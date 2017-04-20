@@ -862,7 +862,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								<label class="control-label">Employee Type:</label>
 								<div id="drop_down_emp_typy" class="controls"></div>
 							</div>
-							<div class="form-group p-xxs">
+							<div class="form-group p-xxs" style="display: none;">
 								<label class="control-label">Is Corporate KPI:</label>
 								<div class="controls">
 									<label for="" class="checkbox" style="cursor:default">
