@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Threshould | Management</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/plugins/iCheck/custom.css">
+    <link rel="stylesheet" href="../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+     <link rel="stylesheet" type="text/css" href="../css/dataTables.bootstrap.min.css"/>
+     <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css"/>
+     
+    
+    <link rel="stylesheet" href="../css/jquery.mloading.css">
+    
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/tywMain.css" rel="stylesheet">
+    <link href="../css/index.css" rel="stylesheet">
+    <link href="../css/threshould.css" rel="stylesheet">
+    
+</head>
+
+<body class="top-navigation">
+
+
+<!--  #####################Content data here ######################-->
+<div class="container">
+
+<!--  nav bar -->
+<div class="row wrapper border-bottom  page-heading" id="naviTitle" >
+    <div class="col-lg-12">
+     <div id="slide_status"></div>
+        <ol class="breadcrumb">
+            <li>
+                <a href="#/"><i class="fa fa-home "></i> Home</a>
+            </li>
+            <li>
+            <i class="fa fa-gears"></i> System Management
+            </li>
+            <li class="active">
+             <strong id="naviLabelMenu"><i class="fa fa-share-alt"></i> Threshould </strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<!-- nav bar -->
+
+				<div class="row"><!-- start--row -->
+
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Advance Search </h5>
+         					</div>
+         					
+         						<div class="ibox-content"> 
+         							<div class="row">
+
+	                                    <div class="col-sm-4 m-b-xs">
+		                                    <div class="form-group"><label class="col-lg-4 control-label">Structure Name</label>
+
+			                                    <div class="col-lg-6" id="dorpDownListStructure">
+			                                    
+				                                    <select data-toggle="tooltip" title="Flag 2" class="input form-control input-sm"  id="flag_2" name="flag_2">
+				                                    	
+				                                    	<option value="0">Structure Name001</option>
+														<option value="1">Structure Name002</option>
+														<option value="2">Structure Name003</option>
+														
+													</select>
+													
+			                                    </div>
+			                                </div>
+										</div>
+
+	                                    
+                                    
+                                     	 <div class="col-sm-8" align="right">
+	                                     	<div class="input-group" >
+		                                     	<div >
+	                                         		<button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance"><i class="fa fa-search"></i>&nbsp;Search</button>
+	                                         	</div>
+                                         	</div>
+                                     	</div>
+                             		</div>
+				         		</div><!-- content end -->
+				         		</div>
+				         		
+         				</div>
+	
+         			</div><!-- end--row -->
+         			<div class="row">
+				         		<div class="col-lg-12">
+					         	<div class="ibox-title">
+	                                <h5>Threshold List </h5>
+	         					</div>
+	         					
+	         					
+	         					<div class="ibox-content"> 
+
+         							<div class="row">
+         								<div class="col-sm-9">
+	                    					<button type="button" class="btn btn-primary" id="btnAddthreshould" data-target="#Modalthreshould" data-toggle="modal"><i class="fa fa-plus-square"></i>&nbsp;Add Threshold</button>	 
+                                     	</div>
+                                     	
+                                    
+                                     	
+                                     	
+         							</div>
+         							
+									
+                                    	<!-- start table -->
+                                    	<!-- pagination start -->
+                                    	<div class="row">
+	                                    	<div class="col-sm-9 m-b-xs">
+	
+												<p class="pagination_top"></p>
+	                   
+	                                    	</div>
+	                                    
+		                                    
+                                    	</div> 
+                                    	 <!-- pagination end -->
+                                    	 
+                                    	<div class="table-responsive">
+                                   		<table class="table table-striped" id="tablethreshould">
+                                   		
+	                                        <thead>
+		                                        <tr>
+		                                            <th  style='width:10%'>Structure Name</th>
+		                                            <th  style='width:10%'>Score </th>
+		                                            <th  style='width:10%'>Threshould Name</th>
+		                                            <th class = objectCenter style='width:15%'>IsActive</th>
+		                                            <th style='width:10%; text-align:center;'>Manage</th>
+		                                        </tr>
+	                                        </thead>
+	                                        <tbody id="listthreshould">
+<!-- 	                                        	<tr> -->
+<!-- 	                                        		<td>สมรรถนะ (Competency)</td> -->
+<!-- 	                                        		<td>0</td> -->
+<!-- 	                                        		<td>ไม่รู้</td> -->
+<!-- 	                                        		<td> -->
+<!-- 	                                        			<input type="checkbox" checked disabled name="isActive" id="isActive" value="1"> -->
+<!-- 	                                        		</td> -->
+<!-- 	                                        		<td style="text-align:center"> -->
+<!-- 	                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#Modalthreshould data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i> -->
+<!-- 	                                        		</td> -->
+<!-- 	                                        	</tr> -->
+<!-- 	                                        	<tr> -->
+<!-- 	                                        		<td>สมรรถนะ (Competency)</td> -->
+<!-- 	                                        		<td>1</td> -->
+<!-- 	                                        		<td>รู้</td> -->
+<!-- 	                                        		<td> -->
+<!-- 	                                        			<input type="checkbox" checked disabled name="isActive" id="isActive" value="1"> -->
+<!-- 	                                        		</td> -->
+<!-- 	                                        		<td style="text-align:center"> -->
+<!-- 	                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i> -->
+<!-- 	                                        		</td> -->
+<!-- 	                                        	</tr> -->
+<!-- 	                                        	<tr> -->
+<!-- 	                                        		<td>สมรรถนะ (Competency)</td> -->
+<!-- 	                                        		<td>2</td> -->
+<!-- 	                                        		<td>ทำได้</td> -->
+<!-- 	                                        		<td> -->
+<!-- 	                                        			<input type="checkbox" checked disabled name="isActive" id="isActive" value="1"> -->
+<!-- 	                                        		</td> -->
+<!-- 	                                        		<td style="text-align:center"> -->
+<!-- 	                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i> -->
+<!-- 	                                        		</td> -->
+<!-- 	                                        	</tr> -->
+<!-- 	                                        	<tr> -->
+<!-- 	                                        		<td>สมรรถนะ (Competency)</td> -->
+<!-- 	                                        		<td>3</td> -->
+<!-- 	                                        		<td>ทำได้ดี</td> -->
+<!-- 	                                        		<td> -->
+<!-- 	                                        			<input type="checkbox" checked disabled name="isActive" id="isActive" value="1"> -->
+<!-- 	                                        		</td> -->
+<!-- 	                                        		<td style="text-align:center"> -->
+<!-- 	                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#Modalthreshould data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i> -->
+<!-- 	                                        		</td> -->
+<!-- 	                                        	</tr> -->
+<!-- 	                                        	<tr> -->
+<!-- 	                                        		<td>สมรรถนะ (Competency)</td> -->
+<!-- 	                                        		<td>4</td> -->
+<!-- 	                                        		<td>สอนงาน</td> -->
+<!-- 	                                        		<td> -->
+<!-- 	                                        			<input type="checkbox" checked disabled name="isActive" id="isActive" value="1"> -->
+<!-- 	                                        		</td> -->
+<!-- 	                                        		<td style="text-align:center"> -->
+<!-- 	                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#Modalthreshould data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i> -->
+<!-- 	                                        		</td> -->
+<!-- 	                                        	</tr> -->
+	                                        	
+	                                        </tbody>
+                                        </table>
+                                        
+                                         
+                                        </div>
+                                        <!-- row start -->
+                                    	<div class="row">
+	                                    	<div class="col-sm-9 m-b-xs">
+	
+												<p class="pagination_bottom"></p>
+	                   
+	                                    	</div>
+	                                    
+		                                    
+                                    	</div> 
+                                    	 <!-- row end -->
+                                    	<!-- end table -->
+                                    	<br style='clear:both'>
+         						</div><!-- content end -->
+         					</div>
+         					</div>
+  </div>       					
+         					
+<!-- Modal Start Edit -->
+
+  <div aria-hidden="true" role="dialog" tabindex="-1" id="Modalthreshould" class="modal inmodal" style="display: none;">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <!-- <i class="fa fa-laptop modal-icon"></i> -->
+                <h4 class="modal-title" id="modalTitleThresould">ADD New Thresould</h4>
+                <!-- 
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                 -->
+            </div>
+            <div class="modal-body">
+                <!-- content start -->
+                <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> ADD NEW THRESOULD</span> </h2>
+                <hr>
+                
+                <!-- form start -->
+                <div class='form-group'>
+	                <div class="col-xs-12">
+	                	Structure Name :
+	                </div>
+	                
+	                <div class=col-sm-12 "form-input-customs">
+	                	<input type="text" class="form-control input-sm " placeholder="" id="cifno_threshould">
+	                	
+	                </div>
+	                <br style="clear:both">
+                </div>
+                
+                <div class='form-group'>
+	                <div class="col-xs-12">
+	                
+	                	Thresould Name :
+	                </div>
+	                
+	                <div class=col-sm-12 "form-input-customs">
+	                
+	                	<input type="text" class="form-control input-sm " placeholder="" id="thresouldName">
+	                </div>
+	                <br style="clear:both">
+                </div>
+                
+                <div class='form-group'>
+                
+	                <div class="col-xs-12">
+	                
+	                	Target Score :
+	                </div>
+	                
+	                <div class=col-sm-12 "form-input-customs-title">
+	                
+	                	<input type="text" class="form-control input-sm numberOnly" placeholder="" id="targetScore">
+	                </div>
+	                <br style="clear:both">
+                </div>
+             
+                
+                <div class='form-file-mangement-radio'>
+	                <div class="form-label-customs"> 
+	                </div>
+	                <div class="col-xs-12">
+	                	
+		             <input type="checkbox"  name="isActive" id="isActive" value="1">
+		              <span>Is Active</span>
+	                </div>
+	                <br style="clear:both">   		
+                </div>
+                
+                  
+                         
+              
+                <!-- form start -->
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+            
+           	 	<input type="hidden" name="id" id="id" value="">
+   				<input type="hidden" name="action" id="action" value="add">
+   				
+   				<button class="btn btn-success" type="button" id="btnSubmit">Save</button>
+   				<button class="btn btn-success" type="button" id="btnAddAnother">Save & Add Another</button>
+                <button data-dismiss="modal" class="btn btn-danger btnCancle" type="button">Cancel</button>
+                <div class="alert alert-warning" id="information" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+</div>                      
+<!-- Modal End Edit -->
+
+
+
+<!-- Modal Confirm Start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal" class="modal inmodal in" style="display: none;">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h5 class="modal-title">Confirm Dialog</h5>
+            </div>
+            <div class="modal-body">
+                <!-- content start -->
+                <!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
+                <hr>
+                 -->
+                <!-- form start -->
+                <div class="form-kpi-mangement">
+	                <div class="form-kpi-label" align="center">
+	                
+	                 		<label>Confirm to Delete Data?</label>
+	                </div>
+                </div>
+                               
+                <!-- form start -->
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+            	<div align="center">
+	                <button class="btn btn-success" id="btnConfirmOK" type="button">&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;</button>&nbsp;&nbsp;
+	                <button data-dismiss="modal" class="btn btn-danger" type="button"><i class="fa fa-times-circle"></i>&nbsp;Cancel</button>
+            	</div>
+            </div>
+        </div>
+    </div>
+    
+    
+   
+</div>
+<!-- Modal Confirm End -->
+
+ <!--  #####################Content data here ######################-->
+		
+	
+
+
+
+
+    <!-- Mainly scripts -->
+     <script src="../js/jquery3.1.1.js"></script>
+	 <script type="text/javascript">
+	 var jQuery_1_1_3 = $.noConflict(true);
+	 </script>
+    
+ 	<script src="../js/jquery-2.1.1.js"></script> 
+    <script src="../js/jquery-ui-1.10.4.min.js"></script>
+    <script src="../js/jquery.bootpag.min.js"></script>
+  
+   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+     <script src="../js/bootstrap.min.js"></script> 
+     
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../js/inspinia.js"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+     <!-- table data start -->
+    <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="../js/dataTables.bootstrap.min.js"></script>
+    <!-- table data end -->
+    
+    <!-- load angular fame work start-->
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/angular-route.js"></script>
+    <!-- load angular fame work end -->
+    
+    
+    <script src="../js/jquery.mloading.js"></script>
+    
+    <script src="../Controller/threshould.js"></script> 
+
+
+</body>
+
+</html>

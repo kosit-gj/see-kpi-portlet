@@ -1,0 +1,332 @@
+<!-- Modal Quantity Start  -->
+
+  <div aria-hidden="true" role="dialog" tabindex="-1" id="modal-quantity" class="modal inmodal" style="display: none;">
+    <div class="modal-dialog  modal-lg">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+             
+                <h4 class="modal-title" id="modalTitleQuantity">Appraisal Item</h4>
+               
+            </div>
+            <div class="modal-body">
+                <!-- content start -->
+                <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalQuantityDescription"></span> </h2>
+                <hr>
+                <div class='row-fluid'>
+                	<div class="span6">
+                	 		<!-- form start -->
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                	Appraisal Item Name <span class='redFont '>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs">
+				                	<input type="text" class="form-control input-sm " placeholder="Appraisal Item Name" id="appraisalItemNameQuantity">
+				                	
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                
+				                	Perspective <span class='redFont'>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs" id="perspectiveAreaQuantity">
+				                
+				                		<select class="form-control input-sm" id="perspectiveQuantity">
+					                		<option></option>
+					                	</select>
+				                		
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                <div class='form-file-mangement'>
+			                
+				                <div class="form-label-customs">
+				                
+				                	UOM <span class='redFont'>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs" id="uomAreaQuantity">
+				                
+				                	<select class="form-control input-sm" id="uomQuantity">
+				                		<option></option>
+				                	</select>
+					                	
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                <div class='form-file-mangement'>
+			                
+				                <div class="form-label-customs">
+				                
+				                	Formula Description <span class='redFont'>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs-title " id="formulaDescriptionAreaQuantity">
+				                
+				                	<textarea class="form-control input-sm" id="formulaDescriptionQuantity"  placeholder="Formula Description" style="width: 389px; height: 81px;"></textarea>
+				                	
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                <!-- form end -->	
+                	</div>
+                	<div class="span6">
+                			<!-- form start -->
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                	Appraisal Level <span class='redFont '>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs" id="appraisalLevelAreaQuantity">
+				                	<select class="form-control input-sm" id="appraisalLevelQuantity">
+				                		<option></option>
+				                	</select>
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                	Department <span class='redFont '>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs" id="departmentAreaQuantity">
+				                	<select class="form-control input-sm" id="departmentQuantity">
+				                		<option></option>
+				                	</select>
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                
+			                
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                
+				                	Baseline Value <span class='redFont'>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs">
+				                
+				                	<input type="text" class="form-control input-sm numberOnly" placeholder="Baseline Value" id="baselineValueQuantity">
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                
+			                <div class='form-file-mangement-radio'>
+				                <div class="form-label-customs"> 
+				                </div>
+				                <div class="input-inline-table-customs">
+				                	
+					             <input type="checkbox" checked='checked'  name="isActiveQuantity" id="isActiveQuantity" value="1">
+					              <span>Is Active</span>
+				                </div>
+				                <br style="clear:both">   		
+			                </div>
+			                <!-- form end -->
+                	</div>
+                </div>
+                <br style="clear:both">
+                <!-- panel2 start -->
+                <div class="row-fluid">
+	  					<div class="span12">
+	                      <div class="ibox-title3">
+	                          <div class='titlePanel'>Advanced Search </div>
+	                      </div>
+	   					
+	   					<div class="ibox-content">
+	   							
+	   							<!-- content  start-->	 
+	                             	<div class="row-fluid">
+										<div class="span10">
+											<div class="row-fluid">
+											<!-- 
+				                                    <div class="span6 m-b-xs">
+					                                    <div class="form-group"><label class="span4 control-label">Appraisal Level</label>
+			
+						                                    <div class="span8" id="appraisalLevelSearchAreaQuantity">
+						                                    
+							                                    <select name="flag_2" id="appraisalLevelSearchQuantity" class="input form-control input-sm" title="Appraisal Level" data-toggle="tooltip">
+							                                    	<option value="0"></option>
+																</select>
+																
+						                                    </div>
+						                                </div>
+													</div>
+												 -->
+													<div class="span6 m-b-xs">
+					                                    <div class="form-group"><label class="span3 control-label">CDS Name</label>
+			
+						                                    <div class="span9" id="cdsNameSearchAreaQuantity">
+						                                    
+							                                    
+																<input type='text'  placeholder="CDS Name"  name='cdsNameSearchQuantity' id='cdsNameSearchQuantity' class='input form-control input-sm' title="CDS Name" data-toggle="tooltip">
+																
+						                                    </div>
+						                                </div>
+													</div>
+													
+											</div>
+										</div>
+										<div class="span2">
+												<div align="right" >
+			                                     	<div class="input-group">
+				                                     	<div id="">
+			                                         		<button id="SearchQuantity" name="SearchQuantity" class="btn btn-info input-sm" type="button"><i class="fa fa-search"></i>&nbsp;Search</button>
+			                                         	</div>
+		                                         	</div>
+		                                     	</div>
+										</div>
+                             		</div>
+	                            <!-- content  end-->
+	                             				
+	                             				
+	   					</div>
+	   				</div>
+	   			</div>
+                <!-- panel2 end -->
+                <!-- panel3 start -->
+                <div class="row-fluid ">
+	  					<div class="span12">
+	                      <div class="ibox-title3">
+	                          <div class='titlePanel'>CDS List</div>
+	                      </div>
+	   					
+	   					<div class="ibox-content">
+	   							
+	   							<!-- content table start-->	
+	   							<!-- pagination top start -->
+	   							<div class="row-fluid">
+	                                  	<div class="span9 ">
+										 <div class="pagination_top2"></div>
+										 <!-- 
+										<ul class="pagination bootpag"><li data-lp="1" class="first disabled"><a href="javascript:void(0);">←</a></li><li data-lp="1" class="prev disabled"><a href="javascript:void(0);">prev</a></li><li class="active" data-lp="1"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li data-lp="2" class="next"><a href="javascript:void(0);">next</a></li><li data-lp="2" class="last"><a href="javascript:void(0);">→</a></li></ul>
+										 -->
+	                 
+	                                  	</div>
+	                                  
+	                                   <div class="span2 object-right paging-text"><div class='paging-text2'>Results per page</div></div>
+	                                   <div class="span1">
+	                                   
+	                                  	<select class="form-control input-sm countPagination2" id="countPaginationTop2" name="countPagination2">
+	                                       <option>10</option>
+	                                    	<option>20</option>
+	                                    	<option>50</option>
+	                                    	<option>100</option>
+	                                   </select> 
+	                                      
+	                                  	</div>
+	                                  	
+	                              </div>
+	   							<!-- pagination top end --> 
+	                             	<div class="table-responsive">
+                                  		<table id="tablethreshould" class="table table-striped">
+                                  		
+                                        <thead>
+	                                        <tr>
+	                                            <th style="width:5%">ID</th>
+	                                            <th style="width:75%">Description </th>
+	                                            <th style="width:20%; text-align:center;"></th>
+	                                        </tr>
+                                        </thead>
+                                        <tbody id="listCDS">
+                                        
+                                        
+                                        </tbody>
+                                       </table>
+                                       
+                                       
+                                      
+			                
+                                  </div>
+                                  
+                                  <!-- pagination bottom start -->
+                                  <div class="row-fluid">
+	                                   	<div class="span9 ">
+	
+											 <div class="pagination_bottom2"></div>
+											<!-- 
+											<ul class="pagination bootpag"><li data-lp="1" class="first disabled"><a href="javascript:void(0);">←</a></li><li data-lp="1" class="prev disabled"><a href="javascript:void(0);">prev</a></li><li class="active" data-lp="1"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li data-lp="2" class="next"><a href="javascript:void(0);">next</a></li><li data-lp="2" class="last"><a href="javascript:void(0);">→</a></li></ul>
+	                  						-->
+	                                   	</div>
+	                                   
+	                                    <div class="span2 object-right paging-text"><div class='paging-text2'>Results per page</div></div>
+	                                    <div class="span1">
+	                                   
+		                                   	<select class="form-control input-sm countPagination2" id="countPaginationBottom2" name="countPagination2">
+		                                        <option>10</option>
+		                                     	<option>20</option>
+		                                     	<option>50</option>
+		                                     	<option>100</option>
+		                                    </select> 
+	                                       
+	                                   	</div>
+                                  </div>
+                                  <!-- pagination bottom end -->
+                                  
+                                   <!-- Formula start-->
+                                   <hr>
+                                   <div class='row-fluid'>
+	                                   <div class='span12'>
+	                                       <div class='form-file-mangement'>
+				                
+								                <div class="form-label-customs">
+								                
+								                	Formula  <span class='redFont'>*</span>
+								                </div>
+								                
+								                <div class="form-input-customs-title">
+								                	<!-- 
+								                	<textarea id="formulaDescriptionQuantity" class="form-control input-sm"  style="width: 664px; height: 100px;">([sum:จำนวนยอดขายสุทธิต่อไตรมาส]/[sum:จำนวนเป้าหมายยอดขายสุทธิต่อไตรมาส]*100)</textarea>
+								                	 -->
+								                	<div id="textarea_cds" class="form-control input-sm" contenteditable> </div>
+								                	
+								                </div>
+								               
+							                </div>
+							            </div>
+						            </div>
+						                <!-- Formula end-->
+						            
+						                 <br style="clear:both">
+						                 <br style="clear:both">
+	                            <!-- content table end-->
+	                             				
+	                             				
+	   					</div>
+	   				</div>
+	   			</div>
+                <!-- panel3 end -->
+                
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+           	 	<input type="hidden" name="appraisalItemIdQuantity" id="appraisalItemIdQuantity" value="">
+           	 	<input type="hidden" name="structure_id_quantity" id="structure_id_quantity" value="">
+   				<input type="hidden" name="actionQuantity" id="actionQuantity" value="add">
+   				<span aria-hidden="true" class="glyphicon glyphicon-refresh" id="btnCheckFormula"></span>
+   			
+   				<button class="btn btn-primary" type="button" id="btnSubmitQuantity">Save</button>
+   				<button class="btn btn-primary" type="button" id="btnAddAnotherQuantity">Save & Add Another</button>
+                <button data-dismiss="modal" class="btn btn-white btnCancleQuantity" type="button">Cancel</button>
+                <div class="alert alert-warning information" id="informationQuantity" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+</div>       
+<div id='paramPagingCDS'></div> 
+<div class='formula_cds_id_area'></div>    
+<div class='formula_cds_name_area'></div>       
+<div class='test_formula_cds_name_area'></div>       
+<!-- Modal Quantity End  -->
+<!-- 
+<script src="../Controller/Form/cQuantity.js"></script>
+ -->

@@ -1,0 +1,178 @@
+
+
+/*main css start*/
+.ibox-title2 {
+	  -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #ffe57f;
+    border-color: #FFCC00;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 3px 0 0;
+    color: black;
+    margin-bottom: 0;
+    min-height: 32px;
+    padding: 0px 10px;
+    
+}
+.ibox-title3 {
+	  -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #ffe57f;
+    border-color: #FFCC00;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 3px 0 0;
+    color: black;
+    margin-bottom: 0;
+    min-height: 30px;
+    padding: 0px 10px;
+    
+}
+.ui-front {
+    z-index: 10000;
+}
+/*main css end*/
+
+.form-input-customs{
+	float:left;
+	width: 250px;
+	/* 425 */
+}
+.form-label-customs{
+	float:right;
+	padding-top: 1px;
+	width:170px;
+}
+.font-gear{
+	font-size: 25px;
+	cursor:pointer;
+}
+
+.input-contact-customs{
+	width:70px;
+	padding-top: 0px;
+} 
+
+.input-inline-table-customs{
+	height:23px;
+	padding: 0px;
+	padding-top: 0px;
+}
+.form-label-customs-manual{
+	float:left;
+	padding-top: 1px;
+	width:95px;
+}
+.form-input-customs-title{
+	float:left;
+	width: 50%;
+}
+.form-input-customs-address{
+	float:left;
+	width: 200px;
+}
+#ui-datepicker-div ,.ui-datepicker { z-index: 99999 !important; }
+
+.aui .ibox-title .control-label{
+	margin-bottom: 0;
+    padding-top: 7px;
+    /*text-align: right;*/
+}
+#btnSearchArea{
+	padding-top:35px;
+}
+.titlePanel{
+	/*display: inline;*/
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding-top: 5px;
+}
+.titlePanelSearch{
+	
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding-top: 5px;
+   
+
+}
+.modal-body {
+    padding: 20px 20px 5px;
+}
+.ibox-title {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #FFCC00;
+    border-color: #FFCC00;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 3px 0 0;
+    color: black;
+    margin-bottom: 0;
+    min-height: 35px;
+    padding: 0px 10px;
+}
+.result_area{
+	display:none;
+}
+.result_cds_area{
+	display:none;
+}
+.paging-text2{
+	padding-top:5px;
+}
+
+#textarea_cds {
+    -moz-appearance: textfield-multiline;
+    -webkit-appearance: textarea;
+   /* border: 1px solid gray;*/
+    font: medium -moz-fixed;
+    font: -webkit-small-control;
+    height: 150px;
+    overflow: auto;
+    padding: 2px;
+    resize: both;
+    width: 100%;
+    
+}
+.font-blue{
+
+	color: blue;
+	font-weight:bold;
+	display:inline;
+	
+	
+}
+.not-allowed{
+	cursor:not-allowed;
+	display: inline;
+	color:red;
+}
+.formula_unit{
+	width:100%;
+}
+.cds_id_inline{
+	display:none;
+}
+.formula_cds_id_area{
+	display:none;
+}
+#btnCheckFormula{
+	color: blue;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 5px;
+    padding: 5px;
+    position: relative;
+    top: 2px;
+}
+

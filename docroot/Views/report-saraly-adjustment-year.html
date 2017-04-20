@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>รายงานยอดเงินที่ปรับประจำปี | Management</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/plugins/iCheck/custom.css">
+    <link rel="stylesheet" href="../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+     <link rel="stylesheet" type="text/css" href="../css/dataTables.bootstrap.min.css"/>
+     <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css"/>
+     
+    
+    <link rel="stylesheet" href="../css/jquery.mloading.css">
+    
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/tywMain.css" rel="stylesheet">
+    <link href="../css/index.css" rel="stylesheet">
+    <link href="../css/report-saraly-adjustment-year.css" rel="stylesheet">
+</head>
+<body class="top-navigation gray-bg ">
+
+
+		<div class="container">
+			
+
+				<div class="row">
+					<!-- start--row -->
+
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>Parameter</h5>
+							</div>
+
+							<div class="ibox-content">
+								<div class="row">
+									<div class="col-lg-2 col-md-2">
+										<div class="form-group p-xxs">
+											<label class="col-lg-4 col-md-4 p-t-xxs">Year</label>
+											<div class="col-lg-8 col-md-8" id="drop_down_list_year">
+												<select data-toggle="tooltip" title="Year"
+													class="input form-control input-sm col-lg-9" id="paramYear"
+													name="paramYear">
+													<option>All</option>
+													<option>2017</option>
+													<option>2016</option>
+												</select>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="col-lg-3 col-md-3">
+										<div class="form-group p-xxs">
+											<label class="col-lg-5 col-md-6 p-t-xxs">Salary Period</label>
+											<div class="col-lg-7 col-md-6" id="drop_down_list_salary_period">
+												<select data-toggle="tooltip" title="Salary Period"
+													class="input form-control input-sm col-lg-9"
+													id="paramSalaryPeriod" name="paramSalaryPeriod">
+													<option>งวดที่ 1</option>
+													<option>งวดที่ 2</option>
+												</select>
+											</div>
+
+										</div>
+
+									</div>
+									<div class="col-lg-3 col-md-3">
+										<div class="form-group p-xxs">
+											<label class="col-lg-4 col-md-5 p-t-xxs">Department</label>
+											<div class="col-lg-8 col-md-7 " id="drop_down_list_department">
+												<select data-toggle="tooltip" title="Department"
+													class="input form-control input-sm col-lg-9"
+													id="paramDepartment" name="paramDepartment">
+													<option>All</option>
+													<option>ระดับบริหาร</option>
+													<option>ระดับการจัดการ</option>
+													<option>ระดับบังคับบัญชา</option>
+													<option>ระดับเจ้าหน้าที่</option>
+													<option>HR</option>
+												</select>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="col-lg-3 col-md-3">
+										<div class="form-group p-xxs">
+											<label class="col-lg-5 col-md-6 p-t-xxs">Position
+												Group</label>
+											<div class="col-lg-7 col-md-6" id="drop_down_list_position_group">
+												<select data-toggle="tooltip" title="Position Group"
+													class="input form-control input-sm col-lg-9"
+													id="paramPsGroup" name="paramPsGroup">
+													<option>All</option>
+													<option>ระดับบริหาร</option>
+													<option>ระดับการจัดการ</option>
+													<option>ระดับบังคับบัญชา</option>
+													<option>ระดับเจ้าหน้าที่</option>
+													<option>HR</option>
+												</select>
+											</div>
+
+
+										</div>
+									</div>
+
+									<div class="col-lg-1 col-md-1 p-b-xxs">
+										<div class="form-group p-xxs ">
+
+											<div class="form-group pull-right  m-b-none">
+
+
+												<button type="button" class="btn btn-grey input-sm"
+													name="btnSearchAdvance" id="btnSearchAdvance">
+													<i class="fa fa-search"></i>&nbsp;View&nbsp;
+												</button>
+
+											</div>
+
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+							<!-- content end -->
+						</div>
+
+					</div>
+
+				</div>
+				<!-- end--row -->
+
+
+				<div class="row" id="report_list_content">
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
+
+							<div class="ibox-content">
+								<div class="row text-center p-t-lg">
+									<h2>
+										<strong>รายงานยอดเงินที่ปรับประจำปี</strong>
+									</h2>
+								</div>
+								<div class="row text-center p-t-xs">
+									<h3>
+										<strong>ฝ่ายผลิต</strong>
+									</h3>
+								</div>
+
+								<div class='row p-t-lg'>
+									<div class='col-sm-12'>
+										<div class="table-responsive" style="border-color: #dddddd">
+											<!-- table-striped -->
+											<table class="table " id="report_table"
+												border="1" style="border-color: #dddddd;">
+												<thead style="border-color: #dddddd">
+
+													<tr class="table-thead-bg">
+														<th style="width: 5%;">ลำดับ</th>
+														<th style="width: 13%;">รหัส</th>
+														<th style="width: 24%;">ชื่อ-สกุล</th>
+														<th style="width: 19%;">ต่ำแหน่ง</th>
+														<th style="width: 13%;">เงินเดือนเก่า</th>
+														<th style="width: 13%;">ยอดเงินปรับ</th>
+														<th style="width: 13%;">ยอดเงินใหม่</th>
+													</tr>
+
+												</thead>
+												<tbody id="listDataReport">
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class='paramEmbedArea'></div>
+	</div>
+
+
+
+
+	<!-- Mainly scripts -->
+     <script src="../js/jquery3.1.1.js"></script>
+	 <script type="text/javascript">
+	 var jQuery_1_1_3 = $.noConflict(true);
+	 </script>
+    
+ 	<script src="../js/jquery-2.1.1.js"></script> 
+    <script src="../js/jquery-ui-1.10.4.min.js"></script>
+    <script src="../js/jquery.bootpag.min.js"></script>
+  
+   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+     <script src="../js/bootstrap.min.js"></script> 
+     
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../js/inspinia.js"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+     <!-- table data start -->
+    <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="../js/dataTables.bootstrap.min.js"></script>
+    <!-- table data end -->
+    
+    <!-- load angular fame work start-->
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/angular-route.js"></script>
+    <!-- load angular fame work end -->
+    
+    
+    <script src="../js/jquery.mloading.js"></script>
+    <script src="../Controller/cConfig.js"></script>
+    <script src="../Controller/cMain.js"></script>
+	<script src="../Controller/report-saraly-adjustment-year.js"></script>
+
+
+</body>
+</html>

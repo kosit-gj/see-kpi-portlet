@@ -1,0 +1,250 @@
+
+ /* Large desktop Start#####################################*/
+ @media (min-width: 1200px) { 
+
+  }
+  /* Large desktop End######################################*/
+  
+  /*  desktop Start#########################################*/
+ @media (min-width: 980px) and (max-width: 1199px) {
+
+ 	
+  }
+ /*  desktop End############################################*/
+ 
+ /* Portrait tablet to landscape and desktop Start##########*/
+ @media (min-width: 768px) and (max-width: 979px) {
+ 	
+  }
+ /* Portrait tablet to landscape and desktop End############*/ 
+ 
+ /* Landscape phone to portrait tablet Start################*/
+ @media (max-width: 767px) { 
+	 	
+  }
+ /* Landscape phone to portrait tablet End##################*/ 
+ 
+ /* Landscape phones and down Start#########################*/
+ @media (max-width: 480px) { 
+ 	
+  }
+  /* Landscape phones and down End##########################*/
+     
+.form-input-customs{
+	float:left;
+	width: 250px;
+	/* 425 */
+}
+.form-label-customs{
+	float:left;
+	padding-top: 1px;
+	width:170px;
+}
+
+.input-contact-customs{
+	width:70px;
+	padding-top: 0px;
+} 
+
+.input-inline-table-customs{
+	height:23px;
+	padding: 0px;
+	padding-top: 0px;
+}
+.form-label-customs-manual{
+	float:left;
+	padding-top: 1px;
+	width:95px;
+}
+.form-input-customs-title{
+	float:left;
+	width: 100px;
+}
+.form-input-customs-address{
+	float:left;
+	width: 200px;
+}
+#ui-datepicker-div ,.ui-datepicker { z-index: 99999 !important; }
+
+.ibox-title .control-label{
+	margin-bottom: 0;
+    padding-top: 7px;
+    text-align: right;
+}
+
+#btnSearchArea{
+	/*padding-top:35px;*/
+}
+
+.titlePanel{
+	/*display: inline;*/
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding-top: 5px;
+    /*width:200px;*/
+    float:left;
+    position: absolute;
+}
+
+.totalWeight{
+	float: right;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding-top: 5px;
+    text-align: right;
+    /*width: 200px;*/
+}
+
+.titlePanel2{
+	/*display: inline;*/
+    font-size: 13px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding-top: 5px;
+    
+}
+
+.titlePanelSearch{
+	
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding-top: 5px;
+   
+
+}
+.ibox-title {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #FFCC00;
+    border-color: #FFCC00;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 3px 0 0;
+    color: black;
+    margin-bottom: 0;
+    min-height: 35px;
+    padding: 0px 10px;
+}
+.ibox-title2 {
+	  -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #ffe57f;
+    border-color: #FFCC00;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 3px 0 0;
+    color: black;
+    margin-bottom: 0;
+    min-height: 30px;
+    padding: 0px 10px;
+    
+}
+.modal-lg {
+    width: 90%;
+}
+.th-small{
+	font-size:8px;
+}
+.input-sm-small{
+	height:24px;
+}
+.font-small{
+	font-size:12px;
+	padding-top:2px;
+}
+.score1{
+	background:#dddddd;
+}
+.score2{
+	
+}
+.score3{
+	background:#dddddd;
+}
+.score4{
+	
+}
+.score5{
+	background:#dddddd;
+}
+.label_info{
+	float:left;
+	font-weight: bold;
+    margin-right: 10px;
+    padding-top:1px;
+    padding-bottom:1px;
+}
+.text_info{
+	float:left;
+	padding-top:1px;
+    padding-bottom:1px;
+}
+.text-width-box{
+	padding-top:7px
+}
+.search_result{
+	display:none;
+}
+.modal-footer{
+	text-align:'';
+}
+
+.labelAssign{
+	float:left;
+	width:75px;	
+	padding-top:5px;
+}
+.dropdownListAssign{
+	float:left;
+	width:100px;
+}
+
+.btnManagement{
+	float:right;
+}
+.btnAssignment{
+	float:left;
+	margin-right:0px;
+}
+.crandTotalWeight{
+	padding:15px;
+	font-size: 14px;
+    font-weight: bold;
+}
+#crandTotalWeight{
+	
+}
+.perscentage{
+	background: #dddddd none repeat scroll 0 0;
+    padding: 3px 5px;
+}
+
+.modal-footer{
+	padding: 0 15px 15px;
+}
+.hidden{
+	display:none;
+}
+
+/*
+.modal-body {
+    padding: 20px 30px 5px;
+}
+*/
+.cus_information_area{
+	display:none;
+}
+.employee_information_area{
+	font-size:14px;
+}
+.scrollit {
+    overflow:scroll;
+    height:300px;
+}

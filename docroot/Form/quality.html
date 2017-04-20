@@ -1,0 +1,95 @@
+<!-- Modal Quality Start Edit -->
+  <div aria-hidden="true" role="dialog" tabindex="-1" id="modal-quality" class="modal inmodal" style="display: none;">
+    <div class="modal-dialog  ">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+             
+                <h4 class="modal-title" id="modalTitleQuality">Appraisal Item</h4>
+               
+            </div>
+            <div class="modal-body">
+                <!-- content start -->
+                <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalQualityDescription"></span> </h2>
+                <hr>
+                <div class='row-fluid'>
+                	<div class="span12">
+                	 		<!-- form start -->
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                	Appraisal Item Name <span class='redFont '>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs">
+				                	<input id="appraisalItemNameQuality" type="text" class="form-control input-sm " placeholder="Appraisal Item Name" >
+				                	
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                
+				                	Appraisal Level <span class='redFont'>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs" id="appraisalLevelAreaQuality">
+				                
+				                		<select class="form-control input-sm" id="appraisalLevelQuality">
+					                		<option></option>
+					                	</select>
+				                		
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                	Department <span class='redFont '>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs" id="departmentAreaQuality"">
+				                	<select class="form-control input-sm" id="departmentQuality"">
+				                		<option></option>
+				                	</select>
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                <div class='form-file-mangement-radio'>
+				                <div class="form-label-customs"> 
+				                </div>
+				                <div class="input-inline-table-customs">
+				                	
+					             <input type="checkbox" checked  name="isActive" id="isActiveQuality" value="1">
+					              <span>Is Active</span>
+				                </div>
+				                <br style="clear:both">   		
+			                </div>
+			               
+			                
+			                
+			                
+			                <!-- form end -->	
+                	</div>
+                	
+                </div>
+                <br style="clear:both">
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+           	 	<input type="hidden" name="structure_id_quality" id="structure_id_quality" value="">
+   				<input type="hidden" name="actionQuality" id="actionQuality" value="add">
+   				
+   				<input type="hidden" name="appraisalItemIdQuality" id="appraisalItemIdQuality" value="">
+   				
+   				<button class="btn btn-primary" type="button" id="btnSubmitQuality">Save</button>
+   				<button class="btn btn-primary" type="button" id="btnAddAnotherQuality">Save & Add Another</button>
+                <button data-dismiss="modal" class="btn btn-white btnCancleQuality" type="button">Cancel</button>
+                <div class="alert alert-warning information" id="informationQuality" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+</div>                      
+<!-- Modal Quality End Edit -->
+<script src="../Controller/Form/cQuality.js"></script>

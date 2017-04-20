@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE display PUBLIC "-//Liferay//DTD Display 6.2.0//EN" "http://www.liferay.com/dtd/liferay-display_6_2_0.dtd">
+
+<display>
+	<category name="SEE KPI">
+		<portlet id="see-kpi" />
+		 
+		<portlet id="appraisal"></portlet>
+		<portlet id="appraisal-item"></portlet>
+		<portlet id="appraisal-assignment"></portlet>
+
+		<portlet id="database-connection"></portlet>
+		<portlet id="common-data-set"></portlet>
+		<portlet id="threshould"></portlet>
+		<portlet id="appraisal-level"></portlet>
+		<portlet id="appraisal-grade"></portlet>
+		<portlet id="appraisal-period"></portlet>
+		<portlet id="System-Configurations"></portlet>
+		<portlet id="Perspective"></portlet>
+		<portlet id="UOM"></portlet>
+		<portlet id="Appraisal-Structure"></portlet>
+
+		<portlet id="import-employee"></portlet>
+		<portlet id="cds-result"></portlet>
+		<portlet id="appraisal-data"></portlet>
+		<!-- 
+		<portlet id="apraisal-item-ifame"></portlet>
+		<portlet id="apraisal-assignment-ifame"></portlet>
+		<portlet id="apprial-ifame"></portlet>
+		-->
+		<portlet id="dashboards"></portlet>
+		<portlet id="emp-result-bonus-raise-amount"></portlet>
+		
+	</category>
+</display>

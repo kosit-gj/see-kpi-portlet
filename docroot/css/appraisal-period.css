@@ -1,0 +1,137 @@
+.form-input-customs{
+	float:left;
+	width: 300px;
+	/* 425 */
+}
+.form-label-customs{
+	float:left;
+	padding-top: 1px;
+	width:190px;
+}
+.font-gear{
+	font-size: 25px;
+	cursor:pointer;
+}
+
+.input-contact-customs{
+	width:70px;
+	padding-top: 0px;
+} 
+
+.input-inline-table-customs{
+	height:23px;
+	padding: 0px;
+	padding-top: 0px;
+}
+.form-label-customs-manual{
+	float:left;
+	padding-top: 1px;
+	width:95px;
+}
+.form-input-customs-title{
+	float:left;
+	width: 100px;
+}
+.form-input-customs-address{
+	float:left;
+	width: 200px;
+}
+#ui-datepicker-div ,.ui-datepicker { z-index: 99999 !important; }
+
+.aui .ibox-title .control-label{
+	margin-bottom: 0;
+    padding-top: 7px;
+    text-align: right;
+}
+.btn-primary {
+    background-color: #1ab394;
+    border-color: #1ab394;
+    color: #ffffff;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary,
+.btn-primary:active:focus,
+.btn-primary:active:hover,
+.btn-primary.active:hover,
+.btn-primary.active:focus {
+  background-color: #1da58a;
+  border-color: #1da58a;
+  color: #FFFFFF;
+}
+
+.popover{
+	width: 120px;
+}
+.font-gear {
+    font-size: 25px;
+    cursor: pointer;
+    color: #993399;
+}
+/* Css by Au Start */
+.gray-bg {
+	background-color: #f3f3f4;
+}
+.ibox-title{
+	padding: 1px 10px;
+}
+.titlePanel {
+	margin: 7px 0;
+}
+.form-group {
+    margin-bottom: 5px;
+}
+.control-label{
+	cursor: default;
+}
+form {
+    margin: 0 0 0;
+}
+.countPagination {
+    width: 70px;
+
+}
+.modal{top:3%;}
+#confrimModal{width: 400px;}
+
+/* Large desktop */
+@media ( min-width : 1200px) {
+	#confrimModal{left: 55%;}
+}
+
+/* Portrait tablet to landscape and desktop */
+@media ( min-width : 980px) and (max-width: 1199px) {
+	#confrimModal{left: 57%;}
+}
+@media ( min-width : 768px) and (max-width: 979px) {
+	#confrimModal{left: 58.5%;}
+	[class*="span"], .uneditable-input[class*="span"], .row-fluid [class*="span"] {
+    display: block;
+    float: none;
+    width: 100%;
+    margin-left: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+	}
+
+	
+}
+
+/* Landscape phone to portrait tablet */
+@media ( max-width : 767px) {
+	#confrimModal{left: 23.5%;}
+}
+
+@media ( min-width : 481px) and (max-width: 615px) {
+#confrimModal{left: 16.5%;}
+}
+
+
+/* Landscape phones and down */
+@media ( max-width : 480px) {
+	#confrimModal{left: 1%;}
+}
+/* Css by Au End */

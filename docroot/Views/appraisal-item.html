@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Appraisal Item | Management</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/plugins/iCheck/custom.css">
+    <link rel="stylesheet" href="../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <!-- 
+    <link rel="stylesheet" type="text/css" href="../css/dataTables.bootstrap.min.css"/>
+     -->
+    <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css"/>
+
+    <link rel="stylesheet" href="../css/jquery.mloading.css">
+    
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/tywMain.css" rel="stylesheet">
+    <link href="../css/index.css" rel="stylesheet">
+    <link href="../css/appraisal-item.css" rel="stylesheet">
+       
+</head>
+
+<body class="top-navigation gray-bg ">
+
+
+<!--  #####################Content data here ######################-->
+<div class="container">
+<div class='row'>
+
+	<div class='col-xs-12'>
+		<div id="slide_status">
+			<div id="btnCloseSlide">×</div>
+			<div id="slide_status_area"></div>
+		</div>
+	</div>
+
+</div>
+
+<h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Appraisal Item</span> </h2>
+        
+
+
+				<div class="row"><!-- start--row -->
+
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                               
+                                  <div class='titlePanelSearch'>Advance Search</div> 
+         					</div>
+         					
+         						<div class="ibox-content"> 
+         							<div class="row">
+										<div class='col-sm-11'>
+											<div class='row'>
+												
+				                                    <div class="col-sm-6 m-b-xs">
+					                                    <div class="form-group"><label class="col-lg-4 control-label">Appraisal Level</label>
+			
+						                                    <div class="col-lg-6" id="appraisalLevelArea">
+						                                    
+							                                    <select data-toggle="tooltip" title="Appraisal Level" class="input form-control input-sm"  id="appraisalLevel" name="appraisalLevel">
+							                                    	
+							                                    	<option value="0"></option>
+																	
+																	
+																</select>
+																
+						                                    </div>
+						                                </div>
+													</div>
+													<div class="col-sm-6 m-b-xs">
+					                                    <div class="form-group"><label class="col-lg-4 control-label">Perspective</label>
+			
+						                                    <div class="col-lg-6" id="perspectiveArea">
+						                                    
+							                                    <select data-toggle="tooltip" title="Perspective" class="input form-control input-sm"  id="perspective" name="perspective">
+							                                    	
+							                                    	<option value="0"></option>
+																	
+																</select>
+																
+						                                    </div>
+						                                </div>
+													</div>
+													<div class="col-sm-6 m-b-xs">
+					                                    <div class="form-group"><label class="col-lg-4 control-label">Structure </label>
+			
+						                                    <div class="col-lg-6" id='structureArea'>
+						                                    
+							                                    <select data-toggle="tooltip" title="Structure" class="input form-control input-sm"  id="structure" name="structure">
+							                                    	
+							                                    	<option value="0"></option>
+																	
+																</select>
+																
+						                                    </div>
+						                                </div>
+													</div>
+													
+													<div class="col-sm-6 m-b-xs">
+					                                    <div class="form-group"><label class="col-lg-4 control-label">Appraisal Item Name</label>
+			
+						                                    <div class="col-lg-6" id='appraisalItemNameArea'>
+						                                    
+																<input data-toggle="tooltip" title="Appraisal Item Name" placeholder="Appraisal Item Name" type='text' name='appraisalItemName' class='input form-control input-sm' id='appraisalItemName'>
+																
+						                                    </div>
+						                                </div>
+													</div>
+													
+													
+											</div>
+										</div>
+										
+										<div class='col-sm-1' align="right">
+										
+												
+												
+			                                     	<div class="input-group" >
+				                                     	<div id="btnSearchArea">
+			                                         		<button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance"><i class="fa fa-search"></i>&nbsp;Search</button>
+			                                         	</div>
+		                                         	</div>
+		                                     	
+                                     	
+										</div>
+										
+
+	                                    
+                                    
+                                     	 
+                             		</div>
+				         		</div><!-- content end -->
+				         		</div>
+				         		
+         				</div>
+	
+         			</div><!-- end--row -->
+         			<div class="row result_area">
+				         		<div class="col-lg-12">
+					         	<div class="ibox-title">
+	                                <div class='titlePanelSearch'>Appraisal Item Result</div>
+	         					</div>
+	         					
+	         					
+	         					<div class="ibox-content"> 
+	         					
+                                    	<!-- start table -->
+                                    	<!-- pagination start -->
+                                    	<div class="row">
+	                                    	<div class="col-sm-9 ">
+												
+												<div class="pagination_top"></div>
+												
+												 <!-- 
+												<ul class="pagination bootpag"><li class="first disabled" data-lp="1"><a href="javascript:void(0);">←</a></li><li class="prev disabled" data-lp="1"><a href="javascript:void(0);">prev</a></li><li data-lp="1" class="active"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li class="next" data-lp="2"><a href="javascript:void(0);">next</a></li><li class="last" data-lp="2"><a href="javascript:void(0);">→</a></li></ul>
+												 -->
+	                   
+	                                    	</div>
+	                                    
+		                                    <div class="col-sm-3 object-right paging-text">
+		                                    
+		                                    	 <div class='pagingDropdown'>
+		                                 			<select  id='countPaginationTop'  class="form-control input-sm countPagination">
+					                                     <option>10</option>
+					                                     <option>20</option>
+					                                     <option>50</option>
+					                                     <option>100</option>
+					                                 </select>
+		                                 		
+		                                 		</div>
+												<div class='pagingText'>Results per page</div>
+		                                    
+		                                    </div>
+		                                    <!-- 
+		                                    <div class="col-sm-1">
+	                                     
+	                                    	<select name="countPagination" id='countPaginationTop'  class="form-control input-sm countPagination">
+		                                        <option>10</option>
+		                                     	<option>20</option>
+		                                     	<option>50</option>
+		                                     	<option>100</option>
+		                                    </select> 
+	                                        
+	                                    	</div>
+	                                    	 -->
+	                                    	
+                                    	</div> 
+                                    	<!-- pagination end -->
+                                    	<!-- mian content start -->
+                                    	
+                                    		<div id='main_conntent_list_data'></div>
+                                    	
+                                    	<!-- mian content end -->
+                                        <!-- row start -->
+                                    	<div class="row">
+	                                    	<div class="col-sm-9 ">
+	
+											    <div class="pagination_bottom"></div>
+											    <!-- 
+												<ul class="pagination bootpag"><li class="first disabled" data-lp="1"><a href="javascript:void(0);">←</a></li><li class="prev disabled" data-lp="1"><a href="javascript:void(0);">prev</a></li><li data-lp="1" class="active"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li class="next" data-lp="2"><a href="javascript:void(0);">next</a></li><li class="last" data-lp="2"><a href="javascript:void(0);">→</a></li></ul>
+	                   							 -->
+	                                    	</div>
+	                                    
+		                                    <div class="col-sm-3 object-right paging-text">
+		                                    
+		                                    	<div class='pagingDropdown'>
+		                                 			<select  id='countPaginationBottom'  class="form-control input-sm countPagination">
+					                                     <option>10</option>
+					                                     <option>20</option>
+					                                     <option>50</option>
+					                                     <option>100</option>
+					                                 </select> 
+			                                 	</div>
+												<div class='pagingText'>Results per page</div>
+		                                    
+		                                    </div>
+		                                  <!-- 
+		                                    <div class="col-sm-1">
+	                                    
+	                                    	<select name="countPagination" id='countPaginationBottom'  class="form-control input-sm countPagination">
+		                                        <option>10</option>
+		                                     	<option>20</option>
+		                                     	<option>50</option>
+		                                     	<option>100</option>
+		                                    </select> 
+	                                        
+	                                    	</div>
+	                                    	 -->
+                                    	</div> 
+                                    	 <!-- row end -->
+                                    	<!-- end table -->
+                                    	<br style='clear:both'>
+         						</div><!-- content end -->
+         					</div>
+         					</div>
+  </div>       					
+         					
+
+
+
+
+
+
+<div id='include_deduct_score'></div>
+<div id='include_quality'></div>
+<div id='include_quantity_form'></div>
+
+
+<!-- Modal Confirm Start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal" class="modal inmodal in" style="display: none;">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h5 class="modal-title">Confirm Dialog</h5>
+            </div>
+            <div class="modal-body">
+                <!-- content start -->
+                <!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
+                <hr>
+                 -->
+                <!-- form start -->
+                <div class="form-kpi-mangement">
+	                <div class="form-kpi-label" align="center">
+	                
+	                 		<label>Confirm to Delete Data?</label>
+	                </div>
+                </div>
+                               
+                <!-- form start -->
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+            	<div align="center">
+	                <button class="btn btn-success" id="btnConfirmOK" type="button">&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;</button>&nbsp;&nbsp;
+	                <button data-dismiss="modal" class="btn btn-danger" type="button"><i class="fa fa-times-circle"></i>&nbsp;Cancel</button>
+            	</div>
+            </div>
+        </div>
+    </div>
+    
+    
+   
+</div>
+<div id='embedParamSearch'></div>
+<div id='embedParamSearchQuantity'></div>
+<!-- Modal Confirm End -->
+
+ <!--  #####################Content data here ######################-->
+		
+    <!-- Mainly scripts -->
+     
+     <script src="../js/jquery3.1.1.js"></script>
+	 <script type="text/javascript">
+	 var jQuery_1_1_3 = $.noConflict(true);
+	 </script>
+    
+ 	<script src="../js/jquery-2.1.1.js"></script> 
+    <script src="../js/jquery-ui-1.10.4.min.js"></script>
+    <script src="../js/jquery.bootpag.min.js"></script>
+  
+   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+     <script src="../js/bootstrap.min.js"></script> 
+     <!-- 
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+ 	-->
+    <!-- Custom and plugin javascript -->
+    <!-- 
+    <script src="../js/inspinia.js"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+     -->
+     <!-- table data start -->
+     <!-- 
+    <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="../js/dataTables.bootstrap.min.js"></script>
+	 -->
+    <!-- table data end -->
+    
+    <!-- load angular fame work start-->
+    <!-- 
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/angular-route.js"></script>
+     -->
+    <!-- load angular fame work end -->
+    
+    
+    <script src="../js/jquery.mloading.js"></script>
+    <script src="../Controller/cConfig.js"></script>
+    <script src="../Controller/cMain.js"></script> 
+    <script src="../Controller/cAppraisalItem.js"></script>
+    
+
+</body>
+
+</html>

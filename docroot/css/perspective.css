@@ -1,0 +1,88 @@
+.btn-primary {
+    background-color: #1ab394;
+    border-color: #1ab394;
+    color: #ffffff;
+
+}
+
+.countPagination {
+    width: 90%;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary,
+.btn-primary:active:focus,
+.btn-primary:active:hover,
+.btn-primary.active:hover,
+.btn-primary.active:focus {
+  background-color: #1da58a;
+  border-color: #1da58a;
+  color: #FFFFFF;
+}
+.form-input-customs{
+	float:left;
+	width: 300px;
+	/* 425 */
+}
+.form-label-customs{
+	float:left;
+	padding-top: 1px;
+	width:120px;
+}
+.font-gear{
+	font-size: 25px;
+	cursor:pointer;
+}
+
+.input-contact-customs{
+	width:70px;
+	padding-top: 0px;
+} 
+
+.input-inline-table-customs{
+	height:23px;
+	padding: 0px;
+	padding-top: 0px;
+}
+.form-label-customs-manual{
+	float:left;
+	padding-top: 1px;
+	width:95px;
+}
+.form-input-customs-title{
+	float:left;
+	width: 100px;
+}
+.form-input-customs-address{
+	float:left;
+	width: 200px;
+}
+#ui-datepicker-div ,.ui-datepicker { z-index: 99999 !important; }
+
+.aui .ibox-title .control-label{
+	margin-bottom: 0;
+    padding-top: 7px;
+    text-align: right;
+}
+.font-gear {
+    font-size: 25px;
+    cursor: pointer;
+    color: #993399;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+	color: black;
+	
+}
+.p-t-xxs{
+ padding-top :5px;
+}
+.p-b-xxs{
+ padding-bottom :5px;
+}
+.btn-primary {
+    background-color: #1ab394;
+    border-color: #1ab394;
+    color: #ffffff;
+}

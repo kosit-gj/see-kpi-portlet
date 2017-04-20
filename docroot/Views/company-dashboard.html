@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Appraisal Item | Management</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/plugins/iCheck/custom.css">
+    <link rel="stylesheet" href="../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+     <link rel="stylesheet" type="text/css" href="../css/dataTables.bootstrap.min.css"/>
+     <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css"/>
+     
+    
+    <link rel="stylesheet" href="../css/jquery.mloading.css">
+    
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/tywMain.css" rel="stylesheet">
+    <link href="../css/index.css" rel="stylesheet">
+    
+    
+    <!-- jqplot start -->
+    <link class="include" rel="stylesheet" type="text/css" href="../js/jquery.jqplot.1.0.9/jquery.jqplot.min.css" />
+    <!-- jqplot end -->
+    
+    <link href="../css/companyDashboard.css" rel="stylesheet">
+    
+</head>
+
+<body class="top-navigation gray-bg ">
+
+<!--  #####################Content data here ######################-->
+<div class="container">
+
+
+<h2>
+	<i class="fa fa fa-dashboard icon-title"></i> 
+	<span id="modalDescription"> Company Dashboard</span> 
+</h2>
+				<div class="row"><!-- start--row -->
+
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+								<div class='row container'>
+									<div class='col-md-8'>
+									  <div class='titlePanelSearch'>KPI DASHBOARD</div>
+									</div>
+									<div class='col-md-4 object-right'>
+									
+										<div class="col-sm-6  inputFormSearch">
+											<div class="form-group">
+												<label class="col-lg-4 control-label numberOnly">Year:</label>
+												<div id="connection_name0" class="col-lg-8 inputFormSearch">
+												
+												<select style="width:100%" name="paramYear" id="paramYear" class="form-control input-sm">
+												
+												</select>
+												
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-6 inputFormSearch">
+											<div class="form-group">
+												<label class="col-lg-4 control-label numberOnly">Month:</label>
+												<div id="connection_name0" class="col-lg-8 inputFormSearch">
+												
+												<select style="width:100%" name="paramMonth" id="paramMonth" class="form-control input-sm">
+												
+												</select>
+												
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</div>                               
+                                 
+         					</div>
+         					
+         						<div class="ibox-content"> 
+         							<!-- content start -->
+         							<div class='row'>
+         								
+         								
+	         							<div class="col-lg-4">
+							                    <div class="ibox float-e-margins">
+							                        <div class="ibox-title">
+							                            <div class='titlePanelSearch2'>Balance Scorecard Dec 2016</div>
+							                            
+							                        </div>
+							                        <div class="ibox-content" id='ibox-content-bsc'>
+							                           
+							                            
+							                            
+							                        </div>
+							                    </div>
+							            </div>
+							            
+							            <div class="col-lg-8">
+							            	<div class='row wrapper-content'>
+							            		<div class='col-lg-12'>
+								                    <div class="ibox float-e-margins">
+								                        <div class="ibox-title">
+								                            <div class='titlePanelSearch2'>Monthly</div>
+								                            
+								                        </div>
+								                        <div class="ibox-content">
+								                            
+								                            <div class='row'>
+								                            	<div class='col-xs-12'>
+								                            		<div class='chart' id='monthlyVariance'></div>
+								                            	</div>
+								                            	
+								                            	<div class='col-xs-12'>
+								                            		<div class='chart' id='monthlyGrowth'></div>
+								                            	</div>
+								                            </div>
+								                            
+								                        </div>
+								                    </div>
+							                   	</div>
+							                </div>
+							                
+							                <div class='row  wrapper-content'>
+							            		<div class='col-lg-12'>
+								                    <div class="ibox float-e-margins">
+								                        <div class="ibox-title">
+								                            <div class='titlePanelSearch2'>YTD</div>
+								                            
+								                        </div>
+								                        <div class="ibox-content">
+								                        
+								                            <div class='row'>
+								                            	<div class='col-xs-12'>
+								                            		<div class='chart' id='ytdVariance'></div>
+								                            	</div>
+								                            	
+								                            	<div class='col-xs-12'>
+								                            		<div class='chart' id='ytdGrowth'></div>
+								                            	</div>
+								                            </div>
+								                            
+								                        </div>
+								                    </div>
+							                   	</div>
+							                </div>
+							                
+							            </div>
+							            
+         							
+         							</div>
+         							<!-- content end -->
+				         		</div>
+				         		
+				         		</div>
+				         		
+         				</div>
+	
+         			</div><!-- end--row -->
+         			
+         					 
+  </div>       					
+ <!-- <button data-toggle="modal" data-target="#ModalKPI" id="btnAddKPI" class="btn btn-info input-sm" type="button"><i class="fa fa-plus-square"></i>&nbsp;Assign KPI</button>	 -->				
+
+ <!--  #####################Content data here ######################-->
+		
+    <!-- Mainly scripts -->
+
+    <!-- 
+ 	<script src="../js/jquery-2.1.1.js"></script> 
+ 	 -->
+ 	<script type="text/javascript" src="../libraryChart/jqplot/jquery.js"></script>
+    <script src="../js/jquery-ui-1.10.4.min.js"></script>
+    <script src="../js/jquery.bootpag.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script> 
+     
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../js/inspinia.js"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+   
+    
+
+    
+    
+    <script src="../js/jquery.mloading.js"></script>
+    <script src="../js/jquery.sparkline.min.js"></script>
+    <!-- jqplot start-->
+    
+    <script class="include" type="text/javascript" src="../js/jquery.jqplot.1.0.9/jquery.jqplot.js"></script>
+    <!-- End Don't touch this! -->
+	<!--  
+    <script class="include" language="javascript" type="text/javascript" src="../js/jquery.jqplot.1.0.9/plugins/jqplot.barRenderer.js"></script>
+    <script class="include" language="javascript" type="text/javascript" src="../js/jquery.jqplot.1.0.9/plugins/jqplot.categoryAxisRenderer.js"></script>
+    <script class="include" language="javascript" type="text/javascript" src="../js/jquery.jqplot.1.0.9/plugins/jqplot.pointLabels.js"></script>
+    -->
+   
+   	<script src="../libraryChart/jqplot/jquery.jqplot.min.js" type="text/javascript" language="javascript"></script>
+	<link href="../libraryChart/jqplot/jquery.jqplot.min.css" type="text/css" rel="stylesheet"/>
+	
+	<link href="../libraryChart/jquery-jvectormap/jquery-jvectormap-1.2.2.css" type="text/css" rel="stylesheet"/>
+	<script src="../libraryChart/jquery-jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+	
+	
+	<script type="text/javascript" src="../libraryChart/jqplot/plugins/jqplot.barRenderer.min.js" type="text/javascript" language="javascript"></script>
+	<script type="text/javascript" src="../libraryChart/jqplot/plugins/jqplot.categoryAxisRenderer.min.js" type="text/javascript" language="javascript"></script>
+	<script type="text/javascript" src="../libraryChart/jqplot/plugins/jqplot.pointLabels.min.js" type="text/javascript" language="javascript"></script>
+	<script type="text/javascript" src="../libraryChart/jqplot/plugins/jqplot.pieRenderer.min.js"></script>
+	<script type="text/javascript" src="../libraryChart/jqplot/plugins/jqplot.donutRenderer.min.js"></script>
+	<script type="text/javascript" src="../libraryChart/jqplot/plugins/jqplot.meterGaugeRenderer.min.js"></script>
+	<script type="text/javascript" src="../libraryChart/jquery-jvectormap/jquery-jvectormap-th_regions-mill-en.js"></script>
+	<script type="text/javascript" src="../libraryChart/jquery-jvectormap/jquery-jvectormap-th-mill-th.js"></script>
+	<script type="text/javascript" src="../libraryChart/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+	<script type="text/javascript" src="../libraryChart/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+	<script type="text/javascript" src="../libraryChart/jqplot/plugins/jqplot.highlighter.js"></script>
+
+    <!-- jqplot end -->
+    <!-- chart framework start -->
+    <script type="text/javascript" src="../Controller/initial.js"></script> 
+	<script type="text/javascript" src="../Controller/barChart.js"></script> 
+	<script type="text/javascript" src="../Controller/barChartHorizontal.js"></script>
+	<script type="text/javascript" src="../Controller/donutChart.js"></script>
+	<script type="text/javascript" src="../Controller/lineChart.js"></script>
+	<script type="text/javascript" src="../Controller/pieChart.js"></script>
+	<script type="text/javascript" src="../Controller/barLineChart.js"></script>
+	<script type="text/javascript" src="../Controller/gaugeChart.js"></script>
+	<script type="text/javascript" src="../Controller/map.js"></script>
+	<script type="text/javascript" src="../Controller/table.js"></script>
+	<script type="text/javascript" src="../Controller/mainJs.js"></script> 
+    <!-- chart framework end -->
+    
+    <script src="../Controller/cConfig.js"></script>
+    <script src="../Controller/cMain.js"></script> 
+    <script src="../Controller/cCompanyDashboard.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

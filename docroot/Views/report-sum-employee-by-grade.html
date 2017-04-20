@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>รายงานสรุปจำนวนพนักงานจำแนกตามเกรด | Management</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/plugins/iCheck/custom.css">
+    <link rel="stylesheet" href="../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+     <link rel="stylesheet" type="text/css" href="../css/dataTables.bootstrap.min.css"/>
+     <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css"/>
+     
+     <link href="../libraryChart/jqplot/jquery.jqplot.min.css" type="text/css" rel="stylesheet" />
+     
+
+     
+    
+    <link rel="stylesheet" href="../css/jquery.mloading.css">
+    
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/tywMain.css" rel="stylesheet">
+    <link href="../css/index.css" rel="stylesheet">
+    <link href="../css/report-sum-employee-by-grade.css" rel="stylesheet">
+</head>
+<body class="top-navigation gray-bg">
+
+	
+		<div class="container">
+			
+			<div class="row">
+	<!-- start--row -->
+
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<h5>Parameter</h5>
+			</div>
+
+			<div class="ibox-content">
+				<div class="row">
+									<div class="col-lg-2 col-md-2">
+										<div class="form-group p-xxs">
+											<label class="col-lg-4 col-md-4 p-t-xxs">Year</label>
+											<div class="col-lg-8 col-md-8" id="drop_down_list_year">
+												<select data-toggle="tooltip" title="Year"
+													class="input form-control input-sm col-lg-9" id="paramYear"
+													name="paramYear">
+													<option>All</option>
+													<option>2017</option>
+													<option>2016</option>
+												</select>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="col-lg-3 col-md-3">
+										<div class="form-group p-xxs">
+											<label class="col-lg-6 col-md-7 p-t-xxs">Appraisal Period</label>
+											<div class="col-lg-6 col-md-5" id="drop_down_list_appraisal_period">
+												<select data-toggle="tooltip" title="Appraisal Period"
+													class="input form-control input-sm col-lg-9"
+													id="paramSalaryPeriod" name="paramSalaryPeriod">
+													<option>งวดที่ 1</option>
+													<option>งวดที่ 2</option>
+												</select>
+											</div>
+
+										</div>
+
+									</div>
+									<div class="col-lg-3 col-md-3">
+										<div class="form-group p-xxs">
+											<label class="col-lg-4 col-md-5 p-t-xxs">Department</label>
+											<div class="col-lg-8 col-md-7 " id="drop_down_list_department">
+												<select data-toggle="tooltip" title="Department"
+													class="input form-control input-sm col-lg-9"
+													id="paramDepartment" name="paramDepartment">
+													<option>All</option>
+													<option>ระดับบริหาร</option>
+													<option>ระดับการจัดการ</option>
+													<option>ระดับบังคับบัญชา</option>
+													<option>ระดับเจ้าหน้าที่</option>
+													<option>HR</option>
+												</select>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="col-lg-3 col-md-3">
+										<div class="form-group p-xxs">
+											<label class="col-lg-5 col-md-6 p-t-xxs">Position
+												Group</label>
+											<div class="col-lg-7 col-md-6" id="drop_down_list_position_group">
+												<select data-toggle="tooltip" title="Position Group"
+													class="input form-control input-sm col-lg-9"
+													id="paramPsGroup" name="paramPsGroup">
+													<option>All</option>
+													<option>ระดับบริหาร</option>
+													<option>ระดับการจัดการ</option>
+													<option>ระดับบังคับบัญชา</option>
+													<option>ระดับเจ้าหน้าที่</option>
+													<option>HR</option>
+												</select>
+											</div>
+
+
+										</div>
+									</div>
+
+									<div class="col-lg-1 col-md-1 p-b-xxs">
+										<div class="form-group p-xxs ">
+
+											<div class="form-group pull-right  m-b-none">
+
+
+												<button type="button" class="btn btn-grey input-sm"
+													name="btnSearchAdvance" id="btnSearchAdvance">
+													<i class="fa fa-search"></i>&nbsp;View&nbsp;
+												</button>
+
+											</div>
+
+										</div>
+									</div>
+
+								</div>
+
+			</div>
+			<!-- content end -->
+		</div>
+
+	</div>
+
+</div>
+<!-- end--row -->
+
+
+
+<div class="row" id="report_list_content">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+				  
+                  <div class="ibox-content">
+                  <div class="row text-center p-t-lg">
+				  		<h2><strong>รายงานสรุปจำนวนพนักงานจำแนกตามเกรด</strong></h2>
+				  </div>
+				  <div class="row text-center p-t-xs">
+				  		<h3><strong>ฝ่ายผลิต</strong></h3>
+				  </div>
+				  
+				  					
+				  <div class="row text-center p-t-lg">
+				  		<div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2 text-center">
+					
+						<div id="bar-example"></div>
+						</div>
+				  </div>
+                   
+                   <div class='row p-t-lg p-t-xs' >
+                   
+                   	  <div class='col-sm-10 col-sm-offset-1 '>
+		                <div class="table-responsive table-border">
+		               <!-- table-striped -->
+		               
+		                        <table class="table" id="report_table">
+		                            <thead class="">
+									
+									<tr  >
+		                                 <th style="width:10%"> ลำดับ</th>
+		                                 <th style="width:15%"> รหัส</th>
+		                                 <th style="width:25%"> ชื่อ-สกุล</th>
+		                                 <th style="width:10%"> เกรด </th>
+		                                 <th style="width:20%"> ช่วงคะแนน </th>
+		                                 <th style="width:20%"> คะแนนรวม (100) </th>
+		                            </tr >
+		                            
+		                            </thead>
+		                            <tbody id="listDataReport">
+		                            <tr  >
+		                            	<td>1</td>
+		                            	<td>1996001</td>
+		                            	<td>นายวทิ เข็มทิ่มเจ็บจัง</td>
+		                            	<td>A</td>
+		                            	<td>90-100</td>
+		                            	<td>90</td>
+		                            	</tr  >
+		                            
+		                       </tbody>
+		                   </table>
+		               </div>
+		          	</div>
+		          
+                </div> 
+                
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div class='paramEmbedArea'></div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
+	</div>
+
+
+
+
+	<!-- Mainly scripts -->
+     <script src="../js/jquery3.1.1.js"></script>
+	 <script type="text/javascript">
+	 var jQuery_1_1_3 = $.noConflict(true);
+	 </script>
+    
+ 	<script src="../js/jquery-2.1.1.js"></script> 
+    <script src="../js/jquery-ui-1.10.4.min.js"></script>
+    <script src="../js/jquery.bootpag.min.js"></script>
+  
+   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+     <script src="../js/bootstrap.min.js"></script> 
+     
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+<!--     <script src="../js/inspinia.js"></script> -->
+    <script src="../js/plugins/pace/pace.min.js"></script>
+     <!-- table data start -->
+    <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="../js/dataTables.bootstrap.min.js"></script>
+    <!-- table data end -->
+    
+    <!-- load angular fame work start-->
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/angular-route.js"></script>
+    <!-- load angular fame work end -->
+    
+    
+   
+    
+    
+    <!-- Chart Start -->
+    <script src="../libraryChart/jqplot/jquery.js"></script>
+<script src="../libraryChart/jqplot/jquery.jqplot.min.js" type="text/javascript" language="javascript"></script>
+<script type="text/javascript" src="../libraryChart/jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+
+ <!-- library  chart start -->
+<script type="text/javascript"
+src="../libraryChart/jqplot/plugins/jqplot.barRenderer.min.js"
+	type="text/javascript" language="javascript"></script>
+<script type="text/javascript"
+	src="../libraryChart/jqplot/plugins/jqplot.categoryAxisRenderer.min.js"
+	type="text/javascript" language="javascript"></script>
+<script type="text/javascript"
+	src="../libraryChart/jqplot/plugins/jqplot.pointLabels.min.js"
+	type="text/javascript" language="javascript"></script>
+<script type="text/javascript"
+	src="../libraryChart/jqplot/plugins/jqplot.pieRenderer.min.js"></script>
+<script type="text/javascript"
+	src="../libraryChart/jqplot/plugins/jqplot.donutRenderer.min.js"></script>
+<script type="text/javascript"
+	src="../libraryChart/jqplot/plugins/jqplot.meterGaugeRenderer.min.js"></script>
+<script type="text/javascript"
+	src="../libraryChart/jquery-jvectormap/jquery-jvectormap-th_regions-mill-en.js"></script>
+<script type="text/javascript"
+	src="../libraryChart/jquery-jvectormap/jquery-jvectormap-th-mill-th.js"></script>
+<script type="text/javascript"
+	src="../libraryChart/jquery-jvectormap/jquery-jvectormap-th-region-mill-th.js"></script>
+<script type="text/javascript"
+	src="../libraryChart/jquery-jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<script type="text/javascript"
+	src="../libraryChart/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+<script type="text/javascript"
+	src="../libraryChart/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+<script type="text/javascript"
+	src="../libraryChart/jqplot/plugins/jqplot.highlighter.js"></script>
+<script type="text/javascript"
+	src="../libraryChart/jqplot/plugins/jqplot.euroFormatter.js"></script>
+ <!--  -------library  chart start -->
+  
+<script type="text/javascript" src="../libraryChart/Chart/barChart.js"></script>
+<script type="text/javascript" src="../libraryChart/Chart/mainJs.js"></script>
+
+<script type="text/javascript"
+	src="../libraryChart/jqplot/plugins/jqplot.enhancedLegendRenderer.min.js"></script>
+    <!-- Chart End -->
+    
+     <script src="../js/jquery.mloading.js"></script>
+    <script src="../Controller/cConfig.js"></script>
+    <script src="../Controller/cMain.js"></script>
+    <script src="../Controller/report-sum-employee-by-grade.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+
+
+
+<!-- Modal Disciplinary Punishment Start  DisPun-->
+
+  <div aria-hidden="true" role="dialog" tabindex="-1" id="modalDisciplinaryPunishment" class="modal inmodal" style="display: none;">
+    <div class="modal-dialog  ">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+             
+                <h4 class="modal-title" id="modalTitleRole">Appraisal Item</h4>
+               
+            </div>
+            <div class="modal-body">
+                <!-- content start -->
+                <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Add Disciplinary Punishment</span> </h2>
+                <hr>
+                <form id='Quantity_form'>
+                <div class='row'>
+                
+                	<div class="col-xs-12">
+                	 		<!-- form start -->
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                	Appraisal Item Name <span class='redFont '>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs">
+				                	<input type="text" class="form-control input-sm numberOnly" placeholder="" id="appraisalItemNameDisPun">
+				                	
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                
+				                	Appraisal Level <span class='redFont'>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs" id="appraisalLevelAreaDisPun">
+				                
+				                		<select id="appraisalLevelDisPun" class="form-control input-sm">
+					                		<option></option>
+					                	</select>
+				                		
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                
+				                	Max Value <span class='redFont'>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs">
+				                
+				                		<input type="text" id="maxValueDisPun" class="form-control input-sm numberOnly" placeholder="" >
+				                	
+				                		
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                 <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                
+				                	Deduct Score/Unit <span class='redFont'>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs" id="deductScoreUnitAreaDisPun">
+				                
+				                		<input type="text" class="form-control input-sm numberOnly" placeholder="" id="deductScoreUnitAreaDisPun">
+				                	
+				                		
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                <div class='form-file-mangement-radio'>
+				                <div class="form-label-customs"> 
+				                </div>
+				                <div class="input-inline-table-customs">
+				                	
+					             <input type="checkbox" checked disabled name="isActiveDisPun" id="isActiveDisPun" value="1">
+					              <span>Is Active</span>
+				                </div>
+				                <br style="clear:both">   		
+			                </div>
+			                <!-- form end -->	
+                	</div>
+                	
+                </div>
+                </form>
+                <br style="clear:both">
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+           	 	<input type="hidden" name="idDisPun" id="id" value="">
+   				<input type="hidden" name="actionDisPun" id="action" value="add">
+   				
+   				<button class="btn btn-primary" type="button" id="btnSubmitDisPun">Save</button>
+   				<button class="btn btn-primary" type="button" id="btnAddAnotherDisPun">Save & Add Another</button>
+                <button data-dismiss="modal" class="btn btn-white btnCancleDisPun" type="button">Cancel</button>
+                <div class="alert alert-warning information" id="informationDisPun" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+</div>                      
+<!-- Modal Disciplinary Punishment End  -->

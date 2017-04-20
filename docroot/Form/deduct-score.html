@@ -1,0 +1,124 @@
+
+<!-- Modal DeductScore  Start  -->
+
+  <div aria-hidden="true" role="dialog" tabindex="-1" id="modal-deduct" class="modal inmodal" style="display: none;">
+    <div class="modal-dialog  ">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
+             
+                <h4 class="modal-title" id="modalTitleDeductScore">Appraisal Item</h4>
+               
+            </div>
+            <div class="modal-body">
+                <!-- content start -->
+                <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDeductScoreDescription"> </span> </h2>
+                <hr>
+                <div class='row-fluid'>
+                	<div class="span12">
+                	 		<!-- form start -->
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                	Appraisal Item Name1 <span class='redFont '>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs">
+				                	<input type="text" class="form-control input-sm " placeholder="Appraisal Item Name" id="appraisalItemNameDeductScore">
+				                	
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                
+				                	Appraisal Level <span class='redFont'>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs" id="appraisalLevelAreaDeductScore">
+				                
+				                		<select class="form-control input-sm" id="appraisalLevelDeductScore">
+					                		<option></option>
+					                	</select>
+				                		
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                
+			                
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                	Department <span class='redFont '>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs" id="departmentAreaDeductScore">
+				                	<select class="form-control input-sm" id="departmentDeductScore">
+				                		<option></option>
+				                	</select>
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                
+				                	Max Value <span class='redFont'>*</span>
+				                </div>
+				                
+				                <div id="maxValueAreaDeductScore" class="form-input-customs">
+				                
+				                		<input type="text" class="form-control input-sm numberOnly span12" placeholder="Max Value " id="maxValueDeductScore">
+				                	
+				                		
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                
+				                	Deduct Score/Unit <span class='redFont'>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs">
+				                
+				                		<input type="text" class="form-control input-sm numberOnly span12" placeholder="Deduct Score/Unit" id="DeductScoreUnitDeductScore">
+				                	
+				                		
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                <div class='form-file-mangement-radio'>
+				                <div class="form-label-customs"> 
+				                </div>
+				                <div class="input-inline-table-customs">
+				                	
+					             <input type="checkbox" checked   name="isActiveDeductScore" id="isActiveDeductScore" value="1">
+					              <span>Is Active</span>
+				                </div>
+				                <br style="clear:both">   		
+			                </div>
+			                <!-- form end -->	
+                	</div>
+                	
+                </div>
+                <br style="clear:both">
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+           	 	<input type="hidden" name="structure_id_deduct" id="structure_id_deduct" value="">
+           	 	<input type="hidden" name="appraisalItemIdDeductScore" id="appraisalItemIdDeductScore" value="">
+   				<input type="hidden" name="actionDeductScore" id="actionDeductScore" value="add">
+   				
+   				<button class="btn btn-primary" type="button" id="btnSubmitDeductScore">Save</button>
+   				<button class="btn btn-primary" type="button" id="btnAddAnotherDeductScore">Save & Add Another</button>
+                <button data-dismiss="modal" class="btn btn-white btnCancleDeductScore" type="button">Cancel</button>
+                <div class="alert alert-warning information" id="informationDeductScore" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+</div>                      
+<!-- Modal  DeductScore End  -->
+<script src="../../tyw-kpi-portlet/Controller/Form/cDeductScore.js"></script>

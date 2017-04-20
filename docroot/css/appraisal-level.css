@@ -1,0 +1,48 @@
+.popover {
+	width: 195px;
+}
+.m-b-xs{
+	margin-bottom: 10px;
+
+}
+
+
+.form-horizontal .checkbox, .form-horizontal .checkbox-inline,
+	.form-horizontal .radio, .form-horizontal .radio-inline {
+	margin-bottom: 0;
+	margin-top: 0;
+	padding-top: 0px;
+}
+.form-group {
+    margin-bottom: 10px;
+}
+.control-label{
+	cursor: default;
+}
+.ibox-title {
+	padding: 1px 10px;
+}
+.ibox-content {
+    background-color: #fff;
+    border: 1px solid #ffe57f;
+    color: inherit;
+    margin-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+h5 {
+	margin: 7px 0;
+}
+
+.gray-bg {
+	background-color: #f3f3f4;
+}
+#objectCenter{
+	text-align: center;
+}
+.checkbox input[type="checkbox"]{
+    opacity: 1;
+    z-index: 1;
+}
+.modal{top:3%;}

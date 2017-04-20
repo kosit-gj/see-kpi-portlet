@@ -1,0 +1,60 @@
+/*main css*/
+.top-navigation .nav > li > a {
+    color: white;
+    margin-top: 0px;
+    padding: 15px 20px;
+    
+}
+.top-navigation .nav > li.active {
+     background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #ffffff 0%, #f6f6f6 47%, #ededed 100%) repeat scroll 0 0;
+    border: medium none;
+}
+.top-navigation .navbar-right {
+    margin-right: 10px;
+    margin-top: 0;
+}
+.top-navigation.fixed-nav #wrapper, .fixed-nav #wrapper.top-navigation {
+    margin-top: 50px;
+}
+
+.top-navigation .nav > li a:hover,
+.top-navigation .nav > li a:focus {
+  /*
+  background: #fff;
+  color: #1ab394;
+  */
+  
+ background: #ec228c;
+  color: white;
+  
+  /*
+  background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #ffffff 0%, #f6f6f6 47%, #ededed 100%) repeat scroll 0 0;
+  color: white;
+  */
+}
+.logo{
+	/*box-shadow: 2px 0 10px #d0d0d0;*/
+}
+
+.top-navigation .navbar-nav .open .dropdown-menu > li > a, .top-navigation .navbar-nav .open .dropdown-menu .dropdown-header {
+    padding: 0 15px 0 20px;
+}
+
+.dropdown-menu > li > a {
+    border-radius: 0;
+}
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+}
+.top-navigation .navbar-nav .dropdown-menu > .active > a{
+	background: #ec228c none repeat scroll 0 0;
+    color: white;
+    font-weight: bold;
+}
+/*
+ul#DQManagementMenuCate li.active{
+  background: #ec228c;
+  color: white;
+}
+*/
+/*main css*/

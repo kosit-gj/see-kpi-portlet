@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Appraisal Item | Management</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/plugins/iCheck/custom.css">
+    <link rel="stylesheet" href="../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css/dataTables.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css"/>
+     
+    
+    <link rel="stylesheet" href="../css/jquery.mloading.css">
+    
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/tywMain.css" rel="stylesheet">
+    <link href="../css/index.css" rel="stylesheet">
+    <link href="../css/appraisal-assignment.css" rel="stylesheet">
+    
+</head>
+<style>
+
+</style>
+<body class="top-navigation gray-bg ">
+
+
+<!--  #####################Content data here ######################-->
+<div id="slide_status">
+	<div id="btnCloseSlide">×</div>
+	<div id="slide_status_area"></div>
+</div>
+<div class="container">
+
+
+
+
+<h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Appraisal Assignment</span> </h2>
+				<div class="row"><!-- start--row -->
+
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                               
+                                  <div class='titlePanelSearch'>Advance Search</div> 
+         					</div>
+         					
+         						<div class="ibox-content"> 
+         							
+											<div class='row'>
+												
+				                                    <div class="col-sm-4 m-b-xs">
+					                                    <div class="form-group"><label class="col-lg-5 control-label">Appraisal Level</label>
+			
+						                                    <div class="col-lg-7" id='appraisalLevelArea'>
+						                                    
+							                                    <select data-toggle="tooltip" title="Flag 2" class="input form-control input-sm"  id="appraisalLevel" name="appraisalLevel">
+							                                    	
+							                                    	<option value="0"></option>
+																	
+																	
+																</select>
+																
+						                                    </div>
+						                                </div>
+													</div>
+													<div class="col-sm-4 m-b-xs">
+					                                    <div class="form-group"><label class="col-lg-5 control-label">Appraisal Type</label>
+			
+						                                    <div class="col-lg-7" id="appraisalTypeArea">
+						                                    
+							                                    <select data-toggle="tooltip" title="Appraisal Type" class="input form-control input-sm"  id="appraisalType" name="appraisalType">
+							                                    	
+							                                    	<option value="0"></option>
+																	
+																</select>
+																
+						                                    </div>
+						                                </div>
+													</div>
+													<div class="col-sm-4 m-b-xs">
+					                                    <div class="form-group"><label class="col-lg-5 control-label">Year </label>
+			
+						                                    <div class="col-lg-7" id='yearArea'>
+						                                    
+							                                  
+																  <select data-toggle="tooltip" title="Year" class="input form-control input-sm"  id="YearList" name="YearList">
+							                                    	
+							                                    	<option value="0"></option>
+																	
+																</select>
+																
+						                                    </div>
+						                                </div>
+													</div>
+													
+													
+													<div class="col-sm-4 m-b-xs" id="periodfrequencyArea">
+					                                    <div class="form-group"><label class="col-lg-5 control-label">Period frequency</label>
+			
+						                                    <div class="col-lg-7" id="periodFrequencyArea">
+						                                    
+							                                    <select data-toggle="tooltip" title="Period frequency" class="input form-control input-sm"  id="periodFrequency" name="periodFrequency">
+							                                    	<option value="0"></option>
+																</select>
+																
+						                                    </div>
+						                                </div>
+													</div>
+													
+													<div class="col-sm-4 m-b-xs">
+					                                    <div class="form-group"><label class="col-lg-5 control-label">Assign Frequency</label>
+			
+						                                    <div class="col-lg-7" id='assignFrequencyArea'>
+						               
+							                                    <select data-toggle="tooltip" title="Assign Frequency" class="input form-control input-sm"  id="assignFrequency" name="assignFrequency">
+							                                    
+							                                    	<option value="1">ครั้งเดียวทุกงวด</option>
+							                                    	<option value="2">ทีละงวด</option>
+																	
+																</select>
+																
+						                                    </div>
+						                                </div>
+													</div>
+													
+													<div class="col-sm-4 m-b-xs">
+					                                    <div class="form-group"><label class="col-lg-5 control-label">Period</label>
+			
+						                                    <div class="col-lg-7" id="periodArea">
+						                                    
+							                                    <select data-toggle="Period" title="Period" class="input form-control input-sm"  id="period" name="period">
+							                                    	
+							                                    	<option value="">ทุกรอบการประเมิน</option>
+																	
+																</select>
+																
+						                                    </div>
+						                                </div>
+													</div>
+													
+													<div class="col-sm-4 m-b-xs">
+					                                    <div class="form-group"><label class="col-lg-5 control-label">Emp Name</label>
+			
+						                                    <div class="col-lg-7" id="empNameArea">
+						                                    
+							                                    
+																<input type="text" class="form-control input-sm numberOnly" placeholder="Emp Name" id="empName">
+																
+																
+						                                    </div>
+						                                </div>
+													</div>
+													<div class="col-sm-4 m-b-xs">
+					                                    <div class="form-group"><label class="col-lg-5 control-label">Position </label>
+			
+						                                    <div class="col-lg-7" id='PositionArea'>
+						                                    
+							                                  
+																
+																<input type="text" id="Position" placeholder="Position" class="form-control input-sm">
+																
+						                                    </div>
+						                                </div>
+													</div>
+													<div class='col-sm-4 object-right' style='text-align:right;' >
+										
+												
+														
+			                                  
+				                                     	<div id="btnSearchArea">
+			                                         		<button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance"><i class="fa fa-search"></i>&nbsp;Search</button>
+			                                         		<button type="button"  data-target='#ModalAssignment' data-toggle='modal' class="btn btn-warning input-sm" name="btnAssignment" id="btnAssignment"><i class="fa fa-sign-in"></i>&nbsp;Assign</button>
+			                                         	</div>
+		                                         
+				                                     	
+                                     	
+													</div>
+													
+													
+											</div>
+							
+				         		</div><!-- content end -->
+				         		</div>
+				         		
+         				</div>
+	
+         			</div><!-- end--row -->
+         			<div class="row search_result">
+				         		<div class="col-lg-12">
+					         	<div class="ibox-title">
+	                                <div class='titlePanel'>Employee List</div>
+	         					</div>
+	         					
+	         					
+	         					<div class="ibox-content"> 
+	         					
+                                    	<!-- start table -->
+                                    	<!-- pagination start -->
+                                    	<div class="row">
+	                                    	<div class="col-xs-9">
+												<div class="pagination_top"></div>
+	                                    	</div>
+	                                    
+		                                    <div class="col-xs-3 object-right paging-text">
+		                                    
+		                                    	<div class='pagingDropdown'>
+		                                 			<select  id='countPaginationTop'  class="form-control input-sm countPagination">
+					                                     <option>10</option>
+					                                     <option>20</option>
+					                                     <option>50</option>
+					                                     <option>100</option>
+					                                 </select>
+		                                 		
+		                                 		</div>
+												<div class='pagingText'>Results per page</div>
+		                                    
+		                                    </div>
+		                                    
+                                    	</div> 
+                                    	 <!-- pagination end -->
+                                    	 
+                                    	 <!-- content row 1 start-->
+                                    	  <div class="row">
+				         					<div class="col-lg-12">
+		                                    	<div class="ibox-title2">
+					                                 <div class='titlePanel2'>ประเมินผลการปฎิบัติงานประจำปี 2017 ครั้งที่1 Start Date 01/11/2016 End Date 30/04/2017 </div> 
+					                                
+					                            </div>
+					         					
+					         					<div class="ibox-content">
+					         							
+					         							<!-- content table start-->	 
+				                                    	<div class="table-responsive">
+				                                   		<table class="table table-striped" id="tablethreshould">
+				                                   		<!-- Select,Status,Emp Code,Department,Section,Appraisal Type,Position -->
+					                                        <thead>
+						                                        <tr>
+						                                            <th class='object-center' style='width:5%'>Select</th>
+						                                            <th  style='width:8%'>Status</th>
+						                                            <th  style='width:8%'>Emp Code</th>
+						                                            <th  style='width:15%'>Emp Name</th>
+						                                            <th  style='width:10%'>Department</th>
+						                                            <th  style='width:10%'>Section</th>
+						                                            <th  style='width:10%'>Appraisal Type</th>
+						                                            <th  style='width:15%'>Position</th>
+						                                            <th style='width:7%; text-align:center;'>Manage</th>
+						                                        </tr>
+					                                        </thead>
+					                                        <tbody id="listDatas">
+					                                        <!-- 
+					                                        	<tr>
+					                                        		<td class='object-center'><input type='checkbox'></td>
+					                                        		<td>Unassigned</td>
+					                                        		<td>0001</td>
+					                                        		<td>ระดับการจัดการ</td>
+					                                        		<td>พัฒนาลูกค้า</td>
+					                                        		<td>ประจำปี</td>
+					                                        		<td>หัวหน้าพัฒนาลูกค้า</td>
+					                                        		<td style="text-align:center">
+					                                        			
+					                                        		<i title="" data-original-title="" class="fa fa-cog font-gear popover-edit-del" data-html="true" data-toggle="popover" data-placement="top" data-content=" &lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;"></i>
+					                                        		
+					                                        		
+					                                        		</td>
+					                                        	</tr>
+					                                        	<tr>
+					                                        		<td class='object-center'><input type='checkbox'></td>
+					                                        		<td>Unassigned</td>
+					                                        		<td>0001</td>
+					                                        		<td>ระดับการจัดการ</td>
+					                                        		<td>พัฒนาลูกค้า</td>
+					                                        		<td>ประจำปี</td>
+					                                        		<td>หัวหน้าพัฒนาลูกค้า</td>
+					                                        		<td style="text-align:center">
+					                                        			<i title="" data-original-title="" class="fa fa-cog font-gear popover-edit-del" data-html="true" data-toggle="popover" data-placement="top" data-content=" &lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;"></i>
+					                                        		</td>
+					                                        	</tr>
+					                                        	<tr>
+					                                        		<td class='object-center'><input type='checkbox'></td>
+					                                        		<td>Unassigned</td>
+					                                        		<td>0001</td>
+					                                        		<td>ระดับการจัดการ</td>
+					                                        		<td>พัฒนาลูกค้า</td>
+					                                        		<td>ประจำปี</td>
+					                                        		<td>หัวหน้าพัฒนาลูกค้า</td>
+					                                        		<td style="text-align:center">
+					                                        			<i title="" data-original-title="" class="fa fa-cog font-gear popover-edit-del" data-html="true" data-toggle="popover" data-placement="top" data-content=" &lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;"></i>
+					                                        		</td>
+					                                        	</tr>
+					                                        	<tr>
+					                                        		<td class='object-center'><input type='checkbox'></td>
+					                                        		<td>Unassigned</td>
+					                                        		<td>0001</td>
+					                                        		<td>ระดับการจัดการ</td>
+					                                        		<td>พัฒนาลูกค้า</td>
+					                                        		<td>ประจำปี</td>
+					                                        		<td>หัวหน้าพัฒนาลูกค้า</td>
+					                                        		<td style="text-align:center">
+					                                        			<i title="" data-original-title="" class="fa fa-cog font-gear popover-edit-del" data-html="true" data-toggle="popover" data-placement="top" data-content=" &lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;"></i>
+					                                        		</td>
+					                                        	</tr>
+					                                        	 -->
+					                                        	
+					                                        </tbody>
+				                                        </table>
+				                                        </div>
+                                        				<!-- content table end-->
+                                        				
+                                        				
+					         					</div>
+					         				</div>
+					         			</div>
+	         							<!-- content row 1 end-->
+	         							
+	         							
+	         							
+
+                                        
+                                        <!-- row start -->
+                                    	<div class="row">
+	                                    	<div class="col-xs-9">
+	
+												  <p class="pagination_bottom"></p>
+												<!-- 
+												<ul class="pagination bootpag"><li class="first disabled" data-lp="1"><a href="javascript:void(0);">←</a></li><li class="prev disabled" data-lp="1"><a href="javascript:void(0);">prev</a></li><li data-lp="1" class="active"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li class="next" data-lp="2"><a href="javascript:void(0);">next</a></li><li class="last" data-lp="2"><a href="javascript:void(0);">→</a></li></ul>
+	                   							 -->
+	                                    	</div>
+	                                    
+		                                    <div class="col-xs-3 object-right paging-text">
+		                                    	<div class='pagingDropdown'>
+		                                 			<select  id='countPaginationBottom'  class="form-control input-sm countPagination">
+					                                     <option>10</option>
+					                                     <option>20</option>
+					                                     <option>50</option>
+					                                     <option>100</option>
+					                                 </select> 
+			                                 	</div>
+												<div class='pagingText'>Results per page</div>
+		                                    </div>
+		                                    <!-- 
+		                                    <div class="col-xs-1">
+	                                    	<select name="countPagination" id='countPaginationBottom'  class="form-control input-sm countPagination">
+		                                        <option>10</option>
+		                                     	<option>20</option>
+		                                     	<option>50</option>
+		                                     	<option>100</option>
+		                                    </select> 
+	                                    	</div>
+	                                    	 -->
+                                    	</div> 
+                                    	 <!-- row end -->
+                                    	<!-- end table -->
+                                    	<br style='clear:both'>
+         						</div><!-- content end -->
+         					</div>
+         					</div>
+         					 
+  </div>
+  
+  <div id='embedParamSearch'></div>       					
+      <!-- <button data-toggle="modal" data-target="#ModalKPI" id="btnAddKPI" class="btn btn-info input-sm" type="button"><i class="fa fa-plus-square"></i>&nbsp;Assign KPI</button>	 -->				
+<!-- Modal KPI Start Edit -->
+
+  <div aria-hidden="true" role="dialog" tabindex="-1" id="ModalAssignment" class="modal inmodal" style="display: none;">
+    <div class="modal-dialog  modal-lg">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+             
+                <h4 class="modal-title" id="modalTitleRole">Appraisal Assignment</h4>
+               
+            </div>
+            <div class="modal-body">
+                <!-- content start -->
+                <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Assign Appraisal Item</span> </h2>
+                <hr>
+               
+             
+                <!-- panel0 start -->
+                <div class="row cus_information_area" >
+	  					<div class="col-lg-12">
+	                      <div class="ibox-title2">
+	                          <div class='titlePanel'>Employee Information</div>
+	                      </div>
+	   					
+	   					<div class="ibox-content">
+	   							
+	   							<!-- content table start-->	
+	   								<div class='row wrapper employee_information_area'>
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Employee Code:</div>
+	   										<div class='text_info' id='employee_code'></div>
+	   									</div>
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Section:</div>
+	   										<div class='text_info' id='section'> </div>
+	   									</div>
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Appraisal Type:</div>
+	   										<div class='text_info' id='appraisal_type'></div>
+	   									</div>
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Employee Name:</div>
+	   										<div class='text_info' id='employee_name'></div>
+	   									</div>
+	   								
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Department:</div>
+	   										<div class='text_info' id='department'></div>
+	   									</div>
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Period:</div>
+	   										<div class='text_info' id='period'> </div>
+	   									</div>
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Start Working Date:</div>
+	   										<div class='text_info' id='start_working_date'> </div>
+	   									</div>
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Chief Employee Code:</div>
+	   										<div class='text_info' id='chief_employee_code'> </div>
+	   									</div>
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Position:</div>
+	   										<div class='text_info' id='position'> </div>
+	   									</div>
+	   									<div class='col-xs-4'>
+	   										<div class='label_info'>Chief Employee Name:</div>
+	   										<div class='text_info'id='chief_employee_name'> </div>
+	   									</div>
+	   									
+	   								</div>
+						          <br style="clear:both">
+	                            <!-- content table end-->				
+	   					</div>
+	   				</div>
+	   			</div>
+                <!-- panel0 end -->
+                <!-- panel1 start -->
+                <div id='appraisal_template_area'></div>
+                <!-- panel1 end -->
+                
+                
+               
+                
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+            
+            	<div class="row">
+            		<div class='col-xs-12 crandTotalWeight' >
+            		Grand Total Weight % <span  class='perscentage'>0.00</span>
+            		</div>
+            	</div>
+            	
+            	<div class="row">
+            		<div class='col-xs-12'>
+            			
+            			<div class='btnManagement'>
+		   					<input type="hidden" name="id" id="id" value="">
+			   				<input type="hidden" name="action" id="action" value="add">
+			   				<button class="btn btn-primary" type="button" id="btnSubmit">Submit</button>
+			   				<!-- 
+			   				<button class="btn btn-primary" type="button" id="btnAddAnother">Save & Add Another</button>
+			   				-->
+			                <button data-dismiss="modal" class="btn btn-white btnCancle" type="button">Cancel</button>
+			                
+		   				</div>
+		   				
+		   				<div class='btnAssignment'>
+		   					
+			   				
+	            			<div class='labelAssign'>Assign to:&nbsp; </div>
+	            			<div class='dropdownListAssign' id='assignToArea'>
+	            			
+		            			<select id='assignTo' class='input form-control input-sm'>
+		            			<!-- 
+				   					<option>1</option>
+				   					<option>2</option>
+				   					<option>3</option>
+				   				 -->
+				   				</select>
+			   				</div>
+			   				
+			   				
+			   				<div class='labelAssign'>Action:&nbsp; </div>
+	            			<div class='dropdownListAssign' id='actionAssignArea'>
+		            			<select id='actionAssign' class='input form-control input-sm'>
+		            			<!-- 
+				   					<option>Save Draft</option>
+				   					<option>Review</option>
+				   				 -->	
+				   				</select>
+			   				</div>
+			   				
+		   				
+		   				</div>
+		   				
+            		
+		            		
+		   				<br style='clear:both'>
+		   				<div class="alert alert-warning information" id="information" style="display: none;"></div>
+			   			<br style='clear:both'>
+			   			<br style='clear:both'>
+		   			</div>
+		   		
+		   			
+   				</div>
+            	
+           	 	
+            </div>
+        </div>
+    </div>
+    
+</div>                      
+<!-- Modal KPI End Edit -->
+
+
+<!-- Modal Confirm Start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal" class="modal inmodal in" style="display: none;">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h5 class="modal-title">Confirm Dialog</h5>
+            </div>
+            <div class="modal-body">
+                <!-- content start -->
+                <!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
+                <hr>
+                 -->
+                <!-- form start -->
+                <div class="form-kpi-mangement">
+	                <div class="form-kpi-label" align="center">
+	                
+	                 		<label>Confirm to Delete Data?</label>
+	                </div>
+                </div>
+                               
+                <!-- form start -->
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+            	<div align="center">
+	                <button class="btn btn-success" id="btnConfirmOK" type="button">&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;</button>&nbsp;&nbsp;
+	                <button data-dismiss="modal" class="btn btn-danger" type="button"><i class="fa fa-times-circle"></i>&nbsp;Cancel</button>
+            	</div>
+            </div>
+        </div>
+    </div>
+    
+    
+   
+</div>
+<!-- Modal Confirm End -->
+
+ <!--  #####################Content data here ######################-->
+		
+    <!-- Mainly scripts -->
+     <script src="../js/jquery3.1.1.js"></script>
+	 <script type="text/javascript">
+	 var jQuery_1_1_3 = $.noConflict(true);
+	 </script>
+    
+ 	<script src="../js/jquery-2.1.1.js"></script> 
+    <script src="../js/jquery-ui-1.10.4.min.js"></script>
+    <script src="../js/jquery.bootpag.min.js"></script>
+  
+   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+     <script src="../js/bootstrap.min.js"></script> 
+     
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../js/inspinia.js"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+     <!-- table data start -->
+    <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="../js/dataTables.bootstrap.min.js"></script>
+    <!-- table data end -->
+    
+
+	
+    <script src="../js/jquery.mloading.js"></script>
+    <script src="../Controller/cConfig.js"></script>
+    <script src="../Controller/cMain.js"></script> 
+    <script src="../Controller/cAppraisalAssignment.js"></script>
+
+	
+</body>
+
+</html>

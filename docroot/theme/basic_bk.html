@@ -1,0 +1,582 @@
+<style>
+.titlePanel {
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding-top: 0;
+}
+.form-label-customs {
+    float: left;
+    padding-right: 5px;
+    padding-top: 1px;
+    text-align: right;
+    width: 150px;
+}
+#advanceSearchArea{
+	display:none;
+}
+.resultArea{
+display:none;
+}
+.inputFormSearch{
+	 padding-right: 0;
+}
+.ibox-content {
+    background-color: #fff;
+    border: 1px solid #ffe57f;
+    color: inherit;
+    margin-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+#btnAdd{
+margin-bottom:5px
+}
+
+.pagingText{
+ 	/*display:none;*/
+ 	}
+ 	#btnPaginationTop{
+ 		width:300px;
+ 		float:left;
+ 	}
+	/*
+	#dropdownPaginationTop{
+		width:100px;
+ 		float:right;
+	}
+	#dropdownPaginationBottom{
+		width:100px;
+ 		float:right;
+	}
+	*/
+	
+	#btnPaginationBottom{
+ 		width:300px;
+ 		float:left;
+ 	}
+	
+	.pagingText{
+	padding-top: 5px;
+	}
+	.aui .pagination ul{
+	margin: 0
+	}
+	
+	.aui form {
+    margin: 0;
+}
+.aui .table td{
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+#countPaginationTop{
+	width:60px;
+}
+#countPaginationBottom{
+	width:60px;
+}
+
+.aui #breadcrumbs {
+    margin-bottom: 0px;
+}
+
+.aui .breadcrumb {
+    background-color: #f5f5f5;
+    border-radius: 2px;
+    list-style: outside none none;
+    margin: 0 0 0px;
+    padding: 0px 15px;
+}
+
+.aui .portlet-content, .aui .portlet-minimized .portlet-content-container {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #eaeaea;
+    border-image: none;
+    border-style: solid;
+    border-width: 0 1px 1px;
+    padding: 10px 5px 5px;
+}
+
+.aui .portlet-content, .aui .portlet-minimized .portlet-content-container {
+  background-color: #fafafa;
+}
+
+.aui .form-group {
+    margin-bottom: 7px;
+}
+
+
+/* Css by Au Start */
+.gray-bg {
+	background-color: #f3f3f4;
+}
+.ibox-title{
+	padding: 1px 10px;
+}
+.titlePanel {
+	margin: 7px 0;
+}
+.form-group {
+    margin-bottom: 10px;
+}
+.control-label{
+	cursor: default;
+}
+form {
+    margin: 0 0 0;
+}
+.countPagination {
+    width: 70px;
+
+}
+.aui .popover-content {
+    padding: 5px 5px 5px 5px;
+}
+
+
+
+.modal{top:3%;}
+#confrimModal{width: 400px;}
+
+.aui .modal-footer{
+	border-radius: 0;
+}
+
+/* Large desktop */
+
+@media ( min-width : 1200px) {
+	#confrimModal{left: 55%;}
+}
+
+/* Portrait tablet to landscape and desktop */
+@media ( min-width : 980px) and (max-width: 1199px) {
+	#confrimModal{left: 57%;}
+}
+@media ( min-width : 768px) and (max-width: 979px) {
+	#confrimModal{left: 58.5%;}
+	.ResultsPerPageTop{
+		position: absolute;
+		left: -20px;
+		top: 78px;
+	}
+	.ResultsPerPageBottom{
+		position: relative;
+		top: -40px;
+	}
+	[class*="span"], .uneditable-input[class*="span"], .row-fluid [class*="span"] {
+    display: block;
+    float: none;
+    width: 100%;
+    margin-left: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+	}
+
+	
+}
+
+/* Landscape phone to portrait tablet */
+@media ( max-width : 767px) {
+	#confrimModal{left: 23.5%;}
+	.ResultsPerPageTop{
+		position: absolute;
+		left: -20px;
+		top: 78px;
+		}
+		.ResultsPerPageBottom{
+		position: relative;
+		top: -40px;
+		}
+}		
+@media ( min-width : 481px) and (max-width: 615px) {
+	
+	#confrimModal{left: 16.5%;}
+	.ResultsPerPageTop{
+		position: absolute;
+		left: -20px;
+		top: 42px;
+	}
+	.ResultsPerPageBottom{
+		position: static;
+	}
+	
+	
+}
+
+/* Landscape phones and down */
+@media ( max-width : 480px) {
+
+	#confrimModal{left: 1%;}
+	.ResultsPerPageTop{
+		/*position: absolute;*/
+		left: -20px;
+		top: 42px;
+		}
+	.ResultsPerPageBottom{
+		position: static;
+	}
+}
+@media ( min-width : 0px) and (max-width: 468px) {
+		.ResultsPerPageTop{
+		position: absolute;
+		left: -20;
+		top: 83px;
+		}
+		#paginationTop{
+			margin-top: 44px;
+		}
+	
+		
+}
+/* Css by Au End1 */
+
+</style>
+<div class="gray-bg">
+	<div class='row-fluid'>
+		<div class='col-xs-12'>
+			<div id="slide_status">
+				<div id="btnCloseSlide">×</div>
+				<div id="slide_status_area"></div>
+			</div>
+		</div>
+	</div>
+	<!-- 
+	<div class="row-fluid">
+		<div class="col-lg-12">
+			<div class="span12" style="padding: 0px 10px;">
+				<h1>
+					<i class="fa fa fa-pencil-square-o icon-title"></i>
+					<small style=" position:absolute;top:37px;left:85px" id="titilePage">Common Data Set</small>
+					</h1>
+				</div>
+			</div>
+	</div>
+	 -->
+	
+<div id='advanceSearchArea'>
+
+<form id='searchAdvanceForm' name='searchAdvanceForm' >
+<div class="row-fluid"><!-- start--row -->
+
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                               
+                                  <div class='titlePanel'>Advance Search</div> 
+         					</div>
+         					
+         						<div class="ibox-content breadcrumb"> 
+         							<div class="row-fluid p-t-xxs">
+										<div class='span9'>
+																				
+												<div id='advanceSearchParamArea'>
+
+													
+												</div>
+												
+											
+										</div>
+										
+										<div class='span3 ' align="right">
+										
+												
+												
+			                                     	
+			                                     	
+		                                         	<div class="input-group" >
+				                                     	<div id="btnSearchArea">
+				                                     	<!-- 
+				                                     		<span id='btnAdvanceSearchOption'>
+				                                     		</span>
+				                                     	-->
+			                                         		<button style="margin-bottom: 5px;" type="submit" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance"><i class="fa fa-search"></i>&nbsp;Search</button>
+			                                         	</div>
+		                                         	</div>
+		                                     	
+                                     	
+										</div>
+										
+
+	                                    
+                                    
+                                     	 
+                             		</div>
+				         		</div><!-- content end -->
+				         		</div>
+				         		
+         				</div>
+	
+         			</div><!-- end--row -->
+         			
+ </form>        			
+         			
+         			
+</div>	
+         			<div class="row-fluid resultArea" style='display:none;'>
+				         		<div class="col-lg-12">
+					         	<div class="ibox-title">
+	                                <div id='titlePanel' class='titlePanel'>Database Connection List </div>
+	         					</div>
+	         					<div class="ibox-content"> 
+
+         							<div class="row-fluid ">
+         								<div class="spen9">
+	                    					<button type="button" class="btn btn-success" id="btnAdd" data-target="#modal-databaseConnection" data-toggle="modal" ><i class="fa fa-plus-square"></i>&nbsp;Add&nbsp;<span id='btnAddData'></span></button>
+	                    					<span id='btnAdvanceSearchOption'></span>
+                                     	</div>
+                                     	
+                                     	<div class="spen3" id="expressSearchArea">
+                                     		<!-- 
+				                       		<div class="input-group"><input type="text" class="input-sm form-control" id="searchText" placeholder="Search"> <span class="input-group-btn">
+				                          		<button id="btnSearch" class="btn btn-sm btn-primary" type="button">&nbsp;<i class="fa fa-search"></i></button> </span>
+				                          	</div>
+				                          	 -->
+				                    	</div>
+         							</div>
+                                    	<!-- start table -->
+                                    	<!-- pagination start -->
+                                    	<div class="row-fluid paginationControl">
+	                                    	<div class="span6 " id="paginationTop">
+												<span class="pagination_top pagination">
+												<!-- Test -->
+												<!-- 
+												<span class="pagination_top"><ul class="pagination bootpag"><li class="first disabled" data-lp="1"><a href="javascript:void(0);">â†�</a></li><li class="prev disabled" data-lp="1"><a href="javascript:void(0);">prev</a></li><li data-lp="1" class="active"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li data-lp="3"><a href="javascript:void(0);">3</a></li><li class="next" data-lp="2"><a href="javascript:void(0);">next</a></li><li class="last" data-lp="3"><a href="javascript:void(0);">â†’</a></li></ul></span>
+												 -->
+												<!-- Test -->
+												</span>
+	                                    	</div>
+		                                    <div class="span6 object-right ResultsPerPageTop">
+		                                    
+			                                    <div id='dropdownPaginationTop' class='pagingDropdown'>
+		                                 			<select  id='countPaginationTop'  class="form-control input-sm countPagination">
+					                                     <option>10</option>
+					                                     <option>20</option>
+					                                     <option>50</option>
+					                                     <option>100</option>
+					                                 </select>
+		                                 		
+		                                 		</div>
+												<div class='pagingText'>Results per page</div>
+		                                    
+		                                    </div>
+		                                   
+                                    	</div> 
+                                    	 <!-- pagination end -->
+                                    	 
+                                    	<div class="table-responsive" id='tableArea' style="overflow:auto;">
+                                    	<!-- -
+                                   		<table class="table table-striped" id="tablethreshould">
+                                   		
+	                                        <thead>
+		                                        <tr>
+		                                            <th  style='width:20%'>Connection Name</th>
+		                                            <th  style='width:65%'>Database Type</th>
+		                                            <th style='width:15%; text-align:center;'>Manage</th>
+		                                        </tr>
+	                                        </thead>
+	                                        <tbody id="listData">
+	                                        	<tr>
+	                                        		<td></td>
+	                                        		<td></td>
+	                                        		<td style="text-align:center">
+	                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i>
+	                                        		</td>
+	                                        	</tr>
+	                                        	<tr>
+	                                        		<td></td>
+	                                        		<td></td>
+	                                        		<td style="text-align:center">
+	                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i>
+	                                        		</td>
+	                                        	</tr>
+	                                        	<tr>
+	                                        		<td></td>
+	                                        		<td></td>
+	                                        		<td style="text-align:center">
+	                                        			<i data-content="&lt;button class='btn btn-warning btn-xs btn-gear edit' id=1 data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=1 class='btn btn-danger btn-xs btn-gear del'&gt;Delete&lt;/button&gt;" data-placement="top" data-toggle="popover" data-html="true" class="fa fa-cog font-gear popover-edit-del" data-original-title="" title=""></i>
+	                                        		</td>
+	                                        	</tr>
+	                                        	
+	                                        </tbody>
+                                        </table>
+                                         -->
+                                        </div>
+                                       
+                                    	<div class="row-fluid paginationControl">
+	                                    	<div class="span6 ">
+												<span class="pagination_bottom pagination">
+												<!-- Test -->
+												<!-- 
+												<span class="pagination_top"><ul class="pagination bootpag"><li class="first disabled" data-lp="1"><a href="javascript:void(0);">â†�</a></li><li class="prev disabled" data-lp="1"><a href="javascript:void(0);">prev</a></li><li data-lp="1" class="active"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li data-lp="3"><a href="javascript:void(0);">3</a></li><li class="next" data-lp="2"><a href="javascript:void(0);">next</a></li><li class="last" data-lp="3"><a href="javascript:void(0);">â†’</a></li></ul></span>
+												 -->
+												<!-- Test -->
+												
+												</span>
+	                                    	</div>
+	                                    
+		                                    <div id='dropdownPaginationBottom' class="span6 object-right ResultsPerPageBottom">
+		                                    
+		                                    	<div class='pagingDropdown'>
+		                                 			<select  id='countPaginationBottom'  class="form-control input-sm countPagination">
+					                                     <option>10</option>
+					                                     <option>20</option>
+					                                     <option>50</option>
+					                                     <option>100</option>
+					                                 </select> 
+			                                 	</div>
+												<div class='pagingText'>Results per page</div>
+		                                    </div>
+	                                    	 
+                                    	</div> 
+                                    	
+                                    	<!-- end table -->
+                                    	<br style='clear:both'>
+         						</div><!-- content end -->
+         					</div>
+         					</div>
+  </div>       					
+         					
+<!-- Modal Start Edit -->
+<div id="modalFormArea"></div>
+<!-- 
+  <div aria-hidden="true" role="dialog" tabindex="-1" id="Modalthreshould" class="modal inmodal" style="display: none;">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">Ã—</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="modalTitleRole">Database Connection</h4>
+            </div>
+            <div class="modal-body">
+                <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Add Database Connection</span> </h2>
+                <hr>
+                <div class='form-file-mangement'>
+	                <div class="form-label-customs">
+	                	Connection Name <span class='redFont '>*</span>
+	                </div>      
+	                <div class="form-input-customs">
+	                	<input type="text" class="form-control input-sm numberOnly" placeholder="" id="cifno_threshould">
+	                </div>
+	                <br style="clear:both">
+                </div>
+                <div class='form-file-mangement'>
+	                <div class="form-label-customs">
+	                	Data Type <span class='redFont'>*</span>
+	                </div>
+	                <div class="form-input-customs">
+	                	<select class='form-control input-sm'>
+	                		<option> </option>
+	                	</select>
+	                </div>
+	                <br style="clear:both">
+                </div>
+                <div class='form-file-mangement'>
+	                <div class="form-label-customs">
+	                	IP Address <span class='redFont'>*</span>
+	                </div>
+	                <div class="form-input-customs">
+	                	<input type="text" class="form-control input-sm" placeholder="" id="targetScore">
+	                </div>
+	                <br style="clear:both">
+                </div>
+                <div class='form-file-mangement'>
+	                <div class="form-label-customs">
+	                	Port <span class='redFont'>*</span>
+	                </div>
+	                <div class="form-input-customs">
+	                	<input type="text" class="form-control input-sm" placeholder="" id="targetScore">
+	                </div>
+	                <br style="clear:both">
+                </div>
+                <div class='form-file-mangement'>
+	                <div class="form-label-customs">
+	                	Database Name <span class='redFont'>*</span>
+	                </div>
+	                <div class="form-input-customs">
+	                	<input type="text" class="form-control input-sm" placeholder="" id="targetScore">
+	                </div>
+	                <br style="clear:both">
+                </div>
+                <div class='form-file-mangement'>
+	                <div class="form-label-customs">
+	                	User <span class='redFont'>*</span>
+	                </div>
+	                <div class="form-input-customs">
+	                	<input type="text" class="form-control input-sm" placeholder="" id="targetScore">
+	                </div>
+	                <br style="clear:both">
+                </div>
+                <div class='form-file-mangement'>
+	                <div class="form-label-customs">
+	                	Password <span class='redFont'>*</span>
+	                </div>
+	                <div class="form-input-customs">
+	                	<input type="text" class="form-control input-sm" placeholder="" id="targetScore">
+	                </div>
+	                <br style="clear:both">
+                </div>
+            </div>
+            <div class="modal-footer">
+           	 	<input type="hidden" name="id" id="id" value="">
+   				<input type="hidden" name="action" id="action" value="add">
+   				<button class="btn btn-primary" type="button" id="btnSubmit">Save</button>
+   				<button class="btn btn-primary" type="button" id="btnAddAnother">Save & Add Another</button>
+                <button data-dismiss="modal" class="btn btn-white btnCancle" type="button">Cancel</button>
+                <div class="alert alert-warning" id="information" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+</div>        
+-->      
+<!-- Modal End Edit -->
+<!-- Modal Confirm Start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal" class="modal inmodal in" style="display: none;">
+    <div class="modal-dialog">
+    <div class="modal-content bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only" style="display: none;">Close</span></button>
+                <h5 class="modal-title">Confirm Dialog</h5>
+            </div>
+            <div class="modal-body">
+                <!-- content start -->
+                <!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
+                <hr>
+                 -->
+                <!-- form start -->
+                <div class="form-kpi-mangement">
+	                <div class="form-kpi-label" align="center">
+	                
+	                 		<label>Confirm to Delete Data?</label>
+	                 		<div id="inform_on_confirm" class='information'></div>
+	                </div>
+                </div>
+                               
+                <!-- form start -->
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+            	<div align="center">
+	                <button class="btn btn-success" id="btnConfirmOK" type="button">&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;</button>&nbsp;&nbsp;
+	                <button data-dismiss="modal" class="btn btn-danger" type="button"><i class="fa fa-times-circle"></i>&nbsp;Cancel</button>
+            	</div>
+            </div>
+        </div>
+    </div>
+    
+    
+   
+</div>
+<!-- Modal Confirm End -->
+
+ <!--  #####################Content data here ######################-->
+		
+	 
+
+

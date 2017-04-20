@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Appraisal | Management</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/plugins/iCheck/custom.css">
+    <link rel="stylesheet" href="../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+     <link rel="stylesheet" type="text/css" href="../css/dataTables.bootstrap.min.css"/>
+     <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css"/>
+     
+    
+    <link rel="stylesheet" href="../css/jquery.mloading.css">
+    
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/tywMain.css" rel="stylesheet">
+    <link href="../css/index.css" rel="stylesheet">
+    <link href="../css/appraisal.css" rel="stylesheet">
+    
+</head>
+<body>
+
+	<div class="wrapper wrapper-content">
+		<div class="container">
+			<div id="includePage" class="ng-view ng-scope">
+				<h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Appraisal Assignment</span> </h2>
+
+				<div class="row">
+					<!-- start--row -->
+
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<div class='titlePanel'>Advance Search</div>
+							</div>
+
+							<div class="ibox-content">
+								<div class="row">
+									<div class="col-lg-3">
+										<div class="form-group p-xxs">
+											<label class="col-lg-5 p-t-xxs">Appraisal Year</label>
+											<div class="col-lg-7">
+												<select data-toggle="tooltip" title=""
+													class="input form-control input-sm col-lg-9" id="AppraisalYear"
+													name="AppraisalYear">
+													
+												</select>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="col-lg-3">
+										<div class="form-group p-xxs">
+											<label class="col-lg-6 p-t-xxs">Appraisal Period</label>
+											<div class="col-lg-6">
+												<select data-toggle="tooltip" title=""
+													class="input form-control input-sm col-lg-9"
+													id="AppraisalPeriod" name="AppraisalPeriod">
+													<option>All</option>
+												</select>
+											</div>
+
+										</div>
+
+									</div>
+									<div class="col-lg-3">
+										<div class="form-group p-xxs">
+											<label class="col-lg-5 p-t-xxs">Appraisal Level</label>
+											<div class="col-lg-7">
+												<select data-toggle="tooltip" title=""
+													class="input form-control input-sm col-lg-9"
+													id="AppraisalLevel" name="AppraisalLevel">
+													<option>All</option>
+													<option>ระดับบริหาร</option>
+													<option>ระดับการจัดการ</option>
+													<option>ระดับบังคับบัญชา</option>
+													<option>ระดับเจ้าหน้าที่</option>
+													<option>HR</option>
+												</select>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<div class="form-group p-xxs">
+											<label class="col-lg-4 p-t-xxs">Department</label>
+											<div class="col-lg-8">
+												<select data-toggle="tooltip" title=""
+													class="input form-control input-sm col-lg-9"
+													id="Department" name="Department">
+													<option>All</option>
+												</select>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<div class="form-group p-xxs">
+											<label class="col-lg-3 p-t-xxs">Section</label>
+											<div class="col-lg-9">
+												<select data-toggle="tooltip" title=""
+													class="input form-control input-sm col-lg-9"
+													id="Section" name="Section">
+													<option>All</option>
+												</select>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="col-lg-3">
+										<div class="form-group p-xxs">
+											<label class="col-lg-3 p-t-xxs">Position</label>
+											<div class="col-lg-9">
+												<input data-toggle="tooltip" title=""
+													class="form-control input-sm" placeholder="Position"
+													type="text" id="Position" name="Position">
+											</div>
+
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div class="form-group p-xxs m-b-none">
+											<label class="col-lg-4 p-t-xxs">Employee Name</label>
+											<div class="col-lg-7">
+												<input data-toggle="tooltip" title=""
+													class="form-control input-sm" placeholder="Employee Name"
+													type="text" id="EmpName" name="EmpName">
+											</div>
+
+										</div>
+									</div>
+									<div class="col-lg-2">
+										<div class="form-group  ">
+											
+											<div class="form-group pull-right p-xxs m-b-none">
+												
+
+												<button type="button" class="btn btn-info input-sm"
+													name="btnSearchAdvance" id="btnSearchAdvance">
+													<i class="fa fa-search"></i>&nbsp;Search
+												</button>&nbsp;
+
+											</div>
+
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+							<!-- content end -->
+						</div>
+
+					</div>
+
+				</div>
+				<!-- end--row -->
+
+				<div class="row search_result" >
+					<div class="col-lg-12">
+						<div class="ibox-title">
+							<div class='titlePanel'>Appraisal List</div>
+						</div>
+
+
+						<div class="ibox-content">
+
+							<!-- start table -->
+							<!-- pagination start -->
+                                    	<div class="row">
+	                                    	<div class="col-xs-9">
+												<div class="pagination_top"></div>
+	                                    	</div>
+	                                    
+		                                    <div class="col-xs-3 object-right paging-text">
+		                                    
+		                                    	<div class='pagingDropdown'>
+		                                 			<select  id='countPaginationTop'  class="form-control input-sm countPagination">
+					                                     <option>10</option>
+					                                     <option>20</option>
+					                                     <option>50</option>
+					                                     <option>100</option>
+					                                 </select>
+		                                 		
+		                                 		</div>
+												<div class='pagingText'>Results per page</div>
+		                                    
+		                                    </div>
+		                                    
+                                    	</div> 
+                                    	 <!-- pagination end -->
+						
+
+
+
+							
+							
+							
+							
+							
+							
+						<div class="row">
+		         					<div class="col-lg-12">
+                                    	<div class="ibox-title2">
+			                                 <div class='titlePanel2'>ประเมินผลการปฎิบัติงานประจำปี 2017 ครั้งที่1 Start Date 01/11/2016 End Date 30/04/2017 </div> 
+			                                
+			                            </div>
+			         					
+			         					<div class="ibox-content">
+         									<!--content start-->
+		         					
+		         							<!--content end-->
+		         							
+										</div>
+			         				</div>
+			         			</div>
+        						<!-- content row 1 end-->
+	         							
+	         				<div class="table-responsive p-b-xxs" >		
+								<table class="table table-striped " id="tableCdsResult" >
+									<thead >
+									<!-- 
+										<tr class="table-tr-bg">
+											<th colspan=7>
+												<span> การประเมินผลการปฏิบัติงาน ประจำปี&nbsp;&nbsp;</span>
+		                                 		<span id="paramYear">2017</span>
+		                                 		<span>&nbsp;&nbsp;ครั้งที่ 1&nbsp;</span>
+		                                 		<span>Start Date&nbsp;&nbsp;</span>
+		                                 		<span id="paramStartDate">1/1/2559</span>
+		                                 		<span>&nbsp;End Date&nbsp;</span>
+		                                 		<span id="paramEndDate">31/1/2559</span>
+		                                 		
+											</th>
+										</tr>
+									-->
+										<tr>
+											<th style='width: auto'>Emp Code</th>
+											<th style='width: auto'>Emp Name</th>
+											<th style='width: auto'>Appraisal Level</th>
+											<th style='width: auto'>Appraisal Type</th>
+											<th style='width: auto'>Position Name</th>
+											<th style='width: auto'>Assign To</th>
+											<th style='width: auto'>Action</th>
+										</tr>
+									</thead>
+									<tbody id="listAppraisal">
+									<!-- 
+										<tr>
+											<td><a href="#" id="idEmpCode" data-target='#ModalAppraisal' data-toggle='modal'>000001</a></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+					 				-->
+									</tbody>
+								</table>
+
+
+							</div>
+
+
+							<!-- pagination start -->
+							<div class="row">
+	                                    	<div class="col-xs-9">
+	
+												  <p class="pagination_bottom"></p>
+												
+	                                    	</div>
+	                                    
+		                                    <div class="col-xs-3 object-right paging-text">
+		                                    	<div class='pagingDropdown'>
+		                                 			<select  id='countPaginationBottom'  class="form-control input-sm countPagination">
+					                                     <option>10</option>
+					                                     <option>20</option>
+					                                     <option>50</option>
+					                                     <option>100</option>
+					                                 </select> 
+			                                 	</div>
+												<div class='pagingText'>Results per page</div>
+		                                    </div>
+		                                   
+                                    	</div> 
+							<!-- pagination end -->
+							<!-- end table -->
+						</div>
+						<!-- content end -->
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal Start Appraisal -->
+
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalAppraisal"
+		class="modal inmodal" style="display: none;">
+		<div class="modal-dialog w-95-p" >
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+					</button>
+					<!-- <i class="fa fa-laptop modal-icon"></i> -->
+					<h4 class="modal-title" id="modalTitleRole">Appraisal</h4>
+					<!-- 
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                 -->
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<h2>
+						<i class="fa fa fa-pencil-square-o icon-title"></i> <span
+							id="modalDescription">Appraisal</span>
+					</h2>
+					<hr>
+					
+					
+					<!-- -------------From Employee Start------------- -->
+					<div class="row">
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<div class='titlePanel'>Employee Information</div>
+							</div>
+							<!-- ibox-content-radius -->
+							<div class="ibox-content ">
+								<div class="row">
+									<div class="col-md-5 col-sm-5 col-xs-12">
+											
+											<label class="col-md-5 col-xs-6 ">Employee code:</label>
+											<label class="col-md-7 col-xs-6 " id="txtEmpCode">000001</label>
+											<label class="col-md-5 col-xs-6 ">Employee Name:</label>
+											<label class="col-md-7 col-xs-6 " id="txtEmpName">Chokanan Nimsuwan</label>
+											<label class="col-md-5 col-xs-6 ">Position:</label>
+											<label class="col-md-7 col-xs-6 " id="txtPosition">Chokanan Nimsuwan</label>
+											<label class="col-md-5 col-xs-6 ">Department:</label>
+											<label class="col-md-7 col-xs-6 " id="txtDepartment">แผนการพัฒนาลูกค้ากรุงเทพและปริมณฑล</label>
+											<label class="col-md-5 col-xs-6 ">Section:</label>
+											<label class="col-md-7 col-xs-6 " id="txtSection">กรุงเทพและปริมณฑล</label>
+									</div>
+									<div class="col-md-5 col-sm-5 col-xs-12">
+											<label class="col-md-5 col-xs-6 ">Chief Employee Code:</label>
+											<label class="col-md-7 col-xs-6 " id="txtChiefEmpCode">000001</label>
+											<label class="col-md-5 col-xs-6 ">Chief Employee Name:</label>
+											<label class="col-md-7 col-xs-6 " id="txtChiefEmpName">Nimsuwan Chokanan</label>
+											<label class="col-md-5 col-xs-6 ">Appraisal Type:</label>
+											<label class="col-md-7 col-xs-6 " id="txtAppraisalType">ประจำปี</label>
+											<label class="col-md-5 col-xs-6 ">Period:</label>
+											<label class="col-md-7 col-xs-6 " id="txtPeriod">ประเมินผลการปฏิบัติงานประจำปี 2517 ครั่งที่ 1</label>
+									</div>
+									<div class="col-md-2 col-sm-2 col-xs-12">
+											<label class="col-xs-12 p-t-xxs text-center ">Grand Total Weigh %</label>
+											<label class="col-xs-12 p-t-xxs text-center " id="txtGrandTotalWeigh" style="font-size: 300%;">87 %</label>
+									
+									</div>
+									
+
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+				<!-- -------------From Employee Start------------- -->
+				
+				
+				
+				
+					
+					
+					<!-- -------------From Appraisal Start------------- -->
+					<div class="row">
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<div class='titlePanel'>Appraisal</div>
+							</div>
+					
+							<div class="ibox-content ibox-content-radius">
+									
+									<div id='appraisal_template_area'></div>
+
+
+								</div>
+						</div>
+
+					</div>
+
+				</div>
+				<!-- -------------From Appraisal Start------------- -->
+
+		
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+					<div class="form-inline">
+						<div class="form-group text-left p-xxs">
+							<label class="">Assign to:</label> 
+							<select
+								data-toggle="tooltip" title=""
+								class="input form-control input-sm" id="assignTo" name="assignTo">
+								<option>All</option>
+								<option>ผู้บริหาร</option>
+								<option>ผู้การจัดการ</option>
+								<option>ผู้บังคับบัญชา</option>
+								<option>เจ้าหน้าที่</option>
+								<option>ผู้ปฏิบัติการ</option>
+								<option>HR</option>
+							</select>
+						</div>
+						<div class="form-group text-left p-xxs">
+							<label class="">Action:</label> 
+							<select
+								data-toggle="tooltip" title=""
+								class="input form-control input-sm" id="actionToAssign" name="actionToAssign">
+								<option>All</option>
+								<option>ผู้บริหาร</option>
+								<option>ผู้การจัดการ</option>
+								<option>ผู้บังคับบัญชา</option>
+								<option>เจ้าหน้าที่</option>
+								<option>ผู้ปฏิบัติการ</option>
+								<option>HR</option>
+							</select>
+						</div>
+						
+							<button class="btn btn-success" type="button" id="btnSubmit">Save</button>
+							<input type='hidden' id='emp_result_id' name='emp_result_id' value=''>
+					<!-- 				<button class="btn btn-success" type="button" id="btnAddAnother">Save -->
+					<!-- 					& Add Another</button> -->
+							<button data-dismiss="modal" class="btn btn-danger btnCancle"
+						type="button">Cancel</button>
+						
+					</div>
+
+
+
+					<div class="alert alert-warning" id="information"
+						style="display: none;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<input type="hidden" name="id" id="id" value="">
+	<input type="hidden" name="action" id="action" value="add">
+	<!-- Modal End Appraisal -->
+
+
+
+	<div id="embedParamSearch"></div>
+	
+	
+    <!-- Mainly scripts -->
+     <script src="../js/jquery3.1.1.js"></script>
+	 <script type="text/javascript">
+	 var jQuery_1_1_3 = $.noConflict(true);
+	 </script>
+    
+ 	<script src="../js/jquery-2.1.1.js"></script> 
+    <script src="../js/jquery-ui-1.10.4.min.js"></script>
+    <script src="../js/jquery.bootpag.min.js"></script>
+  
+   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+     <script src="../js/bootstrap.min.js"></script> 
+     
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../js/inspinia.js"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+    
+    
+
+    
+    
+    <script src="../js/jquery.mloading.js"></script>
+     <script src="../Controller/cConfig.js"></script>
+    <script src="../Controller/cMain.js"></script> 
+    <script src="../Controller/appraisal.js"></script>
+    
+    	
+    
+
+
+
+
+</body>
+</html>

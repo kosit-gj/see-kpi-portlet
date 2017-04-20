@@ -1,0 +1,121 @@
+
+   
+     
+     
+     
+     
+     
+     
+     
+
+
+
+.form-input-customs{
+	float:left;
+	width: 250px;
+	/* 425 */
+}
+.form-label-customs{
+	float:left;
+	padding-top: 1px;
+	width:170px;
+}
+.font-gear{
+	font-size: 25px;
+	cursor:pointer;
+}
+
+.input-contact-customs{
+	width:70px;
+	padding-top: 0px;
+} 
+
+.input-inline-table-customs{
+	height:23px;
+	padding: 0px;
+	padding-top: 0px;
+}
+.form-label-customs-manual{
+	float:left;
+	padding-top: 1px;
+	width:95px;
+}
+.form-input-customs-title{
+	float:left;
+	width: 100px;
+}
+.form-input-customs-address{
+	float:left;
+	width: 200px;
+}
+#ui-datepicker-div ,.ui-datepicker { z-index: 99999 !important; }
+
+.ibox-title .control-label{
+	margin-bottom: 0;
+    padding-top: 5px;
+    /*text-align: right;*/
+}
+#btnSearchArea{
+	padding-top:35px;
+}
+.titlePanel{
+	/*display: inline;*/
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding-top: 5px;
+}
+.titlePanel2{
+	/*display: inline;*/
+    font-size: 13px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding-top: 5px;
+    
+}
+.titlePanelSearch{
+	
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding-top: 5px;
+   
+
+}
+.titlePanelSearch2{
+	font-size: 16px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding-top: 0px;
+   
+}
+.modal-body {
+    padding: 20px 30px 5px;
+}
+.yellow2{
+	background:#ffe57f;
+}
+.title2{
+	padding:5px;
+	padding-left:10px;
+	font-weight: bold;
+}
+#ibox-content-bsc{
+	
+    background-color: #ffffff;
+    
+    border-image: none;
+   
+  
+    color: inherit;
+    padding: 0px;
+} 
+.ibox-content{
+	border: 1px solid #ffe57f;
+}
+.object-right{
+	text-align:right;
+}
+.clickable{
+	cursor:pointer;
+}
