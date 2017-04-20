@@ -5,10 +5,10 @@ var galbalDataCDS=[];
 var tempCdsId ="";
 var tempCdsName ="";
 var pageNumberDefault=1;
-var restfulPathCDS="/tyw_api/public/cds";
-var restfulPathDropDownAppraisalLevel="/tyw_api/public/cds/al_list";
-var restfulPathDropDownConnection="/tyw_api/public/cds/connection_list";
-var restfulPathAutocomplete="/tyw_api/public/cds/auto_cds";
+var restfulPathCDS="/kpi_api/public/cds";
+var restfulPathDropDownAppraisalLevel="/kpi_api/public/cds/al_list";
+var restfulPathDropDownConnection="/kpi_api/public/cds/connection_list";
+var restfulPathAutocomplete="/kpi_api/public/cds/auto_cds";
 
 
  

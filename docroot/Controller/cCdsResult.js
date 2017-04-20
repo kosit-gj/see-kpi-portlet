@@ -5,7 +5,7 @@ var tempEmpId="";
 var tempPosiName="";
 var tempPosiId="";
 var pageNumberDefault=1;
-var restfulPathCdsResult="/tyw_api/public/cds_result";
+var restfulPathCdsResult="/kpi_api/public/cds_result";
 
 var restfulPathDropDownYear=restfulPathCdsResult+"/year_list";
 var restfulPathDropDownMonth=restfulPathCdsResult+"/month_list";
