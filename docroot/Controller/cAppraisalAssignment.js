@@ -298,7 +298,7 @@ var findOneFn = function(id,actionType){
 	
 	//get data for structure
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_assignment/"+id,
+		url:restfulURL+"/kpi_api/public/appraisal_assignment/"+id,
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -337,7 +337,7 @@ var getDataFn = function(page,rpp) {
 	var department_id =$("#embed_department_list").val();
 	
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_assignment",
+		url:restfulURL+"/kpi_api/public/appraisal_assignment",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -370,7 +370,7 @@ var getDataFn = function(page,rpp) {
 //Delete
 var deleteFn = function(id) {
 	 $.ajax({
-      url:restfulURL+"/tyw_api/public/appraisal_assignment/"+id,
+      url:restfulURL+"/kpi_api/public/appraisal_assignment/"+id,
       type:"DELETE",
       dataType:"json",
 	  headers:{Authorization:"Bearer "+tokenID.token},
@@ -706,7 +706,7 @@ var actionUpdateAssignmentFn = function(){
 	//console.log(appraisal_itemsObj);
 	
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_assignment/"+$("#id").val(),
+		url:restfulURL+"/kpi_api/public/appraisal_assignment/"+$("#id").val(),
 		type:"PATCH",
 		dataType:"json",
 		async:false,
@@ -862,7 +862,7 @@ var actionAssignmentFn = function(param){
 	var employeesObj=eval("("+employees+")");
 	var appraisal_itemsObj=eval("(["+appraisal_items+"])");
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_assignment",
+		url:restfulURL+"/kpi_api/public/appraisal_assignment",
 		type:"post",
 		dataType:"json",
 		async:false,
@@ -978,7 +978,7 @@ var appraisalLevelListFn = function(nameArea,id){
 	}
 	
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_item/al_list",
+		url:restfulURL+"/kpi_api/public/appraisal_item/al_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1005,7 +1005,7 @@ var yearListFn = function(nameArea,id){
 	}
 	
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal/year_list",
+		url:restfulURL+"/kpi_api/public/appraisal/year_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1033,8 +1033,8 @@ var appraisalTypeFn = function(nameArea,id){
 	}
 	
 	$.ajax({
-		//http://192.168.1.52/tyw_api/public/appraisal_assignment/appraisal_type_list
-		url:restfulURL+"/tyw_api/public/appraisal_assignment/appraisal_type_list",
+		//http://192.168.1.52/kpi_api/public/appraisal_assignment/appraisal_type_list
+		url:restfulURL+"/kpi_api/public/appraisal_assignment/appraisal_type_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1070,8 +1070,8 @@ var periodFrequencyFn = function(nameArea){
 	}
 	
 	$.ajax({
-		//http://192.168.1.52/tyw_api/public/appraisal_assignment/frequency_list
-		url:restfulURL+"/tyw_api/public/appraisal_assignment/frequency_list",
+		//http://192.168.1.52/kpi_api/public/appraisal_assignment/frequency_list
+		url:restfulURL+"/kpi_api/public/appraisal_assignment/frequency_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1094,7 +1094,7 @@ var periodFrequencyFn = function(nameArea){
 var dropDrowDepartmentFn = function(id){
 
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_item/department_list",
+		url:restfulURL+"/kpi_api/public/appraisal_item/department_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1139,7 +1139,7 @@ var dropDrowPeriodFn = function(paramPeriod,paramAssignFrequency){
 	}
 	
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_assignment/period_list",
+		url:restfulURL+"/kpi_api/public/appraisal_assignment/period_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1178,7 +1178,7 @@ var dropDrowAsignToFn = function(nameArea){
 	}
 	
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_assignment/new_assign_to",
+		url:restfulURL+"/kpi_api/public/appraisal_assignment/new_assign_to",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1203,7 +1203,7 @@ var dropDrowAsignToEditFn = function(paramStageID){
 
 
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_assignment/edit_assign_to",
+		url:restfulURL+"/kpi_api/public/appraisal_assignment/edit_assign_to",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1244,7 +1244,7 @@ var dropDrowActionFn = function(paramStageID,nameArea){
 	}
 	
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_assignment/new_action_to",
+		url:restfulURL+"/kpi_api/public/appraisal_assignment/new_action_to",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1271,7 +1271,7 @@ var dropDrowActionEditFn = function(paramStageID,paramToAppraisalLevel){
 
 	
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_assignment/edit_action_to",
+		url:restfulURL+"/kpi_api/public/appraisal_assignment/edit_action_to",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1310,8 +1310,8 @@ var periodFn = function(nameArea){
 	}
 	
 	$.ajax({
-		//http://192.168.1.52/tyw_api/public/appraisal_assignment/period_list
-		url:restfulURL+"/tyw_api/public/appraisal_assignment/period_list",
+		//http://192.168.1.52/kpi_api/public/appraisal_assignment/period_list
+		url:restfulURL+"/kpi_api/public/appraisal_assignment/period_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1762,8 +1762,8 @@ var createTemplateAssignmentFn = function(data){
 };
 var getTemplateFn = function(){
 	$.ajax({
-		//http://192.168.1.52/tyw_api/public/appraisal_assignment/period_list
-		url:restfulURL+"/tyw_api/public/appraisal_assignment/template",
+		//http://192.168.1.52/kpi_api/public/appraisal_assignment/period_list
+		url:restfulURL+"/kpi_api/public/appraisal_assignment/template",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1795,8 +1795,8 @@ var getTemplateFn = function(){
 //var connectionServiceFn = function(username,password){
 //	$.ajax({
 //		
-//		url:restfulURL+"/tyw_api/public/session",
-//		//url:"http://localhost/tyw_api/public/session",
+//		url:restfulURL+"/kpi_api/public/session",
+//		//url:"http://localhost/kpi_api/public/session",
 //		type:"POST",
 //		dataType:"text",
 //		data:{"username":username,"password":password},
@@ -1898,7 +1898,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	$("#Position").autocomplete({
         source: function (request, response) {
         	$.ajax({
-				 url:restfulURL+"/tyw_api/public/appraisal_assignment/auto_position_name",
+				 url:restfulURL+"/kpi_api/public/appraisal_assignment/auto_position_name",
 				 type:"post",
 				 dataType:"json",
 				 headers:{Authorization:"Bearer "+tokenID.token},
@@ -1926,7 +1926,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	$("#empName").autocomplete({
         source: function (request, response) {
         	$.ajax({
-				 url:restfulURL+"/tyw_api/public/appraisal_assignment/auto_employee_name",
+				 url:restfulURL+"/kpi_api/public/appraisal_assignment/auto_employee_name",
 				 type:"post",
 				 dataType:"json",
 				 headers:{Authorization:"Bearer "+tokenID.token},

@@ -5,7 +5,7 @@ var tempAppItemId="";
 var tempEmpName="";
 var tempEmpId="";
 
-var restfulPathAppData="/tyw_api/public/appraisal_data";
+var restfulPathAppData="/kpi_api/public/appraisal_data";
 
 var restfulPathDropDownStructure=restfulPathAppData+"/structure_list";
 var restfulPathDropDownAppraisalLevel=restfulPathAppData+"/al_list";

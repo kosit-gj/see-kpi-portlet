@@ -164,12 +164,12 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
                         <div class="ibox float-e-margins">
                             <div class="ibox-title" style='padding-bottom:0px;'>
 								<div class='container-fluid'>
-									<div class='span6 '>
+									<div class='span2 '>
 									  <div class="titlePanelSearch" style="margin-left:0px;margin-bottom:10px;">KPI DASHBOARD</div>
 									</div>
-									<div class='span6 object-right'>
+									<div class='span10 object-right'>
 									
-										<div class="span4 offset1 inputFormSearch">
+										<div class="span3 offset1 inputFormSearch">
 											<div class="form-group">
 												<label class="span4 control-label year-label numberOnly">Year:</label>
 												<div id="connection_name0" class="span8  inputFormSearch">
@@ -181,7 +181,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 												</div>
 											</div>
 										</div>
-										<div class="span4 inputFormSearch">
+										<div class="span3 inputFormSearch">
 											<div class="form-group">
 												<label class="span4 control-label period-label numberOnly">Period:</label>
 												<div id="connection_name0" class="span8 inputFormSearch">
@@ -193,8 +193,20 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 												</div>
 											</div>
 										</div>
+										<div class="span3 inputFormSearch">
+											<div class="form-group">
+												<label class="span4 control-label period-label numberOnly">Employee: </label>
+												<div id="connection_name0" class="span8 inputFormSearch">
+												
+												<select style="width:100%" name="paramEmp" id="paramEmp" class="form-control input-sm">
+													
+												</select>
+												
+												</div>
+											</div>
+										</div>
 										
-										<div class="span3">
+										<div class="span2">
 										
 											<button id="btnSearchAdvance" name="btnSearchAdvance" class="btn btn-info input-sm" type="submit" style="margin-bottom: 5px;">&nbsp;<span>Submit</span></button>
 			

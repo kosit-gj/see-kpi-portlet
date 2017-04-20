@@ -18,7 +18,7 @@
     			          ],
     			"form":[{
     	    				"label":"Structure Name","inputType":"dropdown",
-    	    				"id":"structure_id","width":"200px","url":""+restfulURL+"/tyw_api/public/threshold/structure_list"
+    	    				"id":"structure_id","width":"200px","url":""+restfulURL+"/kpi_api/public/threshold/structure_list"
     	    				},
     	    			    {
     	    				"label":"Theshould Name","inputType":"text","default":"All",
@@ -39,12 +39,12 @@
     	    			"advanceSearch":[{
     	 					"label":"Structure Name","inputType":"dropdown",
     	 					"id":"structure_id","width":"100%",
-    	 					"url":""+restfulURL+"/tyw_api/public/threshold/structure_list",
+    	 					"url":""+restfulURL+"/kpi_api/public/threshold/structure_list",
     	 					"initValue":"All"
     	 					}],
     	    			
     			 "formDetail":{"formSize":"modal-dialog","formName":"Threshould","id":"databaseConnection","pk_id":"threshold_id"},       
-    			 "serviceName":[restfulURL+"/tyw_api/public/threshold"],
+    			 "serviceName":[restfulURL+"/kpi_api/public/threshold"],
     			 "tokenID":tokenID,
     			 "pagignation":false,
     			 "expressSearch":false,

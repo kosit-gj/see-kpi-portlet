@@ -25,7 +25,7 @@
 		    					
 		    			     ],
 		        	     "formDetail":{"formSize":"modal-dialog","formName":"UOM","id":"uom","pk_id":"uom_id"},       
-		    			 "serviceName":[restfulURL+"/tyw_api/public/uom"],
+		    			 "serviceName":[restfulURL+"/kpi_api/public/uom"],
 		    			 "tokenID":tokenID,
 		    			 "pagignation":false,
 		    			 "expressSearch":false

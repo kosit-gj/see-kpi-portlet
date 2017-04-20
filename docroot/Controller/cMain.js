@@ -15,7 +15,7 @@ var checkSession = function(paramTokenID){
 		return false;
 	}
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/session",
+		url:restfulURL+"/kpi_api/public/session",
 		type:"GET",
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -66,8 +66,8 @@ var connectionServiceFn = function(username,password){
 	var checkConnection=true;
 	$.ajax({
 		
-		url:restfulURL+"/tyw_api/public/session",
-		//url:"http://localhost/tyw_api/public/session",
+		url:restfulURL+"/kpi_api/public/session",
+		//url:"http://localhost/kpi_api/public/session",
 		type:"POST",
 		dataType:"text",
 		data:{"username":username,"password":password},
@@ -154,7 +154,7 @@ function addCommas(nStr)
 //	
 //	$.ajax({
 //			
-//			url:restfulURL+"/tyw_api/public/session",
+//			url:restfulURL+"/kpi_api/public/session",
 //			type:"POST",
 //			dataType:"text",
 //			//data:{"username":"1","password":"11"},//HR
@@ -419,7 +419,7 @@ $( document ).ajaxStop(function() {
 
 //var checkSession = function(){
 //	$.ajax({
-//		url:restfulURL+"/tyw_api/public/session",
+//		url:restfulURL+"/kpi_api/public/session",
 //		type:"GET",
 //		dataType:"json",
 //		headers:{Authorization:"Bearer "+tokenID.token},
@@ -443,7 +443,7 @@ $( document ).ajaxStop(function() {
 
 var logoutFn = function(){
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/session",
+		url:restfulURL+"/kpi_api/public/session",
 		type:"DELETE",
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},

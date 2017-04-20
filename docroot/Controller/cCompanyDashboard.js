@@ -1,8 +1,32 @@
+var username = $('#user_portlet').val();
+var emp_code="2007004";
+var password = $('#pass_portlet').val();
 
+
+var getEmpListFn = function(){
+	//http://192.168.1.58/kpi_api/public/dashboard/emp_list?emp_code=2007004
+	$.ajax({
+		url:restfulURL+"/kpi_api/public/dashboard/emp_list",
+		type:"post",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		data:{"emp_code":emp_code},
+		success:function(data){
+			var htmlOption="";
+			$.each(data,function(index,indexEntry){
+			
+					htmlOption+="<option value="+indexEntry['emp_code']+">"+indexEntry['emp_name']+"</option>";
+					
+			});
+			$("#paramEmp").html(htmlOption);
+		}
+	});	
+}
 var yearListFn = function(){
 
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/dashboard/year_list",
+		url:restfulURL+"/kpi_api/public/dashboard/year_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -21,7 +45,7 @@ var yearListFn = function(){
 var monthListFn = function(appraisal_year){
 
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/dashboard/month_list",
+		url:restfulURL+"/kpi_api/public/dashboard/month_list",
 		type:"post",
 		dataType:"json",
 		async:false,
@@ -140,12 +164,12 @@ var listBalanceScorecardFn = function(data){
 
 var getBalanceScorecardFn = function(period_id){
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/dashboard/balance_scorecard",
+		url:restfulURL+"/kpi_api/public/dashboard/balance_scorecard",
 		type:"post",
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"period_id":period_id},
+		data:{"emp_code":emp_code,"period_id":period_id},
 		success:function(data){
 			
 			listBalanceScorecardFn(data);
@@ -231,11 +255,11 @@ getDataMonthlyVarianceFn = function(appraisal_year,appraisal_item_id){
 	
 	$.ajax({
 		//url:"../Model/barChartMutiSeries.jsp",
-		url:restfulURL+"/tyw_api/public/dashboard/monthly_variance",
+		url:restfulURL+"/kpi_api/public/dashboard/monthly_variance",
 		type:"post",
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
+		data:{"emp_code":emp_code,"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
 		success:function(data){
 
 			if(data==""){
@@ -330,11 +354,11 @@ getDataMonthlyGrowthFn = function(appraisal_year,appraisal_item_id){
 	
 	$.ajax({
 		//url:"../Model/barChartMutiSeries.jsp",
-		url:restfulURL+"/tyw_api/public/dashboard/monthly_growth",
+		url:restfulURL+"/kpi_api/public/dashboard/monthly_growth",
 		type:"post",
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
+		data:{"emp_code":emp_code,"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
 		success:function(data){
 			if(data==""){
 				//alert("ok")
@@ -417,11 +441,11 @@ getDataYTDGrowthFn = function(appraisal_year,appraisal_item_id){
 	var appraisal_item_id =(appraisal_item_id == undefined || appraisal_item_id == ""  ? "" : appraisal_item_id);
 	
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/dashboard/ytd_monthly_growth",
+		url:restfulURL+"/kpi_api/public/dashboard/ytd_monthly_growth",
 		type:"post",
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
+		data:{"emp_code":emp_code,"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
 		success:function(data){
 			if(data==""){
 				//alert("ok")
@@ -481,11 +505,11 @@ getDataYTDVarianceFn = function(appraisal_year,appraisal_item_id){
 	var appraisal_item_id =(appraisal_item_id == undefined || appraisal_item_id == ""  ? "" : appraisal_item_id);
 	
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/dashboard/ytd_monthly_variance",
+		url:restfulURL+"/kpi_api/public/dashboard/ytd_monthly_variance",
 		type:"post",
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
+		data:{"emp_code":emp_code,"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
 		success:function(data){
 			if(data==""){
 				//alert("ok")
@@ -560,8 +584,7 @@ $(document).ready(function(){
 	
 //	var username = getParamValue('username');
 //	var password = getParamValue('password');
-	var username = $('#user_portlet').val();
-	var password = $('#pass_portlet').val();
+	
 	/*Fixed for Test.*/
 	// username = "1";
 	// password =	"11";
@@ -577,6 +600,8 @@ $(document).ready(function(){
 	
 	
 	yearListFn();
+	getEmpListFn();
+	
 	$("#paramYear").change(function(){
 		monthListFn($(this).val());
 

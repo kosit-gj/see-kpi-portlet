@@ -3,8 +3,8 @@
 //var tokenID= eval("("+sessionStorage.getItem("tokenID")+")");
 var tempSystemconId ="";
 var galbalSystemcon=[];
-var restfulPathdropDownListMonth="tyw_api/public/system_config/month_list";
-var restfulPathSystemcon="/tyw_api/public/system_config";
+var restfulPathdropDownListMonth="kpi_api/public/system_config/month_list";
+var restfulPathSystemcon="/kpi_api/public/system_config";
 var restfulPathDropDownMonth=restfulPathSystemcon+"/month_list";
 var restfulPathDropDownFrequency=restfulPathSystemcon+"/frequency_list";
 
