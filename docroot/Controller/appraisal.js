@@ -92,11 +92,11 @@ var assignTemplateQualityFn = function(structureName,data){
 	htmlTemplateQuality+="<table id=\"tablethreshould\" class=\"table table-striped\">";
 	htmlTemplateQuality+="<thead>";
 		htmlTemplateQuality+="<tr>";
-			htmlTemplateQuality+="<th style=\"width:35%\"><b>Appraisal Item Name</b></th>";
-			htmlTemplateQuality+="<th style=\"width:15%\"><b>Target</b></th>";
-			htmlTemplateQuality+="<th style=\"width:15%\"><b>Score</b></th>  ";      
-			htmlTemplateQuality+="<th style=\"width:15%\"><b>%Weight</b></th>  ";   
-			htmlTemplateQuality+="<th style=\"width:15%\"><b>Weight Score</b></th>  ";   
+			htmlTemplateQuality+="<th style=\"width:40%\"><b>Appraisal Item Name</b></th>";
+			htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Target</b></th>";
+			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>Score</b></th>  ";      
+			htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>%Weight</b></th>  ";   
+			htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Weight Score</b></th>  ";   
 			htmlTemplateQuality+="</tr>";
 				htmlTemplateQuality+="</thead>";
 					htmlTemplateQuality+="<tbody id=\"\" class='appraisal_result'>";
@@ -109,9 +109,9 @@ var assignTemplateQualityFn = function(structureName,data){
 					htmlTemplateQuality+="<tr>";
 					
 						htmlTemplateQuality+="<td class=''>"+indexEntry['appraisal_item_name']+"</td>";
-						htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"left\" title=\""+hintHtml+"\">"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
+						htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\""+hintHtml+"\">"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 						
-						htmlTemplateQuality+="<td class=''>";
+						htmlTemplateQuality+="<td class='' style='text-align: center;'>";
 						htmlTemplateQuality+="<select style='width:50px; height: 25px;padding: 0 0 0 5px;' id='competencyScore-"+indexEntry['appraisal_item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly'>";
 							htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['score']));
 						htmlTemplateQuality+="<select>";
@@ -128,8 +128,8 @@ var assignTemplateQualityFn = function(structureName,data){
 						htmlTemplateQuality+="<td class=''></td>";
 						htmlTemplateQuality+="<td class='' ></td>";
 						htmlTemplateQuality+="<td class=''></td>";
-						htmlTemplateQuality+="<td class='object-right' style='text-align: right;padding-right: 10px;'><b>Total</b></td>";
-						htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
+						htmlTemplateQuality+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>Total</b></td>";
+						htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
 						
 					htmlTemplateQuality+="</tr>";
 				
@@ -168,11 +168,11 @@ var assignTemplateDeductFn = function(structureName,data){
 		htmlTemplateDeduct+="<thead>";
 			htmlTemplateDeduct+="<tr>";
 				htmlTemplateDeduct+="<th style=\"width:35%\"><b>Appraisal Item Name</b></th>";
-				htmlTemplateDeduct+="<th style=\"width:15%\"><b>Max Value</b></th>";
-				htmlTemplateDeduct+="<th style=\"width:15%\"><b>Actual Value</b></th>";
-				htmlTemplateDeduct+="<th style=\"width:15%\"><b>Over Value</b></th>";
-				htmlTemplateDeduct+="<th style=\"width:15%\"><b>Deduct Score/Unit</b> </th>";
-				htmlTemplateDeduct+="<th style=\"width:15%\"><b>Weight Score </b></th>";
+				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Max Value</b></th>";
+				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Actual Value</b></th>";
+				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Over Value</b></th>";
+				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Deduct Score/Unit</b> </th>";
+				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Weight Score </b></th>";
 			htmlTemplateDeduct+="</tr>";
 			htmlTemplateDeduct+="</thead>";
 					htmlTemplateDeduct+="<tbody id=\"\" class='appraisal_result'>";
@@ -194,8 +194,8 @@ var assignTemplateDeductFn = function(structureName,data){
 							htmlTemplateDeduct+="<td class=''></td>";
 							htmlTemplateDeduct+="<td class=''></td>";
 							htmlTemplateDeduct+="<td class=''></td>";
-							htmlTemplateDeduct+="<td class='object-right' style='text-align: right;padding-right: 10px;'><b>Total</b></td>";
-							htmlTemplateDeduct+="<td class=''  style='text-align: right;padding-right: 10px;'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
+							htmlTemplateDeduct+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>Total</b></td>";
+							htmlTemplateDeduct+="<td class=''  style='text-align: right;padding-right: 10px;font-weight: bold;'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
 					htmlTemplateDeduct+="</tr>";
 			
 						
@@ -241,11 +241,11 @@ var assignTemplateQuantityFn = function(structureName,data){
 		htmlTemplateQuantity+="<tr>";
 			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>Perspective</b> </th>";
 			htmlTemplateQuantity+="<th style=\"width:25%\" class=''><b>Appraisal Item Name</b></th>";
-			htmlTemplateQuantity+="<th style=\"width:5%\" class=''><b>Target </b></th>";
-			htmlTemplateQuantity+="<th style=\"width:5%\" class=''><b>Actual </b></th>";
-			htmlTemplateQuantity+="<th style=\"width:5%\" class=''><b>Score </b></th>";
-			htmlTemplateQuantity+="<th style=\"width:5%\" class=''><b>%Weight </b></th>";
-			htmlTemplateQuantity+="<th style=\"width:5%\" class=''><b>Weight Score</b> </th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Target </b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Actual </b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Score </b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Weight </b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Weight Score</b> </th>";
 			
 		htmlTemplateQuantity+="</tr>";
 		htmlTemplateQuantity+="</thead>";
@@ -269,9 +269,9 @@ var assignTemplateQuantityFn = function(structureName,data){
 				htmlTemplateQuantity+="<tr >";
 					htmlTemplateQuantity+="<td>"+indexEntry['perspective_name']+"</td>";
 					htmlTemplateQuantity+="<td>"+indexEntry['appraisal_item_name']+"</td>";
-					htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"left\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
+					htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 					htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
-					htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])).toFixed(2))+"</td>";
+					htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])))+"</td>";
 					htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weight_percent'])).toFixed(2))+"</td>";
 					htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2))+"</td>";
 			
@@ -285,8 +285,8 @@ var assignTemplateQuantityFn = function(structureName,data){
 				htmlTemplateQuantity+="<td ></td>";
 				htmlTemplateQuantity+="<td></td>";
 				htmlTemplateQuantity+="<td></td>";
-				htmlTemplateQuantity+="<td class='object-right' style='text-align: right;padding-right: 10px;'><b>Total</b></td>";
-				htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
+				htmlTemplateQuantity+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>Total</b></td>";
+				htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;font-weight: bold;'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
 			htmlTemplateQuantity+="</tr>";
 			
 			htmlTemplateQuantity+="</tbody>";
@@ -1057,15 +1057,4 @@ $(document).ready(function() {
 		}
 	}
 });
-var addCommas =  function(nStr)
-{
-    nStr += '';
-    x = nStr.split('.');
-    x1 = x[0];
-	x2 = x.length > 1 ? '.' + x[1] : '';
-	var rgx = /(\d+)(\d{3})/;
-	while (rgx.test(x1)) {
-		x1 = x1.replace(rgx, '$1' + ',' + '$2');
-	}
-	return x1 + x2;
-}
+

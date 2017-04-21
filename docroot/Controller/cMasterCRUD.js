@@ -1,7 +1,18 @@
 //Global Variable
 var golbalDataCRUD =[];
 var dataSearch="";
-
+var addCommas =  function(nStr)
+{
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+	x2 = x.length > 1 ? '.' + x[1] : '';
+	var rgx = /(\d+)(\d{3})/;
+	while (rgx.test(x1)) {
+		x1 = x1.replace(rgx, '$1' + ',' + '$2');
+	}
+	return x1 + x2;
+}
 //set paginate start
 var paginationSetUpCRUDFn = function(pageIndex,pageTotal,options){
 	
@@ -281,8 +292,17 @@ var listDataFn = function(data,options){
 				}
 				
 			}else if(indexEntry2['colunmsType']=='text'){
-				
-				htmlTbody+="    		<td class=\"columnSearch"+options['formDetail']['id']+"\">"+indexEntry[indexEntry2['id']]+"</td>";
+				var formatText = "";
+				var styleFormatNum = "";
+				if(indexEntry2['colunmsDataType'] == "decimal"){
+					formatText= addCommas(parseFloat(indexEntry[indexEntry2['id']]).toFixed(2));
+					styleFormatNum ="style='text-align: right;padding-right: 10px;'";
+			
+				}else if(indexEntry2['colunmsDataType'] == "int"){
+					formatText= addCommas(parseInt(indexEntry[indexEntry2['id']]));
+					styleFormatNum ="style='text-align: right;padding-right: 10px;'";
+				}else{formatText=indexEntry[indexEntry2['id']];}
+				htmlTbody+="    		<td class=\"columnSearch"+options['formDetail']['id']+"\" "+styleFormatNum+">"+formatText+"</td>";
 			
 			}else if(indexEntry2['colunmsType']=='hidden'){
 
