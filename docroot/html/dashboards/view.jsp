@@ -235,7 +235,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							            </div>
 							            
 							            <div class="span8 " style='margin-left: 5px;'>
-	<ul class="nav nav-tabs" style="width:30; margin-bottom: 0px;">
+	<ul class="nav nav-tabs" style="width:30; margin-bottom: 5px;">
 		<li class="active"><a data-toggle="tab" href="#monthly" id="Monthly_tab" style='border-radius: 0px;'>Monthly</a></li>
 		<li><a data-toggle="tab" href="#YTD" id="YTD_tab" style=' border-radius: 0px;'>YTD</a></li>
 	</ul>

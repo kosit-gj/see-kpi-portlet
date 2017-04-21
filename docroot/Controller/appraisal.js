@@ -109,7 +109,7 @@ var assignTemplateQualityFn = function(structureName,data){
 					htmlTemplateQuality+="<tr>";
 					
 						htmlTemplateQuality+="<td class=''>"+indexEntry['appraisal_item_name']+"</td>";
-						htmlTemplateQuality+="<td class='' ><div data-toggle=\"tooltip\" data-placement=\"left\" title=\""+hintHtml+"\">"+notNullFn(indexEntry['target_value'])+"</div></td>";
+						htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"left\" title=\""+hintHtml+"\">"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 						
 						htmlTemplateQuality+="<td class=''>";
 						htmlTemplateQuality+="<select style='width:50px; height: 25px;padding: 0 0 0 5px;' id='competencyScore-"+indexEntry['appraisal_item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly'>";
@@ -117,8 +117,8 @@ var assignTemplateQualityFn = function(structureName,data){
 						htmlTemplateQuality+="<select>";
 						//htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['appraisal_item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
 						htmlTemplateQuality+="</td>";
-						htmlTemplateQuality+="<td class=''>"+notNullFn(indexEntry['weight_percent'])+"</td>";
-						htmlTemplateQuality+="<td class=''>"+notNullFn(indexEntry['weigh_score'])+"</td>";
+						htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weight_percent'])).toFixed(2))+"</td>";
+						htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2))+"</td>";
 						
 					htmlTemplateQuality+="</tr>";
 					});
@@ -128,8 +128,8 @@ var assignTemplateQualityFn = function(structureName,data){
 						htmlTemplateQuality+="<td class=''></td>";
 						htmlTemplateQuality+="<td class='' ></td>";
 						htmlTemplateQuality+="<td class=''></td>";
-						htmlTemplateQuality+="<td class='object-right'><b>Total</b></td>";
-						htmlTemplateQuality+="<td class=''><b>"+notNullFn(data['total_weigh_score'])+"</b></td>";
+						htmlTemplateQuality+="<td class='object-right' style='text-align: right;padding-right: 10px;'><b>Total</b></td>";
+						htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
 						
 					htmlTemplateQuality+="</tr>";
 				
@@ -179,12 +179,12 @@ var assignTemplateDeductFn = function(structureName,data){
 					
 					$.each(data['items'],function(index,indexEntry){
 					htmlTemplateDeduct+="<tr>";
-							htmlTemplateDeduct+="<td class=''>"+indexEntry['appraisal_item_name']+"</td>";
-							htmlTemplateDeduct+="<td class=''>"+notNullFn(indexEntry['max_value'])+"</td>";
-							htmlTemplateDeduct+="<td class=''>"+notNullFn(indexEntry['actual_value'])+"</td>";
-							htmlTemplateDeduct+="<td class=''>"+notNullFn(indexEntry['over_value'])+"</td>";
-							htmlTemplateDeduct+="<td class=''>"+notNullFn(indexEntry['deduct_score_unit'])+"</td>";
-							htmlTemplateDeduct+="<td class=''>"+notNullFn(indexEntry['weigh_score'])+"</td>";
+							htmlTemplateDeduct+="<td class=''> "+indexEntry['appraisal_item_name']+"</td>";
+							htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['max_value'])).toFixed(2))+"</td>";
+							htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
+							htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2))+"</td>";
+							htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['deduct_score_unit'])).toFixed(2))+"</td>";
+							htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2))+"</td>";
 							
 					htmlTemplateDeduct+="</tr>";
 					});
@@ -194,8 +194,8 @@ var assignTemplateDeductFn = function(structureName,data){
 							htmlTemplateDeduct+="<td class=''></td>";
 							htmlTemplateDeduct+="<td class=''></td>";
 							htmlTemplateDeduct+="<td class=''></td>";
-							htmlTemplateDeduct+="<td class='object-right'><b>Total</b></td>";
-							htmlTemplateDeduct+="<td class=''><b>"+notNullFn(data['total_weigh_score'])+"</b></td>";
+							htmlTemplateDeduct+="<td class='object-right' style='text-align: right;padding-right: 10px;'><b>Total</b></td>";
+							htmlTemplateDeduct+="<td class=''  style='text-align: right;padding-right: 10px;'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
 					htmlTemplateDeduct+="</tr>";
 			
 						
@@ -269,11 +269,11 @@ var assignTemplateQuantityFn = function(structureName,data){
 				htmlTemplateQuantity+="<tr >";
 					htmlTemplateQuantity+="<td>"+indexEntry['perspective_name']+"</td>";
 					htmlTemplateQuantity+="<td>"+indexEntry['appraisal_item_name']+"</td>";
-					htmlTemplateQuantity+="<td ><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"left\" >"+notNullFn(indexEntry['target_value'])+"</div></td>";
-					htmlTemplateQuantity+="<td>"+notNullFn(indexEntry['actual_value'])+"</td>";
-					htmlTemplateQuantity+="<td>"+notNullFn(indexEntry['score'])+"</td>";
-					htmlTemplateQuantity+="<td>"+notNullFn(indexEntry['weight_percent'])+"</td>";
-					htmlTemplateQuantity+="<td>"+notNullFn(indexEntry['weigh_score'])+"</td>";
+					htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"left\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
+					htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
+					htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])).toFixed(2))+"</td>";
+					htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weight_percent'])).toFixed(2))+"</td>";
+					htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2))+"</td>";
 			
 				htmlTemplateQuantity+="</tr>";
 				
@@ -285,8 +285,8 @@ var assignTemplateQuantityFn = function(structureName,data){
 				htmlTemplateQuantity+="<td ></td>";
 				htmlTemplateQuantity+="<td></td>";
 				htmlTemplateQuantity+="<td></td>";
-				htmlTemplateQuantity+="<td class='object-right'><b>Total</b></td>";
-				htmlTemplateQuantity+="<td><b>"+notNullFn(data['total_weigh_score'])+"</b></td>";
+				htmlTemplateQuantity+="<td class='object-right' style='text-align: right;padding-right: 10px;'><b>Total</b></td>";
+				htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
 			htmlTemplateQuantity+="</tr>";
 			
 			htmlTemplateQuantity+="</tbody>";
@@ -1057,3 +1057,15 @@ $(document).ready(function() {
 		}
 	}
 });
+var addCommas =  function(nStr)
+{
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+	x2 = x.length > 1 ? '.' + x[1] : '';
+	var rgx = /(\d+)(\d{3})/;
+	while (rgx.test(x1)) {
+		x1 = x1.replace(rgx, '$1' + ',' + '$2');
+	}
+	return x1 + x2;
+}

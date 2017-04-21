@@ -302,6 +302,10 @@ margin-bottom:1px;
     max-height: calc(100vh - 200px);
     overflow-y: auto;
 }
+.aui .table td{
+	text-align: '';
+}
+
 	
 </style>
 
@@ -546,7 +550,6 @@ margin-bottom:1px;
 
 
 			</div>
-		</div>
 	</div>
 	
 	<!-- Modal Start Appraisal -->
