@@ -11,7 +11,7 @@
     			"colunms":[
     			           {"colunmsDisplayName":"Seq",           "width":"5% ","id":"seq_no","colunmsType":"text"},
     			           {"colunmsDisplayName":"Structure Name","width":"40%","id":"structure_name","colunmsType":"text"},
-    			           {"colunmsDisplayName":"#Target Score", "width":"15%","id":"nof_target_score","colunmsType":"text"},
+    			           {"colunmsDisplayName":"#Target Score", "width":"15%","id":"nof_target_score","colunmsType":"text","colunmsDataType":"int"},
     			           {"colunmsDisplayName":"Form Type",     "width":"15%","id":"form_name","colunmsType":"text"},
 
 //    			           {"colunmsDisplayName":"Form Type","width":"65%","id":"form_id","colunmsType":"radio"},

@@ -11,7 +11,7 @@
     			"colunms":[
     			         
     			           {"colunmsDisplayName":"Structure Name","width":"30%","id":"structure_name","colunmsType":"text"},
-    			           {"colunmsDisplayName":"Score","width":"20%","id":"target_score","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Score","width":"20%","id":"target_score","colunmsType":"text","colunmsDataType":"int"},
     			           {"colunmsDisplayName":"Threshould Name","width":"20%","id":"threshold_name","colunmsType":"text"},
     			           {"colunmsDisplayName":"IsActive","width":"10%","id":"is_active","colunmsType":"checkbox"},
     			           

@@ -12,9 +12,9 @@
 	    			         
 	    			           {"colunmsDisplayName":"Appraisal Level","width":"15%","id":"appraisal_level_name","colunmsType":"text"},
 	    			           {"colunmsDisplayName":"Grade","width":"15%","id":"grade","colunmsType":"text"},
-	    			           {"colunmsDisplayName":"Begin Score","width":"15%","id":"begin_score","colunmsType":"text"},
-	    			           {"colunmsDisplayName":"End Score","width":"15%","id":"end_score","colunmsType":"text"},
-	    			           {"colunmsDisplayName":"Salary Raise","width":"15%","id":"salary_raise_amount","colunmsType":"text"},
+	    			           {"colunmsDisplayName":"Begin Score","width":"15%","id":"begin_score","colunmsType":"text","colunmsDataType":"decimal"},
+	    			           {"colunmsDisplayName":"End Score","width":"15%","id":"end_score","colunmsType":"text","colunmsDataType":"decimal"},
+	    			           {"colunmsDisplayName":"Salary Raise","width":"15%","id":"salary_raise_amount","colunmsType":"text","colunmsDataType":"decimal"},
 	    			           {"colunmsDisplayName":"IsActive","width":"15%","id":"is_active","colunmsType":"checkbox"},
 	    			          ],
 	    			
