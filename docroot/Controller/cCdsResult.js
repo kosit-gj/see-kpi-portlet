@@ -79,14 +79,25 @@ var listCdsResultFn = function (data) {
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["cds_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_year"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["month_name"]+ "</td>";
-		htmlTable += "<td class='columnSearch'>"+ indexEntry["cds_value"]+ "</td>";
-		htmlTable += "</tr>";
+		htmlTable += "<td class='columnSearch' style='text-align: right;padding-right: 10px;'>"+ addCommas(parseFloat(indexEntry["cds_value"]).toFixed(2))+ "</td>";
+		htmlTable += "</tr>";////parseFloat().toLocaleString()
 	});
 	$("#listCdsResult").html(htmlTable);
 }
 
 //-------------------  Appraisal Data FN END ---------------------
-
+var addCommas =  function(nStr)
+{
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+	x2 = x.length > 1 ? '.' + x[1] : '';
+	var rgx = /(\d+)(\d{3})/;
+	while (rgx.test(x1)) {
+		x1 = x1.replace(rgx, '$1' + ',' + '$2');
+	}
+	return x1 + x2;
+}
 
 //-------------------  Drop Down List Month FN Strart ---------------------
 
