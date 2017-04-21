@@ -472,7 +472,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 											<th style='width: auto'>CDS&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
 											<th style='width: auto'>Year&emsp;</th>
 											<th style='width: auto'>Month&emsp;</th>
-											<th style='width: auto'>CDS&nbsp;Value&emsp;</th>
+											<th style='width:auto;text-align: right;'>CDS&nbsp;Value&emsp;</th>
 										</tr>
 									</thead>
 									<tbody id="listCdsResult">

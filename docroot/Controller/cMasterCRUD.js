@@ -286,9 +286,9 @@ var listDataFn = function(data,options){
 			
 			if(indexEntry2['colunmsType']=='checkbox'){
 				if(indexEntry[indexEntry2['id']]==1){
-					htmlTbody+="<td class=\"columnSearch"+options['formDetail']['id']+"\"><input type='checkbox' disabled='disabled' checked='checked'></td>";
+					htmlTbody+="<td style='text-align:center;' class=\"columnSearch"+options['formDetail']['id']+"\"><input type='checkbox' disabled='disabled' checked='checked'></td>";
 				}else{
-					htmlTbody+="<td class=\"columnSearch"+options['formDetail']['id']+"\"><input type='checkbox' disabled='disabled'></td>";
+					htmlTbody+="<td  style='text-align:center;' class=\"columnSearch"+options['formDetail']['id']+"\"><input type='checkbox' disabled='disabled'></td>";
 				}
 				
 			}else if(indexEntry2['colunmsType']=='text'){
@@ -494,7 +494,7 @@ var createInputTypeFn  = function(object,tokenID){
 	
 		var checked =(object['default'] == 'checked' ? "checked" : "");
 
-		inputType+="<input type=\"hidden\"  id=\""+object['id']+"\" name=\""+object['id']+"\" value='0'>";
+		inputType+="<input  type=\"hidden\"  id=\""+object['id']+"\" name=\""+object['id']+"\" value='0'>";
 		inputType+="<input type='checkbox' "+checked+" class=\"checkbox checkbox-"+object['id']+"\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
 		
 		
@@ -655,7 +655,9 @@ var createDataTableFn = function(options){
 			//data-target="#modal-databaseConnection"
 			$("#btnAdd").attr("data-target","#modal-"+options['formDetail']['id']);
 	
-			var tableHTML="";                	
+			var tableHTML="";
+			var styleCss ="text-align: right;";
+			var styleCssCenter ="text-align:center;";
 			tableHTML+="<table class=\"table table-striped\" id=\"table-"+options['formDetail']['id']+"\">" ;                               		
 			tableHTML+="    <thead>";
 			tableHTML+="        <tr>"
@@ -663,7 +665,12 @@ var createDataTableFn = function(options){
 				if(indexEntry['colunmsType']=='hidden'){
 					tableHTML+="            <th d style='width:"+indexEntry['width']+"; display:none;'><b>"+indexEntry['colunmsDisplayName']+"</b></th>";	
 				}else{
-					tableHTML+="            <th  style='width:"+indexEntry['width']+"'><b>"+indexEntry['colunmsDisplayName']+"</b></th>";
+					if(indexEntry['colunmsDataType'] == "decimal" ||indexEntry['colunmsDataType'] == "int" ){
+						tableHTML+="            <th  style='width:"+indexEntry['width']+";"+styleCss+"'><b>"+indexEntry['colunmsDisplayName']+"</b></th>";
+					}else if (indexEntry['colunmsType'] == "checkbox" ){
+						tableHTML+="            <th  style='width:"+indexEntry['width']+";"+styleCssCenter+"'><b>"+indexEntry['colunmsDisplayName']+"</b></th>";
+					}else {tableHTML+="            <th  style='width:"+indexEntry['width']+"'><b>"+indexEntry['colunmsDisplayName']+"</b></th>";}
+					
 				}
 			});
 			tableHTML+="           	 	<th style='text-align:center;'><b>Manage</b></th>";

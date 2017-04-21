@@ -1,5 +1,5 @@
 var username = $('#user_portlet').val();
-var emp_code_login="2";
+var emp_code="2";
 var password = $('#pass_portlet').val();
 
 
@@ -11,7 +11,7 @@ var getEmpListFn = function(){
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"emp_code":emp_code_login},
+		data:{"emp_code":emp_code},
 		success:function(data){
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
@@ -162,7 +162,7 @@ var listBalanceScorecardFn = function(data){
 	
 };
 
-var getBalanceScorecardFn = function(emp_code,period_id){
+var getBalanceScorecardFn = function(period_id){
 	$.ajax({
 		url:restfulURL+"/kpi_api/public/dashboard/balance_scorecard",
 		type:"post",
@@ -171,13 +171,9 @@ var getBalanceScorecardFn = function(emp_code,period_id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{"emp_code":emp_code,"period_id":period_id},
 		success:function(data){
-			if(data==""){
-				$(".itemName ").hide();
-				listBalanceScorecardFn(data);
-			}else{
-				listBalanceScorecardFn(data);
-				$(".itemName ").show();
-			}
+			
+			listBalanceScorecardFn(data);
+			
 		}
 	});
 }
@@ -253,7 +249,7 @@ createGraphMonthlyVarianceFn = function(data){
 	
 }
 
-getDataMonthlyVarianceFn = function(emp_code,appraisal_year,appraisal_item_id){
+getDataMonthlyVarianceFn = function(appraisal_year,appraisal_item_id){
 	
 	var appraisal_item_id =(appraisal_item_id == undefined || appraisal_item_id == ""  ? "" : appraisal_item_id);
 	
@@ -352,7 +348,7 @@ var createGraphMonthlyGrowthFn = function(data){
 	barLineChart("monthlyGrowth",data,option);	
 	
 }
-getDataMonthlyGrowthFn = function(emp_code,appraisal_year,appraisal_item_id){
+getDataMonthlyGrowthFn = function(appraisal_year,appraisal_item_id){
 	
 	var appraisal_item_id =(appraisal_item_id == undefined || appraisal_item_id == ""  ? "" : appraisal_item_id);
 	
@@ -441,7 +437,7 @@ var createGraphYTDGrowthFn = function(data){
 	barLineChart("ytdGrowth",data,option);	
 	
 }
-getDataYTDGrowthFn = function(emp_code,appraisal_year,appraisal_item_id){
+getDataYTDGrowthFn = function(appraisal_year,appraisal_item_id){
 	var appraisal_item_id =(appraisal_item_id == undefined || appraisal_item_id == ""  ? "" : appraisal_item_id);
 	
 	$.ajax({
@@ -505,7 +501,7 @@ var createGraphYTDVarianceFn = function(data){
 	$("#ytdVariance").empty();
 	barLineChart("ytdVariance",data,option);
 }
-getDataYTDVarianceFn = function(emp_code,appraisal_year,appraisal_item_id){
+getDataYTDVarianceFn = function(appraisal_year,appraisal_item_id){
 	var appraisal_item_id =(appraisal_item_id == undefined || appraisal_item_id == ""  ? "" : appraisal_item_id);
 	
 	$.ajax({
@@ -637,10 +633,10 @@ $(document).ready(function(){
 		
 		
 			
-		getDataMonthlyVarianceFn($("#embedParamEmp").val(),$("#embedParamYear").val(),id);
-		getDataMonthlyGrowthFn($("#embedParamEmp").val(),$("#embedParamYear").val(),id);
-		getDataYTDVarianceFn($("#embedParamEmp").val(),$("#embedParamYear").val(),id);
-		getDataYTDGrowthFn($("#embedParamEmp").val(),$("#embedParamYear").val(),id);
+		getDataMonthlyVarianceFn($("#embedParamYear").val(),id);
+		getDataMonthlyGrowthFn($("#embedParamYear").val(),id);
+		getDataYTDVarianceFn($("#embedParamYear").val(),id);
+		getDataYTDGrowthFn($("#embedParamYear").val(),id);
 		
 	
 		
@@ -648,13 +644,13 @@ $(document).ready(function(){
 	});
 	
 	$("#YTD_tab").click(function(){
-		getDataYTDVarianceFn($("#embedParamEmp").val(),$("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
-		getDataYTDGrowthFn($("#embedParamEmp").val(),$("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
+		getDataYTDVarianceFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
+		getDataYTDGrowthFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
 	});
 	
 	$("#Monthly_tab").click(function(){
-		getDataMonthlyVarianceFn($("#embedParamEmp").val(),$("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
-		getDataMonthlyGrowthFn($("#embedParamEmp").val(),$("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
+		getDataMonthlyVarianceFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
+		getDataMonthlyGrowthFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
 	});
 	
 	
@@ -662,21 +658,13 @@ $(document).ready(function(){
 		 var paramHtml="";
 		 paramHtml += "<input type='hidden' name='embedParamYear' id='embedParamYear' class='embedParam' value='"+$("#paramYear").val()+"'>";
 		 paramHtml += "<input type='hidden' name='embedParamMonth' id='embedParamMonth' class='embedParam' value='"+$("#paramMonth").val()+"'>";
-		 paramHtml += "<input type='hidden' name='embedParamEmp' id='embedParamEmp' class='embedParam' value='"+$("#paramEmp").val()+"'>";
 		$(".embedParam").remove();
-
-		$("#monthlyVariance").empty().css({"height":""});
-		$("#monthlyGrowth").empty().css({"height":""});;
-		$("#ytdGrowth").empty().css({"height":""});;
-		$("#ytdVariance").empty().css({"height":""});;
-		
-		
 		
 		$("body").append(paramHtml);
 		
 		
 		
-		getBalanceScorecardFn($("#embedParamEmp").val(),$("#embedParamMonth").val());
+		getBalanceScorecardFn($("#embedParamMonth").val());
 //		setTimeout(function(){
 //			bindingBulletFn();
 //		},500);
@@ -696,10 +684,10 @@ $(document).ready(function(){
 		}
 		
 		
-		getDataMonthlyVarianceFn($("#embedParamEmp").val(),$("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
-		getDataMonthlyGrowthFn($("#embedParamEmp").val(),$("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
-		getDataYTDVarianceFn($("#embedParamEmp").val(),$("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
-		getDataYTDGrowthFn($("#embedParamEmp").val(),$("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
+		getDataMonthlyVarianceFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
+		getDataMonthlyGrowthFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
+		getDataYTDVarianceFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
+		getDataYTDGrowthFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
 		
 		$(".ibox-content").show();
 		

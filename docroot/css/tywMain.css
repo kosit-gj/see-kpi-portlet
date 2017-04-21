@@ -509,3 +509,7 @@ hr {
 }
 
 /* ---------- End Css By Auu ---------- */
+
+.aui .modal-body {
+	 max-height: 100%;
+}

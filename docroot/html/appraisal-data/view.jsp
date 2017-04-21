@@ -497,7 +497,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 											<th style='width: auto'>Appraisal&nbsp;Item&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
 											<th style='width: auto'>Emp&nbsp;Code&emsp;</th>
 											<th style='width: auto'>Emp&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-											<th style='width: auto'>Data&nbsp;Value&emsp;</th>
+											<th style='width:auto;text-align: right;'>Data&nbsp;Value&emsp;</th>
 											
 										</tr>
 									</thead>

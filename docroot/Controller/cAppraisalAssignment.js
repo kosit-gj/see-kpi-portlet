@@ -621,8 +621,9 @@ var actionUpdateAssignmentFn = function(){
 
 		if($("#form-"+$(structureEntry).val()).val()=="form1"){
 
-			$.each($(".embed_appraisal_id-"+$(structureEntry).val()).get(),function(index2,appraisalItemEntry){
-				
+			//$.each($(".embed_appraisal_id-"+$(structureEntry).val()).get(),function(index2,appraisalItemEntry){
+			$.each($(".appraisalItem-checkbox").get(),function(index2,appraisalItemEntry){
+
 				if(countAppraisalItem==0){
 					appraisal_items+="{";	
 				}else{
@@ -646,7 +647,16 @@ var actionUpdateAssignmentFn = function(){
 				appraisal_items+="\"score4_target_end\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_end-4").val()+"\",";
 				appraisal_items+="\"score5_target_start\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_start-5").val()+"\",";
 				appraisal_items+="\"score5_target_end\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_end-5").val()+"\",";
-				appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\"";
+				appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\",";
+				
+				
+				if($(this).prop("checked")==true){
+					appraisal_items+="\"select_flag\":\"1\"";	
+				}else{
+					appraisal_items+="\"select_flag\":\"0\"";	
+				}
+							
+				
 				appraisal_items+="}";
 				countAppraisalItem++;
 			
@@ -656,7 +666,8 @@ var actionUpdateAssignmentFn = function(){
 			
 		}else if($("#form-"+$(structureEntry).val()).val()=="form2"){
 
-			$.each($(".embed_appraisal_id-"+$(structureEntry).val()).get(),function(index2,appraisalItemEntry){
+			//$.each($(".embed_appraisal_id-"+$(structureEntry).val()).get(),function(index2,appraisalItemEntry){
+			$.each($(".appraisalItem-checkbox").get(),function(index2,appraisalItemEntry){
 				if(countAppraisalItem==0){
 					appraisal_items+="{";	
 				}else{
@@ -668,16 +679,23 @@ var actionUpdateAssignmentFn = function(){
 				appraisal_items+="\"appraisal_item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-appraisal_item_name").text()+"\",";
 				appraisal_items+="\"form_id\":\"2\",";
 				appraisal_items+="\"target_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val()+"\",";
-				appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\"";
-			
+				appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\",";
+				
+				
+				if($(this).prop("checked")==true){
+					appraisal_items+="\"select_flag\":\"1\"";	
+				}else{
+					appraisal_items+="\"select_flag\":\"0\"";	
+				}
+				
 				appraisal_items+="}";
 				countAppraisalItem++;
 			});
 			
 		}else if($("#form-"+$(structureEntry).val()).val()=="form3"){
 			
-			$.each($(".embed_appraisal_id-"+$(structureEntry).val()).get(),function(index2,appraisalItemEntry){
-				
+			//$.each($(".embed_appraisal_id-"+$(structureEntry).val()).get(),function(index2,appraisalItemEntry){
+			$.each($(".appraisalItem-checkbox").get(),function(index2,appraisalItemEntry){
 			
 				if(countAppraisalItem==0){
 					appraisal_items+="{";	
@@ -690,8 +708,16 @@ var actionUpdateAssignmentFn = function(){
 				appraisal_items+="\"appraisal_item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-appraisal_item_name").text()+"\",";
 				appraisal_items+="\"form_id\":\"3\",";
 				appraisal_items+="\"max_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-maxValue").val()+"\",";
-				appraisal_items+="\"deduct_score_unit\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-deductScoreUnit").val()+"\"";
-			    appraisal_items+="}";
+				appraisal_items+="\"deduct_score_unit\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-deductScoreUnit").val()+"\",";
+				
+				if($(this).prop("checked")==true){
+					appraisal_items+="\"select_flag\":\"1\"";	
+				}else{
+					appraisal_items+="\"select_flag\":\"0\"";	
+				}
+				
+				
+				appraisal_items+="}";
 				
 			    countAppraisalItem++;
 				});
@@ -704,6 +730,7 @@ var actionUpdateAssignmentFn = function(){
 
 	var appraisal_itemsObj=eval("(["+appraisal_items+"])");
 	//console.log(appraisal_itemsObj);
+
 	
 	$.ajax({
 		url:restfulURL+"/kpi_api/public/appraisal_assignment/"+$("#id").val(),
@@ -722,22 +749,16 @@ var actionUpdateAssignmentFn = function(){
 		},
 		success:function(data){
 			
-			console.log(data);
 			if(data['status']==200){
-				
 				   //callFlashSlide("Updated."); 
 				   callFlashSlideInModal("Updated","#information");      
 			       getDataFn($("#pageNumber").val(),$("#rpp").val());
 				   $("#ModalAssignment").modal('hide');
 				   $("#action").val("add");
-				   
-				   
+
 			}else if(data['status']=="400"){
 				
 				callFlashSlideInModal(validationAssignmentFn(data),"#information","error");
-				
-				  
-				
 			}
 			
 		}
@@ -805,7 +826,10 @@ var actionAssignmentFn = function(param){
 				appraisal_items+="\"score4_target_end\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_end-4").val()+"\",";
 				appraisal_items+="\"score5_target_start\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_start-5").val()+"\",";
 				appraisal_items+="\"score5_target_end\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_end-5").val()+"\",";
-				appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\"";
+				appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\",";
+				appraisal_items+="\"select_flag\":\"1\"";
+				
+				
 				appraisal_items+="}";
 				countAppraisalItem++;
 			
@@ -826,8 +850,8 @@ var actionAssignmentFn = function(param){
 				appraisal_items+="\"appraisal_item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-appraisal_item_name").text()+"\",";
 				appraisal_items+="\"form_id\":\"2\",";
 				appraisal_items+="\"target_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val()+"\",";
-				appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\"";
-			
+				appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\",";
+				appraisal_items+="\"select_flag\":\"1\"";
 				appraisal_items+="}";
 				countAppraisalItem++;
 			});
@@ -847,8 +871,9 @@ var actionAssignmentFn = function(param){
 				appraisal_items+="\"appraisal_item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-appraisal_item_name").text()+"\",";
 				appraisal_items+="\"form_id\":\"3\",";
 				appraisal_items+="\"max_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-maxValue").val()+"\",";
-				appraisal_items+="\"deduct_score_unit\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-deductScoreUnit").val()+"\"";
-			    appraisal_items+="}";
+				appraisal_items+="\"deduct_score_unit\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-deductScoreUnit").val()+"\",";
+				appraisal_items+="\"select_flag\":\"1\"";
+				appraisal_items+="}";
 				
 			    countAppraisalItem++;
 				});
@@ -1364,7 +1389,7 @@ var assignTemplateQualityFn = function(structureName,data){
 					
 					$.each(data['items'],function(index,indexEntry){
 					htmlTemplateQuality+="<tr>";
-						htmlTemplateQuality+="<td style=\"width:3%;text-align:center;\" class='object-center'  ><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox' type='checkbox'></td>";
+						htmlTemplateQuality+="<td style=\"width:3%;text-align:center;\" class='object-center'  ><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox' type='checkbox' value='"+indexEntry['appraisal_item_id']+"'></td>";
 						htmlTemplateQuality+="<td style=\"width:67%\" style='padding-top:7px;' id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_name' class='id-"+indexEntry['structure_id']+"-appraisal_item_name'>"+indexEntry['appraisal_item_name']+"</td>";
 						htmlTemplateQuality+="<td style=\"width:15%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-target' class='id-"+indexEntry['structure_id']+"-target input form-control input-sm-small numberOnly' type='text'></td>";
 						htmlTemplateQuality+="<td style=\"width:15%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quality input form-control input-sm-small numberOnly' type='text'></td>";
@@ -1416,7 +1441,7 @@ var assignTemplateDeductFn = function(structureName,data){
 					
 					$.each(data['items'],function(index,indexEntry){
 					htmlTemplateDeduct+="<tr>";
-							htmlTemplateDeduct+="<td style=\"width:3%;text-align:center;\" class='object-center' ><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox notCal' type='checkbox'></td>";
+							htmlTemplateDeduct+="<td style=\"width:3%;text-align:center;\" class='object-center' ><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox notCal' type='checkbox' value='"+indexEntry['appraisal_item_id']+"'></td>";
 							htmlTemplateDeduct+="<td style=\"width:67%\" style='padding-top:7px;' id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_name' class='id-"+indexEntry['structure_id']+"-appraisal_item_name'>"+indexEntry['appraisal_item_name']+"</td>";
 							htmlTemplateDeduct+="<td style=\"width:15%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-maxValue' class='id-"+indexEntry['structure_id']+"-maxValue  input form-control input-sm-small numberOnly' type='text' value='"+indexEntry['max_value']+"'></td>";
 							htmlTemplateDeduct+="<td style=\"width:15%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-deductScoreUnit' class='id-"+indexEntry['structure_id']+"-deductScoreUnit    input form-control input-sm-small numberOnly' type='text' value='"+indexEntry['unit_deduct_score']+"'></td>";
@@ -1491,7 +1516,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 				weight_percent
 				*/
 				htmlTemplateQuantity+="<tr>";
-					htmlTemplateQuantity+="<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox' type='checkbox'></td>";
+					htmlTemplateQuantity+="<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox' type='checkbox' value='"+indexEntry['appraisal_item_id']+"'></td>";
 					htmlTemplateQuantity+="<td style=\"width:25%\" class='id-"+indexEntry['structure_id']+"-appraisal_item_name' id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_name' style='padding-top:7px;'>"+indexEntry['appraisal_item_name']+"</td>";
 					htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-target' class='id-"+indexEntry['structure_id']+"-target input form-control input-sm-small numberOnly' type='text'>";
 					htmlTemplateQuantity+="<input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-nof_target_score' class='id-"+indexEntry['structure_id']+"-nof_target_score input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['nof_target_score']+">";
@@ -1836,8 +1861,8 @@ var username = $('#user_portlet').val();
 var password = $('#pass_portlet').val();
 
 /*Fixed for Test.*/
-// username = "1";
-// password =	"11";
+ username = "1";
+ password =	"11";
 	
 if(username!="" && username!=null & username!=[] && username!=undefined ){
 	

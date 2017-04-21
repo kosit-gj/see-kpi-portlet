@@ -205,7 +205,7 @@ var barLineChart=function(chartId,data,option){
 	    var obSeries=eval("("+series+")");
 	    //alert(ticks);
 	   // alert(obValue);
-	    console.log(obSeries);
+	    //console.log(obSeries);
 	    var Planned=seriesArrayUnique[0];
 	    var Actual=seriesArrayUnique[1];
 	    
