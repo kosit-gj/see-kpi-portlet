@@ -1,7 +1,7 @@
-var restfulPathDpAppaisalYear ="/tyw_api/public/appraisal_period/appraisal_year_list";
+var restfulPathDpAppaisalYear ="/kpi_api/public/appraisal_period/appraisal_year_list";
 var restfulPathDpStartYear ="";
-var restfulPathDpStartMonth ="/tyw_api/public/appraisal_period/start_month_list";
-var restfulPathDpAppraisalFrequency ="/tyw_api/public/appraisal_period/frequency_list";
+var restfulPathDpStartMonth ="/kpi_api/public/appraisal_period/start_month_list";
+var restfulPathDpAppraisalFrequency ="/kpi_api/public/appraisal_period/frequency_list";
 var restfulPathDpBonusFrequency ="";
 var restfulPathDpSalaryRaiseFrequency ="";
 var options=[];
@@ -71,7 +71,7 @@ var DropdowStartMonth = function(){
 	var html="";
 	html+="<select data-toggle=\"tooltip\" title=\"Start Month\" class=\"input span12 m-b-n\" id=\"start_month\" name=\"start_month\">";
 	$.ajax({
-		url : restfulURL+"/tyw_api/public/appraisal_period/start_month_list",
+		url : restfulURL+"/kpi_api/public/appraisal_period/start_month_list",
 		type : "get",
 		dataType : "json",
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -97,7 +97,7 @@ var DropdowAppraisalFrequency = function(){
 	var html="";
 	html+="<select data-toggle=\"tooltip\" title=\"Appraisal Frequency\" class=\"input span12 m-b-n\" id=\"appraisal_frequency\" name=\"appraisal_frequency\">";
 	$.ajax({
-		url : restfulURL+"/tyw_api/public/appraisal_period/frequency_list",
+		url : restfulURL+"/kpi_api/public/appraisal_period/frequency_list",
 		type : "get",
 		dataType : "json",
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -126,7 +126,7 @@ var DropdowBonusFrequency = function(){
 	var html="";
 	html+="<select data-toggle=\"tooltip\" title=\"Bonus Frequency\" class=\"input span12 m-b-n\" id=\"bonus_frequency\" name=\"bonus_frequency\">";
 	$.ajax({
-		url : restfulURL+"/tyw_api/public/appraisal_period/frequency_list",
+		url : restfulURL+"/kpi_api/public/appraisal_period/frequency_list",
 		type : "get",
 		dataType : "json",
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -154,7 +154,7 @@ var DropdowSalaryRaiseFrequency = function(){
 	var html="";
 	html+="<select data-toggle=\"tooltip\" title=\"Salary Raise Frequency\" class=\"input span12 m-b-n\" id=\"salary_raise_frequency\" name=\"salary_raise_frequency\">";
 	$.ajax({
-		url : restfulURL+"/tyw_api/public/appraisal_period/frequency_list",
+		url : restfulURL+"/kpi_api/public/appraisal_period/frequency_list",
 		type : "get",
 		dataType : "json",
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -188,7 +188,7 @@ var clearAppraisalPeriodFn = function(){
 	$("#s_r_d").val("");
 }
 var createAppraisalPeriodFn = function(){
-	//http://192.168.1.55/tyw_api/public/appraisal_period/create
+	//http://192.168.1.55/kpi_api/public/appraisal_period/create
 	var form_app_year = $("#form_app_year").val();
 	var start_year = $("#start_year").val();
 	var start_month = $("#start_month").val();
@@ -211,7 +211,7 @@ var createAppraisalPeriodFn = function(){
 //	alert("s_r_d="+s_r_d);
 	
 	$.ajax({
-		url : restfulURL+"/tyw_api/public/appraisal_period/create",
+		url : restfulURL+"/kpi_api/public/appraisal_period/create",
 		type : "post",
 		dataType : "json",
 		data:{
@@ -269,11 +269,11 @@ $(document).ready(function(){
 		    			          ],
 		    			"form":[{
 		    	    				"label":"Year","inputType":"dropdown","default":"All",
-		    	    				"id":"appraisal_year","width":"100px","url":""+restfulURL+"/tyw_api/public/appraisal_period/appraisal_year_list"
+		    	    				"id":"appraisal_year","width":"100px","url":""+restfulURL+"/kpi_api/public/appraisal_period/appraisal_year_list"
 		    	    				},
 		    	    				{
 		        	    				"label":"Appraisal Frequency","inputType":"dropdown",
-		        	    				"id":"appraisal_frequency_id","width":"100px","url":""+restfulURL+"/tyw_api/public/appraisal_period/add_frequency_list","required":true
+		        	    				"id":"appraisal_frequency_id","width":"100px","url":""+restfulURL+"/kpi_api/public/appraisal_period/add_frequency_list","required":true
 		        	    				
 		    	    				},
 		    	    			    {
@@ -299,18 +299,18 @@ $(document).ready(function(){
 		    	    	"advanceSearch":[{
 		    	 					"label":"Appraisal Year","inputType":"dropdown",
 		    	 					"id":"appraisal_year","width":"100%",
-		    	 					"url":""+restfulURL+"/tyw_api/public/appraisal_period/appraisal_year_list"
+		    	 					"url":""+restfulURL+"/kpi_api/public/appraisal_period/appraisal_year_list"
 		    	 					},{
 		        	 				"label":"Description","inputType":"text","placeholder":"Description",
 		        	 				"id":"appraisal_period_desc","width":"100%",
-		        	 				"url":""+restfulURL+"/tyw_api/public/appraisal_period/auto_desc"
+		        	 				"url":""+restfulURL+"/kpi_api/public/appraisal_period/auto_desc"
 		        				    },],
 		    	    			
 		    	    		
 		    	    			
 		    	    			
 		    			 "formDetail":{"formSize":"modal-dialog","formName":"Appraisal Period","id":"appraisalPeriod","pk_id":"period_id"},       
-		    			 "serviceName":[restfulURL+"/tyw_api/public/appraisal_period"],
+		    			 "serviceName":[restfulURL+"/kpi_api/public/appraisal_period"],
 		    			 "tokenID":tokenID,
 		    			 "pagignation":false,
 		    			 "expressSearch":false,
@@ -338,7 +338,7 @@ $(document).ready(function(){
 		    	$("#advanceSearchArea  #appraisal_period_desc").autocomplete({
 		            source: function (request, response) {
 		            	$.ajax({
-		    				 url:restfulURL+"/tyw_api/public/appraisal_period/auto_desc",
+		    				 url:restfulURL+"/kpi_api/public/appraisal_period/auto_desc",
 		    				 type:"post",
 		    				 dataType:"json",
 		    				 headers:{Authorization:"Bearer "+tokenID.token},

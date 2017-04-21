@@ -14,7 +14,7 @@ var getDataFn = function(page,rpp) {
 	
 
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_item",
+		url:restfulURL+"/kpi_api/public/appraisal_item",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -204,7 +204,7 @@ var listDataFn = function(data) {
 var deleteFn = function(id) {
 	
 	 $.ajax({
-      url:restfulURL+"/tyw_api/public/appraisal_item/"+id,
+      url:restfulURL+"/kpi_api/public/appraisal_item/"+id,
       type:"DELETE",
       dataType:"json",
 	  headers:{Authorization:"Bearer "+tokenID.token},
@@ -289,7 +289,7 @@ var paginationSetUpFn2 = function(pageIndex,pageButton,pageTotal){
 
 var findOneFn = function(id,form_url) {
 	$.ajax({
-	      url:restfulURL+"/tyw_api/public/appraisal_item/"+id,
+	      url:restfulURL+"/kpi_api/public/appraisal_item/"+id,
 	      type:"GET",
 	      dataType:"json",
 		  headers:{Authorization:"Bearer "+tokenID.token},
@@ -346,7 +346,7 @@ var appraisalLevelListFn = function(nameArea,id,defaultAll){
 	}
 	
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_item/al_list",
+		url:restfulURL+"/kpi_api/public/appraisal_item/al_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -381,7 +381,7 @@ var perspectiveListFn = function(nameArea,id,defaultAll){
 	
 	
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_item/perspective_list",
+		url:restfulURL+"/kpi_api/public/appraisal_item/perspective_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -408,14 +408,14 @@ var perspectiveListFn = function(nameArea,id,defaultAll){
 	})
 
 }
-//http://192.168.1.52/tyw_api/public/appraisal_item/uom_list
+//http://192.168.1.52/kpi_api/public/appraisal_item/uom_list
 var uomListFn = function(nameArea,id){
 	if(nameArea==undefined){
 		nameArea="";
 	}
 
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_item/uom_list",
+		url:restfulURL+"/kpi_api/public/appraisal_item/uom_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -450,7 +450,7 @@ var structureListFn = function(nameArea){
 	}
 	
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_item/structure_list",
+		url:restfulURL+"/kpi_api/public/appraisal_item/structure_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -473,7 +473,7 @@ var dropDrowDepartmentFn = function(nameArea,id,defaultAll){
 		nameArea="";
 	}
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_item/department_list",
+		url:restfulURL+"/kpi_api/public/appraisal_item/department_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -498,8 +498,8 @@ var dropDrowDepartmentFn = function(nameArea,id,defaultAll){
 //var connectionServiceFn = function(username,password){
 //	$.ajax({
 //		
-//		url:restfulURL+"/tyw_api/public/session",
-//		//url:"http://localhost/tyw_api/public/session",
+//		url:restfulURL+"/kpi_api/public/session",
+//		//url:"http://localhost/kpi_api/public/session",
 //		type:"POST",
 //		dataType:"text",
 //		data:{"username":username,"password":password},
@@ -530,7 +530,7 @@ var dropDrowDepartmentFn = function(nameArea,id,defaultAll){
 var copyItemToLevelFn = function(appraisal_item_code,appraisal_level_code){
 	
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_item/copy",
+		url:restfulURL+"/kpi_api/public/appraisal_item/copy",
 		type:"post",
 		dataType:"json",
 		async:false,
@@ -552,7 +552,7 @@ var copyItemToLevelFn = function(appraisal_item_code,appraisal_level_code){
 var listLevelForCopyFn = function(){
 	var htmlOption="";
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_item/al_list",
+		url:restfulURL+"/kpi_api/public/appraisal_item/al_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -609,7 +609,7 @@ $(document).ready(function(){
 	$("#appraisalItemName").autocomplete({
         source: function (request, response) {
         	$.ajax({
-				 url:restfulURL+"/tyw_api/public/appraisal_item/auto_appraisal_name",
+				 url:restfulURL+"/kpi_api/public/appraisal_item/auto_appraisal_name",
 				 type:"post",
 				 dataType:"json",
 				 headers:{Authorization:"Bearer "+tokenID.token},
