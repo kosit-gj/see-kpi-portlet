@@ -36,7 +36,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 		}
 		
 	.aui .modal-body{
-		max-height: 400px;	
+		/*max-height: 400px;*/	
 	}
 	
   }
@@ -52,7 +52,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 		}
 		
 	.aui .modal-body{
-		max-height: 400px;	
+		/*max-height: 400px;*/	
 	}
  	
   }
@@ -78,7 +78,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	}
 	
 	.aui .modal-body{
-		max-height: 400px;	
+		/*max-height: 400px;*/	
 	}
 	
   }
@@ -106,7 +106,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	}
 	
 	.aui .modal-body{
-		max-height: 300px;	
+		/*max-height: 300px;*/	
 	}
 	
  
@@ -126,7 +126,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 		/*position:absolute;*/
 	}
 	.aui .modal-body{
-		max-height: 300px;	
+		/*max-height: 300px;*/
 	}
 
  
