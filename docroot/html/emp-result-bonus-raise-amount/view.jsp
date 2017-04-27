@@ -73,7 +73,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 <!--  #####################Content data here ######################-->
 <div class="container1">
-<h2><span id="modalDescription"> Calculate Bonus and Raise Amount </span> </h2>
+<h2><span id="modalDescription"> Calculate Bonus and Salary </span> </h2>
 				<!-- start--row-fluid -->
 				<div class="row-fluid">
 
@@ -133,7 +133,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
                     <div class="span12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <div class='titlePanelSearch'>Calculate Raise Amount</div>
+                                <div class='titlePanelSearch'>Calculate Salary</div>
          					</div>
          					
          						<div class="ibox-content breadcrumbs2"> 
