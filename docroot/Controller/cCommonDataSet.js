@@ -65,8 +65,8 @@ var validationSqlFn = function (data) {
 // --------  Clear Start 
 var clearFn = function() {
 	
-	$("#modalTitleRole").html("Common Data Set");
-	$("#modalDescription").html("Add Common Data Set");
+	$("#modalTitleRole").html("Add Common Data Set");
+	$("#modalDescription").html("Common Data Set");
 	$("#f_cds_name").val("");
 	$("#f_cds_description").val("");
 	$("#txt_sql").val("");
@@ -232,8 +232,8 @@ var listCommonDataSetFn = function(data) {
 		
 			$(".edit").on("click",function() {
 			clearFn();
-			$("#modalTitleRole").html("Common Data Set");
-			$("#modalDescription").html("Edit Common Data Set");
+			$("#modalTitleRole").html("Edit Common Data Set");
+			$("#modalDescription").html("Common Data Set");
 			
 			$(this).parent().parent().parent().children().click();
 			//alert($(this).parent().parent().parent().children().click());

@@ -562,7 +562,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
 					</button>
 					<!-- <i class="fa fa-laptop modal-icon"></i> -->
-					<h4 class="modal-title" id="modalTitleRole">Copy</h4>
+					<h4 class="modal-title" id="">Copy</h4>
 					<!-- 
                 <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
                  -->
