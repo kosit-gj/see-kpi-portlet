@@ -678,15 +678,30 @@ $(document).ready(function() {
 	//Autocomplete Search End
 	
 	$("#btn_copy").click(function(){
-		listAppraisalLevel();
+		var chackSelect =  false;
+		$(".btnModalClose").click();
+		$.each($(".selectCdsCheckbox").get(),function(index,indexEntry){
+			if($(indexEntry).is(":checked")){
+				chackSelect = true;
+				return false;
+			}
+		});
+		if (chackSelect == true){
+			listAppraisalLevel();
+			
+			$("#ModalCopy").modal();
+			}
+		else{
+			callFlashSlide("Please Select Common Data Set !!!");
+		}
+		
+		
 	});
 	$("#btnCopySubmit").click(function(){
-
 		copyCdsFn();
 
 		return false;
 	});
-	
 	
 	
 	
@@ -726,6 +741,7 @@ var listAppraisalLevel = function() {
 	$("#formListCopy").html(htmlTable);
 }
 var copyCdsFn = function () {
+	var chackSelect =  false;
 	var cds =[];
 	var appraisal = [];
 	$.each($(".selectCdsCheckbox").get(),function(index,indexEntry){
@@ -739,6 +755,8 @@ var copyCdsFn = function () {
 			appraisal.push($(indexEntry).val());
 		}
 	});
+	if (chackSelect == false){callFlashSlideInModal("<font color='red'>*</font> Please Select Appraisal level !!!","#information3"); return false;}
+
 	console.log(cds);
 	console.log(appraisal);
 		$.ajax({
