@@ -377,11 +377,11 @@ $(document).ready(function() {
 	
 	//#### Call Export User Function Start ####
 	$("#exportToExcel").click(function(){
-		var paramYear=$("#param_year").val();
-		var paramMonth=$("#param_month").val();
-		var paramAppLv=$("#param_app_lv").val();
-		var paramPositionCode=$("#param_position_code").val();
-		var paramEmpCode=$("#param_emp_code").val();
+		var paramYear=$("#year").val();
+		var paramMonth=$("#month").val();
+		var paramAppLv=$("#app_lv").val();
+		var paramPositionCode=$("#position_id").val();
+		var paramEmpCode=$("#emp_name_id").val();
 
 		
 		var param="";

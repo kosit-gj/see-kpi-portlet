@@ -413,12 +413,12 @@ $(document).ready(function() {
 	
 	//#### Call Export User Function Start ####
 	$("#exportToExcel").click(function(){
-		var paramStructure= $("#param_structure").val();
-		var paramAppLv= $("#param_app_lv").val();
-		var paramAppType= $("#param_app_type").val();
-		var paramAppItem= $("#param_app_item").val();
-		var paramPeriod= $("#param_period").val();
-		var paramEmpCode= $("#param_emp_code").val();
+		var paramStructure= $("#structure").val();
+		var paramAppLv= $("#app_lv").val();
+		var paramAppType= $("#app_type").val();
+		var paramAppItem= $("#app_item_id").val();
+		var paramPeriod= $("#period").val();
+		var paramEmpCode= $("#emp_name_id").val();
 		
 		
 		var param="";
