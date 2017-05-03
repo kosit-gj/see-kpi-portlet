@@ -370,7 +370,7 @@ var dropDrowAppraisalLevelFn = function(id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option value=''>All</option>";
+			htmlOption+="<option value=''>All Appraisal Level</option>";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['appraisal_level_id']){
 					htmlOption+="<option selected='selected' value="+indexEntry['appraisal_level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
@@ -392,7 +392,7 @@ var dropDrowDepartmentFn = function(id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option value=''>All</option>";
+			htmlOption+="<option value=''>All Department</option>";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['department_code']){
 					htmlOption+="<option selected='selected' value="+indexEntry['department_code']+">"+indexEntry['department_name']+"</option>";
@@ -416,7 +416,7 @@ var dropDrowSectionFn = function(department_code,id){
 		data:{"department_code":department_code},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option value=''>All</option>";
+			htmlOption+="<option value=''>All Section</option>";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['section_code']){
 					htmlOption+="<option selected='selected' value="+indexEntry['section_code']+">"+indexEntry['section_name']+"</option>";
@@ -781,7 +781,7 @@ var appraisalTypeFn = function(nameArea,id){
 			//var data=['ทดลองงาน','ประจำปี','รักษาการ'];
 			var htmlOption="";
 			
-			htmlOption+="<option  value=''>All</option>";
+			htmlOption+="<option  value=''>All Appraisal Type</option>";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['appraisal_type_id']){
 					htmlOption+="<option selected='selected' value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";

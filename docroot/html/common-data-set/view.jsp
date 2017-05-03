@@ -89,7 +89,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 .aui .modal-body .form-horizontal .form-group {
 	margin-left: 0px;
 	margin-right: 0px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 .aui .form-horizontal .checkbox, .aui .form-horizontal .checkbox-inline,
@@ -110,7 +110,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 }
 
 .aui .form-group {
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 
 .aui .control-label {
@@ -367,7 +367,39 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							</div>
 
 							<div class="ibox-content breadcrumbs2">
-								<div class="row-fluid p-t-xxs">
+					<div class="row-fluid p-t-xxs">
+						<div class="form-inline">
+							<div id="drop_down_list_appraisal_level" class="form-group pull-left span3" style="margin-left: 5px">
+							</div>
+							<div class="form-group pull-left span6" style="margin-left: 5px">
+								<input data-toggle="tooltip"  title="CDS Name"
+									class="span12 m-b-n ui-autocomplete-input"
+									style="margin-bottom: 10px;"  id="cds_name" data-placement="top"
+									name="cds_name" type="text" placeholder="CDS Name"> <input
+									class="form-control input-sm" id="cds_id" name="cds_id"
+									value="" type="hidden">
+							</div>
+							<div class="form-group pull-right m-b-none p-b-xxs">
+								<!-- data-target="#ModalCopy" data-toggle="modal" -->
+								<button id="btn_copy" type="button"
+									class="btn btn-primary btn-sm " style="margin-left: 5px">
+									&nbsp;<i class="fa fa-plus-square"></i>&nbsp;Copy&nbsp;&nbsp;
+								</button>
+							</div>
+							<div class="form-group pull-right m-b-none p-b-xxs">
+								<button type="button" class="btn btn-info input-sm"
+									name="btn_search_advance" id="btn_search_advance"
+									style="margin-left: 5px">
+									<i class="fa fa-search"></i>&nbsp;Search
+								</button>
+							</div>
+						</div>
+					</div>
+
+
+
+
+					<!--<div class="row-fluid p-t-xxs">
 									<div class="span4 form-horizontal  ">
 										<div class="form-group p-xxs ">
 											<label class="control-label">Appraisal level</label>
@@ -393,13 +425,13 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									
 									
 								
-								</div>
-								<div class="row-fluid">
+								</div>-->
+							<!--	<div class="row-fluid">
 									<div class="span12 form-horizontal ">
 										<div class="form-group p-xxs ">
 											<div class="form-group pull-right  m-b-none  p-b-xxs">
 
-<!-- data-target="#ModalCopy" data-toggle="modal" -->
+<!-- data-target="#ModalCopy" data-toggle="modal"
 											<button id="btn_copy" type="button"
 												
 												class="btn btn-primary btn-sm " style="margin-left: 5px">

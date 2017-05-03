@@ -333,6 +333,21 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 .aui .textData{
 	font-weight:bold;
 }
+/* Update by au */
+.aui .btn {
+	font-size: 14px;
+ 	padding: 4px 12px; 
+	width: auto;
+	margin-top: 0px;
+	display: inline;
+}
+.aui .breadcrumbs2 select, .aui breadcrumbs2 textarea, .aui .breadcrumbs2 input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input {
+    height: 30px;
+    padding: none;
+    font-size: 14px;
+}
+.aui  select , .aui  input[type="text"]{font-size: 14px;}
+
 </style>
 
 <body class="gray-bg ">
@@ -365,7 +380,102 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
          					</div>
          					
          						<div class="ibox-content breadcrumbs2"> 
-         							
+         						
+         						<div  class="row-fluid ">
+
+									<div id='appraisalLevelArea' class="form-group pull-left span2"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<select data-toggle="tooltip" title="Flag 2"
+											class="input form-control input-sm" id="appraisalLevel"
+											name="appraisalLevel">
+								
+											<option value="0"></option>
+								
+								
+										</select>
+									</div>
+									<div id='DepartmentArea' class="form-group pull-left span2"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<select data-toggle="tooltip" title="Flag 2"
+											class="input form-control input-sm" id="Department" name="Department">
+										</select>
+									</div>
+									<div id="appraisalTypeArea" class="form-group pull-left span2"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<select data-toggle="tooltip" title="Appraisal Type"
+											class="input form-control input-sm" id="appraisalType"
+											name="appraisalType">
+								
+											<option value="0"></option>
+								
+										</select>
+									</div>
+								
+									<div id='yearArea' class="form-group pull-left span2"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<select data-toggle="tooltip" title="Year"
+											class="input form-control input-sm" id="YearList" name="YearList">
+								
+											<option value="0"></option>
+								
+										</select>
+									</div>
+									<div id="periodFrequencyArea" class="form-group pull-left span2"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<select data-toggle="tooltip" title="Period frequency"
+											class="input form-control input-sm" id="periodFrequency"
+											name="periodFrequency">
+											<option value="0"></option>
+										</select>
+									</div>
+									<div id="assignFrequencyArea" class="form-group pull-left span2"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<select data-toggle="tooltip" title="Assign Frequency"
+											class="input form-control input-sm" id="assignFrequency"
+											name="assignFrequency">
+								
+											<option value="1">ครั้งเดียวทุกงวด</option>
+											<option value="2">ทีละงวด</option>
+								
+										</select>
+									</div>
+									<div id="periodArea" class="form-group pull-left span2"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<select disabled='disabled' data-toggle="Period" title="Period"
+											class="input form-control input-sm" id="period_id" name="period_id">
+								
+											<option value=""></option>
+								
+										</select>
+								</div>
+								<div id="empNameArea" class="form-group pull-left span2"
+									style="margin-left: 5px; margin-bottom: 3px;">
+									<input type="text" class="form-control input-sm span12 "
+										placeholder="Emp Name" id="empName">
+								</div>
+								<div id="PositionArea" class="form-group pull-left span2"
+									style="margin-left: 5px; margin-bottom: 3px;">
+									<input type="text" id="Position" placeholder="Position"
+										class="form-control input-sm span12">
+								</div>
+							
+								<div class="form-group pull-right m-b-none "
+									style="margin-bottom: 5px;">
+									<button type="button" class="btn btn-info input-sm"
+										name="btnSearchAdvance" id="btnSearchAdvance">
+										<i class="fa fa-search"></i>&nbsp;Search
+									</button>
+									<button type="button" data-target='#ModalAssignment'
+										data-toggle='modal' class="btn btn-warning input-sm"
+										name="btnAssignment" id="btnAssignment">
+										<i class="fa fa-sign-in"></i>&nbsp;Assign
+									</button>
+								</div>
+							
+							</div>
+         						
+         						
+         					<!--		
 											<div class='row-fluid'>
 												
 				                                    <div class="span4 m-b-xs">
@@ -464,7 +574,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 						                                </div>
 													</div>
 												</div>
-												<div class='row-fluid'>
+											<div class='row-fluid'>
 													<div class="span4 m-b-xs">
 					                                    <div class="form-group"><label class="span5 control-label">Period</label>
 			
@@ -505,7 +615,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 						                                </div>
 													</div>
 												</div>
-												<div class='row-fluid'>
+											<div class='row-fluid'>
 													<div class='span12 object-right' style='text-align:right;' >
 										
 												
@@ -521,7 +631,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 													</div>
 
 											</div>
-							
+							-->
 				         		</div><!-- content end -->
 				         		</div>
 				         		

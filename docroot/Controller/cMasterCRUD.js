@@ -1,4 +1,4 @@
-//Global Variable
+//Global Variable 
 var golbalDataCRUD =[];
 var dataSearch="";
 var addCommas =  function(nStr)
@@ -600,23 +600,31 @@ var createAvanceSearchFn = function(options){
  */
 		if(indexEntry['inputType']=='dropdown'){
 		
-			avanceSearchHTML+="<div class=\"span6 form-horizontal \">";
+			avanceSearchHTML+="<div class='form-group pull-left span3' style='margin-left: 5px' id=\""+indexEntry['id']+"\">";
+			avanceSearchHTML+=createInputTypeFn(indexEntry,options['tokenID']);
+			avanceSearchHTML+="</div>";
+			/*avanceSearchHTML+="<div class=\"span6 form-horizontal \">";
 				avanceSearchHTML+="<div class=\"form-group p-xxs\"><label class=\"control-label\">"+indexEntry['label']+"</label>";
 					avanceSearchHTML+="<div class=\"controls\" id=\""+indexEntry['id']+"\">";
 					avanceSearchHTML+=createInputTypeFn(indexEntry,options['tokenID']);
 					avanceSearchHTML+="</div>";
 				avanceSearchHTML+="</div>";
-			avanceSearchHTML+="</div>";
+			avanceSearchHTML+="</div>";*/
 			
 		}else if(indexEntry['inputType']=='text'){
+			
 			var dataTypeInput =(indexEntry['dataTypeInput'] == 'number' ? "numberOnly" : "");
+			avanceSearchHTML+="<div class='form-group pull-left span3' style='margin-left: 5px' id='"+indexEntry['id']+"'>";
+			avanceSearchHTML+=createInputTypeFn(indexEntry,options['tokenID']);
+			avanceSearchHTML+="</div>";
+			/*
 			avanceSearchHTML+="<div class=\"span6 form-horizontal\">";
 				avanceSearchHTML+="<div class=\"form-group p-xxs\"><label class=\"control-label "+dataTypeInput+"\">"+indexEntry['label']+"</label>";
 				avanceSearchHTML+="<div class=\"controls\" id='"+indexEntry['id']+"'>";
 				avanceSearchHTML+=createInputTypeFn(indexEntry,options['tokenID']);
 				avanceSearchHTML+="</div>";
 				avanceSearchHTML+="</div>";
-			avanceSearchHTML+="</div>";
+			avanceSearchHTML+="</div>";*/
 			
 		}
 	});

@@ -305,7 +305,19 @@ margin-bottom:1px;
 .aui .table td{
 	text-align: '';
 }
-
+/* Update by au */
+.aui .btn {
+	font-size: 14px;
+ 	padding: 4px 12px; 
+	width: auto;
+	margin-top: 0px;
+	display: inline;
+}
+.aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input {
+    height: 30px;
+    padding: 0 0 0 5px;
+    font-size: 14px;
+}
 	
 </style>
 
@@ -334,6 +346,78 @@ margin-bottom:1px;
 							</div>
 
 							<div class="ibox-content breadcrumbs2">
+														
+								<div class="row-fluid">
+							
+								<div class="form-group pull-left span2" style="margin-left: 5px">
+									<select data-toggle="tooltip" title=""
+										class="input form-control input-sm span12" id="AppraisalYear"
+										name="AppraisalYear">
+									</select>
+								</div>
+								<div class="form-group pull-left span2" style="margin-left: 5px">
+									<select data-toggle="tooltip" title=""
+										class="input form-control input-sm span12" id="AppraisalPeriod"
+										name="AppraisalPeriod">
+										<option>All Appraisal Period</option>
+									</select>
+								</div>
+								<div class="form-group pull-left span2" style="margin-left: 5px">
+									<select data-toggle="tooltip" title=""
+										class="input form-control input-sm span12" id="AppraisalLevel"
+										name="AppraisalLevel">
+										<option>All Appraisal Level</option>
+										<option>ระดับบริหาร</option>
+										<option>ระดับการจัดการ</option>
+										<option>ระดับบังคับบัญชา</option>
+										<option>ระดับเจ้าหน้าที่</option>
+										<option>HR</option>
+									</select>
+								</div>
+								<div class="form-group pull-left span2" style="margin-left: 5px">
+									<select data-toggle="tooltip" title=""
+										class="input form-control input-sm span12" id="Department"
+										name="Department">
+										<option>All Department</option>
+									</select>
+								</div>
+								<div class="form-group pull-left span2" style="margin-left: 5px">
+									<select data-toggle="tooltip" title=""
+										class="input form-control input-sm span12" id="Section"
+										name="Section">
+										<option value=''>All Section</option>
+									</select>
+								</div>
+								<div id="" class="form-group pull-left span2" style="margin-left: 5px">
+									<input data-toggle="tooltip" title=""
+										class="form-control input-sm searchAdvanceText span12"
+										placeholder="Position" type="text" id="Position" name="Position">
+								</div>
+								<div id="" class="form-group pull-left span2" style="margin-left: 5px">
+									<input data-toggle="tooltip" title=""
+										class="form-control input-sm searchAdvanceText span12"
+										placeholder="Employee Name" type="text" id="EmpName" name="EmpName">
+								</div>
+								<div class="form-group pull-left span2" style="margin-left: 5px">
+									<select data-toggle="tooltip" title=""
+										class="input form-control input-sm span12" id="appraisalType"
+										name="appraisalType">
+							
+									</select>
+								</div>
+								<div class="form-group pull-right m-b-none "
+									style="margin-bottom: 5px;">
+									<button type="button" class="btn btn-info input-sm"
+										name="btnSearchAdvance" id="btnSearchAdvance">
+										<i class="fa fa-search"></i>&nbsp;Search
+									</button>
+									&nbsp;
+								</div>
+							
+							</div>
+														
+							
+							<!--
 									<div class="row-fluid">
 										<div class="span4">
 											<div class="form-group p-xxs">
@@ -467,7 +551,7 @@ margin-bottom:1px;
 										</div>
 								</div>
 								
-							
+							 -->
 								</div>
 
 							</div>

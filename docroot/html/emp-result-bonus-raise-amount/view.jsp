@@ -56,7 +56,19 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 .aui .ibox-title label{
 	padding-top: 5px;
 }
-
+/* Update by au */
+.aui .btn {
+	font-size: 14px;
+ 	padding: 4px 12px; 
+	width: auto;
+	margin-top: 0px;
+	display: inline;
+}
+.aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input {
+    height: 30px;
+    padding: none;
+    font-size: 14px;
+}
 </style>
 
 <!-- 
@@ -84,42 +96,71 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
          					</div>
          					
          						<div class="ibox-content breadcrumbs2"> 
-         							<div class="row-fluid">
+         						<div class="row-fluid ">
 
-	                                    <div class="span4 m-b-xs">
-		                                    <div class="form-group"><label class="span4 control-label" style='padding-top: 5px;'>Appraisal Year</label>
-			                                    <div class="span8" >
+									<div id='' class="form-group pull-left span3"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<select data-toggle="tooltip" title="Appraisal Year"
+											class="input form-control input-sm span12" id="dorpDownAppraisalYear"
+											name="dorpDownAppraisalYear">
+								
+										</select>
+									</div>
+								
+									<div id="" class="form-group pull-left span3"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<select data-toggle="tooltip" title="Bonus Period"
+											class="input form-control input-sm span12" id="dorpDownBonusPeriod"
+											name="dorpDownBonusPeriod">
+								
+										</select>
+									</div>
+								
+									<div class="form-group pull-right m-b-none "
+										style="margin-bottom: 5px;">
+										<button type="button" class="btn btn-info input-sm" name="btnCalBonus"
+											id="btnCalBonus">
+											<i class="glyphicon glyphicon-log-in"></i>&nbsp;Calculate Bonus
+										</button>
+									</div>
+								
+								</div>
+<!--          							<div class="row-fluid"> -->
+
+<!-- 	                                    <div class="span4 m-b-xs"> -->
+<!-- 		                                    <div class="form-group"><label class="span4 control-label" style='padding-top: 5px;'>Appraisal Year</label> -->
+<!-- 			                                    <div class="span8" > -->
 				                               
-				                                    <select data-toggle="tooltip" title="Appraisal Year" class="input form-control input-sm span12"  id="dorpDownAppraisalYear" name="dorpDownAppraisalYear">
+<!-- 				                                    <select data-toggle="tooltip" title="Appraisal Year" class="input form-control input-sm span12"  id="dorpDownAppraisalYear" name="dorpDownAppraisalYear"> -->
 				                                    	
-													</select>
+<!-- 													</select> -->
 													
-			                                    </div>
-			                                </div>
-										</div>
+<!-- 			                                    </div> -->
+<!-- 			                                </div> -->
+<!-- 										</div> -->
 										
-										<div class="span4 m-b-xs">
-		                                    <div class="form-group"><label class="span4 control-label" style='padding-top: 5px;'>Bonus Period</label>
-			                                    <div class="span8">
+<!-- 										<div class="span4 m-b-xs"> -->
+<!-- 		                                    <div class="form-group"><label class="span4 control-label" style='padding-top: 5px;'>Bonus Period</label> -->
+<!-- 			                                    <div class="span8"> -->
 				                                    
-				                                    <select data-toggle="tooltip" title="Bonus Period" class="input form-control input-sm span12"  id="dorpDownBonusPeriod" name="dorpDownBonusPeriod">
+<!-- 				                                    <select data-toggle="tooltip" title="Bonus Period" class="input form-control input-sm span12"  id="dorpDownBonusPeriod" name="dorpDownBonusPeriod"> -->
 				                                    	
-													</select>
+<!-- 													</select> -->
 													
-			                                    </div>
-			                                </div>
-										</div>
+<!-- 			                                    </div> -->
+<!-- 			                                </div> -->
+<!-- 										</div> -->
 
-                                     	 <div class="span4" align="right">
-	                                     	<div class="input-group" >
-		                                     	<div >
-	                                         		<button type="button" class="btn btn-info input-sm" name="btnCalBonus" id="btnCalBonus"><i class="glyphicon glyphicon-log-in"></i>&nbsp;Calculate Bonus</button>
-	                                         	</div>
-                                         	</div>
-                                     	</div>
+<!--                                      	 <div class="span4" align="right"> -->
+<!-- 	                                     	<div class="input-group" > -->
+<!-- 		                                     	<div > -->
+<!-- 	                                         		<button type="button" class="btn btn-info input-sm" name="btnCalBonus" id="btnCalBonus"><i class="glyphicon glyphicon-log-in"></i>&nbsp;Calculate Bonus</button> -->
+<!-- 	                                         	</div> -->
+<!--                                          	</div> -->
+<!--                                      	</div> -->
                                      	
                                      	
-                             		</div>
+<!--                              		</div> -->
 				         		</div><!-- content end -->
 				         		</div>
 				         		
@@ -137,42 +178,72 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
          					</div>
          					
          						<div class="ibox-content breadcrumbs2"> 
-         							<div class="row-fluid">
+         						<div class="row-fluid ">
 
-	                                    <div class="span4 m-b-xs">
-		                                    <div class="form-group"><label class="span4 control-label" style='padding-top: 5px;'>Appraisal Year</label>
-			                                    <div class="span8" >
+									<div id='' class="form-group pull-left span3"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<select data-toggle="tooltip" title="Appraisal Year"
+											class="input form-control input-sm span12"
+											id="dorpDownRaiseAppraisalYear" id="dorpDownRaiseAppraisalYear">
+								
+										</select>
+									</div>
+								
+									<div id="" class="form-group pull-left span3"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<select data-toggle="tooltip" title="Salary Period"
+											class="input form-control input-sm span12" id="dorpDownSalaryPeriod"
+											name="dorpDownSalaryPeriod">
+								
+										</select>
+									</div>
+								
+									<div class="form-group pull-right m-b-none "
+										style="margin-bottom: 5px;">
+										<button type="button" class="btn btn-info input-sm"
+											name="btnCalRaiseAmount" id="btnCalRaiseAmount">
+											<i class="glyphicon glyphicon-log-in"></i>&nbsp;Calculate Raise
+											Amount
+										</button>
+									</div>
+								
+								</div>
+<!--          							<div class="row-fluid"> -->
+
+<!-- 	                                    <div class="span4 m-b-xs"> -->
+<!-- 		                                    <div class="form-group"><label class="span4 control-label" style='padding-top: 5px;'>Appraisal Year</label> -->
+<!-- 			                                    <div class="span8" > -->
 				                                    
-				                                    <select data-toggle="tooltip" title="Appraisal Year" class="input form-control input-sm span12"  id="dorpDownRaiseAppraisalYear" id="dorpDownRaiseAppraisalYear">
+<!-- 				                                    <select data-toggle="tooltip" title="Appraisal Year" class="input form-control input-sm span12"  id="dorpDownRaiseAppraisalYear" id="dorpDownRaiseAppraisalYear"> -->
 				                                    	
-													</select>
+<!-- 													</select> -->
 													
-			                                    </div>
-			                                </div>
-										</div>
+<!-- 			                                    </div> -->
+<!-- 			                                </div> -->
+<!-- 										</div> -->
 										
-										<div class="span4 m-b-xs">
-		                                    <div class="form-group"><label class="span4 control-label" style='padding-top: 5px;'>Salary Period</label>
-			                                    <div class="span8">
+<!-- 										<div class="span4 m-b-xs"> -->
+<!-- 		                                    <div class="form-group"><label class="span4 control-label" style='padding-top: 5px;'>Salary Period</label> -->
+<!-- 			                                    <div class="span8"> -->
 				                                    
-				                                    <select data-toggle="tooltip" title="Salary Period" class="input form-control input-sm span12"   id="dorpDownSalaryPeriod" name="dorpDownSalaryPeriod">
+<!-- 				                                    <select data-toggle="tooltip" title="Salary Period" class="input form-control input-sm span12"   id="dorpDownSalaryPeriod" name="dorpDownSalaryPeriod"> -->
 				                                    	
-													</select>
+<!-- 													</select> -->
 													
-			                                    </div>
-			                                </div>
-										</div>
+<!-- 			                                    </div> -->
+<!-- 			                                </div> -->
+<!-- 										</div> -->
 
-                                     	 <div class="span4" align="right">
-	                                     	<div class="input-group" >
-		                                     	<div >
-	                                         		<button type="button" class="btn btn-info input-sm" name="btnCalRaiseAmount" id="btnCalRaiseAmount"><i class="glyphicon glyphicon-log-in"></i>&nbsp;Calculate Raise Amount</button>
-	                                         	</div>
-                                         	</div>
-                                     	</div>
+<!--                                      	 <div class="span4" align="right"> -->
+<!-- 	                                     	<div class="input-group" > -->
+<!-- 		                                     	<div > -->
+<!-- 	                                         		<button type="button" class="btn btn-info input-sm" name="btnCalRaiseAmount" id="btnCalRaiseAmount"><i class="glyphicon glyphicon-log-in"></i>&nbsp;Calculate Raise Amount</button> -->
+<!-- 	                                         	</div> -->
+<!--                                          	</div> -->
+<!--                                      	</div> -->
                                      	
                                      	
-                             		</div>
+<!--                              		</div> -->
 				         		</div><!-- content end -->
 				         		</div>
 				         		

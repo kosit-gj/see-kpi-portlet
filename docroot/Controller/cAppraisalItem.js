@@ -357,7 +357,7 @@ var appraisalLevelListFn = function(nameArea,id,defaultAll){
 			if(defaultAll==false){
 				
 			}else{
-				htmlOption+="<option  value=\"\">All</option>";
+				htmlOption+="<option  value=\"\">All Appraisal Level</option>";
 			}
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['appraisal_level_id']){
@@ -392,7 +392,7 @@ var perspectiveListFn = function(nameArea,id,defaultAll){
 			if(defaultAll==false){
 			
 			}else{
-				htmlOption+="<option  value=\"\">All</option>";
+				htmlOption+="<option  value=\"\">All Perspective</option>";
 			}
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['perspective_id']){
@@ -458,7 +458,7 @@ var structureListFn = function(nameArea){
 		success:function(data){
 			
 			var htmlOption="";
-			htmlOption+="<option value=''>All</option>";
+			htmlOption+="<option value=''>All Structure</option>";
 			$.each(data,function(index,indexEntry){
 				htmlOption+="<option value='"+indexEntry['structure_id']+"'>"+indexEntry['structure_name']+"</option>";
 			});
@@ -481,7 +481,7 @@ var dropDrowDepartmentFn = function(nameArea,id,defaultAll){
 		success:function(data){
 			var htmlOption="";
 			if(defaultAll==true){
-				htmlOption+="<option value=''>All</option>";
+				htmlOption+="<option value=''>All DrowDepartment</option>";
 			}
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['department_code']){

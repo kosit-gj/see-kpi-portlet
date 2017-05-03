@@ -2,6 +2,8 @@
 //Global variable
 var galbalDataCDS=[];
 //IP Server : 171.96.201.146
+
+
 var tempCdsId ="";
 var tempCdsName ="";
 var pageNumberDefault=1;
@@ -412,9 +414,9 @@ var dropDownListAppraisalLevel = function(id,inputId){
 	//id = f_app_lv
 	//id = app_lv
 	var html="";
-	html+="<select  data-toggle=\"tooltip\" title=\"Appraisal Level\" class=\"input span12 m-b-n\" id=\""+inputId+"\" name=\""+inputId+"\">";
+	html+="<select  data-toggle=\"tooltip\" title=\"Appraisal Level\" data-placement='top' class=\"input span12 m-b-n\" id=\""+inputId+"\" name=\""+inputId+"\">";
 	if(inputId == "app_lv"){
-		html+="<option selected value=''>All</option>";}
+		html+="<option selected value=''>All Appraisal Level</option>";}
 
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalLevel,
@@ -533,6 +535,10 @@ var backToTopFn = function(){
 
 
 $(document).ready(function() {
+	$(function () {
+		  $('[data-toggle="tooltip"]').tooltip()
+		})
+		
 	var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
@@ -699,7 +705,7 @@ $(document).ready(function() {
 	});
 	$("#btnCopySubmit").click(function(){
 		copyCdsFn();
-
+		
 		return false;
 	});
 	
@@ -753,6 +759,7 @@ var copyCdsFn = function () {
 	$.each($(".from_data_copy").get(),function(index,indexEntry){
 		if($(indexEntry).is(":checked")){
 			appraisal.push($(indexEntry).val());
+			chackSelect = true;
 		}
 	});
 	if (chackSelect == false){callFlashSlideInModal("<font color='red'>*</font> Please Select Appraisal level !!!","#information3"); return false;}
@@ -767,6 +774,7 @@ var copyCdsFn = function () {
 			async:false,
 			data:{"cds":cds,"appraisal_level":appraisal},
 			success : function(data) {
+				
 				if(data['status']==200){
 					callFlashSlide("Copy Successfully.");
 					getDataFn($("#pageNumber").val(),$("#rpp").val());

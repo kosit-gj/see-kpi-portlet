@@ -128,7 +128,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 }
 
 .aui .form-group {
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 
 .aui .control-label {
@@ -390,6 +390,65 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							</div>
 
 							<div class="ibox-content breadcrumbs2">
+					<div class="row-fluid p-t-xxs">
+						<div id="drop_down_department" class="form-group pull-left span3"
+							style="margin-left: 5px"></div>
+						<div id="drop_down_section" class="form-group pull-left span3"
+							style="margin-left: 5px"></div>
+
+						<div class="form-group pull-left span3" style="margin-left: 5px">
+							<input data-toggle="tooltip" title="Position"
+								data-placement="top" class="span12 m-b-n ui-autocomplete-input"
+								placeholder="Position" id="search_position"
+								name="search_position" type="text"> <input
+								class="form-control input-sm" id="search_position_id"
+								name="search_position_id" value="" type="hidden">
+						</div>
+						<div class="form-group pull-left span3" style="margin-left: 5px">
+							<input data-toggle="tooltip" title="Employee Name"
+								data-placement="top" class="span12 m-b-n ui-autocomplete-input"
+								placeholder="Employee Name" id="search_emp_name"
+								name="search_emp_name" type="text"> <input
+								class="form-control input-sm" id="search_emp_id"
+								name="search_emp_id" value="" type="hidden">
+						</div>
+
+						<div class="form-group pull-right m-b-none ">
+							<button id="btn_add_role" type="submit" data-target="#ModalRole"
+								data-toggle="modal" class="btn btn-primary btn-sm "
+								style="margin-left: 5px;">
+								&nbsp;<i class="fa fa-plus-square"></i>&nbsp;Role&nbsp;&nbsp;
+							</button>
+						</div>
+						<div class="form-group pull-right m-b-none ">
+							<button id="btn_import" type="button" data-target="#ModalImport"
+								data-toggle="modal" class="btn btn-success btn-sm " style="margin-left: 5px;">
+								<i class="fa fa-upload"></i>&nbsp;Import</button>
+						</div>
+						<div class="form-group pull-right m-b-none ">
+							<form id="formExportToExcel" action="" method="post"
+											class="pull-right " style="margin-bottom: 0px; margin-left: 5px">
+											<button id="exportToExcel" class="btn btn-warning btn-sm"
+												type="submit">
+												<i class="fa fa-download"></i> Download
+											</button>
+										</form>
+						</div>
+						<div class="form-group pull-right m-b-none ">
+							<button type="button" name="btnSearchAdvance"
+								id="btnSearchAdvance" class="btn btn-info input-sm "
+								style="margin-left: 5px;">
+								<i class="fa fa-search"></i>&nbsp;Search
+							</button>
+						</div>
+					</div>
+
+
+
+
+
+
+					<!--
 								<div class="row-fluid p-t-xxs">
 									<div class="span4 form-horizontal  ">
 										<div class="form-group p-xxs ">
@@ -469,7 +528,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									</div>
 
 								</div>
-
+-->
 							</div>
 							<!-- content end -->
 						</div>

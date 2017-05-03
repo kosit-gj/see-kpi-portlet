@@ -80,7 +80,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	line-height: normal;
 }
 .aui .form-group {
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 
 .p-t-xxs {
@@ -140,6 +140,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 /* Portrait tablet to landscape and desktop */
 @media ( min-width : 768px) and (max-width: 979px) {
+	.aui #dis-non{display:none;}
 	.aui .ResultsPerPageTop {
 		position: absolute;
 		left: -20px;
@@ -193,6 +194,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 /* Landscape phone to portrait tablet */
 @media ( max-width : 767px) {
+	.aui #dis-non{display:none;}
 	.aui .ResultsPerPageTop {
 		position: absolute;
 		left: -20px;
@@ -322,7 +324,60 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							<div class="ibox-title">
 								<h5>Advance Search</h5>
 							</div>
+				<div class="ibox-content breadcrumbs2">
+					<div class="row-fluid p-t-xxs">
+						<div id="drop_down_list_year" class="form-group pull-left span2"
+							style="margin-left: 5px"></div>
+						<div id="drop_down_list_month" class="form-group pull-left span2"
+							style="margin-left: 5px"></div>
+						<div id="drop_down_list_appraisal_level"
+							class="form-group pull-left span2" style="margin-left: 5px">
 
+						</div>
+						<div class="form-group pull-left span2" style="margin-left: 5px">
+							<input data-toggle="tooltip" data-placement="top"
+								title="Position" class="span12 m-b-n ui-autocomplete-input"
+								placeholder="Position" id="position" name="position" type="text">
+							<input class="form-control input-sm" id="position_id"
+								name="position_id" value="" type="hidden">
+						</div>
+						<div class="form-group pull-left span4" style="margin-left: 5px">
+							<input data-toggle="tooltip" data-placement="top"
+								title="Employee Name" class="span12 m-b-n ui-autocomplete-input"
+								placeholder="Employee Name" id="emp_name" name="emp_name"
+								type="text"> <input class="form-control input-sm"
+								id="emp_name_id" name="emp_name_id" value="" type="hidden">
+						</div>
+						<div id="dis-non" class="form-group pull-left span1" style="margin-left: 5px;">  </div>
+						<div class="form-group pull-right m-b-none ">
+							<button id="btn_import" type="button" data-target="#ModalImport"
+								data-toggle="modal" class="btn btn-success btn-sm "
+								style="margin-left: 5px">
+								<i class="fa fa-upload"></i>&nbsp;Import&nbsp;&nbsp;
+							</button>
+						</div>
+						<div class="form-group pull-right m-b-none ">
+							<form id="formExportToExcel" action="" method="post"
+								class="pull-right " style="margin-bottom: 0px; margin-left: 5px">
+								<button id="exportToExcel" class="btn btn-warning btn-sm"
+									type="button">
+									<i class="fa fa-download"></i> Download
+								</button>
+							</form>
+						</div>
+						<div class="form-group pull-right m-b-none ">
+							<button type="button" name="btnSearchAdvance"
+								id="btnSearchAdvance" class="btn btn-info input-sm "
+								style="margin-left: 5px">
+								<i class="fa fa-search"></i>&nbsp;Search
+							</button>
+						</div>
+
+					</div>
+				</div>
+
+
+				<!--  
 							<div class="ibox-content breadcrumbs2">
 								<div class="row-fluid p-t-xxs" >
 									<div class="span4 form-horizontal  ">
@@ -402,7 +457,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 								</div>
 
-								</div>
+								</div>-->
 
 							</div>
 							<!-- content end -->

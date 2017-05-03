@@ -162,8 +162,8 @@ var dropDownListAppraisalLevel = function(){
 	var html="";
 	
 	
-	html+="<select id=\"app_lv\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Appraisal Level\" name=\"app_lv\">";
-	html+="<option  selected value=''>All</option>";
+	html+="<select data-placement='top' id=\"app_lv\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Appraisal Level\" name=\"app_lv\">";
+	html+="<option  selected value=''>All Appraisal Level</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalLevel,
 		type:"get" ,
@@ -224,6 +224,7 @@ var listErrorFn =function(data){
 //-------------------  Drop Down List Appraisal Level FN END ---------------------
 
 $(document).ready(function() {
+	$('[data-toggle="tooltip"]').tooltip();
 	var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){

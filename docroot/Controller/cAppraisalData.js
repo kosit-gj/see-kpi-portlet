@@ -113,8 +113,8 @@ var dropDownListStructure = function(){
 	var html="";
 	
 	
-	html+="<select id=\"structure\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Structure\" name=\"structure\">";
-	html+="<option  selected value=''>All</option>";
+	html+="<select data-placement='top' id=\"structure\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Structure\" name=\"structure\">";
+	html+="<option  selected value=''>All Structure</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownStructure,
 		type:"get" ,
@@ -142,8 +142,8 @@ var dropDownListAppraisalLevel = function(){
 	var html="";
 	
 	
-	html+="<select id=\"app_lv\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Appraisal Level\" name=\"app_lv\">";
-	html+="<option  selected value=''>All</option>";
+	html+="<select data-placement='top' id=\"app_lv\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Appraisal Level\" name=\"app_lv\">";
+	html+="<option  selected value=''>All Appraisal Level</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalLevel ,
 		type:"get" ,
@@ -170,7 +170,7 @@ var dropDownListAppraisalType = function(){
 	var html="";
 	
 	
-	html+="<select id=\"app_type\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Appraisal Type\" name=\"app_type\">";
+	html+="<select data-placement='top'  id=\"app_type\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Appraisal Type\" name=\"app_type\">";
 	
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalType ,
@@ -198,7 +198,7 @@ var dropDownListPeriod = function(){
 	var html="";
 	
 	
-	html+="<select id=\"period\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Period\" name=\"period\">";
+	html+="<select data-placement='top' data-placement='top' id=\"period\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Period\" name=\"period\">";
 	//html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownPeriod,
@@ -256,6 +256,7 @@ var listErrorFn =function(data){
 }
 $(document).ready(function() {
 	// -------------------  Appraisal Data  ---------------------
+	 $('[data-toggle="tooltip"]').tooltip();
 	var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){

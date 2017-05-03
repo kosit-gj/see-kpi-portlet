@@ -555,7 +555,19 @@ overflow-y: visible;
 }
 
 /*local end*/
-
+/* Update by au */
+.aui .btn {
+	font-size: 14px;
+ 	padding: 4px 12px; 
+	width: auto;
+	margin-top: 0px;
+	display: inline;
+}
+.aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input {
+    height: 30px;
+    padding: none;
+    font-size: 14px;
+}
 </style>
 <body class=" gray-bg ">
 <!--  #####################Content data here ######################-->
@@ -581,8 +593,68 @@ overflow-y: visible;
                                   <div class='titlePanelSearch'>Advance Search</div> 
          					</div>
          					
-         						<div class="ibox-content breadcrumbs2"> 
-         							<div class="row-fluid">
+         						<div class="ibox-content breadcrumbs2">
+							<div class="row-fluid p-t-xxs">
+								
+									<div id="appraisalLevelArea" class="form-group pull-left span2"
+										style="margin-left: 5px">
+										<select data-toggle="tooltip" title="Appraisal Level"
+											class="input form-control input-sm" id="appraisalLevel"
+											name="appraisalLevel">
+											<option value="0"></option>
+										</select>
+									</div>
+									<div id="perspectiveArea" class="form-group pull-left span2"
+										style="margin-left: 5px">
+										<select data-toggle="tooltip" title="Perspective"
+											class="input form-control input-sm" id="perspective"
+											name="perspective">
+
+											<option value="0"></option>
+
+										</select>
+									</div>
+									<div id="structureArea" class="form-group pull-left span2"
+										style="margin-left: 5px">
+										<select data-toggle="tooltip" title="Structure"
+											class="input form-control input-sm" id="structure"
+											name="structure">
+
+											<option value="0"></option>
+
+										</select>
+									</div>
+									<div id="DepartmentArea" class="form-group pull-left span2"
+										style="margin-left: 5px">
+										<select data-toggle="tooltip" title="Flag 2"
+											class="input form-control input-sm" id="department"
+											name="department">
+										</select>
+									</div>
+									<div id="appraisalItemNameArea"
+										class="form-group pull-left span3" style="margin-left: 5px">
+										<input data-toggle="tooltip" title="Appraisal Item "
+											placeholder="Appraisal Item " type='text'
+											name='appraisalItemName'
+											class='input form-control input-sm span12'
+											id='appraisalItemName'>
+									</div>
+								
+								
+									<div class="form-group pull-right m-b-none ">
+										<button type="button" class="btn btn-info input-sm"
+											name="btnSearchAdvance" id="btnSearchAdvance">
+											<i class="fa fa-search"></i>&nbsp;Search
+										</button>
+										<button id="btnCoppy" name="btnCoppy"
+											class="btn btn-warning  input-sm" type="button">
+											<i class="fa fa-plus-square"></i>&nbsp;Copy
+										</button>
+									</div>
+								
+							</div>
+							<!--
+							<div class="row-fluid">
 										
 										
 												

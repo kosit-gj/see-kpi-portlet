@@ -553,8 +553,8 @@ var updateRoleFn = function () {
 //DropDownList Department
 var dropDownListDepartment = function(){
 	var html="";
-	html+="<select data-toggle=\"tooltip\" title=\"Department\" class=\"input span12 m-b-n\" id=\"search_department\" name=\"search_department\" >";
-	html+="<option  selected value=''>All</option>";
+	html+="<select data-placement='top' data-toggle=\"tooltip\" title=\"Department\" class=\"input span12 m-b-n\" id=\"search_department\" name=\"search_department\" >";
+	html+="<option  selected value=''>All Department</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownDepartment ,
 		type:"get" ,
@@ -579,9 +579,9 @@ var dropDownListDepartment = function(){
 //DropDownList Section
 var dropDownListSection = function(id){
 	var html="";
-	html+="<select data-toggle=\"tooltip\" title=\"Section\" class=\"input span12 m-b-n\" id=\"search_section\" name=\"search_section\" >";
+	html+="<select data-placement='top'  data-toggle=\"tooltip\" title=\"Section\" class=\"input span12 m-b-n\" id=\"search_section\" name=\"search_section\" >";
 	
-	html+="<option  selected value=''>All</option>";
+	html+="<option  selected value=''>All Section</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownSection ,
 		type:"get" ,
@@ -623,6 +623,7 @@ var backToTopFn = function(){
 }
 
 $(document).ready(function() {
+	$('[data-toggle="tooltip"]').tooltip();
 	var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
