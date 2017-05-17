@@ -54,6 +54,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
  	  .text-label{
 	  	text-align:left;
 	  }	
+	  .btn-right{
+	  text-align: right;}
    }
   /* Landscape phone to portrait tablet End##################*/ 
   
@@ -73,7 +75,18 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 }
 
 
-
+.aui .btn {
+	font-size: 14px;
+ 	padding: 4px 12px; 
+	width: auto;
+	margin-top: 0px;
+	display: inline;
+}
+.aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input {
+    height: 20px;
+    padding: none;
+    font-size: 14px;
+}
 </style>
 	
 		<div class="">
@@ -212,7 +225,31 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									<label class='text-label'>  Salary Raise Frequency &nbsp;:</label>
 									
 									</div>
-									<div class="span3" id="salarySystem"></div>
+									<div class="span3" id="salarySystem">
+									</div>
+
+                                 </div> 
+                                 <div class="row-fluid">
+							
+									<div class="span5 object-right" >
+									<label class='text-label'>  Calculate Type &nbsp;:</label>
+									
+									</div>
+									<div class="span3" id="salarySystem">
+										<label class="radio">
+											<input type="radio" name="optionsRadios" id="radiosScore" value="1" checked>
+											  Score
+										</label>
+										
+											<span style="padding-left: 21px;"> Max Score &nbsp;:</span>	
+											<input  class="form-control input-data numberOnly" style="width: 50px;" type="text" id="maxScore">
+										
+										
+										<label class="radio" style="margin-bottom: 10px;">
+											  <input type="radio" name="optionsRadios" id="radiosWeight" value="0">
+											  % Weight
+										</label>
+									</div>
 
                                  </div> 
                                  
@@ -222,7 +259,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									<label>  </label>
 									
 									</div>
-									<div class="span3">
+									<div class="span3 btn-right">
 										<input type="hidden" name="id" id="id" value="">
 						   				<input type="hidden" name="action" id="action" value="add">
 						   				
