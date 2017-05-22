@@ -29,7 +29,7 @@ var updateQualityFn  = function(){
 	 }
 	 
 	 $.ajax({
-	    url:restfulURL+"/tyw_api/public/appraisal_item/"+appraisal_item_id,
+	    url:restfulURL+"/kpi_api/public/appraisal_item/"+appraisal_item_id,
 	    type:"PATCH",
 	    dataType:"json",
 	    headers:{Authorization:"Bearer "+tokenID.token},
@@ -70,7 +70,7 @@ var insertQualityFn = function(param) {
 	 }
 
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_item",
+		url:restfulURL+"/kpi_api/public/appraisal_item",
 		type:"post",
 		dataType:"json",
 		async:false,

@@ -67,7 +67,7 @@ var updateQuantityFn  = function(){
 	 }
 	 
 	 $.ajax({
-	    url:restfulURL+"/tyw_api/public/appraisal_item/"+appraisal_item_id,
+	    url:restfulURL+"/kpi_api/public/appraisal_item/"+appraisal_item_id,
 	    type:"PATCH",
 	    dataType:"json",
 	    headers:{Authorization:"Bearer "+tokenID.token},
@@ -124,7 +124,7 @@ var insertQuantityFn = function(param) {
 	 }
 
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_item",
+		url:restfulURL+"/kpi_api/public/appraisal_item",
 		type:"post",
 		dataType:"json",
 		async:false,
@@ -191,7 +191,7 @@ var cdsGetFn = function(page,rpp){
 	var appraisal_level=$("#embed_appraisal_level_quantity").val();
 	var cds_name=$("#embed_cds_name_quantity").val();
 	$.ajax({
-		url:restfulURL+"/tyw_api/public/appraisal_item/cds_list",
+		url:restfulURL+"/kpi_api/public/appraisal_item/cds_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -244,7 +244,7 @@ structure_name
 		perspectiveListFn("Quantity",data['perspective_id'],defaultAll=false);
 		uomListFn("Quantity",data['uom_id']);
 		
-		dropDrowDepartmentFn("Quantity",data['department_code'],defaultAll=false);
+		dropDrowDepartmentFn("Quantity",data['department_code'],defaultAll=true);
 		$("#baselineValueQuantity").val(data['baseline_value']);
 		$("#formulaDescriptionQuantity").val(data['formula_desc']);
 		$("#appraisalItemNameQuantity").val(data['appraisal_item_name']);	
@@ -284,7 +284,7 @@ structure_name
 
 	        source: function (request, response) {
 	        	$.ajax({
-					 url:restfulURL+"/tyw_api/public/cds/auto_cds",
+					 url:restfulURL+"/kpi_api/public/cds/auto_cds",
 					 type:"post",
 					 dataType:"json",
 					 headers:{Authorization:"Bearer "+tokenID.token},
@@ -330,7 +330,7 @@ structure_name
 		clearQuantityFormFn();
 		appraisalLevelListFn("Quantity",$("#embed_appraisal_level_id").val(),defaultAll=false);			
 		perspectiveListFn("Quantity",$("#embed_perspective_id").val(),defaultAll=false);
-		dropDrowDepartmentFn("Quantity",$("#embed_department_id").val(),defaultAll=false);
+		dropDrowDepartmentFn("Quantity",$("#embed_department_id").val(),defaultAll=true);
 		uomListFn("Quantity");
 		$("#btnAddAnotherQuantity").show();
 		//SEARCH
@@ -345,7 +345,7 @@ structure_name
 
 	        source: function (request, response) {
 	        	$.ajax({
-					 url:restfulURL+"/tyw_api/public/cds/auto_cds",
+					 url:restfulURL+"/kpi_api/public/cds/auto_cds",
 					 type:"post",
 					 dataType:"json",
 					 headers:{Authorization:"Bearer "+tokenID.token},

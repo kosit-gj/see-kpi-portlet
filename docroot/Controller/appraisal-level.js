@@ -5,7 +5,7 @@ var insertCriteriaFn = function () {
 	var weight = [];
 	var criteria = [];
 	$('.from_data_weight').each(function(index, indexEntry) {
-		console.log("id: "+this.id+" weigth : "+$(indexEntry).val());
+		//console.log("id: "+this.id+" weigth : "+$(indexEntry).val());
 		criteria.push({
 			"structure_id": ""+this.id+"",
 			"weight_percent": ""+$(indexEntry).val()+"",	   	
@@ -137,7 +137,7 @@ $(document).ready(function(){
 		 			 "advanceSearchSet":false,
 		 			 "btnManageOption":{"id":"addModalCriteria","name":"Criteria"}
 		 	}
-		 	console.log(options['tokenID'].token);
+		 	//console.log(options['tokenID'].token);
 		 	createDataTableFn(options);
 		 	
 		 	 

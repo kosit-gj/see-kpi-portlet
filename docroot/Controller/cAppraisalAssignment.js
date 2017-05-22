@@ -1635,26 +1635,31 @@ var calculationGrandTotalFn = function(id){
 	});
 	grandTotalWieghtTotal=(deductTotalWieght+grandTotalWieght);
 	
-	console.log(grandTotalWieght);
-	console.log(grandTotalWieghtTotal);
+	//console.log(grandTotalWieght);
+	//console.log(grandTotalWieghtTotal);
 	
 	$("#grandTotalWeight").html(grandTotalWieghtTotal);
 	//weigth_total_quality_percentage_target
 	
 	//################ Calculation Quantity Start####################### 
-	var totalWeigthQuantity=0;
+	//var totalWeigthQuantity=0;
 	$.each($(".embed_appraisal_id").get(),function(index,indexEntry){
 		var dataId1=this.id.split("-");;
 		var apprailsal_item_id1=dataId1[1];
 		var structure_id1=dataId1[2];
-		
+		var totalWeigthQuantity=0;
 		$.each($(".total_weigth_quantity").get(),function(index,indexEntry){
 			
 			var dataId=this.id.split("-");;
 			var apprailsal_item_id=dataId[1];
 			var structure_id=dataId[2];
+			
+			//console.log("structure_id1="+structure_id1);
+			//console.log("structure_id="+structure_id);
+			
 			if(apprailsal_item_id==apprailsal_item_id1 && structure_id==structure_id1){
-				//console.log(indexEntry);
+				
+				console.log(indexEntry);
 			
 			
 				if($(indexEntry).val().trim()!="" && $("#id-"+apprailsal_item_id+"-"+structure_id+"-checkbox").prop("checked")==true){
@@ -1695,12 +1700,12 @@ var calculationGrandTotalFn = function(id){
 	.css({"color":"#FF0000"}).
 	addClass("weightIsOver");
 	//End Default weight form Quality is 0%
-	var total_weigth_quality=0;
+	//var total_weigth_quality=0;
 	$.each($(".embed_appraisal_id").get(),function(index,indexEntry){
 		var dataId1=this.id.split("-");;
 		var apprailsal_item_id1=dataId1[1];
 		var structure_id1=dataId1[2];
-		
+		var total_weigth_quality=0;
 		
 		
 			$.each($(".total_weigth_quality").get(),function(index,indexEntry){

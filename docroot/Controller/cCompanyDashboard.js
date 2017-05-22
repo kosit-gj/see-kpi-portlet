@@ -1,5 +1,6 @@
 var username = $('#user_portlet').val();
-var emp_code="2";
+var emp_code=username;
+//var emp_code="2";
 var password = $('#pass_portlet').val();
 
 
