@@ -716,7 +716,15 @@ var createDataTableFn = function(options){
 		
 			
 			jQuery('.numberOnly').keyup(function () { 
-			    this.value = this.value.replace(/[^0-9\.]/g,'');
+			    // this.value = this.value.replace(/[^0-9\.]/g,'');
+		        $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+		        
+		        if($(this).val().split(".").length>2 && ($(this).val().indexOf('.') != $(this).val().lastIndexOf('.'))){
+		        $(this).val($(this).val().substring(0, $(this).val().lastIndexOf('.')));
+		        }
+		        else if ($(this).val().split(".")[1] != null || ($(this).val().split(".")[1]).length ){
+		            $(this).val($(this).val().substring(0, $(this).val().indexOf('.')+3));
+		        }  
 			});
 //			$(".numberOnly").ForceNumericOnly();
 //			$(".numberOnly").keyup(function (e) {
