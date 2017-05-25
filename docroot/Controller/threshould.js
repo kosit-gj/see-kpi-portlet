@@ -1,5 +1,4 @@
  $(document).ready(function(){
-    	
 	 var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
@@ -11,7 +10,7 @@
     			"colunms":[
     			         
     			           {"colunmsDisplayName":"Structure Name","width":"30%","id":"structure_name","colunmsType":"text"},
-    			           {"colunmsDisplayName":"Score","width":"20%","id":"target_score","colunmsType":"text","colunmsDataType":"int"},
+    			           {"colunmsDisplayName":"Score","width":"20%","id":"target_score","colunmsType":"text","colunmsDataType":"decimal"},
     			           {"colunmsDisplayName":"Threshould Name","width":"20%","id":"threshold_name","colunmsType":"text"},
     			           {"colunmsDisplayName":"IsActive","width":"10%","id":"is_active","colunmsType":"checkbox"},
     			           
@@ -52,7 +51,6 @@
     	}
     	//console.log(options['tokenID'].token);
     	createDataTableFn(options);
-    	
 	 	}
 	 }
     	
