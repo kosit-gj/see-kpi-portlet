@@ -29,7 +29,11 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	</div>
 </div>
 
-
+<style>
+.popover {
+	width: 210px;
+}
+</style>
 
 <!-- Modal Import Appraisal Criteria -->
 
