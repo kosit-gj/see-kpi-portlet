@@ -286,7 +286,7 @@ $(document).ready(function () {
 				
 			});
 			
-
+/*
 			jQuery('.numberOnly').keyup(function () { 
 			    // this.value = this.value.replace(/[^0-9\.]/g,'');
 		        $(this).val($(this).val().replace(/[^0-9\.]/g,''));
@@ -297,8 +297,38 @@ $(document).ready(function () {
 		        else if ($(this).val().split(".")[1] != null || ($(this).val().split(".")[1]).length ){
 		            $(this).val($(this).val().substring(0, $(this).val().indexOf('.')+3));
 		        }  
+			});*/
+
+			var getSelectionStart = function (o) {
+				if (o.createTextRange) {
+					var r = document.selection.createRange().duplicate()
+					r.moveEnd('character', o.value.length)
+					if (r.text == '') return o.value.length
+					return o.value.lastIndexOf(r.text)
+				} else return o.selectionStart
+			};
+			jQuery('.numberOnly').keypress(function (evt) { 
+				 var charCode = (evt.which) ? evt.which : event.keyCode;
+				 var number = this.value.split('.');
+				 if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+				    return false;
+				 }
+				    //just one dot
+				 if(number.length>1 && charCode == 46){
+				    return false;
+				 }
+				    //get the carat position
+				 var caratPos = getSelectionStart(this);
+				 var dotPos = this.value.indexOf(".");
+				 if( caratPos > dotPos && dotPos>-1 && (number[1].length > 1)){
+				    return false;
+				 }
+				 return true;
 			});
-	 
+			
+			
+
+			
 	 	}
 	 }
 	 
@@ -312,6 +342,7 @@ $(document).ready(function () {
 		});
 	
 });
+
 
 	
 	

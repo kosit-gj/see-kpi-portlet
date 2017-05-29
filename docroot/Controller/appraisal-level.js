@@ -67,13 +67,40 @@ var listAppraisalCriteria = function(id) {
 				htmlTable+=			data[index]["structure_name"];
 				htmlTable+="	</td>";
 				htmlTable+="	<td style=\"vertical-align:middle\" >";
-				htmlTable+="		<input onkeydown='return ( event.ctrlKey || event.altKey || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) || (95<event.keyCode && event.keyCode<106) || (event.keyCode==8) || (event.keyCode==9) || (event.keyCode>34 && event.keyCode<40) || (event.keyCode==46)|| (event.keyCode==110)|| (event.keyCode==190))' style='margin-bottom: 0px;' class=\"span12 from_data_weight numberOnly\" type='text'  id=\""+data[index]["structure_id"]+"\" value=\""+weight_percent+"\" />";
+				htmlTable+="		<input style='margin-bottom: 0px;' class=\"span12 from_data_weight numberOnly\" type='text'  id=\""+data[index]["structure_id"]+"\" value=\""+weight_percent+"\" />";
 				htmlTable+="	</td>";
 				htmlTable+="</tr>";
 					
 				 
 			});
 			$("#formListAppraisalCriteria").html(htmlTable);
+			var getSelectionStart = function (o) {
+				if (o.createTextRange) {
+					var r = document.selection.createRange().duplicate()
+					r.moveEnd('character', o.value.length)
+					if (r.text == '') return o.value.length
+					return o.value.lastIndexOf(r.text)
+				} else return o.selectionStart
+			};
+			jQuery('.numberOnly').keypress(function (evt) { 
+				console.log("Keypress");
+				 var charCode = (evt.which) ? evt.which : event.keyCode;
+				 var number = this.value.split('.');
+				 if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+				    return false;
+				 }
+				    //just one dot
+				 if(number.length>1 && charCode == 46){
+				    return false;
+				 }
+				    //get the carat position
+				 var caratPos = getSelectionStart(this);
+				 var dotPos = this.value.indexOf(".");
+				 if( caratPos > dotPos && dotPos>-1 && (number[1].length > 1)){
+				    return false;
+				 }
+				 return true;
+			});
 								
 		}
 	});

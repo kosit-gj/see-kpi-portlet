@@ -860,22 +860,32 @@ $(document).ready(function() {
 	
 	
 	
-	$(".numberOnly").keydown(function (e) {
-		        // Allow: backspace, delete, tab, escape, enter and .
-			
-		        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-		             // Allow: Ctrl+A, Command+A
-		            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
-		             // Allow: home, end, left, right, down, up
-		            (e.keyCode >= 35 && e.keyCode <= 40)) {
-		                 // let it happen, don't do anything
-		                 return;
-		        }
-		        // Ensure that it is a number and stop the keypress
-		        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-		            e.preventDefault();
-		        }
-		});
+	var getSelectionStart = function (o) {
+		if (o.createTextRange) {
+			var r = document.selection.createRange().duplicate()
+			r.moveEnd('character', o.value.length)
+			if (r.text == '') return o.value.length
+			return o.value.lastIndexOf(r.text)
+		} else return o.selectionStart
+	};
+	jQuery('.numberOnly').keypress(function (evt) { 
+		 var charCode = (evt.which) ? evt.which : event.keyCode;
+		 var number = this.value.split('.');
+		 if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+		    return false;
+		 }
+		    //just one dot
+		 if(number.length>1 && charCode == 46){
+		    return false;
+		 }
+		    //get the carat position
+		 var caratPos = getSelectionStart(this);
+		 var dotPos = this.value.indexOf(".");
+		 if( caratPos > dotPos && dotPos>-1 && (number[1].length > 1)){
+		    return false;
+		 }
+		 return true;
+	});
 	
 	
 	//FILE IMPORT MOBILE START
