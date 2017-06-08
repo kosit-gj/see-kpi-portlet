@@ -327,12 +327,14 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 				<div class="ibox-content breadcrumbs2">
 					<div class="row-fluid p-t-xxs">
 						<div id="drop_down_list_year" class="form-group pull-left span2"
-							style="margin-left: 5px"></div>
+							style="margin-left: 5px">
+							<select class="input span12 m-b-n" ></select>
+							</div>
 						<div id="drop_down_list_month" class="form-group pull-left span2"
-							style="margin-left: 5px"></div>
+							style="margin-left: 5px"><select class="input span12 m-b-n" ></select></div>
 						<div id="drop_down_list_appraisal_level"
 							class="form-group pull-left span2" style="margin-left: 5px">
-
+							<select class="input span12 m-b-n" ></select>
 						</div>
 						<div class="form-group pull-left span2" style="margin-left: 5px">
 							<input data-toggle="tooltip" data-placement="top"
@@ -341,14 +343,15 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							<input class="form-control input-sm" id="position_id"
 								name="position_id" value="" type="hidden">
 						</div>
-						<div class="form-group pull-left span4" style="margin-left: 5px">
+						<div class="form-group pull-left span2" style="margin-left: 5px">
 							<input data-toggle="tooltip" data-placement="top"
 								title="Employee Name" class="span12 m-b-n ui-autocomplete-input"
 								placeholder="Employee Name" id="emp_name" name="emp_name"
 								type="text"> <input class="form-control input-sm"
 								id="emp_name_id" name="emp_name_id" value="" type="hidden">
 						</div>
-						<div id="dis-non" class="form-group pull-left span1" style="margin-left: 5px;">  </div>
+<!-- 						<div id="dis-non" class="form-group pull-left span1" style="margin-left: 5px;">  </div> -->
+						<div class="form-group pull-right m-b-none">
 						<div class="form-group pull-right m-b-none ">
 							<button id="btn_import" type="button" data-target="#ModalImport"
 								data-toggle="modal" class="btn btn-success btn-sm "
@@ -368,9 +371,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 						<div class="form-group pull-right m-b-none ">
 							<button type="button" name="btnSearchAdvance"
 								id="btnSearchAdvance" class="btn btn-info input-sm "
-								style="margin-left: 5px">
+								style="margin-left: 0px">
 								<i class="fa fa-search"></i>&nbsp;Search
 							</button>
+						</div>
 						</div>
 
 					</div>
