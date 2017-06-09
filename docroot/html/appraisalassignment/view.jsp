@@ -441,7 +441,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									</div>
 									<div id="periodArea" class="form-group pull-left span2"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select disabled='disabled' data-toggle="Period" title="Period"
+										<select data-toggle="tooltip" disabled='disabled' data-toggle="Period" title="Period"
 											class="input form-control input-sm" id="period_id" name="period_id">
 								
 											<option value=""></option>
@@ -450,13 +450,13 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								</div>
 								<div id="empNameArea" class="form-group pull-left span2"
 									style="margin-left: 5px; margin-bottom: 3px;">
-									<input type="text" class="form-control input-sm span12 "
-										placeholder="Emp Name" id="empName">
+									<input data-toggle="tooltip" type="text" class="form-control input-sm span12 "
+										placeholder="Emp Name" id="empName" data-original-title="Employee Name">
 								</div>
 								<div id="PositionArea" class="form-group pull-left span2"
 									style="margin-left: 5px; margin-bottom: 3px;">
-									<input type="text" id="Position" placeholder="Position"
-										class="form-control input-sm span12">
+									<input data-toggle="tooltip" type="text" id="Position" placeholder="Position"
+										class="form-control input-sm span12" data-original-title="Position">
 								</div>
 							
 								<div class="form-group pull-right m-b-none "

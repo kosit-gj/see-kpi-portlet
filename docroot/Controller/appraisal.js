@@ -323,7 +323,7 @@ var dropDrowYearListFn = function(nameArea,id){
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
-			//var data=['ทดลองงาน','ประจำปี','รักษาการ'];
+			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['appraisal_year']){
@@ -746,7 +746,7 @@ var dropDrowAsignToEditFn = function(paramStageID){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{"stage_id":paramStageID},
 		success:function(data){
-			//var data=['ทดลองงาน','ประจำปี','รักษาการ'];
+			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['to_appraisal_level_id']){
@@ -768,7 +768,7 @@ var dropDrowActionEditFn = function(stage_id,to_appraisal_level_id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{"stage_id":stage_id,"to_appraisal_level_id":to_appraisal_level_id},
 		success:function(data){
-			//var data=['ทดลองงาน','ประจำปี','รักษาการ'];
+			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			if(data==''){
 				$("#btnSubmit").attr("disabled","disabled");
 			}else{
@@ -801,7 +801,7 @@ var appraisalTypeFn = function(nameArea,id){
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
-			//var data=['ทดลองงาน','ประจำปี','รักษาการ'];
+			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			var htmlOption="";
 			
 			htmlOption+="<option  value=''>All Appraisal Type</option>";
@@ -880,7 +880,7 @@ var saveAppraisalFn = function(){
 			}else if(data['status']==400){
 				
 				
-				callFlashSlideInModal(validationAppraisalFn(data),"#information","error");    
+				callFlashSlideInModal(validationAppraisalFn(data),"#information","error"); 
 			}
 		}
 	});
@@ -915,7 +915,7 @@ var calculateBunusFn= function(){
 //				
 //			}else if(data['status']==400){
 //				
-//				callFlashSlide(validationFn(data),"error");  
+//				callFlashSlide(validationFn(data),"error");Â Â 
 //				
 //			}
 //		}
@@ -1079,5 +1079,12 @@ $(document).ready(function() {
 		
 		}
 	}
+	
+	//binding tooltip start
+	 $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
+	 $('[data-toggle="tooltip"]').tooltip({
+		 html:true
+	 });
+	//binding tooltip end
 });
 

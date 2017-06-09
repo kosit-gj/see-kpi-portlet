@@ -350,20 +350,20 @@ margin-bottom:1px;
 								<div class="row-fluid">
 							
 								<div class="form-group pull-left span2" style="margin-left: 5px">
-									<select data-toggle="tooltip" title=""
+									<select data-toggle="tooltip" title="" data-original-title="Year"
 										class="input form-control input-sm span12" id="AppraisalYear"
 										name="AppraisalYear">
 									</select>
 								</div>
 								<div class="form-group pull-left span2" style="margin-left: 5px">
-									<select data-toggle="tooltip" title=""
+									<select data-toggle="tooltip" title="" data-original-title="Period"
 										class="input form-control input-sm span12" id="AppraisalPeriod"
 										name="AppraisalPeriod">
 										<option>All Appraisal Period</option>
 									</select>
 								</div>
 								<div class="form-group pull-left span2" style="margin-left: 5px">
-									<select data-toggle="tooltip" title=""
+									<select data-toggle="tooltip" title="" data-original-title="Appraisal Level"
 										class="input form-control input-sm span12" id="AppraisalLevel"
 										name="AppraisalLevel">
 										<option>All Appraisal Level</option>
@@ -375,31 +375,31 @@ margin-bottom:1px;
 									</select>
 								</div>
 								<div class="form-group pull-left span2" style="margin-left: 5px">
-									<select data-toggle="tooltip" title=""
+									<select data-toggle="tooltip" title="" data-original-title="Department"
 										class="input form-control input-sm span12" id="Department"
 										name="Department">
 										<option>All Department</option>
 									</select>
 								</div>
 								<div class="form-group pull-left span2" style="margin-left: 5px">
-									<select data-toggle="tooltip" title=""
+									<select data-toggle="tooltip" title="" data-original-title="Section"
 										class="input form-control input-sm span12" id="Section"
 										name="Section">
 										<option value=''>All Section</option>
 									</select>
 								</div>
 								<div id="" class="form-group pull-left span2" style="margin-left: 5px">
-									<input data-toggle="tooltip" title=""
+									<input data-toggle="tooltip" title="" data-original-title="Position"
 										class="form-control input-sm searchAdvanceText span12"
 										placeholder="Position" type="text" id="Position" name="Position">
 								</div>
 								<div id="" class="form-group pull-left span2" style="margin-left: 5px">
-									<input data-toggle="tooltip" title=""
+									<input data-toggle="tooltip" title="" data-original-title="Employee Name"
 										class="form-control input-sm searchAdvanceText span12"
 										placeholder="Employee Name" type="text" id="EmpName" name="EmpName">
 								</div>
 								<div class="form-group pull-left span2" style="margin-left: 5px">
-									<select data-toggle="tooltip" title=""
+									<select data-toggle="tooltip" title="" data-original-title="Appraisal Type"
 										class="input form-control input-sm span12" id="appraisalType"
 										name="appraisalType">
 							

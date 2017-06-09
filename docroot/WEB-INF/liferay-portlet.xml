@@ -13,7 +13,7 @@
 	                                     
 	                                                                                                 
 	<portlet>                                    
-		<portlet-name>appraisal</portlet-name> 
+		<portlet-name>appraisal</portlet-name>  
 		<icon>/icon.png</icon>             
                    	        
 	 	<!-- include file  start-->  
@@ -24,8 +24,8 @@
 		<header-portlet-css>/css/jquery-ui.css</header-portlet-css> 
 		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
 	   	<header-portlet-css>/css/tywMain.css</header-portlet-css>
-	    <header-portlet-css>/css/appraisal.css</header-portlet-css>       
-	         
+	    <header-portlet-css>/css/appraisal.css</header-portlet-css>
+
 	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
@@ -91,11 +91,11 @@
 	    <header-portlet-css>/css/appraisal-assignment.css</header-portlet-css>  
 	    <header-portlet-css>/js/Fixed-Header-Table-master/css/defaultTheme.css</header-portlet-css>  
   
-	         
+	                        
 	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/plugins/slimscroll/jquery.slimscroll.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/Fixed-Header-Table-master/jquery.fixedheadertable.min.js</footer-portlet-javascript>
@@ -129,11 +129,13 @@
 		<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
 		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
 	    <header-portlet-css>/css/tywMain.css</header-portlet-css>
-	    <header-portlet-css>/css/databaseContention.css</header-portlet-css>           
+	    <header-portlet-css>/css/databaseContention.css</header-portlet-css>      
+		                    
 	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
-	     <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
+	    
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
@@ -158,9 +160,9 @@
 		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
 		<header-portlet-css>/css/tywMain.css</header-portlet-css>
 	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
-	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
-	    <footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>	     
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>  
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
@@ -178,11 +180,10 @@
 		<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
 		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
 	    <header-portlet-css>/css/tywMain.css</header-portlet-css>
-        <footer-portlet-javascript>/js/jquery3.1.1.js</footer-portlet-javascript>
-	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
-	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>	     
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>  
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>  
@@ -200,10 +201,10 @@
 		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
 	    <header-portlet-css>/css/tywMain.css</header-portlet-css>
         <footer-portlet-javascript>/js/jquery3.1.1.js</footer-portlet-javascript>
-	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
-	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>	     
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>  
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>  
@@ -211,7 +212,7 @@
 		<css-class-wrapper>cds-result-portlet</css-class-wrapper>
 	</portlet>  
 	<portlet> 
-		<portlet-name>appraisal-data</portlet-name> 
+		<portlet-name>appraisal-data</portlet-name>  
 		<icon>/icon.png</icon>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
@@ -221,10 +222,10 @@
 		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
 	    <header-portlet-css>/css/tywMain.css</header-portlet-css>
         <footer-portlet-javascript>/js/jquery3.1.1.js</footer-portlet-javascript>
-	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
-	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>	     
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>  
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>  
@@ -248,10 +249,12 @@
 	   	
 	    <header-portlet-css>/css/threshould.css</header-portlet-css>    
 	       
+                    
 	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+	    
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
@@ -277,10 +280,12 @@
 	   	
 	    <header-portlet-css>/css/appraisal-level.css</header-portlet-css>    
 	       
+                    
 	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+	    
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
@@ -308,10 +313,12 @@
 	   	
 	    <header-portlet-css>/css/appraisal-grade.css</header-portlet-css>    
 	       
+                    
 	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+	    
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
@@ -339,10 +346,12 @@
 	    	
 	    <header-portlet-css>/css/appraisal-period.css</header-portlet-css>    
 	         
+                    
 	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
@@ -368,10 +377,12 @@
 	   	
 	    <header-portlet-css>/css/systemConfiguration.css</header-portlet-css>    
 	       
+                    
 	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+	    
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
@@ -399,10 +410,12 @@
 	   	
 	    <header-portlet-css>/css/perspective.css</header-portlet-css>    
 	       
+                    
 	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+	    
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
@@ -429,10 +442,12 @@
 	   	  
 	    <header-portlet-css>/css/uom.css</header-portlet-css>     
 	                
+	                        
 	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+	    
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
@@ -460,10 +475,12 @@
 	   	
 	    <header-portlet-css>/css/appraisalStructure.css</header-portlet-css>    
 	       
+                    
 	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+	    
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
@@ -680,7 +697,7 @@
 		 <footer-portlet-javascript>/Controller/table.js</footer-portlet-javascript>
 		 <footer-portlet-javascript>/Controller/mainJs.js</footer-portlet-javascript>
 	    <!-- chart framework end -->
-		  
+		   
 		
 		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 

@@ -224,7 +224,7 @@ var listErrorFn =function(data){
 //-------------------  Drop Down List Appraisal Level FN END ---------------------
 
 $(document).ready(function() {
-	$('[data-toggle="tooltip"]').tooltip();
+	
 	var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
@@ -469,5 +469,11 @@ $(document).ready(function() {
 		return false;
 	}
 	
+	//binding tooltip start
+	 $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
+	 $('[data-toggle="tooltip"]').tooltip({
+		 html:true
+	 });
+	//binding tooltip end
 });
 

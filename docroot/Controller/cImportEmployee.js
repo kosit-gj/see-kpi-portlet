@@ -47,9 +47,9 @@ var listErrorFn =function(data){
 		
 		if(data[index]['employee_code']!= undefined || data[index]['employee_code']==null){
 			if(data[index]['employee_code']== null){//The employee code field is null
-				errorData+="<font color='red'>*</font> employee code : null ↓<br>";
+				errorData+="<font color='red'>*</font> employee code : null â†“<br>";
 			}else{
-				errorData+="<font color='red'>*</font> employee code : "+data[index]['employee_code']+"  ↓<br>";}
+				errorData+="<font color='red'>*</font> employee code : "+data[index]['employee_code']+"  â†“<br>";}
 		}
 		if(data[index]['errors']['working_start_date_yyyy_mm_dd']!=undefined){
 			errorData+="<font color='red'>*</font> "+data[index]['errors']['working_start_date_yyyy_mm_dd']+"<br>";
@@ -248,7 +248,7 @@ var searchAdvanceFn = function (Department,Section,Position,EmployeeName) {
 
 var listImportEmployeeFn = function(data) {
 	//alert("listCommonDataSetFn");
-	//clear ฟังก์ชัน  data ข้อมูลเก่าทิ้ง 
+	//clear à¸Ÿà¸±à¸‡à¸�à¹Œà¸Šà¸±à¸™  data à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹€à¸�à¹ˆà¸²à¸—à¸´à¹‰à¸‡ 
 	$("#listEmployee").empty();
 	var htmlAppraisalLevel= "";
 	var htmlTable = "";
@@ -286,7 +286,7 @@ var listImportEmployeeFn = function(data) {
 		htmlAppraisalLevel="";
 	});
 	
-	//alert("ผ่าน");
+	//alert("à¸œà¹ˆà¸²à¸™");
 	$("#listEmployee").html(htmlTable);
 	
 	//function popover
@@ -349,7 +349,7 @@ var listImportEmployeeFn = function(data) {
 				    	 
 					     if(data['status']==200){
 					    	 
-					       callFlashSlide("Delete Successfully.");  
+					       callFlashSlide("Delete Successfully.");
 					       getDataFn($("#pageNumber").val(),$("#rpp").val());
 					       clearFn();
 					       $("#confrimModal").modal('hide');
@@ -359,7 +359,7 @@ var listImportEmployeeFn = function(data) {
 					    	 callFlashSlide(data['data'],"error");
 					    	 //backToTopFn();
 					    	}
-					     	  
+					     	
 					 }
 				});
 				
@@ -401,7 +401,7 @@ var listAppraisalLevel = function() {
 //			htmlTable+="type='checkbox' value=\all\"> <label> </label>";
 //			htmlTable+="</div>";
 //			htmlTable+="</td>";
-//			htmlTable+="<td style=\"vertical-align:middle\">ทุกระดับ</td>";
+//			htmlTable+="<td style=\"vertical-align:middle\">à¸—à¸¸à¸�à¸£à¸°à¸”à¸±à¸š</td>";
 //			htmlTable+="</tr>";
 
 		}
@@ -610,8 +610,8 @@ var dropDownEmpType = function(){
 	html+="<select data-toggle=\"tooltip\" title=\"Employee Type\" class=\"input span12 m-b-n\" id=\"from_emp_type\" name=\"from_emp_type\" >";
 	
 	
-	html+="<option value=\"รายวัน\" selected>รายวัน</option>";
-	html+="<option value=\"รายเดือน\">รายเดือน</option>";
+	html+="<option value=\"à¸£à¸²à¸¢à¸§à¸±à¸™\" selected>à¸£à¸²à¸¢à¸§à¸±à¸™</option>";
+	html+="<option value=\"à¸£à¸²à¸¢à¹€à¸”à¸·à¸­à¸™\">à¸£à¸²à¸¢à¹€à¸”à¸·à¸­à¸™</option>";
 	html+="</select>";
 	$("#drop_down_emp_typy").html(html);
 };
@@ -623,7 +623,7 @@ var backToTopFn = function(){
 }
 
 $(document).ready(function() {
-	$('[data-toggle="tooltip"]').tooltip();
+
 	var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
@@ -689,10 +689,10 @@ $(document).ready(function() {
 //		});   
 		 
 	});  
-    $(".from_data_role").click(function(){  // เมื่อคลิก checkbox  ใดๆ  
-        if($(this).prop("checked")==true){ // ตรวจสอบ property  การ ของ   
+    $(".from_data_role").click(function(){  // à¹€à¸¡à¸·à¹ˆà¸­à¸„à¸¥à¸´à¸� checkbox  à¹ƒà¸”à¹†  
+        if($(this).prop("checked")==true){ // à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸š property  à¸�à¸²à¸£ à¸‚à¸­à¸‡   
             var indexObj=$(this).index(".from_data_role"); //   
-            $(".from_data_role").not(":eq("+indexObj+")").prop( "checked", false ); // ยกเลิกการคลิก รายการอื่น  
+            $(".from_data_role").not(":eq("+indexObj+")").prop( "checked", false ); // à¸¢à¸�à¹€à¸¥à¸´à¸�à¸�à¸²à¸£à¸„à¸¥à¸´à¸� à¸£à¸²à¸¢à¸�à¸²à¸£à¸­à¸·à¹ˆà¸™  
         }  
     });  
 	$("#btnEmpSubmit").click(function(){
@@ -960,6 +960,12 @@ $(document).ready(function() {
 		return false;
 	}
 	
+	//binding tooltip start
+	 $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
+	 $('[data-toggle="tooltip"]').tooltip({
+		 html:true
+	 });
+	//binding tooltip end
 
 		
 

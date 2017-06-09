@@ -370,6 +370,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					<div class="row-fluid p-t-xxs">
 						<div class="form-inline">
 							<div id="drop_down_list_appraisal_level" class="form-group pull-left span3" style="margin-left: 5px">
+							<select style="cursor: pointer;" data-original-title="Appraisal Level" data-toggle="tooltip" title="" data-placement="top" class="input span12 m-b-n" id="app_lv" name="app_lv"><option selected="" value="">All Appraisal Level</option></select>
 							</div>
 							<div class="form-group pull-left span6" style="margin-left: 5px">
 								<input data-toggle="tooltip"  title="CDS Name"

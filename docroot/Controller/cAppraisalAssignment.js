@@ -66,7 +66,7 @@ var validationAssignmentFn = function(data){
 }
 
 
-//Click แล้ว ฝังข้อมูล
+//Click à¹�à¸¥à¹‰à¸§ à¸�à¸±à¸‡à¸‚à¹‰à¸­à¸¡à¸¹à¸¥
 var removeEmbedParamCheckboxAppraisalItem = function(id){
 	var id = id.split("-"); 
 	var appraisal_id=id[1];
@@ -81,7 +81,7 @@ var embedParamCheckboxAppraisalItem = function(id){
 	var structure_id=id[2];
 	var count = 0;
 	$.each($(".embed_appraisal_id-"+structure_id).get(),function(index,indexEnry){
-	//ถ้า id ที่วน == id ที่มี	
+	//à¸–à¹‰à¸² id à¸—à¸µà¹ˆà¸§à¸™ == id à¸—à¸µà¹ˆà¸¡à¸µ	
 		//console.log($(indexEnry).val());
 		if($(indexEnry).val()==appraisal_id){
 			count+=1;
@@ -377,25 +377,25 @@ var getDataFn = function(page,rpp) {
 };
 //Delete
 var deleteFn = function(id) {
-	 $.ajax({
-      url:restfulURL+"/kpi_api/public/appraisal_assignment/"+id,
-      type:"DELETE",
-      dataType:"json",
+	$.ajax({
+		url:restfulURL+"/kpi_api/public/appraisal_assignment/"+id,
+		type:"DELETE",
+		dataType:"json",
 	  headers:{Authorization:"Bearer "+tokenID.token},
-	  success:function(data){ 
+	  success:function(data){ 
 		if(data['status']==200){
 			
-			   callFlashSlide("Delete Successfully.");       
-		       getDataFn($("#pageNumber").val(),$("#rpp").val());
+			   callFlashSlide("Delete Successfully.");
+			   getDataFn($("#pageNumber").val(),$("#rpp").val());
 			   $("#confrimModal").modal('hide');
 			   
 		}else if(data['status']=="400"){
 			
-			callFlashSlide(validationFn(data),"error");  
+			callFlashSlide(validationFn(data),"error");
 			
 		}
-     }
-   });
+		}
+});
 };
 //Embed Parameter 
 var embedParam = function(id){
@@ -767,9 +767,9 @@ var actionUpdateAssignmentFn = function(){
 		success:function(data){
 			
 			if(data['status']==200){
-				   //callFlashSlide("Updated."); 
-				   callFlashSlideInModal("Updated","#information");      
-			       getDataFn($("#pageNumber").val(),$("#rpp").val());
+				   //callFlashSlide("Updated.");Â 
+				   callFlashSlideInModal("Updated","#information");
+			       getDataFn($("#pageNumber").val(),$("#rpp").val());
 				   $("#ModalAssignment").modal('hide');
 				   $("#action").val("add");
 
@@ -940,7 +940,7 @@ var actionAssignmentFn = function(param){
 				   
 				   if(param !="saveAndAnother"){
 					   callFlashSlide("Insert Successfully.");
-				       getDataFn($("#pageNumber").val(),$("#rpp").val());
+					   getDataFn($("#pageNumber").val(),$("#rpp").val());
 					   $("#ModalAssignment").modal('hide');
 					   $("#action").val("add");		 	    
 					}else{
@@ -954,8 +954,8 @@ var actionAssignmentFn = function(param){
 				   
 				   
 			}else if(data['status']=="400"){
-				//callFlashSlideInModal(validationFn(data),"#information","error");  
-				callFlashSlideInModal(validationAssignmentFn(data),"#information","error");  
+				//callFlashSlideInModal(validationFn(data),"#information","error");Â Â 
+				callFlashSlideInModal(validationAssignmentFn(data),"#information","error");
 				return false;
 				
 			}
@@ -1083,7 +1083,7 @@ var appraisalTypeFn = function(nameArea,id){
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
-			//var data=['ทดลองงาน','ประจำปี','รักษาการ'];
+			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['appraisal_type_id']){
@@ -1099,7 +1099,7 @@ var appraisalTypeFn = function(nameArea,id){
 }
 
 var periodFrequencyFn = function(nameArea){
-//	var data=['ทุกเดือน','ทุก 3 เดือน','ทุก 6 เดือน','ทุก 12 เดือน'];
+//	var data=['à¸—à¸¸à¸�à¹€à¸”à¸·à¸­à¸™','à¸—à¸¸à¸� 3 à¹€à¸”à¸·à¸­à¸™','à¸—à¸¸à¸� 6 à¹€à¸”à¸·à¸­à¸™','à¸—à¸¸à¸� 12 à¹€à¸”à¸·à¸­à¸™'];
 //	var htmlOption="";
 //	$.each(data,function(index,indexEntry){
 //		htmlOption+="<option>"+indexEntry+"</option>";
@@ -1120,7 +1120,7 @@ var periodFrequencyFn = function(nameArea){
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
-			//var data=['ทดลองงาน','ประจำปี','รักษาการ'];
+			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
 			
@@ -1166,10 +1166,10 @@ var dropDrowPeriodFn = function(paramPeriod,paramAssignFrequency){
 //	
 //	if(paramAssignFrequency==1){
 //
-//		htmlOption+="<option value=''>ทุกรอบการประเมิน</option>";
+//		htmlOption+="<option value=''>à¸—à¸¸à¸�à¸£à¸­à¸šà¸�à¸²à¸£à¸›à¸£à¸°à¹€à¸¡à¸´à¸™</option>";
 //	}else{
 //		for(var i=1;i<=period;i++){	
-//			htmlOption+="<option value="+i+">รอบการประเมินที่ "+i+"</option>";
+//			htmlOption+="<option value="+i+">à¸£à¸­à¸šà¸�à¸²à¸£à¸›à¸£à¸°à¹€à¸¡à¸´à¸™à¸—à¸µà¹ˆ "+i+"</option>";
 //		}
 //	}
 //	$("#period").html(htmlOption);
@@ -1190,7 +1190,7 @@ var dropDrowPeriodFn = function(paramPeriod,paramAssignFrequency){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{"appraisal_year":$("#YearList").val(),"frequency_id":$("#periodFrequency").val()},
 		success:function(data){
-			//var data=['ทดลองงาน','ประจำปี','รักษาการ'];
+			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['period_id']){
@@ -1229,7 +1229,7 @@ var dropDrowAsignToFn = function(nameArea){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{"appraisal_level_id":$("#embed_appraisal_level_id").val()},
 		success:function(data){
-			//var data=['ทดลองงาน','ประจำปี','รักษาการ'];
+			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['to_appraisal_level_id']){
@@ -1254,7 +1254,7 @@ var dropDrowAsignToEditFn = function(paramStageID){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{"stage_id":paramStageID},
 		success:function(data){
-			//var data=['ทดลองงาน','ประจำปี','รักษาการ'];
+			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			if(data=="" || data==null || data==[]){
 				
 				$("#btnSubmit").attr("disabled","disabled");	
@@ -1295,7 +1295,7 @@ var dropDrowActionFn = function(paramStageID,nameArea){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{"stage_id":paramStageID},
 		success:function(data){
-			//var data=['ทดลองงาน','ประจำปี','รักษาการ'];
+			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['stage_id']){
@@ -1322,7 +1322,7 @@ var dropDrowActionEditFn = function(paramStageID,paramToAppraisalLevel){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{"stage_id":paramStageID,"to_appraisal_level_id":paramToAppraisalLevel},
 		success:function(data){
-			//var data=['ทดลองงาน','ประจำปี','รักษาการ'];
+			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['stage_id']){
@@ -1341,7 +1341,7 @@ var dropDrowActionEditFn = function(paramStageID,paramToAppraisalLevel){
 
 
 var periodFn = function(nameArea){
-//	var data=['ทุกเดือน','ทุก 3 เดือน','ทุก 6 เดือน','ทุก 12 เดือน'];
+//	var data=['à¸—à¸¸à¸�à¹€à¸”à¸·à¸­à¸™','à¸—à¸¸à¸� 3 à¹€à¸”à¸·à¸­à¸™','à¸—à¸¸à¸� 6 à¹€à¸”à¸·à¸­à¸™','à¸—à¸¸à¸� 12 à¹€à¸”à¸·à¸­à¸™'];
 //	var htmlOption="";
 //	$.each(data,function(index,indexEntry){
 //		htmlOption+="<option>"+indexEntry+"</option>";
@@ -1365,7 +1365,7 @@ var periodFn = function(nameArea){
 			"frequency_id":$("#periodFrequency").val()
 		},
 		success:function(data){
-			//var data=['ทดลองงาน','ประจำปี','รักษาการ'];
+			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['period_id']){
@@ -1989,7 +1989,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	$("#assignFrequency").change(function(){
 		dropDrowPeriodFn($("#periodFrequency").val(),$(this).val())
 	});
-	//htmlOption+="<option value="+i+">รอบการประเมิน"+i+"</option>";
+	//htmlOption+="<option value="+i+">à¸£à¸­à¸šà¸�à¸²à¸£à¸›à¸£à¸°à¹€à¸¡à¸´à¸™"+i+"</option>";
 	
 	
 	//Auto complete Start
@@ -2230,7 +2230,12 @@ $(window).on('resize',function(){
 });
 //check Orientation End
 
-
+//binding tooltip start
+$('[data-toggle="tooltip"]').css({"cursor":"pointer"});
+$('[data-toggle="tooltip"]').tooltip({
+	 html:true
+});
+//binding tooltip end
 
 
 });

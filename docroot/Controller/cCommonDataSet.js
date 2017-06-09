@@ -270,7 +270,7 @@ var listCommonDataSetFn = function(data) {
 				    	 
 					     if(data['status']==200){
 					    	 
-					       callFlashSlide("Delete Successfully.");  
+					       callFlashSlide("Delete Successfully.");
 					       getDataFn($("#pageNumber").val(),$("#rpp").val());
 					       clearFn();
 					       $("#confrimModal").modal('hide');
@@ -381,8 +381,8 @@ var insertFn = function (param) {
 				   if(param !="saveAndAnother"){
 					   //alert("!saveAndAnother" );
 					   callFlashSlide("Insert Successfully.");
-				       getDataFn($(".pagination .active").attr( "data-lp" ),$("#rpp").val());
-				       clearFn();
+					   getDataFn($(".pagination .active").attr( "data-lp" ),$("#rpp").val());
+					   clearFn();
 				 	   $('#ModalCommonData').modal('hide');
 					}else{
 						//alert("saveAndAnother" );
@@ -414,9 +414,13 @@ var dropDownListAppraisalLevel = function(id,inputId){
 	//id = f_app_lv
 	//id = app_lv
 	var html="";
-	html+="<select  data-toggle=\"tooltip\" title=\"Appraisal Level\" data-placement='top' class=\"input span12 m-b-n\" id=\""+inputId+"\" name=\""+inputId+"\">";
+	//html+="<select  style='cursor: pointer;' data-original-title='Appraisal Level' data-toggle=\"tooltip\" title=\"Appraisal Level\" data-placement='top' class=\"input span12 m-b-n\" id=\""+inputId+"\" name=\""+inputId+"\">";
 	if(inputId == "app_lv"){
-		html+="<option selected value=''>All Appraisal Level</option>";}
+		html+="<select  style='cursor: pointer;' data-original-title='Appraisal Level' data-toggle=\"tooltip\" title=\"Appraisal Level\" data-placement='top' class=\"input span12 m-b-n\" id=\""+inputId+"\" name=\""+inputId+"\">";
+		html+="<option selected value=''>All Appraisal Level</option>";
+		}else{
+			html+="<select    class=\"input span12 m-b-n\" id=\""+inputId+"\" name=\""+inputId+"\">";
+		}
 
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalLevel,
@@ -445,7 +449,7 @@ var dropDownListAppraisalLevel = function(id,inputId){
 var dropDownListConnection = function(id){
 	var html="";
 	
-	html+="<select data-toggle=\"tooltip\" title=\"Connection\" class=\"input span12 m-b-n\" id=\"f_connection\" name=\"f_connection\">";
+	html+="<select class=\"input span12 m-b-n\" id=\"f_connection\" name=\"f_connection\">";
 	//html+="<option  value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownConnection ,
@@ -535,9 +539,7 @@ var backToTopFn = function(){
 
 
 $(document).ready(function() {
-	$(function () {
-		  $('[data-toggle="tooltip"]').tooltip()
-		})
+
 		
 	var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
@@ -710,7 +712,12 @@ $(document).ready(function() {
 	});
 	
 	
-	
+	//binding tooltip start
+	 $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
+	 $('[data-toggle="tooltip"]').tooltip({
+		 html:true
+	 });
+	//binding tooltip end
 	
 	// ------------------- Common Data Set END -------------------
 	
