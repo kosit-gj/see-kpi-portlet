@@ -215,7 +215,6 @@ createGraphMonthlyVarianceFn = function(data){
 	                    show : true,
 	                    placement : 'outsideGrid'
 	                },                  
-
 	                axes : {                  
 	                    xaxis : {
 	                        renderer : $.jqplot.CategoryAxisRenderer,
