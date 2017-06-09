@@ -167,7 +167,14 @@ var setDataToTemplateFn = function(data,actionType){
 	}else{
 //		$(".btnAssignment").show();
 //		$("#btnSubmit").show();
-		$("#ModalAssignment").find('input[type="text"]').removeAttr('disabled'); 
+		
+		//Check TEXT Disabled Start
+		if($("#ModalAssignment").find('input[class="disabledInputText"]')){
+		}else{
+			$("#ModalAssignment").find('input[type="text"]').removeAttr('disabled'); 
+		}
+		//Check TEXT Disabled End
+
 		$("#ModalAssignment").find('input[type="checkbox"]').removeAttr('disabled'); 
 		
 		if(sessionStorage.getItem("is_coporate_kpi")==1){
@@ -305,6 +312,7 @@ var findOneFn = function(id,actionType){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			//console.log(data['head'].length);
+			
 			if(data['head'].length>0){
 				setDataToTemplateFn(data,actionType);
 				$("#ModalAssignment").modal();
@@ -1526,6 +1534,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 				app_url
 				weight_percent
 				*/
+
 				htmlTemplateQuantity+="<tr>";
 					htmlTemplateQuantity+="<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['appraisal_item_id']+"'></td>";
 					htmlTemplateQuantity+="<td style=\"width:25%\" class='id-"+indexEntry['structure_id']+"-appraisal_item_name' id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_name' style='padding-top:7px;'>"+indexEntry['appraisal_item_name']+"</td>";
@@ -1538,8 +1547,8 @@ var assignTemplateQuantityFn = function(structureName,data){
 							htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_start-"+i+"' class='id-"+indexEntry['structure_id']+"-score_start-"+i+" input form-control input-sm-small numberOnly' type='text'></td>";
 							htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_end-"+i+"'  class='id-"+indexEntry['structure_id']+"-score_end-"+i+" input form-control input-sm-small numberOnly' type='text'></td>";
 						}else{
-							htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_start-"+i+"'  disabled class='id-"+indexEntry['structure_id']+"-score_start-"+i+" input form-control input-sm-small numberOnly' type='text'></td>";
-							htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_end-"+i+"'  disabled class='id-"+indexEntry['structure_id']+"-score_end-"+i+" input form-control input-sm-small numberOnly' type='text'></td>";
+							htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_start-"+i+"'  disabled class='id-"+indexEntry['structure_id']+"-score_start-"+i+" input form-control input-sm-small numberOnly disabledInputText' type='text'></td>";
+							htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_end-"+i+"'  disabled class='id-"+indexEntry['structure_id']+"-score_end-"+i+" input form-control input-sm-small numberOnly disabledInputText' type='text'></td>";
 						}
 					}
 					//alert(sessionStorage.getItem("is_coporate_kpi")); 
@@ -1648,7 +1657,8 @@ var calculationGrandTotalFn = function(id){
 		var apprailsal_item_id1=dataId1[1];
 		var structure_id1=dataId1[2];
 		var totalWeigthQuantity=0;
-		$.each($(".total_weigth_quantity").get(),function(index,indexEntry){
+		//$.each($(".total_weigth_quantity").get(),function(index,indexEntry){
+		$.each($(".id-"+structure_id1+"-weight").get(),function(index,indexEntry){
 			
 			var dataId=this.id.split("-");;
 			var apprailsal_item_id=dataId[1];
@@ -1657,7 +1667,7 @@ var calculationGrandTotalFn = function(id){
 			//console.log("structure_id1="+structure_id1);
 			//console.log("structure_id="+structure_id);
 			
-			if(apprailsal_item_id==apprailsal_item_id1 && structure_id==structure_id1){
+			//if(apprailsal_item_id==apprailsal_item_id1 && structure_id==structure_id1){
 				
 				console.log(indexEntry);
 			
@@ -1688,7 +1698,7 @@ var calculationGrandTotalFn = function(id){
 					}
 				}
 			
-			}
+			//}
 		});
 		
 	});
@@ -1702,18 +1712,19 @@ var calculationGrandTotalFn = function(id){
 	//End Default weight form Quality is 0%
 	//var total_weigth_quality=0;
 	$.each($(".embed_appraisal_id").get(),function(index,indexEntry){
-		var dataId1=this.id.split("-");;
+		var dataId1=this.id.split("-");
 		var apprailsal_item_id1=dataId1[1];
 		var structure_id1=dataId1[2];
 		var total_weigth_quality=0;
 		
 		
-			$.each($(".total_weigth_quality").get(),function(index,indexEntry){
+			//$.each($(".total_weigth_quality").get(),function(index,indexEntry){
+			$.each($(".id-"+structure_id1+"-weight").get(),function(index,indexEntry){
 				
 				var dataId=this.id.split("-");;
 				var apprailsal_item_id=dataId[1];
 				var structure_id=dataId[2];
-				if(apprailsal_item_id==apprailsal_item_id1 && structure_id==structure_id1){
+				//if(apprailsal_item_id==apprailsal_item_id1 && structure_id==structure_id1){
 					if($(indexEntry).val().trim()!="" && $("#id-"+apprailsal_item_id+"-"+structure_id+"-checkbox").prop("checked")==true){
 						total_weigth_quality+=(parseInt($(indexEntry).val()));
 						//alert(grandTotalWieght);
@@ -1740,7 +1751,7 @@ var calculationGrandTotalFn = function(id){
 							.css({"color":"#00CC00"});
 						}
 					}
-				}
+				//}
 				
 			});
 		
