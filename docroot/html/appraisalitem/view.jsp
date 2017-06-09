@@ -626,7 +626,7 @@ overflow-y: visible;
 									</div>
 									<div id="DepartmentArea" class="form-group pull-left span2"
 										style="margin-left: 5px">
-										<select data-toggle="tooltip" title="Flag 2"
+										<select data-toggle="tooltip" title="Department"
 											class="input form-control input-sm" id="department"
 											name="department">
 										</select>

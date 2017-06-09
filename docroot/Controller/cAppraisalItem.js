@@ -481,7 +481,7 @@ var dropDrowDepartmentFn = function(nameArea,id,defaultAll){
 		success:function(data){
 			var htmlOption="";
 			if(defaultAll==true){
-				htmlOption+="<option value=''>All DrowDepartment</option>";
+				htmlOption+="<option value=''>All Department</option>";
 			}
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['department_code']){
@@ -579,6 +579,7 @@ var listLevelForCopyFn = function(){
 $(document).ready(function(){
 	
 
+	 
 	var username = $('#user_portlet').val();
 	var password = $('#pass_portlet').val();
 	
@@ -703,4 +704,12 @@ $(document).ready(function(){
 		$(window).scrollTop(0);
 		$(".modal-body").scrollTop(0);
 	});
+	
+
+	//binding tooltip start
+	 $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
+	 $('[data-toggle="tooltip"]').tooltip({
+		 html:true
+	 });
+	//binding tooltip end
 });
