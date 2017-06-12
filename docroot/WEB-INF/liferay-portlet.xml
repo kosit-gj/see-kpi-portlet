@@ -356,7 +356,7 @@
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
-	    
+	     
 	    <footer-portlet-javascript>/Controller/appraisal-period.js</footer-portlet-javascript>
 	    <!-- include file  end--> 
 	         
@@ -365,7 +365,7 @@
 	<portlet>  
 		<portlet-name>System-Configurations</portlet-name>
 		<icon>/icon.png</icon>
-		  
+		 
 		<!-- include file  start-->
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
@@ -613,11 +613,11 @@
 	   	<header-portlet-css>/css/tywMain.css</header-portlet-css>
 		<header-portlet-css>/css/threshould.css</header-portlet-css>
 		
-		
-		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+		 
+	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/plugins/slimscroll/jquery.slimscroll.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.sparkline.min.js</footer-portlet-javascript>

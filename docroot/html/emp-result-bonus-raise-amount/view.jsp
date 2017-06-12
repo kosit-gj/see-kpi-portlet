@@ -100,7 +100,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 									<div id='' class="form-group pull-left span3"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Appraisal Year"
+										<select data-toggle="tooltip" data-original-title="Appraisal Type" title="Appraisal Year"
 											class="input form-control input-sm span12" id="dorpDownAppraisalYear"
 											name="dorpDownAppraisalYear">
 								
@@ -109,7 +109,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								
 									<div id="" class="form-group pull-left span3"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Bonus Period"
+										<select data-toggle="tooltip" data-original-title="Bonus Period" title="Bonus Period"
 											class="input form-control input-sm span12" id="dorpDownBonusPeriod"
 											name="dorpDownBonusPeriod">
 								
@@ -182,7 +182,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 									<div id='' class="form-group pull-left span3"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Appraisal Year"
+										<select data-toggle="tooltip" data-original-title="Appraisal Type"  title="Appraisal Year"
 											class="input form-control input-sm span12"
 											id="dorpDownRaiseAppraisalYear" id="dorpDownRaiseAppraisalYear">
 								
@@ -191,7 +191,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								
 									<div id="" class="form-group pull-left span3"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Salary Period"
+										<select data-toggle="tooltip" data-original-title="Salary Period"  title="Salary Period"
 											class="input form-control input-sm span12" id="dorpDownSalaryPeriod"
 											name="dorpDownSalaryPeriod">
 								
