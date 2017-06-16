@@ -271,7 +271,7 @@ var listImportEmployeeFn = function(data) {
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["department_name"]+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["section_name"]+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["position_name"]+"</td>";
-		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["position_group"]+"</td>";
+		//htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["position_group"]+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["chief_emp_code"]+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+htmlAppraisalLevel+"</td>";
 		//htmlTable += "<td class='objectCenter'>"+IsActive+"</td>";
