@@ -392,9 +392,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							<div class="ibox-content breadcrumbs2">
 					<div class="row-fluid p-t-xxs">
 						<div id="drop_down_department" class="form-group pull-left span3"
-							style="margin-left: 5px"></div>
+							style="margin-left: 5px"><select data-toggle="tooltip" title="Department" class="input span12 m-b-n" id="search_department" name="search_department"><option selected="" value="">All</option></select></div>
 						<div id="drop_down_section" class="form-group pull-left span3"
-							style="margin-left: 5px"></div>
+							style="margin-left: 5px"><select data-toggle="tooltip" title="Section" class="input span12 m-b-n" id="search_section" name="search_section"><option selected="" value="">All</option></select></div>
 
 						<div class="form-group pull-left span3" style="margin-left: 5px">
 							<input data-toggle="tooltip" title="Position"
