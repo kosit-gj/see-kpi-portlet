@@ -478,6 +478,7 @@ var updateFn = function () {
 
 //-------- Insert Role Start
 var insertRoleFn = function () {
+	var chackSelect =  false;
 	var emp =[];
 	var role = [];
 	$.each($(".selectEmpCheckbox").get(),function(index,indexEntry){
@@ -488,9 +489,11 @@ var insertRoleFn = function () {
 	$.each($(".from_data_role").get(),function(index,indexEntry){
 		if($(indexEntry).is(":checked")){
 			role.push($(indexEntry).val());
+			chackSelect = true;
 		}
 	});
-	
+	if (chackSelect == false){callFlashSlideInModal("<font color='red'>*</font> Please Select Appraisal level !!!","#information3"); return false;}
+
 		$.ajax({
 			url : restfulURL+restfulPathImportEmployee+"/role",
 			type : "PATCH",
@@ -609,9 +612,8 @@ var dropDownEmpType = function(){
 	var html="";
 	html+="<select data-toggle=\"tooltip\" title=\"Employee Type\" class=\"input span12 m-b-n\" id=\"from_emp_type\" name=\"from_emp_type\" >";
 	
-	
-	html+="<option value=\"à¸£à¸²à¸¢à¸§à¸±à¸™\" selected>à¸£à¸²à¸¢à¸§à¸±à¸™</option>";
-	html+="<option value=\"à¸£à¸²à¸¢à¹€à¸”à¸·à¸­à¸™\">à¸£à¸²à¸¢à¹€à¸”à¸·à¸­à¸™</option>";
+	html+="<option value=\"รายวัน\" selected>รายวัน</option>";
+	html+="<option value=\"รายเดือน\">รายเดือน</option>";
 	html+="</select>";
 	$("#drop_down_emp_typy").html(html);
 };
@@ -669,6 +671,23 @@ $(document).ready(function() {
 	$("#btn_add_role").click(function() {
 		clearFn();
 		$("#txtAssignEmpName").hide();
+		
+		var chackSelect =  false;
+		$(".btnModalClose").click();
+		$.each($(".selectEmpCheckbox").get(),function(index,indexEntry){
+			if($(indexEntry).is(":checked")){
+				chackSelect = true;
+				return false;
+			}
+		});
+		if (chackSelect == true){
+			listAppraisalLevel();
+			
+			$("#ModalRole").modal();
+			}
+		else{
+			callFlashSlide("Please Select Employee !!!");
+		}
 
 		//listAppraisalLevel();
 		

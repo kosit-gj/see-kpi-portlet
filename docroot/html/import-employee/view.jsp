@@ -47,7 +47,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 }
 
 .popover {
-	width: 208px;
+	width: 215px;
 }
 
 .aui .pagination {
@@ -413,8 +413,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								name="search_emp_id" value="" type="hidden">
 						</div>
 
-						<div class="form-group pull-right m-b-none ">
-							<button id="btn_add_role" type="submit" data-target="#ModalRole"
+						<div class="form-group pull-right m-b-none "> <!-- data-target="#ModalRole"  -->
+							<button id="btn_add_role" type="submit" 
 								data-toggle="modal" class="btn btn-primary btn-sm "
 								style="margin-left: 5px;">
 								&nbsp;<i class="fa fa-plus-square"></i>&nbsp;Role&nbsp;&nbsp;
@@ -779,8 +779,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					<button class="btn btn-success" type="button" id="btnRoldSubmit">Save</button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>
-<!-- 					<div class="alert alert-warning" id="information" -->
-<!-- 						style="display: none;"></div> -->
+					<div class="alert alert-warning" id="information3"
+						style="display: none;"></div>
 				</div>
 			</div>
 		</div>
