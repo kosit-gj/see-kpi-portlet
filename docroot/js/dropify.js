@@ -231,7 +231,7 @@ Dropify.prototype.onFileReady = function(event, previewable, src)
     if (this.errorsEvent.errors.length === 0) {
         this.setPreview(previewable, src);
     } else {
-        this.input.trigger(this.errorsEvent, [this]);
+        this.input.trigger(this.errorsEvent,[this]);
         for (var i = this.errorsEvent.errors.length - 1; i >= 0; i--) {
             var errorNamespace = this.errorsEvent.errors[i].namespace;
             var errorKey = errorNamespace.split('.').pop();
@@ -288,7 +288,7 @@ Dropify.prototype.setPreview = function(previewable, src)
 {
 	var fi = this.element; // GET THE FILE INPUT AS VARIABLE.
 
-    var totalFileSize = 0;
+//    var totalFileSize = 0;
     var fi_type=[];
     var fi_name="";
 
@@ -303,13 +303,13 @@ Dropify.prototype.setPreview = function(previewable, src)
             // totalFileSize = totalFileSize + fsize;
             fi_name += fi.files.item(i).name + "<br>";
             fi_type.push(fi.files.item(i).name.split(".")[1].toUpperCase());
-            console.log(fi.files.item(i).name.split(".")[fi.files.item(i).name.split(".").length-1].toUpperCase());
+            //console.log(fi.files.item(i).name.split(".")[fi.files.item(i).name.split(".").length-1].toUpperCase());
         }
     }
     //alert(fi_name);
-    console.log(this);
-    console.log(fi_name);
-    console.log(Array.from(new Set(fi_type)));
+//    console.log(this);
+//    console.log(fi_name);
+//    console.log(Array.from(new Set(fi_type)));
 	//console.log(this.file.name);
 	
     this.wrapper.removeClass('has-error').addClass('has-preview');
@@ -327,12 +327,18 @@ Dropify.prototype.setPreview = function(previewable, src)
 
         imgTag.appendTo(render);
     } else {
-    	$.each(Array.from(new Set(fi_type)),function(index,indexEntry){
-    		console.log(indexEntry);
-    	});
-    	console.log(render);
-    	$(render).append("<i class='dropify-font-file'/>");
-    	$(render).append("<span class='dropify-extension'>"+this.getFileType()+"</span>");
+//    	$.each(Array.from(new Set(fi_type)),function(index,indexEntry){
+//    		console.log(indexEntry);
+//    	});
+    	//console.log(Array.from(new Set(fi_type)).length);
+    	
+    	if(Array.from(new Set(fi_type)).length == 1){
+    		$(render).append("<i class='dropify-font-file'/>");
+        	$(render).append("<span class='dropify-extension'>"+this.getFileType()+"</span>");
+    	}else{
+    		$(render).append("<i class='fa fa-files-o'/>");
+        	$(render).append("<span class='dropify-extension'>"+"</span>");
+    	}
         //$('<i />').attr('class', 'dropify-font-file').appendTo(render);
         //$('<span class="dropify-extension" />').html(this.getFileType()).appendTo(render);
     	
@@ -378,14 +384,14 @@ Dropify.prototype.clearElement = function()
 {
     if (this.errorsEvent.errors.length === 0) {
         var eventBefore = $.Event("dropify.beforeClear");
-        this.input.trigger(eventBefore, [this]);
+        this.input.trigger(eventBefore,[this]);
 
         if (eventBefore.result !== false) {
             this.resetFile();
             this.input.val('');
             this.resetPreview();
 
-            this.input.trigger($.Event("dropify.afterClear"), [this]);
+            this.input.trigger($.Event("dropify.afterClear"),[this]);
         }
     } else {
         this.resetFile();
@@ -460,7 +466,7 @@ Dropify.prototype.isImage = function()
 */
 Dropify.prototype.isFileExtensionAllowed = function () {
 
-	if (this.settings.allowedFileExtensions.indexOf('*') != "-1" || 
+	if (this.settings.allowedFileExtensions.indexOf('*') != "-1" ||
         this.settings.allowedFileExtensions.indexOf(this.getFileType()) != "-1") {
 		return true;
 	}

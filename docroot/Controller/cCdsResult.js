@@ -483,10 +483,10 @@ $(document).ready(function() {
      // Translated
       $('.dropify-fr').dropify({
          messages: {
-         	 default: 'Glissez-déposez un fichier ici ou cliquez',
-             replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+         	 default: 'Glissez-dï¿½posez un fichier ici ou cliquez',
+             replace: 'Glissez-dï¿½posez un fichier ou cliquez pour remplacer',
              remove:  'Supprimer',
-             error:   'Désolé, le fichier trop volumineux'
+             error:   'Dï¿½solï¿½, le fichier trop volumineux'
          }
      });
 	// Used events
@@ -505,7 +505,7 @@ $(document).ready(function() {
      });
 
      var drDestroy = $('#input-file-to-destroy').dropify();
-     drDestroy = drDestroy.data('dropify')
+     drDestroy = drDestroy.data('dropify');
      $('#toggleDropify').on('click', function(e){
          e.preventDefault();
          if (drDestroy.isDropified()) {
@@ -513,6 +513,6 @@ $(document).ready(function() {
          } else {
              drDestroy.init();
          }
-     })
+     });
 });
 

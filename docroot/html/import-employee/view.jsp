@@ -677,15 +677,15 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 						
 							<h4>FILE IMPORT</h4>
 							<div class="fileUpload ">
-								<span>Browse File</span> <input type="file" name="file"
-									id="file" accept=".xls, .xlsx"> <span></span>
+								<input type="file" id="file" class="dropify" accept=".xls, .xlsx"  /><span></span>
 							</div>
-							<br>
+							
 							<h6 class="label-content-import-export">
 
-								<input class="btn btn-success" type="submit"
-									name="importFileMobile" id="importFileMobile" value="Import">
-<!-- 								<strong>Note</strong> : Data size should de less 10MB -->
+<!-- 							<input class="btn btn-success" type="submit" -->
+<!-- 								name="importFileMobile" id="importFileMobile" value="Import" -->
+<!-- 								style="margin-top: 0px; margin-bottom: 0px;"> -->
+							<!-- 								<strong>Note</strong> : Data size should de less 10MB -->
 
 							</h6>
 						
@@ -697,7 +697,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					<!-- content end -->
 				</div>
 				<div class="modal-footer">
-<!-- 					<button class="btn btn-success" type="button" id="btnRoldSubmit">Save</button> -->
+					<button class="btn btn-success" type="submit" id="importFileMobile" form="fileImportCdsResult">Import</button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>
 						<div class="alert alert-warning information" id="information"
