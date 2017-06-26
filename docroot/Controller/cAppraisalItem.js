@@ -93,7 +93,7 @@ var displayTypeFn  = function(dataValue,dataType){
 
 //List Data
 var listDataFn = function(data) {
-	
+	console.log(data);
 	var  mainContentHTML="";
 	$.each(data,function(index,indexEntry){
 		//console.log(index);
@@ -115,6 +115,7 @@ var listDataFn = function(data) {
 		mainContentHTML+="                      <tr>";
 		mainContentHTML+=" 						<th></th>";
 		$.each(indexEntry['columns'],function(columns,columnsEntry){
+			
 		mainContentHTML+="                          <th >"+columnsEntry['column_display']+"</th>";
 		});
 		
@@ -140,7 +141,7 @@ var listDataFn = function(data) {
 		//mainContentHTML+="                			<td>"+itemsEntry[columnsEntry['column_name']]+"</td>";
 		
 		if(columnsEntry['data_type']=="number"){
-			mainContentHTML+="                			<td>"+itemsEntry[columnsEntry['column_name']]+"</td>";
+			mainContentHTML+="                			<td style=\"text-align:right\">"+itemsEntry[columnsEntry['column_name']]+"</td>";
 		}else{
 			mainContentHTML+="                			<td>"+displayTypeFn(itemsEntry[columnsEntry['column_name']],columnsEntry['data_type'])+"</td>";
 		}

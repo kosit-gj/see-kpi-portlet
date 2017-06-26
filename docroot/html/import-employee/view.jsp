@@ -181,6 +181,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 #container {
 	width: 93.5%;
 }
+.aui #file{
+	width: 100%;
+	height: 100%;
+}
 /* Large desktop */
 @media ( min-width : 1200px) {
 	.aui #confrimModal {
@@ -697,7 +701,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					<!-- content end -->
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-success" type="submit" id="importFileMobile" form="fileImportCdsResult">Import</button>
+					<button class="btn btn-success" type="submit" id="importFileMobile" form="fileImportEmployee">Import</button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>
 						<div class="alert alert-warning information" id="information"

@@ -652,7 +652,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					
 
 					<div class="form-group">
-					<form id="fileImportEmployee">
+					<form id="fileAppraisalData">
 						
 							<h4>FILE IMPORT</h4>
 							<div class="fileUpload ">
@@ -674,7 +674,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					<!-- content end -->
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-success" type="submit" id="importFileMobile" form="fileImportCdsResult">Import</button>
+					<button class="btn btn-success" type="submit" id="importFileMobile" form="fileAppraisalData">Import</button>
 <!-- 					<button class="btn btn-success" type="button" id="btnRoldSubmit">Save</button> -->
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>

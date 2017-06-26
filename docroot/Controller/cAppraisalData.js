@@ -450,7 +450,7 @@ $(document).ready(function() {
 	{
 	  files = event.target.files;
 	}
-	$('form#fileImportEmployee').on('submit', uploadFiles);
+	$('form#fileAppraisalData').on('submit', uploadFiles);
 
 	// Catch the form submit and upload the files
 	function uploadFiles(event)
