@@ -232,23 +232,22 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
                                  <div class="row-fluid">
 							
 									<div class="span5 object-right" >
-									<label class='text-label'>  Calculate Type &nbsp;:</label>
+									<label class='text-label'>  Result Score Mode  &nbsp;:</label>
 									
 									</div>
 									<div class="span3" id="salarySystem">
-										<label class="radio">
-											<input type="radio" name="optionsRadios" id="radiosScore" value="1" checked>
-											  Score
-										</label>
-										
-											<span style="padding-left: 21px;"> Max Score &nbsp;:</span>	
-											<input  class="form-control input-data numberOnly" style="width: 50px;" type="text" id="maxScore">
-										
 										
 										<label class="radio" style="margin-bottom: 10px;">
-											  <input type="radio" name="optionsRadios" id="radiosWeight" value="0">
-											  % Weight
+											  <input checked='checked'  type="radio" name="optionsRadios" id="radiosWeight" value="0">
+											  Percentage Mode
 										</label>
+										<label class="radio">
+											<input type="radio" name="optionsRadios" id="radiosScore" value="1" >
+											  Score
+											<span style="padding-left: 21px;"> Max Score &nbsp;:</span>	
+											<input  class="form-control input-data numberOnly" style="width: 50px;" type="text" id="maxScore">
+										</label>
+										
 									</div>
 
                                  </div> 

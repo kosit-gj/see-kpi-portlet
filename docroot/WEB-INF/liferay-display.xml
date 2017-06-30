@@ -32,7 +32,7 @@
 		<portlet id="dashboards"></portlet>
 		<portlet id="emp-result-bonus-raise-amount"></portlet>
 		<portlet id="Dashboard-Employee"></portlet>
-		
+		<portlet id="dashboard-Kpi-by-org"></portlet>
 	</category>
 	
 </display>

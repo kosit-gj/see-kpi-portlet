@@ -340,6 +340,8 @@ $(document).ready(function () {
 				$("#maxScore").attr("disabled","disabled");
 			}
 		});
+	 
+	 $("#radiosWeight").click();
 	
 });
 

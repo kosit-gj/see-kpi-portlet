@@ -1,0 +1,389 @@
+[
+
+	{
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1412,
+        "appraisal_item_name": "1.จำนวนเงิน Gross NPL",
+        "target_value": "49.74",
+        "actual_value": "45.80",
+        "score": 2
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1413,
+        "appraisal_item_name": "2.จำนวนเงิน Gross NPL เฉลี่ยไตรมาส",
+        "target_value": "49.74",
+        "actual_value": "45.80",
+        "score": 2
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1414,
+        "appraisal_item_name": "3.จำนวน NPL คงเหลือ",
+        "target_value": "7.09",
+        "actual_value": "6.20",
+        "score": 4
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1417,
+        "appraisal_item_name": "4.จำนวน NPL ใหม่ที่เกิดขึ้น",
+        "target_value": "14.00",
+        "actual_value": "13.60",
+        "score": 4
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1416,
+        "appraisal_item_name": "5.ต้นทุนทางการเงิน",
+        "target_value": "4.93",
+        "actual_value": "4.90",
+        "score": 4
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1415,
+        "appraisal_item_name": "6.ค่าใข้จ่ายดำเนินงานต่อรายได้สุทธิจากการดำเนินงาน(Cost to Income)",
+        "target_value": "4.93",
+        "actual_value": "10.80",
+        "score": 2
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1418,
+        "appraisal_item_name": "7.BIS Ratio",
+        "target_value": "18.00",
+        "actual_value": "17.00",
+        "score": 5
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1428,
+        "appraisal_item_name": "8.อัตราผลตอบแทนต่อสินทรัพย์เสี่ยง(ROA Risk Adjusted)",
+        "target_value": "100.00",
+        "actual_value": "94.10",
+        "score": 2
+    },
+    
+    
+    
+    
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1412,
+        "appraisal_item_name": "9.NIM",
+        "target_value": "49.74",
+        "actual_value": "45.80",
+        "score": 2
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1413,
+        "appraisal_item_name": "10.เงินฝากส่วนเพิ่ม",
+        "target_value": "49.74",
+        "actual_value": "45.80",
+        "score": 2
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1414,
+        "appraisal_item_name": "11.การเติบโตของสินเชื่อ (Loan Growth)",
+        "target_value": "7.09",
+        "actual_value": "6.20",
+        "score": 4
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1417,
+        "appraisal_item_name": "12.จำนวนเงินสินเชื่อปล่อยใหม่",
+        "target_value": "14.00",
+        "actual_value": "13.60",
+        "score": 4
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1416,
+        "appraisal_item_name": "13.จำนวนเงินรายสินเชื่อปล่อยใหม่วงเงินไม่เกิน2.0 ล้านบาท",
+        "target_value": "4.93",
+        "actual_value": "4.90",
+        "score": 4
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1415,
+        "appraisal_item_name": "14.จำนวนเงินสินเชื่อโครงการบ้านประชารัฐ",
+        "target_value": "4.93",
+        "actual_value": "10.80",
+        "score": 2
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1418,
+        "appraisal_item_name": "15.ส่วนแบ่งการตลาดสินเชื่อคงค้าง(Out Standing)",
+        "target_value": "18.00",
+        "actual_value": "17.00",
+        "score": 5
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1428,
+        "appraisal_item_name": "16.สินเชื่อคงค้าง(OutStanding)",
+        "target_value": "100.00",
+        "actual_value": "94.10",
+        "score": 2
+    },
+    
+    
+    
+    
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1412,
+        "appraisal_item_name": "17.สัดส่วนสินเชื่อ Refinance Out ต่อสินเชื่อคงค้างไม่เกินค่าที่กำหนด",
+        "target_value": "49.74",
+        "actual_value": "45.80",
+        "score": 2
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1413,
+        "appraisal_item_name": "18. สัดส่วนค่าใช้จ่ายพนักงนต่อผลกำไรสุทธิ",
+        "target_value": "49.74",
+        "actual_value": "45.80",
+        "score": 2
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1414,
+        "appraisal_item_name": "19.อัตราส่วนสินเชื่อคงค้าง / พนักงานรายคน",
+        "target_value": "7.09",
+        "actual_value": "6.20",
+        "score": 4
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1417,
+        "appraisal_item_name": "20.อัตราส่วนเงินฝาก/พนักงานรายคน",
+        "target_value": "14.00",
+        "actual_value": "13.60",
+        "score": 4
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1416,
+        "appraisal_item_name": " 21.CBS Availablity",
+        "target_value": "4.93",
+        "actual_value": "4.90",
+        "score": 4
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1415,
+        "appraisal_item_name": "22.จำนวนครั้ง Cyber Crime ในระบบ",
+        "target_value": "4.93",
+        "actual_value": "10.80",
+        "score": 2
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1418,
+        "appraisal_item_name": "23.ระดับความสำเร็จของโครงการนวัตกรรม(GHB Inno Project 2017)",
+        "target_value": "18.00",
+        "actual_value": "17.00",
+        "score": 5
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1428,
+        "appraisal_item_name": "24.ร้อยละการพิจารณาสินเชื่อแล้วเสร็จภายในเวลามาตรฐาน 5 วันทำการ",
+        "target_value": "100.00",
+        "actual_value": "94.10",
+        "score": 2
+    },
+    
+    
+   
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1418,
+        "appraisal_item_name": "25.ระดับความสำเร็จของโครงการนวัตกรรม(GHB Inno Project 2017)",
+        "target_value": "18.00",
+        "actual_value": "17.00",
+        "score": 5
+    },
+    
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1418,
+        "appraisal_item_name": "26.ผลการจัดระดับตับโดยรวม(Composite Rating)",
+        "target_value": "18.00",
+        "actual_value": "17.00",
+        "score": 5
+    },
+    {
+        "perspective_name": "Financial1 ",
+        "appraisal_item_id": 1428,
+        "appraisal_item_name": "27.จำนวนเรื่องร้องเรียนผ่าน Social Media ไม่ได้รับการ แก้ไขภายใน 24 ชั่วโมง",
+        "target_value": "100.00",
+        "actual_value": "94.10",
+        "score": 2
+    },
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    {
+        "perspective_name": "Financial ",
+        "appraisal_item_id": 1412,
+        "appraisal_item_name": "01.NTS - Net Trade Sales",
+        "target_value": "49.74",
+        "actual_value": "45.80",
+        "score": 2
+    },
+    {
+        "perspective_name": "Financial ",
+        "appraisal_item_id": 1413,
+        "appraisal_item_name": "02.NI - Net Income",
+        "target_value": "49.74",
+        "actual_value": "45.80",
+        "score": 2
+    },
+    {
+        "perspective_name": "Financial ",
+        "appraisal_item_id": 1414,
+        "appraisal_item_name": "03.GP - Gross Profit",
+        "target_value": "7.09",
+        "actual_value": "6.20",
+        "score": 4
+    },
+    {
+        "perspective_name": "Financial ",
+        "appraisal_item_id": 1417,
+        "appraisal_item_name": "04.% to NTS (GP - Gross Profit)",
+        "target_value": "14.00",
+        "actual_value": "13.60",
+        "score": 4
+    },
+    {
+        "perspective_name": "Financial ",
+        "appraisal_item_id": 1416,
+        "appraisal_item_name": "05.SG&A - Selling, General and Administrative Exp.",
+        "target_value": "4.93",
+        "actual_value": "4.90",
+        "score": 4
+    },
+    {
+        "perspective_name": "Financial ",
+        "appraisal_item_id": 1415,
+        "appraisal_item_name": "06.% to NTS  (SG&A - Selling, General and Administrative Exp.)",
+        "target_value": "4.93",
+        "actual_value": "10.80",
+        "score": 2
+    },
+    {
+        "perspective_name": "Financial ",
+        "appraisal_item_id": 1418,
+        "appraisal_item_name": "07.DSO - Day Sales Outstanding (Period End)",
+        "target_value": "18.00",
+        "actual_value": "17.00",
+        "score": 5
+    },
+    {
+        "perspective_name": "Financial ",
+        "appraisal_item_id": 1428,
+        "appraisal_item_name": "08.Credit Limit Control",
+        "target_value": "100.00",
+        "actual_value": "94.10",
+        "score": 2
+    },
+    {
+        "perspective_name": "Internal  Business Process",
+        "appraisal_item_id": 1420,
+        "appraisal_item_name": "09.Zero Recall",
+        "target_value": "0.00",
+        "actual_value": "1.00",
+        "score": 1
+    },
+    {
+        "perspective_name": "Internal  Business Process",
+        "appraisal_item_id": 1421,
+        "appraisal_item_name": "10.% Utilization",
+        "target_value": "70.00",
+        "actual_value": "44.60",
+        "score": 1
+    },
+    {
+        "perspective_name": "Internal  Business Process",
+        "appraisal_item_id": 1422,
+        "appraisal_item_name": "11.Net Inventory - Stockholding | Raw Materials",
+        "target_value": "80.00",
+        "actual_value": "77.50",
+        "score": 4
+    },
+    {
+        "perspective_name": "Internal  Business Process",
+        "appraisal_item_id": 1429,
+        "appraisal_item_name": "12.Inventory Days (Raw Materials)",
+        "target_value": "60.00",
+        "actual_value": "59.00",
+        "score": 5
+    },
+    {
+        "perspective_name": "Internal  Business Process",
+        "appraisal_item_id": 1431,
+        "appraisal_item_name": "13.Net Inventory - Stockholding | Finished Goods",
+        "target_value": "20.00",
+        "actual_value": "17.20",
+        "score": 5
+    },
+    {
+        "perspective_name": "Internal  Business Process",
+        "appraisal_item_id": 1430,
+        "appraisal_item_name": "14.Inventory Days ( Finished Goods)",
+        "target_value": "30.00",
+        "actual_value": "13.00",
+        "score": 5
+    },
+    {
+        "perspective_name": "Internal  Business Process",
+        "appraisal_item_id": 1424,
+        "appraisal_item_name": "15.CFR - Case Fill Rate",
+        "target_value": "95.00",
+        "actual_value": "97.80",
+        "score": 3
+    },
+    {
+        "perspective_name": "Leaning and Growth",
+        "appraisal_item_id": 1425,
+        "appraisal_item_name": "16.Employee Turnover Ratio",
+        "target_value": "2.70",
+        "actual_value": "0.00",
+        "score": 5
+    },
+    {
+        "perspective_name": "Leaning and Growth",
+        "appraisal_item_id": 1426,
+        "appraisal_item_name": "17.Leadership Capability",
+        "target_value": "75.00",
+        "actual_value": "65.00",
+        "score": 2
+    },
+    {
+        "perspective_name": "Leaning and Growth",
+        "appraisal_item_id": 1427,
+        "appraisal_item_name": "18.Zero Accident",
+        "target_value": "0.00",
+        "actual_value": "0.00",
+        "score": 5
+    }
+]

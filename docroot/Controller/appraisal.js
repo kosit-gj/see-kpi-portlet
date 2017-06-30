@@ -531,8 +531,7 @@ var findOneFn = function(id){
 		success:function(data){
 			
 			listAppraisalDetailFn(data);
-			
-			
+
 		}
 	});
 	
@@ -943,8 +942,8 @@ $(document).ready(function() {
 	var username = $('#user_portlet').val();
 	var password = $('#pass_portlet').val();
 	/*Fixed for Test.*/
-	 username = "1";
-	 password =	"11";
+//	 username = "1";
+//	 password =	"11";
 	
 	if(username!="" && username!=null & username!=[] && username!=undefined ){
 		if(connectionServiceFn(username,password)==true){

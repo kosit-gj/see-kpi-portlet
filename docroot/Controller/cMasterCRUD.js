@@ -731,7 +731,7 @@ var createDataTableFn = function(options){
 				} else return o.selectionStart
 			};
 			jQuery('.numberOnly').keypress(function (evt) { 
-				console.log("Keypress");
+				//console.log("Keypress");
 				 var charCode = (evt.which) ? evt.which : event.keyCode;
 				 var number = this.value.split('.');
 				 if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {

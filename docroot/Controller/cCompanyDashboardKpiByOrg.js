@@ -1,33 +1,8 @@
-var username = $('#user_portlet').val();
-var emp_code=username;
-//var emp_code="2";
-var password = $('#pass_portlet').val();
 
-
-var getEmpListFn = function(){
-	//http://192.168.1.58/kpi_api/public/dashboard/emp_list?emp_code=2007004
-	$.ajax({
-		url:restfulURL+"/kpi_api/public/dashboard/emp_list",
-		type:"post",
-		dataType:"json",
-		async:false,
-		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"emp_code":emp_code},
-		success:function(data){
-			var htmlOption="";
-			$.each(data,function(index,indexEntry){
-			
-					htmlOption+="<option value="+indexEntry['emp_code']+">"+indexEntry['emp_name']+"</option>";
-					
-			});
-			$("#paramEmp").html(htmlOption);
-		}
-	});	
-}
 var yearListFn = function(){
 
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/dashboard/year_list",
+		url:restfulURL+"/kpi_api/public/dashboard_kpi_by_org/year_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -46,7 +21,7 @@ var yearListFn = function(){
 var monthListFn = function(appraisal_year){
 
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/dashboard/month_list",
+		url:restfulURL+"/kpi_api/public/dashboard_kpi_by_org/month_list",
 		type:"post",
 		dataType:"json",
 		async:false,
@@ -149,7 +124,7 @@ var listBalanceScorecardFn = function(data){
 				//balanceScorecardHTML+="<td style='width:50px;'><div class='sparkline'>"+notNaNFn(parseInt(indexEntry2['target_value']))+","+notNaNFn(parseInt(indexEntry2['actual_value']))+",120,80,40</div></td>";
 				
 				
-				balanceScorecardHTML+="<td style='width:50px;text-align:right; padding-right:5px;'>"+notNaNFn(addCommas(indexEntry2['actual_value']))+"</td>";
+				balanceScorecardHTML+="<td style='width:30px;text-align:right; padding-right:5px;'>"+notNaNFn(addCommas(indexEntry2['actual_value']))+"</td>";
 				balanceScorecardHTML+="</tr>";   
 			}
 			
@@ -164,14 +139,14 @@ var listBalanceScorecardFn = function(data){
 };
 
 var getBalanceScorecardFn = function(period_id){
-	
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/dashboard/balance_scorecard",
+		//url:restfulURL+"/kpi_api/public/dashboard_kpi_by_org/balance_scorecard",
+		url:"/see-kpi-portlet/Model/balance_scorecard.txt",
 		type:"post",
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"emp_code":$("#embedParamEmp").val(),"period_id":period_id},
+		data:{"period_id":period_id},
 		success:function(data){
 			
 			listBalanceScorecardFn(data);
@@ -216,6 +191,7 @@ createGraphMonthlyVarianceFn = function(data){
 	                    show : true,
 	                    placement : 'outsideGrid'
 	                },                  
+
 	                axes : {                  
 	                    xaxis : {
 	                        renderer : $.jqplot.CategoryAxisRenderer,
@@ -256,23 +232,17 @@ getDataMonthlyVarianceFn = function(appraisal_year,appraisal_item_id){
 	
 	$.ajax({
 		//url:"../Model/barChartMutiSeries.jsp",
-		url:restfulURL+"/kpi_api/public/dashboard/monthly_variance",
+		url:restfulURL+"/kpi_api/public/dashboard_kpi_by_org/monthly_variance",
 		type:"post",
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"emp_code":$("#embedParamEmp").val(),"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
+		data:{"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
 		success:function(data){
 
-			
-		
 			if(data==""){
-//				$(".itemName").hide();
-//				$(".ibox-content").hide();
-				$("#monthlyVariance").empty();
+				
 				return false;
 			}
-			$(".itemName").show();
-			$(".ibox-content").show();
 			/*
 			[["May","Hotel","200"],["June","Hotel","600"],["Junly","Hotel","700"],["Agust","Hotel","1000"],["Octember","Hotel","1000"],
 			 ["May","Event Regristration","400"],["June","Event Regristration","210"],["Junly","Event Regristration","690"],["Agust","Event Regristration","820"],["Octember","Event Regristration","820"],
@@ -361,21 +331,16 @@ getDataMonthlyGrowthFn = function(appraisal_year,appraisal_item_id){
 	
 	$.ajax({
 		//url:"../Model/barChartMutiSeries.jsp",
-		url:restfulURL+"/kpi_api/public/dashboard/monthly_growth",
+		url:restfulURL+"/kpi_api/public/dashboard_kpi_by_org/monthly_growth",
 		type:"post",
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"emp_code":$("#embedParamEmp").val(),"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
+		data:{"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
 		success:function(data){
 			if(data==""){
 				//alert("ok")
-//				$(".itemName").hide();
-//				$(".ibox-content").hide();
-				$("#monthlyGrowth").empty();
 				return false;
 			}
-			$(".itemName").show();
-			$(".ibox-content").show();
 			var objFormat="";
 			var category="[{\"pyear\":\"Previous Year\"},{\"cyear\":\"Actual\"},{\"growth_percent\":\"%Growth\"}]";
 			category = eval("("+category+")");
@@ -453,21 +418,16 @@ getDataYTDGrowthFn = function(appraisal_year,appraisal_item_id){
 	var appraisal_item_id =(appraisal_item_id == undefined || appraisal_item_id == ""  ? "" : appraisal_item_id);
 	
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/dashboard/ytd_monthly_growth",
+		url:restfulURL+"/kpi_api/public/dashboard_kpi_by_org/ytd_monthly_growth",
 		type:"post",
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"emp_code":$("#embedParamEmp").val(),"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
+		data:{"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
 		success:function(data){
 			if(data==""){
 				//alert("ok")
-//				$(".itemName").hide();
-//				$(".ibox-content").hide();
-				$("#ytdGrowth").empty();
 				return false;
 			}
-			$(".itemName").show();
-			$(".ibox-content").show();
 			var objFormat="";
 			var category="[{\"pyear\":\"Previous Year\"},{\"cyear\":\"Actual\"},{\"growth_percent\":\"%Growth\"}]";
 			category = eval("("+category+")");
@@ -522,21 +482,16 @@ getDataYTDVarianceFn = function(appraisal_year,appraisal_item_id){
 	var appraisal_item_id =(appraisal_item_id == undefined || appraisal_item_id == ""  ? "" : appraisal_item_id);
 	
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/dashboard/ytd_monthly_variance",
+		url:restfulURL+"/kpi_api/public/dashboard_kpi_by_org/ytd_monthly_variance",
 		type:"post",
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"emp_code":$("#embedParamEmp").val(),"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
+		data:{"appraisal_year":appraisal_year,"appraisal_item_id":appraisal_item_id},
 		success:function(data){
 			if(data==""){
 				//alert("ok")
-//				$(".itemName").hide();
-//				$(".ibox-content").hide();
-				$("#ytdVariance").empty();
 				return false;
 			}
-			$(".itemName").show();
-			$(".ibox-content").show();
 			var objFormat="";
 			var category="[{\"target_value\":\"Target\"},{\"actual_value\":\"Actual\"},{\"variance_value\":\"Variance\"}]";
 			category = eval("("+category+")");
@@ -599,14 +554,12 @@ var getColorBall = function(position,color){
 
 
 $(document).ready(function(){
-		
-	
 
-	
 	
 //	var username = getParamValue('username');
 //	var password = getParamValue('password');
-	
+	var username = $('#user_portlet').val();
+	var password = $('#pass_portlet').val();
 	/*Fixed for Test.*/
 	// username = "1";
 	// password =	"11";
@@ -622,8 +575,6 @@ $(document).ready(function(){
 	
 	
 	yearListFn();
-	getEmpListFn();
-	
 	$("#paramYear").change(function(){
 		monthListFn($(this).val());
 
@@ -655,59 +606,43 @@ $(document).ready(function(){
 		
 		
 			
-		getDataMonthlyVarianceFn($("#embedParamYear").val(),id);
-		getDataMonthlyGrowthFn($("#embedParamYear").val(),id);
-		//getDataYTDVarianceFn($("#embedParamYear").val(),id);
-		//getDataYTDGrowthFn($("#embedParamYear").val(),id);
+//		getDataMonthlyVarianceFn($("#embedParamYear").val(),id);
+//		getDataMonthlyGrowthFn($("#embedParamYear").val(),id);
+//		getDataYTDVarianceFn($("#embedParamYear").val(),id);
+//		getDataYTDGrowthFn($("#embedParamYear").val(),id);
 		
 	
 		
 		
 	});
 	
-	$(".cick_tab").remove();
-	$("body").append("<input type='hidden' value='monthly_tab' class='cick_tab' id='monthly_tab_embed' name='monthly_tab_embed'>");
-	
 	$("#YTD_tab").click(function(){
-		getDataYTDVarianceFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
-		getDataYTDGrowthFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
-		$(".cick_tab").remove();
-		$("body").append("<input type='hidden' value='tyd_tab' class='cick_tab' id='ytd_tab_embed' name='ytd_tab_embed'>");
+		//getDataYTDVarianceFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
+		//getDataYTDGrowthFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
 	});
 	
 	$("#Monthly_tab").click(function(){
-		getDataMonthlyVarianceFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
-		getDataMonthlyGrowthFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
-		
-		$(".cick_tab").remove();
-		$("body").append("<input type='hidden' value='monthly_tab' class='cick_tab' id='monthly_tab_embed' name='monthly_tab_embed'>");
+		//getDataMonthlyVarianceFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
+		//getDataMonthlyGrowthFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
 	});
 	
 	
 	$("#btnSearchAdvance").click(function(){
-		
-		$(".itemName ").html("");
-		$(".ibox-content").hide();
 		 var paramHtml="";
 		 paramHtml += "<input type='hidden' name='embedParamYear' id='embedParamYear' class='embedParam' value='"+$("#paramYear").val()+"'>";
 		 paramHtml += "<input type='hidden' name='embedParamMonth' id='embedParamMonth' class='embedParam' value='"+$("#paramMonth").val()+"'>";
-		 paramHtml += "<input type='hidden' name='embedParamEmp' id='embedParamEmp' class='embedParam' value='"+$("#paramEmp").val()+"'>";
-		 
-		 $(".embedParam").remove();
+		$(".embedParam").remove();
 		
 		$("body").append(paramHtml);
 		
 		
 		
 		getBalanceScorecardFn($("#embedParamMonth").val());
-//		setTimeout(function(){
-//			bindingBulletFn();
-//		},500);
+
 		
-//		alert($("#embed_appraisal_item_id").val());
-//		if(undefined==$("#embed_appraisal_item_id").val()){
 		
-			$(".embed_appraisal_item_id").remove();
+		if(undefined==$("#embed_appraisal_item_id").val()){
+			
 			if($(".appraisalItem:first").attr("id")!=undefined){
 
 				var id = $(".appraisalItem:first").attr("id").split("-");
@@ -717,23 +652,15 @@ $(document).ready(function(){
 				$(".itemName").html($(".appraisalItem:first td:first").text());
 				
 			}
-		//}
-		
-
-		if($("#monthly_tab_embed").val()=="monthly_tab"){
-			getDataMonthlyVarianceFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
-			getDataMonthlyGrowthFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
-		
-		}else{
-			
-			getDataYTDVarianceFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
-			getDataYTDGrowthFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
 		}
 		
 		
+		//getDataMonthlyVarianceFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
+		//getDataMonthlyGrowthFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
+		//getDataYTDVarianceFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
+		//getDataYTDGrowthFn($("#embedParamYear").val(),$("#embed_appraisal_item_id").val());
 		
-		
-		//$(".ibox-content").show();
+		$(".ibox-content").show();
 		
 	});
 	
@@ -766,4 +693,8 @@ $(document).ready(function(){
 		getBrowserWidth();
 	});
 	//check Orientation End
+	
+	
+	
+	
 });

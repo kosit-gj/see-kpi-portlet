@@ -1,0 +1,35 @@
+<html>
+<head>
+	<title>Tree Example</title>
+<link rel="StyleSheet" href="dtree/dtree.css" type="text/css" />
+<script type="text/javascript" src="dtree/vertdtree.js"></script>
+<style>
+.dtree a.nodeSel {
+    background-color: white;
+}
+</style>
+</head>	
+<body>
+<h1>Horizontal Tree Example</h1>
+<br>
+<h3>Created by Mahmoud Tahoon</h3>
+<br><br><br>
+<script language=javascript>	
+	mytree = new dTree('mytree');
+	
+	//mytree.add(146, -1, '<img width="50" height="50" src="images.png"/> Designers', 'team_index.asp?groupe_id=146', 'Designers', '', '');
+	mytree.add(145, -1, '<img width="50" height="50" src="images.png"/> Developers', 'team_index.asp?groupe_id=145', 'Developers', '', '');
+	mytree.add(148, 145, '<img width="50" height="50" src="images.png"/> Desktop Developers', 'team_index.asp?groupe_id=148', 'Desktop Developers', '', '');
+	mytree.add(147, 145, '<img width="50" height="50" src="images.png"/> Web Developers', 'team_index.asp?groupe_id=147', 'Web Developers', '', '');
+	mytree.add(149, 147, '<img width="50" height="50" src="images.png"/> Asp.net Developers', 'team_index.asp?groupe_id=149', 'Asp.net Developers', '', '');
+	mytree.add(151, 149, '<img width="50" height="50" src="images.png"/> Asp.net 1.0', 'team_index.asp?groupe_id=151', 'Asp.net 1.0', '', '');
+	mytree.add(152, 149, '<img width="50" height="50" src="images.png"/> Asp.net 1.1', 'team_index.asp?groupe_id=152', 'Asp.net 1.1', '', '');
+	mytree.add(153, 149, '<img width="50" height="50" src="images.png"/> Asp.net 2.0999999999999999999', 'team_index.asp?groupe_id=153', 'Asp.net 2.0', '', '');
+	mytree.add(150, 147, '<img width="50" height="50" src="images.png"/> PHP Developers', 'team_index.asp?groupe_id=150', 'PHP Developers', '', '');
+	mytree.add(154, 150, '<img width="50" height="50" src="images.png"/> Zend Studio', 'team_index.asp?groupe_id=154', 'Zend Studio', '', '');
+
+	document.write(mytree); 
+</script> 
+
+</body>
+</html>
