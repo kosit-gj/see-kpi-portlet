@@ -47,7 +47,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 }
 
 .popover {
-	width: 208px;
+	width: 215px;
 }
 
 .aui .pagination {
@@ -180,6 +180,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 #container {
 	width: 93.5%;
+}
+.aui #file{
+	width: 100%;
+	height: 100%;
 }
 /* Large desktop */
 @media ( min-width : 1200px) {
@@ -392,9 +396,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							<div class="ibox-content breadcrumbs2">
 					<div class="row-fluid p-t-xxs">
 						<div id="drop_down_department" class="form-group pull-left span3"
-							style="margin-left: 5px"></div>
+							style="margin-left: 5px"><select data-toggle="tooltip" title="Department" class="input span12 m-b-n" id="search_department" name="search_department"><option selected="" value="">All</option></select></div>
 						<div id="drop_down_section" class="form-group pull-left span3"
-							style="margin-left: 5px"></div>
+							style="margin-left: 5px"><select data-toggle="tooltip" title="Section" class="input span12 m-b-n" id="search_section" name="search_section"><option selected="" value="">All</option></select></div>
 
 						<div class="form-group pull-left span3" style="margin-left: 5px">
 							<input data-toggle="tooltip" title="Position"
@@ -413,8 +417,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								name="search_emp_id" value="" type="hidden">
 						</div>
 
-						<div class="form-group pull-right m-b-none ">
-							<button id="btn_add_role" type="submit" data-target="#ModalRole"
+						<div class="form-group pull-right m-b-none "> <!-- data-target="#ModalRole"  -->
+							<button id="btn_add_role" type="submit" 
 								data-toggle="modal" class="btn btn-primary btn-sm "
 								style="margin-left: 5px;">
 								&nbsp;<i class="fa fa-plus-square"></i>&nbsp;Role&nbsp;&nbsp;
@@ -585,8 +589,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 											<th style='width: auto'>Department&nbsp;Name&emsp;</th>
 											<th style='width: auto'>Section&nbsp;Name&emsp;</th>
 											<th style='width: auto'>Position&nbsp;Name&emsp;&emsp;&emsp;</th>
-											<th style='width: auto'>Position&nbsp;Group&emsp;</th>
-											<th style='width: auto'>Shief&nbsp;Emp&nbsp;Code&emsp;</th>
+<!-- 											<th style='width: auto'>Position&nbsp;Group&emsp;</th> -->
+											<th style='width: auto'>Chief&nbsp;Emp&nbsp;Code&emsp;</th>
 											<th style='width: auto'>Appraisal&nbsp;Level&emsp;</th>
 <!-- 											<th style='width: auto text-align:center;'>IsActive</th> -->
 											<th style='width: auto;text-align: center;' class='objectCenter'>Manage</th>
@@ -677,15 +681,15 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 						
 							<h4>FILE IMPORT</h4>
 							<div class="fileUpload ">
-								<span>Browse File</span> <input type="file" name="file"
-									id="file" accept=".xls, .xlsx"> <span></span>
+								<input type="file" id="file" class="dropify" accept=".xls, .xlsx"  /><span></span>
 							</div>
-							<br>
+							
 							<h6 class="label-content-import-export">
 
-								<input class="btn btn-success" type="submit"
-									name="importFileMobile" id="importFileMobile" value="Import">
-<!-- 								<strong>Note</strong> : Data size should de less 10MB -->
+<!-- 							<input class="btn btn-success" type="submit" -->
+<!-- 								name="importFileMobile" id="importFileMobile" value="Import" -->
+<!-- 								style="margin-top: 0px; margin-bottom: 0px;"> -->
+							<!-- 								<strong>Note</strong> : Data size should de less 10MB -->
 
 							</h6>
 						
@@ -697,7 +701,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					<!-- content end -->
 				</div>
 				<div class="modal-footer">
-<!-- 					<button class="btn btn-success" type="button" id="btnRoldSubmit">Save</button> -->
+					<button class="btn btn-success" type="submit" id="importFileMobile" form="fileImportEmployee">Import</button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>
 						<div class="alert alert-warning information" id="information"
@@ -779,8 +783,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					<button class="btn btn-success" type="button" id="btnRoldSubmit">Save</button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>
-<!-- 					<div class="alert alert-warning" id="information" -->
-<!-- 						style="display: none;"></div> -->
+					<div class="alert alert-warning" id="information3"
+						style="display: none;"></div>
 				</div>
 			</div>
 		</div>
@@ -894,7 +898,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								</div>
 							</div>
 							<div class="form-group p-xxs">
-								<label class="control-label">Supervisor Emp Code:</label>
+								<label class="control-label">Chief Emp Code:</label>
 								<div class="controls">
 									<input type="text" class="form-control input-sm span12" placeholder="" id="from_sup_emp_code">
 								</div>

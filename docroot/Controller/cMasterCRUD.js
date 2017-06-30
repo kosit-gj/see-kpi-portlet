@@ -23,7 +23,7 @@ var paginationSetUpCRUDFn = function(pageIndex,pageTotal,options){
 	$('.pagination_top,.pagination_bottom').bootpag({
 	    total: pageTotal,//page Total
 	    page: pageIndex,//page index
-	    maxVisible: 5,//จำนวนปุ่ม
+	    maxVisible: 5,//à¸ˆà¸³à¸™à¸§à¸™à¸›à¸¸à¹ˆà¸¡
 	    leaps: true,
 	    firstLastUse: true,
 	    first: '←',
@@ -428,12 +428,19 @@ var createInputTypeFn  = function(object,tokenID){
 	//var initValue =(object['initValue'] == undefined  ? false : object['initValue']);
 	
 	var inputType="";
+	var inputTooltip ="";
+
 /*
 {
 "label":"Database Type","inputType":"dropdown","default":"All",
 "id":"databaseType","width":"250px","url":"","required":true
 },
  */
+	if(object['label_tooltip']!= undefined || object['label_tooltip']!= null ){
+		inputTooltip ="data-toggle='tooltip' data-original-title='"+object['label_tooltip']+"'"; 
+	}else{
+		inputTooltip ="";
+	}
 	
 	if(object['inputType']=="dropdown"){
 		
@@ -444,7 +451,7 @@ var createInputTypeFn  = function(object,tokenID){
 			async:false,
 			headers:{Authorization:"Bearer "+tokenID.token},
 			success:function(data){
-				inputType="<select class=\"span12 m-b-n\" id=\""+object['id']+"\" name=\""+object['id']+"\" style=\"width:"+object['width']+"\">";			
+				inputType="<select "+inputTooltip+" class=\"span12 m-b-n\" id=\""+object['id']+"\" name=\""+object['id']+"\" style=\"width:"+object['width']+"\">";			
 				//initValue
 				if(object['initValue']!=undefined){
 					inputType+="<option value=''>"+object['initValue']+"</option>";
@@ -470,10 +477,10 @@ var createInputTypeFn  = function(object,tokenID){
 		var dataTypeInput =(object['dataTypeInput'] == 'number' ? "numberOnly" : "");
 		if(object['placeholder']!=undefined){
 			
-			inputType+="<input type=\"text\" style='width:"+object['width']+"' class=\"span12 m-b-n "+dataTypeInput+"\" placeholder=\""+object['placeholder']+"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
+			inputType+="<input "+inputTooltip+" type=\"text\" style='width:"+object['width']+"' class=\"span12 m-b-n "+dataTypeInput+"\" placeholder=\""+object['placeholder']+"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
 			
 		}else{
-			inputType+="<input type=\"text\" style='width:"+object['width']+"' class=\"span12 m-b-n "+dataTypeInput+"\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
+			inputType+="<input "+inputTooltip+" type=\"text\" style='width:"+object['width']+"' class=\"span12 m-b-n "+dataTypeInput+"\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
 			
 		}
 		
@@ -530,7 +537,7 @@ formHTML+="<div aria-hidden=\"true\" role=\"dialog\" tabindex=\"-1\" id=\"modal-
 formHTML+="<div class=\"modal-dialog\">";
 formHTML+="<div class=\"modal-content  bounceInRight\">";
 formHTML+="        <div class=\"modal-header\">";
-formHTML+="            <button style=\"padding-top:5px\" data-dismiss=\"modal\" class=\"close\" type=\"button\"><span aria-hidden=\"true\">×</span><span class=\"sr-only\" style=\"display: none;\">Close</span></button>";
+formHTML+="            <button style=\"padding-top:5px\" data-dismiss=\"modal\" class=\"close\" type=\"button\"><span aria-hidden=\"true\">x</span><span class=\"sr-only\" style=\"display: none;\">Close</span></button>";
 formHTML+="            <h4 class=\"modal-title\" id=\""+options['formDetail']['id']+"\">"+options['formDetail']['formName']+"</h4>";
 formHTML+="        </div>";
 formHTML+="        <div class=\"modal-body\">";
@@ -745,20 +752,20 @@ var createDataTableFn = function(options){
 //			$(".numberOnly").ForceNumericOnly();
 //			$(".numberOnly").keyup(function (e) {
 //				IsNumeric($(this).val(),this);
-////				        // Allow: backspace, delete, tab, escape, enter and .
+////				Â  Â  Â  Â  // Allow: backspace, delete, tab, escape, enter and .
 ////					
-////				        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-////				             // Allow: Ctrl+A, Command+A
-////				            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
-////				             // Allow: home, end, left, right, down, up
-////				            (e.keyCode >= 35 && e.keyCode <= 40)) {
-////				                 // let it happen, don't do anything
-////				                 return;
-////				        }
-////				        // Ensure that it is a number and stop the keypress
-////				        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-////				            e.preventDefault();
-////				        }
+////				Â  Â  Â  Â  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+////				Â  Â  Â  Â  Â  Â  Â // Allow: Ctrl+A, Command+A
+////				Â  Â  Â  Â  Â  Â  (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||Â 
+////				Â  Â  Â  Â  Â  Â  Â // Allow: home, end, left, right, down, up
+////				Â  Â  Â  Â  Â  Â  (e.keyCode >= 35 && e.keyCode <= 40)) {
+////				Â  Â  Â  Â  Â  Â  Â  Â  Â // let it happen, don't do anything
+////				Â  Â  Â  Â  Â  Â  Â  Â  Â return;
+////				Â  Â  Â  Â  }
+////				Â  Â  Â  Â  // Ensure that it is a number and stop the keypress
+////				Â  Â  Â  Â  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+////				Â  Â  Â  Â  Â  Â  e.preventDefault();
+////				Â  Â  Â  Â  }
 //				});
 			
 			

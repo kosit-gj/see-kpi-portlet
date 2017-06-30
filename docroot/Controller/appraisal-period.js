@@ -297,11 +297,11 @@ $(document).ready(function(){
 		    	    			],
 		    	    			
 		    	    	"advanceSearch":[{
-		    	 					"label":"Appraisal Year","inputType":"dropdown",
+		    	 					"label":"Appraisal Year","label_tooltip":"Appraisal Year","inputType":"dropdown",
 		    	 					"id":"appraisal_year","width":"100%",
 		    	 					"url":""+restfulURL+"/kpi_api/public/appraisal_period/appraisal_year_list"
 		    	 					},{
-		        	 				"label":"Description","inputType":"text","placeholder":"Description",
+		        	 				"label":"Description","label_tooltip":"Description","inputType":"text","placeholder":"Description",
 		        	 				"id":"appraisal_period_desc","width":"100%",
 		        	 				"url":""+restfulURL+"/kpi_api/public/appraisal_period/auto_desc"
 		        				    },],
@@ -387,5 +387,10 @@ $(document).ready(function(){
     	
 	 	}
 	 }
-    	
+	//binding tooltip start
+	 $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
+	 $('[data-toggle="tooltip"]').tooltip({
+		 html:true
+	 });
+	//binding tooltip end
     });

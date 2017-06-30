@@ -644,8 +644,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					<button class="btn btn-success" type="button" id="btnCopySubmit">Save</button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>
-<!-- 					<div class="alert alert-warning" id="information" -->
-<!-- 						style="display: none;"></div> -->
+					<div class="alert alert-warning information" id="information3"
+ 						style="display: none;"></div> 
 				</div>
 			</div>
 		</div>

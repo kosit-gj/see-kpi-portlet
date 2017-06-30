@@ -271,7 +271,7 @@ var listImportEmployeeFn = function(data) {
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["department_name"]+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["section_name"]+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["position_name"]+"</td>";
-		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["position_group"]+"</td>";
+		//htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["position_group"]+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["chief_emp_code"]+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+htmlAppraisalLevel+"</td>";
 		//htmlTable += "<td class='objectCenter'>"+IsActive+"</td>";
@@ -478,6 +478,7 @@ var updateFn = function () {
 
 //-------- Insert Role Start
 var insertRoleFn = function () {
+	var chackSelect =  false;
 	var emp =[];
 	var role = [];
 	$.each($(".selectEmpCheckbox").get(),function(index,indexEntry){
@@ -488,9 +489,11 @@ var insertRoleFn = function () {
 	$.each($(".from_data_role").get(),function(index,indexEntry){
 		if($(indexEntry).is(":checked")){
 			role.push($(indexEntry).val());
+			chackSelect = true;
 		}
 	});
-	
+	if (chackSelect == false){callFlashSlideInModal("<font color='red'>*</font> Please Select Appraisal level !!!","#information3"); return false;}
+
 		$.ajax({
 			url : restfulURL+restfulPathImportEmployee+"/role",
 			type : "PATCH",
@@ -609,9 +612,8 @@ var dropDownEmpType = function(){
 	var html="";
 	html+="<select data-toggle=\"tooltip\" title=\"Employee Type\" class=\"input span12 m-b-n\" id=\"from_emp_type\" name=\"from_emp_type\" >";
 	
-	
-	html+="<option value=\"à¸£à¸²à¸¢à¸§à¸±à¸™\" selected>à¸£à¸²à¸¢à¸§à¸±à¸™</option>";
-	html+="<option value=\"à¸£à¸²à¸¢à¹€à¸”à¸·à¸­à¸™\">à¸£à¸²à¸¢à¹€à¸”à¸·à¸­à¸™</option>";
+	html+="<option value=\"รายวัน\" selected>รายวัน</option>";
+	html+="<option value=\"รายเดือน\">รายเดือน</option>";
 	html+="</select>";
 	$("#drop_down_emp_typy").html(html);
 };
@@ -669,6 +671,23 @@ $(document).ready(function() {
 	$("#btn_add_role").click(function() {
 		clearFn();
 		$("#txtAssignEmpName").hide();
+		
+		var chackSelect =  false;
+		$(".btnModalClose").click();
+		$.each($(".selectEmpCheckbox").get(),function(index,indexEntry){
+			if($(indexEntry).is(":checked")){
+				chackSelect = true;
+				return false;
+			}
+		});
+		if (chackSelect == true){
+			listAppraisalLevel();
+			
+			$("#ModalRole").modal();
+			}
+		else{
+			callFlashSlide("Please Select Employee !!!");
+		}
 
 		//listAppraisalLevel();
 		
@@ -892,6 +911,7 @@ $(document).ready(function() {
 	$("#btn_import").click(function () {
 		$('#file').val("");
 		$(".btnModalClose").click();
+		$(".dropify-clear").click(); 
 	});
 //	$("#importFileMobile").click(function () {
 //		$('#file').val("");
@@ -967,6 +987,43 @@ $(document).ready(function() {
 	 });
 	//binding tooltip end
 
+     // Basic
+     $('.dropify').dropify();
+
+     // Translated
+      $('.dropify-fr').dropify({
+         messages: {
+         	 'default': 'Glissez-dposez un fichier ici ou cliquez',
+             replace: 'Glissez-dposez un fichier ou cliquez pour remplacer',
+             remove:  'Supprimer',
+             error:   'Dsol, le fichier trop volumineux'
+         }
+     });
+	// Used events
+     var drEvent = $('#input-file-events').dropify();
+
+     drEvent.on('dropify.beforeClear', function(event, element){
+         return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+     });
+
+     drEvent.on('dropify.afterClear', function(event, element){
+         alert('File deleted');
+     });
+
+     drEvent.on('dropify.errors', function(event, element){
+         console.log('Has Errors');
+     });
+
+     var drDestroy = $('#input-file-to-destroy').dropify();
+     drDestroy = drDestroy.data('dropify');
+     $('#toggleDropify').on('click', function(e){
+         e.preventDefault();
+         if (drDestroy.isDropified()) {
+             drDestroy.destroy();
+         } else {
+             drDestroy.init();
+         }
+     });
 		
 
 

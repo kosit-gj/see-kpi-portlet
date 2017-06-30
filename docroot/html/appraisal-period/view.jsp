@@ -96,7 +96,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 				                </div>
 				                
 				                 <div class="span7">
-				                	<input data-toggle="tooltip" title="APD"  class="form-control input-sm" placeholder="การประเมินผลการปฏิบัติงานประจำปี" type="text" id="a_p_d" name="a_p_d">
+				                	<input  class="form-control input-sm" placeholder="การประเมินผลการปฏิบัติงานประจำปี" type="text" id="a_p_d" name="a_p_d">
 				                </div>
 				                <br style="clear:both">
 		                	</div>
@@ -113,7 +113,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 				                </div>
 				                
 				                 <div class="span7">
-				                	<input data-toggle="tooltip" title="BPD"  class="form-control input-sm" placeholder="รอบจ่ายโบนัสประจำปี" type="text" id="b_p_d" name="b_p_d">
+				                	<input   class="form-control input-sm" placeholder="รอบจ่ายโบนัสประจำปี" type="text" id="b_p_d" name="b_p_d">
 				                </div>
 			                <br style="clear:both">
 		                	</div>
@@ -131,7 +131,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 				                </div>
 				                
 				                 <div class="span7 ">
-				                	<input data-toggle="tooltip" title="SRD"  class="form-control input-sm" placeholder="รอบขึ้นเงินเดือนประจำปี" type="text" id="s_r_d" name="s_r_d">
+				                	<input  class="form-control input-sm" placeholder="รอบขึ้นเงินเดือนประจำปี" type="text" id="s_r_d" name="s_r_d">
 				                </div>
 				                <br style="clear:both">
 		                	</div>

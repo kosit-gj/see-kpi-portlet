@@ -161,4 +161,10 @@ $(document).ready(function(){
 		}
 	}
 	
+	//binding tooltip start
+	 $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
+	 $('[data-toggle="tooltip"]').tooltip({
+		 html:true
+	 });
+	//binding tooltip end
 });

@@ -47,7 +47,7 @@
 	     			     ],
 	     			     
 	     			    "advanceSearch":[{
-	     			    	"label":"Appraisal Level","inputType":"dropdown",
+	     			    	"label":"Appraisal Level","label_tooltip":"Appraisal Level","inputType":"dropdown",
 	     					"id":"appraisal_level_id","width":"100%",
 	     					"url":""+restfulURL+"/kpi_api/public/appraisal_grade/al_list",
 	     					"initValue":"All"
@@ -65,4 +65,10 @@
     	
 	 	}
 	 }
+		//binding tooltip start
+	 $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
+	 $('[data-toggle="tooltip"]').tooltip({
+		 html:true
+	 });
+	//binding tooltip end
     });

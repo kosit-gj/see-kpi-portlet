@@ -88,6 +88,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 
 /* new */
+.aui #file{
+	width: 100%;
+	height: 100%;
+}
 .aui .form-group {
 	margin-bottom: 5px;
 }
@@ -334,15 +338,15 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					<div class="row-fluid p-t-xxs">
 						<div id="drop_down_list_structure"
 							class="form-group pull-left span2" style="margin-left: 5px">
-							
+							<select d id="structure" class="input span12 m-b-n" data-toggle="tooltip"  style="cursor: pointer;" data-original-title="Structure"><option  value="">All Structure</option></select>
 						</div>
 						<div id="drop_down_list_appraisal_level"
 							class="form-group pull-left span2" style="margin-left: 5px">
-							
+							<select d id="app_lv" class="input span12 m-b-n" data-toggle="tooltip"  style="cursor: pointer;" data-original-title="Appraisal Level"><option  value="">All Appraisal Level</option></select>
 						</div>
 						<div id="drop_down_list_appraisal_type"
 							class="form-group pull-left span2" style="margin-left: 5px">
-							
+							<select data-placement="top" id="app_type" class="input span12 m-b-n" data-toggle="tooltip" title="" name="app_type" style="cursor: pointer;" data-original-title="Appraisal Type"></select>
 						</div>
 						<div class="form-group pull-left span2" style="margin-left: 5px">
 							<input data-toggle="tooltip" title="Appraisal Item"
@@ -353,7 +357,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 						</div>
 						<div id="drop_down_list_period" class="form-group pull-left span2"
 							style="margin-left: 5px">
-							
+							<select data-placement="top" id="period" class="input span12 m-b-n" data-toggle="tooltip" title="" name="period" style="cursor: pointer;" data-original-title="Period"></select>
 						</div>
 						<div class="form-group pull-left span3" style="margin-left: 5px">
 							<input data-toggle="tooltip" title="Employee Name"
@@ -648,22 +652,20 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					
 
 					<div class="form-group">
-					<form id="fileImportEmployee">
+					<form id="fileAppraisalData">
 						
 							<h4>FILE IMPORT</h4>
 							<div class="fileUpload ">
-								<span>Browse File</span> <input type="file" name="file" accept=".xls, .xlsx"
-									id="file" > <span></span>
+								<input type="file" id="file" class="dropify" accept=".xls, .xlsx"  /><span></span>
 							</div>
-							<br>
 							<h6 class="label-content-import-export">
- 
-								<input  class="btn btn-success" type="submit" 
-									name="importFileMobile" id="importFileMobile" value="Import" >
-<!-- 								<strong>Note</strong> : Data size should de less 10MB -->
+
+<!-- 							<input class="btn btn-success" type="submit" -->
+<!-- 								name="importFileMobile" id="importFileMobile" value="Import" -->
+<!-- 								style="margin-top: 0px; margin-bottom: 0px;"> -->
+							<!-- 								<strong>Note</strong> : Data size should de less 10MB -->
 
 							</h6>
-						
 					</form>
 					
 						<!-- start table -->
@@ -672,6 +674,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					<!-- content end -->
 				</div>
 				<div class="modal-footer">
+					<button class="btn btn-success" type="submit" id="importFileMobile" form="fileAppraisalData">Import</button>
 <!-- 					<button class="btn btn-success" type="button" id="btnRoldSubmit">Save</button> -->
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>
