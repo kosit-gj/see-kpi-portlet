@@ -590,7 +590,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 											<th style='width: auto'>Section&nbsp;Name&emsp;</th>
 											<th style='width: auto'>Position&nbsp;Name&emsp;&emsp;&emsp;</th>
 <!-- 											<th style='width: auto'>Position&nbsp;Group&emsp;</th> -->
-											<th style='width: auto'>Shief&nbsp;Emp&nbsp;Code&emsp;</th>
+											<th style='width: auto'>Chief&nbsp;Emp&nbsp;Code&emsp;</th>
 											<th style='width: auto'>Appraisal&nbsp;Level&emsp;</th>
 <!-- 											<th style='width: auto text-align:center;'>IsActive</th> -->
 											<th style='width: auto;text-align: center;' class='objectCenter'>Manage</th>
@@ -898,7 +898,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								</div>
 							</div>
 							<div class="form-group p-xxs">
-								<label class="control-label">Supervisor Emp Code:</label>
+								<label class="control-label">Chief Emp Code:</label>
 								<div class="controls">
 									<input type="text" class="form-control input-sm span12" placeholder="" id="from_sup_emp_code">
 								</div>

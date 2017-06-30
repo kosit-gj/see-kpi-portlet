@@ -67,7 +67,7 @@ var validationSqlFn = function (data) {
 // --------  Clear Start 
 var clearFn = function() {
 	
-	$("#modalTitleRole").html("Add Common Data Set");
+	$("#modalTitleRole").html("Common Data Set");
 	$("#modalDescription").html("Common Data Set");
 	$("#f_cds_name").val("");
 	$("#f_cds_description").val("");
@@ -234,7 +234,7 @@ var listCommonDataSetFn = function(data) {
 		
 			$(".edit").on("click",function() {
 			clearFn();
-			$("#modalTitleRole").html("Edit Common Data Set");
+			$("#modalTitleRole").html("Common Data Set");
 			$("#modalDescription").html("Common Data Set");
 			
 			$(this).parent().parent().parent().children().click();
@@ -781,11 +781,27 @@ var copyCdsFn = function () {
 			async:false,
 			data:{"cds":cds,"appraisal_level":appraisal},
 			success : function(data) {
+				console.log(data);
 				
-				if(data['status']==200){
+				if(data['status']==200 && data['duplicates'].length == 0 ){
 					callFlashSlide("Copy Successfully.");
 					getDataFn($("#pageNumber").val(),$("#rpp").val());
 					$('#ModalCopy').modal('hide');
+					
+				}else if(data['duplicates'].length > 0){
+					var validate = "";
+					validate += "<font color='red'>* </font> The field is Duplicates  ↓ <br>";
+					$.each(data['duplicates'], function(index, indexEntry) {
+						
+						if(indexEntry['cds_name']!=undefined){
+							validate+="<font color='red'>&nbsp&nbsp* </font> cds name: "+indexEntry['cds_name']+" ,";
+						}
+						if(indexEntry['appraisal_level']!=undefined){
+							validate+="<font color='red'>&nbsp</font> appraisal level: "+indexEntry['appraisal_level']+"<br>";
+						}
+					});
+					callFlashSlideInModal(validate,"#information3","error");
+					
 					
 				}
 			}
