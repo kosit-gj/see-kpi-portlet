@@ -80,9 +80,40 @@ var listCdsResultFn = function (data) {
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_year"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["month_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch' style='text-align: right;padding-right: 10px;'>"+ addCommas(parseFloat(indexEntry["cds_value"]).toFixed(2))+ "</td>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;text-align: center;\"><i id='"+ indexEntry["cds_result_id"]+ "' class='fa fa-trash del' style='color:red'></i></td>";
 		htmlTable += "</tr>";////parseFloat().toLocaleString()
 	});
 	$("#listCdsResult").html(htmlTable);
+	$(".del").on("click",function(){
+		var id = this.id;
+		 
+		$("#confrimModal").modal();
+		$(document).off("click","#btnConfirmOK");
+		$(document).on("click","#btnConfirmOK",function(){
+		
+			$.ajax({
+				 url:restfulURL+restfulPathCdsResult+"/"+id,
+				 type : "delete",
+				 dataType:"json",
+				 headers:{Authorization:"Bearer "+tokenID.token},
+				success:function(data){    
+			    	 
+				     if(data['status']==200){
+				    	 
+				       callFlashSlide("Delete Successfully.");
+				       getDataFn($("#pageNumber").val(),$("#rpp").val()); 
+				       $("#confrimModal").modal('hide');
+				       
+				     }else if (data['status'] == "400"){
+				    	 $("#confrimModal").modal('hide');
+				    	 callFlashSlide(data['data'],"error");
+				    	}
+				 }
+			});
+			
+		});
+		
+	});	
 }
 
 //-------------------  Appraisal Data FN END ---------------------

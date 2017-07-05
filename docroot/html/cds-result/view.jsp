@@ -536,6 +536,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 											<th style='width: auto'>Year&emsp;</th>
 											<th style='width: auto'>Month&emsp;</th>
 											<th style='width:auto;text-align: right;'>CDS&nbsp;Value&emsp;</th>
+											<th style='width: auto; text-align: center;'>Manage</th>
 										</tr>
 									</thead>
 									<tbody id="listCdsResult">
@@ -662,3 +663,46 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 		</div>
 	</div>
 	<!-- Modal End  -->
+	
+		<!-- Modal Confirm Start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal"
+		class="modal inmodal in" style="width:400px;left:calc;display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content  bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button" style="padding-top:3px">
+						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+					</button>
+					<h5 class="modal-title">Confirm Dialog</h5>
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
+                <hr>
+                 -->
+					<!-- form start -->
+					<div class="form-kpi-mangement">
+						<div class="form-kpi-label" align="center">
+
+							<label>Confirm to Delete Data?</label>
+						</div>
+					</div>
+
+					<!-- form start -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+					<div align="center">
+						<button class="btn btn-success" id="btnConfirmOK" type="button">
+							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
+						</button>
+						&nbsp;&nbsp;
+						<button data-dismiss="modal" class="btn btn-danger" type="button">
+							<i class="fa fa-times-circle"></i>&nbsp;Cancel
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal Confirm End -->
