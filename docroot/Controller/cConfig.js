@@ -1,6 +1,6 @@
 /*Office*/
-var restfulURL="http://171.96.200.176";
-var ifameURL="http://171.96.200.176";
+var restfulURL="http://192.168.1.254";
+var ifameURL="http://192.168.1.254";
 
 /*Tangying*/
 //var restfulURL="http://192.168.1.240";

@@ -73,8 +73,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 .aui #breadcrumbs {
     margin-bottom: 0px;
 }
-
-
+.aui td {padding:3px 3px 3px 8px !important;}
+.aui .objectCenter {vertical-align: middle !important;}
 .aui .btn {
 	font-size: 14px;
  	padding: 4px 12px; 
@@ -87,6 +87,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
     padding: none;
     font-size: 14px;
 }
+
 </style>
 	
 		<div class="">
@@ -232,33 +233,66 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
                                  <div class="row-fluid">
 							
 									<div class="span5 object-right" >
-									<label class='text-label'>  Result Score Mode  &nbsp;:</label>
+									<label class='text-label'>  Raise Type  &nbsp;:</label>
 									
 									</div>
-									<div class="span3" id="salarySystem">
+									<div class="span3">
 										
-										<label class="radio" style="margin-bottom: 10px;">
-											  <input checked='checked'  type="radio" name="optionsRadios" id="radiosWeight" value="0">
-											  Percentage Mode
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+											  <input checked='checked'  type="radio" name="optionsRadios" id="raiseFixAmount" value="0">
+											  Fix Amount
 										</label>
-										<label class="radio">
-											<input type="radio" name="optionsRadios" id="radiosScore" value="1" >
-											  Score
-											<span style="padding-left: 21px;"> Max Score &nbsp;:</span>	
-											<input  class="form-control input-data numberOnly" style="width: 50px;" type="text" id="maxScore">
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+											<input type="radio" name="optionsRadios" id="raisePercentage" value="1" >
+											  Percentage
 										</label>
 										
 									</div>
 
                                  </div> 
-                                 
+                                 <div class="row-fluid">
+							
+									<div class="span5 object-right" >
+									<label class='text-label'>  Result Type  &nbsp;:</label>
+									
+									</div>
+									<div class="span5">
+										
+										
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+											<input type="radio" name="optionsRadios2" id="resultPercentage" value="0" checked='checked'>
+											  Percentage
+										</label>
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+											  <input   type="radio" name="optionsRadios2" id="raiseScore" value="1">
+											  Score
+										</label>
+										<button disabled data-target="#ModalEmpResult" data-toggle="modal" class=" btn btn-success " type="button" id="btnEmpResult" style="margin: -6px 10px 6px 10px;" >Employee Result Thershold</button>
+									</div>
+
+                                 </div> 
+                                 <div class="row-fluid">
+							
+									<div class="span5 object-right" >
+									<label class='text-label'>  Theme Color &nbsp;:</label>
+									
+									</div>
+									<div class="span3" style="margin-bottom: 25px;">
+										<button
+										    class="jscolor {valueElement:null,value:'ffcc00',valueElement:'themeColor',onFineChange:'updateThemeFn(this)'}"
+										    style="width:50px; height:20px;"></button>
+										    <input type="hidden" id="themeColor" value="">
+										   
+									</div>
+
+                                 </div> 
                                  <div class="row-fluid">
 							
 									<div class="span5 object-right" >
 									<label>  </label>
 									
 									</div>
-									<div class="span3 btn-right">
+									<div class="span5 btn-right">
 										<input type="hidden" name="id" id="id" value="">
 						   				<input type="hidden" name="action" id="action" value="add">
 						   				
@@ -289,7 +323,82 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
   
   <!--  #####################Content data here ######################-->
 		
-	
+	<!-- Modal Start Role -->
+
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalEmpResult"
+		class="modal inmodal" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
+						<span aria-hidden="true">×</span><span class="sr-only"></span>
+					</button>
+					<!-- <i class="fa fa-laptop modal-icon"></i> -->
+					<h4 class="modal-title" id="modalTitleRole">Emp Thershold</h4>
+					<!-- 
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                 -->
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<div class="row-fluid">
+						<div class="col-lg-12">
+						
+						
+						<div class="form-group pull-left m-b-none "> <!-- data-target="#ModalRole"  -->
+							<button type="button" class="btn btn-primary add" style="">
+								&nbsp;&nbsp;Add&nbsp;&nbsp;
+							</button>
+							<button type="button" class="btn btn-warning edit " style="margin-left: 5px;">
+								&nbsp;&nbsp;Edit&nbsp;&nbsp;
+							</button>
+							<button  type="button" class="btn btn-danger del "style="margin-left: 5px;">
+								&nbsp;&nbsp;Delete&nbsp;&nbsp;
+							</button>
+						</div>
+						<div class="form-group pull-right m-b-none "> 
+							<button class="btn btn-success" type="button" id="btnEmpSubmit" style="margin-left: 5px;">Save</button>
+							<button class="btn btn-danger btnEmpCancle" id="btnEmpCancel" type="button" style="margin-left: 5px;">Cancel</button>
+						</div>
+						</div>
+					</div>
+
+
+					<!-- form start -->
+
+					<div>
+						<!-- start table -->
+						<div class="table-responsive">
+							<table class="table table-striped" id="formTableRole">
+								<thead>
+									<tr>
+										<th style='width: auto; '>Check Box</th>
+										<th style='width: auto'>Begin Threshold</th>
+										<th style='width: auto'>End Threshold</th>
+										<th style='width: auto'>Color Picker</th>
+									</tr>
+								</thead>
+								<tbody id="formListEmpResult">
+
+								</tbody>
+							</table>
+						</div>
+
+						<!-- end table -->
+
+
+
+					</div>
+					<!-- form End -->
+					<!-- content end -->
+					<input type="hidden" name="action" id="action" value="add">
+					<div class="alert alert-warning" id="information"
+						style="display: none;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End Role -->
 
 
 

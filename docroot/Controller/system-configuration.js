@@ -3,11 +3,28 @@
 //var tokenID= eval("("+sessionStorage.getItem("tokenID")+")");
 var tempSystemconId ="";
 var galbalSystemcon=[];
+var galbalDataEmpThreshold =[];
 var restfulPathdropDownListMonth="kpi_api/public/system_config/month_list";
 var restfulPathSystemcon="/kpi_api/public/system_config";
 var restfulPathDropDownMonth=restfulPathSystemcon+"/month_list";
 var restfulPathDropDownFrequency=restfulPathSystemcon+"/frequency_list";
-
+var data2 = [{
+	  "id": 1,
+	  "begin_threshold": 1.07,
+	  "end_threshold": 2.37,
+	  "color": "3a69cf"
+	}, {
+	  "id": 2,
+	  "begin_threshold": 1.22,
+	  "end_threshold": 2.29,
+	  "color": "9ad67f"
+	}, {
+	  "id": 3,
+	  "begin_threshold": 2.0,
+	  "end_threshold": 2.17,
+	  "color": "804780"
+	}];
+var maxData = 0;
 //Check Validation
 var validationFn = function(data){
 	var validate = "";
@@ -65,6 +82,46 @@ var getDataFn = function(page,rpp){
 	
 };
 //*********** getdata end *********************//
+
+//------------------- getDateEmpThresholdFn FN Start ---------------------
+var getDateEmpThresholdFn = function(){
+	//var month= $("#drop_down_list_month").val();
+	
+	$.ajax({
+		url : restfulURL+restfulPathSystemcon,
+		type : "get",
+		dataType : "json",
+		headers:{Authorization:"Bearer "+tokenID.token},
+		async:false,// w8 data 
+		success : function(data) {
+			galbalDataEmpThreshold=data2;
+			
+			listEmpThresholdFn(data2);
+		}
+	});
+	
+};
+//*********** getDateEmpThresholdFn end *********************//
+
+//------------------- listEmpThresholdFn FN Start ---------------------
+var listEmpThresholdFn = function(data){
+	var htmlEmpthreshold='';
+	$.each(data,function(index,indexEntry){
+		htmlEmpthreshold += "<tr class='rowSearch'>";
+		htmlEmpthreshold += "<td class='objectCenter'>";
+		htmlEmpthreshold +=	"	<input disabled style=\"margin-bottom: 3px;\"type=\"checkbox\"  class='selectEmpCheckbox' id=empCheckbox-"+indexEntry["id"]+" value=\""+indexEntry["id"]+"\">"+ "</td>";
+		htmlEmpthreshold +="<td class='objectCenter'><input disabled type='text' placeholder='Begin Threshold' style='width: 110px;margin-bottom: 0px;' class='selectEmpBegin' id='empBegin-"+indexEntry["id"]+"' value=\""+indexEntry["begin_threshold"]+"\"></td>";
+		htmlEmpthreshold +="<td class='objectCenter'><input disabled type='text' placeholder='End Threshold' style='width: 110px;margin-bottom: 0px;' class='selectEmpEnd' id='empBegin-"+indexEntry["id"]+"' value=\""+indexEntry["end_threshold"]+"\"></td>";
+		htmlEmpthreshold +="<td class='objectCenter'><button disabled class=\"jscolor {valueElement:null,value:'"+indexEntry["color"]+"',valueElement:'empColor-"+indexEntry["id"]+"'} selectEmpColor\" style='width:50px; height:20px;'></button> <input type='hidden' id=\"empColor-"+indexEntry["id"]+"\" value='"+indexEntry["color"]+"'></td>";
+		htmlEmpthreshold += "</tr>";
+		maxData = indexEntry["id"]; 
+	});
+	$('#formListEmpResult').html(htmlEmpthreshold);
+	jscolor.installByClassName("jscolor");
+	
+	
+};
+//*********** listEmpThresholdFn end *********************//
 
 
 //************ clear start *********//
@@ -236,8 +293,8 @@ var updateFn = function() {
 			"appraisal_frequency_id"            :  $("#appraisalFrequency").val(),
 			"bonus_frequency_id"                :  $("#bonusFrequency").val(),
 			"bonus_prorate"                     :  $("#bonusprorateSystem").val(),
-			"daily_bonus_rate"                        :  $("#dailyBonusRate").val(),
-			"monthly_bonus_rate"                        :  $("#monthlyBonusRate").val(),
+			"daily_bonus_rate"                  :  $("#dailyBonusRate").val(),
+			"monthly_bonus_rate"                :  $("#monthlyBonusRate").val(),
 			"nof_date_bonus"                    :  $("#workingSystem").val(),
 			"salary_raise_frequency_id"         :  $("#salaryRaiseFrequency").val(),
 			"current_appraisal_year"            :  $("#current_appraisal_year").val()
@@ -265,8 +322,14 @@ var updateFn = function() {
 
 //******************** update end********//
 
-
-
+//******************** updateTheme start********//
+var updateThemeFn = function(color){
+	console.log(color);
+	$(".ibox-title").css({"background-color": "#"+color, "border-color": "#"+color});
+	$(".ibox-content").css({"border-color": "#"+color});
+	$(".modal-header").css({"background": "#"+color});
+};
+//******************** updateTheme end********//
 $(document).ready(function () {
 	
 	 var username = $('#user_portlet').val();
@@ -286,7 +349,7 @@ $(document).ready(function () {
 				
 			});
 			
-/*
+			/*
 			jQuery('.numberOnly').keyup(function () { 
 			    // this.value = this.value.replace(/[^0-9\.]/g,'');
 		        $(this).val($(this).val().replace(/[^0-9\.]/g,''));
@@ -297,8 +360,8 @@ $(document).ready(function () {
 		        else if ($(this).val().split(".")[1] != null || ($(this).val().split(".")[1]).length ){
 		            $(this).val($(this).val().substring(0, $(this).val().indexOf('.')+3));
 		        }  
-			});*/
-
+			});
+			*/
 			var getSelectionStart = function (o) {
 				if (o.createTextRange) {
 					var r = document.selection.createRange().duplicate()
@@ -320,6 +383,7 @@ $(document).ready(function () {
 				    //get the carat position
 				 var caratPos = getSelectionStart(this);
 				 var dotPos = this.value.indexOf(".");
+				 
 				 if( caratPos > dotPos && dotPos>-1 && (number[1].length > 1)){
 				    return false;
 				 }
@@ -327,17 +391,54 @@ $(document).ready(function () {
 			});
 			
 			
+			$('#btnEmpResult').click(function(){
+				getDateEmpThresholdFn();
+			});
+			$("#btnEmpCancel").click(function(){
+				$("#action").val("add");
+				$(".add").removeAttr("disabled");
+				$(".edit").removeAttr("disabled");
+				$(".del").removeAttr("disabled");
+				getDateEmpThresholdFn();
+				
+			});
+			$('.add').click(function(){
+				$(".edit").attr("disabled","disabled");
+				$(".del").attr("disabled","disabled");
+				$("#action").val("add");
+				
+				maxData++;
+				var htmlEmpthreshold = '';
 
+				htmlEmpthreshold += "<tr class='tempAdd'>";
+				htmlEmpthreshold += "<td class='objectCenter'>";
+				htmlEmpthreshold +=	"	<input disabled style=\"margin-bottom: 3px;\"type=\"checkbox\"  class='selectEmpCheckbox' id=empCheckbox-"+maxData+" >"+ "</td>";
+				htmlEmpthreshold +="<td class='objectCenter'><input type='text' placeholder='Begin Threshold' style='width: 110px;margin-bottom: 0px;' class='selectEmpBegin' id='empBegin-"+maxData+"' ></td>";
+				htmlEmpthreshold +="<td class='objectCenter'><input type='text' placeholder='End Threshold' style='width: 110px;margin-bottom: 0px;' class='selectEmpEnd' id='empBegin-"+maxData+"' ></td>";
+				htmlEmpthreshold +="<td class='objectCenter'><button class=\"jscolor {valueElement:null,value:'ffffff',valueElement:'empColor-"+maxData+"'} selectEmpColor\" style='width:50px; height:20px;'></button> <input type='hidden' id=\"empColor-"+maxData+"\" value='ffffff'></td>";
+				htmlEmpthreshold += "</tr>";
+				
+				$("#formListEmpResult").append(htmlEmpthreshold);
+				jscolor.installByClassName("jscolor");
+				
+			});
+			$(".edit").click(function(){
+				$("#action").val("edit");
+				$(".add").attr("disabled","disabled");
+				$(".del").attr("disabled","disabled");
+				getDateEmpThresholdFn();
+				
+			});
 			
 	 	}
 	 }
 	 
-	 $("input[name$=optionsRadios]").change(function name() {
-			if($("#radiosScore:checked").is(":checked")){
-				$("#maxScore").removeAttr("disabled");
+	 $("input[name$=optionsRadios2]").change(function name() {
+			if($("#resultPercentage:checked").is(":checked")){
+				$("#btnEmpResult").removeAttr("disabled");
 				//executeFn();
 			}else{
-				$("#maxScore").attr("disabled","disabled");
+				$("#btnEmpResult").attr("disabled","disabled");
 			}
 		});
 	 

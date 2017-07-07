@@ -140,10 +140,21 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 }
 /* Large desktop */
 @media ( min-width : 1200px) {
+.aui #confrimModal {
+		left: 55%;
+	}
 }
-
+/* Portrait tablet to landscape and desktop */
+@media ( min-width : 980px) and (max-width: 1199px) {
+	  .aui #confrimModal {
+		left: 57%;
+	}
+}
 /* Portrait tablet to landscape and desktop */
 @media ( min-width : 768px) and (max-width: 979px) {
+	.aui #confrimModal {
+		left: 58.5%;
+	}
 	.aui #dis-non{display:none;}
 	.aui .ResultsPerPageTop {
 		position: absolute;
@@ -198,6 +209,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 /* Landscape phone to portrait tablet */
 @media ( max-width : 767px) {
+	.aui #confrimModal {
+		left: 23.5%;
+	}
 	.aui #dis-non{display:none;}
 	.aui .ResultsPerPageTop {
 		position: absolute;
@@ -209,6 +223,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 		top: -40px;
 	}
 	@media ( min-width : 481px) and (max-width: 615px) {
+		.aui #confrimModal {
+			left: 16.5%;
+		}
 		.aui .height-32-px {
 			height: 42px
 		}
