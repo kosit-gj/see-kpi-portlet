@@ -16,6 +16,8 @@
 		<portlet id="appraisal-level"></portlet>
 		<portlet id="appraisal-grade"></portlet>
 		<portlet id="appraisal-period"></portlet>
+		<portlet id="appraisal-organization"></portlet>
+		<portlet id="appraisal-position"></portlet>
 		<portlet id="System-Configurations"></portlet>
 		<portlet id="Perspective"></portlet>
 		<portlet id="UOM"></portlet>
