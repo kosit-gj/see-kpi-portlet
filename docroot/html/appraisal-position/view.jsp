@@ -183,7 +183,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 	</div>
 	<!-- end--row -->
-	<div class="container">
+	<div class="row-fluid">
 		<div class="span12">
 			<div class="ibox-title">
 				<h5>Position</h5>
