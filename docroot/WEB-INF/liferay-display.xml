@@ -22,7 +22,7 @@
 		<portlet id="Perspective"></portlet>
 		<portlet id="UOM"></portlet>
 		<portlet id="Appraisal-Structure"></portlet>
-
+		<portlet id="kpi-type"></portlet>
 		<portlet id="import-employee"></portlet>
 		<portlet id="cds-result"></portlet>
 		<portlet id="appraisal-data"></portlet>
@@ -37,4 +37,5 @@
 		<portlet id="dashboard-Kpi-by-org"></portlet>
 	</category>
 	
+
 </display>
