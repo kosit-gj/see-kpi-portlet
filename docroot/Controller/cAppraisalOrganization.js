@@ -1,16 +1,6 @@
-//var restfulURL ="http://192.168.1.58";
-//var restfulPath = ":3001/api/tyw_system_configuration/";
-//var tokenID= eval("("+sessionStorage.getItem("tokenID")+")");
-
-
-
-var restfulPathOrganization="/kpi_api/public/system_config";
-var restfulPathdropDownListOrganization=restfulPathOrganization+"/month_list";
-
-var restfulPathDropDownMonth=restfulPathOrganization+"/month_list";
-var restfulPathDropDownFrequency=restfulPathOrganization+"/frequency_list";
-
-
+var restfulPathOrganization="/see_api/public/org";
+var tempOrgName = "";
+var tempOrgId= "";
 //Check Validation
 var validationFn = function(data){
 	var validate = "";
@@ -28,7 +18,7 @@ var validationFn = function(data){
 		count++;
 	});
 	
-	callFlashSlideInModal(validate,"#information");
+	callFlashSlideInModal(validate,"#information","error");
 	$(".btnModalClose").hide();
 };	
 //------------------- GetData FN Start ---------------------
@@ -42,7 +32,7 @@ var getDataFn = function(page,rpp){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,// w8 data 
 		success : function(data) {
-			listOrganizationFn(data["data"]);
+			listOrganizationFn(data);
 			
 		}
 	});
@@ -61,8 +51,8 @@ var findOneFn = function(id) {
 			
 			$("#mOrgCode").val(data['org_code']);
 			$("#mOrgName").val(data['org_name']);
-
-			$("#dropDownListModalOrg").html(dropDownListModalOrgFn(data['parent_org_code']));
+			$("#mOrgParentName").val(data['parent_org_name']);
+			$("#mOrgParentId").val(data['parent_org_code']);
 
 			//IsAction
 			if(data['is_active']==1){
@@ -89,15 +79,16 @@ var listOrganizationFn = function(data){
 		htmlOrg += "<tr class='rowSearch'>";
 		htmlOrg += "<td style='vertical-align: middle;'>"+ indexEntry["org_code"]+ "</td>";
 		htmlOrg += "<td style='vertical-align: middle;'>"+ indexEntry["org_name"]+ "</td>";
-		htmlOrg += "<td style='vertical-align: middle;'>"+ indexEntry["parent_org_code"]+ "</td>";
-		htmlOrg += "<td style='vertical-align: middle;'>"+IsActive+"</td>";
+		htmlOrg += "<td style='vertical-align: middle;'>"+ indexEntry["parent_org_name"]+ "</td>";
+		htmlOrg += "<td class='objectCenter'>"+IsActive+"</td>";
 		
-		htmlOrg += "<td style='vertical-align: middle;'><i class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"<button class='btn btn-warning btn-xs edit' id="+ indexEntry["org_id"]+ " data-target=#ModalCommonData data-toggle='modal'>Edit</button>&nbsp;" ;
+		htmlOrg += "<td class='objectCenter'><i class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"<button class='btn btn-warning btn-xs edit' id="+ indexEntry["org_id"]+ " data-target=#ModalOrganization data-toggle='modal'>Edit</button>&nbsp;" ;
 		htmlOrg += "<button id="+indexEntry["org_id"]+" class='btn btn-danger btn-xs del'>Delete</button>\"></i></td>";
 		htmlOrg += "</tr>";
 	});
 	$('#listOrganization').html(htmlOrg);
-	
+	//function popover
+	$(".popover-edit-del").popover();
 	$("#tableOrganization").off("click",".popover-edit-del");
 	$("#tableOrganization").on("click",".popover-edit-del",function(){
 		
@@ -164,43 +155,17 @@ var clearFn = function() {
 	 
 	$("#mOrgCode").val("");
 	$("#mOrgName").val("");
+	$("#mOrgParentName").val("");
+	$("#mOrgParentId").val("");
 	$("#checkbox_is_active").prop("checked",false);
 	
 	$(".btnModalClose").click();
-
+	
+	$("#id").val("");
 	$("#action").val("add");
 };
 
 //************** clear end *********//
-
-
-//--------------- DropDownList Bonus start ----------------
-var dropDownListModalOrgFn = function(id){
-	var html="";
-	
-	html+="<select class=\"input span12 m-b-n\" id=\"mOrgParent\" name=\"mOrgParent\">";
-	//html+="<option  value=''>All</option>";
-	$.ajax ({
-		url:restfulURL+restfulPathdropDownListOrganization ,
-		type:"get" ,
-		dataType:"json" ,
-		//headers:{Authorization:"Bearer "+tokenID.token},
-		headers:{Authorization:"Bearer "+tokenID.token},
-		async:false,
-		success:function(data){
-				//galbalDqsRoleObj=data;
-			$.each(data,function(index,indexEntry){
-				if(id==indexEntry["parent_org_code"]){
-					html+="<option selected value="+indexEntry["parent_org_code"]+">"+indexEntry["parent_org_name"]+"</option>";			
-				}else{
-					html+="<option  value="+indexEntry["parent_org_code"]+">"+indexEntry["parent_org_name"]+"</option>";	
-				}
-			});	
-		}
-	});	
-	html+="</select>";
-	return html;
-};
 
 
 
@@ -224,7 +189,7 @@ var updateFn = function() {
 		data : {
 			"org_code":$("#mOrgCode").val(),
 			"org_name":$("#mOrgName").val(),
-			"parent_org_code":$("#mOrgParent").val(),
+			"parent_org_code":$("#mOrgParentId").val(),
 			"is_active":checkboxIsActive
 		},	
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -254,32 +219,25 @@ var listErrorFn =function(data){
 	$.each(data,function(index,indexEntry){
 
 		
-		if(data[index]['employee_code']!= undefined || data[index]['employee_code']==null){
-			if(data[index]['employee_code']== null){//The employee code field is null
-				errorData+="<font color='red'>*</font> employee code : null â†“<br>";
+		if(data[index]['org_code']!= undefined || data[index]['org_code']==null){
+			if(data[index]['org_code']== null){//The position_name field is null
+				errorData+="<font color='red'>*</font> Org code : null ↓<br>";
 			}else{
-				errorData+="<font color='red'>*</font> employee code : "+data[index]['employee_code']+"  â†“<br>";}
+				errorData+="<font color='red'>*</font> Position Name : "+data[index]['position_name']+" ↓<br>";}
 		}
-		if(data[index]['errors']['working_start_date_yyyy_mm_dd']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['working_start_date_yyyy_mm_dd']+"<br>";
+		if(data[index]['errors']['org_code']!=undefined){
+			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['org_code']+"<br>";
 		}
-		if(data[index]['errors']['probation_end_date_yyyy_mm_dd']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['probation_end_date_yyyy_mm_dd']+"<br>";
+		if(data[index]['errors']['org_name']!=undefined){
+			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['org_name']+"<br>";
 		}
-		if(data[index]['errors']['acting_end_date_yyyy_mm_dd']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['probation_end_date_yyyy_mm_dd']+"<br>";
+		if(data[index]['errors']['is_active']!=undefined){
+			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['is_active']+"<br>";
 		}
-		if(data[index]['errors']['salary_amount']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['salary_amount']+"<br>";
-		}
-		if(data[index]['errors']['email']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['email']+"<br>";
-		}
-		
-		
+
 
 	});
-	//alert(errorData);
+	
 	callFlashSlideInModal(errorData,"#information2","error");
 	//callFlashSlideInModal(errorData);
 	/*return errorData;*/
@@ -292,9 +250,10 @@ $(document).ready(function () {
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
 	 	
 	 	if(connectionServiceFn(username,password)==true){
+	 		clearFn();
 			getDataFn();
 	 		$("#btnSubmit").click(function(){
-	 			update();
+	 			updateFn();
 	 		});
 	 		/*
 			var getSelectionStart = function (o) {
@@ -334,8 +293,60 @@ $(document).ready(function () {
 	 		    	return true;
 	 		    }
 			});
+	 		
+	 		//Autocomplete Search Start
+	 		$("#mOrgParentName").autocomplete({
+	 	        source: function (request, response) {
+	 	        	$.ajax({
+	 					 url:restfulURL+restfulPathOrganization+"/auto_org_name",
+	 					 type:"post",
+	 					 dataType:"json",
+	 					 headers:{Authorization:"Bearer "+tokenID.token},
+	 					 data:{"org_name":request.term},
+	 					 //async:false,
+	 	                 error: function (xhr, textStatus, errorThrown) {
+	 	                        console.log('Error: ' + xhr.responseText);
+	 	                    },
+	 					 success:function(data){
+	 						console.log(data);
+	 							response($.map(data, function (item) {
+	 								console.log(item.org_code);
+	 								//alert(item.org_code);
+	 	                            return {
+	 	                                label: item.org_name,
+	 	                                value: item.org_name,
+	 	                                org_code:item.org_code
+	 	                            };
+	 	                        }));
+	 						
+	 					},
+	 					beforeSend:function(){
+	 						$("body").mLoading('hide');	
+	 					}
+	 					
+	 					});
+	 	        },
+	 			select:function(event, ui) {
+	 				$("#mOrgParentName").val(ui.item.value);
+	 	            $("#mOrgParentId").val(ui.item.org_code);
+	 	            tempOrgName = ui.item.value;
+	 	            tempOrgId=ui.item.org_code;
+	 	            return false;
+	 	        },change: function(e, ui) {  
+	 				if ($("#mOrgParentName").val() == tempOrgName) {
+	 					$("#mOrgParentId").val(tempOrgId);
+	 				} else if (ui.item != null) {
+	 					$("#mOrgParentId").val(ui.item.org_code);
+	 				} else {
+	 					$("#mOrgParentId").val("");
+	 				}
+	 	        	
+	 	         }
+	 	    });
+	 	   
+	 		//Autocomplete Search End
 			$("#exportToExcel").click(function(){
-				$("form#formExportToExcel").attr("action",$("#url_portlet").val()+"/file/import_employee_template.xlsx");
+				$("form#formExportToExcel").attr("action",$("#url_portlet").val()+"/file/appraisal_organization_template.xlsx");
 			});
 			//FILE IMPORT MOBILE START
 			$("#btn_import").click(function () {
@@ -375,7 +386,7 @@ $(document).ready(function () {
 				});
 				$("body").mLoading();
 				$.ajax({
-					url:restfulURL+restfulPathOrganization,
+					url:restfulURL+restfulPathOrganization+"/import",
 					type: 'POST',
 					data: data,
 					cache: false,
@@ -389,7 +400,7 @@ $(document).ready(function () {
 						console.log(data);
 						if(data['status']==200 && data['errors'].length==0){
 									
-							callFlashSlide("Import Employee Successfully");
+							callFlashSlide("Import Organization Successfully");
 							getDataFn();
 							$("body").mLoading('hide');
 							$('#ModalImport').modal('hide');

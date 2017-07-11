@@ -105,6 +105,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 #breadcrumbs {
 	margin-bottom: 0px;
 }
+.aui .ui-autocomplete{
+	z-index:1200;
+}
 .aui .form-group {
 	margin-bottom: 5px;
 }
@@ -134,10 +137,12 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	background-color: #f3f3f4;
 }
 
-#objectCenter {
-	text-align: center;
+.aui #objectCenter {
+	text-align: center !important;;
 }
-
+.aui .objectCenter {
+	text-align: center !important;;
+}
 .aui .checkbox input[type="checkbox"] {
 	opacity: 1;
 	z-index: 1;
@@ -226,13 +231,13 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									</tr>
 								</thead>
 								<tbody id="listOrganization">
-									<tr>
-										<td>1</td>
-										<td>สาย</td>
-										<td>สาย</td>
-										<td id="objectCenter" class="objectCenter " style=""><input style="margin-bottom: 3px;" class="selectCdsCheckbox" id="kpiCheckbox-959" value="959" type="checkbox"></td>
-										<td id="objectCenter" style="vertical-align: middle;"><i class="fa fa-cog font-gear popover-edit-del" data-html="true" data-toggle="popover" data-placement="top" data-trigger="focus" tabindex="1" data-content="&lt;button class='btn btn-warning btn-xs edit' id=960 data-target=#ModalOrganization data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=960 data-target=#confrimModal class='btn btn-danger btn-xs del'&gt;Delete&lt;/button&gt;" data-original-title="" title=""></i></td>
-									<tr>
+<!-- 									<tr> -->
+<!-- 										<td>1</td> -->
+<!-- 										<td>สาย</td> -->
+<!-- 										<td>สาย</td> -->
+<!-- 										<td id="objectCenter" class="objectCenter " style=""><input style="margin-bottom: 3px;" class="selectCdsCheckbox" id="kpiCheckbox-959" value="959" type="checkbox"></td> -->
+<!-- 										<td id="objectCenter" style="vertical-align: middle;"><i class="fa fa-cog font-gear popover-edit-del" data-html="true" data-toggle="popover" data-placement="top" data-trigger="focus" tabindex="1" data-content="&lt;button class='btn btn-warning btn-xs edit' id=960 data-target=#ModalOrganization data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=960 data-target=#confrimModal class='btn btn-danger btn-xs del'&gt;Delete&lt;/button&gt;" data-original-title="" title=""></i></td> -->
+<!-- 									<tr> -->
 								</tbody>
 							</table>
 
@@ -268,7 +273,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
                 <div class="row-fluid">
                 	<div class="span12 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
-							<label class="control-label">Organization Code:<span class='redFont'>*</span></label>
+							<label class="control-label">Organization Code:</label>
 								<div class="controls">
 									<input type="text" class="form-control input-sm span12 numberOnly" size="15" maxlength="15" placeholder="" id="mOrgCode"/>
 								</div>
@@ -285,8 +290,13 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 						</div>
 						<div class="form-group p-xxs">
 							<label class="control-label">Parent Organization :</label>
-								<div class="controls" id="dropDownListModalOrg">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="mOrg"/>
+								<div class="controls" >
+									<input 
+									class="form-control input-sm span12"
+									style="margin-bottom: 10px;"  id="mOrgParentName" 
+									name="mOrgParentName" type="text" placeholder="Parent Organization"> <input
+									class="form-control input-sm" id="mOrgParentId" name="mOrgParentId"
+									value="" type="hidden">
 								</div>
 											
  
@@ -313,7 +323,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
    				<button class="btn btn-success" type="button" id="btnSubmit">Save</button>
 <!--    				<button class="btn btn-success" type="button" id="btnAddAnother">Save & Add Another</button> -->
                 <button data-dismiss="modal" class="btn btn-danger btnCancle" type="button">Cancel</button>
-                <div class="alert alert-warning information" id="information" style="display: none;max-height:45px; overflow-y: scroll; position:relative;"></div>
+                <div class="alert alert-warning information" id="information" style="display: none;"></div>
             </div>
         </div>
     </div>

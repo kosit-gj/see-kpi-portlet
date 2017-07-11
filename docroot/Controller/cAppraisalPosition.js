@@ -1,4 +1,4 @@
-var restfulPathPosition="/kpi_api/public/system_config";
+var restfulPathPosition="/see_api/public/position";
 
 
 //Check Validation
@@ -18,7 +18,7 @@ var validationFn = function(data){
 		count++;
 	});
 	
-	callFlashSlideInModal(validate,"#information");
+	callFlashSlideInModal(validate,"#information","error");
 	$(".btnModalClose").hide();
 };	
 //------------------- GetData FN Start ---------------------
@@ -32,7 +32,7 @@ var getDataFn = function(page,rpp){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,// w8 data 
 		success : function(data) {
-			listPositionFn(data["data"]);
+			listPositionFn(data);
 			
 		}
 	});
@@ -48,9 +48,8 @@ var findOneFn = function(id) {
 		dataType : "json",
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success : function(data) {		
-			
+			$("#id").val(id);
 			$("#mPosName").val(data['position_name']);
-
 			//IsAction
 			if(data['is_active']==1){
 				$('#checkbox_is_active').prop('checked', true);
@@ -75,14 +74,14 @@ var listPositionFn = function(data){
 		
 		htmlOrg += "<tr class='rowSearch'>";
 		htmlOrg += "<td style='vertical-align: middle;'>"+ indexEntry["position_name"]+ "</td>";
-		htmlOrg += "<td style='vertical-align: middle;'>"+IsActive+"</td>";
+		htmlOrg += "<td style='vertical-align: middle;text-align: center;'>"+IsActive+"</td>";
 		
-		htmlOrg += "<td style='vertical-align: middle;'><i class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"<button class='btn btn-warning btn-xs edit' id="+ indexEntry["position_id"]+ " data-target=#ModalCommonData data-toggle='modal'>Edit</button>&nbsp;" ;
+		htmlOrg += "<td style='vertical-align: middle;text-align: center;'><i class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"<button class='btn btn-warning btn-xs edit' id="+ indexEntry["position_id"]+ " data-target=#ModalPosition data-toggle='modal'>Edit</button>&nbsp;" ;
 		htmlOrg += "<button id="+indexEntry["position_id"]+" class='btn btn-danger btn-xs del'>Delete</button>\"></i></td>";
 		htmlOrg += "</tr>";
 	});
 	$('#listPosition').html(htmlOrg);
-	
+	$(".popover-edit-del").popover();
 	$("#tablePosition").off("click",".popover-edit-del");
 	$("#tablePosition").on("click",".popover-edit-del",function(){
 		
@@ -146,7 +145,7 @@ var listPositionFn = function(data){
 //************ clear start *********//
 
 var clearFn = function() {
-	 
+	$("#id").val("");
 	$("#mPosName").val("");
 	$("#checkbox_is_active").prop("checked",false);
 	
@@ -179,7 +178,7 @@ var updateFn = function() {
 		type : "PATCH",
 		dataType : "json",
 		data : {
-			"org_code":$("#mPosName").val(),
+		    "position_name": $("#mPosName").val(),
 			"is_active":checkboxIsActive
 		},	
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -209,29 +208,19 @@ var listErrorFn =function(data){
 	$.each(data,function(index,indexEntry){
 
 		
-		if(data[index]['employee_code']!= undefined || data[index]['employee_code']==null){
-			if(data[index]['employee_code']== null){//The employee code field is null
-				errorData+="<font color='red'>*</font> employee code : null â†“<br>";
+		if(data[index]['position_name']!= undefined || data[index]['position_name']==null){
+			if(data[index]['position_name']== null){//The position_name field is null
+				errorData+="<font color='red'>*</font> Position Name : null ↓<br>";
 			}else{
-				errorData+="<font color='red'>*</font> employee code : "+data[index]['employee_code']+"  â†“<br>";}
+				errorData+="<font color='red'>*</font> Position Name : "+data[index]['position_name']+" ↓<br>";}
 		}
-		if(data[index]['errors']['working_start_date_yyyy_mm_dd']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['working_start_date_yyyy_mm_dd']+"<br>";
+		if(data[index]['errors']['position_name']!=undefined){
+			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['position_name']+"<br>";
 		}
-		if(data[index]['errors']['probation_end_date_yyyy_mm_dd']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['probation_end_date_yyyy_mm_dd']+"<br>";
+		if(data[index]['errors']['is_active']!=undefined){
+			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['is_active']+"<br>";
 		}
-		if(data[index]['errors']['acting_end_date_yyyy_mm_dd']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['probation_end_date_yyyy_mm_dd']+"<br>";
-		}
-		if(data[index]['errors']['salary_amount']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['salary_amount']+"<br>";
-		}
-		if(data[index]['errors']['email']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['email']+"<br>";
-		}
-		
-		
+
 
 	});
 	//alert(errorData);
@@ -249,7 +238,7 @@ $(document).ready(function () {
 	 	if(connectionServiceFn(username,password)==true){
 			getDataFn();
 	 		$("#btnSubmit").click(function(){
-	 			update();
+	 			updateFn();
 	 		});
 	 		/*
 			var getSelectionStart = function (o) {
@@ -290,7 +279,7 @@ $(document).ready(function () {
 	 		    }
 			});
 			$("#exportToExcel").click(function(){
-				$("form#formExportToExcel").attr("action",$("#url_portlet").val()+"/file/import_employee_template.xlsx");
+				$("form#formExportToExcel").attr("action",$("#url_portlet").val()+"/file/appraisal_position_template.xlsx");
 			});
 			//FILE IMPORT MOBILE START
 			$("#btn_import").click(function () {
@@ -330,7 +319,7 @@ $(document).ready(function () {
 				});
 				$("body").mLoading();
 				$.ajax({
-					url:restfulURL+restfulPathPosition,
+					url:restfulURL+restfulPathPosition+"/import",
 					type: 'POST',
 					data: data,
 					cache: false,
@@ -344,7 +333,7 @@ $(document).ready(function () {
 						console.log(data);
 						if(data['status']==200 && data['errors'].length==0){
 									
-							callFlashSlide("Import Employee Successfully");
+							callFlashSlide("Position Successfully");
 							getDataFn();
 							$("body").mLoading('hide');
 							$('#ModalImport').modal('hide');

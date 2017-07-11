@@ -224,11 +224,11 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									</tr>
 								</thead>
 								<tbody id="listPosition">
-									<tr>
-										<td>asdasdasdasdasd</td>
-										<td id="objectCenter" class="objectCenter " style=""><input style="margin-bottom: 3px;" class="selectCdsCheckbox" id="kpiCheckbox-959" value="959" type="checkbox"></td>
-										<td id="objectCenter" style="vertical-align: middle;"><i class="fa fa-cog font-gear popover-edit-del" data-html="true" data-toggle="popover" data-placement="top" data-trigger="focus" tabindex="1" data-content="&lt;button class='btn btn-warning btn-xs edit' id=960 data-target=#ModalPosition data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=960 data-target=#confrimModal class='btn btn-danger btn-xs del'&gt;Delete&lt;/button&gt;" data-original-title="" title=""></i></td>
-									<tr>
+<!-- 									<tr> -->
+<!-- 										<td>asdasdasdasdasd</td> -->
+<!-- 										<td id="objectCenter" class="objectCenter " style=""><input style="margin-bottom: 3px;" class="selectCdsCheckbox" id="kpiCheckbox-959" value="959" type="checkbox"></td> -->
+<!-- 										<td id="objectCenter" style="vertical-align: middle;"><i class="fa fa-cog font-gear popover-edit-del" data-html="true" data-toggle="popover" data-placement="top" data-trigger="focus" tabindex="1" data-content="&lt;button class='btn btn-warning btn-xs edit' id=960 data-target=#ModalPosition data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=960 data-target=#confrimModal class='btn btn-danger btn-xs del'&gt;Delete&lt;/button&gt;" data-original-title="" title=""></i></td> -->
+<!-- 									<tr> -->
 								</tbody>
 							</table>
 
