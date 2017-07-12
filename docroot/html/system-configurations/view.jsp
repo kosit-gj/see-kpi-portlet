@@ -87,6 +87,12 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
     padding: none;
     font-size: 14px;
 }
+.aui .modal {
+	top: 3%;
+}
+.aui #confrimModal {
+	top: 10%;
+}
 
 </style>
 	
@@ -239,11 +245,11 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									<div class="span3">
 										
 										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
-											  <input checked='checked'  type="radio" name="optionsRadios" id="raiseFixAmount" value="0">
+											  <input checked='checked'  type="radio" name="optionsRadios" id="raiseFixAmount" value="1">
 											  Fix Amount
 										</label>
 										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
-											<input type="radio" name="optionsRadios" id="raisePercentage" value="1" >
+											<input type="radio" name="optionsRadios" id="raisePercentage" value="2" >
 											  Percentage
 										</label>
 										
@@ -260,14 +266,14 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 										
 										
 										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
-											<input type="radio" name="optionsRadios2" id="resultPercentage" value="0" checked='checked'>
+											<input type="radio" name="optionsRadios2" id="resultPercentage" value="1" checked='checked'>
 											  Percentage
 										</label>
 										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
-											  <input   type="radio" name="optionsRadios2" id="raiseScore" value="1">
+											  <input   type="radio" name="optionsRadios2" id="raiseScore" value="2">
 											  Score
 										</label>
-										<button disabled data-target="#ModalEmpResult" data-toggle="modal" class=" btn btn-success " type="button" id="btnEmpResult" style="margin: -6px 10px 6px 10px;" >Employee Result Thershold</button>
+										<button  data-target="#ModalEmpResult" data-toggle="modal" class=" btn btn-success " type="button" id="btnEmpResult" style="margin: -6px 10px 6px 10px;" >Employee Result Thershold</button>
 									</div>
 
                                  </div> 
@@ -391,8 +397,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					</div>
 					<!-- form End -->
 					<!-- content end -->
-					<input type="hidden" name="action" id="action" value="add">
-					<div class="alert alert-warning" id="information"
+
+					<div class="alert alert-warning" id="information2"
 						style="display: none;"></div>
 				</div>
 			</div>
@@ -402,5 +408,48 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 
 
+<!-- Modal Confirm Start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal"
+		class="modal inmodal in" style="width:400px;left:calc;display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content  bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button" style="padding-top:3px">
+						<span aria-hidden="true">×</span><span class="sr-only"></span>
+					</button>
+					<h5 class="modal-title">Confirm Dialog</h5>
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
+                <hr>
+                 -->
+					<!-- form start -->
+					<div class="form-kpi-mangement">
+						<div class="form-kpi-label" align="center">
 
+							<label>Confirm to Delete Data?</label>
+						</div>
+					</div>
+
+					<!-- form start -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+					<div align="center">
+						<button class="btn btn-success" id="btnConfirmOK" type="button">
+							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
+						</button>
+						&nbsp;&nbsp;
+						<button data-dismiss="modal" class="btn btn-danger" type="button">
+							<i class="fa fa-times-circle"></i>&nbsp;Cancel
+						</button>
+					</div>
+					<div class="alert alert-warning information" id="information"
+						style="display: none;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal Confirm End -->
 		

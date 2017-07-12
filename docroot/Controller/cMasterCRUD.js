@@ -541,8 +541,8 @@ formHTML+="            <button style=\"padding-top:5px\" data-dismiss=\"modal\" 
 formHTML+="            <h4 class=\"modal-title\" id=\""+options['formDetail']['id']+"\">"+options['formDetail']['formName']+"</h4>";
 formHTML+="        </div>";
 formHTML+="        <div class=\"modal-body\">";
-formHTML+="            <div class=\"row-fluid\"><div class=\"col-lg-12\"><div class=\"span12\" style=\"padding: 0px 10px; height:65px;\"><h1><i class=\"fa fa fa-pencil-square-o icon-title\"></i><small id=\"modalDescription\" style=\" position:absolute;top:37px;left:85px\">"+options['formDetail']['formName']+"</small>";
-formHTML+="           </h1></div></div></div> <hr>";
+//formHTML+="            <div class=\"row-fluid\"><div class=\"col-lg-12\"><div class=\"span12\" style=\"padding: 0px 10px; height:65px;\"><h1><i class=\"fa fa fa-pencil-square-o icon-title\"></i><small id=\"modalDescription\" style=\" position:absolute;top:37px;left:85px\">"+options['formDetail']['formName']+"</small>";
+//formHTML+="           </h1></div></div></div> <hr>";
 formHTML+="           <div class=\"row-fluid\">";
 formHTML+="           <div class=\"span12 form-horizontal p-t-xxs\">";
 

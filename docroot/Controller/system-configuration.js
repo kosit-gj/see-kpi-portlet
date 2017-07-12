@@ -4,29 +4,15 @@
 var tempSystemconId ="";
 var galbalSystemcon=[];
 var galbalDataEmpThreshold =[];
-var restfulPathdropDownListMonth="kpi_api/public/system_config/month_list";
-var restfulPathSystemcon="/kpi_api/public/system_config";
+var restfulPathdropDownListMonth="see_api/public/system_config/month_list";
+var restfulPathSystemcon="/see_api/public/system_config";
 var restfulPathDropDownMonth=restfulPathSystemcon+"/month_list";
 var restfulPathDropDownFrequency=restfulPathSystemcon+"/frequency_list";
-var data2 = [{
-	  "id": 1,
-	  "begin_threshold": 1.07,
-	  "end_threshold": 2.37,
-	  "color": "3a69cf"
-	}, {
-	  "id": 2,
-	  "begin_threshold": 1.22,
-	  "end_threshold": 2.29,
-	  "color": "9ad67f"
-	}, {
-	  "id": 3,
-	  "begin_threshold": 2.0,
-	  "end_threshold": 2.17,
-	  "color": "804780"
-	}];
+var restfulPathEmpThreshold="/see_api/public/emp_threshold";
+
 var maxData = 0;
 //Check Validation
-var validationFn = function(data){
+var validationFn = function(data,id){
 	var validate = "";
 	var count = 0;
 	$.each(data['data'], function(index, indexEntry) {
@@ -42,7 +28,7 @@ var validationFn = function(data){
 		count++;
 	});
 	
-	callFlashSlideInModal(validate,"#information");
+	callFlashSlideInModal(validate,id);
 	$(".btnModalClose").hide();
 };	
 //------------------- GetData FN Start ---------------------
@@ -88,15 +74,15 @@ var getDateEmpThresholdFn = function(){
 	//var month= $("#drop_down_list_month").val();
 	
 	$.ajax({
-		url : restfulURL+restfulPathSystemcon,
+		url : restfulURL+restfulPathEmpThreshold,
 		type : "get",
 		dataType : "json",
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,// w8 data 
 		success : function(data) {
-			galbalDataEmpThreshold=data2;
+			//galbalDataEmpThreshold=data2;
 			
-			listEmpThresholdFn(data2);
+			listEmpThresholdFn(data);
 		}
 	});
 	
@@ -109,15 +95,36 @@ var listEmpThresholdFn = function(data){
 	$.each(data,function(index,indexEntry){
 		htmlEmpthreshold += "<tr class='rowSearch'>";
 		htmlEmpthreshold += "<td class='objectCenter'>";
-		htmlEmpthreshold +=	"	<input disabled style=\"margin-bottom: 3px;\"type=\"checkbox\"  class='selectEmpCheckbox' id=empCheckbox-"+indexEntry["id"]+" value=\""+indexEntry["id"]+"\">"+ "</td>";
-		htmlEmpthreshold +="<td class='objectCenter'><input disabled type='text' placeholder='Begin Threshold' style='width: 110px;margin-bottom: 0px;' class='selectEmpBegin' id='empBegin-"+indexEntry["id"]+"' value=\""+indexEntry["begin_threshold"]+"\"></td>";
-		htmlEmpthreshold +="<td class='objectCenter'><input disabled type='text' placeholder='End Threshold' style='width: 110px;margin-bottom: 0px;' class='selectEmpEnd' id='empBegin-"+indexEntry["id"]+"' value=\""+indexEntry["end_threshold"]+"\"></td>";
-		htmlEmpthreshold +="<td class='objectCenter'><button disabled class=\"jscolor {valueElement:null,value:'"+indexEntry["color"]+"',valueElement:'empColor-"+indexEntry["id"]+"'} selectEmpColor\" style='width:50px; height:20px;'></button> <input type='hidden' id=\"empColor-"+indexEntry["id"]+"\" value='"+indexEntry["color"]+"'></td>";
+		htmlEmpthreshold +=	"	<input disabled style=\"margin-bottom: 3px;\"type=\"checkbox\"  class='selectEmpCheckbox' id="+indexEntry["emp_threshold_id"]+" value=\""+indexEntry["emp_threshold_id"]+"\">"+ "</td>";
+		htmlEmpthreshold +="<td class='objectCenter'><input disabled type='text' placeholder='Begin Threshold' style='width: 110px;margin-bottom: 0px;' class='selectEmpBegin numberOnly' id='empBegin-"+indexEntry["emp_threshold_id"]+"' value=\""+indexEntry["begin_threshold"]+"\"></td>";
+		htmlEmpthreshold +="<td class='objectCenter'><input disabled type='text' placeholder='End Threshold' style='width: 110px;margin-bottom: 0px;' class='selectEmpEnd numberOnly' id='empEnd-"+indexEntry["emp_threshold_id"]+"' value=\""+indexEntry["end_threshold"]+"\"></td>";
+		htmlEmpthreshold +="<td class='objectCenter'><button disabled class=\"jscolor {valueElement:null,value:'"+indexEntry["color_code"]+"',valueElement:'empColor-"+indexEntry["emp_threshold_id"]+"'} selectEmpColor\" style='width:50px; height:20px;'></button> <input type='hidden' id=\"empColor-"+indexEntry["emp_threshold_id"]+"\" value='"+indexEntry["color_code"]+"'></td>";
 		htmlEmpthreshold += "</tr>";
-		maxData = indexEntry["id"]; 
+		
 	});
 	$('#formListEmpResult').html(htmlEmpthreshold);
 	jscolor.installByClassName("jscolor");
+
+	jQuery('.numberOnly').keypress(function (evt) { 
+		 var charCode = (evt.which) ? evt.which : event.keyCode;
+		 var number = this.value.split('.');
+		 if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+		    return false;
+		 }
+		    //just one dot
+		 if(number.length>1 && charCode == 46){
+		    return false;
+		 }
+		    //get the carat position
+		 var caratPos = getSelectionStart(this);
+		 var dotPos = this.value.indexOf(".");
+		 
+		 if( caratPos > dotPos && dotPos>-1 && (number[1].length > 1)){
+		    return false;
+		 }
+		 return true;
+	});
+	
 	
 	
 };
@@ -312,7 +319,7 @@ var updateFn = function() {
 					       
 					 	  
 				}else if (data['status'] == "400"){
-					validationFn(data);
+					validationFn(data,"#information");
 			    }
 			}
 	});
@@ -321,6 +328,194 @@ var updateFn = function() {
 };
 
 //******************** update end********//
+//..................update emp start.......................
+var updateEmpFn = function() {
+	
+	var chackSelect =  false;
+	
+	$.each($(".selectEmpCheckbox").get(),function(index,indexEntry){
+		if($(indexEntry).is(":checked")){
+			chackSelect = true;
+			
+		}
+	});
+	if (chackSelect == false){
+		callFlashSlide("Please Select Employee Thershold !!!");
+
+		
+		}
+	else{
+		var emp_thresholds = [];
+
+		$.each($(".selectEmpCheckbox").get(),function(index,indexEntry){
+			if($(indexEntry).is(":checked")){
+				emp_thresholds.push({
+					"emp_threshold_id"	:	this.id,
+					"begin_threshold" 	:	$("#empBegin-"+this.id).val(),
+					"end_threshold" 	:	$("#empEnd-"+this.id).val(),
+					"color_code"		:	$("#empColor-"+this.id).val()
+				});				
+			}
+		});
+		//alert(JSON.stringify(emp_thresholds));
+
+		$.ajax({
+			url:restfulURL+restfulPathEmpThreshold,
+			type:"PATCH",
+			dataType:"json",
+			data:{"emp_thresholds":emp_thresholds},
+			headers:{authorization:"Bearer "+tokenID.token},
+			async:false,
+			success:function(data){
+				if (data['status'] == "200") {
+
+					getDateEmpThresholdFn();
+					$("#action").val("");
+					$(".add").removeAttr("disabled");
+					$(".edit").removeAttr("disabled");
+					$(".del").removeAttr("disabled");
+					callFlashSlide("Update Successfully.");
+					
+					
+					
+				}else if (data['status'] == "400") {
+					validationFn(data,"#information2");
+				}
+			}
+		});
+		
+
+		
+	}
+	
+	
+	return false
+};
+
+//******************** update emp end********//
+
+//..................insert emp start.......................
+var insertEmpFn = function() {
+	
+		var emp_thresholds = [];
+		var id;
+		$.each($(".newSelectEmpCheckbox").get(),function(index,indexEntry){
+			id=this.id.split("-")[1];
+			
+			emp_thresholds.push({
+				"begin_threshold" 	:	$("#newEmpBegin-"+id).val(),
+				"end_threshold" 	:	$("#newEmpEnd-"+id).val(),
+				"color_code"		:	$("#newEmpColor-"+id).val()
+			});				
+			
+		});
+		alert(JSON.stringify(emp_thresholds));
+
+		$.ajax({
+			url:restfulURL+restfulPathEmpThreshold,
+			type:"POST",
+			dataType:"json",
+			data:{"emp_thresholds":emp_thresholds},
+			headers:{authorization:"Bearer "+tokenID.token},
+			async:false,
+			success:function(data){
+				if (data['status'] == "200") {
+
+					getDateEmpThresholdFn();
+					$("#action").val("");
+					$(".add").removeAttr("disabled");
+					$(".edit").removeAttr("disabled");
+					$(".del").removeAttr("disabled");
+					callFlashSlide("Insert Successfully.");
+					
+					
+					
+				}else if (data['status'] == "400") {
+					validationFn(data,"#information2");
+				}
+			}
+		});
+		
+
+		
+	
+	
+	
+	return false
+};
+
+//******************** insert emp end********//
+//..................Delete emp start.......................
+var deleteEmpFn = function() {
+	var chackSelect =  false;
+	
+
+		
+		
+		$.each($(".selectEmpCheckbox").get(),function(index,indexEntry){
+			if($(indexEntry).is(":checked")){
+				chackSelect = true;
+				
+			}
+		});
+		if (chackSelect == false){
+			callFlashSlide("Please Select Employee Thershold !!!");
+
+			
+			}
+		else{
+			$("#confrimModal").modal();
+			$(document).off("click","#btnConfirmOK");
+			$(document).on("click","#btnConfirmOK",function(){
+			var emp_thresholds = [];
+
+			$.each($(".selectEmpCheckbox").get(),function(index,indexEntry){
+				if($(indexEntry).is(":checked")){
+					emp_thresholds.push({
+						"emp_threshold_id"	:	this.id
+					});				
+				}
+			});
+			//alert(JSON.stringify(emp_thresholds));
+
+			$.ajax({
+				url:restfulURL+restfulPathEmpThreshold,
+				type:"DELETE",
+				dataType:"json",
+				data:{"emp_thresholds":emp_thresholds},
+				headers:{authorization:"Bearer "+tokenID.token},
+				async:false,
+				success:function(data){
+					if (data['status'] == "200") {
+
+						getDateEmpThresholdFn();
+						$("#action").val("");
+						$(".add").removeAttr("disabled");
+						$(".edit").removeAttr("disabled");
+						$(".del").removeAttr("disabled");
+						$("#confrimModal").modal('hide');
+						callFlashSlide("Delect Successfully.");
+						
+						
+						
+					}else if (data['status'] == "400") {
+						$("#confrimModal").modal('hide');
+						validationFn(data,"#information2");
+						callFlashSlide(data,"error");
+					}
+				}
+			});		
+			
+		});
+		}
+
+	
+	
+	
+	return false
+};
+
+//******************** Delete emp end********//
 
 //******************** updateTheme start********//
 var updateThemeFn = function(color){
@@ -392,6 +587,7 @@ $(document).ready(function () {
 			
 			
 			$('#btnEmpResult').click(function(){
+				$("#action").val("")
 				getDateEmpThresholdFn();
 			});
 			$("#btnEmpCancel").click(function(){
@@ -412,21 +608,69 @@ $(document).ready(function () {
 
 				htmlEmpthreshold += "<tr class='tempAdd'>";
 				htmlEmpthreshold += "<td class='objectCenter'>";
-				htmlEmpthreshold +=	"	<input disabled style=\"margin-bottom: 3px;\"type=\"checkbox\"  class='selectEmpCheckbox' id=empCheckbox-"+maxData+" >"+ "</td>";
-				htmlEmpthreshold +="<td class='objectCenter'><input type='text' placeholder='Begin Threshold' style='width: 110px;margin-bottom: 0px;' class='selectEmpBegin' id='empBegin-"+maxData+"' ></td>";
-				htmlEmpthreshold +="<td class='objectCenter'><input type='text' placeholder='End Threshold' style='width: 110px;margin-bottom: 0px;' class='selectEmpEnd' id='empBegin-"+maxData+"' ></td>";
-				htmlEmpthreshold +="<td class='objectCenter'><button class=\"jscolor {valueElement:null,value:'ffffff',valueElement:'empColor-"+maxData+"'} selectEmpColor\" style='width:50px; height:20px;'></button> <input type='hidden' id=\"empColor-"+maxData+"\" value='ffffff'></td>";
+				htmlEmpthreshold +=	"	<input disabled  style=\"margin-bottom: 3px;\"type=\"checkbox\"  class='newSelectEmpCheckbox' id=newEmpCheckbox-"+maxData+" >"+ "</td>";
+				htmlEmpthreshold +="<td class='objectCenter'><input type='text' placeholder='Begin Threshold' style='width: 110px;margin-bottom: 0px;' class='newSelectEmpBegin numberOnly' id='newEmpBegin-"+maxData+"' ></td>";
+				htmlEmpthreshold +="<td class='objectCenter'><input type='text' placeholder='End Threshold' style='width: 110px;margin-bottom: 0px;' class='newSelectEmpEnd numberOnly' id='newEmpEnd-"+maxData+"' ></td>";
+				htmlEmpthreshold +="<td class='objectCenter'><button class=\"jscolor {valueElement:null,value:'ffffff',valueElement:'newEmpColor-"+maxData+"'} newSelectEmpColor\" style='width:50px; height:20px;'></button> <input type='hidden' id=\"newEmpColor-"+maxData+"\" value='ffffff'></td>";
 				htmlEmpthreshold += "</tr>";
 				
 				$("#formListEmpResult").append(htmlEmpthreshold);
 				jscolor.installByClassName("jscolor");
+				jQuery('.numberOnly').keypress(function (evt) { 
+					 var charCode = (evt.which) ? evt.which : event.keyCode;
+					 var number = this.value.split('.');
+					 if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+					    return false;
+					 }
+					    //just one dot
+					 if(number.length>1 && charCode == 46){
+					    return false;
+					 }
+					    //get the carat position
+					 var caratPos = getSelectionStart(this);
+					 var dotPos = this.value.indexOf(".");
+					 
+					 if( caratPos > dotPos && dotPos>-1 && (number[1].length > 1)){
+					    return false;
+					 }
+					 return true;
+				});
 				
 			});
 			$(".edit").click(function(){
 				$("#action").val("edit");
 				$(".add").attr("disabled","disabled");
 				$(".del").attr("disabled","disabled");
-				getDateEmpThresholdFn();
+				//getDateEmpThresholdFn();
+				$(".selectEmpCheckbox").removeAttr("disabled");
+				$(".selectEmpBegin").removeAttr("disabled");
+				$(".selectEmpEnd").removeAttr("disabled");
+				$(".selectEmpColor").removeAttr("disabled");
+				
+				
+				
+			});
+			$(".del").click(function(){
+				$("#action").val("delect");
+				$(".add").attr("disabled","disabled");
+				$(".edit").attr("disabled","disabled");
+				//getDateEmpThresholdFn();
+				$(".selectEmpCheckbox").removeAttr("disabled");
+
+			});
+			$("#btnEmpSubmit").click(function(){
+				if($("#action").val() == ""){
+					callFlashSlide("Please Select Menu Manage !!!");
+				}else if ($("#action").val() == "add") {
+					insertEmpFn();
+				}else if($("#action").val() == "edit"){
+					updateEmpFn();
+				}else{
+					deleteEmpFn();
+				}
+				return false;
+				
+				
 				
 			});
 			
