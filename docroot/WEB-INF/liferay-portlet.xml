@@ -79,7 +79,7 @@
 		<portlet-name>appraisal-assignment</portlet-name>
 		<icon>/icon.png</icon>
 		       
-		   
+		    
 		<!-- include file  start-->
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
@@ -90,7 +90,7 @@
 	   	<header-portlet-css>/css/tywMain.css</header-portlet-css>
 	    <header-portlet-css>/css/appraisal-assignment.css</header-portlet-css>  
 	    <header-portlet-css>/js/Fixed-Header-Table-master/css/defaultTheme.css</header-portlet-css>  
-  
+  		 <header-portlet-css>/js/noUiSlider.10.0.0/nouislider.min.css</header-portlet-css> 
 	                        
 	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
@@ -99,14 +99,16 @@
 		<footer-portlet-javascript>/js/plugins/slimscroll/jquery.slimscroll.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/Fixed-Header-Table-master/jquery.fixedheadertable.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/noUiSlider.10.0.0/nouislider.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/noUiSlider.10.0.0/wNumb.min.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	    
 	    <footer-portlet-javascript>/Controller/cAppraisalAssignment.js</footer-portlet-javascript>
 	    <!-- include file  end-->   
-		
-		      
-		         
+		  
+		            
+		               
 		  
 		<css-class-wrapper>
 			appraisal-assignment-portlet
@@ -715,8 +717,8 @@
 		</css-class-wrapper>
 	</portlet>
 	
-	
-	
+	 
+	  
 	<portlet>     
 		<portlet-name>dashboard-Kpi-by-org</portlet-name>
 		<icon>/icon.png</icon>
@@ -733,27 +735,32 @@
 	    <header-portlet-css>/css/companyDashboard.css</header-portlet-css>  
 	    <header-portlet-css>/libraryChart/jqplot/jquery.jqplot.min.css</header-portlet-css>  
 	 	<header-portlet-css>/libraryChart/jquery-jvectormap/jquery-jvectormap-1.2.2.css</header-portlet-css>  
+	 	<!-- 
 	 	<header-portlet-css>js/Horizontal_Tree/dtree/dtree.css</header-portlet-css>           
-	        
-	         
+	    -->
+	          
 	    <!-- <footer-portlet-javascript>http://code.jquery.com/jquery-1.10.2.min.js</footer-portlet-javascript> -->
-	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
-	     
-	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
+	   
+		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		
+		       
+		   
+		<!-- 
 		<footer-portlet-javascript>/js/plugins/slimscroll/jquery.slimscroll.min.js</footer-portlet-javascript>
+		 -->
+		<footer-portlet-javascript>/js/jQuery-slimScroll-master/jquery.slimscroll.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.sparkline.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.jqplot.1.0.9/jquery.jqplot.js</footer-portlet-javascript>
+		<!-- 
 		<footer-portlet-javascript>/js/Horizontal_Tree/dtree/vertdtree.js</footer-portlet-javascript>
+		-->
 		
-		<footer-portlet-javascript>/libraryChart/jqplot/jquery.jqplot.min.js</footer-portlet-javascript>
-		    
-		 <!--  
-  		<footer-portlet-javascript>/js/jquery.mobile-1.4.5.min.js</footer-portlet-javascript>
-   		   -->
- 
+		<!-- 
+		 <footer-portlet-javascript>/libraryChart/jqplot/jquery.jqplot.min.js</footer-portlet-javascript>
 		 <footer-portlet-javascript>/libraryChart/jquery-jvectormap/jquery-jvectormap-1.2.2.min.js</footer-portlet-javascript>
 		 <footer-portlet-javascript>/libraryChart/jqplot/plugins/jqplot.barRenderer.min.js</footer-portlet-javascript>
 		 <footer-portlet-javascript>/libraryChart/jqplot/plugins/jqplot.categoryAxisRenderer.min.js</footer-portlet-javascript>
@@ -767,9 +774,10 @@
 		 <footer-portlet-javascript>/libraryChart/jqplot/plugins/jqplot.canvasTextRenderer.min.js</footer-portlet-javascript>
 		 <footer-portlet-javascript>/libraryChart/jqplot/plugins/jqplot.highlighter.js</footer-portlet-javascript>
 		 <footer-portlet-javascript>/libraryChart/jqplot/plugins/jqplot.enhancedLegendRenderer.min.js</footer-portlet-javascript>
-		  
+		   --> 
 	       
 	   	<!-- chart framework start -->
+	   	<!-- 
 	     <footer-portlet-javascript>/Controller/initial.js</footer-portlet-javascript>
 		 <footer-portlet-javascript>/Controller/barChart.js</footer-portlet-javascript>
 		 <footer-portlet-javascript>/Controller/barChartHorizontal.js</footer-portlet-javascript>
@@ -781,18 +789,21 @@
 		 <footer-portlet-javascript>/Controller/map.js</footer-portlet-javascript>
 		 <footer-portlet-javascript>/Controller/table.js</footer-portlet-javascript>
 		 <footer-portlet-javascript>/Controller/mainJs.js</footer-portlet-javascript>
+		  -->
 		 
-		
 	    <!-- chart framework end -->
-		  
 		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/Controller/cCompanyDashboardKpiByOrg.js</footer-portlet-javascript>
 	    <!-- include file  end--> 
 		<css-class-wrapper>dashboard-Kpi-by-org-portlet</css-class-wrapper>
 	</portlet>  
+	         
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> refs/remotes/origin/master
 	<portlet>
 		<portlet-name>appraisal-organization</portlet-name>
 		<icon>/icon.png</icon>
@@ -892,3 +903,5 @@
 		<role-link>User</role-link>
 	</role-mapper>
 </liferay-portlet-app>
+ 
+                       
