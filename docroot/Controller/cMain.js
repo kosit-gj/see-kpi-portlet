@@ -70,6 +70,7 @@ var connectionServiceFn = function(username,password){
 		//url:"http://localhost/kpi_api/public/session",
 		type:"POST",
 		dataType:"text",
+		//data:{"username":"1","password":"123"},
 		data:{"username":username,"password":password},
 		async:false,
 		//data:{"username":"2015019","password":"2015019"},
