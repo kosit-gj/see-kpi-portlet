@@ -373,6 +373,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					<div class="form-kpi-label" align="center">
 
 						<label>Confirm to Delete Data?</label>
+						<div id="inform_on_confirm" class='information'></div>
 					</div>
 				</div>
 

@@ -217,9 +217,9 @@ var deleteFn = function(id) {
 			   $("#confrimModal").modal('hide');
 			   
 		}else if(data['status']=="400"){
-			
+			 callFlashSlideInModal(data['data'],"#inform_on_confirm","error");
 			//$("#informConfirm").html("<font color='red'>"+data['data']+"</font>");
-			callFlashSlide("<font color=''>"+data['data']+"</font>","error");  
+			//callFlashSlide("<font color=''>"+data['data']+"</font>","error");  
 			
 		}
      }

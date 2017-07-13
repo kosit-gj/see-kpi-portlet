@@ -132,8 +132,7 @@ var listOrganizationFn = function(data){
 					       $("#confrimModal").modal('hide');
 					       
 					     }else if (data['status'] == "400"){
-					    	 $("#confrimModal").modal('hide');
-					    	 callFlashSlide(data['data'],"error");
+					    	 callFlashSlideInModal(data['data'],"#inform_on_confirm","error");
 					    	}
 					 }
 				});

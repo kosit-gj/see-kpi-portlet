@@ -832,6 +832,7 @@ overflow-y: visible;
 	                <div class="form-kpi-label" align="center">
 	                
 	                 		<label>Confirm to Delete Data?</label>
+	                 		<div id="inform_on_confirm" class='information'></div>
 	                 		<p id='informConfirm'></p>
 	                </div>
                 </div>
