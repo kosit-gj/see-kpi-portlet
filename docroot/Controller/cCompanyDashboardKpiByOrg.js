@@ -564,28 +564,27 @@ $(document).ready(function(){
 	// username = "1";
 	// password =	"11";
 	
+	//disable for demo
+	/*
 	if(username!="" && username!=null & username!=[] && username!=undefined ){
 		if(connectionServiceFn(username,password)==false){
 			return false;
 		}
 	}
+	*/
 	
 	
 	
 	
-	
+	/* disable parameter for demo.
 	yearListFn();
 	$("#paramYear").change(function(){
 		monthListFn($(this).val());
 
 	});
 	$("#paramYear").change();
-	
-//	$("#paramMonth").change(function(){
-//		getBalanceScorecardFn($(this).val());
-//		bindingBulletFn();
-//	});
-//	$("#paramMonth").change();
+	*/
+
 
 
 	
@@ -593,6 +592,8 @@ $(document).ready(function(){
 		
 		$(".appraisalItem").removeClass("clicked");
 		$(this).addClass("clicked");
+		//location.reload();
+		
 		
 //		$(".appraisalItem").removeAttr("bgcolor");
 //		$(this).attr("bgcolor","#FF0000");
@@ -697,4 +698,38 @@ $(document).ready(function(){
 	
 	
 	
+	 $('.scrollbar-inner').slimScroll({
+		 	
+		    width: '900px',
+		    height: '100%',
+		    alwaysVisible: true,
+		    railVisible: true,
+		    axis: 'x'
+		    
+	 });
+	 
+	 
+		$("#fullscreen").click(function(){
+
+			var widthBrowser="";
+			var heightBrowser="";
+
+			widthBrowser=$( window ).width()-2;
+			//heightBrowser=$( window ).height()-2;
+			heightBrowser=$( document ).height()-2;
+			
+			//document
+			
+			
+			//alert(widthBrowser);
+			//alert(heightBrowser);
+			
+			$(".aui .modal").css({"width":widthBrowser+"px","height":heightBrowser+"px"});
+			$("#myModalLabel").text($(".itemName").text());
+			
+			$(window).scrollTop(0);
+			
+		});
+		
+		//$( document ).tooltip();
 });

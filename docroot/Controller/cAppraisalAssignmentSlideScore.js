@@ -18,8 +18,7 @@ var clearFn = function(){
 	  $(".grandTotalWeight").html("");
 	  $("#information").html("");
 }
-var stripJsonToString= function(json)
-{
+var stripJsonToString= function(json){
     return JSON.stringify(json).replace(',', ', ').replace('[', '').replace(']', '');
 }
 
@@ -27,14 +26,9 @@ var validationAssignmentFn = function(data){
 
 	var errorData="";
 	var count=0;
-	
-	
 	errorData=stripJsonToString(data['data']);
 	
-	//$.each(data['data'],function(index,indexEntry){
-		
-		
-		
+//$.each(data['data'],function(index,indexEntry){	
 //		if(index==0){
 //		
 //			errorData+="<b>"+indexEntry['appraisal_item_id']+" ";
@@ -57,10 +51,7 @@ var validationAssignmentFn = function(data){
 //			});
 //		}
 
-
-		
-	
-	//});
+//});
 	
 	return errorData;
 	
@@ -306,7 +297,7 @@ var findOneFn = function(id,actionType){
 	
 	//get data for structure
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_assignment/"+id,
+		url:restfulURL+"/see_api/public/appraisal_assignment/"+id,
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -346,7 +337,7 @@ var getDataFn = function(page,rpp) {
 	var department_id =$("#embed_department_list").val();
 	
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_assignment",
+		url:restfulURL+"/see_api/public/appraisal_assignment",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -379,7 +370,7 @@ var getDataFn = function(page,rpp) {
 //Delete
 var deleteFn = function(id) {
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_assignment/"+id,
+		url:restfulURL+"/see_api/public/appraisal_assignment/"+id,
 		type:"DELETE",
 		dataType:"json",
 	  headers:{Authorization:"Bearer "+tokenID.token},
@@ -751,7 +742,7 @@ var actionUpdateAssignmentFn = function(){
 
 	
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_assignment/"+$("#id").val(),
+		url:restfulURL+"/see_api/public/appraisal_assignment/"+$("#id").val(),
 		type:"PATCH",
 		dataType:"json",
 		async:false,
@@ -905,7 +896,7 @@ var actionAssignmentFn = function(param){
 	var employeesObj=eval("("+employees+")");
 	var appraisal_itemsObj=eval("(["+appraisal_items+"])");
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_assignment",
+		url:restfulURL+"/see_api/public/appraisal_assignment",
 		type:"post",
 		dataType:"json",
 		async:false,
@@ -1021,8 +1012,8 @@ var appraisalLevelListFn = function(nameArea,id){
 	}
 	
 	$.ajax({
-		//url:restfulURL+"/kpi_api/public/appraisal_item/al_list",
-		url:restfulURL+"/kpi_api/public/appraisal/al_list",
+		//url:restfulURL+"/see_api/public/appraisal_item/al_list",
+		url:restfulURL+"/see_api/public/appraisal/al_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1049,7 +1040,7 @@ var yearListFn = function(nameArea,id){
 	}
 	
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal/year_list",
+		url:restfulURL+"/see_api/public/appraisal/year_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1077,8 +1068,8 @@ var appraisalTypeFn = function(nameArea,id){
 	}
 	
 	$.ajax({
-		//http://192.168.1.52/kpi_api/public/appraisal_assignment/appraisal_type_list
-		url:restfulURL+"/kpi_api/public/appraisal_assignment/appraisal_type_list",
+		//http://192.168.1.52/see_api/public/appraisal_assignment/appraisal_type_list
+		url:restfulURL+"/see_api/public/appraisal_assignment/appraisal_type_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1114,8 +1105,8 @@ var periodFrequencyFn = function(nameArea){
 	}
 	
 	$.ajax({
-		//http://192.168.1.52/kpi_api/public/appraisal_assignment/frequency_list
-		url:restfulURL+"/kpi_api/public/appraisal_assignment/frequency_list",
+		//http://192.168.1.52/see_api/public/appraisal_assignment/frequency_list
+		url:restfulURL+"/see_api/public/appraisal_assignment/frequency_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1138,8 +1129,8 @@ var periodFrequencyFn = function(nameArea){
 var dropDrowDepartmentFn = function(id){
 
 	$.ajax({
-		//url:restfulURL+"/kpi_api/public/appraisal_item/department_list",
-		url:restfulURL+"/kpi_api/public/appraisal/dep_list",
+		//url:restfulURL+"/see_api/public/appraisal_item/department_list",
+		url:restfulURL+"/see_api/public/appraisal/dep_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1184,7 +1175,7 @@ var dropDrowPeriodFn = function(paramPeriod,paramAssignFrequency){
 	}
 	
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_assignment/period_list",
+		url:restfulURL+"/see_api/public/appraisal_assignment/period_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1223,7 +1214,7 @@ var dropDrowAsignToFn = function(nameArea){
 	}
 	
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_assignment/new_assign_to",
+		url:restfulURL+"/see_api/public/appraisal_assignment/new_assign_to",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1248,7 +1239,7 @@ var dropDrowAsignToEditFn = function(paramStageID){
 
 
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_assignment/edit_assign_to",
+		url:restfulURL+"/see_api/public/appraisal_assignment/edit_assign_to",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1289,7 +1280,7 @@ var dropDrowActionFn = function(paramStageID,nameArea){
 	}
 	
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_assignment/new_action_to",
+		url:restfulURL+"/see_api/public/appraisal_assignment/new_action_to",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1316,7 +1307,7 @@ var dropDrowActionEditFn = function(paramStageID,paramToAppraisalLevel){
 
 	
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_assignment/edit_action_to",
+		url:restfulURL+"/see_api/public/appraisal_assignment/edit_action_to",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1355,8 +1346,8 @@ var periodFn = function(nameArea){
 	}
 	
 	$.ajax({
-		//http://192.168.1.52/kpi_api/public/appraisal_assignment/period_list
-		url:restfulURL+"/kpi_api/public/appraisal_assignment/period_list",
+		//http://192.168.1.52/see_api/public/appraisal_assignment/period_list
+		url:restfulURL+"/see_api/public/appraisal_assignment/period_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1498,26 +1489,29 @@ var assignTemplateQuantityFn = function(structureName,data){
 	htmlTemplateQuantity+="  </div>";
 	htmlTemplateQuantity+="	<div class=\"ibox-content\">";
 	htmlTemplateQuantity+=" <div class=\"table-responsive scrollbar-inner\"  style='overflow:auto;'>";
-	htmlTemplateQuantity+="<table style='width:100%; top: -34px;' id=\"tableQauntity\" class=\"table table-striped tableQauntity fixedHeader\">";
+	htmlTemplateQuantity+="<table style='width:100%; top: -58px;' id=\"tableQauntity\" class=\"table table-striped tableQauntity fixedHeader\">";
 	htmlTemplateQuantity+="<thead>";
 		htmlTemplateQuantity+="<tr>";
 			htmlTemplateQuantity+="<th style=\"width:3%\" class=''><b>Select</b></th>";
 			htmlTemplateQuantity+="<th style=\"width:30%\" class=''><b>Appraisal Item Name</b></th>";
 			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Target</b> </th>";
-			
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>S1</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>E1</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>S2</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>E2</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>S3</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>E3</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>S4</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>E4</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>S5</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>E5</b> </th>";
-			
-		
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			/*
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			*/
 			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>%Weight</b></th>";
+			htmlTemplateQuantity+="<th style=\"width:3%;  text-align:center;\" class=''></th>";
 			htmlTemplateQuantity+="</tr>";
 			htmlTemplateQuantity+="</thead>";
 			htmlTemplateQuantity+="<tbody id=\"\">";
@@ -1532,18 +1526,19 @@ var assignTemplateQuantityFn = function(structureName,data){
 					htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-target' class='id-"+indexEntry['structure_id']+"-target input form-control input-sm-small numberOnly' type='text'>";
 					htmlTemplateQuantity+="<input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-nof_target_score' class='id-"+indexEntry['structure_id']+"-nof_target_score input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['nof_target_score']+">";
 					htmlTemplateQuantity+="<input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_result_id' class='id-"+indexEntry['structure_id']+"-appraisal_item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
+					htmlTemplateQuantity+="</td>";
 					
-					/*
+					htmlTemplateQuantity+="<td style=\"width:5%\">";
+						htmlTemplateQuantity+="<div id='slideScore-"+indexEntry['appraisal_item_id']+"' class='slideScore'></div>";
+						htmlTemplateQuantity+="<input class='input-sm-small'   type='text' id='input-with-keypress-0-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-0-"+indexEntry['appraisal_item_id']+"'>";
 					htmlTemplateQuantity+="</td>";
-					htmlTemplateQuantity+="<td ><div id='slideScore-"+indexEntry['appraisal_item_id']+"' class='slideScore'></div>";
-					htmlTemplateQuantity+="<input type='text' id='input-with-keypress-0-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-0-"+indexEntry['appraisal_item_id']+"'>";
-					htmlTemplateQuantity+="<input type='text' id='input-with-keypress-1-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-1-"+indexEntry['appraisal_item_id']+"'>";
-					htmlTemplateQuantity+="<input type='text' id='input-with-keypress-2-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-2-"+indexEntry['appraisal_item_id']+"'>";
-					htmlTemplateQuantity+="<input type='text' id='input-with-keypress-3-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-3-"+indexEntry['appraisal_item_id']+"'>";
-					htmlTemplateQuantity+="</td>";
-					*/
+					htmlTemplateQuantity+="<td style=\"width:5%\" ><input class='input-sm-small' type='text' id='input-with-keypress-1-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-1-"+indexEntry['appraisal_item_id']+"'></td>";
+					htmlTemplateQuantity+="<td style=\"width:5%\"><input class='input-sm-small' type='text' id='input-with-keypress-2-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-2-"+indexEntry['appraisal_item_id']+"'></td>";
+					htmlTemplateQuantity+="<td style=\"width:5%\"><input class='input-sm-small' type='text' id='input-with-keypress-3-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-3-"+indexEntry['appraisal_item_id']+"'></td>";
+					
+					
 					//input-with-keypress-0-
-					
+					/*
 					for(var i=1;i<=5;i++){
 						if(i<=data['nof_target_score']){
 							htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_start-"+i+"' class='id-"+indexEntry['structure_id']+"-score_start-"+i+" input form-control input-sm-small numberOnly' type='text'></td>";
@@ -1553,13 +1548,15 @@ var assignTemplateQuantityFn = function(structureName,data){
 							htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_end-"+i+"'  disabled class='id-"+indexEntry['structure_id']+"-score_end-"+i+" input form-control input-sm-small numberOnly disabledInputText' type='text'></td>";
 						}
 					}
-					
+					*/
 					if(sessionStorage.getItem("is_coporate_kpi")==1){
 						
 						htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly' disabled type='text' value='0.00'></td>";
 					}else{
 						htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly'  type='text'></td>";
 					}
+					
+					htmlTemplateQuantity+="<td style=\"width:3%\"><a href='#'><i class='fa fa-cog font-gear '></i></a></td>";
 					
 					
 				htmlTemplateQuantity+="</tr>";
@@ -1762,7 +1759,52 @@ var calculationGrandTotalFn = function(id){
 	//################ Calculation Quality End####################### 
 	
 }
+var bindingSlideScoreBarFn = function(){
+	
+	//console.log(appraisal_item_id_array);
+	
+	$.each(appraisal_item_id_array,function(index,indexEntry){
+		
+		if(index<=2){
+			
+		// bind scoll bar start here...
+		var slider = document.getElementById('slideScore-'+indexEntry);
+		
+		var input0 = document.getElementById('input-with-keypress-0-'+indexEntry);
+		var input1 = document.getElementById('input-with-keypress-1-'+indexEntry);
+		var input2 = document.getElementById('input-with-keypress-2-'+indexEntry);
+		var input3 = document.getElementById('input-with-keypress-3-'+indexEntry);
+	
+		
+		var inputs = [input0, input1, input2, input3];
+		
+		noUiSlider.create(slider, {
+			start: [ 0, 20, 60, 100 ],
+			connect: [false, true, true, true, true],
+			direction: 'rtl',
+			//tooltips: [true, wNumb({ decimals: 1 })],
+			tooltips: true,
+			range: {
+				'min': [  0 ],
+				'max': [ 100 ]
+			}
+		});
 
+		var connect = slider.querySelectorAll('.noUi-connect');
+		var classes = ['c-1-color', 'c-2-color', 'c-3-color', 'c-4-color', 'c-5-color'];
+		
+		for ( var i = 0; i < connect.length; i++ ) {
+		    connect[i].classList.add(classes[i]);
+		}
+		
+		slider.noUiSlider.on('update', function( values, handle ) {
+			inputs[handle].value = values[handle];
+		});
+		// bind scoll bar end here...
+		}
+	});
+	
+}
 var createTemplateAssignmentFn = function(data){
 	$("#appraisal_template_area").empty();
 	$.each(data['group'],function(index,indexEntry){
@@ -1778,6 +1820,7 @@ var createTemplateAssignmentFn = function(data){
 		}
 		
 		
+		//bindingSlideScoreBarFn();
 	   
 		
 //	    $('.scrollbar-inner').slimScroll({
@@ -1839,8 +1882,8 @@ var createTemplateAssignmentFn = function(data){
 };
 var getTemplateFn = function(){
 	$.ajax({
-		//http://192.168.1.52/kpi_api/public/appraisal_assignment/period_list
-		url:restfulURL+"/kpi_api/public/appraisal_assignment/template",
+		//http://192.168.1.52/see_api/public/appraisal_assignment/period_list
+		url:restfulURL+"/see_api/public/appraisal_assignment/template",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1872,8 +1915,8 @@ var getTemplateFn = function(){
 //var connectionServiceFn = function(username,password){
 //	$.ajax({
 //		
-//		url:restfulURL+"/kpi_api/public/session",
-//		//url:"http://localhost/kpi_api/public/session",
+//		url:restfulURL+"/see_api/public/session",
+//		//url:"http://localhost/see_api/public/session",
 //		type:"POST",
 //		dataType:"text",
 //		data:{"username":username,"password":password},
@@ -1973,13 +2016,43 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	});
 	
 
-		dropDrowDepartmentFn();
-		appraisalLevelListFn();
-		appraisalTypeFn('','1');
+		//dropDrowDepartmentFn();
+		//appraisalLevelListFn();
+		//appraisalTypeFn('','1');
 		periodFrequencyFn();
 		yearListFn();
 		
 	
+		//Org Autocomplete Start
+		$("#organization").autocomplete({
+	        source: function (request, response) {
+	        	$.ajax({
+					 url:restfulURL+"/see_api/public/org/auto_org_name",
+					 type:"post",
+					 dataType:"json",
+					 headers:{Authorization:"Bearer "+tokenID.token},
+					 data:{"org_name":request.term},
+					 //async:false,
+	                 error: function (xhr, textStatus, errorThrown) {
+	                        console.log('Error: ' + xhr.responseText);
+	                    },
+					 success:function(data){
+							response($.map(data, function (item) {
+	                            return {
+	                                label: item.org_code+"-"+item.org_name,
+	                                value: item.org_code+"-"+item.org_name
+	                            };
+	                        }));
+					},
+					beforeSend:function(){
+						$("body").mLoading('hide');	
+					}
+					
+					});
+	        }
+	    });
+		//Org Autocomplete End
+		
 	
 	
 	$("#periodFrequency").change(function(){
@@ -1999,10 +2072,11 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	
 	
 	//Auto complete Start
+	
 	$("#Position").autocomplete({
         source: function (request, response) {
         	$.ajax({
-				 url:restfulURL+"/kpi_api/public/appraisal_assignment/auto_position_name",
+				 url:restfulURL+"/see_api/public/appraisal_assignment/auto_position_name",
 				 type:"post",
 				 dataType:"json",
 				 headers:{Authorization:"Bearer "+tokenID.token},
@@ -2030,7 +2104,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	$("#empName").autocomplete({
         source: function (request, response) {
         	$.ajax({
-				 url:restfulURL+"/kpi_api/public/appraisal_assignment/auto_employee_name",
+				 url:restfulURL+"/see_api/public/appraisal_assignment/auto_employee_name",
 				 type:"post",
 				 dataType:"json",
 				 headers:{Authorization:"Bearer "+tokenID.token},
@@ -2071,8 +2145,6 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	$("#btnAssignment").click(function(){
 		
 		
-		
-		
 		empldoyees_code=[];
 		$(".information").hide();
 		$("#btnAddAnother").show();
@@ -2083,18 +2155,14 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 					empldoyees_code.push($(indexEntry).val());
 				}
 			});
-		//console.log(empldoyees_code);
 		if(empldoyees_code.length==0){
 			callFlashSlide("Please choose Employees for Assignment.");
 			return false;
 		}else{
-			
-			//console.log(empldoyees_code[0]);
-			//console.log($("#is_coporate_kpi-"+empldoyees_code[0]).val());
+
 			sessionStorage.setItem('is_coporate_kpi',$("#is_coporate_kpi-"+empldoyees_code[0]).val());
 			
-			
-			
+
 			$(".cus_information_area").hide();
 			$("#action").val("add");
 			//Default start

@@ -56,10 +56,8 @@ var validationAssignmentFn = function(data){
 //			});
 //		}
 
-
-		
 	
-	//});
+//});
 	
 	return errorData;
 	

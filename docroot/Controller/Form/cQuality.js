@@ -15,11 +15,13 @@ var clearQualityFormFn = function(){
 var updateQualityFn  = function(){
 	
 
-	 var appraisal_item_name=$("#appraisalItemNameQuality").val();
-	 var appraisal_item_id=$("#appraisalItemIdQuality").val();
+	 var item_name=$("#appraisalItemNameQuality").val();
+	 var item_id=$("#appraisalItemIdQuality").val();
 	 var appraisal_level_id=$("#appraisalLevelQuality").val();
 	 var structure_id=$("#structure_id_quality").val();
-	 var department_id=$("#departmentQuality").val();
+	 //var department_id=$("#departmentQuality").val();
+	 var organization=($('[name="organizationQuality[]"]').val());
+	 var position=($('[name="positionQuality[]"]').val());
 	 
 	 var is_active="";
 	 if($('#isActiveQuality').prop('checked')==true){
@@ -29,17 +31,19 @@ var updateQualityFn  = function(){
 	 }
 	 
 	 $.ajax({
-	    url:restfulURL+"/kpi_api/public/appraisal_item/"+appraisal_item_id,
+	    url:restfulURL+"/see_api/public/appraisal_item/"+item_id,
 	    type:"PATCH",
 	    dataType:"json",
 	    headers:{Authorization:"Bearer "+tokenID.token},
 	    data:{
-		"appraisal_item_name":appraisal_item_name,
-		 "appraisal_level_id":appraisal_level_id,
+		"item_name":item_name,
+		 "appraisal_level":appraisal_level_id,
 		 "structure_id":structure_id,
 		 "is_active":is_active,
 		 "form_id":"2",
-		 "department_code":department_id
+		 //"department_code":department_id
+		 "org":organization,
+		 "position":position,
 		},
 	    success:function(data,status){
 		     if(data['status']=="200"){
@@ -58,10 +62,13 @@ var updateQualityFn  = function(){
 var insertQualityFn = function(param) {
 	
 	
-	 var appraisal_item_name=$("#appraisalItemNameQuality").val();
+	 var item_name=$("#appraisalItemNameQuality").val();
 	 var appraisal_level_id=$("#appraisalLevelQuality").val();
 	 var structure_id=$("#structure_id_quality").val();
-	 var department_id=$("#departmentQuality").val();
+	// var department_id=$("#departmentQuality").val();
+	 var organization=($('[name="organizationQuality[]"]').val());
+	 var position=($('[name="positionQuality[]"]').val());
+	 
 	 var is_active="";
 	 if($('#isActiveQuality').prop('checked')==true){
 		 is_active=1;
@@ -70,17 +77,19 @@ var insertQualityFn = function(param) {
 	 }
 
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_item",
+		url:restfulURL+"/see_api/public/appraisal_item",
 		type:"post",
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{
-			 "appraisal_item_name":appraisal_item_name,
-			 "appraisal_level_id":appraisal_level_id,
+			 "item_name":item_name,
+			 "appraisal_level":appraisal_level_id,
 			 "structure_id":structure_id,
 			 "is_active":is_active,
-			 "department_code":department_id,
+			// "department_code":department_id,
+			 "org":organization,
+			 "position":position,
 			 "form_id":"2"
 		},
 		success:function(data){
@@ -110,17 +119,21 @@ var insertQualityFn = function(param) {
 var initailQualityFormFn = function(action,structureId,structureName,data){
 
 /*
-appraisal_item_name,
+item_name,
 appraisal_level_id,
 structure_id,
 is_active
 */
 	if(action=='edit'){
 		clearQualityFormFn();
-		appraisalLevelListFn("Quality",data['appraisal_level_id']);	
-		dropDrowDepartmentFn("Quality",data['department_code'],defaultAll=false);
-		$("#appraisalItemNameQuality").val(data['appraisal_item_name']);
-		$("#appraisalItemIdQuality").val(data['appraisal_item_id']);
+		appraisalLevelListFn("Quality",data['appraisal_level'],defaultAll=false);	
+		
+		//dropDrowDepartmentFn("Quality",data['department_code'],defaultAll=false);
+		dropDrowOrgFn("Quality",data['org'],defaultAll=false);
+		dropDrowPositionFn("Quality",data['position'],defaultAll=false);
+		
+		$("#appraisalItemNameQuality").val(data['item_name']);
+		$("#appraisalItemIdQuality").val(data['item_id']);
 		
 
 		if(data['is_active']==1){
@@ -145,15 +158,17 @@ is_active
 		
 	}else if(action=='add'){
 		/*
-		appraisal_item_name,
+		item_name,
 		appraisal_level_id,
 		structure_id,
 		is_active
 		*/	
 		clearQualityFormFn();
 		$("#isActiveQuality").prop("checked",true);
-		appraisalLevelListFn("Quality",$("#embed_appraisal_level_id").val());	
-		dropDrowDepartmentFn("Quality",$("#embed_department_id").val(),defaultAll=false);
+		appraisalLevelListFn("Quality",$("#embed_appraisal_level_id").val(),defaultAll=false);	
+		//dropDrowDepartmentFn("Quality",$("#embed_department_id").val(),defaultAll=false);
+		dropDrowOrgFn("Quality",$("#embed_org_id").val(),defaultAll=false);
+		dropDrowPositionFn("Quality",$("#embed_position_id").val(),defaultAll=false);
 		$("#btnAddAnotherQuality").show();
 
 		//set header

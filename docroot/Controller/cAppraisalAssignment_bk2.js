@@ -1498,25 +1498,24 @@ var assignTemplateQuantityFn = function(structureName,data){
 	htmlTemplateQuantity+="  </div>";
 	htmlTemplateQuantity+="	<div class=\"ibox-content\">";
 	htmlTemplateQuantity+=" <div class=\"table-responsive scrollbar-inner\"  style='overflow:auto;'>";
-	htmlTemplateQuantity+="<table style='width:100%; top: -34px;' id=\"tableQauntity\" class=\"table table-striped tableQauntity fixedHeader\">";
+	htmlTemplateQuantity+="<table style='width:100%; top: -58px;' id=\"tableQauntity\" class=\"table table-striped tableQauntity fixedHeader\">";
 	htmlTemplateQuantity+="<thead>";
 		htmlTemplateQuantity+="<tr>";
 			htmlTemplateQuantity+="<th style=\"width:3%\" class=''><b>Select</b></th>";
 			htmlTemplateQuantity+="<th style=\"width:30%\" class=''><b>Appraisal Item Name</b></th>";
 			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Target</b> </th>";
-			
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>S1</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>E1</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>S2</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>E2</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>S3</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>E3</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>S4</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>E4</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>S5</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>E5</b> </th>";
-			
-		
+			htmlTemplateQuantity+="<th style=\"width:30%;  text-align:center;\" class=''><b>-</b> </th>";
+			/*
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+			*/
 			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>%Weight</b></th>";
 			htmlTemplateQuantity+="</tr>";
 			htmlTemplateQuantity+="</thead>";
@@ -1528,22 +1527,20 @@ var assignTemplateQuantityFn = function(structureName,data){
 
 				htmlTemplateQuantity+="<tr>";
 					htmlTemplateQuantity+="<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['appraisal_item_id']+"'></td>";
-					htmlTemplateQuantity+="<td style=\"width:30%\" class='id-"+indexEntry['structure_id']+"-appraisal_item_name' id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_name' style='padding-top:7px;'>"+indexEntry['appraisal_item_name']+"</td>";
+					htmlTemplateQuantity+="<td style=\"width:25%\" class='id-"+indexEntry['structure_id']+"-appraisal_item_name' id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_name' style='padding-top:7px;'>"+indexEntry['appraisal_item_name']+"</td>";
 					htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-target' class='id-"+indexEntry['structure_id']+"-target input form-control input-sm-small numberOnly' type='text'>";
 					htmlTemplateQuantity+="<input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-nof_target_score' class='id-"+indexEntry['structure_id']+"-nof_target_score input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['nof_target_score']+">";
 					htmlTemplateQuantity+="<input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_result_id' class='id-"+indexEntry['structure_id']+"-appraisal_item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
 					
-					/*
 					htmlTemplateQuantity+="</td>";
 					htmlTemplateQuantity+="<td ><div id='slideScore-"+indexEntry['appraisal_item_id']+"' class='slideScore'></div>";
-					htmlTemplateQuantity+="<input type='text' id='input-with-keypress-0-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-0-"+indexEntry['appraisal_item_id']+"'>";
-					htmlTemplateQuantity+="<input type='text' id='input-with-keypress-1-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-1-"+indexEntry['appraisal_item_id']+"'>";
-					htmlTemplateQuantity+="<input type='text' id='input-with-keypress-2-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-2-"+indexEntry['appraisal_item_id']+"'>";
-					htmlTemplateQuantity+="<input type='text' id='input-with-keypress-3-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-3-"+indexEntry['appraisal_item_id']+"'>";
+					htmlTemplateQuantity+="<input type='hidden' id='input-with-keypress-0-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-0-"+indexEntry['appraisal_item_id']+"'>";
+					htmlTemplateQuantity+="<input type='hidden' id='input-with-keypress-1-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-1-"+indexEntry['appraisal_item_id']+"'>";
+					htmlTemplateQuantity+="<input type='hidden' id='input-with-keypress-2-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-2-"+indexEntry['appraisal_item_id']+"'>";
+					htmlTemplateQuantity+="<input type='hidden' id='input-with-keypress-3-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-3-"+indexEntry['appraisal_item_id']+"'>";
 					htmlTemplateQuantity+="</td>";
-					*/
 					//input-with-keypress-0-
-					
+					/*
 					for(var i=1;i<=5;i++){
 						if(i<=data['nof_target_score']){
 							htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_start-"+i+"' class='id-"+indexEntry['structure_id']+"-score_start-"+i+" input form-control input-sm-small numberOnly' type='text'></td>";
@@ -1553,7 +1550,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 							htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_end-"+i+"'  disabled class='id-"+indexEntry['structure_id']+"-score_end-"+i+" input form-control input-sm-small numberOnly disabledInputText' type='text'></td>";
 						}
 					}
-					
+					*/
 					if(sessionStorage.getItem("is_coporate_kpi")==1){
 						
 						htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly' disabled type='text' value='0.00'></td>";
@@ -1762,7 +1759,53 @@ var calculationGrandTotalFn = function(id){
 	//################ Calculation Quality End####################### 
 	
 }
+var bindingSlideScoreBarFn = function(){
+	
+	//console.log(appraisal_item_id_array);
+	
+	$.each(appraisal_item_id_array,function(index,indexEntry){
+		
+	
+		
 
+		// bind scoll bar start here...
+		var slider = document.getElementById('slideScore-'+indexEntry);
+		
+		var input0 = document.getElementById('input-with-keypress-0-'+indexEntry);
+		var input1 = document.getElementById('input-with-keypress-1-'+indexEntry);
+		var input2 = document.getElementById('input-with-keypress-2-'+indexEntry);
+		var input3 = document.getElementById('input-with-keypress-3-'+indexEntry);
+	
+		
+		var inputs = [input0, input1, input2, input3];
+		
+		noUiSlider.create(slider, {
+			start: [ 4000, 8000, 12000, 16000 ],
+			connect: [false, true, true, true, true],
+			direction: 'rtl',
+			//tooltips: [true, wNumb({ decimals: 1 })],
+			tooltips: true,
+			range: {
+				'min': [  2000 ],
+				'max': [ 20000 ]
+			}
+		});
+
+		var connect = slider.querySelectorAll('.noUi-connect');
+		var classes = ['c-1-color', 'c-2-color', 'c-3-color', 'c-4-color', 'c-5-color'];
+		
+		for ( var i = 0; i < connect.length; i++ ) {
+		    connect[i].classList.add(classes[i]);
+		}
+		
+		slider.noUiSlider.on('update', function( values, handle ) {
+			inputs[handle].value = values[handle];
+		});
+		// bind scoll bar end here...
+
+	});
+	
+}
 var createTemplateAssignmentFn = function(data){
 	$("#appraisal_template_area").empty();
 	$.each(data['group'],function(index,indexEntry){
@@ -1778,6 +1821,7 @@ var createTemplateAssignmentFn = function(data){
 		}
 		
 		
+		bindingSlideScoreBarFn();
 	   
 		
 //	    $('.scrollbar-inner').slimScroll({

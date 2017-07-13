@@ -24,20 +24,70 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
 
-
-
 <style>
 
+.ui-multiselect-menu{
+	z-index: 5555;
+}
+.ui-multiselect{
+	padding: 5px;
+}
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr{
+	border-top-right-radius: 0;
+}
 
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl{
+	border-top-left-radius: 0;
+}
 
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl{
+	border-bottom-left-radius: 0;
+}
 
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br{
+	border-bottom-right-radius: 0;
+}
+.ui-multiselect-header span.ui-icon{
+	top: 5px;
+}
+.aui ul, .aui ol{
+	margin: 0px 0px 0px 0px;
+}
+.ui-icon{
+	 margin-top: 0;
+}
+.aui input[type="radio"], .aui input[type="checkbox"]{
+	margin: -5px 0 0;
+}
+.aui label{
+	margin-bottom: 0px;
+}
+.ui-multiselect-checkboxes li{
+	padding-right: 0px;
+}
+.aui form{
+	margin: 0 0 5px;
+}
+.aui .filter{
+	margin-bottom: 5px;
+    margin-top: 5px;
+}
+.aui .form-group > .control-label-search{
+	padding-top: 5px;
+}
 
  /* Large desktop Start#####################################*/
  @media (min-width: 1200px) { 
 
 	.modal.large {
-		    width: 70%;
-		    margin-left:-35%;  
+		    width: 90%;
+		    margin-left:-45%;  
+		    top:0px;
+		}
+		
+	.modal.medium {
+		    width: 50%;
+		    margin-left:-25%;  
 		    top:0px;
 		}
 	
@@ -64,8 +114,14 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
  @media (min-width: 980px) and (max-width: 1199px) {
  
  	.modal.large {
-		    width: 70%;
-		    margin-left:-35%;  
+		    width: 90%;
+		    margin-left:-45%;  
+		    top:0px;
+		}
+		
+		.modal.medium {
+		    width: 50%;
+		    margin-left:-25%;  
 		    top:0px;
 		}
 		/*All Start*/
@@ -103,6 +159,11 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	.modal.large {
 		    width: 90%;
 		    margin-left:-45%;  
+		    top:0px;
+		}
+	.modal.medium {
+		    width: 50%;
+		    margin-left:-25%;  
 		    top:0px;
 		}
 		
@@ -171,6 +232,11 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	    width: '';
 	    top:0px;    
 	}
+	
+	.modal.medium {
+		   width: '';
+	   	   top:0px;  
+		}
 	
  	.pagingText{
  		display:none;
@@ -517,7 +583,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #fff 0px, #f6f6f6 47%, #ededed 100%) repeat scroll 0 0;
     border-radius: 0;
     margin-bottom: 0;
-  	padding-bottom: 0px
+  	padding-bottom: 5px
 
 }
 .wrapper-content{
@@ -595,7 +661,7 @@ overflow-y: visible;
          					
          						<div class="ibox-content breadcrumbs2">
 							<div class="row-fluid p-t-xxs">
-								
+									<!-- 
 									<div id="appraisalLevelArea" class="form-group pull-left span2"
 										style="margin-left: 5px">
 										<select data-toggle="tooltip" title="Appraisal Level"
@@ -604,6 +670,19 @@ overflow-y: visible;
 											<option value="0"></option>
 										</select>
 									</div>
+									 -->
+									 
+									 <div id="kpiTypeArea" class="form-group pull-left span2"
+										style="margin-left: 5px">
+										<select data-toggle="tooltip" title="KPI Type"
+											class="input form-control input-sm" id="kpiType"
+											name="kpiType">
+
+											<option value="0"></option>
+
+										</select>
+									</div>
+									
 									<div id="perspectiveArea" class="form-group pull-left span2"
 										style="margin-left: 5px">
 										<select data-toggle="tooltip" title="Perspective"
@@ -624,6 +703,7 @@ overflow-y: visible;
 
 										</select>
 									</div>
+									 <!-- 
 									<div id="DepartmentArea" class="form-group pull-left span2"
 										style="margin-left: 5px">
 										<select data-toggle="tooltip" title="Department"
@@ -631,6 +711,10 @@ overflow-y: visible;
 											name="department">
 										</select>
 									</div>
+									 -->
+									 
+									  
+									 
 									<div id="appraisalItemNameArea"
 										class="form-group pull-left span3" style="margin-left: 5px">
 										<input data-toggle="tooltip" title="Appraisal Item "
@@ -638,6 +722,15 @@ overflow-y: visible;
 											name='appraisalItemName'
 											class='input form-control input-sm span12'
 											id='appraisalItemName'>
+									</div>
+									 
+									<div id="OrganizationArea"
+										class="form-group pull-left span3" style="margin-left: 5px">
+										<input data-toggle="tooltip" title="Organization "
+											placeholder="Organization " type='text'
+											name='Organization'
+											class='input form-control input-sm span12'
+											id='Organization'>
 									</div>
 								
 								
@@ -648,7 +741,7 @@ overflow-y: visible;
 										</button>
 										<button id="btnCoppy" name="btnCoppy"
 											class="btn btn-warning  input-sm" type="button">
-											<i class="fa fa-plus-square"></i>&nbsp;Copy
+											<i class="fa fa-copy"></i>&nbsp;Copy
 										</button>
 									</div>
 								
@@ -801,7 +894,7 @@ overflow-y: visible;
          						</div><!-- content end -->
          					</div>
          					</div>
-  </div>       					
+        					
 </div>         					
 
 
@@ -896,13 +989,12 @@ overflow-y: visible;
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
              
-                <h4 class="modal-title" id="modalTitleDeductScore">Appraisal Item</h4>
+                <h4 class="modal-title" id="modalTitleDeductScore"><span id="modalDeductScoreDescription"> </span>(Deduct)</h4>
                
             </div>
             <div class="modal-body">
                 <!-- content start -->
-                <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDeductScoreDescription"> </span> </h2>
-                <hr>
+               
                 <div class='row-fluid'>
                 	<div class="span12">
                 	 		<!-- form start -->
@@ -927,7 +1019,7 @@ overflow-y: visible;
 				                <div class="form-input-customs" id="appraisalLevelAreaDeductScore">
 				                
 				                		<select class="form-control input-sm" id="appraisalLevelDeductScore">
-					                		<option></option>
+					                		
 					                	</select>
 				                		
 				                </div>
@@ -935,7 +1027,7 @@ overflow-y: visible;
 			                </div>
 			                
 			                
-			                
+			                <!-- 
 			                <div class='form-file-mangement'>
 				                <div class="form-label-customs">
 				                	Department <span class='redFont '>*</span>
@@ -948,7 +1040,7 @@ overflow-y: visible;
 				                </div>
 				                <br style="clear:both">
 			                </div>
-			                
+			                 -->
 			                
 			                <div class='form-file-mangement'>
 				                <div class="form-label-customs">
@@ -993,6 +1085,54 @@ overflow-y: visible;
                 	</div>
                 	
                 </div>
+                
+                <div class='row-fluid'>
+	                	<div class='span12' >
+	                		
+	                		<!-- panel1 start-->
+	                		<div class="ibox-title3">
+		                          <div class='titlePanel'>Organization</div>
+		                      </div>
+		   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px;'>
+		   							<!-- content  start-->	 
+		                             	<form id="orgDeductScoreForm" action="#" method="post">
+										    <select multiple="multiple" size="10" name="organizationDeductScore[]" id='organizationDeductScore'>
+												
+										    </select>
+										  </form>
+		                            <!-- content  end-->				
+		   					</div>
+	                		<!-- panel1 end -->
+	                		
+	                		
+		                <!-- 
+	                	</div>
+	                	
+	                	<div class='span6' >
+	                	 -->
+	                		<!-- panel2 start-->
+	                		
+	                		<div class="ibox-title3">
+		                          <div class='titlePanel'>Position</div>
+		                      </div>
+		   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px;'>
+		   							<!-- content  start-->	 
+			                		 <form id="positionDeductScoreForm" action="#" method="post">
+									    <select multiple="multiple" size="10" name="positionDeductScore[]" id='positionDeductScore'>
+									     
+									    </select>
+									    
+									  </form>
+		                            <!-- content  end-->				
+		   					</div>
+		   					
+	                		<!-- panel2 end -->
+	                		
+	                		
+							   
+	                	</div>
+                	</div>
+                	
                 <br style="clear:both">
                 <!-- content end -->
             </div>
@@ -1015,19 +1155,22 @@ overflow-y: visible;
  -->
 
 <!-- Modal Quality Start Edit -->
-  <div aria-hidden="true" role="dialog" tabindex="-1" id="modal-quality" class="modal inmodal" style="display: none;">
+  <div aria-hidden="true" role="dialog" tabindex="-1" id="modal-quality" class="modal inmodal " style="display: none;">
     <div class="modal-dialog  ">
     <div class="modal-content animated bounceInRight">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
              
-                <h4 class="modal-title" id="modalTitleQuality">Appraisal Item</h4>
+                <h4 class="modal-title" id="modalTitleQuality"><span id="modalQualityDescription"></span>(Quality)</h4>
                
             </div>
             <div class="modal-body">
                 <!-- content start -->
+                <!-- 
                 <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalQualityDescription"></span> </h2>
                 <hr>
+                 -->
+               
                 <div class='row-fluid'>
                 	<div class="span12">
                 	 		<!-- form start -->
@@ -1052,13 +1195,14 @@ overflow-y: visible;
 				                <div class="form-input-customs" id="appraisalLevelAreaQuality">
 				                
 				                		<select class="form-control input-sm" id="appraisalLevelQuality">
-					                		<option></option>
+					                		
 					                	</select>
 				                		
 				                </div>
+				                
 				                <br style="clear:both">
 			                </div>
-			                
+			                <!-- 
 			                <div class='form-file-mangement'>
 				                <div class="form-label-customs">
 				                	Department <span class='redFont '>*</span>
@@ -1071,7 +1215,7 @@ overflow-y: visible;
 				                </div>
 				                <br style="clear:both">
 			                </div>
-			                
+			                -->
 			                <div class='form-file-mangement'>
 				                <div class="form-label-customs"> 
 				                </div>
@@ -1090,7 +1234,55 @@ overflow-y: visible;
                 	</div>
                 	
                 </div>
-                <br style="clear:both">
+                
+                
+                <div class='row-fluid'>
+	                	<div class='span12' >
+	                		
+	                		<!-- panel1 start-->
+	                		<div class="ibox-title3">
+		                          <div class='titlePanel'>Organization</div>
+		                      </div>
+		   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px;'>
+		   							<!-- content  start-->	 
+		                             	<form id="orgQualityForm" action="#" method="post">
+										    <select multiple="multiple" size="10" name="organizationQuality[]" id='organizationQuality'>
+												
+										    </select>
+										  </form>
+		                            <!-- content  end-->				
+		   					</div>
+	                		<!-- panel1 end -->
+	                		
+	                		
+		                <!-- 
+	                	</div>
+	                	
+	                	<div class='span6' >
+	                	 -->
+	                		<!-- panel2 start-->
+	                		
+	                		<div class="ibox-title3">
+		                          <div class='titlePanel'>Position</div>
+		                      </div>
+		   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px;'>
+		   							<!-- content  start-->	 
+			                		 <form id="positionQualityForm" action="#" method="post">
+									    <select multiple="multiple" size="10" name="positionQuality[]" id='positionQuality'>
+									     
+									    </select>
+									    
+									  </form>
+		                            <!-- content  end-->				
+		   					</div>
+		   					
+	                		<!-- panel2 end -->
+	                		
+	                		
+							   
+	                	</div>
+                	</div>
+                	
                 <!-- content end -->
             </div>
             <div class="modal-footer">
@@ -1121,13 +1313,15 @@ overflow-y: visible;
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
              
-                <h4 class="modal-title" id="modalTitleQuantity">Appraisal Item</h4>
+                <h4 class="modal-title" id="modalTitleQuantity"><span id="modalQuantityDescription"></span>(Quantity) </h4>
                
             </div>
             <div class="modal-body">
                 <!-- content start -->
-                <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalQuantityDescription"></span> </h2>
+                <!--<h2>
+                 <i class="fa fa fa-pencil-square-o icon-title"></i>  <span id="modalQuantityDescription"></span> </h2>
                 <hr>
+                -->
                 <div class='row-fluid'>
                 	<div class="span6">
                 	 		<!-- form start -->
@@ -1138,7 +1332,6 @@ overflow-y: visible;
 				                
 				                <div class="form-input-customs">
 				                	<input type="text" class="form-control input-sm  span12" placeholder="Appraisal Item Name" id="appraisalItemNameQuantity">
-				                	
 				                </div>
 				                <br style="clear:both">
 			                </div>
@@ -1160,21 +1353,37 @@ overflow-y: visible;
 			                </div>
 			                
 			                <div class='form-file-mangement'>
-			                
 				                <div class="form-label-quantity">
 				                
-				                	UOM <span class='redFont'>*</span>
+				                	Remind Condition <span class='redFont'>*</span>
 				                </div>
 				                
-				                <div class="form-input-customs" id="uomAreaQuantity">
+				                <div class="form-input-customs" id="remindCOnditionAreaQuantity">
 				                
-				                	<select class="form-control input-sm" id="uomQuantity">
-				                		<option></option>
-				                	</select>
-					                	
+				                		<select class="form-control input-sm" id="remindCOnditionQuantity">
+					                		 <option value='Daily'>Daily</option>
+					                		 <option value='Monthly'>Monthly</option>
+					                		 <option value='Quarterly'>Quarterly</option>
+					                	</select>
+				                		
 				                </div>
 				                <br style="clear:both">
 			                </div>
+			                
+			                
+			                <div class='form-file-mangement'>
+				                <div class="form-label-quantity"> 
+				                </div>
+				                <div class="form-input-customs">
+				                	
+					             <input type="checkbox" checked='checked'  name="isActiveQuantity" id="isActiveQuantity" value="1">
+					              <span>Is Active</span>
+				                </div>
+				                <br style="clear:both">   		
+			                </div>
+			                
+			                
+			                
 			                
 			                <div class='form-file-mangement'>
 			                
@@ -1195,18 +1404,25 @@ overflow-y: visible;
                 	</div>
                 	<div class="span6">
                 			<!-- form start -->
-			                <div class='form-file-mangement'>
+                			<div class='form-file-mangement'>
+			                
 				                <div class="form-label-quantity">
-				                	Appraisal Level <span class='redFont '>*</span>
+				                
+				                	UOM <span class='redFont'>*</span>
 				                </div>
 				                
-				                <div class="form-input-customs" id="appraisalLevelAreaQuantity">
-				                	<select class="form-control input-sm" id="appraisalLevelQuantity">
+				                <div class="form-input-customs" id="uomAreaQuantity">
+				                
+				                	<select class="form-control input-sm" id="uomQuantity">
 				                		<option></option>
 				                	</select>
+					                	
 				                </div>
 				                <br style="clear:both">
 			                </div>
+			                
+			               
+			                <!-- 
 			                <div class='form-file-mangement'>
 				                <div class="form-label-quantity">
 				                	Department <span class='redFont '>*</span>
@@ -1219,12 +1435,24 @@ overflow-y: visible;
 				                </div>
 				                <br style="clear:both">
 			                </div>
+			                 -->
+			                 
+			                 <div class='form-file-mangement'>
+				                <div class="form-label-quantity">
+				                	KPI Type <span class='redFont '>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs" id="kpiTypeAreaQuantity">
+				                	<select class="form-control input-sm" id="kpiTypeQuantity">
+				                		<option></option>
+				                	</select>
+				                </div>
+				                <br style="clear:both">
+			                </div>
 			                
-			                
-			                
+			                 
 			                <div class='form-file-mangement'>
 				                <div class="form-label-quantity">
-				                
 				                	Baseline Value <span class='redFont'>*</span>
 				                </div>
 				                
@@ -1234,19 +1462,67 @@ overflow-y: visible;
 				                </div>
 				                <br style="clear:both">
 			                </div>
-			                
-			                
-			                <div class='form-file-mangement'>
-				                <div class="form-label-quantity"> 
+			                 <div class='form-file-mangement'>
+				                <div class="form-label-quantity">
+				                	Appraisal Level <span class='redFont '>*</span>
 				                </div>
-				                <div class="form-input-customs">
-				                	
-					             <input type="checkbox" checked='checked'  name="isActiveQuantity" id="isActiveQuantity" value="1">
-					              <span>Is Active</span>
+				                
+				                <div class="form-input-customs" id="appraisalLevelAreaQuantity">
+				                	<select class="form-control input-sm multipleSelect span12"   multiple="multiple" id="appraisalLevelQuantity">
+				                		
+				                	</select>
 				                </div>
-				                <br style="clear:both">   		
+				                <br style="clear:both">
 			                </div>
+			                
+			                
 			                <!-- form end -->
+                	</div>
+                	 <br style="clear:both">
+                	<div class='row-fluid'>
+	                	<div class='span6' >
+	                		
+	                		<!-- panel1 start-->
+	                		<div class="ibox-title3">
+		                          <div class='titlePanel'>Organization</div>
+		                      </div>
+		   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px;'>
+		   							<!-- content  start-->	 
+		                             	<form id="orgQuantityForm" action="#" method="post">
+										    <select multiple="multiple" size="10" name="organizationQuantity[]" id='organizationQuantity'>
+												
+										    </select>
+										  </form>
+		                            <!-- content  end-->				
+		   					</div>
+	                		<!-- panel1 end -->
+	                		
+	                		
+		                	  
+	                	</div>
+	                	
+	                	<div class='span6' >
+	                		<!-- panel2 start-->
+	                		
+	                		<div class="ibox-title3">
+		                          <div class='titlePanel'>Position</div>
+		                      </div>
+		   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px;'>
+		   							<!-- content  start-->	 
+			                		 <form id="positionQuantityForm" action="#" method="post">
+									    <select multiple="multiple" size="10" name="positionQuantity[]" id='positionQuantity'>
+									     
+									    </select>
+									    
+									  </form>
+		                            <!-- content  end-->				
+		   					</div>
+		   					
+	                		<!-- panel2 end -->
+	                		
+	                		
+							   
+	                	</div>
                 	</div>
                 </div>
                 <br style="clear:both">
@@ -1489,5 +1765,13 @@ overflow-y: visible;
 <script src="../Controller/Form/cQuantity.js"></script>
  -->
     
+
+
+
+
+
+ 
+
+
 
 </body>

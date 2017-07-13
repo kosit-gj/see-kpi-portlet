@@ -43,9 +43,9 @@ var listDataQuantityFn = function(data) {
 var updateQuantityFn  = function(){
 	
 
-	 var appraisal_item_name=$("#appraisalItemNameQuantity").val();
+	 var item_name=$("#appraisalItemNameQuantity").val();
 	 
-	 var appraisal_item_id=$("#appraisalItemIdQuantity").val();
+	 var item_id=$("#appraisalItemIdQuantity").val();
 	 
 	 var appraisal_level_id=$("#appraisalLevelQuantity").val();
 	 var perspective_id=$("#perspectiveQuantity").val();
@@ -57,7 +57,12 @@ var updateQuantityFn  = function(){
 	 $(".formula_cds_id_area .cds_name_inline").remove();
 	 var formula_cds_name=$("#textarea_cds").html();
 	 var formula_cds_id=$(".formula_cds_id_area").text().replace(/\s/g,'');
-	 var department_id=$("#departmentQuantity").val();
+	 //var department_id=$("#departmentQuantity").val();
+	 
+	 var organization=($('[name="organizationQuantity[]"]').val());
+	 var position=($('[name="positionQuantity[]"]').val());
+	 var kpi_type_id=$("#kpiTypeQuantity").val();
+	 var remind_condition=$("#remindCOnditionQuantity").val();
 		
 	 var is_active="";
 	 if($('#isActiveQuantity').prop('checked')==true){
@@ -67,13 +72,13 @@ var updateQuantityFn  = function(){
 	 }
 	 
 	 $.ajax({
-	    url:restfulURL+"/kpi_api/public/appraisal_item/"+appraisal_item_id,
+	    url:restfulURL+"/see_api/public/appraisal_item/"+item_id,
 	    type:"PATCH",
 	    dataType:"json",
 	    headers:{Authorization:"Bearer "+tokenID.token},
 	    data:{
-		"appraisal_item_name":appraisal_item_name,
-		"appraisal_level_id":appraisal_level_id,
+		"item_name":item_name,
+		//"appraisal_level_id":appraisal_level_id,
 		"perspective_id":perspective_id,
 		"structure_id":structure_id,
 		"uom_id":uom_id,
@@ -82,15 +87,21 @@ var updateQuantityFn  = function(){
 		"formula_cds_id":formula_cds_id,
 		"formula_cds_name":formula_cds_name,
 		"is_active":is_active,
-		"department_code":department_id,
-		"form_id":"1"
+		//"department_code":department_id,
+		
+		"org":organization,
+		 "position":position,
+		 "appraisal_level":appraisal_level_id,
+		 "kpi_type_id":kpi_type_id,
+		 "remind_condition":remind_condition,
+		 "form_id":"1"
 		},
 	    success:function(data,status){
 		     if(data['status']=="200"){
 				 $('#modal-quantity').modal('hide');
 			     callFlashSlide("Update Successfully.");
 				 getDataFn($("#pageNumber").val(),$("#rpp").val());
-		      	 clearQuantityFormFn
+		      	 clearQuantityFormFn();
 		     }else if(data['status']==400) {
 				callFlashSlideInModal(validationFn(data),"#informationQuantity","error");
 			 }
@@ -106,16 +117,26 @@ var insertQuantityFn = function(param) {
 	var formula_cds_id=$(".formula_cds_id_area").text().replace(/\s/g,'');
 	
 
-	 var appraisal_item_name=$("#appraisalItemNameQuantity").val();
+	 var item_name=$("#appraisalItemNameQuantity").val();
 	 var appraisal_level_id=$("#appraisalLevelQuantity").val();
 	 var perspective_id=$("#perspectiveQuantity").val();
 	 var structure_id=$("#structure_id_quantity").val();
 	 var uom_id=$("#uomQuantity").val();
 	 var baseline_value=$("#baselineValueQuantity").val();
 	 var formula_desc=$("#formulaDescriptionQuantity").val();
-	 var department_id=$("#departmentQuantity").val();
+	// var department_id=$("#departmentQuantity").val();
+	 var organization=($('[name="organizationQuantity[]"]').val());
+	 var position=($('[name="positionQuantity[]"]').val());
+	 var kpi_type_id=$("#kpiTypeQuantity").val();
+	 var remind_condition = $("#remindCOnditionQuantity").val();
+	
+	 /*
+	 console.log(appraisal_level_id);
+	 console.log(organization);
+	 console.log(position);
+	 */
 	 
-		
+	 
 	 var is_active="";
 	 if($('#isActiveQuantity').prop('checked')==true){
 		 is_active=1;
@@ -124,14 +145,14 @@ var insertQuantityFn = function(param) {
 	 }
 
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_item",
+		url:restfulURL+"/see_api/public/appraisal_item",
 		type:"post",
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{
-			 "appraisal_item_name":appraisal_item_name,
-			 "appraisal_level_id":appraisal_level_id,
+			 "item_name":item_name,
+			 //"appraisal_level_id":appraisal_level_id,
 			 "perspective_id":perspective_id,
 			 "structure_id":structure_id,
 			 "uom_id":uom_id,
@@ -140,12 +161,15 @@ var insertQuantityFn = function(param) {
 			 "formula_cds_id":formula_cds_id,
 			 "formula_cds_name":formula_cds_name,
 			 "is_active":is_active,
-			 "department_code":department_id,
+			// "department_code":department_id,
+			 "org":organization,
+			 "position":position,
+			 "appraisal_level":appraisal_level_id,
+			 "kpi_type_id":kpi_type_id,
+			 "remind_condition":remind_condition,
 			 "form_id":"1"
 		},
 		success:function(data){
-			//console.log(data);
-			
 			if(data['status']==200){
 				if(param !="saveAndAnother"){
 					   callFlashSlide("Insert Successfully.");
@@ -158,7 +182,6 @@ var insertQuantityFn = function(param) {
 						callFlashSlideInModal("Insert Data is Successfully.","#informationQuantity");
 					}
 			}else if(data['status']==400){
-			//	console.log(validationFn(data));
 				callFlashSlideInModal(validationFn(data),"#informationQuantity","error");
 			}
 		}
@@ -188,17 +211,17 @@ var cdsGetFn = function(page,rpp){
 	embed_appraisal_level_quantity
 	embed_cds_name_quantity
 	*/
-	var appraisal_level=$("#embed_appraisal_level_quantity").val();
+	//var appraisal_level=$("#embed_appraisal_level_quantity").val();
 	var cds_name=$("#embed_cds_name_quantity").val();
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_item/cds_list",
+		url:restfulURL+"/see_api/public/appraisal_item/cds_list",
 		type:"get",
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{
 			
-			"appraisal_level_id":appraisal_level,
+			//"appraisal_level_id":appraisal_level,
 			"cds_name":cds_name,
 			"page":page,
 			"rpp":rpp
@@ -217,8 +240,8 @@ var cdsGetFn = function(page,rpp){
 var initailQuantityFormFn = function(action,structureId,structureName,data){
 	
 /*
-appraisal_item_id
-appraisal_item_name
+item_id
+item_name
 appraisal_level_id
 structure_id
 perspective_id
@@ -240,14 +263,21 @@ structure_name
 	$("#cdsNameSearchQuantity").val("");
 	if(action=='edit'){
 		clearQuantityFormFn();
-		appraisalLevelListFn("Quantity",data['appraisal_level_id'],defaultAll=false);			
+		appraisalLevelListFn("Quantity",data['appraisal_level'],defaultAll=false);	
+		
+		
 		perspectiveListFn("Quantity",data['perspective_id'],defaultAll=false);
 		uomListFn("Quantity",data['uom_id']);
+		//dropDrowDepartmentFn("Quantity",data['department_code'],defaultAll=true);
 		
-		dropDrowDepartmentFn("Quantity",data['department_code'],defaultAll=true);
+		dropDrowOrgFn("Quantity",data['org'],defaultAll=false);
+		dropDrowPositionFn("Quantity",data['position'],defaultAll=false);
+		dropDrowkpiTypeFn("Quantity",data['kpi_type_id'],defaultAll=false);
+		
+		
 		$("#baselineValueQuantity").val(data['baseline_value']);
 		$("#formulaDescriptionQuantity").val(data['formula_desc']);
-		$("#appraisalItemNameQuantity").val(data['appraisal_item_name']);	
+		$("#appraisalItemNameQuantity").val(data['item_name']);	
 		$("#textarea_cds").html(data['formula_cds_name']);
 		
 		//get formula cds id start
@@ -264,7 +294,12 @@ structure_name
 		}else{
 			$("#isActiveQuantity").prop("checked",false);
 		}
-		$("#appraisalItemIdQuantity").val(data['appraisal_item_id']);
+		
+		//remind_condition
+		//data['remind_condition']
+		$("select#remindCOnditionQuantity").val(data['remind_condition']);
+		
+		$("#appraisalItemIdQuantity").val(data['item_id']);
 		$("#actionQuantity").val("edit");
 		$("#btnAddAnotherQuantity").hide();
 		
@@ -308,7 +343,7 @@ structure_name
 
 	        source: function (request, response) {
 	        	$.ajax({
-					 url:restfulURL+"/kpi_api/public/cds/auto_cds",
+					 url:restfulURL+"/see_api/public/cds/auto_cds",
 					 type:"post",
 					 dataType:"json",
 					 headers:{Authorization:"Bearer "+tokenID.token},
@@ -335,7 +370,7 @@ structure_name
 	    });
 		$(".ui-autocomplete").css({"z-index":"10000;"});
 		//Autocomplete Search End
-		appraisalLevelListFn("SearchQuantity","",defaultAll=false);
+		//appraisalLevelListFn("SearchQuantity","",defaultAll=false);
 		
 		
 		//run search cds default 
@@ -354,13 +389,15 @@ structure_name
 		clearQuantityFormFn();
 		appraisalLevelListFn("Quantity",$("#embed_appraisal_level_id").val(),defaultAll=false);			
 		perspectiveListFn("Quantity",$("#embed_perspective_id").val(),defaultAll=false);
-		dropDrowDepartmentFn("Quantity",$("#embed_department_id").val(),defaultAll=true);
+		//dropDrowDepartmentFn("Quantity",$("#embed_department_id").val(),defaultAll=true);
+		dropDrowOrgFn("Quantity",$("#embed_org_id").val(),defaultAll=false);
+		dropDrowPositionFn("Quantity",$("#embed_position_id").val(),defaultAll=false);
+		dropDrowkpiTypeFn("Quantity",$("#embed_kpi_type_id").val(),defaultAll=false);
 		uomListFn("Quantity");
 		$("#btnAddAnotherQuantity").show();
 		//SEARCH
 		//Autocomplete Search Start.
-		
-		
+
 		//console.log($(objectStructureId).val());
 		$("#structure_id_quantity").val(structureId);
 		$("#modalQuantityDescription").html("Add "+structureName);
@@ -369,11 +406,11 @@ structure_name
 
 	        source: function (request, response) {
 	        	$.ajax({
-					 url:restfulURL+"/kpi_api/public/cds/auto_cds",
+					 url:restfulURL+"/see_api/public/cds/auto_cds",
 					 type:"post",
 					 dataType:"json",
 					 headers:{Authorization:"Bearer "+tokenID.token},
-					 data:{"cds_name":request.term,"appraisal_level_id":$("#appraisalLevelQuantity").val()},
+					 data:{"cds_name":request.term},
 					 //async:false,
 	                 error: function (xhr, textStatus, errorThrown) {
 	                        console.log('Error: ' + xhr.responseText);

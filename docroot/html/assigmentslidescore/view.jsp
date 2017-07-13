@@ -371,6 +371,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 <div class="container1">
 
 
+
 <!-- 
 <h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Appraisal Assignment</span> </h2>
  -->
@@ -387,7 +388,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
          						
          						<div  class="row-fluid ">
 
-									
+									<!-- 
 									<div id='appraisalLevelArea' class="form-group pull-left span2"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<select data-toggle="tooltip" title="Appraisal Level"
@@ -415,6 +416,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								
 										</select>
 									</div>
+									 -->
+									
+									
 								 
 									<div id='yearArea' class="form-group pull-left span2"
 										style="margin-left: 5px; margin-bottom: 3px;">
@@ -998,3 +1002,4 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
       
           
 </body>
+

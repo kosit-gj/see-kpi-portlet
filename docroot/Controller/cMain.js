@@ -15,7 +15,7 @@ var checkSession = function(paramTokenID){
 		return false;
 	}
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/session",
+		url:restfulURL+"/see_api/public/session",
 		type:"GET",
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -33,6 +33,7 @@ var checkSession = function(paramTokenID){
 				is_hr =(data['is_hr'] == null   ? 0 : data['is_hr']);
 				console.log("login success");
 				check=true;
+				setThemeColorFn(tokenID.theme_color);
 				//alert("check hr="+is_hr);
 			}
 		},
@@ -66,8 +67,8 @@ var connectionServiceFn = function(username,password){
 	var checkConnection=true;
 	$.ajax({
 		
-		url:restfulURL+"/kpi_api/public/session",
-		//url:"http://localhost/kpi_api/public/session",
+		url:restfulURL+"/see_api/public/session",
+		//url:"http://localhost/see_api/public/session",
 		type:"POST",
 		dataType:"text",
 		data:{"username":username,"password":password},
@@ -86,6 +87,7 @@ var connectionServiceFn = function(username,password){
 			
 		}
 	});	
+	
 	return checkConnection;
 }
 
@@ -154,7 +156,7 @@ function addCommas(nStr)
 //	
 //	$.ajax({
 //			
-//			url:restfulURL+"/kpi_api/public/session",
+//			url:restfulURL+"/see_api/public/session",
 //			type:"POST",
 //			dataType:"text",
 //			//data:{"username":"1","password":"11"},//HR
@@ -400,7 +402,7 @@ var getPastMonthTH = function(){
 	if(month==0){
 		dataReturn=monthTH[11]+" "+(year-1);
 	}else{
-		dataReturn=monthTH[month]+" "+year
+		dataReturn=monthTH[month]+" "+year;
 	}
 	return dataReturn;
 	
@@ -419,7 +421,7 @@ $( document ).ajaxStop(function() {
 
 //var checkSession = function(){
 //	$.ajax({
-//		url:restfulURL+"/kpi_api/public/session",
+//		url:restfulURL+"/see_api/public/session",
 //		type:"GET",
 //		dataType:"json",
 //		headers:{Authorization:"Bearer "+tokenID.token},
@@ -443,7 +445,7 @@ $( document ).ajaxStop(function() {
 
 var logoutFn = function(){
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/session",
+		url:restfulURL+"/see_api/public/session",
 		type:"DELETE",
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -534,6 +536,14 @@ var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
 	});
 }
 //set paginate end
+
+//******************** updateTheme start********//
+var setThemeColorFn = function(color){
+	$(".ibox-title").css({"background-color": "#"+color, "border-color": "#"+color});
+	$(".ibox-content").css({"border-color": "#"+color});
+	$(".modal-header").css({"background": "#"+color});
+};
+//******************** updateTheme end********//
 
 
 

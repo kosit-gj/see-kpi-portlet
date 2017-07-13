@@ -1,7 +1,7 @@
 
 //Cleaning
 var clearDeductScoreFormFn = function(){
-	
+	$("#actionDeductScore").val("add");
 	$("#informationDeductScore").hide();
 	$("#appraisalItemNameDeductScore").val("");
 	//$("#appraisalLevelDeductScore").val("");
@@ -38,13 +38,15 @@ var listDataDeductScoreFn = function(data) {
 var updateDeductScoreFn  = function(){
 	
 
-	 var appraisal_item_name=$("#appraisalItemNameDeductScore").val();
-	 var appraisal_item_id=$("#appraisalItemIdDeductScore").val();
-	 var appraisal_level_id=$("#appraisalLevelDeductScore").val();
+	 var item_name=$("#appraisalItemNameDeductScore").val();
+	 var item_id=$("#appraisalItemIdDeductScore").val();
+	 var appraisal_level=$("#appraisalLevelDeductScore").val();
 	 var structure_id=$("#structure_id_deduct").val();
 	 var max_value=$("#maxValueDeductScore").val();
 	 var unit_deduct_score=$("#DeductScoreUnitDeductScore").val();
-	 var department_id=$("#departmentDeductScore").val();
+	 //var department_id=$("#departmentDeductScore").val();
+	 var organization=($('[name="organizationDeductScore[]"]').val());
+	 var position=($('[name="positionDeductScore[]"]').val());
 
 	 var is_active="";
 	 if($('#isActiveDeductScore').prop('checked')==true){
@@ -54,18 +56,20 @@ var updateDeductScoreFn  = function(){
 	 }
 	 
 	 $.ajax({
-	    url:restfulURL+"/kpi_api/public/appraisal_item/"+appraisal_item_id,
+	    url:restfulURL+"/see_api/public/appraisal_item/"+item_id,
 	    type:"PATCH",
 	    dataType:"json",
 	    headers:{Authorization:"Bearer "+tokenID.token},
 	    data:{
-		 "appraisal_item_name":appraisal_item_name,
-		 "appraisal_level_id":appraisal_level_id,
+		 "item_name":item_name,
+		 "appraisal_level":appraisal_level,
 		 "structure_id":structure_id,
 		 "max_value":max_value,
 		 "unit_deduct_score":unit_deduct_score,
 		 "is_active":is_active,
-		 "department_code":department_id,
+		// "department_code":department_id,
+		 "org":organization,
+		 "position":position,
 		 "form_id":"3"
 		},
 	    success:function(data,status){
@@ -85,19 +89,21 @@ var updateDeductScoreFn  = function(){
 var insertDeductScoreFn = function(param) {
 	
 	/*
-	appraisal_item_name,
-	appraisal_level_id,
+	item_name,
+	appraisal_level,
 	structure_id,
 	max_value,
 	unit_deduct_score,
 	is_active
 	*/	
-	 var appraisal_item_name=$("#appraisalItemNameDeductScore").val();
-	 var appraisal_level_id=$("#appraisalLevelDeductScore").val();
+	 var item_name=$("#appraisalItemNameDeductScore").val();
+	 var appraisal_level=$("#appraisalLevelDeductScore").val();
 	 var structure_id=$("#structure_id_deduct").val();
 	 var max_value=$("#maxValueDeductScore").val();
 	 var unit_deduct_score=$("#DeductScoreUnitDeductScore").val();
-	 var department_id=$("#departmentDeductScore").val();
+	 //var department_id=$("#departmentDeductScore").val();
+	 var organization=($('[name="organizationDeductScore[]"]').val());
+	 var position=($('[name="positionDeductScore[]"]').val());
 	 var is_active="";
 	 if($('#isActiveDeductScore').prop('checked')==true){
 		 is_active=1;
@@ -106,19 +112,21 @@ var insertDeductScoreFn = function(param) {
 	 }
 
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_item",
+		url:restfulURL+"/see_api/public/appraisal_item",
 		type:"post",
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{
-			 "appraisal_item_name":appraisal_item_name,
-			 "appraisal_level_id":appraisal_level_id,
+			 "item_name":item_name,
+			 "appraisal_level":appraisal_level,
 			 "structure_id":structure_id,
 			 "max_value":max_value,
 			 "unit_deduct_score":unit_deduct_score,
 			 "is_active":is_active,
-			 "department_code":department_id,
+			 //"department_code":department_id,
+			 "org":organization,
+			 "position":position,
 			 "form_id":"3"
 		},
 		success:function(data){
@@ -147,9 +155,10 @@ var insertDeductScoreFn = function(param) {
 
 var initailDeductScoreFormFn = function(action,structureId,structureName,data){
 
+	
 	/*
-	appraisal_item_name,
-	appraisal_level_id,
+	item_name,
+	appraisal_level,
 	structure_id,
 	max_value,
 	unit_deduct_score,
@@ -157,10 +166,12 @@ var initailDeductScoreFormFn = function(action,structureId,structureName,data){
 	*/	
 	if(action=='edit'){
 		clearDeductScoreFormFn();
-		appraisalLevelListFn("DeductScore",data['appraisal_level_id']);	
-		dropDrowDepartmentFn("DeductScore",data['department_code'],defaultAll=false);
+		appraisalLevelListFn("DeductScore",data['appraisal_level'],defaultAll=false);	
+		//dropDrowDepartmentFn("DeductScore",data['department_code'],defaultAll=false);
+		dropDrowOrgFn("DeductScore",data['org'],defaultAll=false);
+		dropDrowPositionFn("DeductScore",data['position'],defaultAll=false);
 		
-		$("#appraisalItemNameDeductScore").val(data['appraisal_item_name']);
+		$("#appraisalItemNameDeductScore").val(data['item_name']);
 		$("#maxValueDeductScore").val(data['max_value']);
 		$("#DeductScoreUnitDeductScore").val(data['unit_deduct_score']);
 		
@@ -169,7 +180,7 @@ var initailDeductScoreFormFn = function(action,structureId,structureName,data){
 		}else{
 			$("#isActiveDeductScore").prop("checked",false);
 		}
-		$("#appraisalItemIdDeductScore").val(data['appraisal_item_id']);
+		$("#appraisalItemIdDeductScore").val(data['item_id']);
 		$("#actionDeductScore").val("edit");
 		$("#btnAddAnotherDeductScore").hide();
 		
@@ -186,18 +197,21 @@ var initailDeductScoreFormFn = function(action,structureId,structureName,data){
 		
 	}else if(action=='add'){
 		/*
-		appraisal_item_name,
-		appraisal_level_id,
+		item_name,
+		appraisal_level,
 		structure_id,
 		max_value,
 		unit_deduct_score,
 		is_active
 		*/	
 		clearDeductScoreFormFn();
-		appraisalLevelListFn("DeductScore",$("#embed_appraisal_level_id").val());	
-		dropDrowDepartmentFn("DeductScore",$("#embed_department_id").val(),defaultAll=false);
+		appraisalLevelListFn("DeductScore",$("#embed_appraisal_level").val(),defaultAll=false);	
+		//dropDrowDepartmentFn("DeductScore",$("#embed_department_id").val(),defaultAll=false);
+		dropDrowOrgFn("DeductScore",$("#embed_org_id").val(),defaultAll=false);
+		dropDrowPositionFn("DeductScore",$("#embed_position_id").val(),defaultAll=false);
+		
 		$("#btnAddAnotherDeductScore").show();
-
+		
 		//set header
 		$("#structure_id_deduct").val(structureId);
 		$("#modalDeductScoreDescription").html("Add "+structureName);
