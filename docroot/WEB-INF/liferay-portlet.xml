@@ -800,10 +800,6 @@
 	</portlet>  
 	         
 	
-<<<<<<< HEAD
-	
-=======
->>>>>>> refs/remotes/origin/master
 	<portlet>
 		<portlet-name>appraisal-organization</portlet-name>
 		<icon>/icon.png</icon>
