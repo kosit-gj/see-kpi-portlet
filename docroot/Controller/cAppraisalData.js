@@ -84,7 +84,6 @@ var listAppraisalDataFn = function (data) {
 		htmlTable += "<tr class='rowSearch'>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_period_desc"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["structure_name"]+ "</td>";
-		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_type_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_item_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_code"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_name"]+ "</td>";

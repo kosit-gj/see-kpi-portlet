@@ -345,7 +345,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							<select d id="app_lv" class="input span12 m-b-n" data-toggle="tooltip"  style="cursor: pointer;" data-original-title="Appraisal Level"><option  value="">All Appraisal Level</option></select>
 						</div>
 						<div id="drop_down_list_appraisal_type"
-							class="form-group pull-left span2" style="margin-left: 5px">
+							class="form-group pull-left span2" style="margin-left: 5px;display: none;">
 							<select data-placement="top" id="app_type" class="input span12 m-b-n" data-toggle="tooltip" title="" name="app_type" style="cursor: pointer;" data-original-title="Appraisal Type"></select>
 						</div>
 						<div class="form-group pull-left span2" style="margin-left: 5px">
@@ -359,7 +359,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							style="margin-left: 5px">
 							<select data-placement="top" id="period" class="input span12 m-b-n" data-toggle="tooltip" title="" name="period" style="cursor: pointer;" data-original-title="Period"></select>
 						</div>
-						<div class="form-group pull-left span3" style="margin-left: 5px">
+						<div class="form-group pull-left span2" style="margin-left: 5px">
 							<input data-toggle="tooltip" title="Employee Name"
 								data-placement="top" class="span12 m-b-n ui-autocomplete-input"
 								placeholder="Employee Name" id="emp_name" name="emp_name"
@@ -390,104 +390,6 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							</button>
 						</div>
 					</div>
-
-
-					<!--							
-								<div class="row-fluid p-t-xxs">
-									<div class="span4 form-horizontal  ">
-										<div class="form-group p-xxs ">
-											<label class="control-label">Structure</label>
-											<div id="drop_down_list_structure" class="controls"></div>
-
-										</div>
-									</div>
-									<div class="span4 form-horizontal  ">
-										<div class="form-group p-xxs ">
-											<label class="control-label">Appraisal Level</label>
-											<div id="drop_down_list_appraisal_level" class="controls"></div>
-
-										</div>
-									</div>
-									
-										<div class="span4 form-horizontal  ">
-											<div class="form-group p-xxs ">
-												<label class="control-label">Appraisal Type</label>
-												<div id="drop_down_list_appraisal_type" class="controls">
-											
-										</div>
-
-											</div>
-										</div>
-									
-									
-								</div>
-								
-								<div class="row-fluid">
-									<div class="span4 form-horizontal ">
-										<div class="form-group p-xxs ">
-											<label class="control-label">Appraisal Item</label>
-											<div class="controls">
-												<input data-toggle="tooltip" title="Appraisal Item" class="span12 m-b-n" placeholder="Appraisal Item" id="app_item" name="app_item" type="text">
-												<input class="form-control input-sm" 
-													type="hidden" id="app_item_id" name="app_item_id" value="">
-											</div>
-											
-
-										</div>
-									</div>
-									<div class="span4 form-horizontal  ">
-										<div class="form-group p-xxs ">
-											<label class="control-label">Period</label>
-											<div id="drop_down_list_period" class="controls"></div>
-
-										</div>
-									</div>
-									<div class="span4 form-horizontal ">
-										<div class="form-group p-xxs ">
-											<label class="control-label">Employee Name</label>
-											<div class="controls">
-												<input data-toggle="tooltip" title="Employee Name" class="span12 m-b-n" placeholder="Employee Name" id="emp_name" name="emp_name" type="text">
-												<input class="form-control input-sm"
-													type="hidden" id="emp_name_id"
-													name="emp_name_id">
-											</div>
-											
-
-										</div>
-									</div>
-
-									
-
-								</div>
-								<div class="row-fluid">
-									<div class="span12 ">
-										
-										<div class="pull-right ">
-											<button id="btn_import" type="button" data-target="#ModalImport"
-											data-toggle="modal" class="btn btn-success btn-sm "
-											style="margin-left: 5px">
-											<i class="fa fa-upload"></i>&nbsp;Import
-											</button>
-										</div>
-										<form id="formExportToExcel" action="" method="post"
-											class="pull-right " style="margin-bottom: 5px;margin-left: 5px">
-											<button id="exportToExcel" class="btn btn-warning btn-sm"
-												type="button">
-												<i class="fa fa-download"></i> Download
-											</button>
-										</form>
-										<div class="pull-right ">
-											<button type="button" name="btnSearchAdvance"
-											id="btnSearchAdvance" class="btn btn-info input-sm "
-											style="margin-left: 5px">
-											<i class="fa fa-search"></i>&nbsp;Search
-											</button>
-										</div>
-		
-									</div>
-								</div>
-							
-  -->
 							</div>
 							<!-- content end -->
 						</div>
@@ -554,7 +456,6 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 										<tr>
 											<th style='width: auto'>Period&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
 											<th style='width: auto'>Structure&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-											<th style='width: auto'>Appraisal&nbsp;Type&nbsp;</th>
 											<th style='width: auto'>Appraisal&nbsp;Item&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
 											<th style='width: auto'>Emp&nbsp;Code&emsp;</th>
 											<th style='width: auto'>Emp&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
