@@ -44,8 +44,8 @@ var getDataFn = function(page,rpp){
 
 			galbalDataSystemcon=data;
 	
-			updateThemeFn(data["theme_color"]);
-			var htmlTheamColor = "<button class=\"jscolor {valueElement:null,value:'"+data["theme_color"]+"',valueElement:'themeColor',onFineChange:'updateThemeFn(this)'} \" style='width:50px; height:20px;'></button>";
+			//setThemeColorFn(data["theme_color"]);
+			var htmlTheamColor = "<button class=\"jscolor {valueElement:null,value:'"+data["theme_color"]+"',valueElement:'themeColor',onFineChange:'setThemeColorFn(this)'} \" style='width:50px; height:20px;'></button>";
 			$("#current_appraisal_year").val(data["current_appraisal_year"]);
 			$("#drop_down_list_month").html(dropDownListMonth(data["period_start_month_id"]));
 			$("#appraisalFrequency").val(data["appraisal_frequency_id"]);
@@ -139,7 +139,7 @@ var listEmpThresholdFn = function(data){
 //************ clear start *********//
 
 var clearFn = function() {
-	updateThemeFn(galbalDataSystemcon["theme_color"]);
+	setThemeColorFn(galbalDataSystemcon["theme_color"]);
 	$("#drop_down_list_month").html(dropDownListMonth(galbalDataSystemcon["period_start_month_id"]));
 	$("#appraisalFrequency").val(galbalDataSystemcon["appraisal_frequency_id"]);
 	$("#bonusFrequency").val(galbalDataSystemcon["bonus_frequency_id"]);	
@@ -156,7 +156,7 @@ var clearFn = function() {
 	if(galbalDataSystemcon["result_type"] == 1){$("#resultWeightPercentage").prop("checked", true);}
 	else if(galbalDataSystemcon["result_type"] == 2){$("#resultPercentage").prop("checked", true);}
 	else if(galbalDataSystemcon["result_type"] == 3){$("#raiseScore").prop("checked", true);}
-	var htmlTheamColor = "<button class=\"jscolor {valueElement:null,value:'"+galbalDataSystemcon["theme_color"]+"',valueElement:'themeColor',onFineChange:'updateThemeFn(this)'} \" style='width:50px; height:20px;'></button>";
+	var htmlTheamColor = "<button class=\"jscolor {valueElement:null,value:'"+galbalDataSystemcon["theme_color"]+"',valueElement:'themeColor',onFineChange:'setThemeColorFn(this)'} \" style='width:50px; height:20px;'></button>";
 	$("#listThemeColor").html(htmlTheamColor);
 	jscolor.installByClassName("jscolor");
 };
@@ -481,14 +481,7 @@ var deleteEmpFn = function() {
 
 //******************** Delete emp end********//
 
-//******************** updateTheme start********//
-var updateThemeFn = function(color){
-	console.log("Theme color : "+color);
-	$(".ibox-title").css({"background-color": "#"+color, "border-color": "#"+color});
-	$(".ibox-content").css({"border-color": "#"+color});
-	$(".modal-header").css({"background": "#"+color});
-};
-//******************** updateTheme end********//
+
 $(document).ready(function () {
 	
 	 var username = $('#user_portlet').val();

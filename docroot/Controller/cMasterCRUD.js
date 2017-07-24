@@ -841,7 +841,7 @@ var createDataTableFn = function(options){
 	    		getDataFn($("#pageNumber").val(),$("#rpp").val(),options,dataSearch);
 	    	}
 	    	//advance search end
-	
+	    	setThemeColorFn(tokenID.theme_color);
 		}
 	});
 }

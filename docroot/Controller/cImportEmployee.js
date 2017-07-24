@@ -6,14 +6,14 @@ var tempEmpID="";
 var tempPosiName="";
 var tempPosiID="";
 var pageNumberDefault=1;
-var restfulPathImportEmployee="/kpi_api/public/import_employee";
-var restfulPathRole="/kpi_api/public/import_employee/role_list";
+var restfulPathImportEmployee="/see_api/public/import_employee";
+var restfulPathRole="/see_api/public/import_employee/role_list";
 
-var restfulPathDropDownDepartment="/kpi_api/public/import_employee/dep_list";
-var restfulPathDropDownSection="/kpi_api/public/import_employee/sec_list";
+var restfulPathDropDownDepartment="/see_api/public/import_employee/dep_list";
+var restfulPathDropDownSection="/see_api/public/import_employee/sec_list";
 
-var restfulPathPositionAutocomplete="/kpi_api/public/import_employee/auto_position_name";
-var restfulPathEmployeeAutocomplete="/kpi_api/public/import_employee/auto_employee_name";
+var restfulPathPositionAutocomplete="/see_api/public/import_employee/auto_position_name";
+var restfulPathEmployeeAutocomplete="/see_api/public/import_employee/auto_employee_name";
 
 //Check Validation Start
 var validationFn = function(data){

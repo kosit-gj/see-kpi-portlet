@@ -384,7 +384,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								<!-- data-target="#ModalCopy" data-toggle="modal" -->
 								<button id="btn_copy" type="button"
 									class="btn btn-primary btn-sm " style="margin-left: 5px">
-									&nbsp;<i class="fa fa-plus-square"></i>&nbsp;Copy&nbsp;&nbsp;
+									&nbsp;<i class="fa fa-copy"></i>&nbsp;Copy&nbsp;&nbsp;
 								</button>
 							</div>
 							<div class="form-group pull-right m-b-none p-b-xxs">
