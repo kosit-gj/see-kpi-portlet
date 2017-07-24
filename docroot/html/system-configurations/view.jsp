@@ -123,7 +123,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 <div class="row"><!-- start--row -->
 
                    </div><!-- end--row -->
-         			<div class="row-fluid">
+         			<div class="row-fluid app_url_hidden">
 				         		<div class="span12">
 					         	<div class="ibox-title">
 	                                <h5>System Configuration </h5>
@@ -162,7 +162,11 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 										<div class="span5 object-right" >
 											<label class='text-label'>  Appraisal Frequency &nbsp;:</label>
 										</div>
-										<div class="span3" id="appraisalSystem"></div>
+										<div class="span3" id="appraisalSystem">
+											<select id="appraisalFrequency" class="input form-control input-sm span12" data-toggle="tooltip" title="Appraisal Frequency" name="appraisalFrequency">
+											</select>
+										
+										</div>
 									</div>
 									
 									<div class="row-fluid">
@@ -170,7 +174,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 											<label class='text-label'>   Bonus Frequency  &nbsp;:</label>
 												
 										</div>
-										<div class="span3" id="bonusfreSystem"></div>
+										<div class="span3" id="bonusfreSystem">
+										<select id="bonusFrequency" class="input form-control input-sm span12" data-toggle="tooltip" title="Bonus Frequency" name="bonusFrequency">
+										</select>
+										</div>
 	                	
 									</div>
 									
@@ -233,6 +240,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									
 									</div>
 									<div class="span3" id="salarySystem">
+										<select id="salaryRaiseFrequency" class="input form-control input-sm span12" data-toggle="tooltip" title="Frequency" name="salaryRaiseFrequency">
+										</select>
 									</div>
 
                                  </div> 
@@ -263,17 +272,19 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									
 									</div>
 									<div class="span5">
-										
-										
 										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
-											<input type="radio" name="optionsRadios2" id="resultPercentage" value="1" checked='checked'>
+											<input type="radio" name="optionsRadios2" id="resultWeightPercentage" value="1" checked='checked'>
+											  Weight Percentage
+										</label>								
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+											<input type="radio" name="optionsRadios2" id="resultPercentage" value="2" >
 											  Percentage
 										</label>
 										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
-											  <input   type="radio" name="optionsRadios2" id="raiseScore" value="2">
+											  <input   type="radio" name="optionsRadios2" id="raiseScore" value="3">
 											  Score
 										</label>
-										<button  data-target="#ModalEmpResult" data-toggle="modal" class=" btn btn-success " type="button" id="btnEmpResult" style="margin: -6px 10px 6px 10px;" >Employee Result Thershold</button>
+										
 									</div>
 
                                  </div> 
@@ -283,14 +294,12 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									<label class='text-label'>  Theme Color &nbsp;:</label>
 									
 									</div>
-									<div class="span3" style="margin-bottom: 25px;">
+									<div class="span3" style="margin-bottom: 25px;" id="listThemeColor">
 										<button
 										    class="jscolor {valueElement:null,value:'ffcc00',valueElement:'themeColor',onFineChange:'updateThemeFn(this)'}"
 										    style="width:50px; height:20px;"></button>
-										    <input type="hidden" id="themeColor" value="">
-										   
 									</div>
-
+										<input type="hidden" id="themeColor" value="">
                                  </div> 
                                  <div class="row-fluid">
 							
@@ -301,7 +310,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									<div class="span5 btn-right">
 										<input type="hidden" name="id" id="id" value="">
 						   				<input type="hidden" name="action" id="action" value="add">
-						   				
+						   				<button  data-target="#ModalEmpResult" data-toggle="modal" class=" btn btn-success " type="button" id="btnEmpResult" style="" >Set Threshold</button>
 						   				<button class=" btn btn-primary " type="button" id="btnSubmit" >Save</button>
 						                <button data-dismiss="modal" class=" btn btn-danger btnCancle" type="button">Cancel</button>
 						                
@@ -340,7 +349,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 						<span aria-hidden="true">×</span><span class="sr-only"></span>
 					</button>
 					<!-- <i class="fa fa-laptop modal-icon"></i> -->
-					<h4 class="modal-title" id="modalTitleRole">Emp Thershold</h4>
+					<h4 class="modal-title" id="modalTitleSetThershold">Set Thershold : </h4>
 					<!-- 
                 <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
                  -->
