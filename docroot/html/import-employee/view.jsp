@@ -123,7 +123,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 .aui #from_emp_type{
 	width: 170px;  
 }
-.aui .resultArea {
+.aui #employee_list_content {
 	display: none;
 }
 
@@ -384,7 +384,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 				</div>
 	
 
-				<div class="row-fluid" >
+				<div class="row-fluid app_url_hidden" >
 					<!-- start--row-fluid -->
 
 					<div class="col-lg-12">
@@ -395,12 +395,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 							<div class="ibox-content breadcrumbs2">
 					<div class="row-fluid p-t-xxs">
-						<div id="drop_down_department" class="form-group pull-left span3"
-							style="margin-left: 5px"><select data-toggle="tooltip" title="Department" class="input span12 m-b-n" id="search_department" name="search_department"><option selected="" value="">All</option></select></div>
-						<div id="drop_down_section" class="form-group pull-left span3"
-							style="margin-left: 5px"><select data-toggle="tooltip" title="Section" class="input span12 m-b-n" id="search_section" name="search_section"><option selected="" value="">All</option></select></div>
+						<div id="drop_down_organization" class="form-group pull-left span2"
+							style="margin-left: 5px"><select data-toggle="tooltip" title="Organization" class="input span12 m-b-n" id="search_org" name="search_org"><option selected="" value="">All</option></select></div>
 
-						<div class="form-group pull-left span3" style="margin-left: 5px">
+						<div class="form-group pull-left span2" style="margin-left: 5px">
 							<input data-toggle="tooltip" title="Position"
 								data-placement="top" class="span12 m-b-n ui-autocomplete-input"
 								placeholder="Position" id="search_position"
@@ -408,7 +406,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								class="form-control input-sm" id="search_position_id"
 								name="search_position_id" value="" type="hidden">
 						</div>
-						<div class="form-group pull-left span3" style="margin-left: 5px">
+						<div class="form-group pull-left span4" style="margin-left: 5px">
 							<input data-toggle="tooltip" title="Employee Name"
 								data-placement="top" class="span12 m-b-n ui-autocomplete-input"
 								placeholder="Employee Name" id="search_emp_name"
@@ -456,8 +454,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								<div class="row-fluid p-t-xxs">
 									<div class="span4 form-horizontal  ">
 										<div class="form-group p-xxs ">
-											<label class="control-label">Department</label>
-											<div id="drop_down_department" class="controls"></div>
+											<label class="control-label">Organization</label>
+											<div id="drop_down_Organization" class="controls"></div>
 
 										</div>
 									</div>
@@ -544,7 +542,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 
 
-				<div class="row-fluid" id="employee_list_content">
+				<div class="row-fluid " id="employee_list_content">
 					<div class="col-lg-12">
 						<div class="ibox-title">
 							<h5>Employee List</h5>
@@ -586,7 +584,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 											<th style='width: auto text-align:center;'>Select</th>
 											<th style='width: auto'>Emp&nbsp;Code&emsp;</th>
 											<th style='width: auto'>Emp&nbsp;Name&emsp;&emsp;&emsp;&emsp;</th>
-											<th style='width: auto'>Department&nbsp;Name&emsp;</th>
+											<th style='width: auto'>Organization&nbsp;Name&emsp;</th>
 											<th style='width: auto'>Section&nbsp;Name&emsp;</th>
 											<th style='width: auto'>Position&nbsp;Name&emsp;&emsp;&emsp;</th>
 <!-- 											<th style='width: auto'>Position&nbsp;Group&emsp;</th> -->
@@ -856,21 +854,21 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								</div>
 							</div>
 							<div class="form-group p-xxs">
-								<label class="control-label">Department Code:</label>
+								<label class="control-label">Organization Code:</label>
 								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_department_code">
+									<input type="text" class="form-control input-sm span12" placeholder="" id="from_org_code">
 								</div>
 							</div>
 							<div class="form-group p-xxs">
-								<label class="control-label">Department Name:</label>
+								<label class="control-label">Organization Name:</label>
 								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_department_name">
+									<input type="text" class="form-control input-sm span12" placeholder="" id="from_org_name">
 								</div>
 							</div>
 							<div class="form-group p-xxs">
 								<label class="control-label">Section Code:</label>
 								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_section_code">
+									<input type="text" class="form-control input-sm span12" placeholder="" id="from_level_id">
 								</div>
 							</div>
 							<div class="form-group p-xxs">
@@ -882,7 +880,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							<div class="form-group p-xxs">
 								<label class="control-label">Position Code:</label>
 								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_position_code">
+									<input type="text" class="form-control input-sm span12" placeholder="" id="from_position_id">
 								</div>
 							</div>
 							<div class="form-group p-xxs">
