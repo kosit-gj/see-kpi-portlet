@@ -208,10 +208,10 @@ var listErrorFn =function(data){
 
 		
 		if(data[index]['position_name']!= undefined || data[index]['position_name']==null){
-			if(data[index]['position_name']== null){//The position_name field is null
-				errorData+="<font color='red'>*</font> Position Name : null ↓<br>";
+			if(data[index]['position_name']== null){//The employee code field is null
+				errorData+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Org code : null <i class='fa fa-level-down'></i><br>";
 			}else{
-				errorData+="<font color='red'>*</font> Position Name : "+data[index]['position_name']+" ↓<br>";}
+				errorData+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Org code : "+data[index]['position_name']+" <i class='fa fa-level-down'></i><br>";}
 		}
 		if(data[index]['errors']['position_name']!=undefined){
 			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['position_name']+"<br>";

@@ -220,9 +220,10 @@ var listErrorFn =function(data){
 		$.each(data,function(index,indexEntry){	
 		if(data[index]['employee_code']!= undefined || data[index]['employee_code']==null){
 			if(data[index]['employee_code']== null){//The employee code field is null
-				errorData+="<font color='red'>*</font> employee code : null ↓<br>";
+				errorData+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Employee Code : null <i class='fa fa-level-down'></i><br>";
 			}else{
-				errorData+="<font color='red'>*</font> employee code : "+data[index]['employee_code']+"  ↓<br>";}
+				errorData+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Employee Code : "+data[index]['employee_code']+" <i class='fa fa-level-down'></i><br>";}
+			
 		}
 		
 		if(typeof data[index]['errors'] != 'object'){
