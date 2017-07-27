@@ -236,6 +236,7 @@ $(document).ready(function () {
 	 	
 	 	if(connectionServiceFn(username,password)==true){
 			getDataFn();
+			$(".app_url_hidden").show();
 	 		$("#btnSubmit").click(function(){
 	 			updateFn();
 	 		});

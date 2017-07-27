@@ -252,6 +252,7 @@ $(document).ready(function () {
 	 	if(connectionServiceFn(username,password)==true){
 	 		clearFn();
 			getDataFn();
+			$(".app_url_hidden").show();
 	 		$("#btnSubmit").click(function(){
 	 			updateFn();
 	 		});
