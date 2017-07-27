@@ -190,6 +190,18 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	height: 100%;
 }
 /* Large desktop */
+@media ( max-width : 1310px) {
+	.aui [class*="span"], .aui  .uneditable-input[class*="span"], .aui .row-fluid [class*="span"]
+		{
+		display: block;
+		float: none;
+		width: 100%;
+		margin-left: 0;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+}
 @media ( min-width : 1200px) {
 	.aui #confrimModal {
 		left: 55%;
