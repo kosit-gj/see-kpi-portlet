@@ -47,7 +47,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 }
 
 .popover {
-	width: 215px;
+	width: 150px;
 }
 
 .aui .pagination {
@@ -66,6 +66,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	margin-top: 0px;
 	display: inline;
 }
+
 .aui input[type="color"], .aui input[type="date"], .aui input[type="datetime"],
 	.aui input[type="datetime-local"], .aui input[type="email"], .aui input[type="month"],
 	.aui input[type="number"], .aui input[type="password"], .aui input[type="search"],
@@ -77,6 +78,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	height: auto;
 	line-height: normal;
 }
+
 .p-t-xxs {
 	padding-top: 5px;
 }
@@ -120,9 +122,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 }
 
 /* new */
-.aui #from_emp_type{
-	width: 170px;  
+.aui #from_emp_type {
+	width: 170px;
 }
+
 .aui #employee_list_content {
 	display: none;
 }
@@ -181,7 +184,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 #container {
 	width: 93.5%;
 }
-.aui #file{
+
+.aui #file {
 	width: 100%;
 	height: 100%;
 }
@@ -321,8 +325,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 /* Landscape phones and down */
 @media ( max-width : 480px) {
-	.aui #from_emp_type{
-	width: 100%;
+	.aui #from_emp_type {
+		width: 100%;
 	}
 	.aui #confrimModal {
 		left: 1%;
@@ -367,6 +371,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 		position: relative;
 	}
 }
+
 </style>
 
 <div id="container1" >
@@ -395,8 +400,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 							<div class="ibox-content breadcrumbs2">
 					<div class="row-fluid p-t-xxs">
-						<div id="drop_down_organization" class="form-group pull-left span2"
-							style="margin-left: 5px"><select data-toggle="tooltip" title="Organization" class="input span12 m-b-n" id="search_org" name="search_org"><option selected="" value="">All</option></select></div>
+						<div id="drop_down_organization" class="form-group pull-left span3"
+							style="margin-left: 5px"><select data-toggle="tooltip" title="Organization" class="input span12 m-b-n" id="search_org" name="search_org"><option selected value="">All Organization</option></select></div>
 
 						<div class="form-group pull-left span2" style="margin-left: 5px">
 							<input data-toggle="tooltip" title="Position"
@@ -406,7 +411,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								class="form-control input-sm" id="search_position_id"
 								name="search_position_id" value="" type="hidden">
 						</div>
-						<div class="form-group pull-left span4" style="margin-left: 5px">
+						<div class="form-group pull-left span3" style="margin-left: 5px">
 							<input data-toggle="tooltip" title="Employee Name"
 								data-placement="top" class="span12 m-b-n ui-autocomplete-input"
 								placeholder="Employee Name" id="search_emp_name"
@@ -414,13 +419,11 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								class="form-control input-sm" id="search_emp_id"
 								name="search_emp_id" value="" type="hidden">
 						</div>
-
-						<div class="form-group pull-right m-b-none "> <!-- data-target="#ModalRole"  -->
-							<button id="btn_add_role" type="submit" 
+						<div class="form-group pull-right m-b-none ">
+						<div class="form-group pull-right m-b-none "> <!-- data-target="#ModalLevel"  -->
+							<button id="btn_assign_level" type="submit" 
 								data-toggle="modal" class="btn btn-primary btn-sm "
-								style="margin-left: 5px;">
-								&nbsp;<i class="fa fa-plus-square"></i>&nbsp;Role&nbsp;&nbsp;
-							</button>
+								style="margin-left: 5px;"><i class="fa fa-pencil-square-o"></i>&nbsp;Assign&nbsp;Level</button>
 						</div>
 						<div class="form-group pull-right m-b-none ">
 							<button id="btn_import" type="button" data-target="#ModalImport"
@@ -444,93 +447,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							</button>
 						</div>
 					</div>
-
-
-
-
-
-
-					<!--
-								<div class="row-fluid p-t-xxs">
-									<div class="span4 form-horizontal  ">
-										<div class="form-group p-xxs ">
-											<label class="control-label">Organization</label>
-											<div id="drop_down_Organization" class="controls"></div>
-
-										</div>
-									</div>
-									<div class="span4 form-horizontal  ">
-										<div class="form-group p-xxs ">
-											<label class="control-label">Section</label>
-											<div id="drop_down_section" class="controls"></div>
-
-										</div>
-									</div>
-									<div class="span4 form-horizontal ">
-										<div class="form-group p-xxs ">
-											<label class="control-label">Position</label>
-											<div class="controls">
-												<input data-toggle="tooltip" title="Position" class="span12 m-b-n" placeholder="Position" id="search_position" name="search_position" type="text">
-												<input class="form-control input-sm" 
-													type="hidden" id="search_position_id" name="search_position_id" value="">
-											</div>
-											
-
-										</div>
-									</div>
-								</div>
-								
-								<div class="row-fluid">
-									<div class="span5 form-horizontal ">
-										<div class="form-group p-xxs ">
-											<label class="control-label">Employee Name</label>
-											<div class="controls">
-												<input data-toggle="tooltip" title="Employee Name" class="span12 m-b-n" placeholder="Employee Name" id="search_emp_name" name="search_emp_name" type="text">
-												<input class="form-control input-sm"
-													type="hidden" id="search_emp_id"
-													name="search_emp_id">
-											</div>
-											
-
-										</div>
-									</div>
-
-									<div class="span7  ">
-
-										
-										<div class="pull-right ">
-											<button id="btn_add_role" type="submit" data-target="#ModalRole"
-											data-toggle="modal" class="btn btn-primary btn-sm "
-											style="margin-left: 5px;margin-bottom: 5px;">
-											&nbsp;<i class="fa fa-plus-square"></i>&nbsp;Role&nbsp;&nbsp;
-											</button>
-										</div>
-										<div class="pull-right ">
-											<button id="btn_import" type="button" data-target="#ModalImport"
-											data-toggle="modal" class="btn btn-success btn-sm "
-											style="margin-left: 5px;margin-bottom: 5px;">
-											<i class="fa fa-upload"></i>&nbsp;Import
-											</button>
-										</div> 
-										<form id="formExportToExcel" action="" method="post"
-											class="pull-right " style="margin-bottom: 5px; margin-left: 5px">
-											<button id="exportToExcel" class="btn btn-warning btn-sm"
-												type="submit">
-												<i class="fa fa-download"></i> Download
-											</button>
-										</form>
-										<div class="pull-right ">
-											<button type="button" name="btnSearchAdvance"
-											id="btnSearchAdvance" class="btn btn-info input-sm "
-											style="margin-left: 5px;margin-bottom: 5px;">
-											<i class="fa fa-search"></i>&nbsp;Search
-											</button>
-										</div>
-		
-									</div>
-
-								</div>
--->
+					</div>
 							</div>
 							<!-- content end -->
 						</div>
@@ -585,9 +502,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 											<th style='width: auto'>Emp&nbsp;Code&emsp;</th>
 											<th style='width: auto'>Emp&nbsp;Name&emsp;&emsp;&emsp;&emsp;</th>
 											<th style='width: auto'>Organization&nbsp;Name&emsp;</th>
-											<th style='width: auto'>Section&nbsp;Name&emsp;</th>
 											<th style='width: auto'>Position&nbsp;Name&emsp;&emsp;&emsp;</th>
-<!-- 											<th style='width: auto'>Position&nbsp;Group&emsp;</th> -->
 											<th style='width: auto'>Chief&nbsp;Emp&nbsp;Code&emsp;</th>
 											<th style='width: auto'>Appraisal&nbsp;Level&emsp;</th>
 <!-- 											<th style='width: auto text-align:center;'>IsActive</th> -->
@@ -629,15 +544,6 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					</div>
 				</div>
 
-
-
-
-
-
-
-
-
-			
 		</div>
 	
 <!-- Modal Import Employee Role -->
@@ -658,42 +564,14 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 				</div>
 				<div class="modal-body">
 					<!-- content start -->
-					<div class="row-fluid">
-					<div class="col-lg-12">
-						<div class="span12" style="padding: 0px 10px; height:65px;">
-							<h1>
-							<i class="fa fa fa-pencil-square-o icon-title"></i>
-							<small style=" position:absolute;top:37px;left:85px">Import Employee</small>
-							</h1>
-						</div>
-					</div>
-					</div>
-					
-					<hr>
-
 					<!-- form start -->
-					
-
 					<div class="form-group">
 					<form id="fileImportEmployee">
-						
-							<h4>FILE IMPORT</h4>
-							<div class="fileUpload ">
-								<input type="file" id="file" class="dropify" accept=".xls, .xlsx"  /><span></span>
-							</div>
-							
-							<h6 class="label-content-import-export">
-
-<!-- 							<input class="btn btn-success" type="submit" -->
-<!-- 								name="importFileMobile" id="importFileMobile" value="Import" -->
-<!-- 								style="margin-top: 0px; margin-bottom: 0px;"> -->
-							<!-- 								<strong>Note</strong> : Data size should de less 10MB -->
-
-							</h6>
-						
+						<h4>FILE IMPORT</h4>
+						<div class="fileUpload ">
+							<input type="file" id="file" class="dropify" accept=".xls, .xlsx" /><span></span>
+						</div>
 					</form>
-					
-						<!-- start table -->
 					</div>
 					<!-- form End -->
 					<!-- content end -->
@@ -714,7 +592,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 	<!-- Modal Start Role -->
 
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalRole"
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalLevel"
 		class="modal inmodal" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content bounceInRight">
@@ -723,24 +601,13 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
 					</button>
 					<!-- <i class="fa fa-laptop modal-icon"></i> -->
-					<h4 class="modal-title" id="modalTitleRole">Role</h4>
+					<h4 class="modal-title" id="modalTitleRole">Assign Level</h4>
 					<!-- 
                 <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
                  -->
 				</div>
 				<div class="modal-body">
 					<!-- content start -->
-					<div class="row-fluid">
-					<div class="col-lg-12">
-						<div class="span12" style="padding: 0px 10px; height:65px;">
-							<h1>
-							<i class="fa fa fa-pencil-square-o icon-title"></i>
-							<small style=" position:absolute;top:37px;left:85px">Assign Role</small>
-							</h1>
-						</div>
-					</div>
-					</div>
-					<hr>
 
 					<!-- form start -->
 					<div class="form-inline p-b-xs" id="txtAssignEmpName">
@@ -756,14 +623,14 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					<div>
 						<!-- start table -->
 						<div class="table-responsive">
-							<table class="table table-striped" id="formTableRole">
+							<table class="table table-striped" id="formTableAppraisalLevel">
 								<thead>
 									<tr>
 										<th style='width: auto; '>Select</th>
-										<th style='width: 70%'>Role Name</th>
+										<th style='width: 70%'>Appraisal Level Name</th>
 									</tr>
 								</thead>
-								<tbody id="formListRuld">
+								<tbody id="formListAppraisalLevel">
 
 								</tbody>
 							</table>
@@ -778,7 +645,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					<!-- content end -->
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-success" type="button" id="btnRoldSubmit">Save</button>
+					<button class="btn btn-success" type="button" id="btnLvSubmit">Save</button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>
 					<div class="alert alert-warning" id="information3"
@@ -809,17 +676,6 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 				</div>
 				<div class="modal-body">
 					<!-- content start -->
-					<div class="row-fluid">
-					<div class="col-lg-12">
-						<div class="span12" style="padding: 0px 10px; height:65px;">
-							<h1>
-							<i class="fa fa fa-pencil-square-o icon-title"></i>
-							<small style=" position:absolute;top:37px;left:85px">Edit Employee</small>
-							</h1>
-						</div>
-					</div>
-					</div>
-					<hr>
 					<!-- form start -->
 					<div class="row-fluid">
 	                	<div class="span12 form-horizontal p-t-xxs">
@@ -833,6 +689,13 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								<label class="control-label">Emp Name:<span class='redFont '>*</span></label>
 								<div class="controls">
 									<input type="text" class="form-control input-sm span12" placeholder="" id="from_emp_name">
+								</div>
+							</div>
+							<div class="form-group p-xxs">
+								<label class="control-label">Appraisal Level Name:</label>
+								<div class="controls">
+									<select title="Appraisal Level" class="input span12 m-b-n" id="from_Level_id" name="from_Level_id" style="margin-bottom:5px!important;">
+									</select>
 								</div>
 							</div>
 							<div class="form-group p-xxs">
@@ -853,46 +716,25 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									<input type="text" class="form-control input-sm span12" placeholder="" id="from_emp_aed">
 								</div>
 							</div>
-							<div class="form-group p-xxs">
-								<label class="control-label">Organization Code:</label>
-								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_org_code">
-								</div>
-							</div>
+
 							<div class="form-group p-xxs">
 								<label class="control-label">Organization Name:</label>
 								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_org_name">
+									<select title="Organization" class="input span12 m-b-n" id="from_org_id" name="from_org_id" style="margin-bottom:5px !important;">
+									</select>
 								</div>
 							</div>
-							<div class="form-group p-xxs">
-								<label class="control-label">Section Code:</label>
-								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_level_id">
-								</div>
-							</div>
-							<div class="form-group p-xxs">
-								<label class="control-label">Section Name:</label>
-								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_section_name">
-								</div>
-							</div>
-							<div class="form-group p-xxs">
-								<label class="control-label">Position Code:</label>
-								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_position_id">
-								</div>
-							</div>
+							
+
 							<div class="form-group p-xxs">
 								<label class="control-label">Position Name:</label>
 								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_position_name">
-								</div>
-							</div>
-							<div class="form-group p-xxs">
-								<label class="control-label">Position Group:</label>
-								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_position_group">
+									<input title="Position"
+										class="form-control input-sm span12"
+										placeholder="Position" id="from_position_name"
+										name="from_position_name" type="text"> <input
+										class="form-control input-sm" id="from_position_id"
+										name="from_position_id" value="" type="hidden">
 								</div>
 							</div>
 							<div class="form-group p-xxs">
@@ -953,7 +795,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>
 						<div class="alert alert-warning information" id="information2"
-						style="display: none;max-height:45px; overflow-y: scroll; position:relative;"></div>
+						style="display: none;"></div>
 				</div>
 			</div>
 		</div>
