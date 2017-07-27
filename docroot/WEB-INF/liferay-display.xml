@@ -13,6 +13,7 @@
 		<portlet id="database-connection"></portlet>
 		<portlet id="common-data-set"></portlet>
 		<portlet id="threshould"></portlet>
+		<portlet id="result-thershold"></portlet>
 		<portlet id="appraisal-level"></portlet>
 		<portlet id="appraisal-grade"></portlet>
 		<portlet id="appraisal-period"></portlet>

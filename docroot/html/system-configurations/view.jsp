@@ -272,16 +272,16 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									
 									</div>
 									<div class="span5">
-										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
-											<input type="radio" name="optionsRadios2" id="resultWeightPercentage" value="1" checked='checked'>
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;display:none;">
+											<input type="radio" name="optionsRadios2" id="resultWeightPercentage" value="0" checked='checked'>
 											  Weight Percentage
 										</label>								
 										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
-											<input type="radio" name="optionsRadios2" id="resultPercentage" value="2" >
+											<input type="radio" name="optionsRadios2" id="resultPercentage" value="1" >
 											  Percentage
 										</label>
 										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
-											  <input   type="radio" name="optionsRadios2" id="raiseScore" value="3">
+											  <input   type="radio" name="optionsRadios2" id="raiseScore" value="2">
 											  Score
 										</label>
 										
@@ -310,7 +310,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									<div class="span5 btn-right">
 										<input type="hidden" name="id" id="id" value="">
 						   				<input type="hidden" name="action" id="action" value="add">
-						   				<button  data-target="#ModalEmpResult" data-toggle="modal" class=" btn btn-success " type="button" id="btnEmpResult" style="" >Set Threshold</button>
+						   				<button  data-target="#ModalEmpResult" data-toggle="modal" class=" btn btn-success " type="button" id="btnEmpResult" style="display:none;" >Set Threshold</button>
 						   				<button class=" btn btn-primary " type="button" id="btnSubmit" >Save</button>
 						                <button data-dismiss="modal" class=" btn btn-danger btnCancle" type="button">Cancel</button>
 						                
