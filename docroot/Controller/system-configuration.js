@@ -103,7 +103,7 @@ var listEmpThresholdFn = function(data){
 		htmlEmpthreshold +=	"	<input disabled style=\"margin-bottom: 3px;\"type=\"checkbox\"  class='selectEmpCheckbox' id="+indexEntry["emp_threshold_id"]+" value=\""+indexEntry["emp_threshold_id"]+"\">"+ "</td>";
 		htmlEmpthreshold +="<td class='objectCenter'><input disabled type='text' placeholder='Begin Threshold' style='width: 110px;margin-bottom: 0px;' class='selectEmpBegin numberOnly' id='empBegin-"+indexEntry["emp_threshold_id"]+"' value=\""+indexEntry["begin_threshold"]+"\"></td>";
 		htmlEmpthreshold +="<td class='objectCenter'><input disabled type='text' placeholder='End Threshold' style='width: 110px;margin-bottom: 0px;' class='selectEmpEnd numberOnly' id='empEnd-"+indexEntry["emp_threshold_id"]+"' value=\""+indexEntry["end_threshold"]+"\"></td>";
-		htmlEmpthreshold +="<td class='objectCenter'><button disabled class=\"jscolor {valueElement:null,value:'"+indexEntry["color_code"]+"',valueElement:'empColor-"+indexEntry["emp_threshold_id"]+"'} selectEmpColor\" style='width:50px; height:20px;'></button> <input type='hidden' id=\"empColor-"+indexEntry["emp_threshold_id"]+"\" value='"+indexEntry["color_code"]+"'></td>";
+		htmlEmpthreshold +="<td class='objectCenter'><button disabled class=\"btn jscolor {valueElement:null,value:'"+indexEntry["color_code"]+"',valueElement:'empColor-"+indexEntry["emp_threshold_id"]+"'} selectEmpColor\" style='width:50px; height:20px;'></button> <input type='hidden' id=\"empColor-"+indexEntry["emp_threshold_id"]+"\" value='"+indexEntry["color_code"]+"'></td>";
 		htmlEmpthreshold += "</tr>";
 		
 	});

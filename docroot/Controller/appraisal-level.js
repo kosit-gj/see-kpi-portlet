@@ -4,15 +4,30 @@ var insertCriteriaFn = function () {
 	var structure =[];
 	var weight = [];
 	var criteria = [];
-	$('.from_data_weight').each(function(index, indexEntry) {
-		//console.log("id: "+this.id+" weigth : "+$(indexEntry).val());
+	var checkbox = "";
+	//from_data_structure
+	$('.from_data_structure').each(function(index, indexEntry) {
+		if($(indexEntry).is(":checked")){
+			checkbox = "1";
+		}else{
+			checkbox = "0";
+		}
 		criteria.push({
-			"structure_id": ""+this.id+"",
-			"weight_percent": ""+$(indexEntry).val()+"",	   	
+			"structure_id": ""+this.id.split("-")[1]+"",
+			"weight_percent": ""+$(".from_data_weight[id$="+this.id.split("-")[1]+"]").val()+"",
+			"checkbox": ""+checkbox+""
 		   });
 	});
+	
+//	$('.from_data_weight').each(function(index, indexEntry) {
+//		//console.log("id: "+this.id+" weigth : "+$(indexEntry).val());
+//		criteria.push({
+//			"structure_id": ""+this.id+"",
+//			"weight_percent": ""+$(indexEntry).val()+"",	   	
+//		   });
+//	});
 		$.ajax({
-			url:restfulURL+"/kpi_api/public/appraisal_level/"+$("#crierai_id").val()+"/criteria",
+			url:restfulURL+"/see_api/public/appraisal_level/"+$("#crierai_id").val()+"/criteria",
 			type : "PATCH",
 			dataType : "json",
 			headers:{Authorization:"Bearer "+tokenID.token},
@@ -45,29 +60,44 @@ var insertCriteriaFn = function () {
 var listAppraisalCriteria = function(id) {
 	htmlTable="";
 	weight_percent="";
+	no_weight = "";
+	is_check = "";
 	$.ajax({ 
-		url:restfulURL+"/kpi_api/public/appraisal_level/"+id+"/criteria",
+		url:restfulURL+"/see_api/public/appraisal_level/"+id+"/criteria",
 		type : "get",
 		dataType : "json",
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success : function(data) {
-			$.each(data,function(index,indexEntry) { 
-				//console.log(data[index]["weight_percent"]);
-				if(data[index]["weight_percent"] == null){
+			if(data["no_weight"] == 1){
+				no_weight="disabled";
+			}else{
+				no_weight="";
+			};
+
+			
+			$.each(data['data'],function(index,indexEntry) { 
+				console.log(indexEntry["weight_percent"]);
+				if(indexEntry["weight_percent"] == null){
 					weight_percent="0.00";
 				}else{
-					weight_percent=data[index]["weight_percent"];
+					weight_percent=indexEntry["weight_percent"];
+				}
+				if(indexEntry["checkbox"] == 1){
+					is_check="checked";
+				}else{
+					is_check="";
 				};
+				
 				htmlTable+="<tr>";
-//				htmlTable+="	<td>";
-//				htmlTable+="		<input  id=\"form_structure_item-"+data[index]["structure_id"]+"\" class=\"from_data_structure\"";
-//				htmlTable+="		type='checkbox' value=\""+data[index]["structure_id"]+"\">";
-//				htmlTable+="	</td>";
+				htmlTable+="	<td>";
+				htmlTable+="		<input  id=\"form_structure_item-"+indexEntry["structure_id"]+"\" class=\"from_data_structure\"";
+				htmlTable+="		type='checkbox' "+is_check+" value=\""+indexEntry["structure_id"]+"\">";
+				htmlTable+="	</td>";
 				htmlTable+="	<td style=\"vertical-align:middle\">";
-				htmlTable+=			data[index]["structure_name"];
+				htmlTable+=			indexEntry["structure_name"];
 				htmlTable+="	</td>";
 				htmlTable+="	<td style=\"vertical-align:middle\" >";
-				htmlTable+="		<input style='margin-bottom: 0px;' class=\"span12 from_data_weight numberOnly\" type='text'  id=\""+data[index]["structure_id"]+"\" value=\""+weight_percent+"\" />";
+				htmlTable+="		<input style='margin-bottom: 0px;' class=\"span12 from_data_weight numberOnly\" "+no_weight+" type='text'  id=\""+indexEntry["structure_id"]+"\" value=\""+weight_percent+"\" />";
 				htmlTable+="	</td>";
 				htmlTable+="</tr>";
 					
@@ -123,8 +153,9 @@ $(document).ready(function(){
 		 			         
 		 			           {"colunmsDisplayName":"Appraisal Level Name","width":"30%","id":"appraisal_level_name","colunmsType":"text"},
 		 			           {"colunmsDisplayName":"View All Employee","width":"20%","id":"is_all_employee","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"Is Active","width":"10%","id":"is_active","colunmsType":"checkbox"},
 		 			           {"colunmsDisplayName":"Is HR","width":"10%","id":"is_hr","colunmsType":"checkbox"},
+		 			           {"colunmsDisplayName":"No Weight","width":"10%","id":"no_weight","colunmsType":"checkbox"},
+		 			           {"colunmsDisplayName":"Is Active","width":"10%","id":"is_active","colunmsType":"checkbox"},
 		 			           {"colunmsDisplayName":"Parent","width":"20%","id":"parent_level_name","colunmsType":"text"}
 		 			          
 		 			           
@@ -141,23 +172,27 @@ $(document).ready(function(){
 		 	    				"id":"is_all_employee","width":"250px"
 		 	    				},
 		 	    				{
-		 	 	    				"label":"Is HR","inputType":"checkbox","default":"uncheck",
-		 	 	    				"id":"is_hr","width":"200px"
+		 	 	    			"label":"Is HR","inputType":"checkbox","default":"uncheck",
+		 	 	    			"id":"is_hr","width":"200px"
 		 	 	    			},
+		 	    			    {
+			 	    			"label":"No Weight","inputType":"checkbox","default":"uncheck",
+			 	    			"id":"no_weight","width":"200px"
+			 	    			},
 		 	    			    {
 		 	    				"label":"IsActive","inputType":"checkbox","default":"checked",
 		 	    				"id":"is_active","width":"200px"
 		 	    				},{
 		    					"label":"Parent Appraisal Level","inputType":"dropdown","initValue":"",
-		    					"id":"parent_id","width":"250px","url":""+restfulURL+"/kpi_api/public/appraisal_level"
+		    					"id":"parent_id","width":"250px","url":""+restfulURL+"/see_api/public/appraisal_level"
 		    					},  
 		 	    				
 		 	    					
 		 	    			],
 		 	    			
 		 	    			
-		 			 "formDetail":{"formSize":"modal-dialog","formName":"Appraisal Level","id":"appraisalLevelForm","pk_id":"appraisal_level_id"},       
-		 			 "serviceName":[restfulURL+"/kpi_api/public/appraisal_level"],
+		 			 "formDetail":{"formSize":"modal-dialog","formName":"Appraisal Level","id":"appraisalLevelForm","pk_id":"level_id"},       
+		 			 "serviceName":[restfulURL+"/see_api/public/appraisal_level"],
 		 			 "tokenID":tokenID,
 		 			 "pagignation":false,
 		 			 "expressSearch":false,
@@ -176,13 +211,13 @@ $(document).ready(function(){
 		 		$("#crierai_id").val(id);
 		 		//console.log("3");
 		 		//console.log($(this).parent().parent().parent().prev().prev().prev().prev().prev().get());
-		 		$("#ac_appraisal_level_name").html("<b>"+$(this).parent().parent().parent().prev().prev().prev().prev().prev().text()+"</b>");
+		 		$("#ac_appraisal_level_name").html("<b>"+$(this).parent().parent().parent().parent().prev().prev().prev().prev().prev().text()+"</b>");
 		 		listAppraisalCriteria(id);
 		 		$("#addModalCriteria").modal();
 		 		
 		 		$("#btnCriteriaSubmit").off("click");
 		 		$("#btnCriteriaSubmit").on("click",function(){
-		 			
+		 			$(".btnModalClose").click();
 		 			insertCriteriaFn();
 		 			
 		 		});

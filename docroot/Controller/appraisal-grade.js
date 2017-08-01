@@ -15,7 +15,7 @@
 	    			           {"colunmsDisplayName":"Begin Score","width":"15%","id":"begin_score","colunmsType":"text","colunmsDataType":"decimal"},
 	    			           {"colunmsDisplayName":"End Score","width":"15%","id":"end_score","colunmsType":"text","colunmsDataType":"decimal"},
 	    			           {"colunmsDisplayName":"Salary Raise","width":"15%","id":"salary_raise_amount","colunmsType":"text","colunmsDataType":"decimal"},
-	    			           {"colunmsDisplayName":"Salary Raise Percent","width":"15%","id":"salary_raise_percent","colunmsType":"text","colunmsDataType":"decimal"},
+	    			           //{"colunmsDisplayName":"Salary Raise Percent","width":"15%","id":"salary_raise_percent","colunmsType":"text","colunmsDataType":"decimal"},
 	    			           {"colunmsDisplayName":"IsActive","width":"10%","id":"is_active","colunmsType":"checkbox"},
 	    			          ],
 	    			
@@ -40,10 +40,6 @@
 	         				"label":"Salary Raise","inputType":"text","placeholder":"Salary Raise",
 	         				"id":"salary_raise_amount","width":"200px","dataTypeInput":"number","required":true
 	         				},
-	         				{
-		         				"label":"Salary Raise Percent","inputType":"text","placeholder":"Salary Raise Percent",
-		         				"id":"salary_raise_percent","width":"200px","dataTypeInput":"number","required":true
-		         			},
 	     			        {
 	     					"label":"IsAtive","inputType":"checkbox","default":"checked",
 	     					"id":"is_active","width":"200px"

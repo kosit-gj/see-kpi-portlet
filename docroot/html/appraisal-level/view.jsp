@@ -82,8 +82,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							<table class="table table-striped" id="formTableRole">
 								<thead>
 									<tr>
- 										<!-- <th style='width: auto; '>Select</th> -->
-										<th style='width: 75%'><b>Structure&nbsp;Name</b></th>
+ 										 <th style='width: 10%; '>Select</th> 
+										<th style='width: 65%'><b>Structure&nbsp;Name</b></th>
 										<th style='width: 15%;text-align: center;'><b>%</b></th>
 									</tr>
 								</thead>
