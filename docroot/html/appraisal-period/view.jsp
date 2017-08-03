@@ -45,18 +45,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
             </div>
             <div class="modal-body">
                 <!-- content start -->
-                <div class="row-fluid">
-					<div class="span12">
-						<div class="span12" style="padding: 0px 10px; height:65px;">
-							<h1>
-							<i class="fa fa fa-pencil-square-o icon-title"></i>
-							<small  id="modalDescription">Create Appraisal Period</small>
-							</h1>
-						</div>
-					</div>
-				</div>
-                
-                <hr>
+
                 
                 <!-- form start -->
                 <div class="row-fluid">

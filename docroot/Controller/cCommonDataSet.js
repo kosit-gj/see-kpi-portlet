@@ -7,10 +7,10 @@ var galbalDataCDS=[];
 var tempCdsId ="";
 var tempCdsName ="";
 var pageNumberDefault=1;
-var restfulPathCDS="/kpi_api/public/cds";
-var restfulPathDropDownAppraisalLevel="/kpi_api/public/cds/al_list";
-var restfulPathDropDownConnection="/kpi_api/public/cds/connection_list";
-var restfulPathAutocomplete="/kpi_api/public/cds/auto_cds";
+var restfulPathCDS="/see_api/public/cds";
+var restfulPathDropDownAppraisalLevel="/see_api/public/cds/al_list";
+var restfulPathDropDownConnection="/see_api/public/cds/connection_list";
+var restfulPathAutocomplete="/see_api/public/cds/auto_cds";
 
 
  
@@ -94,15 +94,14 @@ var clearFn = function() {
 //--------  GetData Start
 var getDataFn = function(page,rpp){
 	//alert("Page : "+page+" - Rpp : "+rpp);
-	var AppraisalLv= $("#param_Appraisal_Lv").val();
+
 	var CdsName= $("#param_CDS_Id").val();
 	$.ajax({
 		url : restfulURL+restfulPathCDS,
 		type : "get",
 		dataType : "json",
 		data:{"page":page,"rpp":rpp,
-			"cds_id":CdsName,
-			"appraisal_level_id":AppraisalLv},
+			"cds_id":CdsName},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,// w8 data 
 		success : function(data) {
@@ -119,11 +118,10 @@ var getDataFn = function(page,rpp){
 //--------  GetData End
 
 // -------- Search Start
-var searchAdvanceFn = function (AppraisalLv,cdsId) {
+var searchAdvanceFn = function (cdsId) {
 	//embed parameter start
 	
 	var htmlParam="";
-	htmlParam+="<input type='hidden' class='param_Embed' id='param_Appraisal_Lv' name='param_Appraisal_Lv' value='"+AppraisalLv+"'>";
 	htmlParam+="<input type='hidden' class='param_Embed' id='param_CDS_Id' name='param_CDS_Id' value='"+cdsId+"'>";
 	$(".param_Embed").remove();
 	$("body").append(htmlParam);
@@ -148,7 +146,7 @@ var findOneFn = function(id) {
 			
 			//Appraisal Level
 			//$("#f_app_lv").val(data['appraisal_level_id']);
-			$("#drop_down_list_from_appraisal_level").html(dropDownListAppraisalLevel(data['appraisal_level_id'],"f_app_lv"));
+			//$("#drop_down_list_from_appraisal_level").html(dropDownListAppraisalLevel(data['appraisal_level_id'],"f_app_lv"));
 			//Connection
 			
 			//$("#f_connection").val(data['connection_id']);
@@ -210,9 +208,9 @@ var listCommonDataSetFn = function(data) {
 			IsActive ="<input disabled type=\"checkbox\"  value=\"0\" >";
 		}
 		htmlTable += "<tr class='rowSearch'>";
-		htmlTable += "<td id=\"objectCenter\" class='objectCenter 'style=\"\">"+"<input  style=\"margin-bottom: 3px;\"type=\"checkbox\"  class='selectCdsCheckbox' id=kpiCheckbox-"+indexEntry["cds_id"]+" value=\""+indexEntry["cds_id"]+"\">"+ "</td>";
+//		htmlTable += "<td id=\"objectCenter\" class='objectCenter 'style=\"\">"+"<input  style=\"margin-bottom: 3px;\"type=\"checkbox\"  class='selectCdsCheckbox' id=kpiCheckbox-"+indexEntry["cds_id"]+" value=\""+indexEntry["cds_id"]+"\">"+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["cds_name"]+ "</td>";
-		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["appraisal_level_name"]+ "</td>";
+//		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["appraisal_level_name"]+ "</td>";
 		htmlTable += "<td id=\"objectCenter\" >"+IsSQL+"</td>";
 		htmlTable += "<td id=\"objectCenter\" >"+IsActive+"</td>";
 		
@@ -317,7 +315,7 @@ var updateFn = function () {
 		data : {
 			"cds_name":$("#f_cds_name").val(),
 			"cds_desc":$("#f_cds_description").val(),
-			"appraisal_level_id":$("#f_app_lv").val(),
+			//"appraisal_level_id":$("#f_app_lv").val(),
 			"connection_id":$("#f_connection").val(),
 			"is_sql":checkboxIsSQL ,
 			"cds_sql":$("#txt_sql").val(),
@@ -366,7 +364,7 @@ var insertFn = function (param) {
 		data : {
 			"cds_name":$("#f_cds_name").val(),
 			"cds_desc":$("#f_cds_description").val(),
-			"appraisal_level_id":$("#f_app_lv").val(),
+			//"appraisal_level_id":$("#f_app_lv").val(),
 			"connection_id":$("#f_connection").val(),
 			"is_sql":checkboxIsSQL ,
 			"cds_sql":$("#txt_sql").val(),
@@ -552,10 +550,8 @@ $(document).ready(function() {
 	
 
 	// ------------------- Common Data Set -------------------
-	$("#cds_list_content").hide();
 	$(".sr-only").hide();
-	$("#drop_down_list_appraisal_level").html(dropDownListAppraisalLevel("","app_lv"));
-	$("#drop_down_list_from_appraisal_level").html(dropDownListAppraisalLevel("","f_app_lv"));
+	//$("#drop_down_list_from_appraisal_level").html(dropDownListAppraisalLevel("","f_app_lv"));
 	$("#drop_down_list_connection").html(dropDownListConnection());
 	
 	
@@ -563,11 +559,11 @@ $(document).ready(function() {
 	$("#cds_id").val("");
 	$("#countPaginationTop").val( $("#countPaginationTop option:first-child").val());
 	$("#countPaginationBottom").val( $("#countPaginationBottom option:first-child").val());
-	
+	$(".app_url_hidden").show();
 	$("#btn_search_advance").click(function(){
 		///alert($("#cds_name").val().split("-", 1));
 		
-		searchAdvanceFn($("#app_lv").val(),$("#cds_id").val());
+		searchAdvanceFn($("#cds_id").val());
 		$("#cds_list_content").show();
 		return false;
 	});
@@ -578,7 +574,7 @@ $(document).ready(function() {
 	
 	$("#btnAddCommonDataSet").click(function(){
 		clearFn();
-		$("#f_app_lv").val( $("#f_app_lv option:first-child").val());
+		//$("#f_app_lv").val( $("#f_app_lv option:first-child").val());
 		$("#f_connection").val( $("#f_connection option:first-child").val());
 		$("#btnAddAnother").show();
 		$("#checkbox_is_sql").prop("checked",true);
@@ -640,7 +636,7 @@ $(document).ready(function() {
 				 type:"post",
 				 dataType:"json",
 				 headers:{Authorization:"Bearer "+tokenID.token},
-				 data:{"appraisal_level_id":$("#app_lv").val(),"cds_name":request.term},
+				 data:{"cds_name":request.term},
 				 //async:false,
                  error: function (xhr, textStatus, errorThrown) {
                         console.log('Error: ' + xhr.responseText);

@@ -104,6 +104,12 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 }
 
 /* new */
+.aui textarea{
+	max-width: 336px;
+}
+.aui #cds_list_content{
+	display:none;
+}
 #btnAddCommonDataSet {
 	position: relative;
 	z-index: 10;
@@ -344,7 +350,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 </style>
 
 <div class="container1">
-				<div class='row-fluid'>
+				<div class='row-fluid '>
 
 					<div class='col-xs-12'>
 						<div id="slide_status" class="span12" style="z-index: 9000;">
@@ -357,7 +363,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 
 
-				<div class="row-fluid">
+				<div class="row-fluid app_url_hidden">
 					<!-- start--row-fluid -->
 
 					<div class="col-lg-12">
@@ -369,9 +375,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							<div class="ibox-content breadcrumbs2">
 					<div class="row-fluid p-t-xxs">
 						<div class="form-inline">
-							<div id="drop_down_list_appraisal_level" class="form-group pull-left span3" style="margin-left: 5px;display:none;">
-							<select style="cursor: pointer;" data-original-title="Appraisal Level" data-toggle="tooltip" title="" data-placement="top" class="input span12 m-b-n" id="app_lv" name="app_lv"><option selected="" value="">All Appraisal Level</option></select>
-							</div>
+							
 							<div class="form-group pull-left span6" style="margin-left: 5px">
 								<input data-toggle="tooltip"  title="CDS Name"
 									class="span12 m-b-n ui-autocomplete-input"
@@ -380,13 +384,13 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									class="form-control input-sm" id="cds_id" name="cds_id"
 									value="" type="hidden">
 							</div>
-							<div class="form-group pull-right m-b-none p-b-xxs">
-								<!-- data-target="#ModalCopy" data-toggle="modal" -->
-								<button id="btn_copy" type="button"
-									class="btn btn-primary btn-sm " style="margin-left: 5px">
-									&nbsp;<i class="fa fa-copy"></i>&nbsp;Copy&nbsp;&nbsp;
-								</button>
-							</div>
+<!-- 							<div class="form-group pull-right m-b-none p-b-xxs"> -->
+<!-- 								data-target="#ModalCopy" data-toggle="modal" -->
+<!-- 								<button id="btn_copy" type="button" -->
+<!-- 									class="btn btn-primary btn-sm " style="margin-left: 5px"> -->
+<!-- 									&nbsp;<i class="fa fa-copy"></i>&nbsp;Copy&nbsp;&nbsp; -->
+<!-- 								</button> -->
+<!-- 							</div> -->
 							<div class="form-group pull-right m-b-none p-b-xxs">
 								<button type="button" class="btn btn-info input-sm"
 									name="btn_search_advance" id="btn_search_advance"
@@ -396,62 +400,6 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							</div>
 						</div>
 					</div>
-
-
-
-
-					<!--<div class="row-fluid p-t-xxs">
-									<div class="span4 form-horizontal  ">
-										<div class="form-group p-xxs ">
-											<label class="control-label">Appraisal level</label>
-											<div id="drop_down_list_appraisal_level" class="controls"></div>
-
-										</div>
-									</div>
-
-									
-
-									<div class="span8 form-horizontal ">
-										<div class="form-group p-xxs ">
-											<label class="control-label">CDS Name</label>
-											<div class="controls">
-												<input data-toggle="tooltip" title="CDS Name" class="span12 m-b-n ui-autocomplete-input" placeholder="CDS Name" id="cds_name" name="cds_name" type="text">
-												<input class="form-control input-sm" id="cds_id" name="cds_id" value="" type="hidden">
-											</div>
-											
-
-										</div>
-									</div>
-									
-									
-									
-								
-								</div>-->
-							<!--	<div class="row-fluid">
-									<div class="span12 form-horizontal ">
-										<div class="form-group p-xxs ">
-											<div class="form-group pull-right  m-b-none  p-b-xxs">
-
-<!-- data-target="#ModalCopy" data-toggle="modal"
-											<button id="btn_copy" type="button"
-												
-												class="btn btn-primary btn-sm " style="margin-left: 5px">
-												&nbsp;<i class="fa fa-plus-square"></i>&nbsp;Copy&nbsp;&nbsp;
-											</button>
-
-											</div>
-											<div class="form-group pull-right  m-b-none  p-b-xxs">
-
-
-												<button type="button" class="btn btn-info input-sm" name="btn_search_advance" id="btn_search_advance" style="margin-left: 5px">
-													<i class="fa fa-search"></i>&nbsp;Search
-												</button>
-
-											</div>
-
-										</div>
-									</div>
-								</div>
 							<!-- content end -->
 						</div>
 
@@ -502,18 +450,6 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 		                                    
 		                          </div>
 
-<!-- 								<div class="span2 object-right paging-text p-t-xs txtCountPaginationTop">Results -->
-<!-- 									per page</div> -->
-<!-- 								<div id="widthPersenTop" class="span1 p-b-xxs selectCountPaginationTop "> -->
-
-<!-- 									<select name="account" id="countPaginationTop" class="form-control input-sm countPagination"> -->
-<!-- 										<option>10</option> -->
-<!-- 										<option>20</option> -->
-<!-- 										<option>50</option> -->
-<!-- 										<option>100</option> -->
-<!-- 									</select> -->
-
-<!-- 								</div> -->
 							</div>
 							<!-- pagination end -->
 
@@ -521,9 +457,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					<table class="table table-striped" id="tableCommonDataSet">
 						<thead>
 							<tr>
-								<th style='width: auto text-align:center;'>Select</th>
+<!-- 								<th style='width: auto text-align:center;'>Select</th> -->
 								<th style='width: auto'>CDS&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-								<th style='width: auto'>Appraisal&nbsp;Level&emsp;</th>
+<!-- 								<th style='width: auto'>Appraisal&nbsp;Level&emsp;</th> -->
 								<th style='width: auto; text-align: center;'>IsSQL&emsp;</th>
 								<th style='width: auto; text-align: center;'>IsActive&emsp;</th>
 								<th style='width: 10%; text-align: center;'>Manage</th>
@@ -557,18 +493,6 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 												<div class='pagingText'>Results per page</div>
 		                        </div>
 
-<!-- 								<div class="span2 object-right paging-text p-t-xs txtCountPaginationBottom">Results -->
-<!-- 									per page</div> -->
-<!-- 								<div id="widthPersenBottom" class="span1 p-b-xxs selectCountPaginationBottom"> -->
-
-<!-- 									<select name="account" id="countPaginationBottom" class="form-control input-sm countPagination"> -->
-<!-- 										<option>10</option> -->
-<!-- 										<option>20</option> -->
-<!-- 										<option>50</option> -->
-<!-- 										<option>100</option> -->
-<!-- 									</select> -->
-
-<!-- 								</div> -->
 							</div>
 							<!-- pagination end -->
 
@@ -665,18 +589,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
             </div>
             <div class="modal-body">
                 <!-- content start -->
-                <div class="row-fluid">
-					<div class="col-lg-12">
-						<div class="span12" style="padding: 0px 10px; height:65px;">
-							<h1>
-							<i class="fa fa fa-pencil-square-o icon-title"></i>
-							<small style=" position:absolute;top:37px;left:85px" id="modalDescription">ADD Common Data Set</small>
-							</h1>
-						</div>
-					</div>
-				</div>
                 
-                <hr>
                 
                 <!-- form start -->
                 <div class="row-fluid">
@@ -697,13 +610,13 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 											
 
 						</div>
-						<div class="form-group p-xxs" style="display:none;">
-							<label class="control-label">Appraisal Level:</label>
-								<div class="controls" id="drop_down_list_from_appraisal_level">
-								</div>
+<!-- 						<div class="form-group p-xxs" style="display:none;"> -->
+<!-- 							<label class="control-label">Appraisal Level:</label> -->
+<!-- 								<div class="controls" id="drop_down_list_from_appraisal_level"> -->
+<!-- 								</div> -->
 											
  
-						</div>
+<!-- 						</div> -->
 						<div class="form-group p-xxs">
 								<label class="control-label">Is SQL:</label>
 								<div class="controls">
