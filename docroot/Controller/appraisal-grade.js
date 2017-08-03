@@ -21,7 +21,7 @@
 	    			
 	    			     "form":[{
 	     					"label":"Appraisal Level","inputType":"dropdown",
-	     					"id":"appraisal_level_id","width":"200px","url":""+restfulURL+"/kpi_api/public/appraisal_grade/al_list"
+	     					"id":"appraisal_level_id","width":"200px","url":""+restfulURL+"/see_api/public/appraisal_grade/al_list"
 	     					},
 	     			        {
 	     					"label":"Appraisal Grade","inputType":"text","placeholder":"Appraisal Grade",
@@ -50,12 +50,12 @@
 	     			    "advanceSearch":[{
 	     			    	"label":"Appraisal Level","label_tooltip":"Appraisal Level","inputType":"dropdown",
 	     					"id":"appraisal_level_id","width":"100%",
-	     					"url":""+restfulURL+"/kpi_api/public/appraisal_grade/al_list",
+	     					"url":""+restfulURL+"/see_api/public/appraisal_grade/al_list",
 	     					"initValue":"All"
 	    			     	}],
 	     			     
 	    			 "formDetail":{"formSize":"modal-dialog","formName":"Appraisal Grade","id":"databaseConnection","pk_id":"grade_id"},       
-	    			 "serviceName":[restfulURL+"/kpi_api/public/appraisal_grade"],
+	    			 "serviceName":[restfulURL+"/see_api/public/appraisal_grade"],
 	    			 "tokenID":tokenID,
 	    			 "pagignation":true,
 	    			 "expressSearch":false,
