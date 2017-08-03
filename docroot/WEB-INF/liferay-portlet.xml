@@ -9,11 +9,11 @@
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>see-kpi-portlet</css-class-wrapper>
 	</portlet>
-	                       
+	      
 	                                     
 	                                                                                                 
 	<portlet>                                    
-		<portlet-name>appraisal</portlet-name>
+		<portlet-name>appraisal</portlet-name> 
 		<icon>/icon.png</icon>             
                    	        
 	 	<!-- include file  start-->  
@@ -44,7 +44,7 @@
 		<css-class-wrapper>appraisal-portlet</css-class-wrapper>
 	</portlet>   
 	<portlet>    
-		<portlet-name>appraisal-item</portlet-name>
+		<portlet-name>appraisal-item</portlet-name> 
 		<icon>/icon.png</icon> 
 	    
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
@@ -144,7 +144,7 @@
 	   
 	    <footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cDatabaseConnection.js</footer-portlet-javascript>
-		
+		<footer-portlet-javascript>/js/jscolor-2.0.4/jscolor.js</footer-portlet-javascript>
 		<css-class-wrapper>
 			database-connection-portlet
 		</css-class-wrapper>
@@ -267,7 +267,6 @@
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
-	    
 	    <footer-portlet-javascript>/Controller/threshould.js</footer-portlet-javascript>
 	    <!-- include file  end-->   
 		 
@@ -298,7 +297,6 @@
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
-	    
 	    <footer-portlet-javascript>/Controller/appraisal-level.js</footer-portlet-javascript>
 	    <!-- include file  end-->  
 		
@@ -331,7 +329,6 @@
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
-	    
 	    <footer-portlet-javascript>/Controller/appraisal-grade.js</footer-portlet-javascript>
 	    <!-- include file  end--> 
 	    
@@ -364,7 +361,6 @@
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
-	     
 	    <footer-portlet-javascript>/Controller/appraisal-period.js</footer-portlet-javascript>
 	    <!-- include file  end--> 
 	         
@@ -396,7 +392,6 @@
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
-	    
 	    <footer-portlet-javascript>/Controller/system-configuration.js</footer-portlet-javascript>
 	    <!-- include file  end--> 
 		 
@@ -429,7 +424,6 @@
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
-	    
 	    <footer-portlet-javascript>/Controller/Perspective.js</footer-portlet-javascript>
 	    <!-- include file  end--> 
 		   	      
@@ -461,7 +455,6 @@
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
-	    
 	    <footer-portlet-javascript>/Controller/uom.js</footer-portlet-javascript>
 	    <!-- include file  end--> 
 		
@@ -494,7 +487,6 @@
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
-	    
 	    <footer-portlet-javascript>/Controller/appraisalStructure.js</footer-portlet-javascript>
 	    <!-- include file  end--> 
 		   
@@ -823,7 +815,7 @@
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
-	    
+	    <footer-portlet-javascript>/js/jscolor-2.0.4/jscolor.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cAppraisalOrganization.js</footer-portlet-javascript>
 	    <!-- include file  end--> 
 		 
@@ -851,7 +843,7 @@
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
-	    
+	    <footer-portlet-javascript>/js/jscolor-2.0.4/jscolor.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cAppraisalPosition.js</footer-portlet-javascript>
 		<css-class-wrapper>
 			appraisal-position-portlet
@@ -878,7 +870,7 @@
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
-	    
+	    <footer-portlet-javascript>/js/jscolor-2.0.4/jscolor.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cKpiType.js</footer-portlet-javascript>
 		<css-class-wrapper>kpi-type-portlet</css-class-wrapper>
 	</portlet>
@@ -904,7 +896,6 @@
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
-	    
 	    <footer-portlet-javascript>/Controller/cResultThershold.js</footer-portlet-javascript>
 		<css-class-wrapper>result-thershold-portlet</css-class-wrapper>
 	</portlet>
