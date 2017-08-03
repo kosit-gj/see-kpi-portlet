@@ -89,7 +89,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
                 <div class="row-fluid">
                 	<div class="span12 form-horizontal p-t-xxs">
                 		<div class="form-group">
-							<label class="control-label">Threshold Group Name<span
+							<label class="control-label">Group Name:<span
 								class="redFont " style="position:absolute;margin-left:4px">*</span>
 							</label>
 							<div class="controls">
@@ -112,7 +112,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								<thead>
 									<tr>
 										<th style='width: 10%;'>No.</th>
-										<th style='width: auto'>Threshold Group Name</th>
+										<th style='width: auto'>Group Name</th>
 										<th style='width: 15%;'>Is Active</th>
 										<th style='width: 15%'>Manage</th>
 									</tr>
@@ -161,7 +161,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
                 <div class="row-fluid">
                 	<div class="span12 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
-							<label class="control-label">Threshold Group Name<span
+							<label class="control-label">Group Name<span
 								class="redFont "style="position:absolute;margin-left:4px">*</span>
 							</label>
 							<div class="controls">

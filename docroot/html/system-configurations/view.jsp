@@ -296,8 +296,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									</div>
 									<div class="span3" style="margin-bottom: 25px;" id="listThemeColor">
 										<button
-										    class="jscolor {valueElement:null,value:'ffcc00',valueElement:'themeColor',onFineChange:'updateThemeFn(this)'}"
-										    style="width:50px; height:20px;"></button>
+										    class="btn jscolor {valueElement:null,value:'ffcc00',valueElement:'themeColor',onFineChange:'updateThemeFn(this)'}"
+										    style="width:70px; height:26px;"></button>
 									</div>
 										<input type="hidden" id="themeColor" value="">
                                  </div> 

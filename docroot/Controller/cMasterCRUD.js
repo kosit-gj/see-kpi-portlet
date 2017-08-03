@@ -318,7 +318,7 @@ var listDataFn = function(data,options){
 			
 			}else if(indexEntry2['colunmsType']=='color'){
 
-				htmlTbody+="    		<td class=\" columnSearch"+options['formDetail']['id']+"\"><button disabled class=\"btn\" style=\"width: 50px; height: 20px; background-color:#"+indexEntry[indexEntry2['id']]+";opacity: 1 !important;\"></button></td>";
+				htmlTbody+="    		<td class=\" columnSearch"+options['formDetail']['id']+"\"><button disabled class=\"btn\" style=\"width: 70px; height: 26px; background-color:#"+indexEntry[indexEntry2['id']]+";opacity: 1 !important;\"></button></td>";
 			
 			}
 		});

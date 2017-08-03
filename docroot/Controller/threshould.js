@@ -229,7 +229,7 @@ $(document).ready(function(){
         	    			},
         	    			{
         	    			"label":"Color","inputType":"color","default":"All",
-        	    			"id":"color_code","width":"50px","height":"20px","dataTypeInput":"color"
+        	    			"id":"color_code","width":"70px","height":"27px","dataTypeInput":"color"
         	    			},
     	    					
     	    			],
