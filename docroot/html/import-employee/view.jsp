@@ -122,6 +122,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 }
 
 /* new */
+.aui .ui-autocomplete{
+	z-index: 1300;
+}
 .aui #from_emp_type {
 	width: 170px;
 }
