@@ -53,17 +53,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 				</div>
 				<div class="modal-body">
 					<!-- content start -->
-					<div class="row-fluid">
-					<div class="span12">
-						<div class="span12">
-							<h1>
-							<i class="fa fa fa-pencil-square-o icon-title"></i>
-							<small >Appraisal Criteria</small>
-							</h1>
-						</div>
-					</div>
-					</div>
-					<hr>
+
 
 					<!-- form start -->
 					<div class="form-inline p-b-xs" id="">
@@ -82,8 +72,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							<table class="table table-striped" id="formTableRole">
 								<thead>
 									<tr>
- 										<!-- <th style='width: auto; '>Select</th> -->
-										<th style='width: 75%'><b>Structure&nbsp;Name</b></th>
+ 										 <th style='width: 10%; '>Select</th> 
+										<th style='width: 65%'><b>Structure&nbsp;Name</b></th>
 										<th style='width: 15%;text-align: center;'><b>%</b></th>
 									</tr>
 								</thead>

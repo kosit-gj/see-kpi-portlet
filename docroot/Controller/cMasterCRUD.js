@@ -1,5 +1,6 @@
 //Global Variable 
 var golbalDataCRUD =[];
+var golbalDataCascades = [];
 var dataSearch="";
 var addCommas =  function(nStr)
 {
@@ -181,11 +182,14 @@ var clearFn = function(options){
 
 		if(indexEntry['inputType']=="text" || indexEntry['inputType']=="date" || indexEntry['inputType']=="password"){
 			$("form#"+options['formDetail']['id']+" #"+indexEntry['id']).val("");
-		}else if(indexEntry['inputType']=="dropdown"){
-			$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).val($("#"+indexEntry['id']+" option:first").val());
+		}else if(indexEntry['inputType']=="dropdown" || indexEntry['inputType']=="cascades"){
+			$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).val($("form#"+options['formDetail']['id']+"  #"+indexEntry['id']+" option:first").val());
+		}else if(indexEntry['inputType']=="color"){
+			$("form#"+options['formDetail']['id']+" #"+indexEntry['id']).val("");
+			$("form#"+options['formDetail']['id']+"  #btnColor-"+indexEntry['id']).css("background-color", "#FFFFFF");
+			
 		}
 	});
-	
 }
 var updateFn = function(data,options){
 	
@@ -223,12 +227,17 @@ var mapObjectToFormFn  =function(data,options){
 
 		if(indexEntry['inputType']=="text" || indexEntry['inputType']=="date"){
 			$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).val(data[indexEntry['id']]);
-		}else if(indexEntry['inputType']=="dropdown"){
-			$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).val(data[indexEntry['id']]);
+		}else if(indexEntry['inputType']=="dropdown" || indexEntry['inputType']=="cascades" ){
+			$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).val(data[indexEntry['id']]).change();
 			//alert("form#"+options['formDetail']['id']+" > #"+indexEntry['id']);
 			//alert(data[indexEntry['id']]);
-		}
-		else if(indexEntry['inputType']=="checkbox"){
+		}else if(indexEntry['inputType']=="color"){
+			$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).val(data[indexEntry['id']]);
+			$("form#"+options['formDetail']['id']+"  #btnColor-"+indexEntry['id']).attr('class',"btn jscolor {valueElement:null,value:'"+data[indexEntry['id']]+"',valueElement:'"+indexEntry['id']+"'}").css("background-color", "#"+data[indexEntry['id']]);
+			
+			//alert("form#"+options['formDetail']['id']+" > #"+indexEntry['id']);
+			//alert(data[indexEntry['id']]);
+		}else if(indexEntry['inputType']=="checkbox"){
 			
 			if(data[indexEntry['id']]==1){
 				
@@ -280,7 +289,7 @@ var listDataFn = function(data,options){
 	
 	var htmlTbody="";
 	$.each(data,function(index,indexEntry) {
-		console.log(indexEntry);
+		//console.log(indexEntry);
 		htmlTbody+="    	<tr class=\"rowSearch"+options['formDetail']['id']+"\">";
 		$.each(options['colunms'],function(index2,indexEntry2){
 			
@@ -308,6 +317,10 @@ var listDataFn = function(data,options){
 
 				htmlTbody+="    		<td style='display:none;' class=\"hidden columnSearch"+options['formDetail']['id']+"\">"+indexEntry[indexEntry2['id']]+"</td>";
 			
+			}else if(indexEntry2['colunmsType']=='color'){
+
+				htmlTbody+="    		<td class=\" columnSearch"+options['formDetail']['id']+"\"><button disabled class=\"btn\" style=\"width: 70px; height: 26px; background-color:#"+indexEntry[indexEntry2['id']]+";opacity: 1 !important;\"></button></td>";
+			
 			}
 		});
 		htmlTbody+="    		<td style=\"text-align:center\">";
@@ -329,7 +342,7 @@ var listDataFn = function(data,options){
 	$("#table-"+options['formDetail']['id']).on("click",".popover-edit-del",function(){
 		//console.log($(this).next().find('.edit').hide());
 		//console.log($(this).parent().prev().text());
-		console.log($(this).parent().prev().text());
+		//console.log($(this).parent().prev().text());
 		if($(this).parent().prev().text()==0 && $(this).parent().prev().text()!=""){
 			
 			$(this).next().find('.edit').attr("disabled","disabled");
@@ -341,7 +354,7 @@ var listDataFn = function(data,options){
 		//Delete Start
 		$(".del").on("click",function() {
 			
-			
+			$(".btnModalClose").click();
 			var id=this.id.split("-");
 			id=id[1];
 			$("#confrimModal").modal();
@@ -441,7 +454,20 @@ var createInputTypeFn  = function(object,tokenID){
 	}else{
 		inputTooltip ="";
 	}
-	
+	if(object['inputType']=="cascades"){
+		inputType="<select "+inputTooltip+" class=\"span12 m-b-n\" id=\""+object['id']+"\" name=\""+object['id']+"\" style=\"width:"+object['width']+"\">";			
+		//initValue
+		if(object['initValue']!=undefined){
+			inputType+="<option value=''>"+object['initValue']+"</option>";
+		}
+		$.each(golbalDataCascades[object['cascades']['id']][0][object['cascades']['listData']],function(index,indexEntry){
+			inputType+="<option value="+indexEntry+">"+indexEntry+"</option>";
+		});
+		inputType+="</select>";
+		
+		
+		
+	}
 	if(object['inputType']=="dropdown"){
 		
 		$.ajax({
@@ -456,6 +482,7 @@ var createInputTypeFn  = function(object,tokenID){
 				if(object['initValue']!=undefined){
 					inputType+="<option value=''>"+object['initValue']+"</option>";
 				}
+				golbalDataCascades[object['id']] = data;
 				
 				$.each(data,function(index,indexEntry){
 				
@@ -483,6 +510,13 @@ var createInputTypeFn  = function(object,tokenID){
 			inputType+="<input "+inputTooltip+" type=\"text\" style='width:"+object['width']+"' class=\"span12 m-b-n "+dataTypeInput+"\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\">";
 			
 		}
+		
+	}else if(object['inputType']=="color" ){
+
+
+		inputType+="<button id=\"btnColor-"+object['id']+"\" name=\"btnColor-"+object['id']+"\" class=\"btn jscolor {valueElement:null,value:'FFFFFF',valueElement:'"+object['id']+"'} \" style='width:"+object['width']+"; height:"+object['height']+";'></button>";
+		inputType+="<input "+inputTooltip+" type=\"hidden\"  id=\""+object['id']+"\" name=\""+object['id']+"\">";
+	
 		
 	}else if(object['inputType']=="date"){
 
@@ -537,7 +571,7 @@ formHTML+="<div aria-hidden=\"true\" role=\"dialog\" tabindex=\"-1\" id=\"modal-
 formHTML+="<div class=\"modal-dialog\">";
 formHTML+="<div class=\"modal-content  bounceInRight\">";
 formHTML+="        <div class=\"modal-header\">";
-formHTML+="            <button style=\"padding-top:5px\" data-dismiss=\"modal\" class=\"close\" type=\"button\"><span aria-hidden=\"true\">x</span><span class=\"sr-only\" style=\"display: none;\">Close</span></button>";
+formHTML+="            <button style=\"padding-top:5px\" data-dismiss=\"modal\" class=\"close\" type=\"button\"><span aria-hidden=\"true\"><i class='fa fa-times'></i></span><span class=\"sr-only\" style=\"display: none;\">Close</span></button>";
 formHTML+="            <h4 class=\"modal-title\" id=\""+options['formDetail']['id']+"\">"+options['formDetail']['formName']+"</h4>";
 formHTML+="        </div>";
 formHTML+="        <div class=\"modal-body\">";
@@ -577,6 +611,23 @@ formHTML+="</div>";
 formHTML+="</div>";   
 formHTML+="</form>"; 
 return formHTML;
+}
+var createScriptCascadesFn = function(options){
+	$.each(options['form'],function(index,indexEntry){
+		if(indexEntry['inputType'] == "cascades"){
+			$("form#"+options['formDetail']['id']+"  #"+indexEntry['cascades']['id']).change(function(){
+				var htmlChange = "";
+				$.each(golbalDataCascades[indexEntry['cascades']['id']],function(index2,indexEntry2){
+					if(indexEntry2[indexEntry['cascades']['id']] == $("form#"+options['formDetail']['id']+"  #"+indexEntry['cascades']['id']).val()){
+						$.each(indexEntry2[indexEntry['cascades']['listData']],function(index3,indexEntry3){
+							htmlChange+="<option value="+indexEntry3+">"+indexEntry3+"</option>";
+						});
+					}
+				});
+				$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).html(htmlChange);
+			});
+		}
+	});
 }
 var createBtnAdvanceSearchOptionFn = function(object){
 	
@@ -645,7 +696,8 @@ var createAvanceSearchFn = function(options){
 	
 }
 var createDataTableFn = function(options){
-	
+	//save option
+	golbalDataCascades['options']=options;
 	//options['advanceSearchSet']
 	var advanceSearchSet =(options['advanceSearchSet'] == '' || options['advanceSearchSet'] == undefined  ? false : options['advanceSearchSet']);
 	var expressSearch =(options['expressSearch'] == '' || options['expressSearch'] == undefined  ? false : options['expressSearch']);
@@ -682,6 +734,8 @@ var createDataTableFn = function(options){
 				}else{
 					if(indexEntry['colunmsDataType'] == "decimal" ||indexEntry['colunmsDataType'] == "int" ){
 						tableHTML+="            <th  style='width:"+indexEntry['width']+";"+styleCss+"'><b>"+indexEntry['colunmsDisplayName']+"</b></th>";
+					}else if(indexEntry['colunmsDataType'] == "color"){
+						tableHTML+="            <th  style='width:"+indexEntry['width']+";"+styleCss+"'><b>"+indexEntry['colunmsDisplayName']+"</b></th>";
 					}else if (indexEntry['colunmsType'] == "checkbox" ){
 						tableHTML+="            <th  style='width:"+indexEntry['width']+";"+styleCssCenter+"'><b>"+indexEntry['colunmsDisplayName']+"</b></th>";
 					}else {tableHTML+="            <th  style='width:"+indexEntry['width']+"'><b>"+indexEntry['colunmsDisplayName']+"</b></th>";}
@@ -700,6 +754,12 @@ var createDataTableFn = function(options){
 			$("#tableArea").html(tableHTML);
 			
 			$("#modalFormArea").html(createFormFn(options));
+			createScriptCascadesFn(options);
+			$.getScript($("#url_portlet").val()+"/js/jscolor-2.0.4/jscolor.js", function(){
+
+				jscolor.installByClassName("jscolor");
+
+			});
 			
 			
 			//binding date picker start
@@ -841,7 +901,7 @@ var createDataTableFn = function(options){
 	    		getDataFn($("#pageNumber").val(),$("#rpp").val(),options,dataSearch);
 	    	}
 	    	//advance search end
-	
+	    	setThemeColorFn(tokenID.theme_color);
 		}
 	});
 }

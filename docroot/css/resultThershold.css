@@ -1,0 +1,182 @@
+body {
+    background-color: #f3f3f4;
+}
+h1 small {
+    font-size: 24.5px;
+}
+.ibox-title {
+    padding: 1px 10px;
+}
+
+.btn-primary {
+    background-color: #1ab394;
+    border-color: #1ab394;
+    color: #ffffff;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary,
+.btn-primary:active:focus,
+.btn-primary:active:hover,
+.btn-primary.active:hover,
+.btn-primary.active:focus {
+  background-color: #04c;
+  border-color: #04c;
+  color: #FFFFFF;
+}
+.p-b-xs{
+	padding-bottom: 10px;
+}
+.form-input-customs{
+	float:left;
+	width: 300px;
+	/* 425 */
+}
+.form-label-customs{
+	float:left;
+	padding-top: 1px;
+	width:120px;
+}
+.font-gear{
+	font-size: 25px;
+	cursor:pointer;
+}
+
+.input-contact-customs{
+	width:70px;
+	padding-top: 0px;
+} 
+
+.input-inline-table-customs{
+	height:23px;
+	padding: 2px;
+	padding-top: 0px;
+}
+.form-label-customs-manual{
+	float:left;
+	padding-top: 1px;
+	width:95px;
+}
+.form-input-customs-title{
+	float:left;
+	width: 100px;
+}
+.form-input-customs-address{
+	float:left;
+	width: 200px;
+}
+#ui-datepicker-div ,.ui-datepicker { z-index: 99999 !important; }
+
+.control-label{
+	margin-bottom: 0;
+    padding-top: 7px;
+    text-align: right;
+}
+.titlePanel {
+	margin: 7px 0;
+}
+.form-group {
+    margin-bottom: 10px;
+}
+.control-label{
+	cursor: default;
+}
+form {
+    margin: 0 0 0;
+}
+.countPagination {
+    width: 70px;
+
+}
+@media ( min-width : 1200px) {
+	#confrimModal{left: 55%;}
+}
+@media ( min-width : 980px) and (max-width: 1199px) {
+	#confrimModal{left: 57%;}
+}
+@media ( min-width : 768px) and (max-width: 979px) {
+	#confrimModal{left: 58.5%;}
+	.ResultsPerPageTop{
+		position: absolute;
+		left: -20px;
+		top: 78px;
+	}
+	.ResultsPerPageBottom{
+		position: relative;
+		top: -40px;
+	}
+	[class*="span"], .uneditable-input[class*="span"], .row-fluid [class*="span"] {
+    display: block;
+    float: none;
+    width: 100%;
+    margin-left: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+	}
+
+	
+}
+
+/* Landscape phone to portrait tablet */
+@media ( max-width : 767px) {
+	#confrimModal{left: 23.5%;}
+	.ResultsPerPageTop{
+		position: absolute;
+		left: -20px;
+		top: 78px;
+		}
+		.ResultsPerPageBottom{
+		position: relative;
+		top: -40px;
+		}
+	@media ( min-width : 481px) and (max-width: 615px) {
+	
+	#confrimModal{left: 16.5%;}
+	.ResultsPerPageTop{
+		position: absolute;
+		left: -20px;
+		top: 42px;
+	}
+	.ResultsPerPageBottom{
+		position: static;
+	}
+	
+	}
+}
+
+/* Landscape phones and down */
+@media ( max-width : 480px) {
+
+	#confrimModal{left: 1%;}
+	.ResultsPerPageTop{
+		position: absolute;
+		left: -20px;
+		top: 42px;
+		}
+	.ResultsPerPageBottom{
+		position: static;
+	}
+	@media ( min-width : 0px) and (max-width: 468px) {
+		.ResultsPerPageTop{
+		position: absolute;
+		left: -20;
+		top: 83px;
+		}
+		#paginationTop{
+			margin-top: 44px;
+		}
+	
+		}
+}
+
+ .ibox-content {
+ 	background-color: #fff;
+ 	border: 1px solid #ffe57f;
+ 	color: inherit;
+ 	margin-bottom: 5px;
+ 	padding-left: 15px;
+ 	padding-right: 15px;
+ 	}

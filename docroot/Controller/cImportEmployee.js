@@ -1,19 +1,12 @@
+var restfulPathImportEmployee="/see_api/public/import_employee";
+var restfulPathAppraisalLevel="/see_api/public/appraisal_level";
+var restfulPathDropDownOrganization="/see_api/public/org";
+var restfulPathPositionAutocomplete="/see_api/public/position/auto";
+var restfulPathEmployeeAutocomplete="/see_api/public/import_employee/auto_employee_name";
 //Global variable
 var galbalDataImportEmp=[];
-
-var tempEmpName="";
-var tempEmpID="";
-var tempPosiName="";
-var tempPosiID="";
+var galbalDataTemp = [];
 var pageNumberDefault=1;
-var restfulPathImportEmployee="/kpi_api/public/import_employee";
-var restfulPathRole="/kpi_api/public/import_employee/role_list";
-
-var restfulPathDropDownDepartment="/kpi_api/public/import_employee/dep_list";
-var restfulPathDropDownSection="/kpi_api/public/import_employee/sec_list";
-
-var restfulPathPositionAutocomplete="/kpi_api/public/import_employee/auto_position_name";
-var restfulPathEmployeeAutocomplete="/kpi_api/public/import_employee/auto_employee_name";
 
 //Check Validation Start
 var validationFn = function(data){
@@ -44,29 +37,44 @@ var listErrorFn =function(data){
 	
 	$.each(data,function(index,indexEntry){
 
-		
+
+
 		if(data[index]['employee_code']!= undefined || data[index]['employee_code']==null){
 			if(data[index]['employee_code']== null){//The employee code field is null
-				errorData+="<font color='red'>*</font> employee code : null â†“<br>";
+				errorData+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Employee Code : null <i class='fa fa-level-down'></i><br>";
 			}else{
-				errorData+="<font color='red'>*</font> employee code : "+data[index]['employee_code']+"  â†“<br>";}
+				errorData+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Employee Code : "+data[index]['employee_code']+" <i class='fa fa-level-down'></i><br>";}
+		}
+	    if(data[index]['errors']['level_id']!=undefined){
+				errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['level_id']+"<br>";
 		}
 		if(data[index]['errors']['working_start_date_yyyy_mm_dd']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['working_start_date_yyyy_mm_dd']+"<br>";
+			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['working_start_date_yyyy_mm_dd']+"<br>";
 		}
 		if(data[index]['errors']['probation_end_date_yyyy_mm_dd']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['probation_end_date_yyyy_mm_dd']+"<br>";
+			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['probation_end_date_yyyy_mm_dd']+"<br>";
 		}
 		if(data[index]['errors']['acting_end_date_yyyy_mm_dd']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['probation_end_date_yyyy_mm_dd']+"<br>";
+			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['probation_end_date_yyyy_mm_dd']+"<br>";
+		}
+		if(data[index]['errors']['org_id']!=undefined){
+			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['org_id']+"<br>";
+		}
+		if(data[index]['errors']['position_id']!=undefined){
+			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['position_id']+"<br>";
+		}
+		if(data[index]['errors']['chief_employee_code']!=undefined){
+			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['chief_employee_code']+"<br>";
 		}
 		if(data[index]['errors']['salary_amount']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['salary_amount']+"<br>";
+			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['salary_amount']+"<br>";
 		}
 		if(data[index]['errors']['email']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['email']+"<br>";
+			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['email']+"<br>";
 		}
-		
+		if(data[index]['errors']['employee_type']!=undefined){
+			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['employee_type']+"<br>";
+		}		
 		
 
 	});
@@ -89,19 +97,17 @@ var clearFn = function() {
 	$("#from_emp_wsd").val("");
 	$("#from_emp_ped").val("");
 	$("#from_emp_aed").val("");
-	$("#from_department_code").val("");
-	$("#from_department_name").val("");
-	$("#from_section_code").val("");
-	$("#from_section_name").val("");
-	$("#from_position_code").val("");
+	$("#from_org_id").val("");
+	$("#from_org_name").val("");
+	$("#from_Level_id").val("");
+	$("#from_position_id").val("");
 	$("#from_position_name").val("");
-	$("#from_position_group").val("");
 	$("#from_sup_emp_code").val("");
 	$("#from_emp_email").val("");
 	$("#from_emp_salary").val("");
 	$("#from_emp_erp_user").val("");
 	
-	$("#from_checkboxIs_corporate_kpi").prop("checked",false);
+
 	$("#from_checkboxIs_active").prop("checked",false);
 	
 	 $(".from_data_role").prop('checked', false); 
@@ -118,8 +124,7 @@ var clearFn = function() {
 
 //--------  GetData Start
 var getDataFn = function(page,rpp){
-	var department= $("#param_Department").val();
-	var section= $("#param_Section").val();
+	var Organization= $("#param_Organization").val();
 	var position= $("#param_Position").val();
 	var empName= $("#param_EmpName").val();
 	$.ajax({
@@ -127,9 +132,8 @@ var getDataFn = function(page,rpp){
 		type : "get",
 		dataType : "json",
 		data:{"page":page,"rpp":rpp,
-			"department_code":department,
-			"section_code":section,
-			"position_code":position,
+			"org_id":Organization,
+			"position_id":position,
 			"emp_code":empName
 		},
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -161,77 +165,37 @@ var findOneFn = function(id) {
 				
 				$("#from_emp_code").val(data['emp_code']);
 				$("#from_emp_name").val(data['emp_name']);
+				$("#from_Level_id").val(data['level_id']);
 				$("#from_emp_wsd").val(data['working_start_date']);
 				$("#from_emp_ped").val(data['probation_end_date']);
 				$("#from_emp_aed").val(data['acting_end_date']);
-				$("#from_department_code").val(data['department_code']);
-				$("#from_department_name").val(data['department_name']);
-				$("#from_section_code").val(data['section_code']);
-				$("#from_section_name").val(data['section_name']);
-				$("#from_position_code").val(data['position_code']);
+				$("#from_org_id").val(data['org_id']);
+				$("#from_position_id").val(data['position_id']);
 				$("#from_position_name").val(data['position_name']);
-				$("#from_position_group").val(data['position_group']);
 				$("#from_sup_emp_code").val(data['chief_emp_code']);
 				$("#from_emp_email").val(data['email']);
 				$("#from_emp_salary").val(data['s_amount']);
 				$("#from_emp_erp_user").val(data['erp_user']);
 				$("#from_emp_type").val(data['emp_type']);
+
 				
-				//isCorporateKPI
-				if(data['is_coporate_kpi']==1){
-					$('#from_checkboxIs_corporate_kpi').prop('checked', true);
-				}else{
-					$('#from_checkboxIs_corporate_kpi').prop('checked', false);
-				}
 				//IsAction
 				if(data['is_active']==1){
 					$('#from_checkboxIs_active').prop('checked', true);
 				}else{
 					$('#from_checkboxIs_active').prop('checked', false);
-				}	
-				
-			
-			
+				}		
 								
 		}
 	});
 };
 //--------- findOne
-//-------- findOneRole
-var findOneRoleFn = function(id,txtFrom) {
-	$.ajax({
-		url:restfulURL+restfulPathImportEmployee+"/"+id+"/role",
-		type : "get",
-		dataType : "json",
-		headers:{Authorization:"Bearer "+tokenID.token},
-		success : function(data) {		
-
-
-			$.each(data,function(index,indexEntry) {
-				//console.log();
-				if (indexEntry["role_active"]=="1"){
-					$("#form_role_item-"+indexEntry["appraisal_level_id"]).prop("checked",true);				
-				}else if (indexEntry["role_active"]=="0"){
-					$("#form_role_item-"+indexEntry["appraisal_level_id"]).prop("checked",false);
-				}
-
-			});
-			
-								
-		}
-	});
-};
-//--------- findOne
-
-
-
 
 //-------- SearchFn Start
-var searchAdvanceFn = function (Department,Section,Position,EmployeeName) {
+var searchAdvanceFn = function (Organization,Position,EmployeeName) {
 	//embed parameter start
 	var htmlParam="";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_Department' name='param_Department' value='"+Department+"'>";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_Section' name='param_Section' value='"+Section+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_Organization' name='param_Organization' value='"+Organization+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_Position' name='param_Position' value='"+Position+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_EmpName' name='param_EmpName' value='"+EmployeeName+"'>";
 	$(".paramEmbed").remove();
@@ -247,46 +211,36 @@ var searchAdvanceFn = function (Department,Section,Position,EmployeeName) {
 //--------  ListData  Start
 
 var listImportEmployeeFn = function(data) {
-	//alert("listCommonDataSetFn");
-	//clear à¸Ÿà¸±à¸‡à¸�à¹Œà¸Šà¸±à¸™  data à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹€à¸�à¹ˆà¸²à¸—à¸´à¹‰à¸‡ 
+
 	$("#listEmployee").empty();
 	var htmlAppraisalLevel= "";
 	var htmlTable = "";
-//	var IsSQL ="";
-//	var IsActive ="";
+	console.log(data);
 	$.each(data,function(index,indexEntry) {
-		//console.log();
-//		if (indexEntry["IsActive"]=="1"){
-//			IsActive = "<input disabled type='checkbox' name='is_active' id='is_active' checked value='1'>";
-//		}else if (indexEntry["IsActive"]=="0"){
-//			IsActive = "<input disabled type='checkbox' name='is_active' id='is_active'  value='0'>";
-//		}
-		$.each(indexEntry["appraisal_level"],function(index,indexEntry){
-			htmlAppraisalLevel+=indexEntry["appraisal_level_name"]+"<br>";
-		});
+
+//		$.each(indexEntry["appraisal_level"],function(index,indexEntry){
+//			htmlAppraisalLevel+=indexEntry["appraisal_level_name"]+"<br>";
+//		});
 		htmlTable += "<tr class='rowSearch'>";
-		htmlTable += "<td id=\"objectCenter\" class='objectCenter 'style=\"\">"+"<input  style=\"margin-bottom: 3px;\"type=\"checkbox\"  class='selectEmpCheckbox' id=kpiCheckbox-"+indexEntry["emp_code"]+" value=\""+indexEntry["emp_code"]+"\">"+ "</td>";
+		htmlTable += "<td id=\"objectCenter\" class='objectCenter 'style=\"\">"+"<input  style=\"margin-bottom: 3px;\"type=\"checkbox\"  class='selectEmpCheckbox' id=kpiCheckbox-"+indexEntry["emp_id"]+" value=\""+indexEntry["emp_id"]+"\">"+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["emp_code"]+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["emp_name"]+ "</td>";
-		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["department_name"]+"</td>";
-		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["section_name"]+"</td>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["org_name"]+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["position_name"]+"</td>";
-		//htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["position_group"]+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["chief_emp_code"]+"</td>";
-		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+htmlAppraisalLevel+"</td>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["appraisal_level_name"]+"</td>";
 		//htmlTable += "<td class='objectCenter'>"+IsActive+"</td>";
-		//<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["_id"]+ " data-target=#ModalRole data-toggle='modal'>Ruld</button>&nbsp;
-		//&lt;button class='btn btn-primary btn-xs btn-gear add' id=1 data-target=#ModalRole data-toggle='modal'&gt;Role&lt;/button&gt;
+		//<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["_id"]+ " data-target=#ModalLevel data-toggle='modal'>Ruld</button>&nbsp;
+		//&lt;button class='btn btn-primary btn-xs btn-gear add' id=1 data-target=#ModalLevel data-toggle='modal'&gt;Role&lt;/button&gt;
 		htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del\" data-trigger=\"focus\" tabindex=\""+index+"\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" " +
-				"<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["emp_code"]+ " data-target=#ModalRole data-toggle='modal'>Role</button>&nbsp;" +
-				"<button class='btn btn-warning btn-xs btn-gear edit' id="+ indexEntry["emp_code"]+ " data-target=#ModalEditEmp data-toggle='modal'>Edit</button>&nbsp;" +
+				//"<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["emp_id"]+ " data-target=#ModalLevel data-toggle='modal'>Role</button>&nbsp;" +
+				"<button class='btn btn-warning btn-xs btn-gear edit' id="+ indexEntry["emp_id"]+ " data-target=#ModalEditEmp data-toggle='modal'>Edit</button>&nbsp;" +
 		        "<button id="+indexEntry["emp_code"]+" class='btn btn-danger btn-xs btn-gear del'>Delete</button>\"></i></td>";
 		htmlTable += "</tr>";
 		
 		htmlAppraisalLevel="";
 	});
-	
-	//alert("à¸œà¹ˆà¸²à¸™");
+
 	$("#listEmployee").html(htmlTable);
 	
 	//function popover
@@ -295,20 +249,6 @@ var listImportEmployeeFn = function(data) {
 	
 	$("#tableEmployee").off("click",".popover-edit-del");
 	$("#tableEmployee").on("click",".popover-edit-del",function(){
-			$(".role").on("click",function(){
-				$("#txtAssignEmpName").show();
-				$(this).parent().parent().parent().children().click();
-				$("#from_role_emp_name").html($(this).parent().parent().parent().prev().prev().prev().prev().prev().prev().prev().text());
-				//listAppraisalLevel();
-				findOneRoleFn(this.id);
-				$("#id").val(this.id);
-				$("#action").val("edit");
-				//Number Only Text Fields.
-				
-				
-				
-				
-			});
 			$(".edit").on("click",function() {
 			$(".btnModalClose").click();
 			$(this).parent().parent().parent().children().click();
@@ -355,8 +295,7 @@ var listImportEmployeeFn = function(data) {
 					       $("#confrimModal").modal('hide');
 					       
 					     }else if (data['status'] == "400"){
-					    	 $("#confrimModal").modal('hide');
-					    	 callFlashSlide(data['data'],"error");
+					    	 callFlashSlideInModal(data['data'],"#inform_on_confirm","error");
 					    	 //backToTopFn();
 					    	}
 					     	
@@ -375,38 +314,38 @@ var listImportEmployeeFn = function(data) {
 //------ List Appraisal Level Start
 var listAppraisalLevel = function() {
 	var htmlTable="";
+	var htmlDropDown="";
 	$.ajax ({
-		url:restfulURL+restfulPathRole ,
+		url:restfulURL+restfulPathAppraisalLevel ,
 		type:"get" ,
 		dataType:"json" ,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
-			
+			console.log(data);
 			$.each(data,function(index,indexEntry){
 				htmlTable+="<tr>";
 				htmlTable+="<td>";
-				htmlTable+="<input  style=\"margin-bottom: 2px;\" id=\"form_role_item-"+indexEntry["appraisal_level_id"]+"\" class=\"from_data_role\"";
-				htmlTable+="type='checkbox' value=\""+indexEntry["appraisal_level_id"]+"\">";
+				htmlTable+="<input  style=\"margin-bottom: 2px;\" id=\"form_role_item-"+indexEntry["level_id"]+"\" class=\"from_data_role\"";
+				htmlTable+="type='checkbox' value=\""+indexEntry["level_id"]+"\">";
 				htmlTable+="</td>";
 				htmlTable+="<td style=\"vertical-align:middle\">"+indexEntry["appraisal_level_name"]+"</td>";
 				htmlTable+="</tr>";
-					
+				htmlDropDown+="<option  value="+indexEntry["level_id"]+">"+indexEntry["appraisal_level_name"]+"</option>";
 //				}		
 			});	
-//			htmlTable+="<tr>";
-//			htmlTable+="<td>";
-//			htmlTable+="<div class=\"checkbox m-l-sm\">";
-//			htmlTable+="<input style=\"margin-top:1px;\" id=\"form_role_item_all\" class=\"from_data_role\"";
-//			htmlTable+="type='checkbox' value=\all\"> <label> </label>";
-//			htmlTable+="</div>";
-//			htmlTable+="</td>";
-//			htmlTable+="<td style=\"vertical-align:middle\">à¸—à¸¸à¸�à¸£à¸°à¸”à¸±à¸š</td>";
-//			htmlTable+="</tr>";
-
 		}
 	});	
-	$("#formListRuld").html(htmlTable);
+	$("#formListAppraisalLevel").html(htmlTable);
+	console.log(htmlDropDown);
+	$("#from_Level_id").html(htmlDropDown);
+	
+	 $(".from_data_role").click(function(){  // à¹€à¸¡à¸·à¹ˆà¸­à¸„à¸¥à¸´à¸� checkbox  à¹ƒà¸”à¹†  
+	        if($(this).prop("checked")==true){ // à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸š property  à¸�à¸²à¸£ à¸‚à¸­à¸‡   
+	            var indexObj=$(this).index(".from_data_role"); //   
+	            $(".from_data_role").not(":eq("+indexObj+")").prop( "checked", false ); // à¸¢à¸�à¹€à¸¥à¸´à¸�à¸�à¸²à¸£à¸„à¸¥à¸´à¸� à¸£à¸²à¸¢à¸�à¸²à¸£à¸­à¸·à¹ˆà¸™  
+	        }  
+	    });  
 }
 
 
@@ -417,14 +356,8 @@ var listAppraisalLevel = function() {
 var updateFn = function () {
 
 
-	var isCorporateKpi = "";
+	
 	var isActive="";
-	//isCorporateKpi
-	if($("#from_checkboxIs_corporate_kpi:checked").is(":checked")){
-		isCorporateKpi="1";
-	}else{
-		isCorporateKpi="0";
-	}
 	//IsAction
 	if($("#from_checkboxIs_active:checked").is(":checked")){
 		isActive="1";
@@ -443,19 +376,14 @@ var updateFn = function () {
 			"working_start_date":$("#from_emp_wsd").val(),
 			"probation_end_date":$("#from_emp_ped").val(),
 			"acting_end_date":$("#from_emp_aed").val(),
-			"department_code":$("#from_department_code").val(),
-			"department_name":$("#from_department_name").val(),
-			"section_code":$("#from_section_code").val(),
-			"section_name":$("#from_section_name").val(),
-			"position_code":$("#from_position_code").val(),
-			"position_name":$("#from_position_name").val(),
-			"position_group":$("#from_position_group").val(),
+			"org_id":$("#from_org_id").val(),
+			"level_id":$("#from_Level_id").val(),
+			"position_id":$("#from_position_id").val(),
 			"chief_emp_code":$("#from_sup_emp_code").val(),
 			"email":$("#from_emp_email").val(),
 			"s_amount":$("#from_emp_salary").val(),
-			"erp_user":$("#erp_user").val(),
+			"erp_user":$("#from_emp_erp_user").val(),
 			"emp_type":$("#from_emp_type").val(),
-			"is_coporate_kpi":isCorporateKpi ,
 			"is_active":isActive
 		},	
 		success : function(data) {
@@ -480,32 +408,39 @@ var updateFn = function () {
 var insertRoleFn = function () {
 	var chackSelect =  false;
 	var emp =[];
-	var role = [];
+	var level = [];
+	console.log("insertRoleFn");
 	$.each($(".selectEmpCheckbox").get(),function(index,indexEntry){
 		if($(indexEntry).is(":checked")){
 			emp.push($(indexEntry).val());
 		}
 	});
+	console.log("selectEmpCheckbox Pass");
 	$.each($(".from_data_role").get(),function(index,indexEntry){
 		if($(indexEntry).is(":checked")){
-			role.push($(indexEntry).val());
+			level.push($(indexEntry).val());
 			chackSelect = true;
 		}
 	});
+	console.log("from_data_role Pass");
 	if (chackSelect == false){callFlashSlideInModal("<font color='red'>*</font> Please Select Appraisal level !!!","#information3"); return false;}
-
+	console.log("chackSelect Pass");
 		$.ajax({
 			url : restfulURL+restfulPathImportEmployee+"/role",
 			type : "PATCH",
 			dataType : "json",
 			headers:{Authorization:"Bearer "+tokenID.token},
 			async:false,
-			data:{"employees":emp,"roles":role},
+			data:{
+				"employees"	:	emp,
+				"roles"	:	level
+				},
 			success : function(data) {
+				console.log("ajax Pass");
 				if(data['status']==200){
 					callFlashSlide("Add Role Successfully.");
 					getDataFn($("#pageNumber").val(),$("#rpp").val());
-					$('#ModalRole').modal('hide');
+					$('#ModalLevel').modal('hide');
 					
 				}
 			}
@@ -515,51 +450,14 @@ var insertRoleFn = function () {
 }
 // -------- Update Role End
 
-//-------- Update Role Start
-var updateRoleFn = function () {
-
-		var role = [];
-		$.each($(".from_data_role").get(),function(index,indexEntry){
-			if($(indexEntry).is(":checked")){
-				role.push($(indexEntry).val());
-			}
-			
-			
-		});
-		
-			$.ajax({
-				url : restfulURL +restfulPathImportEmployee+"/"+$("#id").val()+"/role",
-				type : "PATCH",
-				dataType : "json",
-				headers:{Authorization:"Bearer "+tokenID.token},
-				async:false,
-				data:{"roles":role},
-				success : function(data) {
-					if(data['status']==200){
-						clearFn();
-						callFlashSlide("Update Role Successfully.");
-						getDataFn($("#pageNumber").val(),$("#rpp").val());
-						$('#ModalRole').modal('hide');
-						
-					}
-				}
-			});
-
-
-
-	return false;
-}
-// -------- Update Role End
-
-
-
-//DropDownList Department
-var dropDownListDepartment = function(){
+//DropDownList Organization
+var dropDownListOrganization = function(param){
 	var html="";
-	html+="<select data-placement='top' data-toggle=\"tooltip\" title=\"Department\" class=\"input span12 m-b-n\" id=\"search_department\" name=\"search_department\" >";
-	html+="<option  selected value=''>All Department</option>";
+	if(param == 'All'){
+		html+="<option  selected value=''>All Organization</option>";
+	}
 	$.ajax ({
-		url:restfulURL+restfulPathDropDownDepartment ,
+		url:restfulURL+restfulPathDropDownOrganization ,
 		type:"get" ,
 		dataType:"json" ,
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -567,46 +465,18 @@ var dropDownListDepartment = function(){
 		success:function(data){
 			$.each(data,function(index,indexEntry){
 //				if(id==indexEntry["txtConnection_id"]){
-//					html+="<option  value="+indexEntry["department_code"]+">"+indexEntry["department_name"]+"</option>";			
+//					html+="<option  value="+indexEntry["org_id"]+">"+indexEntry["org_name"]+"</option>";			
 //				}else{
-					html+="<option  value="+indexEntry["department_code"]+">"+indexEntry["department_name"]+"</option>";	
+					html+="<option  value="+indexEntry["org_id"]+">"+indexEntry["org_name"]+"</option>";	
 //				}		
 			});	
 
 		}
 	});	
-	html+="</select>";
+
 	return html;
 };
 
-//DropDownList Section
-var dropDownListSection = function(id){
-	var html="";
-	html+="<select data-placement='top'  data-toggle=\"tooltip\" title=\"Section\" class=\"input span12 m-b-n\" id=\"search_section\" name=\"search_section\" >";
-	
-	html+="<option  selected value=''>All Section</option>";
-	$.ajax ({
-		url:restfulURL+restfulPathDropDownSection ,
-		type:"get" ,
-		dataType:"json" ,
-		data : {"department_code":id},
-		headers:{Authorization:"Bearer "+tokenID.token},
-		async:false,
-		success:function(data){
-				//galbalDqsRoleObj=data;
-			$.each(data,function(index,indexEntry){
-//				if(id==indexEntry["section_code"]){
-//					html+="<option  value="+indexEntry["section_code"]+">"+indexEntry["section_name"]+"</option>";			
-//				}else{
-					html+="<option  value="+indexEntry["section_code"]+">"+indexEntry["section_name"]+"</option>";	
-//				}		
-			});	
-
-		}
-	});	
-	html+="</select>";
-	return html;
-};
 //DropDownList Emp Type
 var dropDownEmpType = function(){
 	var html="";
@@ -634,46 +504,43 @@ $(document).ready(function() {
 	 		return false;
 	 	}
 	 }
+	$(".sr-only").hide();
 	$("#search_position").val("");
 	$("#search_position_id").val("");
 	$("#search_emp_name").val("");
 	$("#search_emp_id").val("");
-	
+	$("#search_org").html(dropDownListOrganization('All'));
+	$("#from_org_id").html(dropDownListOrganization());
+	listAppraisalLevel();
 
 	$("#countPaginationTop").val( $("#countPaginationTop option:first-child").val());
 	$("#countPaginationBottom").val( $("#countPaginationBottom option:first-child").val());
-	
-	$("#employee_list_content").hide();
-	$(".sr-only").hide();
-	$("#drop_down_department").html(dropDownListDepartment());
-	$("#drop_down_section").html(dropDownListSection($("#search_department").val()));
-	$("#drop_down_department").change(function () {
-		$("#drop_down_section").html(dropDownListSection($("#search_department").val()));
-	});
+
+
+
+
+	$(".app_url_hidden").show();
 	
 	$("#btnSearchAdvance").click(function(){
 		
 		searchAdvanceFn(
-				$("#search_department").val(),
-				$("#search_section").val(),
-				//$("#search_position").val().split("-", 1),
+				$("#search_org").val(),
 				$("#search_position_id").val(),
-				//$("#search_emp_name").val().split("-", 1)search_emp_id
 				$("#search_emp_id").val()
 				);
 		$("#employee_list_content").show();
 		
 		return false;
 	});
-	listAppraisalLevel();
+	
 	//$("#btnSearchAdvance").click();
 	
-	$("#btn_add_role").click(function() {
+	$("#btn_assign_level").click(function() {
 		clearFn();
 		$("#txtAssignEmpName").hide();
+		$(".btnModalClose").click();
 		
 		var chackSelect =  false;
-		$(".btnModalClose").click();
 		$.each($(".selectEmpCheckbox").get(),function(index,indexEntry){
 			if($(indexEntry).is(":checked")){
 				chackSelect = true;
@@ -683,53 +550,21 @@ $(document).ready(function() {
 		if (chackSelect == true){
 			listAppraisalLevel();
 			
-			$("#ModalRole").modal();
+			$("#ModalLevel").modal();
 			}
 		else{
 			callFlashSlide("Please Select Employee !!!");
 		}
 
-		//listAppraisalLevel();
-		
-//		$("#form_role_item_all").change(function(){  //"select all" change 
-//		    $(".from_data_role").prop('checked', $(this).prop("checked")); //change all ".from_data_role" checked status
-//		});
-//		
-//		//".from_data_role" change 
-//		$('.from_data_role').change(function(){ 
-//		    //uncheck "select all", if one of the listed from_data_role item is unchecked
-//		    if(false == $(this).prop("checked")){ //if this item is unchecked
-//		        $("#form_role_item_all").prop('checked', false); //change "select all" checked status to false
-//		    }
-//		    //check "select all" if all from_data_role items are checked
-//		    if ($('.from_data_role:checked').length == $('.from_data_role').length ){
-//		        $("#form_role_item_all").prop('checked', true);
-//		    }
-//		});   
-		 
 	});  
-    $(".from_data_role").click(function(){  // à¹€à¸¡à¸·à¹ˆà¸­à¸„à¸¥à¸´à¸� checkbox  à¹ƒà¸”à¹†  
-        if($(this).prop("checked")==true){ // à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸š property  à¸�à¸²à¸£ à¸‚à¸­à¸‡   
-            var indexObj=$(this).index(".from_data_role"); //   
-            $(".from_data_role").not(":eq("+indexObj+")").prop( "checked", false ); // à¸¢à¸�à¹€à¸¥à¸´à¸�à¸�à¸²à¸£à¸„à¸¥à¸´à¸� à¸£à¸²à¸¢à¸�à¸²à¸£à¸­à¸·à¹ˆà¸™  
-        }  
-    });  
+   
 	$("#btnEmpSubmit").click(function(){
-		if ($("#action").val() == "add"|| $("#action").val() == "") {
-			//insertFn();
-			insertFn();
-		}else{
-			updateFn();
-		}
+		updateFn();
 		return false;
 	});
 	
-	$("#btnRoldSubmit").click(function(){
-		if ($("#action").val() == "add"|| $("#action").val() == "") {
-			insertRoleFn();
-		} else {
-			updateRoleFn();
-		}
+	$("#btnLvSubmit").click(function(){
+		insertRoleFn();
 		return false;
 	});
 
@@ -751,12 +586,10 @@ $(document).ready(function() {
         source: function (request, response) {
         	$.ajax({
 				 url:restfulURL+restfulPathPositionAutocomplete,
-				 type:"GET",
+				 type:"POST",
 				 dataType:"json",
 				 data:{
-					 "department_code":$("#search_department").val(),
-					 "section_code":$("#search_section").val(),
-					 "position_name":request.term},
+					 "q":request.term},
 				//async:false,
 				 headers:{Authorization:"Bearer "+tokenID.token},
                  error: function (xhr, textStatus, errorThrown) {
@@ -765,11 +598,16 @@ $(document).ready(function() {
 				 success:function(data){
 					  
 						response($.map(data, function (item) {
-                            return {
-                                label: item.position_name,
-                                value: item.position_name,
-                                position_code:item.position_code
-                            };
+							var dataSet = new Object();
+							//autocomplete default values REQUIRED
+							dataSet.label = item.position_name;
+							dataSet.value = item.position_name;
+
+                            //extend values
+							dataSet.position_id = item.position_id;
+
+							
+                            return dataSet;
                         }));
 					
 				},
@@ -781,24 +619,81 @@ $(document).ready(function() {
         },
 		select:function(event, ui) {
 			$("#search_position").val(ui.item.value);
-            $("#search_position_id").val(ui.item.position_code);
-            tempPosiName = ui.item.value;
-            tempPosiId=ui.item.position_code;
+            $("#search_position_id").val(ui.item.position_id);
+            galbalDataTemp["search_position_name"]= ui.item.value;
+            galbalDataTemp["search_position_id"]= ui.item.position_id;
             return false;
         },change: function(e, ui) {  
         	//alert($("#search_position").val() +"-----"+tempPosiName+"-----"+tempPosiId);
-			if ($("#search_position").val() == tempPosiName) {
-				$("#search_position_id").val(tempPosiId);
+			if ($("#search_position").val() == galbalDataTemp["search_position_name"]) {
+				$("#search_position_id").val(galbalDataTemp["search_position_id"]);
 			} else if (ui.item != null) {
-				$("#search_position_id").val(ui.item.position_code);
+				$("#search_position_id").val(ui.item.position_id);
 			} else {
 				$("#search_position_id").val("");
+			}
+         }
+    });
+   
+	//Autocomplete Search Position End
+	
+	//Autocomplete From Position Start
+	$("#from_position_name").autocomplete({
+        source: function (request, response) {
+        	$.ajax({
+				 url:restfulURL+restfulPathPositionAutocomplete,
+				 type:"POST",
+				 dataType:"json",
+				 data:{
+					 "q":request.term},
+				//async:false,
+				 headers:{Authorization:"Bearer "+tokenID.token},
+                 error: function (xhr, textStatus, errorThrown) {
+                        console.log('Error: ' + xhr.responseText);
+                    },
+				 success:function(data){
+					  
+						response($.map(data, function (item) {
+							var dataSet = new Object();
+							//autocomplete default values REQUIRED
+							dataSet.label = item.position_name;
+							dataSet.value = item.position_name;
+
+                            //extend values
+							dataSet.position_id = item.position_id;
+
+							
+                            return dataSet;
+                        }));
+					
+				},
+				beforeSend:function(){
+					$("body").mLoading('hide');	
+				}
+				
+				});
+        },
+		select:function(event, ui) {
+			$("#from_position_name").val(ui.item.value);
+            $("#from_position_id").val(ui.item.position_id);
+            galbalDataTemp["from_position_name"]= ui.item.value;
+            galbalDataTemp["from_position_id"]= ui.item.position_id;
+
+            return false;
+        },change: function(e, ui) {  
+        	//alert($("#search_position").val() +"-----"+tempPosiName+"-----"+tempPosiId);
+			if ($("#from_position_name").val() == galbalDataTemp["from_position_name"]) {
+				$("#from_position_id").val(galbalDataTemp["from_position_id"]);
+			} else if (ui.item != null) {
+				$("#from_position_id").val(ui.item.position_id);
+			} else {
+				$("#from_position_id").val("");
 			}
         	
          }
     });
    
-	//Autocomplete Search Position End
+	//Autocomplete From Position End
 	
 
   //Auto Complete Employee Name end
@@ -807,12 +702,11 @@ $(document).ready(function() {
         source: function (request, response) {
         	$.ajax({
 				 url:restfulURL+restfulPathEmployeeAutocomplete,
-				 type:"GET",
+				 type:"POST",
 				 dataType:"json",
 				 data:{
-					 "department_code":$("#search_department").val(),
-					 "section_code":$("#search_section").val(),
-					 "position_code":$("#search_position_id").val(),
+					 "org_id":$("#search_org").val(),
+					 "position_id":$("#search_position_id").val(),
 					 "emp_name":request.term},
 				//async:false,
 				 headers:{Authorization:"Bearer "+tokenID.token},
@@ -822,11 +716,15 @@ $(document).ready(function() {
 				 success:function(data){
 					  
 						response($.map(data, function (item) {
-                            return {
-                                label: item.emp_name,
-                                value: item.emp_name,
-                                emp_code:item.emp_code
-                            };
+							var dataSet = new Object();
+							//autocomplete default values REQUIRED
+							dataSet.label = item.emp_name;
+							dataSet.value = item.emp_name;
+
+                            //extend values
+							dataSet.emp_code = item.emp_code;
+
+                            return dataSet;
                         }));
 					
 				},
@@ -839,12 +737,13 @@ $(document).ready(function() {
 		select:function(event, ui) {
 			$("#search_emp_name").val(ui.item.value);
             $("#search_emp_id").val(ui.item.emp_code);
-            tempEmpName = ui.item.value;
-            tempEmpId=ui.item.emp_code;
+            galbalDataTemp["search_emp_name"]= ui.item.value;
+            galbalDataTemp["search_emp_id"]= ui.item.emp_code;
+
             return false;
         },change: function(e, ui) {  
-			if ($("#search_emp_name").val() == tempEmpName) {
-				$("#search_emp_id").val(tempEmpId);
+			if ($("#search_emp_name").val() == galbalDataTemp["search_emp_name"]) {
+				$("#search_emp_id").val(galbalDataTemp["search_emp_id"]);
 			} else if (ui.item != null) {
 				$("#search_emp_id").val(ui.item.emp_code);
 			} else {
@@ -861,21 +760,7 @@ $(document).ready(function() {
 	});
 	
 	//#### Call Export User Function Start ####
-//	$("#exportToExcel").click(function(){
-//		$("form#formExportToExcel").attr("action",restfulURL+"/dqs_api/public/dqs_user/export?token="+tokenID.token);
-//		
-//
-// 		
-//		$("#export_employee_Code").val($("#").val());
-//		$("#export_cds_id").val($("#").val());
-//		$("#export_cds_name").val($("#").val());
-//		$("#export_year").val($("#").val());
-//		$("#export_Month").val($("#").val());
-//		$("#export_cds_Value").val($("#").val());
-//		
-//		$("form#formExportToExcel").submit();
-//	});
-    //#### Call Export User Function End ####
+
 	
 	
 	

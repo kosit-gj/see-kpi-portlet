@@ -16,7 +16,7 @@ $(document).ready(function(){
 
 var dropDrowAppraisaYearFn = function(){
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/result_bonus/appraisal_year",
+		url:restfulURL+"/see_api/public/result_bonus/appraisal_year",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -32,7 +32,7 @@ var dropDrowAppraisaYearFn = function(){
 }
 var dropDrowAppraisalRaiseYearFn = function(){
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/result_raise_amount/appraisal_year",
+		url:restfulURL+"/see_api/public/result_raise_amount/appraisal_year",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -50,7 +50,7 @@ var dropDrowAppraisalRaiseYearFn = function(){
 
 var dropDrowBonusPeriodFn = function(){
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/result_bonus/bonus_period",
+		url:restfulURL+"/see_api/public/result_bonus/bonus_period",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -66,7 +66,7 @@ var dropDrowBonusPeriodFn = function(){
 }
 var dropDrowSalaryPeriodFn = function(){
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/result_raise_amount/salary_period",
+		url:restfulURL+"/see_api/public/result_raise_amount/salary_period",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -85,7 +85,7 @@ var callStoredCalBonusFn = function(){
 
 	//$("#confrimModal").modal();
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/result_bonus/result_bonus",
+		url:restfulURL+"/see_api/public/result_bonus/result_bonus",
 		type:"post",
 		dataType:"json",
 		async:false,
@@ -109,7 +109,7 @@ var callStoredCalRaiseAmountFn = function(){
 	
 	//$("#confrimModal").modal();
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/result_raise_amount/result_raise_amount",
+		url:restfulURL+"/see_api/public/result_raise_amount/result_raise_amount",
 		type:"post",
 		dataType:"json",
 		async:false,

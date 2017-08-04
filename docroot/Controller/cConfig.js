@@ -13,3 +13,7 @@ var ifameURL="http://192.168.1.254";
 //Localhost
 //var restfulURL="http://localhost";
 //var ifameURL="http://localhost";
+
+//P'Methee
+//var restfulURL="http://192.168.1.61";
+//var ifameURL="http://192.168.1.61";

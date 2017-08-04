@@ -158,27 +158,36 @@ form {
 /* Large desktop */
 
 @media ( min-width : 1200px) {
-
-
+	#confrimModal {
+			left: 56%;
+		}
 }
 
 /* Portrait tablet to landscape and desktop */
 @media ( min-width : 980px) and (max-width: 1199px) {
-	
+	#confrimModal {
+		left: 57%;
+	}
 	
 }
 @media ( min-width : 768px) and (max-width: 979px) {
-	
+	#confrimModal {
+		left: 58.5%;
+	}
 	
 }
 
 /* Landscape phone to portrait tablet */
 @media ( max-width : 767px) {
-	
+	#confrimModal {
+		left: 23.5%;
+	}
 	
 }		
 @media ( min-width : 481px) and (max-width: 615px) {
-	
+	#confrimModal {
+			left: 16.5%;
+		}
 	.redFont{
 		float:right;
 	}
@@ -188,7 +197,9 @@ form {
 
 /* Landscape phones and down */
 @media ( max-width : 480px) {
-
+	#confrimModal {
+		left: 1%;
+	}
 	.redFont{
 		float:left;
 	}
@@ -224,7 +235,7 @@ form {
 	<div class='row-fluid'>
 		
 			<div id="slide_status" class='span12'>
-				<div id="btnCloseSlide">à¸£â€”</div>
+				<div id="btnCloseSlide"><i class="fa fa-times"></i></div>
 				<div id="slide_status_area"></div>
 			</div>
 		
@@ -518,7 +529,7 @@ form {
 -->      
 <!-- Modal End Edit -->
 <!-- Modal Confirm Start -->
-<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal" class="modal inmodal in" style="display: none;">
+<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal" class="modal inmodal in" style="display: none;z-index:1310;">
     <div class="modal-dialog">
     <div class="modal-content bounceInRight">
             <div class="modal-header">

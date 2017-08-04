@@ -9,18 +9,19 @@
     	//alert(createTableFn());
 	    	var options={
 	    			"colunms":[
-	    			         
+	    				 
 	    			           {"colunmsDisplayName":"Appraisal Level","width":"15%","id":"appraisal_level_name","colunmsType":"text"},
-	    			           {"colunmsDisplayName":"Grade","width":"15%","id":"grade","colunmsType":"text"},
+	    			           {"colunmsDisplayName":"Grade","width":"10%","id":"grade","colunmsType":"text"},
 	    			           {"colunmsDisplayName":"Begin Score","width":"15%","id":"begin_score","colunmsType":"text","colunmsDataType":"decimal"},
 	    			           {"colunmsDisplayName":"End Score","width":"15%","id":"end_score","colunmsType":"text","colunmsDataType":"decimal"},
 	    			           {"colunmsDisplayName":"Salary Raise","width":"15%","id":"salary_raise_amount","colunmsType":"text","colunmsDataType":"decimal"},
-	    			           {"colunmsDisplayName":"IsActive","width":"15%","id":"is_active","colunmsType":"checkbox"},
+	    			           //{"colunmsDisplayName":"Salary Raise Percent","width":"15%","id":"salary_raise_percent","colunmsType":"text","colunmsDataType":"decimal"},
+	    			           {"colunmsDisplayName":"IsActive","width":"10%","id":"is_active","colunmsType":"checkbox"},
 	    			          ],
 	    			
 	    			     "form":[{
 	     					"label":"Appraisal Level","inputType":"dropdown",
-	     					"id":"appraisal_level_id","width":"200px","url":""+restfulURL+"/kpi_api/public/appraisal_grade/al_list"
+	     					"id":"appraisal_level_id","width":"200px","url":""+restfulURL+"/see_api/public/appraisal_grade/al_list"
 	     					},
 	     			        {
 	     					"label":"Appraisal Grade","inputType":"text","placeholder":"Appraisal Grade",
@@ -49,12 +50,12 @@
 	     			    "advanceSearch":[{
 	     			    	"label":"Appraisal Level","label_tooltip":"Appraisal Level","inputType":"dropdown",
 	     					"id":"appraisal_level_id","width":"100%",
-	     					"url":""+restfulURL+"/kpi_api/public/appraisal_grade/al_list",
+	     					"url":""+restfulURL+"/see_api/public/appraisal_grade/al_list",
 	     					"initValue":"All"
 	    			     	}],
 	     			     
 	    			 "formDetail":{"formSize":"modal-dialog","formName":"Appraisal Grade","id":"databaseConnection","pk_id":"grade_id"},       
-	    			 "serviceName":[restfulURL+"/kpi_api/public/appraisal_grade"],
+	    			 "serviceName":[restfulURL+"/see_api/public/appraisal_grade"],
 	    			 "tokenID":tokenID,
 	    			 "pagignation":true,
 	    			 "expressSearch":false,

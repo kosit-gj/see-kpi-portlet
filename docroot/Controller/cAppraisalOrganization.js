@@ -132,8 +132,7 @@ var listOrganizationFn = function(data){
 					       $("#confrimModal").modal('hide');
 					       
 					     }else if (data['status'] == "400"){
-					    	 $("#confrimModal").modal('hide');
-					    	 callFlashSlide(data['data'],"error");
+					    	 callFlashSlideInModal(data['data'],"#inform_on_confirm","error");
 					    	}
 					 }
 				});
@@ -220,10 +219,11 @@ var listErrorFn =function(data){
 
 		
 		if(data[index]['org_code']!= undefined || data[index]['org_code']==null){
-			if(data[index]['org_code']== null){//The position_name field is null
-				errorData+="<font color='red'>*</font> Org code : null ↓<br>";
+			if(data[index]['org_code']== null){//The employee code field is null
+				errorData+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Org code : null <i class='fa fa-level-down'></i><br>";
 			}else{
-				errorData+="<font color='red'>*</font> Position Name : "+data[index]['position_name']+" ↓<br>";}
+				errorData+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Org code : "+data[index]['org_code']+" <i class='fa fa-level-down'></i><br>";}
+			
 		}
 		if(data[index]['errors']['org_code']!=undefined){
 			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['org_code']+"<br>";
@@ -252,6 +252,7 @@ $(document).ready(function () {
 	 	if(connectionServiceFn(username,password)==true){
 	 		clearFn();
 			getDataFn();
+			$(".app_url_hidden").show();
 	 		$("#btnSubmit").click(function(){
 	 			updateFn();
 	 		});
