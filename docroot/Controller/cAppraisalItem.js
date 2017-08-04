@@ -6,15 +6,15 @@ var globalData=[];
 var getDataFn = function(page,rpp) {
 	
 	
-	var appraisal_level_id = $("#embed_appraisal_level_id").val();
+	//var appraisal_level_id = $("#embed_appraisal_level_id").val();
 	var structure_id= $("#embed_structure_id").val();
 	var perspective_id= $("#embed_perspective_id").val();
-	var appraisal_item_id= $("#embed_appraisal_item_id").val();
-	var department_code= $("#embed_department_id").val();
+	var item_id= $("#embed_item_id").val();
+	var organization_name= $("#embed_organization").val();
 	
 
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_item",
+		url:restfulURL+"/see_api/public/appraisal_item",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -22,11 +22,11 @@ var getDataFn = function(page,rpp) {
 		data:{
 			"page":page,
 			"rpp":rpp,
-			"appraisal_level_id":appraisal_level_id,
+			//"appraisal_level_id":appraisal_level_id,
 			"structure_id":structure_id,
 			"perspective_id":perspective_id,
-			"appraisal_item_id":appraisal_item_id,
-			"department_code":department_code
+			"item_id":item_id,
+			"org_name":organization_name
 			
 			
 		},
@@ -35,10 +35,6 @@ var getDataFn = function(page,rpp) {
 			
 			listDataFn(data['group']);
 			globalData=data;
-			//paginationSetUpFn(1,1,1);
-			//alert(globalData['current_page']);
-			//alert(globalData['last_page']);
-			
 			//paginationSetUpFn(globalData['current_page'],globalData['last_page'],globalData['last_page']);
 			$(".result_area").show();
 		}
@@ -93,7 +89,7 @@ var displayTypeFn  = function(dataValue,dataType){
 
 //List Data
 var listDataFn = function(data) {
-	console.log(data);
+	//console.log(data);
 	var  mainContentHTML="";
 	$.each(data,function(index,indexEntry){
 		//console.log(index);
@@ -136,7 +132,7 @@ var listDataFn = function(data) {
 		$.each(indexEntry['items'],function(items,itemsEntry){
 		
 		mainContentHTML+=" 					<tr>";
-		mainContentHTML+=" 	<td><input type='checkbox' id='checkboxCopy-"+itemsEntry['appraisal_item_id']+"' name='checkboxCopy-"+itemsEntry['appraisal_item_id']+"' class='checkboxCopy' value='"+itemsEntry['appraisal_item_id']+"'></td> ";	
+		mainContentHTML+=" 	<td><input type='checkbox' id='checkboxCopy-"+itemsEntry['item_id']+"' name='checkboxCopy-"+itemsEntry['item_id']+"' class='checkboxCopy' value='"+itemsEntry['item_id']+"'></td> ";	
 		$.each(indexEntry['columns'],function(columns,columnsEntry){
 		//mainContentHTML+="                			<td>"+itemsEntry[columnsEntry['column_name']]+"</td>";
 		
@@ -147,7 +143,7 @@ var listDataFn = function(data) {
 		}
 		});
 		mainContentHTML+="         					<td style=\"text-align:center\">";
-		mainContentHTML+="            				<i data-trigger=\"focus\" tabindex=\""+items+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear edit' id=edit-"+itemsEntry['appraisal_item_id']+"-"+itemsEntry['app_url']+" data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=del-"+itemsEntry['appraisal_item_id']+" class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+		mainContentHTML+="            				<i data-trigger=\"focus\" tabindex=\""+items+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear edit' id=edit-"+itemsEntry['item_id']+"-"+itemsEntry['app_url']+" data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=del-"+itemsEntry['item_id']+" class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
 		mainContentHTML+="          				</td>";
 		
 		mainContentHTML+="           			</tr>";
@@ -205,7 +201,7 @@ var listDataFn = function(data) {
 var deleteFn = function(id) {
 	
 	 $.ajax({
-      url:restfulURL+"/kpi_api/public/appraisal_item/"+id,
+      url:restfulURL+"/see_api/public/appraisal_item/"+id,
       type:"DELETE",
       dataType:"json",
 	  headers:{Authorization:"Bearer "+tokenID.token},
@@ -217,9 +213,9 @@ var deleteFn = function(id) {
 			   $("#confrimModal").modal('hide');
 			   
 		}else if(data['status']=="400"){
-			 callFlashSlideInModal(data['data'],"#inform_on_confirm","error");
+			
 			//$("#informConfirm").html("<font color='red'>"+data['data']+"</font>");
-			//callFlashSlide("<font color=''>"+data['data']+"</font>","error");  
+			callFlashSlide("<font color=''>"+data['data']+"</font>","error");  
 			
 		}
      }
@@ -290,7 +286,7 @@ var paginationSetUpFn2 = function(pageIndex,pageButton,pageTotal){
 
 var findOneFn = function(id,form_url) {
 	$.ajax({
-	      url:restfulURL+"/kpi_api/public/appraisal_item/"+id,
+	      url:restfulURL+"/see_api/public/appraisal_item/"+id,
 	      type:"GET",
 	      dataType:"json",
 		  headers:{Authorization:"Bearer "+tokenID.token},
@@ -321,19 +317,22 @@ var searchAdvanceFn = function() {
 	appraisal_level_id,
 	structure_id,
 	perspective_id,
-	appraisal_item_id
+	item_id
 	*/
 	
 	$(".embed_param_search").remove();
 	
 	var apraisalItemId=$("#appraisalItemName").val().split("-");
 	apraisalItemId=apraisalItemId[0];
+	
+	
 	var embedParam="";
-	embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id' name='embed_appraisal_level_id' value='"+$("#appraisalLevel").val()+"'>";
+	//embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id' name='embed_appraisal_level_id' value='"+$("#appraisalLevel").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_structure_id' name='embed_structure_id' value='"+$("#structure").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_perspective_id' name='embed_perspective_id' value='"+$("#perspective").val()+"'>";
-	embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_item_id' name='embed_appraisal_item_id' value='"+apraisalItemId+"'>";
-	embedParam+="<input type='hidden' class='embed_param_search' id='embed_department_id' name='embed_department_id' value='"+$("#department").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_item_id' name='embed_item_id' value='"+apraisalItemId+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_organization' name='embed_organization' value='"+$("#Organization").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_kpi_type_id' name='embed_kpi_type_id' value='"+$("#kpiType").val()+"'>";
 	$("#embedParamSearch").append(embedParam);
 	
 	getDataFn();
@@ -341,13 +340,21 @@ var searchAdvanceFn = function() {
 /*#########################  Main Function Data #######################*/
 /*#########################  Custom Function Data #######################*/
 var appraisalLevelListFn = function(nameArea,id,defaultAll){
+	var level_array=[];
+	if(id!=undefined){
+		$.each(id,function(index,indexEntry){
+			level_array.push(indexEntry['level_id']);
+		});
+		//console.log(level_array);
+	}
+
 	
 	if(nameArea==undefined){
 		nameArea="";
 	}
 	
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_item/al_list",
+		url:restfulURL+"/see_api/public/appraisal_item/al_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -355,20 +362,29 @@ var appraisalLevelListFn = function(nameArea,id,defaultAll){
 		success:function(data){
 			var htmlOption="";
 			
+			htmlOption+="<select class=\"form-control input-sm multipleSelect span12\"   multiple=\"multiple\" id=\"appraisalLevel"+nameArea+"\">";
 			if(defaultAll==false){
 				
 			}else{
 				htmlOption+="<option  value=\"\">All Appraisal Level</option>";
 			}
 			$.each(data,function(index,indexEntry){
-				if(id==indexEntry['appraisal_level_id']){
-					htmlOption+="<option selected='selected' value="+indexEntry['appraisal_level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
-				}else{
-					htmlOption+="<option value="+indexEntry['appraisal_level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
+				
+					htmlOption+="<option value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
 					
-				}
+				
 			});
-			$("#appraisalLevel"+nameArea).html(htmlOption);
+			htmlOption+="</select>";
+			
+			$("#appraisalLevelArea"+nameArea).html(htmlOption);
+			
+			
+			$("#appraisalLevel"+nameArea).val(level_array);
+			 //binding multi select start
+			$("#appraisalLevel"+nameArea).multiselect({
+				 minWidth:'100%;'
+			 });
+			 //select multi select end
 		}
 	});
 }
@@ -379,10 +395,8 @@ var perspectiveListFn = function(nameArea,id,defaultAll){
 	if(nameArea==undefined){
 		nameArea="";
 	}
-	
-	
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_item/perspective_list",
+		url:restfulURL+"/see_api/public/appraisal_item/perspective_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -409,14 +423,14 @@ var perspectiveListFn = function(nameArea,id,defaultAll){
 	})
 
 }
-//http://192.168.1.52/kpi_api/public/appraisal_item/uom_list
+//http://192.168.1.52/see_api/public/appraisal_item/uom_list
 var uomListFn = function(nameArea,id){
 	if(nameArea==undefined){
 		nameArea="";
 	}
 
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_item/uom_list",
+		url:restfulURL+"/see_api/public/appraisal_item/uom_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -451,7 +465,7 @@ var structureListFn = function(nameArea){
 	}
 	
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_item/structure_list",
+		url:restfulURL+"/see_api/public/appraisal_item/structure_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -469,12 +483,48 @@ var structureListFn = function(nameArea){
 	})
 
 }
+var dropDrowkpiTypeFn = function(nameArea,id,defaultAll){
+	/*
+    "kpi_type_id": 3,
+    "kpi_type_name": "Deduct"
+	 */
+
+	
+	
+	
+	if(nameArea==undefined){
+		nameArea="";
+	}
+	$.ajax({
+		url:restfulURL+"/see_api/public/kpi_type",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			var htmlOption="";
+			if(defaultAll==true){
+				htmlOption+="<option value=''>All KPI Type</option>";
+			}
+			$.each(data,function(index,indexEntry){
+				if(id==indexEntry['kpi_type_id']){
+					htmlOption+="<option selected='selected' value="+indexEntry['kpi_type_id']+">"+indexEntry['kpi_type_name']+"</option>";
+				}else{
+					htmlOption+="<option value="+indexEntry['kpi_type_id']+">"+indexEntry['kpi_type_name']+"</option>";
+				}
+			});
+			$("#kpiType"+nameArea).html(htmlOption);
+		}
+	});
+	
+	
+}
 var dropDrowDepartmentFn = function(nameArea,id,defaultAll){
 	if(nameArea==undefined){
 		nameArea="";
 	}
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_item/department_list",
+		url:restfulURL+"/see_api/public/appraisal_item/department_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -496,11 +546,119 @@ var dropDrowDepartmentFn = function(nameArea,id,defaultAll){
 	});
 	
 }
+
+
+var dropDrowOrgFn = function(nameArea,id,defaultAll){
+	
+	
+	/*
+		org_id": 3,
+        "org_code": "003",
+        "org_name": "Anubis",
+        "is_active": 1,
+        "parent_org_name": null,
+        "parent_org_code": null
+	*/
+	
+	var org_array=[];
+	if(id!=undefined){
+		$.each(id,function(index,indexEntry){
+			org_array.push(indexEntry['org_id']);
+		});
+		//console.log(org_array);
+	}
+	
+	
+	if(nameArea==undefined){
+		nameArea="";
+	}
+	$.ajax({
+		url:restfulURL+"/see_api/public/org",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			var htmlOption="";
+			
+			htmlOption+="<select multiple=\"multiple\" size=\"10\" name=\"organization"+nameArea+"[]\" id='organization"+nameArea+"'>";
+
+			if(defaultAll==true){
+				htmlOption+="<option value=''>All Org</option>";
+			}
+			$.each(data,function(index,indexEntry){
+				if(id==indexEntry['org_code']){
+					htmlOption+="<option selected='selected' value="+indexEntry['org_code']+">"+indexEntry['org_name']+"</option>";
+				}else{
+					htmlOption+="<option value="+indexEntry['org_code']+">"+indexEntry['org_name']+"</option>";
+				}
+			});
+			htmlOption+="</select>";
+			
+			$("#org"+nameArea+"Form").html(htmlOption);
+			$("#organization"+nameArea).val(org_array);
+			$('select[name="organization'+nameArea+'[]"]').bootstrapDualListbox();
+			
+		}
+	});
+	
+}
+var dropDrowPositionFn = function(nameArea,id,defaultAll){
+
+	/*
+		"position_id": 2,
+        "position_name": "Major",
+        "is_active": 1
+	*/
+	
+	var position_array=[];
+	if(id!=undefined){
+		$.each(id,function(index,indexEntry){
+			position_array.push(indexEntry['position_id']);
+		});
+		//console.log(position_array);
+	}
+	
+	if(nameArea==undefined){
+		nameArea="";
+	}
+	$.ajax({
+		url:restfulURL+"/see_api/public/position",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			var htmlOption="";
+			
+			htmlOption+="<select multiple=\"multiple\" size=\"10\" name=\"position"+nameArea+"[]\" id='position"+nameArea+"'>";
+		     
+			if(defaultAll==true){
+				htmlOption+="<option value=''>All Position</option>";
+			}
+			$.each(data,function(index,indexEntry){
+				if(id==indexEntry['position_id']){
+					htmlOption+="<option selected='selected' value="+indexEntry['position_id']+">"+indexEntry['position_name']+"</option>";
+				}else{
+					htmlOption+="<option value="+indexEntry['position_id']+">"+indexEntry['position_name']+"</option>";
+				}
+			});
+			htmlOption+="</select>";
+			$("#position"+nameArea+"Form").html(htmlOption);
+			$("#position"+nameArea).val(position_array);
+			$('select[name="position'+nameArea+'[]"]').bootstrapDualListbox();
+			
+		}
+	});
+	
+}
+
+
 //var connectionServiceFn = function(username,password){
 //	$.ajax({
 //		
-//		url:restfulURL+"/kpi_api/public/session",
-//		//url:"http://localhost/kpi_api/public/session",
+//		url:restfulURL+"/see_api/public/session",
+//		//url:"http://localhost/see_api/public/session",
 //		type:"POST",
 //		dataType:"text",
 //		data:{"username":username,"password":password},
@@ -531,7 +689,7 @@ var dropDrowDepartmentFn = function(nameArea,id,defaultAll){
 var copyItemToLevelFn = function(appraisal_item_code,appraisal_level_code){
 	
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_item/copy",
+		url:restfulURL+"/see_api/public/appraisal_item/copy",
 		type:"post",
 		dataType:"json",
 		async:false,
@@ -553,7 +711,7 @@ var copyItemToLevelFn = function(appraisal_item_code,appraisal_level_code){
 var listLevelForCopyFn = function(){
 	var htmlOption="";
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/appraisal_item/al_list",
+		url:restfulURL+"/see_api/public/appraisal_item/al_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -597,10 +755,11 @@ $(document).ready(function(){
 	//load form  end
 	
 	//parameter start
-	dropDrowDepartmentFn('','',defaultAll=true);
-	appraisalLevelListFn();
+	//dropDrowDepartmentFn('','',defaultAll=true);
+	//appraisalLevelListFn();
 	perspectiveListFn();
 	structureListFn();
+	dropDrowkpiTypeFn();
 	//parameter end
 	
 	
@@ -611,7 +770,7 @@ $(document).ready(function(){
 	$("#appraisalItemName").autocomplete({
         source: function (request, response) {
         	$.ajax({
-				 url:restfulURL+"/kpi_api/public/appraisal_item/auto_appraisal_name",
+				 url:restfulURL+"/see_api/public/appraisal_item/auto_appraisal_name",
 				 type:"post",
 				 dataType:"json",
 				 headers:{Authorization:"Bearer "+tokenID.token},
@@ -623,8 +782,8 @@ $(document).ready(function(){
 				 success:function(data){
 						response($.map(data, function (item) {
                             return {
-                                label: item.appraisal_item_id+"-"+item.appraisal_item_name,
-                                value: item.appraisal_item_id+"-"+item.appraisal_item_name
+                                label: item.item_id+"-"+item.appraisal_item_name,
+                                value: item.item_id+"-"+item.appraisal_item_name
                             };
                         }));
 				},
@@ -636,6 +795,38 @@ $(document).ready(function(){
         }
     });
 	//Autocomplete Search End
+	
+
+	//Autocomplete Organization Search Start
+
+	$("#Organization").autocomplete({
+        source: function (request, response) {
+        	$.ajax({
+				 url:restfulURL+"/see_api/public/org/auto_org_name",
+				 type:"post",
+				 dataType:"json",
+				 headers:{Authorization:"Bearer "+tokenID.token},
+				 data:{"org_name":request.term},
+				 //async:false,
+                 error: function (xhr, textStatus, errorThrown) {
+                        console.log('Error: ' + xhr.responseText);
+                    },
+				 success:function(data){
+						response($.map(data, function (item) {
+                            return {
+                                label: item.org_name,
+                                value: item.org_name
+                            };
+                        }));
+				},
+				beforeSend:function(){
+					$("body").mLoading('hide');	
+				}
+				
+				});
+        }
+    });
+	//Autocomplete Organization Search End
 	
 	
 	
@@ -680,7 +871,7 @@ $(document).ready(function(){
 				var appraisal_level_code=[];
 				$.each($(".levelCheckbox").get(),function(index,indexEntry){
 					if($(indexEntry).is(":checked")){
-						console.log($(indexEntry).val());
+						//console.log($(indexEntry).val());
 						appraisal_level_code.push($(indexEntry).val());
 					}
 				});
@@ -713,4 +904,26 @@ $(document).ready(function(){
 		 html:true
 	 });
 	//binding tooltip end
+	 
+	 
+	 
+	 
+	 //binding advance multi select start
+	 
+	  //var demo1 = $('select[name="duallistbox_demo1[]"]').bootstrapDualListbox();
+	  /*
+	  $("#demoform").submit(function() {
+	      alert($('[name="duallistbox_demo1[]"]').val());
+	      return false;
+	  });
+	  */
+		  
+	 // var demo2 = $('select[name="duallistbox_demo2[]"]').bootstrapDualListbox();
+	 /*
+	  $("#demoform2").submit(function() {
+	      alert($('[name="duallistbox_demo2[]"]').val());
+	      return false;
+	  });
+	  */
+	 //binding advance multi select end
 });

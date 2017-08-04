@@ -1,447 +1,325 @@
-var restfulPathEmpThreshold="/see_api/public/emp_threshold";
-var galbalDataEmpThreshold =[];
-var maxData = 0;
-
-//Check Validation
-var validationFn = function(data){
-	var validate = "";
-	var count = 0;
-	$.each(data['data'], function(index, indexEntry) {
-
-		if (index != undefined) {
-			if (count == 0) {
-				validate += "<font color='red'>* </font>" + indexEntry + "";
-			} else {
-				validate += "<br><font color='red'>* </font> " + indexEntry + " ";
-			}
-		}
-
-		count++;
-	});
-	
-	callFlashSlideInModal(validate,"#information","error");
-	$(".btnModalClose").hide();
-};	
-var getDateFn = function(){
-	//var month= $("#drop_down_list_month").val();
-	
+var gobalDataGroup=[];
+var getDataGroupFn = function(){
 	$.ajax({
-		url : restfulURL+restfulPathEmpThreshold,
+		url:restfulURL + "/see_api/public/result_threshold/group",
 		type : "get",
 		dataType : "json",
-		data : {"result_type" : $("#id").val()},
 		headers:{Authorization:"Bearer "+tokenID.token},
-		async:false,// w8 data 
+		async:false,
 		success : function(data) {
-			//galbalDataEmpThreshold=data2;
-			
-			listEmpThresholdFn(data);
+			var tgn_New = data.map(function(obj) { return obj.result_threshold_group_name; });
+			tgn_New = tgn_New.filter(function(v,i) { return tgn_New.indexOf(v) == i; });
+			gobalDataGroup['data_new'] = tgn_New;
+			console.log(gobalDataGroup['first']);
+			if(gobalDataGroup['first'] == true){
+				var tgn_old = data.map(function(obj) { return obj.result_threshold_group_name; });
+				tgn_old = tgn_old.filter(function(v,i) { return tgn_old.indexOf(v) == i; });
+			   gobalDataGroup['data_old'] = tgn_old;
+			   gobalDataGroup['first'] = false;
+			}
+			listGroupFn(data);
 		}
 	});
-	
 };
-
-//-------- findOne
-var findOneFn = function(id) {
+var clearGroupFn = function(){
+	$("#createThreshold_name").val("");
+	$("#form_threshold_name").val("");
+	$('#form_is_active').prop('checked', false);
+	$("#group_id").val("");
+	$("#group_action").val("add");
+};
+var findOneGroupFn = function(id) {
 	$.ajax({
-		url:restfulURL+restfulPathOrganization+"/"+id,
+		url:restfulURL+ "/see_api/public/result_threshold/group/"+id,
 		type : "get",
 		dataType : "json",
+		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success : function(data) {		
-			
-			$("#mOrgCode").val(data['org_code']);
-			$("#mOrgName").val(data['org_name']);
-			$("#mOrgParentName").val(data['parent_org_name']);
-			$("#mOrgParentId").val(data['parent_org_code']);
+	
+			$("#form_threshold_name").val(data['result_threshold_group_name']);
 
 			//IsAction
 			if(data['is_active']==1){
-				$('#checkbox_is_active').prop('checked', true);
+				$('#form_is_active').prop('checked', true);
 			}else{
-				$('#checkbox_is_active').prop('checked', false);
+				$('#form_is_active').prop('checked', false);
 			}
-
 		}
 	});
 };
-//--------- findOne
-//------------------- listEmpThresholdFn FN Start ---------------------
-var listEmpThresholdFn = function(data){
-	var htmlEmpthreshold='';
-	$.each(data,function(index,indexEntry){
-		htmlEmpthreshold += "<tr class='rowSearch'>";
-		htmlEmpthreshold += "<td class='objectCenter'>";
-		htmlEmpthreshold +=	"	<input disabled style=\"margin-bottom: 3px;\"type=\"checkbox\"  class='selectEmpCheckbox' id="+indexEntry["emp_threshold_id"]+" value=\""+indexEntry["emp_threshold_id"]+"\">"+ "</td>";
-		htmlEmpthreshold +="<td class='objectCenter'><input disabled type='text' placeholder='Begin Threshold' style='width: 110px;margin-bottom: 0px;' class='selectEmpBegin numberOnly' id='empBegin-"+indexEntry["emp_threshold_id"]+"' value=\""+indexEntry["begin_threshold"]+"\"></td>";
-		htmlEmpthreshold +="<td class='objectCenter'><input disabled type='text' placeholder='End Threshold' style='width: 110px;margin-bottom: 0px;' class='selectEmpEnd numberOnly' id='empEnd-"+indexEntry["emp_threshold_id"]+"' value=\""+indexEntry["end_threshold"]+"\"></td>";
-		htmlEmpthreshold +="<td class='objectCenter'><button disabled class=\"jscolor {valueElement:null,value:'"+indexEntry["color_code"]+"',valueElement:'empColor-"+indexEntry["emp_threshold_id"]+"'} selectEmpColor\" style='width:50px; height:20px;'></button> <input type='hidden' id=\"empColor-"+indexEntry["emp_threshold_id"]+"\" value='"+indexEntry["color_code"]+"'></td>";
-		htmlEmpthreshold += "</tr>";
-		
-	});
-	$('#formListEmpResult').html(htmlEmpthreshold);
-	jscolor.installByClassName("jscolor");
 
-	jQuery('.numberOnly').keypress(function (evt) { 
-		 var charCode = (evt.which) ? evt.which : event.keyCode;
-		 var number = this.value.split('.');
-		 if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
-		    return false;
-		 }
-		    //just one dot
-		 if(number.length>1 && charCode == 46){
-		    return false;
-		 }
-		    //get the carat position
-		 var caratPos = getSelectionStart(this);
-		 var dotPos = this.value.indexOf(".");
-		 
-		 if( caratPos > dotPos && dotPos>-1 && (number[1].length > 1)){
-		    return false;
-		 }
-		 return true;
-	});
-	
-	
-	
-};
-//*********** listEmpThresholdFn end *********************//
-
-
-//************ clear start *********//
-
-var clearFn = function() {
-	 
-
-	$(".btnModalClose").click();
-	
-	//$("#id").val("");
-	$("#action").val("");
-};
-
-//************** clear end *********//
-
-
-
-
-//..................update emp start.......................
-var updateFn = function() {
-	
-	var chackSelect =  false;
-	
-	$.each($(".selectEmpCheckbox").get(),function(index,indexEntry){
-		if($(indexEntry).is(":checked")){
-			chackSelect = true;
-			
+var listGroupFn = function (data){
+	var count=0;
+	//alert("listCommonDataSetFn");
+	var htmlTable = "";
+	var IsActive ="";
+	$.each(data,function(index,indexEntry) {
+		count++;
+		if (indexEntry["is_active"]=="1"){
+			IsActive ="<input disabled type=\"checkbox\"  value=\"1\" checked>";
+		}else if (indexEntry["is_active"]=="0"){
+			IsActive ="<input disabled type=\"checkbox\"  value=\"0\" >";
 		}
+		htmlTable += "<tr class='rowSearch'>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ count + "</td>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["result_threshold_group_name"]+ "</td>";
+		htmlTable += "<td id=\"objectCenter\" >"+IsActive+"</td>";
+		
+		htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del2\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"<button class='btn btn-warning btn-xs edit2' id="+ indexEntry["result_threshold_group_id"]+ " data-target=#ModalEditGroup data-toggle='modal'>Edit</button>&nbsp;" ;
+		htmlTable += "<button id="+indexEntry["result_threshold_group_id"]+" class='btn btn-danger btn-xs del2'>Delete</button>\"></i></td>";
+		htmlTable += "</tr>";
 	});
-	if (chackSelect == false){
-		callFlashSlide("Please Select Employee Thershold !!!");
 
-		
-		}
-	else{
-		var emp_thresholds = [];
+	$("#formListThresholdGroup").html(htmlTable);
 
-		$.each($(".selectEmpCheckbox").get(),function(index,indexEntry){
-			if($(indexEntry).is(":checked")){
-				emp_thresholds.push({
-					"emp_threshold_id"	:	this.id,
-					"begin_threshold" 	:	$("#empBegin-"+this.id).val(),
-					"end_threshold" 	:	$("#empEnd-"+this.id).val(),
-					"color_code"		:	$("#empColor-"+this.id).val()
-				});				
-			}
-		});
-		//alert(JSON.stringify(emp_thresholds));
-
-		$.ajax({
-			url:restfulURL+restfulPathEmpThreshold,
-			type:"PATCH",
-			dataType:"json",
-			data:{
-				"result_type" 		:	 $("#id").val(),
-				"emp_thresholds"	:	 emp_thresholds
-			},
-			headers:{authorization:"Bearer "+tokenID.token},
-			async:false,
-			success:function(data){
-				if (data['status'] == "200") {
-
-					getDateFn();
-					$("#action").val("");
-					$(".add").removeAttr("disabled");
-					$(".edit").removeAttr("disabled");
-					$(".del").removeAttr("disabled");
-					callFlashSlide("Update Successfully.");
-					
-					
-					
-				}else if (data['status'] == "400") {
-					validationFn(data,"#information2");
-				}
-			}
-		});
-		
-
-		
-	}
+	//function popover
+	$(".popover-edit-del2").popover();
 	
-	
-	return false
-};
-
-//******************** update emp end********//
-
-//..................insert emp start.......................
-var insertFn = function() {
-	
-		var emp_thresholds = [];
-		var id;
-		$.each($(".newSelectEmpCheckbox").get(),function(index,indexEntry){
-			id=this.id.split("-")[1];
-			
-			emp_thresholds.push({
-				"begin_threshold" 	:	$("#newEmpBegin-"+id).val(),
-				"end_threshold" 	:	$("#newEmpEnd-"+id).val(),
-				"color_code"		:	$("#newEmpColor-"+id).val()
-			});				
-			
-		});
-		//alert(JSON.stringify(emp_thresholds));
-
-		$.ajax({
-			url:restfulURL+restfulPathEmpThreshold,
-			type:"POST",
-			dataType:"json",
-			data:{
-					"result_type" 		:	 $("#id").val(),
-					"emp_thresholds"	:	 emp_thresholds
-				},
-			headers:{authorization:"Bearer "+tokenID.token},
-			async:false,
-			success:function(data){
-				if (data['status'] == "200") {
-
-					getDateFn();
-					$("#action").val("");
-					$(".add").removeAttr("disabled");
-					$(".edit").removeAttr("disabled");
-					$(".del").removeAttr("disabled");
-					callFlashSlide("Insert Successfully.");
-					
-					
-					
-				}else if (data['status'] == "400") {
-					validationFn(data,"#information2");
-				}
-			}
-		});
-		
-
-		
-	
-	
-	
-	return false
-};
-
-//******************** insert emp end********//
-
-//..................Delete emp start.......................
-var deleteFn = function() {
-	var chackSelect =  false;
-	
-
-		
-		
-		$.each($(".selectEmpCheckbox").get(),function(index,indexEntry){
-			if($(indexEntry).is(":checked")){
-				chackSelect = true;
-				
-			}
-		});
-		if (chackSelect == false){
-			callFlashSlide("Please Select Employee Thershold !!!");
-
-			
-			}
-		else{
-			$("#confrimModal").modal();
-			$(document).off("click","#btnConfirmOK");
-			$(document).on("click","#btnConfirmOK",function(){
-			var emp_thresholds = [];
-
-			$.each($(".selectEmpCheckbox").get(),function(index,indexEntry){
-				if($(indexEntry).is(":checked")){
-					emp_thresholds.push({
-						"emp_threshold_id"	:	this.id
-					});				
+	$("#formTableThresholdGroup").off("click",".popover-edit-del2");
+	$("#formTableThresholdGroup").on("click",".popover-edit-del2",function(){
+			$("#formTableThresholdGroup").off("click",".edit2");
+			$(".edit2").on("click",function() {
+				$(".btnModalClose").click();
+				gobalDataGroup['Modal'] = "on";
+				$("#ModalCreateGroup").modal('hide');
+			 	$('#ModalEditGroup').on('hidden', function () {
+			 		$("#ModalCreateGroup").modal('show');
+			 		gobalDataGroup['Modal'] = "off";
+			 		});
+			clearGroupFn();
+			$(this).parent().parent().parent().children().click();	
+			findOneGroupFn(this.id);
+			//$('#form_is_active').prop('checked', true);
+			$('#form_is_active').off("change");
+			$('#form_is_active').on("change",function(){
+				if($('#form_is_active').is(':checked')){
+					var validate = "<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Would you like to set this group as the active threshold group?";
+					callFlashSlideInModal(validate,"#information3","error");
+				}else{
+					if($("#information3").text() == "× Would you like to set this group as the active threshold group?"){ $(".btnModalClose").click();}
 				}
 			});
-			//alert(JSON.stringify(emp_thresholds));
-
-			$.ajax({
-				url:restfulURL+restfulPathEmpThreshold,
-				type:"DELETE",
-				dataType:"json",
-				data:{
-					"result_type" 		:	 $("#id").val(),
-					"emp_thresholds"	:	 emp_thresholds
-				},				
-				headers:{authorization:"Bearer "+tokenID.token},
-				async:false,
-				success:function(data){
-					if (data['status'] == "200") {
-
-						getDateFn();
-						$("#action").val("");
-						$(".add").removeAttr("disabled");
-						$(".edit").removeAttr("disabled");
-						$(".del").removeAttr("disabled");
-						$("#confrimModal").modal('hide');
-						callFlashSlide("Delect Successfully.");
-						
-						
-						
-					}else if (data['status'] == "400") {
-						$("#confrimModal").modal('hide');
-						validationFn(data,"#information2");
-						callFlashSlide(data,"error");
-					}
-				}
-			});		
+			
+			$("#group_id").val(this.id);
+			$("#group_action").val("edit");		
+			$(".edit2").off("click");
 			
 		});
+		
+		$("#formTableThresholdGroup").off("click",".del2");
+		$(".del2").on("click",function(){
+			gobalDataGroup['Modal'] = "on";
+			$("#ModalCreateGroup").modal('hide');
+		 	
+			var id = this.id;
+			$(this).parent().parent().parent().children().click();
+			 
+			$("#confrimModal").modal();
+			$('#confrimModal').on('hidden', function () {
+		 		$("#ModalCreateGroup").modal('show');
+		 		gobalDataGroup['Modal'] = "off";
+		 		$('#confrimModal').off('hidden');
+		 		});
+			$(document).off("click","#btnConfirmOK");
+			$(document).on("click","#btnConfirmOK",function(){
+			console.log(id);
+				$.ajax({
+					 url:restfulURL+"/see_api/public/result_threshold/group/"+id,
+					 type : "delete",
+					 dataType:"json",
+					 async:false,
+					 headers:{Authorization:"Bearer "+tokenID.token},
+					success:function(data){    
+				    	 
+					     if(data['status']==200){
+					    	getDataGroupFn();
+					       callFlashSlide("Delete Successfully.");
+					       clearGroupFn();
+					       $("#confrimModal").modal('hide');
+					       
+					     }else if (data['status'] == "400"){
+					    	 callFlashSlideInModal(data['data'],"#inform_on_confirm","error");
+					    	}
+					 }
+				});
+				
+			});
+			
+		});	
+		
+	});
+	
+
+};
+var updateGroupFn = function () {
+
+	
+
+	var IsAction="";
+	
+	if($("#form_is_active:checked").is(":checked")){
+		IsAction="1";
+	}else{
+		IsAction="0";
+	}
+	
+	$.ajax({
+		url:restfulURL+"/see_api/public/result_threshold/group/"+$("#group_id").val(),
+		type : "PATCH",
+		dataType : "json",
+		data : {
+			"result_threshold_group_name":$("#form_threshold_name").val(),
+			"is_active":IsAction
+		},	
+		async:false,
+		//headers:{Authorization:"Bearer "+tokenID.token},
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success : function(data) {
+			if (data['status'] == "200") {
+				getDataGroupFn();
+				clearGroupFn();
+				$('#ModalEditGroup').modal('hide');
+				callFlashSlide("Update Successfully.");
+				
+			}else if (data['status'] == "400") {
+				//alert("Error ?");information3
+				callFlashSlideInModal(validationFn(data),"#information3","error");
+			}
 		}
+	});
+	return false;
+}
 
-	
-	
-	
-	return false
-};
 
-//******************** Delete emp end********//
-
-var getSelectionStart = function (o) {
-	if (o.createTextRange) {
-		var r = document.selection.createRange().duplicate()
-		r.moveEnd('character', o.value.length)
-		if (r.text == '') return o.value.length
-		return o.value.lastIndexOf(r.text)
-	} else return o.selectionStart
-};
-$(document).ready(function () {
-	
+$(document).ready(function(){
 	 var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
 	 	
 	 	if(connectionServiceFn(username,password)==true){
-	 		clearFn();
-	 		$("#id").val("1");
-	 		$("#btnEmpCancel").click();
-			$(".app_url_hidden").show();
-			
-
-			$('.add').click(function(){
-				$(".edit").attr("disabled","disabled");
-				$(".del").attr("disabled","disabled");
-				$("#action").val("add");
-				
-				maxData++;
-				var htmlEmpthreshold = '';
-
-				htmlEmpthreshold += "<tr class='tempAdd'>";
-				htmlEmpthreshold += "<td class='objectCenter'>";
-				htmlEmpthreshold +=	"	<input disabled  style=\"margin-bottom: 3px;\"type=\"checkbox\"  class='newSelectEmpCheckbox' id=newEmpCheckbox-"+maxData+" >"+ "</td>";
-				htmlEmpthreshold +="<td class='objectCenter'><input type='text' placeholder='Begin Threshold' style='width: 110px;margin-bottom: 0px;' class='newSelectEmpBegin numberOnly' id='newEmpBegin-"+maxData+"' ></td>";
-				htmlEmpthreshold +="<td class='objectCenter'><input type='text' placeholder='End Threshold' style='width: 110px;margin-bottom: 0px;' class='newSelectEmpEnd numberOnly' id='newEmpEnd-"+maxData+"' ></td>";
-				htmlEmpthreshold +="<td class='objectCenter'><button class=\"jscolor {valueElement:null,value:'ffffff',valueElement:'newEmpColor-"+maxData+"'} newSelectEmpColor\" style='width:50px; height:20px;'></button> <input type='hidden' id=\"newEmpColor-"+maxData+"\" value='ffffff'></td>";
-				htmlEmpthreshold += "</tr>";
-				
-				$("#formListEmpResult").append(htmlEmpthreshold);
-				jscolor.installByClassName("jscolor");
-				jQuery('.numberOnly').keypress(function (evt) { 
-					 var charCode = (evt.which) ? evt.which : event.keyCode;
-					 var number = this.value.split('.');
-					 if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
-					    return false;
-					 }
-					    //just one dot
-					 if(number.length>1 && charCode == 46){
-					    return false;
-					 }
-					    //get the carat position
-					 var caratPos = getSelectionStart(this);
-					 var dotPos = this.value.indexOf(".");
-					 
-					 if( caratPos > dotPos && dotPos>-1 && (number[1].length > 1)){
-					    return false;
-					 }
-					 return true;
-				});
-				
-			});
-			$(".edit").click(function(){
-				$("#action").val("edit");
-				$(".add").attr("disabled","disabled");
-				$(".del").attr("disabled","disabled");
-
-				$(".selectEmpCheckbox").removeAttr("disabled");
-				$(".selectEmpBegin").removeAttr("disabled");
-				$(".selectEmpEnd").removeAttr("disabled");
-				$(".selectEmpColor").removeAttr("disabled");
-				
-				
-				
-			});
-			$(".del").click(function(){
-				$("#action").val("delect");
-				$(".add").attr("disabled","disabled");
-				$(".edit").attr("disabled","disabled");
-				//getDateFn();
-				$(".selectEmpCheckbox").removeAttr("disabled");
-
-			});
-			$("#btnEmpSubmit").click(function(){
-				if($("#action").val() == ""){
-					callFlashSlide("Please Select Menu Manage !!!");
-				}else if ($("#action").val() == "add") {
-					insertFn();
-				}else if($("#action").val() == "edit"){
-					updateFn();
-				}else{
-					deleteFn();
-				}
-				return false;
-
-			});
-			$("#btnEmpCancel").click(function(){
-				$("#action").val("add");
-				$(".add").removeAttr("disabled");
-				$(".edit").removeAttr("disabled");
-				$(".del").removeAttr("disabled");
-				getDateFn();
-				
-			});
-	 		
-	 		
+    	
+    	//alert(createTableFn());
+    	var options={
+    			"colunms":[
+    						{"colunmsDisplayName":"Group","width":"25%","id":"result_threshold_group_name","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Begin Threshold","width":"20%","id":"begin_threshold","colunmsType":"text","colunmsDataType":"decimal"},
+    			           {"colunmsDisplayName":"End Threshold","width":"20%","id":"end_threshold","colunmsType":"text","colunmsDataType":"decimal"},
+    			           {"colunmsDisplayName":"Color","width":"15%","id":"color_code","colunmsType":"color"},
+    			          ],
+    			"form":[{
+	     					"label":"Begin Threshold","inputType":"text","placeholder":"Begin Threshold",
+	     					"id":"begin_threshold","width":"200px","dataTypeInput":"number","required":true
+	     					},
+	     					{
+		     				"label":"End Threshold","inputType":"text","placeholder":"End Threshold",
+		     				"id":"end_threshold","width":"200px","dataTypeInput":"number","required":true
+		     				},
+    	  
+    	    			    {
+    	    				"label":"Group","inputType":"dropdown",
+        	    			"id":"result_threshold_group_id","width":"200px","url":""+restfulURL+"/see_api/public/result_threshold/group"
+        	    			},
+        	    			{
+        	    			"label":"Color","inputType":"color","default":"All",
+        	    			"id":"color_code","width":"70px","height":"27px","dataTypeInput":"color"
+        	    			},
+    	    					
+    	    			],
+    	    			
+    	    			"advanceSearch":[{
+        	 					"label":"Group","inputType":"dropdown",
+        	 					"id":"result_threshold_group_id","width":"100%",
+        	 					"url":""+restfulURL+"/see_api/public/result_threshold/group"
+        	 					}],
+    	    			
+    			 "formDetail":{"formSize":"modal-dialog","formName":"Threshould","id":"databaseConnection","pk_id":"result_threshold_id"},       
+    			 "serviceName":[restfulURL+"/see_api/public/result_threshold"],
+    			 "tokenID":tokenID,
+    			 "pagignation":false,
+    			 "expressSearch":false,
+    			 "advanceSearchSet":true,
+    			 "btnAdvanceSearchOption":{"id":"btnCreateGroup","name":"<i class=\"fa fa-plus-square\"></i>&nbsp;Add Threshould Group"}
+    	}
+    	//console.log(options['tokenID'].token);
+    	createDataTableFn(options);
+    	$('#ModalCreateGroup').off('hidden.bs.modal');
+		$('#ModalCreateGroup').on('hidden.bs.modal', function (e) {
 
 			
-			
+			e.stopPropagation();
+			//console.log($(e.target).attr("data-toggle"));
+			if($(e.target).attr("data-toggle") != "popover" && $(e.target).attr("data-toggle") == "modal"){
+				//console.log("In : "+$(e.target).attr("data-toggle"));
+				//console.log(gobalDataGroup['Modal']);
+				var change = false;
+				if(gobalDataGroup['Modal'] == "off"){
+					console.log(gobalDataGroup['data_new']);
+					console.log(gobalDataGroup['data_old']);
+					console.log("----------------------------------------------");
+			 		$.each(gobalDataGroup['data_new'],function(index,indexEntry){
+			 			
+			 			if(indexEntry != gobalDataGroup['data_old'][index]){
+			 				change = true;
+			 			}
+			 		});
+					}
+				if(change == true){createDataTableFn(options);}
+			}
+
+	 		return false;
+	 	});
+ 		$("#btnSaveEditGroup").click(function(){
+ 			updateGroupFn();
+ 		});
+    	$(document).on('click','#btnCreateGroup',function(){
+    		clearGroupFn();
+    		gobalDataGroup['first'] = true;
+    		gobalDataGroup['Modal'] = "off";
+    		getDataGroupFn();
+     		$("#ModalCreateGroup").modal();
+     		
+     		$("#btnSaveGroup").click(function(){
+     			$(".btnModalClose").click();
+     			gobalDataGroup['Modal'] = "on";
+     			$("#ModalCreateGroup").modal('hide');
+    			$("#confrimModalCreateGroup").modal();
+     	    	$('#confrimModalCreateGroup').on('hidden', function () {
+     	    		$("#ModalCreateGroup").modal('show');
+     	    		gobalDataGroup['Modal'] = "off";
+     	    		});
+    			$(document).off("click","#btnConfirmGroupOK");
+    			$(document).on("click","#btnConfirmGroupOK",function(){
+    			
+    				$.ajax({
+    					 url:restfulURL+"/see_api/public/result_threshold/group",
+    					 type : "POST",
+    					 dataType:"json",
+    					 data:{"result_threshold_group_name" : $("#createThreshold_name").val(),"is_active":"1"},
+    					 async:false,
+    					 headers:{Authorization:"Bearer "+tokenID.token},
+    					success:function(data){    
+    				    	 
+    					     if(data['status']==200){
+    					    	 clearGroupFn();
+    					    	 getDataGroupFn();
+    					    	 callFlashSlideInModal("Insert Data is Successfully.");
+    					      
+    					       $("#confrimModalCreateGroup").modal('hide');
+    					       
+    					     }else if (data['status'] == "400"){
+    					    	 
+    					    	 callFlashSlideInModal(data['data']['result_threshold_group_name'],"#inform_on_confirm2","error");
+    					    	}
+    					 }
+    				});
+    				
+    			});
+     			
+     		});     			 			
+    	});
+
 	 	}
 	 }
-	 
-
-	 
-	 
-	
-});
-
-
-	
-	
-
-
-
+    	
+    });

@@ -1,5 +1,6 @@
 //Global Variable 
 var golbalDataCRUD =[];
+var golbalDataCascades = [];
 var dataSearch="";
 var addCommas =  function(nStr)
 {
@@ -181,7 +182,7 @@ var clearFn = function(options){
 
 		if(indexEntry['inputType']=="text" || indexEntry['inputType']=="date" || indexEntry['inputType']=="password"){
 			$("form#"+options['formDetail']['id']+" #"+indexEntry['id']).val("");
-		}else if(indexEntry['inputType']=="dropdown"){
+		}else if(indexEntry['inputType']=="dropdown" || indexEntry['inputType']=="cascades"){
 			$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).val($("form#"+options['formDetail']['id']+"  #"+indexEntry['id']+" option:first").val());
 		}else if(indexEntry['inputType']=="color"){
 			$("form#"+options['formDetail']['id']+" #"+indexEntry['id']).val("");
@@ -226,8 +227,8 @@ var mapObjectToFormFn  =function(data,options){
 
 		if(indexEntry['inputType']=="text" || indexEntry['inputType']=="date"){
 			$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).val(data[indexEntry['id']]);
-		}else if(indexEntry['inputType']=="dropdown"){
-			$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).val(data[indexEntry['id']]);
+		}else if(indexEntry['inputType']=="dropdown" || indexEntry['inputType']=="cascades" ){
+			$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).val(data[indexEntry['id']]).change();
 			//alert("form#"+options['formDetail']['id']+" > #"+indexEntry['id']);
 			//alert(data[indexEntry['id']]);
 		}else if(indexEntry['inputType']=="color"){
@@ -341,7 +342,7 @@ var listDataFn = function(data,options){
 	$("#table-"+options['formDetail']['id']).on("click",".popover-edit-del",function(){
 		//console.log($(this).next().find('.edit').hide());
 		//console.log($(this).parent().prev().text());
-		console.log($(this).parent().prev().text());
+		//console.log($(this).parent().prev().text());
 		if($(this).parent().prev().text()==0 && $(this).parent().prev().text()!=""){
 			
 			$(this).next().find('.edit').attr("disabled","disabled");
@@ -453,7 +454,20 @@ var createInputTypeFn  = function(object,tokenID){
 	}else{
 		inputTooltip ="";
 	}
-	
+	if(object['inputType']=="cascades"){
+		inputType="<select "+inputTooltip+" class=\"span12 m-b-n\" id=\""+object['id']+"\" name=\""+object['id']+"\" style=\"width:"+object['width']+"\">";			
+		//initValue
+		if(object['initValue']!=undefined){
+			inputType+="<option value=''>"+object['initValue']+"</option>";
+		}
+		$.each(golbalDataCascades[object['cascades']['id']][0][object['cascades']['listData']],function(index,indexEntry){
+			inputType+="<option value="+indexEntry+">"+indexEntry+"</option>";
+		});
+		inputType+="</select>";
+		
+		
+		
+	}
 	if(object['inputType']=="dropdown"){
 		
 		$.ajax({
@@ -468,6 +482,7 @@ var createInputTypeFn  = function(object,tokenID){
 				if(object['initValue']!=undefined){
 					inputType+="<option value=''>"+object['initValue']+"</option>";
 				}
+				golbalDataCascades[object['id']] = data;
 				
 				$.each(data,function(index,indexEntry){
 				
@@ -597,6 +612,23 @@ formHTML+="</div>";
 formHTML+="</form>"; 
 return formHTML;
 }
+var createScriptCascadesFn = function(options){
+	$.each(options['form'],function(index,indexEntry){
+		if(indexEntry['inputType'] == "cascades"){
+			$("form#"+options['formDetail']['id']+"  #"+indexEntry['cascades']['id']).change(function(){
+				var htmlChange = "";
+				$.each(golbalDataCascades[indexEntry['cascades']['id']],function(index2,indexEntry2){
+					if(indexEntry2[indexEntry['cascades']['id']] == $("form#"+options['formDetail']['id']+"  #"+indexEntry['cascades']['id']).val()){
+						$.each(indexEntry2[indexEntry['cascades']['listData']],function(index3,indexEntry3){
+							htmlChange+="<option value="+indexEntry3+">"+indexEntry3+"</option>";
+						});
+					}
+				});
+				$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).html(htmlChange);
+			});
+		}
+	});
+}
 var createBtnAdvanceSearchOptionFn = function(object){
 	
 	var AdvanceSearchOption="";
@@ -664,7 +696,8 @@ var createAvanceSearchFn = function(options){
 	
 }
 var createDataTableFn = function(options){
-	
+	//save option
+	golbalDataCascades['options']=options;
 	//options['advanceSearchSet']
 	var advanceSearchSet =(options['advanceSearchSet'] == '' || options['advanceSearchSet'] == undefined  ? false : options['advanceSearchSet']);
 	var expressSearch =(options['expressSearch'] == '' || options['expressSearch'] == undefined  ? false : options['expressSearch']);
@@ -721,6 +754,7 @@ var createDataTableFn = function(options){
 			$("#tableArea").html(tableHTML);
 			
 			$("#modalFormArea").html(createFormFn(options));
+			createScriptCascadesFn(options);
 			$.getScript($("#url_portlet").val()+"/js/jscolor-2.0.4/jscolor.js", function(){
 
 				jscolor.installByClassName("jscolor");

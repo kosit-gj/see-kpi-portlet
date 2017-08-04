@@ -24,183 +24,203 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
 
-
+	<div id="mainContent">
+	</div>
+	
 <style>
 
-
-/* Large desktop Start#####################################*/
-  @media (min-width: 1200px) { 
-
-   }
-   /* Large desktop End######################################*/
-   
-   /*  desktop Start#########################################*/
-  @media (min-width: 980px) and (max-width: 1199px) {
-  
-  	
-   }
-  /*  desktop End############################################*/
-  
-  /* Portrait tablet to landscape and desktop Start##########*/
-  @media (min-width: 768px) and (max-width: 979px) {
-  		 .text-label{
-		  	text-align:right;
-		  }
-   }
-  /* Portrait tablet to landscape and desktop End############*/ 
-  
-  /* Landscape phone to portrait tablet Start################*/
-  @media (max-width: 767px) { 
- 	  .text-label{
-	  	text-align:left;
-	  }	
-	  .btn-right{
-	  text-align: right;}
-   }
-  /* Landscape phone to portrait tablet End##################*/ 
-  
-  /* Landscape phones and down Start#########################*/
-  @media (max-width: 480px) { 
-  	
-  .text-label{
-  	text-align:left;
-  }
-  		
-}
-   /* Landscape phones and down End##########################*/
-     
-    
-.aui #breadcrumbs {
-    margin-bottom: 0px;
-}
-.aui td {padding:3px 3px 3px 8px !important;}
-.aui .objectCenter {vertical-align: middle !important;}
-.aui .btn {
-	font-size: 14px;
- 	padding: 4px 12px; 
-	width: auto;
-	margin-top: 0px;
-	display: inline;
-}
-.aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input {
-    height: 20px;
-    padding: none;
-    font-size: 14px;
-}
-.aui .modal {
-	top: 3%;
-}
-.aui #confrimModal {
-	top: 10%;
+/* Large desktop */
+@media ( min-width : 1200px) {
+	#confrimModalCreateGroup {
+		left: 56%;
+	}
 }
 
+/* Portrait tablet to landscape and desktop */
+@media ( min-width : 980px) and (max-width: 1199px) {
+	#confrimModalCreateGroup {
+		left: 57%;
+	}
+}
+
+@media ( min-width : 768px) and (max-width: 979px) {
+	#confrimModalCreateGroup {
+		left: 58.5%;
+	}
+
+}
+
+/* Landscape phone to portrait tablet */
+@media ( max-width : 767px) {
+	#confrimModalCreateGroup {
+		left: 23.5%;
+	}
+	@media ( min-width : 481px) and (max-width: 622px) {
+		#confrimModalCreateGroup {
+			left: 16.5%;
+		}
+}
+
+/* Landscape phones and down */
+@media ( max-width : 480px) {
+	#confrimModalCreateGroup {
+		left: 1%;
+	}
+}
 </style>
-	
-		<div class="">
-				<div class='row-fluid'>
 
-					
-						<div id="slide_status" class='span12'>
-							<div id="btnCloseSlide">×</div>
-							<div id="slide_status_area"></div>
+<input type="hidden" name="group_id" id="group_id" value="">
+<input type="hidden" name="group_action" id="group_action" value="add">
+<!-- Modal Start Create -->
+
+  <div aria-hidden="true" role="dialog" tabindex="-1" id="ModalCreateGroup" class="modal inmodal" style="display: none;" data-toggle="modal">
+    <div class="modal-dialog">
+    <div class="modal-content  bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button" style="padding-top:5px"><span aria-hidden="true">x</span><span class="sr-only"></span></button>
+                <!-- <i class="fa fa-laptop modal-icon"></i> -->
+                <h4 class="modal-title" id="modalTitleRole">Threshold Group</h4>
+                <!-- 
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                 -->
+            </div>
+            <div class="modal-body">
+                <!-- content start -->
+                <div class="row-fluid">
+                	<div class="span12 form-horizontal p-t-xxs">
+                		<div class="form-group">
+							<label class="control-label">Group Name:<span
+								class="redFont " style="position:absolute;margin-left:4px">*</span>
+							</label>
+							<div class="controls">
+								<input type="text" name="createThreshold_name" id="createThreshold_name"
+									placeholder="Theshould Name" class="span12 m-b-n"
+									style="width: 100%">
+							</div>
 						</div>
-					
-
-				</div>
-
-	<div class="row">
-		<!-- start--row -->
-
-	</div>
-	<!-- end--row -->
-	<div class="row-fluid app_url_hidden">
-		<div class="span12">
-			<div class="ibox-title">
-				<h5>Set Thershold</h5>
-			</div>
-
-
-			<div class="ibox-content">
-				<div class="row-fluid">
-						<div class="col-lg-12">
-						
-						
-						<div class="form-group pull-left m-b-none "> <!-- data-target="#ModalRole"  -->
-							<button type="button" class="btn btn-primary add" style="">
-								&nbsp;&nbsp;Add&nbsp;&nbsp;
-							</button>
-							<button type="button" class="btn btn-warning edit " style="margin-left: 5px;">
-								&nbsp;&nbsp;Edit&nbsp;&nbsp;
-							</button>
-							<button  type="button" class="btn btn-danger del "style="margin-left: 5px;">
-								&nbsp;&nbsp;Delete&nbsp;&nbsp;
-							</button>
+						<div class="form-group pull-right">
+							<button class="btn btn-success" type="button" id="btnSaveGroup">Save</button>
+                			<button data-dismiss="modal" class="btn btn-danger btnCancle btnCancleGroup" type="button">Cancel</button>
 						</div>
-						<div class="form-group pull-right m-b-none "> 
-							<button class="btn btn-success" type="button" id="btnEmpSubmit" style="margin-left: 5px;">Save</button>
-							<button class="btn btn-danger btnEmpCancle" id="btnEmpCancel" type="button" style="margin-left: 5px;">Cancel</button>
-						</div>
-						</div>
-				</div>
-				<!-- form start -->
-
-					<div>
-						<!-- start table -->
-						<div class="table-responsive">
-							<table class="table table-striped" id="formTableRole">
+                	
+                	</div>
+                </div>
+                <!-- form start -->
+                <div class="row-fluid">
+                	<div class="table-responsive">
+							<table class="table table-striped" id="formTableThresholdGroup">
 								<thead>
 									<tr>
-										<th style='width: auto; '>Check Box</th>
-										<th style='width: auto'>Begin Threshold</th>
-										<th style='width: auto'>End Threshold</th>
-										<th style='width: auto'>Color Picker</th>
+										<th style='width: 10%;'>No.</th>
+										<th style='width: auto'>Group Name</th>
+										<th style='width: 15%;'>Is Active</th>
+										<th style='width: 15%'>Manage</th>
 									</tr>
 								</thead>
-								<tbody id="formListEmpResult">
+								<tbody id="formListThresholdGroup">
 
 								</tbody>
 							</table>
 						</div>
+       			</div>
+                
 
-						<!-- end table -->
 
 
-
-					</div>
-					<!-- form End -->
-				<input type="hidden" name="id" id="id" value="">
-				<input type="hidden" name="action" id="action" value="add">
-				<div class="alert alert-warning" id="information2"
-					style="display: none;">
-				</div>
-				<br style='clear: both'>
-			</div>
-		</div>
-	</div>
-</div>
+				<!-- form End -->
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+           	 	
+   				
   
+                <div class="alert alert-warning information" id="information2" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+	<!-- Modal End Create -->
+	
+	
+	<!-- Modal Start Create -->
 
-<!-- Modal Confirm Start -->
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal"
-		class="modal inmodal in" style="width:400px;left:calc;display: none;">
+  <div aria-hidden="true" role="dialog" tabindex="-1" id="ModalEditGroup" class="modal inmodal" style="display: none;z-index:1300;">
+    <div class="modal-dialog">
+    <div class="modal-content  bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button" style="padding-top:5px"><span aria-hidden="true">x</span><span class="sr-only"></span></button>
+                <!-- <i class="fa fa-laptop modal-icon"></i> -->
+                <h4 class="modal-title" id="modalTitleRole">Threshold Group</h4>
+                <!-- 
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                 -->
+            </div>
+            <div class="modal-body">
+                <!-- content start -->
+                <!-- form start -->
+                <div class="row-fluid">
+                	<div class="span12 form-horizontal p-t-xxs">
+						<div class="form-group p-xxs">
+							<label class="control-label">Group Name<span
+								class="redFont "style="position:absolute;margin-left:4px">*</span>
+							</label>
+							<div class="controls">
+								<input type="text" name="form_threshold_name" id="form_threshold_name"
+									placeholder="Threshold Name" class="span12 m-b-n "
+									style="width: 200px">
+							</div>
+						</div>
+						<div class="form-group ">
+							<label class="control-label"> IsActive </label>
+							<div class="controls">
+								<input type="hidden" value="0" name="form_is_active_" id="form_is_active_">
+								<input type="checkbox" name=form_is_active id="form_is_active" placeholder=""
+									class="checkbox checkbox-is_active" checked>
+							</div>
+						</div>
+					</div>
+       			</div>
+                
+
+
+
+				<!-- form End -->
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+           	 	
+   				
+  				<button class="btn btn-success" type="button" id="btnSaveEditGroup">Save</button>
+                <button data-dismiss="modal" class="btn btn-danger  btnCancleGroup" type="button">Cancel</button>
+                <div class="alert alert-warning information" id="information3" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+	<!-- Modal End Create -->
+	
+	
+		<!-- Modal Confirm Start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModalCreateGroup"
+		class="modal inmodal in" style="width:400px;left:calc;display: none;z-index:1300; margin-top: 5%;" >
 		<div class="modal-dialog">
 			<div class="modal-content  bounceInRight">
 				<div class="modal-header">
 					<button data-dismiss="modal" class="close" type="button" style="padding-top:3px">
-						<span aria-hidden="true">×</span><span class="sr-only"></span>
+						<span aria-hidden="true">x</span><span class="sr-only"></span>
 					</button>
-					<h5 class="modal-title">Confirm Dialog</h5>
+					<h4 class="modal-title">Threshold Group</h4>
 				</div>
 				<div class="modal-body">
 					<!-- content start -->
-					<!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
-                <hr>
-                 -->
+	
 					<!-- form start -->
 					<div class="form-kpi-mangement">
 						<div class="form-kpi-label" align="center">
 
-							<label>Confirm to Delete Data?</label>
+							<label>Would you like to set this group</label>
+							<label>as the active threshold group?</label>
+							<div id="inform_on_confirm2" class='information'></div>
 						</div>
 					</div>
 
@@ -209,7 +229,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 				</div>
 				<div class="modal-footer">
 					<div align="center">
-						<button class="btn btn-success" id="btnConfirmOK" type="button">
+						<button class="btn btn-success" id="btnConfirmGroupOK" type="button">
 							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
 						</button>
 						&nbsp;&nbsp;
@@ -217,15 +237,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							<i class="fa fa-times-circle"></i>&nbsp;Cancel
 						</button>
 					</div>
-					
-					<div class="alert alert-warning information" id="information"
-						style="display: none;"></div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Modal Confirm End -->
+
 		
-
-
-

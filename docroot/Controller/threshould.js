@@ -219,10 +219,14 @@ $(document).ready(function(){
     	        			"id":"threshold_name","width":"200px","placeholder":"Threshold Name","required":true,
     	    					
     	    				},
-    	    			    {
-    	    				"label":"Taget Score","inputType":"text","default":"All",
-    	    				"id":"target_score","width":"100px","placeholder":"Taget Score","dataTypeInput":"number","required":true
-    	    				},
+    	    				{
+        	    			"label":"Taget Score ","inputType":"cascades",
+        	    			"id":"target_score","width":"200px",
+        	    			"cascades":{
+        	    							"id"		:	"structure_id",
+        	    							"listData"	:	"score_list"
+        	    						}
+        	    			},
     	    			    {
     	    				"label":"Group","inputType":"dropdown",
         	    			"id":"threshold_group_id","width":"200px","url":""+restfulURL+"/see_api/public/threshold/group"
