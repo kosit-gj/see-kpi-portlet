@@ -2277,6 +2277,10 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 		
 		
 		}
+		setTimeout(function(){
+			alert("test");
+			$(".app_url_hidden").show();
+		},3000);
 		
 		
 	}

@@ -367,7 +367,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 </div>
 
 
-<div class="">
+<div class="app_url_hidden">
 <div class="container1">
 
 

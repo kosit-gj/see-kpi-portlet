@@ -96,7 +96,7 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
-	<portlet>
+	<portlet> 
 		<portlet-name>appraisal-assignment</portlet-name>
 		<display-name>Appraisal Assignment</display-name>
 		<portlet-class>com.test.AppraisalAssignment</portlet-class>
@@ -905,7 +905,12 @@
 	<portlet>
 		<portlet-name>assigment-slide-score</portlet-name>
 		<display-name>Assigment Slide Score</display-name>
+		<!-- 
 		<portlet-class>com.test.assigmentSlideScore</portlet-class>
+		 -->
+		 <portlet-class>
+		 	com.liferay.util.bridges.mvc.MVCPortlet
+		 </portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/html/assigmentslidescore/view.jsp</value>
@@ -952,6 +957,37 @@
 		<portlet-info>
 			<title>Result Thershold</title>
 			<short-title>Result Thershold</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>action-plan</portlet-name>
+		<display-name>Action Plan</display-name>
+		<portlet-class>com.test.ActionPlan</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/actionplan/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Action Plan</title>
+			<short-title>Action Plan</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

@@ -1978,7 +1978,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 		appraisalTypeFn('','1');
 		periodFrequencyFn();
 		yearListFn();
-		
+		$(".app_url_hidden").show();
 	
 	
 	

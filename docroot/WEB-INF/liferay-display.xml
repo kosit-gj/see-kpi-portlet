@@ -37,6 +37,7 @@
 		<portlet id="Dashboard-Employee"></portlet>
 		<portlet id="dashboard-Kpi-by-org"></portlet>
 		<portlet id="assigment-slide-score"></portlet>
+		<portlet id="action-plan"></portlet>
 	</category>
 
 
