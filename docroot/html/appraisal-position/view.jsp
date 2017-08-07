@@ -164,6 +164,11 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	width: 100%;
 	height: 100%;
 }
+.aui .modal-header .close{
+	font-size: 1.4em !important;
+    margin-top: 4px !important;
+    padding-top: 5px !important;
+}
 </style>
 	
 		<div class="">
@@ -171,7 +176,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 					
 						<div id="slide_status" class='span12'>
-							<div id="btnCloseSlide">×</div>
+							<div id="btnCloseSlide"><i class='fa fa-times'></i></div>
 							<div id="slide_status_area"></div>
 						</div>
 					
@@ -249,7 +254,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
     <div class="modal-dialog">
     <div class="modal-content  bounceInRight">
             <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button" style="padding-top:5px"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
+                <button data-dismiss="modal" class="close" type="button" style="padding-top:5px"><span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span></button>
                 <!-- <i class="fa fa-laptop modal-icon"></i> -->
                 <h4 class="modal-title" id="modalTitlePosition">Position</h4>
                 <!-- 
@@ -312,7 +317,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 			<div class="modal-header">
 				<button data-dismiss="modal" class="close" type="button"
 					style="padding-top: 5px">
-					<span aria-hidden="true">×</span><span class="sr-only"></span>
+					<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span>
 				</button>
 				<h4 class="modal-title" id="">Import Position</h4>
 			</div>
@@ -359,7 +364,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 			<div class="modal-header">
 				<button data-dismiss="modal" class="close" type="button"
 					style="padding-top: 3px">
-					<span aria-hidden="true">×</span><span class="sr-only"></span>
+					<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span>
 				</button>
 				<h5 class="modal-title">Confirm Dialog</h5>
 			</div>

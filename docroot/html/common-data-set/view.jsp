@@ -104,6 +104,11 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 }
 
 /* new */
+.aui .modal-header .close{
+	font-size: 1.4em !important;
+    margin-top: 4px !important;
+    padding-top: 5px !important;
+}
 .aui textarea{
 	max-width: 336px;
 }
@@ -354,7 +359,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 					<div class='col-xs-12'>
 						<div id="slide_status" class="span12" style="z-index: 9000;">
-							<div id="btnCloseSlide">×</div>
+							<div id="btnCloseSlide"><i class='fa fa-times'></i></div>
 							<div id="slide_status_area"></div>
 						</div>
 					</div>
@@ -516,7 +521,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 			<div class="modal-content bounceInRight">
 				<div class="modal-header">
 					<button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
-						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only">Close</span>
 					</button>
 					<!-- <i class="fa fa-laptop modal-icon"></i> -->
 					<h4 class="modal-title" id="">Copy</h4>
@@ -580,7 +585,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
     <div class="modal-dialog">
     <div class="modal-content  bounceInRight">
             <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button" style="padding-top:5px"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <button data-dismiss="modal" class="close" type="button" style="padding-top:5px"><span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only">Close</span></button>
                 <!-- <i class="fa fa-laptop modal-icon"></i> -->
                 <h4 class="modal-title" id="modalTitleRole">ADD Common Data Set</h4>
                 <!-- 
@@ -689,7 +694,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 			<div class="modal-content  bounceInRight">
 				<div class="modal-header">
 					<button data-dismiss="modal" class="close" type="button" style="padding-top:3px">
-						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only">Close</span>
 					</button>
 					<h5 class="modal-title">Confirm Dialog</h5>
 				</div>

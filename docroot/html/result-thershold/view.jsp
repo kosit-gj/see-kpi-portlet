@@ -77,9 +77,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
     <div class="modal-dialog">
     <div class="modal-content  bounceInRight">
             <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button" style="padding-top:5px"><span aria-hidden="true">x</span><span class="sr-only"></span></button>
+                <button data-dismiss="modal" class="close" type="button" style="padding-top:5px"><span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span></button>
                 <!-- <i class="fa fa-laptop modal-icon"></i> -->
-                <h4 class="modal-title" id="modalTitleRole">Threshold Group</h4>
+                <h4 class="modal-title" id="modalTitleRole">Result Threshold Group</h4>
                 <!-- 
                 <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
                  -->
@@ -148,9 +148,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
     <div class="modal-dialog">
     <div class="modal-content  bounceInRight">
             <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button" style="padding-top:5px"><span aria-hidden="true">x</span><span class="sr-only"></span></button>
+                <button data-dismiss="modal" class="close" type="button" style="padding-top:5px"><span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span></button>
                 <!-- <i class="fa fa-laptop modal-icon"></i> -->
-                <h4 class="modal-title" id="modalTitleRole">Threshold Group</h4>
+                <h4 class="modal-title" id="modalTitleRole">Result Threshold Group</h4>
                 <!-- 
                 <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
                  -->
@@ -207,9 +207,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 			<div class="modal-content  bounceInRight">
 				<div class="modal-header">
 					<button data-dismiss="modal" class="close" type="button" style="padding-top:3px">
-						<span aria-hidden="true">x</span><span class="sr-only"></span>
+						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span>
 					</button>
-					<h4 class="modal-title">Threshold Group</h4>
+					<h4 class="modal-title">Result Threshold Group</h4>
 				</div>
 				<div class="modal-body">
 					<!-- content start -->

@@ -234,7 +234,7 @@ $(document).ready(function(){
         	 					"initValue":"All"
         	 					}],
     	    			
-    			 "formDetail":{"formSize":"modal-dialog","formName":"Threshould","id":"databaseConnection","pk_id":"result_threshold_id"},       
+    			 "formDetail":{"formSize":"modal-dialog","formName":"Result Threshold","id":"resultThreshold","pk_id":"result_threshold_id"},       
     			 "serviceName":[restfulURL+"/see_api/public/result_threshold"],
     			 "tokenID":tokenID,
     			 "pagignation":false,
