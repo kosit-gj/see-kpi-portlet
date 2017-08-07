@@ -29,7 +29,7 @@
     					   "id":"structure_name","width":"250px","required":true,
     					   },
     					   {
-    	    					"label":"#Target Score","inputType":"text","placeholder":"Target Score",
+    	    					"label":"#Target Score","inputType":"text","placeholder":"Target Score","default":"0",
     	    					"id":"nof_target_score","width":"250px","dataTypeInput":"number","required":true,
     					   },
     					   {
