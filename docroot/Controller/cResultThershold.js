@@ -230,7 +230,8 @@ $(document).ready(function(){
     	    			"advanceSearch":[{
         	 					"label":"Group","inputType":"dropdown",
         	 					"id":"result_threshold_group_id","width":"100%",
-        	 					"url":""+restfulURL+"/see_api/public/result_threshold/group"
+        	 					"url":""+restfulURL+"/see_api/public/result_threshold/group",
+        	 					"initValue":"All"
         	 					}],
     	    			
     			 "formDetail":{"formSize":"modal-dialog","formName":"Threshould","id":"databaseConnection","pk_id":"result_threshold_id"},       
@@ -254,16 +255,17 @@ $(document).ready(function(){
 				//console.log(gobalDataGroup['Modal']);
 				var change = false;
 				if(gobalDataGroup['Modal'] == "off"){
-					console.log(gobalDataGroup['data_new']);
-					console.log(gobalDataGroup['data_old']);
-					console.log("----------------------------------------------");
 			 		$.each(gobalDataGroup['data_new'],function(index,indexEntry){
 			 			
 			 			if(indexEntry != gobalDataGroup['data_old'][index]){
 			 				change = true;
 			 			}
 			 		});
+			 		if(gobalDataGroup['data_new'].length != gobalDataGroup['data_old'].length){
+		 				change = true;
+		 			}
 					}
+				
 				if(change == true){createDataTableFn(options);}
 			}
 

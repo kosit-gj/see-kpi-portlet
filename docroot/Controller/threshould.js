@@ -277,7 +277,11 @@ $(document).ready(function(){
 			 				change = true;
 			 			}
 			 		});
+			 		if(gobalDataGroup['data_new'].length != gobalDataGroup['data_old'].length){
+		 				change = true;
+		 			}
 					}
+				
 				if(change == true){createDataTableFn(options);}
 			}
 
