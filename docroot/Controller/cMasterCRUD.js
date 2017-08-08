@@ -642,6 +642,27 @@ var createBtnAdvanceSearchOptionFn = function(object){
  	
  	return AdvanceSearchOption;
 }
+var createBtnAdvanceDownloadOptionFn = function(object){
+	
+	var AdvanceDownloadOption="";
+ 	AdvanceDownloadOption+="<form id='formExportToExcel' action='' method='post' class='' style='display: inline-flex; margin-bottom: 5px; position: relative; top: -1px;'>";
+	AdvanceDownloadOption+="	<button id='exportToExcel' class='btn btn-warning btn-sm' type='submit'>";
+	AdvanceDownloadOption+="		<i class='fa fa-download'></i> Download";
+	AdvanceDownloadOption+="	</button>";
+	AdvanceDownloadOption+="</form>";
+ 	return AdvanceDownloadOption;
+}
+var createBtnAdvanceImportOptionFn = function(object){
+	
+	var AdvanceImportOption="";
+	//AdvanceImportOption+="	<div class=\"input-group\" >";
+	//AdvanceImportOption+="     	<div id=\"btnSearchArea\">";
+	AdvanceImportOption+="    		<button style=\"margin-bottom: 5px;\"  type=\"button\" class=\"btn btn-success input-sm\" name=\""+object['id']+"\" id=\""+object['id']+"\">"+object['name']+"</button>";
+	//AdvanceImportOption+="     	</div>";
+	//AdvanceImportOption+=" 	</div>";
+ 	
+ 	return AdvanceImportOption;
+}
 var createAvanceSearchFn = function(options){
 	var avanceSearchHTML="";
 	$.each(options['advanceSearch'],function(index,indexEntry){
@@ -718,12 +739,18 @@ var createDataTableFn = function(options){
 			if(expressSearch==true){
 				$("#expressSearchArea").html(createExpressSearchFn());
 			}
-			$("#btnAddData").html(options['formDetail']['formName']);
+			if(options['btnAddOption'] == false && options['btnAddOption']!=undefined){
+				$("#btnAdd").css({"display":"none"});
+			}else{
+				$("#btnAddData").html(options['formDetail']['formName']);
+				$("#btnAdd").attr("data-target","#modal-"+options['formDetail']['id']);
+			}
 			$("#titilePage").html(options['formDetail']['formName']);
 			$("#titlePanel").html(options['formDetail']['formName']+" List");
-			//data-target="#modal-databaseConnection"
-			$("#btnAdd").attr("data-target","#modal-"+options['formDetail']['id']);
-	
+			//data-target="#modal-databaseConnection"  btnAddOption
+			
+			
+			
 			var tableHTML="";
 			var styleCss ="text-align: right;";
 			var styleCssCenter ="text-align:center;";
@@ -776,6 +803,88 @@ var createDataTableFn = function(options){
 				
 				if(options['btnAdvanceSearchOption']!=undefined){
 					$("#btnAdvanceSearchOption").html(createBtnAdvanceSearchOptionFn(options['btnAdvanceSearchOption']));
+				}
+				if(options['btnAdvanceDownloadOption']!=undefined){
+					$("#btnAdvanceDownloadOption").html(createBtnAdvanceDownloadOptionFn());
+					$("#exportToExcel").click(function(){
+						$("form#formExportToExcel").attr("action",options['btnAdvanceDownloadOption']['url']);
+					});
+				}
+				if(options['btnAdvanceImportOption']!=undefined){
+					$("#btnAdvanceImportOption").html(createBtnAdvanceImportOptionFn(options['btnAdvanceImportOption']));
+					
+					//################################################
+					//FILE IMPORT START
+					$("#btn_import").click(function () {
+						$('#file').val("");
+						$(".btnModalClose").click();
+						$(".dropify-clear").click(); 
+					});
+					// Variable to store your files
+					var files;
+					// Add events
+					$('#file').on('change', prepareUpload2);
+
+					// Grab the files and set them to our variable
+					function prepareUpload2(event)
+					{
+					  files = event.target.files;
+					}
+					$('form#fileImportOrganization').on('submit', uploadFiles);
+
+					// Catch the form submit and upload the files
+					function uploadFiles(event)
+					{
+						
+						event.stopPropagation(); // Stop stuff happening
+						event.preventDefault(); // Totally stop stuff happening
+
+						// START A LOADING SPINNER HERE
+
+						// Create a formdata object and add the files
+						var data = new FormData();
+						$.each(files, function(key, value)
+						{
+							data.append(key, value);
+						});
+						$("body").mLoading();
+						$.ajax({
+							url:restfulURL+restfulPathOrganization+"/import",
+							type: 'POST',
+							data: data,
+							cache: false,
+							dataType: 'json',
+							processData: false, // Don't process the files
+							contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+							headers:{Authorization:"Bearer "+tokenID.token},
+							success: function(data, textStatus, jqXHR)
+							{
+								
+								console.log(data);
+								if(data['status']==200 && data['errors'].length==0){
+											
+									callFlashSlide("Import Organization Successfully");
+									getDataFn();
+									$("body").mLoading('hide');
+									$('#ModalImport').modal('hide');
+									
+								}else{
+									listErrorFn(data['errors']);
+									getDataFn();
+									$("body").mLoading('hide');
+								}
+							},
+							error: function(jqXHR, textStatus, errorThrown)
+							{
+								// Handle errors here
+								callFlashSlide('Format Error : ' + textStatus);
+								// STOP LOADING SPINNER
+							}
+						});
+						return false;
+					}
+					//################################################
+					
 				}
 				$("#advanceSearchArea").show();
 			

@@ -93,6 +93,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
     margin-top: 4px !important;
     padding-top: 5px !important;
 }
+.aui #appraisal_data_list_content{
+	display:none;
+}
 .aui #file{
 	width: 100%;
 	height: 100%;
@@ -330,7 +333,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 
 
-		<div class="row-fluid" >
+		<div class="row-fluid app_url_hidden" >
 					<!-- start--row-fluid -->
 
 					<div class="col-lg-12">

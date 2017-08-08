@@ -45,7 +45,7 @@ var getDataFn = function(page,rpp){
 			galbalDataSystemcon=data;
 	
 			//setThemeColorFn(data["theme_color"]);
-			var htmlTheamColor = "<button class=\"jscolor {valueElement:null,value:'"+data["theme_color"]+"',valueElement:'themeColor',onFineChange:'setThemeColorFn(this)'} \" style='width:50px; height:20px;'></button>";
+			var htmlTheamColor = "<button class=\"btn jscolor {valueElement:null,value:'"+data["theme_color"]+"',valueElement:'themeColor',onFineChange:'setThemeColorFn(this)'} \" style='width:70px; height:26px;'></button>";
 			$("#current_appraisal_year").val(data["current_appraisal_year"]);
 			$("#drop_down_list_month").html(dropDownListMonth(data["period_start_month_id"]));
 			$("#appraisalFrequency").val(data["appraisal_frequency_id"]);
