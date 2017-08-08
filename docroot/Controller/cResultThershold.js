@@ -202,7 +202,7 @@ $(document).ready(function(){
     	//alert(createTableFn());
     	var options={
     			"colunms":[
-    						{"colunmsDisplayName":"Group","width":"25%","id":"result_threshold_group_name","colunmsType":"text"},
+    						{"colunmsDisplayName":"Result Threshold Group","width":"25%","id":"result_threshold_group_name","colunmsType":"text"},
     			           {"colunmsDisplayName":"Begin Threshold","width":"20%","id":"begin_threshold","colunmsType":"text","colunmsDataType":"decimal"},
     			           {"colunmsDisplayName":"End Threshold","width":"20%","id":"end_threshold","colunmsType":"text","colunmsDataType":"decimal"},
     			           {"colunmsDisplayName":"Color","width":"15%","id":"color_code","colunmsType":"color"},
@@ -221,7 +221,7 @@ $(document).ready(function(){
         	    			"id":"result_threshold_group_id","width":"200px","url":""+restfulURL+"/see_api/public/result_threshold/group"
         	    			},
         	    			{
-        	    			"label":"Color","inputType":"color","default":"All",
+        	    			"label":"Color","inputType":"color",
         	    			"id":"color_code","width":"70px","height":"27px","dataTypeInput":"color"
         	    			},
     	    					
@@ -240,7 +240,7 @@ $(document).ready(function(){
     			 "pagignation":false,
     			 "expressSearch":false,
     			 "advanceSearchSet":true,
-    			 "btnAdvanceSearchOption":{"id":"btnCreateGroup","name":"<i class=\"fa fa-plus-square\"></i>&nbsp;Add Threshould Group"}
+    			 "btnAdvanceSearchOption":{"id":"btnCreateGroup","name":"<i class=\"fa fa-plus-square\"></i>&nbsp;Add Group"}
     	}
     	//console.log(options['tokenID'].token);
     	createDataTableFn(options);

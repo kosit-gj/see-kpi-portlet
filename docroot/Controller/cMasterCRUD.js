@@ -82,6 +82,23 @@ function validateNumber(event) {
         return true;
     }
 };
+var validateFileFn = function(data){
+	var validateFile="";
+
+	$.each(data,function(index,indexEntry){
+		if(indexEntry[Object.keys(indexEntry)[0]]!= undefined || indexEntry[Object.keys(indexEntry)[0]]==null){
+			if(indexEntry[Object.keys(indexEntry)[0]]== null){//The employee code field is null
+				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Org code : null <i class='fa fa-level-down'></i><br>";
+			}else{
+				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Org code : "+data[index]['org_code']+" <i class='fa fa-level-down'></i><br>";}
+			}
+	     $.each(indexEntry['errors'],function(index2,indexEntry2){
+	    	 validateFile+="<font color='red'>&emsp;*</font> "+indexEntry2+"<br>";
+	     });
+	 
+	});
+	callFlashSlideInModal(validateFile,"#informationFile","error");
+}
 var searchMultiFn=function(search,searchName){
 	var paramSearchName="";
 	 if(searchName==undefined){
@@ -654,13 +671,42 @@ var createBtnAdvanceDownloadOptionFn = function(object){
 }
 var createBtnAdvanceImportOptionFn = function(object){
 	
+	var formHTML="";
+	formHTML+="<form id='"+options['id']+"' name='"+options['id']+"'>";
+	formHTML+="<div aria-hidden=\"true\" role=\"dialog\" tabindex=\"-1\" id=\"modal-"+options['id']+"\" class=\"modal inmodal\" style=\"display: none;\">";
+	formHTML+="<div class=\"modal-dialog\">";
+	formHTML+="<div class=\"modal-content  bounceInRight\">";
+	formHTML+="        <div class=\"modal-header\">";
+	formHTML+="            <button style=\" \" data-dismiss=\"modal\" class=\"close\" type=\"button\"><span aria-hidden=\"true\"><i class='fa fa-times'></i></span><span class=\"sr-only\" style=\"display: none;\">Close</span></button>";
+	formHTML+="            <h4 class=\"modal-title\" id=\"\">"+options['formName']+"</h4>";
+	formHTML+="        </div>";
+	formHTML+="        <div class=\"modal-body\">";
+
+	
+ 	formHTML+="        		<div class='form-group'>";
+	formHTML+="        			<form id='fileImport'>";
+	formHTML+="   		     		<h4>FILE IMPORT</h4>";
+	formHTML+="   		     		<div class='fileUpload'>";
+	formHTML+="   			     		<input type='file' id='file' class='dropify' accept='"+options['accept']+"' /><span></span>";
+	formHTML+="   		     		</div>";
+	formHTML+="   		     	</form>";
+	formHTML+="        		<div>";
+				 
+
+
+	formHTML+="        </div>";
+	formHTML+="        <div class=\"modal-footer\">";
+	formHTML+="				<button class=\"btn btn-success\" type=\"button\" id=\"btnImport\" form=\"fileImport\">Import</button>";
+	formHTML+="            <button data-dismiss=\"modal\" class=\"btn btn-danger btnCancle\" type=\"button\">Cancel</button>";
+	formHTML+="            <div class=\"alert alert-warning information\" id=\"informationFile\" style=\"display: none;\"></div>";
+	formHTML+="        </div>";
+	formHTML+="    </div>";
+	formHTML+="</div>";
+	formHTML+="</div>";   
+	formHTML+="</form>"; 
+	$("#modalFormArea").append(formHTML);
 	var AdvanceImportOption="";
-	//AdvanceImportOption+="	<div class=\"input-group\" >";
-	//AdvanceImportOption+="     	<div id=\"btnSearchArea\">";
-	AdvanceImportOption+="    		<button style=\"margin-bottom: 5px;\"  type=\"button\" class=\"btn btn-success input-sm\" name=\""+object['id']+"\" id=\""+object['id']+"\">"+object['name']+"</button>";
-	//AdvanceImportOption+="     	</div>";
-	//AdvanceImportOption+=" 	</div>";
- 	
+	AdvanceImportOption+="    		<button style=\"margin-bottom: 5px;\"  type=\"button\" class=\"btn btn-success input-sm\" name=\"btn_import\" id=\"btn_import\"><i class='fa fa-upload'></i>&nbsp;Import</button>";
  	return AdvanceImportOption;
 }
 var createAvanceSearchFn = function(options){
@@ -799,100 +845,126 @@ var createDataTableFn = function(options){
 			if(advanceSearchSet==true){
 				
 				$("#advanceSearchParamArea").html(createAvanceSearchFn(options));
-				
-				
-				if(options['btnAdvanceSearchOption']!=undefined){
-					$("#btnAdvanceSearchOption").html(createBtnAdvanceSearchOptionFn(options['btnAdvanceSearchOption']));
-				}
-				if(options['btnAdvanceDownloadOption']!=undefined){
-					$("#btnAdvanceDownloadOption").html(createBtnAdvanceDownloadOptionFn());
-					$("#exportToExcel").click(function(){
-						$("form#formExportToExcel").attr("action",options['btnAdvanceDownloadOption']['url']);
-					});
-				}
-				if(options['btnAdvanceImportOption']!=undefined){
-					$("#btnAdvanceImportOption").html(createBtnAdvanceImportOptionFn(options['btnAdvanceImportOption']));
-					
-					//################################################
-					//FILE IMPORT START
-					$("#btn_import").click(function () {
-						$('#file').val("");
-						$(".btnModalClose").click();
-						$(".dropify-clear").click(); 
-					});
-					// Variable to store your files
-					var files;
-					// Add events
-					$('#file').on('change', prepareUpload2);
-
-					// Grab the files and set them to our variable
-					function prepareUpload2(event)
-					{
-					  files = event.target.files;
-					}
-					$('form#fileImportOrganization').on('submit', uploadFiles);
-
-					// Catch the form submit and upload the files
-					function uploadFiles(event)
-					{
-						
-						event.stopPropagation(); // Stop stuff happening
-						event.preventDefault(); // Totally stop stuff happening
-
-						// START A LOADING SPINNER HERE
-
-						// Create a formdata object and add the files
-						var data = new FormData();
-						$.each(files, function(key, value)
-						{
-							data.append(key, value);
-						});
-						$("body").mLoading();
-						$.ajax({
-							url:restfulURL+restfulPathOrganization+"/import",
-							type: 'POST',
-							data: data,
-							cache: false,
-							dataType: 'json',
-							processData: false, // Don't process the files
-							contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-							headers:{Authorization:"Bearer "+tokenID.token},
-							success: function(data, textStatus, jqXHR)
-							{
-								
-								console.log(data);
-								if(data['status']==200 && data['errors'].length==0){
-											
-									callFlashSlide("Import Organization Successfully");
-									getDataFn();
-									$("body").mLoading('hide');
-									$('#ModalImport').modal('hide');
-									
-								}else{
-									listErrorFn(data['errors']);
-									getDataFn();
-									$("body").mLoading('hide');
-								}
-							},
-							error: function(jqXHR, textStatus, errorThrown)
-							{
-								// Handle errors here
-								callFlashSlide('Format Error : ' + textStatus);
-								// STOP LOADING SPINNER
-							}
-						});
-						return false;
-					}
-					//################################################
-					
-				}
 				$("#advanceSearchArea").show();
 			
 			}else{
 				$("#advanceSearchArea").hide();
 			}
 		
-			
+			if(options['btnAdvanceSearchOption']!=undefined){
+				$("#btnAdvanceSearchOption").html(createBtnAdvanceSearchOptionFn(options['btnAdvanceSearchOption']));
+			}
+			if(options['btnAdvanceDownloadOption']!=undefined){
+				$("#btnAdvanceDownloadOption").html(createBtnAdvanceDownloadOptionFn());
+				$("#exportToExcel").click(function(){
+					$("form#formExportToExcel").attr("action",options['btnAdvanceDownloadOption']['url']);
+				});
+			}
+			if(options['btnAdvanceImportOption']!=undefined){
+				$("#btnAdvanceImportOption").html(createBtnAdvanceImportOptionFn(options['btnAdvanceImportOption']));
+				$("#btn_import").attr("data-target","#modal-"+options['btnAdvanceImportOption']['id']);
+				//################################################
+				//FILE IMPORT START
+				$("#btn_import").click(function () {
+					$('#file').val("");
+					$(".btnModalClose").click();
+					$(".dropify-clear").click(); 
+				});
+				// Variable to store your files
+				var files;
+				// Add events
+				$('#file').on('change', prepareUpload2);
+
+				// Grab the files and set them to our variable
+				function prepareUpload2(event)
+				{
+				  files = event.target.files;
+				}
+				$('form#fileImport').on('submit', uploadFiles);
+
+				// Catch the form submit and upload the files
+				function uploadFiles(event)
+				{
+					
+					event.stopPropagation(); // Stop stuff happening
+					event.preventDefault(); // Totally stop stuff happening
+
+					// START A LOADING SPINNER HERE
+
+					// Create a formdata object and add the files
+					var data = new FormData();
+					$.each(files, function(key, value)
+					{
+						data.append(key, value);
+					});
+					$("body").mLoading();
+					$.ajax({
+						url:options['serviceName']+"/import",
+						type: 'POST',
+						data: data,
+						cache: false,
+						dataType: 'json',
+						processData: false, // Don't process the files
+						contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+						headers:{Authorization:"Bearer "+tokenID.token},
+						success: function(data, textStatus, jqXHR)
+						{
+							
+							console.log(data);
+							if(data['status']==200 && data['errors'].length==0){
+										
+								callFlashSlide("Import "+options['btnAdvanceImportOption']['formName']+" Successfully");
+								getDataFn($("#pageNumber").val(),$("#rpp").val(),options,dataSearch);
+								$("body").mLoading('hide');
+								$("#modal-"+options['btnAdvanceImportOption']['id']).modal('hide');
+								
+							}else{
+								validateFileFn(data['errors']);
+								getDataFn($("#pageNumber").val(),$("#rpp").val(),options,dataSearch);
+								$("body").mLoading('hide');
+							}
+						},
+						error: function(jqXHR, textStatus, errorThrown)
+						{
+							// Handle errors here
+							callFlashSlide('Format Error : ' + textStatus);
+							// STOP LOADING SPINNER
+						}
+					});
+					return false;
+				}
+				$.when($.getStylesheet($("#url_portlet").val()+"/css/dropify.css"), $.getScript($("#url_portlet").val()+"/js/dropify.js")).then(function () {
+					// Used events
+				     var drEvent = $('#input-file-events').dropify();
+
+				     drEvent.on('dropify.beforeClear', function(event, element){
+				         return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+				     });
+
+				     drEvent.on('dropify.afterClear', function(event, element){
+				         alert('File deleted');
+				     });
+
+				     drEvent.on('dropify.errors', function(event, element){
+				         console.log('Has Errors');
+				     });
+
+				     var drDestroy = $('#input-file-to-destroy').dropify();
+				     drDestroy = drDestroy.data('dropify');
+				     $('#toggleDropify').on('click', function(e){
+				         e.preventDefault();
+				         if (drDestroy.isDropified()) {
+				             drDestroy.destroy();
+				         } else {
+				             drDestroy.init();
+				         }
+				     });
+				}, function () {
+				  console.log('an error occurred somewhere dropify');
+				});
+				//################################################
+				
+			}
 			var getSelectionStart = function (o) {
 				if (o.createTextRange) {
 					var r = document.selection.createRange().duplicate()
