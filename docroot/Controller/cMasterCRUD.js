@@ -82,6 +82,23 @@ function validateNumber(event) {
         return true;
     }
 };
+var validateFileFn = function(data){
+	var validateFile="";
+
+	$.each(data,function(index,indexEntry){
+		if(indexEntry[Object.keys(indexEntry)[0]]!= undefined || indexEntry[Object.keys(indexEntry)[0]]==null){
+			if(indexEntry[Object.keys(indexEntry)[0]]== null){//The employee code field is null
+				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+Object.keys(indexEntry)[0]+" : null <i class='fa fa-level-down'></i><br>";
+			}else{
+				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+Object.keys(indexEntry)[0]+": "+indexEntry+" <i class='fa fa-level-down'></i><br>";}
+			}
+	     $.each(indexEntry['errors'],function(index2,indexEntry2){
+	    	 validateFile+="<font color='red'>&emsp;*</font> "+indexEntry2+"<br>";
+	     });
+	 
+	});
+	callFlashSlideInModal(validateFile,"#informationFile","error");
+}
 var searchMultiFn=function(search,searchName){
 	var paramSearchName="";
 	 if(searchName==undefined){
@@ -229,6 +246,35 @@ var mapObjectToFormFn  =function(data,options){
 		if(indexEntry['inputType']=="text" || indexEntry['inputType']=="date"){
 			$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).val(data[indexEntry['id']]);
 		}else if(indexEntry['inputType']=="dropdown" || indexEntry['inputType']=="cascades" ){
+			if(indexEntry['updateList']== true && indexEntry['updateList']!=undefined){
+				$.ajax({
+					url:indexEntry['url'],
+					dataType:"json",
+					type:"get",
+					async:false,
+					headers:{Authorization:"Bearer "+tokenID.token},
+					success:function(data){
+						var inputType ="";
+						//initValue
+						if(indexEntry['initValue']!=undefined){
+							inputType+="<option value=''>"+indexEntry['initValue']+"</option>";
+						}
+						golbalDataCascades[indexEntry['id']] = data;
+						
+						$.each(data,function(index2,indexEntry2){
+
+							if(dataSearch==indexEntry2[Object.keys(indexEntry2)[0]]){
+								
+								inputType+="<option selected value="+indexEntry2[Object.keys(indexEntry2)[0]]+">"+indexEntry2[Object.keys(indexEntry2)[1]]+"</option>";
+							}else{
+								inputType+="<option value="+indexEntry2[Object.keys(indexEntry2)[0]]+">"+indexEntry2[Object.keys(indexEntry2)[1]]+"</option>";
+							}
+						});
+						$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).html(inputType);
+						//alert(inputType);
+					}
+				})
+			}
 			$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).val(data[indexEntry['id']]).change();
 			//alert("form#"+options['formDetail']['id']+" > #"+indexEntry['id']);
 			//alert(data[indexEntry['id']]);
@@ -642,6 +688,32 @@ var createBtnAdvanceSearchOptionFn = function(object){
  	
  	return AdvanceSearchOption;
 }
+var createBtnAdvanceDownloadOptionFn = function(object){
+	
+	var AdvanceDownloadOption="";
+ 	AdvanceDownloadOption+="<form id='formExportToExcel' action='' method='post' class='' style='display: inline-flex; margin-bottom: 5px; position: relative; top: -1px;'>";
+	AdvanceDownloadOption+="	<button id='exportToExcel' class='btn btn-warning btn-sm' type='submit'>";
+	AdvanceDownloadOption+="		<i class='fa fa-download'></i> Download";
+	AdvanceDownloadOption+="	</button>";
+	AdvanceDownloadOption+="</form>";
+ 	return AdvanceDownloadOption;
+}
+var createBtnAdvanceImportOptionFn = function(object){
+	
+	
+	if(object['formName'] != undefined){
+		$("#modal-import #modalTitleFile").html(object['formName']);
+	}else{
+		$("#modal-import #modalTitleFile").html("Import Option['formName']");
+	}
+	if(object['accept'] != undefined){
+		$("#modal-import #file").attr('accept',object['accept']);
+	}
+	
+	var AdvanceImportOption="";
+	AdvanceImportOption+="    		<button style=\"margin-bottom: 5px;\"  type=\"button\" class=\"btn btn-success input-sm\" name=\"btn_import\" id=\"btn_import\" data-target='#modal-import' data-toggle='modal'><i class='fa fa-upload'></i>&nbsp;Import</button>";
+ 	return AdvanceImportOption;
+}
 var createAvanceSearchFn = function(options){
 	var avanceSearchHTML="";
 	$.each(options['advanceSearch'],function(index,indexEntry){
@@ -718,12 +790,18 @@ var createDataTableFn = function(options){
 			if(expressSearch==true){
 				$("#expressSearchArea").html(createExpressSearchFn());
 			}
-			$("#btnAddData").html(options['formDetail']['formName']);
+			if(options['btnAddOption'] == false && options['btnAddOption']!=undefined){
+				$("#btnAdd").css({"display":"none"});
+			}else{
+				$("#btnAddData").html(options['formDetail']['formName']);
+				$("#btnAdd").attr("data-target","#modal-"+options['formDetail']['id']);
+			}
 			$("#titilePage").html(options['formDetail']['formName']);
 			$("#titlePanel").html(options['formDetail']['formName']+" List");
-			//data-target="#modal-databaseConnection"
-			$("#btnAdd").attr("data-target","#modal-"+options['formDetail']['id']);
-	
+			//data-target="#modal-databaseConnection"  btnAddOption
+			
+			
+			
 			var tableHTML="";
 			var styleCss ="text-align: right;";
 			var styleCssCenter ="text-align:center;";
@@ -772,18 +850,141 @@ var createDataTableFn = function(options){
 			if(advanceSearchSet==true){
 				
 				$("#advanceSearchParamArea").html(createAvanceSearchFn(options));
-				
-				
-				if(options['btnAdvanceSearchOption']!=undefined){
-					$("#btnAdvanceSearchOption").html(createBtnAdvanceSearchOptionFn(options['btnAdvanceSearchOption']));
-				}
 				$("#advanceSearchArea").show();
 			
 			}else{
 				$("#advanceSearchArea").hide();
 			}
 		
-			
+			if(options['btnAdvanceSearchOption']!=undefined){
+				$("#btnAdvanceSearchOption").html(createBtnAdvanceSearchOptionFn(options['btnAdvanceSearchOption']));
+			}
+			if(options['btnAdvanceDownloadOption']!=undefined){
+				$("#btnAdvanceDownloadOption").html(createBtnAdvanceDownloadOptionFn());
+				$("#exportToExcel").click(function(){
+					$("form#formExportToExcel").attr("action",options['btnAdvanceDownloadOption']['url']);
+				});
+			}
+			if(options['btnAdvanceImportOption']!=undefined){
+				$("#btnAdvanceImportOption").html(createBtnAdvanceImportOptionFn(options['btnAdvanceImportOption']));
+				//################################################
+				//FILE IMPORT START
+				
+				$.getScript($("#url_portlet").val()+"/js/dropify.js", function(){
+					
+					// Basic
+				     $('.dropify').dropify();
+
+				     // Translated
+				      $('.dropify-fr').dropify({
+				         messages: {
+				         	 'default': 'Glissez-dposez un fichier ici ou cliquez',
+				             replace: 'Glissez-dposez un fichier ou cliquez pour remplacer',
+				             remove:  'Supprimer',
+				             error:   'Dsol, le fichier trop volumineux'
+				         }
+				     });
+					// Used events
+				     var drEvent = $('#input-file-events').dropify();
+
+				     drEvent.on('dropify.beforeClear', function(event, element){
+				         return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+				     });
+
+				     drEvent.on('dropify.afterClear', function(event, element){
+				         alert('File deleted');
+				     });
+
+				     drEvent.on('dropify.errors', function(event, element){
+				         console.log('Has Errors');
+				     });
+
+				     var drDestroy = $('#input-file-to-destroy').dropify();
+				     drDestroy = drDestroy.data('dropify');
+				     $('#toggleDropify').on('click', function(e){
+				         e.preventDefault();
+				         if (drDestroy.isDropified()) {
+				             drDestroy.destroy();
+				         } else {
+				             drDestroy.init();
+				         }
+				     });
+
+				});
+				
+				$("#btn_import").click(function () {
+					$('#modal-import #file').val("");
+					$(".btnModalClose").click();
+					$(".dropify-clear").click(); 
+				});
+				// Variable to store your files
+				var files;
+				// Add events
+				$('#file').on('change', prepareUpload2);
+
+				// Grab the files and set them to our variable
+				function prepareUpload2(event)
+				{
+				  files = event.target.files;
+				}
+				$('form#fileImport').on('submit', uploadFiles);
+
+				// Catch the form submit and upload the files
+				function uploadFiles(event)
+				{
+					
+					event.stopPropagation(); // Stop stuff happening
+					event.preventDefault(); // Totally stop stuff happening
+
+					// START A LOADING SPINNER HERE
+
+					// Create a formdata object and add the files
+					var data = new FormData();
+					$.each(files, function(key, value)
+					{
+						data.append(key, value);
+					});
+					$("body").mLoading();
+					$.ajax({
+						url:options['serviceName']+"/import",
+						type: 'POST',
+						data: data,
+						cache: false,
+						dataType: 'json',
+						processData: false, // Don't process the files
+						contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+						headers:{Authorization:"Bearer "+tokenID.token},
+						success: function(data, textStatus, jqXHR)
+						{
+							
+							console.log(data);
+							if(data['status']==200 && data['errors'].length==0){
+										
+								callFlashSlide(""+options['btnAdvanceImportOption']['formName']+" Successfully");
+								getDataFn($("#pageNumber").val(),$("#rpp").val(),golbalDataCascades['options'],dataSearch);
+								$("body").mLoading('hide');
+								$("#modal-import").modal('hide');
+								
+							}else{
+								validateFileFn(data['errors']);
+								getDataFn($("#pageNumber").val(),$("#rpp").val(),golbalDataCascades['options'],dataSearch);
+								$("body").mLoading('hide');
+							}
+						},
+						error: function(jqXHR, textStatus, errorThrown)
+						{
+							// Handle errors here
+							callFlashSlide('Format Error : ' + textStatus);
+							// STOP LOADING SPINNER
+						}
+					});
+					return false;
+				}
+				
+				
+				//################################################
+				
+			}
 			var getSelectionStart = function (o) {
 				if (o.createTextRange) {
 					var r = document.selection.createRange().duplicate()

@@ -6,18 +6,6 @@
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
-<%
-
-String username = themeDisplay.getUser().getScreenName();
-String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWORD);
-
-%>
-<input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
-<input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
-<input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
-
-
-
 
 
 <style>
@@ -637,6 +625,14 @@ overflow-y: visible;
 }
 </style>
 
+<%
+String username = themeDisplay.getUser().getScreenName();
+String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWORD);
+%>
+<input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
+<input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
+<input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
+
 <div class="app_url_hidden" style="display: block;">
 <div class="row-fluid"><!-- start--row-fluid -->
 
@@ -709,6 +705,7 @@ overflow-y: visible;
   	margin:1px;
   	padding:5px;
   	height: 89px;
+  	background:#fff;
 	
 }
 .boxForecastArea{
@@ -743,8 +740,9 @@ overflow-y: visible;
 	border-width: 1px 1px 1px 1px;
 	border-color: #cccccc;
   	border-style: solid;
-  	margin:3px;
-  	padding:3px;
+  	padding:3.5px;
+  	background:#fff;
+  	margin: 1px 3px 3px;
 }
 .fontCenter{
 	text-align:center;
@@ -758,9 +756,10 @@ overflow-y: visible;
   	margin-bottom:3px;
   	font-size: 16px;
   	font-weight: bold;
+  	background:#fff;
 }
 .boxTargetData{
-	padding-top:15px;
+	padding-top:20px;
 }
 .aui .alert, .aui .portlet-msg-alert, .aui .portlet-msg-error, .aui .portlet-msg-help, .aui .portlet-msg-info, .aui .portlet-msg-progress, .aui .portlet-msg-success{
 	padding: 8px 8px 8px 14px;

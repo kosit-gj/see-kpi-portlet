@@ -35,6 +35,7 @@ var getDataFn = function(page,rpp) {
 			
 			
 			listDataFn(data['group']);
+			setThemeColorFn(tokenID.theme_color);
 			globalData=data;
 			//paginationSetUpFn(globalData['current_page'],globalData['last_page'],globalData['last_page']);
 			$(".result_area").show();
@@ -341,6 +342,7 @@ var searchAdvanceFn = function() {
 /*#########################  Main Function Data #######################*/
 /*#########################  Custom Function Data #######################*/
 var appraisalLevelListFn = function(nameArea,id,defaultAll){
+	alert("appraisalLevelList");
 	var level_array=[];
 	if(id!=undefined){
 		$.each(id,function(index,indexEntry){
@@ -757,7 +759,7 @@ $(document).ready(function(){
 	
 	//parameter start
 	//dropDrowDepartmentFn('','',defaultAll=true);
-	//appraisalLevelListFn();
+	appraisalLevelListFn();
 	perspectiveListFn();
 	structureListFn();
 	dropDrowkpiTypeFn();

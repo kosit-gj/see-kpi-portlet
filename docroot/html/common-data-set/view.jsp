@@ -730,5 +730,4 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 		</div>
 	</div>
 	<!-- Modal Confirm End -->
-
 		

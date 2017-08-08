@@ -661,7 +661,7 @@ overflow-y: visible;
          					
          						<div class="ibox-content breadcrumbs2">
 							<div class="row-fluid p-t-xxs">
-									<!-- 
+									
 									<div id="appraisalLevelArea" class="form-group pull-left span2"
 										style="margin-left: 5px">
 										<select data-toggle="tooltip" title="Appraisal Level"
@@ -670,7 +670,7 @@ overflow-y: visible;
 											<option value="0"></option>
 										</select>
 									</div>
-									 -->
+									 
 									 
 									 <div id="kpiTypeArea" class="form-group pull-left span2"
 										style="margin-left: 5px">

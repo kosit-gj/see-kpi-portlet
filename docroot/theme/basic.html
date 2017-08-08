@@ -91,7 +91,10 @@ margin-bottom:5px
     margin: 0 0 0px;
     padding: 0px 15px;
 }
-
+.aui #file{
+	width: 100%;
+	height: 100%;
+}
 .aui .portlet-content, .aui .portlet-minimized .portlet-content-container {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
@@ -328,6 +331,8 @@ form {
          								<div class="spen9">
 	                    					<button type="button" class="btn btn-success" id="btnAdd" data-target="#modal-databaseConnection" data-toggle="modal" ><i class="fa fa-plus-square"></i>&nbsp;Add&nbsp;<span id='btnAddData'></span></button>
 	                    					<span id='btnAdvanceSearchOption'></span>
+	                    					<span id='btnAdvanceDownloadOption'></span>
+	                    					<span id='btnAdvanceImportOption'></span>
                                      	</div>
                                      	
                                      	<div class="spen3" id="expressSearchArea">
@@ -533,6 +538,54 @@ form {
 </div>        
 -->      
 <!-- Modal End Edit -->
+
+<!-- Modal Import Organization -->
+
+<div aria-hidden="true" role="dialog" tabindex="-1" id="modal-import"
+	class="modal inmodal" style="display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content  bounceInRight">
+			<div class="modal-header">
+				<button data-dismiss="modal" class="close" type="button"
+					style="padding-top: 5px">
+					<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span>
+				</button>
+				<h4 class="modal-title" id="modalTitleFile"></h4>
+			</div>
+			<div class="modal-body">
+				<!-- content start -->
+
+			
+
+				<!-- form start -->
+
+
+				<div class="form-group">
+					<form id="fileImport">
+
+						<h4>FILE IMPORT</h4>
+						<div class="fileUpload ">
+							<input type="file" id="file" class="dropify" accept="" style="width:100%;height:100%;"/><span></span>
+						</div>
+					</form>
+
+					<!-- start table -->
+				</div>
+				<!-- form End -->
+				<!-- content end -->
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-success" type="submit"
+					id="btnFileImport" form="fileImport">Import</button>
+				<button data-dismiss="modal" class="btn btn-danger btnCancle"
+					type="button">Cancel</button>
+				<div class="alert alert-warning information" id="informationFile" style="display: none;"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal Import Organization -->
+
 <!-- Modal Confirm Start -->
 <div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal" class="modal inmodal in" style="display: none;z-index:1310;">
     <div class="modal-dialog">

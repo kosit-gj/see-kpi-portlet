@@ -873,6 +873,6 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 <input type="hidden" name="id" id="id" value="">
 <input type="hidden" name="action" id="action" value="add">
 
-	<!-- Mainly scripts -->
-
+<!-- Mainly scripts -->
 <!-- <script type="text/javascript">var jQuery_1_1_3 = $.noConflict(true);</script> -->
+
