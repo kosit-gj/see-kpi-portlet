@@ -97,6 +97,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
     margin-top: 4px !important;
     padding-top: 5px !important;
 }
+.aui #cds_result_list_content{
+	display: none;
+}
 .aui .control-label {
 	cursor: default;
 }
@@ -342,7 +345,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 	
 
-				<div class="row-fluid" class="p-t-xxs">
+				<div class="row-fluid app_url_hidden" >
 					<!-- start--row-fluid -->
 
 					<div class="col-lg-12">

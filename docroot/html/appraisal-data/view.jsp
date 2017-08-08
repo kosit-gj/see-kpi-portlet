@@ -93,6 +93,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
     margin-top: 4px !important;
     padding-top: 5px !important;
 }
+.aui #appraisal_data_list_content{
+	display:none;
+}
 .aui #file{
 	width: 100%;
 	height: 100%;
@@ -330,7 +333,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 
 
-		<div class="row-fluid" >
+		<div class="row-fluid app_url_hidden" >
 					<!-- start--row-fluid -->
 
 					<div class="col-lg-12">
@@ -371,28 +374,30 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								type="text"> <input class="form-control input-sm"
 								id="emp_name_id" name="emp_name_id" value="" type="hidden">
 						</div>
-						<div class="form-group pull-right m-b-none ">
-							<button id="btn_import" type="button" data-target="#ModalImport"
-								data-toggle="modal" class="btn btn-success btn-sm "
-								style="margin-left: 5px">
-								<i class="fa fa-upload"></i>&nbsp;Import&nbsp;&nbsp;
-							</button>
-						</div>
-						<div class="form-group pull-right m-b-none ">
-							<form id="formExportToExcel" action="" method="post"
-								class="pull-right " style="margin-bottom: 0px; margin-left: 5px">
-								<button id="exportToExcel" class="btn btn-warning btn-sm"
-									type="button">
-									<i class="fa fa-download"></i> Download
+						<div class="form-group pull-right m-b-none">
+							<div class="form-group pull-right m-b-none ">
+								<button id="btn_import" type="button" data-target="#ModalImport"
+									data-toggle="modal" class="btn btn-success btn-sm "
+									style="margin-left: 5px">
+									<i class="fa fa-upload"></i>&nbsp;Import&nbsp;&nbsp;
 								</button>
-							</form>
-						</div>
-						<div class="form-group pull-right m-b-none ">
-							<button type="button" name="btnSearchAdvance"
-								id="btnSearchAdvance" class="btn btn-info input-sm "
-								style="margin-left: 5px">
-								<i class="fa fa-search"></i>&nbsp;Search
-							</button>
+							</div>
+							<div class="form-group pull-right m-b-none ">
+								<form id="formExportToExcel" action="" method="post"
+									class="pull-right " style="margin-bottom: 0px; margin-left: 5px">
+									<button id="exportToExcel" class="btn btn-warning btn-sm"
+										type="button">
+										<i class="fa fa-download"></i> Download
+									</button>
+								</form>
+							</div>
+							<div class="form-group pull-right m-b-none ">
+								<button type="button" name="btnSearchAdvance"
+									id="btnSearchAdvance" class="btn btn-info input-sm "
+									style="margin-left: 5px">
+									<i class="fa fa-search"></i>&nbsp;Search
+								</button>
+							</div>
 						</div>
 					</div>
 							</div>

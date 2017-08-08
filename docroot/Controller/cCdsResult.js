@@ -1,11 +1,8 @@
 //Global variable
 var galbalDataCDSResult=[];
-var tempEmpName="";
-var tempEmpId="";
-var tempPosiName="";
-var tempPosiId="";
+var galbalDataTemp = [];
 var pageNumberDefault=1;
-var restfulPathCdsResult="/kpi_api/public/cds_result";
+var restfulPathCdsResult="/see_api/public/cds_result";
 
 var restfulPathDropDownYear=restfulPathCdsResult+"/year_list";
 var restfulPathDropDownMonth=restfulPathCdsResult+"/month_list";
@@ -21,8 +18,8 @@ var getDataFn = function(page,rpp){
 	var year= $("#param_year").val();
 	var month= $("#param_month").val();
 	var app_lv= $("#param_app_lv").val();
-	var position= $("#param_position_code").val();
-	var emp_name= $("#param_emp_code").val();
+	var position= $("#param_position_id").val();
+	var emp_name= $("#param_emp_id").val();
 	$.ajax({
 		url : restfulURL+restfulPathCdsResult,
 		type : "get",
@@ -30,9 +27,9 @@ var getDataFn = function(page,rpp){
 		data:{"page":page,"rpp":rpp,
 			"current_appraisal_year":year,
 			"month_id":month,
-			"appraisal_level_id":app_lv,
-			"position_code":position,
-			"emp_code":emp_name		
+			"level_id":app_lv,
+			"position_id":position,
+			"emp_id":emp_name		
 		},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,// w8 data 
@@ -57,8 +54,8 @@ var searchAdvanceFn = function (year,month,app_lv,position,emp_name) {
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_year' name='param_year' value='"+year+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_month' name='param_month' value='"+month+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' name='param_app_lv' value='"+app_lv+"'>";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_position_code' name='param_position_code' value='"+position+"'>";
-	htmlParam+="<input type='hidden' class='paramEmbed' id='param_emp_code' name='param_emp_code' value='"+emp_name+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_position_id' name='param_position_id' value='"+position+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_emp_id' name='param_emp_id' value='"+emp_name+"'>";
 	$(".paramEmbed").remove();
 	$("body").append(htmlParam);
 	//embed parameter end
@@ -72,7 +69,7 @@ var listCdsResultFn = function (data) {
 // 		+indexEntry["appraisal_level"]+indexEntry["appraisal_item"]);
 	
 		htmlTable += "<tr class='rowSearch'>";//cds_result_id
-		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_code"]+ "</td>";
+		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_id"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_level_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["cds_id"]+ "</td>";
@@ -205,7 +202,7 @@ var dropDownListAppraisalLevel = function(){
 				//galbalDqsRoleObj=data;
 			$.each(data,function(index,indexEntry){
 
-					html+="<option  value="+indexEntry["appraisal_level_id"]+">"+indexEntry["appraisal_level_name"]+"</option>";	
+					html+="<option  value="+indexEntry["level_id"]+">"+indexEntry["appraisal_level_name"]+"</option>";	
 		
 			});	
 
@@ -270,7 +267,6 @@ $(document).ready(function() {
 	$("#position_id").val("");
 	$("#emp_name_id").val("");
 	
-	$("#cds_result_list_content").hide();
 	$(".sr-only").hide();
 	$("#drop_down_list_year").html(dropDownListYear());
 	$("#drop_down_list_month").html(dropDownListMonth());
@@ -278,7 +274,7 @@ $(document).ready(function() {
 	
 	$("#countPaginationTop").val( $("#countPaginationTop option:first-child").val());
 	$("#countPaginationBottom").val( $("#countPaginationBottom option:first-child").val());
-	
+	$(".app_url_hidden").show();
 	$("#btnSearchAdvance").click(function(){
 
 	
@@ -313,7 +309,7 @@ $(document).ready(function() {
                             return {
                                 label: item.position_name,
                                 value: item.position_name,
-                                position_code : item.position_code
+                                position_id : item.position_id
                                 
                             };
                         }));
@@ -327,17 +323,17 @@ $(document).ready(function() {
         },
 		select:function(event, ui) {
 			$("#position").val(ui.item.value);
-            $("#position_id").val(ui.item.position_code);
-            tempPosiName = ui.item.label;
-            tempPosiId=ui.item.position_code;
+            $("#position_id").val(ui.item.position_id);
+            galbalDataTemp['position_name'] = ui.item.label;
+            galbalDataTemp['position_id']=ui.item.position_id;
             return false;
         },change: function(e, ui) {  
 
  
-			if ($("#position").val() == tempPosiName) {
-				$("#position_id").val(tempPosiId);
+			if ($("#position").val() == galbalDataTemp['position_name']) {
+				$("#position_id").val(galbalDataTemp['position_id']);
 			}  else if (ui.item != null){
-				$("#position_id").val(ui.item.position_code);
+				$("#position_id").val(ui.item.position_id);
 			}else {
 				$("#position_id").val("");
 			}
@@ -385,12 +381,12 @@ $(document).ready(function() {
 		select:function(event, ui) {
 			$("#emp_name").val(ui.item.value);
             $("#emp_name_id").val(ui.item.emp_code);
-            tempEmpName = ui.item.value;
-            tempEmpId=ui.item.emp_code;
+            galbalDataTemp['emp_name'] = ui.item.value;
+            galbalDataTemp['emp_id']=ui.item.emp_code;
             return false;
         },change: function(e, ui) {  
-			if ($("#emp_name").val() == tempEmpName) {
-				$("#emp_name_id").val(tempEmpId);
+			if ($("#emp_name").val() == galbalDataTemp['emp_name']) {
+				$("#emp_name_id").val(galbalDataTemp['emp_id']);
 			} else if (ui.item != null){
 				$("#emp_name_id").val(ui.item.emp_code);
 			} else {
@@ -420,9 +416,9 @@ $(document).ready(function() {
 		var param="";
 		param+="&current_appraisal_year="+paramYear;
 		param+="&month_id="+paramMonth;
-		param+="&appraisal_level_id="+paramAppLv;
-		param+="&position_code="+paramPositionCode;
-		param+="&emp_code="+paramEmpCode;
+		param+="&level_id="+paramAppLv;
+		param+="&position_id="+paramPositionCode;
+		param+="&emp_id="+paramEmpCode;
 		//alert(restfulURL+restfulPathCdsResult+"/export?token="+tokenID.token+""+param);
 		$("form#formExportToExcel").attr("action",restfulURL+restfulPathCdsResult+"/export?token="+tokenID.token+""+param);
 		$("form#formExportToExcel").submit();

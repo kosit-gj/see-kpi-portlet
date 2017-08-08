@@ -4,8 +4,9 @@ var tempAppItemName="";
 var tempAppItemId="";
 var tempEmpName="";
 var tempEmpId="";  
+var galbalDataTemp = [];
 var pageNumberDefault=1;
-var restfulPathAppData="/kpi_api/public/appraisal_data";
+var restfulPathAppData="/see_api/public/appraisal_data";
  
 var restfulPathDropDownStructure=restfulPathAppData+"/structure_list";
 var restfulPathDropDownAppraisalLevel=restfulPathAppData+"/al_list";
@@ -263,7 +264,7 @@ $(document).ready(function() {
 	 		return false;
 	 	}
 	 }
-	$("#appraisal_data_list_content").hide();
+
 	$(".sr-only").hide();
 	$("#drop_down_list_structure").html(dropDownListStructure());
 	$("#drop_down_list_appraisal_level").html(dropDownListAppraisalLevel());
@@ -277,7 +278,7 @@ $(document).ready(function() {
 	
 	$("#countPaginationTop").val( $("#countPaginationTop option:first-child").val());
 	$("#countPaginationBottom").val( $("#countPaginationBottom option:first-child").val());
-	
+	$(".app_url_hidden").show();
 	$("#btnSearchAdvance").click(function(){
 		
 		searchAdvanceFn(
@@ -375,7 +376,7 @@ $(document).ready(function() {
                             return {
                                 label: item.emp_name,
                                 value: item.emp_name,
-                                emp_code: item.emp_code
+                                emp_id: item.emp_id
                             };
                         }));
 					
@@ -388,15 +389,15 @@ $(document).ready(function() {
         },
 		select:function(event, ui) {
 			$("#emp_name").val(ui.item.value);
-            $("#emp_name_id").val(ui.item.emp_code);
-            tempEmpName = ui.item.value;
-            tempEmpId=ui.item.emp_code;
+            $("#emp_name_id").val(ui.item.emp_id);
+            galbalDataTemp['emp_name'] = ui.item.value;
+            galbalDataTemp['emp_id']=ui.item.emp_id;
             return false;
         },change: function(e, ui) {  
-			if ($("#emp_name").val() == tempEmpName) {
-				$("#emp_name_id").val(tempEmpId);
+			if ($("#emp_name").val() == galbalDataTemp['emp_name']) {
+				$("#emp_name_id").val(galbalDataTemp['emp_id']);
 			} else if (ui.item != null){
-				$("#emp_name_id").val(ui.item.emp_code);
+				$("#emp_name_id").val(ui.item.emp_id);
 			} else {
 				$("#emp_name_id").val("");
 				
