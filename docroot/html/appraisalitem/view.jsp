@@ -1097,7 +1097,7 @@ overflow-y: visible;
 		   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px;'>
 		   							<!-- content  start-->	 
 		                             	<form id="orgDeductScoreForm" action="#" method="post">
-										    <select multiple="multiple" size="10" name="organizationDeductScore[]" id='organizationDeductScore'>
+										    <select multiple="multiple" size="10" name="<portlet:namespace />organizationDeductScore[]" id='organizationDeductScore'>
 												
 										    </select>
 										  </form>
@@ -1119,7 +1119,7 @@ overflow-y: visible;
 		   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px;'>
 		   							<!-- content  start-->	 
 			                		 <form id="positionDeductScoreForm" action="#" method="post">
-									    <select multiple="multiple" size="10" name="positionDeductScore[]" id='positionDeductScore'>
+									    <select multiple="multiple" size="10" name="<portlet:namespace />positionDeductScore[]" id='positionDeductScore'>
 									     
 									    </select>
 									    
@@ -1247,7 +1247,7 @@ overflow-y: visible;
 		   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px;'>
 		   							<!-- content  start-->	 
 		                             	<form id="orgQualityForm" action="#" method="post">
-										    <select multiple="multiple" size="10" name="organizationQuality[]" id='organizationQuality'>
+										    <select multiple="multiple" size="10" name="<portlet:namespace />organizationQuality[]" id='organizationQuality'>
 												
 										    </select>
 										  </form>
@@ -1269,7 +1269,7 @@ overflow-y: visible;
 		   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px;'>
 		   							<!-- content  start-->	 
 			                		 <form id="positionQualityForm" action="#" method="post">
-									    <select multiple="multiple" size="10" name="positionQuality[]" id='positionQuality'>
+									    <select multiple="multiple" size="10" name="<portlet:namespace />positionQuality[]" id='positionQuality'>
 									     
 									    </select>
 									    
@@ -1490,7 +1490,7 @@ overflow-y: visible;
 		   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px;'>
 		   							<!-- content  start-->	 
 		                             	<form id="orgQuantityForm" action="#" method="post">
-										    <select multiple="multiple" size="10" name="organizationQuantity[]" id='organizationQuantity'>
+										    <select multiple="multiple" size="10" name="<portlet:namespace />organizationQuantity[]" id='organizationQuantity'>
 												
 										    </select>
 										  </form>
@@ -1511,7 +1511,7 @@ overflow-y: visible;
 		   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px;'>
 		   							<!-- content  start-->	 
 			                		 <form id="positionQuantityForm" action="#" method="post">
-									    <select multiple="multiple" size="10" name="positionQuantity[]" id='positionQuantity'>
+									    <select multiple="multiple" size="10" name="<portlet:namespace />positionQuantity[]" id='positionQuantity'>
 									     
 									    </select>
 									    

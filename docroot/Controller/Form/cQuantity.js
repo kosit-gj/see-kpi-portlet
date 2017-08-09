@@ -263,7 +263,7 @@ structure_name
 	$("#cdsNameSearchQuantity").val("");
 	if(action=='edit'){
 		clearQuantityFormFn();
-		appraisalLevelListFn("Quantity",data['appraisal_level'],defaultAll=false);	
+		appraisalLevelListFn("Quantity",data['appraisal_level'],defaultAll=false,multiSelect=true);	
 		
 		
 		perspectiveListFn("Quantity",data['perspective_id'],defaultAll=false);
@@ -387,7 +387,7 @@ structure_name
 	}else if(action=='add'){
 	
 		clearQuantityFormFn();
-		appraisalLevelListFn("Quantity",$("#embed_appraisal_level_id").val(),defaultAll=false);			
+		appraisalLevelListFn("Quantity",$("#embed_appraisal_level_id").val(),defaultAll=false,multiSelect=true);			
 		perspectiveListFn("Quantity",$("#embed_perspective_id").val(),defaultAll=false);
 		//dropDrowDepartmentFn("Quantity",$("#embed_department_id").val(),defaultAll=true);
 		dropDrowOrgFn("Quantity",$("#embed_org_id").val(),defaultAll=false);

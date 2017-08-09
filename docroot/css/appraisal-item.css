@@ -18,12 +18,12 @@
     
 }
 .ibox-title3 {
-	  -moz-border-bottom-colors: none;
+	-moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    background-color: #ffe57f;
-    border-color: #FFCC00;
+    /*background-color: #ffe57f;*/
+    /*border-color: #FFCC00;*/
     border-image: none;
     border-style: solid solid none;
     border-width: 3px 0 0;
@@ -110,8 +110,8 @@
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    background-color: #FFCC00;
-    border-color: #FFCC00;
+    /*background-color: #FFCC00;
+    border-color: #FFCC00;*/
     border-image: none;
     border-style: solid solid none;
     border-width: 3px 0 0;

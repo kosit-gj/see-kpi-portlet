@@ -341,8 +341,8 @@ var searchAdvanceFn = function() {
 };
 /*#########################  Main Function Data #######################*/
 /*#########################  Custom Function Data #######################*/
-var appraisalLevelListFn = function(nameArea,id,defaultAll){
-	alert("appraisalLevelList");
+var appraisalLevelListFn = function(nameArea,id,defaultAll,multiSelect){
+
 	var level_array=[];
 	if(id!=undefined){
 		$.each(id,function(index,indexEntry){
@@ -364,8 +364,11 @@ var appraisalLevelListFn = function(nameArea,id,defaultAll){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-			
-			htmlOption+="<select class=\"form-control input-sm multipleSelect span12\"   multiple=\"multiple\" id=\"appraisalLevel"+nameArea+"\">";
+			if(multiSelect==true){
+				htmlOption+="<select class=\"form-control input-sm multipleSelect span12\"   multiple=\"multiple\" id=\"appraisalLevel"+nameArea+"\">";
+			}else{
+				htmlOption+="<select class=\"form-control input-sm multipleSelect span12\"   id=\"appraisalLevel"+nameArea+"\">";	
+			}
 			if(defaultAll==false){
 				
 			}else{
@@ -381,12 +384,15 @@ var appraisalLevelListFn = function(nameArea,id,defaultAll){
 			
 			$("#appraisalLevelArea"+nameArea).html(htmlOption);
 			
+			if(multiSelect==true){
 			
-			$("#appraisalLevel"+nameArea).val(level_array);
-			 //binding multi select start
-			$("#appraisalLevel"+nameArea).multiselect({
-				 minWidth:'100%;'
-			 });
+				$("#appraisalLevel"+nameArea).val(level_array);
+				 //binding multi select start
+				$("#appraisalLevel"+nameArea).multiselect({
+					 minWidth:'100%;'
+				});
+				
+			}
 			 //select multi select end
 		}
 	});
@@ -759,7 +765,7 @@ $(document).ready(function(){
 	
 	//parameter start
 	//dropDrowDepartmentFn('','',defaultAll=true);
-	appraisalLevelListFn();
+	appraisalLevelListFn('','',defaultAll=true,multiSelect=false);
 	perspectiveListFn();
 	structureListFn();
 	dropDrowkpiTypeFn();

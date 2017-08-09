@@ -166,7 +166,7 @@ var initailDeductScoreFormFn = function(action,structureId,structureName,data){
 	*/	
 	if(action=='edit'){
 		clearDeductScoreFormFn();
-		appraisalLevelListFn("DeductScore",data['appraisal_level'],defaultAll=false);	
+		appraisalLevelListFn("DeductScore",data['appraisal_level'],defaultAll=false,multiSelect=true);	
 		//dropDrowDepartmentFn("DeductScore",data['department_code'],defaultAll=false);
 		dropDrowOrgFn("DeductScore",data['org'],defaultAll=false);
 		dropDrowPositionFn("DeductScore",data['position'],defaultAll=false);
@@ -205,7 +205,7 @@ var initailDeductScoreFormFn = function(action,structureId,structureName,data){
 		is_active
 		*/	
 		clearDeductScoreFormFn();
-		appraisalLevelListFn("DeductScore",$("#embed_appraisal_level").val(),defaultAll=false);	
+		appraisalLevelListFn("DeductScore",$("#embed_appraisal_level").val(),defaultAll=false,multiSelect=true);	
 		//dropDrowDepartmentFn("DeductScore",$("#embed_department_id").val(),defaultAll=false);
 		dropDrowOrgFn("DeductScore",$("#embed_org_id").val(),defaultAll=false);
 		dropDrowPositionFn("DeductScore",$("#embed_position_id").val(),defaultAll=false);

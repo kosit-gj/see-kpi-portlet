@@ -207,7 +207,7 @@ $(document).ready(function(){
     			           {"colunmsDisplayName":"Score","width":"20%","id":"target_score","colunmsType":"text","colunmsDataType":"decimal"},
     			           {"colunmsDisplayName":"Threshould Name","width":"20%","id":"threshold_name","colunmsType":"text"},
     			           {"colunmsDisplayName":"Color","width":"10%","id":"color_code","colunmsType":"color"},
-    			           {"colunmsDisplayName":"Group","width":"20%","id":"threshold_group_name","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Threshold Group","width":"20%","id":"threshold_group_name","colunmsType":"text"},
     			           
     			          ],
     			"form":[{
@@ -215,7 +215,7 @@ $(document).ready(function(){
     	    				"id":"structure_id","width":"200px","url":""+restfulURL+"/see_api/public/threshold/structure_list"
     	    				},
     	    			    {
-    	    				"label":"Threshold Name","inputType":"text","default":"All",
+    	    				"label":"Threshold Name","inputType":"text",
     	        			"id":"threshold_name","width":"200px","placeholder":"Threshold Name","required":true,
     	    					
     	    				},
@@ -257,7 +257,7 @@ $(document).ready(function(){
     			 "pagignation":false,
     			 "expressSearch":false,
     			 "advanceSearchSet":true,
-    			 "btnAdvanceSearchOption":{"id":"btnCreateGroup","name":"<i class=\"fa fa-plus-square\"></i>&nbsp;Add Threshould Group"}
+    			 "btnAdvanceSearchOption":{"id":"btnCreateGroup","name":"<i class=\"fa fa-plus-square\"></i>&nbsp;Add Group"}
     	}
     	//console.log(options['tokenID'].token);
     	createDataTableFn(options);

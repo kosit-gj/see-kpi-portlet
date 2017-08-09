@@ -126,7 +126,7 @@ is_active
 */
 	if(action=='edit'){
 		clearQualityFormFn();
-		appraisalLevelListFn("Quality",data['appraisal_level'],defaultAll=false);	
+		appraisalLevelListFn("Quality",data['appraisal_level'],defaultAll=false,multiSelect=true);	
 		
 		//dropDrowDepartmentFn("Quality",data['department_code'],defaultAll=false);
 		dropDrowOrgFn("Quality",data['org'],defaultAll=false);
@@ -165,7 +165,7 @@ is_active
 		*/	
 		clearQualityFormFn();
 		$("#isActiveQuality").prop("checked",true);
-		appraisalLevelListFn("Quality",$("#embed_appraisal_level_id").val(),defaultAll=false);	
+		appraisalLevelListFn("Quality",$("#embed_appraisal_level_id").val(),defaultAll=false,multiSelect=true);	
 		//dropDrowDepartmentFn("Quality",$("#embed_department_id").val(),defaultAll=false);
 		dropDrowOrgFn("Quality",$("#embed_org_id").val(),defaultAll=false);
 		dropDrowPositionFn("Quality",$("#embed_position_id").val(),defaultAll=false);
