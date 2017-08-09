@@ -23,37 +23,24 @@
         				"id":"org_name","width":"350px","required":true
         				},
     			        {
-    					"label":"Database Type","inputType":"dropdown","default":"",
-    					"id":"database_type_id","width":"250px","url":""+restfulURL+"/see_api/public/org",
+    					"label":"Parent Org.","inputType":"dropdown","initValue":"","updateList":true,
+    					"id":"parent_org_code","width":"250px","url":""+restfulURL+"/see_api/public/org/parent_list",
     					},
     					{
 	 	    			"label":"IsActive","inputType":"checkbox","default":"checked",
 	 	    			"id":"is_active","width":"200px"
 	 	    			}
     					
-    			     ],
-			     "advanceSearch":[{
- 					"label":"aaa Name0","inputType":"text","placeholder":"DefultText",
- 					"id":"connection_name0","width":"100%",
- 					"dataTypeInput":"number"
-			     	},{
- 					"label":"bbb Name1","inputType":"dropdown",
- 					"id":"connection_name1","width":"100%",
- 					"url":""+restfulURL+"/kpi_api/public/database_connection/db_type_list",
- 					"initValue":"All Data1"
- 					},{
- 					"label":"ccc Name2","inputType":"dropdown",
- 					"id":"connection_name2","width":"100%",
- 					"url":""+restfulURL+"/kpi_api/public/database_connection/db_type_list",
- 					"initValue":"All Data2"
- 					}],
- 					
-    			 "formDetail":{"formSize":"modal-dialog","formName":"Database Connection","id":"databaseConnection","pk_id":"connection_id"},       
-    			 "serviceName":[restfulURL+"/kpi_api/public/database_connection"],
+    			     ], 					
+    			 "formDetail":{"formSize":"modal-dialog","formName":"Organization","id":"organization","pk_id":"org_code"},       
+    			 "serviceName":[restfulURL+"/see_api/public/org"],
     			 "tokenID":tokenID,
     			 "pagignation":false,
     			 "expressSearch":false,
     			 "advanceSearchSet":false,
+    			 "btnAddOption":false,
+    			 "btnAdvanceDownloadOption":{"url":""+$("#url_portlet").val()+"/file/appraisal_organization_template.xlsx"},
+    			 "btnAdvanceImportOption":{"formName":"Import Organization","accept":".xls ,.xlsx"}
     			 //"btnManageOption":{"id":"BtnID","name":"BtnName"},
     			 //"btnAdvanceSearchOption":{"id":"BtnID","name":"<i class=\"fa fa-plus-square\"></i>&nbsp;Btn"}
     	}

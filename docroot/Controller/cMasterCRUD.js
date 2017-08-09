@@ -246,6 +246,35 @@ var mapObjectToFormFn  =function(data,options){
 		if(indexEntry['inputType']=="text" || indexEntry['inputType']=="date"){
 			$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).val(data[indexEntry['id']]);
 		}else if(indexEntry['inputType']=="dropdown" || indexEntry['inputType']=="cascades" ){
+			if(indexEntry['updateList']== true && indexEntry['updateList']!=undefined){
+				$.ajax({
+					url:indexEntry['url'],
+					dataType:"json",
+					type:"get",
+					async:false,
+					headers:{Authorization:"Bearer "+tokenID.token},
+					success:function(data){
+						var inputType ="";
+						//initValue
+						if(indexEntry['initValue']!=undefined){
+							inputType+="<option value=''>"+indexEntry['initValue']+"</option>";
+						}
+						golbalDataCascades[indexEntry['id']] = data;
+						
+						$.each(data,function(index2,indexEntry2){
+
+							if(dataSearch==indexEntry2[Object.keys(indexEntry2)[0]]){
+								
+								inputType+="<option selected value="+indexEntry2[Object.keys(indexEntry2)[0]]+">"+indexEntry2[Object.keys(indexEntry2)[1]]+"</option>";
+							}else{
+								inputType+="<option value="+indexEntry2[Object.keys(indexEntry2)[0]]+">"+indexEntry2[Object.keys(indexEntry2)[1]]+"</option>";
+							}
+						});
+						$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).html(inputType);
+						//alert(inputType);
+					}
+				})
+			}
 			$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).val(data[indexEntry['id']]).change();
 			//alert("form#"+options['formDetail']['id']+" > #"+indexEntry['id']);
 			//alert(data[indexEntry['id']]);
@@ -671,42 +700,18 @@ var createBtnAdvanceDownloadOptionFn = function(object){
 }
 var createBtnAdvanceImportOptionFn = function(object){
 	
-	var formHTML="";
-	formHTML+="<form id='"+options['id']+"' name='"+options['id']+"'>";
-	formHTML+="<div aria-hidden=\"true\" role=\"dialog\" tabindex=\"-1\" id=\"modal-"+options['id']+"\" class=\"modal inmodal\" style=\"display: none;\">";
-	formHTML+="<div class=\"modal-dialog\">";
-	formHTML+="<div class=\"modal-content  bounceInRight\">";
-	formHTML+="        <div class=\"modal-header\">";
-	formHTML+="            <button style=\" \" data-dismiss=\"modal\" class=\"close\" type=\"button\"><span aria-hidden=\"true\"><i class='fa fa-times'></i></span><span class=\"sr-only\" style=\"display: none;\">Close</span></button>";
-	formHTML+="            <h4 class=\"modal-title\" id=\"\">"+options['formName']+"</h4>";
-	formHTML+="        </div>";
-	formHTML+="        <div class=\"modal-body\">";
-
 	
- 	formHTML+="        		<div class='form-group'>";
-	formHTML+="        			<form id='fileImport'>";
-	formHTML+="   		     		<h4>FILE IMPORT</h4>";
-	formHTML+="   		     		<div class='fileUpload'>";
-	formHTML+="   			     		<input type='file' id='file' class='dropify' accept='"+options['accept']+"' /><span></span>";
-	formHTML+="   		     		</div>";
-	formHTML+="   		     	</form>";
-	formHTML+="        		<div>";
-				 
-
-
-	formHTML+="        </div>";
-	formHTML+="        <div class=\"modal-footer\">";
-	formHTML+="				<button class=\"btn btn-success\" type=\"button\" id=\"btnImport\" form=\"fileImport\">Import</button>";
-	formHTML+="            <button data-dismiss=\"modal\" class=\"btn btn-danger btnCancle\" type=\"button\">Cancel</button>";
-	formHTML+="            <div class=\"alert alert-warning information\" id=\"informationFile\" style=\"display: none;\"></div>";
-	formHTML+="        </div>";
-	formHTML+="    </div>";
-	formHTML+="</div>";
-	formHTML+="</div>";   
-	formHTML+="</form>"; 
-	$("#modalFormArea").append(formHTML);
+	if(object['formName'] != undefined){
+		$("#modal-import #modalTitleFile").html(object['formName']);
+	}else{
+		$("#modal-import #modalTitleFile").html("Import Option['formName']");
+	}
+	if(object['accept'] != undefined){
+		$("#modal-import #file").attr('accept',object['accept']);
+	}
+	
 	var AdvanceImportOption="";
-	AdvanceImportOption+="    		<button style=\"margin-bottom: 5px;\"  type=\"button\" class=\"btn btn-success input-sm\" name=\"btn_import\" id=\"btn_import\"><i class='fa fa-upload'></i>&nbsp;Import</button>";
+	AdvanceImportOption+="    		<button style=\"margin-bottom: 5px;\"  type=\"button\" class=\"btn btn-success input-sm\" name=\"btn_import\" id=\"btn_import\" data-target='#modal-import' data-toggle='modal'><i class='fa fa-upload'></i>&nbsp;Import</button>";
  	return AdvanceImportOption;
 }
 var createAvanceSearchFn = function(options){
@@ -862,11 +867,53 @@ var createDataTableFn = function(options){
 			}
 			if(options['btnAdvanceImportOption']!=undefined){
 				$("#btnAdvanceImportOption").html(createBtnAdvanceImportOptionFn(options['btnAdvanceImportOption']));
-				$("#btn_import").attr("data-target","#modal-"+options['btnAdvanceImportOption']['id']);
 				//################################################
 				//FILE IMPORT START
+				
+				$.getScript($("#url_portlet").val()+"/js/dropify.js", function(){
+					
+					// Basic
+				     $('.dropify').dropify();
+
+				     // Translated
+				      $('.dropify-fr').dropify({
+				         messages: {
+				         	 'default': 'Glissez-dposez un fichier ici ou cliquez',
+				             replace: 'Glissez-dposez un fichier ou cliquez pour remplacer',
+				             remove:  'Supprimer',
+				             error:   'Dsol, le fichier trop volumineux'
+				         }
+				     });
+					// Used events
+				     var drEvent = $('#input-file-events').dropify();
+
+				     drEvent.on('dropify.beforeClear', function(event, element){
+				         return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+				     });
+
+				     drEvent.on('dropify.afterClear', function(event, element){
+				         alert('File deleted');
+				     });
+
+				     drEvent.on('dropify.errors', function(event, element){
+				         console.log('Has Errors');
+				     });
+
+				     var drDestroy = $('#input-file-to-destroy').dropify();
+				     drDestroy = drDestroy.data('dropify');
+				     $('#toggleDropify').on('click', function(e){
+				         e.preventDefault();
+				         if (drDestroy.isDropified()) {
+				             drDestroy.destroy();
+				         } else {
+				             drDestroy.init();
+				         }
+				     });
+
+				});
+				
 				$("#btn_import").click(function () {
-					$('#file').val("");
+					$('#modal-import #file').val("");
 					$(".btnModalClose").click();
 					$(".dropify-clear").click(); 
 				});
@@ -913,14 +960,14 @@ var createDataTableFn = function(options){
 							console.log(data);
 							if(data['status']==200 && data['errors'].length==0){
 										
-								callFlashSlide("Import "+options['btnAdvanceImportOption']['formName']+" Successfully");
-								getDataFn($("#pageNumber").val(),$("#rpp").val(),options,dataSearch);
+								callFlashSlide(""+options['btnAdvanceImportOption']['formName']+" Successfully");
+								getDataFn($("#pageNumber").val(),$("#rpp").val(),golbalDataCascades['options'],dataSearch);
 								$("body").mLoading('hide');
-								$("#modal-"+options['btnAdvanceImportOption']['id']).modal('hide');
+								$("#modal-import").modal('hide');
 								
 							}else{
 								validateFileFn(data['errors']);
-								getDataFn($("#pageNumber").val(),$("#rpp").val(),options,dataSearch);
+								getDataFn($("#pageNumber").val(),$("#rpp").val(),golbalDataCascades['options'],dataSearch);
 								$("body").mLoading('hide');
 							}
 						},
@@ -933,35 +980,8 @@ var createDataTableFn = function(options){
 					});
 					return false;
 				}
-				$.when($.getStylesheet($("#url_portlet").val()+"/css/dropify.css"), $.getScript($("#url_portlet").val()+"/js/dropify.js")).then(function () {
-					// Used events
-				     var drEvent = $('#input-file-events').dropify();
-
-				     drEvent.on('dropify.beforeClear', function(event, element){
-				         return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
-				     });
-
-				     drEvent.on('dropify.afterClear', function(event, element){
-				         alert('File deleted');
-				     });
-
-				     drEvent.on('dropify.errors', function(event, element){
-				         console.log('Has Errors');
-				     });
-
-				     var drDestroy = $('#input-file-to-destroy').dropify();
-				     drDestroy = drDestroy.data('dropify');
-				     $('#toggleDropify').on('click', function(e){
-				         e.preventDefault();
-				         if (drDestroy.isDropified()) {
-				             drDestroy.destroy();
-				         } else {
-				             drDestroy.init();
-				         }
-				     });
-				}, function () {
-				  console.log('an error occurred somewhere dropify');
-				});
+				
+				
 				//################################################
 				
 			}
