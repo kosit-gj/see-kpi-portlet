@@ -43,6 +43,12 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
     	text-align: right;
 	}
 	
+	
+	 .ibox-content .row-fluid .span4{
+		width: 32.624%;
+	}
+	
+	
   }
   /* Large desktop End######################################*/
   
@@ -185,7 +191,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
     	text-align: left;
 	}
 
- 
+	
 
   }
   /* Landscape phones and down End##########################*/
@@ -353,6 +359,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 }
 .aui  select , .aui  input[type="text"]{font-size: 14px;}
 
+
+
 </style>
 
 <body class="gray-bg ">
@@ -388,8 +396,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
          						
          						<div  class="row-fluid ">
 
-									<!-- 
-									<div id='appraisalLevelArea' class="form-group pull-left span2"
+									
+									<div id='appraisalLevelArea' class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<select data-toggle="tooltip" title="Appraisal Level"
 											class="input form-control input-sm" id="appraisalLevel"
@@ -400,13 +408,21 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								
 										</select>
 									</div>
+									<div id="organizationArea" class="form-group pull-left span4"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<input data-toggle="tooltip" type="text" class="form-control input-sm span12 "
+											placeholder="Organization" id="organization" data-original-title="Organization">
+									</div>
+									<!-- 
 									<div id='DepartmentArea' class="form-group pull-left span2"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<select data-toggle="tooltip" title="Department"
 											class="input form-control input-sm" id="Department" name="Department">
 										</select>
 									</div>
-									<div id="appraisalTypeArea" class="form-group pull-left span2"
+									-->
+									
+									<div id="appraisalTypeArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<select data-toggle="tooltip" title="Appraisal Type"
 											class="input form-control input-sm" id="appraisalType"
@@ -416,11 +432,20 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								
 										</select>
 									</div>
-									 -->
+									 
+									 <div id="PositionArea" class="form-group pull-left span4"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<input data-toggle="tooltip" type="text" id="Position" placeholder="Position"
+											class="form-control input-sm span12" data-original-title="Position">
+									</div>
 									
-									
+									<div id="empNameArea" class="form-group pull-left span4"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<input data-toggle="tooltip" type="text" class="form-control input-sm span12 "
+											placeholder="Emp Name" id="empName" data-original-title="Employee Name">
+									</div>
 								 
-									<div id='yearArea' class="form-group pull-left span2"
+									<div id='yearArea' class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<select data-toggle="tooltip" title="Year"
 											class="input form-control input-sm" id="YearList" name="YearList">
@@ -429,7 +454,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								
 										</select>
 									</div>
-									<div id="periodFrequencyArea" class="form-group pull-left span2"
+									<div id="periodFrequencyArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<select data-toggle="tooltip" title="Period frequency"
 											class="input form-control input-sm" id="periodFrequency"
@@ -437,7 +462,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 											<option value="0"></option>
 										</select>
 									</div>
-									<div id="assignFrequencyArea" class="form-group pull-left span2"
+									<div id="assignFrequencyArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<select data-toggle="tooltip" title="Assign Frequency"
 											class="input form-control input-sm" id="assignFrequency"
@@ -448,7 +473,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								
 										</select>
 									</div>
-									<div id="periodArea" class="form-group pull-left span2"
+									<div id="periodArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<select data-toggle="tooltip" disabled='disabled' data-toggle="Period" title="Period"
 											class="input form-control input-sm" id="period_id" name="period_id">
@@ -457,21 +482,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								
 										</select>
 								</div>
-								<div id="organizationArea" class="form-group pull-left span2"
-									style="margin-left: 5px; margin-bottom: 3px;">
-									<input data-toggle="tooltip" type="text" class="form-control input-sm span12 "
-										placeholder="Organization" id="organization" data-original-title="Organization">
-								</div>
-								<div id="empNameArea" class="form-group pull-left span2"
-									style="margin-left: 5px; margin-bottom: 3px;">
-									<input data-toggle="tooltip" type="text" class="form-control input-sm span12 "
-										placeholder="Emp Name" id="empName" data-original-title="Employee Name">
-								</div>
-								<div id="PositionArea" class="form-group pull-left span2"
-									style="margin-left: 5px; margin-bottom: 3px;">
-									<input data-toggle="tooltip" type="text" id="Position" placeholder="Position"
-										class="form-control input-sm span12" data-original-title="Position">
-								</div>
+								
+								
+								
+								
 							
 								<div class="form-group pull-right m-b-none "
 									style="margin-bottom: 5px;">
@@ -877,6 +891,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
             	</div>
             	
             	<div class="row-fluid">
+            		<!-- 
             		<div class="span3 ">
             		
             			<div class="form-group "> 
@@ -888,6 +903,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 						 </div> 
 						 
             		</div>
+            		 -->
             		<div class="span3 ">
             		
 	            			<div class="form-group "> 
@@ -899,7 +915,19 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 						  </div> 
 					 
             		</div>
-            		<div class="span4 offset2">
+            		
+            		<div class="span5 ">
+            		
+            			<div class="form-group "> 
+							 <label class="span3 p-t-xxs"><b>Remark:</b></label> 
+							 <div class="span9"> 
+								 <input type='text' name='' id='' value=''>
+							 </div> 
+						 </div> 
+						 
+            		</div>
+            		
+            		<div class="span4 offset0">
             				<input type="hidden" name="id" id="id" value="">
 		   					<input type="hidden" name="period_id_edit" id="period_id_edit" value="">
 			   				<input type="hidden" name="action" id="action" value="add">
@@ -908,6 +936,45 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
             		</div>
             	</div>
             	
+            	<div class="row-fluid" style='text-align:left;'>
+            		<a href="#" id='slideUpDownStageHistory'>Work Flow Stage History</a>
+            		<div id='slideStageHistory' style='display:none;'>
+            			<table class='table'>
+            				<thead>
+            					<tr>
+            						<th>Create by</th>
+            						<th>Create dttm</th>
+            						<th>Form Stage ID</th>
+            						<th>To Stage ID</th>
+            						<th>Remark</th>
+            					</tr>
+            				</thead>
+            				<tbody id='listDataStageHistory'>
+            					<tr >
+            						<td>emp_code1</td>
+            						<td>2017-08-16 10:20:22</td>
+            						<td>HR</td>
+            						<td>Manager</td>
+            						<td>่Reject เนื่องจากไม่เหมาะสม</td>
+            					</tr>
+            					<tr >
+            						<td>emp_code1</td>
+            						<td>2017-08-16 10:20:22</td>
+            						<td>HR</td>
+            						<td>Manager</td>
+            						<td>่Reject เนื่องจากไม่เหมาะสม</td>
+            					</tr>
+            					<tr >
+            						<td>emp_code1</td>
+            						<td>2017-08-16 10:20:22</td>
+            						<td>HR</td>
+            						<td>Manager</td>
+            						<td>่Reject เนื่องจากไม่เหมาะสม</td>
+            					</tr>
+            				</tbody>
+            			</table>
+            		</div>
+            	</div>
             	
    				<div class="alert alert-warning information" id="information" style="display: none;"></div>
 	   			

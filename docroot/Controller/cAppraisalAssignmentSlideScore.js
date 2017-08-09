@@ -3,7 +3,7 @@
 //Global variable
 var globalData=[];
 var empldoyees_code = [];
-var appraisal_item_id_array=[];
+var item_id_array=[];
 
 
 
@@ -31,8 +31,8 @@ var validationAssignmentFn = function(data){
 //$.each(data['data'],function(index,indexEntry){	
 //		if(index==0){
 //		
-//			errorData+="<b>"+indexEntry['appraisal_item_id']+" ";
-//			errorData+=indexEntry['appraisal_item_name']+"</b> ";
+//			errorData+="<b>"+indexEntry['item_id']+" ";
+//			errorData+=indexEntry['item_name']+"</b> ";
 //			
 //			$.each(indexEntry['data'],function(index2,indexEntry2){
 //				//errorData+=" "+index2;
@@ -42,8 +42,8 @@ var validationAssignmentFn = function(data){
 //		}
 //		
 //		else{
-//			errorData+="<br><b>"+indexEntry['appraisal_item_id']+"-";
-//			errorData+=indexEntry['appraisal_item_name']+"</b> ";
+//			errorData+="<br><b>"+indexEntry['item_id']+"-";
+//			errorData+=indexEntry['item_name']+"</b> ";
 //			
 //			$.each(indexEntry['data'],function(index2,indexEntry2){
 //				//errorData+=" "+index2;
@@ -197,8 +197,8 @@ var setDataToTemplateFn = function(data,actionType){
 	
 /*
 actual_value
-appraisal_item_id
-appraisal_item_name
+item_id
+item_name
 appraisal_item_result_id
 created_by
 created_dttm
@@ -231,40 +231,40 @@ weight_percent
 	$(".embed_appraisal_id").remove();
 	$.each(data,function(index,indexEntry){
 		
-		//console.log(indexEntry['appraisal_item_id']);
+		//console.log(indexEntry['item_id']);
 		//mapping data start
 		//form1
-		$("#id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-checkbox").prop("checked",true);
-		$("#id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-target").val(indexEntry['target_value']);
-		$("#id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_result_id").val(indexEntry['appraisal_item_result_id']);
-		$("#id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_start-1").val(indexEntry['score1_target_start']);
-		$("#id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_end-1").val(indexEntry['score1_target_end']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox").prop("checked",true);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target").val(indexEntry['target_value']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_result_id").val(indexEntry['appraisal_item_result_id']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score_start-1").val(indexEntry['score1_target_start']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score_end-1").val(indexEntry['score1_target_end']);
 		
-		$("#id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_start-2").val(indexEntry['score2_target_start']);
-		$("#id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_end-2").val(indexEntry['score2_target_end']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score_start-2").val(indexEntry['score2_target_start']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score_end-2").val(indexEntry['score2_target_end']);
 		
-		$("#id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_start-3").val(indexEntry['score3_target_start']);
-		$("#id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_end-3").val(indexEntry['score3_target_end']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score_start-3").val(indexEntry['score3_target_start']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score_end-3").val(indexEntry['score3_target_end']);
 		
-		$("#id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_start-4").val(indexEntry['score4_target_start']);
-		$("#id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_end-4").val(indexEntry['score4_target_end']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score_start-4").val(indexEntry['score4_target_start']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score_end-4").val(indexEntry['score4_target_end']);
 		
-		$("#id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_start-5").val(indexEntry['score5_target_start']);
-		$("#id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_end-5").val(indexEntry['score5_target_end']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score_start-5").val(indexEntry['score5_target_start']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score_end-5").val(indexEntry['score5_target_end']);
 		
 		
-		$("#id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-weight").val(indexEntry['weight_percent']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight").val(indexEntry['weight_percent']);
 		
 		//form2
 		
 		//form3
-		$("#id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-maxValue").val(indexEntry['max_value']);
-		$("#id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-deductScoreUnit").val(indexEntry['deduct_score_unit']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-maxValue").val(indexEntry['max_value']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-deductScoreUnit").val(indexEntry['deduct_score_unit']);
 		
 		
 		//embedParamAppraisal for get updated.
 		
-		embedParamCheckboxAppraisalItem("id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-checkbox");
+		embedParamCheckboxAppraisalItem("id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox");
 		//mapping data end
 		
 		calculationGrandTotalDefaultFn();
@@ -330,11 +330,11 @@ var getDataFn = function(page,rpp) {
 	var appraisal_level_id = $("#embed_appraisal_level_id").val();
 	var appraisal_type_id= $("#embed_appraisal_type_id").val();
 	var period_id= $("#embed_period_id").val();
-	var position_code= $("#embed_position_code").val();
+	var position_id= $("#embed_position_id").val();
 	var emp_code= $("#embed_emp_code").val();
 	var embed_year_list =$("#embed_year_list").val();
 	var embed_period_frequency =$("#embed_period_frequency").val();
-	var department_id =$("#embed_department_list").val();
+	//var department_id =$("#embed_department_list").val();
 	
 	$.ajax({
 		url:restfulURL+"/see_api/public/appraisal_assignment",
@@ -350,10 +350,10 @@ var getDataFn = function(page,rpp) {
 			"appraisal_level_id":appraisal_level_id,
 			"appraisal_type_id":appraisal_type_id,
 			"period_id":period_id,
-			"position_code":position_code,
+			"position_id":position_id,
 			"appraisal_year":embed_year_list,
 			"frequency_id":embed_period_frequency,
-			"department_code":department_id,
+			//"department_code":department_id,
 			"emp_code":emp_code	
 			
 		},
@@ -362,6 +362,7 @@ var getDataFn = function(page,rpp) {
 			//console.log(data);
 			
 			listDataFn(data);
+			setThemeColorFn(tokenID.theme_color);
 			globalData=data;
 			paginationSetUpFn(globalData['current_page'],globalData['last_page'],globalData['last_page']);
 		}
@@ -426,11 +427,13 @@ var listDataFn = function(data) {
 				htmlHTML+=" <th style=\"width:5%\" class=\"object-center\">Select</th>";
 			}
 				htmlHTML+=" <th style=\"width:8%\">Status</th>";
-				htmlHTML+=" <th style=\"width:8%\">Emp Code</th>";
-				htmlHTML+=" <th style=\"width:15%\">Emp Name</th>";
-				htmlHTML+=" <th style=\"width:10%\">Department</th>";
+				htmlHTML+=" <th style=\"width:10%\">Emp Code</th>";
+				htmlHTML+=" <th style=\"width:10%\">Emp Name</th>";
+				htmlHTML+=" <th style=\"width:15%\">Organization</th>";
+				/*
 				htmlHTML+=" <th style=\"width:15%\">Section</th>";
 				htmlHTML+=" <th style=\"width:15%\">Appraisal Type</th>";
+				*/
 				htmlHTML+=" <th style=\"width:15%\">Position</th>";
 			if(index!='p0'){
 				htmlHTML+=" <th style=\"width:7%; text-align:center;\">Manage</th>";
@@ -461,9 +464,11 @@ var listDataFn = function(data) {
 				htmlHTML+="  <input type='hidden' id='period_id-"+itemEntry['emp_code']+"' name='period_id-"+itemEntry['emp_code']+"' value='"+itemEntry['period_id']+"'>";
 				htmlHTML+=" </td>";
 				htmlHTML+="  <td>"+itemEntry['emp_name']+"</td>";
-				htmlHTML+="  <td>"+itemEntry['department_name']+"</td>";
+				htmlHTML+="  <td>"+itemEntry['org_name']+"</td>";
+				/*
 				htmlHTML+="	<td>"+itemEntry['section_name']+"</td>";
 				htmlHTML+="	<td>"+itemEntry['appraisal_type_name']+"</td>";
+				*/
 				htmlHTML+="	<td>"+itemEntry['position_name']+"</td>";
 				htmlHTML+="  <td style=\"text-align:center\">";
 				
@@ -634,8 +639,8 @@ var actionUpdateAssignmentFn = function(){
 				appraisal_items+="\"appraisal_item_result_id\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-appraisal_item_result_id").val()+"\",";
 				appraisal_items+="\"nof_target_score\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-nof_target_score").val()+"\",";
 				appraisal_items+="\"form_id\":\"1\",";
-				appraisal_items+="\"appraisal_item_id\":\""+$(appraisalItemEntry).val()+"\",";
-				appraisal_items+="\"appraisal_item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-appraisal_item_name").text()+"\",";
+				appraisal_items+="\"item_id\":\""+$(appraisalItemEntry).val()+"\",";
+				appraisal_items+="\"item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-item_name").text()+"\",";
 				appraisal_items+="\"target_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val()+"\",";
 				appraisal_items+="\"score1_target_start\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_start-1").val()+"\",";
 				appraisal_items+="\"score1_target_end\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_end-1").val()+"\",";
@@ -675,8 +680,8 @@ var actionUpdateAssignmentFn = function(){
 				}
 				//appraisal_items+="\"appraisal_item_result_id\":\"11\",";
 				appraisal_items+="\"appraisal_item_result_id\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-appraisal_item_result_id").val()+"\",";
-				appraisal_items+="\"appraisal_item_id\":\""+$(appraisalItemEntry).val()+"\",";
-				appraisal_items+="\"appraisal_item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-appraisal_item_name").text()+"\",";
+				appraisal_items+="\"item_id\":\""+$(appraisalItemEntry).val()+"\",";
+				appraisal_items+="\"item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-item_name").text()+"\",";
 				appraisal_items+="\"form_id\":\"2\",";
 				appraisal_items+="\"target_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val()+"\",";
 				appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\",";
@@ -705,8 +710,8 @@ var actionUpdateAssignmentFn = function(){
 				
 				//appraisal_items+="\"appraisal_item_result_id\":\"11\",";
 				appraisal_items+="\"appraisal_item_result_id\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-appraisal_item_result_id").val()+"\",";
-				appraisal_items+="\"appraisal_item_id\":\""+$(appraisalItemEntry).val()+"\",";
-				appraisal_items+="\"appraisal_item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-appraisal_item_name").text()+"\",";
+				appraisal_items+="\"item_id\":\""+$(appraisalItemEntry).val()+"\",";
+				appraisal_items+="\"item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-item_name").text()+"\",";
 				appraisal_items+="\"form_id\":\"3\",";
 				appraisal_items+="\"max_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-maxValue").val()+"\",";
 				appraisal_items+="\"deduct_score_unit\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-deductScoreUnit").val()+"\",";
@@ -822,8 +827,8 @@ var actionAssignmentFn = function(param){
 				//nof_target_score
 				appraisal_items+="\"nof_target_score\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-nof_target_score").val()+"\",";
 				appraisal_items+="\"form_id\":\"1\",";
-				appraisal_items+="\"appraisal_item_id\":\""+$(appraisalItemEntry).val()+"\",";
-				appraisal_items+="\"appraisal_item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-appraisal_item_name").text()+"\",";
+				appraisal_items+="\"item_id\":\""+$(appraisalItemEntry).val()+"\",";
+				appraisal_items+="\"item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-item_name").text()+"\",";
 				appraisal_items+="\"target_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val()+"\",";
 				appraisal_items+="\"score1_target_start\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_start-1").val()+"\",";
 				appraisal_items+="\"score1_target_end\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score_end-1").val()+"\",";
@@ -855,8 +860,8 @@ var actionAssignmentFn = function(param){
 					appraisal_items+=",{";	
 				}
 				//appraisal_items+="\"appraisal_item_result_id\":\"11\",";
-				appraisal_items+="\"appraisal_item_id\":\""+$(appraisalItemEntry).val()+"\",";
-				appraisal_items+="\"appraisal_item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-appraisal_item_name").text()+"\",";
+				appraisal_items+="\"item_id\":\""+$(appraisalItemEntry).val()+"\",";
+				appraisal_items+="\"item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-item_name").text()+"\",";
 				appraisal_items+="\"form_id\":\"2\",";
 				appraisal_items+="\"target_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val()+"\",";
 				appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\",";
@@ -876,8 +881,8 @@ var actionAssignmentFn = function(param){
 					appraisal_items+=",{";	
 				}
 				//appraisal_items+="\"appraisal_item_result_id\":\"11\",";
-				appraisal_items+="\"appraisal_item_id\":\""+$(appraisalItemEntry).val()+"\",";
-				appraisal_items+="\"appraisal_item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-appraisal_item_name").text()+"\",";
+				appraisal_items+="\"item_id\":\""+$(appraisalItemEntry).val()+"\",";
+				appraisal_items+="\"item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-item_name").text()+"\",";
 				appraisal_items+="\"form_id\":\"3\",";
 				appraisal_items+="\"max_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-maxValue").val()+"\",";
 				appraisal_items+="\"deduct_score_unit\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-deductScoreUnit").val()+"\",";
@@ -990,17 +995,18 @@ var searchAdvanceFn = function() {
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id' name='embed_appraisal_level_id' value='"+$("#appraisalLevel").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_type_id' name='embed_appraisal_type_id' value='"+$("#appraisalType").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_period_id' name='embed_period_id' value='"+$("#period_id").val()+"'>";
-	embedParam+="<input type='hidden' class='embed_param_search' id='embed_position_code' name='embed_position_code' value='"+Position+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_position_id' name='embed_position_id' value='"+Position+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_emp_code' name='embed_emp_code' value='"+empNameCode+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_period_frequency' name='embed_period_frequency' value='"+$("#periodFrequency").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_year_list' name='embed_year_list' value='"+$("#YearList").val()+"'>";
-	embedParam+="<input type='hidden' class='embed_param_search' id='embed_department_list' name='embed_department_list' value='"+$("#Department").val()+"'>";
+	//embedParam+="<input type='hidden' class='embed_param_search' id='embed_department_list' name='embed_department_list' value='"+$("#Department").val()+"'>";
 	
 	
 	
 	$("#embedParamSearch").append(embedParam);
 	
 	getDataFn();
+	
 };
 /*#########################  Main Function Data #######################*/
 /*#########################  Custom Function Data #######################*/
@@ -1013,7 +1019,7 @@ var appraisalLevelListFn = function(nameArea,id){
 	
 	$.ajax({
 		//url:restfulURL+"/see_api/public/appraisal_item/al_list",
-		url:restfulURL+"/see_api/public/appraisal/al_list",
+		url:restfulURL+"/see_api/public/appraisal_assignment/al_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1021,10 +1027,10 @@ var appraisalLevelListFn = function(nameArea,id){
 		success:function(data){
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
-				if(id==indexEntry['appraisal_level_id']){
-					htmlOption+="<option selected='selected' value="+indexEntry['appraisal_level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
+				if(id==indexEntry['level_id']){
+					htmlOption+="<option selected='selected' value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
 				}else{
-					htmlOption+="<option value="+indexEntry['appraisal_level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
+					htmlOption+="<option value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
 					
 				}
 			});
@@ -1400,11 +1406,11 @@ var assignTemplateQualityFn = function(structureName,data){
 					
 					$.each(data['items'],function(index,indexEntry){
 					htmlTemplateQuality+="<tr>";
-						htmlTemplateQuality+="<td style=\"width:3%;text-align:center;\" class='object-center'  ><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['appraisal_item_id']+"'></td>";
-						htmlTemplateQuality+="<td style=\"width:67%\" style='padding-top:7px;' id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_name' class='id-"+indexEntry['structure_id']+"-appraisal_item_name'>"+indexEntry['appraisal_item_name']+"</td>";
-						htmlTemplateQuality+="<td style=\"width:15%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-target' class='id-"+indexEntry['structure_id']+"-target input form-control input-sm-small numberOnly' type='text'></td>";
-						htmlTemplateQuality+="<td style=\"width:15%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quality input form-control input-sm-small numberOnly' type='text'></td>";
-						htmlTemplateQuality+="<input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_result_id' class='id-"+indexEntry['structure_id']+"-appraisal_item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
+						htmlTemplateQuality+="<td style=\"width:3%;text-align:center;\" class='object-center'  ><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['item_id']+"'></td>";
+						htmlTemplateQuality+="<td style=\"width:67%\" style='padding-top:7px;' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' class='id-"+indexEntry['structure_id']+"-item_name'>"+indexEntry['item_name']+"</td>";
+						htmlTemplateQuality+="<td style=\"width:15%\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target' class='id-"+indexEntry['structure_id']+"-target input form-control input-sm-small numberOnly' type='text'></td>";
+						htmlTemplateQuality+="<td style=\"width:15%\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quality input form-control input-sm-small numberOnly' type='text'></td>";
+						htmlTemplateQuality+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_result_id' class='id-"+indexEntry['structure_id']+"-appraisal_item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
 						
 					htmlTemplateQuality+="</tr>";
 					});
@@ -1452,11 +1458,11 @@ var assignTemplateDeductFn = function(structureName,data){
 					
 					$.each(data['items'],function(index,indexEntry){
 					htmlTemplateDeduct+="<tr>";
-							htmlTemplateDeduct+="<td style=\"width:3%;text-align:center;\" class='object-center' ><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox notCal appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['appraisal_item_id']+"'></td>";
-							htmlTemplateDeduct+="<td style=\"width:67%\" style='padding-top:7px;' id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_name' class='id-"+indexEntry['structure_id']+"-appraisal_item_name'>"+indexEntry['appraisal_item_name']+"</td>";
-							htmlTemplateDeduct+="<td style=\"width:15%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-maxValue' class='id-"+indexEntry['structure_id']+"-maxValue  input form-control input-sm-small numberOnly' type='text' value='"+indexEntry['max_value']+"'></td>";
-							htmlTemplateDeduct+="<td style=\"width:15%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-deductScoreUnit' class='id-"+indexEntry['structure_id']+"-deductScoreUnit    input form-control input-sm-small numberOnly' type='text' value='"+indexEntry['unit_deduct_score']+"'></td>";
-							htmlTemplateDeduct+="<input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_result_id' class='id-"+indexEntry['structure_id']+"-appraisal_item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
+							htmlTemplateDeduct+="<td style=\"width:3%;text-align:center;\" class='object-center' ><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox notCal appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['item_id']+"'></td>";
+							htmlTemplateDeduct+="<td style=\"width:67%\" style='padding-top:7px;' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' class='id-"+indexEntry['structure_id']+"-item_name'>"+indexEntry['item_name']+"</td>";
+							htmlTemplateDeduct+="<td style=\"width:15%;text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-maxValue' class='id-"+indexEntry['structure_id']+"-maxValue  input form-control input-sm-small numberOnly' type='text' value='"+indexEntry['max_value']+"'></td>";
+							htmlTemplateDeduct+="<td style=\"width:15%\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-deductScoreUnit' class='id-"+indexEntry['structure_id']+"-deductScoreUnit    input form-control input-sm-small numberOnly' type='text' value='"+indexEntry['unit_deduct_score']+"'></td>";
+							htmlTemplateDeduct+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_result_id' class='id-"+indexEntry['structure_id']+"-appraisal_item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
 							
 					htmlTemplateDeduct+="</tr>";
 					});
@@ -1478,102 +1484,143 @@ var assignTemplateDeductFn = function(structureName,data){
 
 var assignTemplateQuantityFn = function(structureName,data){
 	
-	appraisal_item_id_array=[];
+	item_id_array=[];
 	var htmlTemplateQuantity = "";
-	htmlTemplateQuantity+="<div class=\"row-fluid\">";
-	htmlTemplateQuantity+="	<div class=\"span12\">";
-	htmlTemplateQuantity+="  <div class=\"ibox-title2\">";
 	
-	htmlTemplateQuantity+="      <div class='titlePanel'>"+structureName+"</div>";
-	htmlTemplateQuantity+="      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-"+data['structure_id']+"'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-"+data['structure_id']+"'></span>Total Weight <span id='weigth_total_quantity_percentage_target-"+data['structure_id']+"'>"+data['total_weight']+"%</span></div>";
-	htmlTemplateQuantity+="  </div>";
-	htmlTemplateQuantity+="	<div class=\"ibox-content\">";
-	htmlTemplateQuantity+=" <div class=\"table-responsive scrollbar-inner\"  style='overflow:auto;'>";
-	htmlTemplateQuantity+="<table style='width:100%; top: -58px;' id=\"tableQauntity\" class=\"table table-striped tableQauntity fixedHeader\">";
-	htmlTemplateQuantity+="<thead>";
-		htmlTemplateQuantity+="<tr>";
-			htmlTemplateQuantity+="<th style=\"width:3%\" class=''><b>Select</b></th>";
-			htmlTemplateQuantity+="<th style=\"width:30%\" class=''><b>Appraisal Item Name</b></th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Target</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
-			/*
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
-			*/
-			htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>%Weight</b></th>";
-			htmlTemplateQuantity+="<th style=\"width:3%;  text-align:center;\" class=''></th>";
-			htmlTemplateQuantity+="</tr>";
-			htmlTemplateQuantity+="</thead>";
-			htmlTemplateQuantity+="<tbody id=\"\">";
-			$.each(data['items'],function(index,indexEntry){
-				
-				appraisal_item_id_array.push(indexEntry['appraisal_item_id']);
-				
-
+	if(data['no_weight']==1){
+		// No Weight == 1
+			htmlTemplateQuantity+="<div class=\"row-fluid\">";
+			htmlTemplateQuantity+="	<div class=\"span12\">";
+			htmlTemplateQuantity+="  <div class=\"ibox-title2\">";
+			
+			htmlTemplateQuantity+="      <div class='titlePanel'>"+structureName+"</div>";
+			htmlTemplateQuantity+="      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-"+data['structure_id']+"'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-"+data['structure_id']+"'></span>Total Weight <span id='weigth_total_quantity_percentage_target-"+data['structure_id']+"'>"+data['total_weight']+"%</span></div>";
+			htmlTemplateQuantity+="  </div>";
+			htmlTemplateQuantity+="	<div class=\"ibox-content\">";
+			htmlTemplateQuantity+=" <div class=\"table-responsive scrollbar-inner\"  style='overflow:auto;'>";
+			htmlTemplateQuantity+="<table style='width:100%; top: -58px;' id=\"tableQauntity\" class=\"table table-striped tableQauntity fixedHeader\">";
+			htmlTemplateQuantity+="<thead>";
 				htmlTemplateQuantity+="<tr>";
-					htmlTemplateQuantity+="<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['appraisal_item_id']+"'></td>";
-					htmlTemplateQuantity+="<td style=\"width:30%\" class='id-"+indexEntry['structure_id']+"-appraisal_item_name' id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_name' style='padding-top:7px;'>"+indexEntry['appraisal_item_name']+"</td>";
-					htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-target' class='id-"+indexEntry['structure_id']+"-target input form-control input-sm-small numberOnly' type='text'>";
-					htmlTemplateQuantity+="<input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-nof_target_score' class='id-"+indexEntry['structure_id']+"-nof_target_score input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['nof_target_score']+">";
-					htmlTemplateQuantity+="<input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_result_id' class='id-"+indexEntry['structure_id']+"-appraisal_item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
-					htmlTemplateQuantity+="</td>";
+					htmlTemplateQuantity+="<th style=\"width:3%\" class=''><b>Select</b></th>";
+					htmlTemplateQuantity+="<th style=\"width:30%\" class=''><b>Appraisal Item Name</b></th>";
+					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Target</b> </th>";
+					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
+					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>-</b> </th>";
 					
-					htmlTemplateQuantity+="<td style=\"width:5%\">";
-						htmlTemplateQuantity+="<div id='slideScore-"+indexEntry['appraisal_item_id']+"' class='slideScore'></div>";
-						htmlTemplateQuantity+="<input class='input-sm-small'   type='text' id='input-with-keypress-0-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-0-"+indexEntry['appraisal_item_id']+"'>";
-					htmlTemplateQuantity+="</td>";
-					htmlTemplateQuantity+="<td style=\"width:5%\" ><input class='input-sm-small' type='text' id='input-with-keypress-1-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-1-"+indexEntry['appraisal_item_id']+"'></td>";
-					htmlTemplateQuantity+="<td style=\"width:5%\"><input class='input-sm-small' type='text' id='input-with-keypress-2-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-2-"+indexEntry['appraisal_item_id']+"'></td>";
-					htmlTemplateQuantity+="<td style=\"width:5%\"><input class='input-sm-small' type='text' id='input-with-keypress-3-"+indexEntry['appraisal_item_id']+"' name='input-with-keypress-3-"+indexEntry['appraisal_item_id']+"'></td>";
-					
-					
-					//input-with-keypress-0-
-					/*
-					for(var i=1;i<=5;i++){
-						if(i<=data['nof_target_score']){
-							htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_start-"+i+"' class='id-"+indexEntry['structure_id']+"-score_start-"+i+" input form-control input-sm-small numberOnly' type='text'></td>";
-							htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_end-"+i+"'  class='id-"+indexEntry['structure_id']+"-score_end-"+i+" input form-control input-sm-small numberOnly' type='text'></td>";
-						}else{
-							htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_start-"+i+"'  disabled class='id-"+indexEntry['structure_id']+"-score_start-"+i+" input form-control input-sm-small numberOnly disabledInputText' type='text'></td>";
-							htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-score_end-"+i+"'  disabled class='id-"+indexEntry['structure_id']+"-score_end-"+i+" input form-control input-sm-small numberOnly disabledInputText' type='text'></td>";
-						}
-					}
-					*/
-					if(sessionStorage.getItem("is_coporate_kpi")==1){
+					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>%Weight</b></th>";
+					htmlTemplateQuantity+="<th style=\"width:3%;  text-align:center;\" class=''></th>";
+					htmlTemplateQuantity+="</tr>";
+					htmlTemplateQuantity+="</thead>";
+					htmlTemplateQuantity+="<tbody id=\"\">";
+					$.each(data['items'],function(index,indexEntry){
 						
-						htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly' disabled type='text' value='0.00'></td>";
-					}else{
-						htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['appraisal_item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly'  type='text'></td>";
-					}
+						item_id_array.push(indexEntry['item_id']);
+						
+		
+						htmlTemplateQuantity+="<tr>";
+							htmlTemplateQuantity+="<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['item_id']+"'></td>";
+							htmlTemplateQuantity+="<td style=\"width:30%\" class='id-"+indexEntry['structure_id']+"-item_name' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' style='padding-top:7px;'>"+indexEntry['item_name']+"</td>";
+							htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target' class='id-"+indexEntry['structure_id']+"-target input form-control input-sm-small numberOnly' type='text'>";
+							htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-nof_target_score' class='id-"+indexEntry['structure_id']+"-nof_target_score input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['nof_target_score']+">";
+							htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-appraisal_item_result_id' class='id-"+indexEntry['structure_id']+"-appraisal_item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
+							htmlTemplateQuantity+="</td>";
+							
+							htmlTemplateQuantity+="<td style=\"width:5%\">";
+								htmlTemplateQuantity+="<div id='slideScore-"+indexEntry['item_id']+"' class='slideScore'></div>";
+								htmlTemplateQuantity+="<input class='input-sm-small'   type='text' id='input-with-keypress-0-"+indexEntry['item_id']+"' name='input-with-keypress-0-"+indexEntry['item_id']+"'>";
+							htmlTemplateQuantity+="</td>";
+							htmlTemplateQuantity+="<td style=\"width:5%\" ><input class='input-sm-small' type='text' id='input-with-keypress-1-"+indexEntry['item_id']+"' name='input-with-keypress-1-"+indexEntry['item_id']+"'></td>";
+							htmlTemplateQuantity+="<td style=\"width:5%\"><input class='input-sm-small' type='text' id='input-with-keypress-2-"+indexEntry['item_id']+"' name='input-with-keypress-2-"+indexEntry['item_id']+"'></td>";
+							htmlTemplateQuantity+="<td style=\"width:5%\"><input class='input-sm-small' type='text' id='input-with-keypress-3-"+indexEntry['item_id']+"' name='input-with-keypress-3-"+indexEntry['item_id']+"'></td>";
+							
+							
+							
+							if(sessionStorage.getItem("is_coporate_kpi")==1){
+								
+								htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly' disabled type='text' value='0.00'></td>";
+							}else{
+								htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly'  type='text'></td>";
+							}
+							
+							htmlTemplateQuantity+="<td style=\"width:3%\"><a href='#'><i class='fa fa-cog font-gear '></i></a></td>";
+							
+							
+						htmlTemplateQuantity+="</tr>";
+						
+					});
+					htmlTemplateQuantity+="</tbody>";
+					htmlTemplateQuantity+="</table>";
+					htmlTemplateQuantity+="<input type='hidden' id='structure_id-"+data['structure_id']+"' class='structure_id' value="+data['structure_id']+">";
+					htmlTemplateQuantity+="<input type='hidden' id='form-"+data['structure_id']+"' class='' value=\"form1\">";
+					htmlTemplateQuantity+="<input type='hidden' id='item_id_array-"+data['structure_id']+"' class='item_id_array' value=\""+item_id_array+"\">";
 					
-					htmlTemplateQuantity+="<td style=\"width:3%\"><a href='#'><i class='fa fa-cog font-gear '></i></a></td>";
 					
-					
-				htmlTemplateQuantity+="</tr>";
-				
-			});
-			htmlTemplateQuantity+="</tbody>";
-			htmlTemplateQuantity+="</table>";
-			htmlTemplateQuantity+="<input type='hidden' id='structure_id-"+data['structure_id']+"' class='structure_id' value="+data['structure_id']+">";
-			htmlTemplateQuantity+="<input type='hidden' id='form-"+data['structure_id']+"' class='' value=\"form1\">";
-			htmlTemplateQuantity+="<input type='hidden' id='appraisal_item_id_array-"+data['structure_id']+"' class='appraisal_item_id_array' value=\""+appraisal_item_id_array+"\">";
-			
-			
+					htmlTemplateQuantity+="</div>";
+					htmlTemplateQuantity+="<br style=\"clear:both\">";	
+				htmlTemplateQuantity+="</div>";
 			htmlTemplateQuantity+="</div>";
-			htmlTemplateQuantity+="<br style=\"clear:both\">";	
+			htmlTemplateQuantity+="</div>";
+			
+	}else{
+		
+		 
+		// No Weight == 0
+		
+		htmlTemplateQuantity+="<div class=\"row-fluid\">";
+		htmlTemplateQuantity+="	<div class=\"span12\">";
+		htmlTemplateQuantity+="  <div class=\"ibox-title2\">";
+		
+		htmlTemplateQuantity+="      <div class='titlePanel'>"+structureName+"</div>";
+		htmlTemplateQuantity+="      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-"+data['structure_id']+"'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-"+data['structure_id']+"'></span>Total Weight <span id='weigth_total_quantity_percentage_target-"+data['structure_id']+"'>"+data['total_weight']+"%</span></div>";
+		htmlTemplateQuantity+="  </div>";
+		htmlTemplateQuantity+="	<div class=\"ibox-content\">";
+		htmlTemplateQuantity+=" <div class=\"table-responsive scrollbar-inner\"  style='overflow:auto;'>";
+		htmlTemplateQuantity+="<table style='width:100%; top: -38px;' id=\"tableQauntity\" class=\"table table-striped tableQauntity fixedHeader\">";
+		htmlTemplateQuantity+="<thead>";
+			htmlTemplateQuantity+="<tr>";
+				htmlTemplateQuantity+="<th style=\"width:3%; text-align:center;\" class=''><b>Select</b></th>";
+				htmlTemplateQuantity+="<th style=\"width:30%\" class=''><b>Appraisal Item Name</b></th>";
+				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Target</b> </th>";
+				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Forecast Value</b> </th>";
+				
+				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>%Weight</b></th>";
+			//	htmlTemplateQuantity+="<th style=\"width:3%;  text-align:center;\" class=''></th>";
+				htmlTemplateQuantity+="</tr>";
+				htmlTemplateQuantity+="</thead>";
+				htmlTemplateQuantity+="<tbody id=\"\">";
+				$.each(data['items'],function(index,indexEntry){
+					
+					item_id_array.push(indexEntry['item_id']);
+					 
+	 
+					htmlTemplateQuantity+="<tr>";
+					
+						htmlTemplateQuantity+="<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['item_id']+"'></td>";
+						htmlTemplateQuantity+="<td style=\"width:30%\" class='id-"+indexEntry['structure_id']+"-item_name' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' style='padding-top:7px;'>"+indexEntry['item_name']+"</td>";
+						htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input class='input-sm-small' type='text' id='input-with-keypress-2-"+indexEntry['item_id']+"' name='input-with-keypress-2-"+indexEntry['item_id']+"'></td>";
+						htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input class='input-sm-small' type='text' id='input-with-keypress-3-"+indexEntry['item_id']+"' name='input-with-keypress-3-"+indexEntry['item_id']+"'></td>";
+						htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly'  type='text'></td>";
+						//htmlTemplateQuantity+="<td style=\"width:3%; text-align:center;\"><a href='#'><i class='fa fa-cog font-gear '></i></a></td>";
+					htmlTemplateQuantity+="</tr>";
+					
+				});
+				htmlTemplateQuantity+="</tbody>";
+				htmlTemplateQuantity+="</table>";
+				htmlTemplateQuantity+="<input type='hidden' id='structure_id-"+data['structure_id']+"' class='structure_id' value="+data['structure_id']+">";
+				htmlTemplateQuantity+="<input type='hidden' id='form-"+data['structure_id']+"' class='' value=\"form1\">";
+				htmlTemplateQuantity+="<input type='hidden' id='item_id_array-"+data['structure_id']+"' class='item_id_array' value=\""+item_id_array+"\">";
+				
+				
+				htmlTemplateQuantity+="</div>";
+				htmlTemplateQuantity+="<br style=\"clear:both\">";	
+			htmlTemplateQuantity+="</div>";
 		htmlTemplateQuantity+="</div>";
-	htmlTemplateQuantity+="</div>";
-	htmlTemplateQuantity+="</div>";
+		htmlTemplateQuantity+="</div>";
+		
+		
+	}
 	
 	//return htmlTemplateQuantity;
 	$("#appraisal_template_area").append(htmlTemplateQuantity);
@@ -1761,9 +1808,9 @@ var calculationGrandTotalFn = function(id){
 }
 var bindingSlideScoreBarFn = function(){
 	
-	//console.log(appraisal_item_id_array);
+	//console.log(item_id_array);
 	
-	$.each(appraisal_item_id_array,function(index,indexEntry){
+	$.each(item_id_array,function(index,indexEntry){
 		
 		if(index<=2){
 			
@@ -1960,8 +2007,8 @@ var username = $('#user_portlet').val();
 var password = $('#pass_portlet').val();
 
 /*Fixed for Test.*/
- username = "1";
- password =	"11";
+// username = "1";
+// password =	"11";
 	
 if(username!="" && username!=null & username!=[] && username!=undefined ){
 	
@@ -2017,10 +2064,11 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	
 
 		//dropDrowDepartmentFn();
-		//appraisalLevelListFn();
-		//appraisalTypeFn('','1');
+		appraisalLevelListFn();
+		appraisalTypeFn('','1');
 		periodFrequencyFn();
 		yearListFn();
+		$(".app_url_hidden").show();
 		
 	
 		//Org Autocomplete Start
@@ -2170,13 +2218,14 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 			$("#btnAddAnother").removeAttr("disabled");
 			//Default end
 			getTemplateFn();
-			dropDrowAsignToFn();
-			
+			/*dropDrowAsignToFn();
 			$("#assignTo").off("change");
 			$("#assignTo").change(function(){
 				dropDrowActionFn($(this).val());
 			});
 			$("#assignTo").change();
+			*/
+			dropDrowActionFn($(this).val());
 			
 			$(window).scrollTop(0);
 			setTimeout(function(){
@@ -2275,12 +2324,28 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 		});
 		
 		
+		//Button Click Stage History Start.
+		
+		$("#slideUpDownStageHistory").click(function(){
+			//alert("hello jquery");
+			$("#slideStageHistory").slideToggle();
+			
+			/*
+			$(window).scrollTop(1000000);
+			setTimeout(function(){
+				$(".modal-body").scrollTop(1000000);
+				$(".fht-tbody").scrollTop(1000000);
+			},3000);
+			*/
+			return false;
+		});
+		
+		//Button Click Stage History End.
+		
+		
 		
 		}
-		setTimeout(function(){
-			alert("test");
-			$(".app_url_hidden").show();
-		},3000);
+	
 		
 		
 	}

@@ -105,6 +105,16 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	 	.form-label-customs{
 	 		text-align: right;
 	 	}
+	 	.aui .row-fluid .span4{
+			width: 32.624%;
+		}
+		
+		#positionBox{
+			width:49.718%
+		}
+		#organizationBox{
+			width:49.718%
+		}
 		/*Quantity End*/
 	
   }
@@ -113,6 +123,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
   /*  desktop Start#########################################*/
  @media (min-width: 980px) and (max-width: 1199px) {
  
+ 	body{
+ 	 background:red;
+ 	}
  	.modal.large {
 		    width: 90%;
 		    margin-left:-45%;  
@@ -148,6 +161,15 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	 	.form-label-customs{
 	 		text-align: right;
 	 	}
+	 	.aui .row-fluid .span4{
+			width: 32.624%;
+		}
+		#positionBox{
+			width:100%
+		}
+		#organizationBox{
+			width:100%
+		}
 		/*Quantity End*/
  	
   }
@@ -168,7 +190,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 		}
 		
 	.aui .ibox-title2{
-		height:45px;
+		height:32px;
 	}
 	
 	.aui .btnAdd{
@@ -219,6 +241,14 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	.aui #textarea_cds{
 		height: 150px;
 	}
+	
+	#positionBox{
+		width:100%
+	}
+	#organizationBox{
+		width:100%
+	}
+
 	/*Qauntity End*/
   }
  /* Portrait tablet to landscape and desktop End############*/ 
@@ -262,12 +292,18 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	}
 	
 	.aui .ibox-title2{
+	/*
 		height:63px;
+		*/
+		height:32px;
 	}
 	
 	.aui .btnAdd{
 		position: relative;
+		/*
    		top: -22px;
+   		*/
+   		top: 0px;
 	}
 	/*All Form Start*/
 	.aui .modal-body{
@@ -317,6 +353,17 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	.aui #textarea_cds{
 		height: 77px;
 	}
+	.titleQuantityForm{
+ 		display:none;
+ 	}
+	
+	#positionBox{
+		width:100%
+	}
+	#organizationBox{
+		width:100%
+	}
+
  	/*Quantity End*/
 	
   }
@@ -348,12 +395,18 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	}
 	
 	.aui .ibox-title2{
+	/*
 		height:63px;
+	*/
+		height:32px;
 	}
 	
 	.aui .btnAdd{
 		position: relative;
+		/*
    		top: -22px;
+   		*/
+   		top: 0px;
 	}
 	/*All Form Start*/
 	/*
@@ -419,6 +472,16 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
  	.aui .ibox-title2 .btn{
  		font-size:12px;
  	}
+ 	.titleQuantityForm{
+ 		display:none;
+ 	}
+ 	
+ 	#positionBox{
+		width:100%
+	}
+	#organizationBox{
+		width:100%
+	}
 
   }
   /* Landscape phones and down End##########################*/
@@ -634,10 +697,14 @@ overflow-y: visible;
     padding: none;
     font-size: 14px;
 }
+
+
+
+
 </style>
 <body class=" gray-bg ">
 <!--  #####################Content data here ######################-->
-<div class="">
+<div class="app_url_hidden">
 <div class="container1">
 <div class='row-fluid'>
 	<div id="slide_status" class='span12'>
@@ -662,38 +729,25 @@ overflow-y: visible;
          						<div class="ibox-content breadcrumbs2">
 							<div class="row-fluid p-t-xxs">
 									
-									<div id="appraisalLevelArea" class="form-group pull-left span2"
-										style="margin-left: 5px">
+									<div id="appraisalLevelArea" class="form-group pull-left span4" style="margin-left: 5px">
 										<select data-toggle="tooltip" title="Appraisal Level"
 											class="input form-control input-sm" id="appraisalLevel"
 											name="appraisalLevel">
 											<option value="0"></option>
 										</select>
 									</div>
-									 
-									 
-									 <div id="kpiTypeArea" class="form-group pull-left span2"
-										style="margin-left: 5px">
-										<select data-toggle="tooltip" title="KPI Type"
-											class="input form-control input-sm" id="kpiType"
-											name="kpiType">
-
-											<option value="0"></option>
-
-										</select>
-									</div>
 									
-									<div id="perspectiveArea" class="form-group pull-left span2"
-										style="margin-left: 5px">
-										<select data-toggle="tooltip" title="Perspective"
-											class="input form-control input-sm" id="perspective"
-											name="perspective">
-
-											<option value="0"></option>
-
-										</select>
+									<div id="OrganizationArea"
+										class="form-group pull-left span4" style="margin-left: 5px">
+										<input data-toggle="tooltip" title="Organization "
+											placeholder="Organization " type='text'
+											name='Organization'
+											class='input form-control input-sm span12'
+											id='Organization'>
 									</div>
-									<div id="structureArea" class="form-group pull-left span2"
+									 
+									 
+									<div id="structureArea" class="form-group pull-left span4"
 										style="margin-left: 5px">
 										<select data-toggle="tooltip" title="Structure"
 											class="input form-control input-sm" id="structure"
@@ -703,8 +757,41 @@ overflow-y: visible;
 
 										</select>
 									</div>
+									
+									 
+									 <div id="kpiTypeArea" class="form-group pull-left span4"
+										style="margin-left: 5px">
+										<select data-toggle="tooltip" title="KPI Type"
+											class="input form-control input-sm" id="kpiType"
+											name="kpiType">
+
+											<option value="0"></option>
+
+										</select>
+									</div>
+									<div id="appraisalItemNameArea"
+										class="form-group pull-left span4" style="margin-left: 5px">
+										<input data-toggle="tooltip" title="Appraisal Item "
+											placeholder="Appraisal Item " type='text'
+											name='appraisalItemName'
+											class='input form-control input-sm span12'
+											id='appraisalItemName'>
+									</div>
+									
+									
+									<div id="perspectiveArea" class="form-group pull-left span4"
+										style="margin-left: 5px">
+										<select data-toggle="tooltip" title="Perspective"
+											class="input form-control input-sm" id="perspective"
+											name="perspective">
+
+											<option value="0"></option>
+
+										</select>
+									</div>
+									
 									 <!-- 
-									<div id="DepartmentArea" class="form-group pull-left span2"
+									<div id="DepartmentArea" class="form-group pull-left span3"
 										style="margin-left: 5px">
 										<select data-toggle="tooltip" title="Department"
 											class="input form-control input-sm" id="department"
@@ -715,23 +802,9 @@ overflow-y: visible;
 									 
 									  
 									 
-									<div id="appraisalItemNameArea"
-										class="form-group pull-left span3" style="margin-left: 5px">
-										<input data-toggle="tooltip" title="Appraisal Item "
-											placeholder="Appraisal Item " type='text'
-											name='appraisalItemName'
-											class='input form-control input-sm span12'
-											id='appraisalItemName'>
-									</div>
+									
 									 
-									<div id="OrganizationArea"
-										class="form-group pull-left span3" style="margin-left: 5px">
-										<input data-toggle="tooltip" title="Organization "
-											placeholder="Organization " type='text'
-											name='Organization'
-											class='input form-control input-sm span12'
-											id='Organization'>
-									</div>
+									
 								
 								
 									<div class="form-group pull-right m-b-none ">
@@ -990,7 +1063,7 @@ overflow-y: visible;
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
              
-                <h4 class="modal-title" id="modalTitleDeductScore"><span id="modalDeductScoreDescription"> </span>(Deduct)</h4>
+                <h4 class="modal-title" id="modalTitleDeductScore"><span id="modalDeductScoreDescription"> </span> </h4>
                
             </div>
             <div class="modal-body">
@@ -1162,7 +1235,7 @@ overflow-y: visible;
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
              
-                <h4 class="modal-title" id="modalTitleQuality"><span id="modalQualityDescription"></span>(Quality)</h4>
+                <h4 class="modal-title" id="modalTitleQuality"><span id="modalQualityDescription"></span> </h4>
                
             </div>
             <div class="modal-body">
@@ -1314,7 +1387,7 @@ overflow-y: visible;
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
              
-                <h4 class="modal-title" id="modalTitleQuantity"><span id="modalQuantityDescription"></span>(Quantity) </h4>
+                <h4 class="modal-title" id="modalTitleQuantity"><span id="modalQuantityDescription"></span>  </h4>
                
             </div>
             <div class="modal-body">
@@ -1355,18 +1428,25 @@ overflow-y: visible;
 			                
 			                <div class='form-file-mangement'>
 				                <div class="form-label-quantity">
-				                
-				                	Remind Condition <span class='redFont'>*</span>
+				                	Baseline Value <span class='redFont'>*</span>
 				                </div>
 				                
-				                <div class="form-input-customs" id="remindCOnditionAreaQuantity">
+				                <div class="form-input-customs">
 				                
-				                		<select class="form-control input-sm" id="remindCOnditionQuantity">
-					                		 <option value='Daily'>Daily</option>
-					                		 <option value='Monthly'>Monthly</option>
-					                		 <option value='Quarterly'>Quarterly</option>
-					                	</select>
+				                	<input type="text" class="form-control input-sm numberOnly span12" placeholder="Baseline Value" id="baselineValueQuantity">
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			               <div class='form-file-mangement'>
+				                <div class="form-label-quantity">
+				                	Appraisal Level <span class='redFont '>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs" id="appraisalLevelAreaQuantity">
+				                	<select class="form-control input-sm multipleSelect span12"   multiple="multiple" id="appraisalLevelQuantity">
 				                		
+				                	</select>
 				                </div>
 				                <br style="clear:both">
 			                </div>
@@ -1451,37 +1531,49 @@ overflow-y: visible;
 				                <br style="clear:both">
 			                </div>
 			                
-			                 
-			                <div class='form-file-mangement'>
+			                 <div class='form-file-mangement'>
 				                <div class="form-label-quantity">
-				                	Baseline Value <span class='redFont'>*</span>
+				                
+				                	Remind Condition <span class='redFont'>*</span>
 				                </div>
 				                
-				                <div class="form-input-customs">
+				                <div class="form-input-customs" id="remindCOnditionAreaQuantity">
 				                
-				                	<input type="text" class="form-control input-sm numberOnly span12" placeholder="Baseline Value" id="baselineValueQuantity">
+				                		<select class="form-control input-sm" id="remindCOnditionQuantity">
+					                		 <!-- 
+					                		 <option value='Daily'>Daily</option>
+					                		 <option value='Monthly'>Monthly</option>
+					                		 <option value='Quarterly'>Quarterly</option>
+					                		  -->
+					                	</select>
+				                		
 				                </div>
 				                <br style="clear:both">
 			                </div>
-			                 <div class='form-file-mangement'>
+			                
+			                  
+			               <div class='form-file-mangement'>
 				                <div class="form-label-quantity">
-				                	Appraisal Level <span class='redFont '>*</span>
+				                	Value Type <span class='redFont '>*</span>
 				                </div>
 				                
-				                <div class="form-input-customs" id="appraisalLevelAreaQuantity">
-				                	<select class="form-control input-sm multipleSelect span12"   multiple="multiple" id="appraisalLevelQuantity">
+				                <div class="form-input-customs" id="valueTypeAreaQuantity">
+				                	<select class="form-control input-sm span12"    id="valueTypeQuantity">
 				                		
 				                	</select>
 				                </div>
 				                <br style="clear:both">
 			                </div>
+			                 
+			                
+			                 
 			                
 			                
 			                <!-- form end -->
                 	</div>
                 	 <br style="clear:both">
                 	<div class='row-fluid'>
-	                	<div class='span6' >
+	                	<div class='span6 mutiSelectBox' id='organizationBox' >
 	                		
 	                		<!-- panel1 start-->
 	                		<div class="ibox-title3">
@@ -1502,7 +1594,7 @@ overflow-y: visible;
 		                	  
 	                	</div>
 	                	
-	                	<div class='span6' >
+	                	<div class='span6' id='positionBox' style='margin-left:5px;'>
 	                		<!-- panel2 start-->
 	                		
 	                		<div class="ibox-title3">

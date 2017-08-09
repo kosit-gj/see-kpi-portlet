@@ -63,7 +63,7 @@ var updateQuantityFn  = function(){
 	 var position=($('[name="positionQuantity[]"]').val());
 	 var kpi_type_id=$("#kpiTypeQuantity").val();
 	 var remind_condition=$("#remindCOnditionQuantity").val();
-		
+	 var value_type=$("#valueTypeQuantity").val();
 	 var is_active="";
 	 if($('#isActiveQuantity').prop('checked')==true){
 		 is_active=1;
@@ -93,7 +93,8 @@ var updateQuantityFn  = function(){
 		 "position":position,
 		 "appraisal_level":appraisal_level_id,
 		 "kpi_type_id":kpi_type_id,
-		 "remind_condition":remind_condition,
+		 "remind_condition_id":remind_condition,
+		 "value_type_id":value_type,
 		 "form_id":"1"
 		},
 	    success:function(data,status){
@@ -129,6 +130,7 @@ var insertQuantityFn = function(param) {
 	 var position=($('[name="positionQuantity[]"]').val());
 	 var kpi_type_id=$("#kpiTypeQuantity").val();
 	 var remind_condition = $("#remindCOnditionQuantity").val();
+	 var value_type = $("#valueTypeQuantity").val();
 	
 	 /*
 	 console.log(appraisal_level_id);
@@ -166,7 +168,8 @@ var insertQuantityFn = function(param) {
 			 "position":position,
 			 "appraisal_level":appraisal_level_id,
 			 "kpi_type_id":kpi_type_id,
-			 "remind_condition":remind_condition,
+			 "remind_condition_id":remind_condition,
+			 "value_type_id":value_type,
 			 "form_id":"1"
 		},
 		success:function(data){
@@ -273,7 +276,8 @@ structure_name
 		dropDrowOrgFn("Quantity",data['org'],defaultAll=false);
 		dropDrowPositionFn("Quantity",data['position'],defaultAll=false);
 		dropDrowkpiTypeFn("Quantity",data['kpi_type_id'],defaultAll=false);
-		
+		dropDrowValueTypeFn("Quantity",data['value_type_id'],defaultAll=false);
+		dropDrowremindConditionFn("Quantity",'',defaultAll=false);
 		
 		$("#baselineValueQuantity").val(data['baseline_value']);
 		$("#formulaDescriptionQuantity").val(data['formula_desc']);
@@ -394,6 +398,8 @@ structure_name
 		dropDrowPositionFn("Quantity",$("#embed_position_id").val(),defaultAll=false);
 		dropDrowkpiTypeFn("Quantity",$("#embed_kpi_type_id").val(),defaultAll=false);
 		uomListFn("Quantity");
+		dropDrowValueTypeFn("Quantity",'',defaultAll=false);
+		dropDrowremindConditionFn("Quantity",'',defaultAll=false);
 		$("#btnAddAnotherQuantity").show();
 		//SEARCH
 		//Autocomplete Search Start.

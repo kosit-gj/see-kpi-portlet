@@ -7,11 +7,13 @@ var globalData=[];
 var getDataFn = function(page,rpp) {
 	
 	
-	//var appraisal_level_id = $("#embed_appraisal_level_id").val();
+	var appraisal_level_id = $("#embed_appraisal_level_id").val();
 	var structure_id= $("#embed_structure_id").val();
 	var perspective_id= $("#embed_perspective_id").val();
 	var item_id= $("#embed_item_id").val();
-	var organization_name= $("#embed_organization").val();
+	var organization_id= $("#embed_organization").val();
+	var kpi_type_id= $("#embed_kpi_type_id").val();
+	
 	
 
 	$.ajax({
@@ -23,11 +25,12 @@ var getDataFn = function(page,rpp) {
 		data:{
 			"page":page,
 			"rpp":rpp,
-			//"appraisal_level_id":appraisal_level_id,
+			"level_id":appraisal_level_id,
+			"kpi_type_id":kpi_type_id,
 			"structure_id":structure_id,
 			"perspective_id":perspective_id,
 			"item_id":item_id,
-			"org_name":organization_name
+			"org_id":organization_id
 			
 			
 		},
@@ -113,8 +116,13 @@ var listDataFn = function(data) {
 		mainContentHTML+="                      <tr>";
 		mainContentHTML+=" 						<th></th>";
 		$.each(indexEntry['columns'],function(columns,columnsEntry){
-			
-		mainContentHTML+="                          <th >"+columnsEntry['column_display']+"</th>";
+			if(columnsEntry['data_type']=="number"){
+				mainContentHTML+="                          <th  style='text-align:right;'>"+columnsEntry['column_display']+"</th>";
+			}else if(columnsEntry['data_type']=="checkbox"){
+				mainContentHTML+="                			 <th style='text-align:center;'>"+columnsEntry['column_display']+"</th>";
+			}else{
+				mainContentHTML+="                          <th style='text-align:left;'>"+columnsEntry['column_display']+"</th>";
+			}
 		});
 		
 		/*
@@ -140,6 +148,8 @@ var listDataFn = function(data) {
 		
 		if(columnsEntry['data_type']=="number"){
 			mainContentHTML+="                			<td style=\"text-align:right\">"+itemsEntry[columnsEntry['column_name']]+"</td>";
+		}else if(columnsEntry['data_type']=="checkbox"){
+			mainContentHTML+="                			<td style=\"text-align:center\">"+displayTypeFn(itemsEntry[columnsEntry['column_name']],columnsEntry['data_type'])+"</td>";
 		}else{
 			mainContentHTML+="                			<td>"+displayTypeFn(itemsEntry[columnsEntry['column_name']],columnsEntry['data_type'])+"</td>";
 		}
@@ -327,14 +337,18 @@ var searchAdvanceFn = function() {
 	var apraisalItemId=$("#appraisalItemName").val().split("-");
 	apraisalItemId=apraisalItemId[0];
 	
+	var Organization=$("#Organization").val().split("-");
+	Organization=Organization[0];
+	
 	
 	var embedParam="";
-	//embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id' name='embed_appraisal_level_id' value='"+$("#appraisalLevel").val()+"'>";
-	embedParam+="<input type='hidden' class='embed_param_search' id='embed_structure_id' name='embed_structure_id' value='"+$("#structure").val()+"'>";
-	embedParam+="<input type='hidden' class='embed_param_search' id='embed_perspective_id' name='embed_perspective_id' value='"+$("#perspective").val()+"'>";
-	embedParam+="<input type='hidden' class='embed_param_search' id='embed_item_id' name='embed_item_id' value='"+apraisalItemId+"'>";
-	embedParam+="<input type='hidden' class='embed_param_search' id='embed_organization' name='embed_organization' value='"+$("#Organization").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id' name='embed_appraisal_level_id' value='"+$("#appraisalLevel").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_kpi_type_id' name='embed_kpi_type_id' value='"+$("#kpiType").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_perspective_id' name='embed_perspective_id' value='"+$("#perspective").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_structure_id' name='embed_structure_id' value='"+$("#structure").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_item_id' name='embed_item_id' value='"+apraisalItemId+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_organization' name='embed_organization' value='"+Organization+"'>";
+	
 	$("#embedParamSearch").append(embedParam);
 	
 	getDataFn();
@@ -492,6 +506,80 @@ var structureListFn = function(nameArea){
 	})
 
 }
+
+var dropDrowValueTypeFn =function(nameArea,id,defaultAll){
+	/*
+    "kpi_type_id": 3,
+    "kpi_type_name": "Deduct"
+	 */
+
+	
+	
+	//value_type_id": 1,
+    //"value_type_name": "Bigger is better"
+    	
+	if(nameArea==undefined){
+		nameArea="";
+	}
+	$.ajax({
+		url:restfulURL+"/see_api/public/appraisal_item/value_type_list",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			var htmlOption="";
+			if(defaultAll==true){
+				htmlOption+="<option value=''>All Value Type</option>";
+			}
+			$.each(data,function(index,indexEntry){
+				if(id==indexEntry['value_type_id']){
+					htmlOption+="<option selected='selected' value="+indexEntry['value_type_id']+">"+indexEntry['value_type_name']+"</option>";
+				}else{
+					htmlOption+="<option value="+indexEntry['value_type_id']+">"+indexEntry['value_type_name']+"</option>";
+				}
+			});
+			$("#valueType"+nameArea).html(htmlOption);
+		}
+	});
+	
+	
+}
+
+var dropDrowremindConditionFn =function(nameArea,id,defaultAll){
+	/*
+    "kpi_type_id": 3,
+    "kpi_type_name": "Deduct"
+	 */
+	//"remind_condition_id": 1,
+    //"remind_condition_name": "Monthly"
+    	
+	if(nameArea==undefined){
+		nameArea="";
+	}
+	$.ajax({
+		url:restfulURL+"/see_api/public/appraisal_item/remind_list",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			var htmlOption="";
+			if(defaultAll==true){
+				htmlOption+="<option value=''>All Remind Condition</option>";
+			}
+			$.each(data,function(index,indexEntry){
+				if(id==indexEntry['value_type_id']){
+					htmlOption+="<option selected='selected' value="+indexEntry['remind_condition_id']+">"+indexEntry['remind_condition_name']+"</option>";
+				}else{
+					htmlOption+="<option value="+indexEntry['remind_condition_id']+">"+indexEntry['remind_condition_name']+"</option>";
+				}
+			});
+			$("#remindCOndition"+nameArea).html(htmlOption);
+		}
+	});
+}
+
 var dropDrowkpiTypeFn = function(nameArea,id,defaultAll){
 	/*
     "kpi_type_id": 3,
@@ -768,14 +856,20 @@ $(document).ready(function(){
 	appraisalLevelListFn('','',defaultAll=true,multiSelect=false);
 	perspectiveListFn();
 	structureListFn();
-	dropDrowkpiTypeFn();
+	dropDrowkpiTypeFn('','',defaultAll=true);
+	$(".app_url_hidden").show();
 	//parameter end
 	
 	
 	
 
 	//Autocomplete Search Start
-
+	var splitOrgIdFn = function(Organization){
+		
+		var orgId = Organization.split("-");
+		orgId=orgId[0]
+		return orgId;
+	}
 	$("#appraisalItemName").autocomplete({
         source: function (request, response) {
         	$.ajax({
@@ -783,7 +877,20 @@ $(document).ready(function(){
 				 type:"post",
 				 dataType:"json",
 				 headers:{Authorization:"Bearer "+tokenID.token},
-				 data:{"appraisal_item_name":request.term,"perspective_id":$("#perspective").val(),"appraisal_level_id":$("#appraisalLevel").val(),"structure_id":$("#structure").val()},
+				 data:{
+					 "item_name":request.term,
+					 /*
+					 "perspective_id":$("#perspective").val(),
+					 "appraisal_level_id":$("#appraisalLevel").val(),
+					 "structure_id":$("#structure").val()
+					 */
+					 
+					 "level_id":$("#appraisalLevel").val(),
+					 "kpi_type_id":$("#kpiType").val(),
+					 "structure_id":$("#structure").val(),
+					 "perspective_id":$("#perspective").val(),
+					 "org_id":splitOrgIdFn($("#Organization").val())
+					 },
 				 //async:false,
                  error: function (xhr, textStatus, errorThrown) {
                         console.log('Error: ' + xhr.responseText);
@@ -791,8 +898,8 @@ $(document).ready(function(){
 				 success:function(data){
 						response($.map(data, function (item) {
                             return {
-                                label: item.item_id+"-"+item.appraisal_item_name,
-                                value: item.item_id+"-"+item.appraisal_item_name
+                                label: item.item_id+"-"+item.item_name,
+                                value: item.item_id+"-"+item.item_name
                             };
                         }));
 				},
@@ -823,8 +930,8 @@ $(document).ready(function(){
 				 success:function(data){
 						response($.map(data, function (item) {
                             return {
-                                label: item.org_name,
-                                value: item.org_name
+                                label: item.org_id+"-"+item.org_name,
+                                value: item.org_id+"-"+item.org_name
                             };
                         }));
 				},
