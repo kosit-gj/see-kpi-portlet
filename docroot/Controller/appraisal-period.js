@@ -302,7 +302,7 @@ $(document).ready(function(){
 		    	 					"url":""+restfulURL+"/see_api/public/appraisal_period/appraisal_year_list"
 		    	 					},{
 		        	 				"label":"Description","label_tooltip":"Description","inputType":"text","placeholder":"Description",
-		        	 				"id":"appraisal_period_desc","width":"100%",
+		        	 				"id":"appraisal_period_desc","width":"100%","default":"",
 		        	 				"url":""+restfulURL+"/see_api/public/appraisal_period/auto_desc"
 		        				    },],
 		    	    			
