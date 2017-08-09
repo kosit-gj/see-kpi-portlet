@@ -201,6 +201,35 @@ var clearFn = function(options){
 			var dataDefault =(indexEntry['default'] == undefined ? "" : indexEntry['default']);
 			$("form#"+options['formDetail']['id']+" #"+indexEntry['id']).val(dataDefault);
 		}else if(indexEntry['inputType']=="dropdown" || indexEntry['inputType']=="cascades"){
+			if(indexEntry['updateList']== true && indexEntry['updateList']!=undefined){
+				$.ajax({
+					url:indexEntry['url'],
+					dataType:"json",
+					type:"get",
+					async:false,
+					headers:{Authorization:"Bearer "+tokenID.token},
+					success:function(data){
+						var inputType ="";
+						//initValue
+						if(indexEntry['initValue']!=undefined){
+							inputType+="<option value=''>"+indexEntry['initValue']+"</option>";
+						}
+						golbalDataCascades[indexEntry['id']] = data;
+						
+						$.each(data,function(index2,indexEntry2){
+
+							if(dataSearch==indexEntry2[Object.keys(indexEntry2)[0]]){
+								
+								inputType+="<option selected value="+indexEntry2[Object.keys(indexEntry2)[0]]+">"+indexEntry2[Object.keys(indexEntry2)[1]]+"</option>";
+							}else{
+								inputType+="<option value="+indexEntry2[Object.keys(indexEntry2)[0]]+">"+indexEntry2[Object.keys(indexEntry2)[1]]+"</option>";
+							}
+						});
+						$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).html(inputType);
+						//alert(inputType);
+					}
+				})
+			}
 			$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).val($("form#"+options['formDetail']['id']+"  #"+indexEntry['id']+" option:first").val());
 		}else if(indexEntry['inputType']=="color"){
 			$("form#"+options['formDetail']['id']+" #"+indexEntry['id']).val("");

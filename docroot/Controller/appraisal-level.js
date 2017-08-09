@@ -183,7 +183,7 @@ $(document).ready(function(){
 		 	    				"label":"IsActive","inputType":"checkbox","default":"checked",
 		 	    				"id":"is_active","width":"200px"
 		 	    				},{
-		    					"label":"Parent Appraisal Level","inputType":"dropdown","initValue":"",
+		    					"label":"Parent Appraisal Level","inputType":"dropdown","initValue":"","updateList":true,
 		    					"id":"parent_id","width":"250px","url":""+restfulURL+"/see_api/public/appraisal_level"
 		    					},  
 		 	    				
