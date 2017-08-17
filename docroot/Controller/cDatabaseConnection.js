@@ -22,7 +22,7 @@
     					},
     			        {
     					"label":"IP Address","inputType":"text","placeholder":"IP Address",
-    					"id":"ip_address","width":"350px","dataTypeInput":"number","required":true
+    					"id":"ip_address","width":"350px","dataTypeInput":"ip","required":true
     					},
     			        {
     					"label":"Port","inputType":"text","placeholder":"Port",

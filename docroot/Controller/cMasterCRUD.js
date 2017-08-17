@@ -577,7 +577,7 @@ var createInputTypeFn  = function(object,tokenID){
 		
 	}else if(object['inputType']=="text" || object['inputType']=="autoComplete"){
 
-		var dataTypeInput =(object['dataTypeInput'] == 'number' ? "numberOnly" : "");
+		var dataTypeInput =(object['dataTypeInput'] == 'number' ? "numberOnly" : object['dataTypeInput'] == 'ip' ? "ip_address" : "");
 		var dataDefault =(object['default'] == undefined ? "" : object['default']);
 		if(object['placeholder']!=undefined){
 			
@@ -1041,6 +1041,29 @@ var createDataTableFn = function(options){
 				 }
 				 return true;
 			});
+			$.getScript($("#url_portlet").val()+"/js/plugins/jquery_mask/jquery.mask.min.js", function(){
+
+				  $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {
+					    translation: {
+					      'Z': {
+					        pattern: /[0-9]/, optional: true
+					      }
+					    },
+					    onChange: function(cep, event, currentField, options){
+					        if(cep){
+					            var ipArray = cep.split(".");
+					            for (i in ipArray){
+					                if(ipArray[i] != "" && parseInt(ipArray[i]) > 255){
+					                    ipArray[i] =  '255';
+					                }
+					            }
+					            var resultingValue = ipArray.join(".");
+					            $(currentField).val(resultingValue);
+					        }
+					    }
+					  });
+
+			});
 //			$(".numberOnly").ForceNumericOnly();
 //			$(".numberOnly").keyup(function (e) {
 //				IsNumeric($(this).val(),this);
@@ -1085,7 +1108,7 @@ var createDataTableFn = function(options){
 				//console.log(data);
 				
 				if($("#action").val()=="add"){
-					
+					console.log(data);
 					insertFn(data,options);
 				}else{
 					
@@ -1095,6 +1118,17 @@ var createDataTableFn = function(options){
 			
 			
 			$("#btnAddAnother").click(function(){
+				var checkboxes = $("form#"+options['formDetail']['id']).find('input[type="checkbox"]');
+				$.each( checkboxes, function( key, value ) {
+				    if (value.checked === false) {
+				        value.value = 0;
+				       
+				    } else {
+				        value.value = 1;
+				    
+				    }
+				   // $(value).attr('type', 'hidden');
+				});
 				var data = $("form#"+options['formDetail']['id']).serialize();
 				insertFn(data,options,'saveAndAnother');
 			});
@@ -1136,6 +1170,4 @@ var createDataTableFn = function(options){
 	    	setThemeColorFn(tokenID.theme_color);
 		}
 	});
-
 }
-
