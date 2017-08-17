@@ -234,8 +234,8 @@ var listImportEmployeeFn = function(data) {
 		//&lt;button class='btn btn-primary btn-xs btn-gear add' id=1 data-target=#ModalLevel data-toggle='modal'&gt;Role&lt;/button&gt;
 		htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del\" data-trigger=\"focus\" tabindex=\""+index+"\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" " +
 				//"<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["emp_id"]+ " data-target=#ModalLevel data-toggle='modal'>Role</button>&nbsp;" +
-				"<button class='btn btn-warning btn-xs btn-gear edit' id="+ indexEntry["emp_id"]+ " data-target=#ModalEditEmp data-toggle='modal'>Edit</button>&nbsp;" +
-		        "<button id="+indexEntry["emp_id"]+" class='btn btn-danger btn-xs btn-gear del'>Delete</button>\"></i></td>";
+				"<button class='btn btn-warning btn-xs btn-gear edit' id="+ indexEntry["emp_code"]+ " data-target=#ModalEditEmp data-toggle='modal'>Edit</button>&nbsp;" +
+		        "<button id="+indexEntry["emp_code"]+" class='btn btn-danger btn-xs btn-gear del'>Delete</button>\"></i></td>";
 		htmlTable += "</tr>";
 		
 		htmlAppraisalLevel="";
