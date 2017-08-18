@@ -9,10 +9,14 @@
 	 		
     	var options={
     			"colunms":[
+    						{"colunmsDisplayName":"Position Code","width":"15%","id":"position_code","colunmsType":"text"},
     			           {"colunmsDisplayName":"Position Name","width":"60%","id":"position_name","colunmsType":"text"},
     			           {"colunmsDisplayName":"Is Active","width":"auto","id":"is_active","colunmsType":"checkbox"},
     			          ],
     			"form":[{
+						"label":"Position Code","inputType":"text","placeholder":"Position Code",
+						"id":"position_code","width":"250px","required":true
+						},{
     					"label":"Position Name","inputType":"text","placeholder":"Position Name",
     					"id":"position_name","width":"350px","required":true
     					},
