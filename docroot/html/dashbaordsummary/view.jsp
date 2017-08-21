@@ -737,96 +737,122 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
 
 <div class="app_url_hidden" style="display: block;">
-<div class="row-fluid"><!-- start--row-fluid -->
+	<div class="row-fluid app_url_hidden">
+		<!-- start--row-fluid -->
 
-   <div class="span12">
-           <div class="ibox float-e-margins">
-                <div class="ibox-title" style="background-color: rgb(83, 120, 253); border-color: rgb(83, 120, 253); min-height:0px;">      
-                    <div class="titlePanelSearch">Advance Search</div> 
-    			</div>
-    					
-    			<div class="ibox-content breadcrumbs2" style="border-color: rgb(83, 120, 253);"> 
-    						
-    				<div class="row-fluid ">
-							
-							<div style="margin-left: 5px; margin-bottom: 3px;" class="form-group pull-left span2" id="yearArea">
-								<select name="year" id="year" class="input form-control input-sm" title="" data-toggle="tooltip" style="cursor: pointer;" data-original-title="Year">
-						
-									<option value="1">2016</option>
-									<option value="2">2017</option>
-						
-								</select>
-							</div>
-							<div style="margin-left: 5px; margin-bottom: 3px;" class="form-group pull-left span2" id="periodArea">
-								<select name="period" id="period" class="input form-control input-sm" title=""  data-toggle="tooltip" style="cursor: pointer;" data-original-title="Period">
-						
-									<option value="">Period1</option>
-									<option value="">Period1</option>
-						
-								</select>
-							</div>
-							
-							<div style="margin-left: 5px; margin-bottom: 3px;" class="form-group pull-left span2" id="apprasiaLevelArea">
-								<select name="apprasiaLevel" id="apprasiaLevel" class="input form-control input-sm" title=""  data-toggle="tooltip" style="cursor: pointer;" data-original-title="Apprasia Level">
-						
-									<option value="">Appraisal Level1</option>
-									<option value="">Appraisal Level2</option>
-						
-								</select>
-							</div>
-							<div style="margin-left: 5px; margin-bottom: 3px;" class="form-group pull-left span2" id="organizationArea">
-								<select name="organization" id="organization" class="input form-control input-sm" title=""  data-toggle="tooltip" style="cursor: pointer;" data-original-title="Organization">
-						
-									<option value="">Organization 1</option>
-									<option value="">Organization 2</option>
-						
-								</select>
-							</div>
-							<div style="margin-left: 5px; margin-bottom: 3px;" class="form-group pull-left span4" id="kpiArea">
-								<select name="kpi" id="kpi" class="input form-control input-sm" title=""  data-toggle="tooltip" style="cursor: pointer;" data-original-title="KPI">
-						
-									<option value="">KPI1</option>
-									<option value="">KPI2</option>
-						
-								</select>
-							</div>
-							
-						
-						<div style="margin-bottom: 5px;" class="form-group pull-right m-b-none ">
-							<button id="btnSearchAdvance" name="btnSearchAdvance" class="btn btn-info input-sm" type="button">
+		<div class="span12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title"
+					style="background-color: rgb(83, 120, 253); border-color: rgb(83, 120, 253); min-height: 0px;">
+					<div class="titlePanelSearch">Advance Search</div>
+				</div>
+
+				<div class="ibox-content breadcrumbs2"
+					style="border-color: rgb(83, 120, 253);">
+
+					<div class="row-fluid ">
+
+						<div style="margin-left: 5px; margin-bottom: 3px;"
+							class="form-group pull-left span2" id="yearArea">
+							<select name="year" id="year" class="input form-control input-sm"
+								title="" data-toggle="tooltip" style="cursor: pointer;"
+								data-original-title="Year">
+
+								<option value="1">2016</option>
+								<option value="2">2017</option>
+
+							</select>
+						</div>
+						<div style="margin-left: 5px; margin-bottom: 3px;"
+							class="form-group pull-left span2" id="periodArea">
+							<select name="period" id="period"
+								class="input form-control input-sm" title=""
+								data-toggle="tooltip" style="cursor: pointer;"
+								data-original-title="Period">
+
+								<option value="">Period1</option>
+								<option value="">Period1</option>
+
+							</select>
+						</div>
+
+						<div style="margin-left: 5px; margin-bottom: 3px;"
+							class="form-group pull-left span2" id="apprasiaLevelArea">
+							<select name="apprasiaLevel" id="apprasiaLevel"
+								class="input form-control input-sm" title=""
+								data-toggle="tooltip" style="cursor: pointer;"
+								data-original-title="Apprasia Level">
+
+								<option value="">Appraisal Level1</option>
+								<option value="">Appraisal Level2</option>
+
+							</select>
+						</div>
+						<div style="margin-left: 5px; margin-bottom: 3px;"
+							class="form-group pull-left span2" id="organizationArea">
+							<select name="organization" id="organization"
+								class="input form-control input-sm" title=""
+								data-toggle="tooltip" style="cursor: pointer;"
+								data-original-title="Organization">
+
+								<option value="">Organization 1</option>
+								<option value="">Organization 2</option>
+
+							</select>
+						</div>
+						<div style="margin-left: 5px; margin-bottom: 3px;"
+							class="form-group pull-left span4" id="kpiArea">
+							<select name="kpi" id="kpi" class="input form-control input-sm"
+								title="" data-toggle="tooltip" style="cursor: pointer;"
+								data-original-title="KPI">
+
+								<option value="">KPI1</option>
+								<option value="">KPI2</option>
+
+							</select>
+						</div>
+
+
+						<div style="margin-bottom: 5px;"
+							class="form-group pull-right m-b-none ">
+							<button id="btnSearchAdvance" name="btnSearchAdvance"
+								class="btn btn-info input-sm" type="button">
 								<i class="fa fa-search"></i>&nbsp;Search
 							</button>
-							
+
 						</div>
-					
+
 					</div>
-		
-	    		</div><!-- content end -->
-	    </div>
-	    		
+
+				</div>
+				<!-- content end -->
+			</div>
+
+		</div>
+
 	</div>
+	<!-- end--row-fluid -->
 
-</div><!-- end--row-fluid -->
 
-
-<style>
-.graphLTop{
-	float:left;
-	padding:5px;
-	border:1px solid #cccccc;
-	margin:2px;
-	width:28.8%;
-	font-weight:bold;
-	background:#ddd;
-	
+	<style>
+.graphLTop {
+	float: left;
+	padding: 5px;
+	border: 1px solid #cccccc;
+	margin: 2px;
+	width: 28.8%;
+	font-weight: bold;
+	background: #ddd;
 }
-.graphLTop .textGRaphTop{
-	text-align:center;
+
+.graphLTop .textGRaphTop {
+	text-align: center;
 }
-.graphLTopHeader{
-	font-weight:bold;
-	font-size:18px;
-	color:orange;
+
+.graphLTopHeader {
+	font-weight: bold;
+	font-size: 18px;
+	color: orange;
 }
 </style>
 
@@ -835,80 +861,105 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 
 
-<!-- content accordion start -->
-<div id="accordion">
-  <h3>Section 1</h3>
-  <div class='' style='height:auto;'>
-    	<div class='span4'>
-    		<div class='graphLTopHeader'>จำนวนเงิน Gross NPL</div>
-    		<div>
-    			<div class='graphLTop'>
-    				<div class='textGRaphTop'>Target</div>
-    				<div class='textGRaphTop'>9,999,999</div>
-    			</div>
-    			<div class='graphLTop'>
-    				
-    				<div class='textGRaphTop'>Forecast</div>
-    				<div class='textGRaphTop'>8,888,888</div>
-    			</div>
-    			<div class='graphLTop'>
-    				
-    				<div class='textGRaphTop'>Actual</div>
-    				<div class='textGRaphTop'>7,777,777</div>
-    			</div>
-    			<br style='clear:both'>
-    		</div>
-    		<div>
-    		 	<div id="chart-container">FusionCharts will render here</div>
-    		</div>
-    		
-    	</div>
-    	
-    	<div class='span8'>
-    			<div id="chart-container2">FusionCharts will render here</div>
-    	</div>
-  </div>
-  <h3>Section 2</h3>
-  <div>
-    <p>
-    Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-    purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-    velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-    suscipit faucibus urna.
-    </p>
-  </div>
-  <h3>Section 3</h3>
-  <div>
-    <p>
-    Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
-    Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
-    ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-    lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
-    </p>
-    <ul>
-      <li>List item one</li>
-      <li>List item two</li>
-      <li>List item three</li>
-    </ul>
-  </div>
-  <h3>Section 4</h3>
-  <div>
-    <p>
-    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-    et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
-    faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
-    mauris vel est.
-    </p>
-    <p>
-    Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
-    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-    inceptos himenaeos.
-    </p>
-  </div>
+	<!-- content accordion start -->
+	<div id="accordion">
+		<h3>Section 1</h3>
+		<div class='' style='height: auto;'>
+			<div class='span4'>
+				<div class='graphLTopHeader'>จำนวนเงิน Gross NPL</div>
+				<div>
+					<div class='graphLTop'>
+						<div class='textGRaphTop'>Target</div>
+						<div class='textGRaphTop'>9,999,999</div>
+					</div>
+					<div class='graphLTop'>
+
+						<div class='textGRaphTop'>Forecast</div>
+						<div class='textGRaphTop'>8,888,888</div>
+					</div>
+					<div class='graphLTop'>
+
+						<div class='textGRaphTop'>Actual</div>
+						<div class='textGRaphTop'>7,777,777</div>
+					</div>
+					<br style='clear: both'>
+				</div>
+				<div>
+					<div id="chart-container">FusionCharts will render here</div>
+				</div>
+
+			</div>
+
+			<div class='span8'>
+				<div id="chart-container2">FusionCharts will render here</div>
+			</div>
+		</div>
+		<h3>Section 2</h3>
+		<div>
+			<p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum
+				sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris
+				turpis porttitor velit, faucibus interdum tellus libero ac justo.
+				Vivamus non quam. In suscipit faucibus urna.</p>
+		</div>
+		<h3>Section 3</h3>
+		<div>
+			<p>Nam enim risus, molestie et, porta ac, aliquam ac, risus.
+				Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in
+				pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac
+				felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam
+				nisi, eu iaculis leo purus venenatis dui.</p>
+			<ul>
+				<li>List item one</li>
+				<li>List item two</li>
+				<li>List item three</li>
+			</ul>
+		</div>
+		<h3>Section 4</h3>
+		<div>
+			<p>Cras dictum. Pellentesque habitant morbi tristique senectus et
+				netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum
+				primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+				Aenean lacinia mauris vel est.</p>
+			<p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim
+				consequat lectus. Class aptent taciti sociosqu ad litora torquent
+				per conubia nostra, per inceptos himenaeos.</p>
+		</div>
+	</div>
+	<!-- content accordion end -->
+	<div class="panel-group" id="accordion2" role="tablist"
+		aria-multiselectable="true">
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="headingTwo">
+				<h4 class="panel-title">
+					<a class="collapsed" role="button" data-toggle="collapse"
+						data-parent="#accordion2" href="#collapseTwo" aria-expanded="false"
+						aria-controls="collapseTwo"
+						style='color: black; font-weight: bold;'> <span
+						class="fa fa-plus"></span> ALL KPI
+					</a>
+				</h4>
+			</div>
+			<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+				aria-labelledby="headingTwo">
+				<div class="panel-body">
+					<h3>Section test</h3>
+					<div>
+						<p>Cras dictum. Pellentesque habitant morbi tristique senectus
+							et netus et malesuada fames ac turpis egestas. Vestibulum ante
+							ipsum primis in faucibus orci luctus et ultrices posuere cubilia
+							Curae; Aenean lacinia mauris vel est.</p>
+						<p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim
+							consequat lectus. Class aptent taciti sociosqu ad litora torquent
+							per conubia nostra, per inceptos himenaeos.</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
+
 </div>
-<!-- content accordion end -->
-
-
-
- </div>
  
