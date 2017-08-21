@@ -151,11 +151,17 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 .aui #confrimModal {
 		left: 55%;
 	}
+	.aui #drop_down_list_appraisal_level{
+		width:27.5%;
+	}
 }
 /* Portrait tablet to landscape and desktop */
 @media ( min-width : 980px) and (max-width: 1199px) {
 	  .aui #confrimModal {
 		left: 57%;
+	}
+	.aui #drop_down_list_appraisal_level{
+		width:26.5%;
 	}
 }
 /* Portrait tablet to landscape and desktop */
@@ -345,7 +351,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 	
 
-				<div class="row-fluid" class="p-t-xxs">
+				<div class="row-fluid app_url_hidden" class="p-t-xxs">
 					<!-- start--row-fluid -->
 
 					<div class="col-lg-12">
@@ -355,24 +361,36 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							</div>
 				<div class="ibox-content breadcrumbs2">
 					<div class="row-fluid p-t-xxs">
-						<div id="drop_down_list_year" class="form-group pull-left span2"
+						<div id="drop_down_list_year" class="form-group pull-left span3"
 							style="margin-left: 5px">
 							<select class="input span12 m-b-n" ></select>
 							</div>
-						<div id="drop_down_list_month" class="form-group pull-left span2"
-							style="margin-left: 5px"><select class="input span12 m-b-n" ></select></div>
-						<div id="drop_down_list_appraisal_level"
-							class="form-group pull-left span2" style="margin-left: 5px">
+						<div id="drop_down_list_month" class="form-group pull-left span3"
+							style="margin-left: 5px"><select class="input span12 m-b-n" ></select>
+						</div>
+						<div id="drop_down_list_appraisal_type"
+							class="form-group pull-left span3" style="margin-left: 5px">
 							<select class="input span12 m-b-n" ></select>
 						</div>
-						<div class="form-group pull-left span2" style="margin-left: 5px">
+						<div id="drop_down_list_appraisal_level"
+							class="form-group pull-left span3" style="margin-left: 5px">
+							<select class="input span12 m-b-n" ></select>
+						</div>
+						<div class="form-group pull-left span3" style="margin-left: 5px">
+							<input data-toggle="tooltip" data-placement="top"
+								title="Organization" class="span12 m-b-n ui-autocomplete-input"
+								placeholder="Organization" id="org_name" name="org_name" type="text">
+							<input class="form-control input-sm" id="org_id"
+								name="org_id" value="" type="hidden">
+						</div>
+						<div class="form-group pull-left span3" style="margin-left: 5px">
 							<input data-toggle="tooltip" data-placement="top"
 								title="Position" class="span12 m-b-n ui-autocomplete-input"
 								placeholder="Position" id="position" name="position" type="text">
 							<input class="form-control input-sm" id="position_id"
 								name="position_id" value="" type="hidden">
 						</div>
-						<div class="form-group pull-left span2" style="margin-left: 5px">
+						<div class="form-group pull-left span3" style="margin-left: 5px">
 							<input data-toggle="tooltip" data-placement="top"
 								title="Employee Name" class="span12 m-b-n ui-autocomplete-input"
 								placeholder="Employee Name" id="emp_name" name="emp_name"
@@ -408,89 +426,6 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 					</div>
 				</div>
-
-
-				<!--  
-							<div class="ibox-content breadcrumbs2">
-								<div class="row-fluid p-t-xxs" >
-									<div class="span4 form-horizontal  ">
-										<div class="form-group p-xxs ">
-											<label class="control-label">Year</label>
-											<div id="drop_down_list_year" class="controls"></div>
-
-										</div>
-									</div>
-									<div class="span4 form-horizontal  ">
-										<div class="form-group p-xxs ">
-											<label class="control-label">Month</label>
-											<div id="drop_down_list_month" class="controls"></div>
-
-										</div>
-									</div>
-									<div class="span4 form-horizontal  ">
-										<div class="form-group p-xxs ">
-											<label class="control-label">Appraisal Level</label>
-											<div id="drop_down_list_appraisal_level" class="controls"></div>
-
-										</div>
-									</div>
-								</div>
-								<div class="row-fluid">
-									<div class="span4 form-horizontal ">
-										<div class="form-group p-xxs ">
-											<label class="control-label">Position</label>
-											<div class="controls">
-												<input data-toggle="tooltip" title="Position" class="span12 m-b-n" placeholder="Position" id="position" name="position" type="text">
-												<input class="form-control input-sm" 
-													type="hidden" id="position_id" name="position_id" value="">
-											</div>
-											
-
-										</div>
-									</div>
-									<div class="span4 form-horizontal ">
-										<div class="form-group p-xxs ">
-											<label class="control-label">Employee Name</label>
-											<div class="controls">
-												<input data-toggle="tooltip" title="Employee Name" class="span12 m-b-n" placeholder="Employee Name" id="emp_name" name="emp_name" type="text">
-												<input class="form-control input-sm"
-													type="hidden" id="emp_name_id"
-													name="emp_name_id">
-											</div>
-											
-
-										</div>
-									</div>
-
-									<div class="span4  ">
-										
-										<div class="pull-right ">
-											<button id="btn_import" type="button" data-target="#ModalImport"
-											data-toggle="modal" class="btn btn-success btn-sm "
-											style="margin-left: 5px">
-											<i class="fa fa-upload"></i>&nbsp;Import
-											</button>
-										</div>
-										<form id="formExportToExcel" action="" method="post"
-											class="pull-right " style="margin-bottom: 5px;margin-left: 5px">
-											<button id="exportToExcel" class="btn btn-warning btn-sm"
-												type="button">
-												<i class="fa fa-download"></i> Download
-											</button>
-										</form>
-										<div class="pull-right ">
-											<button type="button" name="btnSearchAdvance"
-											id="btnSearchAdvance" class="btn btn-info input-sm "
-											style="margin-left: 5px">
-											<i class="fa fa-search"></i>&nbsp;Search
-											</button>
-										</div>
-		
-									</div>
-
-								</div>
-
-								</div>-->
 
 							</div>
 							<!-- content end -->
