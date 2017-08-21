@@ -18,7 +18,7 @@
     					},
     			        {
     					"label":"Database Type","inputType":"dropdown","default":"checked",
-    					"id":"database_type_id","width":"250px","url":""+restfulURL+"/kpi_api/public/database_connection/db_type_list",
+    					"id":"database_type_id","width":"250px","url":""+restfulURL+"/see_api/public/database_connection/db_type_list",
     					},
     			        {
     					"label":"IP Address","inputType":"text","placeholder":"IP Address",
@@ -49,17 +49,17 @@
 			     	},{
  					"label":"bbb Name1","inputType":"dropdown",
  					"id":"connection_name1","width":"100%",
- 					"url":""+restfulURL+"/kpi_api/public/database_connection/db_type_list",
+ 					"url":""+restfulURL+"/see_api/public/database_connection/db_type_list",
  					"initValue":"All Data1"
  					},{
  					"label":"ccc Name2","inputType":"dropdown",
  					"id":"connection_name2","width":"100%",
- 					"url":""+restfulURL+"/kpi_api/public/database_connection/db_type_list",
+ 					"url":""+restfulURL+"/see_api/public/database_connection/db_type_list",
  					"initValue":"All Data2"
  					}],
  					
     			 "formDetail":{"formSize":"modal-dialog","formName":"Database Connection","id":"databaseConnection","pk_id":"connection_id"},       
-    			 "serviceName":[restfulURL+"/kpi_api/public/database_connection"],
+    			 "serviceName":[restfulURL+"/see_api/public/database_connection"],
     			 "tokenID":tokenID,
     			 "pagignation":false,
     			 "expressSearch":false,
