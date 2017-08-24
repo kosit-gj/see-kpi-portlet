@@ -59,9 +59,9 @@ var getDataFn = function(page,rpp){
 			if(data["raise_type"] == 1){$("#raiseFixAmount").prop("checked", true);}
 			else if(data["raise_type"] == 2){$("#raisePercentage").prop("checked", true);}
 			 
-			if(data["result_type"] == 1){$("#resultWeightPercentage").prop("checked", true);}
-			else if(data["result_type"] == 2){$("#resultPercentage").prop("checked", true);}
-			else if(data["result_type"] == 3){$("#raiseScore").prop("checked", true);}
+			if(data["result_type"] == 0){$("#resultWeightPercentage").prop("checked", true);}
+			else if(data["result_type"] == 1){$("#resultPercentage").prop("checked", true);}
+			else if(data["result_type"] == 2){$("#raiseScore").prop("checked", true);}
 			
 			
 			$("#listThemeColor").html(htmlTheamColor);
@@ -153,10 +153,10 @@ var clearFn = function() {
 	if(galbalDataSystemcon["raise_type"] == 1){$("#raiseFixAmount").prop("checked", true);}
 	else if(galbalDataSystemcon["raise_type"] == 2){$("#raisePercentage").prop("checked", true);}
 	 
-	if(galbalDataSystemcon["result_type"] == 1){$("#resultWeightPercentage").prop("checked", true);}
-	else if(galbalDataSystemcon["result_type"] == 2){$("#resultPercentage").prop("checked", true);}
-	else if(galbalDataSystemcon["result_type"] == 3){$("#raiseScore").prop("checked", true);}
-	var htmlTheamColor = "<button class=\"jscolor {valueElement:null,value:'"+galbalDataSystemcon["theme_color"]+"',valueElement:'themeColor',onFineChange:'setThemeColorFn(this)'} \" style='width:50px; height:20px;'></button>";
+	if(galbalDataSystemcon["result_type"] == 0){$("#resultWeightPercentage").prop("checked", true);}
+	else if(galbalDataSystemcon["result_type"] == 1){$("#resultPercentage").prop("checked", true);}
+	else if(galbalDataSystemcon["result_type"] == 2){$("#raiseScore").prop("checked", true);}
+	var htmlTheamColor = "<button class=\"btn jscolor {valueElement:null,value:'"+galbalDataSystemcon["theme_color"]+"',valueElement:'themeColor',onFineChange:'setThemeColorFn(this)'} \" style='width:70px; height:26px;'></button>";
 	$("#listThemeColor").html(htmlTheamColor);
 	jscolor.installByClassName("jscolor");
 };
@@ -243,9 +243,9 @@ var updateFn = function() {
 	if($("#raiseFixAmount:checked").is(":checked")){raiseType=1;}
 	else if($("#raisePercentage:checked").is(":checked")){raiseType=2;}
 	 
-	if($("#resultWeightPercentage:checked").is(":checked")){resultType=1;}
-	else if($("#resultPercentage:checked").is(":checked")){resultType=2;}
-	else if($("#raiseScore:checked").is(":checked")){resultType=3;}
+	if($("#resultWeightPercentage:checked").is(":checked")){resultType=0;}
+	else if($("#resultPercentage:checked").is(":checked")){resultType=1;}
+	else if($("#raiseScore:checked").is(":checked")){resultType=2;}
 	
 	$.ajax({
 		url:restfulURL+restfulPathSystemcon,
