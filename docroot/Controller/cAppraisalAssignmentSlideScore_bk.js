@@ -128,7 +128,7 @@ var setDataToTemplateFn = function(data,actionType){
 	if($("#embed_appraisal_type_id").val()==1){
 		$("#titlePanelInformation").html("Employee Information");
 		
-		$("#employee_code").html(head['emp_code']);
+		$("#employee_code").html(head['emp_id']);
 		$("#section").html(head['section_name']);
 		$("#appraisal_type").html(head['appraisal_type_name']);
 		$("#employee_name").html(head['emp_name']);
@@ -138,7 +138,6 @@ var setDataToTemplateFn = function(data,actionType){
 		$("#chief_employee_code").html(head['chief_emp_code']);
 		$("#position").html(head['position_name']);
 		$("#chief_employee_name").html(head['chief_emp_name']);
-		$("#start_working_date").html(head['working_start_date']);
 		
 		
 		$("#empInformation").show();
@@ -213,12 +212,12 @@ var setDataToTemplateFn = function(data,actionType){
 
 		$("#ModalAssignment").find('input[type="checkbox"]').removeAttr('disabled'); 
 		
-//		if(sessionStorage.getItem("is_coporate_kpi")==1){
-//			//total_weigth_quantity
-//			$(".total_weigth_quantity").prop("disabled",true);
-//		}else{
-//			$(".total_weigth_quantity").removeAttr('disabled'); 
-//		}
+		if(sessionStorage.getItem("is_coporate_kpi")==1){
+			//total_weigth_quantity
+			$(".total_weigth_quantity").prop("disabled",true);
+		}else{
+			$(".total_weigth_quantity").removeAttr('disabled'); 
+		}
 	}
 	
 	
@@ -475,27 +474,15 @@ var listDataFn = function(data) {
 			}else{
 				htmlHTML+=" <th style=\"width:5%; text-align:center;\" class=\"object-center\">Select</th>";
 			}
-			
-			if($("#embed_appraisal_type_id").val()==1){
-				
 				htmlHTML+=" <th style=\"width:8%\">Status</th>";
 				htmlHTML+=" <th style=\"width:10%\">Emp Code</th>";
 				htmlHTML+=" <th style=\"width:10%\">Emp Name</th>";
 				htmlHTML+=" <th style=\"width:15%\">Organization</th>";
+				/*
+				htmlHTML+=" <th style=\"width:15%\">Section</th>";
+				htmlHTML+=" <th style=\"width:15%\">Appraisal Type</th>";
+				*/
 				htmlHTML+=" <th style=\"width:15%\">Position</th>";
-							
-			}else if($("#embed_appraisal_type_id").val()==2){
-				
-				htmlHTML+=" <th style=\"width:8%\">Status</th>";
-				htmlHTML+=" <th style=\"width:10%\">Org Code</th>";
-				htmlHTML+=" <th style=\"width:15%\">Organization</th>";
-
-				
-			}
-				
-				
-				
-				
 			if(index!='p0'){
 				htmlHTML+=" <th style=\"width:7%; text-align:center;\">Manage</th>";
 			}else{
@@ -513,44 +500,24 @@ var listDataFn = function(data) {
 					htmlHTML+="	<td class='object-center'></td>";
 						
 				}else{
-					
-					if($("#embed_appraisal_type_id").val()==1){
-						htmlHTML+="	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-"+itemEntry['emp_id']+"' type='checkbox' value="+itemEntry['emp_id']+"-"+itemEntry['emp_code']+"></td>";
-					}else if($("#embed_appraisal_type_id").val()==2){
-						htmlHTML+="	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-"+itemEntry['org_id']+"' type='checkbox' value="+itemEntry['org_id']+"-"+itemEntry['org_code']+"></td>";
-						//alert(itemEntry['org_id']);
-					}
-				}
-				
-				
-				if($("#embed_appraisal_type_id").val()==1){
-					htmlHTML+="  <td id='status-"+itemEntry['emp_id']+"'>"+itemEntry['status']+"";
-					htmlHTML+="  <input type='hidden' id='emp_result_id-"+itemEntry['emp_id']+"' name='emp_result_id-"+itemEntry['emp_id']+"' value='"+itemEntry['emp_result_id']+"'>";
-					htmlHTML+="  <input type='hidden' id='is_coporate_kpi-"+itemEntry['emp_id']+"' name='is_coporate_kpi-"+itemEntry['emp_id']+"' value='"+itemEntry['is_coporate_kpi']+"'>";
-					htmlHTML+="  </td>";
-					htmlHTML+="  <td>"+itemEntry['emp_code']+"";
-					htmlHTML+="  <input type='hidden' id='period_id-"+itemEntry['emp_id']+"' name='period_id-"+itemEntry['emp_id']+"' value='"+itemEntry['period_id']+"'>";
-					htmlHTML+=" </td>";
-					htmlHTML+="  <td>"+itemEntry['emp_name']+"</td>";
-					htmlHTML+="  <td>"+itemEntry['org_name']+"</td>";
-					htmlHTML+="	<td>"+itemEntry['position_name']+"</td>";
-				}else{
-					
-					htmlHTML+="  <td id='status-"+itemEntry['emp_id']+"'>"+itemEntry['status']+"";
-					htmlHTML+="  <input type='hidden' id='emp_result_id-"+itemEntry['emp_id']+"' name='emp_result_id-"+itemEntry['emp_id']+"' value='"+itemEntry['emp_result_id']+"'>";
-					htmlHTML+="  <input type='hidden' id='is_coporate_kpi-"+itemEntry['emp_id']+"' name='is_coporate_kpi-"+itemEntry['emp_id']+"' value='"+itemEntry['is_coporate_kpi']+"'>";
-					htmlHTML+="  </td>";
-					htmlHTML+="  <td>"+itemEntry['org_code']+"";
-					htmlHTML+="  <input type='hidden' id='period_id-"+itemEntry['emp_id']+"' name='period_id-"+itemEntry['emp_id']+"' value='"+itemEntry['period_id']+"'>";
-					htmlHTML+=" </td>";
-					
-					htmlHTML+="  <td>"+itemEntry['org_name']+"</td>";
-					
+					htmlHTML+="	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-"+itemEntry['emp_id']+"' type='checkbox' value="+itemEntry['emp_id']+"-"+itemEntry['emp_code']+"></td>";
 					
 				}
+				htmlHTML+="  <td id='status-"+itemEntry['emp_id']+"'>"+itemEntry['status']+"";
+				htmlHTML+="  <input type='hidden' id='emp_result_id-"+itemEntry['emp_id']+"' name='emp_result_id-"+itemEntry['emp_id']+"' value='"+itemEntry['emp_result_id']+"'>";
+				htmlHTML+="  <input type='hidden' id='is_coporate_kpi-"+itemEntry['emp_id']+"' name='is_coporate_kpi-"+itemEntry['emp_id']+"' value='"+itemEntry['is_coporate_kpi']+"'>";
 				
-				
-				
+				htmlHTML+="  </td>";
+				htmlHTML+="  <td>"+itemEntry['emp_code']+"";
+				htmlHTML+="  <input type='hidden' id='period_id-"+itemEntry['emp_id']+"' name='period_id-"+itemEntry['emp_id']+"' value='"+itemEntry['period_id']+"'>";
+				htmlHTML+=" </td>";
+				htmlHTML+="  <td>"+itemEntry['emp_name']+"</td>";
+				htmlHTML+="  <td>"+itemEntry['org_name']+"</td>";
+				/*
+				htmlHTML+="	<td>"+itemEntry['section_name']+"</td>";
+				htmlHTML+="	<td>"+itemEntry['appraisal_type_name']+"</td>";
+				*/
+				htmlHTML+="	<td>"+itemEntry['position_name']+"</td>";
 				htmlHTML+="  <td style=\"text-align:center\">";
 				
 				if(index!='p0'){
@@ -920,14 +887,7 @@ var actionAssignmentFn = function(param){
 		}else{
 			employees+=",{";
 		}
-			if($("#embed_appraisal_type_id").val()==1){
-				employees+="\"emp_id\":\""+indexEntry+"\",\"emp_code\":\""+empldoyees_code[index]+"\",";
-				employees+="\"org_id\":\"\",\"org_code\":\"\"";
-			}else if($("#embed_appraisal_type_id").val()==2){
-				employees+="\"emp_id\":\"\",\"emp_code\":\"\",";
-				employees+="\"org_id\":\""+indexEntry+"\",\"org_code\":\""+empldoyees_code[index]+"\"";
-			}
-			
+			employees+="\"emp_id\":\""+indexEntry+"\",\"emp_code\":\""+empldoyees_code[index]+"\"";
 		employees+="}";
 		//employee.push({'emp_id':indexEntry});
 	});
@@ -1627,88 +1587,88 @@ var assignTemplateQuantityFn = function(structureName,data){
 	var htmlTemplateQuantity = "";
 	
 	
-//	if(data['no_weight']==1){
-//		// No Weight == 1
-//			htmlTemplateQuantity+="<div class=\"row-fluid\">";
-//			htmlTemplateQuantity+="	<div class=\"span12\">";
-//			htmlTemplateQuantity+="  <div class=\"ibox-title2\">";
-//			
-//			htmlTemplateQuantity+="      <div class='titlePanel'>"+structureName+"</div>";
-//			htmlTemplateQuantity+="      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-"+data['structure_id']+"'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-"+data['structure_id']+"'></span>Total Weight <span id='weigth_total_quantity_percentage_target-"+data['structure_id']+"'>"+data['total_weight']+"%</span></div>";
-//			htmlTemplateQuantity+="  </div>";
-//			htmlTemplateQuantity+="	<div class=\"ibox-content\">";
-//			htmlTemplateQuantity+=" <div class=\"table-responsive scrollbar-inner\"  style='overflow:auto;'>";
-//			htmlTemplateQuantity+="<table style='width:100%; top: -38px;' id=\"tableQauntity\" class=\"table table-striped tableQauntity fixedHeader\">";
-//			htmlTemplateQuantity+="<thead>";
-//				htmlTemplateQuantity+="<tr>";
-//					htmlTemplateQuantity+="<th style=\"width:3%;  text-align:center;\" class=''><b>Select</b></th>";
-//					htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>Appraisal Item Name</b></th>";
-//					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Target</b> </th>";
-//					htmlTemplateQuantity+="<th style=\"width:10%;  text-align:center;\" class=''><b>Forecast Result</b> </th>";
-//					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><div class='redBOx'>1</div> </th>";
-//					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><div class='OrangeBox'>2</div> </th>";
-//					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><div class='YellowBox'>3</div> </th>";
-//					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><div class='greenBox'>4</div> </th>";
-//					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><div class='veryGreenBOx'>5</div> </th>";
-//					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>%Weight</b></th>";
-//					//htmlTemplateQuantity+="<th style=\"width:3%;  text-align:center;\" class=''></th>";
-//					htmlTemplateQuantity+="</tr>";
-//					htmlTemplateQuantity+="</thead>";
-//					htmlTemplateQuantity+="<tbody id=\"\">";
-//					$.each(data['items'],function(index,indexEntry){
-//						
-//						item_id_array.push(indexEntry['item_id']);
-//						
-//		
-//						htmlTemplateQuantity+="<tr>";
-//						
+	if(data['no_weight']==1){
+		// No Weight == 1
+			htmlTemplateQuantity+="<div class=\"row-fluid\">";
+			htmlTemplateQuantity+="	<div class=\"span12\">";
+			htmlTemplateQuantity+="  <div class=\"ibox-title2\">";
+			
+			htmlTemplateQuantity+="      <div class='titlePanel'>"+structureName+"</div>";
+			htmlTemplateQuantity+="      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-"+data['structure_id']+"'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-"+data['structure_id']+"'></span>Total Weight <span id='weigth_total_quantity_percentage_target-"+data['structure_id']+"'>"+data['total_weight']+"%</span></div>";
+			htmlTemplateQuantity+="  </div>";
+			htmlTemplateQuantity+="	<div class=\"ibox-content\">";
+			htmlTemplateQuantity+=" <div class=\"table-responsive scrollbar-inner\"  style='overflow:auto;'>";
+			htmlTemplateQuantity+="<table style='width:100%; top: -38px;' id=\"tableQauntity\" class=\"table table-striped tableQauntity fixedHeader\">";
+			htmlTemplateQuantity+="<thead>";
+				htmlTemplateQuantity+="<tr>";
+					htmlTemplateQuantity+="<th style=\"width:3%;  text-align:center;\" class=''><b>Select</b></th>";
+					htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>Appraisal Item Name</b></th>";
+					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Target</b> </th>";
+					htmlTemplateQuantity+="<th style=\"width:10%;  text-align:center;\" class=''><b>Forecast Result</b> </th>";
+					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><div class='redBOx'>1</div> </th>";
+					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><div class='OrangeBox'>2</div> </th>";
+					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><div class='YellowBox'>3</div> </th>";
+					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><div class='greenBox'>4</div> </th>";
+					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><div class='veryGreenBOx'>5</div> </th>";
+					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>%Weight</b></th>";
+					//htmlTemplateQuantity+="<th style=\"width:3%;  text-align:center;\" class=''></th>";
+					htmlTemplateQuantity+="</tr>";
+					htmlTemplateQuantity+="</thead>";
+					htmlTemplateQuantity+="<tbody id=\"\">";
+					$.each(data['items'],function(index,indexEntry){
+						
+						item_id_array.push(indexEntry['item_id']);
+						
+		
+						htmlTemplateQuantity+="<tr>";
+						
+							
+							htmlTemplateQuantity+="<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['item_id']+"'></td>";
+							htmlTemplateQuantity+="<td style=\"width:20%\" class='id-"+indexEntry['structure_id']+"-item_name' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' style='padding-top:7px;'>"+indexEntry['item_name']+"</td>";
+							htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target' class='id-"+indexEntry['structure_id']+"-target input form-control input-sm-small numberOnly' type='text'>";
+							htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-kpi_type_id' class='id-"+indexEntry['structure_id']+"-kpi_type_id input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['kpi_type_id']+">";
+							htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-nof_target_score' class='id-"+indexEntry['structure_id']+"-nof_target_score input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['nof_target_score']+">";
+							htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_result_id' class='id-"+indexEntry['structure_id']+"-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
+							htmlTemplateQuantity+="</td>";
+							
+						   htmlTemplateQuantity+="<td style=\"width:10%;text-align:center;\"><input class='input-sm-small' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast'></td>";
+							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center;\"><input class='input-sm-small' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score1' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score1'></td>";
+							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center;\"><input class='input-sm-small' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score2' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score2'></td>";
+							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center;\"><input class='input-sm-small' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score3' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score3'></td>";
+							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center;\"><input class='input-sm-small' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score4' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score4'></td>";
+							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center;\"><input class='input-sm-small' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score5' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score5'></td>";
+							
+							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly'  type='text'></td>";
+							
 //							
-//							htmlTemplateQuantity+="<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['item_id']+"'></td>";
-//							htmlTemplateQuantity+="<td style=\"width:20%\" class='id-"+indexEntry['structure_id']+"-item_name' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' style='padding-top:7px;'>"+indexEntry['item_name']+"</td>";
-//							htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target' class='id-"+indexEntry['structure_id']+"-target input form-control input-sm-small numberOnly' type='text'>";
-//							htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-kpi_type_id' class='id-"+indexEntry['structure_id']+"-kpi_type_id input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['kpi_type_id']+">";
-//							htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-nof_target_score' class='id-"+indexEntry['structure_id']+"-nof_target_score input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['nof_target_score']+">";
-//							htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_result_id' class='id-"+indexEntry['structure_id']+"-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
-//							htmlTemplateQuantity+="</td>";
-//							
-//						   htmlTemplateQuantity+="<td style=\"width:10%;text-align:center;\"><input class='input-sm-small' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast'></td>";
-//							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center;\"><input class='input-sm-small' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score1' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score1'></td>";
-//							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center;\"><input class='input-sm-small' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score2' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score2'></td>";
-//							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center;\"><input class='input-sm-small' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score3' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score3'></td>";
-//							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center;\"><input class='input-sm-small' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score4' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score4'></td>";
-//							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center;\"><input class='input-sm-small' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score5' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score5'></td>";
-//							
-//							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly'  type='text'></td>";
-//							
-////							
-////							if(sessionStorage.getItem("is_coporate_kpi")==1){
-////								
-////								htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly' disabled type='text' value='0.00'></td>";
-////							}else{
-////								htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly'  type='text'></td>";
-////							}
-//							
-//							//htmlTemplateQuantity+="<td style=\"width:3%\"><a href='#'><i class='fa fa-cog font-gear '></i></a></td>";
-//							
-//							
-//						htmlTemplateQuantity+="</tr>";
-//						
-//					});
-//					htmlTemplateQuantity+="</tbody>";
-//					htmlTemplateQuantity+="</table>";
-//					htmlTemplateQuantity+="<input type='hidden' id='structure_id-"+data['structure_id']+"' class='structure_id' value="+data['structure_id']+">";
-//					htmlTemplateQuantity+="<input type='hidden' id='no_weight-"+data['structure_id']+"' class='no_weight' value="+data['no_weight']+">";
-//					htmlTemplateQuantity+="<input type='hidden' id='form-"+data['structure_id']+"' class='' value=\"form1\">";
-//					htmlTemplateQuantity+="<input type='hidden' id='item_id_array-"+data['structure_id']+"' class='item_id_array' value=\""+item_id_array+"\">";
-//					
-//					
-//					htmlTemplateQuantity+="</div>";
-//					htmlTemplateQuantity+="<br style=\"clear:both\">";	
-//				htmlTemplateQuantity+="</div>";
-//			htmlTemplateQuantity+="</div>";
-//			htmlTemplateQuantity+="</div>";
-//			
-//	}else{
+//							if(sessionStorage.getItem("is_coporate_kpi")==1){
+//								
+//								htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly' disabled type='text' value='0.00'></td>";
+//							}else{
+//								htmlTemplateQuantity+="<td style=\"width:5%\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly'  type='text'></td>";
+//							}
+							
+							//htmlTemplateQuantity+="<td style=\"width:3%\"><a href='#'><i class='fa fa-cog font-gear '></i></a></td>";
+							
+							
+						htmlTemplateQuantity+="</tr>";
+						
+					});
+					htmlTemplateQuantity+="</tbody>";
+					htmlTemplateQuantity+="</table>";
+					htmlTemplateQuantity+="<input type='hidden' id='structure_id-"+data['structure_id']+"' class='structure_id' value="+data['structure_id']+">";
+					htmlTemplateQuantity+="<input type='hidden' id='no_weight-"+data['structure_id']+"' class='no_weight' value="+data['no_weight']+">";
+					htmlTemplateQuantity+="<input type='hidden' id='form-"+data['structure_id']+"' class='' value=\"form1\">";
+					htmlTemplateQuantity+="<input type='hidden' id='item_id_array-"+data['structure_id']+"' class='item_id_array' value=\""+item_id_array+"\">";
+					
+					
+					htmlTemplateQuantity+="</div>";
+					htmlTemplateQuantity+="<br style=\"clear:both\">";	
+				htmlTemplateQuantity+="</div>";
+			htmlTemplateQuantity+="</div>";
+			htmlTemplateQuantity+="</div>";
+			
+	}else{
 		
 		 
 		// No Weight == 0
@@ -1731,7 +1691,9 @@ var assignTemplateQuantityFn = function(structureName,data){
 				htmlTemplateQuantity+="<th style=\"width:30%\" class=''><b>Appraisal Item Name</b></th>";
 				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Target</b> </th>";
 				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Forecast Value</b> </th>";
+				
 				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>%Weight</b></th>";
+			//	htmlTemplateQuantity+="<th style=\"width:3%;  text-align:center;\" class=''></th>";
 				htmlTemplateQuantity+="</tr>";
 				htmlTemplateQuantity+="</thead>";
 				htmlTemplateQuantity+="<tbody id=\"\">";
@@ -1749,6 +1711,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 						htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input class='input-sm-small' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target'></td>";
 						htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input class='input-sm-small' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast'></td>";
 						htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly'  type='text'></td>";
+						//htmlTemplateQuantity+="<td style=\"width:3%; text-align:center;\"><a href='#'><i class='fa fa-cog font-gear '></i></a></td>";
 					htmlTemplateQuantity+="</tr>";
 					
 				});
@@ -1767,7 +1730,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 		htmlTemplateQuantity+="</div>";
 		
 		
-	//}
+	}
 	
 	//return htmlTemplateQuantity;
 	$("#appraisal_template_area").append(htmlTemplateQuantity);
@@ -2014,8 +1977,6 @@ var createTemplateAssignmentFn = function(data){
 		}
 		
 		
-		
-		
 		//bindingSlideScoreBarFn();
 	   
 		
@@ -2056,6 +2017,8 @@ var createTemplateAssignmentFn = function(data){
 	});
 	//sum grand total start
 	
+	
+	
 	$(".weight_sum").keyup(function(){
 		calculationGrandTotalFn(this.id);
 	})
@@ -2072,21 +2035,7 @@ var createTemplateAssignmentFn = function(data){
 	})
 	
 	//sum grand total end
-
-	//alert($(".no_weight").val());
-	if($(".no_weight").val()==1){
-		$(".totalWeight").hide();
-		$(".grandTotalWeight").hide();
-
-		$("input.total_weigth_quantity").attr('disabled','disabled');
-		console.log($(".total_weigth_quantity").get());
-		
-	}else{
-		$("input.total_weigth_quantity").removeAttr('disabled');
-		$(".totalWeight").show();
-		$(".grandTotalWeight").show();
-	}
-	 
+	
 };
 var getTemplateFn = function(){
 	$.ajax({
@@ -2168,7 +2117,7 @@ var username = $('#user_portlet').val();
 var password = $('#pass_portlet').val();
 
 /*Fixed for Test.*/
- username = "01";
+ username = "1";
  password =	"11";
 	
 if(username!="" && username!=null & username!=[] && username!=undefined ){
@@ -2277,7 +2226,6 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	$("#assignFrequency").change(function(){
 		dropDrowPeriodFn($("#periodFrequency").val(),$(this).val())
 	});
-	$("#assignFrequency").change();
 	//htmlOption+="<option value="+i+">à¸£à¸­à¸šà¸�à¸²à¸£à¸›à¸£à¸°à¹€à¸¡à¸´à¸™"+i+"</option>";
 	
 	
@@ -2349,7 +2297,6 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 		$(".countPagination").val(10);
 		$("#rpp").remove();
 		$(".search_result").show();
-		
 	});
 	
 	//btn assignment start
@@ -2371,7 +2318,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 				}
 			});
 		if(empldoyees_id.length==0){
-			callFlashSlide("Please choose Employees or Organization for Assignment.");
+			callFlashSlide("Please choose Employees for Assignment.");
 			return false;
 		}else{
 
@@ -2421,8 +2368,6 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 			
 		//if(sessionStorage.getItem("is_coporate_kpi")==0){	
 			
-			if($(".no_weight").val()==0){	
-			
 				if($(".checkWeigthOver").hasClass('weightIsOver')==true){
 					
 					callFlashSlideInModal("<b>Cannot Assign Structure not equal to Weight Total<b>","#information","error");
@@ -2442,21 +2387,21 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 						callFlashSlideInModal("Please choose Appraisal item ID.","#information","error");
 					}
 				}
-		}else{
-			
-			//no_weight==1
-			
-			if($(".embed_appraisal_id").get().length>0){
-				if($("#action").val()=="add"){
-					actionAssignmentFn("saveOnly");
-				}else{
-					actionUpdateAssignmentFn();
-				}
-			}else{
-				callFlashSlideInModal("Please choose Appraisal item ID.","#information","error");
-			}
-			
-		}
+//		}else{
+//			
+//
+//			
+//			if($(".embed_appraisal_id").get().length>0){
+//				if($("#action").val()=="add"){
+//					actionAssignmentFn("saveOnly");
+//				}else{
+//					actionUpdateAssignmentFn();
+//				}
+//			}else{
+//				callFlashSlideInModal("Please choose Appraisal item ID.","#information","error");
+//			}
+//			
+//		}
 			
 		});
 		$(document).on("click","#btnAddAnother",function(){

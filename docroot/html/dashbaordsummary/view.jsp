@@ -837,7 +837,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 <!-- content accordion start -->
 <div id="accordion">
-  <h3>Section 1</h3>
+  <h3>ธอส.</h3>
   <div class='' style='height:auto;'>
     	<div class='span4'>
     		<div class='graphLTopHeader'>จำนวนเงิน Gross NPL</div>
@@ -868,7 +868,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
     			<div id="chart-container2">FusionCharts will render here</div>
     	</div>
   </div>
-  <h3>Section 2</h3>
+  <h3>กลุ่มงานกลยุทธ์องค์กร</h3>
   <div>
     <p>
     Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
@@ -877,7 +877,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
     suscipit faucibus urna.
     </p>
   </div>
-  <h3>Section 3</h3>
+  <h3>กลุ่มงานสาขานครหลวง</h3>
   <div>
     <p>
     Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
@@ -891,7 +891,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
       <li>List item three</li>
     </ul>
   </div>
-  <h3>Section 4</h3>
+  <h3>กลุ่มงานสาขาภูมิภาค</h3>
   <div>
     <p>
     Cras dictum. Pellentesque habitant morbi tristique senectus et netus

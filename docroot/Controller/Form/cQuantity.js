@@ -277,7 +277,8 @@ structure_name
 		dropDrowPositionFn("Quantity",data['position'],defaultAll=false);
 		dropDrowkpiTypeFn("Quantity",data['kpi_type_id'],defaultAll=false);
 		dropDrowValueTypeFn("Quantity",data['value_type_id'],defaultAll=false);
-		dropDrowremindConditionFn("Quantity",'',defaultAll=false);
+		
+		dropDrowremindConditionFn("Quantity",data['remind_condition_id'],defaultAll=false,defaultEmpty=true);
 		
 		$("#baselineValueQuantity").val(data['baseline_value']);
 		$("#formulaDescriptionQuantity").val(data['formula_desc']);
@@ -391,7 +392,7 @@ structure_name
 	}else if(action=='add'){
 	
 		clearQuantityFormFn();
-		appraisalLevelListFn("Quantity",$("#embed_appraisal_level_id").val(),defaultAll=false,multiSelect=true);			
+		appraisalLevelListFn("Quantity",'',defaultAll=false,multiSelect=true);			
 		perspectiveListFn("Quantity",$("#embed_perspective_id").val(),defaultAll=false);
 		//dropDrowDepartmentFn("Quantity",$("#embed_department_id").val(),defaultAll=true);
 		dropDrowOrgFn("Quantity",$("#embed_org_id").val(),defaultAll=false);
@@ -399,7 +400,7 @@ structure_name
 		dropDrowkpiTypeFn("Quantity",$("#embed_kpi_type_id").val(),defaultAll=false);
 		uomListFn("Quantity");
 		dropDrowValueTypeFn("Quantity",'',defaultAll=false);
-		dropDrowremindConditionFn("Quantity",'',defaultAll=false);
+		dropDrowremindConditionFn("Quantity",'',defaultAll=false,defaultEmpty=true);
 		$("#btnAddAnotherQuantity").show();
 		//SEARCH
 		//Autocomplete Search Start.

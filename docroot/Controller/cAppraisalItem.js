@@ -358,11 +358,16 @@ var searchAdvanceFn = function() {
 var appraisalLevelListFn = function(nameArea,id,defaultAll,multiSelect){
 
 	var level_array=[];
-	if(id!=undefined){
-		$.each(id,function(index,indexEntry){
-			level_array.push(indexEntry['level_id']);
-		});
-		//console.log(level_array);
+
+	if(multiSelect==true){
+	
+		if(id!=undefined && id!=''){
+			$.each(id,function(index,indexEntry){
+				level_array.push(indexEntry['level_id']);
+			});
+			//console.log(level_array);
+		}
+		
 	}
 
 	
@@ -567,9 +572,14 @@ var dropDrowremindConditionFn =function(nameArea,id,defaultAll){
 			var htmlOption="";
 			if(defaultAll==true){
 				htmlOption+="<option value=''>All Remind Condition</option>";
+			}else if(defaultEmpty==true){
+				htmlOption+="<option value=''></option>";
 			}
+			
+			
 			$.each(data,function(index,indexEntry){
-				if(id==indexEntry['value_type_id']){
+				
+				if(id==indexEntry['remind_condition_id']){
 					htmlOption+="<option selected='selected' value="+indexEntry['remind_condition_id']+">"+indexEntry['remind_condition_name']+"</option>";
 				}else{
 					htmlOption+="<option value="+indexEntry['remind_condition_id']+">"+indexEntry['remind_condition_name']+"</option>";
@@ -658,7 +668,7 @@ var dropDrowOrgFn = function(nameArea,id,defaultAll){
 	*/
 	
 	var org_array=[];
-	if(id!=undefined){
+	if(id!=undefined && id!=''){
 		$.each(id,function(index,indexEntry){
 			org_array.push(indexEntry['org_id']);
 		});
@@ -684,10 +694,10 @@ var dropDrowOrgFn = function(nameArea,id,defaultAll){
 				htmlOption+="<option value=''>All Org</option>";
 			}
 			$.each(data,function(index,indexEntry){
-				if(id==indexEntry['org_code']){
-					htmlOption+="<option selected='selected' value="+indexEntry['org_code']+">"+indexEntry['org_name']+"</option>";
+				if(id==indexEntry['org_id']){
+					htmlOption+="<option selected='selected' value="+indexEntry['org_id']+">"+indexEntry['org_name']+"</option>";
 				}else{
-					htmlOption+="<option value="+indexEntry['org_code']+">"+indexEntry['org_name']+"</option>";
+					htmlOption+="<option value="+indexEntry['org_id']+">"+indexEntry['org_name']+"</option>";
 				}
 			});
 			htmlOption+="</select>";
