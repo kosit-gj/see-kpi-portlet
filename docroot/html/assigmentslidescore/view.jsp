@@ -360,6 +360,46 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 .aui  select , .aui  input[type="text"]{font-size: 14px;}
 
 
+.redBOx{
+	background: red none repeat scroll 0 0;
+    border-radius: 5px;
+    height: auto;
+    width: 100%;
+    text-align:center;
+}
+.OrangeBox{
+	background: orange none repeat scroll 0 0;
+    border-radius: 5px;
+    height: auto;
+    width: 100%;
+    text-align:center;
+}
+.YellowBox{
+	background: yellow none repeat scroll 0 0;
+    border-radius: 5px;
+    height: auto;
+    width: 100%;
+    text-align:center;
+}
+.greenBox{
+	background: #00ff00 none repeat scroll 0 0;
+    border-radius: 5px;
+    height: auto;
+    width: 100%;
+    text-align:center;
+}
+
+.veryGreenBOx{
+	background: #008000 none repeat scroll 0 0;
+    border-radius: 5px;
+    height: auto;
+    width: 100%;
+    text-align:center;
+}
+.aui .cus_information_area label{
+	margin-bottom: 1px;
+}
+}
 
 </style>
 
@@ -778,94 +818,66 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
                 <div class="row-fluid cus_information_area" >
 	  					<div class="span12">
 	                      <div class="ibox-title2">
-	                          <div class='titlePanel'>Employee Information</div>
+	                          <div class='titlePanel' id='titlePanelInformation'>Employee Information</div>
 	                      </div>
 	   					
 	   					<div class="ibox-content">
 	   							
 	   							<!-- content table start-->	
-	   							<!-- 
-	   								<div class='row-fluid wrapper employee_information_area'>
-	   									<div style='min-height:25px;'  class='span4 employee_row'>
-	   										<div class='label_info'>Employee Code:</div>
-	   										<div class='text_info' id='employee_code'></div>
-	   									</div>
-	   									<div style='min-height:25px;' class='span4 employee_row'>
-	   										<div class='label_info'>Section:</div>
-	   										<div class='text_info' id='section'> </div>
-	   									</div>
-	   									<div style='min-height:25px;' class='span4 employee_row'>
-	   										<div class='label_info'>Appraisal Type:</div>
-	   										<div class='text_info' id='appraisal_type'></div>
-	   									</div>
-	   								</div>
-	   								<div class='row-fluid '>
-	   									<div style='min-height:25px;' class='span4 employee_row'>
-	   										<div class='label_info'>Employee Name:</div>
-	   										<div class='text_info' id='employee_name'></div>
-	   									</div>
-	   								
-	   									<div style='min-height:25px;' class='span4 employee_row'>
-	   										<div class='label_info'>Department:</div>
-	   										<div class='text_info' id='department'></div>
-	   									</div>
-	   									<div style='min-height:25px;' class='span4 employee_row'>
-	   										<div class='label_info'>Period:</div>
-	   										<div class='text_info' id='period_label'> </div>
-	   									</div>
-	   								</div>
-	   								<div class='row-fluid '>
-	   									<div style='min-height:25px;' class='span4 employee_row'>
-	   										<div class='label_info'>Start Working Date:</div>
-	   										<div class='text_info' id='start_working_date'> </div>
-	   									</div>
-	   									<div style='min-height:25px;' class='span4 employee_row'>
-	   										<div class='label_info'>Chief Employee Code:</div>
-	   										<div class='text_info' id='chief_employee_code'> </div>
-	   									</div>
-	   									<div style='min-height:25px;' class='span4 employee_row'>
-	   										<div class='label_info'>Position:</div>
-	   										<div class='text_info' id='position'> </div>
-	   									</div>
-	   								</div>
-	   								<div class='row-fluid '>
-	   									<div style='min-height:25px;' class='span4 employee_row'>
-	   										<div class='label_info'>Chief Employee Name:</div>
-	   										<div class='text_info'id='chief_employee_name'> </div>
-	   									</div>
-	   									
-	   								</div>
-	   								-->
+	   							<div id='empInformation' class='container-fluid'>
 	   								<div class="row-fluid">
-										<label style='min-height:auto;' class="span3 textInfo">Employee code:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData">Employee code:</label>
 										<label style='min-height:auto;' class="span3 textInfo textData" id="employee_code"></label>
-										<label style='min-height:auto;' class="span3 textInfo">Employee Name:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData">Employee Name:</label>
 										<label style='min-height:auto;' class="span3 textInfo textData" id="employee_name"></label>
 									</div>
 									<div class="row-fluid">
-										<label style='min-height:auto;' class="span3 textInfo">Position:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData">Position:</label>
 										<label style='min-height:auto;' class="span3 textInfo textData" id="position"></label>
-										<label style='min-height:auto;' class="span3 textInfo">Department:</label>
-										<label style='min-height:auto;' class="span3 textInfo textData" id="department"></label>
+										
+										<label style='min-height:auto;' class="span3 textInfo textData">Organization:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData" id="organizationLabel"></label>
+										 
 									</div>
 									<div class="row-fluid">
-										<label style='min-height:auto;' class="span3 textInfo">Section:</label>
-										<label style='min-height:auto;' class="span3 textInfo textData" id="section"></label>
-										<label style='min-height:auto;' class="span3 textInfo">Chief Employee Code:</label>
+										
+										<label style='min-height:auto;' class="span3 textInfo textData">Chief Employee Code:</label>
 										<label style='min-height:auto;' class="span3 textInfo textData" id="chief_employee_code"></label>
-									</div>
-									<div class="row-fluid">
-										<label style='min-height:auto;' class="span3 textInfo">Chief Employee Name:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData">Chief Employee Name:</label>
 										<label style='min-height:auto;' class="span3 textInfo textData" id="chief_employee_name"></label>
-										<label style='min-height:auto;' class="span3 textInfo">Appraisal Type:</label>
-										<label style='min-height:auto;' class="span3 textInfo textData" id="appraisal_type"></label>
+									</div>
+									
+									<div class="row-fluid">
+										<label style='min-height:auto;' class="span3 textInfo textData">Period:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData"  id="period_label"></label>
+										
+										<label style='min-height:auto;' class="span3 textInfo textData">Start Working Date:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData"  id="start_working_date"></label>
+										
+									</div>
+								</div>
+								
+								<div id='orgInformation' class='container-fluid'>
+								
+									
+									<div class="row-fluid">
+										<label style='min-height:auto;' class="span3 textInfo textData">Organization Code:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData" id="organizationCodeLabelOrg"></label>
+										<label style='min-height:auto;' class="span3 textInfo textData">Organization Name:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData" id="organizationNameLabelOrg"></label>
+										 
 									</div>
 									<div class="row-fluid">
-										<label style='min-height:auto;' class="span3 textInfo">Period:</label>
-										<label style='min-height:auto;' class="span3 textInfo textData"  id="period_label"></label>
-										<label style='min-height:auto;' class="span3 textInfo">Start Working Date:</label>
-										<label style='min-height:auto;' class="span3 textInfo textData"  id="start_working_date"></label>
+										
+										<label style='min-height:auto;' class="span3 textInfo textData">Parent Organization:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData" id="parentOrganizationOrg"></label>
+										<label style='min-height:auto;' class="span3 textInfo textData">Period:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData" id="periodOrg"></label>
 									</div>
+									
+									
+									
+								</div>
 									
 						          <br style="clear:both">
 	                            <!-- content table end-->				
@@ -921,7 +933,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
             			<div class="form-group "> 
 							 <label class="span3 p-t-xxs"><b>Remark:</b></label> 
 							 <div class="span9"> 
-								 <input type='text' name='' id='' value=''>
+								 <input type='text' name='remark_footer' id='remark_footer' class='span12' value=''>
 							 </div> 
 						 </div> 
 						 
@@ -937,16 +949,16 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
             	</div>
             	
             	<div class="row-fluid" style='text-align:left;'>
-            		<a href="#" id='slideUpDownStageHistory'>Work Flow Stage History</a>
+            		<a href="#" id='slideUpDownStageHistory' style='display:none;'>Work Flow Stage History</a>
             		<div id='slideStageHistory' style='display:none;'>
             			<table class='table'>
             				<thead>
             					<tr>
-            						<th>Create by</th>
-            						<th>Create dttm</th>
-            						<th>Form Stage ID</th>
-            						<th>To Stage ID</th>
-            						<th>Remark</th>
+            						<th  style='width:15%'>Create by</th>
+            						<th  style='width:15%'>Create dttm</th>
+            						<th  style='width:15%'>Form Stage ID</th>
+            						<th  style='width:15%'>To Stage ID</th>
+            						<th  style='width:35%'>Remark</th>
             					</tr>
             				</thead>
             				<tbody id='listDataStageHistory'>

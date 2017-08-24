@@ -10,44 +10,11 @@
 
 <style>
 
-.ui-multiselect-menu{
-	z-index: 5555;
-}
-.ui-multiselect{
-	padding: 5px;
-}
-.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr{
-	border-top-right-radius: 0;
-}
-
-.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl{
-	border-top-left-radius: 0;
-}
-
-.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl{
-	border-bottom-left-radius: 0;
-}
-
-.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br{
-	border-bottom-right-radius: 0;
-}
-.ui-multiselect-header span.ui-icon{
-	top: 5px;
-}
-.aui ul, .aui ol{
-	margin: 0px 0px 0px 0px;
-}
-.ui-icon{
-	 margin-top: 0;
-}
 .aui input[type="radio"], .aui input[type="checkbox"]{
 	margin: -5px 0 0;
 }
 .aui label{
 	margin-bottom: 0px;
-}
-.ui-multiselect-checkboxes li{
-	padding-right: 0px;
 }
 .aui form{
 	margin: 0 0 5px;
@@ -75,21 +42,6 @@
 		    top:0px;
 		}
 	
-		/*Qauntity Start*/
-		.form-label-quantity{
-		text-align: right;
-		}
-		.form-input-customs-title{
-			width: 250px;
-		}
-		.aui .redFont{
- 		
-	 		  float: right;
-	 	}
-	 	.form-label-customs{
-	 		text-align: right;
-	 	}
-		/*Quantity End*/
 	
   }
   /* Large desktop End######################################*/
@@ -117,22 +69,6 @@
 			width:100%;
 		}
 		/*All End*/
-		
-		/*Qauntity Start*/
-		.form-label-quantity{
-		text-align: left;
-		}
-		.form-input-customs-title{
-			width: 250px;
-		}
-		.aui .redFont{
- 		
-	 		  float: right;
-	 	}
-	 	.form-label-customs{
-	 		text-align: right;
-	 	}
-		/*Quantity End*/
  	
   }
  /*  desktop End############################################*/
@@ -177,38 +113,6 @@
 	}
 	
 	/*All Form End*/
-	/*Deduct Score Start*/
- 	.aui .form-file-mangement{
- 		height: 45px;
- 	}
- 	.aui .form-label-customs{
- 		text-align: right;
- 	}
- 	
- 	.aui .redFont{
- 		
- 		  float: right;
- 	}
- 	/*Deduct Score Start*/
- 	
- 	/*Qauntity Start*/
- 	.form-label-quantity{
-		text-align: left;
-		}
-	.form-input-customs-title{
-		width: 250px;
-	}
-	.aui .redFont{
- 		
- 		  float: left;
- 	}
- 	.aui .pagianation_area{
-		/*position:relative;*/
-	}
-	.aui #textarea_cds{
-		height: 150px;
-	}
-	/*Qauntity End*/
   }
  /* Portrait tablet to landscape and desktop End############*/ 
  
@@ -230,22 +134,6 @@
  	.pagingText{
  		display:none;
  	}
- 	#btnPaginationTop{
- 		width:300px;
- 		float:left;
- 	}
-	#dropdownPaginationTop{
-		width:100px;
- 		float:right;
-	}
-	#btnPaginationBottom{
- 		width:300px;
- 		float:left;
- 	}
-	#dropdownPaginationBottom{
-		width:100px;
- 		float:right;
-	}
 	.aui .form-group > .control-label-search {
     	text-align: left;
 	}
@@ -263,50 +151,6 @@
 		max-height: 350px;
 	}
 	/*All Form End*/
-	/*Deduct Score Start*/
- 	.aui .form-file-mangement{
- 		height: 50px;
- 	}
- 	.aui .form-label-customs{
- 		 text-align: left;
- 	}
- 	.aui .redFont{
- 		 
- 		  float: left;
- 	}
- 	#modalDeductScoreDescription{
- 		font-size:25px;
- 	}
- 	
- 	/*Deduct Score Start*/
- 	/*Quality Start*/
- 	#modalQualityDescription{
- 		font-size:25px;
- 	}
- 	/*Quality End*/
- 	
- 	/*Quantity Start*/
- 	#modalTitleQuantity{
- 		font-size:25px;
- 	}
-
- 	.form-label-quantity{
-		text-align: left;
-	}
-	
-	.form-input-customs-title{
-		width: 250px;
-	}
-	#cdsNameLabel{
-		display:none;
-	}
-	.aui .pagianation_area{
-		/*position:absolute;*/
-	}
-	.aui #textarea_cds{
-		height: 77px;
-	}
- 	/*Quantity End*/
 	
   }
  /* Landscape phone to portrait tablet End##################*/ 
@@ -315,23 +159,6 @@
  @media (max-width: 480px) { 
  	
  	
- 
- 	#btnPaginationTop{
- 		width:300px;
- 		float:left;
- 	}
-	#dropdownPaginationTop{
-		width:100px;
- 		float:right;
-	}
-	#btnPaginationBottom{
- 		width:300px;
- 		float:left;
- 	}
-	#dropdownPaginationBottom{
-		width:100px;
- 		float:right;
-	}
 	.aui .form-group > .control-label-search{
     	text-align: left;
 	}
@@ -352,62 +179,7 @@
 	*/
 	/*All Form End*/
  	
- 	/*Deduct Score Start*/
- 	.aui .form-file-mangement{
- 		height: 50px;
- 	}
- 	.aui .form-label-customs{
- 		 text-align: left;
- 		 
- 	}
- 	.aui .redFont{
- 		
- 		 float: left;
- 	}
- 	#modalDeductScoreDescription{
- 		font-size:20px;
- 	}
- 	/*Deduct Score Start*/
- 	/*Quality Start*/
- 	#modalQualityDescription{
- 		font-size:20px;
- 	}
-
- 	/*Quality End*/
  	
- 	/*Quantity Start*/
- 	#modalTitleQuantity{
- 		font-size:20px;
- 	}
- 	.form-label-quantity{
-		text-align: left;
-	}
-	.form-input-customs{
-		width: 100%;
-	}
-	#cdsNameLabel{
-		display:none;
-	}
-	.paging-text2{
-		display:none;
-	}
-	.form-input-customs-title{
-		width: 100%;
-	}
-	.aui .pagianation_area{
-		/*position:static;*/
-	}
-	.aui .pagingDropdown{
-		float: left;
-	}
-	.aui #textarea_cds{
-		height: 77px;
-	}
- 	/*Quantity End*/
- 	
- 	.aui .ibox-title2 .btn{
- 		font-size:12px;
- 	}
 
   }
   /* Landscape phones and down End##########################*/
@@ -505,20 +277,7 @@
     padding-left: 15px;
     padding-right: 15px;
 }
-/*
-.aui .portlet-content, .aui .portlet-minimized .portlet-content-container {
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    background: #f3f3f4 none repeat scroll 0 0;
-    border-color: #eaeaea;
-    border-image: none;
-    border-style: solid;
-    border-width: 0 1px 1px;
-    padding: 1px 10px 10px;
-}
-*/
+
 .form-file-mangement {
     height: 37px;
 }
@@ -531,41 +290,7 @@
 /* main end*/
 
 /*local start*/
-/*
-.aui #modal-quality{
-    background-clip: padding-box;
-    background-color: white;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 6px;
-    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-    left: 50%;
-    margin-left: -280px;
-    outline: 0 none;
-    position: fixed;
-    top: 10%;
-    width: 500px;
-    z-index: 1050;
-}
-*/
-.form-label-customs {
-    float: left;
-    padding-top: 1px;
-    width: 170px;
-    /*text-align:right;*/
-}
 
-.form-label-quantity {
-    float: left;
-    padding-top: 1px;
-    width: 170px;
-    font-weight:bold;
-    /*text-align:right;*/
-}
-
-.form-group > .control-label-search{
-	/*font-weight:bold;*/
-	text-align:right;
-}
 
 .breadcrumbs2{
 
@@ -591,16 +316,6 @@
 padding:5px;
 }
 
-/*
-.aui .modal-body{
-overflow-y: visible;
-}
-*/
-/*
-.modal{
-    max-height: calc(100vh - 0px);
-    overflow-y: auto;
-}*/
 
 .aui .table th, .aui .table td{
 	font-size: 13px;
@@ -625,112 +340,215 @@ overflow-y: visible;
 }
 </style>
 <style>
-.boxActionPlainArea{
-	
-}
-.boxActionPlainArea .boxActionL{
-	float:left;
-	width:50%;
-	/*border:1px solid #cccccc;*/
+.boxActionPlainArea {
 	
 }
 
-.boxActionPlainArea .boxActionR{
-	float:right;
-	width:565px;
+.boxActionPlainArea .boxActionL {
+	float: left;
+	width: 50%;
 	/*border:1px solid #cccccc;*/
 }
 
-.boxTargetArea{
-	width:25%;
-	float:right;
-	border-width: 1px 1px 1px 1px;
-	border-color: #cccccc;
-  	border-style: solid;
-  	margin:1px;
-  	padding:5px;
-  	height: 89px;
-  	background:#fff;
-	
+.boxActionPlainArea .boxActionR {
+	float: right;
+	width: 565px;
+	/*border:1px solid #cccccc;*/
 }
-.boxForecastArea{
-	width:32%;
-	float:right;
-	
-	/*
-	border-width: 1px 1px 1px 1px;
-	border-color: #cccccc;
-  	border-style: solid;
-  	margin:1px;
-  	padding:5px;
-  	*/
-  	
-}
-.boxActualPercentageArea{
-	width:40%;
-	float:right;
-	
-	/*
-	border-width: 1px 1px 1px 1px;
-	border-color: #cccccc;
-  	border-style: solid;
-  	margin:1px;
-  	padding:5px;*/
-  	
-}
-.fontBold{
-	font-weight:bold;
-}
-.boxForecastVsActual{
-	border-width: 1px 1px 1px 1px;
-	border-color: #cccccc;
-  	border-style: solid;
-  	padding:3.5px;
-  	background:#fff;
-  	margin: 1px 3px 3px;
-}
-.fontCenter{
-	text-align:center;
-}
-.actionPlanList{
 
-	padding:5px;
+.boxTargetArea {
+	width: 25%;
+	float: right;
 	border-width: 1px 1px 1px 1px;
 	border-color: #cccccc;
-  	border-style: solid;
-  	margin-bottom:3px;
-  	font-size: 16px;
-  	font-weight: bold;
-  	background:#fff;
+	border-style: solid;
+	margin: 1px;
+	padding: 5px;
+	height: 89px;
+	background: #fff;
 }
-.boxTargetData{
-	padding-top:20px;
+
+.fontBold {
+	font-weight: bold;
 }
-.aui .alert, .aui .portlet-msg-alert, .aui .portlet-msg-error, .aui .portlet-msg-help, .aui .portlet-msg-info, .aui .portlet-msg-progress, .aui .portlet-msg-success{
+
+.aui .alert, .aui .portlet-msg-alert, .aui .portlet-msg-error, .aui .portlet-msg-help,
+	.aui .portlet-msg-info, .aui .portlet-msg-progress, .aui .portlet-msg-success
+	{
 	padding: 8px 8px 8px 14px;
-	color:#555;
+	color: #555;
 	margin-bottom: 0;
 }
 
-
-.aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input{
-	height:'';
+.aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"],
+	.aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"],
+	.aui input[type="month"], .aui input[type="time"], .aui input[type="week"],
+	.aui input[type="number"], .aui input[type="email"], .aui input[type="url"],
+	.aui input[type="search"], .aui input[type="tel"], .aui input[type="color"],
+	.aui .uneditable-input {
+	height: '';
 }
 
-.aui input[type="color"], .aui input[type="date"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="email"], .aui input[type="month"], .aui input[type="number"], .aui input[type="password"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="text"], .aui input[type="time"], .aui input[type="url"], .aui input[type="week"], .aui select, .aui textarea, .aui .uneditable-input{
+.aui input[type="color"], .aui input[type="date"], .aui input[type="datetime"],
+	.aui input[type="datetime-local"], .aui input[type="email"], .aui input[type="month"],
+	.aui input[type="number"], .aui input[type="password"], .aui input[type="search"],
+	.aui input[type="tel"], .aui input[type="text"], .aui input[type="time"],
+	.aui input[type="url"], .aui input[type="week"], .aui select, .aui textarea,
+	.aui .uneditable-input {
 	margin-bottom: 0px;
 }
 
-.ui-accordion .ui-accordion-header{
+.ui-accordion .ui-accordion-header {
 	margin: 0px;
-    padding: 0px;
+	padding: 0px;
 }
+
+/* accordian */
+.aui .panel {
+	margin-bottom: 20px;
+	background-color: #fff;
+	border: 1px solid transparent;
+	border-radius: 0px;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.aui .panel-group .panel {
+	margin-bottom: 5px;
+	border-radius: 0px;
+}
+
+.aui .panel-default {
+	border-color: #C5C5C5;
+}
+
+.aui .panel-default:HOVER {
+	border-color: #CCCCCC;
+}
+
+.aui .panel-default>.panel-heading {
+	color: #333;
+	/*     background-color: #fc0; */
+	background: #f6f6f6;
+	border-color: #fc0;
+	padding: 1px;
+	padding-bottom: 5px;
+	max-height: 32px;
+}
+
+.aui .panel-default>.panel-heading:HOVER {
+	background: #ededed;
+}
+
+.aui .panel-group .panel-heading {
+	border-bottom: 0;
+}
+
+.aui .panel-heading {
+	display: block;
+	text-decoration: none;
+	margin: 0px 0px;
+	border-bottom: 1px solid transparent;
+	/*     border-top-left-radius: 3px; */
+	/*     border-top-right-radius: 3px; */
+}
+
+.aui .panel-heading a {
+	display: block !important;
+	font-size: 14px !important;
+	font-weight: bold !important;
+	padding: 9.5px 10px 8px 10px;
+	margin: -11px 0px;
+	text-decoration: none;
+}
+
+.aui .panel-heading a:hover {
+	display: block;
+	/*     color: dimgrey !important; */
+	text-decoration: none;
+}
+
+.aui .panel-body {
+	margin: 10px;
+}
+
+.aui #accordion {
+	display: none;
+}
+/* accordian */
+/* Next & Back */
+.arrow {
+	cursor: pointer;
+	position: relative;
+	display: block;
+	top: 43%; //
+	margin: 100px 0 0 100px;
+	width: 25px;
+	height: 25px;
+	border: solid 3px #999;
+	border-radius: 100%;
+	z-index: 1;
+	transition: all .2s linear;
+	opacity: 0.3;
+}
+
+.arrow:before, .arrow:after {
+	content: "";
+	position: absolute;
+	width: 35%;
+	height: 10%;
+	top: 41%;
+	left: 55%;
+	background: #999;
+	z-index: 2;
+	transform: translate(-50%, -50%) rotate(45deg);
+	transition: all .2s linear;
+}
+
+.arrow:after {
+	z-index: 3;
+	top: 59%;
+	left: 55%;
+	transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.arrow:hover {
+	border: solid 6px #777;
+}
+
+.arrow:hover:after, .arrow:hover:before {
+	background: #777;
+}
+
+.arrow:active {
+	border: solid 6px #111;
+}
+
+.arrow:active:after, .arrow:active:before {
+	background: #111;
+}
+
+.aui #previous {
+	transform: rotate(180deg);
+	display: block;
+	float: left;
+	margin-left: 10px;
+	position: absolute;
+}
+
+.aui #next {
+	position: absolute;
+	right: 0px;
+	margin-right: 20px;
+	margin-top: 0px;
+}
+/* Next & Back */
 </style>
 
 
 <%
-String username = themeDisplay.getUser().getScreenName();
-String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWORD);
+	String username = themeDisplay.getUser().getScreenName();
+	String password = (String) request.getSession().getAttribute(WebKeys.USER_PASSWORD);
 %>
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
@@ -834,7 +652,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	<!-- end--row-fluid -->
 
 
-	<style>
+<style>
 .graphLTop {
 	float: left;
 	padding: 5px;
@@ -862,9 +680,84 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 
 	<!-- content accordion start -->
-	<div id="accordion">
-		<h3>Section 1</h3>
-		<div class='' style='height: auto;'>
+	
+	<!-- content accordion end -->
+	<div class="panel-group" id="accordion" role="tablist"
+		aria-multiselectable="true">
+		<!-- 
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="headingTwo">
+				<h4 class="panel-title">
+					<a class="collapsed" role="button" data-toggle="collapse"
+						data-parent="#accordion2" href="#collapseTwo" aria-expanded="false"
+						aria-controls="collapseTwo"
+						style='color: #333333; font-weight: bold;'> <span
+						class="fa fa-caret-right"></span> ALL KPI
+					</a>
+				</h4>
+			</div>
+			<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+				aria-labelledby="headingTwo">
+				<div class="panel-body">
+					<span id="previous" class="arrow" data-previous=''></span>
+					<span id="next" class="arrow" data-next=''></span>
+					<div class='' style='height: auto;'>
+						<div class='span4'>
+							<div class='graphLTopHeader'>จำนวนเงิน Gross NPL</div>
+							<div>
+								<div class='graphLTop'>
+									<div class='textGRaphTop'>Target</div>
+									<div class='textGRaphTop'>9,999,999</div>
+								</div>
+								<div class='graphLTop'>
+
+									<div class='textGRaphTop'>Forecast</div>
+									<div class='textGRaphTop'>8,888,888</div>
+								</div>
+								<div class='graphLTop'>
+
+									<div class='textGRaphTop'>Actual</div>
+									<div class='textGRaphTop'>7,777,777</div>
+								</div>
+								<br style='clear: both'>
+							</div>
+							<div>
+								<div id="chart-container">FusionCharts will render here</div>
+							</div>
+
+						</div>
+
+						<div class='span8'>
+							<div class='graphLTopHeader' style='margin-bottom: 3px;'>จำนวนเงิน
+								Gross NPL</div>
+							<div id="chart-container2">FusionCharts will render here</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="headingTwo">
+				<h4 class="panel-title">
+					<a class="collapsed" role="button" data-toggle="collapse"
+						data-parent="#accordion2" href="#collapse3" aria-expanded="false"
+						aria-controls="collapse3"
+						style='color: #333333; font-weight: bold;'> <span
+						class="fa fa-caret-right"></span> ALL KPI
+					</a>
+				</h4>
+			</div>
+			<div id="collapse3" class="panel-collapse collapse" role="tabpanel"
+				aria-labelledby="headingTwo">
+				<div class="panel-body">
+					
+							<div class='' style='height: auto;'>
 			<div class='span4'>
 				<div class='graphLTopHeader'>จำนวนเงิน Gross NPL</div>
 				<div>
@@ -885,77 +778,24 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					<br style='clear: both'>
 				</div>
 				<div>
-					<div id="chart-container">FusionCharts will render here</div>
+					<div id="chart-container3">FusionCharts will render here</div>
 				</div>
 
 			</div>
 
 			<div class='span8'>
-				<div id="chart-container2">FusionCharts will render here</div>
+				<div id="chart-container4">FusionCharts will render here</div>
 			</div>
 		</div>
-		<h3>Section 2</h3>
-		<div>
-			<p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum
-				sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris
-				turpis porttitor velit, faucibus interdum tellus libero ac justo.
-				Vivamus non quam. In suscipit faucibus urna.</p>
-		</div>
-		<h3>Section 3</h3>
-		<div>
-			<p>Nam enim risus, molestie et, porta ac, aliquam ac, risus.
-				Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in
-				pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac
-				felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam
-				nisi, eu iaculis leo purus venenatis dui.</p>
-			<ul>
-				<li>List item one</li>
-				<li>List item two</li>
-				<li>List item three</li>
-			</ul>
-		</div>
-		<h3>Section 4</h3>
-		<div>
-			<p>Cras dictum. Pellentesque habitant morbi tristique senectus et
-				netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum
-				primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-				Aenean lacinia mauris vel est.</p>
-			<p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim
-				consequat lectus. Class aptent taciti sociosqu ad litora torquent
-				per conubia nostra, per inceptos himenaeos.</p>
-		</div>
-	</div>
-	<!-- content accordion end -->
-	<div class="panel-group" id="accordion2" role="tablist"
-		aria-multiselectable="true">
-		<div class="panel panel-default">
-			<div class="panel-heading" role="tab" id="headingTwo">
-				<h4 class="panel-title">
-					<a class="collapsed" role="button" data-toggle="collapse"
-						data-parent="#accordion2" href="#collapseTwo" aria-expanded="false"
-						aria-controls="collapseTwo"
-						style='color: black; font-weight: bold;'> <span
-						class="fa fa-plus"></span> ALL KPI
-					</a>
-				</h4>
-			</div>
-			<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
-				aria-labelledby="headingTwo">
-				<div class="panel-body">
-					<h3>Section test</h3>
-					<div>
-						<p>Cras dictum. Pellentesque habitant morbi tristique senectus
-							et netus et malesuada fames ac turpis egestas. Vestibulum ante
-							ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-							Curae; Aenean lacinia mauris vel est.</p>
-						<p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim
-							consequat lectus. Class aptent taciti sociosqu ad litora torquent
-							per conubia nostra, per inceptos himenaeos.</p>
-					</div>
+					
+					
+					
+					
 				</div>
 
 			</div>
 		</div>
+		-->
 	</div>
 
 

@@ -39,6 +39,7 @@
 		<portlet id="assigment-slide-score"></portlet>
 		<portlet id="action-plan"></portlet>
 		<portlet id="dashbaord-summary"></portlet>
+		<portlet id="all-kpi-dashboard"></portlet>
 	</category>
 
 

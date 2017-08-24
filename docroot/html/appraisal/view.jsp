@@ -318,7 +318,115 @@ margin-bottom:1px;
     padding: 0 0 0 5px;
     font-size: 14px;
 }
+
+
+/* Modal action plan START */
+
+.boxActionPlainArea{
 	
+}
+.boxActionPlainArea .boxActionL{
+	float:left;
+	width:50%;
+	/*border:1px solid #cccccc;*/
+	
+}
+
+.boxActionPlainArea .boxActionR{
+	float:right;
+	width:565px;
+	/*border:1px solid #cccccc;*/
+}
+
+.boxTargetArea{
+	width:25%;
+	float:right;
+	border-width: 1px 1px 1px 1px;
+	border-color: #cccccc;
+  	border-style: solid;
+  	margin:1px;
+  	padding:5px;
+  	height: 89px;
+  	background:#fff;
+	
+}
+.boxForecastArea{
+	width:32%;
+	float:right;
+	
+	/*
+	border-width: 1px 1px 1px 1px;
+	border-color: #cccccc;
+  	border-style: solid;
+  	margin:1px;
+  	padding:5px;
+  	*/
+  	
+}
+.boxActualPercentageArea{
+	width:40%;
+	float:right;
+	
+	/*
+	border-width: 1px 1px 1px 1px;
+	border-color: #cccccc;
+  	border-style: solid;
+  	margin:1px;
+  	padding:5px;*/
+  	
+}
+.fontBold{
+	font-weight:bold;
+}
+.boxForecastVsActual{
+	border-width: 1px 1px 1px 1px;
+	border-color: #cccccc;
+  	border-style: solid;
+  	padding:3.5px;
+  	background:#fff;
+  	margin: 1px 3px 3px;
+  	height: 40px;
+}
+.fontCenter{
+	text-align:center;
+}
+.actionPlanList{
+
+	padding:5px;
+	border-width: 1px 1px 1px 1px;
+	border-color: #cccccc;
+  	border-style: solid;
+  	margin-bottom:3px;
+  	font-weight: bold;
+  	background:#fff;
+  	height: 37.5px;
+}
+.boxTargetData{
+	padding-top:20px;
+}
+.aui .alert, .aui .portlet-msg-alert, .aui .portlet-msg-error, .aui .portlet-msg-help, .aui .portlet-msg-info, .aui .portlet-msg-progress, .aui .portlet-msg-success{
+	padding: 8px 8px 8px 14px;
+	color:#555;
+	margin-bottom: 0;
+}
+
+
+.aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input{
+	height:'';
+}
+
+.aui input[type="color"], .aui input[type="date"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="email"], .aui input[type="month"], .aui input[type="number"], .aui input[type="password"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="text"], .aui input[type="time"], .aui input[type="url"], .aui input[type="week"], .aui select, .aui textarea, .aui .uneditable-input{
+	margin-bottom: 0px;
+}
+
+.ui-autocomplete{
+	z-index: 999999;
+}
+
+.actionplan_input{
+	display:none;
+}
+/* Modal action plan END */
 </style>
 
 <body class=" gray-bg ">
@@ -349,20 +457,30 @@ margin-bottom:1px;
 														
 								<div class="row-fluid">
 							
-								<div class="form-group pull-left span2" style="margin-left: 5px">
+								<div class="form-group pull-left span4" style="margin-left: 5px">
 									<select data-toggle="tooltip" title="" data-original-title="Year"
 										class="input form-control input-sm span12" id="AppraisalYear"
 										name="AppraisalYear">
 									</select>
 								</div>
-								<div class="form-group pull-left span2" style="margin-left: 5px">
+								<div class="form-group pull-left span4" style="margin-left: 5px">
 									<select data-toggle="tooltip" title="" data-original-title="Period"
 										class="input form-control input-sm span12" id="AppraisalPeriod"
 										name="AppraisalPeriod">
 										<option>All Appraisal Period</option>
 									</select>
 								</div>
-								<div class="form-group pull-left span2" style="margin-left: 5px">
+								
+								<div class="form-group pull-left span4" style="margin-left: 5px">
+									<select data-toggle="tooltip" title="" data-original-title="Appraisal Type"
+										class="input form-control input-sm span12" id="appraisalType"
+										name="appraisalType">
+							
+									</select>
+								</div>
+								
+								
+								<div class="form-group pull-left span4" style="margin-left: 5px">
 									<select data-toggle="tooltip" title="" data-original-title="Appraisal Level"
 										class="input form-control input-sm span12" id="AppraisalLevel"
 										name="AppraisalLevel">
@@ -374,13 +492,15 @@ margin-bottom:1px;
 										<option>HR</option>
 									</select>
 								</div>
-								<div class="form-group pull-left span2" style="margin-left: 5px">
-									<select data-toggle="tooltip" title="" data-original-title="Department"
-										class="input form-control input-sm span12" id="Department"
-										name="Department">
-										<option>All Department</option>
-									</select>
+								
+								<div id="" class="form-group pull-left span4" style="margin-left: 5px">
+									<input data-toggle="tooltip" title="" data-original-title="Organization"
+										class="form-control input-sm searchAdvanceText span12"
+										placeholder="Organization" type="text" id="organization" name="organization">
 								</div>
+								
+								
+								<!-- 
 								<div class="form-group pull-left span2" style="margin-left: 5px">
 									<select data-toggle="tooltip" title="" data-original-title="Section"
 										class="input form-control input-sm span12" id="Section"
@@ -388,23 +508,18 @@ margin-bottom:1px;
 										<option value=''>All Section</option>
 									</select>
 								</div>
-								<div id="" class="form-group pull-left span2" style="margin-left: 5px">
+								 -->
+								<div id="" class="form-group pull-left span4" style="margin-left: 5px">
 									<input data-toggle="tooltip" title="" data-original-title="Position"
 										class="form-control input-sm searchAdvanceText span12"
 										placeholder="Position" type="text" id="Position" name="Position">
 								</div>
-								<div id="" class="form-group pull-left span2" style="margin-left: 5px">
+								<div id="" class="form-group pull-left span4" style="margin-left: 5px">
 									<input data-toggle="tooltip" title="" data-original-title="Employee Name"
 										class="form-control input-sm searchAdvanceText span12"
 										placeholder="Employee Name" type="text" id="EmpName" name="EmpName">
 								</div>
-								<div class="form-group pull-left span2" style="margin-left: 5px">
-									<select data-toggle="tooltip" title="" data-original-title="Appraisal Type"
-										class="input form-control input-sm span12" id="appraisalType"
-										name="appraisalType">
-							
-									</select>
-								</div>
+								
 								<div class="form-group pull-right m-b-none "
 									style="margin-bottom: 5px;">
 									<button type="button" class="btn btn-info input-sm"
@@ -667,11 +782,11 @@ margin-bottom:1px;
 					<div class="span12">
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<div class='titlePanel'>Employee Information</div>
+								<div class='titlePanel' id='titlePanelInformation'>Employee Information</div>
 							</div>
 							<!-- ibox-content-radius -->
 							<div class="ibox-content ">
-								<div class="container-fluid">
+								<div class="container-fluid"  id='empInformation'>
 									<div class="span10 ">
 											
 											<div class="row-fluid">
@@ -684,21 +799,17 @@ margin-bottom:1px;
 											<div class="row-fluid">
 												<label class="span3 textInfo">Position:</label>
 												<label class="span3 textInfo textData" id="txtPosition"></label>
-												<label class="span3 textInfo">Department:</label>
-												<label class="span3 textInfo textData" id="txtDepartment"></label>
+												<label class="span3 textInfo">Organization:</label>
+												<label class="span3 textInfo textData" id="txtOrgName"></label>
 											</div>
 											<div class="row-fluid">
-												<label class="span3 textInfo">Section:</label>
-												<label class="span3 textInfo textData" id="txtSection"></label>
+												
 												<label class="span3 textInfo">Chief Employee Code:</label>
 												<label class="span3 textInfo textData" id="txtChiefEmpCode"></label>
-											</div>
-											<div class="row-fluid">
 												<label class="span3 textInfo">Chief Employee Name:</label>
 												<label class="span3 textInfo textData" id="txtChiefEmpName"></label>
-												<label class="span3 textInfo">Appraisal Type:</label>
-												<label class="span3 textInfo textData" id="txtAppraisalType"></label>
 											</div>
+										
 											<div class="row-fluid">
 												<label class="span3 textInfo">Period:</label>
 												<label class="span3 textInfo textData"  id="txtPeriod"></label>
@@ -712,6 +823,34 @@ margin-bottom:1px;
 									
 
 								</div>
+								
+								<div class="container-fluid"  id='orgInformation'>
+									<div class="span10 ">
+											
+											<div class="row-fluid">
+											
+												<label class="span3 textInfo">Organization code:</label>
+												<label class="span3 textInfo textData" id="txtOrgCodeOrg"></label>
+												<label class="span3 textInfo">Organization Name:</label>
+												<label class="span3 textInfo textData" id="txtOrgNameOrg"></label>
+											</div>
+											<div class="row-fluid">
+												<label class="span3 textInfo">Parent Organization:</label>
+												<label class="span3 textInfo textData" id="txtParentOrganizationOrg"></label>
+												<label class="span3 textInfo">Period:</label>
+												<label class="span3 textInfo textData"  id="txtPeriodOrg"></label>
+											</div>
+											
+									</div>
+									<div class="span2" id='grandTototalWeightArea'>
+											<label class="span12 p-t-xxsg text-center ">Grand Total Weight %</label>
+											<label class="span12 p-t-xxsg text-center " id="txtGrandTotalWeighOrg" style="font-size: 300%;"></label>
+									
+									</div>
+									
+
+								</div>
+								
 
 							</div>
 						</div>
@@ -754,7 +893,7 @@ margin-bottom:1px;
 				
 					
 					<div class='row-fluid'>
-					
+						<!-- 
 						<div class="span3 ">
 							 <div class="form-group p-xxs"> 
 								 <label class="span5 p-t-xxs"><b>Assign to:</b></label> 
@@ -765,7 +904,7 @@ margin-bottom:1px;
 								 </div> 
 							 </div> 
 						 </div>
-						 
+						  -->
 						 <div class="span3 ">
 							 <div class="form-group p-xxs"> 
 								 <label class="span4 p-t-xxs"><b>Action:</b></label> 
@@ -776,8 +915,17 @@ margin-bottom:1px;
 								 </div> 
 							 </div> 
 						 </div>
+						 <div class="span5 ">
+	            			<div class="form-group "> 
+								 <label class="span3 p-t-xxs"><b>Remark:</b></label> 
+								 <div class="span9"> 
+									 <input type='text' name='remark_footer' id='remark_footer' class='span12' value=''>
+								 </div> 
+							 </div>  
+	            		</div>
+	            		
 						 
-						  <div class="span4 offset2">
+						  <div class="span4 offset0">
 						  
 							  	<button class="btn btn-success" type="button" id="btnSubmit">Submit</button>
 								<input type='hidden' id='emp_result_id' name='emp_result_id' value=''>
@@ -787,7 +935,45 @@ margin-bottom:1px;
 					
 					</div>
 					
-					
+					<div class="row-fluid" style='text-align:left;'>
+            		<a href="#" id='slideUpDownStageHistory' style='display:none;'>Work Flow Stage History</a>
+            		<div id='slideStageHistory' style='display:none;'>
+            			<table class='table'>
+            				<thead>
+            					<tr>
+            						<th  style='width:15%'>Create by</th>
+            						<th  style='width:15%'>Create dttm</th>
+            						<th  style='width:15%'>Form Stage ID</th>
+            						<th  style='width:15%'>To Stage ID</th>
+            						<th  style='width:35%'>Remark</th>
+            					</tr>
+            				</thead>
+            				<tbody id='listDataStageHistory'>
+            					<tr >
+            						<td>emp_code1</td>
+            						<td>2017-08-16 10:20:22</td>
+            						<td>HR</td>
+            						<td>Manager</td>
+            						<td>่Reject เนื่องจากไม่เหมาะสม</td>
+            					</tr>
+            					<tr >
+            						<td>emp_code1</td>
+            						<td>2017-08-16 10:20:22</td>
+            						<td>HR</td>
+            						<td>Manager</td>
+            						<td>่Reject เนื่องจากไม่เหมาะสม</td>
+            					</tr>
+            					<tr >
+            						<td>emp_code1</td>
+            						<td>2017-08-16 10:20:22</td>
+            						<td>HR</td>
+            						<td>Manager</td>
+            						<td>่Reject เนื่องจากไม่เหมาะสม</td>
+            					</tr>
+            				</tbody>
+            			</table>
+            		</div>
+            	</div>
 
 					<div class="alert alert-warning" id="information"
 						style="display: none;"></div>
@@ -798,6 +984,356 @@ margin-bottom:1px;
 	<input type="hidden" name="id" id="id" value="">
 	<input type="hidden" name="action" id="action" value="add">
 	<!-- Modal End Appraisal -->
+	
+	
+	
+	
+<!-- Modal Phase Start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="PhaseModal" class="modal inmodal " style="display: none;">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
+                <h5 class="modal-title">Phase</h5>
+            </div>
+            <div class="modal-body">
+               
+                
+Phase Name <input type='text' name='' value=''>
+
+<table>
+	<thead>
+		<tr>
+			<th>
+			No.
+			</th>
+			<th>
+			Phase Name
+			</th>
+			<th>
+			is Active
+			</th>
+			<th>
+			Manage
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td>Phase1</td>
+			<td><input type='checkbox' id='' name=''></td>
+			<td>Manage</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>Phase1</td>
+			<td><input type='checkbox' id='' name=''></td>
+			<td>Manage</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>Phase1</td>
+			<td><input type='checkbox' id='' name=''></td>
+			<td>Manage</td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+
+<!-- 
+Phase
+Phase Name
+Is Active
+ -->
+				
+	               
+                               
+                <!-- form start -->
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+            	<div align="center">
+	                <button class="btn btn-success" id="btnConfirmOK" type="button">&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;</button>&nbsp;&nbsp;
+	                <button data-dismiss="modal" class="btn btn-danger" type="button"><i class="fa fa-times-circle"></i>&nbsp;Cancel</button>
+            	</div>
+            </div>
+        </div>
+    </div>
+    
+    
+   
+</div>
+
+<!-- modal action plan start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="actionPlanModal" class="modal inmodal large" style="display: none;">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight large">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
+                <h5 class="modal-title">Action Plan</h5>
+            </div>
+            <div class="modal-body">
+                <!-- content start -->
+                 
+				<div class="row-fluid">
+				<!-- start--row-fluid -->
+				   <div class="span12">
+				           <div class="ibox float-e-margins">
+				           <!-- 
+				                <div class="ibox-title" style="background-color: rgb(83, 120, 253); border-color: rgb(83, 120, 253); min-height:0px;">      
+				                    <div class="titlePanelSearch">Action Plan</div> 
+				    			</div>
+				    		-->
+				    			<div class="ibox-content breadcrumbs2" style="border-color: rgb(83, 120, 253);"> 
+				    						
+				    				<div class="row-fluid ">
+											
+											<div class='boxActionPlainArea alert alert-success'>
+												<div class='boxActionL'>
+													<!-- 
+													<div class='actionPlanList'>
+													Phase <span id='actionPlanPhase'></span>
+													</div>
+													 -->
+													<div class='actionPlanList'>
+														<div style='padding-top:10px; padding-left: 10px;'>
+															Organization: <span id='actionPlanOrganization'></span>
+														</div>
+													</div>
+													<div class='actionPlanList'>
+														<div style='padding-top:10px; padding-left: 10px;'>
+															Appraisal Item: <span id='actionPlanAppraisalItem'></span>
+														</div>
+													</div>
+													 
+													
+												</div>
+												<div class='boxActionR'>
+													
+													<div class='boxActualPercentageArea'>
+													
+														<div class='boxActualvsForecast boxForecastVsActual'>
+															<div class='fontBold '>
+																%Actual vs Forecast 
+															</div>
+															<div >
+																<span id='actionPlanActualVSforecast'></span>% <span id='sparkline1'></span>
+															</div>
+														</div>
+														<div class='boxActualvsTarget boxForecastVsActual'>
+															<div class='fontBold'>
+															% Actual vs Target 
+															</div>
+															<div>
+															<span id='actionPlanActualVSTarget'></span>% <span id='sparkline2'></span>
+															</div>
+															
+														</div>
+														
+													</div>
+													<div class='boxForecastArea'>
+														<div class='boxForecastResult boxForecastVsActual'>
+															<div class='fontBold fontCenter'>
+															Forecast Result
+															</div>
+															<div class='fontCenter'>
+															 <span id='actionPlanForecastResult'></span>
+															 </div>
+														</div>
+														<div class='boxActual boxForecastVsActual'>
+															<div class='fontBold fontCenter'>
+															Actual
+															</div>
+															<div class='fontCenter'>
+															 <span id='actionPlanActual'></span>
+															 </div>
+														</div>
+													</div>
+													<div class='boxTargetArea' style='font-size:20px;'>
+														<div class='boxTargetData'>
+														<div class='fontBold fontCenter'>Target</div>
+														<div class='fontCenter fontBold' style='font-size:24px;margin-top:5px; color:green;'> <span id='actionPlanTarget'></span></div>
+														</div>
+													</div>
+												</div>
+												<br style='clear:both'>
+											</div>
+									</div>
+						
+					    		
+				
+									<div class='row-fluid' style='margin-top:5px;margin-bottom:5px;'>
+										<div class=' alert alert-block'>
+											<div class='span6'>
+												<button type="button" class="btn btn-success input-sm" name="btn-" id="btnAddActionPlan">
+												
+													Add
+												</button>
+												<button type="button" class="btn btn-warning  input-sm" name="btn-" id="btnEditActionPlan">
+													Edit
+												</button>
+												<button type="button" class="btn btn-danger input-sm" name="btn-" id="btnDelActionPlan">
+													Delete
+												</button>
+												<input type="hidden" id="action_actionplan" value="add" name="action_actionplan">
+            									<input type="hidden" id="action_new_actionplan" value="" name="action_new_actionplan">
+            									<input type="hidden" id="actionplan_emp_id" value="" name="actionplan_emp_id">
+            									<input type="hidden" id="actionplan_emp_name" value="" name="actionplan_emp_name">
+            									<input type="hidden" id="item_result_id" value="3" name="item_result_id">
+            									
+											</div>
+											<div class='span6'>
+												<div style='text-align:right;'>
+													<button type="button" class="btn btn-primary input-sm" name="btn-" id="btnSaveActionPlan">
+														Save
+													</button>
+													<button type="button" class="btn btn-danger input-sm" name="btn-" id="btnCancelActionPlan">
+														Cancel
+													</button>
+													
+												</div>
+											</div>
+											<br style='clear:both'>
+										</div>
+									</div>
+									<div style="overflow: scroll; width:100%;">
+									<!-- Select,Task,Plan Start,Plan Start,Plan End,Actual Start,Actual End,Responsible,%Completed,PV,AC,EV -->
+										<table class='table'>
+											<thead>
+												<tr>
+													<th style='width:5%'><center><b>Select</b></center></th>
+													<th style='width:10%'><b>Task</b></th>
+													<th style='width:5%'><b>Plan Start</b></th>
+													<th style='width:5%'><b>Plan End</b></th>
+													<th style='width:5%'><b>Actual Start</b></th>
+													<th style='width:5%'><b>Actual End</b></th>
+													<th style='width:5%'><b>Phase</b></th>
+													<th style='width:10%'><b>Responsible</b></th>
+													<th style='width:10%'><center><b>%Completed</b></center></th>
+													<th style='width:10%'><center><b>PV</center></b></th>
+													<th style='width:10%'><center><b>AC</center></b></th>
+													<th style='width:10%'><center><b>EV</center></b></th>
+													
+												</tr>
+											</thead>
+											<tbody id='listDataActionPlan'>
+												<!-- 
+												<tr>
+													<td>
+													<center>
+														<input type='checkbox' name='' id='' class='' value=''>
+													</center>
+													</td>
+													<td>Plan</td>
+													<td>
+												
+														<input type='text' name='planStart' id='planStart' class='datepicker input-small' style="height:20px;margin-right:3px;" value='08/07/2017'>
+													</td>
+													<td>
+														<input type='text' name='planEnd' id='planEnd' class='datepicker input-small' style="height:20px;margin-right:3px;" value='08/07/2017'>
+													</td>
+													<td>
+														<input type='text' name='actualStart' id='actualStart' class='datepicker input-small' style="height:20px;margin-right:3px;" value='08/07/2017'>
+													</td>
+													<td>
+														<input type='text' name='actualStart' id='actualStart' class='datepicker input-small' style="height:20px; margin-right:3px;" value='08/07/2017'>
+													</td>
+													<td>
+														<select id='phase' name='phase' class='input-small' style="height:22px; margin-right:3px;">
+															<option>Phase1</option>
+															<option>Phase2</option>
+															<option>Phase3</option>
+														</select>
+													</td>
+													<td>
+													ศักดิ์สิทธิ์ ยศกระจารุกุล
+													</td>
+													
+													<td>
+													<center>20</center>
+													</td>
+													
+													<td>
+													<center>-</center>
+													</td>
+													<td>
+													<center>20</center>
+													</td>
+													<td>
+													<center>50</center>
+													</td>
+												</tr>
+												 -->
+											</tbody>
+											
+										</table>
+									</div>
+				
+				
+				</div><!-- content end -->
+					    </div>
+					    		
+					</div>
+				
+				</div>
+				<!-- end--row-fluid -->
+				<div class="alert alert-warning" id="information3"
+						style="display: none;"></div>
+                <!-- content end -->
+            </div>
+           
+        </div>
+    </div>
+    
+    
+   
+</div>
+<!-- modal action plan end -->
+
+
+
+	
+<!-- Modal Confirm Start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal" class="modal inmodal " style="display: none;">
+    <div class="modal-dialog ">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
+                <h5 class="modal-title">Confirm Dialog</h5>
+            </div>
+            <div class="modal-body">
+                <!-- content start -->
+                <!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
+                <hr>
+                 -->
+                <!-- form start -->
+                <div class="form-kpi-mangement">
+	                <div class="form-kpi-label" align="center">
+	                
+	                 		<label>Confirm to Delete Data?</label>
+	                </div>
+                </div>
+                               
+                <!-- form start -->
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+            	<div align="center">
+	                <button class="btn btn-success" id="btnConfirmOK" type="button">&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;</button>&nbsp;&nbsp;
+	                <button data-dismiss="modal" class="btn btn-danger" type="button"><i class="fa fa-times-circle"></i>&nbsp;Cancel</button>
+            	</div>
+            </div>
+        </div>
+    </div>
+    
+    
+   
+</div>
+<!-- Modal Confirm End -->
+
 
 
 
@@ -824,6 +1360,7 @@ margin-bottom:1px;
 
 	<div id="embedParamSearch"></div>
 	
+
 </body>
 	
 	

@@ -1134,9 +1134,27 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	    		
 	</div>
 
-</div><!-- end--row-fluid -->
+</div>
+<!-- end--row-fluid -->
 
 
+<!-- phase start -->
 
+Phase Name:<input type='text' id='' name=''>
+	<table>
+		<tr>
+			<th>No.</th>
+			<th>Phase Name</th>
+			<th>is Active</th>
+			<th>Manage</th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>Phase1</td>
+			<td><input type='checkbox'  id='isActive' name='isActive'></td>
+			<td><a href='#' class='edit' id='edit-1'>Edit</a>,<a href='#' class='del' id='del-1'>del</a></td>
+		</tr>
+	</table>
+<!-- phase end -->
 
  </div>
