@@ -326,9 +326,10 @@ $(document).ready(function() {
 	 		return false;
 	 	}
 	 }
-
+	$("#org_name").val("");
 	$("#position").val("");
 	$("#emp_name").val("");
+	$("#org_id").val("");
 	$("#position_id").val("");
 	$("#emp_name_id").val("");
 	
@@ -378,7 +379,7 @@ $(document).ready(function() {
 	                            return {
 	                                label: item.org_name,
 	                                value: item.org_name,
-	                                org_code:item.org_code
+	                                org_code:item.org_id
 	                            };
 	                        }));
 						
