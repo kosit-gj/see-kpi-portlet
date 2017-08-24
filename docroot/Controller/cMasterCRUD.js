@@ -536,8 +536,11 @@ var createInputTypeFn  = function(object,tokenID){
 		if(object['initValue']!=undefined){
 			inputType+="<option value=''>"+object['initValue']+"</option>";
 		}
+		//console.log(golbalDataCascades[object['cascades']['id']][0]);
 		$.each(golbalDataCascades[object['cascades']['id']][0][object['cascades']['listData']],function(index,indexEntry){
-			inputType+="<option value="+indexEntry+">"+indexEntry+"</option>";
+			//inputType+="<option value="+indexEntry+">"+indexEntry+"</option>";
+			inputType+="<option value="+(indexEntry[Object.keys(indexEntry)[0]] != undefined ? indexEntry[Object.keys(indexEntry)[0]] : indexEntry)+">"+(indexEntry[Object.keys(indexEntry)[1]] != undefined ? indexEntry[Object.keys(indexEntry)[1]] : indexEntry)+"</option>";
+
 		});
 		inputType+="</select>";
 		
@@ -694,10 +697,15 @@ var createScriptCascadesFn = function(options){
 		if(indexEntry['inputType'] == "cascades"){
 			$("form#"+options['formDetail']['id']+"  #"+indexEntry['cascades']['id']).change(function(){
 				var htmlChange = "";
+				if(indexEntry['initValue']!=undefined){
+					htmlChange+="<option value=''>"+indexEntry['initValue']+"</option>";
+				}
 				$.each(golbalDataCascades[indexEntry['cascades']['id']],function(index2,indexEntry2){
 					if(indexEntry2[indexEntry['cascades']['id']] == $("form#"+options['formDetail']['id']+"  #"+indexEntry['cascades']['id']).val()){
+						
 						$.each(indexEntry2[indexEntry['cascades']['listData']],function(index3,indexEntry3){
-							htmlChange+="<option value="+indexEntry3+">"+indexEntry3+"</option>";
+							//htmlChange+="<option value="+indexEntry3+">"+indexEntry3+"</option>";
+							htmlChange+="<option value="+(indexEntry3[Object.keys(indexEntry3)[0]] != undefined ? indexEntry3[Object.keys(indexEntry3)[0]] : indexEntry3)+">"+(indexEntry3[Object.keys(indexEntry3)[1]] != undefined ? indexEntry3[Object.keys(indexEntry3)[1]] : indexEntry3)+"</option>";
 						});
 					}
 				});
