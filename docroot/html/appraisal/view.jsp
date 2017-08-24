@@ -426,6 +426,12 @@ margin-bottom:1px;
 .actionplan_input{
 	display:none;
 }
+.jqstooltip{
+	display:none;
+}
+#jqstooltip{
+	display:none;
+}
 /* Modal action plan END */
 </style>
 
@@ -989,7 +995,7 @@ margin-bottom:1px;
 	
 	
 <!-- Modal Phase Start -->
-<div aria-hidden="true" role="dialog" tabindex="-1" id="PhaseModal" class="modal inmodal " style="display: none;">
+<div aria-hidden="true" role="dialog" tabindex="-1" id="phaseModal" class="modal inmodal " style="display: none;">
     <div class="modal-dialog">
     <div class="modal-content animated bounceInRight">
             <div class="modal-header">
@@ -1120,7 +1126,7 @@ Is Active
 																%Actual vs Forecast 
 															</div>
 															<div >
-																<span id='actionPlanActualVSforecast'></span>% <span id='sparkline1'></span>
+																<span id='actionPlanActualVSforecast'></span>% <span id='actualvsForecastBar'></span>
 															</div>
 														</div>
 														<div class='boxActualvsTarget boxForecastVsActual'>
@@ -1128,11 +1134,11 @@ Is Active
 															% Actual vs Target 
 															</div>
 															<div>
-															<span id='actionPlanActualVSTarget'></span>% <span id='sparkline2'></span>
+															<span id='actionPlanActualVSTarget'></span>% <span id='actualvsTargetBar'></span>
 															</div>
 															
 														</div>
-														
+														 
 													</div>
 													<div class='boxForecastArea'>
 														<div class='boxForecastResult boxForecastVsActual'>
@@ -1280,7 +1286,7 @@ Is Active
 				
 				</div>
 				<!-- end--row-fluid -->
-				<div class="alert alert-warning" id="information3"
+				<div class="alert alert-warning information" id="information3"
 						style="display: none;"></div>
                 <!-- content end -->
             </div>

@@ -9,8 +9,8 @@
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>see-kpi-portlet</css-class-wrapper>    
 	</portlet>  
-	                                                                                                                                                  
-	                                                                                                                                                         
+	                                                                                                                                                                       
+	                                                                                                                                                           
 	<portlet>                                                 
 		<portlet-name>appraisal</portlet-name>         
 		<icon>/icon.png</icon>                      

@@ -770,7 +770,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								</div>
 							</div>
 							<div class="form-group p-xxs">
-								<label class="control-label">Salary:<span class='redFont '>*</span></label>
+								<label class="control-label">Salary:</label>
 								<div class="controls">
 									<input type="text" class="form-control input-sm span12 numberOnly" placeholder="" id="from_emp_salary">
 								</div>

@@ -28,28 +28,24 @@ var globalCount=0;
 //}
 
 //List Error Function Start
-var listErrorFn =function(data){
+var listErrorActionPlanFn =function(data){
 	var errorData="";
 	
-	$.each(data,function(index,indexEntry){
-		if(index==0){
+	
 		
-			if(indexEntry['error']['processing_seq']!=undefined){
-				errorData+=indexEntry['error']['processing_seq']+" ";
+			if(data[0]['action_plan_name']!=undefined){
+				errorData+="Error Task Name <b>"+data[0]['action_plan_name']+"</b><br>";
 			}
-			if(indexEntry['error']['rule_id']!=undefined){
-				errorData+="<br>Rule ID:"+indexEntry['rule_id']+" | "+indexEntry['error']['rule_id'];
-			}
-		}else{
 			
-			if(indexEntry['error']['processing_seq']!=undefined){
-				errorData+="<br>"+indexEntry['error']['processing_seq']+" ";
+			if(data[0]['error']!=undefined){
+				$.each(data[0]['error'],function(index,indexEntry){
+					
+						errorData+="<b>"+index+"</b>:"+indexEntry+"<br>";
+					
+				});
 			}
-			if(indexEntry['error']['rule_id']!=undefined){
-				errorData+="<br>Rule ID : "+indexEntry['rule_id']+" |"+indexEntry['error']['rule_id'];
-			}
-		}
-	});
+			
+			
 	
 	return errorData;
 }
@@ -846,7 +842,7 @@ var dropdownListPhaseFn = function(){
 var listActionPlanFn = function(data){
 	
 	dropdownListPhaseFn();
-
+	 $("#action_new_actionplan").val("");
 
 	//Map Data ...
 	/*
@@ -935,15 +931,26 @@ update_dttm
 			htmlTR+="<div class='actionplan_label'>"+indexEntry['phase_name']+"</div>";
 			htmlTR+="<select id='phase_list-"+indexEntry['action_plan_id']+"' name='phase_list-"+indexEntry['action_plan_id']+"' class='input-small actionplan_input' style=\"height:22px; margin-right:3px;\">";
 			$.each(phaseArray,function(index2,indexEntry2){
+				//console.log(indexEntry['phase_id']+"=="+indexEntry2['phase_id']);
 				
-				htmlTR+="<option value='"+indexEntry2['phase_id']+"'>"+indexEntry2['phase_name']+"</option>";
+				if(indexEntry['phase_id']==indexEntry2['phase_id']){
+					htmlTR+="<option selected value='"+indexEntry2['phase_id']+"'>"+indexEntry2['phase_name']+"</option>";
+				}else{
+					htmlTR+="<option value='"+indexEntry2['phase_id']+"'>"+indexEntry2['phase_name']+"</option>";
+				}
 			});
 			htmlTR+="</select>";
 			htmlTR+="</td>";
 			
 			htmlTR+="<td>";
-			htmlTR+="<div class='actionplan_label'>"+indexEntry['responsible']+"</div>";
-			htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='responsible-"+indexEntry['action_plan_id']+"' class='responsible actionplan_input' name='responsible-"+indexEntry['action_plan_id']+"' value='"+indexEntry['responsible']+"'>";
+			if(indexEntry['responsible']!="" && indexEntry['responsible']!=null ){
+				htmlTR+="<div class='actionplan_label'>"+indexEntry['emp_id']+"-"+indexEntry['responsible']+"</div>";
+				htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='responsible-"+indexEntry['action_plan_id']+"' class='responsible actionplan_input' name='responsible-"+indexEntry['action_plan_id']+"' value='"+indexEntry['emp_id']+"-"+indexEntry['responsible']+"'>";
+			}else{
+				htmlTR+="<div class='actionplan_label'></div>";
+				htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='responsible-"+indexEntry['action_plan_id']+"' class='responsible actionplan_input' name='responsible-"+indexEntry['action_plan_id']+"' value=''>";
+			}
+			
 			htmlTR+="</td>";
 			
 			htmlTR+="<td>";
@@ -987,15 +994,43 @@ update_dttm
 //	        buttonText: "Select date"
 //	      });
 	//2017-08-22
-	 	 $(".datepicker").datepicker();
-	 	 $(".datepicker").datepicker( "option", "dateFormat", "yy-mm-dd" );
-	    
-	    $("#sparkline1").sparkline([10,12,12,9,7], {
-	        type: 'bullet'});
-	    
-	    $("#sparkline2").sparkline([10,12,12,9,7], {
-	        type: 'bullet'});
+//	 	 $(".datepicker").datepicker();
+//	 	 $(".datepicker").datepicker( "option", "dateFormat", "yy-mm-dd" );
+	    //target,over_target,center,performance2,performance1
 	
+	
+	/*
+	 data['header']['target_value']
+	 data['header']['forecast_value']
+	 data['header']['actual_value']
+	 data['header']['actual_vs_forecast']
+	 data['header']['actual_vs_target']
+	 
+	 */
+	//parseFloat(notNullFn(data['header']['target_value'])).toFixed(2);
+	
+	   
+	    
+	    $("#actualvsForecastBar").sparkline([0,0,parseFloat(notNullFn(data['header']['target_value'])).toFixed(2),parseFloat(notNullFn(data['header']['actual_vs_forecast'])).toFixed(2),parseFloat(notNullFn(data['header']['actual_vs_forecast'])).toFixed(2)], {
+	        type: 'bullet',
+	        targetColor: '#7f94ff',
+	        performanceColor: '#7f94ff',
+	        rangeColors: ['#d3dafe','#7f94ff','#7f94ff ']});
+	    
+	    
+	    $("#actualvsTargetBar").sparkline([0,0,parseFloat(notNullFn(data['header']['target_value'])).toFixed(2),parseFloat(notNullFn(data['header']['actual_vs_target'])).toFixed(2),parseFloat(notNullFn(data['header']['actual_vs_target'])).toFixed(2)], {
+	        type: 'bullet',
+	        targetColor: '#7f94ff',
+	        performanceColor: '#7f94ff',
+	        rangeColors: ['#d3dafe','#7f94ff','#7f94ff ']});
+	    
+	    
+	    $(".jqstooltip").hide();
+	    
+	
+	    
+	    
+	 
 }
 
 var insertActionPlanInlineFn = function(){	
@@ -1015,8 +1050,8 @@ var insertActionPlanInlineFn = function(){
 			htmlTableInline+="<td>";
 			htmlTableInline+="<input id='new_complete-"+globalCount+"' type=\"checkbox\" class='new_complete_flag'>";
 			htmlTableInline+="</td>";
-			htmlTableInline+="<td ><button class='btn btn-danger btn-xs  deleteNewCondition new-condition' type='button' id='"+globalCount+"'>Delete</button></td>";
-			//htmlTableInline+="<td ><i class=\"fa fa-gear font-management font-management2  new-condition\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\"<button class='btn btn-danger btn-xs deleteCondition deleteNewCondition new-condition' type='button' id='"+globalCount+"'>Delete</button>\"></i></td>";
+			htmlTableInline+="<td ><button class='btn btn-danger btn-xs  deleteNewAction Plan new-condition' type='button' id='"+globalCount+"'>Delete</button></td>";
+			//htmlTableInline+="<td ><i class=\"fa fa-gear font-management font-management2  new-condition\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\"<button class='btn btn-danger btn-xs deleteAction Plan deleteNewAction Plan new-condition' type='button' id='"+globalCount+"'>Delete</button>\"></i></td>";
 			htmlTableInline+="</tr>";
 			*/
 			
@@ -1126,6 +1161,21 @@ var getActionPlanFn = function(id){
 		}
 	});
 	
+var getPhaseFn = function(id){
+	
+	$.ajax({
+		url:restfulURL+"/see_api/public/appraisal/action_plan/"+id,
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			//console.log(data);
+			listActionPlanFn(data);
+		}
+	});
+	
+}	
 	 
 	 
 	
@@ -1291,7 +1341,6 @@ var listDataFn = function(data){
 			$("#actionPlanModal").modal();
 			
 			getActionPlanFn("3");
-			alert("click action_plan");
 			$("#action_actionplan").val("add");
 			
 			
@@ -1299,14 +1348,12 @@ var listDataFn = function(data){
 		});
 		//findOne Start
 		$(".phase").on("click",function() {
-			alert("phase");
-//			$(window).scrollTop(0);
-//			var edit=this.id.split("-");
-//			var id=edit[1];
-//			var form_url=edit[2];
-//			findOneFn(id,form_url);
-//			$(".modal-body").scrollTop(0);
-//			$(this).parent().parent().parent().children().click();
+			alert("phase2");
+			$("#informConfirm").empty();
+			var id=this.id.split("-");
+			id=id[1];
+			$("#phaseModal").modal();
+			getPhaseFn("3");
 		});
 	});	
 	/*bindding popover end*/
@@ -1788,23 +1835,24 @@ $(document).ready(function() {
 		$("#btnAddActionPlan").click(function(){
 			 
 			  if($("#action_actionplan").val()=="add"){
-				  
+				   
 				insertActionPlanInlineFn();
-				$("#action_new_condition").val("add");
+				$("#action_new_actionplan").val("add");
 				//$(".iconDisable").html("<i style='opacity:0.3;cursor:default;' class='fa fa-gear font-management'></i>");
 				//$(".iconDisable").html("<button id=\"\" style='opacity:0.3;cursor:default;' type=\"button\" class=\"btn btn-danger btn-xs   new-condition\">Delete</button>");
 				$("input.action_plan_id").prop("disabled",true);
 				return false;
 			  }else{
-				  callFlashSlideInModal("Can't add Condition. Because your doing Update Data!.","#information2","error");
+				  callFlashSlideInModal("Can't add Action Plan. Because your doing Update Data!.","#information3","error");
 			  }
 		  });
 		 
 		 
 		  
 		  $("#btnEditActionPlan").click(function() {
+			
 				if($("#action_new_actionplan").val()=="add"){
-					callFlashSlideInModal("Can't edit Condition. Because your doing insert Data!.","#information3","error");
+					callFlashSlideInModal("Can't edit Action Plan. Because your doing insert Data!.","#information3","error");
 					return false;
 				  }
 				
@@ -1813,85 +1861,162 @@ $(document).ready(function() {
 				
 				$("#action_actionplan").val("edit");
 				
-				$(".datepicker").datepicker({
-			 		 	onSelect: function(dateText, inst) {
-			 		      $(this).val(dateText);
-			 		      alert(dateText);
-			 		      
-			 		    }
-			 	 });
+				
+				
+				$(".datepicker").datepicker();
+				$(".datepicker").each(function() {    
+					
+					var dataDate=$(this).val().split("-");
+					var newDataDate="";
+					var yy=dataDate[0];
+					var mm=dataDate[1];
+					var dd=dataDate[2];
+					newDataDate=mm+"/"+dd+"/"+yy;
+				
+					//10/12/2012
+					//2017-08-22
+				    $(this).datepicker('setDate', newDataDate);
+				});
+				$(".datepicker").datepicker( "option", "dateFormat", "yy-mm-dd" );
+				
+				
+				
+				
+				//Autocomplete START.
+				 $(".responsible").autocomplete({
+				        source: function (request, response) {
+				        	$.ajax({
+								 url:restfulURL+"/see_api/public/appraisal/action_plan/auto_employee_name",
+								 type:"get",
+								 dataType:"json",
+								 headers:{Authorization:"Bearer "+tokenID.token},
+								 data:{
+									 "emp_name":request.term,
+									 },
+								 //async:false,
+				                 error: function (xhr, textStatus, errorThrown) {
+				                        console.log('Error: ' + xhr.responseText);
+				                    },
+								 success:function(data){
+										response($.map(data, function (item) {
+				                            return {
+				                                label: item.emp_id+"-"+item.emp_name,
+				                                value: item.emp_id+"-"+item.emp_name
+				                            };
+				                        }));
+								},
+								beforeSend:function(){
+									$("body").mLoading('hide');	
+								}
+								
+								});
+				        }
+				    });
+				 //Autocomplete END.
+				
 			});
 		  
 		  
 		  
-		//ปุ่ม add Condition
+		//ปุ่ม add Action Plan
 		$("#btnSaveActionPlan").click(function(){ 
 			
 				
 			if($("#action_actionplan").val() == "edit") {	
 				
-			var grade_id = $("#embed_grade_id").val();
-
-				  // get data for loop array start
-				  var grades=[];
-				  $.each(golbalDataCondition,function(index,indexEntry){
-
+		
 				  
-				  var rule_id = "";
-				  var processing_seq = "";
-				  var operator = "";
-				  var complete_flag = "";
-				 
-				 
-				  if($("#embed_seq-"+indexEntry['condition_id']).val()!=undefined 
-					|| $("#embed_operater-"+indexEntry['condition_id']).val()!=undefined 
-					|| $("#embed_complete_flag-"+indexEntry['condition_id']).val()!=undefined 
-					)
-				  {
+			
+			  var action_plan_id="";
+			  var phase_id = "";
+			  var action_plan_name = "";
+			  var plan_start_date = "";
+			  var plan_end_date = "";
+			  var actual_start_date = "";
+			  var actual_end_date="";
+			  
+			  var plan_value="";
+			  var actual_cost="";
+			  var earned_value="";
+			  var completed_percent="";
+			  var emp_id="";
+			  var new_responsible="";
+			  
+			  var actions = [];
+				  
+			
+			  
+			  $.each($(".action_plan_id"),function(index,indexEntry){
+					 
+					 var id=this.id.split("-");
+					 var i=id[1];
+					 
+					
+					 
+					  action_plan_id=i;
+					  phase_id=$("#phase_list-"+i).val();
+					  action_plan_name = $("#action_plan_name-"+i).val();
+					  plan_start_date = $("#plan_start_date-"+i).val();
+					  plan_end_date = $("#plan_end_date-"+i).val();
+					  actual_start_date = $("#actual_start_date-"+i).val();
+					  actual_end_date=$("#actual_end_date-"+i).val();
 					  
-				  	   //send value Seq
-					   processing_seq=$("#seq-"+indexEntry['condition_id']).val();
-					   //send value ContactType 
-					   operator=$("#operater-"+indexEntry['condition_id']).val();
-				 
-					   //send value KPI 
-					   if($("#Complete-"+indexEntry['condition_id']).prop('checked')){ 
-						   complete_flag = 1;
-				        }else{ 
-				        	complete_flag = 0;
-				        }
+					  plan_value=$("#plan_value-"+i).val();
+					  actual_cost=$("#actual_cost-"+i).val();
+					  earned_value=$("#earned_value-"+i).val();
+					  completed_percent=$("#completed_percent-"+i).val();
+					  if($("#responsible-"+i).val()==""){
+						  emp_id="";
+					  }else{
+						  emp_id=$("#responsible-"+i).val().split("-");
+						  emp_id=emp_id[0];
+					  }
+//					  emp_id=$("#actionplan_emp_id").val();
+//					  responsible=$("#new_responsible").val();
+					
+					
+
 					   
-					   grades.push({
-						   condition_id:""+indexEntry['condition_id']+"",
-						   rule_id:""+indexEntry['rule_id']+"",
-						   processing_seq:processing_seq,
-						   operator: ""+operator+"",
-						   complete_flag: ""+complete_flag+"",
+					  actions.push({
+						      action_plan_id:""+action_plan_id+"",
+						      phase_id: ""+phase_id+"",
+							  action_plan_name : ""+action_plan_name+"",
+							  plan_start_date : ""+plan_start_date+"",
+							  plan_end_date : ""+plan_end_date+"",
+							  actual_start_date : ""+actual_start_date+"",
+							  actual_end_date: ""+actual_end_date+"",
+							  plan_value: ""+plan_value+"",
+							  actual_cost: ""+actual_cost+"",
+							  earned_value: ""+earned_value+"",
+							  completed_percent: ""+completed_percent+"",
+							 // responsible: ""+responsible+"",
+							  emp_id:emp_id
+							  
 					   });
-					   
-				  }
-				  
-				  });
-				//Get data for loop array end
+			  });
+				//console.log("actions");
+				//console.log(actions);
+				
+				
 					$.ajax({
-						     url:restfulURL+"/dqs_api/public/dqs_grade/"+grade_id+"/condition",
+						     url:restfulURL+"/see_api/public/appraisal/action_plan/"+$("#item_result_id").val(),
 						     type:"PATCH",
 						     dataType:"json",
-						     data:{"grades":grades},
+						     data:{"actions":actions},
 						     headers:{Authorization:"Bearer "+tokenID.token},
 						     async:false,
 						     success:function(data,status){
-							 checkMaintenanceFn(data);
+							
 						     	  if(data['status']==200 ){
-									getDataConditionFn();
+									getActionPlanFn($("#item_result_id").val());
 								  	$("#action_actionplan").val("add");
 									if(data['data']['error'].length==0){
 							      	
-								  	callFlashSlideInModal("Update Successfully.","#information2"); 
+								  	callFlashSlideInModal("Update Successfully.","#information3"); 
 							
 									}else{
-										callFlashSlideInModal(listErrorFn(data['data']['error']),"#information2","error");
-										
+										callFlashSlideInModal(listErrorActionPlanFn(data['data']['error']),"#information3","error");
+										//callFlashSlideInModal(validationFn(data),"#information3","error");
 									  }
 								  	  
 								  }
@@ -1936,14 +2061,14 @@ $(document).ready(function() {
 				  
 				  var actions = [];
 					  
-				  $.each($(".new_action_plan_id"),function(index,indexEntry){
-					 console.log(this.id);
-					// console.log($(this).attr("id"));
-					 console.log($(this));
-					 var id=this.id.split("-");
-					 id=id[1];
-					 
-				  });	
+//				  $.each($(".new_action_plan_id"),function(index,indexEntry){
+//					 console.log(this.id);
+//					// console.log($(this).attr("id"));
+//					 console.log($(this));
+//					 var id=this.id.split("-");
+//					 id=id[1];
+//					 
+//				  });	
 				  
 				  $.each($(".new_action_plan_id"),function(index,indexEntry){
 						 
@@ -1992,8 +2117,8 @@ $(document).ready(function() {
 								  
 						   });
 				  });
-					console.log("actions");
-					console.log(actions);
+					//console.log("actions");
+					//console.log(actions);
 				
 					  $.ajax({
 						     url:restfulURL+"/see_api/public/appraisal/action_plan/"+$("#item_result_id").val(),
@@ -2012,9 +2137,8 @@ $(document).ready(function() {
 									    callFlashSlideInModal("Insert Successfully.","#information3");
 								     
 								      }else{
-										//callFlashSlideInModal(listErrorFn(data['data']['error']),"#information2","error");
-										
-										callFlashSlideInModal(validationFn(data),"#information3","error");
+										callFlashSlideInModal(listErrorActionPlanFn(data['data']['error']),"#information3","error");
+										//callFlashSlideInModal(validationFn(data),"#information3","error");
 										
 										}
 									  
@@ -2030,33 +2154,86 @@ $(document).ready(function() {
 		//delete action plan start...
 		 $(document).on("click","#btnDelActionPlan",function(){
 				
-			 	if($("#action_actionplan").val()=="add"){
+//			 	if($("#action_actionplan").val()=="add"){
+//			 	
+//			 		 $.each($("input.new_action_plan_id:checked"),function(index,indexEntry){
+//			 			 
+//			 			$(this).parent().parent().parent().remove();
+//			 			 
+//			 		 });
+//			 		
+//			 		if($("input.new_action_plan_id").get().length==0){
+//						$("#btnCancelActionPlan").click();
+//					}
+//			 	}
 			 	
-			 		 $.each($("input.new_action_plan_id:checked"),function(index,indexEntry){
-			 			 
+				 var action_plan_id=[];
+				 var actions=[];
+				 
+				 $.each($("input.new_action_plan_id:checked"),function(index,indexEntry){
+		 			 
 			 			$(this).parent().parent().parent().remove();
 			 			 
-			 		 });
-			 		
-			 		if($("input.new_action_plan_id").get().length==0){
-						$("#btnCancelActionPlan").click();
-					}
-			 	}
+			 	 });
+				 
+			 	 $.each($(".action_plan_id:checked"),function(index2,indexEntry3){
+			 			
+			 			 actions.push({
+							   
+						 		action_plan_id: ""+$(this).val()+"",
+								  
+						 	 });
+			 	});
+			 	 
+		
+			 	 					  
+			
+			 	 console.log(actions);
+			 	  
+
+					  $.ajax({
+						     url:restfulURL+"/see_api/public/appraisal/action_plan/"+$("#item_result_id").val(),
+						     type:"DELETE",
+						     dataType:"json",
+						     data:{"actions": actions },
+							 headers:{Authorization:"Bearer "+tokenID.token},
+						     success:function(data,status){
+								
+							
+								
+								 if(data['data']['error'].length==0){
+										getActionPlanFn($("#item_result_id").val());
+									    callFlashSlideInModal("Delete Successfully.","#information3");
+								     
+								      }else{
+										callFlashSlideInModal(listErrorActionPlanFn(data['data']['error']),"#information3","error");
+										//callFlashSlideInModal(validationFn(data),"#information3","error");
+										
+								}
+								 
+						}
+					});
+			 	 
+			 	 
+			 	
+			 	 
+			 	 
 			 });
 		//delete action plan end...
 		 
 		 //Cancel action plan start...
 		 $("#btnCancelActionPlan").click(function(){
 			 
-			  getActionPlanFn($("#item_result_id").val());
+			  
 			  
 			  //getActionPlanFn(3);
 			  $(".actionplan_label").show();
 			  $(".actionplan_input").hide();
 			  
 			  $("input.action_plan_id").prop("disabled",false);
-			  $("#action_action_plan").val("add");
-			  $("#action_new_action_plan").val("");
+			  $("#action_actionplan").val("add");
+			  $("#action_new_actionplan").val("");
+			  getActionPlanFn($("#item_result_id").val());
 		  });
 		 //Cancel action plan end...
 		//Action Plan Action Area...

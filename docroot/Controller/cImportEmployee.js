@@ -222,7 +222,7 @@ var listImportEmployeeFn = function(data) {
 //			htmlAppraisalLevel+=indexEntry["appraisal_level_name"]+"<br>";
 //		});
 		htmlTable += "<tr class='rowSearch'>";
-		htmlTable += "<td id=\"objectCenter\" class='objectCenter 'style=\"\">"+"<input  style=\"margin-bottom: 3px;\"type=\"checkbox\"  class='selectEmpCheckbox' id=kpiCheckbox-"+indexEntry["emp_id"]+" value=\""+indexEntry["emp_id"]+"\">"+ "</td>";
+		htmlTable += "<td id=\"objectCenter\" class='objectCenter 'style=\"\">"+"<input  style=\"margin-bottom: 3px;\"type=\"checkbox\"  class='selectEmpCheckbox' id=kpiCheckbox-"+indexEntry["emp_code"]+" value=\""+indexEntry["emp_code"]+"\">"+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["emp_code"]+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["emp_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+indexEntry["org_name"]+"</td>";
@@ -234,7 +234,7 @@ var listImportEmployeeFn = function(data) {
 		//&lt;button class='btn btn-primary btn-xs btn-gear add' id=1 data-target=#ModalLevel data-toggle='modal'&gt;Role&lt;/button&gt;
 		htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del\" data-trigger=\"focus\" tabindex=\""+index+"\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" " +
 				//"<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["emp_id"]+ " data-target=#ModalLevel data-toggle='modal'>Role</button>&nbsp;" +
-				"<button class='btn btn-warning btn-xs btn-gear edit' id="+ indexEntry["emp_id"]+ " data-target=#ModalEditEmp data-toggle='modal'>Edit</button>&nbsp;" +
+				"<button class='btn btn-warning btn-xs btn-gear edit' id="+ indexEntry["emp_code"]+ " data-target=#ModalEditEmp data-toggle='modal'>Edit</button>&nbsp;" +
 		        "<button id="+indexEntry["emp_code"]+" class='btn btn-danger btn-xs btn-gear del'>Delete</button>\"></i></td>";
 		htmlTable += "</tr>";
 		
@@ -323,6 +323,7 @@ var listAppraisalLevel = function() {
 		async:false,
 		success:function(data){
 			console.log(data);
+			htmlDropDown+="<option  value=''></option>";
 			$.each(data,function(index,indexEntry){
 				htmlTable+="<tr>";
 				htmlTable+="<td>";
@@ -455,6 +456,8 @@ var dropDownListOrganization = function(param){
 	var html="";
 	if(param == 'All'){
 		html+="<option  selected value=''>All Organization</option>";
+	}else{
+		html+="<option selected value=\"\" selected></option>";
 	}
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownOrganization ,
@@ -481,8 +484,8 @@ var dropDownListOrganization = function(param){
 var dropDownEmpType = function(){
 	var html="";
 	html+="<select data-toggle=\"tooltip\" title=\"Employee Type\" class=\"input span12 m-b-n\" id=\"from_emp_type\" name=\"from_emp_type\" >";
-	
-	html+="<option value=\"รายวัน\" selected>รายวัน</option>";
+	html+="<option value=\"\" selected></option>";
+	html+="<option value=\"รายวัน\" >รายวัน</option>";
 	html+="<option value=\"รายเดือน\">รายเดือน</option>";
 	html+="</select>";
 	$("#drop_down_emp_typy").html(html);
