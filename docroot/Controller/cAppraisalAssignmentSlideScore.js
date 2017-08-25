@@ -344,7 +344,7 @@ var findOneFn = function(id,actionType){
 	getTemplateFn();
 	
 	
-	//get data for structure
+	//get data for structureี
 	$.ajax({
 		url:restfulURL+"/see_api/public/appraisal_assignment/"+id,
 		type:"get",
@@ -2168,8 +2168,9 @@ var username = $('#user_portlet').val();
 var password = $('#pass_portlet').val();
 
 /*Fixed for Test.*/
- username = "01";
- password =	"11";
+
+// username = "01";
+// password =	"11";
 	
 if(username!="" && username!=null & username!=[] && username!=undefined ){
 	

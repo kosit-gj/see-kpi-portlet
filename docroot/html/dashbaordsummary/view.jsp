@@ -543,6 +543,47 @@ padding:5px;
 	margin-top: 0px;
 }
 /* Next & Back */
+.graphLTop {
+	float: left;
+	padding: 5px;
+	border: 1px solid #cccccc;
+	margin: 2px;
+	width: 28.8%;
+	font-weight: bold;
+	background: #ddd;
+}
+
+.graphLTop .textGRaphTop {
+	text-align: center;
+}
+
+.graphLTopHeader {
+	font-weight: bold;
+	font-size: 18px;
+	color: orange;
+}
+
+/* Start All KPI */
+.fontBold{
+	font-size:16px;
+	font-weight:bold;
+}
+.fontNumber{
+	text-align:right;
+}
+.fontString{
+	text-align:left;
+}
+.fontCenter{
+	text-align:center;
+}
+.tableInside{
+	width:100%;
+}
+table#tableAllKPI .aui .table th, .aui .table td{
+	padding: 2px;
+}
+/* End All KPI */
 </style>
 
 
@@ -649,156 +690,371 @@ padding:5px;
 		</div>
 
 	</div>
-	<!-- end--row-fluid -->
-
-
-<style>
-.graphLTop {
-	float: left;
-	padding: 5px;
-	border: 1px solid #cccccc;
-	margin: 2px;
-	width: 28.8%;
-	font-weight: bold;
-	background: #ddd;
-}
-
-.graphLTop .textGRaphTop {
-	text-align: center;
-}
-
-.graphLTopHeader {
-	font-weight: bold;
-	font-size: 18px;
-	color: orange;
-}
-</style>
-
-
-
-
-
-
-	<!-- content accordion start -->
 	
-	<!-- content accordion end -->
+	<!-- content accordion start -->
 	<div class="panel-group" id="accordion" role="tablist"
 		aria-multiselectable="true">
-		<!-- 
-		<div class="panel panel-default">
-			<div class="panel-heading" role="tab" id="headingTwo">
-				<h4 class="panel-title">
-					<a class="collapsed" role="button" data-toggle="collapse"
-						data-parent="#accordion2" href="#collapseTwo" aria-expanded="false"
-						aria-controls="collapseTwo"
-						style='color: #333333; font-weight: bold;'> <span
-						class="fa fa-caret-right"></span> ALL KPI
-					</a>
-				</h4>
-			</div>
-			<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
-				aria-labelledby="headingTwo">
-				<div class="panel-body">
-					<span id="previous" class="arrow" data-previous=''></span>
-					<span id="next" class="arrow" data-next=''></span>
-					<div class='' style='height: auto;'>
-						<div class='span4'>
-							<div class='graphLTopHeader'>จำนวนเงิน Gross NPL</div>
-							<div>
-								<div class='graphLTop'>
-									<div class='textGRaphTop'>Target</div>
-									<div class='textGRaphTop'>9,999,999</div>
-								</div>
-								<div class='graphLTop'>
-
-									<div class='textGRaphTop'>Forecast</div>
-									<div class='textGRaphTop'>8,888,888</div>
-								</div>
-								<div class='graphLTop'>
-
-									<div class='textGRaphTop'>Actual</div>
-									<div class='textGRaphTop'>7,777,777</div>
-								</div>
-								<br style='clear: both'>
-							</div>
-							<div>
-								<div id="chart-container">FusionCharts will render here</div>
-							</div>
-
-						</div>
-
-						<div class='span8'>
-							<div class='graphLTopHeader' style='margin-bottom: 3px;'>จำนวนเงิน
-								Gross NPL</div>
-							<div id="chart-container2">FusionCharts will render here</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-		
-		
-		
-		
-		
-		<div class="panel panel-default">
-			<div class="panel-heading" role="tab" id="headingTwo">
-				<h4 class="panel-title">
-					<a class="collapsed" role="button" data-toggle="collapse"
-						data-parent="#accordion2" href="#collapse3" aria-expanded="false"
-						aria-controls="collapse3"
-						style='color: #333333; font-weight: bold;'> <span
-						class="fa fa-caret-right"></span> ALL KPI
-					</a>
-				</h4>
-			</div>
-			<div id="collapse3" class="panel-collapse collapse" role="tabpanel"
-				aria-labelledby="headingTwo">
-				<div class="panel-body">
-					
-							<div class='' style='height: auto;'>
-			<div class='span4'>
-				<div class='graphLTopHeader'>จำนวนเงิน Gross NPL</div>
-				<div>
-					<div class='graphLTop'>
-						<div class='textGRaphTop'>Target</div>
-						<div class='textGRaphTop'>9,999,999</div>
-					</div>
-					<div class='graphLTop'>
-
-						<div class='textGRaphTop'>Forecast</div>
-						<div class='textGRaphTop'>8,888,888</div>
-					</div>
-					<div class='graphLTop'>
-
-						<div class='textGRaphTop'>Actual</div>
-						<div class='textGRaphTop'>7,777,777</div>
-					</div>
-					<br style='clear: both'>
-				</div>
-				<div>
-					<div id="chart-container3">FusionCharts will render here</div>
-				</div>
-
-			</div>
-
-			<div class='span8'>
-				<div id="chart-container4">FusionCharts will render here</div>
-			</div>
-		</div>
-					
-					
-					
-					
-				</div>
-
-			</div>
-		</div>
-		-->
+	
 	</div>
+	<!-- content accordion end -->
+
+
 
 
 
 </div>
+ 
+ <div aria-hidden="true" role="dialog" tabindex="-1" id="ModalKPI"
+		class="modal inmodal large" style="display: none;">
+		<div class="modal-dialog " >
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
+						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span>
+					</button>
+					<h4 class="modal-title" id="modalTitleRole">All KPI</h4>
+
+				</div>
+				<div class="modal-body">
+<!-- ############################################################################ -->
+					<table class='table table-bordered' id='tableAllKPI'>
+
+	<thead>
+		<tr>
+			<th width='100px'>
+			<div class='fontBold '> Perspective</div>
+			</th>
+			
+			<th width='100px'>
+			<div class='fontBold '>KPI</div>
+			</th>
+			
+			<th width='100px'>
+			<div class='fontBold '>UOM</div>
+			</th>
+			
+			<th width='300px'>
+			<div class='fontBold fontCenter'>ธอส</div>
+			</th>
+			
+			<th width='300px'>
+			<div class='fontBold fontCenter'>กลยุทธ์องค์กร</div>
+			</th>
+			
+			<th width='300px'>
+			<div class='fontBold fontCenter'>สาขานครหลวง</div>
+			</th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Strong Financial</td>
+				<td>จำนวนเงิน Gross NPL</td>
+				<td>ร้อยละ</td>
+				<td>
+					<!-- table start -->
+					<table class='tableInside table-striped'>
+						<thead>
+							<tr>
+								<th><div class='fontBold '>Target</div></th>
+								<th><div class='fontBold '>Forecast</div></th>
+								<th><div class='fontBold '>Actual</div></th>
+							</tr>
+							
+						</thead>
+						<tbody>
+							<tr>
+								<td>4</td>
+								<td>3.5</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>%Target</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+							<tr>
+								<td>%Forecast</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+						</tbody>
+					</table>
+					<!-- table end -->
+				</td>
+				<td>
+				<!-- table start -->
+					<table class='tableInside table-striped'>
+						<thead>
+							<tr>
+								<th><div class='fontBold '>Target</th>
+								<th><div class='fontBold '>Forecast</th>
+								<th><div class='fontBold '>Actual</th>
+							</tr>
+							
+						</thead>
+						<tbody>
+							<tr>
+								<td>4</td>
+								<td>3.5</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>%Target</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+							<tr>
+								<td>%Forecast</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+						</tbody>
+					</table>
+					<!-- table end -->
+				</td>
+				<td>
+				<!-- table start -->
+					<table class='tableInside table-striped'>
+						<thead>
+							<tr>
+								<th><div class='fontBold '>Target</div></th>
+								<th><div class='fontBold '>Forecast</div></th>
+								<th><div class='fontBold '>Actual</div></th>
+							</tr>
+							
+						</thead>
+						<tbody>
+							<tr>
+								<td>4</td>
+								<td>3.5</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>%Target</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+							<tr>
+								<td>%Forecast</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+						</tbody>
+					</table>
+					<!-- table end -->
+				</td>
+			</tr>
+			
+			<tr>
+				<td>Strong Financial</td>
+				<td>จำนวนเงิน Gross NPL</td>
+				<td>ร้อยละ</td>
+				<td>
+					<!-- table start -->
+					<table class='tableInside table-striped'>
+						<thead>
+							<tr>
+								<th><div class='fontBold '>Target</div></th>
+								<th><div class='fontBold '>Forecast</div></th>
+								<th><div class='fontBold '>Actual</div></th>
+							</tr>
+							
+						</thead>
+						<tbody>
+							<tr>
+								<td>4</td>
+								<td>3.5</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>%Target</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+							<tr>
+								<td>%Forecast</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+						</tbody>
+					</table>
+					<!-- table end -->
+				</td>
+				<td>
+				<!-- table start -->
+					<table class='tableInside table-striped'>
+						<thead>
+							<tr>
+								<th><div class='fontBold '>Target</div></th>
+								<th><div class='fontBold '>Forecast</div></th>
+								<th><div class='fontBold '>Actual</div></th>
+							</tr>
+							
+						</thead>
+						<tbody>
+							<tr>
+								<td>4</td>
+								<td>3.5</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>%Target</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+							<tr>
+								<td>%Forecast</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+						</tbody>
+					</table>
+					<!-- table end -->
+				</td>
+				<td>
+				<!-- table start -->
+					<table class='tableInside table-striped'>
+						<thead>
+							<tr>
+								<th><div class='fontBold '>Target</div></th>
+								<th><div class='fontBold '>Forecast</div></th>
+								<th><div class='fontBold '>Actual</div></th>
+							</tr>
+							
+						</thead>
+						<tbody>
+							<tr>
+								<td>4</td>
+								<td>3.5</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>%Target</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+							<tr>
+								<td>%Forecast</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+						</tbody>
+					</table>
+					<!-- table end -->
+				</td>
+			</tr>
+			
+			<tr>
+				<td>Strong Financial</td>
+				<td>จำนวนเงิน Gross NPL</td>
+				<td>ร้อยละ</td>
+				<td>
+					<!-- table start -->
+					<table class='tableInside table-striped'>
+						<thead>
+							<tr>
+								<th><div class='fontBold '>Target</div></th>
+								<th><div class='fontBold '>Forecast</div></th>
+								<th><div class='fontBold '>Actual</div></th>
+							</tr>
+							
+						</thead>
+						<tbody>
+							<tr>
+								<td>4</td>
+								<td>3.5</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>%Target</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+							<tr>
+								<td>%Forecast</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+						</tbody>
+					</table>
+					<!-- table end -->
+				</td>
+				<td>
+				<!-- table start -->
+					<table class='tableInside table-striped'>
+						<thead>
+							<tr>
+								<th><div class='fontBold '>Target</div></th>
+								<th><div class='fontBold '>Forecast</div></th>
+								<th><div class='fontBold '>Actual</div></th>
+							</tr>
+							
+						</thead>
+						<tbody>
+							<tr>
+								<td>4</td>
+								<td>3.5</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>%Target</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+							<tr>
+								<td>%Forecast</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+						</tbody>
+					</table>
+					<!-- table end -->
+				</td>
+				<td>
+				<!-- table start -->
+					<table class='tableInside table-striped'>
+						<thead>
+							<tr>
+								<th><div class='fontBold '>Target</div></th>
+								<th><div class='fontBold '>Forecast</div></th>
+								<th><div class='fontBold '>Actual</div></th>
+							</tr>
+							
+						</thead>
+						<tbody>
+							<tr>
+								<td>4</td>
+								<td>3.5</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>%Target</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+							<tr>
+								<td>%Forecast</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+						</tbody>
+					</table>
+					<!-- table end -->
+				</td>
+			</tr>
+			
+		</tbody>
+	
+</table>
+
+<!-- ############################################################################ -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+				
+				</div>
+			</div>
+		</div>
+	</div>
  

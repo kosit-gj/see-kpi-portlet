@@ -1004,27 +1004,40 @@ margin-bottom:1px;
             </div>
             <div class="modal-body">
                
-                
-Phase Name <input type='text' name='' value=''>
-
-<table>
+<div style='margin-bottom:5px;'>
+<table style='width:100%'> 
+	<tr>
+		<td style='width:100px; '><b>Phase Name</b></td>
+		<td><input type='text' name='phaseName' id='phaseName' placeholder='Phase Name' class='input form-control input-sm-small span12' value=''></td>
+	</tr>
+	<tr>
+		<td ><b>Is Active</b></td>
+		<td style='text-align:left;'><input type='checkbox' name='phaseIsActive' id='phaseIsActive' class='input form-control input-sm-small' value='0'></td>
+	</tr>
+</table>                
+	<div align="right">
+	     <button class="btn btn-success" id="btnSavePhase" type="button">&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Save&nbsp;&nbsp;</button>&nbsp;&nbsp;
+	     <button class="btn btn-danger" id='btnCancelPhase' type="button"><i class="fa fa-times-circle"></i>&nbsp;Cancel</button>
+	</div>
+</div>
+<table class='table'>
 	<thead>
 		<tr>
-			<th>
-			No.
+			<th style='width:10%;'>
+			<b>No.</b>
 			</th>
-			<th>
-			Phase Name
+			<th style='width:30%;'>
+			<b>Phase Name</b>
 			</th>
-			<th>
-			is Active
+			<th style='width:10%; text-align:center;'>
+			<b>is Active</b>
 			</th>
-			<th>
-			Manage
+			<th style='text-align:center; width:15%;'>
+			<b>Manage</b>
 			</th>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody id='listDataPhase'>
 		<tr>
 			<td>1</td>
 			<td>Phase1</td>
@@ -1044,6 +1057,11 @@ Phase Name <input type='text' name='' value=''>
 			<td>Manage</td>
 		</tr>
 	</tbody>
+	
+
+	<input type="hidden" name="pahse_id_edit" id="pahse_id_edit" value="">
+	<input type="hidden" name="phase_action" id="phase_action" value="add">
+	
 </table>
 
 
@@ -1060,12 +1078,7 @@ Is Active
                 <!-- form start -->
                 <!-- content end -->
             </div>
-            <div class="modal-footer">
-            	<div align="center">
-	                <button class="btn btn-success" id="btnConfirmOK" type="button">&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;</button>&nbsp;&nbsp;
-	                <button data-dismiss="modal" class="btn btn-danger" type="button"><i class="fa fa-times-circle"></i>&nbsp;Cancel</button>
-            	</div>
-            </div>
+         
         </div>
     </div>
     

@@ -604,39 +604,34 @@ var listAppraisalDetailFn = function(data){
 			$(".popover-edit-del").popover();
 			$(".appraisal_result").off("click",".popover-edit-del");
 			$(".appraisal_result").on("click",".popover-edit-del",function(){
-				//Delete Start
+				
+				
+				//action_plan Start
 				$(".action_plan").on("click",function() {
-					alert("action_plan");
-//					$("#informConfirm").empty();
+					
+					$("#informConfirm").empty();
 					var id=this.id.split("-");
-					var item_result_id=id[1];
-					var emp_id=id[2];
-					var emp_name=id[3];
-//					$("#actionplan_emp_id").val(emp_id);
-//					$("#actionplan_emp_name").val(emp_name);
-//					$("#item_result_id").val(item_result_id);
-					alert(item_result_id);
-					alert(emp_id);
+					id=id[1];
+					$("#actionPlanModal").modal();
 					
-//					$("#confrimModal").modal();
-//					$(this).parent().parent().parent().children().click();
-//					$(document).off("click","#btnConfirmOK");
-//					$(document).on("click","#btnConfirmOK",function(){
-//						deleteFn(id);
-//					});
+					getActionPlanFn(id);
+					$("#action_actionplan").val("add");
+					
+					
 					
 				});
-				//findOne Start
+				//phase Start
 				$(".phase").on("click",function() {
-					alert("phase");
-//					$(window).scrollTop(0);
-//					var edit=this.id.split("-");
-//					var id=edit[1];
-//					var form_url=edit[2];
-//					findOneFn(id,form_url);
-//					$(".modal-body").scrollTop(0);
-//					$(this).parent().parent().parent().children().click();
+					//alert("phase3");
+					clearFormPhaseFn();
+					$("#informConfirm").empty();
+					var id=this.id.split("-");
+					id=id[1];
+					$("#phaseModal").modal();
+					getPhaseFn();
 				});
+				
+				
 			});	
 			/*bindding popover end*/
 			
@@ -1161,23 +1156,153 @@ var getActionPlanFn = function(id){
 		}
 	});
 	
-var getPhaseFn = function(id){
+}
+var deletePhaseFn = function(id){
+	
+	 $.ajax({
+		      url:restfulURL+"/see_api/public/phase/"+id,
+		      type:"DELETE",
+		      dataType:"json",
+			  headers:{Authorization:"Bearer "+tokenID.token},
+			  success:function(data){ 
+				if(data['status']==200){
+					
+					   callFlashSlide("Delete Successfully.");       
+				       getPhaseFn();
+					   $("#confrimModal").modal('hide');
+					   
+				}else if(data['status']=="400"){
+					
+					//$("#informConfirm").html("<font color='red'>"+data['data']+"</font>");
+					callFlashSlide("<font color=''>"+data['data']+"</font>","error");  
+					
+				}
+		     }
+		   });
+}
+var findOnePhaseFn = function(id){
+	
+	//get structure
+
+	
+	//get data for structure
+	$.ajax({
+		url:restfulURL+"/see_api/public/phase/"+id,
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+		
+/*
+				"{
+
+			    ""phase_id"": 4,
+			    ""phase_name"": ""Ceta"",
+			    ""is_active"": 1
+
+			}"
+*/				$("#phaseName").val(data['phase_name']);
+				if(data['is_active']==1){
+					$("#phaseIsActive").prop('checked',true);
+				}else{
+					$("#phaseIsActive").prop('checked',false);
+				}
+
+				$("#phase_action").val("edit");
+				$("#pahse_id_edit").val(id);
+		
+			
+			
+		}
+	});
+	
+}
+var listPhaseFn = function(data){
+	var htmlTR="";
+	
+	//Exsample Data 
+	/*
+	phase_id
+	phase_name
+	is_active
+	*/
+	$.each(data,function(index,indexEntry){
+		htmlTR+="<tr>";
+			htmlTR+="<td>"+indexEntry['phase_id']+"</td>";
+			htmlTR+="<td>"+indexEntry['phase_name']+"</td>";
+			if(indexEntry['is_active']==1){
+				htmlTR+="<td style='text-align:center;'><input disabled checked type='checkbox' id='' name=''></td>";
+			}else{
+				htmlTR+="<td style='text-align:center;'><input disabled type='checkbox' id='' name=''></td>";
+			}
+			
+			htmlTR+="<td style='text-align:center;'>";
+	
+			htmlTR+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear edit_phase' id=edit_phase-"+indexEntry['phase_id']+" data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=del_phase-"+indexEntry['phase_id']+" class='btn btn-danger btn-small btn-gear phaseDel'&gt;Del&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+			
+			htmlTR+="</td>";
+		htmlTR+="</tr>";
+	});
+	
+	
+	
+	$("#listDataPhase").html(htmlTR);
+	
+	/*bindding popover start*/
+	$(".popover-edit-del").popover();
+	$("#listDataPhase").off("click",".popover-edit-del");
+	$("#listDataPhase").on("click",".popover-edit-del",function(){
+		//Delete Start
+		$(".phaseDel").on("click",function() {
+			$("#informConfirm").empty();
+			var id=this.id.split("-");
+			id=id[1];
+			$("#confrimModal").modal();
+			//$(this).parent().parent().parent().children().click();
+			$(document).off("click","#btnConfirmOK");
+			$(document).on("click","#btnConfirmOK",function(){
+				//alert(id);
+				deletePhaseFn(id);
+				
+			});
+			
+		});
+		//findOne Start
+		$(".edit_phase").on("click",function() {
+			
+			$(window).scrollTop(0);
+			var edit=this.id.split("-");
+			var id=edit[1];
+			//alert(id+"-----"+form_url);
+			findOnePhaseFn(id);
+			$(".modal-body").scrollTop(0);
+		});
+	});	
+	/*bindding popover end*/
+	
+	
+	
+}
+var clearFormPhaseFn = function(){
+	 $("#phaseName").val("");
+	 $("#pahse_id_edit").val("");
+	 $("#phase_action").val("add");
+	 $("#phaseIsActive").prop('checked',false);
+}
+var getPhaseFn = function(){
 	
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal/action_plan/"+id,
+		url:restfulURL+"/see_api/public/phase",
 		type:"get",
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			//console.log(data);
-			listActionPlanFn(data);
+			listPhaseFn(data);
 		}
 	});
-	
-}	
-	 
-	 
 	
 }
 var listDataFn = function(data){
@@ -1332,7 +1457,8 @@ var listDataFn = function(data){
 	$(".popover-edit-del").popover();
 	$("#listAppraisal").off("click",".popover-edit-del");
 	$("#listAppraisal").on("click",".popover-edit-del",function(){
-		//Delete Start
+		
+		//action_plan Start
 		$(".action_plan").on("click",function() {
 			
 			$("#informConfirm").empty();
@@ -1346,15 +1472,18 @@ var listDataFn = function(data){
 			
 			
 		});
-		//findOne Start
+		//phase Start
 		$(".phase").on("click",function() {
-			alert("phase2");
+			//alert("phase3");
+			clearFormPhaseFn();
 			$("#informConfirm").empty();
 			var id=this.id.split("-");
 			id=id[1];
 			$("#phaseModal").modal();
-			getPhaseFn("3");
+			getPhaseFn();
 		});
+		
+		
 	});	
 	/*bindding popover end*/
 }
@@ -2244,6 +2373,78 @@ $(document).ready(function() {
 		
 		}
 	}
+	
+	
+	
+	//Phase Start...
+	 $(document).on("click","#btnSavePhase",function(){
+		 	
+		 var is_active="";
+		 if($("#phaseIsActive").prop('checked')==true){
+			 is_active=1;
+		 }else{
+			 is_active=0
+		 }
+
+		 	if($("#phase_action").val()=="add"){
+		 		
+		 	
+			 	  $.ajax({
+					     url:restfulURL+"/see_api/public/phase",
+					     type:"POST",
+					     dataType:"json",
+					     data:{"phase_name": $("#phaseName").val(),"is_active":is_active },
+						 headers:{Authorization:"Bearer "+tokenID.token},
+					     success:function(data,status){
+						
+							if(data['status']==200){
+								getPhaseFn();
+								clearFormPhaseFn();
+								
+							}else if(data['status']=="400"){
+								
+								//$("#informConfirm").html("<font color='red'>"+data['data']+"</font>");
+								callFlashSlide("<font color=''>"+data['data']['phase_name']+"</font>","error");  
+								
+							}
+						
+						
+					}
+			 	});
+		 	
+		 	}else{
+		 		
+		 		 $.ajax({
+						     url:restfulURL+"/see_api/public/phase/"+$("#pahse_id_edit").val(),
+						     type:"PATCH",
+						     dataType:"json",
+						     data:{"phase_name": $("#phaseName").val(),"is_active":is_active},
+							 headers:{Authorization:"Bearer "+tokenID.token},
+						     success:function(data,status){
+							
+								if(data['status']==200){
+									getPhaseFn();
+									clearFormPhaseFn();
+								}else if(data['status']=="400"){
+									
+									//$("#informConfirm").html("<font color='red'>"+data['data']+"</font>");
+									callFlashSlide("<font color=''>"+data['data']['phase_name']+"</font>","error");  
+									
+								}
+							
+							
+						}
+				 	});
+		 		
+		 	}
+		 	
+	 });
+	 
+	 $(document).on("click","#btnCancelPhase",function(){
+		 clearFormPhaseFn();
+		 getPhaseFn();
+	 });
+	//Phase End...
 	
 	//binding tooltip start
 	 $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
