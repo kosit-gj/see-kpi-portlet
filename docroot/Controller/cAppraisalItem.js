@@ -932,7 +932,7 @@ $(document).ready(function(){
 				 type:"post",
 				 dataType:"json",
 				 headers:{Authorization:"Bearer "+tokenID.token},
-				 data:{"org_name":request.term},
+				 data:{"org_name":request.term,"level_id":$("#appraisalLevel").val()},
 				 //async:false,
                  error: function (xhr, textStatus, errorThrown) {
                         console.log('Error: ' + xhr.responseText);

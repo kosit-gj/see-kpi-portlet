@@ -26,7 +26,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 <style>
 @CHARSET "ISO-8859-1";
 
-.breadcrumbs2 {
+.aui .breadcrumbs2 {
 	background: rgba(0, 0, 0, 0)
 		linear-gradient(to bottom, #fff 0px, #f6f6f6 47%, #ededed 100%) repeat
 		scroll 0 0;
@@ -35,7 +35,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	padding-bottom: 0px
 }
 
-#breadcrumbs {
+.aui #breadcrumbs {
 	margin-bottom: 0px;
 }
 
@@ -151,7 +151,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 .aui #confrimModal {
 		left: 55%;
 	}
-	.aui #drop_down_list_appraisal_level{
+	.aui #txtPositionInput{
 		width:27.5%;
 	}
 }
@@ -160,7 +160,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	  .aui #confrimModal {
 		left: 57%;
 	}
-	.aui #drop_down_list_appraisal_level{
+	.aui #txtPositionInput{
 		width:26.5%;
 	}
 }
@@ -354,14 +354,14 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 				<div class="row-fluid app_url_hidden" class="p-t-xxs">
 					<!-- start--row-fluid -->
 
-					<div class="col-lg-12">
+					<div class="">
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
 								<h5>Advance Search</h5>
 							</div>
 				<div class="ibox-content breadcrumbs2">
 					<div class="row-fluid p-t-xxs">
-						<div id="drop_down_list_year" class="form-group pull-left span3"
+					<div id="drop_down_list_year" class="form-group pull-left span3"
 							style="margin-left: 5px">
 							<select class="input span12 m-b-n" ></select>
 							</div>
@@ -372,31 +372,37 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							class="form-group pull-left span3" style="margin-left: 5px">
 							<select class="input span12 m-b-n" ></select>
 						</div>
-						<div id="drop_down_list_appraisal_level"
-							class="form-group pull-left span3" style="margin-left: 5px">
-							<select class="input span12 m-b-n" ></select>
-						</div>
-						<div class="form-group pull-left span3" style="margin-left: 5px">
-							<input data-toggle="tooltip" data-placement="top"
-								title="Organization" class="span12 m-b-n ui-autocomplete-input"
-								placeholder="Organization" id="org_name" name="org_name" type="text">
-							<input class="form-control input-sm" id="org_id"
-								name="org_id" value="" type="hidden">
-						</div>
-						<div class="form-group pull-left span3" style="margin-left: 5px">
+						<div class="form-group pull-left span3" style="margin-left: 5px" id="txtPositionInput">
 							<input data-toggle="tooltip" data-placement="top"
 								title="Position" class="span12 m-b-n ui-autocomplete-input"
 								placeholder="Position" id="position" name="position" type="text">
 							<input class="form-control input-sm" id="position_id"
 								name="position_id" value="" type="hidden">
 						</div>
-						<div class="form-group pull-left span3" style="margin-left: 5px">
+						<div class="form-group pull-left span3" style="margin-left: 5px" >
 							<input data-toggle="tooltip" data-placement="top"
 								title="Employee Name" class="span12 m-b-n ui-autocomplete-input"
 								placeholder="Employee Name" id="emp_name" name="emp_name"
 								type="text"> <input class="form-control input-sm"
 								id="emp_name_id" name="emp_name_id" value="" type="hidden">
 						</div>
+						
+						<div id="drop_down_list_appraisal_level"
+							class="form-group pull-left span3" style="margin-left: 5px">
+							<select class="input span12 m-b-n" ></select>
+						</div>
+						<div id="drop_down_list_organization"
+							class="form-group pull-left span3" style="margin-left: 5px">
+							<select class="input span12 m-b-n" ></select>
+						</div>
+<!-- 						<div class="form-group pull-left span3" style="margin-left: 5px"> -->
+<!-- 							<input data-toggle="tooltip" data-placement="top" -->
+<!-- 								title="Organization" class="span12 m-b-n ui-autocomplete-input" -->
+<!-- 								placeholder="Organization" id="org_name" name="org_name" type="text"> -->
+<!-- 							<input class="form-control input-sm" id="org_id" -->
+<!-- 								name="org_id" value="" type="hidden"> -->
+<!-- 						</div> -->
+						
 <!-- 						<div id="dis-non" class="form-group pull-left span1" style="margin-left: 5px;">  </div> -->
 						<div class="form-group pull-right m-b-none">
 						<div class="form-group pull-right m-b-none ">
@@ -437,7 +443,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 				<!-- end--row-fluid -->
 
 				<div class="row-fluid" id="cds_result_list_content">
-					<div class="col-lg-12">
+					<div class="">
 						<div class="ibox-title">
 							<h5>CDS Result List</h5>
 						</div>

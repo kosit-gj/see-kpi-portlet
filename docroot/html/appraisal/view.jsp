@@ -39,6 +39,15 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 		/*max-height: 400px;*/	
 	}
 	
+	#smartArea{
+	display:show;
+	}
+	
+	.breadcrumbs2 .row-fluid .span4{
+			width: 32.624%;
+		}
+		
+	 
   }
   /* Large desktop End######################################*/
   
@@ -54,6 +63,14 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	.aui .modal-body{
 		/*max-height: 400px;*/	
 	}
+	#smartArea{
+	display:none;
+	}
+	
+	.breadcrumbs2 .row-fluid .span4{
+			width: 32.624%;
+		}
+		
  	
   }
  /*  desktop End############################################*/
@@ -79,6 +96,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	
 	.aui .modal-body{
 		/*max-height: 400px;*/	
+	}
+	#smartArea{
+	display:none;
 	}
 	
   }
@@ -108,6 +128,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	.aui .modal-body{
 		/*max-height: 300px;*/	
 	}
+	#smartArea{
+	display:none;
+	}
+	
 	
  
   }
@@ -128,6 +152,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	.aui .modal-body{
 		/*max-height: 300px;*/
 	}
+	#smartArea{
+	display:none;
+	}
+	
 
  
 
@@ -327,19 +355,20 @@ margin-bottom:1px;
 }
 .boxActionPlainArea .boxActionL{
 	float:left;
-	width:50%;
+	width:55%;
 	/*border:1px solid #cccccc;*/
 	
 }
 
 .boxActionPlainArea .boxActionR{
 	float:right;
-	width:565px;
+	/*width:565px;*/
+	width:45%;
 	/*border:1px solid #cccccc;*/
 }
 
 .boxTargetArea{
-	width:25%;
+	width:23%;
 	float:right;
 	border-width: 1px 1px 1px 1px;
 	border-color: #cccccc;
@@ -351,7 +380,7 @@ margin-bottom:1px;
 	
 }
 .boxForecastArea{
-	width:32%;
+	width:30%;
 	float:right;
 	
 	/*
@@ -399,7 +428,8 @@ margin-bottom:1px;
   	margin-bottom:3px;
   	font-weight: bold;
   	background:#fff;
-  	height: 37.5px;
+  	/*height: 37.5px;*/
+  	min-height: 37.5px;
 }
 .boxTargetData{
 	padding-top:20px;
@@ -444,7 +474,7 @@ margin-bottom:1px;
 </div>
 
 
-	<div class="">
+	<div class="app_url_hidden">
 		<div class="container1">
 			<div id="includePage" class="ng-view ng-scope">
 			<!-- 
@@ -463,13 +493,13 @@ margin-bottom:1px;
 														
 								<div class="row-fluid">
 							
-								<div class="form-group pull-left span4" style="margin-left: 5px">
+							<div class="form-group pull-left span3" style="margin-left: 5px">
 									<select data-toggle="tooltip" title="" data-original-title="Year"
 										class="input form-control input-sm span12" id="AppraisalYear"
 										name="AppraisalYear">
 									</select>
 								</div>
-								<div class="form-group pull-left span4" style="margin-left: 5px">
+								<div class="form-group pull-left span3" style="margin-left: 5px">
 									<select data-toggle="tooltip" title="" data-original-title="Period"
 										class="input form-control input-sm span12" id="AppraisalPeriod"
 										name="AppraisalPeriod">
@@ -477,16 +507,33 @@ margin-bottom:1px;
 									</select>
 								</div>
 								
-								<div class="form-group pull-left span4" style="margin-left: 5px">
-									<select data-toggle="tooltip" title="" data-original-title="Appraisal Type"
-										class="input form-control input-sm span12" id="appraisalType"
-										name="appraisalType">
-							
-									</select>
-								</div>
+								
+								<div class="form-group pull-left span3" style="margin-left: 5px">
+										<select data-toggle="tooltip" title="" data-original-title="Appraisal Type"
+											class="input form-control input-sm span12" id="appraisalType"
+											name="appraisalType">
+								
+										</select>
+									</div>
+									
+									<div id="" class="form-group pull-left span3" style="margin-left: 5px">
+										<input data-toggle="tooltip" title="" data-original-title="Employee Name"
+											class="form-control input-sm searchAdvanceText span12"
+											placeholder="Employee Name" type="text" id="EmpName" name="EmpName">
+									</div>
+									
+									<div id="" class="form-group pull-left span3" style="margin-left: 5px">
+										<input data-toggle="tooltip" title="" data-original-title="Position"
+											class="form-control input-sm searchAdvanceText span12"
+											placeholder="Position" type="text" id="Position" name="Position">
+									</div>
+									
+									
 								
 								
-								<div class="form-group pull-left span4" style="margin-left: 5px">
+								
+								
+								<div class="form-group pull-left span3" style="margin-left: 5px">
 									<select data-toggle="tooltip" title="" data-original-title="Appraisal Level"
 										class="input form-control input-sm span12" id="AppraisalLevel"
 										name="AppraisalLevel">
@@ -499,32 +546,22 @@ margin-bottom:1px;
 									</select>
 								</div>
 								
+								<div class="form-group pull-left span3" style="margin-left: 5px">
+									<select data-toggle="tooltip" title="" data-original-title="organization"
+										class="input form-control input-sm span12" id="organization"
+										name="organization">
+										<option>All Organization</option>
+									</select>
+								</div>
+								<!-- 
 								<div id="" class="form-group pull-left span4" style="margin-left: 5px">
 									<input data-toggle="tooltip" title="" data-original-title="Organization"
 										class="form-control input-sm searchAdvanceText span12"
 										placeholder="Organization" type="text" id="organization" name="organization">
 								</div>
-								
-								
-								<!-- 
-								<div class="form-group pull-left span2" style="margin-left: 5px">
-									<select data-toggle="tooltip" title="" data-original-title="Section"
-										class="input form-control input-sm span12" id="Section"
-										name="Section">
-										<option value=''>All Section</option>
-									</select>
-								</div>
 								 -->
-								<div id="" class="form-group pull-left span4" style="margin-left: 5px">
-									<input data-toggle="tooltip" title="" data-original-title="Position"
-										class="form-control input-sm searchAdvanceText span12"
-										placeholder="Position" type="text" id="Position" name="Position">
-								</div>
-								<div id="" class="form-group pull-left span4" style="margin-left: 5px">
-									<input data-toggle="tooltip" title="" data-original-title="Employee Name"
-										class="form-control input-sm searchAdvanceText span12"
-										placeholder="Employee Name" type="text" id="EmpName" name="EmpName">
-								</div>
+								
+								
 								
 								<div class="form-group pull-right m-b-none "
 									style="margin-bottom: 5px;">
@@ -793,65 +830,129 @@ margin-bottom:1px;
 							<!-- ibox-content-radius -->
 							<div class="ibox-content ">
 								<div class="container-fluid"  id='empInformation'>
-									<div class="span10 ">
-											
-											<div class="row-fluid">
-											
-												<label class="span3 textInfo">Employee code:</label>
-												<label class="span3 textInfo textData" id="txtEmpCode"></label>
-												<label class="span3 textInfo">Employee Name:</label>
-												<label class="span3 textInfo textData" id="txtEmpName"></label>
-											</div>
-											<div class="row-fluid">
-												<label class="span3 textInfo">Position:</label>
-												<label class="span3 textInfo textData" id="txtPosition"></label>
-												<label class="span3 textInfo">Organization:</label>
-												<label class="span3 textInfo textData" id="txtOrgName"></label>
-											</div>
-											<div class="row-fluid">
+									<div class='hasWeightGrandTotalArea'>
+										<div class="span10 ">
 												
-												<label class="span3 textInfo">Chief Employee Code:</label>
-												<label class="span3 textInfo textData" id="txtChiefEmpCode"></label>
-												<label class="span3 textInfo">Chief Employee Name:</label>
-												<label class="span3 textInfo textData" id="txtChiefEmpName"></label>
-											</div>
+												<div class="row-fluid">
+												
+													<label class="span3 textInfo">Employee code:</label>
+													<label class="span3 textInfo textData txtEmpCode" id="txtEmpCode"></label>
+													<label class="span3 textInfo">Employee Name:</label>
+													<label class="span3 textInfo textData txtEmpName" id="txtEmpName"></label>
+												</div>
+												<div class="row-fluid">
+													<label class="span3 textInfo">Position:</label>
+													<label class="span3 textInfo textData txtPosition" id="txtPosition"></label>
+													<label class="span3 textInfo">Organization:</label>
+													<label class="span3 textInfo textData txtOrgName" id="txtOrgName"></label>
+												</div>
+												<div class="row-fluid">
+													
+													<label class="span3 textInfo">Chief Employee Code:</label>
+													<label class="span3 textInfo textData txtChiefEmpCode" id="txtChiefEmpCode"></label>
+													<label class="span3 textInfo">Chief Employee Name:</label>
+													<label class="span3 textInfo textData txtChiefEmpName" id="txtChiefEmpName"></label>
+												</div>
+											
+												<div class="row-fluid">
+													<label class="span3 textInfo">Period:</label>
+													<label class="span3 textInfo textData txtPeriod"  id="txtPeriod"></label>
+												</div>
+										</div>
+										<div class="span2" id='grandTototalWeightArea'>
+												<label class="span12 p-t-xxsg text-center ">Grand Total Weight %</label>
+												<label class="span12 p-t-xxsg text-center txtGrandTotalWeigh" id="txtGrandTotalWeigh" style="font-size: 300%;"></label>
 										
-											<div class="row-fluid">
-												<label class="span3 textInfo">Period:</label>
-												<label class="span3 textInfo textData"  id="txtPeriod"></label>
-											</div>
-									</div>
-									<div class="span2" id='grandTototalWeightArea'>
-											<label class="span12 p-t-xxsg text-center ">Grand Total Weight %</label>
-											<label class="span12 p-t-xxsg text-center " id="txtGrandTotalWeigh" style="font-size: 300%;"></label>
+										</div>
+									
 									
 									</div>
 									
+									<div class='noWeightGrandTotalArea'>
+									<!--  -->
+									<div class="span12">
+												
+												<div class="row-fluid">
+												
+													<label class="span3 textInfo">Employee code:</label>
+													<label class="span3 textInfo textData txtEmpCode" id="txtEmpCode"></label>
+													<label class="span3 textInfo">Employee Name:</label>
+													<label class="span3 textInfo textData txtEmpName" id="txtEmpName"></label>
+												</div>
+												<div class="row-fluid">
+													<label class="span3 textInfo">Position:</label>
+													<label class="span3 textInfo textData txtPosition" id="txtPosition"></label>
+													<label class="span3 textInfo">Organization:</label>
+													<label class="span3 textInfo textData txtOrgName" id="txtOrgName"></label>
+												</div>
+												<div class="row-fluid">
+													
+													<label class="span3 textInfo">Chief Employee Code:</label>
+													<label class="span3 textInfo textData txtChiefEmpCode" id="txtChiefEmpCode"></label>
+													<label class="span3 textInfo">Chief Employee Name:</label>
+													<label class="span3 textInfo textData txtChiefEmpName" id="txtChiefEmpName"></label>
+												</div>
+											
+												<div class="row-fluid">
+													<label class="span3 textInfo">Period:</label>
+													<label class="span3 textInfo textData txtPeriod"  id="txtPeriod"></label>
+												</div>
+										</div>
+										
+									<!--  -->
+									</div>	
 
 								</div>
 								
 								<div class="container-fluid"  id='orgInformation'>
-									<div class="span10 ">
-											
-											<div class="row-fluid">
-											
-												<label class="span3 textInfo">Organization code:</label>
-												<label class="span3 textInfo textData" id="txtOrgCodeOrg"></label>
-												<label class="span3 textInfo">Organization Name:</label>
-												<label class="span3 textInfo textData" id="txtOrgNameOrg"></label>
+								
+									<div class='hasWeightGrandTotalArea'>
+								
+											<div class="span10 ">
+													
+													<div class="row-fluid">
+													
+														<label class="span3 textInfo">Organization code:</label>
+														<label class="span3 textInfo textData txtOrgCodeOrg" id="txtOrgCodeOrg"></label>
+														<label class="span3 textInfo">Organization Name:</label>
+														<label class="span3 textInfo textData txtOrgNameOrg" id="txtOrgNameOrg"></label>
+													</div>
+													<div class="row-fluid">
+														<label class="span3 textInfo">Parent Organization:</label>
+														<label class="span3 textInfo textData txtParentOrganizationOrg" id="txtParentOrganizationOrg"></label>
+														<label class="span3 textInfo">Period:</label>
+														<label class="span3 textInfo textData txtPeriodOrg"  id="txtPeriodOrg"></label>
+													</div>
+													
 											</div>
-											<div class="row-fluid">
-												<label class="span3 textInfo">Parent Organization:</label>
-												<label class="span3 textInfo textData" id="txtParentOrganizationOrg"></label>
-												<label class="span3 textInfo">Period:</label>
-												<label class="span3 textInfo textData"  id="txtPeriodOrg"></label>
-											</div>
+											<div class="span2" id='grandTototalWeightArea'>
+													<label class="span12 p-t-xxsg text-center ">Grand Total Weight %</label>
+													<label class="span12 p-t-xxsg text-center txtGrandTotalWeighOrg" id="txtGrandTotalWeighOrg" style="font-size: 300%;"></label>
 											
-									</div>
-									<div class="span2" id='grandTototalWeightArea'>
-											<label class="span12 p-t-xxsg text-center ">Grand Total Weight %</label>
-											<label class="span12 p-t-xxsg text-center " id="txtGrandTotalWeighOrg" style="font-size: 300%;"></label>
+											</div>
 									
+									</div>
+									
+									<div class='noWeightGrandTotalArea'>
+									
+											<div class="span12 ">
+													
+													<div class="row-fluid">
+													
+														<label class="span3 textInfo">Organization code:</label>
+														<label class="span3 textInfo textData txtOrgCodeOrg" id="txtOrgCodeOrg"></label>
+														<label class="span3 textInfo">Organization Name:</label>
+														<label class="span3 textInfo textData txtOrgNameOrg" id="txtOrgNameOrg"></label>
+													</div>
+													<div class="row-fluid">
+														<label class="span3 textInfo">Parent Organization:</label>
+														<label class="span3 textInfo textData txtParentOrganizationOrg" id="txtParentOrganizationOrg"></label>
+														<label class="span3 textInfo">Period:</label>
+														<label class="span3 textInfo textData txtPeriodOrg"  id="txtPeriodOrg"></label>
+													</div>
+													
+											</div>
+											
 									</div>
 									
 
@@ -1038,29 +1139,14 @@ margin-bottom:1px;
 		</tr>
 	</thead>
 	<tbody id='listDataPhase'>
-		<tr>
-			<td>1</td>
-			<td>Phase1</td>
-			<td><input type='checkbox' id='' name=''></td>
-			<td>Manage</td>
-		</tr>
-		<tr>
-			<td>2</td>
-			<td>Phase1</td>
-			<td><input type='checkbox' id='' name=''></td>
-			<td>Manage</td>
-		</tr>
-		<tr>
-			<td>3</td>
-			<td>Phase1</td>
-			<td><input type='checkbox' id='' name=''></td>
-			<td>Manage</td>
-		</tr>
+		
 	</tbody>
 	
 
 	<input type="hidden" name="pahse_id_edit" id="pahse_id_edit" value="">
 	<input type="hidden" name="phase_action" id="phase_action" value="add">
+	<input type="hidden" name="phase_item_result_id" id="phase_item_result_id" value="">
+	
 	
 </table>
 
@@ -1094,6 +1180,67 @@ Is Active
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
                 <h5 class="modal-title">Action Plan</h5>
             </div>
+          
+            
+            
+
+
+
+
+            <!-- smart cricle area -->
+            
+		<div class="container" id='smartArea' style='margin-top:10px;'>
+			     
+			    <ul class="ca-menu">
+			                    <li style='background:#aed6f1;'>
+			                        <a href="#">
+			                           <!--  <span class="ca-icon">A</span> -->
+			                            <div class="ca-content" >
+			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>S</h2>
+			                                <h3 class="ca-sub" style='font-size: 17px; color:#ffffff;'>SPECIFIC</h3>
+			                            </div>
+			                        </a>                   
+			                    </li>
+			                    <li style='background:#85c1e9;'>
+			                        <a href="#">
+			                          <!--  <span class="ca-icon">I</span>-->
+			                            <div class="ca-content">
+			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>M</h2>
+			                                <h3 class="ca-sub" style='font-size: 17px; color:#ffffff;'>MEASURABLE</h3>
+			                            </div>
+			                        </a>                   
+			                    </li>
+			                    <li style='background:#3498db;'>
+			                        <a href="#">
+			                           <!-- <span class="ca-icon">C</span>-->
+			                            <div class="ca-content">
+			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>A</h2>
+			                                <h3 class="ca-sub" style='font-size: 17px; color:#ffffff;'>ATTAINABLE</h3>
+			                            </div>
+			                        </a>                    
+			                    </li>
+			                    <li style='background:#1f74ad;'>
+			                        <a href="#">
+			                           <!-- <span class="ca-icon">S</span>-->
+			                            <div class="ca-content">
+			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>R</h2>
+			                                <h3 class="ca-sub"  style='font-size: 17px; color:#ffffff;'>RELEVANT</h3>
+			                            </div>
+			                        </a>  
+			                    </li>
+			                     <li style='background:#144d73;'>
+			                        <a href="#">
+			                           <!-- <span class="ca-icon">T</span>-->
+			                            <div class="ca-content">
+			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>T</h2>
+			                                <h3 class="ca-sub" style='font-size: 17px; color:#ffffff;'>TIME-BOUND</h3>
+			                            </div>
+			                        </a>  
+			                    </li>
+			    </ul>
+			</div>
+            <!-- smart cricle area -->
+            
             <div class="modal-body">
                 <!-- content start -->
                  
@@ -1156,7 +1303,7 @@ Is Active
 													<div class='boxForecastArea'>
 														<div class='boxForecastResult boxForecastVsActual'>
 															<div class='fontBold fontCenter'>
-															Forecast Result
+															Forecast
 															</div>
 															<div class='fontCenter'>
 															 <span id='actionPlanForecastResult'></span>
@@ -1174,7 +1321,7 @@ Is Active
 													<div class='boxTargetArea' style='font-size:20px;'>
 														<div class='boxTargetData'>
 														<div class='fontBold fontCenter'>Target</div>
-														<div class='fontCenter fontBold' style='font-size:24px;margin-top:5px; color:green;'> <span id='actionPlanTarget'></span></div>
+														<div class='fontCenter fontBold' style='font-size:15px;margin-top:5px; color:green;'> <span id='actionPlanTarget'></span></div>
 														</div>
 													</div>
 												</div>
@@ -1353,31 +1500,7 @@ Is Active
 </div>
 <!-- Modal Confirm End -->
 
-
-
-
-	<!-- New Modal Appraisal Start -->
-	    <!-- Button to trigger modal -->
-	    <!-- 
-    <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
-      -->
-    <!-- Modal -->
-    <div id="myModal" class="modal  fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	       <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		        <h3 id="myModalLabel">Modal header</h3>
-	      </div>
-	      <div class="modal-body">
-	        	<p>One fine body… </p>
-	      </div>
-	      <div class="modal-footer">
-		        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-		        <button class="btn btn-primary">Save changes</button>
-	      </div>
-    </div>
-	<!--  New Modal APpraisal End -->
-
-	<div id="embedParamSearch"></div>
+<div id="embedParamSearch"></div>
 	
 
 </body>
@@ -1387,8 +1510,7 @@ Is Active
 
 
 
-
-
+ 
 
 
 	

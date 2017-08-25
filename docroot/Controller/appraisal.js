@@ -111,7 +111,9 @@ var assignTemplateQualityFn = function(structureName,data){
 
 	//Appraisal Item Name,Target,Actual,Score,%Weight,Weight Score
 	htmlTemplateQuality+="<div class='titlePanel'>"+structureName+"</div>";
+		if(data['no_weight']==0){ // has weight;
 		htmlTemplateQuality+="<div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+		}
 	htmlTemplateQuality+="</div>";
 	htmlTemplateQuality+="<div class=\"ibox-content\">";
 	htmlTemplateQuality+="<div class=\"table-responsive scrollbar-inner\" style='overflow:auto;'>";
@@ -215,7 +217,9 @@ var assignTemplateDeductFn = function(structureName,data){
 	htmlTemplateDeduct+="<div class=\"span12\">";
 	htmlTemplateDeduct+="<div class=\"ibox-title2\">";
 	htmlTemplateDeduct+="<div class='titlePanel'>"+structureName+"</div>";
-	htmlTemplateDeduct+="<div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+	if(data['no_weight']==0){ // has weight;
+		htmlTemplateDeduct+="<div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+	}
 	htmlTemplateDeduct+="</div>";
 		
 		htmlTemplateDeduct+="<div class=\"ibox-content\">";
@@ -318,7 +322,9 @@ var assignTemplateQuantityFn = function(structureName,data){
 	htmlTemplateQuantity+="  <div class=\"ibox-title2\">";
 	
 	htmlTemplateQuantity+="      <div class='titlePanel'>"+structureName+"</div>";
+	if(data['no_weight']==0){ // has weight;
 	htmlTemplateQuantity+="      <div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+	}
 	htmlTemplateQuantity+="  </div>";
 	htmlTemplateQuantity+="	<div class=\"ibox-content\">";
 	htmlTemplateQuantity+=" <div class=\"table-responsive scrollbar-inner\" style='overflow:auto;'>";
@@ -337,7 +343,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Achievement </b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Weight </b></th>";
 			htmlTemplateQuantity+="<th style='width:10%;text-align: right;' class=''><b>Weight Score</b> </th>";
-			htmlTemplateQuantity+="<th style='width:7%;text-align: center;' class=''><b>Manage</b> </th>";
+			htmlTemplateQuantity+="<th style='width:10%;text-align: center;' class=''><b>Manage</b> </th>";
 			
 		htmlTemplateQuantity+="</tr>";
 		
@@ -348,8 +354,8 @@ var assignTemplateQuantityFn = function(structureName,data){
 			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>Appraisal Item Name</b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Target </b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Actual </b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Score </b></th>";
-			htmlTemplateQuantity+="<th style='width:7%;text-align: center;' class=''><b>Manage</b> </th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Achievement </b></th>";
+			htmlTemplateQuantity+="<th style='width:10%;text-align: center;' class=''><b>Manage</b> </th>";
 		htmlTemplateQuantity+="</tr>";
 	}
 	
@@ -383,7 +389,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 						
 	
 						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
-						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear phase' id='phase-"+indexEntry['appraisal_item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target=#addModalRule data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-danger btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target=#addModalRule data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-danger btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
 						htmlTemplateQuantity+="	</td>";
 							
 					htmlTemplateQuantity+="</tr>";
@@ -394,9 +400,9 @@ var assignTemplateQuantityFn = function(structureName,data){
 						htmlTemplateQuantity+="<td>"+indexEntry['item_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
-						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])))+"</td>";
+						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['achievement'])).toFixed(2))+"</td>";
 						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
-						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear phase' id='phase-"+indexEntry['appraisal_item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target=#addModalRule data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-danger btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target=#addModalRule data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-danger btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
 						htmlTemplateQuantity+="	</td>";
 							
 					htmlTemplateQuantity+="</tr>";
@@ -536,7 +542,7 @@ var dropDrowDepartmentFn = function(id){
 var dropDrowOrgFn = function(id){
 
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal/auto_org_name",
+		url:restfulURL+"/see_api/public/org",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -545,10 +551,10 @@ var dropDrowOrgFn = function(id){
 			var htmlOption="";
 			htmlOption+="<option value=''>All Organization</option>";
 			$.each(data,function(index,indexEntry){
-				if(id==indexEntry['org_code']){
-					htmlOption+="<option selected='selected' value="+indexEntry['org_code']+">"+indexEntry['org_name']+"</option>";
+				if(id==indexEntry['org_id']){
+					htmlOption+="<option selected='selected' value="+indexEntry['org_id']+">"+indexEntry['org_name']+"</option>";
 				}else{
-					htmlOption+="<option value="+indexEntry['org_code']+">"+indexEntry['org_name']+"</option>";
+					htmlOption+="<option value="+indexEntry['org_id']+">"+indexEntry['org_name']+"</option>";
 				}
 			});
 			$("#organization").html(htmlOption);
@@ -601,6 +607,7 @@ var listAppraisalDetailFn = function(data){
 			
 			
 			/*bindding popover start*/
+			//Using
 			$(".popover-edit-del").popover();
 			$(".appraisal_result").off("click",".popover-edit-del");
 			$(".appraisal_result").on("click",".popover-edit-del",function(){
@@ -627,8 +634,10 @@ var listAppraisalDetailFn = function(data){
 					$("#informConfirm").empty();
 					var id=this.id.split("-");
 					id=id[1];
+				
 					$("#phaseModal").modal();
-					getPhaseFn();
+					$("#phase_item_result_id").val(id)
+					getPhaseFn(id);
 				});
 				
 				
@@ -650,35 +659,49 @@ var listAppraisalDetailFn = function(data){
 		 });
 		//binding tooltip end
 		
+		 if(data['head'][0]['no_weight']==0){
+			 $(".hasWeightGrandTotalArea").show();
+			 $(".noWeightGrandTotalArea").hide();
+		 }else{
+			 $(".hasWeightGrandTotalArea").hide();
+			 $(".noWeightGrandTotalArea").show();
+		 }
+		 
+		 
 		//set header start
 		 if($("#embed_appraisalType").val()==1){
 			 
 			 $("#orgInformation").hide();
 			 $("#empInformation").show();
+			 //hasWeight f and f = t
+			
+					
+					
+				
 			 $("#titlePanelInformation").html("Employee Information");
 		 
-			 $("#txtEmpCode").html(data['head'][0]['emp_code']);
-			 $("#txtEmpName").html(data['head'][0]['emp_name']);
-			 $("#txtPosition").html(data['head'][0]['position_name']);
-			 $("#txtOrgName").html(data['head'][0]['org_name']);
-			
-			 $("#txtChiefEmpCode").html(data['head'][0]['chief_emp_code']);
-			 $("#txtChiefEmpName").html(data['head'][0]['chief_emp_name']);
-			 $("#txtAppraisalType").html(data['head'][0]['appraisal_type_name']);
-			 $("#txtPeriod").html(data['head'][0]['appraisal_period_desc']);
-			 $("#txtGrandTotalWeigh").html(data['head'][0]['result_score']);
+			 $(".txtEmpCode").html(data['head'][0]['emp_code']);
+			 $(".txtEmpName").html(data['head'][0]['emp_name']);
+			 $(".txtPosition").html(data['head'][0]['position_name']);
+			 $(".txtOrgName").html(data['head'][0]['org_name']);
+			 $(".txtChiefEmpCode").html(data['head'][0]['chief_emp_code']);
+			 $(".txtChiefEmpName").html(data['head'][0]['chief_emp_name']);
+			 $(".txtAppraisalType").html(data['head'][0]['appraisal_type_name']);
+			 $(".txtPeriod").html(data['head'][0]['appraisal_period_desc']);
+			 $(".txtGrandTotalWeigh").html(data['head'][0]['result_score']);
 		 
 		 }else if($("#embed_appraisalType").val()==2){
 			 
 			 $("#orgInformation").show();
 			 $("#empInformation").hide();
+			 
 			 $("#titlePanelInformation").html("Organization Information");
 			 
-			 $("#txtOrgCodeOrg").html(data['head'][0]['org_code']);
-			 $("#txtOrgNameOrg").html(data['head'][0]['org_name']);
-			 $("#txtParentOrganizationOrg").html(data['head'][0]['parent_org_name']);
-			 $("#txtPeriodOrg").html(data['head'][0]['appraisal_period_desc']);
-			 $("#txtGrandTotalWeighOrg").html(data['head'][0]['result_score']);
+			 $(".txtOrgCodeOrg").html(data['head'][0]['org_code']);
+			 $(".txtOrgNameOrg").html(data['head'][0]['org_name']);
+			 $(".txtParentOrganizationOrg").html(data['head'][0]['parent_org_name']);
+			 $(".txtPeriodOrg").html(data['head'][0]['appraisal_period_desc']);
+			 $(".txtGrandTotalWeighOrg").html(data['head'][0]['result_score']);
 			 
 		 }
 		 
@@ -764,6 +787,7 @@ var findOneFn = function(id){
 		success:function(data){
 			
 			listAppraisalDetailFn(data);
+			setThemeColorFn(tokenID.theme_color);
 
 		}
 	});
@@ -991,7 +1015,7 @@ update_dttm
 	//2017-08-22
 //	 	 $(".datepicker").datepicker();
 //	 	 $(".datepicker").datepicker( "option", "dateFormat", "yy-mm-dd" );
-	    //target,over_target,center,performance2,performance1
+	   
 	
 	
 	/*
@@ -1005,16 +1029,35 @@ update_dttm
 	//parseFloat(notNullFn(data['header']['target_value'])).toFixed(2);
 	
 	   
-	    
-	    $("#actualvsForecastBar").sparkline([0,0,parseFloat(notNullFn(data['header']['target_value'])).toFixed(2),parseFloat(notNullFn(data['header']['actual_vs_forecast'])).toFixed(2),parseFloat(notNullFn(data['header']['actual_vs_forecast'])).toFixed(2)], {
+	 //target,over_target,center,performance2,performance1
+	 //0,0,100,80,80
+	//%Actual vs Forecast 
+	var actual_value = parseFloat(notNullFn(data['header']['actual_value'])).toFixed(2);
+	var target_value = parseFloat(notNullFn(data['header']['target_value'])).toFixed(2);
+	var forecast_value = parseFloat(notNullFn(data['header']['forecast_value'])).toFixed(2);
+	
+	var actual_vs_forecast="";
+	var actual_vs_target="";
+	
+	actual_vs_forecast= (actual_value/forecast_value)*100;
+	actual_vs_target= (actual_value/target_value)*100;
+	
+	//alert("actual_vs_forecast="+actual_vs_forecast);
+	//alert("actual_vs_target="+actual_vs_target);
+	//% Actual vs Target 
+	
+	
+	    $("#actualvsForecastBar").sparkline([0,0,100,parseFloat(notNullFn(actual_vs_forecast)).toFixed(2),parseFloat(notNullFn(actual_vs_forecast)).toFixed(2)], {
 	        type: 'bullet',
+	        width:'80',
 	        targetColor: '#7f94ff',
 	        performanceColor: '#7f94ff',
 	        rangeColors: ['#d3dafe','#7f94ff','#7f94ff ']});
 	    
 	    
-	    $("#actualvsTargetBar").sparkline([0,0,parseFloat(notNullFn(data['header']['target_value'])).toFixed(2),parseFloat(notNullFn(data['header']['actual_vs_target'])).toFixed(2),parseFloat(notNullFn(data['header']['actual_vs_target'])).toFixed(2)], {
+	    $("#actualvsTargetBar").sparkline([0,0,100,parseFloat(notNullFn(actual_vs_target)).toFixed(2),parseFloat(notNullFn(actual_vs_target)).toFixed(2)], {
 	        type: 'bullet',
+	        width:'80',
 	        targetColor: '#7f94ff',
 	        performanceColor: '#7f94ff',
 	        rangeColors: ['#d3dafe','#7f94ff','#7f94ff ']});
@@ -1168,7 +1211,7 @@ var deletePhaseFn = function(id){
 				if(data['status']==200){
 					
 					   callFlashSlide("Delete Successfully.");       
-				       getPhaseFn();
+				       getPhaseFn($("#phase_item_result_id").val());
 					   $("#confrimModal").modal('hide');
 					   
 				}else if(data['status']=="400"){
@@ -1290,13 +1333,14 @@ var clearFormPhaseFn = function(){
 	 $("#phase_action").val("add");
 	 $("#phaseIsActive").prop('checked',false);
 }
-var getPhaseFn = function(){
+var getPhaseFn = function(id){
 	
 	$.ajax({
 		url:restfulURL+"/see_api/public/phase",
 		type:"get",
 		dataType:"json",
 		async:false,
+		data:{"item_result_id":id},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			//console.log(data);
@@ -1367,7 +1411,7 @@ var listDataFn = function(data){
 				htmlHTML+=" <th style=\"width:auto;\"><b>Organization </b></th>";
 				htmlHTML+=" <th style=\"width:auto;\"><b>Position</b> </th>";
 				htmlHTML+=" <th style=\"width:auto;\"><b>Action</b></th>";
-				htmlHTML+=" <th style=\"width:auto; text-align:center;\"><b>Manage</b></th>";
+				//htmlHTML+=" <th style=\"width:auto; text-align:center;\"><b>Manage</b></th>";
 				
 			}else if($("#embed_appraisalType").val()=="2"){
 				
@@ -1375,7 +1419,7 @@ var listDataFn = function(data){
 				htmlHTML+=" <th style=\"widthauto;\"><b>Org Name</b></th>";
 				htmlHTML+=" <th style=\"width:auto;\"><b>Appraisal Level</b> </th>";
 				htmlHTML+=" <th style=\"width:auto;\"><b>Action</b></th>";
-				htmlHTML+=" <th style=\"width:auto; text-align:center;\"><b>Manage</b></th>";
+				//htmlHTML+=" <th style=\"width:auto; text-align:center;\"><b>Manage</b></th>";
 				
 			}
 				
@@ -1412,9 +1456,9 @@ var listDataFn = function(data){
 						htmlHTML+="	<td>"+itemEntry['position_name']+"</td>";
 						
 						htmlHTML+="	<td>"+itemEntry['to_action']+"</td>";
-						htmlHTML+="	<td style=\"text-align:center\">";
-						htmlHTML+=" <i data-trigger=\"focus\" tabindex=\""+index2+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear phase' id=phase-"+itemEntry['org_code']+" data-target=#addModalRule data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id=action_plan-"+itemEntry['org_code']+" class='btn btn-danger btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
-						htmlHTML+="	</td>";
+//						htmlHTML+="	<td style=\"text-align:center\">";
+//						htmlHTML+=" <i data-trigger=\"focus\" tabindex=\""+index2+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear phase' id=phase-"+itemEntry['org_code']+" data-target=#addModalRule data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id=action_plan-"+itemEntry['org_code']+" class='btn btn-danger btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+//						htmlHTML+="	</td>";
 					
 					htmlHTML+="</tr>";
 					
@@ -1432,9 +1476,9 @@ var listDataFn = function(data){
 						htmlHTML+=" <td>"+itemEntry['appraisal_level_name']+"</td>";
 					
 						htmlHTML+="	<td>"+itemEntry['to_action']+"</td>";
-						htmlHTML+="	<td style=\"text-align:center\">";
-						htmlHTML+=" <i data-trigger=\"focus\" tabindex=\""+index2+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear phase' id=phase-"+itemEntry['org_code']+" data-target=#addModalRule data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id=action_plan-"+itemEntry['org_code']+" class='btn btn-danger btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
-						htmlHTML+="	</td>";
+//						htmlHTML+="	<td style=\"text-align:center\">";
+//						htmlHTML+=" <i data-trigger=\"focus\" tabindex=\""+index2+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear phase' id=phase-"+itemEntry['org_code']+" data-target=#addModalRule data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id=action_plan-"+itemEntry['org_code']+" class='btn btn-danger btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+//						htmlHTML+="	</td>";
 					
 					htmlHTML+="</tr>";
 				}
@@ -1454,6 +1498,7 @@ var listDataFn = function(data){
 	$("#listAppraisal").html(htmlHTML);
 	
 	/*bindding popover start*/
+	// Not Use
 	$(".popover-edit-del").popover();
 	$("#listAppraisal").off("click",".popover-edit-del");
 	$("#listAppraisal").on("click",".popover-edit-del",function(){
@@ -1538,6 +1583,7 @@ var getDataFn = function(page,rpp){
 			//console.log(data);
 			
 			listDataFn(data);
+			setThemeColorFn(tokenID.theme_color);
 			globalData=data;
 			paginationSetUpFn(globalData['current_page'],globalData['last_page'],globalData['last_page']);
 			$(".search_result").show();
@@ -1779,6 +1825,7 @@ var calculateBunusFn= function(){
 $(document).ready(function() {
 	
 	
+	
 
 //	var username = getParamValue('username');
 //	var password = getParamValue('password');
@@ -1807,7 +1854,7 @@ $(document).ready(function() {
 		$("#AppraisalYear").change();
 		
 		dropDrowAppraisalLevelFn();
-		//dropDrowOrgFn();
+		dropDrowOrgFn();
 		//dropDrowDepartmentFn();
 		
 //		$("#Department").change(function(){
@@ -1846,33 +1893,33 @@ $(document).ready(function() {
 	    });
 	
 		
-		$("#organization").autocomplete({
-	        source: function (request, response) {
-	        	$.ajax({
-					 url:restfulURL+"/see_api/public/appraisal/auto_org_name",
-					 type:"get",
-					 dataType:"json",
-					 headers:{Authorization:"Bearer "+tokenID.token},
-					 data:{"org_name":request.term},
-					 //async:false,
-	                 error: function (xhr, textStatus, errorThrown) {
-	                        console.log('Error: ' + xhr.responseText);
-	                    },
-					 success:function(data){
-							response($.map(data, function (item) {
-	                            return {
-	                                label: item.org_id+"-"+item.org_name,
-	                                value: item.org_id+"-"+item.org_name
-	                            };
-	                        }));
-					},
-					beforeSend:function(){
-						$("body").mLoading('hide');	
-					}
-					
-					});
-	        }
-	    });
+//		$("#organization").autocomplete({
+//	        source: function (request, response) {
+//	        	$.ajax({
+//					 url:restfulURL+"/see_api/public/appraisal/auto_org_name",
+//					 type:"get",
+//					 dataType:"json",
+//					 headers:{Authorization:"Bearer "+tokenID.token},
+//					 data:{"org_name":request.term,"level_id":$("#AppraisalLevel").val()},
+//					 //async:false,
+//	                 error: function (xhr, textStatus, errorThrown) {
+//	                        console.log('Error: ' + xhr.responseText);
+//	                    },
+//					 success:function(data){
+//							response($.map(data, function (item) {
+//	                            return {
+//	                                label: item.org_id+"-"+item.org_name,
+//	                                value: item.org_id+"-"+item.org_name
+//	                            };
+//	                        }));
+//					},
+//					beforeSend:function(){
+//						$("body").mLoading('hide');	
+//					}
+//					
+//					});
+//	        }
+//	    });
 		
 		
 		
@@ -1888,8 +1935,8 @@ $(document).ready(function() {
 					 type:"get",
 					 dataType:"json",
 					 headers:{Authorization:"Bearer "+tokenID.token},
-					 data:{"emp_name":request.term,
-						 "position_id":splitData($("#Position").val()),"org_id":splitData($("#organization").val())},
+					 data:{"emp_name":request.term},
+						// "position_id":splitData($("#Position").val()),"org_id":splitData($("#organization").val())},
 					 //async:false,
 	                 error: function (xhr, textStatus, errorThrown) {
 	                        console.log('Error: ' + xhr.responseText);
@@ -1910,6 +1957,23 @@ $(document).ready(function() {
 	        }
 	    });
 		appraisalTypeFn();
+		
+		$("#appraisalType").change(function(){
+			if($("#appraisalType").val()==2){
+				
+				$("#Position").prop("disabled",true);
+				$("#EmpName").prop("disabled",true);
+				
+				$("#Position").val("");
+				$("#empName").val("");
+				
+			}else{
+				$("#Position").prop("disabled",false);
+				$("#EmpName").prop("disabled",false);
+			}
+		});
+		$("#appraisalType").change();
+		
 	//set parameter end
 		
 		
@@ -2045,6 +2109,8 @@ $(document).ready(function() {
 				
 			});
 		  
+		  
+		  $(".app_url_hidden").show();
 		  
 		  
 		//ปุ่ม add Action Plan
@@ -2317,7 +2383,7 @@ $(document).ready(function() {
 		
 			 	 					  
 			
-			 	 console.log(actions);
+			 	// console.log(actions);
 			 	  
 
 					  $.ajax({
@@ -2393,12 +2459,12 @@ $(document).ready(function() {
 					     url:restfulURL+"/see_api/public/phase",
 					     type:"POST",
 					     dataType:"json",
-					     data:{"phase_name": $("#phaseName").val(),"is_active":is_active },
+					     data:{"phase_name": $("#phaseName").val(),"is_active":is_active,"item_result_id":$("#phase_item_result_id").val()},
 						 headers:{Authorization:"Bearer "+tokenID.token},
 					     success:function(data,status){
 						
 							if(data['status']==200){
-								getPhaseFn();
+								getPhaseFn($("#phase_item_result_id").val());
 								clearFormPhaseFn();
 								
 							}else if(data['status']=="400"){
@@ -2418,12 +2484,12 @@ $(document).ready(function() {
 						     url:restfulURL+"/see_api/public/phase/"+$("#pahse_id_edit").val(),
 						     type:"PATCH",
 						     dataType:"json",
-						     data:{"phase_name": $("#phaseName").val(),"is_active":is_active},
+						     data:{"phase_name": $("#phaseName").val(),"is_active":is_active,"item_result_id":$("#phase_item_result_id").val()},
 							 headers:{Authorization:"Bearer "+tokenID.token},
 						     success:function(data,status){
 							
 								if(data['status']==200){
-									getPhaseFn();
+									getPhaseFn($("#phase_item_result_id").val());
 									clearFormPhaseFn();
 								}else if(data['status']=="400"){
 									
@@ -2442,7 +2508,7 @@ $(document).ready(function() {
 	 
 	 $(document).on("click","#btnCancelPhase",function(){
 		 clearFormPhaseFn();
-		 getPhaseFn();
+		 getPhaseFn($("#phase_item_result_id").val());
 	 });
 	//Phase End...
 	
@@ -2455,4 +2521,5 @@ $(document).ready(function() {
 	 
 	 
 });
+
 

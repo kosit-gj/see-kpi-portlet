@@ -9,7 +9,9 @@
 
 
 <style>
-
+.aui #breadcrumbs {
+	margin-bottom: 0px;
+}
 .aui input[type="radio"], .aui input[type="checkbox"]{
 	margin: -5px 0 0;
 }
@@ -190,9 +192,6 @@
         table {
             width: 100%;
         }
-        .aui #breadcrumbs {
-		    margin-bottom: 5px;
-		}
        .aui .portlet-content, .aui .portlet-minimized .portlet-content-container {
 	    -moz-border-bottom-colors: none;
 	    -moz-border-left-colors: none;
@@ -580,9 +579,13 @@ padding:5px;
 .tableInside{
 	width:100%;
 }
-table#tableAllKPI .aui .table th, .aui .table td{
+table#tableAllKPI1 .aui .table th, .aui .table td{
 	padding: 2px;
 }
+table#tableAllKPI2 .aui .table th, .aui .table td{
+	padding: 2px;
+}
+
 /* End All KPI */
 </style>
 
@@ -717,336 +720,35 @@ table#tableAllKPI .aui .table th, .aui .table td{
 				</div>
 				<div class="modal-body">
 <!-- ############################################################################ -->
-					<table class='table table-bordered' id='tableAllKPI'>
+				<div style='width: 740px; float: left;'>
+					<table class='table table-bordered' id='tableAllKPI1'>
 
-	<thead>
-		<tr>
-			<th width='100px'>
-			<div class='fontBold '> Perspective</div>
-			</th>
-			
-			<th width='100px'>
-			<div class='fontBold '>KPI</div>
-			</th>
-			
-			<th width='100px'>
-			<div class='fontBold '>UOM</div>
-			</th>
-			
-			<th width='300px'>
-			<div class='fontBold fontCenter'>ธอส</div>
-			</th>
-			
-			<th width='300px'>
-			<div class='fontBold fontCenter'>กลยุทธ์องค์กร</div>
-			</th>
-			
-			<th width='300px'>
-			<div class='fontBold fontCenter'>สาขานครหลวง</div>
-			</th>
-		</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Strong Financial</td>
-				<td>จำนวนเงิน Gross NPL</td>
-				<td>ร้อยละ</td>
-				<td>
-					<!-- table start -->
-					<table class='tableInside table-striped'>
 						<thead>
-							<tr>
-								<th><div class='fontBold '>Target</div></th>
-								<th><div class='fontBold '>Forecast</div></th>
-								<th><div class='fontBold '>Actual</div></th>
+							<tr id="listHeader1" style='height: 66px;'>
+
 							</tr>
-							
 						</thead>
-						<tbody>
-							<tr>
-								<td>4</td>
-								<td>3.5</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>%Target</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
-							<tr>
-								<td>%Forecast</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
+						<tbody id='listData1'>
+
 						</tbody>
+
 					</table>
-					<!-- table end -->
-				</td>
-				<td>
-				<!-- table start -->
-					<table class='tableInside table-striped'>
+				</div>
+
+				<div style='width: 310px; float: left; overflow-x: scroll;'>
+					<table class='table table-bordered' id='tableAllKPI2'>
+
 						<thead>
-							<tr>
-								<th><div class='fontBold '>Target</th>
-								<th><div class='fontBold '>Forecast</th>
-								<th><div class='fontBold '>Actual</th>
+							<tr id="listHeader2" style='height: 66px;'>
+
 							</tr>
-							
 						</thead>
-						<tbody>
-							<tr>
-								<td>4</td>
-								<td>3.5</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>%Target</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
-							<tr>
-								<td>%Forecast</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
+						<tbody id='listData2'>
+
 						</tbody>
+
 					</table>
-					<!-- table end -->
-				</td>
-				<td>
-				<!-- table start -->
-					<table class='tableInside table-striped'>
-						<thead>
-							<tr>
-								<th><div class='fontBold '>Target</div></th>
-								<th><div class='fontBold '>Forecast</div></th>
-								<th><div class='fontBold '>Actual</div></th>
-							</tr>
-							
-						</thead>
-						<tbody>
-							<tr>
-								<td>4</td>
-								<td>3.5</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>%Target</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
-							<tr>
-								<td>%Forecast</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
-						</tbody>
-					</table>
-					<!-- table end -->
-				</td>
-			</tr>
-			
-			<tr>
-				<td>Strong Financial</td>
-				<td>จำนวนเงิน Gross NPL</td>
-				<td>ร้อยละ</td>
-				<td>
-					<!-- table start -->
-					<table class='tableInside table-striped'>
-						<thead>
-							<tr>
-								<th><div class='fontBold '>Target</div></th>
-								<th><div class='fontBold '>Forecast</div></th>
-								<th><div class='fontBold '>Actual</div></th>
-							</tr>
-							
-						</thead>
-						<tbody>
-							<tr>
-								<td>4</td>
-								<td>3.5</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>%Target</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
-							<tr>
-								<td>%Forecast</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
-						</tbody>
-					</table>
-					<!-- table end -->
-				</td>
-				<td>
-				<!-- table start -->
-					<table class='tableInside table-striped'>
-						<thead>
-							<tr>
-								<th><div class='fontBold '>Target</div></th>
-								<th><div class='fontBold '>Forecast</div></th>
-								<th><div class='fontBold '>Actual</div></th>
-							</tr>
-							
-						</thead>
-						<tbody>
-							<tr>
-								<td>4</td>
-								<td>3.5</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>%Target</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
-							<tr>
-								<td>%Forecast</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
-						</tbody>
-					</table>
-					<!-- table end -->
-				</td>
-				<td>
-				<!-- table start -->
-					<table class='tableInside table-striped'>
-						<thead>
-							<tr>
-								<th><div class='fontBold '>Target</div></th>
-								<th><div class='fontBold '>Forecast</div></th>
-								<th><div class='fontBold '>Actual</div></th>
-							</tr>
-							
-						</thead>
-						<tbody>
-							<tr>
-								<td>4</td>
-								<td>3.5</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>%Target</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
-							<tr>
-								<td>%Forecast</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
-						</tbody>
-					</table>
-					<!-- table end -->
-				</td>
-			</tr>
-			
-			<tr>
-				<td>Strong Financial</td>
-				<td>จำนวนเงิน Gross NPL</td>
-				<td>ร้อยละ</td>
-				<td>
-					<!-- table start -->
-					<table class='tableInside table-striped'>
-						<thead>
-							<tr>
-								<th><div class='fontBold '>Target</div></th>
-								<th><div class='fontBold '>Forecast</div></th>
-								<th><div class='fontBold '>Actual</div></th>
-							</tr>
-							
-						</thead>
-						<tbody>
-							<tr>
-								<td>4</td>
-								<td>3.5</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>%Target</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
-							<tr>
-								<td>%Forecast</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
-						</tbody>
-					</table>
-					<!-- table end -->
-				</td>
-				<td>
-				<!-- table start -->
-					<table class='tableInside table-striped'>
-						<thead>
-							<tr>
-								<th><div class='fontBold '>Target</div></th>
-								<th><div class='fontBold '>Forecast</div></th>
-								<th><div class='fontBold '>Actual</div></th>
-							</tr>
-							
-						</thead>
-						<tbody>
-							<tr>
-								<td>4</td>
-								<td>3.5</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>%Target</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
-							<tr>
-								<td>%Forecast</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
-						</tbody>
-					</table>
-					<!-- table end -->
-				</td>
-				<td>
-				<!-- table start -->
-					<table class='tableInside table-striped'>
-						<thead>
-							<tr>
-								<th><div class='fontBold '>Target</div></th>
-								<th><div class='fontBold '>Forecast</div></th>
-								<th><div class='fontBold '>Actual</div></th>
-							</tr>
-							
-						</thead>
-						<tbody>
-							<tr>
-								<td>4</td>
-								<td>3.5</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>%Target</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
-							<tr>
-								<td>%Forecast</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
-						</tbody>
-					</table>
-					<!-- table end -->
-				</td>
-			</tr>
-			
-		</tbody>
-	
-</table>
+				</div>
 
 <!-- ############################################################################ -->
 					<!-- content end -->

@@ -238,7 +238,7 @@ var dropDownListAppraisalType = function(){
 	var html="";
 	
 	
-	html+="<select data-placement='top' id=\"app_type\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Appraisal Level\" name=\"app_type\">";
+	html+="<select data-placement='top' id=\"app_type\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Appraisal Type\" name=\"app_type\">";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalType,
 		type:"get" ,
@@ -250,6 +250,32 @@ var dropDownListAppraisalType = function(){
 			$.each(data,function(index,indexEntry){
 
 					html+="<option  value="+indexEntry["appraisal_type_id"]+">"+indexEntry["appraisal_type_name"]+"</option>";	
+		
+			});	
+
+		}
+	});	
+	html+="</select>";
+	return html;
+};
+var dropDownListOrganization = function(){
+	var html="";
+	
+	
+	html+="<select data-placement='top' id=\"org_id\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Organization\" name=\"org_id\">";
+	html+="<option  selected value=''>All Organization</option>";
+	$.ajax ({
+		url:restfulURL+"/see_api/public/org",
+		type:"get" ,
+		dataType:"json" ,
+		data:{"level_id":$("#app_lv").val()},
+		headers:{Authorization:"Bearer "+tokenID.token},
+		async:false,
+		success:function(data){
+				//galbalDqsRoleObj=data;
+			$.each(data,function(index,indexEntry){
+
+					html+="<option  value="+indexEntry["org_id"]+">"+indexEntry["org_name"]+"</option>";	
 		
 			});	
 
@@ -337,9 +363,14 @@ $(document).ready(function() {
 	$("#drop_down_list_year").html(dropDownListYear());
 	$("#drop_down_list_month").html(dropDownListMonth());
 	$("#drop_down_list_appraisal_level").html(dropDownListAppraisalLevel());
+	$("#drop_down_list_organization").html(dropDownListOrganization());
 	$("#drop_down_list_appraisal_type").html(dropDownListAppraisalType());
 	$("#countPaginationTop").val( $("#countPaginationTop option:first-child").val());
 	$("#countPaginationBottom").val( $("#countPaginationBottom option:first-child").val());
+	
+	$("#app_lv").change(function(){
+		$("#drop_down_list_organization").html(dropDownListOrganization());
+	});
 	
 	$(".app_url_hidden").show();
 	$("#btnSearchAdvance").click(function(){
@@ -357,7 +388,7 @@ $(document).ready(function() {
 		return false;
 	});
 	//$("#btnSearchAdvance").click();
-	
+	/*
 	//Autocomplete Search Start
 		$("#org_name").autocomplete({
 	        source: function (request, response) {
@@ -366,7 +397,8 @@ $(document).ready(function() {
 					 type:"post",
 					 dataType:"json",
 					 headers:{Authorization:"Bearer "+tokenID.token},
-					 data:{"org_name":request.term},
+					 data:{"org_name":request.term,
+						 "level_id":$("#app_lv").val()},
 					 //async:false,
 	                 error: function (xhr, textStatus, errorThrown) {
 	                        console.log('Error: ' + xhr.responseText);
@@ -407,7 +439,7 @@ $(document).ready(function() {
 	        	
 	         }
 	    });
-	
+	*/
 	//check Orientation Start
 	var getBrowserWidth = function(){
 		if(window.innerWidth > 980 && window.innerWidth < 1230){
@@ -438,7 +470,8 @@ $(document).ready(function() {
 				 type:"post",
 				 dataType:"json",
 				 data:{
-					 "position_name":request.term},
+					 "position_name":request.term
+				 },
 				//async:false,
 				 headers:{Authorization:"Bearer "+tokenID.token},
                  error: function (xhr, textStatus, errorThrown) {
@@ -549,7 +582,9 @@ $(document).ready(function() {
 			$("#position").attr("disabled", 'disabled');
 			$("#emp_name").attr("disabled", 'disabled');
 			$("#position").val("");
+			$("#position_id").val("");
 			$("#emp_name").val("");
+			$("#emp_name_id").val("");
 			
 		}
 	});

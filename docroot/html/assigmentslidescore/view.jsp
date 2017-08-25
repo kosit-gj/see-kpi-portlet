@@ -435,7 +435,29 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
          						<div class="ibox-content breadcrumbs2"> 
          						
          						<div  class="row-fluid ">
-
+									
+									<div id="appraisalTypeArea" class="form-group pull-left span4"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<select data-toggle="tooltip" title="Appraisal Type"
+											class="input form-control input-sm" id="appraisalType"
+											name="appraisalType">
+								
+											<option value="0"></option>
+								
+										</select>
+									</div>
+									 <div id="empNameArea" class="form-group pull-left span4"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<input data-toggle="tooltip" type="text" class="form-control input-sm span12 "
+											placeholder="Emp Name" id="empName" data-original-title="Employee Name">
+									</div>
+									 <div id="PositionArea" class="form-group pull-left span4"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<input data-toggle="tooltip" type="text" id="Position" placeholder="Position"
+											class="form-control input-sm span12" data-original-title="Position">
+									</div>
+									
+									
 									
 									<div id='appraisalLevelArea' class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
@@ -448,42 +470,24 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								
 										</select>
 									</div>
+									<div class="form-group pull-left span4" style="margin-left: 5px">
+										<select data-toggle="tooltip" title="" data-original-title="organization"
+											class="input form-control input-sm span12" id="organization"
+											name="organization">
+											<option>All Organization</option>
+										</select>
+									</div>
+									
+									<!-- 
 									<div id="organizationArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<input data-toggle="tooltip" type="text" class="form-control input-sm span12 "
 											placeholder="Organization" id="organization" data-original-title="Organization">
 									</div>
-									<!-- 
-									<div id='DepartmentArea' class="form-group pull-left span2"
-										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Department"
-											class="input form-control input-sm" id="Department" name="Department">
-										</select>
-									</div>
-									-->
-									
-									<div id="appraisalTypeArea" class="form-group pull-left span4"
-										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Appraisal Type"
-											class="input form-control input-sm" id="appraisalType"
-											name="appraisalType">
+								-->
 								
-											<option value="0"></option>
-								
-										</select>
-									</div>
-									 
-									 <div id="PositionArea" class="form-group pull-left span4"
-										style="margin-left: 5px; margin-bottom: 3px;">
-										<input data-toggle="tooltip" type="text" id="Position" placeholder="Position"
-											class="form-control input-sm span12" data-original-title="Position">
-									</div>
 									
-									<div id="empNameArea" class="form-group pull-left span4"
-										style="margin-left: 5px; margin-bottom: 3px;">
-										<input data-toggle="tooltip" type="text" class="form-control input-sm span12 "
-											placeholder="Emp Name" id="empName" data-original-title="Employee Name">
-									</div>
+									
 								 
 									<div id='yearArea' class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">

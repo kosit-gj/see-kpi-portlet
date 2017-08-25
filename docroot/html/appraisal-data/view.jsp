@@ -25,7 +25,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
 <style>
 
-.breadcrumbs2 {
+.aui .breadcrumbs2 {
 	background: rgba(0, 0, 0, 0)
 		linear-gradient(to bottom, #fff 0px, #f6f6f6 47%, #ededed 100%) repeat
 		scroll 0 0;
@@ -34,7 +34,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	padding-bottom: 0px
 }
 
-#breadcrumbs {
+.aui #breadcrumbs {
 	margin-bottom: 0px;
 }
 

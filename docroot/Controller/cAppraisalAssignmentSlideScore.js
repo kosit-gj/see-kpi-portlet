@@ -383,7 +383,8 @@ var getDataFn = function(page,rpp) {
 	var emp_id= $("#embed_emp_id").val();
 	var embed_year_list =$("#embed_year_list").val();
 	var embed_period_frequency =$("#embed_period_frequency").val();
-	//var department_id =$("#embed_department_list").val();
+	var embed_organization =$("#embed_organization").val().split("-");
+	embed_organization=embed_organization[0];
 	
 	$.ajax({
 		url:restfulURL+"/see_api/public/appraisal_assignment",
@@ -402,7 +403,7 @@ var getDataFn = function(page,rpp) {
 			"position_id":position_id,
 			"appraisal_year":embed_year_list,
 			"frequency_id":embed_period_frequency,
-			//"department_code":department_id,
+			"org_id":embed_organization,
 			"emp_id":emp_id	
 			
 		},
@@ -1139,7 +1140,7 @@ var searchAdvanceFn = function() {
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_emp_id' name='embed_emp_id' value='"+empNameCode+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_period_frequency' name='embed_period_frequency' value='"+$("#periodFrequency").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_year_list' name='embed_year_list' value='"+$("#YearList").val()+"'>";
-	//embedParam+="<input type='hidden' class='embed_param_search' id='embed_department_list' name='embed_department_list' value='"+$("#Department").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_organization' name='embed_organization' value='"+$("#organization").val()+"'>";
 	
 	
 	
@@ -1295,6 +1296,29 @@ var dropDrowDepartmentFn = function(id){
 		}
 	});
 }
+var dropDrowOrgFn = function(id){
+
+	$.ajax({
+		url:restfulURL+"/see_api/public/org",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			var htmlOption="";
+			htmlOption+="<option value=''>All Organization</option>";
+			$.each(data,function(index,indexEntry){
+				if(id==indexEntry['org_id']){
+					htmlOption+="<option selected='selected' value="+indexEntry['org_id']+">"+indexEntry['org_name']+"</option>";
+				}else{
+					htmlOption+="<option value="+indexEntry['org_id']+">"+indexEntry['org_name']+"</option>";
+				}
+			});
+			$("#organization").html(htmlOption);
+		}
+	});
+}
+
 var dropDrowPeriodFn = function(paramPeriod,paramAssignFrequency){
 	
 //	var htmlOption="";
@@ -2013,6 +2037,9 @@ var createTemplateAssignmentFn = function(data){
 			$("#appraisal_template_area").append(assignTemplateDeductFn(index,indexEntry));
 		}
 		
+		setThemeColorFn(tokenID.theme_color);
+		
+		
 		
 		
 		
@@ -2169,7 +2196,7 @@ var password = $('#pass_portlet').val();
 
 /*Fixed for Test.*/
 
-// username = "01";
+// username = "hradmin";
 // password =	"11";
 	
 if(username!="" && username!=null & username!=[] && username!=undefined ){
@@ -2230,10 +2257,30 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 		appraisalTypeFn('','1');
 		periodFrequencyFn();
 		yearListFn();
+		dropDrowOrgFn();
+		
+		
+		$("#appraisalType").change(function(){
+			if($("#appraisalType").val()==2){
+				
+				$("#Position").prop("disabled",true);
+				$("#empName").prop("disabled",true);
+				
+				$("#Position").val("");
+				$("#empName").val("");
+				
+			}else{
+				$("#Position").prop("disabled",false);
+				$("#empName").prop("disabled",false);
+			}
+		});
+		$("#appraisalType").change();
+		
 		$(".app_url_hidden").show();
 		
 	
 		//Org Autocomplete Start
+		/*
 		$("#organization").autocomplete({
 	        source: function (request, response) {
 	        	$.ajax({
@@ -2241,7 +2288,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 					 type:"post",
 					 dataType:"json",
 					 headers:{Authorization:"Bearer "+tokenID.token},
-					 data:{"org_name":request.term},
+					 data:{"org_name":request.term,"level_id":$("#appraisalLevel").val()},
 					 //async:false,
 	                 error: function (xhr, textStatus, errorThrown) {
 	                        console.log('Error: ' + xhr.responseText);
@@ -2249,8 +2296,8 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 					 success:function(data){
 							response($.map(data, function (item) {
 	                            return {
-	                                label: item.org_code+"-"+item.org_name,
-	                                value: item.org_code+"-"+item.org_name
+	                                label: item.org_id+"-"+item.org_name,
+	                                value: item.org_id+"-"+item.org_name
 	                            };
 	                        }));
 					},
@@ -2261,6 +2308,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 					});
 	        }
 	    });
+	    */
 		//Org Autocomplete End
 		
 	
@@ -2299,8 +2347,8 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 				 success:function(data){
 						response($.map(data, function (item) {
                             return {
-                                label: item.position_code+"-"+item.position_name,
-                                value: item.position_code+"-"+item.position_name
+                                label: item.position_id+"-"+item.position_name,
+                                value: item.position_id+"-"+item.position_name
                             };
                         }));
 				},
@@ -2327,8 +2375,8 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 				 success:function(data){
 						response($.map(data, function (item) {
                             return {
-                                label: item.emp_id+"-"+item.emp_name,
-                                value: item.emp_id+"-"+item.emp_name,
+                                label: item.emp_code+"-"+item.emp_name,
+                                value: item.emp_code+"-"+item.emp_name,
                             };
                         }));
 				},
@@ -2399,6 +2447,12 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 			$("#assignTo").change();
 			*/
 			dropDrowActionFn($(this).val());
+			
+			//check assignment if reject  remark is require.
+			$("#actionAssign").off("change");
+			$("#actionAssign").on("change",function(){
+				//alert("hello jquery");
+			});
 			
 			$(window).scrollTop(0);
 			setTimeout(function(){

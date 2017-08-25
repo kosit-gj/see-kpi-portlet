@@ -1,7 +1,2010 @@
  var restfulPathDashboard="/see_api/public/cds_result";
  var galbalDashboard=[];
  var galbalDataTemp = [];
+ galbalDataTemp['galbalOrg'] = [];
  galbalDataTemp['extract'] = false;
+ galbalDataTemp['All_KPI'] = {
+		  "0": {
+			    "perspective": "01.Strong Financial",
+			    "item": "01.1. จำนวนเงิน Gross NPL",
+			    "uom": "ร้อยละ",
+			    "item_id": 25,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "1": {
+			    "perspective": "01.Strong Financial",
+			    "item": "01.2. จำนวนเงิน Gross NPL เฉลี่ยไตรมาส",
+			    "uom": "ร้อยละ",
+			    "item_id": 26,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "2": {
+			    "perspective": "01.Strong Financial",
+			    "item": "01.4. จำนวน NPL ใหม่ที่เกิดขึ้น",
+			    "uom": "ล้านบาท",
+			    "item_id": 28,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "3": {
+			    "perspective": "01.Strong Financial",
+			    "item": "02. ต้นทุนทางการเงิน",
+			    "uom": "bps",
+			    "item_id": 29,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "4": {
+			    "perspective": "01.Strong Financial",
+			    "item": "05. อัตราผลตอบแทนต่อสินทรัพย์เสี่ยง (ROA Risk Adjusted)",
+			    "uom": "bps",
+			    "item_id": 47,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "5": {
+			    "perspective": "01.Strong Financial",
+			    "item": "06. NIM",
+			    "uom": "bps",
+			    "item_id": 48,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "6": {
+			    "perspective": "01.Strong Financial",
+			    "item": "07. เงินฝากส่วนเพิ่ม",
+			    "uom": "bps",
+			    "item_id": 50,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "7": {
+			    "perspective": "01.Strong Financial",
+			    "item": "BIS Ratio",
+			    "uom": "ร้อยละ",
+			    "item_id": 36,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "8": {
+			    "perspective": "01.Strong Financial",
+			    "item": "ค่าใช้จ่ายดำเนินงานต่อรายได้สุทธิจากการดำเนินงาน (Cost to Income)",
+			    "uom": "bps",
+			    "item_id": 30,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "9": {
+			    "perspective": "01.Strong Financial",
+			    "item": "จำนวน NPL คงเหลือ",
+			    "uom": "ล้านบาท",
+			    "item_id": 27,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "10": {
+			    "perspective": "02.Market Leader",
+			    "item": "08.1. จำนวนเงินสินเชื่อปล่อยใหม่",
+			    "uom": "bps",
+			    "item_id": 52,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "11": {
+			    "perspective": "02.Market Leader",
+			    "item": "08.2. จำนวนรายสินเชื่อปล่อยใหม่วงเงินไม่เกิน 2.0 ล้านบาท",
+			    "uom": "bps",
+			    "item_id": 53,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "12": {
+			    "perspective": "02.Market Leader",
+			    "item": "08.3. จำนวนเงินสินเชื่อโครงการบ้านประชารัฐ",
+			    "uom": "bps",
+			    "item_id": 54,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "13": {
+			    "perspective": "02.Market Leader",
+			    "item": "09. ส่วนแบ่งการตลาดสินเชื่อคงค้าง (Out Standing)",
+			    "uom": "bps",
+			    "item_id": 55,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "14": {
+			    "perspective": "02.Market Leader",
+			    "item": "10. สินเชื่อคงค้าง (Out Standing)",
+			    "uom": "bps",
+			    "item_id": 56,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "15": {
+			    "perspective": "02.Market Leader",
+			    "item": "11. สัดส่วนสินเชื่อ Refinance Out ต่อสินเชื่อคงค้างไม่เกินค่าที่กำหนด (เป้า=ค่าเฉลี่ย3ปีย้อนหลัง)",
+			    "uom": "bps",
+			    "item_id": 57,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "16": {
+			    "perspective": "03.A+ Leader & Staff",
+			    "item": "12. สัดส่วนค่าใช้จ่ายพนักงานต่อผลกำไรสุทธิ",
+			    "uom": "bps",
+			    "item_id": 58,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "17": {
+			    "perspective": "03.A+ Leader & Staff",
+			    "item": "13. อัตราส่วนสินเชื่อคงค้าง/พนักงานรายคน",
+			    "uom": "bps",
+			    "item_id": 59,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "18": {
+			    "perspective": "03.A+ Leader & Staff",
+			    "item": "14. อัตราส่วนเงินฝาก/พนักงานรายคน",
+			    "uom": "bps",
+			    "item_id": 60,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "19": {
+			    "perspective": "04.Reliability",
+			    "item": "15. อัตราส่วนเงินฝาก/พนักงานรายคน",
+			    "uom": "bps",
+			    "item_id": 61,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "20": {
+			    "perspective": "04.Reliability",
+			    "item": "16. จำนวนครั้ง Cyber Crime ในระบบ",
+			    "uom": "bps",
+			    "item_id": 62,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "21": {
+			    "perspective": "04.Reliability",
+			    "item": "17. ระดับความสำเร็จของโครงการนวัตกรรม (GHB Inno Projects 2017)",
+			    "uom": "bps",
+			    "item_id": 63,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "22": {
+			    "perspective": "04.Reliability",
+			    "item": "18. ร้อยละการพิจารณาสินเชื่อแล้วเสร็จภายในเวลามาตรฐาน 5 วันทำการ",
+			    "uom": "bps",
+			    "item_id": 64,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "23": {
+			    "perspective": "04.Reliability",
+			    "item": "19. ระดับความสำเร็จของโครงการด้าน IT(CBS/ERP)",
+			    "uom": "bps",
+			    "item_id": 65,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  },
+			  "24": {
+			    "perspective": "05.Trust",
+			    "item": "20. ผลการจัดระดับโดยรวม (Composite Rating)",
+			    "uom": "bps",
+			    "item_id": 66,
+			    "org": {
+			      "id_8": {
+			        "org": "กลุ่มงานกลยุทธ์องค์กร",
+			        "org_code": "08",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_9": {
+			        "org": "กลุ่มงานสาขานครหลวง",
+			        "org_code": "09",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_10": {
+			        "org": "กลุ่มงานสาขาภูมิภาค",
+			        "org_code": "10",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_11": {
+			        "org": "กลุ่มงานการตลาด",
+			        "org_code": "11",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_12": {
+			        "org": "กลุ่มงานสินเชื่อ",
+			        "org_code": "12",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_13": {
+			        "org": "กลุ่มงานบริหารหนี้และปฏิบัติการ",
+			        "org_code": "13",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_14": {
+			        "org": "กลุ่มงานการเงินและบัญชี",
+			        "org_code": "14",
+			        "target": "50.00",
+			        "forecast": "50",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      },
+			      "id_73": {
+			        "org": "ธอส.",
+			        "org_code": "00",
+			        "target": "0.00",
+			        "forecast": "0",
+			        "actual": "0.00",
+			        "percent_target": "0.000000",
+			        "percent_forecast": "0.0000"
+			      }
+			    }
+			  }
+			};
 //# Generate Drop Down List
  var generateDropDownList = function(url,type,request,initValue){
  	var html="";
@@ -53,9 +2056,10 @@
 		accordionHtml += "			 <a class='collapsed' role='button' data-toggle='collapse' data-parent='#accordion' href='#bodyOrg-"+data['org_id']+"' aria-expanded='false' aria-controls='bodyOrg-"+data['org_id']+"' style='color: black;font-weight: bold;'>";
 		accordionHtml += "<span class='fa fa-caret-right'></span> "+data['org_name']+"&emsp;";	
 		if(parent == "group1"){
-			accordionHtml += "<button id='btn_extract' type='button' class='btn btn-xs btn-white' style='margin-top: -6px;'> <i class='fa fa-plus-square' aria-hidden='true'></i> Extract</button>";
+			accordionHtml += "<button id='btn_extract' type='button' class='btn btn-xs btn-white' style='margin-top: -6px;'> <i class='fa fa-plus-square' aria-hidden='true'></i> Expand</button>";
+			accordionHtml += "<button id='btn_kpi' type='button' data-target='#ModalKPI' data-toggle='modal' class='btn btn-xs btn-white' style='margin-top: -6px;float: right;'> <i class='fa fa-table fa-table' aria-hidden='true'></i> All KPI</button>";
 		}
-
+		
 		accordionHtml += "			</a>";	
 		accordionHtml += "		</h4>";	
 		accordionHtml += "	</div>";	
@@ -118,9 +2122,13 @@
 	 });
 		    var cSatScoreChart = new FusionCharts({
 		        type: 'angulargauge',
+			    dataLoadStartMessage: "Loading chart. Please wait",
+			    baseChartMessageFont: "Arial",
+			    baseChartMessageFontSize: "18",
+			    baseChartMessageColor: "#FC0000",
 		        renderAt:  "chartOrgGauge-"+data['org_id'],
 		        width: '100%',
-		        height: '250',
+		        height: '200',
 		        dataFormat: 'json',
 		        dataSource: {
 		            "chart": {
@@ -145,7 +2153,7 @@
 		            },
 		            "dials": {
 		                "dial": [{
-		                    "value": data['dual_chart']['data']['actual_value']
+		                    "value": (data['dual_chart']['data']['actual_value']/data['dual_chart']['data']['target'])*100
 		                }]
 		            },
 		            "trendpoints": {
@@ -165,6 +2173,55 @@
 	 return false;
  };
  
+ var generateChartBulletFn = function(id,data,color){
+	    var revBulletChart = new FusionCharts({
+	        type: 'hbullet',
+	        renderAt: id,
+	        width: '270',
+	        height: '30',
+	        dataFormat: 'json',
+	        dataSource: {
+	            "chart": {
+	                "theme": "fint",
+	                "lowerLimit": "1",
+	                //"showPlotBorder":"1",
+	                //"plotBorderColor":"#dedede",
+	                "plotBorderThickness":"1",
+	                //"plotFillColor": "#5b0101",
+	                //"plotFillAlpha": "90",
+	                "targetThickness": "4",
+	                "targetColor": "#5b0101",
+	                "showTickMarks":"0",
+	                "showTickValues":"0",
+	                "showValue":"0",
+	                "chartBottomMargin": "0",
+	                "chartTopMargin": "0",
+	                "chartLeftMargin": "0",
+	                "chartRightMargin": "0",
+	                "gaugeFillMix": "{dark-30},{light-60},{dark-10}"
+	            },
+	            "colorRange": {
+	                "color": color
+	            },
+	            "value": data,
+	            "target": "100"
+	        }
+	    })
+	    .render();
+		
+	 return false;
+ };
+ var generateChartBulletSparkFn = function(data){ 
+	 $('.sparkline').sparkline('html', {
+		 	type: 'bullet',
+		 	width:'170',
+		 	height: '20',
+		 	targetWidth: '4',
+		    targetColor: '#003f7f',
+		    performanceColor: '#00007f',
+		    rangeColors: data[0]['rangeColor']
+		 } );
+ };
  var generateChartBarFn = function(data){
 	 var actual = [] ;
 	 $.each(data['bar_chart']['data']['actual'],function(index,indexEntry){
@@ -176,9 +2233,13 @@
 	 
 		    var revenueChart = new FusionCharts({
 		        type: 'column2d',
+		        dataLoadStartMessage: "Loading chart. Please wait",
+			    baseChartMessageFont: "Arial",
+			    baseChartMessageFontSize: "18",
+			    baseChartMessageColor: "#FC0000",
 		        renderAt: "chartOrgBar-"+data['org_id'],
 		        width: '100%',
-		        height: '350',
+		        height: '250',
 		        dataFormat: 'json',
 		        dataSource: {
 		            "chart": {
@@ -229,7 +2290,70 @@
 		
 	 return false;
  };
- 
+var generateSubTableKPIFn = function(item,data){
+	var ContentHTML = "";
+	
+	ContentHTML+="<table class='tableInside table-striped'>";
+	ContentHTML+="	<thead>";
+	ContentHTML+="		<tr>";
+	ContentHTML+="			<th><div class='fontBold ' style='width:100px'>Target</div></th>";
+	ContentHTML+="			<th><div class='fontBold ' style='width:100px'>Forecast</div></th>";
+	ContentHTML+="			<th><div class='fontBold ' style='width:100px'>Actual</div></th>";
+	ContentHTML+="		</tr>";
+	ContentHTML+="	</thead>";
+	ContentHTML+="	<tbody>";
+	ContentHTML+="		<tr>";
+	ContentHTML+="			<td>"+data['target']+"</td>";
+	ContentHTML+="			<td>"+data['forecast']+"</td>";
+	ContentHTML+="			<td>"+data['actual']+"</td>";
+	ContentHTML+="		</tr>";
+	ContentHTML+="		<tr>";
+	ContentHTML+="			<td>%Target</td>";
+	ContentHTML+="			<td colspan='2'><div id='perTarget-Item-"+item+"-Org-"+data['org_code']+"' class='sparkline'></div></td>";
+	ContentHTML+="		</tr>";
+	ContentHTML+="		<tr>";
+	ContentHTML+="			<td>%Forecast</td>";
+	ContentHTML+="			<td colspan='2'><div id='perForecast-Item-"+item+"-Org-"+data['org_code']+"' class='sparkline'></div></td>";
+	ContentHTML+="		</tr>";
+	ContentHTML+="	</tbody>";
+	ContentHTML+="</table'>";
+	console.log(ContentHTML);
+	return ContentHTML;
+/* ### Ex.return ###
+					<!-- table start -->
+					<table class='tableInside table-striped'>
+						<thead>
+							<tr>
+								<th><div class='fontBold '>Target</div></th>
+								<th><div class='fontBold '>Forecast</div></th>
+								<th><div class='fontBold '>Actual</div></th>
+							</tr>
+							
+						</thead>
+						<tbody>
+							<tr>
+								<td>4</td>
+								<td>3.5</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>%Target</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+							<tr>
+								<td>%Forecast</td>
+								<td colspan='2'><div class='sparkline'></div></td>
+								
+							</tr>
+						</tbody>
+					</table>
+					<!-- table end -->
+ */	
+	
+	
+	
+};
  var getDataFn = function(page,rpp){
 		var year= $("#param_year").val();
 		var period= $("#param_period").val();
@@ -258,6 +2382,55 @@
 		});	
 };
 
+var getOrgFn = function(data){
+	galbalDataTemp['galbalOrg'] = [];
+	  if(data[0]['org']!=undefined){
+	   $.each(data[0]['org'],function(index,indexEntry){
+		   
+		galbalDataTemp['galbalOrg'].push({"org_code":indexEntry['org_code'],"org_name":indexEntry['org']});
+	    console.log(indexEntry['org']);
+	   });
+	   
+	   listHeaderFn(galbalDataTemp['galbalOrg']);
+	  }
+	  
+};
+
+var getDataKPIFn = function(page,rpp){
+	var year= $("#param_year").val();
+	var period= $("#param_period").val();
+	var app_lv= $("#param_app_lv").val();
+	var org= $("#param_org_id").val();
+	var kpi= $("#param_kpi_id").val();
+
+	$.ajax({
+		url : restfulURL+"/see_api/public/dashboard/all_content",
+		type : "post",
+		dataType : "json",
+		data:{
+			"year_id":year,
+			"period_id":period,
+			"level_id":app_lv,
+			"org_id":org,
+			"item_id":kpi		
+		},
+		headers:{Authorization:"Bearer "+tokenID.token},
+		async:false,// w8 data 
+		success : function(data) {
+			//galbalDataTemp['All_KPI']=data;
+			getOrgFn(data);
+			listDashBoardAllKPIFn(data);
+			$("#ModalKPI").modal('show');
+			setTimeout(function(){ 
+				console.log("sparkline setTimeout");
+				generateChartBulletSparkFn(data)
+				$('.sparkline').show();
+			}, 2000);
+			
+		}
+	});	
+};
+
  
  var searchAdvanceFn = function (year,period,app_lv,org,kpi) {
 	//embed parameter start
@@ -274,7 +2447,47 @@
 		getDataFn();
 };
  
- var listDashBoardFn = function(data){
+var listHeaderFn=function(galbalOrg){
+	 var htmlHeader1 = "";
+	 var htmlHeader2 = "";
+	 var htmlHeaderMain = "";
+	 var htmlHeaderSummary1 = "";
+	 var htmlHeaderSummary2 = "";
+	 
+	 htmlHeader1+="<th style='width:120px;'>";
+	 htmlHeader1+="<div class='fontBold '> Perspective</div>";
+	 htmlHeader1+="</th>";
+	 
+	 htmlHeader1+="<th style='width:240px;'>";
+	 htmlHeader1+="<div class='fontBold '>KPI</div>";
+	 htmlHeader1+="</th>";
+	 
+	 htmlHeader1+="<th style='width:80px;'>";
+	 htmlHeader1+="<div class='fontBold '>UOM</div>";
+	 htmlHeader1+="</th>";
+	 
+	 $.each(galbalOrg,function(index,indexEntry){
+	  //console.log(indexEntry);
+	  if(indexEntry['org_code']=="00"){
+	   htmlHeaderMain+="<th style='min-width:300px;'>";
+	    htmlHeaderMain+="<div class='fontBold fontCenter'>"+indexEntry['org_name']+"</div>";
+	   htmlHeaderMain+="</th>";
+	  }else{
+	   htmlHeader2+="<th style='min-width:300px;'>";
+	    htmlHeader2+="<div class='fontBold fontCenter'>"+indexEntry['org_name']+"</div>";
+	   htmlHeader2+="</th>";
+	  }
+	 });
+	 htmlHeaderSummary1+=htmlHeader1;
+	 htmlHeaderSummary1+=htmlHeaderMain;
+	 htmlHeaderSummary2+=htmlHeader2;
+	 $("#listHeader1").html(htmlHeaderSummary1);
+	 $("#listHeader2").html(htmlHeaderSummary2);
+	 
+	 
+};
+
+var listDashBoardFn = function(data){
 	 
 	 $("#accordion").empty();
 	 $("#accordion").hide();
@@ -304,10 +2517,12 @@
 	    	$(this).prev().css({"background": "#"+tokenID.theme_color});
 	    	$(this).parent().css({"border-color": "#"+tokenID.theme_color});
 	    	$(this).parent().find(".fa").removeClass("fa-caret-right").addClass("fa-caret-down");
+	    	$("#btn_kpi").find(".fa").removeClass("fa-caret-down").addClass("fa-table");
 	    }).on('hide.bs.collapse', function(){
 	    	$(this).parent().css({"border-color": "#c5c5c5"});
 	    	$(this).prev().css({"background": "#f6f6f6"});
 	    	$(this).parent().find(".fa").removeClass("fa-caret-down").addClass("fa-caret-right");
+	    	$("#btn_kpi").find(".fa").removeClass("fa-caret-right").addClass("fa-table");
 	    });
 
 
@@ -345,29 +2560,140 @@
 				});
 			$("#btn_extract").off("click");
 			$("#btn_extract").click(function(event){
-				console.log(event);
 				  event.stopPropagation();
 				  if(galbalDataTemp['extract'] == true){
 					  console.log(galbalDataTemp['extract']);
 				    $("#btn_extract").find(".fa").removeClass("fa-minus-square").addClass("fa-plus-square");
+				    
 				    $("#accordion").children().children().next().collapse('hide');
 				    galbalDataTemp['extract'] = false;
 				  }
 				  else if(galbalDataTemp['extract'] == false){
 					  console.log(galbalDataTemp['extract']);
 					  $("#btn_extract").find(".fa").removeClass("fa-plus-square").addClass("fa-minus-square");
+					  $("#btn_kpi").find(".fa").removeClass("fa-plus-square").addClass("fa-table");
 					    $("#accordion").children().children().next().collapse('show');
 					    galbalDataTemp['extract'] = true;
 				  }
 				});
-			
+			$("#btn_kpi").off("click");
+			$("#btn_kpi").click(function(event){
+				  event.stopPropagation();
+				  event.preventDefault();
+				  $("#ModalKPI").modal('hide');
+				  getDataKPIFn();
+				  document.body.scrollTop = 0;
+				  document.documentElement.scrollTop = 0;
+				  //http://localhost/see_api/public/dashboard/all_content
+				});
 			$( "#accordion" ).sortable({
 				 // revert: true
 				 items: '.sortableItem:not(#orgParent)'
 				});
 			$('#accordion').disableSelection();
  };
-$(document).ready(function(){
+var listDashBoardAllKPIFn = function(data){
+
+	var htmlData1="";
+	var htmlData3="";
+	 $.each(data,function(index,indexEntry){
+	  var htmlData2="";
+	   console.log(index);
+	  htmlData1+="<tr>";
+	  htmlData3+="<tr>";
+	   htmlData1+="<td>"+indexEntry['perspective']+"</td>";
+	   htmlData1+="<td>"+indexEntry['item']+"</td>";
+	   htmlData1+="<td>"+indexEntry['uom']+"</td>";
+	   
+	   //loop here..
+	   $.each(indexEntry['org'],function(index2,indexEntry2){
+	   
+	   if(indexEntry2['org_code']=="00"){
+	    
+	    htmlData2+="<td>"; 
+	    htmlData2+="<table class='tableInside table-striped'>";
+	    htmlData2+="<thead>";
+	    htmlData2+="<tr>";
+	    htmlData2+="<th><div class='fontBold ' style='min-width:100px'>Target</div></th>";
+	    htmlData2+="<th><div class='fontBold '  style='min-width:100px'>Forecast</div></th>";
+	    htmlData2+="<th><div class='fontBold ' style='min-width:100px'>Actual</div></th>";
+	      htmlData2+="</tr>";
+	     htmlData2+="</thead>";
+	     htmlData2+="<tbody>";
+	      htmlData2+="<tr>";
+	      htmlData2+="<td >"+indexEntry2['target']+"</td>";
+	      htmlData2+="<td>"+indexEntry2['forecast']+"</td>";
+	      htmlData2+="<td>"+indexEntry2['actual']+"</td>";
+	      htmlData2+="</tr>";
+	      htmlData2+="<tr>";
+	      htmlData2+="<td>%Target</td>";
+	      htmlData2+="<td colspan='2'><div class='sparkline' id='perTarget"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_target_str']+"</div></td>";
+	      htmlData2+="</tr>";
+	      htmlData2+="<tr>";
+	      htmlData2+="<td>%Forecast</td>";
+	      htmlData2+="<td colspan='2'><div class='sparkline' id='perForecast"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_forecast_str']+"</div></td>";  
+	      htmlData2+="</tr>";
+	     htmlData2+="</tbody>";
+	    htmlData2+="</table>";
+	    htmlData2+="</td>";
+	    
+	   }else{
+	    
+	    
+	    htmlData3+="<td>"; 
+	    htmlData3+="<table class='tableInside table-striped'>";
+	    htmlData3+="<thead>";
+	     htmlData3+="<tr>";
+	      htmlData3+="<th><div class='fontBold ' style='min-width:100px;'>Target</div></th>";
+	      htmlData3+="<th><div class='fontBold ' style='min-width:100px;'>Forecast</div></th>";
+	      htmlData3+="<th><div class='fontBold ' style='min-width:100px;'>Actual</div></th>";
+	      htmlData3+="</tr>";
+	    htmlData3+="</thead>";
+	     htmlData3+="<tbody>";
+	      htmlData3+="<tr>";
+	      htmlData3+="<td>"+indexEntry2['target']+"</td>";
+	      htmlData3+="<td>"+indexEntry2['forecast']+"</td>";
+	      htmlData3+="<td>"+indexEntry2['actual']+"</td>";
+	      htmlData3+="</tr>";
+	      htmlData3+="<tr>";
+	       htmlData3+="<td>%Target</td>";
+	       htmlData3+="<td colspan='2'><div class='sparkline' id='perTarget"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_target_str']+"</div></td>";
+	      htmlData3+="</tr>";
+	      htmlData3+="<tr>";
+	       htmlData3+="<td>%Forecast</td>";
+	       htmlData3+="<td colspan='2'><div class='sparkline' id='perForecast"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_forecast_str']+"</div></td>";   
+	      htmlData3+="</tr>";
+	      htmlData3+="</tbody>";
+	    htmlData3+="</table>";
+	    htmlData3+="</td>";
+	    
+	   }
+	   
+	   });
+	   htmlData1+=htmlData2;
+	   //htmlData1+=htmlData3;
+	   //loop
+	  htmlData1+="</tr>";
+	  htmlData3+="</tr>";
+	  
+	  
+	 });
+	 
+	 $("#listData1").html(htmlData1);
+	 $("#listData2").html(htmlData3);
+	 
+	 //..loop chart
+/*	 $.each(data,function(index,indexEntry){
+		 $.each(indexEntry['org'],function(index2,indexEntry2){
+			 generateChartBulletFn("perTarget"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code'],indexEntry2['percent_target'],indexEntry['color']);
+			 generateChartBulletFn("perForecast"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code'],indexEntry2['percent_forecast'],indexEntry['color']);
+		 });
+	 });
+*/	 console.log(data[0]['rangeColor']);
+	  
+	 
+};
+ $(document).ready(function(){
 	var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
@@ -411,7 +2737,7 @@ $(document).ready(function(){
 			 html:true
 		 });
 		//binding tooltip end
-	 	
+		 $(".lfr-hudcrumbs").removeClass("lfr-hudcrumbs");
 	 }
  });
  
