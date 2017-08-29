@@ -619,26 +619,26 @@ var listAppraisalDetailFn = function(data){
 					$("#informConfirm").empty();
 					var id=this.id.split("-");
 					id=id[1];
-					$("#actionPlanModal").modal();
-					
+					$("#actionPlanModal").modal().css({"margin-top":"0px"});
 					getActionPlanFn(id);
 					$("#action_actionplan").val("add");
 					
-					
-					
 				});
 				//phase Start
-				$(".phase").on("click",function() {
+				$(".phase").on("click",function(event) {
+					event.preventDefault();
 					//alert("phase3");
 					clearFormPhaseFn();
 					$("#informConfirm").empty();
 					var id=this.id.split("-");
 					id=id[1];
 				
-					$("#phaseModal").modal();
+					$("#phaseModal").modal().css({"margin-top":"0px"});
+					$("#phaseName").off("fucus");
 					$("#phase_item_result_id").val(id)
 					getPhaseFn(id);
 				});
+				//$(".phase").off("click");
 				
 				
 			});	
@@ -1148,6 +1148,12 @@ var insertActionPlanInlineFn = function(){
 		 $(".datepicker").datepicker();
 		 $(".datepicker").datepicker( "option", "dateFormat", "yy-mm-dd" );
 		 
+		
+		 
+		 $(".datepicker").focus(function(){
+			 $("#ui-datepicker-div").css({"z-index": "999999"});
+		 });
+		 
 		 //Autocomplete START.
 		 $(".new_responsible").autocomplete({
 		        source: function (request, response) {
@@ -1301,7 +1307,7 @@ var listPhaseFn = function(data){
 			$("#informConfirm").empty();
 			var id=this.id.split("-");
 			id=id[1];
-			$("#confrimModal").modal();
+			$("#confrimModal").modal().css({"margin-top":"0px"});;
 			//$(this).parent().parent().parent().children().click();
 			$(document).off("click","#btnConfirmOK");
 			$(document).on("click","#btnConfirmOK",function(){
@@ -1498,6 +1504,7 @@ var listDataFn = function(data){
 	$("#listAppraisal").html(htmlHTML);
 	
 	/*bindding popover start*/
+	/*
 	// Not Use
 	$(".popover-edit-del").popover();
 	$("#listAppraisal").off("click",".popover-edit-del");
@@ -1518,7 +1525,9 @@ var listDataFn = function(data){
 			
 		});
 		//phase Start
-		$(".phase").on("click",function() {
+		
+		$(".phase").on("click",function(event) {
+			  
 			//alert("phase3");
 			clearFormPhaseFn();
 			$("#informConfirm").empty();
@@ -1527,9 +1536,9 @@ var listDataFn = function(data){
 			$("#phaseModal").modal();
 			getPhaseFn();
 		});
-		
-		
+		//$(".phase").off("click");
 	});	
+	*/
 	/*bindding popover end*/
 }
 var getDataFn = function(page,rpp){
@@ -2071,6 +2080,9 @@ $(document).ready(function() {
 				    $(this).datepicker('setDate', newDataDate);
 				});
 				$(".datepicker").datepicker( "option", "dateFormat", "yy-mm-dd" );
+				$(".datepicker").focus(function(){
+					 $("#ui-datepicker-div").css({"z-index": "999999"});
+				 });
 				
 				
 				
@@ -2518,6 +2530,9 @@ $(document).ready(function() {
 		 html:true
 	 });
 	//binding tooltip end
+	 
+	 
+	 
 	 
 	 
 });

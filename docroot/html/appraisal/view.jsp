@@ -1094,9 +1094,9 @@ margin-bottom:1px;
 	
 	
 	
-	
+	 
 <!-- Modal Phase Start -->
-<div aria-hidden="true" role="dialog" tabindex="-1" id="phaseModal" class="modal inmodal " style="display: none;">
+<div aria-hidden="true" role="dialog" tabindex="-1" id="phaseModal" class="modal inmodal " style="display: none; margin-top: 0px;">
     <div class="modal-dialog">
     <div class="modal-content animated bounceInRight">
             <div class="modal-header">
@@ -1109,7 +1109,7 @@ margin-bottom:1px;
 <table style='width:100%'> 
 	<tr>
 		<td style='width:100px; '><b>Phase Name</b></td>
-		<td><input type='text' name='phaseName' id='phaseName' placeholder='Phase Name' class='input form-control input-sm-small span12' value=''></td>
+		<td><input  style='width:96%'; type='text' name='phaseName' id='phaseName' placeholder='Phase Name' class='input form-control input-sm-small ' value=''></td>
 	</tr>
 	<tr>
 		<td ><b>Is Active</b></td>
@@ -1508,9 +1508,6 @@ Is Active
 	
 
 
-
-
- 
 
 
 	
