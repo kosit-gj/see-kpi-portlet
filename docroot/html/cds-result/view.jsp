@@ -152,7 +152,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 		left: 55%;
 	}
 	.aui #txtEmpInput{
-		width:27.5%;
+/* 		width:27.5%; */
 	}
 }
 /* Portrait tablet to landscape and desktop */
@@ -161,7 +161,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 		left: 57%;
 	}
 	.aui #txtEmpInput{
-		width:26.5%;
+/* 		width:26.5%; */
 	}
 }
 /* Portrait tablet to landscape and desktop */
@@ -360,7 +360,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								<h5>Advance Search</h5>
 							</div>
 				<div class="ibox-content breadcrumbs2">
-					<div class="row-fluid p-t-xxs">
+					<div class="row-fluid p-t-xxs cSearchAdvance">
 					<div id="drop_down_list_year" class="form-group pull-left span3"
 							style="margin-left: 5px">
 							<select class="input span12 m-b-n" ></select>

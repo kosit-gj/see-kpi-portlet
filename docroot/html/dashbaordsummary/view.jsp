@@ -28,6 +28,9 @@
 .aui .form-group > .control-label-search{
 	padding-top: 5px;
 }
+.aui .titlePanelSearch {
+    font-weight: bold;
+}
 
  /* Large desktop Start#####################################*/
  @media (min-width: 1200px) { 
@@ -585,7 +588,16 @@ table#tableAllKPI1 .aui .table th, .aui .table td{
 table#tableAllKPI2 .aui .table th, .aui .table td{
 	padding: 2px;
 }
-
+.aui .header-fixed-kpi1 { 
+    position: absolute; 
+    top: 15px; display:none;
+    width:740px;
+}
+.aui .header-fixed-kpi2 { 
+    position: absolute; 
+    top: 0px; display:none;
+    width:310px;
+}
 /* End All KPI */
 </style>
 
@@ -704,7 +716,7 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 
 
 
-
+	
 </div>
  
  <div aria-hidden="true" role="dialog" tabindex="-1" id="ModalKPI"
@@ -720,6 +732,7 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 				</div>
 				<div class="modal-body">
 <!-- ############################################################################ -->
+				<div id="scrollOrg"style="overflow:auto;min-width:1067px;max-height:500px;" class="table-responsive p-b-xxs">
 				<div style='width: 740px; float: left;'>
 					<table class='table table-bordered' id='tableAllKPI1'>
 
@@ -733,9 +746,10 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 						</tbody>
 
 					</table>
+					<table class='table table-bordered header-fixed-kpi1' id='subTableKPI1'></table>
 				</div>
 
-				<div style='width: 310px; float: left; overflow-x: scroll;'>
+				<div id="scrollSubOrg" style='width: 310px; float: left; overflow-x: scroll;position: relative;'>
 					<table class='table table-bordered' id='tableAllKPI2'>
 
 						<thead>
@@ -748,8 +762,9 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 						</tbody>
 
 					</table>
+					<table class='table table-bordered header-fixed-kpi2' id='subTableKPI2'></table>
 				</div>
-
+				</div>
 <!-- ############################################################################ -->
 					<!-- content end -->
 				</div>

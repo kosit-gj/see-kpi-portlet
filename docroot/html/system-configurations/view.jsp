@@ -154,7 +154,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
          								<div class="span5 object-right" >
 											<label class='text-label'>  Period start Month &nbsp;:</label>
 										</div>
-										<div class="span3" id="drop_down_list_month"></div>
+										<div class="span3" id="drop_down_list_month">
+											<select name="month" title="Month" data-toggle="tooltip" class="input form-control input-sm span12" id="month"></select>
+										</div>
 									</div>
 								
 								
@@ -283,6 +285,27 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
 											  <input   type="radio" name="optionsRadios2" id="raiseScore" value="2">
 											  Score
+										</label>
+										
+									</div>
+
+                                 </div> 
+<!--                                  threshold -->
+								<div class="row-fluid">
+							
+									<div class="span5 object-right" >
+									<label class='text-label'>  Threshold  &nbsp;:</label>
+									
+									</div>
+									<div class="span3">
+										
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+											  <input checked='checked'  type="radio" name="optionsThreshold" id="thresholdOn" value="1">
+											  Threshold
+										</label>
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+											<input type="radio" name="optionsThreshold" id="thresholdOff" value="0" >
+											  No Threshold 
 										</label>
 										
 									</div>

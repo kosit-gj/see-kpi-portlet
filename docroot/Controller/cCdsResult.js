@@ -341,6 +341,24 @@ var listErrorFn =function(data){
 	/*return errorData;*/
 }
 //-------------------  Drop Down List Appraisal Level FN END ---------------------
+var getBrowserWidth = function(){
+    var wSearchAdvance = $('.cSearchAdvance').width()-2;
+    var wTarget = $('#drop_down_list_appraisal_type').width();
+    var wCalTarget = $('#drop_down_list_appraisal_type').width()*4+20;
+    
+		if(window.innerWidth < 980){
+			$("#txtEmpInput").css({"width":""});	
+		} else if(window.innerWidth < 1366){
+			// Small Device
+    
+			$("#txtEmpInput").width(wSearchAdvance-wCalTarget+wTarget);
+			
+		} else {
+			// Large Device
+			$("#txtEmpInput").width(wSearchAdvance-wCalTarget+wTarget);
+	
+		}
+};
 
 $(document).ready(function() {
 	
@@ -371,8 +389,8 @@ $(document).ready(function() {
 	$("#app_lv").change(function(){
 		$("#drop_down_list_organization").html(dropDownListOrganization());
 	});
-	
 	$(".app_url_hidden").show();
+	getBrowserWidth();
 	$("#btnSearchAdvance").click(function(){
 
 	
@@ -440,24 +458,9 @@ $(document).ready(function() {
 	         }
 	    });
 	*/
-	//check Orientation Start
-	var getBrowserWidth = function(){
-		if(window.innerWidth > 980 && window.innerWidth < 1230){
-			// Medium Device
-			$("#drop_down_list_appraisal_level").css({"width": ((window.innerWidth*0.205))+"px"});
-		} else if(window.innerWidth > 1300){
-			
-			$("#drop_down_list_appraisal_level").css({"width": ((window.innerWidth*0.24))+"px"});
-		}else if(window.innerWidth > 1199){
-			
-			$("#drop_down_list_appraisal_level").css({"width": ((window.innerWidth*0.225))+"px"});
-			$("#position").val(window.innerWidth);
-		}else{
-			$("#drop_down_list_appraisal_level").css({ 'width' : ''});
-		}
-	};
 
-	//check Orientation End
+	
+
 	
 	
 	
@@ -733,5 +736,10 @@ $(document).ready(function() {
              drDestroy.init();
          }
      });
+ 	
+ 	$(window).on('resize',function(){
+ 		getBrowserWidth();
+ 	});
+ 	
 });
 

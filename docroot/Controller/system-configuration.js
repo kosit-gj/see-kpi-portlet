@@ -47,7 +47,7 @@ var getDataFn = function(page,rpp){
 			//setThemeColorFn(data["theme_color"]);
 			var htmlTheamColor = "<button class=\"btn jscolor {valueElement:null,value:'"+data["theme_color"]+"',valueElement:'themeColor',onFineChange:'setThemeColorFn(this)'} \" style='width:70px; height:26px;'></button>";
 			$("#current_appraisal_year").val(data["current_appraisal_year"]);
-			$("#drop_down_list_month").html(dropDownListMonth(data["period_start_month_id"]));
+			$("#month").val(data["period_start_month_id"]);
 			$("#appraisalFrequency").val(data["appraisal_frequency_id"]);
 			$("#bonusFrequency").val(data["bonus_frequency_id"]);
 			$("#bonusprorateSystem").val(data["bonus_prorate"]);
@@ -63,7 +63,8 @@ var getDataFn = function(page,rpp){
 			else if(data["result_type"] == 1){$("#resultPercentage").prop("checked", true);}
 			else if(data["result_type"] == 2){$("#raiseScore").prop("checked", true);}
 			
-			
+			if(data["threshold"] == 1){$("#thresholdOn").prop("checked", true);}
+			else if(data["threshold"] == 0){$("#thresholdOff").prop("checked", true);}
 			$("#listThemeColor").html(htmlTheamColor);
 			jscolor.installByClassName("jscolor");
 			
@@ -139,8 +140,9 @@ var listEmpThresholdFn = function(data){
 //************ clear start *********//
 
 var clearFn = function() {
+	$("body").mLoading();
 	setThemeColorFn(galbalDataSystemcon["theme_color"]);
-	$("#drop_down_list_month").html(dropDownListMonth(galbalDataSystemcon["period_start_month_id"]));
+	$("#month").val(galbalDataSystemcon["period_start_month_id"]);
 	$("#appraisalFrequency").val(galbalDataSystemcon["appraisal_frequency_id"]);
 	$("#bonusFrequency").val(galbalDataSystemcon["bonus_frequency_id"]);	
 	$("#bonusprorateSystem").val(galbalDataSystemcon["bonus_prorate"]);
@@ -156,68 +158,41 @@ var clearFn = function() {
 	if(galbalDataSystemcon["result_type"] == 0){$("#resultWeightPercentage").prop("checked", true);}
 	else if(galbalDataSystemcon["result_type"] == 1){$("#resultPercentage").prop("checked", true);}
 	else if(galbalDataSystemcon["result_type"] == 2){$("#raiseScore").prop("checked", true);}
+	if(galbalDataSystemcon["threshold"] == 1){$("#thresholdOn").prop("checked", true);}
+	else if(galbalDataSystemcon["threshold"] == 0){$("#thresholdOff").prop("checked", true);}
 	var htmlTheamColor = "<button class=\"btn jscolor {valueElement:null,value:'"+galbalDataSystemcon["theme_color"]+"',valueElement:'themeColor',onFineChange:'setThemeColorFn(this)'} \" style='width:70px; height:26px;'></button>";
 	$("#listThemeColor").html(htmlTheamColor);
 	jscolor.installByClassName("jscolor");
+	setTimeout(function(){
+		$("body").mLoading('hide');
+	},1000);
+	
 };
 
 //************** clear end *********//
+var generateDropDownList = function(url,type,request,initValue){
+ 	var html="";
+ 	
+ 	if(initValue!=undefined){
+ 		html+="<option value=''>"+initValue+"</option>";
+	}
 
+ 	$.ajax ({
+ 		url:url,
+ 		type:type ,
+ 		dataType:"json" ,
+ 		data:request,
+ 		headers:{Authorization:"Bearer "+tokenID.token},
+ 		async:false,
+ 		success:function(data){ 			
+ 			$.each(data,function(index,indexEntry){
+ 				html+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1] == undefined  ?  Object.keys(indexEntry)[0]:Object.keys(indexEntry)[1]]+"</option>";	
+ 			});	
 
-//************** dropDownList Month start  **************//
-
-var dropDownListMonth = function(id){
-	var html="";
-	
-	html+="<select id=\"month\" class=\"input form-control input-sm span12\" data-toggle=\"tooltip\" title=\"Month\" name=\"month\">";
-	//html+="<option  selected value=''>All</option>";
-	$.ajax ({
-		url:restfulURL+restfulPathDropDownMonth,
-		type:"get" ,
-		dataType:"json" ,
-		headers:{Authorization:"Bearer "+tokenID.token},
-		async:false,
-		success:function(data){
-			$.each(data,function(index,indexEntry){
-				//console.log(data[index]["month_id"]);
-				if(id==indexEntry["month_id"]){
-					html+="<option selected value="+indexEntry["month_id"]+">"+indexEntry["month_name"]+"</option>";			
-				}else{
-					html+="<option  value="+indexEntry["month_id"]+">"+indexEntry["month_name"]+"</option>";	
-				}
-			
-			});	
-		}
-	});	
-	html+="</select>";
-	return html;
-};
-//****************dropDownListMonth end************************//
-
-//--------------- DropDownList Appraisal Frequency start ----------------
-var dropDownListAppraisalFrequencyFn = function(){
-	var html="";
-	
-
-	$.ajax ({
-		url:restfulURL+restfulPathDropDownFrequency,
-		type:"get" ,
-		dataType:"json" ,
-		headers:{Authorization:"Bearer "+tokenID.token},
-		async:false,
-		success:function(data){
-			$.each(data,function(index,indexEntry){
-				html+="<option  value="+indexEntry["frequency_id"]+">"+indexEntry["frequency_name"]+"</option>";	
-			});	
-		}
-	});	
-	$("#appraisalFrequency").html(html);
-	$("#bonusFrequency").html(html);
-	$("#salaryRaiseFrequency").html(html);
-	
-	
-};
-//----------------DropDownList Appraisal  frequency ------------
+ 		}
+ 	});	
+ 	return html;
+ };
 
 
 
@@ -240,12 +215,16 @@ var listSystemConfigFn = function (data) {
 var updateFn = function() {
 	var raiseType=0;
 	var resultType=0;
+	var threshold=0;
 	if($("#raiseFixAmount:checked").is(":checked")){raiseType=1;}
 	else if($("#raisePercentage:checked").is(":checked")){raiseType=2;}
 	 
 	if($("#resultWeightPercentage:checked").is(":checked")){resultType=0;}
 	else if($("#resultPercentage:checked").is(":checked")){resultType=1;}
 	else if($("#raiseScore:checked").is(":checked")){resultType=2;}
+	
+	if($("#thresholdOn:checked").is(":checked")){threshold=1;}
+	else if($("#thresholdOff:checked").is(":checked")){threshold=0;}
 	
 	$.ajax({
 		url:restfulURL+restfulPathSystemcon,
@@ -264,6 +243,7 @@ var updateFn = function() {
 			"current_appraisal_year"            :  $("#current_appraisal_year").val(),
 			"raise_type"			            :  raiseType,
 			"result_type"			            :  resultType,
+			"threshold"							:  threshold,
 			"theme_color"			            :  $("#themeColor").val()
 			
 		},	
@@ -271,7 +251,8 @@ var updateFn = function() {
 		success : function(data,status) {
 				if (data['status'] == "200") {
 					//*****btnsubmit******
-					getDataFn();
+					//getDataFn();
+					galbalDataSystemcon=data['data'];
 					callFlashSlide("update Successfully."); 	  
 				}else if (data['status'] == "400"){
 					validationFn(data,"#information");
@@ -489,8 +470,10 @@ $(document).ready(function () {
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
 	 	
 	 	if(connectionServiceFn(username,password)==true){
-	 		
-	 		dropDownListAppraisalFrequencyFn();
+	 		//url,type,request,initValue
+	 		$("#month").html(generateDropDownList(restfulURL+restfulPathDropDownMonth,"GET"));
+	 		$("#appraisalFrequency ,#bonusFrequency ,#salaryRaiseFrequency").html(generateDropDownList(restfulURL+restfulPathDropDownFrequency,"GET"));
+	
 			getDataFn();
 			$(".app_url_hidden").show();
 			$(".btnCancle").click(function () {
