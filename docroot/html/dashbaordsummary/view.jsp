@@ -590,7 +590,7 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 }
 .aui .header-fixed-kpi1 { 
     position: absolute; 
-    top: 15px; display:none;
+    top: 0px; display:none;
     width:740px;
 }
 .aui .header-fixed-kpi2 { 
@@ -733,7 +733,8 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 				<div class="modal-body">
 <!-- ############################################################################ -->
 				<div id="scrollOrg"style="overflow:auto;min-width:1067px;max-height:500px;" class="table-responsive p-b-xxs">
-				<div style='width: 740px; float: left;'>
+				<div id="scrollSubOrg1"style='width: 740px;max-height:482px; float: left;overflow: hidden;position: relative;'>
+					<div id="scrollSubOrg2" style="float: left; position: relative; overflow-y: scroll; width: 757px; overflow-x: hidden; max-height: 482px;">
 					<table class='table table-bordered' id='tableAllKPI1'>
 
 						<thead>
@@ -747,9 +748,10 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 
 					</table>
 					<table class='table table-bordered header-fixed-kpi1' id='subTableKPI1'></table>
+					</div>
 				</div>
 
-				<div id="scrollSubOrg" style='width: 310px; float: left; overflow-x: scroll;position: relative;'>
+				<div id="scrollSubOrg3" style='width: 327px;max-height:500px; float: left; overflow-x: scroll;overflow-y: scroll;position: relative;'>
 					<table class='table table-bordered' id='tableAllKPI2'>
 
 						<thead>

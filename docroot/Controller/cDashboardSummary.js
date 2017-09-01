@@ -105,7 +105,7 @@
 		//#End Body Accordion
 		accordionHtml += "		</div>";	
 		accordionHtml += "</div>";
-		//console.log(accordionHtml);
+
 		return accordionHtml;
 		//$("#accordion").append(accordionHtml);
 		
@@ -316,7 +316,7 @@ var generateSubTableKPIFn = function(item,data){
 	ContentHTML+="		</tr>";
 	ContentHTML+="	</tbody>";
 	ContentHTML+="</table'>";
-	console.log(ContentHTML);
+	//console.log(ContentHTML);
 	return ContentHTML;
 /* ### Ex.return ###
 					<!-- table start -->
@@ -387,7 +387,7 @@ var getOrgFn = function(data){
 	   $.each(data[0]['org'],function(index,indexEntry){
 		   
 		galbalDataTemp['galbalOrg'].push({"org_code":indexEntry['org_code'],"org_name":indexEntry['org']});
-	    console.log(indexEntry['org']);
+	    //console.log(indexEntry['org']);
 	   });
 	   
 	   listHeaderFn(galbalDataTemp['galbalOrg']);
@@ -416,24 +416,63 @@ var getDataKPIFn = function(page,rpp){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,// w8 data 
 		success : function(data) {
+			
 			galbalDataTemp['All_KPI']=data;
 			getOrgFn(data);
 			listDashBoardAllKPIFn(data);
-			$("#scrollOrg").scrollTop(0);
 			$("#ModalKPI").modal('show');
+			$("#scrollOrg *").scrollTop(0).scrollLeft(0);
+			$("#subTableKPI1").html($("#tableAllKPI1 > thead").clone()).show();
+			$("#subTableKPI2").html($("#tableAllKPI2 > thead").clone()).show(); 
+			
+			$("#scrollOrg *").unbind( "mouseenter , mouseleave, scroll" );
+			$( "#scrollSubOrg1" ).bind({
+			  mouseenter: function() {
+			   
+			    //console.log("in");
+			    $("#scrollSubOrg3").unbind( "scroll" );
+			    $("#scrollSubOrg2").bind("scroll", function() {
+			            
+								    var offset = $(this).scrollTop();
+								    //console.log(offset);
+								    $('#scrollSubOrg3').scrollTop(offset);
+							        $('#subTableKPI1').css('margin-top', offset);
+							        $('#subTableKPI2').css('margin-top', offset);
+
+								});
+			    
+			    
+			  },
+			  mouseleave: function() {
+			    $("#scrollSubOrg2").unbind("scroll");
+			    //console.log("out");
+			    $("#scrollSubOrg3").bind("scroll", function() {
+			             //$("#scrollSubOrg2").unbind( "scroll" );
+								    var offset = $(this).scrollTop();
+			         
+								    $('#scrollSubOrg2').scrollTop(offset);
+							        $('#subTableKPI1').css('margin-top', offset);
+							        $('#subTableKPI2').css('margin-top', offset);
+
+								});
+			  }
+			});
+
+
+			$("#scrollSubOrg3").bind("scroll", function() {
+								    var offset = $(this).scrollTop();
+			         
+								    $('#scrollSubOrg2').scrollTop(offset);
+							        $('#subTableKPI1').css('margin-top', offset);
+							        $('#subTableKPI2').css('margin-top', offset);
+
+								});
+			
 			setTimeout(function(){ 
-				console.log("sparkline setTimeout");
-				generateChartBulletSparkFn(data)
-				$('.sparkline').show();
-				$("#subTableKPI1").html($("#tableAllKPI1 > thead").clone()).show();
-				$("#subTableKPI2").html($("#tableAllKPI2 > thead").clone()).show();  
-				$( "#scrollOrg").unbind( "scroll" );
-				$("#scrollOrg").bind("scroll", function() {
-					    var offset = $(this).scrollTop();
-					    $('#subTableKPI2').css('margin-top', offset);
-
-					});
-
+				
+				generateChartBulletSparkFn(data);
+				//$('.sparkline').show();
+				$("body").mLoading('hide');
 			}, 2000);
 			
 		}
@@ -511,7 +550,7 @@ var listDashBoardFn = function(data){
 //		 generateChartGaugeFn(indexEntry);
 //		 generateChartBarFn(indexEntry);
 		 $.when(generateChartGaugeFn(indexEntry),generateChartBarFn(indexEntry)).then(function() {
-				    console.log(inedx+" Loading Chart: Success");
+				    //console.log(inedx+" Loading Chart: Success");
 		});
 	 });
 	 
@@ -539,7 +578,7 @@ var listDashBoardFn = function(data){
 
 			$("#next").off("click");
 			$("#next").on("click",function() {
-				  console.log("Next KPI : "+$(this).attr("data-next"));
+				  //console.log("Next KPI : "+$(this).attr("data-next"));
 
 				  			searchAdvanceFn(
 									$("#param_year").val(),
@@ -554,7 +593,7 @@ var listDashBoardFn = function(data){
 				});
 			$("#previous").off("click");
 			$("#previous").on("click",function() {
-				  console.log("Next Previous : "+$(this).attr("data-previous"));
+				  //console.log("Next Previous : "+$(this).attr("data-previous"));
 				  			
 				  			searchAdvanceFn(
 									$("#param_year").val(),
@@ -571,14 +610,14 @@ var listDashBoardFn = function(data){
 			$("#btn_extract").click(function(event){
 				  event.stopPropagation();
 				  if(galbalDataTemp['extract'] == true){
-					  console.log(galbalDataTemp['extract']);
+					  //console.log(galbalDataTemp['extract']);
 				    $("#btn_extract").find(".fa").removeClass("fa-minus-square").addClass("fa-plus-square");
 				    
 				    $("#accordion").children().children().next().collapse('hide');
 				    galbalDataTemp['extract'] = false;
 				  }
 				  else if(galbalDataTemp['extract'] == false){
-					  console.log(galbalDataTemp['extract']);
+					  //console.log(galbalDataTemp['extract']);
 					  $("#btn_extract").find(".fa").removeClass("fa-plus-square").addClass("fa-minus-square");
 					  $("#btn_kpi").find(".fa").removeClass("fa-plus-square").addClass("fa-table");
 					    $("#accordion").children().children().next().collapse('show');
@@ -591,6 +630,8 @@ var listDashBoardFn = function(data){
 				  event.preventDefault();
 				  $("#ModalKPI").modal('hide');
 				  getDataKPIFn();
+				  
+				  $("body").mLoading();
 //				  document.body.scrollTop = 0;
 //				  document.documentElement.scrollTop = 0;
 				  $('html, body').animate({
@@ -613,7 +654,6 @@ var listDashBoardAllKPIFn = function(data){
 	var htmlData3="";
 	 $.each(data,function(index,indexEntry){
 	  var htmlData2="";
-	   console.log(index);
 	  htmlData1+="<tr>";
 	  htmlData3+="<tr>";
 	   htmlData1+="<td>"+indexEntry['perspective']+"</td>";
@@ -704,8 +744,7 @@ var listDashBoardAllKPIFn = function(data){
 			 generateChartBulletFn("perForecast"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code'],indexEntry2['percent_forecast'],indexEntry['color']);
 		 });
 	 });
-*/	 console.log(data[0]['rangeColor']);
-	  
+*/	  
 	 
 };
  $(document).ready(function(){
