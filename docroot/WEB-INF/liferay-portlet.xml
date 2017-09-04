@@ -9,7 +9,7 @@
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>see-kpi-portlet</css-class-wrapper>    
 	</portlet>   
-	                               	                                                                                                                                                                        
+	                                                   	                                                                                                                                                                        
 	                                                                                                                                                             
 	<portlet>                                                 
 		<portlet-name>appraisal</portlet-name>         
@@ -23,23 +23,23 @@
 		<header-portlet-css>/css/jquery-ui.css</header-portlet-css> 
 		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
 		<header-portlet-css>/js/css3-hover-effects/style.css</header-portlet-css>
-		   
+		
 		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
 		
 		<!-- 
 		<header-portlet-css>/js/css3-hover-effects/demo.css</header-portlet-css>
-		 -->         
+		-->    
 	                         
 	   	<header-portlet-css>/css/tywMain.css</header-portlet-css>
 	    <header-portlet-css>/css/appraisal.css</header-portlet-css>
-  
+    
 	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
-		 
-      
-	                                                       
+		                   
+        
+	                                                                  
 		                      
 		<footer-portlet-javascript>/js/plugins/slimscroll/jquery.slimscroll.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
@@ -47,6 +47,22 @@
 		 
 		 <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	     <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+		<footer-portlet-javascript>
+			/js/fusioncharts/js/fusioncharts.js               
+		</footer-portlet-javascript>    
+		<footer-portlet-javascript> 
+			/js/fusioncharts/js/fusioncharts.charts.js
+		</footer-portlet-javascript> 
+		
+		<footer-portlet-javascript> 
+			/js/fusioncharts/js/fusioncharts.widgets.js
+		</footer-portlet-javascript> 
+		<footer-portlet-javascript> 
+			/js/fusioncharts/js/themes/fusioncharts.theme.fint.js
+		</footer-portlet-javascript>   
+		 
+		       
+		                     
  		                  
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
@@ -863,7 +879,7 @@
 		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
 	    <header-portlet-css>/css/dropify.css</header-portlet-css>
                     
-	    <footer-portlet-javascript>/js/jquery3.1.1.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
@@ -1052,7 +1068,7 @@
 	<portlet>
 		<portlet-name>all-kpi-dashboard</portlet-name>
 		<icon>/icon.png</icon>
-		
+		 
 		
 		
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
@@ -1077,9 +1093,19 @@
 	     
 	    <footer-portlet-javascript>/Controller/cAllKpiDashboard.js</footer-portlet-javascript> 
 		    
-		       
+		         
 		  
 		<css-class-wrapper>all-kpi-dashboard-portlet</css-class-wrapper>
+	</portlet>
+	 
+	<portlet>
+		<portlet-name>usage-log</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>usage-log-portlet</css-class-wrapper>
 	</portlet>
 	<role-mapper> 
 		<role-name>administrator</role-name>
@@ -1098,5 +1124,5 @@
 		<role-link>User</role-link>  
 	</role-mapper>  
 </liferay-portlet-app>
-               
-                                  	                    
+       
+                            

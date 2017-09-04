@@ -342,7 +342,7 @@ var findOneFn = function(id,actionType){
 	
 	
 	//get structure
-	getTemplateFn(id);
+	getTemplateFn();
 	
 	
 	//get data for structureี
@@ -734,7 +734,6 @@ var actionUpdateAssignmentFn = function(){
 					appraisal_items+="\"score3\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score3").val()+"\",";
 					appraisal_items+="\"score4\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score4").val()+"\",";
 					appraisal_items+="\"score5\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score5").val()+"\",";
-					appraisal_items+="\"total_weight\":\""+$("#total_weight-"+$(structureEntry).val()).val()+"\",";
 					appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\",";
 					
 					
@@ -769,7 +768,6 @@ var actionUpdateAssignmentFn = function(){
 				appraisal_items+="\"item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-item_name").text()+"\",";
 				appraisal_items+="\"form_id\":\"2\",";
 				appraisal_items+="\"target_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val()+"\",";
-				appraisal_items+="\"total_weight\":\""+$("#total_weight-"+$(structureEntry).val()).val()+"\",";
 				appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\",";
 				
 				
@@ -800,7 +798,6 @@ var actionUpdateAssignmentFn = function(){
 				appraisal_items+="\"item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-item_name").text()+"\",";
 				appraisal_items+="\"form_id\":\"3\",";
 				appraisal_items+="\"max_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-maxValue").val()+"\",";
-				appraisal_items+="\"total_weight\":\""+$("#total_weight-"+$(structureEntry).val()).val()+"\",";
 				appraisal_items+="\"deduct_score_unit\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-deductScoreUnit").val()+"\",";
 				
 //				console.log("-----------------");
@@ -939,7 +936,6 @@ var actionAssignmentFn = function(param){
 					appraisal_items+="\"score4\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score4").val()+"\",";
 					appraisal_items+="\"score5\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score5").val()+"\",";
 					appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\",";
-					appraisal_items+="\"total_weight\":\""+$("#total_weight-"+$(structureEntry).val()).val()+"\",";
 					appraisal_items+="\"select_flag\":\"1\"";
 				
 				
@@ -964,7 +960,6 @@ var actionAssignmentFn = function(param){
 				appraisal_items+="\"form_id\":\"2\",";
 				appraisal_items+="\"target_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val()+"\",";
 				appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\",";
-				appraisal_items+="\"total_weight\":\""+$("#total_weight-"+$(structureEntry).val()).val()+"\",";
 				appraisal_items+="\"select_flag\":\"1\"";
 				appraisal_items+="}";
 				countAppraisalItem++;
@@ -986,7 +981,6 @@ var actionAssignmentFn = function(param){
 				appraisal_items+="\"form_id\":\"3\",";
 				appraisal_items+="\"max_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-maxValue").val()+"\",";
 				appraisal_items+="\"deduct_score_unit\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-deductScoreUnit").val()+"\",";
-				appraisal_items+="\"total_weight\":\""+$("#total_weight-"+$(structureEntry).val()).val()+"\",";
 				appraisal_items+="\"select_flag\":\"1\"";
 				appraisal_items+="}";
 				
@@ -1256,7 +1250,7 @@ var dropDrowDepartmentFn = function(id){
 		}
 	});
 }
-var dropDrowOrgFn = function(appraisalLevelId){
+var dropDrowOrgFn = function(id){
 
 	$.ajax({
 		url:restfulURL+"/see_api/public/org",
@@ -1264,7 +1258,6 @@ var dropDrowOrgFn = function(appraisalLevelId){
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"level_id":appraisalLevelId},
 		success:function(data){
 			var htmlOption="";
 			htmlOption+="<option value=''>All Organization</option>";
@@ -1284,7 +1277,7 @@ var dropDrowPeriodFn = function(paramPeriod,paramAssignFrequency){
 	
 //	var htmlOption="";
 //	
-//	var periodFrequency = parseFloat(paramPeriod);
+//	var periodFrequency = parseInt(paramPeriod);
 //	var period = 12/periodFrequency;
 //	
 //	if(paramAssignFrequency==1){
@@ -1544,7 +1537,6 @@ var assignTemplateQualityFn = function(structureName,data){
 					
 					//htmlTemplateQuality+="<div class='formName hidden'>form2</div>";
 					htmlTemplateQuality+="<input type='hidden' id='structure_id-"+data['structure_id']+"' class='structure_id' value="+data['structure_id']+">";
-					htmlTemplateQuality+="<input type='hidden' id='total_weight-"+data['structure_id']+"' class='total_weight' value="+data['total_weight']+">";
 					htmlTemplateQuality+="<input type='hidden' id='form-"+data['structure_id']+"' class='' value=\"form2\">";
 					
 					htmlTemplateQuality+="</div>";
@@ -1587,7 +1579,7 @@ var assignTemplateDeductFn = function(structureName,data){
 							htmlTemplateDeduct+="<td style=\"width:3%;text-align:center;\" class='object-center' ><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox notCal appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['item_id']+"'></td>";
 							htmlTemplateDeduct+="<td style=\"width:67%\" style='padding-top:7px;' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' class='id-"+indexEntry['structure_id']+"-item_name'>"+indexEntry['item_name']+"</td>";
 							htmlTemplateDeduct+="<td style=\"width:15%;text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-maxValue' class='id-"+indexEntry['structure_id']+"-maxValue  input form-control input-sm-small numberOnly' type='text' value='"+indexEntry['max_value']+"'></td>";
-							htmlTemplateDeduct+="<td style=\"width:15%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-deductScoreUnit' class='id-"+indexEntry['structure_id']+"-deductScoreUnit    input form-control input-sm-small numberOnly' type='text' value='"+indexEntry['unit_deduct_score']+"'>     </td>";
+							htmlTemplateDeduct+="<td style=\"width:15%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-deductScoreUnit' class='id-"+indexEntry['structure_id']+"-deductScoreUnit    input form-control input-sm-small numberOnly' type='text' value='"+indexEntry['unit_deduct_score']+"'></td>";
 							htmlTemplateDeduct+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_result_id' class='id-"+indexEntry['structure_id']+"-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
 					htmlTemplateDeduct+="</tr>";
 					});
@@ -1596,7 +1588,6 @@ var assignTemplateDeductFn = function(structureName,data){
 					htmlTemplateDeduct+="</tbody>";
 					htmlTemplateDeduct+="</table>";
 					htmlTemplateDeduct+="<input type='hidden' id='structure_id-"+data['structure_id']+"' class='structure_id' value="+data['structure_id']+">";
-					htmlTemplateDeduct+="<input type='hidden' id='total_weight-"+data['structure_id']+"' class='total_weight' value="+data['total_weight']+">";
 					htmlTemplateDeduct+="<input type='hidden' id='form-"+data['structure_id']+"' class='' value=\"form3\">";
 					
 				htmlTemplateDeduct+="</div>";
@@ -1632,7 +1623,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 					htmlTemplateQuantity+="<th style=\"width:3%;  text-align:center;\" class=''><b>Select</b></th>";
 					htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>Appraisal Item Name</b></th>";
 					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Target</b> </th>";
-					htmlTemplateQuantity+="<th style=\"width:10%;  text-align:center;\" class='thBox'><b>Forecast Value</b> </th>";
+					htmlTemplateQuantity+="<th style=\"width:10%;  text-align:center;\" class='thBox'><b>Forecast Result</b> </th>";
 					
 					
 					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#"+data['threshold_color'][0]['color_code']+"' class='redBOxL'>1</div></th>";
@@ -1661,7 +1652,6 @@ var assignTemplateQuantityFn = function(structureName,data){
 							htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target' class='id-"+indexEntry['structure_id']+"-target input form-control input-sm-small numberOnly' type='text'>";
 							htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-kpi_type_id' class='id-"+indexEntry['structure_id']+"-kpi_type_id input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['kpi_type_id']+">";
 							htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-nof_target_score' class='id-"+indexEntry['structure_id']+"-nof_target_score input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['nof_target_score']+">";
-							//htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-total_weight' class='id-"+indexEntry['structure_id']+"-total_weight input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['total_weight']+">";
 							htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_result_id' class='id-"+indexEntry['structure_id']+"-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
 							htmlTemplateQuantity+="</td>";
 							
@@ -1686,7 +1676,6 @@ var assignTemplateQuantityFn = function(structureName,data){
 					htmlTemplateQuantity+="</table>";
 					htmlTemplateQuantity+="<input type='hidden' id='structure_id-"+data['structure_id']+"' class='structure_id' value="+data['structure_id']+">";
 					htmlTemplateQuantity+="<input type='hidden' id='no_weight-"+data['structure_id']+"' class='no_weight' value="+data['no_weight']+">";
-					htmlTemplateQuantity+="<input type='hidden' id='total_weight-"+data['structure_id']+"' class='total_weight' value="+data['total_weight']+">";
 					htmlTemplateQuantity+="<input type='hidden' id='form-"+data['structure_id']+"' class='' value=\"form1\">";
 					htmlTemplateQuantity+="<input type='hidden' id='item_id_array-"+data['structure_id']+"' class='item_id_array' value=\""+item_id_array+"\">";
 					
@@ -1732,7 +1721,6 @@ var assignTemplateQuantityFn = function(structureName,data){
 					htmlTemplateQuantity+="<tr>";
 						htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-kpi_type_id' class='id-"+indexEntry['structure_id']+"-kpi_type_id input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['kpi_type_id']+">";
 						htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-nof_target_score' class='id-"+indexEntry['structure_id']+"-nof_target_score input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['nof_target_score']+">";
-						//htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-total_weight' class='id-"+indexEntry['structure_id']+"-total_weight input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['total_weight']+">";
 						htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_result_id' class='id-"+indexEntry['structure_id']+"-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
 						htmlTemplateQuantity+="<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['item_id']+"'></td>";
 						htmlTemplateQuantity+="<td style=\"width:30%\" class='id-"+indexEntry['structure_id']+"-item_name' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' style='padding-top:7px;'>"+indexEntry['item_name']+"</td>";
@@ -1746,9 +1734,6 @@ var assignTemplateQuantityFn = function(structureName,data){
 				htmlTemplateQuantity+="</table>";
 				htmlTemplateQuantity+="<input type='hidden' id='structure_id-"+data['structure_id']+"' class='structure_id' value="+data['structure_id']+">";
 				htmlTemplateQuantity+="<input type='hidden' id='no_weight-"+data['structure_id']+"' class='no_weight' value="+data['no_weight']+">";
-				//htmlTemplateQuantity+="<input type='hidden' id='no_weight-"+data['structure_id']+"' class='no_weight' value="+data['no_weight']+">";
-				//htmlTemplateQuantity+="<input type='hidden' id='total_weight-"+data['structure_id']+"' class='no_weight' value="+data['no_weight']+">";
-				htmlTemplateQuantity+="<input type='hidden' id='total_weight-"+data['structure_id']+"' class='total_weight' value="+data['total_weight']+">";
 				htmlTemplateQuantity+="<input type='hidden' id='form-"+data['structure_id']+"' class='' value=\"form1\">";
 				htmlTemplateQuantity+="<input type='hidden' id='item_id_array-"+data['structure_id']+"' class='item_id_array' value=\""+item_id_array+"\">";
 				
@@ -1768,7 +1753,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 	if(data['threshold']==1){
 		if(data['nof_target_score']>0){
 			
-			for(var i=0;i<=(parseFloat(data['nof_target_score'])+1);i++){
+			for(var i=0;i<=(parseInt(data['nof_target_score'])+1);i++){
 				$(".scoreText"+i).prop("disabled",false);
 			}
 			
@@ -1790,7 +1775,7 @@ var calculationGrandTotalDefaultFn = function(id){
 		
 		if($(indexEntry).val().trim()!=""){
 			
-			grandTotalWieght+=(parseFloat($(indexEntry).val()));
+			grandTotalWieght+=(parseInt($(indexEntry).val()));
 			//alert(grandTotalWieght);
 			
 		}
@@ -1798,12 +1783,12 @@ var calculationGrandTotalDefaultFn = function(id){
 	});
 	
 	$.each($(".weigth_total_deduct_percentage_target").get(),function(index,indexEntry){
-		//parseFloat($("#weigth_total_deduct_percentage").text());
-		deductTotalWieght+=parseFloat($(indexEntry).text());
+		//parseInt($("#weigth_total_deduct_percentage").text());
+		deductTotalWieght+=parseInt($(indexEntry).text());
 		
 	});
 	grandTotalWieghtTotal=(deductTotalWieght+grandTotalWieght);
-	$("#grandTotalWeight").html(parseFloat(grandTotalWieghtTotal).toFixed(2));
+	$("#grandTotalWeight").html(grandTotalWieghtTotal);
 	//$("#grandTotalWeight").html(grandTotalWieght);
 	
 }
@@ -1824,7 +1809,7 @@ var calculationGrandTotalFn = function(id){
 	var globalStructure_id=globalDataId[2];
 	//Start Default weight form quantity is 0%
 	$("#weigth_total_quantity_percentage-"+globalStructure_id)
-	.html("Cannot Assignment Because Weight% not equal to "+parseFloat($("#weigth_total_quantity_percentage_target-"+globalStructure_id).text()).toFixed(2)+"% [0%]")
+	.html("Cannot Assignment Because Weight% not equal to "+parseInt($("#weigth_total_quantity_percentage_target-"+globalStructure_id).text())+"% [0%]")
 	.css({"color":"#FF0000"}).
 	addClass("weightIsOver");
 	//End Default weight form quantity is 0%
@@ -1835,19 +1820,19 @@ var calculationGrandTotalFn = function(id){
 		var dataId=this.id.split("-");
 		var apprailsal_item_id=dataId[1];
 		var structure_id=dataId[2];
-		grandTotalWieght+=getNum(parseFloat($("#id-"+apprailsal_item_id+"-"+structure_id+"-weight").val()));
+		grandTotalWieght+=getNum(parseInt($("#id-"+apprailsal_item_id+"-"+structure_id+"-weight").val()));
 		
 	});
 			   
 	$.each($(".weigth_total_deduct_percentage_target").get(),function(index,indexEntry){
-		deductTotalWieght+=parseFloat($(indexEntry).text());
+		deductTotalWieght+=parseInt($(indexEntry).text());
 	});
 	grandTotalWieghtTotal=(deductTotalWieght+grandTotalWieght);
 	
 	//console.log(grandTotalWieght);
 	//console.log(grandTotalWieghtTotal);
 	
-	$("#grandTotalWeight").html(parseFloat(grandTotalWieghtTotal).toFixed(2));
+	$("#grandTotalWeight").html(grandTotalWieghtTotal);
 	//weigth_total_quality_percentage_target
 	
 	//################ Calculation Quantity Start####################### 
@@ -1873,12 +1858,12 @@ var calculationGrandTotalFn = function(id){
 			
 			
 				if($(indexEntry).val().trim()!="" && $("#id-"+apprailsal_item_id+"-"+structure_id+"-checkbox").prop("checked")==true){
-					totalWeigthQuantity+=(parseFloat($(indexEntry).val()));
+					totalWeigthQuantity+=(parseInt($(indexEntry).val()));
 					//alert(grandTotalWieght);
-					if(totalWeigthQuantity != parseFloat($("#weigth_total_quantity_percentage_target-"+structure_id).text())){
+					if(totalWeigthQuantity != parseInt($("#weigth_total_quantity_percentage_target-"+structure_id).text())){
 						
 						$("#weigth_total_quantity_percentage-"+structure_id)
-						.html("Cannot Assignment Because Weight% not equal to "+parseFloat($("#weigth_total_quantity_percentage_target-"+structure_id).text()).toFixed(2)+"% ["+parseFloat(totalWeigthQuantity).toFixed(2)+"%]")
+						.html("Cannot Assignment Because Weight% not equal to "+parseInt($("#weigth_total_quantity_percentage_target-"+structure_id).text())+"% ["+totalWeigthQuantity+"%]")
 						.css({"color":"#FF0000"}).
 						addClass("weightIsOver");
 						
@@ -1893,7 +1878,7 @@ var calculationGrandTotalFn = function(id){
 						.css({"color":"#00CC00"})
 						.removeClass("weightIsOver");
 						
-						$("#weigth_total_quantity_moblie_percentage-"+structure_id).html("["+parseFloat(totalWeigthQuantity).toFixed(2)+"%]")
+						$("#weigth_total_quantity_moblie_percentage-"+structure_id).html("["+totalWeigthQuantity+"%]")
 						.css({"color":"#00CC00"});
 					}
 				}
@@ -1906,7 +1891,7 @@ var calculationGrandTotalFn = function(id){
 	//################ Calculation Quality Start####################### 
 	//Start Default weight form Quality is 0%
 	$("#weigth_total_quality_percentage-"+globalStructure_id)
-	.html("Cannot Assignment Because Weight% not equal to "+parseFloat($("#weigth_total_quality_percentage_target-"+globalStructure_id).text())+"% [0%]")
+	.html("Cannot Assignment Because Weight% not equal to "+parseInt($("#weigth_total_quality_percentage_target-"+globalStructure_id).text())+"% [0%]")
 	.css({"color":"#FF0000"}).
 	addClass("weightIsOver");
 	//End Default weight form Quality is 0%
@@ -1926,14 +1911,14 @@ var calculationGrandTotalFn = function(id){
 				var structure_id=dataId[2];
 				//if(apprailsal_item_id==apprailsal_item_id1 && structure_id==structure_id1){
 					if($(indexEntry).val().trim()!="" && $("#id-"+apprailsal_item_id+"-"+structure_id+"-checkbox").prop("checked")==true){
-						total_weigth_quality+=(parseFloat($(indexEntry).val()));
+						total_weigth_quality+=(parseInt($(indexEntry).val()));
 						//alert(grandTotalWieght);
 						//$("#weigth_total_quality_percentage").html( "["+total_weigth_quality+"]");
 						
-						if(total_weigth_quality != parseFloat($("#weigth_total_quality_percentage_target-"+structure_id).text())){
+						if(total_weigth_quality != parseInt($("#weigth_total_quality_percentage_target-"+structure_id).text())){
 							
 							$("#weigth_total_quality_percentage-"+structure_id)
-							.html("Cannot Assignment Because Weight% not equal to "+parseFloat($("#weigth_total_quality_percentage_target-"+structure_id).text())+"% ["+parseFloat(total_weigth_quality).toFixed(2)+"%]")
+							.html("Cannot Assignment Because Weight% not equal to "+parseInt($("#weigth_total_quality_percentage_target-"+structure_id).text())+"% ["+total_weigth_quality+"%]")
 							.css({"color":"#FF0000"}).
 							addClass("weightIsOver");
 							
@@ -1943,11 +1928,11 @@ var calculationGrandTotalFn = function(id){
 						}else{
 							
 							$("#weigth_total_quality_percentage-"+structure_id)
-							.html("["+parseFloat(total_weigth_quality).toFixed(2)+"%]")
+							.html("["+total_weigth_quality+"%]")
 							.css({"color":"#00CC00"})
 							.removeClass("weightIsOver");
 							
-							$("#weigth_total_quality_moblie_percentage-"+structure_id).html("["+parseFloat(total_weigth_quality).toFixed(2)+"%]")
+							$("#weigth_total_quality_moblie_percentage-"+structure_id).html("["+total_weigth_quality+"%]")
 							.css({"color":"#00CC00"});
 						}
 					}
@@ -2102,7 +2087,7 @@ var createTemplateAssignmentFn = function(data){
 	}
 	 
 };
-var getTemplateFn = function(emp_result_id){
+var getTemplateFn = function(){
 	$.ajax({
 		//http://192.168.1.52/see_api/public/appraisal_assignment/period_list
 		url:restfulURL+"/see_api/public/appraisal_assignment/template",
@@ -2111,7 +2096,7 @@ var getTemplateFn = function(emp_result_id){
 		async:false,
 		data:{
 			'appraisal_level_id':$("#appraisalLevel").val(),
-			'emp_result_id':emp_result_id
+			//'department_code':$("#embed_department_list").val()
 			},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
@@ -2244,13 +2229,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 		appraisalTypeFn('','1');
 		periodFrequencyFn();
 		yearListFn();
-		
-		$("#appraisalLevel").change(function(){
-			dropDrowOrgFn($(this).val());	
-		});
-		$("#appraisalLevel").change();
-		
-		//dropDrowOrgFn();
+		dropDrowOrgFn();
 		
 		
 		$("#appraisalType").change(function(){
@@ -2482,7 +2461,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 							
 							callFlashSlideInModal("<b>Cannot Assign Structure not equal to Weight Total<b>","#information","error");
 							
-						}else if(parseFloat($("#grandTotalWeight").text())!=100){
+						}else if(parseInt($("#grandTotalWeight").text())!=100){
 							callFlashSlideInModal("<b>Grand Total Weight is Not 100%.<b>","#information","error");
 							
 						}else{
@@ -2524,7 +2503,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 				
 				callFlashSlideInModal("<b>Cannot Assign Structure not equal to Weight Total<b>","#information","error");
 				
-			}else if(parseFloat($("#grandTotalWeight").text())!=100){
+			}else if(parseInt($("#grandTotalWeight").text())!=100){
 				callFlashSlideInModal("<b>Grand Total Weight is Not 100%.</b>","#information","error");
 			
 			}else{
@@ -2551,9 +2530,9 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 				removeEmbedParamCheckboxAppraisalItem(this.id);
 			}
 			
-			//if(sessionStorage.getItem("is_coporate_kpi")==0){
+			if(sessionStorage.getItem("is_coporate_kpi")==0){
 				calculationGrandTotalFn(this.id);
-			//}
+			}
 		});
 		
 		

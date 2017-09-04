@@ -360,42 +360,94 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 .aui  select , .aui  input[type="text"]{font-size: 14px;}
 
 
-.redBOx{
-	background: red none repeat scroll 0 0;
-    border-radius: 5px;
-    height: auto;
-    width: 100%;
-    text-align:center;
+.table th.thBox{
+	padding-left:0px;
+	padding-right:0px;
 }
-.OrangeBox{
-	background: orange none repeat scroll 0 0;
-    border-radius: 5px;
+.redBOxL{
+	/*background: red none repeat scroll 0 0;*/
+    border-radius: 0px;
     height: auto;
-    width: 100%;
-    text-align:center;
+   
+    text-align:right;
+    float: right;
+    width: 30px;
 }
-.YellowBox{
-	background: yellow none repeat scroll 0 0;
-    border-radius: 5px;
+.redBOxR{
+	/*background: red none repeat scroll 0 0;*/
+    border-radius: 0px;
     height: auto;
-    width: 100%;
-    text-align:center;
+    text-align:right;
+    float: left;
+    width: 25px;
 }
-.greenBox{
-	background: #00ff00 none repeat scroll 0 0;
-    border-radius: 5px;
+.OrangeBoxL{
+	/*background: orange none repeat scroll 0 0;*/
+    border-radius: 0px;
     height: auto;
-    width: 100%;
-    text-align:center;
+    float: right;
+    width: 30px;
+    text-align:right;
+}
+.OrangeBoxR{
+	/*background: orange none repeat scroll 0 0;*/
+    border-radius: 0px;
+    height: auto;
+    text-align:right;
+    float: left;
+    width: 25px;
+}
+.YellowBoxL{
+	/*background: yellow none repeat scroll 0 0;*/
+    border-radius: 0px;
+    height: auto;
+    float: right;
+    width: 30px;
+    text-align:right;
+}
+.YellowBoxR{
+	/*background: yellow none repeat scroll 0 0;*/
+    border-radius: 0px;
+    height: auto;
+    text-align:right;
+    float: left;
+    width: 25px;
+}
+.greenBoxL{
+	/*background: #00ff00 none repeat scroll 0 0;*/
+    border-radius: 0px;
+    height: auto;
+    float: right;
+    width: 30px;
+    text-align:right;
+}
+.greenBoxR{
+	/*background: #00ff00 none repeat scroll 0 0;*/
+    border-radius: 0px;
+    height: auto;
+    text-align:right;
+    float: left;
+    width: 25px;
 }
 
-.veryGreenBOx{
-	background: #008000 none repeat scroll 0 0;
-    border-radius: 5px;
+
+.veryGreenBOxL{
+	/*background: #008000 none repeat scroll 0 0;*/
+    border-radius: 0px;
     height: auto;
-    width: 100%;
-    text-align:center;
+    float: right;
+    width: 30px;
+    text-align:right;
 }
+.veryGreenBOxR{
+	/*background: #008000 none repeat scroll 0 0;*/
+    border-radius: 0px;
+    height: auto;
+    text-align:right;
+    float: left;
+    width: 25px;
+}
+
 .aui .cus_information_area label{
 	margin-bottom: 1px;
 }
@@ -474,7 +526,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 										<select data-toggle="tooltip" title="" data-original-title="organization"
 											class="input form-control input-sm span12" id="organization"
 											name="organization">
-											<option>All Organization</option>
+											<option value=''>All Organization</option>
 										</select>
 									</div>
 									
@@ -902,7 +954,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
             
             	<div class="row-fluid">
             		<div class='span12 grandTotalWeight' >
-            		Grand Total Weight % <span id="grandTotalWeight"  class='perscentage'>0.00</span>
+            		
+            		<span id='grandTotalWeightArea' >Grand Total Weight %</span>
+            	
+            		<span id="grandTotalWeight"  class='perscentage'>0.00</span>
             		</div>
             	</div>
             	

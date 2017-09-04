@@ -88,7 +88,7 @@ var dropdownDeductScoreFn = function(score){
 	return htmlTemplateQuality;
 }
 var assignTemplateQualityFn = function(structureName,data){
-	var appraisal_item_result_id_array=[];
+	var item_result_id_array=[];
 	var htmlTemplateQuality="";
 	
 	
@@ -112,7 +112,12 @@ var assignTemplateQualityFn = function(structureName,data){
 	//Appraisal Item Name,Target,Actual,Score,%Weight,Weight Score
 	htmlTemplateQuality+="<div class='titlePanel'>"+structureName+"</div>";
 		if(data['no_weight']==0){ // has weight;
-		htmlTemplateQuality+="<div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+			if(data['result_type']==1){
+				htmlTemplateQuality+="<div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+			}else{
+				htmlTemplateQuality+="<div class='totalWeight'>Total Score "+data['total_weight']+"</div>";
+			}
+		
 		}
 	htmlTemplateQuality+="</div>";
 	htmlTemplateQuality+="<div class=\"ibox-content\">";
@@ -125,8 +130,13 @@ var assignTemplateQualityFn = function(structureName,data){
 				htmlTemplateQuality+="<th style=\"width:40%\"><b>Appraisal Item Name</b></th>";
 				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Target</b></th>";
 				htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>Score</b></th>  ";      
-				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>%Weight</b></th>  ";   
-				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Weight Score</b></th>  ";   
+				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>%Weight</b></th>  ";  
+				if(data['result_type']==1){
+					htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Weight Score</b></th>  ";
+				}else{
+					htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Result Score</b></th>  ";
+				}
+				   
 			htmlTemplateQuality+="</tr>";
 	}else{
 		
@@ -142,7 +152,7 @@ var assignTemplateQualityFn = function(structureName,data){
 					
 					$.each(data['items'],function(index,indexEntry){
 						
-					appraisal_item_result_id_array.push(indexEntry['appraisal_item_result_id']);
+					item_result_id_array.push(indexEntry['item_result_id']);
 						
 					//has weight
 						if(data['no_weight']==0){
@@ -152,10 +162,10 @@ var assignTemplateQualityFn = function(structureName,data){
 								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\""+hintHtml+"\">"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 								
 								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
-								htmlTemplateQuality+="<select style='width:50px; height: 25px;padding: 0 0 0 5px;' id='competencyScore-"+indexEntry['appraisal_item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly'>";
+								htmlTemplateQuality+="<select style='width:50px; height: 25px;padding: 0 0 0 5px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
 									htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['score']));
 								htmlTemplateQuality+="<select>";
-								//htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['appraisal_item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
+								//htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
 								htmlTemplateQuality+="</td>";
 								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weight_percent'])).toFixed(2))+"</td>";
 								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2))+"</td>";
@@ -168,10 +178,10 @@ var assignTemplateQualityFn = function(structureName,data){
 								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\""+hintHtml+"\">"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 								
 								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
-								htmlTemplateQuality+="<select style='width:50px; height: 25px;padding: 0 0 0 5px;' id='competencyScore-"+indexEntry['appraisal_item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly'>";
+								htmlTemplateQuality+="<select style='width:50px; height: 25px;padding: 0 0 0 5px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore input form-control input-sm-small numberOnly'>";
 									htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['score']));
 								htmlTemplateQuality+="<select>";
-								//htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['appraisal_item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
+								//htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
 								htmlTemplateQuality+="</td>";
 							
 								
@@ -198,7 +208,7 @@ var assignTemplateQualityFn = function(structureName,data){
 					//htmlTemplateQuality+="<div class='formName hidden'>form2</div>";
 					htmlTemplateQuality+="<input type='hidden' id='structure_id-"+data['structure_id']+"' class='structure_id' value="+data['structure_id']+">";
 					htmlTemplateQuality+="<input type='hidden' id='form-"+data['structure_id']+"' class='' value=\"form2\">";
-					htmlTemplateQuality+="<input type='hidden' id='appraisal_item_result_id_array-"+data['structure_id']+"' class='appraisal_item_result_id_array' value=\""+appraisal_item_result_id_array+"\">";
+					htmlTemplateQuality+="<input type='hidden' id='item_result_id_array-"+data['structure_id']+"' class='item_result_id_array' value=\""+item_result_id_array+"\">";
 					
 					htmlTemplateQuality+="</div>";
 					htmlTemplateQuality+="<br style=\"clear:both\">";				
@@ -218,7 +228,12 @@ var assignTemplateDeductFn = function(structureName,data){
 	htmlTemplateDeduct+="<div class=\"ibox-title2\">";
 	htmlTemplateDeduct+="<div class='titlePanel'>"+structureName+"</div>";
 	if(data['no_weight']==0){ // has weight;
-		htmlTemplateDeduct+="<div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+		
+		if(data['result_type']==1){
+			htmlTemplateDeduct+="<div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+		}else{
+			htmlTemplateDeduct+="<div class='totalWeight'>Total Score "+data['total_weight']+"</div>";
+		}
 	}
 	htmlTemplateDeduct+="</div>";
 		
@@ -237,7 +252,11 @@ var assignTemplateDeductFn = function(structureName,data){
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Actual Value</b></th>";
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Over Value</b></th>";
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Deduct Score/Unit</b> </th>";
-				htmlTemplateDeduct+="<th style='width:20%;text-align: right;'><b>Weight Score </b></th>";
+				if(data['result_type']==1){
+					htmlTemplateDeduct+="<th style='width:20%;text-align: right;'><b>Weight Score </b></th>";
+				}else{
+					htmlTemplateDeduct+="<th style='width:20%;text-align: right;'><b>Result Score </b></th>";
+				}
 			htmlTemplateDeduct+="</tr>";
 		}else{
 			htmlTemplateDeduct+="<tr>";
@@ -304,7 +323,7 @@ var assignTemplateDeductFn = function(structureName,data){
 };
 
 var assignTemplateQuantityFn = function(structureName,data){
-	var appraisal_item_result_id_array=[];
+	var item_result_id_array=[];
 	var htmlTemplateQuantity = "";
 	var hintCount = 0;
 	var hintHtml="";
@@ -323,7 +342,11 @@ var assignTemplateQuantityFn = function(structureName,data){
 	
 	htmlTemplateQuantity+="      <div class='titlePanel'>"+structureName+"</div>";
 	if(data['no_weight']==0){ // has weight;
-	htmlTemplateQuantity+="      <div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+		if(data['result_type']==1){
+			htmlTemplateQuantity+="      <div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+		}else{
+			htmlTemplateQuantity+="      <div class='totalWeight'>Total Score "+data['total_weight']+"</div>";
+		}
 	}
 	htmlTemplateQuantity+="  </div>";
 	htmlTemplateQuantity+="	<div class=\"ibox-content\">";
@@ -339,11 +362,20 @@ var assignTemplateQuantityFn = function(structureName,data){
 			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>Perspective</b> </th>";
 			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>Appraisal Item Name</b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Target </b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Forecast </b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Actual </b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Achievement </b></th>";
+			if(data['threshold']==1){
+				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Score </b></th>";
+			}else{
+				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Achievement </b></th>";
+			}
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Weight </b></th>";
-			htmlTemplateQuantity+="<th style='width:10%;text-align: right;' class=''><b>Weight Score</b> </th>";
-			htmlTemplateQuantity+="<th style='width:10%;text-align: center;' class=''><b>Manage</b> </th>";
+			if(data['result_type']==1){
+				htmlTemplateQuantity+="<th style='width:10%;text-align: right;' class=''><b>Weight Score</b> </th>";
+			}else{
+				htmlTemplateQuantity+="<th style='width:10%;text-align: right;' class=''><b>Result Score</b> </th>";
+			}
+			htmlTemplateQuantity+="<th style='width:15%;text-align: center;' class=''><b>Manage</b> </th>";
 			
 		htmlTemplateQuantity+="</tr>";
 		
@@ -353,9 +385,16 @@ var assignTemplateQuantityFn = function(structureName,data){
 			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>Perspective</b> </th>";
 			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>Appraisal Item Name</b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Target </b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Forecast </b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Actual </b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Achievement </b></th>";
-			htmlTemplateQuantity+="<th style='width:10%;text-align: center;' class=''><b>Manage</b> </th>";
+			
+			if(data['threshold']==1){
+				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Score </b></th>";
+			}else{
+				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Achievement </b></th>";
+			}
+			
+			htmlTemplateQuantity+="<th style='width:15%;text-align: center;' class=''><b>Manage</b> </th>";
 		htmlTemplateQuantity+="</tr>";
 	}
 	
@@ -364,9 +403,9 @@ var assignTemplateQuantityFn = function(structureName,data){
 			$.each(data['items'],function(index,indexEntry){
 			
 				
-				appraisal_item_result_id_array.push(indexEntry['appraisal_item_result_id']);
+				item_result_id_array.push(indexEntry['item_result_id']);
 				/*
-				appraisal_item_result_id
+				item_result_id
 				item_name
 				structure_id
 				structure_name
@@ -382,14 +421,21 @@ var assignTemplateQuantityFn = function(structureName,data){
 						htmlTemplateQuantity+="<td>"+indexEntry['perspective_name']+"</td>";
 						htmlTemplateQuantity+="<td>"+indexEntry['item_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
+						
+						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:50px; height: 25px;padding: 0 0 0 5px;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+indexEntry['forecast_value']+"></td>";
+						
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
-						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['achievement'])))+"</td>";
+						if(data['threshold']==1){
+							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])))+"</td>";
+						}else{
+							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['achievement'])))+"</td>";
+						}
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weight_percent'])).toFixed(2))+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2))+"</td>";
 						
 	
 						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
-						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target=#addModalRule data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-danger btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Gantt&lt;/button&gt;  &lt;button class='btn btn-warning btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt; &lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-danger btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
 						htmlTemplateQuantity+="	</td>";
 							
 					htmlTemplateQuantity+="</tr>";
@@ -399,10 +445,18 @@ var assignTemplateQuantityFn = function(structureName,data){
 						htmlTemplateQuantity+="<td>"+indexEntry['perspective_name']+"</td>";
 						htmlTemplateQuantity+="<td>"+indexEntry['item_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
+						
+						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input type=\"text\"  class=\"span10 input-sm-small numberOnly itemScore\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+indexEntry['forecast_value']+"></td>";
+						
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
-						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['achievement'])).toFixed(2))+"</td>";
+						if(data['threshold']==1){
+							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])).toFixed(2))+"</td>";
+						}else{
+							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['achievement'])).toFixed(2))+"</td>";
+						}
+						
 						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
-						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target=#addModalRule data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-danger btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Gantt&lt;/button&gt; &lt;button class='btn btn-warning btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-danger btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
 						htmlTemplateQuantity+="	</td>";
 							
 					htmlTemplateQuantity+="</tr>";
@@ -418,6 +472,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 					htmlTemplateQuantity+="<td></td>";
 					htmlTemplateQuantity+="<td></td>";
 					htmlTemplateQuantity+="<td></td>";
+					htmlTemplateQuantity+="<td></td>";
 					htmlTemplateQuantity+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>Total</b></td>";
 					htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;font-weight: bold; font-size:16px;'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
 				htmlTemplateQuantity+="</tr>";
@@ -427,7 +482,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 			htmlTemplateQuantity+="</table>";
 			htmlTemplateQuantity+="<input type='hidden' id='structure_id-"+data['structure_id']+"' class='structure_id' value="+data['structure_id']+">";
 			htmlTemplateQuantity+="<input type='hidden' id='form-"+data['structure_id']+"' class='' value=\"form1\">";
-			htmlTemplateQuantity+="<input type='hidden' id='appraisal_item_result_id_array-"+data['structure_id']+"' class='appraisal_item_result_id_array' value=\""+appraisal_item_result_id_array+"\">";
+			htmlTemplateQuantity+="<input type='hidden' id='item_result_id_array-"+data['structure_id']+"' class='item_result_id_array' value=\""+item_result_id_array+"\">";
 			
 			
 			htmlTemplateQuantity+="</div>";
@@ -539,7 +594,7 @@ var dropDrowDepartmentFn = function(id){
 		}
 	});
 }
-var dropDrowOrgFn = function(id){
+var dropDrowOrgFn = function(appraisalLevelId){
 
 	$.ajax({
 		url:restfulURL+"/see_api/public/org",
@@ -547,6 +602,7 @@ var dropDrowOrgFn = function(id){
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
+		data:{"level_id":appraisalLevelId},
 		success:function(data){
 			var htmlOption="";
 			htmlOption+="<option value=''>All Organization</option>";
@@ -638,7 +694,18 @@ var listAppraisalDetailFn = function(data){
 					$("#phase_item_result_id").val(id)
 					getPhaseFn(id);
 				});
-				//$(".phase").off("click");
+				//ganttChart start
+				$(".ganttChart").on("click",function(event) {
+					
+					$("#informConfirm").empty();
+					var id=this.id.split("-");
+					id=id[1];
+				
+					$("#ganttChartModal").modal().css({"margin-top":"0px"});
+					//$("#phase_item_result_id").val(id)
+					//getPhaseFn(id);
+				});
+				
 				
 				
 			});	
@@ -743,7 +810,7 @@ var listAppraisalDetailFn = function(data){
 //	});
 	dropDrowActionEditFn(data['head'][0]['stage_id']);
 	$("#assignTo").change();
-	$("#ModalAppraisal").modal();
+	$("#ModalAppraisal").modal().css({"margin-top":"0px"});
 	
 	
 	
@@ -973,22 +1040,22 @@ update_dttm
 			htmlTR+="</td>";
 			
 			htmlTR+="<td>";
-			htmlTR+="<div class='actionplan_label'><center>"+addCommas(parseFloat(notNullFn(indexEntry['completed_percent'])).toFixed(2))+"</center></div>";//Completed
+			htmlTR+="<div class='actionplan_label' style='text-align:right;'>"+addCommas(parseFloat(notNullFn(indexEntry['completed_percent'])).toFixed(2))+"</div>";//Completed
 			htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='completed_percent-"+indexEntry['action_plan_id']+"' class='actionplan_input' name='completed_percent-"+indexEntry['action_plan_id']+"' value='"+indexEntry['completed_percent']+"'>";//Completed
 			
 			htmlTR+="</td>";
 			htmlTR+="<td>";
-			htmlTR+="<div class='actionplan_label'><center>"+addCommas(parseFloat(notNullFn(indexEntry['plan_value'])).toFixed(2))+"</center></div>";//PV
+			htmlTR+="<div class='actionplan_label' style='text-align:right;'>"+addCommas(parseFloat(notNullFn(indexEntry['plan_value'])).toFixed(2))+"</div>";//PV
 			htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='plan_value-"+indexEntry['action_plan_id']+"' name='plan_value-"+indexEntry['action_plan_id']+"' class='actionplan_input' value='"+indexEntry['plan_value']+"'>";//PV
 			
 			htmlTR+="</td>";
 			htmlTR+="<td>";
-			htmlTR+="<div class='actionplan_label'><center>"+addCommas(parseFloat(notNullFn(indexEntry['actual_cost'])).toFixed(2))+"</center></div>";//AC
+			htmlTR+="<div class='actionplan_label' style='text-align:right;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_cost'])).toFixed(2))+"</div>";//AC
 			htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='actual_cost-"+indexEntry['action_plan_id']+"' name='actual_cost-"+indexEntry['action_plan_id']+"' class='actionplan_input' value='"+indexEntry['actual_cost']+"'>";//AC
 			
 			htmlTR+="</td>";
 			htmlTR+="<td>";
-			htmlTR+="<div class='actionplan_label'><center>"+addCommas(parseFloat(notNullFn(indexEntry['earned_value'])).toFixed(2))+"</center></div>";//EV
+			htmlTR+="<div class='actionplan_label' style='text-align:right;'>"+addCommas(parseFloat(notNullFn(indexEntry['earned_value'])).toFixed(2))+"</div>";//EV
 			htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='earned_value-"+indexEntry['action_plan_id']+"' name='earned_value-"+indexEntry['action_plan_id']+"' class='actionplan_input' value='"+indexEntry['earned_value']+"'>";//EV
 			htmlTR+="</td>";
 		htmlTR+="</tr>";
@@ -1045,8 +1112,12 @@ update_dttm
 	//alert("actual_vs_forecast="+actual_vs_forecast);
 	//alert("actual_vs_target="+actual_vs_target);
 	//% Actual vs Target 
-	
-	
+	/*
+	target,performance,green,yellow,red
+	$("#sparkline").sparkline([10,12,12,9,7 ], {
+    type: 'bullet',
+    rangeColors: ['green','yellow','red ']});
+    */
 	    $("#actualvsForecastBar").sparkline([0,0,100,parseFloat(notNullFn(actual_vs_forecast)).toFixed(2),parseFloat(notNullFn(actual_vs_forecast)).toFixed(2)], {
 	        type: 'bullet',
 	        width:'80',
@@ -1288,7 +1359,7 @@ var listPhaseFn = function(data){
 			
 			htmlTR+="<td style='text-align:center;'>";
 	
-			htmlTR+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear edit_phase' id=edit_phase-"+indexEntry['phase_id']+" data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=del_phase-"+indexEntry['phase_id']+" class='btn btn-danger btn-small btn-gear phaseDel'&gt;Del&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+			htmlTR+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear edit_phase' id=edit_phase-"+indexEntry['phase_id']+" data-target='' data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=del_phase-"+indexEntry['phase_id']+" class='btn btn-danger btn-small btn-gear phaseDel'&gt;Del&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
 			
 			htmlTR+="</td>";
 		htmlTR+="</tr>";
@@ -1307,7 +1378,7 @@ var listPhaseFn = function(data){
 			$("#informConfirm").empty();
 			var id=this.id.split("-");
 			id=id[1];
-			$("#confrimModal").modal().css({"margin-top":"0px"});;
+			$("#confrimModal").modal().css({"margin-top":"0px"});
 			//$(this).parent().parent().parent().children().click();
 			$(document).off("click","#btnConfirmOK");
 			$(document).on("click","#btnConfirmOK",function(){
@@ -1730,24 +1801,33 @@ var saveAppraisalFn = function(){
 //	"stage_id,
 //	appraisal: [
 //	  {
-//	     appraisal_item_result_id: '',
+//	     item_result_id: '',
 //	     score: ''
 //	  },...
 //	]"
 	var appraisal=""; 
 	appraisal+="[";
-	$.each($(".competencyScore").get(),function(index,indexEntry){
-		var appraisal_item_result_id=$(indexEntry).attr("id");
-		appraisal_item_result_id=appraisal_item_result_id.split("-");
-		appraisal_item_result_id=appraisal_item_result_id[1];
+	$.each($(".itemScore").get(),function(index,indexEntry){
+		var typeScore="";
+		var item_result_id=$(indexEntry).attr("id");
+		item_result_id=item_result_id.split("-");
+		typeScore=item_result_id[0];
+		item_result_id=item_result_id[1];
 		
 		if(index==0){
 			appraisal+="{";
 		}else{
 			appraisal+=",{";
 		}
-		appraisal+="\"appraisal_item_result_id\":\""+appraisal_item_result_id+"\",";
-		appraisal+="\"score\":\""+$(indexEntry).val()+"\"";
+		appraisal+="\"item_result_id\":\""+item_result_id+"\",";
+		if(typeScore=="forecast"){
+			appraisal+="\"forecast_value\":\""+$(indexEntry).val()+"\",";
+			appraisal+="\"score\":\"\"";
+		}else{
+			appraisal+="\"forecast_value\":\"\",";
+			appraisal+="\"score\":\""+$(indexEntry).val()+"\"";
+		}
+		
 		
 		appraisal+="}";
 	});
@@ -1830,10 +1910,1094 @@ var calculateBunusFn= function(){
 //}
 
 
-
+var generateGanttChartFn = function(){
+    var revgannttChart = new FusionCharts({
+    	type: 'gantt',
+        renderAt: 'ganttChart',
+        width: '750',
+        height: '500',
+        dataFormat: 'json',
+        dataSource: {
+            "chart": {
+            "exportenabled": "1",
+                "exportatclient": "1",
+                "caption": "Construction management of a new store in Denver",
+                "subcaption": "Planned vs Actual",                
+                "dateformat": "dd/mm/yyyy",
+                "outputdateformat": "ddds mns yy",
+                "ganttwidthpercent": "60",
+                "ganttPaneDuration": "40",
+                "ganttPaneDurationUnit": "d",
+                "plottooltext": "$processName{br} $label starting date $start{br}$label ending date $end",
+                "legendBorderAlpha": "0",
+                "legendShadow": "0",
+                "usePlotGradientColor": "0",
+                "showCanvasBorder": "0",
+                "flatScrollBars": "1",
+                "gridbordercolor": "#333333",
+                "gridborderalpha": "20",
+                "slackFillColor": "#e44a00",
+                "taskBarFillMix": "light+0"
+            },
+            "categories": [
+                {
+                    "bgcolor": "#999999",
+                    "category": [
+                        {
+                            "start": "1/4/2014",
+                            "end": "30/6/2014",
+                            "label": "Months",
+                            "align": "middle",
+                            "fontcolor": "#ffffff",
+                            "fontsize": "12"
+                        }
+                    ]
+                },
+                {
+                    "bgcolor": "#999999",
+                    "align": "middle",                                                        
+                    "fontcolor": "#ffffff",
+                    "fontsize": "12",
+                    "category": [
+                        {
+                            "start": "1/4/2014",
+                            "end": "30/4/2014",
+                            "label": "April"                            
+                        },
+                        {
+                            "start": "1/5/2014",
+                            "end": "31/5/2014",
+                            "label": "May"
+                        },
+                        {
+                            "start": "1/6/2014",
+                            "end": "30/6/2014",
+                            "label": "June"
+                        }
+                    ]
+                },
+                {
+                    "bgcolor": "#ffffff",
+                    "fontcolor": "#333333",
+                    "fontsize": "11",
+                    "align": "center",
+                    "category": [
+                        {
+                            "start": "1/4/2014",
+                            "end": "5/4/2014",
+                            "label": "Week 1"
+                        },
+                        {
+                            "start": "6/4/2014",
+                            "end": "12/4/2014",
+                            "label": "Week 2"
+                        },
+                        {
+                            "start": "13/4/2014",
+                            "end": "19/4/2014",
+                            "label": "Week 3"
+                        },
+                        {
+                            "start": "20/4/2014",
+                            "end": "26/4/2014",
+                            "label": "Week 4"
+                        },
+                        {
+                            "start": "27/4/2014",
+                            "end": "3/5/2014",
+                            "label": "Week 5"
+                        },
+                        {
+                            "start": "4/5/2014",
+                            "end": "10/5/2014",
+                            "label": "Week 6"
+                        },
+                        {
+                            "start": "11/5/2014",
+                            "end": "17/5/2014",
+                            "label": "Week 7"
+                        },
+                        {
+                            "start": "18/5/2014",
+                            "end": "24/5/2014",
+                            "label": "Week 8"
+                        },
+                        {
+                            "start": "25/5/2014",
+                            "end": "31/5/2014",
+                            "label": "Week 9"
+                        },
+                        {
+                            "start": "1/6/2014",
+                            "end": "7/6/2014",
+                            "label": "Week 10"
+                        },
+                        {
+                            "start": "8/6/2014",
+                            "end": "14/6/2014",
+                            "label": "Week 11"
+                        },
+                        {
+                            "start": "15/6/2014",
+                            "end": "21/6/2014",
+                            "label": "Week 12"
+                        },
+                        {
+                            "start": "22/6/2014",
+                            "end": "28/6/2014",
+                            "label": "Week 13"
+                        }
+                    ]
+                }
+            ],
+            "processes": {
+                "headertext": "Task",
+                "fontcolor": "#000000",
+                "fontsize": "11",
+                "isanimated": "1",
+                "bgcolor": "#6baa01",
+                "headervalign": "bottom",
+                "headeralign": "left",
+                "headerbgcolor": "#999999",
+                "headerfontcolor": "#ffffff",
+                "headerfontsize": "12",
+                "align": "left",
+                "isbold": "1",
+                "bgalpha": "25",
+                "process": [
+                    {
+                        "label": "Clear site",
+                        "id": "1"
+                    },
+                    {
+                        "label": "Excavate Foundation",
+                        "id": "2",
+                        "hoverBandColor": "#e44a00",
+                        "hoverBandAlpha": "40"
+                    },
+                    {
+                        "label": "Concrete Foundation",
+                        "id": "3",
+                        "hoverBandColor": "#e44a00",
+                        "hoverBandAlpha": "40"
+                    },
+                    {
+                        "label": "Footing to DPC",
+                        "id": "4",
+                        "hoverBandColor": "#e44a00",
+                        "hoverBandAlpha": "40"
+                    },
+                    {
+                        "label": "Drainage Services",
+                        "id": "5",
+                        "hoverBandColor": "#e44a00",
+                        "hoverBandAlpha": "40"
+                    },
+                    {
+                        "label": "Backfill",
+                        "id": "6",
+                        "hoverBandColor": "#e44a00",
+                        "hoverBandAlpha": "40"
+                    },
+                    {
+                        "label": "Ground Floor",
+                        "id": "7"
+                    },
+                    {
+                        "label": "Walls on First Floor",
+                        "id": "8"
+                    },
+                    {
+                        "label": "First Floor Carcass",
+                        "id": "9",
+                        "hoverBandColor": "#e44a00",
+                        "hoverBandAlpha": "40"
+                    },
+                    {
+                        "label": "First Floor Deck",
+                        "id": "10",
+                        "hoverBandColor": "#e44a00",
+                        "hoverBandAlpha": "40"
+                    },
+                    {
+                        "label": "Roof Structure",
+                        "id": "11"
+                    },
+                    {
+                        "label": "Roof Covering",
+                        "id": "12"
+                    },
+                    {
+                        "label": "Rainwater Gear",
+                        "id": "13"
+                    },
+                    {
+                        "label": "Windows",
+                        "id": "14"
+                    },
+                    {
+                        "label": "External Doors",
+                        "id": "15"
+                    },
+                    {
+                        "label": "Connect Electricity",
+                        "id": "16"
+                    },
+                    {
+                        "label": "Connect Water Supply",
+                        "id": "17",
+                        "hoverBandColor": "#e44a00",
+                        "hoverBandAlpha": "40"
+                    },
+                    {
+                        "label": "Install Air Conditioning",
+                        "id": "18",
+                        "hoverBandColor": "#e44a00",
+                        "hoverBandAlpha": "40"
+                    },
+                    {
+                        "label": "Interior Decoration",
+                        "id": "19",
+                        "hoverBandColor": "#e44a00",
+                        "hoverBandAlpha": "40"
+                    },
+                    {
+                        "label": "Fencing And signs",
+                        "id": "20"
+                    },
+                    {
+                        "label": "Exterior Decoration",
+                        "id": "21",
+                        "hoverBandColor": "#e44a00",
+                        "hoverBandAlpha": "40"
+                    },
+                    {
+                        "label": "Setup racks",
+                        "id": "22"
+                    }
+                ]
+            },
+            "datatable": {
+                "showprocessname": "1",
+                "namealign": "left",
+                "fontcolor": "#000000",
+                "fontsize": "10",
+                "valign": "right",
+                "align": "center",
+                "headervalign": "bottom",
+                "headeralign": "center",
+                "headerbgcolor": "#999999",
+                "headerfontcolor": "#ffffff",
+                "headerfontsize": "12",                
+                "datacolumn": [
+                    {
+                        "bgcolor": "#eeeeee",
+                        "headertext": "Actual{br}Start{br}Date",
+                        "text": [
+                            {
+                                "label": "9/4/2014"
+                            },
+                            {
+                                "label": "13/4/2014"
+                            },
+                            {
+                                "label": "26/4/2014",
+                                "bgcolor": "#e44a00",
+                                "bgAlpha": "40",
+                                
+                            },
+                            {
+                                "label": "4/5/2014",
+                                "bgcolor": "#e44a00",
+                                "bgAlpha": "40"
+                            },
+                            {
+                                "label": "6/5/2014"                                
+                            },
+                            {
+                                "label": "5/5/2014",
+                                "bgcolor": "#e44a00",
+                                "bgAlpha": "40"
+                            },
+                            {
+                                "label": "11/5/2014"
+                            },
+                            {
+                                "label": "16/5/2014"
+                            },
+                            {
+                                "label": "16/5/2014"
+                            },
+                            {
+                                "label": "21/5/2014",
+                                "bgcolor": "#e44a00",
+                                "bgAlpha": "40"
+                            },
+                            {
+                                "label": "25/5/2014"
+                            },
+                            {
+                                "label": "28/5/2014"
+                            },
+                            {
+                                "label": "4/6/2014"
+                            },
+                            {
+                                "label": "4/6/2014"
+                            },
+                            {
+                                "label": "4/6/2014"
+                            },
+                            {
+                                "label": "2/6/2014"
+                            },
+                            {
+                                "label": "5/6/2014"
+                            },
+                            {
+                                "label": "18/6/2014",
+                                "bgcolor": "#e44a00",
+                                "bgAlpha": "40"
+                            },
+                            {
+                                "label": "16/6/2014",
+                                "bgcolor": "#e44a00",
+                                "bgAlpha": "40"
+                            },
+                            {
+                                "label": "23/6/2014"
+                            },
+                            {
+                                "label": "18/6/2014"
+                            },
+                            {
+                                "label": "25/6/2014"
+                            }
+                        ]
+                    },
+                    {
+                        "bgcolor": "#eeeeee",
+                        "headertext": "Actual{br}End{br}Date",
+                        "text": [
+                            {
+                                "label": "12/4/2014"
+                            },
+                            {
+                                "label": "25/4/2014",
+                                "bgcolor": "#e44a00",
+                                "bgAlpha": "40"
+                            },
+                            {
+                                "label": "4/5/2014",
+                                "bgcolor": "#e44a00",
+                                "bgAlpha": "40"
+                            },
+                            {
+                                "label": "10/5/2014"
+                            },
+                            {
+                                "label": "10/5/2014"
+                            },
+                            {
+                                "label": "11/5/2014",
+                                "bgcolor": "#e44a00",
+                                "bgAlpha": "40"
+                            },
+                            {
+                                "label": "14/5/2014"
+                            },
+                            {
+                                "label": "19/5/2014"
+                            },
+                            {
+                                "label": "21/5/2014",
+                                "bgcolor": "#e44a00",
+                                "bgAlpha": "40"
+                            },
+                            {
+                                "label": "24/5/2014",
+                                "bgcolor": "#e44a00",
+                                "bgAlpha": "40"
+                            },
+                            {
+                                "label": "27/5/2014"
+                            },
+                            {
+                                "label": "1/6/2014"
+                            },
+                            {
+                                "label": "6/6/2014"
+                            },
+                            {
+                                "label": "4/6/2014"
+                            },
+                            {
+                                "label": "4/6/2014"
+                            },
+                            {
+                                "label": "7/6/2014"
+                            },
+                            {
+                                "label": "17/6/2014",
+                                "bgcolor": "#e44a00",
+                                "bgAlpha": "40"
+                            },
+                            {
+                                "label": "20/6/2014",
+                                "bgcolor": "#e44a00",
+                                "bgAlpha": "40"
+                            },
+                            {
+                                "label": "23/6/2014"
+                            },
+                            {
+                                "label": "23/6/2014"
+                            },
+                            {
+                                "label": "23/6/2014",
+                                "bgcolor": "#e44a00",
+                                "bgAlpha": "40"
+                            },
+                            {
+                                "label": "28/6/2014"
+                            }
+                        ]
+                    }                    
+                ]
+            },
+            "tasks": {
+                "task": [
+                    {
+                        "label": "Planned",
+                        "processid": "1",
+                        "start": "9/4/2014",
+                        "end": "12/4/2014",
+                        "id": "1-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "1",
+                        "start": "9/4/2014",
+                        "end": "12/4/2014",
+                        "id": "1",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "2",
+                        "start": "13/4/2014",
+                        "end": "23/4/2014",
+                        "id": "2-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "2",
+                        "start": "13/4/2014",
+                        "end": "25/4/2014",
+                        "id": "2",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Delay",
+                        "processid": "2",
+                        "start": "23/4/2014",
+                        "end": "25/4/2014",
+                        "id": "2-2",
+                        "color": "#e44a00",                        
+                        "toppadding": "56%",
+                        "height": "32%",
+                        "tooltext": "Delayed by 2 days."
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "3",
+                        "start": "23/4/2014",
+                        "end": "30/4/2014",
+                        "id": "3-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "3",
+                        "start": "26/4/2014",
+                        "end": "4/5/2014",
+                        "id": "3",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Delay",
+                        "processid": "3",
+                        "start": "3/5/2014",
+                        "end": "4/5/2014",
+                        "id": "3-2",
+                        "color": "#e44a00",                        
+                        "toppadding": "56%",
+                        "height": "32%",
+                        "tooltext": "Delayed by 1 days."
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "4",
+                        "start": "3/5/2014",
+                        "end": "10/5/2014",
+                        "id": "4-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "4",
+                        "start": "4/5/2014",
+                        "end": "10/5/2014",
+                        "id": "4",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "5",
+                        "start": "6/5/2014",
+                        "end": "11/5/2014",
+                        "id": "5-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "5",
+                        "start": "6/5/2014",
+                        "end": "10/5/2014",
+                        "id": "5",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "6",
+                        "start": "4/5/2014",
+                        "end": "7/5/2014",
+                        "id": "6-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "6",
+                        "start": "5/5/2014",
+                        "end": "11/5/2014",
+                        "id": "6",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Delay",
+                        "processid": "6",
+                        "start": "7/5/2014",
+                        "end": "11/5/2014",
+                        "id": "6-2",
+                        "color": "#e44a00",                        
+                        "toppadding": "56%",
+                        "height": "32%",
+                        "tooltext": "Delayed by 4 days."
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "7",
+                        "start": "11/5/2014",
+                        "end": "14/5/2014",
+                        "id": "7-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "7",
+                        "start": "11/5/2014",
+                        "end": "14/5/2014",
+                        "id": "7",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "8",
+                        "start": "16/5/2014",
+                        "end": "19/5/2014",
+                        "id": "8-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "8",
+                        "start": "16/5/2014",
+                        "end": "19/5/2014",
+                        "id": "8",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "9",
+                        "start": "16/5/2014",
+                        "end": "18/5/2014",
+                        "id": "9-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "9",
+                        "start": "16/5/2014",
+                        "end": "21/5/2014",
+                        "id": "9",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Delay",
+                        "processid": "9",
+                        "start": "18/5/2014",
+                        "end": "21/5/2014",
+                        "id": "9-2",
+                        "color": "#e44a00",                        
+                        "toppadding": "56%",
+                        "height": "32%",
+                        "tooltext": "Delayed by 3 days."
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "10",
+                        "start": "20/5/2014",
+                        "end": "23/5/2014",
+                        "id": "10-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "10",
+                        "start": "21/5/2014",
+                        "end": "24/5/2014",
+                        "id": "10",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Delay",
+                        "processid": "10",
+                        "start": "23/5/2014",
+                        "end": "24/5/2014",
+                        "id": "10-2",
+                        "color": "#e44a00",                        
+                        "toppadding": "56%",
+                        "height": "32%",
+                        "tooltext": "Delayed by 1 days."
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "11",
+                        "start": "25/5/2014",
+                        "end": "27/5/2014",
+                        "id": "11-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "11",
+                        "start": "25/5/2014",
+                        "end": "27/5/2014",
+                        "id": "11",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "12",
+                        "start": "28/5/2014",
+                        "end": "1/6/2014",
+                        "id": "12-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "12",
+                        "start": "28/5/2014",
+                        "end": "1/6/2014",
+                        "id": "12",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "13",
+                        "start": "4/6/2014",
+                        "end": "6/6/2014",
+                        "id": "13-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "13",
+                        "start": "4/6/2014",
+                        "end": "6/6/2014",
+                        "id": "13",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "14",
+                        "start": "4/6/2014",
+                        "end": "4/6/2014",
+                        "id": "14-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "14",
+                        "start": "4/6/2014",
+                        "end": "4/6/2014",
+                        "id": "14",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "15",
+                        "start": "4/6/2014",
+                        "end": "4/6/2014",
+                        "id": "15-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "15",
+                        "start": "4/6/2014",
+                        "end": "4/6/2014",
+                        "id": "15",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "16",
+                        "start": "2/6/2014",
+                        "end": "7/6/2014",
+                        "id": "16-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "16",
+                        "start": "2/6/2014",
+                        "end": "7/6/2014",
+                        "id": "16",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "17",
+                        "start": "5/6/2014",
+                        "end": "10/6/2014",
+                        "id": "17-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "17",
+                        "start": "5/6/2014",
+                        "end": "17/6/2014",
+                        "id": "17",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Delay",
+                        "processid": "17",
+                        "start": "10/6/2014",
+                        "end": "17/6/2014",
+                        "id": "17-2",
+                        "color": "#e44a00",                        
+                        "toppadding": "56%",
+                        "height": "32%",
+                        "tooltext": "Delayed by 7 days."
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "18",
+                        "start": "10/6/2014",
+                        "end": "12/6/2014",
+                        "id": "18-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Delay",
+                        "processid": "18",
+                        "start": "18/6/2014",
+                        "end": "20/6/2014",
+                        "id": "18",
+                        "color": "#e44a00",                        
+                        "toppadding": "56%",
+                        "height": "32%",
+                        "tooltext": "Delayed by 8 days."
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "19",
+                        "start": "15/6/2014",
+                        "end": "23/6/2014",
+                        "id": "19-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "19",
+                        "start": "16/6/2014",
+                        "end": "23/6/2014",
+                        "id": "19",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "20",
+                        "start": "23/6/2014",
+                        "end": "23/6/2014",
+                        "id": "20-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "20",
+                        "start": "23/6/2014",
+                        "end": "23/6/2014",
+                        "id": "20",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "21",
+                        "start": "18/6/2014",
+                        "end": "21/6/2014",
+                        "id": "21-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "21",
+                        "start": "18/6/2014",
+                        "end": "23/6/2014",
+                        "id": "21",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    },
+                    {
+                        "label": "Delay",
+                        "processid": "21",
+                        "start": "21/6/2014",
+                        "end": "23/6/2014",
+                        "id": "21-2",
+                        "color": "#e44a00",                        
+                        "toppadding": "56%",
+                        "height": "32%",
+                        "tooltext": "Delayed by 2 days."
+                    },
+                    {
+                        "label": "Planned",
+                        "processid": "22",
+                        "start": "24/6/2014",
+                        "end": "28/6/2014",
+                        "id": "22-1",
+                        "color": "#008ee4",
+                        "height": "32%",
+                        "toppadding": "12%"
+                    },
+                    {
+                        "label": "Actual",
+                        "processid": "22",
+                        "start": "25/6/2014",
+                        "end": "28/6/2014",
+                        "id": "22",
+                        "color": "#6baa01",                        
+                        "toppadding": "56%",
+                        "height": "32%"
+                    }
+                ]
+            },
+            "connectors": [
+                {
+                    "connector": [
+                        {
+                            "fromtaskid": "1",
+                            "totaskid": "2",
+                            "color": "#008ee4",
+                            "thickness": "2",
+                            "fromtaskconnectstart_": "1"
+                        },
+                        {
+                            "fromtaskid": "2-2",
+                            "totaskid": "3",
+                            "color": "#008ee4",
+                            "thickness": "2"
+                        },
+                        {
+                            "fromtaskid": "3-2",
+                            "totaskid": "4",
+                            "color": "#008ee4",
+                            "thickness": "2"
+                        },
+                        {
+                            "fromtaskid": "3-2",
+                            "totaskid": "6",
+                            "color": "#008ee4",
+                            "thickness": "2"
+                        },
+                        {
+                            "fromtaskid": "7",
+                            "totaskid": "8",
+                            "color": "#008ee4",
+                            "thickness": "2"
+                        },
+                        {
+                            "fromtaskid": "7",
+                            "totaskid": "9",
+                            "color": "#008ee4",
+                            "thickness": "2"
+                        },
+                        {
+                            "fromtaskid": "12",
+                            "totaskid": "16",
+                            "color": "#008ee4",
+                            "thickness": "2"
+                        },
+                        {
+                            "fromtaskid": "12",
+                            "totaskid": "17",
+                            "color": "#008ee4",
+                            "thickness": "2"
+                        },
+                        {
+                            "fromtaskid": "17-2",
+                            "totaskid": "18",
+                            "color": "#008ee4",
+                            "thickness": "2"
+                        },
+                        {
+                            "fromtaskid": "19",
+                            "totaskid": "22",
+                            "color": "#008ee4",
+                            "thickness": "2"
+                        }
+                    ]
+                }
+            ],
+            "milestones": {
+                "milestone": [
+                    {
+                        "date": "2/6/2014",
+                        "taskid": "12",
+                        "color": "#f8bd19",
+                        "shape": "star",
+                        "tooltext": "Completion of Phase 1"
+                    }
+                    /*{
+                        "date": "21/8/2008",
+                        "taskid": "10",
+                        "color": "#f8bd19",
+                        "shape": "star",
+                        "tooltext": "New estimated moving date"
+                    }*/
+                ]
+            },
+            "legend": {
+                "item": [
+                    {
+                        "label": "Planned",
+                        "color": "#008ee4"
+                    },
+                    {
+                        "label": "Actual",
+                        "color": "#6baa01"
+                    },
+                    {
+                        "label": "Slack (Delay)",
+                        "color": "#e44a00"
+                    }
+                ]
+            }
+        }
+    })
+    .render();
+	
+ return false;
+};
 $(document).ready(function() {
 	
-	
+	 	
+	   
 	
 
 //	var username = getParamValue('username');
@@ -1849,6 +3013,21 @@ $(document).ready(function() {
 	
 		
 	
+	//Start Action plan by email link here..
+	setTimeout(function(){
+		if($("#param_link").val()=="email"){
+			$("#actionPlanModal").modal().css({"margin-top":"0px"});
+			getActionPlanFn($("#param_item_result_id").val());
+			$("#action_actionplan").val("add");
+		}
+	},3000);	
+	//End Action plan by email link here..
+	
+	
+	//Test Fusion Chart Start
+	generateGanttChartFn();
+	
+			
 	
 	
 	$("#assignTo").removeAttr("disabled");
@@ -1863,13 +3042,13 @@ $(document).ready(function() {
 		$("#AppraisalYear").change();
 		
 		dropDrowAppraisalLevelFn();
-		dropDrowOrgFn();
+		//dropDrowOrgFn();
 		//dropDrowDepartmentFn();
 		
-//		$("#Department").change(function(){
-//			dropDrowSectionFn($(this).val());	
-//		});
-//		$("#Department").change();
+		$("#AppraisalLevel").change(function(){
+			dropDrowOrgFn($(this).val());	
+		});
+		$("#AppraisalLevel").change();
 		
 		//Auto complete Start
 		//http://192.168.1.52/see_api/public/appraisal_assignment/auto_position_name

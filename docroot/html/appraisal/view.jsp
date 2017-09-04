@@ -4,6 +4,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 <%
@@ -18,8 +19,15 @@ String password=PortalUtil.getUser(request).getPassword();
 String username = themeDisplay.getUser().getScreenName();
 String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWORD);
 //out.print(username);
+
+String param_link = PortalUtil.getOriginalServletRequest(request).getParameter("param_link");
+String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getParameter("param_item_result_id");
+//out.print(param);
 //out.print("password2="+password);
 %>
+<input type="hidden" id="param_link" name="param_link" value="<%=param_link%>">
+<input type="hidden" id="param_item_result_id" name="param_item_result_id" value="<%=param_item_result_id%>">
+
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
@@ -46,7 +54,27 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	.breadcrumbs2 .row-fluid .span4{
 			width: 32.624%;
 		}
-		
+	
+	#actionPlanModal{
+		margin-top:0px;
+	}
+	.moblieArea{
+		display:none;
+	}
+	.desktopArea{
+		display:block;
+	}
+	
+	.saveAndCancelArea{
+		text-align:right;
+	}	
+	
+	#actualvsTargetBar{
+		display:'';
+	}
+	#actualvsForecastBar{
+		display:'';
+	}
 	 
   }
   /* Large desktop End######################################*/
@@ -71,6 +99,29 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 			width: 32.624%;
 		}
 		
+	#actionPlanModal{
+		margin-top:0px;
+	}
+	
+	
+	.moblieArea{
+		display:none;
+	}
+	.desktopArea{
+		display:block;
+	}
+	
+	.saveAndCancelArea{
+		text-align:right;
+	}
+	
+	#actualvsTargetBar{
+		display:'';
+	}
+	#actualvsForecastBar{
+		display:'';
+	}	
+		
  	
   }
  /*  desktop End############################################*/
@@ -78,7 +129,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
  /* Portrait tablet to landscape and desktop Start##########*/
  @media (min-width: 768px) and (max-width: 979px) {
  
-	
+	.aui .modal{
+		left:1%;
+	}
 	.modal.large {
 		    width: 90%;
 		    margin-left:-45%;  
@@ -101,6 +154,32 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	display:none;
 	}
 	
+	#actionPlanModal{
+		margin-top:0px;
+	}
+	
+	
+	.moblieArea{
+		display:block;
+	}
+	.desktopArea{
+		display:none;
+	}
+	
+	.saveAndCancelArea{
+		text-align:right;
+	}
+	
+	
+	
+	#actualvsTargetBar{
+		display:none;
+	}
+	#actualvsForecastBar{
+		display:none;
+	}
+ 
+ 	
   }
  /* Portrait tablet to landscape and desktop End############*/ 
  
@@ -114,7 +193,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	}
 	#grandTototalWeightArea{
 		position: relative;
-    	top: -385px;
+    	top: -300px;
 	}
 	.aui .p-t-xxs {
     	text-align: left;
@@ -132,7 +211,26 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	display:none;
 	}
 	
+	#actionPlanModal{
+		margin-top:0px;
+	}
 	
+	.moblieArea{
+		display:block;
+	}
+	.desktopArea{
+		display:none;
+	}
+	.saveAndCancelArea{
+		text-align:left;
+	}
+	
+	#actualvsTargetBar{
+		display:'';
+	}
+	#actualvsForecastBar{
+		display:'';
+	}
  
   }
  /* Landscape phone to portrait tablet End##################*/ 
@@ -156,7 +254,33 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	display:none;
 	}
 	
-
+	#actionPlanModal{
+		margin-top:0px;
+	}
+	
+	.moblieArea{
+		display:block;
+	}
+	.desktopArea{
+		display:none;
+	}
+	.saveAndCancelArea{
+		text-align:left;
+	}
+	
+	#actualvsTargetBar{
+		display:none;
+	}
+	#actualvsForecastBar{
+		display:none;
+	}
+	
+	
+	/*btn area start*/
+	#btnSaveActionPlan{
+		width:100%;
+	}
+	/*btn area end*/
  
 
   }
@@ -308,6 +432,7 @@ margin-bottom:1px;
 
 .textInfo{
 	font-wieght:bold;
+	/*text-align:right;*/
 }
 /*
 .aui label {
@@ -334,13 +459,16 @@ margin-bottom:1px;
 	text-align: '';
 }
 /* Update by au */
-.aui .btn {
+
+/*.aui .btn {
 	font-size: 14px;
  	padding: 4px 12px; 
 	width: auto;
 	margin-top: 0px;
 	display: inline;
 }
+*/
+
 .aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input {
     height: 30px;
     padding: 0 0 0 5px;
@@ -354,33 +482,33 @@ margin-bottom:1px;
 	
 }
 .boxActionPlainArea .boxActionL{
-	float:left;
-	width:55%;
+	/*float:left;*/
+	/*width:55%;*/
 	/*border:1px solid #cccccc;*/
-	
+	margin-top: 3px;
 }
 
 .boxActionPlainArea .boxActionR{
-	float:right;
+	/*float:right;*/
 	/*width:565px;*/
-	width:45%;
+	/*width:45%;*/
 	/*border:1px solid #cccccc;*/
 }
 
 .boxTargetArea{
-	width:23%;
-	float:right;
+	width:27%;
+	float:left;
 	border-width: 1px 1px 1px 1px;
 	border-color: #cccccc;
   	border-style: solid;
-  	margin:1px;
+  	margin-top:3px;
   	padding:5px;
   	height: 89px;
   	background:#fff;
 	
 }
 .boxForecastArea{
-	width:30%;
+	width:28.5%;
 	float:right;
 	
 	/*
@@ -393,8 +521,9 @@ margin-bottom:1px;
   	
 }
 .boxActualPercentageArea{
-	width:40%;
+	width:39%;
 	float:right;
+	margin-left: 0.5%;
 	
 	/*
 	border-width: 1px 1px 1px 1px;
@@ -413,7 +542,7 @@ margin-bottom:1px;
   	border-style: solid;
   	padding:3.5px;
   	background:#fff;
-  	margin: 1px 3px 3px;
+  	margin-top:3px;
   	height: 40px;
 }
 .fontCenter{
@@ -464,6 +593,7 @@ margin-bottom:1px;
 }
 /* Modal action plan END */
 </style>
+
 
 <body class=" gray-bg ">
 <div class='row-fluid'>
@@ -836,31 +966,31 @@ margin-bottom:1px;
 												<div class="row-fluid">
 												
 													<label class="span3 textInfo">Employee code:</label>
-													<label class="span3 textInfo textData txtEmpCode" id="txtEmpCode"></label>
+													<label class="span3  textData txtEmpCode" id="txtEmpCode"></label>
 													<label class="span3 textInfo">Employee Name:</label>
-													<label class="span3 textInfo textData txtEmpName" id="txtEmpName"></label>
+													<label class="span3  textData txtEmpName" id="txtEmpName"></label>
 												</div>
 												<div class="row-fluid">
 													<label class="span3 textInfo">Position:</label>
-													<label class="span3 textInfo textData txtPosition" id="txtPosition"></label>
+													<label class="span3  textData txtPosition" id="txtPosition"></label>
 													<label class="span3 textInfo">Organization:</label>
-													<label class="span3 textInfo textData txtOrgName" id="txtOrgName"></label>
+													<label class="span3  textData txtOrgName" id="txtOrgName"></label>
 												</div>
 												<div class="row-fluid">
 													
 													<label class="span3 textInfo">Chief Employee Code:</label>
-													<label class="span3 textInfo textData txtChiefEmpCode" id="txtChiefEmpCode"></label>
+													<label class="span3  textData txtChiefEmpCode" id="txtChiefEmpCode"></label>
 													<label class="span3 textInfo">Chief Employee Name:</label>
-													<label class="span3 textInfo textData txtChiefEmpName" id="txtChiefEmpName"></label>
+													<label class="span3  textData txtChiefEmpName" id="txtChiefEmpName"></label>
 												</div>
 											
 												<div class="row-fluid">
 													<label class="span3 textInfo">Period:</label>
-													<label class="span3 textInfo textData txtPeriod"  id="txtPeriod"></label>
+													<label class="span3  textData txtPeriod"  id="txtPeriod"></label>
 												</div>
 										</div>
 										<div class="span2" id='grandTototalWeightArea'>
-												<label class="span12 p-t-xxsg text-center ">Grand Total Weight %</label>
+												<label class="span12 p-t-xxsg text-center ">Grand Total</label>
 												<label class="span12 p-t-xxsg text-center txtGrandTotalWeigh" id="txtGrandTotalWeigh" style="font-size: 300%;"></label>
 										
 										</div>
@@ -875,27 +1005,27 @@ margin-bottom:1px;
 												<div class="row-fluid">
 												
 													<label class="span3 textInfo">Employee code:</label>
-													<label class="span3 textInfo textData txtEmpCode" id="txtEmpCode"></label>
+													<label class="span3  textData txtEmpCode" id="txtEmpCode"></label>
 													<label class="span3 textInfo">Employee Name:</label>
-													<label class="span3 textInfo textData txtEmpName" id="txtEmpName"></label>
+													<label class="span3  textData txtEmpName" id="txtEmpName"></label>
 												</div>
 												<div class="row-fluid">
 													<label class="span3 textInfo">Position:</label>
-													<label class="span3 textInfo textData txtPosition" id="txtPosition"></label>
+													<label class="span3  textData txtPosition" id="txtPosition"></label>
 													<label class="span3 textInfo">Organization:</label>
-													<label class="span3 textInfo textData txtOrgName" id="txtOrgName"></label>
+													<label class="span3  textData txtOrgName" id="txtOrgName"></label>
 												</div>
 												<div class="row-fluid">
 													
 													<label class="span3 textInfo">Chief Employee Code:</label>
-													<label class="span3 textInfo textData txtChiefEmpCode" id="txtChiefEmpCode"></label>
+													<label class="span3  textData txtChiefEmpCode" id="txtChiefEmpCode"></label>
 													<label class="span3 textInfo">Chief Employee Name:</label>
-													<label class="span3 textInfo textData txtChiefEmpName" id="txtChiefEmpName"></label>
+													<label class="span3  textData txtChiefEmpName" id="txtChiefEmpName"></label>
 												</div>
 											
 												<div class="row-fluid">
 													<label class="span3 textInfo">Period:</label>
-													<label class="span3 textInfo textData txtPeriod"  id="txtPeriod"></label>
+													<label class="span3  textData txtPeriod"  id="txtPeriod"></label>
 												</div>
 										</div>
 										
@@ -913,20 +1043,20 @@ margin-bottom:1px;
 													<div class="row-fluid">
 													
 														<label class="span3 textInfo">Organization code:</label>
-														<label class="span3 textInfo textData txtOrgCodeOrg" id="txtOrgCodeOrg"></label>
+														<label class="span3  textData txtOrgCodeOrg" id="txtOrgCodeOrg"></label>
 														<label class="span3 textInfo">Organization Name:</label>
-														<label class="span3 textInfo textData txtOrgNameOrg" id="txtOrgNameOrg"></label>
+														<label class="span3  textData txtOrgNameOrg" id="txtOrgNameOrg"></label>
 													</div>
 													<div class="row-fluid">
 														<label class="span3 textInfo">Parent Organization:</label>
-														<label class="span3 textInfo textData txtParentOrganizationOrg" id="txtParentOrganizationOrg"></label>
+														<label class="span3  textData txtParentOrganizationOrg" id="txtParentOrganizationOrg"></label>
 														<label class="span3 textInfo">Period:</label>
-														<label class="span3 textInfo textData txtPeriodOrg"  id="txtPeriodOrg"></label>
+														<label class="span3  textData txtPeriodOrg"  id="txtPeriodOrg"></label>
 													</div>
 													
 											</div>
 											<div class="span2" id='grandTototalWeightArea'>
-													<label class="span12 p-t-xxsg text-center ">Grand Total Weight %</label>
+													<label class="span12 p-t-xxsg text-center ">Grand Total </label>
 													<label class="span12 p-t-xxsg text-center txtGrandTotalWeighOrg" id="txtGrandTotalWeighOrg" style="font-size: 300%;"></label>
 											
 											</div>
@@ -1173,7 +1303,7 @@ Is Active
 </div>
 
 <!-- modal action plan start -->
-<div aria-hidden="true" role="dialog" tabindex="-1" id="actionPlanModal" class="modal inmodal large" style="display: none;">
+<div aria-hidden="true" role="dialog" tabindex="-1" id="actionPlanModal" class="modal inmodal large" style="display: none; margin-top: 0px;">
     <div class="modal-dialog">
     <div class="modal-content animated bounceInRight large">
             <div class="modal-header">
@@ -1185,11 +1315,11 @@ Is Active
             
 
 
-
+ 
 
             <!-- smart cricle area -->
             
-		<div class="container" id='smartArea' style='margin-top:10px;'>
+		<div class="container" id='smartArea' style='margin-top:10px; width:1050px;'>
 			     
 			    <ul class="ca-menu">
 			                    <li style='background:#aed6f1;'>
@@ -1258,73 +1388,85 @@ Is Active
 				    				<div class="row-fluid ">
 											
 											<div class='boxActionPlainArea alert alert-success'>
-												<div class='boxActionL'>
-													<!-- 
-													<div class='actionPlanList'>
-													Phase <span id='actionPlanPhase'></span>
-													</div>
-													 -->
-													<div class='actionPlanList'>
-														<div style='padding-top:10px; padding-left: 10px;'>
-															Organization: <span id='actionPlanOrganization'></span>
+												<div class='span6'>
+													<div class='boxActionL'>
+														<!-- 
+														<div class='actionPlanList'>
+														Phase <span id='actionPlanPhase'></span>
 														</div>
-													</div>
-													<div class='actionPlanList'>
-														<div style='padding-top:10px; padding-left: 10px;'>
-															Appraisal Item: <span id='actionPlanAppraisalItem'></span>
-														</div>
-													</div>
-													 
-													
-												</div>
-												<div class='boxActionR'>
-													
-													<div class='boxActualPercentageArea'>
-													
-														<div class='boxActualvsForecast boxForecastVsActual'>
-															<div class='fontBold '>
-																%Actual vs Forecast 
-															</div>
-															<div >
-																<span id='actionPlanActualVSforecast'></span>% <span id='actualvsForecastBar'></span>
+														 -->
+														<div class='actionPlanList'>
+															<div style='padding-top:10px; padding-left: 10px;'>
+																Organization: <span id='actionPlanOrganization'></span>
 															</div>
 														</div>
-														<div class='boxActualvsTarget boxForecastVsActual'>
-															<div class='fontBold'>
-															% Actual vs Target 
+														<div class='actionPlanList'>
+															<div style='padding-top:10px; padding-left: 10px;'>
+																Appraisal Item: <span id='actionPlanAppraisalItem'></span>
 															</div>
-															<div>
-															<span id='actionPlanActualVSTarget'></span>% <span id='actualvsTargetBar'></span>
-															</div>
-															
 														</div>
 														 
+														
 													</div>
-													<div class='boxForecastArea'>
-														<div class='boxForecastResult boxForecastVsActual'>
-															<div class='fontBold fontCenter'>
-															Forecast
+												</div>
+												<div class='span6'>
+													<div class='boxActionR'>
+														
+														<div class='boxActualPercentageArea'>
+														
+															<div class='boxActualvsForecast boxForecastVsActual'>
+																<div  class='fontBold desktopArea'>
+																	%Actual vs Forecast 
+																</div>
+																<div class='fontBold moblieArea'>
+																	%A vs F 
+																</div>
+																<div >
+																	<span id='actionPlanActualVSforecast'></span>% <span id='actualvsForecastBar'></span>
+																</div>
 															</div>
-															<div class='fontCenter'>
-															 <span id='actionPlanForecastResult'></span>
-															 </div>
-														</div>
-														<div class='boxActual boxForecastVsActual'>
-															<div class='fontBold fontCenter'>
-															Actual
+															<div class='boxActualvsTarget boxForecastVsActual'>
+																<div class='fontBold desktopArea'>
+																% Actual vs Target 
+																</div>
+																<div class='fontBold moblieArea'>
+																	%A vs T 
+																</div>
+																<div>
+																<span id='actionPlanActualVSTarget'></span>% <span id='actualvsTargetBar'></span>
+																</div>
+																
 															</div>
-															<div class='fontCenter'>
-															 <span id='actionPlanActual'></span>
-															 </div>
+															 
 														</div>
-													</div>
-													<div class='boxTargetArea' style='font-size:20px;'>
-														<div class='boxTargetData'>
-														<div class='fontBold fontCenter'>Target</div>
-														<div class='fontCenter fontBold' style='font-size:15px;margin-top:5px; color:green;'> <span id='actionPlanTarget'></span></div>
+														<div class='boxForecastArea'>
+															<div class='boxForecastResult boxForecastVsActual'>
+																<div class='fontBold fontCenter'>
+																Forecast
+																</div>
+																<div class='fontCenter'>
+																 <span id='actionPlanForecastResult'></span>
+																 </div>
+															</div>
+															<div class='boxActual boxForecastVsActual'>
+																<div class='fontBold fontCenter'>
+																Actual
+																</div>
+																<div class='fontCenter'>
+																 <span id='actionPlanActual'></span>
+																 </div>
+															</div>
+														</div>
+														<div class='boxTargetArea' style='font-size:20px;'>
+															<div class='boxTargetData'>
+															<div class='fontBold fontCenter'>Target</div>
+															<div class='fontCenter fontBold' style='font-size:15px;margin-top:5px; color:green;'> <span id='actionPlanTarget'></span></div>
+															</div>
 														</div>
 													</div>
 												</div>
+												
+												
 												<br style='clear:both'>
 											</div>
 									</div>
@@ -1352,7 +1494,7 @@ Is Active
             									
 											</div>
 											<div class='span6'>
-												<div style='text-align:right;'>
+												<div class='saveAndCancelArea' >
 													<button type="button" class="btn btn-primary input-sm" name="btn-" id="btnSaveActionPlan">
 														Save
 													</button>
@@ -1372,16 +1514,16 @@ Is Active
 												<tr>
 													<th style='width:5%'><center><b>Select</b></center></th>
 													<th style='width:10%'><b>Task</b></th>
-													<th style='width:5%'><b>Plan Start</b></th>
-													<th style='width:5%'><b>Plan End</b></th>
-													<th style='width:5%'><b>Actual Start</b></th>
-													<th style='width:5%'><b>Actual End</b></th>
+													<th style='width:8%'><b>Plan Start</b></th>
+													<th style='width:8%'><b>Plan End</b></th>
+													<th style='width:9%'><b>Actual Start</b></th>
+													<th style='width:8%'><b>Actual End</b></th>
 													<th style='width:5%'><b>Phase</b></th>
 													<th style='width:10%'><b>Responsible</b></th>
-													<th style='width:10%'><center><b>%Completed</b></center></th>
-													<th style='width:10%'><center><b>PV</center></b></th>
-													<th style='width:10%'><center><b>AC</center></b></th>
-													<th style='width:10%'><center><b>EV</center></b></th>
+													<th style='width:10%;text-align:right;'><b>%Completed</b></center></th>
+													<th style='width:7%;text-align:right;'><b>PV</b></th>
+													<th style='width:7%;text-align:right;'><b>AC</b></th>
+													<th style='width:7%;text-align:right;'><b>EV</b></th>
 													
 												</tr>
 											</thead>
@@ -1459,6 +1601,36 @@ Is Active
 </div>
 <!-- modal action plan end -->
 
+
+
+
+
+
+
+<!-- modal gantt chart start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="ganttChartModal" class="modal inmodal large" style="display: none; margin-top: 0px;">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight large">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
+                <h5 class="modal-title">Gantt Chart</h5>
+            </div>
+
+            <div class="modal-body">
+                <!-- content start -->
+                <div style='text-align:center;'>
+                 <div id='ganttChart' ></div>
+				</div>
+                <!-- content end -->
+            </div>
+           
+        </div>
+    </div>
+    
+    
+   
+</div>
+<!-- modal gantt chart end -->
 
 
 	

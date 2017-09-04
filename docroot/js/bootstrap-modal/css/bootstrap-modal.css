@@ -19,13 +19,14 @@
 .modal-open.page-overflow .modal-scrollable {
 	overflow-y: scroll;
 }
-
+/*
 @media (max-width: 979px) {
 	.modal-open.page-overflow .page-container .navbar-fixed-top,
 	.modal-open.page-overflow .page-container .navbar-fixed-bottom  {
 		overflow-y: visible;
 	}
 }
+*/
 
 
 .modal-scrollable {

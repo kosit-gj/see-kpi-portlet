@@ -40,7 +40,9 @@
 		<portlet id="action-plan"></portlet>
 		<portlet id="dashbaord-summary"></portlet>
 		<portlet id="all-kpi-dashboard"></portlet>
+		<portlet id="usage-log"></portlet>
 	</category>
 
 
+	 
 </display>
