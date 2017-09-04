@@ -266,9 +266,9 @@ structure_name
 	$("#cdsNameSearchQuantity").val("");
 	if(action=='edit'){
 		clearQuantityFormFn();
+		$("#modalQuantityDescription").html("Edit "+structureName);
 		appraisalLevelListFn("Quantity",data['appraisal_level'],defaultAll=false,multiSelect=true);	
-		
-		
+	
 		perspectiveListFn("Quantity",data['perspective_id'],defaultAll=false);
 		uomListFn("Quantity",data['uom_id']);
 		//dropDrowDepartmentFn("Quantity",data['department_code'],defaultAll=true);
@@ -339,7 +339,7 @@ structure_name
 		
 		//set header
 		$("#structure_id_quantity").val(structureId);
-		$("#modalQuantityDescription").html("Edit "+structureName);
+		
 
 		
 		
@@ -392,6 +392,7 @@ structure_name
 	}else if(action=='add'){
 	
 		clearQuantityFormFn();
+		$("#modalQuantityDescription").html("Add "+structureName);
 		appraisalLevelListFn("Quantity",'',defaultAll=false,multiSelect=true);			
 		perspectiveListFn("Quantity",$("#embed_perspective_id").val(),defaultAll=false);
 		//dropDrowDepartmentFn("Quantity",$("#embed_department_id").val(),defaultAll=true);
@@ -407,7 +408,7 @@ structure_name
 
 		//console.log($(objectStructureId).val());
 		$("#structure_id_quantity").val(structureId);
-		$("#modalQuantityDescription").html("Add "+structureName);
+		
 		
 		$("#cdsNameSearchQuantity").autocomplete({
 

@@ -112,7 +112,12 @@ var assignTemplateQualityFn = function(structureName,data){
 	//Appraisal Item Name,Target,Actual,Score,%Weight,Weight Score
 	htmlTemplateQuality+="<div class='titlePanel'>"+structureName+"</div>";
 		if(data['no_weight']==0){ // has weight;
-		htmlTemplateQuality+="<div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+			if(data['result_type']==1){
+				htmlTemplateQuality+="<div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+			}else{
+				htmlTemplateQuality+="<div class='totalWeight'>Total Score "+data['total_weight']+"</div>";
+			}
+		
 		}
 	htmlTemplateQuality+="</div>";
 	htmlTemplateQuality+="<div class=\"ibox-content\">";
@@ -125,8 +130,13 @@ var assignTemplateQualityFn = function(structureName,data){
 				htmlTemplateQuality+="<th style=\"width:40%\"><b>Appraisal Item Name</b></th>";
 				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Target</b></th>";
 				htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>Score</b></th>  ";      
-				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>%Weight</b></th>  ";   
-				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Weight Score</b></th>  ";   
+				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>%Weight</b></th>  ";  
+				if(data['result_type']==1){
+					htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Weight Score</b></th>  ";
+				}else{
+					htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Result Score</b></th>  ";
+				}
+				   
 			htmlTemplateQuality+="</tr>";
 	}else{
 		
@@ -218,7 +228,12 @@ var assignTemplateDeductFn = function(structureName,data){
 	htmlTemplateDeduct+="<div class=\"ibox-title2\">";
 	htmlTemplateDeduct+="<div class='titlePanel'>"+structureName+"</div>";
 	if(data['no_weight']==0){ // has weight;
-		htmlTemplateDeduct+="<div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+		
+		if(data['result_type']==1){
+			htmlTemplateDeduct+="<div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+		}else{
+			htmlTemplateDeduct+="<div class='totalWeight'>Total Score "+data['total_weight']+"</div>";
+		}
 	}
 	htmlTemplateDeduct+="</div>";
 		
@@ -237,7 +252,11 @@ var assignTemplateDeductFn = function(structureName,data){
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Actual Value</b></th>";
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Over Value</b></th>";
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Deduct Score/Unit</b> </th>";
-				htmlTemplateDeduct+="<th style='width:20%;text-align: right;'><b>Weight Score </b></th>";
+				if(data['result_type']==1){
+					htmlTemplateDeduct+="<th style='width:20%;text-align: right;'><b>Weight Score </b></th>";
+				}else{
+					htmlTemplateDeduct+="<th style='width:20%;text-align: right;'><b>Result Score </b></th>";
+				}
 			htmlTemplateDeduct+="</tr>";
 		}else{
 			htmlTemplateDeduct+="<tr>";
@@ -323,7 +342,11 @@ var assignTemplateQuantityFn = function(structureName,data){
 	
 	htmlTemplateQuantity+="      <div class='titlePanel'>"+structureName+"</div>";
 	if(data['no_weight']==0){ // has weight;
-	htmlTemplateQuantity+="      <div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+		if(data['result_type']==1){
+			htmlTemplateQuantity+="      <div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+		}else{
+			htmlTemplateQuantity+="      <div class='totalWeight'>Total Score "+data['total_weight']+"</div>";
+		}
 	}
 	htmlTemplateQuantity+="  </div>";
 	htmlTemplateQuantity+="	<div class=\"ibox-content\">";
@@ -340,9 +363,17 @@ var assignTemplateQuantityFn = function(structureName,data){
 			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>Appraisal Item Name</b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Target </b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Actual </b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Achievement </b></th>";
+			if(data['threshold']==1){
+				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Score </b></th>";
+			}else{
+				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Achievement </b></th>";
+			}
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Weight </b></th>";
-			htmlTemplateQuantity+="<th style='width:10%;text-align: right;' class=''><b>Weight Score</b> </th>";
+			if(data['result_type']==1){
+				htmlTemplateQuantity+="<th style='width:10%;text-align: right;' class=''><b>Weight Score</b> </th>";
+			}else{
+				htmlTemplateQuantity+="<th style='width:10%;text-align: right;' class=''><b>Result Score</b> </th>";
+			}
 			htmlTemplateQuantity+="<th style='width:10%;text-align: center;' class=''><b>Manage</b> </th>";
 			
 		htmlTemplateQuantity+="</tr>";
@@ -354,7 +385,13 @@ var assignTemplateQuantityFn = function(structureName,data){
 			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>Appraisal Item Name</b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Target </b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Actual </b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Achievement </b></th>";
+			
+			if(data['threshold']==1){
+				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Score </b></th>";
+			}else{
+				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Achievement </b></th>";
+			}
+			
 			htmlTemplateQuantity+="<th style='width:10%;text-align: center;' class=''><b>Manage</b> </th>";
 		htmlTemplateQuantity+="</tr>";
 	}
@@ -383,7 +420,11 @@ var assignTemplateQuantityFn = function(structureName,data){
 						htmlTemplateQuantity+="<td>"+indexEntry['item_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
-						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['achievement'])))+"</td>";
+						if(data['threshold']==1){
+							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])))+"</td>";
+						}else{
+							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['achievement'])))+"</td>";
+						}
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weight_percent'])).toFixed(2))+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2))+"</td>";
 						
@@ -400,7 +441,12 @@ var assignTemplateQuantityFn = function(structureName,data){
 						htmlTemplateQuantity+="<td>"+indexEntry['item_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
-						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['achievement'])).toFixed(2))+"</td>";
+						if(data['threshold']==1){
+							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])).toFixed(2))+"</td>";
+						}else{
+							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['achievement'])).toFixed(2))+"</td>";
+						}
+						
 						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
 						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target=#addModalRule data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-danger btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
 						htmlTemplateQuantity+="	</td>";
@@ -743,7 +789,7 @@ var listAppraisalDetailFn = function(data){
 //	});
 	dropDrowActionEditFn(data['head'][0]['stage_id']);
 	$("#assignTo").change();
-	$("#ModalAppraisal").modal();
+	$("#ModalAppraisal").modal().css({"margin-top":"0px"});
 	
 	
 	
@@ -1307,7 +1353,7 @@ var listPhaseFn = function(data){
 			$("#informConfirm").empty();
 			var id=this.id.split("-");
 			id=id[1];
-			$("#confrimModal").modal().css({"margin-top":"0px"});;
+			$("#confrimModal").modal().css({"margin-top":"0px"});
 			//$(this).parent().parent().parent().children().click();
 			$(document).off("click","#btnConfirmOK");
 			$(document).on("click","#btnConfirmOK",function(){

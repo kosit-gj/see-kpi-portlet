@@ -1387,7 +1387,7 @@ overflow-y: visible;
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
              
-                <h4 class="modal-title" id="modalTitleQuantity"><span id="modalQuantityDescription"></span>  </h4>
+                <h4 class="modal-title" id="modalTitleQuantity"><span id="modalQuantityDescription"></span> &nbsp; </h4>
                
             </div>
             <div class="modal-body">

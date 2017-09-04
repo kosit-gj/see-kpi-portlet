@@ -46,7 +46,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	.breadcrumbs2 .row-fluid .span4{
 			width: 32.624%;
 		}
-		
+	
+	#actionPlanModal{
+		margin-top:0px;
+	}	
 	 
   }
   /* Large desktop End######################################*/
@@ -70,6 +73,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	.breadcrumbs2 .row-fluid .span4{
 			width: 32.624%;
 		}
+		
+	#actionPlanModal{
+		margin-top:0px;
+	}
 		
  	
   }
@@ -101,6 +108,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	display:none;
 	}
 	
+	#actionPlanModal{
+		margin-top:0px;
+	}
   }
  /* Portrait tablet to landscape and desktop End############*/ 
  
@@ -114,7 +124,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	}
 	#grandTototalWeightArea{
 		position: relative;
-    	top: -385px;
+    	top: -300px;
 	}
 	.aui .p-t-xxs {
     	text-align: left;
@@ -130,6 +140,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	}
 	#smartArea{
 	display:none;
+	}
+	
+	#actionPlanModal{
+		margin-top:0px;
 	}
 	
 	
@@ -154,6 +168,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	}
 	#smartArea{
 	display:none;
+	}
+	
+	#actionPlanModal{
+		margin-top:0px;
 	}
 	
 
@@ -308,6 +326,7 @@ margin-bottom:1px;
 
 .textInfo{
 	font-wieght:bold;
+	/*text-align:right;*/
 }
 /*
 .aui label {
@@ -836,31 +855,31 @@ margin-bottom:1px;
 												<div class="row-fluid">
 												
 													<label class="span3 textInfo">Employee code:</label>
-													<label class="span3 textInfo textData txtEmpCode" id="txtEmpCode"></label>
+													<label class="span3  textData txtEmpCode" id="txtEmpCode"></label>
 													<label class="span3 textInfo">Employee Name:</label>
-													<label class="span3 textInfo textData txtEmpName" id="txtEmpName"></label>
+													<label class="span3  textData txtEmpName" id="txtEmpName"></label>
 												</div>
 												<div class="row-fluid">
 													<label class="span3 textInfo">Position:</label>
-													<label class="span3 textInfo textData txtPosition" id="txtPosition"></label>
+													<label class="span3  textData txtPosition" id="txtPosition"></label>
 													<label class="span3 textInfo">Organization:</label>
-													<label class="span3 textInfo textData txtOrgName" id="txtOrgName"></label>
+													<label class="span3  textData txtOrgName" id="txtOrgName"></label>
 												</div>
 												<div class="row-fluid">
 													
 													<label class="span3 textInfo">Chief Employee Code:</label>
-													<label class="span3 textInfo textData txtChiefEmpCode" id="txtChiefEmpCode"></label>
+													<label class="span3  textData txtChiefEmpCode" id="txtChiefEmpCode"></label>
 													<label class="span3 textInfo">Chief Employee Name:</label>
-													<label class="span3 textInfo textData txtChiefEmpName" id="txtChiefEmpName"></label>
+													<label class="span3  textData txtChiefEmpName" id="txtChiefEmpName"></label>
 												</div>
 											
 												<div class="row-fluid">
 													<label class="span3 textInfo">Period:</label>
-													<label class="span3 textInfo textData txtPeriod"  id="txtPeriod"></label>
+													<label class="span3  textData txtPeriod"  id="txtPeriod"></label>
 												</div>
 										</div>
 										<div class="span2" id='grandTototalWeightArea'>
-												<label class="span12 p-t-xxsg text-center ">Grand Total Weight %</label>
+												<label class="span12 p-t-xxsg text-center ">Grand Total</label>
 												<label class="span12 p-t-xxsg text-center txtGrandTotalWeigh" id="txtGrandTotalWeigh" style="font-size: 300%;"></label>
 										
 										</div>
@@ -875,27 +894,27 @@ margin-bottom:1px;
 												<div class="row-fluid">
 												
 													<label class="span3 textInfo">Employee code:</label>
-													<label class="span3 textInfo textData txtEmpCode" id="txtEmpCode"></label>
+													<label class="span3  textData txtEmpCode" id="txtEmpCode"></label>
 													<label class="span3 textInfo">Employee Name:</label>
-													<label class="span3 textInfo textData txtEmpName" id="txtEmpName"></label>
+													<label class="span3  textData txtEmpName" id="txtEmpName"></label>
 												</div>
 												<div class="row-fluid">
 													<label class="span3 textInfo">Position:</label>
-													<label class="span3 textInfo textData txtPosition" id="txtPosition"></label>
+													<label class="span3  textData txtPosition" id="txtPosition"></label>
 													<label class="span3 textInfo">Organization:</label>
-													<label class="span3 textInfo textData txtOrgName" id="txtOrgName"></label>
+													<label class="span3  textData txtOrgName" id="txtOrgName"></label>
 												</div>
 												<div class="row-fluid">
 													
 													<label class="span3 textInfo">Chief Employee Code:</label>
-													<label class="span3 textInfo textData txtChiefEmpCode" id="txtChiefEmpCode"></label>
+													<label class="span3  textData txtChiefEmpCode" id="txtChiefEmpCode"></label>
 													<label class="span3 textInfo">Chief Employee Name:</label>
-													<label class="span3 textInfo textData txtChiefEmpName" id="txtChiefEmpName"></label>
+													<label class="span3  textData txtChiefEmpName" id="txtChiefEmpName"></label>
 												</div>
 											
 												<div class="row-fluid">
 													<label class="span3 textInfo">Period:</label>
-													<label class="span3 textInfo textData txtPeriod"  id="txtPeriod"></label>
+													<label class="span3  textData txtPeriod"  id="txtPeriod"></label>
 												</div>
 										</div>
 										
@@ -913,15 +932,15 @@ margin-bottom:1px;
 													<div class="row-fluid">
 													
 														<label class="span3 textInfo">Organization code:</label>
-														<label class="span3 textInfo textData txtOrgCodeOrg" id="txtOrgCodeOrg"></label>
+														<label class="span3  textData txtOrgCodeOrg" id="txtOrgCodeOrg"></label>
 														<label class="span3 textInfo">Organization Name:</label>
-														<label class="span3 textInfo textData txtOrgNameOrg" id="txtOrgNameOrg"></label>
+														<label class="span3  textData txtOrgNameOrg" id="txtOrgNameOrg"></label>
 													</div>
 													<div class="row-fluid">
 														<label class="span3 textInfo">Parent Organization:</label>
-														<label class="span3 textInfo textData txtParentOrganizationOrg" id="txtParentOrganizationOrg"></label>
+														<label class="span3  textData txtParentOrganizationOrg" id="txtParentOrganizationOrg"></label>
 														<label class="span3 textInfo">Period:</label>
-														<label class="span3 textInfo textData txtPeriodOrg"  id="txtPeriodOrg"></label>
+														<label class="span3  textData txtPeriodOrg"  id="txtPeriodOrg"></label>
 													</div>
 													
 											</div>
@@ -1173,7 +1192,7 @@ Is Active
 </div>
 
 <!-- modal action plan start -->
-<div aria-hidden="true" role="dialog" tabindex="-1" id="actionPlanModal" class="modal inmodal large" style="display: none;">
+<div aria-hidden="true" role="dialog" tabindex="-1" id="actionPlanModal" class="modal inmodal large" style="display: none; margin-top: 0px;">
     <div class="modal-dialog">
     <div class="modal-content animated bounceInRight large">
             <div class="modal-header">
