@@ -44,13 +44,26 @@
 	 	    			"id":"is_active","width":"200px"
 	 	    			}
     					
-    			     ], 					
+    			     ],
+    			 "advanceSearch":[{
+ 	 					"label":"Appraisal Level","label_tooltip":"Appraisal Level","inputType":"dropdown",
+ 	 					"id":"level_id","width":"100%","initValue":"All Appraisal Level",
+ 	 					"url":""+restfulURL+"/see_api/public/org/al_list"
+ 	 					},
+ 	 					{
+ 	 	 				"label":"Organization","label_tooltip":"Organization","inputType":"cascades","initValue":"All Organization",
+ 	 	 				"id":"org_code","width":"100%",
+ 	 	 				"cascades":{
+							"id"		:	"level_id",
+							"listData"	:	"org"
+ 	 	 					}
+ 	 	 				}],
     			 "formDetail":{"formSize":"modal-dialog","formName":"Organization","id":"organization","pk_id":"org_id"},       
     			 "serviceName":[restfulURL+"/see_api/public/org"],
     			 "tokenID":tokenID,
     			 "pagignation":false,
     			 "expressSearch":false,
-    			 "advanceSearchSet":false,
+    			 "advanceSearchSet":true,
     			 "btnAddOption":false,
     			 "btnAdvanceDownloadOption":{"url":""+$("#url_portlet").val()+"/file/appraisal_organization_template.xlsx"},
     			 "btnAdvanceImportOption":{"formName":"Import Organization","accept":".xls ,.xlsx"}
@@ -62,5 +75,11 @@
     	
 		}
 	 }
+	//binding tooltip start
+	 $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
+	 $('[data-toggle="tooltip"]').tooltip({
+		 html:true
+	 });
+	//binding tooltip end
     });
  
