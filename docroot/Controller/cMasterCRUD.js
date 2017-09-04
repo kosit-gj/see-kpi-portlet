@@ -387,7 +387,7 @@ var listDataFn = function(data,options){
 					formatText= addCommas(parseInt(indexEntry[indexEntry2['id']]));
 					styleFormatNum ="style='text-align: right;padding-right: 10px;'";
 				}else{formatText=indexEntry[indexEntry2['id']];}
-				htmlTbody+="    		<td class=\"columnSearch"+options['formDetail']['id']+"\" "+styleFormatNum+">"+formatText+"</td>";
+				htmlTbody+="    		<td class=\"columnSearch"+options['formDetail']['id']+"\" "+styleFormatNum+">"+notNullTextFn(formatText)+"</td>";
 			
 			}else if(indexEntry2['colunmsType']=='hidden'){
 
