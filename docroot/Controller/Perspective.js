@@ -9,13 +9,18 @@
     	var options={
     			
     			"colunms":[
-    			           {"colunmsDisplayName":"Perspective Name","width":"65%","id":"perspective_name","colunmsType":"text"},
-    			           {"colunmsDisplayName":"IsActive","width":"20%","id":"is_active","colunmsType":"checkbox"},
+    			           {"colunmsDisplayName":"Perspective Name","width":"35%","id":"perspective_name","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Abbreviation","width":"20%","id":"perspective_abbr","colunmsType":"text"},
+    			           {"colunmsDisplayName":"IsActive","width":"15%","id":"is_active","colunmsType":"checkbox"},
     			          ],
     			"form":[{
     					"label":"Perspective Name","inputType":"text","placeholder":"Perspective Name",
     					"id":"perspective_name","width":"200px","required":true,
     					},
+    					{
+            				"label":"Abbreviation","inputType":"text","placeholder":"Abbreviation",
+            				"id":"perspective_abbr","width":"200px"
+            			},
     			        
     					{
         					"label":"IsActive","inputType":"checkbox","default":"checked",

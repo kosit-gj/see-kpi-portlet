@@ -317,12 +317,16 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									<label class='text-label'>  Theme Color &nbsp;:</label>
 									
 									</div>
-									<div class="span3" style="margin-bottom: 25px;" id="listThemeColor">
+									<div class="span3" style="margin-bottom: 25px; width:auto;margin-right: 5px;" id="listThemeColor">
 										<button
 										    class="btn jscolor {valueElement:null,value:'ffcc00',valueElement:'themeColor',onFineChange:'updateThemeFn(this)'}"
 										    style="width:70px; height:26px;"></button>
 									</div>
-										<input type="hidden" id="themeColor" value="">
+									<div class='input-prepend input-append' style="margin-top: -2px;" >
+										<span class='add-on'>#</span>
+										<input type="text"  maxlength='6'  id="themeColor" name="themeColor" style='width: 80px;' class='m-b-n span4'>
+									</div>
+										
                                  </div> 
                                  <div class="row-fluid">
 							

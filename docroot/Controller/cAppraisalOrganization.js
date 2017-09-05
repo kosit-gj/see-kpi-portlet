@@ -11,7 +11,8 @@
     			"colunms":[
     			           {"colunmsDisplayName":"Organization Code","width":"15%","id":"org_code","colunmsType":"text"},
     			           {"colunmsDisplayName":"Organization","width":"25%","id":"org_name","colunmsType":"text"},
-    			           {"colunmsDisplayName":"Appraisal Level","width":"25%","id":"appraisal_level_name","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Abbreviation","width":"10%","id":"org_abbr","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Appraisal Level","width":"15%","id":"appraisal_level_name","colunmsType":"text"},
     			           {"colunmsDisplayName":"Parent Org.","width":"25%","id":"parent_org_name","colunmsType":"text"},
     			           {"colunmsDisplayName":"Is Active","width":"10%","id":"is_active","colunmsType":"checkbox"},
     			          ],
@@ -23,6 +24,10 @@
         				"label":"Organization Name","inputType":"text","placeholder":"Organization Name",
         				"id":"org_name","width":"350px","required":true
         				},
+        				{
+            				"label":"Abbreviation","inputType":"text","placeholder":"Abbreviation",
+            				"id":"org_abbr","width":"250px"
+            			},
 //    			        {
 //    					"label":"Parent Org.","inputType":"dropdown","initValue":"","updateList":true,
 //    					"id":"parent_org_code","width":"250px","url":""+restfulURL+"/see_api/public/org/parent_list",

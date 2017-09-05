@@ -594,9 +594,11 @@ var createInputTypeFn  = function(object,tokenID){
 	}else if(object['inputType']=="color" ){
 
 
-		inputType+="<button id=\"btnColor-"+object['id']+"\" name=\"btnColor-"+object['id']+"\" class=\"btn jscolor {valueElement:null,value:'FFFFFF',valueElement:'"+object['id']+"'} \" style='width:"+object['width']+"; height:"+object['height']+";'></button>";
-		inputType+="<input "+inputTooltip+" type=\"hidden\"  id=\""+object['id']+"\" name=\""+object['id']+"\">";
-	
+		inputType+="<button id=\"btnColor-"+object['id']+"\" name=\"btnColor-"+object['id']+"\" class=\"btn jscolor {valueElement:null,value:'FFFFFF',valueElement:'"+object['id']+"'} \" style='width:"+object['width']+"; height:"+object['height']+"; margin-right: 5px;'></button>";
+		inputType+="<div class='input-prepend input-append' >";
+		inputType+="	<span class='add-on'>#</span>";
+		inputType+="	<input "+inputTooltip+" type=\"text\"  maxlength='6'  id=\""+object['id']+"\" name=\""+object['id']+"\" style='width: 80px;' class='m-b-n span4'>";
+		inputType+="</div>";
 		
 	}else if(object['inputType']=="date"){
 
