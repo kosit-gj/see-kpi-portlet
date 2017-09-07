@@ -253,9 +253,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									<label class='text-label'>  Raise Type  &nbsp;:</label>
 									
 									</div>
-									<div class="span3">
+									<div class="span5">
 										
-										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 12px;">
 											  <input checked='checked'  type="radio" name="optionsRadios" id="raiseFixAmount" value="1">
 											  Fix Amount
 										</label>
@@ -297,9 +297,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									<label class='text-label'>  Threshold  &nbsp;:</label>
 									
 									</div>
-									<div class="span3">
+									<div class="span5">
 										
-										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 20px;">
 											  <input checked='checked'  type="radio" name="optionsThreshold" id="thresholdOn" value="1">
 											  Threshold
 										</label>

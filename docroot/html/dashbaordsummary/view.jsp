@@ -34,7 +34,7 @@
 
  /* Large desktop Start#####################################*/
  @media (min-width: 1200px) { 
-
+	
 	.modal.large {
 		    width: 90%;
 		    margin-left:-45%;  
@@ -46,7 +46,6 @@
 		    margin-left:-25%;  
 		    top:0px;
 		}
-	
 	
   }
   /* Large desktop End######################################*/
@@ -65,6 +64,7 @@
 		    margin-left:-25%;  
 		    top:0px;
 		}
+	
 		/*All Start*/
 		.aui #btnSearchAdvance{
 		margin-bottom:5px;
@@ -80,7 +80,7 @@
  
  /* Portrait tablet to landscape and desktop Start##########*/
  @media (min-width: 768px) and (max-width: 979px) {
- 
+ 		
 	.modal.large {
 		    width: 90%;
 		    margin-left:-45%;  
@@ -124,7 +124,6 @@
  /* Landscape phone to portrait tablet Start################*/
  @media (max-width: 767px) { 
  
- 
  .modal.large {
  	
 	    width: '';
@@ -163,7 +162,6 @@
  /* Landscape phones and down Start#########################*/
  @media (max-width: 480px) { 
  	
- 	
 	.aui .form-group > .control-label-search{
     	text-align: left;
 	}
@@ -175,6 +173,9 @@
 	.aui .btnAdd{
 		position: relative;
    		top: -22px;
+	}
+	.aui .graphLTop {
+		width:95%;
 	}
 	/*All Form Start*/
 	/*
@@ -406,6 +407,7 @@ padding:5px;
 }
 
 /* accordian */
+
 .aui .panel {
 	margin-bottom: 20px;
 	background-color: #fff;
@@ -434,8 +436,8 @@ padding:5px;
 	background: #f6f6f6;
 	border-color: #fc0;
 	padding: 1px;
-	padding-bottom: 5px;
-	max-height: 32px;
+	padding-bottom: 1px;
+/* 	max-height: 32px; */
 }
 
 .aui .panel-default>.panel-heading:HOVER {
@@ -469,7 +471,18 @@ padding:5px;
 	/*     color: dimgrey !important; */
 	text-decoration: none;
 }
-
+.aui .accordion-content{
+		width: auto !important;
+		margin-top: 0px; 
+		float: left !important; 
+		display:flex !important;
+	}
+.aui .accordion-btn {
+/*     text-align: right; */
+/*     margin-top: 5px; */
+	display: inline-block;
+    float: right;
+}
 .aui .panel-body {
 	margin: 10px;
 }

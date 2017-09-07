@@ -345,17 +345,20 @@ var getBrowserWidth = function(){
     var wSearchAdvance = $('.cSearchAdvance').width()-2;
     var wTarget = $('#drop_down_list_appraisal_type').width();
     var wCalTarget = $('#drop_down_list_appraisal_type').width()*4+20;
+    var height = $('#drop_down_list_appraisal_type').height()+0.25;
     
 		if(window.innerWidth < 980){
-			$("#txtEmpInput").css({"width":""});	
+			$("#txtEmpInput").css({"width":""});
+			$("#txtEmpInput").css({"height":""});
 		} else if(window.innerWidth < 1366){
 			// Small Device
     
 			$("#txtEmpInput").width(wSearchAdvance-wCalTarget+wTarget);
-			
+			$("#txtEmpInput").css({"height":height});
 		} else {
 			// Large Device
 			$("#txtEmpInput").width(wSearchAdvance-wCalTarget+wTarget);
+			$("#txtEmpInput").css({"height":height});
 	
 		}
 };
@@ -403,6 +406,7 @@ $(document).ready(function() {
 				$("#position_id").val(),
 				$("#emp_name_id").val());
 		$("#cds_result_list_content").show();
+		getBrowserWidth();
 		return false;
 	});
 	//$("#btnSearchAdvance").click();
