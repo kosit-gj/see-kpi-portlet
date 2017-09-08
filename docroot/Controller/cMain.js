@@ -257,6 +257,16 @@ var notNullFn = function(data){
 	}
 	return parseFloat(dataNotNull).toFixed(2);
 }
+//check value not null
+var notNullTextFn = function(data){
+	var dataNotNull="";
+	if((data == '' || data == 'undefinided' || data == null )){
+		dataNotNull="";
+	}else{
+		dataNotNull=data;
+	}
+	return dataNotNull;
+}
 //oops: isObject(Object) -> false
 function isObject(val) {
     return (typeof val === 'object');

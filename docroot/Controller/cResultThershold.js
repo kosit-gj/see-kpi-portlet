@@ -231,7 +231,7 @@ $(document).ready(function(){
         	 					"label":"Group","inputType":"dropdown",
         	 					"id":"result_threshold_group_id","width":"100%",
         	 					"url":""+restfulURL+"/see_api/public/result_threshold/group",
-        	 					"initValue":"All"
+        	 					"initValue":"All Group"
         	 					}],
     	    			
     			 "formDetail":{"formSize":"modal-dialog","formName":"Result Threshold","id":"resultThreshold","pk_id":"result_threshold_id"},       

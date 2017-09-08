@@ -242,13 +242,13 @@ $(document).ready(function(){
     	 					"label":"Structure Name","inputType":"dropdown",
     	 					"id":"structure_id","width":"100%",
     	 					"url":""+restfulURL+"/see_api/public/threshold/structure_list",
-    	 					"initValue":"All"
+    	 					"initValue":"All Structure Name"
     	 					},
     	 					{
         	 					"label":"Group","inputType":"dropdown",
         	 					"id":"threshold_group_id","width":"100%",
         	 					"url":""+restfulURL+"/see_api/public/threshold/group",
-        	 					"initValue":"All"
+        	 					"initValue":"All Group"
         	 					}],
     	    			
     			 "formDetail":{"formSize":"modal-dialog","formName":"Threshould","id":"databaseConnection","pk_id":"threshold_id"},       

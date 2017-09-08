@@ -387,7 +387,7 @@ var listDataFn = function(data,options){
 					formatText= addCommas(parseInt(indexEntry[indexEntry2['id']]));
 					styleFormatNum ="style='text-align: right;padding-right: 10px;'";
 				}else{formatText=indexEntry[indexEntry2['id']];}
-				htmlTbody+="    		<td class=\"columnSearch"+options['formDetail']['id']+"\" "+styleFormatNum+">"+formatText+"</td>";
+				htmlTbody+="    		<td class=\"columnSearch"+options['formDetail']['id']+"\" "+styleFormatNum+">"+notNullTextFn(formatText)+"</td>";
 			
 			}else if(indexEntry2['colunmsType']=='hidden'){
 
@@ -578,25 +578,27 @@ var createInputTypeFn  = function(object,tokenID){
 			}
 		})
 		
-	}else if(object['inputType']=="text" || object['inputType']=="autoComplete"){
+	}else if(object['inputType']=="text" || object['inputType']=="autoComplete"|| object['inputType']=='hidden'){
 
 		var dataTypeInput =(object['dataTypeInput'] == 'number' ? "numberOnly" : object['dataTypeInput'] == 'ip' ? "ip_address" : "");
 		var dataDefault =(object['default'] == undefined ? "" : object['default']);
 		if(object['placeholder']!=undefined){
 			
-			inputType+="<input "+inputTooltip+" type=\"text\" style='width:"+object['width']+"' class=\"span12 m-b-n "+dataTypeInput+"\" placeholder=\""+object['placeholder']+"\" id=\""+object['id']+"\" name=\""+object['id']+"\" value=\""+object['default']+"\"  >";
+			inputType+="<input "+inputTooltip+" type=\""+(object['inputType']=='hidden' ? "hidden" : "text")+"\" style='width:"+object['width']+"' class=\"span12 m-b-n "+dataTypeInput+"\" placeholder=\""+object['placeholder']+"\" id=\""+object['id']+"\" name=\""+object['id']+"\" value=\""+object['default']+"\"  >";
 			
 		}else{
-			inputType+="<input "+inputTooltip+" type=\"text\" style='width:"+object['width']+"' class=\"span12 m-b-n "+dataTypeInput+"\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\" value=\""+object['default']+"\" >";
+			inputType+="<input "+inputTooltip+" type=\""+(object['inputType']=='hidden' ? "hidden" : "text")+"\" style='width:"+object['width']+"' class=\"span12 m-b-n "+dataTypeInput+"\" placeholder=\"\" id=\""+object['id']+"\" name=\""+object['id']+"\" value=\""+object['default']+"\" >";
 			
 		}
 		
 	}else if(object['inputType']=="color" ){
 
 
-		inputType+="<button id=\"btnColor-"+object['id']+"\" name=\"btnColor-"+object['id']+"\" class=\"btn jscolor {valueElement:null,value:'FFFFFF',valueElement:'"+object['id']+"'} \" style='width:"+object['width']+"; height:"+object['height']+";'></button>";
-		inputType+="<input "+inputTooltip+" type=\"hidden\"  id=\""+object['id']+"\" name=\""+object['id']+"\">";
-	
+		inputType+="<button id=\"btnColor-"+object['id']+"\" name=\"btnColor-"+object['id']+"\" class=\"btn jscolor {valueElement:null,value:'FFFFFF',valueElement:'"+object['id']+"'} \" style='width:"+object['width']+"; height:"+object['height']+"; margin-right: 5px;'></button>";
+		inputType+="<div class='input-prepend input-append' >";
+		inputType+="	<span class='add-on'>#</span>";
+		inputType+="	<input "+inputTooltip+" type=\"text\"  maxlength='6'  id=\""+object['id']+"\" name=\""+object['id']+"\" style='width: 80px;' class='m-b-n span4'>";
+		inputType+="</div>";
 		
 	}else if(object['inputType']=="date"){
 
@@ -693,6 +695,28 @@ formHTML+="</form>";
 return formHTML;
 }
 var createScriptCascadesFn = function(options){
+	if(options['advanceSearch']!=undefined){
+	$.each(options['advanceSearch'],function(index,indexEntry){
+		if(indexEntry['inputType'] == "cascades"){
+			$("form#searchAdvanceForm  #"+indexEntry['cascades']['id'] +" select").change(function(){
+				var htmlChange = "";
+				if(indexEntry['initValue']!=undefined){
+					htmlChange+="<option value=''>"+indexEntry['initValue']+"</option>";
+				}
+				$.each(golbalDataCascades[indexEntry['cascades']['id']],function(index2,indexEntry2){
+					if(indexEntry2[indexEntry['cascades']['id']] == $("form#searchAdvanceForm  #"+indexEntry['cascades']['id']+" select").val()){
+						
+						$.each(indexEntry2[indexEntry['cascades']['listData']],function(index3,indexEntry3){
+							//htmlChange+="<option value="+indexEntry3+">"+indexEntry3+"</option>";
+							htmlChange+="<option value="+(indexEntry3[Object.keys(indexEntry3)[0]] != undefined ? indexEntry3[Object.keys(indexEntry3)[0]] : indexEntry3)+">"+(indexEntry3[Object.keys(indexEntry3)[1]] != undefined ? indexEntry3[Object.keys(indexEntry3)[1]] : indexEntry3)+"</option>";
+						});
+					}
+				});
+				$("form#searchAdvanceForm  #"+indexEntry['id']+" select").html(htmlChange);
+			});
+		}
+	});
+	};
 	$.each(options['form'],function(index,indexEntry){
 		if(indexEntry['inputType'] == "cascades"){
 			$("form#"+options['formDetail']['id']+"  #"+indexEntry['cascades']['id']).change(function(){
@@ -767,7 +791,7 @@ var createAvanceSearchFn = function(options){
 										</div>
 									</div>
  */
-		if(indexEntry['inputType']=='dropdown'){
+		if(indexEntry['inputType']=='dropdown' || indexEntry['inputType']=='cascades'){
 		
 			avanceSearchHTML+="<div class='form-group pull-left span3' style='margin-left: 5px' id=\""+indexEntry['id']+"\">";
 			avanceSearchHTML+=createInputTypeFn(indexEntry,options['tokenID']);
@@ -780,7 +804,7 @@ var createAvanceSearchFn = function(options){
 				avanceSearchHTML+="</div>";
 			avanceSearchHTML+="</div>";*/
 			
-		}else if(indexEntry['inputType']=='text'){
+		}else if(indexEntry['inputType']=='text' || indexEntry['inputType']=='autoComplete' || indexEntry['inputType']=='hidden'){
 			
 			var dataTypeInput =(indexEntry['dataTypeInput'] == 'number' ? "numberOnly" : "");
 			avanceSearchHTML+="<div class='form-group pull-left span3' style='margin-left: 5px' id='"+indexEntry['id']+"'>";
@@ -871,7 +895,7 @@ var createDataTableFn = function(options){
 			$("#tableArea").html(tableHTML);
 			
 			$("#modalFormArea").html(createFormFn(options));
-			createScriptCascadesFn(options);
+			
 			$.getScript($("#url_portlet").val()+"/js/jscolor-2.0.4/jscolor.js", function(){
 
 				jscolor.installByClassName("jscolor");
@@ -892,7 +916,7 @@ var createDataTableFn = function(options){
 			}else{
 				$("#advanceSearchArea").hide();
 			}
-		
+			createScriptCascadesFn(options);
 			if(options['btnAdvanceSearchOption']!=undefined){
 				$("#btnAdvanceSearchOption").html(createBtnAdvanceSearchOptionFn(options['btnAdvanceSearchOption']));
 			}

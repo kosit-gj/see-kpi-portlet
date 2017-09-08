@@ -173,7 +173,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	.aui .ResultsPerPageTop {
 		position: absolute;
 		left: -20px;
-		top: 46px;
+		top: 5px;
 	}
 	.aui .ResultsPerPageBottom {
 		position: relative;
@@ -230,7 +230,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	.aui .ResultsPerPageTop {
 		position: absolute;
 		left: -20px;
-		top: 46px;
+		top: 5px;
 	}
 	.aui .ResultsPerPageBottom {
 		position: relative;
@@ -249,7 +249,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 		.aui .ResultsPerPageTop {
 			position: absolute;
 			left: -20px;
-			top: 46px;
+			top: 5px;
 		}
 		.aui .ResultsPerPageBottom {
 			position: static;
@@ -445,12 +445,12 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 				<div class="row-fluid" id="cds_result_list_content">
 					<div class="">
-						<div class="ibox-title">
+						<div class="ibox-title" >
 							<h5>CDS Result List</h5>
 						</div>
 
 
-						<div class="ibox-content" >
+						<div class="ibox-content" style="position: relative;">
 						<div class="row-fluid">
 								<div class="height-32-px"></div>
 						</div>

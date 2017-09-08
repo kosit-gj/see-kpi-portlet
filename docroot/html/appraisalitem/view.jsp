@@ -812,10 +812,12 @@ overflow-y: visible;
 											name="btnSearchAdvance" id="btnSearchAdvance">
 											<i class="fa fa-search"></i>&nbsp;Search
 										</button>
+										<!-- 
 										<button id="btnCoppy" name="btnCoppy"
 											class="btn btn-warning  input-sm" type="button">
 											<i class="fa fa-copy"></i>&nbsp;Copy
 										</button>
+										 -->
 									</div>
 								
 							</div>

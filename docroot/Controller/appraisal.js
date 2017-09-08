@@ -375,7 +375,9 @@ var assignTemplateQuantityFn = function(structureName,data){
 			}else{
 				htmlTemplateQuantity+="<th style='width:10%;text-align: right;' class=''><b>Result Score</b> </th>";
 			}
+
 			htmlTemplateQuantity+="<th style='width:15%;text-align: center;' class=''><b>Manage</b> </th>";
+
 			
 		htmlTemplateQuantity+="</tr>";
 		
@@ -394,7 +396,9 @@ var assignTemplateQuantityFn = function(structureName,data){
 				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Achievement </b></th>";
 			}
 			
+
 			htmlTemplateQuantity+="<th style='width:15%;text-align: center;' class=''><b>Manage</b> </th>";
+
 		htmlTemplateQuantity+="</tr>";
 	}
 	

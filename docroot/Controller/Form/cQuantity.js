@@ -62,7 +62,7 @@ var updateQuantityFn  = function(){
 	 var organization=($('[name="organizationQuantity[]"]').val());
 	 var position=($('[name="positionQuantity[]"]').val());
 	 var kpi_type_id=$("#kpiTypeQuantity").val();
-	 var remind_condition=$("#remindCOnditionQuantity").val();
+	 var remind_condition_id=$("#remindCOnditionQuantity").val();
 	 var value_type=$("#valueTypeQuantity").val();
 	 var is_active="";
 	 if($('#isActiveQuantity').prop('checked')==true){
@@ -93,7 +93,7 @@ var updateQuantityFn  = function(){
 		 "position":position,
 		 "appraisal_level":appraisal_level_id,
 		 "kpi_type_id":kpi_type_id,
-		 "remind_condition_id":remind_condition,
+		 "remind_condition_id":remind_condition_id,
 		 "value_type_id":value_type,
 		 "form_id":"1"
 		},
@@ -129,7 +129,7 @@ var insertQuantityFn = function(param) {
 	 var organization=($('[name="organizationQuantity[]"]').val());
 	 var position=($('[name="positionQuantity[]"]').val());
 	 var kpi_type_id=$("#kpiTypeQuantity").val();
-	 var remind_condition = $("#remindCOnditionQuantity").val();
+	 var remind_condition_id = $("#remindCOnditionQuantity").val();
 	 var value_type = $("#valueTypeQuantity").val();
 	
 	 /*
@@ -168,7 +168,7 @@ var insertQuantityFn = function(param) {
 			 "position":position,
 			 "appraisal_level":appraisal_level_id,
 			 "kpi_type_id":kpi_type_id,
-			 "remind_condition_id":remind_condition,
+			 "remind_condition_id":remind_condition_id,
 			 "value_type_id":value_type,
 			 "form_id":"1"
 		},
@@ -300,9 +300,9 @@ structure_name
 			$("#isActiveQuantity").prop("checked",false);
 		}
 		
-		//remind_condition
-		//data['remind_condition']
-		$("select#remindCOnditionQuantity").val(data['remind_condition']);
+		//remind_condition_id
+		//data['remind_condition_id']
+		$("select#remindCOnditionQuantity").val(data['remind_condition_id']);
 		
 		$("#appraisalItemIdQuantity").val(data['item_id']);
 		$("#actionQuantity").val("edit");

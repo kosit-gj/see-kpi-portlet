@@ -23,6 +23,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 .c-4-color { background: blue; }
 .c-5-color { background: purple; }
 
+
+
  /* Large desktop Start#####################################*/
  @media (min-width: 1200px) { 
  

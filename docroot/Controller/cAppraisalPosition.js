@@ -1,4 +1,5 @@
- $(document).ready(function(){
+var galbalDataTemp = []; 
+$(document).ready(function(){
    
 	 var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
@@ -25,13 +26,18 @@
 	 	    			"id":"is_active","width":"200px"
 	 	    			}
     					
-    			     ], 					
+    			     ], 	
+    			 "advanceSearch":[{
+     	 				"label":"Position","label_tooltip":"Position","inputType":"autoComplete","placeholder":"Position",
+     	 				"id":"position_name","width":"100%","default":""
+     				    }
+     				    ],
     			 "formDetail":{"formSize":"modal-dialog","formName":"Position","id":"position","pk_id":"position_id"},       
     			 "serviceName":[restfulURL+"/see_api/public/position"],
     			 "tokenID":tokenID,
     			 "pagignation":false,
     			 "expressSearch":false,
-    			 "advanceSearchSet":false,
+    			 "advanceSearchSet":true,
     			 "btnAddOption":false,
     			 "btnAdvanceDownloadOption":{"url":""+$("#url_portlet").val()+"/file/appraisal_position_template.xlsx"},
     			 "btnAdvanceImportOption":{"formName":"Import Position","accept":".xls ,.xlsx"}
@@ -42,6 +48,45 @@
     	createDataTableFn(options);
     	
 		}
+	 	//Autocomplete From Position Start
+    	$("form#searchAdvanceForm #position_name input").autocomplete({
+            source: function (request, response) {
+            	$.ajax({
+    				 url:restfulURL+"/see_api/public/position/auto",
+    				 type:"POST",
+    				 dataType:"json",
+    				 data:{
+    					 "q":request.term},
+    				//async:false,
+    				 headers:{Authorization:"Bearer "+tokenID.token},
+                     error: function (xhr, textStatus, errorThrown) {
+                            console.log('Error: ' + xhr.responseText);
+                        },
+    				 success:function(data){
+    					  
+    						response($.map(data, function (item) {
+    							var dataSet = new Object();
+    							//autocomplete default values REQUIRED
+    							dataSet.label = item.position_name;
+    							dataSet.value = item.position_name;
+
+                                //extend values
+    							dataSet.position_id = item.position_id;
+
+    							console.log(dataSet);
+                                return dataSet;
+                            }));
+    					
+    				},
+    				beforeSend:function(){
+    					$("body").mLoading('hide');	
+    				}
+    				
+    				});
+            }
+        });
+       
+    	//Autocomplete From Position End
 	 }
     });
  

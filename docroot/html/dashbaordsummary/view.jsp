@@ -34,10 +34,10 @@
 
  /* Large desktop Start#####################################*/
  @media (min-width: 1200px) { 
-
+	
 	.modal.large {
-		    width: 90%;
-		    margin-left:-45%;  
+		    width: 95%;
+		    margin-left:-47.2%;  
 		    top:0px;
 		}
 		
@@ -46,7 +46,7 @@
 		    margin-left:-25%;  
 		    top:0px;
 		}
-	
+	.aui .advance-search .span3{width: 22.077%;}
 	
   }
   /* Large desktop End######################################*/
@@ -55,8 +55,8 @@
  @media (min-width: 980px) and (max-width: 1199px) {
  
  	.modal.large {
-		    width: 90%;
-		    margin-left:-45%;  
+		    width: 95%;
+		    margin-left:-47.2%;  
 		    top:0px;
 		}
 		
@@ -65,6 +65,7 @@
 		    margin-left:-25%;  
 		    top:0px;
 		}
+		.aui .advance-search .span3{width: 24.374%;}
 		/*All Start*/
 		.aui #btnSearchAdvance{
 		margin-bottom:5px;
@@ -80,7 +81,7 @@
  
  /* Portrait tablet to landscape and desktop Start##########*/
  @media (min-width: 768px) and (max-width: 979px) {
- 
+ 		
 	.modal.large {
 		    width: 90%;
 		    margin-left:-45%;  
@@ -105,6 +106,7 @@
 		position: relative;
    		top: 0px;
 	}
+	.aui .advance-search .span3{width: 24.268%;}
 	/*All Form Start*/
 	.aui .modal-body{
 		max-height: 400px;
@@ -123,7 +125,6 @@
  
  /* Landscape phone to portrait tablet Start################*/
  @media (max-width: 767px) { 
- 
  
  .modal.large {
  	
@@ -163,7 +164,6 @@
  /* Landscape phones and down Start#########################*/
  @media (max-width: 480px) { 
  	
- 	
 	.aui .form-group > .control-label-search{
     	text-align: left;
 	}
@@ -175,6 +175,9 @@
 	.aui .btnAdd{
 		position: relative;
    		top: -22px;
+	}
+	.aui .graphLTop {
+		width:95%;
 	}
 	/*All Form Start*/
 	/*
@@ -406,6 +409,7 @@ padding:5px;
 }
 
 /* accordian */
+
 .aui .panel {
 	margin-bottom: 20px;
 	background-color: #fff;
@@ -434,8 +438,8 @@ padding:5px;
 	background: #f6f6f6;
 	border-color: #fc0;
 	padding: 1px;
-	padding-bottom: 5px;
-	max-height: 32px;
+	padding-bottom: 1px;
+/* 	max-height: 32px; */
 }
 
 .aui .panel-default>.panel-heading:HOVER {
@@ -469,7 +473,18 @@ padding:5px;
 	/*     color: dimgrey !important; */
 	text-decoration: none;
 }
-
+.aui .accordion-content{
+		width: auto !important;
+		margin-top: 0px; 
+		float: left !important; 
+		display:flex !important;
+	}
+.aui .accordion-btn {
+/*     text-align: right; */
+/*     margin-top: 5px; */
+	display: inline-block;
+    float: right;
+}
 .aui .panel-body {
 	margin: 10px;
 }
@@ -621,13 +636,13 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 					<div class="titlePanelSearch">Advance Search</div>
 				</div>
 
-				<div class="ibox-content breadcrumbs2"
+				<div class="ibox-content breadcrumbs2 advance-search"
 					style="border-color: rgb(83, 120, 253);">
 
 					<div class="row-fluid ">
 
 						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span2" id="yearArea">
+							class="form-group pull-left span3" id="yearArea">
 							<select name="year" id="year" class="input form-control input-sm"
 								title="" data-toggle="tooltip" style="cursor: pointer;"
 								data-original-title="Year">
@@ -638,7 +653,7 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 							</select>
 						</div>
 						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span2" id="periodArea">
+							class="form-group pull-left span3" id="periodArea">
 							<select name="period" id="period"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
@@ -649,9 +664,33 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 
 							</select>
 						</div>
+						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;">
+							<select name="app_type" id="app_type"
+								class="input form-control input-sm" title=""
+								data-toggle="tooltip" style="cursor: pointer;"
+								data-original-title="Appraisal Type">
 
+								<option value="1">Individual Test</option>
+								<option value="2">Organization Test</option>
+
+							</select>
+						</div>
+						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;" id="txtEmpInput">
+							<input data-toggle="tooltip" data-placement="top"
+								title="Employee Name" class="span12 m-b-n ui-autocomplete-input"
+								placeholder="Employee Name" id="emp_name" name="emp_name"
+								type="text"> <input class="form-control input-sm"
+								id="emp_name_id" name="emp_name_id" value="" type="hidden">
+						</div>
+						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;" >
+							<input data-toggle="tooltip" data-placement="top"
+								title="Position" class="span12 m-b-n ui-autocomplete-input"
+								placeholder="Position" id="position" name="position" type="text">
+							<input class="form-control input-sm" id="position_id"
+								name="position_id" value="" type="hidden">
+						</div>
 						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span2" id="apprasiaLevelArea">
+							class="form-group pull-left span3" id="apprasiaLevelArea">
 							<select name="apprasiaLevel" id="apprasiaLevel"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
@@ -663,7 +702,7 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 							</select>
 						</div>
 						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span2" id="organizationArea">
+							class="form-group pull-left span3" id="organizationArea">
 							<select name="organization" id="organization"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
@@ -675,7 +714,7 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 							</select>
 						</div>
 						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span4" id="kpiArea">
+							class="form-group pull-left span3" id="kpiArea">
 							<select name="kpi" id="kpi" class="input form-control input-sm"
 								title="" data-toggle="tooltip" style="cursor: pointer;"
 								data-original-title="KPI">
@@ -732,7 +771,7 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 				</div>
 				<div class="modal-body">
 <!-- ############################################################################ -->
-				<div id="scrollOrg"style="overflow:auto;min-width:1067px;max-height:500px;" class="table-responsive p-b-xxs">
+				<div id="scrollOrg"style="overflow:auto;min-width:1170px;max-height:500px;" class="table-responsive p-b-xxs">
 				<div id="scrollSubOrg1"style='width: 740px;max-height:482px; float: left;overflow: hidden;position: relative;'>
 					<div id="scrollSubOrg2" style="float: left; position: relative; overflow-y: scroll; width: 757px; overflow-x: hidden; max-height: 482px;">
 					<table class='table table-bordered' id='tableAllKPI1'>
@@ -751,7 +790,7 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 					</div>
 				</div>
 
-				<div id="scrollSubOrg3" style='width: 327px;max-height:500px; float: left; overflow-x: scroll;overflow-y: scroll;position: relative;'>
+				<div id="scrollSubOrg3" style='width: 367px;max-height:500px; float: left; overflow-x: scroll;overflow-y: scroll;position: relative;'>
 					<table class='table table-bordered' id='tableAllKPI2'>
 
 						<thead>

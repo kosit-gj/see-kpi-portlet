@@ -253,9 +253,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									<label class='text-label'>  Raise Type  &nbsp;:</label>
 									
 									</div>
-									<div class="span3">
+									<div class="span5">
 										
-										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 12px;">
 											  <input checked='checked'  type="radio" name="optionsRadios" id="raiseFixAmount" value="1">
 											  Fix Amount
 										</label>
@@ -297,9 +297,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									<label class='text-label'>  Threshold  &nbsp;:</label>
 									
 									</div>
-									<div class="span3">
+									<div class="span5">
 										
-										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 20px;">
 											  <input checked='checked'  type="radio" name="optionsThreshold" id="thresholdOn" value="1">
 											  Threshold
 										</label>
@@ -317,12 +317,16 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									<label class='text-label'>  Theme Color &nbsp;:</label>
 									
 									</div>
-									<div class="span3" style="margin-bottom: 25px;" id="listThemeColor">
+									<div class="span3" style="margin-bottom: 25px; width:auto;margin-right: 5px;" id="listThemeColor">
 										<button
 										    class="btn jscolor {valueElement:null,value:'ffcc00',valueElement:'themeColor',onFineChange:'updateThemeFn(this)'}"
 										    style="width:70px; height:26px;"></button>
 									</div>
-										<input type="hidden" id="themeColor" value="">
+									<div class='input-prepend input-append' style="margin-top: -2px;" >
+										<span class='add-on'>#</span>
+										<input type="text"  maxlength='6'  id="themeColor" name="themeColor" style='width: 80px;' class='m-b-n span4'>
+									</div>
+										
                                  </div> 
                                  <div class="row-fluid">
 							

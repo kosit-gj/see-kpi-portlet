@@ -734,7 +734,9 @@ var actionUpdateAssignmentFn = function(){
 					appraisal_items+="\"score3\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score3").val()+"\",";
 					appraisal_items+="\"score4\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score4").val()+"\",";
 					appraisal_items+="\"score5\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score5").val()+"\",";
+
 					appraisal_items+="\"total_weight\":\""+$("#total_weight-"+$(structureEntry).val()).val()+"\",";
+
 					appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\",";
 					
 					
@@ -1632,6 +1634,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 					htmlTemplateQuantity+="<th style=\"width:3%;  text-align:center;\" class=''><b>Select</b></th>";
 					htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>Appraisal Item Name</b></th>";
 					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Target</b> </th>";
+
 					htmlTemplateQuantity+="<th style=\"width:10%;  text-align:center;\" class='thBox'><b>Forecast Value</b> </th>";
 					
 					
@@ -1687,6 +1690,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 					htmlTemplateQuantity+="<input type='hidden' id='structure_id-"+data['structure_id']+"' class='structure_id' value="+data['structure_id']+">";
 					htmlTemplateQuantity+="<input type='hidden' id='no_weight-"+data['structure_id']+"' class='no_weight' value="+data['no_weight']+">";
 					htmlTemplateQuantity+="<input type='hidden' id='total_weight-"+data['structure_id']+"' class='total_weight' value="+data['total_weight']+">";
+
 					htmlTemplateQuantity+="<input type='hidden' id='form-"+data['structure_id']+"' class='' value=\"form1\">";
 					htmlTemplateQuantity+="<input type='hidden' id='item_id_array-"+data['structure_id']+"' class='item_id_array' value=\""+item_id_array+"\">";
 					
@@ -2112,6 +2116,7 @@ var getTemplateFn = function(emp_result_id){
 		data:{
 			'appraisal_level_id':$("#appraisalLevel").val(),
 			'emp_result_id':emp_result_id
+
 			},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){

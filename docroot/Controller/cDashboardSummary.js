@@ -1,9 +1,10 @@
- var restfulPathDashboard="/see_api/public/cds_result";
+ var restfulPathDashboard="/see_api/public/cds_result"; 
  var galbalDashboard=[];
  var galbalDataTemp = [];
  galbalDataTemp['galbalOrg'] = [];
  galbalDataTemp['extract'] = false;
  galbalDataTemp['All_KPI'] = {};
+ galbalDataTemp['collapse_show']="";
 //# Generate Drop Down List
  var generateDropDownList = function(url,type,request,initValue){
  	var html="";
@@ -41,6 +42,57 @@
  	});	
  	return html;
  };
+ var generateAutocomplete = function(id,url,type,requests){
+	 $(id).autocomplete({
+	        source: function (request, response) {
+	        	requests[Object.keys(requests)] = request.term;
+	        	$.ajax({
+					 url:url,
+					 type:type,
+					 dataType:"json",
+					 data:requests,
+					//async:false,
+					 headers:{Authorization:"Bearer "+tokenID.token},
+	                 error: function (xhr, textStatus, errorThrown) {
+	                        console.log('Error: ' + xhr.responseText);
+	                    },
+					 success:function(data){
+						  
+							response($.map(data, function (item) {
+	                            return {
+	                                label: item[Object.keys(item)[1]],
+	                                value: item[Object.keys(item)[1]],
+	                                value_id : item[Object.keys(item)[0]]
+	                                
+	                            };
+	                        }));
+						
+					},
+					beforeSend:function(){
+						$("body").mLoading('hide');	
+					}
+					
+					});
+	        },
+			select:function(event, ui) {
+				$(id).val(ui.item.value);
+	            $(id+"_id").val(ui.item.value_id);
+	            galbalDataTemp[id] = ui.item.label;
+	            galbalDataTemp[id+"_id"]=ui.item.value_id;
+	            return false;
+	        },change: function(e, ui) {  
+
+	 
+				if ($(id).val() == galbalDataTemp[id]) {
+					$(id+"_id").val(galbalDataTemp[id+"_id"]);
+				}  else if (ui.item != null){
+					$(id+"_id").val(ui.item.value_id);
+				}else {
+					$(id+"_id").val("");
+				}
+	         }
+	    });
+ }
  var generateAccordionHTML = function(parent,data){
 		var kpi_id = galbalDataTemp["item_id"];
 		var accordionHtml = "";
@@ -51,12 +103,19 @@
 		}
 			
 		accordionHtml += "	<div class='panel-heading' role='tab' id='headOrg-"+data['org_id']+"'>";
-		accordionHtml += "		<h4 class='panel-title'>";
-		accordionHtml += "			 <a class='collapsed' role='button' data-toggle='collapse' data-parent='#accordion' href='#bodyOrg-"+data['org_id']+"' aria-expanded='false' aria-controls='bodyOrg-"+data['org_id']+"' style='color: black;font-weight: bold;'>";
-		accordionHtml += "<span class='fa fa-caret-right'></span> "+data['org_name']+"&emsp;";	
+		accordionHtml += "		<h4 class='panel-title' "+(parent == "group1" ? "style='margin-top: 5px; margin-bottom: 5px;' " : "")+">";
+		accordionHtml += "			 <a class='collapsed row' role='button' data-toggle='collapse' data-parent='#accordion' href='#bodyOrg-"+data['org_id']+"' aria-expanded='false' aria-controls='bodyOrg-"+data['org_id']+"' style='color: black;font-weight: bold;'>";
+		
 		if(parent == "group1"){
-			accordionHtml += "<button id='btn_extract' type='button' class='btn btn-xs btn-white' style='margin-top: -6px;font-weight: 700;'> <i class='fa fa-plus-square' aria-hidden='true'></i> Expand</button>";
-			accordionHtml += "<button id='btn_kpi' type='button' data-target='#ModalKPI' data-toggle='modal' class='btn btn-xs btn-white' style='margin-top: -6px;float: right;font-weight: 700;'> <i class='fa fa-table fa-table' aria-hidden='true'></i> All KPI</button>";
+			accordionHtml += "<div class='accordion-content span10' style=''>";
+			accordionHtml += "	<div style='margin-bottom: auto; margin-top: auto;'><span class='fa fa-caret-right'></span> "+data['org_name']+"&emsp;</div>";
+			accordionHtml += "</div>";
+			accordionHtml += "<div class='accordion-btn'>";
+			accordionHtml += "<button id='btn_extract' type='button' class='btn btn-xs btn-white' style='margin-top: -1px;font-weight: 700;'> <i class='fa fa-plus-square' aria-hidden='true'></i> Expand</button>";
+			accordionHtml += "<button id='btn_kpi' type='button' data-target='#ModalKPI' data-toggle='modal' class='btn btn-xs btn-white' style='margin-top: -1px;margin-left: 5px;font-weight: 700;'> <i class='fa fa-table fa-table' aria-hidden='true'></i> All KPI</button>";
+			accordionHtml += "</div>";
+		}else{
+			accordionHtml += "<span class='fa fa-caret-right'></span> "+data['org_name']+"&emsp;";	
 		}
 		
 		accordionHtml += "			</a>";	
@@ -289,6 +348,222 @@
 		
 	 return false;
  };
+ var generateChartBarLineAreaFn = function(data){	
+	 var salesAnlysisChart = new FusionCharts({
+	        type: 'mscombi2d',
+	        renderAt: 'chart-container',
+	        width: '100%',
+	        height: '250',
+	        renderAt: "chartOrgBar-"+data['org_id'],
+	        dataFormat: 'json',
+	        dataSource: {
+	            "chart": {
+	                //"caption": "Harry's SuperMart",
+	                //"subCaption": "Sales analysis of last year",
+	                "xAxisname": "Month",
+	                "yAxisName": "Monthly Actual",
+	                //"numberPrefix": "$",
+	                "showBorder": "0",
+	                "showValues": "0",
+	                "paletteColors": "#0075c2,#1aaf5d,#f2c500",
+	                "bgColor": "#ffffff",
+	                "showCanvasBorder": "0",
+	                "canvasBgColor": "#ffffff",
+	                "captionFontSize": "14",
+	                "subcaptionFontSize": "14",
+	                "subcaptionFontBold": "0",
+	                "divlineColor": "#999999",
+	                "divLineIsDashed": "1",
+	                "divLineDashLen": "1",
+	                "divLineGapLen": "1",
+	                "showAlternateHGridColor": "0",
+	                "usePlotGradientColor": "0",
+	                "toolTipColor": "#ffffff",
+	                "toolTipBorderThickness": "0",
+	                "toolTipBgColor": "#000000",
+	                "toolTipBgAlpha": "80",
+	                "toolTipBorderRadius": "4",
+	                "toolTipPadding": "10",
+	                "legendBgColor": "#ffffff",
+	                "legendBorderAlpha": '0',
+	                "legendShadow": '0',
+	                "legendItemFontSize": '10',
+	                "legendItemFontColor": '#666666'
+	            },
+	            "categories": [
+	                {
+	                    "category": [
+	                        {
+	                            "label": "Jan"
+	                        },
+	                        {
+	                            "label": "Feb"
+	                        },
+	                        {
+	                            "label": "Mar"
+	                        },
+	                        {
+	                            "label": "Apr"
+	                        },
+	                        {
+	                            "label": "May"
+	                        },
+	                        {
+	                            "label": "Jun"
+	                        },
+	                        {
+	                            "label": "Jul"
+	                        },
+	                        {
+	                            "label": "Aug"
+	                        },
+	                        {
+	                            "label": "Sep"
+	                        },
+	                        {
+	                            "label": "Oct"
+	                        },
+	                        {
+	                            "label": "Nov"
+	                        },
+	                        {
+	                            "label": "Dec"
+	                        }
+	                    ]
+	                }
+	            ],
+	            "dataset": [
+	                {
+	                    "seriesName": "Actual",
+	                    "showValues": "0",
+	                    "data": [
+	                        {
+	                            "value": "16000"
+	                        },
+	                        {
+	                            "value": "20000"
+	                        },
+	                        {
+	                            "value": "18000"
+	                        },
+	                        {
+	                            "value": "19000"
+	                        },
+	                        {
+	                            "value": "15000"
+	                        },
+	                        {
+	                            "value": "21000"
+	                        },
+	                        {
+	                            "value": "16000"
+	                        },
+	                        {
+	                            "value": "20000"
+	                        },
+	                        {
+	                            "value": "17000"
+	                        },
+	                        {
+	                            "value": "25000"
+	                        },
+	                        {
+	                            "value": "19000"
+	                        },
+	                        {
+	                            "value": "23000"
+	                        }
+	                    ]
+	                },
+	                {
+	                    "seriesName": "Forecast",
+	                    "renderAs": "line",
+	                    "data": [
+	                        {
+	                            "value": "15000"
+	                        },
+	                        {
+	                            "value": "16000"
+	                        },
+	                        {
+	                            "value": "17000"
+	                        },
+	                        {
+	                            "value": "18000"
+	                        },
+	                        {
+	                            "value": "19000"
+	                        },
+	                        {
+	                            "value": "19000"
+	                        },
+	                        {
+	                            "value": "19000"
+	                        },
+	                        {
+	                            "value": "19000"
+	                        },
+	                        {
+	                            "value": "20000"
+	                        },
+	                        {
+	                            "value": "21000"
+	                        },
+	                        {
+	                            "value": "22000"
+	                        },
+	                        {
+	                            "value": "23000"
+	                        }
+	                    ]
+	                },
+	                {
+	                    "seriesName": "Taget",
+	                    "renderAs": "area",
+	                    "data": [
+	                        {
+	                            "value": "4000"
+	                        },
+	                        {
+	                            "value": "5000"
+	                        },
+	                        {
+	                            "value": "3000"
+	                        },
+	                        {
+	                            "value": "4000"
+	                        },
+	                        {
+	                            "value": "1000"
+	                        },
+	                        {
+	                            "value": "7000"
+	                        },
+	                        {
+	                            "value": "1000"
+	                        },
+	                        {
+	                            "value": "4000"
+	                        },
+	                        {
+	                            "value": "1000"
+	                        },
+	                        {
+	                            "value": "8000"
+	                        },
+	                        {
+	                            "value": "2000"
+	                        },
+	                        {
+	                            "value": "7000"
+	                        }
+	                    ]
+	                }
+	            ]
+	        }
+	    }).render();
+	 return false;
+ };
 var generateSubTableKPIFn = function(item,data){
 	var ContentHTML = "";
 	
@@ -356,6 +631,9 @@ var generateSubTableKPIFn = function(item,data){
  var getDataFn = function(page,rpp){
 		var year= $("#param_year").val();
 		var period= $("#param_period").val();
+		var app_type= $("#param_app_type").val();
+		var emp= $("#param_emp").val();
+		var position= $("#param_position").val();
 		var app_lv= $("#param_app_lv").val();
 		var org= $("#param_org_id").val();
 		var kpi= $("#param_kpi_id").val();
@@ -367,6 +645,9 @@ var generateSubTableKPIFn = function(item,data){
 			data:{
 				"year_id":year,
 				"period_id":period,
+				"appraisal_type_id":app_type,
+				"emp_id":emp,
+				"position_id":position,
 				"level_id":app_lv,
 				"org_id":org,
 				"item_id":kpi		
@@ -398,6 +679,9 @@ var getOrgFn = function(data){
 var getDataKPIFn = function(page,rpp){
 	var year= $("#param_year").val();
 	var period= $("#param_period").val();
+	var app_type= $("#param_app_type").val();
+	var emp= $("#param_emp").val();
+	var position= $("#param_position").val();
 	var app_lv= $("#param_app_lv").val();
 	var org= $("#param_org_id").val();
 	var kpi= $("#param_kpi_id").val();
@@ -409,6 +693,9 @@ var getDataKPIFn = function(page,rpp){
 		data:{
 			"year_id":year,
 			"period_id":period,
+			"appraisal_type_id":app_type,
+			"emp_id":emp,
+			"position_id":position,
 			"level_id":app_lv,
 			"org_id":org,
 			"item_id":kpi		
@@ -480,15 +767,18 @@ var getDataKPIFn = function(page,rpp){
 };
 
  
- var searchAdvanceFn = function (year,period,app_lv,org,kpi) {
+ var searchAdvanceFn = function (year,period,app_lv,org,kpi,app_type,emp,position) {
 	//embed parameter start
 		
 		var htmlParam="";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_year' name='param_year' value='"+year+"'>";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_period' name='param_period' value='"+period+"'>";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' name='param_app_lv' value='"+app_lv+"'>";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' name='param_org_id' value='"+org+"'>";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_kpi_id' name='param_kpi_id' value='"+kpi+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_year' 	name='param_year' 		value='"+year+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_period' 	name='param_period' 	value='"+period+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_type' name='param_app_type' 	value='"+app_type+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_emp' 		name='param_emp' 		value='"+emp+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_position' name='param_position' 	value='"+position+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' 	name='param_app_lv' 	value='"+app_lv+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' 	name='param_org_id' 	value='"+org+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_kpi_id' 	name='param_kpi_id' 	value='"+kpi+"'>";
 		$(".paramEmbed").remove();
 		$("body").append(htmlParam);
 		//embed parameter end
@@ -579,7 +869,7 @@ var listDashBoardFn = function(data){
 			$("#next").off("click");
 			$("#next").on("click",function() {
 				  //console.log("Next KPI : "+$(this).attr("data-next"));
-
+							galbalDataTemp['collapse_show'] = $(".collapse.in").get();///Memory Collapse Show
 				  			searchAdvanceFn(
 									$("#param_year").val(),
 									$("#param_period").val(),
@@ -588,13 +878,16 @@ var listDashBoardFn = function(data){
 									$(this).attr("data-next"));
 				  			$("#accordion").show();
 				  			$("#accordion").children().children().next().eq(0).collapse('show');
+				  			$.each(galbalDataTemp['collapse_show'],function(index,indexEntry){
+				  				$("#"+this.id).collapse('show');
+				  			});
 				  			return false;
 				  
 				});
 			$("#previous").off("click");
 			$("#previous").on("click",function() {
 				  //console.log("Next Previous : "+$(this).attr("data-previous"));
-				  			
+				 			galbalDataTemp['collapse_show'] = $(".collapse.in").get();///Memory Collapse Show
 				  			searchAdvanceFn(
 									$("#param_year").val(),
 									$("#param_period").val(),
@@ -602,7 +895,10 @@ var listDashBoardFn = function(data){
 									$("#param_org_id").val(),
 									$(this).attr("data-previous"));
 				  			$("#accordion").show();
-				  			$("#accordion").children().children().next().eq(0).collapse('show');;
+				  			$("#accordion").children().children().next().eq(0).collapse('show');
+				  			$.each(galbalDataTemp['collapse_show'],function(index,indexEntry){
+				  				$("#"+this.id).collapse('show');
+				  			});
 				  			return false;
 				  	
 				});
@@ -676,9 +972,9 @@ var listDashBoardAllKPIFn = function(data){
 	     htmlData2+="</thead>";
 	     htmlData2+="<tbody>";
 	      htmlData2+="<tr>";
-	      htmlData2+="<td >"+addCommas(indexEntry2['target'])+"</td>";
-	      htmlData2+="<td>"+addCommas(indexEntry2['forecast'])+"</td>";
-	      htmlData2+="<td>"+addCommas(indexEntry2['actual'])+"</td>";
+	      htmlData2+="<td style='text-align:right;'>"+addCommas(indexEntry2['target'])+"</td>";
+	      htmlData2+="<td style='text-align:right;'>"+addCommas(indexEntry2['forecast'])+"</td>";
+	      htmlData2+="<td style='text-align:right;'>"+addCommas(indexEntry2['actual'])+"</td>";
 	      htmlData2+="</tr>";
 	      htmlData2+="<tr>";
 	      htmlData2+="<td>%Target</td>";
@@ -706,9 +1002,9 @@ var listDashBoardAllKPIFn = function(data){
 	    htmlData3+="</thead>";
 	     htmlData3+="<tbody>";
 	      htmlData3+="<tr>";
-	      htmlData3+="<td>"+indexEntry2['target']+"</td>";
-	      htmlData3+="<td>"+indexEntry2['forecast']+"</td>";
-	      htmlData3+="<td>"+indexEntry2['actual']+"</td>";
+	      htmlData3+="<td style='text-align:right;'>"+indexEntry2['target']+"</td>";
+	      htmlData3+="<td style='text-align:right;'>"+indexEntry2['forecast']+"</td>";
+	      htmlData3+="<td style='text-align:right;'>"+indexEntry2['actual']+"</td>";
 	      htmlData3+="</tr>";
 	      htmlData3+="<tr>";
 	       htmlData3+="<td>%Target</td>";
@@ -755,9 +1051,11 @@ var listDashBoardAllKPIFn = function(data){
 	 	if(connectionServiceFn(username,password)==false){
 	 		return false;
 	 	}
+	 	$(".advance-search input").val("");
 	 	//Generate DropDown List
 		$("#year").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/year_list","GET"));
 		$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));
+		$("#app_type").html(generateDropDownList(restfulURL+"/see_api/public/appraisal_assignment/appraisal_type_list","GET"));
 		$("#apprasiaLevel").html(generateDropDownList(restfulURL+"/see_api/public/appraisal/al_list","GET"));
 		$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));
 		$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val()})));
@@ -775,7 +1073,10 @@ var listDashBoardAllKPIFn = function(data){
 					$("#period").val(),
 					$("#apprasiaLevel").val(),
 					$("#organization").val(),
-					$("#kpi").val());
+					$("#kpi").val(),
+					$("#app_type").val(),
+					$("#emp_name_id").val(),
+					$("#position_id").val());
 			$("#accordion").show();
 			$("#accordion").children().children().next().eq(0).collapse('show');;
 			return false;
@@ -785,6 +1086,34 @@ var listDashBoardAllKPIFn = function(data){
 		
 		$(".app_url_hidden").show();
 		
+		
+		//Autocomplete Search Start
+		generateAutocomplete("#position",restfulURL+"/see_api/public/cds_result/auto_position_name","post",{"position_name":null});
+		generateAutocomplete("#emp_name",restfulURL+"/see_api/public/cds_result/auto_emp_name","post",{"emp_name":null});
+		//Autocomplete Search End
+		
+		$("#app_type").change(function(){
+			if($("#app_type").val() == "1"){
+
+				$("#position").removeAttr('disabled');
+				$("#emp_name").removeAttr('disabled');
+			}else if($("#app_type").val() == "2"){
+				$("#position").attr("disabled", 'disabled');
+				$("#emp_name").attr("disabled", 'disabled');
+				$("#position").val("");
+				$("#position_id").val("");
+				$("#emp_name").val("");
+				$("#emp_name_id").val("");
+				
+			}
+		});
+		$("#app_type").change();
+		
+		
+		
+		
+		
+		
 		//binding tooltip start
 		 $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
 		 $('[data-toggle="tooltip"]').tooltip({
@@ -792,12 +1121,15 @@ var listDashBoardAllKPIFn = function(data){
 		 });
 		//binding tooltip end
 		 $(".lfr-hudcrumbs").removeClass("lfr-hudcrumbs");
+		 
+		 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			    // is mobile..
+			 //alert(navigator.userAgent);
+			 $("#scrollSubOrg2").css({'max-height':500});
+			 $("#scrollSubOrg1").css({'max-height':500});
+			 $("#scrollSubOrg1").height(500);
+			 $("#scrollSubOrg2").width(740);
+			 
+		 }
 	 }
  });
- 
-
- 
- 
- 
- 
- 

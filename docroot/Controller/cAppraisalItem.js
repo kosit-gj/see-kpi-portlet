@@ -114,7 +114,7 @@ var listDataFn = function(data) {
         		
 		mainContentHTML+="                  <thead>";
 		mainContentHTML+="                      <tr>";
-		mainContentHTML+=" 						<th></th>";
+		//mainContentHTML+=" 						<th></th>";
 		$.each(indexEntry['columns'],function(columns,columnsEntry){
 			if(columnsEntry['data_type']=="number"){
 				mainContentHTML+="                          <th  style='text-align:right;'>"+columnsEntry['column_display']+"</th>";
@@ -142,7 +142,7 @@ var listDataFn = function(data) {
 		$.each(indexEntry['items'],function(items,itemsEntry){
 		
 		mainContentHTML+=" 					<tr>";
-		mainContentHTML+=" 	<td><input type='checkbox' id='checkboxCopy-"+itemsEntry['item_id']+"' name='checkboxCopy-"+itemsEntry['item_id']+"' class='checkboxCopy' value='"+itemsEntry['item_id']+"'></td> ";	
+		//mainContentHTML+=" 	<td><input type='checkbox' id='checkboxCopy-"+itemsEntry['item_id']+"' name='checkboxCopy-"+itemsEntry['item_id']+"' class='checkboxCopy' value='"+itemsEntry['item_id']+"'></td> ";	
 		$.each(indexEntry['columns'],function(columns,columnsEntry){
 		//mainContentHTML+="                			<td>"+itemsEntry[columnsEntry['column_name']]+"</td>";
 		

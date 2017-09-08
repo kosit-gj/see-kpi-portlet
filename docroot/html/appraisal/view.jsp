@@ -57,6 +57,7 @@ String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getP
 	
 	#actionPlanModal{
 		margin-top:0px;
+
 	}
 	.moblieArea{
 		display:none;
@@ -75,6 +76,8 @@ String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getP
 	#actualvsForecastBar{
 		display:'';
 	}
+
+
 	 
   }
   /* Large desktop End######################################*/
@@ -98,6 +101,10 @@ String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getP
 	.breadcrumbs2 .row-fluid .span4{
 			width: 32.624%;
 		}
+		
+	#actionPlanModal{
+		margin-top:0px;
+	}
 		
 	#actionPlanModal{
 		margin-top:0px;
@@ -157,6 +164,7 @@ String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getP
 	#actionPlanModal{
 		margin-top:0px;
 	}
+
 	
 	
 	.moblieArea{
@@ -179,7 +187,7 @@ String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getP
 		display:none;
 	}
  
- 	
+
   }
  /* Portrait tablet to landscape and desktop End############*/ 
  
@@ -209,6 +217,10 @@ String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getP
 	}
 	#smartArea{
 	display:none;
+	}
+	
+	#actionPlanModal{
+		margin-top:0px;
 	}
 	
 	#actionPlanModal{
@@ -252,6 +264,10 @@ String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getP
 	}
 	#smartArea{
 	display:none;
+	}
+	
+	#actionPlanModal{
+		margin-top:0px;
 	}
 	
 	#actionPlanModal{
