@@ -1133,10 +1133,3 @@ var listDashBoardAllKPIFn = function(data){
 		 }
 	 }
  });
- 
-
- 
- 
- ฟ
- 
- 
