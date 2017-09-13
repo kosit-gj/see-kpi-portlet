@@ -63,7 +63,7 @@ function getParamValue(paramName)
             return pArr[1]; //return value
     }
 }
-
+ 
 var connectionServiceFn = function(username,password,plid){
 	var checkConnection=true;
 	$.ajax({
