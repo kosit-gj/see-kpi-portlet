@@ -1210,9 +1210,20 @@
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	     
-	    <footer-portlet-javascript>/Controller/cDashboardOverallSubordinate.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/cDashboardSubordinatePerformance.js</footer-portlet-javascript>
 		<css-class-wrapper>
 			dashboard-subordinate-performance-portlet
+		</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>dashboard-overall-performance</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			dashboard-overall-performance-portlet
 		</css-class-wrapper>
 	</portlet>
 	<role-mapper> 

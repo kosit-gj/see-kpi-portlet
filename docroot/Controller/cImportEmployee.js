@@ -504,7 +504,7 @@ $(document).ready(function() {
 	 var plid = $('#plid_portlet').val();
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
 	 	
-		 if(connectionServiceFn(username,password,plid)==true){
+		 if(connectionServiceFn(username,password,plid)==false){
 	 		return false;
 	 	}
 	 }
