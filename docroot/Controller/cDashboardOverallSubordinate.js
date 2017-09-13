@@ -1,9 +1,52 @@
- var restfulPathDashboard="/see_api/public/cds_result";
+ var restfulPathDashboard="/see_api/public/cds_result"; 
  var galbalDashboard=[];
  var galbalDataTemp = [];
  galbalDataTemp['galbalOrg'] = [];
  galbalDataTemp['extract'] = false;
- galbalDataTemp['All_KPI'] = {};
+ galbalDataTemp['All_KPI'] = [ {
+		"color" : "#00aee4",
+		"data" : [ {
+			"x" : "80",
+			"y" : "15000",
+			"z" : "24",
+			"name" : "Nike"
+		}, {
+			"x" : "60",
+			"y" : "18500",
+			"z" : "26",
+			"name" : "Adidas"
+		}, {
+			"x" : "50",
+			"y" : "19450",
+			"z" : "19",
+			"name" : "Puma"
+		} ]
+	}, {
+		"data" : [ {
+
+			"x" : "32",
+			"y" : "22000",
+			"z" : "10",
+			"name" : "Reebok"
+		}, {
+			"x" : "44",
+			"y" : "13000",
+			"z" : "9",
+			"name" : "Woodland"
+		} ]
+	}, {
+		"data" : [ {
+			"x" : "65",
+			"y" : "10500",
+			"z" : "8",
+			"name" : "Fila"
+		}, {
+			"x" : "43",
+			"y" : "8750",
+			"z" : "5",
+			"name" : "Lotto"
+		} ]
+	} ];
  galbalDataTemp['collapse_show']="";
 //# Generate Drop Down List
  var generateDropDownList = function(url,type,request,initValue){
@@ -93,83 +136,7 @@
 	         }
 	    });
  }
- var generateAccordionHTML = function(parent,data){
-		var kpi_id = galbalDataTemp["item_id"];
-		var accordionHtml = "";
-		if(parent == "group1"){
-			accordionHtml += "<div id='orgParent' class='panel panel-default sortableItem'>";
-		}else{
-			accordionHtml += "<div class='panel panel-default sortableItem'>";
-		}
-			
-		accordionHtml += "	<div class='panel-heading' role='tab' id='headOrg-"+data['org_id']+"'>";
-		accordionHtml += "		<h4 class='panel-title' "+(parent == "group1" ? "style='margin-top: 5px; margin-bottom: 5px;' " : "")+">";
-		accordionHtml += "			 <a class='collapsed row' role='button' data-toggle='collapse' data-parent='#accordion' href='#bodyOrg-"+data['org_id']+"' aria-expanded='false' aria-controls='bodyOrg-"+data['org_id']+"' style='color: black;font-weight: bold;'>";
-		
-		if(parent == "group1"){
-			accordionHtml += "<div class='accordion-content span10' style=''>";
-			accordionHtml += "	<div style='margin-bottom: auto; margin-top: auto;'><span class='fa fa-caret-right'></span> "+data['org_name']+"&emsp;</div>";
-			accordionHtml += "</div>";
-			accordionHtml += "<div class='accordion-btn'>";
-			accordionHtml += "<button id='btn_extract' type='button' class='btn btn-xs btn-white' style='margin-top: -1px;font-weight: 700;'> <i class='fa fa-plus-square' aria-hidden='true'></i> Expand</button>";
-			accordionHtml += "<button id='btn_kpi' type='button' data-target='#ModalKPI' data-toggle='modal' class='btn btn-xs btn-white' style='margin-top: -1px;margin-left: 5px;font-weight: 700;'> <i class='fa fa-table fa-table' aria-hidden='true'></i> All KPI</button>";
-			accordionHtml += "</div>";
-		}else{
-			accordionHtml += "<span class='fa fa-caret-right'></span> "+data['org_name']+"&emsp;";	
-		}
-		
-		accordionHtml += "			</a>";	
-		accordionHtml += "		</h4>";	
-		accordionHtml += "	</div>";	
-		accordionHtml += "	<div id='bodyOrg-"+data['org_id']+"' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headOrg-"+data['org_id']+"'>";	
-		accordionHtml += "		<div class='panel-body'>";
-		//#Start Body Accordion
-		accordionHtml += "				<div class='span12 graphLTopHeader'>"+data['perspective_name']+" - "+data['item_name']+"</div>";		
-		//#btn next & previous kpi
-		if(kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val()))-1] !=  undefined && parent == "group1"){
-			accordionHtml += "			<span id='previous' class='arrow' data-previous='"+kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val()))-1]+"'></span>";
-		}
-		if(kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val()))+1] !=  undefined && parent == "group1"){
-			accordionHtml += "			<span id='next' class='arrow' data-next='"+kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val()))+1]+"'></span>";	
-		}
-		
-		accordionHtml += "			<div class='' style='height: auto;'>";
-		
-		accordionHtml += "				<div class='span4'>";
-		//accordionHtml += "				<div class='graphLTopHeader'>Perspective: "+data['perspective_name']+"</div>";
-		accordionHtml += "					<div>";
-		accordionHtml += "						<div class='graphLTop'>";
-		accordionHtml += "							<div class='textGRaphTop'>Target</div>";
-		accordionHtml += "							<div class='textGRaphTop'>"+addCommas(data['dual_chart']['data']['target'])+"</div>";
-		accordionHtml += "						</div>";
-		accordionHtml += "						<div class='graphLTop'>";
-		accordionHtml += "							<div class='textGRaphTop'>Forecast</div>";
-		accordionHtml += "							<div class='textGRaphTop'>"+addCommas(data['dual_chart']['data']['forecast'])+"</div>";
-		accordionHtml += "						</div>";
-		accordionHtml += "						<div class='graphLTop'>";
-		accordionHtml += "							<div class='textGRaphTop'>Actual</div>";
-		accordionHtml += "							<div class='textGRaphTop'>"+addCommas(data['dual_chart']['data']['actual_value'])+"</div>";
-		accordionHtml += "						</div>";
-		accordionHtml += "						<br style='clear: both'>";
-		accordionHtml += "					</div>";
-		accordionHtml += "					<div>";
-		accordionHtml += "						<div id='chartOrgGauge-"+data['org_id']+"'></div>";
-		accordionHtml += "					</div>";
-		accordionHtml += "				</div>";	
-		accordionHtml += "				</div>";
-		accordionHtml += "				<div class='span8'>";
-		//accordionHtml += "					<div class='graphLTopHeader' style='margin-bottom: 3px;'>KPI: "+data['item_name']+"</div>";
-		accordionHtml += "					<div id='chartOrgBar-"+data['org_id']+"'></div>";
-		accordionHtml += "				</div>";
-		accordionHtml += "			</div>";
-		//#End Body Accordion
-		accordionHtml += "		</div>";	
-		accordionHtml += "</div>";
-
-		return accordionHtml;
-		//$("#accordion").append(accordionHtml);
-		
-}
+ 
  var generateChartGaugeFn = function(data){
 	 var color = [];
 	 $.each(data['dual_chart']['color_range'],function(index,indexEntry){
@@ -306,18 +273,6 @@
 		               //"subCaption": "Harry's SuperMart",
 		                "xAxisName": "Month",
 		                "yAxisName": "YTD Actual",
-		                "xAxisNameFont": "Arial",
-		                "xAxisNameFontSize": "14",
-		                "xAxisNameFontColor": "#993300",
-		                "xAxisNameFontBold": "1",
-		                //"xAxisNameFontItalic": "1",
-		                "xAxisNameAlpha": "80",
-		                "yAxisNameFont": "Arial",
-		                "yAxisNameFontSize": "14",
-		                "yAxisNameFontColor": "#993300",
-		                "yAxisNameFontBold": "1",
-		                //"yAxisNameFontItalic": "1",
-		                "yAxisNameAlpha": "80",
 		                //"numberPrefix": "$",
 		                "showBorder": "0",
 		                "paletteColors": "#0075c2",
@@ -375,18 +330,6 @@
 	                //"subCaption": "Sales analysis of last year",
 	                "xAxisname": "Month",
 	                "yAxisName": "Monthly Actual",
-	                "xAxisNameFont": "Arial",
-	                "xAxisNameFontSize": "14",
-	                "xAxisNameFontColor": "#993300",
-	                "xAxisNameFontBold": "1",
-	                "xAxisNameFontItalic": "1",
-	                "xAxisNameAlpha": "80",
-	                "yAxisNameFont": "Arial",
-	                "yAxisNameFontSize": "14",
-	                "yAxisNameFontColor": "#993300",
-	                "yAxisNameFontBold": "1",
-	                "yAxisNameFontItalic": "1",
-	                "yAxisNameAlpha": "80",
 	                //"numberPrefix": "$",
 	                "showBorder": "0",
 	                "showValues": "0",
@@ -589,70 +532,51 @@
 	    }).render();
 	 return false;
  };
-var generateSubTableKPIFn = function(item,data){
-	var ContentHTML = "";
-	
-	ContentHTML+="<table class='tableInside table-striped'>";
-	ContentHTML+="	<thead>";
-	ContentHTML+="		<tr>";
-	ContentHTML+="			<th><div class='fontBold ' style='width:100px'>Target</div></th>";
-	ContentHTML+="			<th><div class='fontBold ' style='width:100px'>Forecast</div></th>";
-	ContentHTML+="			<th><div class='fontBold ' style='width:100px'>Actual</div></th>";
-	ContentHTML+="		</tr>";
-	ContentHTML+="	</thead>";
-	ContentHTML+="	<tbody>";
-	ContentHTML+="		<tr>";
-	ContentHTML+="			<td>"+data['target']+"</td>";
-	ContentHTML+="			<td>"+data['forecast']+"</td>";
-	ContentHTML+="			<td>"+data['actual']+"</td>";
-	ContentHTML+="		</tr>";
-	ContentHTML+="		<tr>";
-	ContentHTML+="			<td>%Target</td>";
-	ContentHTML+="			<td colspan='2'><div id='perTarget-Item-"+item+"-Org-"+data['org_code']+"' class='sparkline'></div></td>";
-	ContentHTML+="		</tr>";
-	ContentHTML+="		<tr>";
-	ContentHTML+="			<td>%Forecast</td>";
-	ContentHTML+="			<td colspan='2'><div id='perForecast-Item-"+item+"-Org-"+data['org_code']+"' class='sparkline'></div></td>";
-	ContentHTML+="		</tr>";
-	ContentHTML+="	</tbody>";
-	ContentHTML+="</table'>";
-	//console.log(ContentHTML);
-	return ContentHTML;
-/* ### Ex.return ###
-					<!-- table start -->
-					<table class='tableInside table-striped'>
-						<thead>
-							<tr>
-								<th><div class='fontBold '>Target</div></th>
-								<th><div class='fontBold '>Forecast</div></th>
-								<th><div class='fontBold '>Actual</div></th>
-							</tr>
-							
-						</thead>
-						<tbody>
-							<tr>
-								<td>4</td>
-								<td>3.5</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>%Target</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
-							<tr>
-								<td>%Forecast</td>
-								<td colspan='2'><div class='sparkline'></div></td>
-								
-							</tr>
-						</tbody>
-					</table>
-					<!-- table end -->
- */	
-	
-	
-	
-};
+ var generateChartBubbleFn = function(data){	
+	 var analysisChart = new FusionCharts({
+	        type: 'bubble',
+	        renderAt: 'listBubbleChart',
+	        width: '100%',
+	        height: '400',
+	        dataFormat: 'json',
+	        dataSource: {
+	            "chart": {
+//	                "caption": "Sales Analysis of Shoe Brands",
+//	                "subcaption": "Last Quarter",
+	                "xAxisMinValue": "0",
+	                "xAxisMaxValue": "5",
+	                "yAxisMinValue": "0",
+	                "yAxisMaxValue": "5",
+	                "xAxisNameFont": "Arial",
+	                "xAxisNameFontSize": "16",
+	                "xAxisNameFontColor": "#993300",
+	                "xAxisNameFontBold": "1",
+	                "xAxisNameFontItalic": "1",
+	                "xAxisNameAlpha": "80",
+	                "yAxisNameFont": "Arial",
+	                "yAxisNameFontSize": "16",
+	                "yAxisNameFontColor": "#993300",
+	                "yAxisNameFontBold": "1",
+	                "yAxisNameFontItalic": "1",
+	                "yAxisNameAlpha": "80",
+	                "plotFillAlpha": "70",
+	                "plotFillHoverColor": "#eeeeee",
+	                "showPlotBorder": "0",
+	                "xAxisName": "Target",
+	                "yAxisName": "Actual",
+	                "numDivlines": "2",
+	                "showValues":"1",
+	                "showTrendlineLabels": "0",
+	                "chartLeftMargin": "35",
+	                "chartRightMargin": "35",
+	                //Dynamic tool-tips with HTML and macro variables
+	                "plotTooltext": "<div id='nameDiv'>$name :</div>{br}Average Price : <b>$$xDataValue</b>{br}Units Sold : <b>$yDataValue</b>{br}Profit Contribution : <b>$zvalue%</b>",
+	                "theme": "fint"
+	            },
+	            "dataset" : data
+	        }
+	    }).render();
+ };
  var getDataFn = function(page,rpp){
 		var year= $("#param_year").val();
 		var period= $("#param_period").val();
@@ -664,8 +588,8 @@ var generateSubTableKPIFn = function(item,data){
 		var kpi= $("#param_kpi_id").val();
 
 		$.ajax({
-			url : restfulURL+"/see_api/public/dashboard/content",
-			type : "post",
+			url : restfulURL+"/see_api/public/dashboard/kpi_overall",
+			type : "get",
 			dataType : "json",
 			data:{
 				"year_id":year,
@@ -687,111 +611,6 @@ var generateSubTableKPIFn = function(item,data){
 		});	
 };
 
-var getOrgFn = function(data){
-	galbalDataTemp['galbalOrg'] = [];
-	  if(data[0]['org']!=undefined){
-	   $.each(data[0]['org'],function(index,indexEntry){
-		   
-		galbalDataTemp['galbalOrg'].push({"org_code":indexEntry['org_code'],"org_name":indexEntry['org']});
-	    //console.log(indexEntry['org']);
-	   });
-	   
-	   listHeaderFn(galbalDataTemp['galbalOrg']);
-	  }
-	  
-};
-
-var getDataKPIFn = function(page,rpp){
-	var year= $("#param_year").val();
-	var period= $("#param_period").val();
-	var app_type= $("#param_app_type").val();
-	var emp= $("#param_emp").val();
-	var position= $("#param_position").val();
-	var app_lv= $("#param_app_lv").val();
-	var org= $("#param_org_id").val();
-	var kpi= $("#param_kpi_id").val();
-
-	$.ajax({
-		url : restfulURL+"/see_api/public/dashboard/all_content",
-		type : "post",
-		dataType : "json",
-		data:{
-			"year_id":year,
-			"period_id":period,
-			"appraisal_type_id":app_type,
-			"emp_id":emp,
-			"position_id":position,
-			"level_id":app_lv,
-			"org_id":org,
-			"item_id":kpi		
-		},
-		headers:{Authorization:"Bearer "+tokenID.token},
-		async:false,// w8 data 
-		success : function(data) {
-			
-			galbalDataTemp['All_KPI']=data;
-			getOrgFn(data);
-			listDashBoardAllKPIFn(data);
-			$("#ModalKPI").modal('show');
-			$("#scrollOrg *").scrollTop(0).scrollLeft(0);
-			$('#subTableKPI1 , #subTableKPI2').css('margin-top', "0");
-			$("#subTableKPI1").html($("#tableAllKPI1 > thead").clone()).show();
-			$("#subTableKPI2").html($("#tableAllKPI2 > thead").clone()).show(); 
-			
-			$("#scrollOrg *").unbind( "mouseenter , mouseleave, scroll" );
-			$( "#scrollSubOrg1" ).bind({
-			  mouseenter: function() {
-			   
-			    //console.log("in");
-			    $("#scrollSubOrg3").unbind( "scroll" );
-			    $("#scrollSubOrg2").bind("scroll", function() {
-			            
-								    var offset = $(this).scrollTop();
-								    //console.log(offset);
-								    $('#scrollSubOrg3').scrollTop(offset);
-							        $('#subTableKPI1').css('margin-top', offset);
-							        $('#subTableKPI2').css('margin-top', offset);
-
-								});
-			    
-			    
-			  },
-			  mouseleave: function() {
-			    $("#scrollSubOrg2").unbind("scroll");
-			    //console.log("out");
-			    $("#scrollSubOrg3").bind("scroll", function() {
-			             //$("#scrollSubOrg2").unbind( "scroll" );
-								    var offset = $(this).scrollTop();
-			         
-								    $('#scrollSubOrg2').scrollTop(offset);
-							        $('#subTableKPI1').css('margin-top', offset);
-							        $('#subTableKPI2').css('margin-top', offset);
-
-								});
-			  }
-			});
-
-
-			$("#scrollSubOrg3").bind("scroll", function() {
-								    var offset = $(this).scrollTop();
-			         
-								    $('#scrollSubOrg2').scrollTop(offset);
-							        $('#subTableKPI1').css('margin-top', offset);
-							        $('#subTableKPI2').css('margin-top', offset);
-
-								});
-			
-			setTimeout(function(){ 
-				
-				generateChartBulletSparkFn(data);
-				//$('.sparkline').show();
-				$("body").mLoading('hide');
-			}, 2000);
-			
-		}
-	});	
-};
-
  
  var searchAdvanceFn = function (year,period,app_lv,org,kpi,app_type,emp,position) {
 	//embed parameter start
@@ -811,246 +630,32 @@ var getDataKPIFn = function(page,rpp){
 		getDataFn();
 };
  
-var listHeaderFn=function(galbalOrg){
-	 var htmlHeader1 = "";
-	 var htmlHeader2 = "";
-	 var htmlHeaderMain = "";
-	 var htmlHeaderSummary1 = "";
-	 var htmlHeaderSummary2 = "";
-	 
-	 htmlHeader1+="<th style='width:120px;'>";
-	 htmlHeader1+="<div class='fontBold '> Perspective</div>";
-	 htmlHeader1+="</th>";
-	 
-	 htmlHeader1+="<th style='width:237px;'>";
-	 htmlHeader1+="<div class='fontBold '>KPI</div>";
-	 htmlHeader1+="</th>";
-	 
-	 htmlHeader1+="<th style='width:60px;'>";
-	 htmlHeader1+="<div class='fontBold '>UOM</div>";
-	 htmlHeader1+="</th>";
-	 
-	 $.each(galbalOrg,function(index,indexEntry){
-	  //console.log(indexEntry);
-	  if(indexEntry['org_code']=="00"){
-	   htmlHeaderMain+="<th style='min-width:323px;'>";
-	    htmlHeaderMain+="<div class='fontBold fontCenter'>"+indexEntry['org_name']+"</div>";
-	   htmlHeaderMain+="</th>";
-	  }else{
-	   htmlHeader2+="<th style='min-width:323px;'>";
-	    htmlHeader2+="<div class='fontBold fontCenter'>"+indexEntry['org_name']+"</div>";
-	   htmlHeader2+="</th>";
-	  }
-	 });
-	 htmlHeaderSummary1+=htmlHeader1;
-	 htmlHeaderSummary1+=htmlHeaderMain;
-	 htmlHeaderSummary2+=htmlHeader2;
-	 $("#listHeader1").html(htmlHeaderSummary1);
-	 $("#listHeader2").html(htmlHeaderSummary2);
-	 
-	 
-};
+
 
 var listDashBoardFn = function(data){
-	 
-	 $("#accordion").empty();
-	 $("#accordion").hide();
-	 html = "";
-	 $.each(data , function(inedx,indexEntry){
-		 html+=generateAccordionHTML(inedx,indexEntry);
-	 });
-	 $("#accordion").html(html);
-	 
-	 
-	 $.each(data , function(inedx,indexEntry){
-//		 generateChartGaugeFn(indexEntry);
-//		 generateChartBarFn(indexEntry);
-		 $.when(generateChartGaugeFn(indexEntry),generateChartBarFn(indexEntry)).then(function() {
-				    //console.log(inedx+" Loading Chart: Success");
-		});
-	 });
-	 
-
-		// Add minus icon for collapse element which is open by default
-	    $(".collapse.in").each(function(){
-	    	$(this).siblings(".panel-heading").find(".fa").addClass("fa-caret-down").removeClass("fa-caret-right");
-	    });
-	    
-	    // Toggle plus minus icon on show hide of collapse element
-	    $(".collapse").on('show.bs.collapse', function(){
-	    	$(this).prev().css({"background": "#"+tokenID.theme_color});
-	    	$(this).parent().css({"border-color": "#"+tokenID.theme_color});
-	    	$(this).parent().find(".fa").removeClass("fa-caret-right").addClass("fa-caret-down");
-	    	$("#btn_kpi").find(".fa").removeClass("fa-caret-down").addClass("fa-table");
-	    }).on('hide.bs.collapse', function(){
-	    	$(this).parent().css({"border-color": "#c5c5c5"});
-	    	$(this).prev().css({"background": "#f6f6f6"});
-	    	$(this).parent().find(".fa").removeClass("fa-caret-down").addClass("fa-caret-right");
-	    	$("#btn_kpi").find(".fa").removeClass("fa-caret-right").addClass("fa-table");
-	    });
-
-
-	    //Open Parent Org
-
-			$("#next , #previous").off("click");
-			$("#next , #previous").on("click",function() {
-				  //console.log("Next KPI : "+$(this).attr("data-next"));
-							galbalDataTemp['collapse_show'] = $(".collapse.in").get();///Memory Collapse Show
-							
-							$("#param_kpi_id").val($(this).attr("data-"+this.id));
-							//console.log($(this).attr("data-"+this.id));
-							getDataFn();
-
-				  			$("#accordion").show();
-				  			$("#accordion").children().children().next().eq(0).collapse('show');
-				  			$.each(galbalDataTemp['collapse_show'],function(index,indexEntry){
-				  				$("#"+this.id).collapse('show');
-				  			});
-				  			return false;
-				  
-				});
-			
-			$("#btn_extract").off("click");
-			$("#btn_extract").click(function(event){
-				  event.stopPropagation();
-				  if(galbalDataTemp['extract'] == true){
-					  //console.log(galbalDataTemp['extract']);
-				    $("#btn_extract").find(".fa").removeClass("fa-minus-square").addClass("fa-plus-square");
-				    
-				    $("#accordion").children().children().next().collapse('hide');
-				    galbalDataTemp['extract'] = false;
-				  }
-				  else if(galbalDataTemp['extract'] == false){
-					  //console.log(galbalDataTemp['extract']);
-					  $("#btn_extract").find(".fa").removeClass("fa-plus-square").addClass("fa-minus-square");
-					  $("#btn_kpi").find(".fa").removeClass("fa-plus-square").addClass("fa-table");
-					    $("#accordion").children().children().next().collapse('show');
-					    galbalDataTemp['extract'] = true;
-				  }
-				});
-			$("#btn_kpi").off("click");
-			$("#btn_kpi").click(function(event){
-				  event.stopPropagation();
-				  event.preventDefault();
-				  $("#ModalKPI").modal('hide');
-				  getDataKPIFn();
-				  
-				  $("body").mLoading();
-//				  document.body.scrollTop = 0;
-//				  document.documentElement.scrollTop = 0;
-				  $('html, body').animate({
-				        scrollTop: $("#ModalKPI").offset().top
-				    }, 0);
-				  
-
-				  
-				  //http://localhost/see_api/public/dashboard/all_content
-				});
-			$( "#accordion" ).sortable({
-				 // revert: true
-				 items: '.sortableItem:not(#orgParent)'
-				});
-			$('#accordion').disableSelection();
+	 $("#txtTopic").html(data['header']);
+	 generateChartBubbleFn(data['dataset']);
+	 var html = "";
+	 var kpi_id = galbalDataTemp["item_id"];
+	 if (kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val())) - 1] != undefined ) {
+		 html += "			<span id='previous' class='arrow' data-previous='"
+				+ kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val())) - 1]
+				+ "'></span>";
+	 }
+	 if (kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val())) + 1] != undefined) {
+		 html += "			<span id='next' class='arrow' data-next='"
+				+ kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val())) + 1]
+				+ "'></span>";
+	 }
+	 $("#pager").html(html);
+	 $("#next , #previous").off("click");
+	 $("#next , #previous").on("click",function() {
+		 $("#param_kpi_id").val($(this).attr("data-"+this.id));
+		 getDataFn();
+		 return false;
+	});
  };
-var listDashBoardAllKPIFn = function(data){
 
-	var htmlData1="";
-	var htmlData3="";
-	 $.each(data,function(index,indexEntry){
-	  var htmlData2="";
-	  htmlData1+="<tr>";
-	  htmlData3+="<tr>";
-	   htmlData1+="<td>"+indexEntry['perspective']+"</td>";
-	   htmlData1+="<td>"+indexEntry['item']+"</td>";
-	   htmlData1+="<td>"+indexEntry['uom']+"</td>";
-	   
-	   //loop here..
-	   $.each(indexEntry['org'],function(index2,indexEntry2){
-	   
-	   if(indexEntry2['org_code']=="00"){
-	    
-	    htmlData2+="<td>"; 
-	    htmlData2+="<table class='tableInside table-striped'>";
-	    htmlData2+="<thead>";
-	    htmlData2+="<tr>";
-	    htmlData2+="<th><div class='fontBold ' style='min-width:100px'>Target</div></th>";
-	    htmlData2+="<th><div class='fontBold '  style='min-width:100px'>Forecast</div></th>";
-	    htmlData2+="<th><div class='fontBold ' style='min-width:100px'>Actual</div></th>";
-	      htmlData2+="</tr>";
-	     htmlData2+="</thead>";
-	     htmlData2+="<tbody>";
-	      htmlData2+="<tr>";
-	      htmlData2+="<td style='text-align:right;'>"+addCommas(indexEntry2['target'])+"</td>";
-	      htmlData2+="<td style='text-align:right;'>"+addCommas(indexEntry2['forecast'])+"</td>";
-	      htmlData2+="<td style='text-align:right;'>"+addCommas(indexEntry2['actual'])+"</td>";
-	      htmlData2+="</tr>";
-	      htmlData2+="<tr>";
-	      htmlData2+="<td>%Target</td>";
-	      htmlData2+="<td colspan='2'><div class='sparkline' id='perTarget"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_target_str']+"</div></td>";
-	      htmlData2+="</tr>";
-	      htmlData2+="<tr>";
-	      htmlData2+="<td>%Forecast</td>";
-	      htmlData2+="<td colspan='2'><div class='sparkline' id='perForecast"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_forecast_str']+"</div></td>";  
-	      htmlData2+="</tr>";
-	     htmlData2+="</tbody>";
-	    htmlData2+="</table>";
-	    htmlData2+="</td>";
-	    
-	   }else{
-	    
-	    
-	    htmlData3+="<td>"; 
-	    htmlData3+="<table class='tableInside table-striped'>";
-	    htmlData3+="<thead>";
-	     htmlData3+="<tr>";
-	      htmlData3+="<th><div class='fontBold ' style='min-width:100px;'>Target</div></th>";
-	      htmlData3+="<th><div class='fontBold ' style='min-width:100px;'>Forecast</div></th>";
-	      htmlData3+="<th><div class='fontBold ' style='min-width:100px;'>Actual</div></th>";
-	      htmlData3+="</tr>";
-	    htmlData3+="</thead>";
-	     htmlData3+="<tbody>";
-	      htmlData3+="<tr>";
-	      htmlData3+="<td style='text-align:right;'>"+indexEntry2['target']+"</td>";
-	      htmlData3+="<td style='text-align:right;'>"+indexEntry2['forecast']+"</td>";
-	      htmlData3+="<td style='text-align:right;'>"+indexEntry2['actual']+"</td>";
-	      htmlData3+="</tr>";
-	      htmlData3+="<tr>";
-	       htmlData3+="<td>%Target</td>";
-	       htmlData3+="<td colspan='2'><div class='sparkline' id='perTarget"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_target_str']+"</div></td>";
-	      htmlData3+="</tr>";
-	      htmlData3+="<tr>";
-	       htmlData3+="<td>%Forecast</td>";
-	       htmlData3+="<td colspan='2'><div class='sparkline' id='perForecast"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_forecast_str']+"</div></td>";   
-	      htmlData3+="</tr>";
-	      htmlData3+="</tbody>";
-	    htmlData3+="</table>";
-	    htmlData3+="</td>";
-	    
-	   }
-	   
-	   });
-	   htmlData1+=htmlData2;
-	   //htmlData1+=htmlData3;
-	   //loop
-	  htmlData1+="</tr>";
-	  htmlData3+="</tr>";
-	  
-	  
-	 });
-	 
-	 $("#listData1").html(htmlData1);
-	 $("#listData2").html(htmlData3);
-	 
-	 //..loop chart
-/*	 $.each(data,function(index,indexEntry){
-		 $.each(indexEntry['org'],function(index2,indexEntry2){
-			 generateChartBulletFn("perTarget"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code'],indexEntry2['percent_target'],indexEntry['color']);
-			 generateChartBulletFn("perForecast"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code'],indexEntry2['percent_forecast'],indexEntry['color']);
-		 });
-	 });
-*/	  
-	 
-};
  $(document).ready(function(){
 	var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
@@ -1086,8 +691,7 @@ var listDashBoardAllKPIFn = function(data){
 					$("#app_type").val(),
 					$("#emp_name_id").val(),
 					$("#position_id").val());
-			$("#accordion").show();
-			$("#accordion").children().children().next().eq(0).collapse('show');;
+			$("#listSubordinate").show();
 			return false;
 		});
 		
@@ -1131,14 +735,6 @@ var listDashBoardAllKPIFn = function(data){
 		//binding tooltip end
 		 $(".lfr-hudcrumbs").removeClass("lfr-hudcrumbs");
 		 
-		 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-			    // is mobile..
-			 //alert(navigator.userAgent);
-			 $("#scrollSubOrg2").css({'max-height':500});
-			 $("#scrollSubOrg1").css({'max-height':500});
-			 $("#scrollSubOrg1").height(500);
-			 $("#scrollSubOrg2").width(740);
-			 
-		 }
+		 
 	 }
  });
