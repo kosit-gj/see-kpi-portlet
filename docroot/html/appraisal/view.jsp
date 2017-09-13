@@ -22,6 +22,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 String param_link = PortalUtil.getOriginalServletRequest(request).getParameter("param_link");
 String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getParameter("param_item_result_id");
+layout = themeDisplay.getLayout();
+plid = layout.getPlid();
 //out.print(param);
 //out.print("password2="+password);
 %>
@@ -31,6 +33,7 @@ String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getP
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
+<input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
 
 <style>
 
@@ -75,6 +78,10 @@ String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getP
 	}
 	#actualvsForecastBar{
 		display:'';
+	}
+	
+	.aui .row-fluid#advanceSearchAppraisal .span3{
+		width: 24.5%;
 	}
 
 
@@ -128,6 +135,10 @@ String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getP
 	#actualvsForecastBar{
 		display:'';
 	}	
+	
+	.aui #advanceSearchAppraisal.row-fluid .span3 {
+    	width: 32.5%;
+	}
 		
  	
   }
@@ -186,6 +197,10 @@ String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getP
 	#actualvsForecastBar{
 		display:none;
 	}
+	
+	.aui #advanceSearchAppraisal.row-fluid .span3 {
+	    width: 24.2%;
+	}
  
 
   }
@@ -243,6 +258,25 @@ String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getP
 	#actualvsForecastBar{
 		display:'';
 	}
+	
+	/*btn area start*/
+	#btnSaveActionPlan{
+		width:100%;
+	}
+	#btnCancelActionPlan{
+		width:100%;
+	}
+	
+	#btnAddActionPlan{
+		width:100%;
+	}
+	#btnEditActionPlan{
+		width:100%;
+	}
+	#btnDelActionPlan{
+		width:100%;
+	}
+	/*btn area end*/
  
   }
  /* Landscape phone to portrait tablet End##################*/ 
@@ -294,6 +328,19 @@ String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getP
 	
 	/*btn area start*/
 	#btnSaveActionPlan{
+		width:100%;
+	}
+	#btnCancelActionPlan{
+		width:100%;
+	}
+	
+	#btnAddActionPlan{
+		width:100%;
+	}
+	#btnEditActionPlan{
+		width:100%;
+	}
+	#btnDelActionPlan{
 		width:100%;
 	}
 	/*btn area end*/
@@ -394,7 +441,7 @@ String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getP
 	background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #fff 0px, #f6f6f6 47%, #ededed 100%) repeat scroll 0 0;
     border-radius: 0;
     margin-bottom: 0;
-  	padding-bottom: 0px
+  	/*padding-bottom: 0px*/
 
 }
 .aui .searchAdvanceText{
@@ -476,14 +523,14 @@ margin-bottom:1px;
 }
 /* Update by au */
 
-/*.aui .btn {
+.aui .btn {
 	font-size: 14px;
  	padding: 4px 12px; 
 	width: auto;
 	margin-top: 0px;
 	display: inline;
 }
-*/
+
 
 .aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input {
     height: 30px;
@@ -637,7 +684,7 @@ margin-bottom:1px;
 
 							<div class="ibox-content breadcrumbs2">
 														
-								<div class="row-fluid">
+								<div class="row-fluid" id='advanceSearchAppraisal'>
 							
 							<div class="form-group pull-left span3" style="margin-left: 5px">
 									<select data-toggle="tooltip" title="" data-original-title="Year"
@@ -699,18 +746,11 @@ margin-bottom:1px;
 										<option>All Organization</option>
 									</select>
 								</div>
-								<!-- 
-								<div id="" class="form-group pull-left span4" style="margin-left: 5px">
-									<input data-toggle="tooltip" title="" data-original-title="Organization"
-										class="form-control input-sm searchAdvanceText span12"
-										placeholder="Organization" type="text" id="organization" name="organization">
-								</div>
-								 -->
+							
 								
 								
 								
-								<div class="form-group pull-right m-b-none "
-									style="margin-bottom: 5px;">
+								<div class="form-group span3 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
 									<button type="button" class="btn btn-info input-sm"
 										name="btnSearchAdvance" id="btnSearchAdvance">
 										<i class="fa fa-search"></i>&nbsp;Search
@@ -721,141 +761,7 @@ margin-bottom:1px;
 							</div>
 														
 							
-							<!--
-									<div class="row-fluid">
-										<div class="span4">
-											<div class="form-group p-xxs">
-												<label class="span5 p-t-xxs">Appraisal Year</label>
-												<div class="span7">
-													<select data-toggle="tooltip" title=""
-														class="input form-control input-sm span12" id="AppraisalYear"
-														name="AppraisalYear">
-														
-													</select>
-												</div>
-	
-											</div>
-										</div>
-	
-										<div class="span4">
-											<div class="form-group p-xxs">
-												<label class="span5 p-t-xxs">Appraisal Period</label>
-												<div class="span7">
-													<select data-toggle="tooltip" title=""
-														class="input form-control input-sm span12"
-														id="AppraisalPeriod" name="AppraisalPeriod">
-														<option>All</option>
-													</select>
-												</div>
-	
-											</div>
-	
-										</div>
-										<div class="span4">
-											<div class="form-group p-xxs">
-												<label class="span5 p-t-xxs">Appraisal Level</label>
-												<div class="span7">
-													<select data-toggle="tooltip" title=""
-														class="input form-control input-sm span12"
-														id="AppraisalLevel" name="AppraisalLevel">
-														<option>All</option>
-														<option>ระดับบริหาร</option>
-														<option>ระดับการจัดการ</option>
-														<option>ระดับบังคับบัญชา</option>
-														<option>ระดับเจ้าหน้าที่</option>
-														<option>HR</option>
-													</select>
-												</div>
-	
-											</div>
-										</div>
-								</div>
-								<div class="row-fluid">
-										<div class="span4">
-											<div class="form-group p-xxs">
-												<label class="span5 p-t-xxs">Department</label>
-												<div class="span7">
-													<select data-toggle="tooltip" title=""
-														class="input form-control input-sm span12"
-														id="Department" name="Department">
-														<option>All</option>
-													</select>
-												</div>
-	
-											</div>
-										</div>
-										<div class="span4">
-											<div class="form-group p-xxs">
-												<label class="span5 p-t-xxs">Section</label>
-												<div class="span7">
-													<select data-toggle="tooltip" title=""
-														class="input form-control input-sm span12"
-														id="Section" name="Section">
-														<option value=''>All</option>
-													</select>
-												</div>
-	
-											</div>
-										</div>
-	
-										<div class="span4">
-											<div class="form-group p-xxs">
-												<label class="span5 p-t-xxs">Position</label>
-												<div class="span7">
-													<input data-toggle="tooltip" title=""
-														class="form-control input-sm searchAdvanceText span12" placeholder="Position"
-														type="text" id="Position" name="Position">
-												</div>
-	
-											</div>
-										</div>
-							</div>
-							<div class="row-fluid">
-										<div class="span4">
-											<div class="form-group p-xxs m-b-none">
-												<label class="span5 p-t-xxs">Employee Name</label>
-												<div class="span7">
-													<input data-toggle="tooltip" title=""
-														class="form-control input-sm searchAdvanceText span12" placeholder="Employee Name"
-														type="text" id="EmpName" name="EmpName">
-												</div>
-	
-											</div>
-										</div>
-										<div class="span4">
-											<div class="form-group p-xxs m-b-none">
-												<label class="span5 p-t-xxs">Appraisal Type</label>
-												<div class="span7">
-													
-													<select data-toggle="tooltip" title=""
-														class="input form-control input-sm span12"
-														id="appraisalType" name="appraisalType">
-														
-													</select>
-													
-													
-												</div>
-	
-											</div>
-										</div>
-										<div class="span4">
-											<div class="form-group  ">
-												
-												<div class="form-group pull-right p-xxs m-b-none">
-													
-	
-													<button type="button" class="btn btn-info input-sm"
-														name="btnSearchAdvance" id="btnSearchAdvance">
-														<i class="fa fa-search"></i>&nbsp;Search
-													</button>&nbsp;
-	
-												</div>
-	
-											</div>
-										</div>
-								</div>
-								
-							 -->
+							
 								</div>
 
 							</div>

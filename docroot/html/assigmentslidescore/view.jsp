@@ -9,11 +9,13 @@
 <%
 String username = themeDisplay.getUser().getScreenName();
 String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWORD);
+layout = themeDisplay.getLayout();
+plid = layout.getPlid();
 %>
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
-
+<input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
 
 <style>
 
@@ -22,8 +24,6 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 .c-3-color { background: green; }
 .c-4-color { background: blue; }
 .c-5-color { background: purple; }
-
-
 
  /* Large desktop Start#####################################*/
  @media (min-width: 1200px) { 
@@ -47,7 +47,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	
 	
 	 .ibox-content .row-fluid .span4{
-		width: 32.624%;
+		width: 32.831%;
 	}
 	
 	
@@ -71,6 +71,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	}
 	.aui .ibox-content .control-label{
     	text-align: right;
+	}
+	
+	 .ibox-content .row-fluid .span4{
+		width: 32.69%;
 	}
  	
   }
@@ -112,6 +116,11 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	
 	.aui .ibox-content .control-label{
     	text-align: right;
+	}
+	
+	
+	 .ibox-content .row-fluid .span4{
+		width: 32.4917%
 	}
   }
  /* Portrait tablet to landscape and desktop End############*/ 
@@ -156,6 +165,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	.aui .p-t-xxs {
     	text-align: right;
 	}
+	
+	 .ibox-content .row-fluid .span4{
+		width: 100%
+	}
  
   }
  /* Landscape phone to portrait tablet End##################*/ 
@@ -191,6 +204,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	
 	.aui .p-t-xxs {
     	text-align: left;
+	}
+	
+	.ibox-content .row-fluid .span4{
+		width: 100%
 	}
 
 	
@@ -861,7 +878,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
              
-                <h4 class="modal-title" id="modalTitleRole">Appraisal Assignment</h4>
+                <h4 class="modal-title" id="modalTitleRole">Assignment</h4>
                
             </div>
             <div class="modal-body">

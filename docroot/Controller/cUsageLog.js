@@ -3,49 +3,95 @@ var golbalData=[];
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
 });
+var dropDrowOrgFn = function(appraisalLevelId){
 
-
-var dropDownListBranchLocal = function(){
-	$.ajax({			
-		url:restfulURL+"/dqs_api/public/dqs_monitoring/branch_list",
+	$.ajax({
+		url:restfulURL+"/see_api/public/org",
 		type:"get",
 		dataType:"json",
-		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		data:{"level_id":appraisalLevelId},
 		success:function(data){
+			var htmlOption="";
+			htmlOption+="<option value=''>All Organization</option>";
+			$.each(data,function(index,indexEntry){
 			
-		checkMaintenanceFn(data);
-		var html="";
-		html+="<select class=\"form-control input-sm listBranch\" id=\"listBranch\">";
-		html+="<option selected='selected'  value=''> All Branch</option>";
-		
-		$.each(data,function(index,indexEntry){
-			
-				html+="<option  value="+indexEntry["brcd"]+">"+indexEntry["desc"]+"</option>";	
-					
-		});	
-		html+="</select>";
-		$("#listBranchArea").html(html);
-		
+					htmlOption+="<option value="+indexEntry['org_id']+">"+indexEntry['org_name']+"</option>";
+				
+			});
+			$("#organization").html(htmlOption);
 		}
-		
 	});
-		
+}
 
-};
+var appraisalLevelListFn = function(nameArea,id){
+	
+	if(nameArea==undefined){
+		nameArea="";
+	}
+	
+	$.ajax({
+		//url:restfulURL+"/see_api/public/appraisal_item/al_list",
+		url:restfulURL+"/see_api/public/appraisal_assignment/al_list",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			var htmlOption="";
+			$.each(data,function(index,indexEntry){
+				if(id==indexEntry['level_id']){
+					htmlOption+="<option selected='selected' value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
+				}else{
+					htmlOption+="<option value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
+					
+				}
+			});
+			$("#appraisalLevel"+nameArea).html(htmlOption);
+		}
+	});
+}
+var appraisalTypeFn = function(nameArea,id){
+	
+	if(nameArea==undefined){
+		nameArea="";
+	}
+	
+	$.ajax({
+		//http://192.168.1.52/see_api/public/appraisal_assignment/appraisal_type_list
+		url:restfulURL+"/see_api/public/appraisal_assignment/appraisal_type_list",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			var htmlOption="";
+			$.each(data,function(index,indexEntry){
+				if(id==indexEntry['appraisal_type_id']){
+					htmlOption+="<option selected='selected' value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
+				}else{
+					htmlOption+="<option value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
+					
+				}
+			});
+			$("#appraisalType"+nameArea).html(htmlOption);
+		}
+	});
+}
 
 
 var listDataFn = function(data){
 	
 			 var htmlTable="";
 			 $("#listMainUsageLog").empty();
-			   $.each(data['group'],function(index,indexEntry){
+			   $.each(data['data'],function(index,indexEntry){
 				
 				    htmlTable+="<tr>";
-						htmlTable+="<td>";
+						htmlTable+="<td style='padding:0px;'>";
 							htmlTable+="<div class=\"ibox float-e-margins\">";
-								htmlTable+="<div class=\"ibox-title\">";
-									htmlTable+="<h5>Branch : "+index+"</h5>";
+								htmlTable+="<div class=\"ibox-title2\">";
+									htmlTable+="<div class=\"titlePanel2\">"+index+" </div>";
 								htmlTable+="</div>";
 								htmlTable+="<div class=\"ibox-content\" style='padding: 0 0px 0px;'>";
 								//SUB TABLE HERE..
@@ -53,11 +99,15 @@ var listDataFn = function(data){
 								htmlTable+="<table class=\"table\">";
 								htmlTable+="<thead>";
 									htmlTable+="<tr  class=\"active\">";
-										htmlTable+="<th style='width:30px;'>No.</th>";
-										htmlTable+="<th style='width:100px;'>Usage Date</th>";
-										htmlTable+="<th style='width:80px;'>Personnel Id</th>";
-										htmlTable+="<th style='width:100px;'>Personnel Name</th>";
-										htmlTable+="<th style='width:400px;'>Menu</th>";
+										//htmlTable+="<th style='width:30px;'><b>No.</b></th>";
+										htmlTable+="<th style='width:200px;'><b>Usage Date</b></th>";
+										htmlTable+="<th style='width:100px;'><b>Personnel Id</b></th>";
+										htmlTable+="<th style='width:150px;'><b>Personnel Name</b></th>";
+										htmlTable+="<th style='width:200px;'><b>Organization</b></th>";
+										htmlTable+="<th style='width:300px;'><b>Menu</b></th>";
+										
+										
+									
 										
 									htmlTable+="</tr>";
 								htmlTable+="</thead>";
@@ -67,11 +117,12 @@ var listDataFn = function(data){
 									var count=1;
 									 $.each(indexEntry['items'],function(index2,indexEntry2){
 										htmlTable+="<tr>";
-											htmlTable+="<td><div class='text-inline-table'>"+indexEntry2['seq']+"</div></td>";
-											htmlTable+="<td><div class='text-inline-table'>"+indexEntry2['usage_dttm']+"</div></td>";
-											htmlTable+=" <td><div class='text-inline-table'>"+indexEntry2['personnel_id']+"</div></td>";
-											htmlTable+="<td><div class='text-inline-table'>"+indexEntry2['thai_full_name']+"</div></td>";  
-											htmlTable+="<td><div class='text-inline-table'>"+indexEntry2['menu_name']+"  </div></td>";
+											//htmlTable+="<td><div class='text-inline-table'>"+indexEntry2['row_number']+"</div></td>";
+											htmlTable+="<td><div class='text-inline-table'>"+indexEntry2['created_dttm']+"</div></td>";
+											htmlTable+=" <td><div class='text-inline-table'>"+indexEntry2['emp_code']+"</div></td>";
+											htmlTable+="<td><div class='text-inline-table'>"+indexEntry2['emp_name']+"</div></td>";  
+											htmlTable+="<td><div class='text-inline-table'>"+indexEntry2['org_name']+"  </div></td>";
+											htmlTable+="<td><div class='text-inline-table'>"+indexEntry2['url']+"  </div></td>";
 											
 										htmlTable+="</tr>";
 										count++;
@@ -89,7 +140,7 @@ var listDataFn = function(data){
 			   });
 				
 			  $("#listMainUsageLog").html(htmlTable);
-			  
+			 setThemeColorFn(tokenID.theme_color);
 			
 			
 			
@@ -99,20 +150,20 @@ var getDataFn = function(page,rpp){
 	
 	
 	$.ajax({
-		url : restfulURL+"/dqs_api/public/dqs_maintenance/usage_log",
+		url : restfulURL+"/see_api/public/report/usage_log",
 		type : "get",
 		dataType : "json",
 		data:{"page":page,"rpp":rpp,
-			"branch_code":$("#embedParamlistBranch").val(),"personnel_name":$("#embedParamPersonnelName").val(),"usage_start_date":$("#embedParamUsageStartDate").val(),"usage_end_date":$("#embedParamUsageEndDate").val()
+			//"branch_code":$("#embedParamlistBranch").val(),"personnel_name":$("#embedParamPersonnelName").val(),"usage_start_date":$("#embedParamUsageStartDate").val(),"usage_end_date":$("#embedParamUsageEndDate").val()
 			},
 		headers:{Authorization:"Bearer "+tokenID.token},
+		async:false,
 		success : function(data) {
 			//console.log(data);
-			checkMaintenanceFn(data);
 			listDataFn(data);
 			golbalData=data;
 			paginationSetUpFn(golbalData['current_page'],golbalData['last_page'],golbalData['last_page']);
-			
+			$(".display_result").show();
 			
 		}
 	});
@@ -121,13 +172,36 @@ var getDataFn = function(page,rpp){
 };
 var searchAdvance = function(){
 
-	var htmlParameter="";
-	htmlParameter+="<input type='hidden' id='embedParamlistBranch' name='embedParamlistBranch' class='embedParam' value='"+$("#listBranch").val()+"' >";
-	htmlParameter+="<input type='hidden' id='embedParamPersonnelName' name='embedParamPersonnelName' class='embedParam' value='"+$("#personnel_name").val()+"' >";
-	htmlParameter+="<input type='hidden' id='embedParamUsageStartDate' name='embedParamUsageStartDate' class='embedParam' value='"+$("#usage_start_date").val()+"' >";
-	htmlParameter+="<input type='hidden' id='embedParamUsageEndDate' name='embedParamUsageEndDate' class='embedParam' value='"+$("#usage_end_date").val()+"' >";
-	$(".embedParam").remove();
-	$("body").append(htmlParameter);
+	
+
+	var Position= $("#Position").val().split("-");
+	Position=Position[0];
+	
+
+	
+	var empNameCode= $("#empName").val().split("-");
+	empNameCode=empNameCode[0];
+	
+	
+	
+	$(".embed_param_search").remove();
+	
+
+	
+	
+	var embedParam="";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_type_id' name='embed_appraisal_type_id' value='"+$("#appraisalType").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_emp_id' name='embed_emp_id' value='"+empNameCode+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_position_id' name='embed_position_id' value='"+Position+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id' name='embed_appraisal_level_id' value='"+$("#appraisalLevel").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_organization' name='embed_organization' value='"+$("#organization").val()+"'>";
+	embedParam+="<input type='hidden' id='embed_param_usage_start_date' name='embed_param_usage_start_date' class='embed_param_search' value='"+$("#usage_start_date").val()+"' >";
+	embedParam+="<input type='hidden' id='embed_param_usage_end_date' name='embed_param_usage_end_date' class='embed_param_search' value='"+$("#usage_end_date").val()+"' >";
+
+	
+	
+	$("#embedParamSearch").append(embedParam);
+	
 	//getDataFn();
 	getDataFn(1,$("#rpp").val());
 }
@@ -136,7 +210,106 @@ var searchAdvance = function(){
 
 $(document).ready(function(){
 	
-	dropDownListBranchLocal();
+	
+	
+var username = $('#user_portlet').val();
+var password = $('#pass_portlet').val();
+var plid = $('#plid_portlet').val();
+
+if(connectionServiceFn(username,password,plid)==true){
+	
+	//SEARCH PARAM 
+	appraisalTypeFn();
+	appraisalLevelListFn();
+	$("#appraisalLevel").change(function(){
+		dropDrowOrgFn($(this).val());	
+	});
+	$("#appraisalLevel").change();
+	
+	
+
+	$("#appraisalType").change(function(){
+		if($("#appraisalType").val()==2){
+			
+			$("#Position").prop("disabled",true);
+			$("#empName").prop("disabled",true);
+			
+			$("#Position").val("");
+			$("#empName").val("");
+			
+		}else{
+			$("#Position").prop("disabled",false);
+			$("#empName").prop("disabled",false);
+		}
+	});
+	$("#appraisalType").change();
+	
+	$(".app_url_hidden").show();
+	
+	
+
+
+	//Auto complete Start
+	
+	$("#Position").autocomplete({
+        source: function (request, response) {
+        	$.ajax({
+				 url:restfulURL+"/see_api/public/appraisal_assignment/auto_position_name",
+				 type:"post",
+				 dataType:"json",
+				 headers:{Authorization:"Bearer "+tokenID.token},
+				 data:{"position_name":request.term},
+				 //async:false,
+                 error: function (xhr, textStatus, errorThrown) {
+                        console.log('Error: ' + xhr.responseText);
+                    },
+				 success:function(data){
+						response($.map(data, function (item) {
+                            return {
+                                label: item.position_id+"-"+item.position_name,
+                                value: item.position_id+"-"+item.position_name
+                            };
+                        }));
+				},
+				beforeSend:function(){
+					$("body").mLoading('hide');	
+				}
+				
+				});
+        }
+    });
+	
+	$("#empName").autocomplete({
+        source: function (request, response) {
+        	$.ajax({
+				 url:restfulURL+"/see_api/public/appraisal_assignment/auto_employee_name",
+				 type:"post",
+				 dataType:"json",
+				 headers:{Authorization:"Bearer "+tokenID.token},
+				 data:{"emp_name":request.term},
+				 //async:false,
+                 error: function (xhr, textStatus, errorThrown) {
+                        console.log('Error: ' + xhr.responseText);
+                    },
+				 success:function(data){
+						response($.map(data, function (item) {
+                            return {
+                                label: item.emp_code+"-"+item.emp_name,
+                                value: item.emp_code+"-"+item.emp_name,
+                            };
+                        }));
+				},
+				beforeSend:function(){
+					$("body").mLoading('hide');	
+				}
+				
+				});
+        }
+    });
+	
+	
+	//Auto Complete End
+	
 	
 	//parameter date start
 	$("#usage_start_date").datepicker();
@@ -150,6 +323,7 @@ $(document).ready(function(){
     $(".ui-datepicker").hide();
 	//parameter date end
     
+    $("#advanceSearchDisplay").show();
 
 	
 	
@@ -161,50 +335,9 @@ $(document).ready(function(){
 	//$("#btnSearchAdvance").click();
 	//Search Data Here..
 	
-	//Auto Complete personnelID start
-	$("#personnel_name").autocomplete({
-        source: function (request, response) {
-        	 $.ajax({
-				    url:restfulURL+"/dqs_api/public/dqs_maintenance/personnel_name",
-				    type:"post",
-				    dataType:"json",
-					headers:{Authorization:"Bearer "+tokenID.token},
-					data:{"q":request.term},
-					//async:false,
-                    error: function (xhr, textStatus, errorThrown) {
-                    	console.log('Error: ' + xhr.responseText);
-                    },
-				    success:function(data){
-					checkMaintenanceFn(data);
-						response($.map(data, function (item) {
-                            return {
-                                label: item.thai_full_name,
-                                value: item.thai_full_name
-                               
-                            }
-                        }));
-					
-				    },
-					beforeSend:function(){
-						$("body").mLoading('hide');	
-					}
-				   });
-        	
-        }
-    });
-	
-	//Export
-	$("#exportToExcel").click(function(){
-		
-		var param="";
-		param+="&branch_code="+$("#embedParamlistBranch").val();
-		param+="&personnel_name="+$("#embedParamPersonnelName").val();
-		param+="&usage_start_date="+$("#embedParamUsageStartDate").val();
-		param+="&usage_end_date="+$("#embedParamUsageEndDate").val();
-		
-		$("form#formExportToExcel ").attr("action",restfulURL+"/dqs_api/public/dqs_maintenance/usage_log/export?token="+tokenID.token+""+param);
-		$("form#formExportToExcel ").submit();
-	});
 	
 	
+	
+	
+}
 });

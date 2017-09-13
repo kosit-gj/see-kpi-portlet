@@ -2125,15 +2125,12 @@ var getTemplateFn = function(emp_result_id){
 			createTemplateAssignmentFn(data);
 		
 			//SET FIXED HEADER 
-			var widthScreen= $(".fht-table-wrapper").width();
-		
-			$('table.fixedHeader').fixedHeaderTable({ height: '250', fixedColumn: false})
-			.css({"width":"auto","position":"absolute"});
-			//$(".fht-tbody table.fixedHeader thead").hide();
-			$(".fht-tbody table.fixedHeader thead").css({"opacity":"0"});
-			$(".fht-table-wrapper").css({"height":"310px"," overflow":"hidden","min-width":"1100px"});
+//			var widthScreen= $(".fht-table-wrapper").width();	
+//			$('table.fixedHeader').fixedHeaderTable({ height: '250', fixedColumn: false})
+//			.css({"width":"auto","position":"absolute"});
+//			$(".fht-tbody table.fixedHeader thead").css({"opacity":"0"});
+//			$(".fht-table-wrapper").css({"height":"310px"," overflow":"hidden","min-width":"1100px"});
 			
-			//$(".tableQauntity thead tr th:eq(1)").css({"width":"40%"});
 		}
 	});
 };
@@ -2185,6 +2182,7 @@ $(document).ready(function(){
 	
 var username = $('#user_portlet').val();
 var password = $('#pass_portlet').val();
+var plid = $('#plid_portlet').val();
 
 /*Fixed for Test.*/
 
@@ -2193,7 +2191,7 @@ var password = $('#pass_portlet').val();
 	
 if(username!="" && username!=null & username!=[] && username!=undefined ){
 	
-	if(connectionServiceFn(username,password)==true){
+	if(connectionServiceFn(username,password,plid)==true){
 			
 		
 	//Default start

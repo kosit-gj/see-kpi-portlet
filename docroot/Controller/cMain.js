@@ -18,6 +18,7 @@ var checkSession = function(paramTokenID){
 		url:restfulURL+"/see_api/public/session",
 		type:"GET",
 		dataType:"json",
+		//data:{"plid":}
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
@@ -63,7 +64,7 @@ function getParamValue(paramName)
     }
 }
 
-var connectionServiceFn = function(username,password){
+var connectionServiceFn = function(username,password,plid){
 	var checkConnection=true;
 	$.ajax({
 		
@@ -71,7 +72,7 @@ var connectionServiceFn = function(username,password){
 		//url:"http://localhost/see_api/public/session",
 		type:"POST",
 		dataType:"text",
-		data:{"username":username,"password":password},
+		data:{"username":username,"password":password,"plid":plid},
 		async:false,
 		//data:{"username":"2015019","password":"2015019"},
 		error: function(jqXHR, textStatus, errorThrown) {

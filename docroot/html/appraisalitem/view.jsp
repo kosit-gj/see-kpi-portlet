@@ -17,12 +17,16 @@ String password=PortalUtil.getUser(request).getPassword();
 
 String username = themeDisplay.getUser().getScreenName();
 String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWORD);
+layout = themeDisplay.getLayout();
+plid = layout.getPlid();
+
 //out.print(username);
 //out.print("password2="+password);
 %>
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
+<input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
 
 <style>
 
@@ -116,7 +120,11 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 			width:49.718%
 		}
 		/*Quantity End*/
-	
+		
+	 	.ibox-content .row-fluid .span4{
+			width: 32.831%;
+		}
+			
   }
   /* Large desktop End######################################*/
   
@@ -171,6 +179,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 			width:100%
 		}
 		/*Quantity End*/
+		
+		 .ibox-content .row-fluid .span4{
+		width: 32.69%;
+	}
  	
   }
  /*  desktop End############################################*/
@@ -250,6 +262,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	}
 
 	/*Qauntity End*/
+	.ibox-content .row-fluid .span4{
+		width: 32.4917%
+	}
+	
   }
  /* Portrait tablet to landscape and desktop End############*/ 
  
@@ -365,6 +381,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	}
 
  	/*Quantity End*/
+ 	
+ 	 .ibox-content .row-fluid .span4{
+		width: 100%
+	}
 	
   }
  /* Landscape phone to portrait tablet End##################*/ 
@@ -482,6 +502,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	#organizationBox{
 		width:100%
 	}
+	
+	.ibox-content .row-fluid .span4{
+		width: 100%
+	}
 
   }
   /* Landscape phones and down End##########################*/
@@ -493,7 +517,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
             width: 100%;
         }
         .aui #breadcrumbs {
-		    margin-bottom: 5px;
+		    margin-bottom: 0px;
 		}
        .aui .portlet-content, .aui .portlet-minimized .portlet-content-container {
 	    -moz-border-bottom-colors: none;
@@ -696,6 +720,10 @@ overflow-y: visible;
     height: 30px;
     padding: none;
     font-size: 14px;
+}
+
+.aui .ibox-content input[type="color"], .aui input[type="date"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="email"], .aui input[type="month"], .aui input[type="number"], .aui input[type="password"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="text"], .aui input[type="time"], .aui input[type="url"], .aui input[type="week"], .aui select, .aui textarea, .aui .uneditable-input{
+	margin-bottom: 5px;
 }
 
 
