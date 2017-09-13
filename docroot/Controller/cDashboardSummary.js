@@ -892,16 +892,15 @@ var listDashBoardFn = function(data){
 
 	    //Open Parent Org
 
-			$("#next").off("click");
-			$("#next").on("click",function() {
+			$("#next , #previous").off("click");
+			$("#next , #previous").on("click",function() {
 				  //console.log("Next KPI : "+$(this).attr("data-next"));
 							galbalDataTemp['collapse_show'] = $(".collapse.in").get();///Memory Collapse Show
-				  			searchAdvanceFn(
-									$("#param_year").val(),
-									$("#param_period").val(),
-									$("#param_app_lv").val(),
-									$("#param_org_id").val(),
-									$(this).attr("data-next"));
+							
+							$("#param_kpi_id").val($(this).attr("data-"+this.id));
+							//console.log($(this).attr("data-"+this.id));
+							getDataFn();
+
 				  			$("#accordion").show();
 				  			$("#accordion").children().children().next().eq(0).collapse('show');
 				  			$.each(galbalDataTemp['collapse_show'],function(index,indexEntry){
@@ -910,24 +909,7 @@ var listDashBoardFn = function(data){
 				  			return false;
 				  
 				});
-			$("#previous").off("click");
-			$("#previous").on("click",function() {
-				  //console.log("Next Previous : "+$(this).attr("data-previous"));
-				 			galbalDataTemp['collapse_show'] = $(".collapse.in").get();///Memory Collapse Show
-				  			searchAdvanceFn(
-									$("#param_year").val(),
-									$("#param_period").val(),
-									$("#param_app_lv").val(),
-									$("#param_org_id").val(),
-									$(this).attr("data-previous"));
-				  			$("#accordion").show();
-				  			$("#accordion").children().children().next().eq(0).collapse('show');
-				  			$.each(galbalDataTemp['collapse_show'],function(index,indexEntry){
-				  				$("#"+this.id).collapse('show');
-				  			});
-				  			return false;
-				  	
-				});
+			
 			$("#btn_extract").off("click");
 			$("#btn_extract").click(function(event){
 				  event.stopPropagation();

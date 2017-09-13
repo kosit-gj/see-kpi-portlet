@@ -1171,7 +1171,7 @@
 		<css-class-wrapper>usage-log-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>dashboard-overall-subordinate</portlet-name>
+		<portlet-name>dashboard-subordinate-performance</portlet-name>
 		<icon>/icon.png</icon>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
@@ -1212,7 +1212,7 @@
 	     
 	    <footer-portlet-javascript>/Controller/cDashboardOverallSubordinate.js</footer-portlet-javascript>
 		<css-class-wrapper>
-			dashboard-overall-subordinate-portlet
+			dashboard-subordinate-performance-portlet
 		</css-class-wrapper>
 	</portlet>
 	<role-mapper> 

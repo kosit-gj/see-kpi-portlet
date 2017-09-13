@@ -41,7 +41,7 @@
 		<portlet id="dashbaord-summary"></portlet>
 		<portlet id="all-kpi-dashboard"></portlet>
 		<portlet id="usage-log"></portlet>
-		<portlet id="dashboard-overall-subordinate"></portlet>
+		<portlet id="dashboard-subordinate-performance"></portlet>
 	</category>
 
 

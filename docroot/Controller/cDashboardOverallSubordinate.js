@@ -3,7 +3,50 @@
  var galbalDataTemp = [];
  galbalDataTemp['galbalOrg'] = [];
  galbalDataTemp['extract'] = false;
- galbalDataTemp['All_KPI'] = {};
+ galbalDataTemp['All_KPI'] = [ {
+		"color" : "#00aee4",
+		"data" : [ {
+			"x" : "80",
+			"y" : "15000",
+			"z" : "24",
+			"name" : "Nike"
+		}, {
+			"x" : "60",
+			"y" : "18500",
+			"z" : "26",
+			"name" : "Adidas"
+		}, {
+			"x" : "50",
+			"y" : "19450",
+			"z" : "19",
+			"name" : "Puma"
+		} ]
+	}, {
+		"data" : [ {
+
+			"x" : "32",
+			"y" : "22000",
+			"z" : "10",
+			"name" : "Reebok"
+		}, {
+			"x" : "44",
+			"y" : "13000",
+			"z" : "9",
+			"name" : "Woodland"
+		} ]
+	}, {
+		"data" : [ {
+			"x" : "65",
+			"y" : "10500",
+			"z" : "8",
+			"name" : "Fila"
+		}, {
+			"x" : "43",
+			"y" : "8750",
+			"z" : "5",
+			"name" : "Lotto"
+		} ]
+	} ];
  galbalDataTemp['collapse_show']="";
 //# Generate Drop Down List
  var generateDropDownList = function(url,type,request,initValue){
@@ -501,9 +544,9 @@
 //	                "caption": "Sales Analysis of Shoe Brands",
 //	                "subcaption": "Last Quarter",
 	                "xAxisMinValue": "0",
-	                "xAxisMaxValue": "100",
+	                "xAxisMaxValue": "5",
 	                "yAxisMinValue": "0",
-	                "yAxisMaxValue": "1000",
+	                "yAxisMaxValue": "5",
 	                "xAxisNameFont": "Arial",
 	                "xAxisNameFontSize": "16",
 	                "xAxisNameFontColor": "#993300",
@@ -517,7 +560,7 @@
 	                "yAxisNameFontItalic": "1",
 	                "yAxisNameAlpha": "80",
 	                "plotFillAlpha": "70",
-	                "plotFillHoverColor": "#6baa01",
+	                "plotFillHoverColor": "#eeeeee",
 	                "showPlotBorder": "0",
 	                "xAxisName": "Target",
 	                "yAxisName": "Actual",
@@ -530,50 +573,7 @@
 	                "plotTooltext": "<div id='nameDiv'>$name :</div>{br}Average Price : <b>$$xDataValue</b>{br}Units Sold : <b>$yDataValue</b>{br}Profit Contribution : <b>$zvalue%</b>",
 	                "theme": "fint"
 	            },
-	            "dataset" : [ {
-						"color" : "#00aee4",
-						"data" : [ {
-							"x" : "80",
-							"y" : "15000",
-							"z" : "24",
-							"name" : "Nike"
-						}, {
-							"x" : "60",
-							"y" : "18500",
-							"z" : "26",
-							"name" : "Adidas"
-						}, {
-							"x" : "50",
-							"y" : "19450",
-							"z" : "19",
-							"name" : "Puma"
-						} ]
-					}, {
-						"data" : [ {
-
-							"x" : "32",
-							"y" : "22000",
-							"z" : "10",
-							"name" : "Reebok"
-						}, {
-							"x" : "44",
-							"y" : "13000",
-							"z" : "9",
-							"name" : "Woodland"
-						} ]
-					}, {
-						"data" : [ {
-							"x" : "65",
-							"y" : "10500",
-							"z" : "8",
-							"name" : "Fila"
-						}, {
-							"x" : "43",
-							"y" : "8750",
-							"z" : "5",
-							"name" : "Lotto"
-						} ]
-					} ]
+	            "dataset" : data
 	        }
 	    }).render();
  };
@@ -588,8 +588,8 @@
 		var kpi= $("#param_kpi_id").val();
 
 		$.ajax({
-			url : restfulURL+"/see_api/public/dashboard/content",
-			type : "post",
+			url : restfulURL+"/see_api/public/dashboard/kpi_overall",
+			type : "get",
 			dataType : "json",
 			data:{
 				"year_id":year,
@@ -633,8 +633,8 @@
 
 
 var listDashBoardFn = function(data){
-	 $("#txtTopic").html("01.Strong Financial - 01 จำนวนเงิน Gross NPL");
-	 generateChartBubbleFn();
+	 $("#txtTopic").html(data['header']);
+	 generateChartBubbleFn(data['dataset']);
 	 var html = "";
 	 var kpi_id = galbalDataTemp["item_id"];
 	 if (kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val())) - 1] != undefined ) {
@@ -648,30 +648,12 @@ var listDashBoardFn = function(data){
 				+ "'></span>";
 	 }
 	 $("#pager").html(html);
-			$("#next").off("click");
-			$("#next").on("click",function() {
-				  			searchAdvanceFn(
-									$("#param_year").val(),
-									$("#param_period").val(),
-									$("#param_app_lv").val(),
-									$("#param_org_id").val(),
-									$(this).attr("data-next"));
-				  			
-				  			return false;
-				  
-				});
-			$("#previous").off("click");
-			$("#previous").on("click",function() {
-				  			searchAdvanceFn(
-									$("#param_year").val(),
-									$("#param_period").val(),
-									$("#param_app_lv").val(),
-									$("#param_org_id").val(),
-									$(this).attr("data-previous"));
-				  			return false;
-				  	
-				});
-			
+	 $("#next , #previous").off("click");
+	 $("#next , #previous").on("click",function() {
+		 $("#param_kpi_id").val($(this).attr("data-"+this.id));
+		 getDataFn();
+		 return false;
+	});
  };
 
  $(document).ready(function(){
