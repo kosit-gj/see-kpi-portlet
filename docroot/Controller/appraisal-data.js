@@ -183,9 +183,10 @@ $(document).ready(function() {
 //	 var password = $('#pass_portlet').val();
 	 var username = 1;
 	 var password = 11;
+	 var plid = $('#plid_portlet').val();
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
 	 	
-	 	if(connectionServiceFn(username,password)==false){
+		 if(connectionServiceFn(username,password,plid)==true){
 	 		return false;
 	 	}
 	 }

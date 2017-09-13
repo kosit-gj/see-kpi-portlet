@@ -623,6 +623,8 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 <%
 	String username = themeDisplay.getUser().getScreenName();
 	String password = (String) request.getSession().getAttribute(WebKeys.USER_PASSWORD);
+	layout = themeDisplay.getLayout();
+	plid = layout.getPlid();
 %>
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">

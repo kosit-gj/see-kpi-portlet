@@ -3,9 +3,10 @@ $(document).ready(function(){
    
 	 var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
+	 var plid = $('#plid_portlet').val();
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
 	 	
-	 	if(connectionServiceFn(username,password)==true){
+		 if(connectionServiceFn(username,password,plid)==true){
 	 
 	 		
     	var options={
