@@ -546,7 +546,6 @@
 		var position= $("#param_position").val();
 		var app_lv= $("#param_app_lv").val();
 		var org= $("#param_org_id").val();
-		var kpi= $("#param_kpi_id").val();
 
 		$.ajax({
 			url : restfulURL+"/see_api/public/dashboard/kpi_overall",
@@ -559,8 +558,7 @@
 				"emp_id":emp,
 				"position_id":position,
 				"level_id":app_lv,
-				"org_id":org,
-				"item_id":kpi		
+				"org_id":org	
 			},
 			headers:{Authorization:"Bearer "+tokenID.token},
 			async:false,// w8 data 
@@ -573,7 +571,7 @@
 };
 
  
- var searchAdvanceFn = function (year,period,app_lv,org,kpi,app_type,emp,position) {
+ var searchAdvanceFn = function (year,period,app_lv,org,app_type,emp,position) {
 	//embed parameter start
 		
 		var htmlParam="";
@@ -584,7 +582,7 @@
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_position' name='param_position' 	value='"+position+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' 	name='param_app_lv' 	value='"+app_lv+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' 	name='param_org_id' 	value='"+org+"'>";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_kpi_id' 	name='param_kpi_id' 	value='"+kpi+"'>";
+		
 		$(".paramEmbed").remove();
 		$("body").append(htmlParam);
 		//embed parameter end
@@ -597,24 +595,7 @@ var listDashBoardFn = function(data){
 	 $("#txtTopic").html(data['header']);
 	 generateChartBubbleFn(data['dataset']);
 	 var html = "";
-	 var kpi_id = galbalDataTemp["item_id"];
-	 if (kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val())) - 1] != undefined ) {
-		 html += "			<span id='previous' class='arrow' data-previous='"
-				+ kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val())) - 1]
-				+ "'></span>";
-	 }
-	 if (kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val())) + 1] != undefined) {
-		 html += "			<span id='next' class='arrow' data-next='"
-				+ kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val())) + 1]
-				+ "'></span>";
-	 }
-	 $("#pager").html(html);
-	 $("#next , #previous").off("click");
-	 $("#next , #previous").on("click",function() {
-		 $("#param_kpi_id").val($(this).attr("data-"+this.id));
-		 getDataFn();
-		 return false;
-	});
+
  };
 
  $(document).ready(function(){
@@ -648,7 +629,6 @@ var listDashBoardFn = function(data){
 					$("#period").val(),
 					$("#apprasiaLevel").val(),
 					$("#organization").val(),
-					$("#kpi").val(),
 					$("#app_type").val(),
 					$("#emp_name_id").val(),
 					$("#position_id").val());

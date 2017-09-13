@@ -443,17 +443,7 @@
 
 							</select>
 						</div>
-						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span3" id="kpiArea">
-							<select name="kpi" id="kpi" class="input form-control input-sm"
-								title="" data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="KPI">
-
-								<option value="">KPI1</option>
-								<option value="">KPI2</option>
-
-							</select>
-						</div>
+						
 
 
 						<div style="margin-bottom: 5px;"
@@ -477,10 +467,7 @@
 	
 	<!-- content accordion start -->
 	<div class="ibox-content" id="listSubordinate" >
-		<div id="pager">
-			<span id='previous' class='arrow' data-previous=''></span>
-			<span id='next' class='arrow' data-next=''></span>
-		</div>
+		
 		<div class="row-fluid ">
 			<div class="span12 graphLTopHeader" id="txtTopic">TEST</div>
 		</div>
