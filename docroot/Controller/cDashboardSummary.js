@@ -336,7 +336,8 @@
 		                "showAlternateHGridColor": "0",
 		                "subcaptionFontBold": "0",
 		                "exportEnabled" :"0",
-		                "subcaptionFontSize": "14"
+		                "subcaptionFontSize": "14",
+		                "useRoundEdges":"1"
 		            },            
 		            "data": actual,
 		            "trendlines": [
@@ -413,7 +414,8 @@
 	                "legendBorderAlpha": '0',
 	                "legendShadow": '0',
 	                "legendItemFontSize": '10',
-	                "legendItemFontColor": '#666666'
+	                "legendItemFontColor": '#666666',
+	                "useRoundEdges":"1"
 	            },
 	            "categories": [
 	                {
@@ -1057,7 +1059,7 @@ var listDashBoardAllKPIFn = function(data){
 	 var plid = $('#plid_portlet').val();
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
 	 	
-		 if(connectionServiceFn(username,password,plid)==true){
+		 if(connectionServiceFn(username,password,plid)==false){
 	 		return false;
 	 	}
 	 	$(".advance-search input").val("");

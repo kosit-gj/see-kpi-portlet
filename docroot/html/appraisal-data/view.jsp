@@ -370,7 +370,7 @@ plid = layout.getPlid();
 							style="margin-left: 5px">
 							<select data-placement="top" id="period" class="input span12 m-b-n" data-toggle="tooltip" title="" name="period" style="cursor: pointer;" data-original-title="Period"></select>
 						</div>
-						<div class="form-group pull-left span2" style="margin-left: 5px">
+						<div class="form-group pull-left span2" style="margin-left: 5px;width: 155px;">
 							<input data-toggle="tooltip" title="Employee Name"
 								data-placement="top" class="span12 m-b-n ui-autocomplete-input"
 								placeholder="Employee Name" id="emp_name" name="emp_name"

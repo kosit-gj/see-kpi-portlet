@@ -12,6 +12,7 @@
     			"colunms":[
     			           {"colunmsDisplayName":"Perspective Name","width":"35%","id":"perspective_name","colunmsType":"text"},
     			           {"colunmsDisplayName":"Abbreviation","width":"20%","id":"perspective_abbr","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Color","width":"10%","id":"color_code","colunmsType":"color"},
     			           {"colunmsDisplayName":"IsActive","width":"15%","id":"is_active","colunmsType":"checkbox"},
     			          ],
     			"form":[{
@@ -22,6 +23,10 @@
             				"label":"Abbreviation","inputType":"text","placeholder":"Abbreviation",
             				"id":"perspective_abbr","width":"200px"
             			},
+            			{
+        	    			"label":"Color","inputType":"color","default":"All",
+        	    			"id":"color_code","width":"70px","height":"27px","dataTypeInput":"color"
+        	    		},
     			        
     					{
         					"label":"IsActive","inputType":"checkbox","default":"checked",

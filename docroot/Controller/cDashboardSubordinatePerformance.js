@@ -3,50 +3,7 @@
  var galbalDataTemp = [];
  galbalDataTemp['galbalOrg'] = [];
  galbalDataTemp['extract'] = false;
- galbalDataTemp['All_KPI'] = [ {
-		"color" : "#00aee4",
-		"data" : [ {
-			"x" : "80",
-			"y" : "15000",
-			"z" : "24",
-			"name" : "Nike"
-		}, {
-			"x" : "60",
-			"y" : "18500",
-			"z" : "26",
-			"name" : "Adidas"
-		}, {
-			"x" : "50",
-			"y" : "19450",
-			"z" : "19",
-			"name" : "Puma"
-		} ]
-	}, {
-		"data" : [ {
-
-			"x" : "32",
-			"y" : "22000",
-			"z" : "10",
-			"name" : "Reebok"
-		}, {
-			"x" : "44",
-			"y" : "13000",
-			"z" : "9",
-			"name" : "Woodland"
-		} ]
-	}, {
-		"data" : [ {
-			"x" : "65",
-			"y" : "10500",
-			"z" : "8",
-			"name" : "Fila"
-		}, {
-			"x" : "43",
-			"y" : "8750",
-			"z" : "5",
-			"name" : "Lotto"
-		} ]
-	} ];
+ galbalDataTemp['All_KPI'] = [];
  galbalDataTemp['collapse_show']="";
 //# Generate Drop Down List
  var generateDropDownList = function(url,type,request,initValue){
@@ -535,6 +492,10 @@
  var generateChartBubbleFn = function(data){	
 	 var analysisChart = new FusionCharts({
 	        type: 'bubble',
+	        dataLoadStartMessage: "Loading chart. Please wait",
+		    baseChartMessageFont: "Arial",
+		    baseChartMessageFontSize: "18",
+		    baseChartMessageColor: "#FC0000",
 	        renderAt: 'listBubbleChart',
 	        width: '100%',
 	        height: '400',
@@ -662,7 +623,7 @@ var listDashBoardFn = function(data){
 	 var plid = $('#plid_portlet').val();
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
 	 	
-		 if(connectionServiceFn(username,password,plid)==true){
+		 if(connectionServiceFn(username,password,plid)==false){
 	 		return false;
 	 	}
 	 	$(".advance-search input").val("");

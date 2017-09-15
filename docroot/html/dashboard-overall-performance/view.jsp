@@ -36,7 +36,7 @@
  @media (min-width: 1200px) { 
 	
 
-	.aui .advance-search .span3{width: 22.077%;}
+	.aui .advance-search .span3{width: 24.504%;}
 	
   }
   /* Large desktop End######################################*/
@@ -44,7 +44,7 @@
   /*  desktop Start#########################################*/
  @media (min-width: 980px) and (max-width: 1199px) {
  
-		.aui .advance-search .span3{width: 24.374%;}
+		.aui .advance-search .span3{width: 24.354%;}
 		/*All Start*/
 		.aui #btnSearchAdvance{
 		margin-bottom:5px;
@@ -79,7 +79,7 @@
 	}
 	
 	
-	.aui .advance-search .span3{width: 24.268%;}
+	.aui .advance-search .span3{width: 24.238%;}
 	/*All Form Start*/
 	
 	.aui #btnSearchAdvance{
@@ -332,7 +332,10 @@
 	margin-top: 15px;
 }
 #listBubbleChart{
- 	min-width: 1000px;
+/*  	min-width: 1000px; */
+}
+#listPieChart tspan {
+    font-weight: bold;
 }
 .aui .modal-dialog{
     overflow-y: initial !important;
@@ -349,13 +352,12 @@
 	String password = (String) request.getSession().getAttribute(WebKeys.USER_PASSWORD);
 	layout = themeDisplay.getLayout();
 	plid = layout.getPlid();
-	String first_name = request.getParameter("first_name");
 %>
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
 <input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
-<input type="text" id="post_kpi" name="post_kpi" value="<%= first_name%>">
+
 <div class="app_url_hidden" style="display: block;">
 	<div class="row-fluid app_url_hidden">
 		<!-- start--row-fluid -->
@@ -444,17 +446,7 @@
 
 							</select>
 						</div>
-						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span3" id="kpiArea">
-							<select name="kpi" id="kpi" class="input form-control input-sm"
-								title="" data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="KPI">
-
-								<option value="">KPI1</option>
-								<option value="">KPI2</option>
-
-							</select>
-						</div>
+						
 
 
 						<div style="margin-bottom: 5px;"
@@ -478,18 +470,29 @@
 	
 	<!-- content accordion start -->
 	<div class="ibox-content" id="listSubordinate" >
-		<div id="pager">
-			<span id='previous' class='arrow' data-previous=''></span>
-			<span id='next' class='arrow' data-next=''></span>
-		</div>
-		<div class="row-fluid ">
-			<div class="span12 graphLTopHeader" id="txtTopic">TEST</div>
-		</div>
+		
+		
 		<div style="overflow:auto">
 		<div class="row-fluid ">
-			<div class="span12 " id="listBubbleChart"></div>
+			<div class="span5 " >
+				<div class="row-fluid ">
+					<div class="span12" id="captionPieChart"></div>
+				</div>
+				<div class="row-fluid ">
+					<div class="span12" id="listPieChart"></div>
+				</div>
+			</div>
+			<div class="span7 " >
+				<div class="row-fluid ">
+					<div class="span12" id="captionBubbleChart"></div>
+				</div>
+				<div class="row-fluid ">
+					<div class="span12" id="listBubbleChart"></div>
+				</div>
+			</div>
 		</div>
 		</div>
+		
 	</div>
 	<!-- content accordion end -->
 

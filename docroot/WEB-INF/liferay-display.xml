@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE display PUBLIC "-//Liferay//DTD Display 6.2.0//EN" "http://www.liferay.com/dtd/liferay-display_6_2_0.dtd">
-    
+   
 <display> 
 	<category name="SEE KPI">
 		<!-- 
@@ -43,6 +43,7 @@
 		<portlet id="usage-log"></portlet>
 		<portlet id="dashboard-subordinate-performance"></portlet>
 		<portlet id="dashboard-branch-performance"></portlet>
+		<portlet id="dashboard-overall-performance"></portlet>
 	</category>
 
 
