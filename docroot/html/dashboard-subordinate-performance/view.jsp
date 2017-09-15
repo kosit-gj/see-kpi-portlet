@@ -327,7 +327,7 @@
 .graphLTopHeader {
 	font-weight: bold;
 	font-size: 18px;
-	color: black;
+	color: #993300;
 	text-align: center;
 	margin-top: 15px;
 }
@@ -349,12 +349,13 @@
 	String password = (String) request.getSession().getAttribute(WebKeys.USER_PASSWORD);
 	layout = themeDisplay.getLayout();
 	plid = layout.getPlid();
+	String first_name = request.getParameter("first_name");
 %>
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
 <input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
-
+<input type="text" id="post_kpi" name="post_kpi" value="<%= first_name%>">
 <div class="app_url_hidden" style="display: block;">
 	<div class="row-fluid app_url_hidden">
 		<!-- start--row-fluid -->

@@ -85,7 +85,7 @@ var listAppraisalDataFn = function (data) {
 		htmlTable += "<tr class='rowSearch'>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_period_desc"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["structure_name"]+ "</td>";
-		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_item_name"]+ "</td>";
+		htmlTable += "<td class='columnSearch'>"+ indexEntry["item_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_code"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch' style='text-align: right;padding-right: 10px;'>"+ addCommas(parseFloat(indexEntry["actual_value"]).toFixed(2))+ "</td>";
@@ -261,7 +261,7 @@ $(document).ready(function() {
 	 var plid = $('#plid_portlet').val();
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
 	 	
-		 if(connectionServiceFn(username,password,plid)==true){
+		 if(connectionServiceFn(username,password,plid)==false){
 	 		return false;
 	 	}
 	 }

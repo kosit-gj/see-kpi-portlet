@@ -94,449 +94,133 @@
 	    });
  }
  
- var generateChartGaugeFn = function(data){
-	 var color = [];
-	 $.each(data['dual_chart']['color_range'],function(index,indexEntry){
-		 color.push({
-			 "minValue":indexEntry['min_val'],
-			 "maxValue":indexEntry['max_val'],
-			 "code": "#"+indexEntry['color']
-		 	});
-	 });
-		    var cSatScoreChart = new FusionCharts({
-		        type: 'angulargauge',
-			    dataLoadStartMessage: "Loading chart. Please wait",
-			    baseChartMessageFont: "Arial",
-			    baseChartMessageFontSize: "18",
-			    baseChartMessageColor: "#FC0000",
-		        renderAt:  "chartOrgGauge-"+data['org_id'],
-		        width: '100%',
-		        height: '200',
-		        dataFormat: 'json',
-		        dataSource: {
-		            "chart": {
-		                 "baseFontSize":"11",
-		                 "captionFontSize":"14",
-		                 "lowerLimit": "0",
-		                 //"upperLimit": "120000",
-		                 "gaugeFillMix": "{dark-30},{light-60},{dark-10}",
-		                 "gaugeFillRatio": "15",
-		                 "majorTMNumber": "4",
-		                 "majorTMColor": "#333",
-		                 "majorTMAlpha": "100",
-		                 "majorTMHeight": "15",
-		                 "majorTMThickness": "2",  
-		                 "showValue": "1",
-		                 "theme": "fint",
-		                 "exportEnabled" :"0",
-		                 "bgColor": "#ffffff",
-		            },
-		            "colorRange": {
-		                "color": color
-		            },
-		            "dials": {
-		                "dial": [{
-		                    "value": (data['dual_chart']['data']['actual_value']/data['dual_chart']['data']['target'])*100
-		                }]
-		            },
-		            "trendpoints": {
-		                "point": [
-		                    {
-		                        "thickness": "3.5",
-		                        "radius": "152",
-		                        "innerRadius": "78",
-		                        "alpha": "100"
-		                    }
-		                ]    
-		            }
-		        }
-		}).render(); 
-		
-		
-	 return false;
- };
- 
- var generateChartBulletFn = function(id,data,color){
-	    var revBulletChart = new FusionCharts({
-	        type: 'hbullet',
-	        renderAt: id,
-	        width: '270',
-	        height: '30',
-	        dataFormat: 'json',
-	        dataSource: {
-	            "chart": {
-	                "theme": "fint",
-	                "lowerLimit": "1",
-	                //"showPlotBorder":"1",
-	                //"plotBorderColor":"#dedede",
-	                "plotBorderThickness":"1",
-	                //"plotFillColor": "#5b0101",
-	                //"plotFillAlpha": "90",
-	                "targetThickness": "4",
-	                "targetColor": "#5b0101",
-	                "showTickMarks":"0",
-	                "showTickValues":"0",
-	                "showValue":"0",
-	                "chartBottomMargin": "0",
-	                "chartTopMargin": "0",
-	                "chartLeftMargin": "0",
-	                "chartRightMargin": "0",
-	                "gaugeFillMix": "{dark-30},{light-60},{dark-10}"
-	            },
-	            "colorRange": {
-	                "color": color
-	            },
-	            "value": data,
-	            "target": "100"
-	        }
-	    })
-	    .render();
-		
-	 return false;
- };
- var generateChartBulletSparkFn = function(data){ 
-	 $('.sparkline').sparkline('html', {
-		 	type: 'bullet',
-		 	width:'170',
-		 	height: '20',
-		 	targetWidth: '4',
-		    targetColor: '#003f7f',
-		    performanceColor: '#00007f',
-		    rangeColors: data[0]['rangeColor']
-		 } );
- };
- var generateChartBarFn = function(data){
-	 var actual = [] ;
-	 $.each(data['bar_chart']['data']['actual'],function(index,indexEntry){
-		 actual.push({
-			 "label":indexEntry['month'],
-			 "value":indexEntry['value']
-		 	});
-	 });
-	 
-		    var revenueChart = new FusionCharts({
-		        type: 'column2d',
-		        dataLoadStartMessage: "Loading chart. Please wait",
-			    baseChartMessageFont: "Arial",
-			    baseChartMessageFontSize: "18",
-			    baseChartMessageColor: "#FC0000",
-		        renderAt: "chartOrgBar-"+data['org_id'],
-		        width: '100%',
-		        height: '250',
-		        dataFormat: 'json',
-		        dataSource: {
-		            "chart": {
-		               // "caption": "Monthly revenue for last year",
-		               //"subCaption": "Harry's SuperMart",
-		                "xAxisName": "Month",
-		                "yAxisName": "YTD Actual",
-		                //"numberPrefix": "$",
-		                "showBorder": "0",
-		                "paletteColors": "#0075c2",
-		                "bgColor": "#ffffff",
-		                "borderAlpha": "20",
-		                "canvasBorderAlpha": "0",
-		                "usePlotGradientColor": "0",
-		                "plotBorderAlpha": "10",
-		                "placevaluesInside": "1",
-		                "rotatevalues": "1",
-		                "valueFontColor": "#ffffff",                
-		                "showXAxisLine": "1",
-		                "xAxisLineColor": "#999999",
-		                "divlineColor": "#999999",               
-		                "divLineIsDashed": "1",
-		                "showAlternateHGridColor": "0",
-		                "subcaptionFontBold": "0",
-		                "exportEnabled" :"0",
-		                "subcaptionFontSize": "14"
-		            },            
-		            "data": actual,
-		            "trendlines": [
-		                {
-		                    "line": [
-		                        {
-		                            "startvalue": data['bar_chart']['data']['target'],
-		                            "color": "#1aaf5d",
-		                            "valueOnRight": "1",
-		                            "displayvalue": "Target"
-		                        },{
-		                            "startvalue": data['bar_chart']['data']['forecast'],
-		                            "color": "#DC143C",
-		                            "valueOnRight": "1",
-		                            "displayvalue": "Forecast"
-		                        }
-		                    ]
-		                }
-		            ]
-		        }
-		    }).render();
-		
-	 return false;
- };
- var generateChartBarLineAreaFn = function(data){	
-	 var salesAnlysisChart = new FusionCharts({
-	        type: 'mscombi2d',
-	        renderAt: 'chart-container',
-	        width: '100%',
-	        height: '250',
-	        renderAt: "chartOrgBar-"+data['org_id'],
-	        dataFormat: 'json',
-	        dataSource: {
-	            "chart": {
-	                //"caption": "Harry's SuperMart",
-	                //"subCaption": "Sales analysis of last year",
-	                "xAxisname": "Month",
-	                "yAxisName": "Monthly Actual",
-	                //"numberPrefix": "$",
-	                "showBorder": "0",
-	                "showValues": "0",
-	                "paletteColors": "#0075c2,#1aaf5d,#f2c500",
-	                "bgColor": "#ffffff",
-	                "showCanvasBorder": "0",
-	                "canvasBgColor": "#ffffff",
-	                "captionFontSize": "14",
-	                "subcaptionFontSize": "14",
-	                "subcaptionFontBold": "0",
-	                "divlineColor": "#999999",
-	                "divLineIsDashed": "1",
-	                "divLineDashLen": "1",
-	                "divLineGapLen": "1",
-	                "showAlternateHGridColor": "0",
-	                "usePlotGradientColor": "0",
-	                "toolTipColor": "#ffffff",
-	                "toolTipBorderThickness": "0",
-	                "toolTipBgColor": "#000000",
-	                "toolTipBgAlpha": "80",
-	                "toolTipBorderRadius": "4",
-	                "toolTipPadding": "10",
-	                "legendBgColor": "#ffffff",
-	                "legendBorderAlpha": '0',
-	                "legendShadow": '0',
-	                "legendItemFontSize": '10',
-	                "legendItemFontColor": '#666666'
-	            },
-	            "categories": [
-	                {
-	                    "category": [
-	                        {
-	                            "label": "Jan"
-	                        },
-	                        {
-	                            "label": "Feb"
-	                        },
-	                        {
-	                            "label": "Mar"
-	                        },
-	                        {
-	                            "label": "Apr"
-	                        },
-	                        {
-	                            "label": "May"
-	                        },
-	                        {
-	                            "label": "Jun"
-	                        },
-	                        {
-	                            "label": "Jul"
-	                        },
-	                        {
-	                            "label": "Aug"
-	                        },
-	                        {
-	                            "label": "Sep"
-	                        },
-	                        {
-	                            "label": "Oct"
-	                        },
-	                        {
-	                            "label": "Nov"
-	                        },
-	                        {
-	                            "label": "Dec"
-	                        }
-	                    ]
-	                }
-	            ],
-	            "dataset": [
-	                {
-	                    "seriesName": "Actual",
-	                    "showValues": "0",
-	                    "data": [
-	                        {
-	                            "value": "16000"
-	                        },
-	                        {
-	                            "value": "20000"
-	                        },
-	                        {
-	                            "value": "18000"
-	                        },
-	                        {
-	                            "value": "19000"
-	                        },
-	                        {
-	                            "value": "15000"
-	                        },
-	                        {
-	                            "value": "21000"
-	                        },
-	                        {
-	                            "value": "16000"
-	                        },
-	                        {
-	                            "value": "20000"
-	                        },
-	                        {
-	                            "value": "17000"
-	                        },
-	                        {
-	                            "value": "25000"
-	                        },
-	                        {
-	                            "value": "19000"
-	                        },
-	                        {
-	                            "value": "23000"
-	                        }
-	                    ]
-	                },
-	                {
-	                    "seriesName": "Forecast",
-	                    "renderAs": "line",
-	                    "data": [
-	                        {
-	                            "value": "15000"
-	                        },
-	                        {
-	                            "value": "16000"
-	                        },
-	                        {
-	                            "value": "17000"
-	                        },
-	                        {
-	                            "value": "18000"
-	                        },
-	                        {
-	                            "value": "19000"
-	                        },
-	                        {
-	                            "value": "19000"
-	                        },
-	                        {
-	                            "value": "19000"
-	                        },
-	                        {
-	                            "value": "19000"
-	                        },
-	                        {
-	                            "value": "20000"
-	                        },
-	                        {
-	                            "value": "21000"
-	                        },
-	                        {
-	                            "value": "22000"
-	                        },
-	                        {
-	                            "value": "23000"
-	                        }
-	                    ]
-	                },
-	                {
-	                    "seriesName": "Taget",
-	                    "renderAs": "area",
-	                    "data": [
-	                        {
-	                            "value": "4000"
-	                        },
-	                        {
-	                            "value": "5000"
-	                        },
-	                        {
-	                            "value": "3000"
-	                        },
-	                        {
-	                            "value": "4000"
-	                        },
-	                        {
-	                            "value": "1000"
-	                        },
-	                        {
-	                            "value": "7000"
-	                        },
-	                        {
-	                            "value": "1000"
-	                        },
-	                        {
-	                            "value": "4000"
-	                        },
-	                        {
-	                            "value": "1000"
-	                        },
-	                        {
-	                            "value": "8000"
-	                        },
-	                        {
-	                            "value": "2000"
-	                        },
-	                        {
-	                            "value": "7000"
-	                        }
-	                    ]
-	                }
-	            ]
-	        }
-	    }).render();
-	 return false;
- };
+
  var generateChartBubbleFn = function(data){	
 	 var analysisChart = new FusionCharts({
 	        type: 'bubble',
 	        dataLoadStartMessage: "Loading chart. Please wait",
 		    baseChartMessageFont: "Arial",
-		    baseChartMessageFontSize: "18",
-		    baseChartMessageColor: "#FC0000",
+		    baseChartMessageFontSize: "16",
+		    baseChartMessageColor: "#993300",
 	        renderAt: 'listBubbleChart',
 	        width: '100%',
 	        height: '400',
 	        dataFormat: 'json',
 	        dataSource: {
 	            "chart": {
-//	                "caption": "Sales Analysis of Shoe Brands",
+	                //"caption": data['header'],
 //	                "subcaption": "Last Quarter",
+	                "captionFont": "Arial",
+	                "captionFontSize": "18",
+	                "captionFontBold": "1",
+	                "basefontsize": "12",
+	                "valueFontSize": "10",
+	                "valueFontBold": "12",
 	                "xAxisMinValue": "0",
-	                "xAxisMaxValue": "5",
+	                //"xAxisMaxValue": "100",
 	                "yAxisMinValue": "0",
-	                "yAxisMaxValue": "5",
+	                "yAxisMaxValue": "100",
 	                "xAxisNameFont": "Arial",
-	                "xAxisNameFontSize": "16",
+	                "xAxisNameFontSize": "14",
 	                "xAxisNameFontColor": "#993300",
 	                "xAxisNameFontBold": "1",
 	                "xAxisNameFontItalic": "1",
 	                "xAxisNameAlpha": "80",
 	                "yAxisNameFont": "Arial",
-	                "yAxisNameFontSize": "16",
+	                "yAxisNameFontSize": "14",
 	                "yAxisNameFontColor": "#993300",
 	                "yAxisNameFontBold": "1",
 	                "yAxisNameFontItalic": "1",
 	                "yAxisNameAlpha": "80",
 	                "plotFillAlpha": "70",
-	                "plotFillHoverColor": "#eeeeee",
+	                "plotFillHoverColor": "#FFFACD",
 	                "showPlotBorder": "0",
-	                "xAxisName": "Target",
-	                "yAxisName": "Actual",
+	                "xAxisName": "Impact",
+	                "yAxisName": "Urgency",
 	                "numDivlines": "2",
 	                "showValues":"1",
-	                "showTrendlineLabels": "0",
+	                "showTrendlineLabels": "1",
+	                "showYAxisValues":"0",
+	                "numDivlines": "0",
 	                "chartLeftMargin": "35",
 	                "chartRightMargin": "35",
 	                //Dynamic tool-tips with HTML and macro variables
-	                "plotTooltext": "<div id='nameDiv'>$name :</div>{br}Average Price : <b>$$xDataValue</b>{br}Units Sold : <b>$yDataValue</b>{br}Profit Contribution : <b>$zvalue%</b>",
+	                //"plotTooltext": "<div id='nameDiv'>$name :</div>{br}Target : <b>$xDataValue</b>{br}Actual : <b>$yDataValue</b>{br}Profit Contribution : <b>$zvalue%</b>",
+	                "plotTooltext": "$name , <b>Unachieved : <b>$zvalue%</b>",
 	                "theme": "fint"
 	            },
-	            "dataset" : data
+	            "categories": data['categories'],
+	            "dataset" : data['dataset'],
+	            "trendlines" : data['trendlines']
 	        }
 	    }).render();
+	 
+ };
+ var generateChartPieFn = function(data){	
+	 var topProductsChart = new FusionCharts({
+	        type: 'multilevelpie',
+	        dataLoadStartMessage: "Loading chart. Please wait",
+		    baseChartMessageFont: "Arial",
+		    baseChartMessageFontSize: "16",
+		    baseChartMessageColor: "#993300",
+	        renderAt: 'listPieChart',
+	        width: '100%',
+	        height: '385',
+	        //id : "myChart",
+	        dataFormat: 'json',
+	        dataSource: {
+	            "chart": {
+	            	//"caption": data['header'],
+	            	"captionFont": "Arial",
+	                "captionFontSize": "18",
+	                //"captionFontBold": "1",
+	                "baseFontColor" : "#333333",
+	                "baseFont" : "Helvetica Neue,Arial",   
+	                "basefontsize": "12",
+	                "valueFontBold": "1",
+	                "subcaptionFontBold": "0",
+	                "bgColor" : "#ffffff",
+	                "canvasBgColor" : "#ffffff",
+	                "showBorder" : "0",
+	                "showShadow" : "0",
+	                "showCanvasBorder": "0",
+	                "showPlotBorder": "1",
+	                "pieFillAlpha": "60",
+	                "pieBorderThickness": "2",
+	                "hoverFillColor": "#FFFACD",
+	                "pieBorderColor": "#ffffff",
+	                "useHoverColor": "1",
+	                "showValuesInTooltip": "1",
+	                "showPercentInTooltip": "0",
+	                "numberPrefix": "$",
+	                "plotTooltext": "$label, $value, $percentValue",
+	                "theme": "fint"
+	            },
+	            "category": data['category']
+	        },
+	        "events": {
+	            "dataplotclick" : function(ev, props) {
+	              var senderData = ev.sender.getJSONData()['category'];
+	              var clickLabel = props.label;
+	              $.each(senderData,function(index,indexEntry){
+	            	  if(clickLabel == indexEntry['label']){
+	            		  $("#param_perspective").val("");
+	            		  getDataBubbleFn();
+	            		  return false;
+	            	  }
+		                $.each(indexEntry['category'],function(index2,indexEntry2){
+							if (clickLabel == indexEntry2['label']) {
+								$("#param_perspective").val(indexEntry2['perspective_id']);
+								getDataBubbleFn();
+								return false;
+							}
+		                });
+	              });
+	    				}    
+	        }
+	    }).render();
+	 	
+	    
  };
  var getDataFn = function(page,rpp){
 		var year= $("#param_year").val();
@@ -546,34 +230,65 @@
 		var position= $("#param_position").val();
 		var app_lv= $("#param_app_lv").val();
 		var org= $("#param_org_id").val();
-		var kpi= $("#param_kpi_id").val();
 
 		$.ajax({
-			url : restfulURL+"/see_api/public/dashboard/kpi_overall",
+			url : restfulURL+"/see_api/public/dashboard/kpi_overall_pie",
 			type : "get",
 			dataType : "json",
 			data:{
-				"year_id":year,
-				"period_id":period,
-				"appraisal_type_id":app_type,
-				"emp_id":emp,
-				"position_id":position,
-				"level_id":app_lv,
-				"org_id":org,
-				"item_id":kpi		
+				"year_id"				:		year,
+				"period_id"				:		period,
+				"appraisal_type_id"		:		app_type,
+				"emp_id"				:		emp,
+				"position_id"			:		position,
+				"level_id"				:		app_lv,
+				"org_id"				:		org	
 			},
 			headers:{Authorization:"Bearer "+tokenID.token},
 			async:false,// w8 data 
 			success : function(data) {
 				galbalDashboard=data;
-				listDashBoardFn(data);
+				$("#captionPieChart").html("<div id='txtTopic' class='span12 graphLTopHeader'>"+data['header']+"</div>");
+				generateChartPieFn(data);
 				
 			}
 		});	
 };
+var getDataBubbleFn = function(page,rpp){
+	var year= $("#param_year").val();
+	var period= $("#param_period").val();
+	var app_type= $("#param_app_type").val();
+	var emp= $("#param_emp").val();
+	var position= $("#param_position").val();
+	var app_lv= $("#param_app_lv").val();
+	var org= $("#param_org_id").val();
+	var perspective= $("#param_perspective").val();
+	$.ajax({
+		url : restfulURL+"/see_api/public/dashboard/kpi_overall_bubble",
+		type : "get",
+		dataType : "json",
+		data:{
+			"year_id"				:		year,
+			"period_id"				:		period,
+			"appraisal_type_id"		:		app_type,
+			"emp_id"				:		emp,
+			"position_id"			:		position,
+			"level_id"				:		app_lv,
+			"org_id"				:		org,
+			"perspective_id" 		:		perspective 
+		},
+		headers:{Authorization:"Bearer "+tokenID.token},
+		async:false,// w8 data 
+		success : function(data) {
+			$("#captionBubbleChart").html("<div id='txtTopic' class='span12 graphLTopHeader'>"+data['header']+"</div>");
+			generateChartBubbleFn(data);
+			
+		}
+	});	
+};
 
  
- var searchAdvanceFn = function (year,period,app_lv,org,kpi,app_type,emp,position) {
+ var searchAdvanceFn = function (year,period,app_lv,org,app_type,emp,position) {
 	//embed parameter start
 		
 		var htmlParam="";
@@ -584,38 +299,15 @@
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_position' name='param_position' 	value='"+position+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' 	name='param_app_lv' 	value='"+app_lv+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' 	name='param_org_id' 	value='"+org+"'>";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_kpi_id' 	name='param_kpi_id' 	value='"+kpi+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_perspective' 	name='param_perspective' 	value=''>";
 		$(".paramEmbed").remove();
 		$("body").append(htmlParam);
 		//embed parameter end
 		getDataFn();
+		getDataBubbleFn();
 };
  
 
-
-var listDashBoardFn = function(data){
-	 $("#txtTopic").html(data['header']);
-	 generateChartBubbleFn(data['dataset']);
-	 var html = "";
-	 var kpi_id = galbalDataTemp["item_id"];
-	 if (kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val())) - 1] != undefined ) {
-		 html += "			<span id='previous' class='arrow' data-previous='"
-				+ kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val())) - 1]
-				+ "'></span>";
-	 }
-	 if (kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val())) + 1] != undefined) {
-		 html += "			<span id='next' class='arrow' data-next='"
-				+ kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val())) + 1]
-				+ "'></span>";
-	 }
-	 $("#pager").html(html);
-	 $("#next , #previous").off("click");
-	 $("#next , #previous").on("click",function() {
-		 $("#param_kpi_id").val($(this).attr("data-"+this.id));
-		 getDataFn();
-		 return false;
-	});
- };
 
  $(document).ready(function(){
 	var username = $('#user_portlet').val();
@@ -638,7 +330,7 @@ var listDashBoardFn = function(data){
 		//#Change Param Function
 		$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
 		$("#apprasiaLevel").change(function(){$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));$("#organization").change();});
-		$("#organization").change(function(){$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val()})));});
+		
 		
 		
 		
@@ -648,7 +340,7 @@ var listDashBoardFn = function(data){
 					$("#period").val(),
 					$("#apprasiaLevel").val(),
 					$("#organization").val(),
-					$("#kpi").val(),
+		
 					$("#app_type").val(),
 					$("#emp_name_id").val(),
 					$("#position_id").val());

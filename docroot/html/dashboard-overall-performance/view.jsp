@@ -36,7 +36,7 @@
  @media (min-width: 1200px) { 
 	
 
-	.aui .advance-search .span3{width: 22.077%;}
+	.aui .advance-search .span3{width: 24.504%;}
 	
   }
   /* Large desktop End######################################*/
@@ -44,7 +44,7 @@
   /*  desktop Start#########################################*/
  @media (min-width: 980px) and (max-width: 1199px) {
  
-		.aui .advance-search .span3{width: 24.374%;}
+		.aui .advance-search .span3{width: 24.354%;}
 		/*All Start*/
 		.aui #btnSearchAdvance{
 		margin-bottom:5px;
@@ -79,7 +79,7 @@
 	}
 	
 	
-	.aui .advance-search .span3{width: 24.268%;}
+	.aui .advance-search .span3{width: 24.238%;}
 	/*All Form Start*/
 	
 	.aui #btnSearchAdvance{
@@ -327,12 +327,15 @@
 .graphLTopHeader {
 	font-weight: bold;
 	font-size: 18px;
-	color: black;
+	color: #993300;
 	text-align: center;
 	margin-top: 15px;
 }
 #listBubbleChart{
- 	min-width: 1000px;
+/*  	min-width: 1000px; */
+}
+#listPieChart tspan {
+    font-weight: bold;
 }
 .aui .modal-dialog{
     overflow-y: initial !important;
@@ -468,14 +471,28 @@
 	<!-- content accordion start -->
 	<div class="ibox-content" id="listSubordinate" >
 		
-		<div class="row-fluid ">
-			<div class="span12 graphLTopHeader" id="txtTopic">TEST</div>
-		</div>
+		
 		<div style="overflow:auto">
 		<div class="row-fluid ">
-			<div class="span12 " id="listBubbleChart"></div>
+			<div class="span5 " >
+				<div class="row-fluid ">
+					<div class="span12" id="captionPieChart"></div>
+				</div>
+				<div class="row-fluid ">
+					<div class="span12" id="listPieChart"></div>
+				</div>
+			</div>
+			<div class="span7 " >
+				<div class="row-fluid ">
+					<div class="span12" id="captionBubbleChart"></div>
+				</div>
+				<div class="row-fluid ">
+					<div class="span12" id="listBubbleChart"></div>
+				</div>
+			</div>
 		</div>
 		</div>
+		
 	</div>
 	<!-- content accordion end -->
 
