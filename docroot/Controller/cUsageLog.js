@@ -248,7 +248,7 @@ if(connectionServiceFn(username,password,plid)==true){
 	
 	
 
-
+	
 	//Auto complete Start
 	
 	$("#Position").autocomplete({

@@ -1,0 +1,357 @@
+.search-box{
+	
+	/*border: 1px solid;*/
+    float: left;
+    margin-right: 5px;
+    width: 150px;
+    margin-bottom:5px;
+}
+.search-box-submit{
+	float: left;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    text-align: right;
+    width: 525px;
+}
+.btn-search{
+	/*width: 100%;*/
+}
+.font-management{
+	font-size:20px;
+	cursor:pointer;
+}
+.label-branch{
+	height:25px;
+	font-size:14px;
+}
+.label-count-fail{
+	height:25px;
+	font-size:14px;
+}
+#modalDetail  .modal-body {
+    padding: 0;
+}
+
+.btn-search{
+	margin-bottom:5px;
+}
+.title-detail{
+	padding-top:5px;
+	padding-bottom:20px;
+	font-size:16px;
+}
+.label-detail{
+	
+	float:left;
+}
+.label-detail .box1{
+	width:117px;
+}
+.label-detail .box2{
+	width:174px;
+}
+.label-detail .box3{
+	width:228px;
+}
+.label-detail .box4{
+	width:228px;
+}
+.label-detail .box5{
+	width:260px;
+}
+.explain-label-title{
+	float: left;
+    font-size: 15px;
+    width: 250px;
+}
+.label-explain{
+	float:left;
+	width:100px;
+	font-weight:bold;
+}
+
+.input-explain{
+	float:left;
+	width:438px;
+}
+
+/*--START--*/
+
+.titlePanel {
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding-top: 0;
+}
+.form-label-customs {
+    float: left;
+    padding-right: 5px;
+    padding-top: 1px;
+    text-align: right;
+    width: 150px;
+}
+#advanceSearchArea{
+	display:none;
+}
+.resultArea{
+display:none;
+}
+.inputFormSearch{
+	 padding-right: 0;
+}
+.ibox-content {
+    background-color: #fff;
+    border: 1px solid #ffe57f;
+    color: inherit;
+    margin-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+#btnAdd{
+margin-bottom:5px
+}
+
+.pagingText{
+ 	/*display:none;*/
+ 	}
+ 	#btnPaginationTop{
+ 		width:300px;
+ 		float:left;
+ 	}
+	/*
+	#dropdownPaginationTop{
+		width:100px;
+ 		float:right;
+	}
+	#dropdownPaginationBottom{
+		width:100px;
+ 		float:right;
+	}
+	*/
+	
+	#btnPaginationBottom{
+ 		width:300px;
+ 		float:left;
+ 	}
+	
+	.pagingText{
+	padding-top: 5px;
+	}
+	.aui .pagination ul{
+	margin: 0
+	}
+	
+	.aui form {
+    margin: 0;
+}
+.aui .table td{
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+#countPaginationTop{
+	width:60px;
+}
+#countPaginationBottom{
+	width:60px;
+}
+
+.aui #breadcrumbs {
+    margin-bottom: 0px;
+}
+
+.aui .breadcrumb {
+    background-color: #f5f5f5;
+    border-radius: 2px;
+    list-style: outside none none;
+    margin: 0 0 0px;
+    padding: 0px 15px;
+}
+.aui #file{
+	width: 100%;
+	height: 100%;
+}
+.aui .portlet-content, .aui .portlet-minimized .portlet-content-container {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #eaeaea;
+    border-image: none;
+    border-style: solid;
+    border-width: 0 1px 1px;
+    padding: 10px 5px 5px;
+}
+
+.aui .portlet-content, .aui .portlet-minimized .portlet-content-container {
+  background-color: #fafafa;
+}
+
+.aui .form-group {
+    margin-bottom: 7px;
+}
+
+
+/* Css by Au Start */
+.aui .modal-header .close{
+	font-size: 1.4em !important;
+    margin-top: 4px !important;
+    padding-top: 5px !important;
+}
+.gray-bg {
+	background-color: #f3f3f4;
+}
+.ibox-title{
+	padding: 1px 10px;
+	min-height: 30px;
+}
+.ibox-title2 {
+	  -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #ffe57f;
+    border-color: #FFCC00;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 3px 0 0;
+    color: black;
+    margin-bottom: 0;
+    min-height: 30px;
+    padding: 0px 10px;
+    
+}
+
+.titlePanel {
+	margin: 5px 0;
+}
+.form-group {
+    margin-bottom: 10px;
+}
+.control-label{
+	cursor: default;
+}
+
+.aui .ibox-title .control-label{
+	text-align: right;
+}
+
+form {
+    margin: 0 0 0;
+}
+.countPagination {
+    width: 70px;
+
+}
+.aui .popover-content {
+    padding: 5px 5px 5px 5px;
+}
+
+
+
+.modal{top:3%;}
+#confrimModal{width: 400px;}
+
+.aui .modal-footer{
+	border-radius: 0;
+}
+
+
+/* Large desktop */
+
+@media ( min-width : 1200px) {
+	#confrimModal {
+			left: 56%;
+		}
+}
+
+/* Portrait tablet to landscape and desktop */
+@media ( min-width : 980px) and (max-width: 1199px) {
+	#confrimModal {
+		left: 57%;
+	}
+	
+}
+@media ( min-width : 768px) and (max-width: 979px) {
+	#confrimModal {
+		left: 58.5%;
+	}
+	
+}
+
+/* Landscape phone to portrait tablet */
+@media ( max-width : 767px) {
+	#confrimModal {
+		left: 23.5%;
+	}
+	
+}		
+@media ( min-width : 481px) and (max-width: 615px) {
+	#confrimModal {
+			left: 16.5%;
+		}
+	.redFont{
+		float:right;
+	}
+	
+	
+}
+
+/* Landscape phones and down */
+@media ( max-width : 480px) {
+	#confrimModal {
+		left: 1%;
+	}
+	.redFont{
+		float:left;
+	}
+	.aui .ibox-title .control-label{
+		text-align: left;
+	}
+}
+@media ( min-width : 0px) and (max-width: 468px) {
+		
+	
+		
+}
+.aui .btn {
+	font-size: 14px;
+ 	padding: 4px 12px; 
+	width: auto;
+	margin-top: 0px;
+	display: inline;
+}
+.aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input {
+    height: 30px;
+    padding: none;
+    font-size: 14px;
+}
+.popover {
+	width: 135px;
+}
+/* Css by Au End1 */
+
+/*--END--*/
+
+.titlePanel2{
+	/*display: inline;*/
+    font-size: 13px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding-top: 5px;
+    
+}
+.aui .table td {
+    font-size: 13px;
+}
+.aui .table td {
+    border-top: 1px solid #ddd;
+    line-height: 16px;
+    padding: 5px;
+    text-align: left;
+    vertical-align: top;
+}
+
+
