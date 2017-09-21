@@ -495,7 +495,7 @@
 	        dataLoadStartMessage: "Loading chart. Please wait",
 		    baseChartMessageFont: "Arial",
 		    baseChartMessageFontSize: "18",
-		    baseChartMessageColor: "#FC0000",
+		    baseChartMessageColor: "#993300",
 	        renderAt: 'listBubbleChart',
 	        width: '100%',
 	        height: '400',
@@ -507,9 +507,9 @@
 	            	"basefontsize": "12",
 	                "valueFontSize": "11",
 	                "xAxisMinValue": "0",
-	                "xAxisMaxValue": "5",
+	                //"xAxisMaxValue": "5",
 	                "yAxisMinValue": "0",
-	                "yAxisMaxValue": "5",
+	                //"yAxisMaxValue": "5",
 	                "xAxisNameFont": "Arial",
 	                "xAxisNameFontSize": "16",
 	                "xAxisNameFontColor": "#993300",
@@ -614,6 +614,7 @@ var listDashBoardFn = function(data){
 	 $("#next , #previous").off("click");
 	 $("#next , #previous").on("click",function() {
 		 $("#param_kpi_id").val($(this).attr("data-"+this.id));
+		 $("#kpi").val($(this).attr("data-"+this.id));
 		 getDataFn();
 		 return false;
 	});

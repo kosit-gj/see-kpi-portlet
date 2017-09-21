@@ -580,7 +580,7 @@ var createInputTypeFn  = function(object,tokenID){
 		
 	}else if(object['inputType']=="text" || object['inputType']=="autoComplete"|| object['inputType']=='hidden'){
 
-		var dataTypeInput =(object['dataTypeInput'] == 'number' ? "numberOnly" : object['dataTypeInput'] == 'ip' ? "ip_address" : "");
+		var dataTypeInput =(object['dataTypeInput'] == 'number' ? "numberOnly" : object['dataTypeInput'] == 'ip' ? "ip_address" : object['dataTypeInput'] == undefined ? "" : object['dataTypeInput']);
 		var dataDefault =(object['default'] == undefined ? "" : object['default']);
 		if(object['placeholder']!=undefined){
 			

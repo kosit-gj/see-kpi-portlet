@@ -10,12 +10,15 @@
 	 		
     	var options={
     			"colunms":[
-    			           {"colunmsDisplayName":"Organization Code","width":"15%","id":"org_code","colunmsType":"text"},
-    			           {"colunmsDisplayName":"Organization","width":"25%","id":"org_name","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Organization Code","width":"14%","id":"org_code","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Organization","width":"18%","id":"org_name","colunmsType":"text"},
     			           {"colunmsDisplayName":"Abbreviation","width":"10%","id":"org_abbr","colunmsType":"text"},
-    			           {"colunmsDisplayName":"Appraisal Level","width":"15%","id":"appraisal_level_name","colunmsType":"text"},
-    			           {"colunmsDisplayName":"Parent Org.","width":"25%","id":"parent_org_name","colunmsType":"text"},
-    			           {"colunmsDisplayName":"Is Active","width":"10%","id":"is_active","colunmsType":"checkbox"},
+    			           {"colunmsDisplayName":"Appraisal Level","width":"11%","id":"appraisal_level_name","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Parent Org.","width":"13%","id":"parent_org_name","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Province","width":"","id":"province_name","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Latitude","width":"","id":"latitude","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Longtitude","width":"","id":"longtitude","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Is Active","width":"7%","id":"is_active","colunmsType":"checkbox"},
     			          ],
     			"form":[{
     					"label":"Organization Code","inputType":"text","placeholder":"Organization Code",
@@ -45,6 +48,18 @@
         	    							"listData"	:	"parent_org"
         	    						}
         	    		},
+        	    		{
+            				"label":"Province Name","inputType":"dropdown","initValue":"",
+            				"id":"level_id","width":"250px","url":""+restfulURL+"/see_api/public/org/province_list"
+            			},
+            			{
+        					"label":"Latitude","inputType":"text","dataTypeInput":"geographic","placeholder":"Latitude",
+        					"id":"latitude","width":"250px","required":true
+        				},
+        				{
+        					"label":"Longtitude","inputType":"text","dataTypeInput":"geographic","placeholder":"Longtitude",
+        					"id":"longtitude","width":"250px","required":true
+        				},
     					{
 	 	    			"label":"IsActive","inputType":"checkbox","default":"checked",
 	 	    			"id":"is_active","width":"200px"
@@ -78,7 +93,11 @@
     	}
     	
     	createDataTableFn(options);
-    	
+    	$.getScript($("#url_portlet").val()+"/js/plugins/jquery_mask/jquery.mask.min.js", function(){
+
+			  $('.geographic').mask('999.000000');
+
+		});
 		}
 	 }
 	//binding tooltip start

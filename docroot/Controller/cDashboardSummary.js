@@ -1121,6 +1121,7 @@ var listDashBoardFn = function(data){
 							galbalDataTemp['collapse_show'] = $(".collapse.in").get();///Memory Collapse Show
 							
 							$("#param_kpi_id").val($(this).attr("data-"+this.id));
+							$("#kpi").val($(this).attr("data-"+this.id));
 							//console.log($(this).attr("data-"+this.id));
 							getDataFn();
 

@@ -289,7 +289,7 @@
 			async:false,// w8 data 
 			success : function(data) {
 				galbalDashboard=data;
-				$("#captionPieChart").html("<div id='txtTopic' class='span12 graphLTopHeader'>"+data['header']+"</div>");
+				$("#captionPieChart").html("<div id='txtTopic' class='span12 graphLTopHeader'>"+data['header'].replace("Performance by Perspective", "<div style='display: inline-block;'>Performance by Perspective</div>")+"</div>");
 				generateChartPieFn(data);
 				
 			}
@@ -321,7 +321,7 @@ var getDataBubbleFn = function(page,rpp){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,// w8 data 
 		success : function(data) {
-			$("#captionBubbleChart").html("<div id='txtTopic' class='span12 graphLTopHeader'>"+data['header']+"</div>");
+			$("#captionBubbleChart").html("<div id='txtTopic' class='span12 graphLTopHeader'>"+data['header'].replace("Performance by KPI", "<div style='display: inline-block;'>Performance by KPI</div>")+"</div>");
 			generateChartBubbleFn(data);
 			
 		}

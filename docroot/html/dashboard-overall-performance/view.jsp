@@ -350,6 +350,9 @@
     stroke: #999999 !important;
     stroke-opacity: 0.9 !important;
 }
+.aui .fusioncharts-caption{
+	font-weight: bold;
+}
 </style>
 
 
