@@ -4,10 +4,30 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 
-
+<%
+	String username = themeDisplay.getUser().getScreenName();
+	String password = (String) request.getSession().getAttribute(WebKeys.USER_PASSWORD);
+	layout = themeDisplay.getLayout();
+	plid = layout.getPlid();
+	
+%>
+<input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
+<input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
+<input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
+<input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
+<input type="hidden" id="get_year_id" name="get_year_id" value="<%= PortalUtil.getOriginalServletRequest(request).getParameter("param_year")%>">
+<input type="hidden" id="get_period_id" name="get_period_id" value="<%= PortalUtil.getOriginalServletRequest(request).getParameter("param_period")%>">
+<input type="hidden" id="get_appraisal_type_id" name="get_appraisal_type_id" value="<%= PortalUtil.getOriginalServletRequest(request).getParameter("param_app_type")%>">
+<input type="hidden" id="get_emp_id" name="get_emp_id" value="<%= PortalUtil.getOriginalServletRequest(request).getParameter("param_emp")%>">
+<input type="hidden" id="get_position_id" name="get_position_id" value="<%=PortalUtil.getOriginalServletRequest(request).getParameter("param_position")%>">
+<input type="hidden" id="get_level_id" name="get_level_id" value="<%= PortalUtil.getOriginalServletRequest(request).getParameter("param_app_lv")%>">
+<input type="hidden" id="get_org_id" name="get_org_id" value="<%= PortalUtil.getOriginalServletRequest(request).getParameter("param_org_id")%>">
+<input type="hidden" id="get_item_id" name="get_item_id" value="<%=PortalUtil.getOriginalServletRequest(request).getParameter("param_item")%>">
+<input type="hidden" id="get_sending_status" name="get_sending_status" value="<%=PortalUtil.getOriginalServletRequest(request).getParameter("sending_status")%>">
 <style>
 .aui #breadcrumbs {
 	margin-bottom: 0px;
@@ -344,18 +364,7 @@
 </style>
 
 
-<%
-	String username = themeDisplay.getUser().getScreenName();
-	String password = (String) request.getSession().getAttribute(WebKeys.USER_PASSWORD);
-	layout = themeDisplay.getLayout();
-	plid = layout.getPlid();
-	String first_name = request.getParameter("first_name");
-%>
-<input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
-<input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
-<input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
-<input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
-<input type="text" id="post_kpi" name="post_kpi" value="<%= first_name%>">
+
 <div class="app_url_hidden" style="display: block;">
 	<div class="row-fluid app_url_hidden">
 		<!-- start--row-fluid -->

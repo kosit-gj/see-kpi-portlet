@@ -320,7 +320,7 @@
 		                "yAxisNameAlpha": "80",
 		                //"numberPrefix": "$",
 		                "showBorder": "0",
-		                "paletteColors": "#0075c2",
+		                "paletteColors": "#FF850D",
 		                "bgColor": "#ffffff",
 		                "borderAlpha": "20",
 		                "canvasBorderAlpha": "0",
@@ -337,7 +337,8 @@
 		                "subcaptionFontBold": "0",
 		                "exportEnabled" :"0",
 		                "subcaptionFontSize": "14",
-		                "useRoundEdges":"1"
+		                "useRoundEdges":"1",
+	                    "theme" : "fint"
 		            },            
 		            "data": actual,
 		            "trendlines": [
@@ -356,10 +357,120 @@
 		                        }
 		                    ]
 		                }
-		            ]
-		        }
+		            ],
+		            "annotations": {
+	                    "drawImmediately": "1",
+	                    "showbelow": "1",
+	                    //Annotations on a chart can be divided across multiple groups for easy management, and manipulation through API
+	                    "groups": [                        
+	                        {                  
+	                            //Each group needs a unique ID
+	                            "id": "Q2",
+	                            //Under each group, you can define multiple items. Each item is a polygon, text or image - with its own set of parameters.
+	                            "items": [
+	                                {
+	                                    //Each item needs a unique ID
+	                                    "id": "Q2-Base",
+	                                    //This item is of type rectangle
+	                                    "type": "rectangle",
+	                                    "radius": "2",
+	                                    "alpha" : "90", 
+	                                    "fillColor": "#7FC31C",
+	                                    //Setting x and y position based on annotation macros. Here we're statically positioning it w.r.t 2nd column (0 base in JavaScript) of 1st dataset. Hence $dataset.0.set.1.x
+	                                    "link": "javascript:void(0)",
+	                                    "x": "$dataset.0.set.1.x-25",
+	                                    "y": "$dataset.0.set.1.starty-15",
+	                                    "tox": "$dataset.0.set.1.x+25",
+	                                    "toy": "$dataset.0.set.1.starty-40"
+	                                },
+	                                {
+	                                    "id": "Q2-Triangle",
+	                                    //Polygon item 
+	                                    "type": "polygon",
+	                                    //With 3 sides, so it is a triangle
+	                                    "sides": "3",
+	                                    "startangle": "270",
+	                                    "alpha" : "90",      
+	                                    "fillColor": "#7FC31C",                                    									"link": "javascript:void(0)",
+	                                    "x": "$dataset.0.set.1.x",
+	                                    "y": "$dataset.0.set.1.starty-16",
+	                                    "radius": "11",                                
+	                                },
+	                                {
+	                                    "id": "Q2-Label",
+	                                    //Text annotation item type to add label for callout
+	                                    "type": "Text",                                
+	                                    "fontSize": "11",                                                            "link": "javascript:void(0)",   
+	                                    "bold": "1",
+	                                    "fillcolor": "#ffffff",
+	                                    "text": "SIN",
+	                                    "x": "$dataset.0.set.1.x",
+	                                    "y": "$dataset.0.set.1.starty - 26"
+	                                }
+	                                
+	                            ]
+	                        },
+	                        {                  
+	                            //Each group needs a unique ID
+	                            "id": "Q4",
+	                            //Under each group, you can define multiple items. Each item is a polygon, text or image - with its own set of parameters.
+	                            "items": [
+	                                {
+	                                    //Each item needs a unique ID
+	                                    "id": "Q4-Base",
+	                                    //This item is of type rectangle
+	                                    "type": "rectangle",
+	                                    "radius": "2",
+	                                    "alpha" : "90", 
+	                                    "fillColor": "#7FC31C",
+	                                    //Setting x and y position based on annotation macros. Here we're statically positioning it w.r.t 2nd column (0 base in JavaScript) of 1st dataset. Hence $dataset.0.set.1.x
+	                                    "link": "javascript:void(0)",
+	                                    "x": "$dataset.0.set.3.x-25",
+	                                    "y": "$dataset.0.set.3.starty-15",
+	                                    "tox": "$dataset.0.set.3.x+25",
+	                                    "toy": "$dataset.0.set.3.starty-40"
+	                                },
+	                                {
+	                                    "id": "Q4-Triangle",
+	                                    //Polygon item 
+	                                    "type": "polygon",
+	                                    //With 3 sides, so it is a triangle
+	                                    "sides": "3",
+	                                    "startangle": "270",
+	                                    "alpha" : "90",      
+	                                    "fillColor": "#7FC31C",                                    									"link": "javascript:void(0)",
+	                                    "x": "$dataset.0.set.3.x",
+	                                    "y": "$dataset.0.set.3.starty-16",
+	                                    "radius": "11",                                
+	                                },
+	                                {
+	                                    "id": "Q4-Label",
+	                                    //Text annotation item type to add label for callout
+	                                    "type": "Text",                                
+	                                    "fontSize": "11",                                                            "link": "javascript:void(0)",   
+	                                    "bold": "1",
+	                                    "fillcolor": "#ffffff",
+	                                    "text": "SIN",
+	                                    "x": "$dataset.0.set.3.x",
+	                                    "y": "$dataset.0.set.3.starty - 26"
+	                                }
+	                                
+	                            ]
+	                        }
+	                    ]
+	                }
+		        },
+
+            
+            //On click of annotation, toggle the message.
+            "annotationclick": function (evtObj, argObj) {
+                var annotations = evtObj.sender.annotations;
+                 	console.log(argObj.groupId);  
+                
+                
+            }
 		    }).render();
-		
+		    
 	 return false;
  };
  var generateChartBarLineAreaFn = function(data){	
@@ -586,8 +697,118 @@
 	                        }
 	                    ]
 	                }
-	            ]
-	        }
+	            ],
+	            "annotations": {
+                    "drawImmediately": "1",
+                    "showbelow": "1",
+                    //Annotations on a chart can be divided across multiple groups for easy management, and manipulation through API
+                    "groups": [                        
+                        {                  
+                            //Each group needs a unique ID
+                            "id": "Q2",
+                            //Under each group, you can define multiple items. Each item is a polygon, text or image - with its own set of parameters.
+                            "items": [
+                                {
+                                    //Each item needs a unique ID
+                                    "id": "Q2-Base",
+                                    //This item is of type rectangle
+                                    "type": "rectangle",
+                                    "radius": "2",
+                                    "alpha" : "90", 
+                                    "fillColor": "#7FC31C",
+                                    //Setting x and y position based on annotation macros. Here we're statically positioning it w.r.t 2nd column (0 base in JavaScript) of 1st dataset. Hence $dataset.0.set.1.x
+                                    "link": "javascript:void(0)",
+                                    "x": "$dataset.0.set.1.x-25",
+                                    "y": "$dataset.0.set.1.starty-18",
+                                    "tox": "$dataset.0.set.1.x+25",
+                                    "toy": "$dataset.0.set.1.starty-40"
+                                },
+                                {
+                                    "id": "Q2-Triangle",
+                                    //Polygon item 
+                                    "type": "polygon",
+                                    //With 3 sides, so it is a triangle
+                                    "sides": "3",
+                                    "startangle": "270",
+                                    "alpha" : "90",      
+                                    "fillColor": "#7FC31C",                                    									"link": "javascript:void(0)",
+                                    "x": "$dataset.0.set.1.x",
+                                    "y": "$dataset.0.set.1.starty-18",
+                                    "radius": "12",                                
+                                },
+                                {
+                                    "id": "Q2-Label",
+                                    //Text annotation item type to add label for callout
+                                    "type": "Text",                                
+                                    "fontSize": "12",                                                            "link": "javascript:void(0)",   
+                                    "bold": "1",
+                                    "fillcolor": "#ffffff",
+                                    "text": "SIN",
+                                    "x": "$dataset.0.set.1.x",
+                                    "y": "$dataset.0.set.1.starty - 30"
+                                }
+                                
+                            ]
+                        },
+                        {                  
+                            //Each group needs a unique ID
+                            "id": "Q4",
+                            //Under each group, you can define multiple items. Each item is a polygon, text or image - with its own set of parameters.
+                            "items": [
+                                {
+                                    //Each item needs a unique ID
+                                    "id": "Q4-Base",
+                                    //This item is of type rectangle
+                                    "type": "rectangle",
+                                    "radius": "2",
+                                    "alpha" : "90", 
+                                    "fillColor": "#7FC31C",
+                                    //Setting x and y position based on annotation macros. Here we're statically positioning it w.r.t 2nd column (0 base in JavaScript) of 1st dataset. Hence $dataset.0.set.1.x
+                                    "link": "javascript:void(0)",
+                                    "x": "$dataset.0.set.3.x-25",
+                                    "y": "$dataset.0.set.3.starty-18",
+                                    "tox": "$dataset.0.set.3.x+25",
+                                    "toy": "$dataset.0.set.3.starty-40"
+                                },
+                                {
+                                    "id": "Q4-Triangle",
+                                    //Polygon item 
+                                    "type": "polygon",
+                                    //With 3 sides, so it is a triangle
+                                    "sides": "3",
+                                    "startangle": "270",
+                                    "alpha" : "90",      
+                                    "fillColor": "#7FC31C",                                    									"link": "javascript:void(0)",
+                                    "x": "$dataset.0.set.3.x",
+                                    "y": "$dataset.0.set.3.starty-18",
+                                    "radius": "12",                                
+                                },
+                                {
+                                    "id": "Q4-Label",
+                                    //Text annotation item type to add label for callout
+                                    "type": "Text",                                
+                                    "fontSize": "12",                                                            "link": "javascript:void(0)",   
+                                    "bold": "1",
+                                    "fillcolor": "#ffffff",
+                                    "text": "SIN",
+                                    "x": "$dataset.0.set.3.x",
+                                    "y": "$dataset.0.set.3.starty - 30"
+                                }
+                                
+                            ]
+                        }
+                    ]
+                }
+	        },
+
+            
+            //On click of annotation, toggle the message.
+            "annotationclick": function (evtObj, argObj) {
+                var annotations = evtObj.sender.annotations;
+                 	console.log(argObj.groupId);  
+                
+                
+            }
 	    }).render();
 	 return false;
  };
@@ -835,11 +1056,11 @@ var listHeaderFn=function(galbalOrg){
 	 $.each(galbalOrg,function(index,indexEntry){
 	  //console.log(indexEntry);
 	  if(indexEntry['org_code']=="00"){
-	   htmlHeaderMain+="<th style='min-width:323px;'>";
+	   htmlHeaderMain+="<th style='min-width:325px;'>";
 	    htmlHeaderMain+="<div class='fontBold fontCenter'>"+indexEntry['org_name']+"</div>";
 	   htmlHeaderMain+="</th>";
 	  }else{
-	   htmlHeader2+="<th style='min-width:323px;'>";
+	   htmlHeader2+="<th style='min-width:325px;'>";
 	    htmlHeader2+="<div class='fontBold fontCenter'>"+indexEntry['org_name']+"</div>";
 	   htmlHeader2+="</th>";
 	  }
@@ -975,7 +1196,7 @@ var listDashBoardAllKPIFn = function(data){
 	    htmlData2+="<table class='tableInside table-striped'>";
 	    htmlData2+="<thead>";
 	    htmlData2+="<tr>";
-	    htmlData2+="<th><div class='fontBold ' style='min-width:100px'>Target</div></th>";
+	    htmlData2+="<th><div class='fontBold ' style='min-width:102px'>Target</div></th>";
 	    htmlData2+="<th><div class='fontBold '  style='min-width:100px'>Forecast</div></th>";
 	    htmlData2+="<th><div class='fontBold ' style='min-width:100px'>Actual</div></th>";
 	      htmlData2+="</tr>";
@@ -987,11 +1208,11 @@ var listDashBoardAllKPIFn = function(data){
 	      htmlData2+="<td style='text-align:right;'>"+addCommas(indexEntry2['actual'])+"</td>";
 	      htmlData2+="</tr>";
 	      htmlData2+="<tr>";
-	      htmlData2+="<td>%Target</td>";
+	      htmlData2+="<td>%Target<span style='float:right'>999.99</span></td>";
 	      htmlData2+="<td colspan='2'><div class='sparkline' id='perTarget"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_target_str']+"</div></td>";
 	      htmlData2+="</tr>";
 	      htmlData2+="<tr>";
-	      htmlData2+="<td>%Forecast</td>";
+	      htmlData2+="<td>%Forecast<span style='float:right'>999.99</span></td>";
 	      htmlData2+="<td colspan='2'><div class='sparkline' id='perForecast"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_forecast_str']+"</div></td>";  
 	      htmlData2+="</tr>";
 	     htmlData2+="</tbody>";
@@ -1005,7 +1226,7 @@ var listDashBoardAllKPIFn = function(data){
 	    htmlData3+="<table class='tableInside table-striped'>";
 	    htmlData3+="<thead>";
 	     htmlData3+="<tr>";
-	      htmlData3+="<th><div class='fontBold ' style='min-width:100px;'>Target</div></th>";
+	      htmlData3+="<th><div class='fontBold ' style='min-width:102px;'>Target</div></th>";
 	      htmlData3+="<th><div class='fontBold ' style='min-width:100px;'>Forecast</div></th>";
 	      htmlData3+="<th><div class='fontBold ' style='min-width:100px;'>Actual</div></th>";
 	      htmlData3+="</tr>";
@@ -1017,11 +1238,11 @@ var listDashBoardAllKPIFn = function(data){
 	      htmlData3+="<td style='text-align:right;'>"+indexEntry2['actual']+"</td>";
 	      htmlData3+="</tr>";
 	      htmlData3+="<tr>";
-	       htmlData3+="<td>%Target</td>";
+	       htmlData3+="<td>%Target<span style='float:right'>999.99</span></td>";
 	       htmlData3+="<td colspan='2'><div class='sparkline' id='perTarget"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_target_str']+"</div></td>";
 	      htmlData3+="</tr>";
 	      htmlData3+="<tr>";
-	       htmlData3+="<td>%Forecast</td>";
+	       htmlData3+="<td>%Forecast<span style='float:right'>999.99</span></td>";
 	       htmlData3+="<td colspan='2'><div class='sparkline' id='perForecast"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_forecast_str']+"</div></td>";   
 	      htmlData3+="</tr>";
 	      htmlData3+="</tbody>";
