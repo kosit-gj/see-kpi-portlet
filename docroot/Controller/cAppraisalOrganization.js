@@ -1,5 +1,5 @@
  $(document).ready(function(){
-   
+    
 	 var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
 	 var plid = $('#plid_portlet').val();
