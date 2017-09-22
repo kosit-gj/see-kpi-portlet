@@ -1263,8 +1263,12 @@
 	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/plugins/slimscroll/jquery.slimscroll.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
-		 <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
-	     <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
+	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+		
+		  
+	 
+		
 		
 		<footer-portlet-javascript>
 			/js/fusioncharts/js/fusioncharts.js               
@@ -1285,6 +1289,7 @@
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	     
 	    <footer-portlet-javascript>/Controller/cDashboardOverallPerformance.js</footer-portlet-javascript>
+		
 		<css-class-wrapper>
 			dashboard-overall-performance-portlet
 		</css-class-wrapper>
@@ -1306,5 +1311,5 @@
 		<role-link>User</role-link>  
 	</role-mapper>  
 </liferay-portlet-app>
-     
+                             
                            

@@ -379,13 +379,22 @@ This is the <b>Usage Log</b> portlet in View mode.2
 		height:597px;
 		
 	}
+	.ui-accordion .ui-accordion-content{
+		padding: 5px;
+	}
+	#mapGooglePerfomanceArea{
+		width:500px;
+		height:500px;
+	}
 </style>	
-	<button id='btnCreateMap'>Create Map</button>			
+	<button id='btnCreateMap'>Create Map</button>		
+	<button id='btnCreateGoogleMap'>Create Google Map</button>		
 <div class="row-fluid ">
 
    	<div class='span6'>
    		Span6
    		<div id='mapPerfomanceArea' ></div>
+   		<div id='mapGooglePerfomanceArea' ></div>
    	</div>
    	<div class='span6'>
    		
@@ -421,7 +430,160 @@ This is the <b>Usage Log</b> portlet in View mode.2
 			  
 			  <div>
 			   <!-- Content Start -->
-			   		Test
+			   	<table class='table' style='width:100%;'>
+			   		<thead>
+			   		
+				   		<tr>
+				   			<th>Perspective</th>
+				   			<th>KPI</th>
+				   			<th>UOM</th>
+	   						<th style='background:#fcf8e3; text-align:center;'>KPI Result</th>	
+				   		</tr>
+			   		</thead>
+			   		<tbody>
+			   			<tr>
+			   				<td>01 Strong Finacncail </td>
+			   				<td>01 จำนวนเงิน Gross NPL</td>
+			   				<td>ร้อยละ </td>
+			   				
+			   				<td>
+			   					<table>
+			   						<thead>
+				   						<tr>
+				   							<th style='background:#fcf8e3;'>Target</th>
+				   							<th style='background:#fcf8e3;'>Forecast</th>
+				   							<th style='background:#fcf8e3;'>Actual</th>
+				   						</tr>
+			   						</thead>
+			   						<tbody>
+			   							<tr>
+			   								<td>4.00</td>
+			   								<td>4</td>
+			   								<td>2.40</td>
+			   							</tr>
+			   							<tr>
+			   								<td>%Taget</td>
+			   								<td colspan='2'></td>
+			   								
+			   							</tr>
+			   							<tr>
+			   								<td>%Forecast</td>
+			   								<td colspan='2'></td>
+			   							</tr>
+			   						</tbody>
+			   					</table>
+			   				</td>
+			   				
+			   			</tr>
+			   			
+			   			<tr>
+			   				<td>01 Strong Finacncail </td>
+			   				<td>01 จำนวนเงิน Gross NPL</td>
+			   				<td>ร้อยละ </td>
+			   				
+			   				<td>
+			   					<table>
+			   						<thead>
+				   						<tr>
+				   							<th style='background:#fcf8e3;'>Target</th>
+				   							<th style='background:#fcf8e3;'>Forecast</th>
+				   							<th style='background:#fcf8e3;'>Actual</th>
+				   						</tr>
+			   						</thead>
+			   						<tbody>
+			   							<tr>
+			   								<td>4.00</td>
+			   								<td>4</td>
+			   								<td>2.40</td>
+			   							</tr>
+			   							<tr>
+			   								<td>%Taget</td>
+			   								<td colspan='2'></td>
+			   								
+			   							</tr>
+			   							<tr>
+			   								<td>%Forecast</td>
+			   								<td colspan='2'></td>
+			   							</tr>
+			   						</tbody>
+			   					</table>
+			   				</td>
+			   				
+			   			</tr>
+			   			
+			   			
+			   			<tr>
+			   				<td>01 Strong Finacncail </td>
+			   				<td>01 จำนวนเงิน Gross NPL</td>
+			   				<td>ร้อยละ </td>
+			   				
+			   				<td>
+			   					<table>
+			   						<thead>
+				   						<tr>
+				   							<th style='background:#fcf8e3;'>Target</th>
+				   							<th style='background:#fcf8e3;'>Forecast</th>
+				   							<th style='background:#fcf8e3;'>Actual</th>
+				   						</tr>
+			   						</thead>
+			   						<tbody>
+			   							<tr>
+			   								<td>4.00</td>
+			   								<td>4</td>
+			   								<td>2.40</td>
+			   							</tr>
+			   							<tr>
+			   								<td>%Taget</td>
+			   								<td colspan='2'></td>
+			   								
+			   							</tr>
+			   							<tr>
+			   								<td>%Forecast</td>
+			   								<td colspan='2'></td>
+			   							</tr>
+			   						</tbody>
+			   					</table>
+			   				</td>
+			   				
+			   			</tr>
+			   			
+			   			
+			   			<tr>
+			   				<td>01 Strong Finacncail </td>
+			   				<td>01 จำนวนเงิน Gross NPL</td>
+			   				<td>ร้อยละ </td>
+			   				
+			   				<td>
+			   					<table>
+			   						<thead>
+				   						<tr>
+				   							<th style='background:#fcf8e3;'>Target</th>
+				   							<th style='background:#fcf8e3;'>Forecast</th>
+				   							<th style='background:#fcf8e3;'>Actual</th>
+				   						</tr>
+			   						</thead>
+			   						<tbody>
+			   							<tr>
+			   								<td>4.00</td>
+			   								<td>4</td>
+			   								<td>2.40</td>
+			   							</tr>
+			   							<tr>
+			   								<td>%Taget</td>
+			   								<td colspan='2'></td>
+			   								
+			   							</tr>
+			   							<tr>
+			   								<td>%Forecast</td>
+			   								<td colspan='2'></td>
+			   							</tr>
+			   						</tbody>
+			   					</table>
+			   				</td>
+			   				
+			   			</tr>
+			   		</tbody>
+			   	</table>
 			   <!-- Content End -->
 			   
 			   
@@ -501,6 +663,10 @@ This is the <b>Usage Log</b> portlet in View mode.2
 
 
 <div id='embedParamSearch'></div>
+<!-- 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK3RgqSLy1toc4lkh2JVFQ5ipuRB106vU&callback=initMap" async defer></script>
+ -->
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK3RgqSLy1toc4lkh2JVFQ5ipuRB106vU" async defer></script>
 
 
 
