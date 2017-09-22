@@ -4,6 +4,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
+
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 
@@ -344,6 +345,14 @@
     max-height: calc(100vh - 200px);
     overflow-y: auto;
 }
+
+.aui #listBubbleChart path {
+    stroke: #999999 !important;
+    stroke-opacity: 0.9 !important;
+}
+.aui .fusioncharts-caption{
+	font-weight: bold;
+}
 </style>
 
 
@@ -499,7 +508,9 @@
 
 
 
-	
+	<form id="linkParam" method="POST" target="_blank" action="POST">
+		
+	</form>
 </div>
  
  

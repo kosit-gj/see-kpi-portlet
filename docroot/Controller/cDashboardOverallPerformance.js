@@ -114,12 +114,12 @@
 	                "captionFontSize": "18",
 	                "captionFontBold": "1",
 	                "basefontsize": "12",
-	                "valueFontSize": "10",
-	                "valueFontBold": "12",
+	                "valueFontSize": "11",
+	                "valueFontBold": "1",
 	                "xAxisMinValue": "0",
 	                //"xAxisMaxValue": "100",
 	                "yAxisMinValue": "0",
-	                "yAxisMaxValue": "100",
+	                //"yAxisMaxValue": "100",
 	                "xAxisNameFont": "Arial",
 	                "xAxisNameFontSize": "14",
 	                "xAxisNameFontColor": "#993300",
@@ -133,10 +133,10 @@
 	                "yAxisNameFontItalic": "1",
 	                "yAxisNameAlpha": "80",
 	                "plotFillAlpha": "70",
-	                "plotFillHoverColor": "#FFFACD",
+	                "plotFillHoverColor": "#eeeeee",
 	                "showPlotBorder": "0",
-	                "xAxisName": "Impact",
-	                "yAxisName": "Urgency",
+	                "xAxisName": "Urgency",
+	                "yAxisName": "Impact",
 	                "numDivlines": "2",
 	                "showValues":"1",
 	                "showTrendlineLabels": "1",
@@ -145,13 +145,51 @@
 	                "chartLeftMargin": "35",
 	                "chartRightMargin": "35",
 	                //Dynamic tool-tips with HTML and macro variables
-	                //"plotTooltext": "<div id='nameDiv'>$name :</div>{br}Target : <b>$xDataValue</b>{br}Actual : <b>$yDataValue</b>{br}Profit Contribution : <b>$zvalue%</b>",
-	                "plotTooltext": "$name , <b>Unachieved : <b>$zvalue%</b>",
+	                "plotTooltext": "<div id='nameDiv'>$name </div>{br}Urgency : <b>$xDataValue</b>{br}Impact : <b>$yDataValue</b>{br}Achievement : <b>$zvalue%</b>",
+	                
 	                "theme": "fint"
 	            },
 	            "categories": data['categories'],
-	            "dataset" : data['dataset'],
+	            "dataset" 	: data['dataset'],
 	            "trendlines" : data['trendlines']
+	        },
+	        "events": {
+	            "dataplotclick" : function(ev, props) {
+	            	var objDataset = ev.sender.getJSONData().dataset;
+	            	console.log(objDataset);
+	            	console.log(props.displayValue);
+	            	var clickLabel = props.displayValue;
+	            	$.each(objDataset,function(index,indexEntry){
+	            		$.each(indexEntry['data'],function(index2,indexEntry2){
+		            	  if(clickLabel == indexEntry2['name']){
+//		            		  var year= $("#param_year").val();
+//		            			var period= $("#param_period").val();
+//		            			var app_type= $("#param_app_type").val();
+//		            			var emp= $("#param_emp").val();
+//		            			var position= $("#param_position").val();
+//		            			var app_lv= $("#param_app_lv").val();
+//		            			var org= $("#param_org_id").val();
+//		            			var item= $("#param_item").val(indexEntry2['item_id']);
+//		            			var paramLink =
+//		            			"year_id="+year+
+//		            			"&period_id="+period+
+//		        				"&appraisal_type_id="+app_type+
+//		        				"&emp_id="+emp+
+//		        				"&position_id="+position+
+//		        				"&level_id="+app_lv+
+//		        				"&org_id="+org+
+//		        				"&item_id="+item;
+		            			$("#param_item").val(indexEntry2['item_id']);
+		            			$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/overall-subordinate");
+		            			$("form#linkParam").submit();
+		            			$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/performance-trend");
+		            			$("form#linkParam").submit();
+		            		  //getDataBubbleFn();
+		            		  return false;
+		            	  }
+	            	 	});
+		              });
+	            }    
 	        }
 	    }).render();
 	 
@@ -177,6 +215,7 @@
 	                "baseFontColor" : "#333333",
 	                "baseFont" : "Helvetica Neue,Arial",   
 	                "basefontsize": "12",
+	                "valueFontSize": "11",
 	                "valueFontBold": "1",
 	                "subcaptionFontBold": "0",
 	                "bgColor" : "#ffffff",
@@ -187,13 +226,13 @@
 	                "showPlotBorder": "1",
 	                "pieFillAlpha": "60",
 	                "pieBorderThickness": "2",
-	                "hoverFillColor": "#FFFACD",
+	                "hoverFillColor": "#eeeeee",
 	                "pieBorderColor": "#ffffff",
 	                "useHoverColor": "1",
 	                "showValuesInTooltip": "1",
 	                "showPercentInTooltip": "0",
 	                "numberPrefix": "$",
-	                "plotTooltext": "$label, $value, $percentValue",
+	                "plotTooltext": "$label",//, $value, $percentValue
 	                "theme": "fint"
 	            },
 	            "category": data['category']
@@ -201,8 +240,10 @@
 	        "events": {
 	            "dataplotclick" : function(ev, props) {
 	              var senderData = ev.sender.getJSONData()['category'];
-	              var clickLabel = props.label;
+	              var clickLabel = props.label.replace("<br />", "{br}");
+	              
 	              $.each(senderData,function(index,indexEntry){
+	            	  
 	            	  if(clickLabel == indexEntry['label']){
 	            		  $("#param_perspective").val("");
 	            		  getDataBubbleFn();
@@ -248,7 +289,7 @@
 			async:false,// w8 data 
 			success : function(data) {
 				galbalDashboard=data;
-				$("#captionPieChart").html("<div id='txtTopic' class='span12 graphLTopHeader'>"+data['header']+"</div>");
+				$("#captionPieChart").html("<div id='txtTopic' class='span12 graphLTopHeader'>"+data['header'].replace("Performance by Perspective", "<div style='display: inline-block;'>Performance by Perspective</div>")+"</div>");
 				generateChartPieFn(data);
 				
 			}
@@ -280,7 +321,7 @@ var getDataBubbleFn = function(page,rpp){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,// w8 data 
 		success : function(data) {
-			$("#captionBubbleChart").html("<div id='txtTopic' class='span12 graphLTopHeader'>"+data['header']+"</div>");
+			$("#captionBubbleChart").html("<div id='txtTopic' class='span12 graphLTopHeader'>"+data['header'].replace("Performance by KPI", "<div style='display: inline-block;'>Performance by KPI</div>")+"</div>");
 			generateChartBubbleFn(data);
 			
 		}
@@ -292,16 +333,18 @@ var getDataBubbleFn = function(page,rpp){
 	//embed parameter start
 		
 		var htmlParam="";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_year' 	name='param_year' 		value='"+year+"'>";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_period' 	name='param_period' 	value='"+period+"'>";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_type' name='param_app_type' 	value='"+app_type+"'>";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_emp' 		name='param_emp' 		value='"+emp+"'>";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_position' name='param_position' 	value='"+position+"'>";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' 	name='param_app_lv' 	value='"+app_lv+"'>";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' 	name='param_org_id' 	value='"+org+"'>";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_perspective' 	name='param_perspective' 	value=''>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_year' 		name='param_year' 		value='"+year+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_period' 		name='param_period' 	value='"+period+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_type' 	name='param_app_type' 	value='"+app_type+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_emp' 			name='param_emp' 		value='"+emp+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_position' 	name='param_position' 	value='"+position+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' 		name='param_app_lv' 	value='"+app_lv+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' 		name='param_org_id' 	value='"+org+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_perspective' 	name='param_perspective'value=''>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_item' 		name='param_item' 		value=''>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='sending_status' 	name='sending_status' 	value='true'>";
 		$(".paramEmbed").remove();
-		$("body").append(htmlParam);
+		$("form#linkParam").append(htmlParam);
 		//embed parameter end
 		getDataFn();
 		getDataBubbleFn();

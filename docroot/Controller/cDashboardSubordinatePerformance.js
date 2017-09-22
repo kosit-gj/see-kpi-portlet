@@ -495,7 +495,7 @@
 	        dataLoadStartMessage: "Loading chart. Please wait",
 		    baseChartMessageFont: "Arial",
 		    baseChartMessageFontSize: "18",
-		    baseChartMessageColor: "#FC0000",
+		    baseChartMessageColor: "#993300",
 	        renderAt: 'listBubbleChart',
 	        width: '100%',
 	        height: '400',
@@ -504,10 +504,12 @@
 	            "chart": {
 //	                "caption": "Sales Analysis of Shoe Brands",
 //	                "subcaption": "Last Quarter",
+	            	"basefontsize": "12",
+	                "valueFontSize": "11",
 	                "xAxisMinValue": "0",
-	                "xAxisMaxValue": "5",
+	                //"xAxisMaxValue": "5",
 	                "yAxisMinValue": "0",
-	                "yAxisMaxValue": "5",
+	                //"yAxisMaxValue": "5",
 	                "xAxisNameFont": "Arial",
 	                "xAxisNameFontSize": "16",
 	                "xAxisNameFontColor": "#993300",
@@ -531,7 +533,7 @@
 	                "chartLeftMargin": "35",
 	                "chartRightMargin": "35",
 	                //Dynamic tool-tips with HTML and macro variables
-	                "plotTooltext": "<div id='nameDiv'>$name :</div>{br}Average Price : <b>$$xDataValue</b>{br}Units Sold : <b>$yDataValue</b>{br}Profit Contribution : <b>$zvalue%</b>",
+	                "plotTooltext": "<div id='nameDiv'>$name </div>{br}Target : <b>$xDataValue</b>{br}Actual : <b>$yDataValue</b>{br}Achievement : <b>$zvalue%</b>",
 	                "theme": "fint"
 	            },
 	            "dataset" : data
@@ -612,6 +614,7 @@ var listDashBoardFn = function(data){
 	 $("#next , #previous").off("click");
 	 $("#next , #previous").on("click",function() {
 		 $("#param_kpi_id").val($(this).attr("data-"+this.id));
+		 $("#kpi").val($(this).attr("data-"+this.id));
 		 getDataFn();
 		 return false;
 	});
@@ -659,7 +662,19 @@ var listDashBoardFn = function(data){
 
 		
 		$(".app_url_hidden").show();
-		
+		if($("#get_sending_status").val() == "true" && $("#get_sending_status").val() != null){
+			searchAdvanceFn(
+					$("#get_year_id").val(),
+					$("#get_period_id").val(),
+					$("#get_level_id").val(),
+					$("#get_org_id").val(),
+					$("#get_item_id").val(),
+					$("#get_appraisal_type_id").val(),
+					$("#get_emp_id").val(),
+					$("#get_position_id").val());
+			$("#listSubordinate").show();
+			$("#get_sending_status").val("false");
+		}
 		
 		//Autocomplete Search Start
 		generateAutocomplete("#position",restfulURL+"/see_api/public/cds_result/auto_position_name","post",{"position_name":null});
