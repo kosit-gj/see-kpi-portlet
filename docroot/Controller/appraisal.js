@@ -1047,7 +1047,7 @@ update_dttm
 			htmlTR+="<div class='actionplan_label' style='text-align:right;'>"+addCommas(parseFloat(notNullFn(indexEntry['completed_percent'])).toFixed(2))+"</div>";//Completed
 			htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='completed_percent-"+indexEntry['action_plan_id']+"' class='actionplan_input' name='completed_percent-"+indexEntry['action_plan_id']+"' value='"+indexEntry['completed_percent']+"'>";//Completed
 			
-			htmlTR+="</td>";
+			htmlTR+="</td>";/*
 			htmlTR+="<td>";
 			htmlTR+="<div class='actionplan_label' style='text-align:right;'>"+addCommas(parseFloat(notNullFn(indexEntry['plan_value'])).toFixed(2))+"</div>";//PV
 			htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='plan_value-"+indexEntry['action_plan_id']+"' name='plan_value-"+indexEntry['action_plan_id']+"' class='actionplan_input' value='"+indexEntry['plan_value']+"'>";//PV
@@ -1061,7 +1061,7 @@ update_dttm
 			htmlTR+="<td>";
 			htmlTR+="<div class='actionplan_label' style='text-align:right;'>"+addCommas(parseFloat(notNullFn(indexEntry['earned_value'])).toFixed(2))+"</div>";//EV
 			htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='earned_value-"+indexEntry['action_plan_id']+"' name='earned_value-"+indexEntry['action_plan_id']+"' class='actionplan_input' value='"+indexEntry['earned_value']+"'>";//EV
-			htmlTR+="</td>";
+			htmlTR+="</td>";*/
 		htmlTR+="</tr>";
 	});
 	
@@ -1206,7 +1206,7 @@ var insertActionPlanInlineFn = function(){
 				htmlTR+="</td>";
 				htmlTR+="<td>";
 				htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='new_completed_percent-"+globalCount+"' name='new_completed_percent-"+globalCount+"' value=''>";//Completed
-				htmlTR+="</td>";
+				htmlTR+="</td>";/*
 				htmlTR+="<td>";
 				htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='new_plan_value-"+globalCount+"' name='new_plan_value-"+globalCount+"' value=''>";//PV
 				htmlTR+="</td>";
@@ -1215,7 +1215,7 @@ var insertActionPlanInlineFn = function(){
 				htmlTR+="</td>";
 				htmlTR+="<td>";
 				htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='new_earned_value-"+globalCount+"' name='new_earned_value-"+globalCount+"' value=''>";//EV
-				htmlTR+="</td>";
+				htmlTR+="</td>";*/
 			htmlTR+="</tr>";
 			
 
@@ -3351,10 +3351,10 @@ $(document).ready(function() {
 					  plan_end_date = $("#plan_end_date-"+i).val();
 					  actual_start_date = $("#actual_start_date-"+i).val();
 					  actual_end_date=$("#actual_end_date-"+i).val();
-					  
+					  /*
 					  plan_value=$("#plan_value-"+i).val();
 					  actual_cost=$("#actual_cost-"+i).val();
-					  earned_value=$("#earned_value-"+i).val();
+					  earned_value=$("#earned_value-"+i).val();*/
 					  completed_percent=$("#completed_percent-"+i).val();
 					  if($("#responsible-"+i).val()==""){
 						  emp_id="";
@@ -3376,9 +3376,9 @@ $(document).ready(function() {
 							  plan_end_date : ""+plan_end_date+"",
 							  actual_start_date : ""+actual_start_date+"",
 							  actual_end_date: ""+actual_end_date+"",
-							  plan_value: ""+plan_value+"",
-							  actual_cost: ""+actual_cost+"",
-							  earned_value: ""+earned_value+"",
+							  //plan_value: ""+plan_value+"",
+							  //actual_cost: ""+actual_cost+"",
+							  //earned_value: ""+earned_value+"",
 							  completed_percent: ""+completed_percent+"",
 							 // responsible: ""+responsible+"",
 							  emp_id:emp_id
@@ -3474,10 +3474,10 @@ $(document).ready(function() {
 						  plan_end_date = $("#new_plan_end_date-"+i).val();
 						  actual_start_date = $("#new_actual_start_date-"+i).val();
 						  actual_end_date=$("#new_actual_end_date-"+i).val();
-						  
+						  /*
 						  plan_value=$("#new_plan_value-"+i).val();
 						  actual_cost=$("#new_actual_cost-"+i).val();
-						  earned_value=$("#new_earned_value-"+i).val();
+						  earned_value=$("#new_earned_value-"+i).val();*/
 						  completed_percent=$("#new_completed_percent-"+i).val();
 						  if($("#new_responsible-"+i).val()==""){
 							  emp_id="";
@@ -3499,9 +3499,9 @@ $(document).ready(function() {
 								  plan_end_date : ""+plan_end_date+"",
 								  actual_start_date : ""+actual_start_date+"",
 								  actual_end_date: ""+actual_end_date+"",
-								  plan_value: ""+plan_value+"",
-								  actual_cost: ""+actual_cost+"",
-								  earned_value: ""+earned_value+"",
+								  //plan_value: ""+plan_value+"",
+								 // actual_cost: ""+actual_cost+"",
+								  //earned_value: ""+earned_value+"",
 								  completed_percent: ""+completed_percent+"",
 								 // responsible: ""+responsible+"",
 								  emp_id:emp_id

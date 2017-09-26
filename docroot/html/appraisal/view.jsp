@@ -1372,17 +1372,17 @@ Is Active
 															</div>
 															<div class='boxActual boxForecastVsActual'>
 																<div class='fontBold fontCenter'>
-																Actual
+																Target
 																</div>
 																<div class='fontCenter'>
-																 <span id='actionPlanActual'></span>
+																 <span id='actionPlanTarget'></span>
 																 </div>
 															</div>
 														</div>
 														<div class='boxTargetArea' style='font-size:20px;'>
 															<div class='boxTargetData'>
-															<div class='fontBold fontCenter'>Target</div>
-															<div class='fontCenter fontBold' style='font-size:15px;margin-top:5px; color:green;'> <span id='actionPlanTarget'></span></div>
+															<div class='fontBold fontCenter'>Actual</div>
+															<div class='fontCenter fontBold' style='font-size:15px;margin-top:5px; color:green;'> <span id='actionPlanActual'></span></div>
 															</div>
 														</div>
 													</div>
@@ -1429,7 +1429,7 @@ Is Active
 											<br style='clear:both'>
 										</div>
 									</div>
-									<div style="overflow: scroll; width:100%;">
+									<div style="overflow: auto; width:100%;">
 									<!-- Select,Task,Plan Start,Plan Start,Plan End,Actual Start,Actual End,Responsible,%Completed,PV,AC,EV -->
 										<table class='table'>
 											<thead>
@@ -1443,9 +1443,9 @@ Is Active
 													<th style='width:5%'><b>Phase</b></th>
 													<th style='width:10%'><b>Responsible</b></th>
 													<th style='width:10%;text-align:right;'><b>%Completed</b></center></th>
-													<th style='width:7%;text-align:right;'><b>PV</b></th>
-													<th style='width:7%;text-align:right;'><b>AC</b></th>
-													<th style='width:7%;text-align:right;'><b>EV</b></th>
+<!-- 													<th style='width:7%;text-align:right;'><b>PV</b></th> -->
+<!-- 													<th style='width:7%;text-align:right;'><b>AC</b></th> -->
+<!-- 													<th style='width:7%;text-align:right;'><b>EV</b></th> -->
 													
 												</tr>
 											</thead>
