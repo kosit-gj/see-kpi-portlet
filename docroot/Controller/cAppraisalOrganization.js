@@ -16,8 +16,8 @@
     			           {"colunmsDisplayName":"Appraisal Level","width":"11%","id":"appraisal_level_name","colunmsType":"text"},
     			           {"colunmsDisplayName":"Parent Org.","width":"13%","id":"parent_org_name","colunmsType":"text"},
     			           {"colunmsDisplayName":"Province","width":"","id":"province_name","colunmsType":"text"},
-    			           {"colunmsDisplayName":"Latitude","width":"","id":"latitude","colunmsType":"text"},
-    			           {"colunmsDisplayName":"Longtitude","width":"","id":"longtitude","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Lt.","width":"","id":"latitude","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Ln.","width":"","id":"longitude","colunmsType":"text"},
     			           {"colunmsDisplayName":"Is Active","width":"7%","id":"is_active","colunmsType":"checkbox"},
     			          ],
     			"form":[{
@@ -50,15 +50,15 @@
         	    		},
         	    		{
             				"label":"Province Name","inputType":"dropdown","initValue":"",
-            				"id":"level_id","width":"250px","url":""+restfulURL+"/see_api/public/org/province_list"
+            				"id":"province_code","width":"250px","url":""+restfulURL+"/see_api/public/org/province_list"
             			},
             			{
         					"label":"Latitude","inputType":"text","dataTypeInput":"geographic","placeholder":"Latitude",
         					"id":"latitude","width":"250px","required":true
         				},
         				{
-        					"label":"Longtitude","inputType":"text","dataTypeInput":"geographic","placeholder":"Longtitude",
-        					"id":"longtitude","width":"250px","required":true
+        					"label":"Longitude","inputType":"text","dataTypeInput":"geographic","placeholder":"Longtitude",
+        					"id":"longitude","width":"250px","required":true
         				},
     					{
 	 	    			"label":"IsActive","inputType":"checkbox","default":"checked",
