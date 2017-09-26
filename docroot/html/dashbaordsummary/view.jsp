@@ -831,4 +831,9 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 			</div>
 		</div>
 	</div>
+	<form id="linkParam" method="POST" target="_blank" action="POST">
+		<input type="hidden" value="" name="param_item_result_id" id="param_item_result_id" class="">
+		<input type="hidden" value="email" name="param_link" id="param_link" class="" >
+		
+	</form>
  

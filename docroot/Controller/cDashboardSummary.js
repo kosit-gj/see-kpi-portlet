@@ -93,7 +93,7 @@
 	         }
 	    });
  }
- var generateAccordionHTML = function(parent,data){
+ var generateAccordionHTML = function(data,parent){
 		var kpi_id = galbalDataTemp["item_id"];
 		var accordionHtml = "";
 		if(parent == "group1"){
@@ -290,7 +290,7 @@
 		 	});
 	 });
 	 
-		    var revenueChart = new FusionCharts({
+		    var revenueChart1 = new FusionCharts({
 		        type: 'column2d',
 		        dataLoadStartMessage: "Loading chart. Please wait",
 			    baseChartMessageFont: "Arial",
@@ -318,6 +318,7 @@
 		                "yAxisNameFontBold": "1",
 		                //"yAxisNameFontItalic": "1",
 		                "yAxisNameAlpha": "80",
+		                "yAxisMaxValue": (data['bar_chart']['max_value'] <= 4 ? "5" : data['bar_chart']['max_value']*(1.05)),
 		                //"numberPrefix": "$",
 		                "showBorder": "0",
 		                "paletteColors": "#FF850D",
@@ -330,6 +331,8 @@
 		                "rotatevalues": "1",
 		                "valueFontColor": "#ffffff",                
 		                "showXAxisLine": "1",
+		                "showValues":"0",
+		                "placevaluesinside": "1",
 		                "xAxisLineColor": "#999999",
 		                "divlineColor": "#999999",               
 		                "divLineIsDashed": "1",
@@ -358,117 +361,22 @@
 		                    ]
 		                }
 		            ],
-		            "annotations": {
-	                    "drawImmediately": "1",
-	                    "showbelow": "1",
-	                    //Annotations on a chart can be divided across multiple groups for easy management, and manipulation through API
-	                    "groups": [                        
-	                        {                  
-	                            //Each group needs a unique ID
-	                            "id": "Q2",
-	                            //Under each group, you can define multiple items. Each item is a polygon, text or image - with its own set of parameters.
-	                            "items": [
-	                                {
-	                                    //Each item needs a unique ID
-	                                    "id": "Q2-Base",
-	                                    //This item is of type rectangle
-	                                    "type": "rectangle",
-	                                    "radius": "2",
-	                                    "alpha" : "90", 
-	                                    "fillColor": "#7FC31C",
-	                                    //Setting x and y position based on annotation macros. Here we're statically positioning it w.r.t 2nd column (0 base in JavaScript) of 1st dataset. Hence $dataset.0.set.1.x
-	                                    "link": "javascript:void(0)",
-	                                    "x": "$dataset.0.set.1.x-25",
-	                                    "y": "$dataset.0.set.1.starty-15",
-	                                    "tox": "$dataset.0.set.1.x+25",
-	                                    "toy": "$dataset.0.set.1.starty-40"
-	                                },
-	                                {
-	                                    "id": "Q2-Triangle",
-	                                    //Polygon item 
-	                                    "type": "polygon",
-	                                    //With 3 sides, so it is a triangle
-	                                    "sides": "3",
-	                                    "startangle": "270",
-	                                    "alpha" : "90",      
-	                                    "fillColor": "#7FC31C",                                    									"link": "javascript:void(0)",
-	                                    "x": "$dataset.0.set.1.x",
-	                                    "y": "$dataset.0.set.1.starty-16",
-	                                    "radius": "11",                                
-	                                },
-	                                {
-	                                    "id": "Q2-Label",
-	                                    //Text annotation item type to add label for callout
-	                                    "type": "Text",                                
-	                                    "fontSize": "11",                                                            "link": "javascript:void(0)",   
-	                                    "bold": "1",
-	                                    "fillcolor": "#ffffff",
-	                                    "text": "SIN",
-	                                    "x": "$dataset.0.set.1.x",
-	                                    "y": "$dataset.0.set.1.starty - 26"
-	                                }
-	                                
-	                            ]
-	                        },
-	                        {                  
-	                            //Each group needs a unique ID
-	                            "id": "Q4",
-	                            //Under each group, you can define multiple items. Each item is a polygon, text or image - with its own set of parameters.
-	                            "items": [
-	                                {
-	                                    //Each item needs a unique ID
-	                                    "id": "Q4-Base",
-	                                    //This item is of type rectangle
-	                                    "type": "rectangle",
-	                                    "radius": "2",
-	                                    "alpha" : "90", 
-	                                    "fillColor": "#7FC31C",
-	                                    //Setting x and y position based on annotation macros. Here we're statically positioning it w.r.t 2nd column (0 base in JavaScript) of 1st dataset. Hence $dataset.0.set.1.x
-	                                    "link": "javascript:void(0)",
-	                                    "x": "$dataset.0.set.3.x-25",
-	                                    "y": "$dataset.0.set.3.starty-15",
-	                                    "tox": "$dataset.0.set.3.x+25",
-	                                    "toy": "$dataset.0.set.3.starty-40"
-	                                },
-	                                {
-	                                    "id": "Q4-Triangle",
-	                                    //Polygon item 
-	                                    "type": "polygon",
-	                                    //With 3 sides, so it is a triangle
-	                                    "sides": "3",
-	                                    "startangle": "270",
-	                                    "alpha" : "90",      
-	                                    "fillColor": "#7FC31C",                                    									"link": "javascript:void(0)",
-	                                    "x": "$dataset.0.set.3.x",
-	                                    "y": "$dataset.0.set.3.starty-16",
-	                                    "radius": "11",                                
-	                                },
-	                                {
-	                                    "id": "Q4-Label",
-	                                    //Text annotation item type to add label for callout
-	                                    "type": "Text",                                
-	                                    "fontSize": "11",                                                            "link": "javascript:void(0)",   
-	                                    "bold": "1",
-	                                    "fillcolor": "#ffffff",
-	                                    "text": "SIN",
-	                                    "x": "$dataset.0.set.3.x",
-	                                    "y": "$dataset.0.set.3.starty - 26"
-	                                }
-	                                
-	                            ]
-	                        }
-	                    ]
-	                }
+		            "annotations": data['annotations']
 		        },
 
             
-            //On click of annotation, toggle the message.
-            "annotationclick": function (evtObj, argObj) {
-                var annotations = evtObj.sender.annotations;
-                 	console.log(argObj.groupId);  
-                
-                
-            }
+		        "events": {
+		            "annotationclick" : function(ev, props) {
+		              
+		            	$("#param_item_result_id").val("");
+	                 	$("#param_item_result_id").val(props.groupId.split("-")[0]);
+	                 	//$("#param_link").val("email");
+            			$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/kpi-result");
+            			$("form#linkParam").submit();
+            		  return false;
+		             
+		    		}    
+		        }
 		    }).render();
 		    
 	 return false;
@@ -887,8 +795,8 @@ var generateSubTableKPIFn = function(item,data){
 		var kpi= $("#param_kpi_id").val();
 
 		$.ajax({
-			url : restfulURL+"/see_api/public/dashboard/content",
-			type : "post",
+			url : restfulURL+"/see_api/public/dashboard/performance_trend",
+			type : "get",
 			dataType : "json",
 			data:{
 				"year_id":year,
@@ -915,7 +823,7 @@ var getOrgFn = function(data){
 	  if(data[0]['org']!=undefined){
 	   $.each(data[0]['org'],function(index,indexEntry){
 		   
-		galbalDataTemp['galbalOrg'].push({"org_code":indexEntry['org_code'],"org_name":indexEntry['org']});
+		galbalDataTemp['galbalOrg'].push({"org_id":indexEntry['org_id'],"org_name":indexEntry['org']});
 	    //console.log(indexEntry['org']);
 	   });
 	   
@@ -1040,7 +948,7 @@ var listHeaderFn=function(galbalOrg){
 	 var htmlHeaderMain = "";
 	 var htmlHeaderSummary1 = "";
 	 var htmlHeaderSummary2 = "";
-	 
+	 var org= $("#param_org_id").val();
 	 htmlHeader1+="<th style='width:120px;'>";
 	 htmlHeader1+="<div class='fontBold '> Perspective</div>";
 	 htmlHeader1+="</th>";
@@ -1055,7 +963,7 @@ var listHeaderFn=function(galbalOrg){
 	 
 	 $.each(galbalOrg,function(index,indexEntry){
 	  //console.log(indexEntry);
-	  if(indexEntry['org_code']=="00"){
+	  if(indexEntry['org_id']==org){
 	   htmlHeaderMain+="<th style='min-width:325px;'>";
 	    htmlHeaderMain+="<div class='fontBold fontCenter'>"+indexEntry['org_name']+"</div>";
 	   htmlHeaderMain+="</th>";
@@ -1078,9 +986,19 @@ var listDashBoardFn = function(data){
 	 
 	 $("#accordion").empty();
 	 $("#accordion").hide();
-	 html = "";
+	 var org= $("#param_org_id").val();
+	 var html = "";
 	 $.each(data , function(inedx,indexEntry){
-		 html+=generateAccordionHTML(inedx,indexEntry);
+		 if(org == indexEntry['org_id']){
+			 html+=generateAccordionHTML(indexEntry,"group1");
+			 return false;
+		 };
+		 
+	 });
+	 $.each(data , function(inedx,indexEntry){
+		 if(org != indexEntry['org_id']){
+			 html+=generateAccordionHTML(indexEntry);
+		 };
 	 });
 	 $("#accordion").html(html);
 	 
@@ -1177,7 +1095,7 @@ var listDashBoardFn = function(data){
 			$('#accordion').disableSelection();
  };
 var listDashBoardAllKPIFn = function(data){
-
+	 var org= $("#param_org_id").val();
 	var htmlData1="";
 	var htmlData3="";
 	 $.each(data,function(index,indexEntry){
@@ -1191,7 +1109,7 @@ var listDashBoardAllKPIFn = function(data){
 	   //loop here..
 	   $.each(indexEntry['org'],function(index2,indexEntry2){
 	   
-	   if(indexEntry2['org_code']=="00"){
+	   if(indexEntry2['org_id']==org){
 	    
 	    htmlData2+="<td>"; 
 	    htmlData2+="<table class='tableInside table-striped'>";
@@ -1209,11 +1127,11 @@ var listDashBoardAllKPIFn = function(data){
 	      htmlData2+="<td style='text-align:right;'>"+addCommas(indexEntry2['actual'])+"</td>";
 	      htmlData2+="</tr>";
 	      htmlData2+="<tr>";
-	      htmlData2+="<td>%Target<span style='float:right'>999.99</span></td>";
+	      htmlData2+="<td>%Target<span style='float:right'>"+parseFloat(indexEntry2['percent_target']).toFixed(2)+"</span></td>";
 	      htmlData2+="<td colspan='2'><div class='sparkline' id='perTarget"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_target_str']+"</div></td>";
 	      htmlData2+="</tr>";
 	      htmlData2+="<tr>";
-	      htmlData2+="<td>%Forecast<span style='float:right'>999.99</span></td>";
+	      htmlData2+="<td>%Forecast<span style='float:right'>"+parseFloat(indexEntry2['percent_forecast']).toFixed(2)+"</span></td>";
 	      htmlData2+="<td colspan='2'><div class='sparkline' id='perForecast"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_forecast_str']+"</div></td>";  
 	      htmlData2+="</tr>";
 	     htmlData2+="</tbody>";
@@ -1239,11 +1157,11 @@ var listDashBoardAllKPIFn = function(data){
 	      htmlData3+="<td style='text-align:right;'>"+indexEntry2['actual']+"</td>";
 	      htmlData3+="</tr>";
 	      htmlData3+="<tr>";
-	       htmlData3+="<td>%Target<span style='float:right'>999.99</span></td>";
+	       htmlData3+="<td>%Target<span style='float:right'>"+parseFloat(indexEntry2['percent_target']).toFixed(2)+"</span></td>";
 	       htmlData3+="<td colspan='2'><div class='sparkline' id='perTarget"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_target_str']+"</div></td>";
 	      htmlData3+="</tr>";
 	      htmlData3+="<tr>";
-	       htmlData3+="<td>%Forecast<span style='float:right'>999.99</span></td>";
+	       htmlData3+="<td>%Forecast<span style='float:right'>"+parseFloat(indexEntry2['percent_forecast']).toFixed(2)+"</span></td>";
 	       htmlData3+="<td colspan='2'><div class='sparkline' id='perForecast"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_forecast_str']+"</div></td>";   
 	      htmlData3+="</tr>";
 	      htmlData3+="</tbody>";

@@ -537,6 +537,30 @@
 	                "theme": "fint"
 	            },
 	            "dataset" : data
+	        },
+	        "events": {
+	            "dataplotclick" : function(ev, props) {
+	            	var objDataset = ev.sender.getJSONData().dataset;
+	            	console.log(objDataset);
+	            	console.log(props.displayValue);
+	            	var clickLabel = props.displayValue;
+	            	$.each(objDataset,function(index,indexEntry){
+	            		$.each(indexEntry['data'],function(index2,indexEntry2){
+		            	  if(clickLabel == indexEntry2['name']){
+		            		  	var temp_org = $("#param_org_id").val();
+		            		  	var temp_lv = $("#param_app_lv").val();
+		            			$("#param_item").val($("#param_kpi_id").val());
+		            		  	$("#param_org_id").val(indexEntry2['org_id']);
+		            		  	$("#param_app_lv").val(indexEntry2['level_id']);
+		            			$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/performance-trend");
+		            			$("form#linkParam").submit();
+		            			$("#param_org_id").val(temp_org);
+		            		  	$("#param_app_lv").val(temp_lv);
+		            		  return false;
+		            	  }
+	            	 	});
+		              });
+	            }    
 	        }
 	    }).render();
  };
@@ -587,8 +611,10 @@
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' 	name='param_app_lv' 	value='"+app_lv+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' 	name='param_org_id' 	value='"+org+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_kpi_id' 	name='param_kpi_id' 	value='"+kpi+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_item' 		name='param_item' 		value=''>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='sending_status' 	name='sending_status' 	value='true'>";
 		$(".paramEmbed").remove();
-		$("body").append(htmlParam);
+		$("form#linkParam").append(htmlParam);
 		//embed parameter end
 		getDataFn();
 };
