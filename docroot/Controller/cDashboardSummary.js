@@ -789,7 +789,7 @@ var generateSubTableKPIFn = function(item,data){
 		var period= $("#param_period").val();
 		var app_type= $("#param_app_type").val();
 		var emp= $("#param_emp").val();
-		var position= $("#param_position").val();
+		//var position= $("#param_position").val();
 		var app_lv= $("#param_app_lv").val();
 		var org= $("#param_org_id").val();
 		var kpi= $("#param_kpi_id").val();
@@ -803,7 +803,7 @@ var generateSubTableKPIFn = function(item,data){
 				"period_id":period,
 				"appraisal_type_id":app_type,
 				"emp_id":emp,
-				"position_id":position,
+				//"position_id":position,
 				"level_id":app_lv,
 				"org_id":org,
 				"item_id":kpi		
@@ -837,7 +837,7 @@ var getDataKPIFn = function(page,rpp){
 	var period= $("#param_period").val();
 	var app_type= $("#param_app_type").val();
 	var emp= $("#param_emp").val();
-	var position= $("#param_position").val();
+	//var position= $("#param_position").val();
 	var app_lv= $("#param_app_lv").val();
 	var org= $("#param_org_id").val();
 	var kpi= $("#param_kpi_id").val();
@@ -851,7 +851,7 @@ var getDataKPIFn = function(page,rpp){
 			"period_id":period,
 			"appraisal_type_id":app_type,
 			"emp_id":emp,
-			"position_id":position,
+			//"position_id":position,
 			"level_id":app_lv,
 			"org_id":org,
 			"item_id":kpi		
@@ -932,7 +932,7 @@ var getDataKPIFn = function(page,rpp){
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_period' 	name='param_period' 	value='"+period+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_type' name='param_app_type' 	value='"+app_type+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_emp' 		name='param_emp' 		value='"+emp+"'>";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_position' name='param_position' 	value='"+position+"'>";
+		//htmlParam+="<input type='hidden' class='paramEmbed' id='param_position' name='param_position' 	value='"+position+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' 	name='param_app_lv' 	value='"+app_lv+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' 	name='param_org_id' 	value='"+org+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_kpi_id' 	name='param_kpi_id' 	value='"+kpi+"'>";
@@ -1226,8 +1226,9 @@ var listDashBoardAllKPIFn = function(data){
 					$("#organization").val(),
 					$("#kpi").val(),
 					$("#app_type").val(),
-					$("#emp_name_id").val(),
-					$("#position_id").val());
+					$("#emp_name_id").val()//,
+					//$("#position_id").val()
+					);
 			$("#accordion").show();
 			$("#accordion").children().children().next().eq(0).collapse('show');;
 			return false;
@@ -1236,23 +1237,42 @@ var listDashBoardAllKPIFn = function(data){
 
 		
 		$(".app_url_hidden").show();
-		
+		if($("#get_sending_status").val() == "true" && $("#get_sending_status").val() != null){
+			searchAdvanceFn(
+					$("#get_year_id").val(),
+					$("#get_period_id").val(),
+					$("#get_level_id").val(),
+					$("#get_org_id").val(),
+					$("#get_item_id").val(),
+					$("#get_appraisal_type_id").val(),
+					$("#get_emp_id").val()//,
+					//$("#get_position_id").val()
+					);
+			//$("#listSubordinate").show();
+			$("#get_sending_status").val("false");
+		}
 		
 		//Autocomplete Search Start
-		generateAutocomplete("#position",restfulURL+"/see_api/public/cds_result/auto_position_name","post",{"position_name":null});
+		//generateAutocomplete("#position",restfulURL+"/see_api/public/cds_result/auto_position_name","post",{"position_name":null});
 		generateAutocomplete("#emp_name",restfulURL+"/see_api/public/cds_result/auto_emp_name","post",{"emp_name":null});
 		//Autocomplete Search End
 		
 		$("#app_type").change(function(){
 			if($("#app_type").val() == "1"){
 
-				$("#position").removeAttr('disabled');
+				//$("#position").removeAttr('disabled');
 				$("#emp_name").removeAttr('disabled');
+				$("#emp_name").removeAttr('disabled');
+				$('#apprasiaLevel').val($('#apprasiaLevel option:first-child').val());
+				$('#organization').val($('#organization option:first-child').val());
+				$("#apprasiaLevel , #organization").attr("disabled", 'disabled');
+			
 			}else if($("#app_type").val() == "2"){
-				$("#position").attr("disabled", 'disabled');
+				//$("#position").attr("disabled", 'disabled');
 				$("#emp_name").attr("disabled", 'disabled');
-				$("#position").val("");
-				$("#position_id").val("");
+				$("#apprasiaLevel , #organization").removeAttr('disabled');
+				//$("#position").val("");
+				//$("#position_id").val("");
 				$("#emp_name").val("");
 				$("#emp_name_id").val("");
 				
