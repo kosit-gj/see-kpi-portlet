@@ -67,8 +67,8 @@
     					
     			     ],
     			 "advanceSearch":[{
- 	 					"label":"Appraisal Level","label_tooltip":"Appraisal Level","inputType":"dropdown",
- 	 					"id":"level_id","width":"100%","initValue":"All Appraisal Level",
+ 	 					"label":"Level","label_tooltip":"Level","inputType":"dropdown",
+ 	 					"id":"level_id","width":"100%","initValue":"All Level",
  	 					"url":""+restfulURL+"/see_api/public/org/al_list"
  	 					},
  	 					{

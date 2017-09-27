@@ -56,7 +56,7 @@
  @media (min-width: 1200px) { 
 	
 
-	.aui .advance-search .span3{width: 22.077%;}
+	.aui .advance-search .span3{width: 24.504%;}
 	
   }
   /* Large desktop End######################################*/
@@ -64,7 +64,7 @@
   /*  desktop Start#########################################*/
  @media (min-width: 980px) and (max-width: 1199px) {
  
-		.aui .advance-search .span3{width: 24.374%;}
+		.aui .advance-search .span3{width: 24.364%;}
 		/*All Start*/
 		.aui #btnSearchAdvance{
 		margin-bottom:5px;
@@ -99,7 +99,7 @@
 	}
 	
 	
-	.aui .advance-search .span3{width: 24.268%;}
+	.aui .advance-search .span3{width: 24.242%;}
 	/*All Form Start*/
 	
 	.aui #btnSearchAdvance{
@@ -408,7 +408,7 @@
 							<select name="app_type" id="app_type"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Appraisal Type">
+								data-original-title="Entity Type">
 
 								<option value="1">Individual Test</option>
 								<option value="2">Organization Test</option>
@@ -422,19 +422,19 @@
 								type="text"> <input class="form-control input-sm"
 								id="emp_name_id" name="emp_name_id" value="" type="hidden">
 						</div>
-						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;" >
-							<input data-toggle="tooltip" data-placement="top"
-								title="Position" class="span12 m-b-n ui-autocomplete-input"
-								placeholder="Position" id="position" name="position" type="text">
-							<input class="form-control input-sm" id="position_id"
-								name="position_id" value="" type="hidden">
-						</div>
+<!-- 						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;" > -->
+<!-- 							<input data-toggle="tooltip" data-placement="top" -->
+<!-- 								title="Position" class="span12 m-b-n ui-autocomplete-input" -->
+<!-- 								placeholder="Position" id="position" name="position" type="text"> -->
+<!-- 							<input class="form-control input-sm" id="position_id" -->
+<!-- 								name="position_id" value="" type="hidden"> -->
+<!-- 						</div> -->
 						<div style="margin-left: 5px; margin-bottom: 3px;"
 							class="form-group pull-left span3" id="apprasiaLevelArea">
 							<select name="apprasiaLevel" id="apprasiaLevel"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Apprasia Level">
+								data-original-title="Level">
 
 								<option value="">Appraisal Level1</option>
 								<option value="">Appraisal Level2</option>

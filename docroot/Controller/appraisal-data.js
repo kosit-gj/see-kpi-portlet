@@ -126,7 +126,7 @@ var dropDownListAppraisalLevel = function(){
 	var html="";
 	
 	
-	html+="<select id=\"app_lv\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Appraisal Level\" name=\"app_lv\">";
+	html+="<select id=\"app_lv\" class=\"input form-control input-sm col-lg-9\" data-toggle=\"tooltip\" title=\"Level\" name=\"app_lv\">";
 	html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalLevel ,

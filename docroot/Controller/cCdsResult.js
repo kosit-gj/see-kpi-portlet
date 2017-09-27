@@ -210,7 +210,7 @@ var dropDownListAppraisalLevel = function(){
 	var html="";
 	
 	
-	html+="<select data-placement='top' id=\"app_lv\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Appraisal Level\" name=\"app_lv\">";
+	html+="<select data-placement='top' id=\"app_lv\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Level\" name=\"app_lv\">";
 	html+="<option  selected value=''>All Appraisal Level</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalLevel,
@@ -238,7 +238,7 @@ var dropDownListAppraisalType = function(){
 	var html="";
 	
 	
-	html+="<select data-placement='top' id=\"app_type\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Appraisal Type\" name=\"app_type\">";
+	html+="<select data-placement='top' id=\"app_type\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Entity Type\" name=\"app_type\">";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalType,
 		type:"get" ,

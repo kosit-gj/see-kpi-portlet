@@ -49,7 +49,7 @@
 	     			     ],
 	     			     
 	     			    "advanceSearch":[{
-	     			    	"label":"Appraisal Level","label_tooltip":"Appraisal Level","inputType":"dropdown",
+	     			    	"label":"Level","label_tooltip":"Level","inputType":"dropdown",
 	     					"id":"appraisal_level_id","width":"100%",
 	     					"url":""+restfulURL+"/see_api/public/appraisal_grade/al_list",
 	     					"initValue":"All"
