@@ -384,14 +384,14 @@ var appraisalLevelListFn = function(nameArea,id,defaultAll,multiSelect){
 		success:function(data){
 			var htmlOption="";
 			if(multiSelect==true){
-				htmlOption+="<select class=\"form-control input-sm multipleSelect span12\"   multiple=\"multiple\" id=\"appraisalLevel"+nameArea+"\">";
+				htmlOption+="<select class=\"form-control input-sm multipleSelect span12\" data-toggle=\"tooltip\" title=\"Level\"  multiple=\"multiple\" id=\"appraisalLevel"+nameArea+"\">";
 			}else{
-				htmlOption+="<select class=\"form-control input-sm multipleSelect span12\"   id=\"appraisalLevel"+nameArea+"\">";	
+				htmlOption+="<select class=\"form-control input-sm multipleSelect span12\" data-toggle=\"tooltip\" title=\"Level\"  id=\"appraisalLevel"+nameArea+"\">";	
 			}
 			if(defaultAll==false){
 				
 			}else{
-				htmlOption+="<option  value=\"\">All Appraisal Level</option>";
+				htmlOption+="<option  value=\"\">All Level</option>";
 			}
 			$.each(data,function(index,indexEntry){
 				

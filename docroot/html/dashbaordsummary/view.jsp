@@ -684,7 +684,7 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 							<select name="app_type" id="app_type"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Appraisal Type">
+								data-original-title="Entity Type">
 
 								<option value="1">Individual Test</option>
 								<option value="2">Organization Test</option>
@@ -710,7 +710,7 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 							<select name="apprasiaLevel" id="apprasiaLevel"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Apprasia Level">
+								data-original-title="Level">
 
 								<option value="">Appraisal Level1</option>
 								<option value="">Appraisal Level2</option>

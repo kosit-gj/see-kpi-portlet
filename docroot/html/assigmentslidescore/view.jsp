@@ -509,7 +509,7 @@ plid = layout.getPlid();
 									
 									<div id="appraisalTypeArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Appraisal Type"
+										<select data-toggle="tooltip" title="Entity Type"
 											class="input form-control input-sm" id="appraisalType"
 											name="appraisalType">
 								
@@ -532,7 +532,7 @@ plid = layout.getPlid();
 									
 									<div id='appraisalLevelArea' class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Appraisal Level"
+										<select data-toggle="tooltip" title="Level"
 											class="input form-control input-sm" id="appraisalLevel"
 											name="appraisalLevel">
 								

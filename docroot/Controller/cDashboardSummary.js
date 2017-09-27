@@ -294,11 +294,11 @@
 		        type: 'column2d',
 		        dataLoadStartMessage: "Loading chart. Please wait",
 			    baseChartMessageFont: "Arial",
-			    baseChartMessageFontSize: "18",
-			    baseChartMessageColor: "#FC0000",
+			    baseChartMessageFontSize: "16",
+			    baseChartMessageColor: "#993300",
 		        renderAt: "chartOrgBar-"+data['org_id'],
 		        width: '100%',
-		        height: '250',
+		        height: '255',
 		        dataFormat: 'json',
 		        dataSource: {
 		            "chart": {
@@ -385,8 +385,12 @@
 	 var salesAnlysisChart = new FusionCharts({
 	        type: 'mscombi2d',
 	        renderAt: 'chart-container',
+	        dataLoadStartMessage: "Loading chart. Please wait",
+		    baseChartMessageFont: "Arial",
+		    baseChartMessageFontSize: "16",
+		    baseChartMessageColor: "#993300",
 	        width: '100%',
-	        height: '250',
+	        height: '255',
 	        renderAt: "chartOrgBar-"+data['org_id'],
 	        dataFormat: 'json',
 	        dataSource: {
@@ -410,7 +414,8 @@
 	                //"numberPrefix": "$",
 	                "showBorder": "0",
 	                "showValues": "0",
-	                "paletteColors": "#0075c2,#1aaf5d,#f2c500",
+	                "paletteColors": "#FF850D",
+	                "paletteColors": "#FF850D,#1aaf5d,#f2c500",
 	                "bgColor": "#ffffff",
 	                "showCanvasBorder": "0",
 	                "canvasBgColor": "#ffffff",
@@ -436,287 +441,24 @@
 	                "legendItemFontColor": '#666666',
 	                "useRoundEdges":"1"
 	            },
-	            "categories": [
-	                {
-	                    "category": [
-	                        {
-	                            "label": "Jan"
-	                        },
-	                        {
-	                            "label": "Feb"
-	                        },
-	                        {
-	                            "label": "Mar"
-	                        },
-	                        {
-	                            "label": "Apr"
-	                        },
-	                        {
-	                            "label": "May"
-	                        },
-	                        {
-	                            "label": "Jun"
-	                        },
-	                        {
-	                            "label": "Jul"
-	                        },
-	                        {
-	                            "label": "Aug"
-	                        },
-	                        {
-	                            "label": "Sep"
-	                        },
-	                        {
-	                            "label": "Oct"
-	                        },
-	                        {
-	                            "label": "Nov"
-	                        },
-	                        {
-	                            "label": "Dec"
-	                        }
-	                    ]
-	                }
-	            ],
-	            "dataset": [
-	                {
-	                    "seriesName": "Actual",
-	                    "showValues": "0",
-	                    "data": [
-	                        {
-	                            "value": "16000"
-	                        },
-	                        {
-	                            "value": "20000"
-	                        },
-	                        {
-	                            "value": "18000"
-	                        },
-	                        {
-	                            "value": "19000"
-	                        },
-	                        {
-	                            "value": "15000"
-	                        },
-	                        {
-	                            "value": "21000"
-	                        },
-	                        {
-	                            "value": "16000"
-	                        },
-	                        {
-	                            "value": "20000"
-	                        },
-	                        {
-	                            "value": "17000"
-	                        },
-	                        {
-	                            "value": "25000"
-	                        },
-	                        {
-	                            "value": "19000"
-	                        },
-	                        {
-	                            "value": "23000"
-	                        }
-	                    ]
-	                },
-	                {
-	                    "seriesName": "Forecast",
-	                    "renderAs": "line",
-	                    "data": [
-	                        {
-	                            "value": "15000"
-	                        },
-	                        {
-	                            "value": "16000"
-	                        },
-	                        {
-	                            "value": "17000"
-	                        },
-	                        {
-	                            "value": "18000"
-	                        },
-	                        {
-	                            "value": "19000"
-	                        },
-	                        {
-	                            "value": "19000"
-	                        },
-	                        {
-	                            "value": "19000"
-	                        },
-	                        {
-	                            "value": "19000"
-	                        },
-	                        {
-	                            "value": "20000"
-	                        },
-	                        {
-	                            "value": "21000"
-	                        },
-	                        {
-	                            "value": "22000"
-	                        },
-	                        {
-	                            "value": "23000"
-	                        }
-	                    ]
-	                },
-	                {
-	                    "seriesName": "Taget",
-	                    "renderAs": "area",
-	                    "data": [
-	                        {
-	                            "value": "4000"
-	                        },
-	                        {
-	                            "value": "5000"
-	                        },
-	                        {
-	                            "value": "3000"
-	                        },
-	                        {
-	                            "value": "4000"
-	                        },
-	                        {
-	                            "value": "1000"
-	                        },
-	                        {
-	                            "value": "7000"
-	                        },
-	                        {
-	                            "value": "1000"
-	                        },
-	                        {
-	                            "value": "4000"
-	                        },
-	                        {
-	                            "value": "1000"
-	                        },
-	                        {
-	                            "value": "8000"
-	                        },
-	                        {
-	                            "value": "2000"
-	                        },
-	                        {
-	                            "value": "7000"
-	                        }
-	                    ]
-	                }
-	            ],
-	            "annotations": {
-                    "drawImmediately": "1",
-                    "showbelow": "1",
-                    //Annotations on a chart can be divided across multiple groups for easy management, and manipulation through API
-                    "groups": [                        
-                        {                  
-                            //Each group needs a unique ID
-                            "id": "Q2",
-                            //Under each group, you can define multiple items. Each item is a polygon, text or image - with its own set of parameters.
-                            "items": [
-                                {
-                                    //Each item needs a unique ID
-                                    "id": "Q2-Base",
-                                    //This item is of type rectangle
-                                    "type": "rectangle",
-                                    "radius": "2",
-                                    "alpha" : "90", 
-                                    "fillColor": "#7FC31C",
-                                    //Setting x and y position based on annotation macros. Here we're statically positioning it w.r.t 2nd column (0 base in JavaScript) of 1st dataset. Hence $dataset.0.set.1.x
-                                    "link": "javascript:void(0)",
-                                    "x": "$dataset.0.set.1.x-25",
-                                    "y": "$dataset.0.set.1.starty-18",
-                                    "tox": "$dataset.0.set.1.x+25",
-                                    "toy": "$dataset.0.set.1.starty-40"
-                                },
-                                {
-                                    "id": "Q2-Triangle",
-                                    //Polygon item 
-                                    "type": "polygon",
-                                    //With 3 sides, so it is a triangle
-                                    "sides": "3",
-                                    "startangle": "270",
-                                    "alpha" : "90",      
-                                    "fillColor": "#7FC31C",                                    									"link": "javascript:void(0)",
-                                    "x": "$dataset.0.set.1.x",
-                                    "y": "$dataset.0.set.1.starty-18",
-                                    "radius": "12",                                
-                                },
-                                {
-                                    "id": "Q2-Label",
-                                    //Text annotation item type to add label for callout
-                                    "type": "Text",                                
-                                    "fontSize": "12",                                                            "link": "javascript:void(0)",   
-                                    "bold": "1",
-                                    "fillcolor": "#ffffff",
-                                    "text": "SIN",
-                                    "x": "$dataset.0.set.1.x",
-                                    "y": "$dataset.0.set.1.starty - 30"
-                                }
-                                
-                            ]
-                        },
-                        {                  
-                            //Each group needs a unique ID
-                            "id": "Q4",
-                            //Under each group, you can define multiple items. Each item is a polygon, text or image - with its own set of parameters.
-                            "items": [
-                                {
-                                    //Each item needs a unique ID
-                                    "id": "Q4-Base",
-                                    //This item is of type rectangle
-                                    "type": "rectangle",
-                                    "radius": "2",
-                                    "alpha" : "90", 
-                                    "fillColor": "#7FC31C",
-                                    //Setting x and y position based on annotation macros. Here we're statically positioning it w.r.t 2nd column (0 base in JavaScript) of 1st dataset. Hence $dataset.0.set.1.x
-                                    "link": "javascript:void(0)",
-                                    "x": "$dataset.0.set.3.x-25",
-                                    "y": "$dataset.0.set.3.starty-18",
-                                    "tox": "$dataset.0.set.3.x+25",
-                                    "toy": "$dataset.0.set.3.starty-40"
-                                },
-                                {
-                                    "id": "Q4-Triangle",
-                                    //Polygon item 
-                                    "type": "polygon",
-                                    //With 3 sides, so it is a triangle
-                                    "sides": "3",
-                                    "startangle": "270",
-                                    "alpha" : "90",      
-                                    "fillColor": "#7FC31C",                                    									"link": "javascript:void(0)",
-                                    "x": "$dataset.0.set.3.x",
-                                    "y": "$dataset.0.set.3.starty-18",
-                                    "radius": "12",                                
-                                },
-                                {
-                                    "id": "Q4-Label",
-                                    //Text annotation item type to add label for callout
-                                    "type": "Text",                                
-                                    "fontSize": "12",                                                            "link": "javascript:void(0)",   
-                                    "bold": "1",
-                                    "fillcolor": "#ffffff",
-                                    "text": "SIN",
-                                    "x": "$dataset.0.set.3.x",
-                                    "y": "$dataset.0.set.3.starty - 30"
-                                }
-                                
-                            ]
-                        }
-                    ]
-                }
+	            "categories": data['categories'],
+	            "dataset": data['dataset'],
+	            "annotations": data['annotations']
 	        },
 
             
-            //On click of annotation, toggle the message.
-            "annotationclick": function (evtObj, argObj) {
-                var annotations = evtObj.sender.annotations;
-                 	console.log(argObj.groupId);  
-                
-                
-            }
+	        "events": {
+	            "annotationclick" : function(ev, props) {
+	              
+	            	$("#param_item_result_id").val("");
+                 	$("#param_item_result_id").val(props.groupId.split("-")[0]);
+                 	//$("#param_link").val("email");
+        			$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/kpi-result");
+        			$("form#linkParam").submit();
+        		  return false;
+	             
+	    		}    
+	        }
 	    }).render();
 	 return false;
  };
@@ -989,7 +731,7 @@ var listDashBoardFn = function(data){
 	 var org= $("#param_org_id").val();
 	 var html = "";
 	 $.each(data , function(inedx,indexEntry){
-		 if(org == indexEntry['org_id']){
+		 if(org == indexEntry['org_id'] ){
 			 html+=generateAccordionHTML(indexEntry,"group1");
 			 return false;
 		 };
@@ -1006,7 +748,7 @@ var listDashBoardFn = function(data){
 	 $.each(data , function(inedx,indexEntry){
 //		 generateChartGaugeFn(indexEntry);
 //		 generateChartBarFn(indexEntry);
-		 $.when(generateChartGaugeFn(indexEntry),generateChartBarFn(indexEntry)).then(function() {
+		 $.when(generateChartGaugeFn(indexEntry),indexEntry['chart_type'] == "yearly" ? generateChartBarFn(indexEntry) : generateChartBarLineAreaFn(indexEntry)).then(function() {
 				    //console.log(inedx+" Loading Chart: Success");
 		});
 	 });

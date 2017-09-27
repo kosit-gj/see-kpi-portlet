@@ -758,10 +758,12 @@ overflow-y: visible;
 							<div class="row-fluid p-t-xxs">
 									
 									<div id="appraisalLevelArea" class="form-group pull-left span4" style="margin-left: 5px">
-										<select data-toggle="tooltip" title="Appraisal Level"
+											<select data-toggle="tooltip" title="Level"
 											class="input form-control input-sm" id="appraisalLevel"
 											name="appraisalLevel">
+
 											<option value="0"></option>
+
 										</select>
 									</div>
 									
@@ -799,8 +801,8 @@ overflow-y: visible;
 									</div>
 									<div id="appraisalItemNameArea"
 										class="form-group pull-left span4" style="margin-left: 5px">
-										<input data-toggle="tooltip" title="Appraisal Item "
-											placeholder="Appraisal Item " type='text'
+										<input data-toggle="tooltip" title="KPI"
+											placeholder="KPI" type='text'
 											name='appraisalItemName'
 											class='input form-control input-sm span12'
 											id='appraisalItemName'>

@@ -283,7 +283,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 									
 									<div id="appraisalTypeArea" class="form-group span3"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Appraisal Type"
+										<select data-toggle="tooltip" title="Entity Type"
 											class="input form-control input-sm span12" id="appraisalType"
 											name="appraisalType">
 								
@@ -306,11 +306,11 @@ This is the <b>Usage Log</b> portlet in View mode.2
 									
 									<div id='appraisalLevelArea' class="form-group span3"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Appraisal Level"
+										<select data-toggle="tooltip" title="Level"
 											class="input form-control input-sm span12" id="appraisalLevel"
 											name="appraisalLevel">
 								
-											<option value="">Appraisal Level</option>
+											<option value="">Level</option>
 								
 								
 										</select>
