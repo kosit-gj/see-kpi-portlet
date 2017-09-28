@@ -1,4 +1,41 @@
+var galbalDashboard=[];
+var galbalDataTemp = [];
+var generateDropDownList = function(url,type,request,initValue){
+ 	var html="";
+ 	
+ 	if(initValue!=undefined){
+ 		html+="<option value=''>"+initValue+"</option>";
+	}
 
+ 	$.ajax ({
+ 		url:url,
+ 		type:type ,
+ 		dataType:"json" ,
+ 		data:request,
+ 		headers:{Authorization:"Bearer "+tokenID.token},
+ 		async:false,
+ 		success:function(data){
+ 			try {
+ 			    if(Object.keys(data[0])[0] != undefined && Object.keys(data[0])[0] == "item_id"){
+ 			    	galbalDataTemp["item_id"] = [];
+ 			    	$.each(data,function(index,indexEntry){
+ 			    		galbalDataTemp["item_id"].push(indexEntry[Object.keys(indexEntry)[0]]);
+ 		 			});	
+ 			    }
+ 			}
+ 			catch(err) {
+ 			    console.log(err.message);
+ 			}
+
+ 			
+ 			$.each(data,function(index,indexEntry){
+ 				html+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1] == undefined  ?  Object.keys(indexEntry)[0]:Object.keys(indexEntry)[1]]+"</option>";	
+ 			});	
+
+ 		}
+ 	});	
+ 	return html;
+ };
 
 function findById(source, id) {
     return source.filter(function( obj ) {
@@ -190,60 +227,88 @@ var createJvectorMap = function(){
     	});
 }
 $("document").ready(function(){
-	 $( "#detailPerfomanceArea" ).accordion();
+	var username = $('#user_portlet').val();
+	 var password = $('#pass_portlet').val();
+	 var plid = $('#plid_portlet').val();
+	 if(username!="" && username!=null & username!=[] && username!=undefined ){
+	 	
+		 if(connectionServiceFn(username,password,plid)==false){
+	 		return false;
+	 	}
+		 $("#year").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/year_list","GET"));
+			$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));
+			$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":""},"All organization"));
+			$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"org_id":$("#organization").val()},"All KPI")));
+			
+			
+			$( "#detailPerfomanceArea" ).accordion();
+			 
+			 
+		    var gauge1 = loadLiquidFillGauge("fillgauge1", 55);
+		    var config1 = liquidFillGaugeDefaultSettings();
+		    config1.circleColor = "#FF7777";
+		    config1.textColor = "#FF4444";
+		    config1.waveTextColor = "#FFAAAA";
+		    config1.waveColor = "#FFDDDD";
+		    config1.circleThickness = 0.2;
+		    config1.textVertPosition = 0.2;
+		    config1.waveAnimateTime = 1000;
+		    
+		    var gauge2 = loadLiquidFillGauge("fillgauge2", 80);
+		    var config2= liquidFillGaugeDefaultSettings();
+		    config2.circleColor = "#FF7777";
+		    config2.textColor = "#FF4444";
+		    config2.waveTextColor = "#FFAAAA";
+		    config2.waveColor = "#FFDDDD";
+		    config2.circleThickness = 0.2;
+		    config2.textVertPosition = 0.2;
+		    config2.waveAnimateTime = 1000;
+		    
+		    var gauge3 = loadLiquidFillGauge("fillgauge3", 70);
+		    var config3 = liquidFillGaugeDefaultSettings();
+		    config3.circleColor = "#FF7777";
+		    config3.textColor = "#FF4444";
+		    config3.waveTextColor = "#FFAAAA";
+		    config3.waveColor = "#FFDDDD";
+		    config3.circleThickness = 0.2;
+		    config3.textVertPosition = 0.2;
+		    config3.waveAnimateTime = 1000;
+		    
+		    var gauge4 = loadLiquidFillGauge("fillgauge4", 45);
+		    var config4 = liquidFillGaugeDefaultSettings();
+		    config4.circleColor = "#FF7777";
+		    config4.textColor = "#FF4444";
+		    config4.waveTextColor = "#FFAAAA";
+		    config4.waveColor = "#FFDDDD";
+		    config4.circleThickness = 0.2;
+		    config4.textVertPosition = 0.2;
+		    config4.waveAnimateTime = 1000;
+		    
+		    
+		    
+		    $("#btnCreateMap").click(function(){
+		    	createJvectorMap();
+		    });
+		    
+		    $("#btnCreateGoogleMap").click(function(){
+		    	
+		    	initMap();
+		    	//alert("hello jquery");	
+		    });
+		 
+	 }
+	
+
+	
+
 	 
-	 
-	    var gauge1 = loadLiquidFillGauge("fillgauge1", 55);
-	    var config1 = liquidFillGaugeDefaultSettings();
-	    config1.circleColor = "#FF7777";
-	    config1.textColor = "#FF4444";
-	    config1.waveTextColor = "#FFAAAA";
-	    config1.waveColor = "#FFDDDD";
-	    config1.circleThickness = 0.2;
-	    config1.textVertPosition = 0.2;
-	    config1.waveAnimateTime = 1000;
-	    
-	    var gauge2 = loadLiquidFillGauge("fillgauge2", 80);
-	    var config2= liquidFillGaugeDefaultSettings();
-	    config2.circleColor = "#FF7777";
-	    config2.textColor = "#FF4444";
-	    config2.waveTextColor = "#FFAAAA";
-	    config2.waveColor = "#FFDDDD";
-	    config2.circleThickness = 0.2;
-	    config2.textVertPosition = 0.2;
-	    config2.waveAnimateTime = 1000;
-	    
-	    var gauge3 = loadLiquidFillGauge("fillgauge3", 70);
-	    var config3 = liquidFillGaugeDefaultSettings();
-	    config3.circleColor = "#FF7777";
-	    config3.textColor = "#FF4444";
-	    config3.waveTextColor = "#FFAAAA";
-	    config3.waveColor = "#FFDDDD";
-	    config3.circleThickness = 0.2;
-	    config3.textVertPosition = 0.2;
-	    config3.waveAnimateTime = 1000;
-	    
-	    var gauge4 = loadLiquidFillGauge("fillgauge4", 45);
-	    var config4 = liquidFillGaugeDefaultSettings();
-	    config4.circleColor = "#FF7777";
-	    config4.textColor = "#FF4444";
-	    config4.waveTextColor = "#FFAAAA";
-	    config4.waveColor = "#FFDDDD";
-	    config4.circleThickness = 0.2;
-	    config4.textVertPosition = 0.2;
-	    config4.waveAnimateTime = 1000;
 	    
 	    
-	    
-	    $("#btnCreateMap").click(function(){
-	    	createJvectorMap();
-	    });
-	    
-	    $("#btnCreateGoogleMap").click(function(){
-	    	
-	    	initMap();
-	    	//alert("hello jquery");	
-	    });
-	    
+	  //binding tooltip start
+		 $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
+		 $('[data-toggle="tooltip"]').tooltip({
+			 html:true
+		 });
+		//binding tooltip end
 	    
 });

@@ -283,55 +283,61 @@ This is the <b>Usage Log</b> portlet in View mode.2
 									
 									<div id="appraisalTypeArea" class="form-group span2"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Appraisal Type"
-											class="input form-control input-sm span12" id="appraisalType"
-											name="appraisalType">
-								
-											<option value="">2017</option>
-								
+										
+										<select name="year" id="year" class="input form-control input-sm span12"
+											title="" data-toggle="tooltip" style="cursor: pointer;"
+											data-original-title="Year">
+			
+											<option value="1">2017</option>
+											
+			
 										</select>
 									</div>
 									 <div id='xxxArea' class="form-group span2"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Xxx"
-											class="input form-control input-sm span12" id="xxx"
-											name="xxx">
-								
-											<option value="">ประเมินประจำปี 2017</option>
-								
-								
+										<select name="period" id="period"
+											class="input form-control input-sm span12" title=""
+											data-toggle="tooltip" style="cursor: pointer;"
+											data-original-title="Period">
+			
+											<option value=""></option>
+			
 										</select>
 									</div>
 									<div id='xxxArea' class="form-group span2"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Xxx"
-											class="input form-control input-sm span12" id="xxx"
-											name="xxx">
-								
+										<select name="apprasiaLevel" id="apprasiaLevel"
+											class="input form-control input-sm span12" title=""
+											data-toggle="tooltip" style="cursor: pointer;"
+											data-original-title="Level">
+			
 											<option value="">ทุกฝ่าย</option>
-								
-								
+			
 										</select>
+										
 									</div>
 									
 									
 									
 									<div id='appraisalLevelArea' class="form-group span2"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Appraisal Level"
-											class="input form-control input-sm span12" id="appraisalLevel"
-											name="appraisalLevel">
-								
+										<select name="province" id="province"
+											class="input form-control input-sm span12" title=""
+											data-toggle="tooltip" style="cursor: pointer;"
+											data-original-title="Province">
+			
 											<option value="">ทุกเขต</option>
-								
-								
+			
 										</select>
 									</div>
 									<div class="form-group span2" style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="" data-original-title="organization"
-											class="input form-control input-sm span12" id="organization"
-											name="organization">
-											<option value=''>ทุก KPI</option>
+										<select name="kpi" id="kpi" class="input form-control input-sm span12"
+											title="" data-toggle="tooltip" style="cursor: pointer;"
+											data-original-title="KPI">
+			
+											<option value="">KPI1</option>
+											<option value="">KPI2</option>
+			
 										</select>
 									</div>
 									
