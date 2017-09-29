@@ -1,4 +1,41 @@
+var galbalDashboard=[];
+var galbalDataTemp = [];
+var generateDropDownList = function(url,type,request,initValue){
+ 	var html="";
+ 	
+ 	if(initValue!=undefined){
+ 		html+="<option value=''>"+initValue+"</option>";
+	}
 
+ 	$.ajax ({
+ 		url:url,
+ 		type:type ,
+ 		dataType:"json" ,
+ 		data:request,
+ 		headers:{Authorization:"Bearer "+tokenID.token},
+ 		async:false,
+ 		success:function(data){
+ 			try {
+ 			    if(Object.keys(data[0])[0] != undefined && Object.keys(data[0])[0] == "item_id"){
+ 			    	galbalDataTemp["item_id"] = [];
+ 			    	$.each(data,function(index,indexEntry){
+ 			    		galbalDataTemp["item_id"].push(indexEntry[Object.keys(indexEntry)[0]]);
+ 		 			});	
+ 			    }
+ 			}
+ 			catch(err) {
+ 			    console.log(err.message);
+ 			}
+
+ 			
+ 			$.each(data,function(index,indexEntry){
+ 				html+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1] == undefined  ?  Object.keys(indexEntry)[0]:Object.keys(indexEntry)[1]]+"</option>";	
+ 			});	
+
+ 		}
+ 	});	
+ 	return html;
+ };
 
 function findById(source, id) {
     return source.filter(function( obj ) {
@@ -11,7 +48,7 @@ function findById(source, id) {
 
 
 var getMapProvinceinitialsName = function(id){
-	console.log(id);
+	//console.log(id);
 	var objectProvinceName=[
 	 
 	{'id':'57','province':'Chiang Rai','initials':'ชร'},
@@ -106,7 +143,7 @@ var locations = [
        		  ['<div id="14">สเต็ก ลุงหนวด</div>',13.862970, 100.613834]
        		];
 
- function initMap() {
+ function initGoogleMap() {
 	var mapOptions = {
 	  center: {lat: 13.847860, lng: 100.604274},
 	  zoom: 15,
@@ -141,23 +178,261 @@ var locations = [
 	}
 
 }
-var createJvectorMap = function(){
+var getColorJvectorMap = function(){
+	var txtColorData="";
+	var objColorData="";
+	$.ajax({
+		url:restfulURL+"/see_api/public/dashboard/branch_performance",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			txtColorData+="{";
+			$.each(data['vector_map'],function(index,indexEntry){
+				if(index!=0){
+					txtColorData+=",";
+				}
+				txtColorData+="\"TH-"+indexEntry['province_code']+"\":\""+indexEntry['color_code']+"\"";
+				
+			});
+			txtColorData+="}";
+			//console.log(txtColorData);
+			objColorData = eval("("+txtColorData+")");
+			//console.log(objColorData);
+			createJvectorMap(objColorData);
+		}
+	});
+}
+var listDataPerformanceDetailFn = function(data,district){
+	//console.log(data);
+	var rageGreenColor="#ffffff";
+	var rangeColorsThreshold="[]";
+	var mainArea="";	
+	mainArea+="<h3 style='text-align:center;' id='BranchPerTitle'></h3>";
+	mainArea+="<div id='detailPerfomanceArea'></div>";
+	$("#detailArea").html(mainArea);
+	$("#BranchPerTitle").html("Branch Performance:"+getMapProvinceinitialsName(district));
+	$.each(data,function(index,indexEntry){
+		
+	var dataTableHTML="";
+	dataTableHTML+="<h3><span style='padding-top:10px;' id='bpf_org_id-"+indexEntry['org_id']+"'>"+indexEntry['org_name']+"</span>";
+	dataTableHTML+="<div class='branchPerformance'>";
+	dataTableHTML+="<svg id=\"fillgauge"+indexEntry['org_id']+"\" width=\"70px\" height=\"70px\" onclick=\"gauge"+indexEntry['org_id']+".update(NewValue());\"></svg>";
+	dataTableHTML+="</div>";
+	dataTableHTML+="<br style='clear:both'>";
+	dataTableHTML+="</h3>";
+  
+	dataTableHTML+="<div>";
+		dataTableHTML+="<table class='table' style='width:100%;'>";
+			dataTableHTML+="<thead>";
+				dataTableHTML+="<tr>";
+					dataTableHTML+="<th>Perspective</th>";
+					dataTableHTML+="<th>KPI</th>";
+					dataTableHTML+="<th>UOM</th>";
+					dataTableHTML+="<th style='background:#fcf8e3; text-align:center;'>KPI Result</th>";	
+			dataTableHTML+="</tr>";
+			dataTableHTML+="</thead>";
+			dataTableHTML+="<tbody>";
+				
+			$.each(indexEntry['branch_details'],function(index2,indexEntry2){
+				if(index2==0){
+					 rageGreenColor=indexEntry2['rangeColor'][0];
+					 rangeColorsThreshold=indexEntry2['rangeColor'];
+					
+				}
+				
+				/*
+			actual
+	
+				"2.40"
+			forecast
+				
+				"3.00"
+			item_name
+				
+				"01 จำนวนเงิน Gross NPL"
+			percent_forecast
+				
+				"80.000000"
+			percent_forecast_str
+				
+				"100,80.000000,100.00,70.00,50.00"
+			percent_target
+				
+				"60.000000"
+			percent_target_str
+				
+				"100,60.000000,100.00,70.00,50.00"
+			perspective_name
+				
+				"01.Strong Financial"
+			rangeColor
+				
+				["4EFF03", "FFFF00", "FF0000"]
+			
+			target
+				
+				"4.00"
+			uom_name
+				
+			"ร้อยละ"
+				*/
+				dataTableHTML+="<tr>";
+					dataTableHTML+="<td>"+indexEntry2['perspective_name']+" </td>";
+					dataTableHTML+="<td>"+indexEntry2['item_name']+"</td>";
+					dataTableHTML+="<td>"+indexEntry2['uom_name']+" </td>";
+					dataTableHTML+="<td>";
+					
+					dataTableHTML+="<table>";
+						dataTableHTML+="<thead>";
+							dataTableHTML+="<tr>";
+								dataTableHTML+="<th style='background:#fcf8e3;'>Target</th>";
+								dataTableHTML+="<th style='background:#fcf8e3;'>Forecast</th>";
+								dataTableHTML+="<th style='background:#fcf8e3;'>Actual</th>";
+							dataTableHTML+="</tr>";
+							dataTableHTML+="</thead>";
+							dataTableHTML+="<tbody>";
+								dataTableHTML+="<tr>";
+									dataTableHTML+="<td>"+indexEntry2['target']+"</td>";
+									dataTableHTML+="<td>"+indexEntry2['forecast']+"</td>";
+									dataTableHTML+="<td>"+indexEntry2['actual']+"</td>";
+								dataTableHTML+="</tr>";
+								dataTableHTML+="<tr>";
+									dataTableHTML+="<td>%Taget</td>";
+									dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:0;'  >"+indexEntry2['percent_target_str']+"</div></td>";
+								dataTableHTML+="</tr>";
+								dataTableHTML+="<tr>";
+									dataTableHTML+="<td>%Forecast</td>";
+									dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:0;'>"+indexEntry2['percent_forecast_str']+"</div></td>";
+								dataTableHTML+="</tr>";
+							dataTableHTML+="</tbody>";
+						dataTableHTML+="</table>";
+					dataTableHTML+="</td>";
+				dataTableHTML+="</tr>";
+				
+			});
+				
+				
+			dataTableHTML+="</tbody>";
+		dataTableHTML+="</table>"; 
+	dataTableHTML+="</div>";
+	$("#detailPerfomanceArea").append(dataTableHTML);
+	
+	var config = liquidFillGaugeDefaultSettings();
+	config.circleColor = indexEntry['color_code'];
+	config.textColor = "white";
+	config.waveTextColor = "white";
+	config.waveColor = indexEntry['color_code'];
+	
+
+	
+	config.circleThickness = 0.2;
+	config.textVertPosition = 0.5;
+	config.waveAnimateTime = 1000;
+	config.waveHeight = 0.15;
+    config.waveOffset = 0.25;
+    config.circleThickness = 0.05;
+    
+	var gauge = loadLiquidFillGauge("fillgauge"+indexEntry['org_id'], indexEntry['pct'],config);
+	
+	
+
+	
+
+});
+
+
+
+$("#detailPerfomanceArea" ).accordion({
+    heightStyle: "content"
+});
+
+setTimeout(function(){
+	
+//	$(".sparkline").sparkline([10,12,12,9,7], {
+//	    type: 'bullet',
+//	    rangeColors: ['#d3dafe','#a8b6ff','red ']
+//	}).css("opacity","1");
+	    
+
+	
+	$(".sparkline").sparkline('html', {
+        type: 'bullet',
+        width:'80',
+        targetColor: rageGreenColor,
+        performanceColor: 'blue',
+        rangeColors: rangeColorsThreshold
+	}).css("opacity","1");
+
+	},1000);
+
+/*
+ .sparkline(ragneValue1, {
+	        type: 'bullet',
+	        width:'80',
+	        targetColor: rageGreenColor,
+	        performanceColor: 'blue',
+	        rangeColors: rangeColorsThreshold});
+	        
+ */
+
+
+
+
+$("#detailArea").show();
+  
+}
+var showPerformanceDetailFn=function(district){
+	var dataDetails="";
+	$.ajax({
+		url:restfulURL+"/see_api/public/dashboard/branch_details?province_code=10&period_id=17",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+				
+				listDataPerformanceDetailFn(data,district);
+				//console.log(data);
+			
+		}
+	});
+	
+}
+var createJvectorMap = function(objColorData){
 	//jVector map thailand
+	//var objColorData={"TH-10":"red","TH-12":"yellow"};
     $('#mapPerfomanceArea').vectorMap({
     	map: 'th_mill',
     	//map: 'th_mill_en',
+    	backgroundColor: "transparent",
+    	series: {
+ 	        regions: [{
+ 	            values:objColorData,
+ 	            attribute: "fill"
+ 	        }]
+ 	    },
+ 	    regionsSelectable: false,
+		regionStyle: {
+			initial: {fill: "#808080"},
+			selected: {fill: "#F4A582"}
+		},
     	labels: {
     	      regions: {
     	        render: function(code){
-    	          var doNotShow = ['US-RI', 'US-DC', 'US-DE', 'US-MD'];
-
-    	          if (doNotShow.indexOf(code) === -1) {
-    	        	  getMapProvinceinitialsName(code.split('-')[1]);
-    	        	 // return code.split('-')[1];
-    	        	  
-    	        	  return getMapProvinceinitialsName(code.split('-')[1]);
-    	          }
-    	        },
+    	          //var doNotShow = ['US-RI', 'US-DC', 'US-DE', 'US-MD'];
+//    	          if (doNotShow.indexOf(code) === -1) {
+//    	        	  getMapProvinceinitialsName(code.split('-')[1]);
+//    	        	 // return code.split('-')[1];
+//    	        	  
+//    	        	  return getMapProvinceinitialsName(code.split('-')[1]);
+//    	          }
+    	          
+    	          getMapProvinceinitialsName(code.split('-')[1]);
+ 	        	  return getMapProvinceinitialsName(code.split('-')[1]);
+    	        }
+    			/*,
     	        offsets: function(code){
     	          return {
     	            'CA': [-10, 10],
@@ -172,78 +447,157 @@ var createJvectorMap = function(){
     	            'HI': [25, 50]
     	          }[code.split('-')[1]];
     	        }
+    	        */
     	      }
     	    },
   	      onRegionClick:function (event, code){
   				/* Get province name from jvector append to tag hidden in body, For the grid title header. */
   				var map = $("#mapPerfomanceArea").vectorMap("get", "mapObject");
-  				$("#provinceNameHi").remove();
-  				$("body").append("<input type=\"hidden\" id=\"provinceNameHi\" value=\""+map.getRegionName(code)+"\">");
+  				$("#districtNameHi").remove();
+  				$("body").append("<input type=\"hidden\" id=\"districtNameHi\" value=\""+map.getRegionName(code)+"\">");
   				
-  				var provinceid = code.substring(3);
+  				var district = code.substring(3);
   				
-  				console.log(provinceid);
-  				alert(provinceid);
+  				//console.log(provinceid);
+  				//alert(provinceid);
+  				showPerformanceDetailFn(district);
   				
   		    }
     	
     	});
 }
+//SearchAdvance
+var searchAdvanceFn = function() {
+	/*
+	year,
+	period,
+	region,
+	district,
+	kpi
+	*/
+	
+
+	
+	var embedParam="";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_year' name='embed_year' value='"+$("#year").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_period' name='embed_period' value='"+$("#period").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_region' name='embed_region' value='"+$("#region").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_district' name='embed_district' value='"+$("#district").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_kpi' name='embed_kpi' value='"+$("#kpi").val()+"'>";
+
+	$("#embedParamSearch").html(embedParam);
+	
+	if($("#embed_region").val()==""){
+		
+		$("#mapArea").html("<div id='mapPerfomanceArea'  style='height:597px;'></div>");
+		$("#mapPerfomanceArea").show();
+		$("#mapGooglePerfomanceArea").hide();
+		getColorJvectorMap();
+	}else{
+		
+		$("#mapArea").html("<div id='mapGooglePerfomanceArea' style='width:100%; height:500px;'></div>");
+		$("#mapPerfomanceArea").hide();
+		$("#mapGooglePerfomanceArea").show();
+		initGoogleMap();
+	}
+
+}; 
 $("document").ready(function(){
-	 $( "#detailPerfomanceArea" ).accordion();
+	var username = $('#user_portlet').val();
+	 var password = $('#pass_portlet').val();
+	 var plid = $('#plid_portlet').val();
+	 if(username!="" && username!=null & username!=[] && username!=undefined ){
+	 	
+		 if(connectionServiceFn(username,password,plid)==false){
+	 		return false;
+	 	}
+		 	
+//		 	$("#year").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/year_list","GET"));
+//			$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));
+//			$("#region").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/region_list","POST",{"region_code":""},"All Region"));
+//		 	$("#district").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/district_list?org_code=39","POST",{"appraisal_level":""},"All District"));
+//		 	$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"org_id":$("#organization").val()},"All KPI")));
+			
+			
+			//$( "#detailPerfomanceArea" ).accordion();
+			 
+			 /*
+		    var gauge1 = loadLiquidFillGauge("fillgauge1", 55);
+		    var config1 = liquidFillGaugeDefaultSettings();
+		    config1.circleColor = "#FF7777";
+		    config1.textColor = "#FF4444";
+		    config1.waveTextColor = "#FFAAAA";
+		    config1.waveColor = "#FFDDDD";
+		    config1.circleThickness = 0.2;
+		    config1.textVertPosition = 0.2;
+		    config1.waveAnimateTime = 1000;
+		    
+		    var gauge2 = loadLiquidFillGauge("fillgauge2", 80);
+		    var config2= liquidFillGaugeDefaultSettings();
+		    config2.circleColor = "#FF7777";
+		    config2.textColor = "#FF4444";
+		    config2.waveTextColor = "#FFAAAA";
+		    config2.waveColor = "#FFDDDD";
+		    config2.circleThickness = 0.2;
+		    config2.textVertPosition = 0.2;
+		    config2.waveAnimateTime = 1000;
+		    
+		    var gauge3 = loadLiquidFillGauge("fillgauge3", 70);
+		    var config3 = liquidFillGaugeDefaultSettings();
+		    config3.circleColor = "#FF7777";
+		    config3.textColor = "#FF4444";
+		    config3.waveTextColor = "#FFAAAA";
+		    config3.waveColor = "#FFDDDD";
+		    config3.circleThickness = 0.2;
+		    config3.textVertPosition = 0.2;
+		    config3.waveAnimateTime = 1000;
+		    
+		    var gauge4 = loadLiquidFillGauge("fillgauge4", 45);
+		    var config4 = liquidFillGaugeDefaultSettings();
+		    config4.circleColor = "#FF7777";
+		    config4.textColor = "#FF4444";
+		    config4.waveTextColor = "#FFAAAA";
+		    config4.waveColor = "#FFDDDD";
+		    config4.circleThickness = 0.2;
+		    config4.textVertPosition = 0.2;
+		    config4.waveAnimateTime = 1000;
+		    */
+		    
+		    
+		    $("#btnCreateMap").click(function(){
+		    	createJvectorMap();
+		    });
+		    
+		    $("#btnCreateGoogleMap").click(function(){
+		    	
+		    	initGoogleMap();
+		    	//alert("hello jquery");	
+		    });
+		    
+		    //click submit();
+		    $("#btnSearchAdvance").click(function(){
+		    	searchAdvanceFn();
+		    });
+		    
+		    
+		    
+		//binding tooltip start
+			 $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
+			 $('[data-toggle="tooltip"]').tooltip({
+				 html:true
+			 });
+		//binding tooltip end
+				 
+		 
+	 }
+	
+	 //get data color map for jector
+	// getColorJvectorMap();
+	
 	 
+	
 	 
-	    var gauge1 = loadLiquidFillGauge("fillgauge1", 55);
-	    var config1 = liquidFillGaugeDefaultSettings();
-	    config1.circleColor = "#FF7777";
-	    config1.textColor = "#FF4444";
-	    config1.waveTextColor = "#FFAAAA";
-	    config1.waveColor = "#FFDDDD";
-	    config1.circleThickness = 0.2;
-	    config1.textVertPosition = 0.2;
-	    config1.waveAnimateTime = 1000;
 	    
-	    var gauge2 = loadLiquidFillGauge("fillgauge2", 80);
-	    var config2= liquidFillGaugeDefaultSettings();
-	    config2.circleColor = "#FF7777";
-	    config2.textColor = "#FF4444";
-	    config2.waveTextColor = "#FFAAAA";
-	    config2.waveColor = "#FFDDDD";
-	    config2.circleThickness = 0.2;
-	    config2.textVertPosition = 0.2;
-	    config2.waveAnimateTime = 1000;
-	    
-	    var gauge3 = loadLiquidFillGauge("fillgauge3", 70);
-	    var config3 = liquidFillGaugeDefaultSettings();
-	    config3.circleColor = "#FF7777";
-	    config3.textColor = "#FF4444";
-	    config3.waveTextColor = "#FFAAAA";
-	    config3.waveColor = "#FFDDDD";
-	    config3.circleThickness = 0.2;
-	    config3.textVertPosition = 0.2;
-	    config3.waveAnimateTime = 1000;
-	    
-	    var gauge4 = loadLiquidFillGauge("fillgauge4", 45);
-	    var config4 = liquidFillGaugeDefaultSettings();
-	    config4.circleColor = "#FF7777";
-	    config4.textColor = "#FF4444";
-	    config4.waveTextColor = "#FFAAAA";
-	    config4.waveColor = "#FFDDDD";
-	    config4.circleThickness = 0.2;
-	    config4.textVertPosition = 0.2;
-	    config4.waveAnimateTime = 1000;
-	    
-	    
-	    
-	    $("#btnCreateMap").click(function(){
-	    	createJvectorMap();
-	    });
-	    
-	    $("#btnCreateGoogleMap").click(function(){
-	    	
-	    	initMap();
-	    	//alert("hello jquery");	
-	    });
-	    
+	
 	    
 });
