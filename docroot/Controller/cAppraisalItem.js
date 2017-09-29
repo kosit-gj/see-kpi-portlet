@@ -176,6 +176,7 @@ var listDataFn = function(data) {
 	$(".popover-edit-del").popover();
 	$("#main_conntent_list_data").off("click",".popover-edit-del");
 	$("#main_conntent_list_data").on("click",".popover-edit-del",function(){
+		$(".popover").css({"text-align":"center"});
 		//Delete Start
 		$(".del").on("click",function() {
 			$("#informConfirm").empty();

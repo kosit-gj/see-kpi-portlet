@@ -180,6 +180,7 @@ plid = layout.getPlid();
 	
 	.moblieArea{
 		display:block;
+		font-size:0.8em;
 	}
 	.desktopArea{
 		display:none;
@@ -244,6 +245,7 @@ plid = layout.getPlid();
 	
 	.moblieArea{
 		display:block;
+		font-size:0.7em;
 	}
 	.desktopArea{
 		display:none;
@@ -310,6 +312,7 @@ plid = layout.getPlid();
 	
 	.moblieArea{
 		display:block;
+		font-size:0.6em;
 	}
 	.desktopArea{
 		display:none;
@@ -1153,7 +1156,7 @@ margin-bottom:1px;
     <div class="modal-content animated bounceInRight">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
-                <h5 class="modal-title">Phase</h5>
+                <h5 class="modal-title">Phase </h5>
             </div>
             <div class="modal-body">
                
@@ -1161,7 +1164,7 @@ margin-bottom:1px;
 <table style='width:100%'> 
 	<tr>
 		<td style='width:100px; '><b>Phase Name</b></td>
-		<td><input  style='width:96%'; type='text' name='phaseName' id='phaseName' placeholder='Phase Name' class='input form-control input-sm-small ' value=''></td>
+		<td><input  type='text' name='phaseName' id='phaseName' placeholder='Phase Name' class='input form-control input-sm-small span4' value=''></td>
 	</tr>
 	<tr>
 		<td ><b>Is Active</b></td>
@@ -1222,6 +1225,64 @@ Is Active
     
     
    
+</div>
+
+
+<!-- Modal Reason Start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="reasonModal" class="modal inmodal " style="display: none; margin-top: 0px;">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
+                <h5 class="modal-title">Reason</h5>
+            </div>
+            <div class="modal-body">
+               
+<div style='margin-bottom:5px;'>
+<table style='width:100%'> 
+	<tr>
+		<td style='width:100px; '><b>Reason </b></td>
+		<td><input  style='margin-bottom:5px;'  type='text' name='reason_name' id='reason_name' placeholder='Reason' class='input form-control input-sm-small span5' value=''></td>
+	</tr>
+	
+</table>                
+	<div align="right">
+	     <button class="btn btn-success" id="btnSaveReason" type="button">&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Save&nbsp;&nbsp;</button>&nbsp;&nbsp;
+	     <button class="btn btn-danger" id='btnCancelReason' type="button"><i class="fa fa-times-circle"></i>&nbsp;Cancel</button>
+	</div>
+</div>
+			<table class='table'>
+				<thead>
+					<tr>
+						<th style='width:10%;'>
+						<b>No.</b>
+						</th>
+						<th style='width:30%;'>
+						<b>Reason</b>
+						</th>
+						<th style='text-align:center; width:15%;'>
+						<b>Manage</b>
+						</th>
+					</tr>
+				</thead>
+				<tbody id='listDataReason'>
+					
+				</tbody>
+				
+			
+				<input type="hidden" name="reason_id_edit" id="reason_id_edit" value="">
+				<input type="hidden" name="reason_action" id="reason_action" value="add">
+				<input type="hidden" name="reason_item_result_id" id="reason_item_result_id" value="">
+				
+				
+			</table>
+          
+                <!-- form start -->
+                <!-- content end -->
+            </div>
+         
+        </div>
+    </div>
 </div>
 
 <!-- modal action plan start -->
@@ -1340,8 +1401,8 @@ Is Active
 																<div  class='fontBold desktopArea'>
 																	%Actual vs Forecast 
 																</div>
-																<div class='fontBold moblieArea'>
-																	%A vs F 
+																<div class='fontBold moblieArea' >
+																	%Actual vs Forecast 
 																</div>
 																<div >
 																	<span id='actionPlanActualVSforecast'></span>% <span id='actualvsForecastBar'></span>
@@ -1349,10 +1410,10 @@ Is Active
 															</div>
 															<div class='boxActualvsTarget boxForecastVsActual'>
 																<div class='fontBold desktopArea'>
-																% Actual vs Target 
+																	% Actual vs Target 
 																</div>
-																<div class='fontBold moblieArea'>
-																	%A vs T 
+																<div class='fontBold moblieArea' >
+																	% Actual vs Target 
 																</div>
 																<div>
 																<span id='actionPlanActualVSTarget'></span>% <span id='actualvsTargetBar'></span>
@@ -1442,7 +1503,7 @@ Is Active
 													<th style='width:8%'><b>Actual End</b></th>
 													<th style='width:5%'><b>Phase</b></th>
 													<th style='width:10%'><b>Responsible</b></th>
-													<th style='width:10%;text-align:right;'><b>%Completed</b></center></th>
+													<th style='width:10%;'><b>%Completed</b></th>
 <!-- 													<th style='width:7%;text-align:right;'><b>PV</b></th> -->
 <!-- 													<th style='width:7%;text-align:right;'><b>AC</b></th> -->
 <!-- 													<th style='width:7%;text-align:right;'><b>EV</b></th> -->
@@ -1540,6 +1601,16 @@ Is Active
 
             <div class="modal-body">
                 <!-- content start -->
+                <div class='container'>
+	                <div class='row-fluid'>
+	                	<div class='span6 alert' style='font-weight:bold;'>
+	                		Organization: <span id='ganttOrgTxt'></span>
+	                	</div>
+	                	<div class='span6 alert' style='font-weight:bold;'>
+	                		Appraisal Item: <span id='ganttAppraisalItemTxt'></span>
+	                	</div>
+	                </div>
+                </div>
                 <div style='text-align:center;'>
                  <div id='ganttChart' ></div>
 				</div>

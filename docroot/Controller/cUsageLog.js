@@ -33,7 +33,7 @@ var appraisalLevelListFn = function(nameArea,id){
 	
 	$.ajax({
 		//url:restfulURL+"/see_api/public/appraisal_item/al_list",
-		url:restfulURL+"/see_api/public/appraisal_assignment/al_list",
+		url:restfulURL+"/see_api/public/report/al_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -154,7 +154,26 @@ var getDataFn = function(page,rpp){
 		type : "get",
 		dataType : "json",
 		data:{"page":page,"rpp":rpp,
-			//"branch_code":$("#embedParamlistBranch").val(),"personnel_name":$("#embedParamPersonnelName").val(),"usage_start_date":$("#embedParamUsageStartDate").val(),"usage_end_date":$("#embedParamUsageEndDate").val()
+		
+			/*
+			 embed_appraisal_type_id
+			 embed_emp_id
+			 embed_position_id
+			 embed_appraisal_level_id
+			 embed_organization
+			 embed_param_usage_start_date
+			 embed_param_usage_end_date
+			 */
+			
+			
+			"usage_start_date":$("#embed_param_usage_start_date").val(),
+			"usage_end_date":$("#embed_param_usage_end_date").val(),
+			"emp_id":$("#embed_emp_id").val(),
+			"position_id":$("#embed_position_id").val(),
+			"level_id":$("#embed_appraisal_level_id").val(),
+			"org_id":$("#embed_organization").val()
+			
+			
 			},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,

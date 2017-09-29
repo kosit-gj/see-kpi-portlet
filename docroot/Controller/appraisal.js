@@ -423,7 +423,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 				if(data['no_weight']==0){
 					htmlTemplateQuantity+="<tr >";
 						htmlTemplateQuantity+="<td>"+indexEntry['perspective_name']+"</td>";
-						htmlTemplateQuantity+="<td>"+indexEntry['item_name']+"</td>";
+						htmlTemplateQuantity+="<td id=\"item_name-"+indexEntry['item_result_id']+"\">"+indexEntry['item_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 						
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:50px; height: 25px;padding: 0 0 0 5px;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+indexEntry['forecast_value']+"></td>";
@@ -439,7 +439,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 						
 	
 						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
-						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"   &lt;button style='width:100px;' class='btn btn-success btn-small btn-gear reason' id='reason-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Reason&lt;/button&gt;  &lt;button style='width:100px;' class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Gantt&lt;/button&gt;  &lt;button style='width:100px;' class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt; &lt;button style='width:100px;' id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"   &lt;button style='width:100px;' class='btn btn-success btn-small btn-gear reason' id='reason-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Reason&lt;/button&gt;  &lt;button style='width:100px;' class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Gantt Chart&lt;/button&gt;  &lt;button style='width:100px;' class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt; &lt;button style='width:100px;' id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
 						htmlTemplateQuantity+="	</td>";
 							
 					htmlTemplateQuantity+="</tr>";
@@ -698,13 +698,34 @@ var listAppraisalDetailFn = function(data){
 					$("#phase_item_result_id").val(id)
 					getPhaseFn(id);
 				});
+				
+				//reason Start
+				$(".reason").on("click",function(event) {
+					event.preventDefault();
+					//alert("phase3");
+					clearFormReasonFn();
+					$(".informConfirm").empty();
+					var id=this.id.split("-");
+					id=id[1];
+				
+					$("#reasonModal").modal().css({"margin-top":"0px"});
+					$("#reason").off("fucus");
+					$("#reason_item_result_id").val(id);
+					getReasonFn(id);
+				});
+				
+				
 				//ganttChart start
 				$(".ganttChart").on("click",function(event) {
 					
 					$("#informConfirm").empty();
 					var id=this.id.split("-");
 					id=id[1];
+					
 					getDataGanttChartFn(id);
+					$("#ganttOrgTxt").text($("#txtOrgName").text());
+					$("#ganttAppraisalItemTxt").text($("#item_name-"+id).text());
+					
 					$("#ganttChartModal").modal().css({"margin-top":"0px"});
 					//$("#phase_item_result_id").val(id)
 					//getPhaseFn(id);
@@ -960,6 +981,7 @@ var listActionPlanFn = function(data){
 	
 	
 	
+	
 	var htmlTR="";
 	$.each(data['actions'],function(index,indexEntry){
 		 
@@ -1101,7 +1123,7 @@ update_dttm
 	//parseFloat(notNullFn(data['header']['target_value'])).toFixed(2);
 	
 	   
-	 //target,over_target,center,performance2,performance1
+	
 	 //0,0,100,80,80
 	//%Actual vs Forecast 
 	var actual_value = parseFloat(notNullFn(data['header']['actual_value'])).toFixed(2);
@@ -1123,6 +1145,43 @@ update_dttm
     type: 'bullet',
     rangeColors: ['green','yellow','red ']});
     */
+	 //target,over_target,center,performance2,performance1
+	//target,allArea,green,yellow,red
+	console.log(data['header']['result_threshold_color']);
+	var rangeColorsThreshold=[];
+	var ragneValue1=[100,parseInt( parseFloat(notNullFn(data['header']['actual_vs_forecast'])).toFixed(2))];
+	var ragneValue2=[100,parseInt( parseFloat(notNullFn(data['header']['actual_vs_target'])).toFixed(2))];
+	var rageGreenColor="";
+	$.each(data['header']['result_threshold_color'],function(index,indexEntry){
+		
+
+		ragneValue1.push(parseInt(indexEntry['end_threshold']));
+		ragneValue2.push(parseInt(indexEntry['end_threshold']));
+		rangeColorsThreshold.push("#"+indexEntry['color_code']);
+		if(index==0){
+		rageGreenColor="#"+indexEntry['color_code'];
+		}
+	});
+	
+	
+		console.log(ragneValue1);
+	    $("#actualvsForecastBar").sparkline(ragneValue1, {
+	        type: 'bullet',
+	        width:'80',
+	        targetColor: rageGreenColor,
+	        performanceColor: 'blue',
+	        rangeColors: rangeColorsThreshold});
+	    
+	    
+	    $("#actualvsTargetBar").sparkline(ragneValue2, {
+	        type: 'bullet',
+	        width:'80',
+	        targetColor: rageGreenColor,
+	        performanceColor: 'blue',
+	        rangeColors: rangeColorsThreshold});
+	    
+	   
+		/*
 	    $("#actualvsForecastBar").sparkline([0,0,100,parseFloat(notNullFn(actual_vs_forecast)).toFixed(2),parseFloat(notNullFn(actual_vs_forecast)).toFixed(2)], {
 	        type: 'bullet',
 	        width:'80',
@@ -1138,7 +1197,7 @@ update_dttm
 	        performanceColor: '#7f94ff',
 	        rangeColors: ['#d3dafe','#7f94ff','#7f94ff ']});
 	    
-	    
+	   */
 	    $(".jqstooltip").hide();
 	    
 	
@@ -1282,6 +1341,8 @@ var getActionPlanFn = function(id){
 	});
 	
 }
+
+/* phase function start*/
 var deletePhaseFn = function(id){
 	
 	 $.ajax({
@@ -1305,6 +1366,9 @@ var deletePhaseFn = function(id){
 		     }
 		   });
 }
+
+
+
 var findOnePhaseFn = function(id){
 	
 	//get structure
@@ -1343,6 +1407,8 @@ var findOnePhaseFn = function(id){
 	});
 	
 }
+
+
 var listPhaseFn = function(data){
 	var htmlTR="";
 	
@@ -1364,7 +1430,7 @@ var listPhaseFn = function(data){
 			
 			htmlTR+="<td style='text-align:center;'>";
 	
-			htmlTR+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear edit_phase' id=edit_phase-"+indexEntry['phase_id']+" data-target='' data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=del_phase-"+indexEntry['phase_id']+" class='btn btn-danger btn-small btn-gear phaseDel'&gt;Del&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+			htmlTR+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear edit_phase' id=edit_phase-"+indexEntry['phase_id']+" data-target='' data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=del_phase-"+indexEntry['phase_id']+" class='btn btn-danger btn-small btn-gear phaseDel'&gt;Delete&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
 			
 			htmlTR+="</td>";
 		htmlTR+="</tr>";
@@ -1431,6 +1497,136 @@ var getPhaseFn = function(id){
 	});
 	
 }
+/* phase function end*/
+
+
+
+/* reason function start*/
+var deleteReasonFn = function(id){
+	
+	 $.ajax({
+		      url:restfulURL+"/see_api/public/appraisal/reason/"+$("#reason_item_result_id").val(),
+		      type:"DELETE",
+		      dataType:"json",
+			  data:{"reason_id":id},
+			  headers:{Authorization:"Bearer "+tokenID.token},
+			  success:function(data){
+				if(data['status']==200){
+					
+					   callFlashSlide("Delete Successfully.");       
+				       getReasonFn($("#reason_item_result_id").val());
+					   $("#confrimModal").modal('hide');
+					   
+				}else if(data['status']=="400"){
+					
+					//$("#informConfirm").html("<font color='red'>"+data['data']+"</font>");
+					callFlashSlide("<font color=''>"+data['data']+"</font>","error");  
+					
+				}
+		     }
+		   });
+}
+
+var findOneReasonFn = function(id){
+	
+	$.ajax({
+		url:restfulURL+"/see_api/public/appraisal/reason/"+$("#reason_item_result_id").val()+"/"+id,
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+		
+
+				$("#reason_name").val(data['reason_name']);
+				$("#reason_action").val("edit");
+				$("#reason_id_edit").val(id);
+		
+			
+			
+		}
+	});
+	
+}
+
+var listReasonFn = function(data){
+	var htmlTR="";
+	
+	//Exsample Data 
+	
+	$.each(data,function(index,indexEntry){
+		htmlTR+="<tr>";
+			htmlTR+="<td>"+indexEntry['rank']+"</td>";
+			htmlTR+="<td>"+indexEntry['reason_name']+"</td>";
+			htmlTR+="<td style='text-align:center;'>";
+			htmlTR+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear edit_reason' id=edit_reason-"+indexEntry['reason_id']+" data-target='' data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=del_reason-"+indexEntry['reason_id']+" class='btn btn-danger btn-small btn-gear reasonDel'&gt;Delete&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+			htmlTR+="</td>";
+		htmlTR+="</tr>";
+	});
+	
+	$("#listDataReason").html(htmlTR);
+	
+	/*bindding popover start*/
+	$(".popover-edit-del").popover();
+	$("#listDataReason").off("click",".popover-edit-del");
+	$("#listDataReason").on("click",".popover-edit-del",function(){
+		//Delete Start
+		$(".reasonDel").on("click",function() {
+			$("#informConfirm").empty();
+			var id=this.id.split("-");
+			id=id[1];
+			$("#confrimModal").modal().css({"margin-top":"0px"});
+			//$(this).parent().parent().parent().children().click();
+			$(document).off("click","#btnConfirmOK");
+			$(document).on("click","#btnConfirmOK",function(){
+				//alert(id);
+				deleteReasonFn(id);
+				
+			});
+			
+		});
+		//findOne Start
+		$(".edit_reason").on("click",function() {
+			
+			$(window).scrollTop(0);
+			var edit=this.id.split("-");
+			var id=edit[1];
+			//alert(id+"-----"+form_url);
+			findOneReasonFn(id);
+			$(".modal-body").scrollTop(0);
+		});
+	});	
+	/*bindding popover end*/
+	
+	
+	
+}
+var clearFormReasonFn = function(){
+	 $("#reason_name").val("");
+	 $("#reason_id_edit").val("");
+	 $("#reason_action").val("add");
+	
+}
+var getReasonFn = function(id){
+	
+	$.ajax({
+		url:restfulURL+"/see_api/public/appraisal/reason/"+id,
+		
+		type:"get",
+		dataType:"json",
+		async:false,
+		//data:{"item_result_id":id},
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			//console.log(data);
+			listReasonFn(data);
+		}
+	});
+	
+}
+/* reason function start*/
+
+
 var listDataFn = function(data){
 	htmlHTML="";
 
@@ -1534,7 +1730,7 @@ var listDataFn = function(data){
 						htmlHTML+"</td>";
 						htmlHTML+=" <td>"+itemEntry['emp_name']+"</td>";
 						htmlHTML+=" <td>"+itemEntry['appraisal_level_name']+"</td>";
-						htmlHTML+=" <td>"+itemEntry['appraisal_type_name']+"</td>";
+						htmlHTML+=" <td>"+itemEntry['org_name']+"</td>";
 						htmlHTML+="	<td>"+itemEntry['position_name']+"</td>";
 						
 						htmlHTML+="	<td>"+itemEntry['to_action']+"</td>";
@@ -1946,8 +2142,8 @@ var getDataGanttChartFn = function(){
 	            "chart": {
 	            "exportenabled": "1",
 	                "exportatclient": "1",
-	                "caption": "Action Plan",
-	                "subcaption": "Planned vs Actual",                
+	                //"caption": "Action Plan",
+	                //"subcaption": "Planned vs Actual",                
 	                "dateformat": "dd/mm/yyyy",
 	                "outputdateformat": "ddds mns yy",
 	                "ganttwidthpercent": "60",
@@ -2727,6 +2923,73 @@ $(document).ready(function() {
 		 getPhaseFn($("#phase_item_result_id").val());
 	 });
 	//Phase End...
+	 
+	//Reason Start..
+	 $(document).on("click","#btnSaveReason",function(){
+		 	
+	
+
+		 	if($("#reason_action").val()=="add"){
+		 		
+		 	
+			 	  $.ajax({
+					     url:restfulURL+"/see_api/public/appraisal/reason/"+$("#reason_item_result_id").val(),
+					     type:"POST",
+					     dataType:"json",
+					     data:{"reason_name": $("#reason_name").val()},
+						 headers:{Authorization:"Bearer "+tokenID.token},
+					     success:function(data,status){
+						
+							if(data['status']==200){
+								getReasonFn($("#reason_item_result_id").val());
+								clearFormReasonFn();
+								
+							}else if(data['status']=="400"){
+								
+								//$("#informConfirm").html("<font color='red'>"+data['data']+"</font>");
+								callFlashSlide("<font color=''>"+data['data']['reason_name']+"</font>","error");  
+								
+							}
+						
+						
+					}
+			 	});
+		 	
+		 	}else{
+		 		
+		 		 $.ajax({
+						     url:restfulURL+"/see_api/public/appraisal/reason/"+$("#reason_item_result_id").val(),
+						     type:"PATCH",
+						     dataType:"json",
+						     data:{"reason_name": $("#reason_name").val(),"reason_id":$("#reason_id_edit").val()},
+							 headers:{Authorization:"Bearer "+tokenID.token},
+						     success:function(data,status){
+							
+								if(data['status']==200){
+									getReasonFn($("#reason_item_result_id").val());
+									clearFormReasonFn();
+								}else if(data['status']=="400"){
+									
+									//$("#informConfirm").html("<font color='red'>"+data['data']+"</font>");
+									callFlashSlide("<font color=''>"+data['data']['phase_name']+"</font>","error");  
+									
+								}
+							
+							
+						}
+				 	});
+		 		
+		 	}
+		 	
+	 });
+	 
+	 $(document).on("click","#btnCancelReason",function(){
+		 clearFormReasonFn();
+		 getReasonFn($("#reason_item_result_id").val());
+	 });
+	//Reason End...
+	 
+	 
 	
 	//binding tooltip start
 	 $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
