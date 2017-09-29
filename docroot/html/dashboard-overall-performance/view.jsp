@@ -480,7 +480,7 @@
 	<div class="ibox-content" id="listSubordinate" >
 		
 		
-		<div style="overflow:auto">
+		<div style="">
 		<div class="row-fluid ">
 			<div class="span5 " >
 				<div class="row-fluid ">

@@ -255,6 +255,28 @@ plid = layout.getPlid();
 .aui .pagination {
     margin: 0;
 }
+
+.branchText{
+		float:left;
+	}
+	.branchPerformance{
+		float: right;
+	    position: absolute;
+	    right: 5px;
+	    top: 5px;
+	}
+	.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover{
+		background: whitesmoke;
+	}
+	
+	.aui h1, .aui h2, .aui h3{
+		line-height: 65px;
+	}
+	
+	.ui-accordion .ui-accordion-content{
+		padding: 5px;
+	}
+	
 </style>
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
@@ -283,55 +305,65 @@ This is the <b>Usage Log</b> portlet in View mode.2
 									
 									<div id="appraisalTypeArea" class="form-group span2"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Appraisal Type"
-											class="input form-control input-sm span12" id="appraisalType"
-											name="appraisalType">
-								
-											<option value="">2017</option>
-								
+										
+										<select name="year" id="year" class="input form-control input-sm span12"
+											title="" data-toggle="tooltip" style="cursor: pointer;"
+											data-original-title="Year">
+			
+											<option value="1">2017</option>
+											
+			
 										</select>
 									</div>
 									 <div id='xxxArea' class="form-group span2"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Xxx"
-											class="input form-control input-sm span12" id="xxx"
-											name="xxx">
-								
-											<option value="">ประเมินประจำปี 2017</option>
-								
-								
+										<select name="period" id="period"
+											class="input form-control input-sm span12" title=""
+											data-toggle="tooltip" style="cursor: pointer;"
+											data-original-title="Period">
+			
+											<option value=""></option>
+			
 										</select>
 									</div>
+									
+	
 									<div id='xxxArea' class="form-group span2"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Xxx"
-											class="input form-control input-sm span12" id="xxx"
-											name="xxx">
-								
+										<select name="region" id="region"
+											class="input form-control input-sm span12" title=""
+											data-toggle="tooltip" style="cursor: pointer;"
+											data-original-title="Region">
+			
 											<option value="">ทุกฝ่าย</option>
-								
-								
+											<option value="1">ฝ่ายสาขาภาคเหนือ</option>
+			
 										</select>
+										
 									</div>
 									
 									
 									
 									<div id='appraisalLevelArea' class="form-group span2"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Appraisal Level"
-											class="input form-control input-sm span12" id="appraisalLevel"
-											name="appraisalLevel">
-								
+										<select name="district" id="district"
+											class="input form-control input-sm span12" title=""
+											data-toggle="tooltip" style="cursor: pointer;"
+											data-original-title="District">
+			
 											<option value="">ทุกเขต</option>
-								
-								
+											<option value="10">กรุงเทพมหานคร</option>
+			
 										</select>
 									</div>
 									<div class="form-group span2" style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="" data-original-title="organization"
-											class="input form-control input-sm span12" id="organization"
-											name="organization">
-											<option value=''>ทุก KPI</option>
+										<select name="kpi" id="kpi" class="input form-control input-sm span12"
+											title="" data-toggle="tooltip" style="cursor: pointer;"
+											data-original-title="KPI">
+			
+											<option value="">KPI1</option>
+											<option value="">KPI2</option>
+			
 										</select>
 									</div>
 									
@@ -358,45 +390,20 @@ This is the <b>Usage Log</b> portlet in View mode.2
             
             <!-- SEARCH ADVANCE END -->
 </div>
-<style>
-	.branchText{
-		float:left;
-	}
-	.branchPerformance{
-		float: right;
-	    position: absolute;
-	    right: 5px;
-	    top: 5px;
-	}
-	.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover{
-		background: whitesmoke;
-	}
-	
-	.aui h1, .aui h2, .aui h3{
-		line-height: 65px;
-	}
-	#mapPerfomanceArea{
-		height:597px;
-		
-	}
-	.ui-accordion .ui-accordion-content{
-		padding: 5px;
-	}
-	#mapGooglePerfomanceArea{
-		width:500px;
-		height:500px;
-	}
-</style>	
+
+	<!-- 
 	<button id='btnCreateMap'>Create Map</button>		
-	<button id='btnCreateGoogleMap'>Create Google Map</button>		
+	<button id='btnCreateGoogleMap'>Create Google Map</button>	
+	 -->	
 <div class="row-fluid ">
 
-   	<div class='span6'>
-   		Span6
-   		<div id='mapPerfomanceArea' ></div>
-   		<div id='mapGooglePerfomanceArea' ></div>
+   	<div class='span6' id='mapArea'>
+   		<!-- 
+   		<div id='mapPerfomanceArea'  style='height:597px;'></div>
+   		<div id='mapGooglePerfomanceArea' style='width:500px; height:500px;'></div>
+   	    -->
    	</div>
-   	<div class='span6'>
+   	<div class='span6' id='detailArea' style='display:none;'>
    		
    		
    				<h3 style='text-align:center;'>

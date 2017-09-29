@@ -1,4 +1,41 @@
+var galbalDashboard=[];
+var galbalDataTemp = [];
+var generateDropDownList = function(url,type,request,initValue){
+ 	var html="";
+ 	
+ 	if(initValue!=undefined){
+ 		html+="<option value=''>"+initValue+"</option>";
+	}
 
+ 	$.ajax ({
+ 		url:url,
+ 		type:type ,
+ 		dataType:"json" ,
+ 		data:request,
+ 		headers:{Authorization:"Bearer "+tokenID.token},
+ 		async:false,
+ 		success:function(data){
+ 			try {
+ 			    if(Object.keys(data[0])[0] != undefined && Object.keys(data[0])[0] == "item_id"){
+ 			    	galbalDataTemp["item_id"] = [];
+ 			    	$.each(data,function(index,indexEntry){
+ 			    		galbalDataTemp["item_id"].push(indexEntry[Object.keys(indexEntry)[0]]);
+ 		 			});	
+ 			    }
+ 			}
+ 			catch(err) {
+ 			    console.log(err.message);
+ 			}
+
+ 			
+ 			$.each(data,function(index,indexEntry){
+ 				html+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1] == undefined  ?  Object.keys(indexEntry)[0]:Object.keys(indexEntry)[1]]+"</option>";	
+ 			});	
+
+ 		}
+ 	});	
+ 	return html;
+ };
 
 function findById(source, id) {
     return source.filter(function( obj ) {
@@ -11,7 +48,7 @@ function findById(source, id) {
 
 
 var getMapProvinceinitialsName = function(id){
-	console.log(id);
+	//console.log(id);
 	var objectProvinceName=[
 	 
 	{'id':'57','province':'Chiang Rai','initials':'ชร'},
@@ -106,7 +143,7 @@ var locations = [
        		  ['<div id="14">สเต็ก ลุงหนวด</div>',13.862970, 100.613834]
        		];
 
- function initMap() {
+ function initGoogleMap() {
 	var mapOptions = {
 	  center: {lat: 13.847860, lng: 100.604274},
 	  zoom: 15,
@@ -141,23 +178,81 @@ var locations = [
 	}
 
 }
-var createJvectorMap = function(){
+var getColorJvectorMap = function(){
+	var txtColorData="";
+	var objColorData="";
+	$.ajax({
+		url:restfulURL+"/see_api/public/dashboard/branch_performance",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			txtColorData+="{";
+			$.each(data['vector_map'],function(index,indexEntry){
+				if(index!=0){
+					txtColorData+=",";
+				}
+				txtColorData+="\"TH-"+indexEntry['province_code']+"\":\"#"+indexEntry['color_code']+"\"";
+				
+			});
+			txtColorData+="}";
+			//console.log(txtColorData);
+			objColorData = eval("("+txtColorData+")");
+			//console.log(objColorData);
+			createJvectorMap(objColorData);
+		}
+	});
+}
+var showPerformanceDetailFn=function(){
+	var dataDetails="";
+	$.ajax({
+		url:restfulURL+"/see_api/public/dashboard/branch_details?province_code=10&period_id=17",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			
+				console.log(data);
+			
+		}
+	});
+	
+}
+var createJvectorMap = function(objColorData){
 	//jVector map thailand
+	//var objColorData={"TH-10":"red","TH-12":"yellow"};
     $('#mapPerfomanceArea').vectorMap({
     	map: 'th_mill',
     	//map: 'th_mill_en',
+    	backgroundColor: "transparent",
+    	series: {
+ 	        regions: [{
+ 	            values:objColorData,
+ 	            attribute: "fill"
+ 	        }]
+ 	    },
+ 	    regionsSelectable: false,
+		regionStyle: {
+			initial: {fill: "#808080"},
+			selected: {fill: "#F4A582"}
+		},
     	labels: {
     	      regions: {
     	        render: function(code){
-    	          var doNotShow = ['US-RI', 'US-DC', 'US-DE', 'US-MD'];
-
-    	          if (doNotShow.indexOf(code) === -1) {
-    	        	  getMapProvinceinitialsName(code.split('-')[1]);
-    	        	 // return code.split('-')[1];
-    	        	  
-    	        	  return getMapProvinceinitialsName(code.split('-')[1]);
-    	          }
-    	        },
+    	          //var doNotShow = ['US-RI', 'US-DC', 'US-DE', 'US-MD'];
+//    	          if (doNotShow.indexOf(code) === -1) {
+//    	        	  getMapProvinceinitialsName(code.split('-')[1]);
+//    	        	 // return code.split('-')[1];
+//    	        	  
+//    	        	  return getMapProvinceinitialsName(code.split('-')[1]);
+//    	          }
+    	          
+    	          getMapProvinceinitialsName(code.split('-')[1]);
+ 	        	  return getMapProvinceinitialsName(code.split('-')[1]);
+    	        }
+    			/*,
     	        offsets: function(code){
     	          return {
     	            'CA': [-10, 10],
@@ -172,78 +267,154 @@ var createJvectorMap = function(){
     	            'HI': [25, 50]
     	          }[code.split('-')[1]];
     	        }
+    	        */
     	      }
     	    },
   	      onRegionClick:function (event, code){
   				/* Get province name from jvector append to tag hidden in body, For the grid title header. */
   				var map = $("#mapPerfomanceArea").vectorMap("get", "mapObject");
-  				$("#provinceNameHi").remove();
-  				$("body").append("<input type=\"hidden\" id=\"provinceNameHi\" value=\""+map.getRegionName(code)+"\">");
+  				$("#districtNameHi").remove();
+  				$("body").append("<input type=\"hidden\" id=\"districtNameHi\" value=\""+map.getRegionName(code)+"\">");
   				
-  				var provinceid = code.substring(3);
+  				var district = code.substring(3);
   				
-  				console.log(provinceid);
-  				alert(provinceid);
+  				//console.log(provinceid);
+  				//alert(provinceid);
+  				showPerformanceDetailFn(district);
   				
   		    }
     	
     	});
 }
+//SearchAdvance
+var searchAdvanceFn = function() {
+	/*
+	year,
+	period,
+	region,
+	district,
+	kpi
+	*/
+	
+
+	
+	var embedParam="";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_year' name='embed_year' value='"+$("#year").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_period' name='embed_period' value='"+$("#period").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_region' name='embed_region' value='"+$("#region").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_district' name='embed_district' value='"+$("#district").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_kpi' name='embed_kpi' value='"+$("#kpi").val()+"'>";
+
+	$("#embedParamSearch").html(embedParam);
+	
+	if($("#embed_region").val()==""){
+		
+		$("#mapArea").html("<div id='mapPerfomanceArea'  style='height:597px;'></div>");
+		$("#mapPerfomanceArea").show();
+		$("#mapGooglePerfomanceArea").hide();
+		getColorJvectorMap();
+	}else{
+		
+		$("#mapArea").html("<div id='mapGooglePerfomanceArea' style='width:100%; height:500px;'></div>");
+		$("#mapPerfomanceArea").hide();
+		$("#mapGooglePerfomanceArea").show();
+		initGoogleMap();
+	}
+
+}; 
 $("document").ready(function(){
-	 $( "#detailPerfomanceArea" ).accordion();
+	var username = $('#user_portlet').val();
+	 var password = $('#pass_portlet').val();
+	 var plid = $('#plid_portlet').val();
+	 if(username!="" && username!=null & username!=[] && username!=undefined ){
+	 	
+		 if(connectionServiceFn(username,password,plid)==false){
+	 		return false;
+	 	}
+		 	//$("#year").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/year_list","GET"));
+			//$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));
+			//$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":""},"All organization"));
+			//$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"org_id":$("#organization").val()},"All KPI")));
+			
+			
+			$( "#detailPerfomanceArea" ).accordion();
+			 
+			 
+		    var gauge1 = loadLiquidFillGauge("fillgauge1", 55);
+		    var config1 = liquidFillGaugeDefaultSettings();
+		    config1.circleColor = "#FF7777";
+		    config1.textColor = "#FF4444";
+		    config1.waveTextColor = "#FFAAAA";
+		    config1.waveColor = "#FFDDDD";
+		    config1.circleThickness = 0.2;
+		    config1.textVertPosition = 0.2;
+		    config1.waveAnimateTime = 1000;
+		    
+		    var gauge2 = loadLiquidFillGauge("fillgauge2", 80);
+		    var config2= liquidFillGaugeDefaultSettings();
+		    config2.circleColor = "#FF7777";
+		    config2.textColor = "#FF4444";
+		    config2.waveTextColor = "#FFAAAA";
+		    config2.waveColor = "#FFDDDD";
+		    config2.circleThickness = 0.2;
+		    config2.textVertPosition = 0.2;
+		    config2.waveAnimateTime = 1000;
+		    
+		    var gauge3 = loadLiquidFillGauge("fillgauge3", 70);
+		    var config3 = liquidFillGaugeDefaultSettings();
+		    config3.circleColor = "#FF7777";
+		    config3.textColor = "#FF4444";
+		    config3.waveTextColor = "#FFAAAA";
+		    config3.waveColor = "#FFDDDD";
+		    config3.circleThickness = 0.2;
+		    config3.textVertPosition = 0.2;
+		    config3.waveAnimateTime = 1000;
+		    
+		    var gauge4 = loadLiquidFillGauge("fillgauge4", 45);
+		    var config4 = liquidFillGaugeDefaultSettings();
+		    config4.circleColor = "#FF7777";
+		    config4.textColor = "#FF4444";
+		    config4.waveTextColor = "#FFAAAA";
+		    config4.waveColor = "#FFDDDD";
+		    config4.circleThickness = 0.2;
+		    config4.textVertPosition = 0.2;
+		    config4.waveAnimateTime = 1000;
+		    
+		    
+		    
+		    $("#btnCreateMap").click(function(){
+		    	createJvectorMap();
+		    });
+		    
+		    $("#btnCreateGoogleMap").click(function(){
+		    	
+		    	initGoogleMap();
+		    	//alert("hello jquery");	
+		    });
+		    
+		    //click submit();
+		    $("#btnSearchAdvance").click(function(){
+		    	searchAdvanceFn();
+		    });
+		    
+		    
+		    
+		//binding tooltip start
+			 $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
+			 $('[data-toggle="tooltip"]').tooltip({
+				 html:true
+			 });
+		//binding tooltip end
+				 
+		 
+	 }
+	
+	 //get data color map for jector
+	// getColorJvectorMap();
+	
+
 	 
-	 
-	    var gauge1 = loadLiquidFillGauge("fillgauge1", 55);
-	    var config1 = liquidFillGaugeDefaultSettings();
-	    config1.circleColor = "#FF7777";
-	    config1.textColor = "#FF4444";
-	    config1.waveTextColor = "#FFAAAA";
-	    config1.waveColor = "#FFDDDD";
-	    config1.circleThickness = 0.2;
-	    config1.textVertPosition = 0.2;
-	    config1.waveAnimateTime = 1000;
 	    
-	    var gauge2 = loadLiquidFillGauge("fillgauge2", 80);
-	    var config2= liquidFillGaugeDefaultSettings();
-	    config2.circleColor = "#FF7777";
-	    config2.textColor = "#FF4444";
-	    config2.waveTextColor = "#FFAAAA";
-	    config2.waveColor = "#FFDDDD";
-	    config2.circleThickness = 0.2;
-	    config2.textVertPosition = 0.2;
-	    config2.waveAnimateTime = 1000;
-	    
-	    var gauge3 = loadLiquidFillGauge("fillgauge3", 70);
-	    var config3 = liquidFillGaugeDefaultSettings();
-	    config3.circleColor = "#FF7777";
-	    config3.textColor = "#FF4444";
-	    config3.waveTextColor = "#FFAAAA";
-	    config3.waveColor = "#FFDDDD";
-	    config3.circleThickness = 0.2;
-	    config3.textVertPosition = 0.2;
-	    config3.waveAnimateTime = 1000;
-	    
-	    var gauge4 = loadLiquidFillGauge("fillgauge4", 45);
-	    var config4 = liquidFillGaugeDefaultSettings();
-	    config4.circleColor = "#FF7777";
-	    config4.textColor = "#FF4444";
-	    config4.waveTextColor = "#FFAAAA";
-	    config4.waveColor = "#FFDDDD";
-	    config4.circleThickness = 0.2;
-	    config4.textVertPosition = 0.2;
-	    config4.waveAnimateTime = 1000;
-	    
-	    
-	    
-	    $("#btnCreateMap").click(function(){
-	    	createJvectorMap();
-	    });
-	    
-	    $("#btnCreateGoogleMap").click(function(){
-	    	
-	    	initMap();
-	    	//alert("hello jquery");	
-	    });
-	    
+	
 	    
 });

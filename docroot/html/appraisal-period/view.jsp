@@ -27,6 +27,10 @@ plid = layout.getPlid();
 .form-group {
     margin-bottom: 5px;
 }
+.aui #Modalcreate .form-horizontal .control-label {
+    padding-top: 5px;
+    text-align: left;
+}
 </style>
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
@@ -88,7 +92,7 @@ plid = layout.getPlid();
 				                </div>
 				                
 				                 <div class="span7">
-				                	<input  class="form-control input-sm" placeholder="การประเมินผลการปฏิบัติงานประจำปี" type="text" id="a_p_d" name="a_p_d">
+				                	<input  class="span12 " placeholder="การประเมินผลการปฏิบัติงานประจำปี" type="text" id="a_p_d" name="a_p_d">
 				                </div>
 				                <br style="clear:both">
 		                	</div>
@@ -105,7 +109,7 @@ plid = layout.getPlid();
 				                </div>
 				                
 				                 <div class="span7">
-				                	<input   class="form-control input-sm" placeholder="รอบจ่ายโบนัสประจำปี" type="text" id="b_p_d" name="b_p_d">
+				                	<input   class="span12 " placeholder="รอบจ่ายโบนัสประจำปี" type="text" id="b_p_d" name="b_p_d">
 				                </div>
 			                <br style="clear:both">
 		                	</div>
@@ -123,7 +127,7 @@ plid = layout.getPlid();
 				                </div>
 				                
 				                 <div class="span7 ">
-				                	<input  class="form-control input-sm" placeholder="รอบขึ้นเงินเดือนประจำปี" type="text" id="s_r_d" name="s_r_d">
+				                	<input  class="span12 " placeholder="รอบขึ้นเงินเดือนประจำปี" type="text" id="s_r_d" name="s_r_d">
 				                </div>
 				                <br style="clear:both">
 		                	</div>
