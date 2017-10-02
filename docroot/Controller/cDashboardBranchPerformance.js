@@ -348,6 +348,17 @@ $("#detailPerfomanceArea" ).accordion({
     heightStyle: "content"
 });
 
+$(".ui-accordion-header").click(function(){
+	
+	$(".sparkline").sparkline('html', {
+        type: 'bullet',
+        width:'80',
+        targetColor: rageGreenColor,
+        performanceColor: 'blue',
+        rangeColors: rangeColorsThreshold
+	}).css("opacity","1");
+});
+
 setTimeout(function(){
 	
 //	$(".sparkline").sparkline([10,12,12,9,7], {

@@ -277,11 +277,13 @@ plid = layout.getPlid();
 		padding: 5px;
 	}
 	
+
 	.aui .table td{
 	padding-top: 3px;
     padding-bottom: 3px;
 	}
 	
+
 </style>
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">

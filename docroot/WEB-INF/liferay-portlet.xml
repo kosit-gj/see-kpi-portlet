@@ -9,7 +9,7 @@
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>see-kpi-portlet</css-class-wrapper>    
 	</portlet>   
- 
+   
 	                                                                                                                                                             
 	<portlet>                                                 
 		<portlet-name>appraisal</portlet-name>         
@@ -288,7 +288,7 @@
 		<css-class-wrapper>appraisal-data-portlet</css-class-wrapper>      
 	</portlet>
 
-
+ 
 	<portlet>
 		<portlet-name>threshould</portlet-name>
 		<icon>/icon.png</icon>
@@ -1267,9 +1267,6 @@
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
 		
 		  
-	 
-		
-		
 		<footer-portlet-javascript>
 			/js/fusioncharts/js/fusioncharts.js               
 		</footer-portlet-javascript>    
@@ -1296,7 +1293,7 @@
 	</portlet>
 	<role-mapper> 
 		<role-name>administrator</role-name>
-		<role-link>Administrator</role-link>
+		<role-link>Administrator</role-link> 
 	</role-mapper>
 	<role-mapper>
 		<role-name>guest</role-name>  
@@ -1308,8 +1305,8 @@
 	</role-mapper>
 	<role-mapper>
 		<role-name>user</role-name>  
-		<role-link>User</role-link>  
-	</role-mapper>  
+		<role-link>User</role-link>   
+	</role-mapper>   
 </liferay-portlet-app>
-                             
-                           
+           
+                      

@@ -1,7 +1,9 @@
-/*Config*/
+var restfulURL="";
+/*#######Office#######*/
+restfulURL="http://192.168.1.254";
 
-/*Test*/
-var restfulURL="http://192.168.1.254";
+/*#######Localhost#######*/
+//restfulURL="http://localhost";
 
-/*Poroduction*/
-//var restfulURL="";
+/*#######Poroduction#######*/
+//restfulURL="";
