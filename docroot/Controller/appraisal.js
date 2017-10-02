@@ -722,10 +722,11 @@ var listAppraisalDetailFn = function(data){
 					var id=this.id.split("-");
 					id=id[1];
 					
-					getDataGanttChartFn(id);
+					getDataGanttChartFn(id,$("#ganntChartZoom").val());
 					$("#ganttOrgTxt").text($("#txtOrgName").text());
+					//alert($("#item_name-"+id).text());
 					$("#ganttAppraisalItemTxt").text($("#item_name-"+id).text());
-					
+					$("#gantt_item_result_id").val(id);
 					$("#ganttChartModal").modal().css({"margin-top":"0px"});
 					//$("#phase_item_result_id").val(id)
 					//getPhaseFn(id);
@@ -2117,7 +2118,7 @@ var generateGanttChartFn = function(dataSource){
     	type: 'gantt',
         renderAt: 'ganttChart',
         width: '100%',
-        height: '600',
+        //height: '600',
         dataFormat: 'json',
         dataSource: dataSource
     })
@@ -2125,12 +2126,19 @@ var generateGanttChartFn = function(dataSource){
 	
  return false;
 };
-var getDataGanttChartFn = function(){
+var getDataGanttChartFn = function(item_result_id,ganttPaneDuration){
+	var ganttPaneDurationVarible="";
+	if(ganttPaneDuration==undefined || ganttPaneDuration==""){
+		ganttPaneDurationVarible==10
+	}else{
+		ganttPaneDurationVarible=ganttPaneDuration
+	}
+	
 	$.ajax({
 		url:restfulURL+"/see_api/public/dashboard/gantt",
 		type:"get",
 		dataType:"json",
-		//data:"",
+		data:{"item_result_id":item_result_id},
 		async:false,
 		success:function(data){
 		//console.log(data);
@@ -2140,15 +2148,16 @@ var getDataGanttChartFn = function(){
 			var objectGantt={};
 			objectGantt={
 	            "chart": {
-	            "exportenabled": "1",
+	            	"exportenabled": "1",
 	                "exportatclient": "1",
 	                //"caption": "Action Plan",
 	                //"subcaption": "Planned vs Actual",                
 	                "dateformat": "dd/mm/yyyy",
 	                "outputdateformat": "ddds mns yy",
 	                "ganttwidthpercent": "60",
-	                "ganttPaneDuration": "40",
-	                "ganttPaneDurationUnit": "d",
+	                "ganttPaneDuration": ganttPaneDurationVarible,
+	               // "ganttPaneDurationUnit": "d",
+	                "ganttPaneDurationUnit": "m",
 	                "plottooltext": "$processName{br} $label starting date $start{br}$label ending date $end",
 	                "legendBorderAlpha": "0",
 	                "legendShadow": "0",
@@ -2163,7 +2172,7 @@ var getDataGanttChartFn = function(){
 	             "categories":data['categories'],
 	             "processes":data['processes'],
 	             "datatable":data['datatable'],
-	              "tasks":data['tasks']
+	             "tasks":data['tasks']
 	            /*
 	            "categories":data['categories'],
 	            "processes":data['processes'],
@@ -2997,6 +3006,13 @@ $(document).ready(function() {
 		 html:true
 	 });
 	//binding tooltip end
+	 
+	 //gantt chart zoom start
+	 $("#ganntChartZoom").change(function(){
+		// alert($(this).val());
+		getDataGanttChartFn($("#gantt_item_result_id").val(),$(this).val());
+	 });
+	 //gantt chart zoom end
 	 
 	 
 	 

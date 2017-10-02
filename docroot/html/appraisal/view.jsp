@@ -1602,7 +1602,9 @@ Is Active
             <div class="modal-body">
                 <!-- content start -->
                 <div class='container'>
+                	
 	                <div class='row-fluid'>
+	                
 	                	<div class='span6 alert' style='font-weight:bold;'>
 	                		Organization: <span id='ganttOrgTxt'></span>
 	                	</div>
@@ -1614,6 +1616,18 @@ Is Active
                 <div style='text-align:center;'>
                  <div id='ganttChart' ></div>
 				</div>
+				<div style='text-align:right;'>
+						Zoom
+	                	<select id='ganntChartZoom' style='width:65px;'>
+	                		<option value='10'>100%</option>
+	                		<option value='20'>80%</option>
+	                		<option value='40'>60%</option>
+	                		<option value='60'>40%</option>
+	                		<option value='80'>20%</option>
+	                		<option value='90'>0%</option>
+	                	</select>
+	             </div>
+	             <input type="hidden" name="gantt_item_result_id" id="gantt_item_result_id" value="">
                 <!-- content end -->
             </div>
            
