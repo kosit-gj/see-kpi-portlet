@@ -980,17 +980,21 @@ var listDashBoardAllKPIFn = function(data){
 		
 		$(".app_url_hidden").show();
 		if($("#get_sending_status").val() == "true" && $("#get_sending_status").val() != null){
-			searchAdvanceFn(
-					$("#get_year_id").val(),
-					$("#get_period_id").val(),
-					$("#get_level_id").val(),
-					$("#get_org_id").val(),
-					$("#get_item_id").val(),
-					$("#get_appraisal_type_id").val(),
-					$("#get_emp_id").val()//,
-					//$("#get_position_id").val()
-					);
-			//$("#listSubordinate").show();
+			$("#year").val($("#get_year_id").val());
+			$("#period").val($("#get_period_id").val());
+			
+			$("#app_type").val($("#get_appraisal_type_id").val());
+			$("#emp_name").val($("#get_emp_id").val());
+			$("#emp_name_id").val($("#get_emp_name").val());
+			
+			$("#apprasiaLevel").val($("#get_level_id").val());
+			$("#apprasiaLevel").change();
+			$("#organization").val($("#get_org_id").val());
+			$("#organization").change();
+			$("#kpi").val($("#get_item_id").val());
+			
+	
+			$("#btnSearchAdvance").click();
 			$("#get_sending_status").val("false");
 		}
 		

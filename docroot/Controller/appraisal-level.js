@@ -156,6 +156,7 @@ $(document).ready(function(){
 		 			           {"colunmsDisplayName":"View All Employee","width":"20%","id":"is_all_employee","colunmsType":"checkbox"},
 		 			           {"colunmsDisplayName":"Is HR","width":"10%","id":"is_hr","colunmsType":"checkbox"},
 		 			           {"colunmsDisplayName":"No Weight","width":"10%","id":"no_weight","colunmsType":"checkbox"},
+		 			           {"colunmsDisplayName":"District","width":"10%","id":"district_flag","colunmsType":"checkbox"},
 		 			           {"colunmsDisplayName":"Is Active","width":"10%","id":"is_active","colunmsType":"checkbox"},
 		 			           {"colunmsDisplayName":"Parent","width":"20%","id":"parent_level_name","colunmsType":"text"}
 		 			          
@@ -180,7 +181,10 @@ $(document).ready(function(){
 			 	    			"label":"No Weight","inputType":"checkbox","default":"uncheck",
 			 	    			"id":"no_weight","width":"200px"
 			 	    			},
-		 	    			    {
+			 	    			{
+			 	    				"label":"District","inputType":"checkbox","default":"uncheck",
+			 	    				"id":"district_flag","width":"200px"
+			 	    			},{
 		 	    				"label":"IsActive","inputType":"checkbox","default":"checked",
 		 	    				"id":"is_active","width":"200px"
 		 	    				},{
