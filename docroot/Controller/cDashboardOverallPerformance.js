@@ -134,18 +134,18 @@
 	                "yAxisNameAlpha": "80",
 	                "plotFillAlpha": "70",
 	                "plotFillHoverColor": "#eeeeee",
-	                "showPlotBorder": "0",
 	                "xAxisName": "Urgency",
 	                "yAxisName": "Impact",
 	                "numDivlines": "2",
-	                "showValues":"1",
+	                "showValues":"0",
+	                "showPlotBorder":"1",
 	                "showTrendlineLabels": "1",
 	                "showYAxisValues":"0",
 	                "numDivlines": "0",
 	                "chartLeftMargin": "35",
 	                "chartRightMargin": "35",
 	                //Dynamic tool-tips with HTML and macro variables
-	                "plotTooltext": "<div id='nameDiv'>$name </div>{br}Urgency : <b>$xDataValue</b>{br}Impact : <b>$yDataValue</b>{br}Achievement : <b>$zvalue%</b>",
+	                "plotTooltext": "<div id='nameDiv'>$name</div>{br}Urgency : <b>$xDataValue</b>{br}Impact : <b>$yDataValue</b>{br}Achievement : <b>$zvalue%</b>",
 	                
 	                "theme": "fint"
 	            },
@@ -158,7 +158,7 @@
 	            	var objDataset = ev.sender.getJSONData().dataset;
 	            	console.log(objDataset);
 	            	console.log(props.displayValue);
-	            	var clickLabel = props.displayValue;
+	            	var clickLabel = $("#nameDiv").text();
 	            	$.each(objDataset,function(index,indexEntry){
 	            		$.each(indexEntry['data'],function(index2,indexEntry2){
 		            	  if(clickLabel == indexEntry2['name']){
@@ -329,7 +329,7 @@ var getDataBubbleFn = function(page,rpp){
 };
 
  
- var searchAdvanceFn = function (year,period,app_lv,org,app_type,emp,position) {
+ var searchAdvanceFn = function (year,period,app_lv,org,app_type,emp,emp_name,position) {
 	//embed parameter start
 		
 		var htmlParam="";
@@ -337,6 +337,7 @@ var getDataBubbleFn = function(page,rpp){
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_period' 		name='param_period' 	value='"+period+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_type' 	name='param_app_type' 	value='"+app_type+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_emp' 			name='param_emp' 		value='"+emp+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_emp_name' 			name='param_emp_name' 		value='"+emp_name+"'>";
 		//htmlParam+="<input type='hidden' class='paramEmbed' id='param_position' 	name='param_position' 	value='"+position+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' 		name='param_app_lv' 	value='"+app_lv+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' 		name='param_org_id' 	value='"+org+"'>";
@@ -385,7 +386,8 @@ var getDataBubbleFn = function(page,rpp){
 					$("#organization").val(),
 		
 					$("#app_type").val(),
-					$("#emp_name_id").val()//,
+					$("#emp_name_id").val(),
+					$("#emp_name").val()
 					//$("#position_id").val()
 					);
 			$("#listSubordinate").show();

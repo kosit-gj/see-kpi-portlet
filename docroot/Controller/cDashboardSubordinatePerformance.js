@@ -524,16 +524,16 @@
 	                "yAxisNameAlpha": "80",
 	                "plotFillAlpha": "70",
 	                "plotFillHoverColor": "#eeeeee",
-	                "showPlotBorder": "0",
+	                "showPlotBorder": "1",
 	                "xAxisName": "Target",
 	                "yAxisName": "Actual",
 	                "numDivlines": "2",
-	                "showValues":"1",
+	                "showValues":"0",
 	                "showTrendlineLabels": "0",
 	                "chartLeftMargin": "35",
 	                "chartRightMargin": "35",
 	                //Dynamic tool-tips with HTML and macro variables
-	                "plotTooltext": "<div id='nameDiv'>$name </div>{br}Target : <b>$xDataValue</b>{br}Actual : <b>$yDataValue</b>{br}Achievement : <b>$zvalue%</b>",
+	                "plotTooltext": "<div id='nameDiv'>$name</div>{br}Target : <b>$xDataValue</b>{br}Actual : <b>$yDataValue</b>{br}Achievement : <b>$zvalue%</b>",
 	                "theme": "fint"
 	            },
 	            "dataset" : data
@@ -543,7 +543,7 @@
 	            	var objDataset = ev.sender.getJSONData().dataset;
 	            	console.log(objDataset);
 	            	console.log(props.displayValue);
-	            	var clickLabel = props.displayValue;
+	            	var clickLabel =  $("#nameDiv").text();
 	            	$.each(objDataset,function(index,indexEntry){
 	            		$.each(indexEntry['data'],function(index2,indexEntry2){
 		            	  if(clickLabel == indexEntry2['name']){
@@ -679,7 +679,8 @@ var listDashBoardFn = function(data){
 					$("#organization").val(),
 					$("#kpi").val(),
 					$("#app_type").val(),
-					$("#emp_name_id").val()//,
+					$("#emp_name_id").val(),
+					$("#emp_name").val()
 					//$("#position_id").val()
 					);
 			$("#listSubordinate").show();
@@ -690,17 +691,21 @@ var listDashBoardFn = function(data){
 		
 		$(".app_url_hidden").show();
 		if($("#get_sending_status").val() == "true" && $("#get_sending_status").val() != null){
-			searchAdvanceFn(
-					$("#get_year_id").val(),
-					$("#get_period_id").val(),
-					$("#get_level_id").val(),
-					$("#get_org_id").val(),
-					$("#get_item_id").val(),
-					$("#get_appraisal_type_id").val(),
-					$("#get_emp_id").val()//,
-					//$("#get_position_id").val()
-					);
-			$("#listSubordinate").show();
+			$("#year").val($("#get_year_id").val());
+			$("#period").val($("#get_period_id").val());
+			
+			$("#app_type").val($("#get_appraisal_type_id").val());
+			$("#emp_name").val($("#get_emp_id").val());
+			$("#emp_name_id").val($("#get_emp_name").val());
+			
+			$("#apprasiaLevel").val($("#get_level_id").val());
+			$("#apprasiaLevel").change();
+			$("#organization").val($("#get_org_id").val());
+			$("#organization").change();
+			$("#kpi").val($("#get_item_id").val());
+			
+	
+			$("#btnSearchAdvance").click();
 			$("#get_sending_status").val("false");
 		}
 		

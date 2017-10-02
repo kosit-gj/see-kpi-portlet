@@ -181,10 +181,12 @@ var locations = [
 var getColorJvectorMap = function(){
 	var txtColorData="";
 	var objColorData="";
+	//region_code=41&period_id=17&district_code=77031
 	$.ajax({
 		url:restfulURL+"/see_api/public/dashboard/branch_performance",
 		type:"get",
 		dataType:"json",
+		
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
@@ -522,13 +524,17 @@ $("document").ready(function(){
 		 if(connectionServiceFn(username,password,plid)==false){
 	 		return false;
 	 	}
-		 	
-//		 	$("#year").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/year_list","GET"));
-//			$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));
-//			$("#region").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/region_list","POST",{"region_code":""},"All Region"));
-//		 	$("#district").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/district_list?org_code=39","POST",{"appraisal_level":""},"All District"));
-//		 	$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"org_id":$("#organization").val()},"All KPI")));
+		 
+		 	$("#year").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/year_list","GET"));
+			$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));
+			$("#region").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/region_list","GET",{},"All Region"));
+		 	$("#district").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/district_list","get",{"org_code":$("#region").val()},"All District"));
+		 	$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_map_list","POST",{"region_code":$("#region").val(),"district_code":$("#district").val()},"All KPI")));
 			
+		 	//#Change Param Function
+			$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
+			$("#region").change(function(){$("#district").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/district_list","get",{"org_code":$("#region").val()},"All District"));$("#district").change();});
+			$("#district").change(function(){$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_map_list","POST",{"region_code":$("#region").val(),"district_code":$("#district").val()},"All KPI")));});
 			
 			//$( "#detailPerfomanceArea" ).accordion();
 			 
