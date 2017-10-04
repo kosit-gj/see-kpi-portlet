@@ -93,7 +93,7 @@
 	         }
 	    });
  }
- var generateAccordionHTML = function(data,parent){
+ var generateAccordionHTML = function(data,parent,type){
 		var kpi_id = galbalDataTemp["item_id"];
 		var accordionHtml = "";
 		if(parent == "group1"){
@@ -102,9 +102,9 @@
 			accordionHtml += "<div class='panel panel-default sortableItem'>";
 		}
 			
-		accordionHtml += "	<div class='panel-heading' role='tab' id='headOrg-"+data['org_id']+"'>";
+		accordionHtml += "	<div class='panel-heading' role='tab' id='headOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"'>";
 		accordionHtml += "		<h4 class='panel-title' "+(parent == "group1" ? "style='margin-top: 5px; margin-bottom: 5px;' " : "")+">";
-		accordionHtml += "			 <a class='collapsed row' role='button' data-toggle='collapse' data-parent='#accordion' href='#bodyOrg-"+data['org_id']+"' aria-expanded='false' aria-controls='bodyOrg-"+data['org_id']+"' style='color: black;font-weight: bold;'>";
+		accordionHtml += "			 <a class='collapsed row' role='button' data-toggle='collapse' data-parent='#accordion' href='#bodyOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"' aria-expanded='false' aria-controls='bodyOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"' style='color: black;font-weight: bold;'>";
 		
 		if(parent == "group1"){
 			accordionHtml += "<div class='accordion-content span10' style=''>";
@@ -121,7 +121,7 @@
 		accordionHtml += "			</a>";	
 		accordionHtml += "		</h4>";	
 		accordionHtml += "	</div>";	
-		accordionHtml += "	<div id='bodyOrg-"+data['org_id']+"' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headOrg-"+data['org_id']+"'>";	
+		accordionHtml += "	<div id='bodyOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"'>";	
 		accordionHtml += "		<div class='panel-body'>";
 		//#Start Body Accordion
 		accordionHtml += "				<div class='span12 graphLTopHeader'>"+data['perspective_name']+" - "+data['item_name']+"</div>";		
@@ -153,13 +153,13 @@
 		accordionHtml += "						<br style='clear: both'>";
 		accordionHtml += "					</div>";
 		accordionHtml += "					<div>";
-		accordionHtml += "						<div id='chartOrgGauge-"+data['org_id']+"'></div>";
+		accordionHtml += "						<div id='chartOrgGauge-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"'></div>";
 		accordionHtml += "					</div>";
 		accordionHtml += "				</div>";	
 		accordionHtml += "				</div>";
 		accordionHtml += "				<div class='span8'>";
 		//accordionHtml += "					<div class='graphLTopHeader' style='margin-bottom: 3px;'>KPI: "+data['item_name']+"</div>";
-		accordionHtml += "					<div id='chartOrgBar-"+data['org_id']+"'></div>";
+		accordionHtml += "					<div id='chartOrgBar-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"'></div>";
 		accordionHtml += "				</div>";
 		accordionHtml += "			</div>";
 		//#End Body Accordion
@@ -170,7 +170,7 @@
 		//$("#accordion").append(accordionHtml);
 		
 }
- var generateChartGaugeFn = function(data){
+ var generateChartGaugeFn = function(data,type){
 	 var color = [];
 	 $.each(data['dual_chart']['color_range'],function(index,indexEntry){
 		 color.push({
@@ -185,7 +185,7 @@
 			    baseChartMessageFont: "Arial",
 			    baseChartMessageFontSize: "18",
 			    baseChartMessageColor: "#FC0000",
-		        renderAt:  "chartOrgGauge-"+data['org_id'],
+		        renderAt:  "chartOrgGauge-"+(type == "org" ? data['org_id'] : data['emp_id'] ),
 		        width: '100%',
 		        height: '200',
 		        dataFormat: 'json',
@@ -281,7 +281,7 @@
 		    rangeColors: data[0]['rangeColor']
 		 } );
  };
- var generateChartBarFn = function(data){
+ var generateChartBarFn = function(data,type){
 	 var actual = [] ;
 	 $.each(data['bar_chart']['data']['actual'],function(index,indexEntry){
 		 actual.push({
@@ -296,7 +296,7 @@
 			    baseChartMessageFont: "Arial",
 			    baseChartMessageFontSize: "16",
 			    baseChartMessageColor: "#993300",
-		        renderAt: "chartOrgBar-"+data['org_id'],
+		        renderAt: "chartOrgBar-"+(type == "org" ? data['org_id'] : data['emp_id'] ),
 		        width: '100%',
 		        height: '255',
 		        dataFormat: 'json',
@@ -381,7 +381,7 @@
 		    
 	 return false;
  };
- var generateChartBarLineAreaFn = function(data){	
+ var generateChartBarLineAreaFn = function(data,type){	
 	 var salesAnlysisChart = new FusionCharts({
 	        type: 'mscombi2d',
 	        renderAt: 'chart-container',
@@ -391,7 +391,7 @@
 		    baseChartMessageColor: "#993300",
 	        width: '100%',
 	        height: '255',
-	        renderAt: "chartOrgBar-"+data['org_id'],
+	        renderAt: "chartOrgBar-"+(type == "org" ? data['org_id'] : data['emp_id'] ),
 	        dataFormat: 'json',
 	        dataSource: {
 	            "chart": {
@@ -690,7 +690,7 @@ var listHeaderFn=function(galbalOrg){
 	 var htmlHeaderMain = "";
 	 var htmlHeaderSummary1 = "";
 	 var htmlHeaderSummary2 = "";
-	 var org= $("#param_org_id").val();
+	 var org= ($("#param_emp").val() == "" ? $("#param_org_id").val() :$("#param_emp").val());
 	 htmlHeader1+="<th style='width:120px;'>";
 	 htmlHeader1+="<div class='fontBold '> Perspective</div>";
 	 htmlHeader1+="</th>";
@@ -729,26 +729,48 @@ var listDashBoardFn = function(data){
 	 $("#accordion").empty();
 	 $("#accordion").hide();
 	 var org= $("#param_org_id").val();
+	 var emp= $("#param_emp").val();
 	 var html = "";
-	 $.each(data , function(inedx,indexEntry){
-		 if(org == indexEntry['org_id'] ){
-			 html+=generateAccordionHTML(indexEntry,"group1");
-			 return false;
-		 };
-		 
-	 });
-	 $.each(data , function(inedx,indexEntry){
-		 if(org != indexEntry['org_id']){
-			 html+=generateAccordionHTML(indexEntry);
-		 };
-	 });
+	 if(emp == ""){
+		 $.each(data , function(inedx,indexEntry){
+			 if(org == indexEntry['org_id'] ){
+				 html+=generateAccordionHTML(indexEntry,"group1","org");
+				 return false;
+			 };
+			 
+		 });
+		 $.each(data , function(inedx,indexEntry){
+			 if(org != indexEntry['org_id']){
+				 html+=generateAccordionHTML(indexEntry,"","org");
+			 };
+		 });
+	 }else{
+		 $.each(data , function(inedx,indexEntry){
+			 if(emp == indexEntry['emp_id'] ){
+				 html+=generateAccordionHTML(indexEntry,"group1","emp");
+				 return false;
+			 };
+			 
+		 });
+		 $.each(data , function(inedx,indexEntry){
+			 if(emp != indexEntry['emp_id']){
+				 html+=generateAccordionHTML(indexEntry,"emp");
+			 };
+		 }); 
+	 }
+	 
 	 $("#accordion").html(html);
 	 
 	 
 	 $.each(data , function(inedx,indexEntry){
 //		 generateChartGaugeFn(indexEntry);
 //		 generateChartBarFn(indexEntry);
-		 $.when(generateChartGaugeFn(indexEntry),indexEntry['chart_type'] == "yearly" ? generateChartBarFn(indexEntry) : generateChartBarLineAreaFn(indexEntry)).then(function() {
+		 $.when(
+				 generateChartGaugeFn(indexEntry,(emp == "" ? "org" :"emp")),
+				 indexEntry['chart_type'] == "yearly" ? 
+						 generateChartBarFn(indexEntry,(emp == "" ? "org" :"emp")) : 
+						 generateChartBarLineAreaFn(indexEntry,(emp == "" ? "org" :"emp"))
+				).then(function() {
 				    //console.log(inedx+" Loading Chart: Success");
 		});
 	 });
@@ -837,7 +859,7 @@ var listDashBoardFn = function(data){
 			$('#accordion').disableSelection();
  };
 var listDashBoardAllKPIFn = function(data){
-	 var org= $("#param_org_id").val();
+	 var org= ($("#param_emp").val() == "" ? $("#param_org_id").val() :$("#param_emp").val());
 	var htmlData1="";
 	var htmlData3="";
 	 $.each(data,function(index,indexEntry){
