@@ -266,7 +266,10 @@
 
 .aui .fixed {
 	position: fixed;
- 	top: 24px; 
+ 	top: 36px; 
+}
+.aui .tableInside{
+	width:100%;
 }
 </style>
 <input type="hidden" id="user_portlet" name="user_portlet"
@@ -285,7 +288,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 
 
 
-<div class="row-fluid" style='display: block;' id='advanceSearchDisplay'>
+<div class="row-fluid app_url_hidden" style='' id='advanceSearchDisplay'>
 	<!--  SEARCH ADVANCE START -->
 
 	<div class="span12">

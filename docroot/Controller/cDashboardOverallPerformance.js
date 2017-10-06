@@ -180,7 +180,7 @@
 //		        				"&org_id="+org+
 //		        				"&item_id="+item;
 		            			$("#param_item").val(indexEntry2['item_id']);
-		            			$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/overall-subordinate");
+		            			$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/subordinate-performance");
 		            			$("form#linkParam").submit();
 		            			$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/performance-trend");
 		            			$("form#linkParam").submit();
@@ -376,9 +376,16 @@ var getDataBubbleFn = function(page,rpp){
 		$("#apprasiaLevel").change(function(){$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));$("#organization").change();});
 		
 		
-		
+		$(".app_url_hidden").show();
 		
 		$("#btnSearchAdvance").click(function(){
+			if($("#app_type").val() == "1"){
+				if($("#emp_name_id").val() ==""){
+					callFlashSlide("Employee Name is Require !");
+					return false;
+				}
+			}
+			
 			searchAdvanceFn(
 					$("#year").val(),
 					$("#period").val(),
@@ -411,7 +418,8 @@ var getDataBubbleFn = function(page,rpp){
 				$("#emp_name").removeAttr('disabled');
 				$("#emp_name").removeAttr('disabled');
 				$('#apprasiaLevel').val($('#apprasiaLevel option:first-child').val());
-				$('#organization').val($('#organization option:first-child').val());
+				$('#apprasiaLevel').change();
+				//$('#organization').val($('#organization option:first-child').val());
 				$("#apprasiaLevel , #organization").attr("disabled", 'disabled');
 			
 			}else if($("#app_type").val() == "2"){

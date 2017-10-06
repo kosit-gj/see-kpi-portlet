@@ -640,7 +640,14 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 </style>
 
 
-
+<div class='row-fluid '>
+	<div class='col-xs-12'>
+		<div id="slide_status" class="span12" style="z-index: 9000;">
+			<div id="btnCloseSlide"><i class='fa fa-times'></i></div>
+			<div id="slide_status_area"></div>
+		</div>
+	</div>
+</div>
 
 <div class="app_url_hidden" style="display: block;">
 	<div class="row-fluid app_url_hidden">
@@ -711,7 +718,7 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 							<select name="apprasiaLevel" id="apprasiaLevel"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Level">
+								data-original-title="Level" disabled>
 
 								<option value="">Appraisal Level1</option>
 								<option value="">Appraisal Level2</option>
@@ -723,7 +730,7 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 							<select name="organization" id="organization"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Organization">
+								data-original-title="Organization" disabled>
 
 								<option value="">Organization 1</option>
 								<option value="">Organization 2</option>

@@ -700,14 +700,14 @@
 	</portlet>
 	
 	<portlet>
-		<portlet-name>emp-result-bonus-raise-amount</portlet-name>
-		<display-name>Emp Result Bonus Raise Amount</display-name>
+		<portlet-name>calculate-bonus-and-salary</portlet-name>
+		<display-name>Calculate Bonus and Salary</display-name>
 		<portlet-class>
 			com.liferay.util.bridges.mvc.MVCPortlet
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/emp-result-bonus-raise-amount/view.jsp</value>
+			<value>/html/calculate-bonus-and-salary/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -715,8 +715,8 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>Emp Result Bonus Raise Amount</title>
-			<short-title>Emp Result Bonus Raise Amount</short-title>
+			<title>Calculate Bonus and Salary</title>
+			<short-title>Calculate Bonus and Salary</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>
@@ -1004,12 +1004,12 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>dashbaord-summary</portlet-name>
-		<display-name>Dashbaord Summary</display-name>
+		<portlet-name>dashbaord-performance-trend</portlet-name>
+		<display-name>Dashboard Performance Trend</display-name>
 		<portlet-class>com.test.dashbaordSummary</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/dashbaordsummary/view.jsp</value>
+			<value>/html/dashbaord-performance-trend/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -1017,8 +1017,8 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>Dashbaord Summary</title>
-			<short-title>Dashbaord Summary</short-title>
+			<title>Dashboard Performance Trend</title>
+			<short-title>Dashboard Performance Trend</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

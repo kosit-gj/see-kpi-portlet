@@ -96,7 +96,7 @@ var getMapProvinceinitialsName = function(id){
 	{'id':'27 	','province':'Sa Kaeo','initials':'สก'},
 	{'id':'24 	','province':'Chachoengsao','initials':'ฉช'},
 	{'id':'25 	','province':'Prachin Buri','initials':'ปจ'},
-	{'id':'22 	','province':'Chanthaburi','initials':'ปจ'},
+	{'id':'22 	','province':'Chanthaburi','initials':'จบ'},
 	{'id':'23 	','province':'Trat','initials':'ตร'},
 	{'id':'20 	','province':'Chon Buri','initials':'ชบ'},
 	{'id':'21 	','province':'Rayong','initials':'รย'},
@@ -147,7 +147,7 @@ var pinSymbol = function (color) {
 		var region_code= $("#embed_region").val();
 		var period= $("#embed_period").val();
 		var district_code= $("#embed_district").val();
-		
+		var kpi= $("#embed_kpi").val();
 		//region_code=41&period_id=17&district_code=77031
 		$.ajax({
 			url:restfulURL+"/see_api/public/dashboard/branch_performance",
@@ -156,8 +156,8 @@ var pinSymbol = function (color) {
 			data:{
 				"region_code"				:		region_code,
 				"period_id"					:		period,
-				"district_code"				:		district_code
-				
+				"district_code"				:		district_code,
+				"item_id"					:		kpi
 			},
 			async:false,
 			headers:{Authorization:"Bearer "+tokenID.token},
@@ -218,11 +218,13 @@ var pinSymbol = function (color) {
 }
 var getColorJvectorMap = function(){
 	var txtColorData="";
+	var txtDataAvg="";
 	var objColorData="";
+	var objDataAvg="";
 	var region_code= $("#embed_region").val();
 	var period= $("#embed_period").val();
 	var district_code= $("#embed_district").val();
-	
+	var kpi= $("#embed_kpi").val();
 	//region_code=41&period_id=17&district_code=77031
 	$.ajax({
 		url:restfulURL+"/see_api/public/dashboard/branch_performance",
@@ -231,40 +233,50 @@ var getColorJvectorMap = function(){
 		data:{
 			"region_code"				:		region_code,
 			"period_id"					:		period,
-			"district_code"				:		district_code
+			"district_code"				:		district_code,
+			"item_id"					:		kpi
 			
 		},
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			txtColorData+="{";
+			txtDataAvg+="{";
 			$.each(data['vector_map'],function(index,indexEntry){
 				if(index!=0){
 					txtColorData+=",";
+					txtDataAvg+=",";
 				}
 				txtColorData+="\"TH-"+indexEntry['province_code']+"\":\""+indexEntry['color_code']+"\"";
+				txtDataAvg+="\"TH-"+indexEntry['province_code']+"\":\""+indexEntry['average']+"\"";
 				
 			});
 			txtColorData+="}";
+			txtDataAvg+="}";
 			//console.log(txtColorData);
 			objColorData = eval("("+txtColorData+")");
+			objDataAvg = eval("("+txtDataAvg+")");
 			//console.log(objColorData);
-			createJvectorMap(objColorData);
+			createJvectorMap(objColorData,objDataAvg);
 		}
 	});
 }
 var listDataPerformanceDetailFn = function(data,district,type){
 	//console.log(data);
+	var scrollID =  $('#mapArea').children();
+	$(window).off("scroll");
+	$(window).on("scroll");
+	scrollID.removeClass('fixed');
 	var rageGreenColor="#ffffff";
 	var rangeColorsThreshold="[]";
 	var mainArea="";	
-	mainArea+="<h3 style='text-align:center;color:#993300;' id='BranchPerTitle'></h3>";
+	mainArea+="<h3 style='text-align:center;color:#993300;font-size: 20px;margin: 0px;' id='BranchPerTitle'></h3>";
 	mainArea+="<div id='detailPerfomanceArea'></div>";
 	if(data == null || data == undefined || data =="" ){
 		mainArea+="<div id='noData'>No data to display.</div>";
 	}
 	$("#detailArea").html(mainArea);
-	$("#BranchPerTitle").html("Branch Performance:"+(type == "gmap" ? district : getMapProvinceinitialsName(district)));
+	$("#BranchPerTitle").html("Branch Performance:"+district);
 	console.log(data);
 	$.each(data,function(index,indexEntry){
 	
@@ -277,13 +289,13 @@ var listDataPerformanceDetailFn = function(data,district,type){
 	dataTableHTML+="</h3>";
   
 	dataTableHTML+="<div>";
-		dataTableHTML+="<table class='table' style='width:100%;'>";
+		dataTableHTML+="<table class='table table-bordered' style='width:100%;'>";
 			dataTableHTML+="<thead>";
 				dataTableHTML+="<tr>";
 					dataTableHTML+="<th>Perspective</th>";
 					dataTableHTML+="<th>KPI</th>";
 					dataTableHTML+="<th>UOM</th>";
-					dataTableHTML+="<th style='background:#fcf8e3; text-align:center;'>KPI Result</th>";	
+					dataTableHTML+="<th style='text-align:center;min-width: 250px;'>KPI Result</th>";	
 			dataTableHTML+="</tr>";
 			dataTableHTML+="</thead>";
 			dataTableHTML+="<tbody>";
@@ -337,12 +349,12 @@ var listDataPerformanceDetailFn = function(data,district,type){
 					dataTableHTML+="<td>"+indexEntry2['uom_name']+" </td>";
 					dataTableHTML+="<td>";
 					
-					dataTableHTML+="<table class='table'>";
+					dataTableHTML+="<table class='tableInside table-striped'>";
 						dataTableHTML+="<thead>";
 							dataTableHTML+="<tr>";
-								dataTableHTML+="<th style='background:#fcf8e3;'>Target</th>";
-								dataTableHTML+="<th style='background:#fcf8e3;'>Forecast</th>";
-								dataTableHTML+="<th style='background:#fcf8e3;'>Actual</th>";
+								dataTableHTML+="<th style='min-width: 90px;'>Target</th>";
+								dataTableHTML+="<th style='min-width: 60px;'>Forecast</th>";
+								dataTableHTML+="<th style='min-width: 60px;'>Actual</th>";
 							dataTableHTML+="</tr>";
 							dataTableHTML+="</thead>";
 							dataTableHTML+="<tbody>";
@@ -352,11 +364,11 @@ var listDataPerformanceDetailFn = function(data,district,type){
 									dataTableHTML+="<td style=' text-align: right !important;'>"+indexEntry2['actual']+"</td>";
 								dataTableHTML+="</tr>";
 								dataTableHTML+="<tr>";
-									dataTableHTML+="<td>%Taget</td>";
+									dataTableHTML+="<td>%Taget<span style='float:right'>"+parseFloat(indexEntry2['percent_target']).toFixed(2)+"</span></td>";
 									dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:0;'  >"+indexEntry2['percent_target_str']+"</div></td>";
 								dataTableHTML+="</tr>";
 								dataTableHTML+="<tr>";
-									dataTableHTML+="<td>%Forecast</td>";
+									dataTableHTML+="<td>%Forecast<span style='float:right'>"+parseFloat(indexEntry2['percent_forecast']).toFixed(2)+"</span></td>";
 									dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:0;'>"+indexEntry2['percent_forecast_str']+"</div></td>";
 								dataTableHTML+="</tr>";
 							dataTableHTML+="</tbody>";
@@ -374,8 +386,8 @@ var listDataPerformanceDetailFn = function(data,district,type){
 	
 	var config = liquidFillGaugeDefaultSettings();
 	config.circleColor = indexEntry['color_code'];
-	config.textColor = "white";
-	config.waveTextColor = "white";
+	config.textColor = "black";
+	config.waveTextColor = "black";
 	config.waveColor = indexEntry['color_code'];
 	
 
@@ -409,8 +421,9 @@ $(".ui-accordion-header").click(function(){
 		//console.log($(e_this +" .sparkline"));
 		$(e_this +" .sparkline").sparkline('html', {
 	        type: 'bullet',
-	        width:'80',
-	        targetColor: rageGreenColor,
+	        width:'120',
+	        height: '20',
+	        targetColor:  '#000000',
 	        performanceColor: 'blue',
 	        rangeColors: rangeColorsThreshold
 		}).css("opacity","1");
@@ -430,8 +443,9 @@ setTimeout(function(){
 	
 	$(".sparkline").sparkline('html', {
         type: 'bullet',
-        width:'80',
-        targetColor: rageGreenColor,
+        width:'120',
+        height: '20',
+        targetColor: '#000000',
         performanceColor: 'blue',
         rangeColors: rangeColorsThreshold
 	}).css("opacity","1");
@@ -453,36 +467,80 @@ setTimeout(function(){
 
 $("#detailArea").show();
 
+if(window.innerWidth >= 768 && (data !="" || data != null)){
+	//alert(window.innerWidth);
+	
+	var scroll = $(window).scrollTop();
+	if (scroll >= 280) {
+		  scrollID.addClass('fixed');
+		  if(type == "gmap"){
+			  $("#mapGoogle").css({"width" : "43%"});
+		  }	
+	  }
+	  else {
+		  scrollID.removeClass('fixed');
+		  if(type == "gmap"){
+		  $("#mapGoogle").css({"width" : ""});
+	  }	}
+	$(window).scroll(function(){
+		scroll = $(window).scrollTop();
+	  
+	  
+	  if (scroll >= 280) {
+		  scrollID.addClass('fixed');
+		  if(type == "gmap"){
+			  $("#mapGoogle").css({"width" : "43%"});
+		  }	
+	  }
+	  else {
+		  scrollID.removeClass('fixed');
+		  if(type == "gmap"){
+		  $("#mapGoogle").css({"width" : ""});
+	  }	}
+	});
+}
+
+
+
   
 }
-var showPerformanceDetailFn=function(district){
+var showPerformanceDetailFn=function(district,province){
 	var dataDetails="";
 	var period= $("#embed_period").val();
+	var kpi= $("#embed_kpi").val();
 	$.ajax({
 		url:restfulURL+"/see_api/public/dashboard/branch_details",
 		type:"get",
 		dataType:"json",
 		data : {
 			"province_code"		:  	district,
-				"period_id"		:	period
+				"period_id"		:	period,
+				"item_id"		:	kpi
+				
 			
 		},
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 				
-				listDataPerformanceDetailFn(data,district);
+				listDataPerformanceDetailFn(data,province);
 				//console.log(data);
 			
 		}
 	});
 	
 }
-var createJvectorMap = function(objColorData){
+var createJvectorMap = function(objColorData,objDataAvg){
 	//jVector map thailand
 	//var objColorData={"TH-10":"red","TH-12":"yellow"};
     $('#mapPerfomanceArea').vectorMap({
     	map: 'th_mill',
+//    	zoomMin: 1.4,
+//        focusOn: {
+//            x: 0.1,
+//            y: 0.1,
+//            scale: 1
+//        },
     	//map: 'th_mill_en',
     	backgroundColor: "transparent",
     	series: {
@@ -536,12 +594,13 @@ var createJvectorMap = function(objColorData){
   				
   				var district = code.substring(3);
   				
-  				//console.log(code);
-  				//console.log(district);
-  				//alert(provinceid);
-  				showPerformanceDetailFn(district);
+  				showPerformanceDetailFn(district,$("#districtNameHi").val());
   				
-  		    }
+  		    },
+    	    onRegionTipShow: function (e, el, code) {
+    	    	
+    	        el.html(el.html() + ' , Avg. : '+parseFloat(notNullFn(objDataAvg[code])).toFixed(2));
+    	    }
     	
     	});
 }
@@ -568,13 +627,13 @@ var searchAdvanceFn = function() {
 	
 	if($("#embed_region").val()==""){
 		
-		$("#mapArea").html("<div id='mapPerfomanceArea'  style='height:597px;'></div>");
+		$("#mapArea").html("<div id='mapPerfomanceArea'  style='height:577px;'></div>");
 		$("#mapPerfomanceArea").show();
 		$("#mapGooglePerfomanceArea").hide();
 		getColorJvectorMap();
 	}else{
 		
-		$("#mapArea").html("<div id='mapGooglePerfomanceArea' style='width:100%; height:500px;'></div>");
+		$("#mapArea").html("<div id='mapGoogle'><div id='mapGooglePerfomanceArea' style='width:100%; height:500px;'></div></div>");
 		$("#mapPerfomanceArea").hide();
 		$("#mapGooglePerfomanceArea").show();
 		initGoogleMap();
@@ -601,7 +660,7 @@ $("document").ready(function(){
 			$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
 			$("#region").change(function(){$("#district").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/district_list","get",{"org_code":$("#region").val()},"All District"));$("#district").change();});
 			$("#district").change(function(){$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_map_list","POST",{"region_code":$("#region").val(),"district_code":$("#district").val()},"All KPI")));});
-			
+			$(".app_url_hidden").show();
 			//$( "#detailPerfomanceArea" ).accordion();
 			 
 			 /*
