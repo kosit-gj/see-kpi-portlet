@@ -46,6 +46,7 @@
 		 
 		 <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	     <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+		
 		<footer-portlet-javascript>
 			/js/fusioncharts/js/fusioncharts.js               
 		</footer-portlet-javascript>    
@@ -60,7 +61,7 @@
 			/js/fusioncharts/js/themes/fusioncharts.theme.fint.js
 		</footer-portlet-javascript>   
 		 
-		       
+		<footer-portlet-javascript>/js/jquery-print.js</footer-portlet-javascript>
 		                     
  		                  
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
@@ -69,8 +70,8 @@
 	    <footer-portlet-javascript>/Controller/appraisal.js</footer-portlet-javascript>
 	          
 	    <!-- include file  end-->            
-		                      
-		                 
+		                       
+		               
 		<css-class-wrapper>appraisal-portlet</css-class-wrapper>
 	</portlet>      
 	<portlet>        
@@ -658,7 +659,7 @@
 	</portlet>  
 	
 	<portlet>
-		<portlet-name>emp-result-bonus-raise-amount</portlet-name>
+		<portlet-name>calculate-bonus-and-salary</portlet-name>
 		<icon>/icon.png</icon>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
@@ -679,13 +680,13 @@
 		<footer-portlet-javascript>/js/jquery.sparkline.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
-		<footer-portlet-javascript>/Controller/cEmpResultBonusRaiseAmont.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/Controller/cCalculateBonusAndSalary.js</footer-portlet-javascript>
 		
 		     
 
     
 		<css-class-wrapper>
-			emp-result-bonus-raise-amount-portlet
+			calculate-bonus-and-salary-portlet
 		</css-class-wrapper>
 	</portlet>
 	
@@ -1027,7 +1028,7 @@
 		<css-class-wrapper>action-plan-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>dashbaord-summary</portlet-name>
+		<portlet-name>dashbaord-performance-trend</portlet-name>
 		<icon>/icon.png</icon>
 		
 		
@@ -1076,9 +1077,9 @@
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	     
-	    <footer-portlet-javascript>/Controller/cDashboardSummary.js</footer-portlet-javascript> 
+	    <footer-portlet-javascript>/Controller/cDashboardPerformanceTrend.js</footer-portlet-javascript> 
 	     
-		<css-class-wrapper>dashbaord-summary-portlet</css-class-wrapper>
+		<css-class-wrapper>dashbaord-performance-trend-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>all-kpi-dashboard</portlet-name>
@@ -1208,8 +1209,10 @@
 		<header-portlet-css>/css/usage-log-report.css</header-portlet-css>
 		
 		
-		
+		<!-- 
 		<footer-portlet-javascript>https://code.jquery.com/jquery-1.12.4.min.js</footer-portlet-javascript>
+		 -->
+		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
@@ -1220,12 +1223,13 @@
 		
 		<footer-portlet-javascript>/js/d3-liquid-fill-gauge/d3.v3.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/d3-liquid-fill-gauge/liquidFillGauge.js</footer-portlet-javascript>
-		
+		 
 		
 		
 		<footer-portlet-javascript>/js/jvectormap-2.0.3/jquery-jvectormap-2.0.3.min.js</footer-portlet-javascript>
   		<footer-portlet-javascript>/js/jvectormap-2.0.3/jquery-jvectormap-th-mill.js</footer-portlet-javascript>
   		<footer-portlet-javascript>/js/jvectormap-2.0.3/jquery-jvectormap-th-mill-en.js</footer-portlet-javascript>
+ 		
  		
 		 <!-- 
 		<footer-portlet-javascript>/js/jvectormap/js/jquery.vmap.packed.js</footer-portlet-javascript>
@@ -1308,5 +1312,4 @@
 		<role-link>User</role-link>   
 	</role-mapper>   
 </liferay-portlet-app>
-           
-                      
+ 
