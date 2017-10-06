@@ -40,6 +40,7 @@ var appraisalLevelListFn = function(nameArea,id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
+			htmlOption+="<option  value=\"\">All Level</option>";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['level_id']){
 					htmlOption+="<option selected='selected' value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
@@ -101,8 +102,8 @@ var listDataFn = function(data){
 									htmlTable+="<tr  class=\"active\">";
 										//htmlTable+="<th style='width:30px;'><b>No.</b></th>";
 										htmlTable+="<th style='width:200px;'><b>Usage Date</b></th>";
-										htmlTable+="<th style='width:100px;'><b>Personnel Id</b></th>";
-										htmlTable+="<th style='width:150px;'><b>Personnel Name</b></th>";
+										htmlTable+="<th style='width:100px;'><b>Employee Code</b></th>";
+										htmlTable+="<th style='width:150px;'><b>Employee Name</b></th>";
 										htmlTable+="<th style='width:200px;'><b>Organization</b></th>";
 										htmlTable+="<th style='width:300px;'><b>Menu</b></th>";
 										

@@ -119,6 +119,9 @@ plid = layout.getPlid();
 		#organizationBox{
 			width:49.718%
 		}
+		#formulaDescriptionAreaQuantity{
+		width:72.5%;
+		}
 		/*Quantity End*/
 		
 	 	.ibox-content .row-fluid .span4{
@@ -177,6 +180,14 @@ plid = layout.getPlid();
 		}
 		#organizationBox{
 			width:100%
+		}
+		/*
+		#formulaDescriptionLabelAreaQuantity{
+			width:100%;
+		}
+		*/
+		#formulaDescriptionAreaQuantity{
+			width:75%;
 		}
 		/*Quantity End*/
 		
@@ -260,7 +271,12 @@ plid = layout.getPlid();
 	#organizationBox{
 		width:100%
 	}
-
+	#formulaDescriptionAreaQuantity{
+		width:100%;
+	}
+	#formulaDescriptionLabelAreaQuantity{
+		width:100%;
+	}
 	/*Qauntity End*/
 	.ibox-content .row-fluid .span4{
 		width: 32.4917%
@@ -379,7 +395,12 @@ plid = layout.getPlid();
 	#organizationBox{
 		width:100%
 	}
-
+	#formulaDescriptionAreaQuantity{
+		width:100%;
+	}
+	#formulaDescriptionLabelAreaQuantity{
+		width:100%;
+	}
  	/*Quantity End*/
  	
  	 .ibox-content .row-fluid .span4{
@@ -486,6 +507,12 @@ plid = layout.getPlid();
 	}
 	.aui #textarea_cds{
 		height: 77px;
+	}
+	#formulaDescriptionAreaQuantity{
+		width:100%;
+	}
+	#formulaDescriptionLabelAreaQuantity{
+		width:100%;
 	}
  	/*Quantity End*/
  	
@@ -724,6 +751,9 @@ overflow-y: visible;
 
 .aui .ibox-content input[type="color"], .aui input[type="date"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="email"], .aui input[type="month"], .aui input[type="number"], .aui input[type="password"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="text"], .aui input[type="time"], .aui input[type="url"], .aui input[type="week"], .aui select, .aui textarea, .aui .uneditable-input{
 	margin-bottom: 5px;
+}
+#formulaDescriptionAreaQuantity{
+	float:left;
 }
 
 
@@ -1457,7 +1487,7 @@ overflow-y: visible;
 				                </div>
 				                <br style="clear:both">
 			                </div>
-			                
+			                <!-- 
 			                <div class='form-file-mangement'>
 				                <div class="form-label-quantity">
 				                	Baseline Value <span class='redFont'>*</span>
@@ -1469,7 +1499,7 @@ overflow-y: visible;
 				                </div>
 				                <br style="clear:both">
 			                </div>
-			                
+			                 -->
 			               <div class='form-file-mangement'>
 				                <div class="form-label-quantity">
 				                	Appraisal Level <span class='redFont '>*</span>
@@ -1484,6 +1514,17 @@ overflow-y: visible;
 			                </div>
 			                
 			                
+			                 <div class='form-file-mangement'>
+				                <div class="form-label-quantity">
+				                	KPI ID &nbsp;
+				                </div>
+				                
+				                <div class="form-input-customs">
+				                
+				                	<input type="text" class="form-control input-sm numberOnly span12" placeholder="KPI ID" id="kpiQuantity">
+				                </div>
+				                <br style="clear:both">
+			                </div>
 			                <div class='form-file-mangement'>
 				                <div class="form-label-quantity"> 
 				                </div>
@@ -1496,8 +1537,7 @@ overflow-y: visible;
 			                </div>
 			                
 			                
-			                
-			                
+			                <!-- 
 			                <div class='form-file-mangement'>
 			                
 				                <div class="form-label-quantity">
@@ -1512,7 +1552,8 @@ overflow-y: visible;
 				                </div>
 				                <br style="clear:both">
 			                </div>
-			                 <br style="clear:both">
+			                -->
+			                
 			                <!-- form end -->	
                 	</div>
                 	<div class="span6">
@@ -1566,7 +1607,7 @@ overflow-y: visible;
 			                 <div class='form-file-mangement'>
 				                <div class="form-label-quantity">
 				                
-				                	Remind Condition <span class='redFont'>*</span>
+				                	Remind Condition &nbsp; 
 				                </div>
 				                
 				                <div class="form-input-customs" id="remindCOnditionAreaQuantity">
@@ -1596,12 +1637,32 @@ overflow-y: visible;
 				                </div>
 				                <br style="clear:both">
 			                </div>
+			                
+			                 
+			                
 			                 
 			                
 			                 
 			                
 			                
 			                <!-- form end -->
+                	</div>
+                	<div class='row-fluid'>
+                	<div class='span12'>
+                			<div class='form-file-mangement'>
+			                
+				                <div class="form-label-quantity" id="formulaDescriptionLabelAreaQuantity">
+				                
+				                	Formula Description <span class='redFont'>*</span>
+				                </div>
+				                
+				                <div class="" id="formulaDescriptionAreaQuantity">
+				                
+				                	<textarea class="form-control input-sm span12" id="formulaDescriptionQuantity"  placeholder="Formula Description" style=" height: 81px;"></textarea>
+				                	
+				                </div>
+				                <br style="clear:both">
+			                </div>
                 	</div>
                 	 <br style="clear:both">
                 	<div class='row-fluid'>

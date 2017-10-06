@@ -334,7 +334,9 @@ plid = layout.getPlid();
 	font-weight:bold;
 }
 .aui .input-sm-small{
-	width:40px;
+	width:70px;
+	font-size:13px;
+	text-align:right;
 	
 }
 .aui .table {
@@ -1032,10 +1034,10 @@ plid = layout.getPlid();
             			<table class='table'>
             				<thead>
             					<tr>
-            						<th  style='width:15%'>Create by</th>
-            						<th  style='width:15%'>Create dttm</th>
-            						<th  style='width:15%'>Form Stage ID</th>
-            						<th  style='width:15%'>To Stage ID</th>
+            						<th  style='width:15%'>Created By</th>
+            						<th  style='width:15%'>Created Datetime</th>
+            						<th  style='width:15%'>From Stage</th>
+            						<th  style='width:15%'>To Stage</th>
             						<th  style='width:35%'>Remark</th>
             					</tr>
             				</thead>

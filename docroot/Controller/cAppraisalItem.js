@@ -341,12 +341,15 @@ var searchAdvanceFn = function() {
 	var Organization=$("#Organization").val().split("-");
 	Organization=Organization[0];
 	
+	var structure = $("#structure").val().split("-");
+	structure=structure[0];
+	
 	
 	var embedParam="";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id' name='embed_appraisal_level_id' value='"+$("#appraisalLevel").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_kpi_type_id' name='embed_kpi_type_id' value='"+$("#kpiType").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_perspective_id' name='embed_perspective_id' value='"+$("#perspective").val()+"'>";
-	embedParam+="<input type='hidden' class='embed_param_search' id='embed_structure_id' name='embed_structure_id' value='"+$("#structure").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_structure_id' name='embed_structure_id' value='"+structure+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_item_id' name='embed_item_id' value='"+apraisalItemId+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_organization' name='embed_organization' value='"+Organization+"'>";
 	
@@ -504,7 +507,7 @@ var structureListFn = function(nameArea){
 			var htmlOption="";
 			htmlOption+="<option value=''>All Structure</option>";
 			$.each(data,function(index,indexEntry){
-				htmlOption+="<option value='"+indexEntry['structure_id']+"'>"+indexEntry['structure_name']+"</option>";
+				htmlOption+="<option value='"+indexEntry['structure_id']+"-"+indexEntry['form_name']+"'>"+indexEntry['structure_name']+"</option>";
 			});
 			$("#structure"+nameArea).html(htmlOption);
 			
@@ -1034,7 +1037,24 @@ $(document).ready(function(){
 	//binding tooltip end
 	 
 	 
-	 
+	 //check structure type
+	 $("#structure").change(function(){
+		var  structureType=$(this).val().split("-");
+		structureType=structureType[1];
+		if(structureType=="Quality" || structureType=="Deduct Score"){
+
+			$("#kpiType").prop("disabled",true);
+			$("#appraisalItemName").prop("disabled",true);
+			$("#perspective").prop("disabled",true);
+			
+		}else{
+
+			$("#kpiType").prop("disabled",false);
+			$("#appraisalItemName").prop("disabled",false);
+			$("#perspective").prop("disabled",false);
+			
+		}
+	 });
 	 
 	 //binding advance multi select start
 	 

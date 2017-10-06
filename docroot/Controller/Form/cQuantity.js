@@ -13,7 +13,7 @@ var clearQuantityFormFn = function(){
 	$("#uomQuantity option:first").attr('selected','selected');
 	$("#isActiveQuantity").prop("checked",true);
 	$("#formulaDescriptionQuantity").val("");
-	//$("#structure_id_quantity").val("");
+	$("#kpiQuantity").val("");
 	$("#textarea_cds").html("");
 	
 	
@@ -64,6 +64,8 @@ var updateQuantityFn  = function(){
 	 var kpi_type_id=$("#kpiTypeQuantity").val();
 	 var remind_condition_id=$("#remindCOnditionQuantity").val();
 	 var value_type=$("#valueTypeQuantity").val();
+	 var kpi_id = $("#kpiQuantity").val();
+	 
 	 var is_active="";
 	 if($('#isActiveQuantity').prop('checked')==true){
 		 is_active=1;
@@ -95,6 +97,7 @@ var updateQuantityFn  = function(){
 		 "kpi_type_id":kpi_type_id,
 		 "remind_condition_id":remind_condition_id,
 		 "value_type_id":value_type,
+		 "kpi_id":kpi_id,
 		 "form_id":"1"
 		},
 	    success:function(data,status){
@@ -131,6 +134,7 @@ var insertQuantityFn = function(param) {
 	 var kpi_type_id=$("#kpiTypeQuantity").val();
 	 var remind_condition_id = $("#remindCOnditionQuantity").val();
 	 var value_type = $("#valueTypeQuantity").val();
+	 var kpi_id = $("#kpiQuantity").val();
 	
 	 /*
 	 console.log(appraisal_level_id);
@@ -170,6 +174,7 @@ var insertQuantityFn = function(param) {
 			 "kpi_type_id":kpi_type_id,
 			 "remind_condition_id":remind_condition_id,
 			 "value_type_id":value_type,
+			 "kpi_id":kpi_id,
 			 "form_id":"1"
 		},
 		success:function(data){
@@ -284,6 +289,8 @@ structure_name
 		$("#formulaDescriptionQuantity").val(data['formula_desc']);
 		$("#appraisalItemNameQuantity").val(data['item_name']);	
 		$("#textarea_cds").html(data['formula_cds_name']);
+		$("#kpiQuantity").val(data['kpi_id']);
+		
 		
 		//get formula cds id start
 		$("#textarea_cds").keyup(function(){

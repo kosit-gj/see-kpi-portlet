@@ -1,8 +1,6 @@
-
 var globalData="";
 var phaseArray=[];
 var globalCount=0;
-
 // funciton global start
 //form2
 
@@ -162,7 +160,7 @@ var assignTemplateQualityFn = function(structureName,data){
 								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\""+hintHtml+"\">"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 								
 								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
-								htmlTemplateQuality+="<select style='width:50px; height: 25px;padding: 0 0 0 5px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
+								htmlTemplateQuality+="<select style='width:50px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
 									htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['score']));
 								htmlTemplateQuality+="<select>";
 								//htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
@@ -178,7 +176,7 @@ var assignTemplateQualityFn = function(structureName,data){
 								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\""+hintHtml+"\">"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 								
 								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
-								htmlTemplateQuality+="<select style='width:50px; height: 25px;padding: 0 0 0 5px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore input form-control input-sm-small numberOnly'>";
+								htmlTemplateQuality+="<select style='width:50px; height: 25px;padding: 0 0 0 5px;font-size:13px; text-align:right;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore input form-control input-sm-small numberOnly'>";
 									htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['score']));
 								htmlTemplateQuality+="<select>";
 								//htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
@@ -426,7 +424,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 						htmlTemplateQuantity+="<td id=\"item_name-"+indexEntry['item_result_id']+"\">"+indexEntry['item_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 						
-						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:50px; height: 25px;padding: 0 0 0 5px;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+indexEntry['forecast_value']+"></td>";
+						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+indexEntry['forecast_value']+"></td>";
 						
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
 						if(data['threshold']==1){
@@ -563,7 +561,7 @@ var dropDrowAppraisalLevelFn = function(id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option value=''>All Appraisal Level</option>";
+			htmlOption+="<option value=''>All Level</option>";
 			$.each(data,function(index,indexEntry){
 				
 				if(id==indexEntry['level_id']){
@@ -723,9 +721,8 @@ var listAppraisalDetailFn = function(data){
 					id=id[1];
 					
 					getDataGanttChartFn(id,$("#ganntChartZoom").val());
-					$("#ganttOrgTxt").text($("#txtOrgName").text());
-					//alert($("#item_name-"+id).text());
-					$("#ganttAppraisalItemTxt").text($("#item_name-"+id).text());
+					//$("#ganttOrgTxt").text($("#txtOrgName").text());
+					//$("#ganttAppraisalItemTxt").text($("#item_name-"+id).text());
 					$("#gantt_item_result_id").val(id);
 					$("#ganttChartModal").modal().css({"margin-top":"0px"});
 					//$("#phase_item_result_id").val(id)
@@ -860,14 +857,7 @@ var listAppraisalDetailFn = function(data){
 	//Stage History List Data..
 	
 	
-	//Button Click Stage History Start.
-	
-	$("#slideUpDownStageHistory").click(function(){
-		$("#slideStageHistory").slideToggle();
-		return false;
-	});
-	
-	//Button Click Stage History End.
+
 	
 };
 var findOneFn = function(id){
@@ -1169,7 +1159,8 @@ update_dttm
 	    $("#actualvsForecastBar").sparkline(ragneValue1, {
 	        type: 'bullet',
 	        width:'80',
-	        targetColor: rageGreenColor,
+	        //targetColor: rageGreenColor,
+	        targetColor: 'blue',
 	        performanceColor: 'blue',
 	        rangeColors: rangeColorsThreshold});
 	    
@@ -1177,7 +1168,8 @@ update_dttm
 	    $("#actualvsTargetBar").sparkline(ragneValue2, {
 	        type: 'bullet',
 	        width:'80',
-	        targetColor: rageGreenColor,
+	        //targetColor: rageGreenColor,
+	        targetColor: 'blue',
 	        performanceColor: 'blue',
 	        rangeColors: rangeColorsThreshold});
 	    
@@ -2126,10 +2118,11 @@ var generateGanttChartFn = function(dataSource){
 	
  return false;
 };
+
 var getDataGanttChartFn = function(item_result_id,ganttPaneDuration){
 	var ganttPaneDurationVarible="";
 	if(ganttPaneDuration==undefined || ganttPaneDuration==""){
-		ganttPaneDurationVarible==10
+		ganttPaneDurationVarible==90
 	}else{
 		ganttPaneDurationVarible=ganttPaneDuration
 	}
@@ -2142,14 +2135,24 @@ var getDataGanttChartFn = function(item_result_id,ganttPaneDuration){
 		async:false,
 		success:function(data){
 		//console.log(data);
-		console.log(data['processes']);
+		if(data['header']['emp_name']=="" || data['header']['emp_name']==null){
+			$(".ganntChartTitleOrg").show();
+			$(".ganntChartTitleEmp").hide();
+		}else{
+			$(".ganntChartTitleOrg").hide();
+			$(".ganntChartTitleEmp").show();
+		}
+		$(".ganttOrgTxt").text(data['header']['org_name']);
+		$(".ganttAppraisalItemTxt").text(data['header']['item_name']);
+		$(".ganttAppraisalPeriodDescTxt").text(data['header']['appraisal_period_desc']);
+		$(".ganttEmpTxt").text(data['header']['emp_name']);
 		
 			var dataGantt="";
 			var objectGantt={};
 			objectGantt={
 	            "chart": {
-	            	"exportenabled": "1",
-	                "exportatclient": "1",
+	            	//"exportenabled": "1",
+	                //"exportatclient": "1",
 	                //"caption": "Action Plan",
 	                //"subcaption": "Planned vs Actual",                
 	                "dateformat": "dd/mm/yyyy",
@@ -2165,14 +2168,30 @@ var getDataGanttChartFn = function(item_result_id,ganttPaneDuration){
 	                "showCanvasBorder": "0",
 	                "flatScrollBars": "1",
 	                "gridbordercolor": "#333333",
-	                "gridborderalpha": "20",
+	                "gridborderalpha": "5",
 	                "slackFillColor": "#e44a00",
 	                "taskBarFillMix": "light+0"
 	            }, 
 	             "categories":data['categories'],
 	             "processes":data['processes'],
 	             "datatable":data['datatable'],
-	             "tasks":data['tasks']
+	             "tasks":data['tasks'],
+	             "legend": {
+	                 "item": [
+	                     {
+	                         "label": "Planned",
+	                         "color": "#008ee4"
+	                     },
+	                     {
+	                         "label": "Actual",
+	                         "color": "#6baa01"
+	                     },
+	                     {
+	                         "label": "Slack (Delay)",
+	                         "color": "#e44a00"
+	                     }
+	                 ]
+	             }
 	            /*
 	            "categories":data['categories'],
 	            "processes":data['processes'],
@@ -3011,13 +3030,36 @@ $(document).ready(function() {
 	 $("#ganntChartZoom").change(function(){
 		// alert($(this).val());
 		getDataGanttChartFn($("#gantt_item_result_id").val(),$(this).val());
+		$("#gantt_zoom").val($(this).val());
+		
 	 });
 	 //gantt chart zoom end
+	 //gantt chart print start
+	 $("#btnPrint").click(function(){
+		 
+		 
+		 var url="../../see-kpi-portlet/print/gantt-chart.jsp?restfulURL="+restfulURL+"&item_result_id="+$("#gantt_item_result_id").val()+"&zoom="+$("#gantt_zoom").val()+"";
+		 url+="&entityType="+$("#embed_appraisalType").val();
+		 url+="&period="+$(".ganntChartTitleEmpArea .ganttAppraisalPeriodDescTxt").text();
+		 url+="&organization="+$(".ganntChartTitleEmpArea  .ganttOrgTxt").text();
+		 url+="&appraisalItem="+$(".ganntChartTitleEmpArea  .ganttAppraisalItemTxt").text();
+		 url+="&employee="+$(".ganntChartTitleEmpArea  .ganttEmpTxt").text();
+		 
+		 window.open(url, '_blank');
+	 });
+	 
+	 //gantt chart print edn
 	 
 	 
 	 
-	 
-	 
+	//Button Click Stage History Start.
+	
+	$("#slideUpDownStageHistory").click(function(){
+		$("#slideStageHistory").slideToggle();
+		return false;
+	});
+	
+	//Button Click Stage History End.
 });
 
 

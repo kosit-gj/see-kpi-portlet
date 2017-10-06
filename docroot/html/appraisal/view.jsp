@@ -657,6 +657,13 @@ margin-bottom:1px;
 #jqstooltip{
 	display:none;
 }
+.ganntChartTititle{
+	/*background-color: #fffbdc;*/
+    border: 1px solid #f1d875;
+   /* padding:10px;
+    margin-bottom:5px;
+    */
+}
 /* Modal action plan END */
 </style>
 
@@ -705,7 +712,7 @@ margin-bottom:1px;
 								
 								
 								<div class="form-group pull-left span3" style="margin-left: 5px">
-										<select data-toggle="tooltip" title="" data-original-title="Appraisal Type"
+										<select data-toggle="tooltip" title="" data-original-title="Entity Type "
 											class="input form-control input-sm span12" id="appraisalType"
 											name="appraisalType">
 								
@@ -730,7 +737,7 @@ margin-bottom:1px;
 								
 								
 								<div class="form-group pull-left span3" style="margin-left: 5px">
-									<select data-toggle="tooltip" title="" data-original-title="Appraisal Level"
+									<select data-toggle="tooltip" title="" data-original-title="Level"
 										class="input form-control input-sm span12" id="AppraisalLevel"
 										name="AppraisalLevel">
 										<option>All Appraisal Level</option>
@@ -1103,10 +1110,10 @@ margin-bottom:1px;
             			<table class='table'>
             				<thead>
             					<tr>
-            						<th  style='width:15%'>Create by</th>
-            						<th  style='width:15%'>Create dttm</th>
-            						<th  style='width:15%'>Form Stage ID</th>
-            						<th  style='width:15%'>To Stage ID</th>
+            						<th  style='width:15%'>Created By</th>
+            						<th  style='width:15%'>Created Datetime</th>
+            						<th  style='width:15%'>From Stage</th>
+            						<th  style='width:15%'>To Stage</th>
             						<th  style='width:35%'>Remark</th>
             					</tr>
             				</thead>
@@ -1601,21 +1608,82 @@ Is Active
 
             <div class="modal-body">
                 <!-- content start -->
-                <div class='container'>
-                	
-	                <div class='row-fluid'>
-	                
-	                	<div class='span6 alert' style='font-weight:bold;'>
+                 <!-- 
+                <div class='container' >
+	                <div class='row-fluid ' >
+	                	<div class='span4 ' style='font-weight:bold;'>
+	                		Period: <span id='ganttAppraisalPeriodDescTxt'></span>
+	                	</div>
+	                	<div class='span4 ' style='font-weight:bold;'>
 	                		Organization: <span id='ganttOrgTxt'></span>
 	                	</div>
-	                	<div class='span6 alert' style='font-weight:bold;'>
+	                	<div class='span4 ' style='font-weight:bold;'>
 	                		Appraisal Item: <span id='ganttAppraisalItemTxt'></span>
 	                	</div>
 	                </div>
                 </div>
-                <div style='text-align:center;'>
-                 <div id='ganttChart' ></div>
+                -->
+                <div class="ibox float-e-margins">
+							<div class="ibox-title" style="background-color: rgb(255, 224, 18); border-color: rgb(255, 224, 18); text-align:right;">
+
+								Zoom
+			                	<select id='ganntChartZoom' style='width:65px;'>
+			                		<option value='90'>100%</option>
+			                		<option value='80'>80%</option>
+			                		<option value='60'>60%</option>
+			                		<option value='40'>40%</option>
+			                		<option value='20'>20%</option>
+			                		<option value='10'>0%</option>
+			                	</select>
+			                	<button class='btn btn-primary' id='btnPrint'><i class="icon-print"></i> Print</button>
+
+							</div>
+							<!-- ibox-content-radius -->
+							<div class="ibox-content " style="border-color: rgb(255, 224, 18);">
+							
+							
+							
+							
+									 <div class='row-fluid  ganntChartTititle ganntChartTitleOrg'  >
+					                	<div class='span4 ' style='font-weight:bold;padding:10px;'>
+					                		Period: <span class='ganttAppraisalPeriodDescTxt'></span>
+					                	</div>
+					                	<div class='span4 ' style='font-weight:bold;padding:10px;'>
+					                		Organization: <span class='ganttOrgTxt'></span>
+					                	</div>
+					                	<div class='span4 ' style='font-weight:bold;padding:10px;'>
+					                		Appraisal Item: <span class='ganttAppraisalItemTxt'></span>
+					                	</div>
+					                </div>
+					                <div class='ganntChartTititle ganntChartTitleEmpArea'>
+						                <div class='row-fluid   ganntChartTitleEmp'  >
+						                	<div class='span6 ' style='font-weight:bold;padding:10px;padding-bottom:0px'>
+						                		Period: <span  class='ganttAppraisalPeriodDescTxt'></span>
+						                	</div>
+						                	<div class='span6 ' style='font-weight:bold;padding:10px;padding-bottom:0px'>
+						                		Organization: <span class='ganttOrgTxt'></span>
+						                	</div>
+						                </div>
+						                <div class='row-fluid  ganntChartTitleEmp'>
+						                	<div class='span6 ' style='font-weight:bold;padding:10px; padding-top:5px'>
+						                		Employee: <span class='ganttEmpTxt'></span>
+						                	</div>
+						                	<div class='span6 ' style='font-weight:bold;padding:10px; padding-top:5px'>
+						                		Appraisal Item: <span class='ganttAppraisalItemTxt'></span>
+						                	</div>
+						                </div>
+					                
+					                </div>
+	                
+									  <div style='text-align:center;'>
+					                 	<div id='ganttChart' ></div>
+									  </div>
+
+							</div>
 				</div>
+
+              
+				<!-- 
 				<div style='text-align:right;'>
 						Zoom
 	                	<select id='ganntChartZoom' style='width:65px;'>
@@ -1627,7 +1695,9 @@ Is Active
 	                		<option value='90'>0%</option>
 	                	</select>
 	             </div>
+	              -->
 	             <input type="hidden" name="gantt_item_result_id" id="gantt_item_result_id" value="">
+	             <input type="hidden" name="gantt_zoom" id="gantt_zoom" value="">
                 <!-- content end -->
             </div>
            
@@ -1657,7 +1727,6 @@ Is Active
                 <!-- form start -->
                 <div class="form-kpi-mangement">
 	                <div class="form-kpi-label" align="center">
-	                
 	                 		<label>Confirm to Delete Data?</label>
 	                </div>
                 </div>

@@ -475,7 +475,9 @@ var listDataFn = function(data) {
 			if(index!='p0'){
 				htmlHTML+=" <th style=\"width:5%; text-align:center; \" class=\"object-center\"></th>";
 			}else{
-				htmlHTML+=" <th style=\"width:5%; text-align:center;\" class=\"object-center\">Select</th>";
+				htmlHTML+="<th style=\"width:5%; text-align:center;\" class=\"object-center\">";
+				htmlHTML+="<input type=\"checkbox\" name=\"unassignSelectAll\" id=\"unassignSelectAll\" style=\"margin-top:-3px;\">";
+				htmlHTML+="</th>";
 			}
 			
 			if($("#embed_appraisal_type_id").val()==1){
@@ -619,6 +621,18 @@ var listDataFn = function(data) {
 	});
 	
 	$("#listDatas").html(htmlHTML);
+	
+	
+	$("#unassignSelectAll").click
+	
+	$('#unassignSelectAll').click(function() {
+	   if($('#unassignSelectAll').prop('checked')){
+		   $(".asign_emp").prop('checked',true);
+	   }else{
+		   $(".asign_emp").prop('checked',false);;
+	   }
+	   
+	});
 	
 	$(".popover-edit-del").popover();
 	$("#listDatas").off("click",".popover-edit-del");
