@@ -12,7 +12,7 @@ var restfulPathEmpThreshold="/see_api/public/emp_threshold";
 
 var maxData = 0;
 //Check Validation
-var validationFn = function(data,id){
+var validationFn = function(data,id,error){
 	var validate = "";
 	var count = 0;
 	$.each(data['data'], function(index, indexEntry) {
@@ -28,9 +28,10 @@ var validationFn = function(data,id){
 		count++;
 	});
 	
-	callFlashSlideInModal(validate,id);
+	callFlashSlideInModal(validate,id,error);
 	$(".btnModalClose").hide();
-};	
+};
+
 //------------------- GetData FN Start ---------------------
 var getDataFn = function(page,rpp){
 	
@@ -65,8 +66,22 @@ var getDataFn = function(page,rpp){
 			
 			if(data["threshold"] == 1){$("#thresholdOn").prop("checked", true);}
 			else if(data["threshold"] == 0){$("#thresholdOff").prop("checked", true);}
+			
+			if(data["email_reminder_flag"] == 1){$("#emailReminderOn").prop("checked", true);}
+			else if(data["email_reminder_flag"] == 0){$("#emailReminderOff").prop("checked", true);}
 			$("#listThemeColor").html(htmlTheamColor);
 			jscolor.installByClassName("jscolor");
+			
+			
+			//Modal Setup Email
+			$("#form_mail_driver").val(data["mail_driver"]);
+			$("#form_mail_host").val(data["mail_host"]);
+			$("#form_mail_port").val(data["mail_port"]);
+			$("#form_mail_username").val(data["mail_username"]);
+			$("#form_mail_password").val(data["mail_password"]);
+			$("#form_mail_encryption").val(data["mail_encryption"]);
+			$("#form_web_domain").val(data["web_domain"]);
+			
 			
 		}
 	});
@@ -160,12 +175,24 @@ var clearFn = function() {
 	else if(galbalDataSystemcon["result_type"] == 2){$("#raiseScore").prop("checked", true);}
 	if(galbalDataSystemcon["threshold"] == 1){$("#thresholdOn").prop("checked", true);}
 	else if(galbalDataSystemcon["threshold"] == 0){$("#thresholdOff").prop("checked", true);}
+	if(galbalDataSystemcon["email_reminder_flag"] == 1){$("#emailReminderOn").prop("checked", true);}
+	else if(galbalDataSystemcon["email_reminder_flag"] == 0){$("#emailReminderOff").prop("checked", true);}
+
 	var htmlTheamColor = "<button class=\"btn jscolor {valueElement:null,value:'"+galbalDataSystemcon["theme_color"]+"',valueElement:'themeColor',onFineChange:'setThemeColorFn(this)'} \" style='width:70px; height:26px;'></button>";
 	$("#listThemeColor").html(htmlTheamColor);
 	jscolor.installByClassName("jscolor");
 	setTimeout(function(){
 		$("body").mLoading('hide');
 	},1000);
+	
+	//Modal Setup Email
+	$("#form_mail_driver").val(galbalDataSystemcon["mail_driver"]);
+	$("#form_mail_host").val(galbalDataSystemcon["mail_host"]);
+	$("#form_mail_port").val(galbalDataSystemcon["mail_port"]);
+	$("#form_mail_username").val(galbalDataSystemcon["mail_username"]);
+	$("#form_mail_password").val(galbalDataSystemcon["mail_password"]);
+	$("#form_mail_encryption").val(galbalDataSystemcon["mail_encryption"]);
+	$("#form_web_domain").val(galbalDataSystemcon["web_domain"]);
 	
 };
 
@@ -216,6 +243,7 @@ var updateFn = function() {
 	var raiseType=0;
 	var resultType=0;
 	var threshold=0;
+	var emailReminder=0;
 	if($("#raiseFixAmount:checked").is(":checked")){raiseType=1;}
 	else if($("#raisePercentage:checked").is(":checked")){raiseType=2;}
 	 
@@ -225,6 +253,10 @@ var updateFn = function() {
 	
 	if($("#thresholdOn:checked").is(":checked")){threshold=1;}
 	else if($("#thresholdOff:checked").is(":checked")){threshold=0;}
+	
+	if($("#emailReminderOn:checked").is(":checked")){emailReminder=1;}
+	else if($("#emailReminderOff:checked").is(":checked")){emailReminder=0;}
+	
 	
 	$.ajax({
 		url:restfulURL+restfulPathSystemcon,
@@ -244,6 +276,7 @@ var updateFn = function() {
 			"raise_type"			            :  raiseType,
 			"result_type"			            :  resultType,
 			"threshold"							:  threshold,
+			"email_reminder_flag"				:  emailReminder,
 			"theme_color"			            :  $("#themeColor").val()
 			
 		},	
@@ -264,6 +297,62 @@ var updateFn = function() {
 };
 
 //******************** update end********//
+
+var updateMailFn = function() {
+	
+	$.ajax({
+		url:restfulURL+restfulPathSystemcon,
+		type : "PATCH",
+		dataType : "json",
+		data : {
+			
+			"period_start_month_id"             :  galbalDataSystemcon["period_start_month_id"],
+			"appraisal_frequency_id"            :  galbalDataSystemcon["appraisal_frequency_id"],
+			"bonus_frequency_id"                :  galbalDataSystemcon["bonus_frequency_id"],
+			"bonus_prorate"                     :  galbalDataSystemcon["bonus_prorate"],
+			"daily_bonus_rate"                  :  galbalDataSystemcon["daily_bonus_rate"],
+			"monthly_bonus_rate"                :  galbalDataSystemcon["monthly_bonus_rate"],
+			"nof_date_bonus"                    :  galbalDataSystemcon["nof_date_bonus"],
+			"salary_raise_frequency_id"         :  galbalDataSystemcon["salary_raise_frequency_id"],
+			"current_appraisal_year"            :  galbalDataSystemcon["current_appraisal_year"],
+			"raise_type"			            :  galbalDataSystemcon["raise_type"],
+			"result_type"			            :  galbalDataSystemcon["result_type"],
+			"threshold"							:  galbalDataSystemcon["threshold"],
+			"email_reminder_flag"				:  galbalDataSystemcon["email_reminder_flag"],
+			"theme_color"			            :  galbalDataSystemcon["theme_color"],
+			// Update Mail
+			"mail_driver"         				:  $("#form_mail_driver").val(),
+			"mail_host"            				:  $("#form_mail_host").val(),
+			"mail_port"			            	:  $("#form_mail_port").val(),
+			"mail_username"			            :  $("#form_mail_username").val(),
+			"mail_password"						:  $("#form_mail_password").val(),
+			"mail_encryption"					:  $("#form_mail_encryption").val(),
+			"web_domain"			            :  $("#form_web_domain").val(),
+			
+		},	
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success : function(data,status) {
+				if (data['status'] == "200") {
+					
+					galbalDataSystemcon["mail_driver"] = $("#form_mail_driver").val();
+					galbalDataSystemcon["mail_host"] = $("#form_mail_host").val();
+					galbalDataSystemcon["mail_port"] = $("#form_mail_port").val();
+					galbalDataSystemcon["mail_username"] = $("#form_mail_username").val();
+					galbalDataSystemcon["mail_password"] = $("#form_mail_password").val();
+					galbalDataSystemcon["mail_encryption"] = $("#form_mail_encryption").val();
+					galbalDataSystemcon["web_domain"] = $("#form_web_domain").val();
+
+					
+					$("#ModalSetupReminder").modal('hide');
+					callFlashSlide("Update Mail Successfully."); 	  
+				}else if (data['status'] == "400"){
+					validationFn(data,"#information3","error");
+			    }
+			}
+	});
+	
+	return false
+};
 //..................update emp start.......................
 var updateEmpFn = function() {
 	
@@ -485,6 +574,19 @@ $(document).ready(function () {
 				updateFn();
 				
 			});
+			$("#btnSetupReminder").click(function(){
+				//Modal Setup Email
+				$("#form_mail_driver").val(galbalDataSystemcon["mail_driver"]);
+				$("#form_mail_host").val(galbalDataSystemcon["mail_host"]);
+				$("#form_mail_port").val(galbalDataSystemcon["mail_port"]);
+				$("#form_mail_username").val(galbalDataSystemcon["mail_username"]);
+				$("#form_mail_password").val(galbalDataSystemcon["mail_password"]);
+				$("#form_mail_encryption").val(galbalDataSystemcon["mail_encryption"]);
+				$("#form_web_domain").val(galbalDataSystemcon["web_domain"]);
+			});
+			$("#btnEmailSubmit").click(function(){
+				updateMailFn();
+			});
 			
 			/*
 			jQuery('.numberOnly').keyup(function () { 
@@ -627,6 +729,11 @@ $(document).ready(function () {
 				
 				
 				
+			});
+			$.getScript($("#url_portlet").val()+"/js/plugins/jquery_mask/jquery.mask.min.js", function(){
+
+				  $('.port').mask('9999');
+
 			});
 			
 	 	}

@@ -96,12 +96,14 @@ var getDataFn = function(page,rpp){
 	//alert("Page : "+page+" - Rpp : "+rpp);
 
 	var CdsName= $("#param_CDS_Id").val();
+	var isSql= $("#param_is_sql").val();
 	$.ajax({
 		url : restfulURL+restfulPathCDS,
 		type : "get",
 		dataType : "json",
 		data:{"page":page,"rpp":rpp,
-			"cds_id":CdsName},
+			"cds_id":CdsName,
+			"is_sql":isSql},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,// w8 data 
 		success : function(data) {
@@ -118,11 +120,12 @@ var getDataFn = function(page,rpp){
 //--------  GetData End
 
 // -------- Search Start
-var searchAdvanceFn = function (cdsId) {
+var searchAdvanceFn = function (cdsId,issql) {
 	//embed parameter start
 	
 	var htmlParam="";
 	htmlParam+="<input type='hidden' class='param_Embed' id='param_CDS_Id' name='param_CDS_Id' value='"+cdsId+"'>";
+	htmlParam+="<input type='hidden' class='param_Embed' id='param_is_sql' name='param_is_sql' value='"+issql+"'>";
 	$(".param_Embed").remove();
 	$("body").append(htmlParam);
 	//embed parameter end
@@ -564,7 +567,7 @@ $(document).ready(function() {
 	$("#btn_search_advance").click(function(){
 		///alert($("#cds_name").val().split("-", 1));
 		
-		searchAdvanceFn($("#cds_id").val());
+		searchAdvanceFn($("#cds_id").val(),$("#is_sql").val());
 		$("#cds_list_content").show();
 		return false;
 	});

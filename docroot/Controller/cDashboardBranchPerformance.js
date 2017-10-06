@@ -15,19 +15,7 @@ var generateDropDownList = function(url,type,request,initValue){
  		headers:{Authorization:"Bearer "+tokenID.token},
  		async:false,
  		success:function(data){
- 			try {
- 			    if(Object.keys(data[0])[0] != undefined && Object.keys(data[0])[0] == "item_id"){
- 			    	galbalDataTemp["item_id"] = [];
- 			    	$.each(data,function(index,indexEntry){
- 			    		galbalDataTemp["item_id"].push(indexEntry[Object.keys(indexEntry)[0]]);
- 		 			});	
- 			    }
- 			}
- 			catch(err) {
- 			    console.log(err.message);
- 			}
-
- 			
+ 			 			
  			$.each(data,function(index,indexEntry){
  				html+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1] == undefined  ?  Object.keys(indexEntry)[0]:Object.keys(indexEntry)[1]]+"</option>";	
  			});	
@@ -108,7 +96,7 @@ var getMapProvinceinitialsName = function(id){
 	{'id':'27 	','province':'Sa Kaeo','initials':'สก'},
 	{'id':'24 	','province':'Chachoengsao','initials':'ฉช'},
 	{'id':'25 	','province':'Prachin Buri','initials':'ปจ'},
-	{'id':'22 	','province':'Chanthaburi','initials':'ปจ'},
+	{'id':'22 	','province':'Chanthaburi','initials':'จบ'},
 	{'id':'23 	','province':'Trat','initials':'ตร'},
 	{'id':'20 	','province':'Chon Buri','initials':'ชบ'},
 	{'id':'21 	','province':'Rayong','initials':'รย'},
@@ -137,88 +125,163 @@ var getMapProvinceinitialsName = function(id){
 
 
 var locations = [
-       		  ['<div id="11">วัดลาดปลาเค้า</div>', 13.846876, 100.604481],
-       		  ['<div id="12">หมู่บ้านอารียา</div>', 13.847766, 100.605768],
-       		  ['<div id="13">สปีดเวย์</div>', 13.845235, 100.602711],
-       		  ['<div id="14">สเต็ก ลุงหนวด</div>',13.862970, 100.613834]
+//	
+//       		  ['<div id="11">วัดลาดปลาเค้า</div>', 13.846876, 100.604481],
+//       		  ['<div id="12">หมู่บ้านอารียา</div>', 13.847766, 100.605768],
+//       		  ['<div id="13">สปีดเวย์</div>', 13.845235, 100.602711],
+//       		  ['<div id="14">สเต็ก ลุงหนวด</div>',13.862970, 100.613834]
        		];
-
+var pinSymbol = function (color) {
+    return {
+    	 path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z M -2,-30 a 2,2 0 1,1 4,0 2,2 0 1,1 -4,0',
+        fillColor: color,
+        fillOpacity: 1,
+        strokeColor: '#000',
+        strokeWeight: 2,
+        scale: 1,
+   };
+}
  function initGoogleMap() {
-	var mapOptions = {
-	  center: {lat: 13.847860, lng: 100.604274},
-	  zoom: 15,
-	}
-		
-	var maps = new google.maps.Map(document.getElementById("mapGooglePerfomanceArea"),mapOptions);
-	
-	var marker, i, info;
+	 
+	 		locations = [];
+		var region_code= $("#embed_region").val();
+		var period= $("#embed_period").val();
+		var district_code= $("#embed_district").val();
+		var kpi= $("#embed_kpi").val();
+		//region_code=41&period_id=17&district_code=77031
+		$.ajax({
+			url:restfulURL+"/see_api/public/dashboard/branch_performance",
+			type:"get",
+			dataType:"json",
+			data:{
+				"region_code"				:		region_code,
+				"period_id"					:		period,
+				"district_code"				:		district_code,
+				"item_id"					:		kpi
+			},
+			async:false,
+			headers:{Authorization:"Bearer "+tokenID.token},
+			success:function(data){
+				$.each(data['google_map'],function(index,indexEntry){
+					locations.push([indexEntry['org_id']+"-"+indexEntry['org_name'],parseFloat(indexEntry['latitude']),parseFloat(indexEntry['longitude']),indexEntry['color_code'],[indexEntry]]);
+				});
+				console.log(locations);
+				
+				
+				var mapOptions = {
+						  center: {lat: (locations[0] == undefined ? parseFloat("13.7251088") :locations[0][1]), lng: (locations[0] == undefined ? parseFloat("100.4847133") :locations[0][2])},
+						  zoom: (locations[0] == undefined ? 5 : 15),
+						}
+							
+						var maps = new google.maps.Map(document.getElementById("mapGooglePerfomanceArea"),mapOptions);
+						
+						var marker, i, info;
 
-	for (i = 0; i < locations.length; i++) {  
+						for (i = 0; i < locations.length; i++) {  
 
-		marker = new google.maps.Marker({
-		   position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-		   map: maps,
-		   title: locations[i][0]
+							marker = new google.maps.Marker({
+							   position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+							   map: maps,
+							   icon: pinSymbol(locations[i][3]),
+							   title: locations[i][0].split("-")[1]
+							});
+
+							info = new google.maps.InfoWindow();
+
+						  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+							 
+							return function() {
+							  info.setContent(locations[i][0].split("-")[1]);
+							  info.open(maps, marker);
+							  
+							  //console.log(marker.title);
+							  console.log(locations[i][4]);
+							  listDataPerformanceDetailFn(locations[i][4],marker.title,"gmap");
+							  //alert(locations[i][0].split("-")[0]);
+							  //console.log(i);
+							}
+						  })(marker, i));
+
+						}
+				
+				
+				
+				
+			}
 		});
 
-		info = new google.maps.InfoWindow();
-
-	  google.maps.event.addListener(marker, 'click', (function(marker, i) {
-		 
-		return function() {
-		  info.setContent(locations[i][0]);
-		  info.open(maps, marker);
-		  
-		  console.log(marker.title);
-		  alert(marker.title)
-		  console.log(i);
-		}
-	  })(marker, i));
-
-	}
+	 
+	 
+	 
+	
 
 }
 var getColorJvectorMap = function(){
 	var txtColorData="";
+	var txtDataAvg="";
 	var objColorData="";
+	var objDataAvg="";
+	var region_code= $("#embed_region").val();
+	var period= $("#embed_period").val();
+	var district_code= $("#embed_district").val();
+	var kpi= $("#embed_kpi").val();
 	//region_code=41&period_id=17&district_code=77031
 	$.ajax({
 		url:restfulURL+"/see_api/public/dashboard/branch_performance",
 		type:"get",
 		dataType:"json",
-		
+		data:{
+			"region_code"				:		region_code,
+			"period_id"					:		period,
+			"district_code"				:		district_code,
+			"item_id"					:		kpi
+			
+		},
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			txtColorData+="{";
+			txtDataAvg+="{";
 			$.each(data['vector_map'],function(index,indexEntry){
 				if(index!=0){
 					txtColorData+=",";
+					txtDataAvg+=",";
 				}
 				txtColorData+="\"TH-"+indexEntry['province_code']+"\":\""+indexEntry['color_code']+"\"";
+				txtDataAvg+="\"TH-"+indexEntry['province_code']+"\":\""+indexEntry['average']+"\"";
 				
 			});
 			txtColorData+="}";
+			txtDataAvg+="}";
 			//console.log(txtColorData);
 			objColorData = eval("("+txtColorData+")");
+			objDataAvg = eval("("+txtDataAvg+")");
 			//console.log(objColorData);
-			createJvectorMap(objColorData);
+			createJvectorMap(objColorData,objDataAvg);
 		}
 	});
 }
-var listDataPerformanceDetailFn = function(data,district){
+var listDataPerformanceDetailFn = function(data,district,type){
 	//console.log(data);
+	var scrollID =  $('#mapArea').children();
+	$(window).off("scroll");
+	$(window).on("scroll");
+	scrollID.removeClass('fixed');
 	var rageGreenColor="#ffffff";
 	var rangeColorsThreshold="[]";
 	var mainArea="";	
-	mainArea+="<h3 style='text-align:center;' id='BranchPerTitle'></h3>";
+	mainArea+="<h3 style='text-align:center;color:#993300;font-size: 20px;margin: 0px;' id='BranchPerTitle'></h3>";
 	mainArea+="<div id='detailPerfomanceArea'></div>";
+	if(data == null || data == undefined || data =="" ){
+		mainArea+="<div id='noData'>No data to display.</div>";
+	}
 	$("#detailArea").html(mainArea);
-	$("#BranchPerTitle").html("Branch Performance:"+getMapProvinceinitialsName(district));
+	$("#BranchPerTitle").html("Branch Performance:"+district);
+	console.log(data);
 	$.each(data,function(index,indexEntry){
-		
+	
 	var dataTableHTML="";
-	dataTableHTML+="<h3><span style='padding-top:10px;' id='bpf_org_id-"+indexEntry['org_id']+"'>"+indexEntry['org_name']+"</span>";
+	dataTableHTML+="<h3 data-sparkline='"+(index == 0 ? "active":"")+"'><span style='padding-top:10px;' id='bpf_org_id-"+indexEntry['org_id']+"'>"+indexEntry['org_name']+"</span>";
 	dataTableHTML+="<div class='branchPerformance'>";
 	dataTableHTML+="<svg id=\"fillgauge"+indexEntry['org_id']+"\" width=\"70px\" height=\"70px\" onclick=\"gauge"+indexEntry['org_id']+".update(NewValue());\"></svg>";
 	dataTableHTML+="</div>";
@@ -226,13 +289,13 @@ var listDataPerformanceDetailFn = function(data,district){
 	dataTableHTML+="</h3>";
   
 	dataTableHTML+="<div>";
-		dataTableHTML+="<table class='table' style='width:100%;'>";
+		dataTableHTML+="<table class='table table-bordered' style='width:100%;'>";
 			dataTableHTML+="<thead>";
 				dataTableHTML+="<tr>";
 					dataTableHTML+="<th>Perspective</th>";
 					dataTableHTML+="<th>KPI</th>";
 					dataTableHTML+="<th>UOM</th>";
-					dataTableHTML+="<th style='background:#fcf8e3; text-align:center;'>KPI Result</th>";	
+					dataTableHTML+="<th style='text-align:center;min-width: 250px;'>KPI Result</th>";	
 			dataTableHTML+="</tr>";
 			dataTableHTML+="</thead>";
 			dataTableHTML+="<tbody>";
@@ -286,26 +349,26 @@ var listDataPerformanceDetailFn = function(data,district){
 					dataTableHTML+="<td>"+indexEntry2['uom_name']+" </td>";
 					dataTableHTML+="<td>";
 					
-					dataTableHTML+="<table>";
+					dataTableHTML+="<table class='tableInside table-striped'>";
 						dataTableHTML+="<thead>";
 							dataTableHTML+="<tr>";
-								dataTableHTML+="<th style='background:#fcf8e3;'>Target</th>";
-								dataTableHTML+="<th style='background:#fcf8e3;'>Forecast</th>";
-								dataTableHTML+="<th style='background:#fcf8e3;'>Actual</th>";
+								dataTableHTML+="<th style='min-width: 90px;'>Target</th>";
+								dataTableHTML+="<th style='min-width: 60px;'>Forecast</th>";
+								dataTableHTML+="<th style='min-width: 60px;'>Actual</th>";
 							dataTableHTML+="</tr>";
 							dataTableHTML+="</thead>";
 							dataTableHTML+="<tbody>";
 								dataTableHTML+="<tr>";
-									dataTableHTML+="<td>"+indexEntry2['target']+"</td>";
-									dataTableHTML+="<td>"+indexEntry2['forecast']+"</td>";
-									dataTableHTML+="<td>"+indexEntry2['actual']+"</td>";
+									dataTableHTML+="<td style=' text-align: right !important;'>"+indexEntry2['target']+"</td>";
+									dataTableHTML+="<td style=' text-align: right !important;'>"+indexEntry2['forecast']+"</td>";
+									dataTableHTML+="<td style=' text-align: right !important;'>"+indexEntry2['actual']+"</td>";
 								dataTableHTML+="</tr>";
 								dataTableHTML+="<tr>";
-									dataTableHTML+="<td>%Taget</td>";
+									dataTableHTML+="<td>%Taget<span style='float:right'>"+parseFloat(indexEntry2['percent_target']).toFixed(2)+"</span></td>";
 									dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:0;'  >"+indexEntry2['percent_target_str']+"</div></td>";
 								dataTableHTML+="</tr>";
 								dataTableHTML+="<tr>";
-									dataTableHTML+="<td>%Forecast</td>";
+									dataTableHTML+="<td>%Forecast<span style='float:right'>"+parseFloat(indexEntry2['percent_forecast']).toFixed(2)+"</span></td>";
 									dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:0;'>"+indexEntry2['percent_forecast_str']+"</div></td>";
 								dataTableHTML+="</tr>";
 							dataTableHTML+="</tbody>";
@@ -323,8 +386,8 @@ var listDataPerformanceDetailFn = function(data,district){
 	
 	var config = liquidFillGaugeDefaultSettings();
 	config.circleColor = indexEntry['color_code'];
-	config.textColor = "white";
-	config.waveTextColor = "white";
+	config.textColor = "black";
+	config.waveTextColor = "black";
 	config.waveColor = indexEntry['color_code'];
 	
 
@@ -347,18 +410,26 @@ var listDataPerformanceDetailFn = function(data,district){
 
 
 $("#detailPerfomanceArea" ).accordion({
-    heightStyle: "content"
+    heightStyle: "content",
+    collapsible: true
 });
 
 $(".ui-accordion-header").click(function(){
+	//console.log($(this).attr("data-sparkline"));
+	if($(this).attr("data-sparkline") != "active" ){
+		var e_this =  "#"+$(this).next()[0].id;
+		//console.log($(e_this +" .sparkline"));
+		$(e_this +" .sparkline").sparkline('html', {
+	        type: 'bullet',
+	        width:'120',
+	        height: '20',
+	        targetColor:  '#000000',
+	        performanceColor: 'blue',
+	        rangeColors: rangeColorsThreshold
+		}).css("opacity","1");
+		$(this).attr("data-sparkline","active" )
+	}
 	
-	$(".sparkline").sparkline('html', {
-        type: 'bullet',
-        width:'80',
-        targetColor: rageGreenColor,
-        performanceColor: 'blue',
-        rangeColors: rangeColorsThreshold
-	}).css("opacity","1");
 });
 
 setTimeout(function(){
@@ -372,8 +443,9 @@ setTimeout(function(){
 	
 	$(".sparkline").sparkline('html', {
         type: 'bullet',
-        width:'80',
-        targetColor: rageGreenColor,
+        width:'120',
+        height: '20',
+        targetColor: '#000000',
         performanceColor: 'blue',
         rangeColors: rangeColorsThreshold
 	}).css("opacity","1");
@@ -394,30 +466,81 @@ setTimeout(function(){
 
 
 $("#detailArea").show();
+
+if(window.innerWidth >= 768 && (data !="" || data != null)){
+	//alert(window.innerWidth);
+	
+	var scroll = $(window).scrollTop();
+	if (scroll >= 280) {
+		  scrollID.addClass('fixed');
+		  if(type == "gmap"){
+			  $("#mapGoogle").css({"width" : "43%"});
+		  }	
+	  }
+	  else {
+		  scrollID.removeClass('fixed');
+		  if(type == "gmap"){
+		  $("#mapGoogle").css({"width" : ""});
+	  }	}
+	$(window).scroll(function(){
+		scroll = $(window).scrollTop();
+	  
+	  
+	  if (scroll >= 280) {
+		  scrollID.addClass('fixed');
+		  if(type == "gmap"){
+			  $("#mapGoogle").css({"width" : "43%"});
+		  }	
+	  }
+	  else {
+		  scrollID.removeClass('fixed');
+		  if(type == "gmap"){
+		  $("#mapGoogle").css({"width" : ""});
+	  }	}
+	});
+}
+
+
+
   
 }
-var showPerformanceDetailFn=function(district){
+var showPerformanceDetailFn=function(district,province){
 	var dataDetails="";
+	var period= $("#embed_period").val();
+	var kpi= $("#embed_kpi").val();
 	$.ajax({
-		url:restfulURL+"/see_api/public/dashboard/branch_details?province_code=10&period_id=17",
+		url:restfulURL+"/see_api/public/dashboard/branch_details",
 		type:"get",
 		dataType:"json",
+		data : {
+			"province_code"		:  	district,
+				"period_id"		:	period,
+				"item_id"		:	kpi
+				
+			
+		},
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 				
-				listDataPerformanceDetailFn(data,district);
+				listDataPerformanceDetailFn(data,province);
 				//console.log(data);
 			
 		}
 	});
 	
 }
-var createJvectorMap = function(objColorData){
+var createJvectorMap = function(objColorData,objDataAvg){
 	//jVector map thailand
 	//var objColorData={"TH-10":"red","TH-12":"yellow"};
     $('#mapPerfomanceArea').vectorMap({
     	map: 'th_mill',
+//    	zoomMin: 1.4,
+//        focusOn: {
+//            x: 0.1,
+//            y: 0.1,
+//            scale: 1
+//        },
     	//map: 'th_mill_en',
     	backgroundColor: "transparent",
     	series: {
@@ -471,11 +594,13 @@ var createJvectorMap = function(objColorData){
   				
   				var district = code.substring(3);
   				
-  				//console.log(provinceid);
-  				//alert(provinceid);
-  				showPerformanceDetailFn(district);
+  				showPerformanceDetailFn(district,$("#districtNameHi").val());
   				
-  		    }
+  		    },
+    	    onRegionTipShow: function (e, el, code) {
+    	    	
+    	        el.html(el.html() + ' , Avg. : '+parseFloat(notNullFn(objDataAvg[code])).toFixed(2));
+    	    }
     	
     	});
 }
@@ -502,13 +627,13 @@ var searchAdvanceFn = function() {
 	
 	if($("#embed_region").val()==""){
 		
-		$("#mapArea").html("<div id='mapPerfomanceArea'  style='height:597px;'></div>");
+		$("#mapArea").html("<div id='mapPerfomanceArea'  style='height:577px;'></div>");
 		$("#mapPerfomanceArea").show();
 		$("#mapGooglePerfomanceArea").hide();
 		getColorJvectorMap();
 	}else{
 		
-		$("#mapArea").html("<div id='mapGooglePerfomanceArea' style='width:100%; height:500px;'></div>");
+		$("#mapArea").html("<div id='mapGoogle'><div id='mapGooglePerfomanceArea' style='width:100%; height:500px;'></div></div>");
 		$("#mapPerfomanceArea").hide();
 		$("#mapGooglePerfomanceArea").show();
 		initGoogleMap();
@@ -535,7 +660,7 @@ $("document").ready(function(){
 			$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
 			$("#region").change(function(){$("#district").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/district_list","get",{"org_code":$("#region").val()},"All District"));$("#district").change();});
 			$("#district").change(function(){$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_map_list","POST",{"region_code":$("#region").val(),"district_code":$("#district").val()},"All KPI")));});
-			
+			$(".app_url_hidden").show();
 			//$( "#detailPerfomanceArea" ).accordion();
 			 
 			 /*
@@ -593,6 +718,7 @@ $("document").ready(function(){
 		    
 		    //click submit();
 		    $("#btnSearchAdvance").click(function(){
+		    	$("#detailArea").hide();
 		    	searchAdvanceFn();
 		    });
 		    

@@ -146,7 +146,7 @@ $(document).ready(function(){
 			dropDrowAppraisalRaiseYearFn();
 			dropDrowBonusPeriodFn();
 			dropDrowSalaryPeriodFn();
-			
+			$(".app_url_hidden").show();
 			$("#btnCalBonus").click(function(){
 				callStoredCalBonusFn();
 			});

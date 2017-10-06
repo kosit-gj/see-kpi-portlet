@@ -421,7 +421,7 @@ plid = layout.getPlid();
 								class="pull-right " style="margin-bottom: 0px; margin-left: 5px">
 								<button id="exportToExcel" class="btn btn-warning btn-sm"
 									type="button">
-									<i class="fa fa-download"></i> Download
+									<i class="fa fa-download"></i> Export
 								</button>
 							</form>
 						</div>

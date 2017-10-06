@@ -1,6 +1,7 @@
  var restfulPathDashboard="/see_api/public/cds_result";
  var galbalDashboard=[];
  var galbalDataTemp = [];
+ var changeAutocomplete=true;
  galbalDataTemp['galbalOrg'] = [];
  galbalDataTemp['extract'] = false;
  galbalDataTemp['All_KPI'] = {};
@@ -77,6 +78,8 @@
 			select:function(event, ui) {
 				$(id).val(ui.item.value);
 	            $(id+"_id").val(ui.item.value_id);
+	            changeAutocomplete = true;
+	            $("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));
 	            galbalDataTemp[id] = ui.item.label;
 	            galbalDataTemp[id+"_id"]=ui.item.value_id;
 	            return false;
@@ -85,15 +88,23 @@
 	 
 				if ($(id).val() == galbalDataTemp[id]) {
 					$(id+"_id").val(galbalDataTemp[id+"_id"]);
+					changeAutocomplete = true;
 				}  else if (ui.item != null){
 					$(id+"_id").val(ui.item.value_id);
+					changeAutocomplete = true;
 				}else {
 					$(id+"_id").val("");
+					if(changeAutocomplete == true){
+						$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));
+						changeAutocomplete = false;
+					}
+					
 				}
+				
 	         }
 	    });
  }
- var generateAccordionHTML = function(data,parent){
+ var generateAccordionHTML = function(data,parent,type){
 		var kpi_id = galbalDataTemp["item_id"];
 		var accordionHtml = "";
 		if(parent == "group1"){
@@ -102,9 +113,9 @@
 			accordionHtml += "<div class='panel panel-default sortableItem'>";
 		}
 			
-		accordionHtml += "	<div class='panel-heading' role='tab' id='headOrg-"+data['org_id']+"'>";
+		accordionHtml += "	<div class='panel-heading' role='tab' id='headOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"'>";
 		accordionHtml += "		<h4 class='panel-title' "+(parent == "group1" ? "style='margin-top: 5px; margin-bottom: 5px;' " : "")+">";
-		accordionHtml += "			 <a class='collapsed row' role='button' data-toggle='collapse' data-parent='#accordion' href='#bodyOrg-"+data['org_id']+"' aria-expanded='false' aria-controls='bodyOrg-"+data['org_id']+"' style='color: black;font-weight: bold;'>";
+		accordionHtml += "			 <a class='collapsed row' role='button' data-toggle='collapse' data-parent='#accordion' href='#bodyOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"' aria-expanded='false' aria-controls='bodyOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"' style='color: black;font-weight: bold;'>";
 		
 		if(parent == "group1"){
 			accordionHtml += "<div class='accordion-content span10' style=''>";
@@ -121,7 +132,7 @@
 		accordionHtml += "			</a>";	
 		accordionHtml += "		</h4>";	
 		accordionHtml += "	</div>";	
-		accordionHtml += "	<div id='bodyOrg-"+data['org_id']+"' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headOrg-"+data['org_id']+"'>";	
+		accordionHtml += "	<div id='bodyOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"'>";	
 		accordionHtml += "		<div class='panel-body'>";
 		//#Start Body Accordion
 		accordionHtml += "				<div class='span12 graphLTopHeader'>"+data['perspective_name']+" - "+data['item_name']+"</div>";		
@@ -153,13 +164,13 @@
 		accordionHtml += "						<br style='clear: both'>";
 		accordionHtml += "					</div>";
 		accordionHtml += "					<div>";
-		accordionHtml += "						<div id='chartOrgGauge-"+data['org_id']+"'></div>";
+		accordionHtml += "						<div id='chartOrgGauge-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"'></div>";
 		accordionHtml += "					</div>";
 		accordionHtml += "				</div>";	
 		accordionHtml += "				</div>";
 		accordionHtml += "				<div class='span8'>";
 		//accordionHtml += "					<div class='graphLTopHeader' style='margin-bottom: 3px;'>KPI: "+data['item_name']+"</div>";
-		accordionHtml += "					<div id='chartOrgBar-"+data['org_id']+"'></div>";
+		accordionHtml += "					<div id='chartOrgBar-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"'></div>";
 		accordionHtml += "				</div>";
 		accordionHtml += "			</div>";
 		//#End Body Accordion
@@ -170,7 +181,7 @@
 		//$("#accordion").append(accordionHtml);
 		
 }
- var generateChartGaugeFn = function(data){
+ var generateChartGaugeFn = function(data,type){
 	 var color = [];
 	 $.each(data['dual_chart']['color_range'],function(index,indexEntry){
 		 color.push({
@@ -185,7 +196,7 @@
 			    baseChartMessageFont: "Arial",
 			    baseChartMessageFontSize: "18",
 			    baseChartMessageColor: "#FC0000",
-		        renderAt:  "chartOrgGauge-"+data['org_id'],
+		        renderAt:  "chartOrgGauge-"+(type == "org" ? data['org_id'] : data['emp_id'] ),
 		        width: '100%',
 		        height: '200',
 		        dataFormat: 'json',
@@ -281,7 +292,7 @@
 		    rangeColors: data[0]['rangeColor']
 		 } );
  };
- var generateChartBarFn = function(data){
+ var generateChartBarFn = function(data,type){
 	 var actual = [] ;
 	 $.each(data['bar_chart']['data']['actual'],function(index,indexEntry){
 		 actual.push({
@@ -296,7 +307,7 @@
 			    baseChartMessageFont: "Arial",
 			    baseChartMessageFontSize: "16",
 			    baseChartMessageColor: "#993300",
-		        renderAt: "chartOrgBar-"+data['org_id'],
+		        renderAt: "chartOrgBar-"+(type == "org" ? data['org_id'] : data['emp_id'] ),
 		        width: '100%',
 		        height: '255',
 		        dataFormat: 'json',
@@ -321,7 +332,7 @@
 		                "yAxisMaxValue": (data['bar_chart']['max_value'] <= 4 ? "5" : data['bar_chart']['max_value']*(1.05)),
 		                //"numberPrefix": "$",
 		                "showBorder": "0",
-		                "paletteColors": "#FF850D",
+		                "paletteColors": "#"+tokenID.theme_color,
 		                "bgColor": "#ffffff",
 		                "borderAlpha": "20",
 		                "canvasBorderAlpha": "0",
@@ -381,7 +392,7 @@
 		    
 	 return false;
  };
- var generateChartBarLineAreaFn = function(data){	
+ var generateChartBarLineAreaFn = function(data,type){	
 	 var salesAnlysisChart = new FusionCharts({
 	        type: 'mscombi2d',
 	        renderAt: 'chart-container',
@@ -391,7 +402,7 @@
 		    baseChartMessageColor: "#993300",
 	        width: '100%',
 	        height: '255',
-	        renderAt: "chartOrgBar-"+data['org_id'],
+	        renderAt: "chartOrgBar-"+(type == "org" ? data['org_id'] : data['emp_id'] ),
 	        dataFormat: 'json',
 	        dataSource: {
 	            "chart": {
@@ -415,7 +426,7 @@
 	                "showBorder": "0",
 	                "showValues": "0",
 	                "paletteColors": "#FF850D",
-	                "paletteColors": "#FF850D,#1aaf5d,#f2c500",
+	                "paletteColors": "#"+tokenID.theme_color+",#1aaf5d,#f2c500",
 	                "bgColor": "#ffffff",
 	                "showCanvasBorder": "0",
 	                "canvasBgColor": "#ffffff",
@@ -690,7 +701,7 @@ var listHeaderFn=function(galbalOrg){
 	 var htmlHeaderMain = "";
 	 var htmlHeaderSummary1 = "";
 	 var htmlHeaderSummary2 = "";
-	 var org= $("#param_org_id").val();
+	 var org= ($("#param_emp").val() == "" ? $("#param_org_id").val() :$("#param_emp").val());
 	 htmlHeader1+="<th style='width:120px;'>";
 	 htmlHeader1+="<div class='fontBold '> Perspective</div>";
 	 htmlHeader1+="</th>";
@@ -729,26 +740,48 @@ var listDashBoardFn = function(data){
 	 $("#accordion").empty();
 	 $("#accordion").hide();
 	 var org= $("#param_org_id").val();
+	 var emp= $("#param_emp").val();
 	 var html = "";
-	 $.each(data , function(inedx,indexEntry){
-		 if(org == indexEntry['org_id'] ){
-			 html+=generateAccordionHTML(indexEntry,"group1");
-			 return false;
-		 };
-		 
-	 });
-	 $.each(data , function(inedx,indexEntry){
-		 if(org != indexEntry['org_id']){
-			 html+=generateAccordionHTML(indexEntry);
-		 };
-	 });
+	 if(emp == ""){
+		 $.each(data , function(inedx,indexEntry){
+			 if(org == indexEntry['org_id'] ){
+				 html+=generateAccordionHTML(indexEntry,"group1","org");
+				 return false;
+			 };
+			 
+		 });
+		 $.each(data , function(inedx,indexEntry){
+			 if(org != indexEntry['org_id']){
+				 html+=generateAccordionHTML(indexEntry,"","org");
+			 };
+		 });
+	 }else{
+		 $.each(data , function(inedx,indexEntry){
+			 if(emp == indexEntry['emp_id'] ){
+				 html+=generateAccordionHTML(indexEntry,"group1","emp");
+				 return false;
+			 };
+			 
+		 });
+		 $.each(data , function(inedx,indexEntry){
+			 if(emp != indexEntry['emp_id']){
+				 html+=generateAccordionHTML(indexEntry,"emp");
+			 };
+		 }); 
+	 }
+	 
 	 $("#accordion").html(html);
 	 
 	 
 	 $.each(data , function(inedx,indexEntry){
 //		 generateChartGaugeFn(indexEntry);
 //		 generateChartBarFn(indexEntry);
-		 $.when(generateChartGaugeFn(indexEntry),indexEntry['chart_type'] == "yearly" ? generateChartBarFn(indexEntry) : generateChartBarLineAreaFn(indexEntry)).then(function() {
+		 $.when(
+				 generateChartGaugeFn(indexEntry,(emp == "" ? "org" :"emp")),
+				 indexEntry['chart_type'] == "yearly" ? 
+						 generateChartBarFn(indexEntry,(emp == "" ? "org" :"emp")) : 
+						 generateChartBarLineAreaFn(indexEntry,(emp == "" ? "org" :"emp"))
+				).then(function() {
 				    //console.log(inedx+" Loading Chart: Success");
 		});
 	 });
@@ -837,7 +870,7 @@ var listDashBoardFn = function(data){
 			$('#accordion').disableSelection();
  };
 var listDashBoardAllKPIFn = function(data){
-	 var org= $("#param_org_id").val();
+	 var org= ($("#param_emp").val() == "" ? $("#param_org_id").val() :$("#param_emp").val());
 	var htmlData1="";
 	var htmlData3="";
 	 $.each(data,function(index,indexEntry){
@@ -951,16 +984,23 @@ var listDashBoardAllKPIFn = function(data){
 		$("#app_type").html(generateDropDownList(restfulURL+"/see_api/public/appraisal_assignment/appraisal_type_list","GET"));
 		$("#apprasiaLevel").html(generateDropDownList(restfulURL+"/see_api/public/appraisal/al_list","GET"));
 		$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));
-		$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val()})));
+		$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));
 		
 		//#Change Param Function
 		$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
 		$("#apprasiaLevel").change(function(){$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));$("#organization").change();});
-		$("#organization").change(function(){$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val()})));});
+		$("#organization").change(function(){$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));});
+		
 		
 		
 		
 		$("#btnSearchAdvance").click(function(){
+			if($("#app_type").val() == "1"){
+				if($("#emp_name_id").val() ==""){
+					callFlashSlide("Employee Name is Require !");
+					return false;
+				}
+			}
 			searchAdvanceFn(
 					$("#year").val(),
 					$("#period").val(),
@@ -984,13 +1024,14 @@ var listDashBoardAllKPIFn = function(data){
 			$("#period").val($("#get_period_id").val());
 			
 			$("#app_type").val($("#get_appraisal_type_id").val());
-			$("#emp_name").val($("#get_emp_id").val());
-			$("#emp_name_id").val($("#get_emp_name").val());
+			$("#emp_name").val($("#get_emp_name").val());
+			$("#emp_name_id").val($("#get_emp_id").val());
 			
 			$("#apprasiaLevel").val($("#get_level_id").val());
 			$("#apprasiaLevel").change();
 			$("#organization").val($("#get_org_id").val());
 			$("#organization").change();
+			$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));
 			$("#kpi").val($("#get_item_id").val());
 			
 	
@@ -1001,21 +1042,25 @@ var listDashBoardAllKPIFn = function(data){
 		//Autocomplete Search Start
 		//generateAutocomplete("#position",restfulURL+"/see_api/public/cds_result/auto_position_name","post",{"position_name":null});
 		generateAutocomplete("#emp_name",restfulURL+"/see_api/public/cds_result/auto_emp_name","post",{"emp_name":null});
+		
 		//Autocomplete Search End
 		
 		$("#app_type").change(function(){
+			console.log("app_type change");
 			if($("#app_type").val() == "1"){
 
 				//$("#position").removeAttr('disabled');
 				$("#emp_name").removeAttr('disabled');
 				$("#emp_name").removeAttr('disabled');
 				$('#apprasiaLevel').val($('#apprasiaLevel option:first-child').val());
-				$('#organization').val($('#organization option:first-child').val());
+				$('#apprasiaLevel').change();
+
 				$("#apprasiaLevel , #organization").attr("disabled", 'disabled');
 			
 			}else if($("#app_type").val() == "2"){
 				//$("#position").attr("disabled", 'disabled');
 				$("#emp_name").attr("disabled", 'disabled');
+				$('#organization').change();
 				$("#apprasiaLevel , #organization").removeAttr('disabled');
 				//$("#position").val("");
 				//$("#position_id").val("");
@@ -1024,7 +1069,7 @@ var listDashBoardAllKPIFn = function(data){
 				
 			}
 		});
-		$("#app_type").change();
+		//$("#app_type").change();
 		
 		
 		

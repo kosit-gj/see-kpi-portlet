@@ -1,6 +1,7 @@
  var restfulPathDashboard="/see_api/public/cds_result"; 
  var galbalDashboard=[];
  var galbalDataTemp = [];
+ var changeAutocomplete=true;
  galbalDataTemp['galbalOrg'] = [];
  galbalDataTemp['extract'] = false;
  galbalDataTemp['All_KPI'] = [];
@@ -77,6 +78,8 @@
 			select:function(event, ui) {
 				$(id).val(ui.item.value);
 	            $(id+"_id").val(ui.item.value_id);
+	            changeAutocomplete = true;
+	            $("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));
 	            galbalDataTemp[id] = ui.item.label;
 	            galbalDataTemp[id+"_id"]=ui.item.value_id;
 	            return false;
@@ -85,11 +88,19 @@
 	 
 				if ($(id).val() == galbalDataTemp[id]) {
 					$(id+"_id").val(galbalDataTemp[id+"_id"]);
+					changeAutocomplete = true;
 				}  else if (ui.item != null){
 					$(id+"_id").val(ui.item.value_id);
+					changeAutocomplete = true;
 				}else {
 					$(id+"_id").val("");
+					if(changeAutocomplete == true){
+						$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));
+						changeAutocomplete = false;
+					}
+					
 				}
+				
 	         }
 	    });
  }
@@ -662,16 +673,22 @@ var listDashBoardFn = function(data){
 		$("#app_type").html(generateDropDownList(restfulURL+"/see_api/public/appraisal_assignment/appraisal_type_list","GET"));
 		$("#apprasiaLevel").html(generateDropDownList(restfulURL+"/see_api/public/appraisal/al_list","GET"));
 		$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));
-		$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val()})));
+		$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));
 		
 		//#Change Param Function
 		$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
 		$("#apprasiaLevel").change(function(){$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));$("#organization").change();});
-		$("#organization").change(function(){$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val()})));});
+		$("#organization").change(function(){console.log("organization change");$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));});
 		
 		
 		
 		$("#btnSearchAdvance").click(function(){
+			if($("#app_type").val() == "1"){
+				if($("#emp_name_id").val() ==""){
+					callFlashSlide("Employee Name is Require !");
+					return false;
+				}
+			}
 			searchAdvanceFn(
 					$("#year").val(),
 					$("#period").val(),
@@ -695,13 +712,14 @@ var listDashBoardFn = function(data){
 			$("#period").val($("#get_period_id").val());
 			
 			$("#app_type").val($("#get_appraisal_type_id").val());
-			$("#emp_name").val($("#get_emp_id").val());
-			$("#emp_name_id").val($("#get_emp_name").val());
+			$("#emp_name").val($("#get_emp_name").val());
+			$("#emp_name_id").val($("#get_emp_id").val());
 			
 			$("#apprasiaLevel").val($("#get_level_id").val());
 			$("#apprasiaLevel").change();
 			$("#organization").val($("#get_org_id").val());
 			$("#organization").change();
+			$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));
 			$("#kpi").val($("#get_item_id").val());
 			
 	
@@ -721,12 +739,14 @@ var listDashBoardFn = function(data){
 				$("#emp_name").removeAttr('disabled');
 				$("#emp_name").removeAttr('disabled');
 				$('#apprasiaLevel').val($('#apprasiaLevel option:first-child').val());
-				$('#organization').val($('#organization option:first-child').val());
+				$('#apprasiaLevel').change();
+
 				$("#apprasiaLevel , #organization").attr("disabled", 'disabled');
 			
 			}else if($("#app_type").val() == "2"){
 				//$("#position").attr("disabled", 'disabled');
 				$("#emp_name").attr("disabled", 'disabled');
+				$('#organization').change();
 				$("#apprasiaLevel , #organization").removeAttr('disabled');
 				//$("#position").val("");
 				//$("#position_id").val("");
@@ -735,7 +755,7 @@ var listDashBoardFn = function(data){
 				
 			}
 		});
-		$("#app_type").change();
+		//$("#app_type").change();
 		
 		
 		

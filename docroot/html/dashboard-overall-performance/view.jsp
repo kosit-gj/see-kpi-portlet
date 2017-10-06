@@ -366,7 +366,14 @@
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
 <input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
-
+<div class='row-fluid '>
+	<div class='col-xs-12'>
+		<div id="slide_status" class="span12" style="z-index: 9000;">
+			<div id="btnCloseSlide"><i class='fa fa-times'></i></div>
+			<div id="slide_status_area"></div>
+		</div>
+	</div>
+</div>
 <div class="app_url_hidden" style="display: block;">
 	<div class="row-fluid app_url_hidden">
 		<!-- start--row-fluid -->

@@ -87,7 +87,7 @@ plid = layout.getPlid();
 </div>
 
 <!--  #####################Content data here ######################-->
-<div class="container1">
+<div class="container1 app_url_hidden">
 <h2><span id="modalDescription"> Calculate Bonus and Salary </span> </h2>
 				<!-- start--row-fluid -->
 				<div class="row-fluid">
@@ -205,8 +205,7 @@ plid = layout.getPlid();
 										style="margin-bottom: 5px;">
 										<button type="button" class="btn btn-info input-sm"
 											name="btnCalRaiseAmount" id="btnCalRaiseAmount">
-											<i class="glyphicon glyphicon-log-in"></i>&nbsp;Calculate Raise
-											Amount
+											<i class="glyphicon glyphicon-log-in"></i>&nbsp;Calculate Salary
 										</button>
 									</div>
 								

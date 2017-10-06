@@ -88,7 +88,7 @@ var listAppraisalDataFn = function (data) {
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["item_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_code"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_name"]+ "</td>";
-		htmlTable += "<td class='columnSearch' style='text-align: right;padding-right: 10px;'>"+ addCommas(parseFloat(indexEntry["actual_value"]).toFixed(2))+ "</td>";
+		htmlTable += "<td class='columnSearch' style='text-align: right;padding-right: 10px;'>"+ addCommas(parseFloat(notNullFn(indexEntry["actual_value"])).toFixed(2))+ "</td>";
 		htmlTable += "</tr>";//parseFloat().toLocaleString()
 	});
 	$("#listAppraisalData").html(htmlTable);

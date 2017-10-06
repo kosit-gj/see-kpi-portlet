@@ -392,6 +392,18 @@ plid = layout.getPlid();
 									class="form-control input-sm" id="cds_id" name="cds_id"
 									value="" type="hidden">
 							</div>
+							<div class="form-group pull-left span2" style="margin-left: 5px;margin-bottom: 3px;">
+								<select name="is_sql" id="is_sql"
+								class="input form-control input-sm span12" title=""
+								data-toggle="tooltip" style="cursor: pointer;"
+								data-original-title="IsSQL">
+								
+								<option value="">All IsSQL</option>
+								<option value="1">Yes</option>
+								<option value="0">No</option>
+
+								</select>
+							</div>
 <!-- 							<div class="form-group pull-right m-b-none p-b-xxs"> -->
 <!-- 								data-target="#ModalCopy" data-toggle="modal" -->
 <!-- 								<button id="btn_copy" type="button" -->
