@@ -314,20 +314,54 @@ plid = layout.getPlid();
 									</div>
 
                                  </div> 
+								<div class="row-fluid">
+							
+									<div class="span5 object-right" >
+									<label class='text-label'>  Setup Mail Server  &nbsp;:</label>
+									
+									</div>
+									<div class="span5">
+										
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 20px;">
+											  <input  type="radio" name="optionsEmailReminder" id="emailReminderOn" value="1">
+											  Yes
+										</label>
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+											<input type="radio" name="optionsEmailReminder" id="emailReminderOff" value="0" checked='checked'>
+											  No 
+										</label>
+										
+									</div>
+
+                                 </div> 
+                                 <div class="row-fluid">
+							
+									<div class="span5 object-right" >
+									<label class='text-label'>  Setup Reminder  &nbsp;:</label>
+									
+									</div>
+									<div class="span5">
+										
+										<button  data-target="#ModalSetupReminder" data-toggle="modal" class=" btn btn-warning " type="button" id="btnSetupReminder" style="margin-top: -5px;" ><i class="fa fa-cogs"></i> Edit</button>
+										
+										
+									</div>
+
+                                 </div> 
                                  <div class="row-fluid">
 							
 									<div class="span5 object-right" >
 									<label class='text-label'>  Theme Color &nbsp;:</label>
 									
 									</div>
-									<div class="span3" style="margin-bottom: 25px; width:auto;margin-right: 5px;" id="listThemeColor">
+									<div class="span3" style="margin-bottom: 25px; width:auto;margin-right: 5px; display:inline;" id="listThemeColor">
 										<button
 										    class="btn jscolor {valueElement:null,value:'ffcc00',valueElement:'themeColor',onFineChange:'updateThemeFn(this)'}"
 										    style="width:70px; height:26px;"></button>
 									</div>
-									<div class='input-prepend input-append' style="margin-top: -2px;" >
+									<div class='input-prepend input-append' style="margin-top: -2px;display: inline; display: -moz-box;" >
 										<span class='add-on'>#</span>
-										<input type="text"  maxlength='6'  id="themeColor" name="themeColor" style='width: 80px;' class='m-b-n span4'>
+										<input type="text"  maxlength='6'  id="themeColor" name="themeColor" style='width: 80px; ' class='m-b-n span4'>
 									</div>
 										
                                  </div> 
@@ -491,4 +525,111 @@ plid = layout.getPlid();
 		</div>
 	</div>
 	<!-- Modal Confirm End -->
+	
+	
+		<!-- Modal Start Email -->
+
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalSetupReminder"
+		class="modal inmodal" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
+						<span aria-hidden="true">×</span><span class="sr-only"></span>
+					</button>
+					<!-- <i class="fa fa-laptop modal-icon"></i> -->
+					<h4 class="modal-title" id="modalTitleSetThershold">Setup Email</h4>
+					<!-- 
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                 -->
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<!-- form start -->
+				<div class="row-fluid">
+                	<div class="span12 form-horizontal p-t-xxs">
+						<div class="form-group p-xxs">
+							<label class="control-label">Mail Driver :
+							</label>
+							<div class="controls">
+								<input type="text" name="form_mail_driver" id="form_mail_driver"
+									placeholder="Mail Driver" class="span12 m-b-n "
+									style="">
+							</div>
+						</div>
+						<div class="form-group p-xxs">
+							<label class="control-label">Mail Host :
+							</label>
+							<div class="controls">
+								<input type="text" name="form_mail_host" id="form_mail_host"
+									placeholder="Mail Host" class="span12 m-b-n "
+									style="">
+							</div>
+						</div>
+						<div class="form-group p-xxs">
+							<label class="control-label">Mail Port :
+							</label>
+							<div class="controls">
+								<input type="text" name="form_mail_port" id="form_mail_port"
+									placeholder="Mail Port" class="span12 m-b-n port "
+									style="">
+							</div>
+						</div>
+						<div class="form-group p-xxs">
+							<label class="control-label">Mail Username :
+							</label>
+							<div class="controls">
+								<input type="text" name="form_mail_username" id="form_mail_username"
+									placeholder="Mail Username" class="span12 m-b-n "
+									style="">
+							</div>
+						</div>
+						<div class="form-group p-xxs">
+							<label class="control-label">Mail Password :
+							</label>
+							<div class="controls">
+								<input type="password" name="form_mail_password" id="form_mail_password"
+									placeholder="Mail Password" class="span12 m-b-n "
+									style="">
+							</div>
+						</div>
+						<div class="form-group p-xxs">
+							<label class="control-label">Mail Encryption :
+							</label>
+							<div class="controls">
+								<input type="text" name="form_mail_encryption" id="form_mail_encryption"
+									placeholder="Mail Encryption" class="span12 m-b-n "
+									style="">
+							</div>
+						</div>
+						<div class="form-group p-xxs">
+							<label class="control-label">Web Domain :
+							</label>
+							<div class="controls">
+								<input type="text" name="form_web_domain" id="form_web_domain"
+									placeholder="Web Domain" class="span12 m-b-n "
+									style="">
+							</div>
+						</div>
+						
+						
+					</div>
+       			</div>
+					
+					<!-- form End -->
+					<!-- content end -->
+				
+				</div>
+				<div class="modal-footer">
+					<div align="right">
+						<button class="btn btn-success" type="button" id="btnEmailSubmit" style="margin-left: 5px;">Save</button>
+						<button data-dismiss="modal"  class="btn btn-danger btnEmailCancle" id="btnEmailCancel" type="button" style="margin-left: 5px;">Cancel</button>
+					</div>
+					<div class="alert alert-warning information" id="information3"
+						style="display: none;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End Email -->
 		
