@@ -195,8 +195,10 @@ var pinSymbol = function (color) {
 							  info.open(maps, marker);
 							  
 							  //console.log(marker.title);
-							  console.log(locations[i][4]);
+							  //console.log(locations[i][4]);
+							  $("body").mLoading();
 							  listDataPerformanceDetailFn(locations[i][4],marker.title,"gmap");
+							  $("body").mLoading('hide');
 							  //alert(locations[i][0].split("-")[0]);
 							  //console.log(i);
 							}
@@ -264,13 +266,14 @@ var getColorJvectorMap = function(){
 var listDataPerformanceDetailFn = function(data,district,type){
 	//console.log(data);
 	var scrollID =  $('#mapArea').children();
-	$(window).off("scroll");
+	var scroll;
+	$(window).off("scroll","resize");
 	$(window).on("scroll");
 	scrollID.removeClass('fixed');
 	var rageGreenColor="#ffffff";
 	var rangeColorsThreshold="[]";
 	var mainArea="";	
-	mainArea+="<h3 style='text-align:center;color:#993300;font-size: 20px;margin: 0px;' id='BranchPerTitle'></h3>";
+	mainArea+="<h3 style='text-align:center;color:black;font-size: 20px;margin: 0px;' id='BranchPerTitle'></h3>";
 	mainArea+="<div id='detailPerfomanceArea'></div>";
 	if(data == null || data == undefined || data =="" ){
 		mainArea+="<div id='noData'>No data to display.</div>";
@@ -466,11 +469,14 @@ setTimeout(function(){
 
 
 $("#detailArea").show();
+if(type == "gmap"){
+	  $("#mapGoogle").css({"width" : ""});
+}
 
-if(window.innerWidth >= 768 && (data !="" || data != null)){
-	//alert(window.innerWidth);
+if(window.innerWidth >= 768 && (data !="" )){
+	console.log(data);
 	
-	var scroll = $(window).scrollTop();
+	scroll = $(window).scrollTop();
 	if (scroll >= 280) {
 		  scrollID.addClass('fixed');
 		  if(type == "gmap"){
@@ -499,6 +505,55 @@ if(window.innerWidth >= 768 && (data !="" || data != null)){
 	  }	}
 	});
 }
+
+$(window).on('resize',function(){
+	
+	
+	if(window.innerWidth >= 768 && (data !="" )){
+		console.log(data);
+		
+		scroll = $(window).scrollTop();
+		if (scroll >= 280) {
+			  scrollID.addClass('fixed');
+			  if(type == "gmap"){
+				  $("#mapGoogle").css({"width" : "43%"});
+			  }	
+		  }
+		  else {
+			  scrollID.removeClass('fixed');
+			  if(type == "gmap"){
+			  $("#mapGoogle").css({"width" : ""});
+		  }	}
+		$(window).off("scroll");
+		$(window).on("scroll");
+		$(window).scroll(function(){
+			scroll = $(window).scrollTop();
+		  
+		  
+		  if (scroll >= 280) {
+			  scrollID.addClass('fixed');
+			  if(type == "gmap"){
+				  $("#mapGoogle").css({"width" : "43%"});
+			  }	
+		  }
+		  else {
+			  scrollID.removeClass('fixed');
+			  if(type == "gmap"){
+			  $("#mapGoogle").css({"width" : ""});
+		  }	}
+		});
+	}else{
+		$(window).off("scroll");
+		$(window).on("scroll");
+		scrollID.removeClass('fixed');
+		if(type == "gmap"){
+			  $("#mapGoogle").css({"width" : ""});
+		}
+	}
+	
+	
+	
+});
 
 
 
@@ -593,9 +648,9 @@ var createJvectorMap = function(objColorData,objDataAvg){
   				$("body").append("<input type=\"hidden\" id=\"districtNameHi\" value=\""+map.getRegionName(code)+"\">");
   				
   				var district = code.substring(3);
-  				
+  				$("body").mLoading();
   				showPerformanceDetailFn(district,$("#districtNameHi").val());
-  				
+  				$("body").mLoading('hide');
   		    },
     	    onRegionTipShow: function (e, el, code) {
     	    	
@@ -627,7 +682,7 @@ var searchAdvanceFn = function() {
 	
 	if($("#embed_region").val()==""){
 		
-		$("#mapArea").html("<div id='mapPerfomanceArea'  style='height:577px;'></div>");
+		$("#mapArea").html("<div id='mapPerfomanceArea'  style='height:557px;'></div>");
 		$("#mapPerfomanceArea").show();
 		$("#mapGooglePerfomanceArea").hide();
 		getColorJvectorMap();

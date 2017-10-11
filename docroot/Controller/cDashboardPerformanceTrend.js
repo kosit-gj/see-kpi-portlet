@@ -135,7 +135,7 @@
 		accordionHtml += "	<div id='bodyOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"'>";	
 		accordionHtml += "		<div class='panel-body'>";
 		//#Start Body Accordion
-		accordionHtml += "				<div class='span12 graphLTopHeader'>"+data['perspective_name']+" - "+data['item_name']+"</div>";		
+		accordionHtml += "				<div class='span12 graphLTopHeader'>"+data['perspective_name']+" - "+data['item_name']+" (หน่วย : "+data['uom_name']+")"+"</div>";		
 		//#btn next & previous kpi
 		if(kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val()))-1] !=  undefined && parent == "group1"){
 			accordionHtml += "			<span id='previous' class='arrow' data-previous='"+kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val()))-1]+"'></span>";
@@ -216,6 +216,7 @@
 		                 "showValue": "1",
 		                 "theme": "fint",
 		                 "exportEnabled" :"0",
+		                 "valueBelowPivot": "1",
 		                 "bgColor": "#ffffff",
 		            },
 		            "colorRange": {
@@ -1034,7 +1035,20 @@ var listDashBoardAllKPIFn = function(data){
 			$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));
 			$("#kpi").val($("#get_item_id").val());
 			
-	
+			if($("#app_type").val() == "1"){
+
+				//$("#position").removeAttr('disabled');
+				$("#emp_name").removeAttr('disabled');
+				$("#apprasiaLevel , #organization").attr("disabled", 'disabled');
+			}else if($("#app_type").val() == "2"){
+
+				$("#emp_name").attr("disabled", 'disabled');
+				$("#apprasiaLevel , #organization").removeAttr('disabled');
+				$("#emp_name").val("");
+				$("#emp_name_id").val("");
+				
+			}
+		
 			$("#btnSearchAdvance").click();
 			$("#get_sending_status").val("false");
 		}
@@ -1050,7 +1064,6 @@ var listDashBoardAllKPIFn = function(data){
 			if($("#app_type").val() == "1"){
 
 				//$("#position").removeAttr('disabled');
-				$("#emp_name").removeAttr('disabled');
 				$("#emp_name").removeAttr('disabled');
 				$('#apprasiaLevel').val($('#apprasiaLevel option:first-child').val());
 				$('#apprasiaLevel').change();

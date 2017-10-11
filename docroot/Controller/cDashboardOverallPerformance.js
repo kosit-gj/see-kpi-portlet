@@ -133,7 +133,8 @@
 	                "yAxisNameFontItalic": "1",
 	                "yAxisNameAlpha": "80",
 	                "plotFillAlpha": "70",
-	                "plotFillHoverColor": "#eeeeee",
+	                "plotFillHoverColor": "",
+	                "bubbleHoverAlpha": "35",
 	                "xAxisName": "Urgency",
 	                "yAxisName": "Impact",
 	                "numDivlines": "2",
@@ -182,8 +183,11 @@
 		            			$("#param_item").val(indexEntry2['item_id']);
 		            			$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/subordinate-performance");
 		            			$("form#linkParam").submit();
-		            			$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/performance-trend");
-		            			$("form#linkParam").submit();
+//		            			setTimeout(function(){
+//		            				$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/performance-trend");
+//			            			$("form#linkParam").submit();
+//		            				}, 1000);
+		            			
 		            		  //getDataBubbleFn();
 		            		  return false;
 		            	  }
@@ -226,7 +230,8 @@
 	                "showPlotBorder": "1",
 	                "pieFillAlpha": "60",
 	                "pieBorderThickness": "2",
-	                "hoverFillColor": "#eeeeee",
+	                "hoverFillColor": data['category'][0]['color'],
+	                "hoverFillAlpha":"35",
 	                "pieBorderColor": "#ffffff",
 	                "useHoverColor": "1",
 	                "showValuesInTooltip": "1",

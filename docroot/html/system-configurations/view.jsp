@@ -317,7 +317,7 @@ plid = layout.getPlid();
 								<div class="row-fluid">
 							
 									<div class="span5 object-right" >
-									<label class='text-label'>  Setup Mail Server  &nbsp;:</label>
+									<label class='text-label'>  Email Reminder  &nbsp;:</label>
 									
 									</div>
 									<div class="span5">
@@ -337,7 +337,7 @@ plid = layout.getPlid();
                                  <div class="row-fluid">
 							
 									<div class="span5 object-right" >
-									<label class='text-label'>  Setup Reminder  &nbsp;:</label>
+									<label class='text-label'>  Setup Mail Server  &nbsp;:</label>
 									
 									</div>
 									<div class="span5">

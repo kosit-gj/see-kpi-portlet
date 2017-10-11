@@ -534,12 +534,13 @@
 	                "yAxisNameFontItalic": "1",
 	                "yAxisNameAlpha": "80",
 	                "plotFillAlpha": "70",
-	                "plotFillHoverColor": "#eeeeee",
+	                "plotFillHoverColor": "",
+	                "bubbleHoverAlpha": "35",
 	                "showPlotBorder": "1",
 	                "xAxisName": "Target",
 	                "yAxisName": "Actual",
 	                "numDivlines": "2",
-	                "showValues":"0",
+	                "showValues":"1",
 	                "showTrendlineLabels": "0",
 	                "chartLeftMargin": "35",
 	                "chartRightMargin": "35",
@@ -721,7 +722,19 @@ var listDashBoardFn = function(data){
 			$("#organization").change();
 			$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));
 			$("#kpi").val($("#get_item_id").val());
-			
+			if($("#app_type").val() == "1"){
+
+				//$("#position").removeAttr('disabled');
+				$("#emp_name").removeAttr('disabled');
+				$("#apprasiaLevel , #organization").attr("disabled", 'disabled');
+			}else if($("#app_type").val() == "2"){
+
+				$("#emp_name").attr("disabled", 'disabled');
+				$("#apprasiaLevel , #organization").removeAttr('disabled');
+				$("#emp_name").val("");
+				$("#emp_name_id").val("");
+				
+			}
 	
 			$("#btnSearchAdvance").click();
 			$("#get_sending_status").val("false");
@@ -736,7 +749,6 @@ var listDashBoardFn = function(data){
 			if($("#app_type").val() == "1"){
 
 				//$("#position").removeAttr('disabled');
-				$("#emp_name").removeAttr('disabled');
 				$("#emp_name").removeAttr('disabled');
 				$('#apprasiaLevel').val($('#apprasiaLevel option:first-child').val());
 				$('#apprasiaLevel').change();

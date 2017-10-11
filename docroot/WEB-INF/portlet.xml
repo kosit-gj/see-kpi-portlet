@@ -904,7 +904,7 @@
 
 	<portlet>
 		<portlet-name>assigment-slide-score</portlet-name>
-		<display-name>Assigment Slide Score</display-name>
+		<display-name>Appraisal Assignment</display-name>
 		<!-- 
 		<portlet-class>com.test.assigmentSlideScore</portlet-class>
 		 -->
@@ -921,8 +921,8 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>Assigment Slide Score</title>
-			<short-title>Assigment Slide Score</short-title>
+			<title>Appraisal Assignment</title>
+			<short-title>Appraisal Assignment</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

@@ -54,11 +54,11 @@
             			},
             			{
         					"label":"Latitude","inputType":"text","dataTypeInput":"geographic","placeholder":"Latitude",
-        					"id":"latitude","width":"250px","required":true
+        					"id":"latitude","width":"250px"
         				},
         				{
         					"label":"Longitude","inputType":"text","dataTypeInput":"geographic","placeholder":"Longtitude",
-        					"id":"longitude","width":"250px","required":true
+        					"id":"longitude","width":"250px"
         				},
     					{
 	 	    			"label":"IsActive","inputType":"checkbox","default":"checked",

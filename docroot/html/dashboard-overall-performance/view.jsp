@@ -328,12 +328,12 @@
 .graphLTopHeader {
 	font-weight: bold;
 	font-size: 18px;
-	color: #993300;
+	color: black;
 	text-align: center;
 	margin-top: 15px;
 }
 #listBubbleChart{
-/*  	min-width: 1000px; */
+  	min-width: 600px; 
 }
 #listPieChart tspan {
     font-weight: bold;
@@ -501,7 +501,7 @@
 				<div class="row-fluid ">
 					<div class="span12" id="captionBubbleChart"></div>
 				</div>
-				<div class="row-fluid ">
+				<div class="row-fluid " style="overflow:auto">
 					<div class="span12" id="listBubbleChart"></div>
 				</div>
 			</div>

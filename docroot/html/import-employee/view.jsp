@@ -603,8 +603,8 @@ plid = layout.getPlid();
 					<button class="btn btn-success" type="submit" id="importFileMobile" form="fileImportEmployee">Import</button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>
-						<div class="alert alert-warning information" id="information"
-						style="height:120px; overflow-y: scroll; position:relative;"></div>
+						<div class="alert alert-warning information" id="informationFile"
+						style="height:120px; overflow-y: scroll; position:relative;display: none;"></div>
 				</div>
 			</div>
 		</div>

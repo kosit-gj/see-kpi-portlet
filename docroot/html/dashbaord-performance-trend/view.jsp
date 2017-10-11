@@ -815,7 +815,7 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 				</div>
 
 				<div id="scrollSubOrg3" style='width: 444px;max-height:500px; float: left; overflow-x: scroll;overflow-y: scroll;position: relative;'>
-					<table class='table table-bordered' id='tableAllKPI2'>
+					<table class='table table-bordered' id='tableAllKPI2' style="width: 325px;">
 
 						<thead>
 							<tr id="listHeader2" style='height: 66px;'>

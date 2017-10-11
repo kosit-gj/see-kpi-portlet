@@ -235,6 +235,15 @@ var clearFn = function(options){
 			$("form#"+options['formDetail']['id']+" #"+indexEntry['id']).val("");
 			$("form#"+options['formDetail']['id']+"  #btnColor-"+indexEntry['id']).css("background-color", "#FFFFFF");
 			
+		}else if(indexEntry['inputType']=="checkbox"){
+			
+			if(indexEntry['default']=="checked"){
+				$("form#"+options['formDetail']['id']+" #"+indexEntry['id']).prop('checked',true);
+				
+			}else{
+				$("form#"+options['formDetail']['id']+" #"+indexEntry['id']).prop('checked',false);
+			}
+			
 		}
 	});
 }

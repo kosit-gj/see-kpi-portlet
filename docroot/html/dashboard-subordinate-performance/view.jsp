@@ -348,12 +348,12 @@
 .graphLTopHeader {
 	font-weight: bold;
 	font-size: 18px;
-	color: #993300;
+	color: black;
 	text-align: center;
 	margin-top: 15px;
 }
 #listBubbleChart{
- 	min-width: 1000px;
+ 	min-width: 600px;
 }
 .aui .modal-dialog{
     overflow-y: initial !important;
@@ -500,7 +500,7 @@
 			<span id='next' class='arrow' data-next=''></span>
 		</div>
 		<div class="row-fluid ">
-			<div class="span12 graphLTopHeader" id="txtTopic">TEST</div>
+			<div class="span12 graphLTopHeader" id="txtTopic"></div>
 		</div>
 		<div style="overflow:auto">
 		<div class="row-fluid ">

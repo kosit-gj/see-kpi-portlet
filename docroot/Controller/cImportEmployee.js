@@ -31,7 +31,23 @@ var validationFn = function(data){
 };
 
 //Check Validation Edd
+var validateFileFn = function(data){
+	var validateFile="";
 
+	$.each(data,function(index,indexEntry){
+		if(indexEntry[Object.keys(indexEntry)[0]]!= undefined || indexEntry[Object.keys(indexEntry)[0]]==null){
+			if(indexEntry[Object.keys(indexEntry)[0]]== null){//The employee code field is null
+				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+Object.keys(indexEntry)[0]+" : null <i class='fa fa-level-down'></i><br>";
+			}else{
+				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+Object.keys(indexEntry)[0]+": "+indexEntry[Object.keys(indexEntry)[0]]+" <i class='fa fa-level-down'></i><br>";}
+			}
+	     $.each(indexEntry['errors'],function(index2,indexEntry2){
+	    	 validateFile+="<font color='red'>&emsp;*</font> "+indexEntry2+"<br>";
+	     });
+	 
+	});
+	callFlashSlideInModal(validateFile,"#informationFile","error");
+}
 var listErrorFn =function(data){
 	var errorData="";
 	
@@ -215,7 +231,7 @@ var listImportEmployeeFn = function(data) {
 	$("#listEmployee").empty();
 	var htmlAppraisalLevel= "";
 	var htmlTable = "";
-	console.log(data);
+	//console.log(data);
 	$.each(data,function(index,indexEntry) {
 
 //		$.each(indexEntry["appraisal_level"],function(index,indexEntry){
@@ -322,7 +338,7 @@ var listAppraisalLevel = function() {
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
-			console.log(data);
+			//console.log(data);
 			htmlDropDown+="<option  value=''></option>";
 			$.each(data,function(index,indexEntry){
 				htmlTable+="<tr>";
@@ -338,7 +354,7 @@ var listAppraisalLevel = function() {
 		}
 	});	
 	$("#formListAppraisalLevel").html(htmlTable);
-	console.log(htmlDropDown);
+	//console.log(htmlDropDown);
 	$("#from_Level_id").html(htmlDropDown);
 	
 	 $(".from_data_role").click(function(){  // à¹€à¸¡à¸·à¹ˆà¸­à¸„à¸¥à¸´à¸� checkbox  à¹ƒà¸”à¹†  
@@ -410,22 +426,22 @@ var insertRoleFn = function () {
 	var chackSelect =  false;
 	var emp =[];
 	var level = [];
-	console.log("insertRoleFn");
+	//console.log("insertRoleFn");
 	$.each($(".selectEmpCheckbox").get(),function(index,indexEntry){
 		if($(indexEntry).is(":checked")){
 			emp.push($(indexEntry).val());
 		}
 	});
-	console.log("selectEmpCheckbox Pass");
+	//console.log("selectEmpCheckbox Pass");
 	$.each($(".from_data_role").get(),function(index,indexEntry){
 		if($(indexEntry).is(":checked")){
 			level.push($(indexEntry).val());
 			chackSelect = true;
 		}
 	});
-	console.log("from_data_role Pass");
+	//console.log("from_data_role Pass");
 	if (chackSelect == false){callFlashSlideInModal("<font color='red'>*</font> Please Select Appraisal level !!!","#information3"); return false;}
-	console.log("chackSelect Pass");
+	//console.log("chackSelect Pass");
 		$.ajax({
 			url : restfulURL+restfulPathImportEmployee+"/role",
 			type : "PATCH",
@@ -437,7 +453,7 @@ var insertRoleFn = function () {
 				"roles"	:	level
 				},
 			success : function(data) {
-				console.log("ajax Pass");
+				//console.log("ajax Pass");
 				if(data['status']==200){
 					callFlashSlide("Add Role Successfully.");
 					getDataFn($("#pageNumber").val(),$("#rpp").val());
@@ -597,7 +613,7 @@ $(document).ready(function() {
 				//async:false,
 				 headers:{Authorization:"Bearer "+tokenID.token},
                  error: function (xhr, textStatus, errorThrown) {
-                        console.log('Error: ' + xhr.responseText);
+                        //console.log('Error: ' + xhr.responseText);
                     },
 				 success:function(data){
 					  
@@ -653,7 +669,7 @@ $(document).ready(function() {
 				//async:false,
 				 headers:{Authorization:"Bearer "+tokenID.token},
                  error: function (xhr, textStatus, errorThrown) {
-                        console.log('Error: ' + xhr.responseText);
+                        //console.log('Error: ' + xhr.responseText);
                     },
 				 success:function(data){
 					  
@@ -715,7 +731,7 @@ $(document).ready(function() {
 				//async:false,
 				 headers:{Authorization:"Bearer "+tokenID.token},
                  error: function (xhr, textStatus, errorThrown) {
-                        console.log('Error: ' + xhr.responseText);
+                        //console.log('Error: ' + xhr.responseText);
                     },
 				 success:function(data){
 					  
@@ -845,7 +861,7 @@ $(document).ready(function() {
 			success: function(data, textStatus, jqXHR)
 			{
 				
-				console.log(data);
+				//console.log(data);
 				if(data['status']==200 && data['errors'].length==0){
 							
 					callFlashSlide("Import Employee Successfully");
@@ -854,7 +870,7 @@ $(document).ready(function() {
 					$('#ModalImport').modal('hide');
 					
 				}else{
-					listErrorFn(data['errors']);
+					validateFileFn(data['errors']);
 					getDataFn($(".pagination .active").attr( "data-lp" ),$("#rpp").val());
 					$("body").mLoading('hide');
 				}

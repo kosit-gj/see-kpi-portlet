@@ -583,17 +583,7 @@ plid = layout.getPlid();
 				</div>
 				<div class="modal-body">
 					<!-- content start -->
-					<div class="row-fluid">
-					<div class="col-lg-12">
-						<div class="span12" style="padding: 0px 10px; height:65px;">
-							<h1>
-							<i class="fa fa fa-pencil-square-o icon-title"></i>
-							<small style=" position:absolute;top:37px;left:85px">CDS Result</small>
-							</h1>
-						</div>
-					</div>
-					</div>
-					<hr>
+					
     
 					<!-- form start -->
 					 

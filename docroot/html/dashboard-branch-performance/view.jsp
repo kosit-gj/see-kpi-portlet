@@ -271,6 +271,9 @@
 .aui .tableInside{
 	width:100%;
 }
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+	border-color: #ccc;
+}
 </style>
 <input type="hidden" id="user_portlet" name="user_portlet"
 	value="<%=username%>">
@@ -408,7 +411,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 	<div class='span6' id='detailArea' style='display: none;'>
 
 
-		<h3 style='text-align: center; color: #993300' id='BranchPerTitle'></h3>
+		<h3 style='text-align: center; color: black;' id='BranchPerTitle'></h3>
 		<div id="detailPerfomanceArea">
 
 			<!-- 
