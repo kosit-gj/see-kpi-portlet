@@ -979,23 +979,8 @@ var listDashBoardAllKPIFn = function(data){
 	 		return false;
 	 	}
 	 	$(".advance-search input").val("");
-	 	//Generate DropDown List
-		$("#year").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/year_list","GET"));
-		$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));
-		$("#app_type").html(generateDropDownList(restfulURL+"/see_api/public/appraisal_assignment/appraisal_type_list","GET"));
-		$("#apprasiaLevel").html(generateDropDownList(restfulURL+"/see_api/public/appraisal/al_list","GET"));
-		$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));
-		$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));
-		
-		//#Change Param Function
-		$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
-		$("#apprasiaLevel").change(function(){$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));$("#organization").change();});
-		$("#organization").change(function(){$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));});
-		
-		
-		
-		
-		$("#btnSearchAdvance").click(function(){
+	 	
+	 	$("#btnSearchAdvance").click(function(){
 			if($("#app_type").val() == "1"){
 				if($("#emp_name_id").val() ==""){
 					callFlashSlide("Employee Name is Require !");
@@ -1016,25 +1001,29 @@ var listDashBoardAllKPIFn = function(data){
 			$("#accordion").children().children().next().eq(0).collapse('show');;
 			return false;
 		});
-		
-
-		
-		$(".app_url_hidden").show();
-		if($("#get_sending_status").val() == "true" && $("#get_sending_status").val() != null){
+	 	
+	 	
+	 	//Generate DropDown List
+	 	if($("#get_sending_status").val() == "true" && $("#get_sending_status").val() != null){
+	 		$("#year").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/year_list","GET"));
 			$("#year").val($("#get_year_id").val());
+			$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));
 			$("#period").val($("#get_period_id").val());
 			
+			$("#app_type").html(generateDropDownList(restfulURL+"/see_api/public/appraisal_assignment/appraisal_type_list","GET"));
 			$("#app_type").val($("#get_appraisal_type_id").val());
+			
 			$("#emp_name").val($("#get_emp_name").val());
 			$("#emp_name_id").val($("#get_emp_id").val());
 			
+			$("#apprasiaLevel").html(generateDropDownList(restfulURL+"/see_api/public/appraisal/al_list","GET"));
 			$("#apprasiaLevel").val($("#get_level_id").val());
-			$("#apprasiaLevel").change();
+			
+			$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));
 			$("#organization").val($("#get_org_id").val());
-			$("#organization").change();
+
 			$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));
 			$("#kpi").val($("#get_item_id").val());
-			
 			if($("#app_type").val() == "1"){
 
 				//$("#position").removeAttr('disabled');
@@ -1048,10 +1037,28 @@ var listDashBoardAllKPIFn = function(data){
 				$("#emp_name_id").val("");
 				
 			}
-		
+	
 			$("#btnSearchAdvance").click();
 			$("#get_sending_status").val("false");
+		}else{
+			//Generate DropDown List
+			$("#year").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/year_list","GET"));
+			$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));
+			$("#app_type").html(generateDropDownList(restfulURL+"/see_api/public/appraisal_assignment/appraisal_type_list","GET"));
+			$("#apprasiaLevel").html(generateDropDownList(restfulURL+"/see_api/public/appraisal/al_list","GET"));
+			$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));
+			$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));
+			
+			//#Change Param Function
+			$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
+			$("#apprasiaLevel").change(function(){$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));$("#organization").change();});
+			$("#organization").change(function(){console.log("organization change");$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));});
+			
+			
 		}
+		
+		$(".app_url_hidden").show();
+		
 		
 		//Autocomplete Search Start
 		//generateAutocomplete("#position",restfulURL+"/see_api/public/cds_result/auto_position_name","post",{"position_name":null});
@@ -1084,11 +1091,7 @@ var listDashBoardAllKPIFn = function(data){
 		});
 		//$("#app_type").change();
 		
-		
-		
-		
-		
-		
+
 		//binding tooltip start
 		 $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
 		 $('[data-toggle="tooltip"]').tooltip({

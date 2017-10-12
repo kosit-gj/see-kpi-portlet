@@ -199,6 +199,13 @@
 	 
  };
  var generateChartPieFn = function(data){	
+	 var hoverColor = "";
+	 try {
+		 hoverColor = data['category'][0]['color'];
+		}
+		catch(err) {
+		    console.log(err.message);
+		}
 	 var topProductsChart = new FusionCharts({
 	        type: 'multilevelpie',
 	        dataLoadStartMessage: "Loading chart. Please wait",
@@ -230,7 +237,7 @@
 	                "showPlotBorder": "1",
 	                "pieFillAlpha": "60",
 	                "pieBorderThickness": "2",
-	                "hoverFillColor": data['category'][0]['color'],
+	                "hoverFillColor": hoverColor,
 	                "hoverFillAlpha":"35",
 	                "pieBorderColor": "#ffffff",
 	                "useHoverColor": "1",
@@ -438,7 +445,7 @@ var getDataBubbleFn = function(page,rpp){
 				
 			}
 		});
-		$("#app_type").change();
+		//$("#app_type").change();
 		
 		
 		
