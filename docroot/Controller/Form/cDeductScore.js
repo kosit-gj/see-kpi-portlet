@@ -7,6 +7,7 @@ var clearDeductScoreFormFn = function(){
 	//$("#appraisalLevelDeductScore").val("");
 	$("#appraisalLevelDeductScore option:first").attr('selected','selected');	
 	$("#maxValueDeductScore").val("");
+	$("#isShowVarianceDeductScore").prop("checked",true);
 	$("#isActiveDeductScore").prop("checked",true);
 	$("#DeductScoreUnitDeductScore").val("");
 	
@@ -48,12 +49,19 @@ var updateDeductScoreFn  = function(){
 	 var organization=($('[name="organizationDeductScore[]"]').val());
 	 var position=($('[name="positionDeductScore[]"]').val());
 
+	 var is_variance="";
+	 if($('#isShowVarianceDeductScore').prop('checked')==true){
+		 is_variance=1;
+	 }else{
+		 is_variance=0;
+	 }
 	 var is_active="";
 	 if($('#isActiveDeductScore').prop('checked')==true){
 		 is_active=1;
 	 }else{
 		 is_active=0;
 	 }
+	 
 	 
 	 $.ajax({
 	    url:restfulURL+"/see_api/public/appraisal_item/"+item_id,
@@ -66,6 +74,7 @@ var updateDeductScoreFn  = function(){
 		 "structure_id":structure_id,
 		 "max_value":max_value,
 		 "unit_deduct_score":unit_deduct_score,
+		 "is_show_variance ":is_variance,
 		 "is_active":is_active,
 		// "department_code":department_id,
 		 "org":organization,
@@ -104,6 +113,12 @@ var insertDeductScoreFn = function(param) {
 	 //var department_id=$("#departmentDeductScore").val();
 	 var organization=($('[name="organizationDeductScore[]"]').val());
 	 var position=($('[name="positionDeductScore[]"]').val());
+	 var is_variance="";
+	 if($('#isShowVarianceDeductScore').prop('checked')==true){
+		 is_variance=1;
+	 }else{
+		 is_variance=0;
+	 }
 	 var is_active="";
 	 if($('#isActiveDeductScore').prop('checked')==true){
 		 is_active=1;
@@ -123,6 +138,7 @@ var insertDeductScoreFn = function(param) {
 			 "structure_id":structure_id,
 			 "max_value":max_value,
 			 "unit_deduct_score":unit_deduct_score,
+			 "is_show_variance":is_variance,
 			 "is_active":is_active,
 			 //"department_code":department_id,
 			 "org":organization,
@@ -175,6 +191,11 @@ var initailDeductScoreFormFn = function(action,structureId,structureName,data){
 		$("#maxValueDeductScore").val(data['max_value']);
 		$("#DeductScoreUnitDeductScore").val(data['unit_deduct_score']);
 		
+		if(data['is_show_variance']==1){
+			$("#isShowVarianceDeductScore").prop("checked",true);
+		}else{
+			$("#isShowVarianceDeductScore").prop("checked",false);
+		}
 		if(data['is_active']==1){
 			$("#isActiveDeductScore").prop("checked",true);
 		}else{

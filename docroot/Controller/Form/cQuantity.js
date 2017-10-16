@@ -12,6 +12,7 @@ var clearQuantityFormFn = function(){
 	$("#baselineValueQuantity").val("");
 	$("#uomQuantity option:first").attr('selected','selected');
 	$("#isActiveQuantity").prop("checked",true);
+	$("#isShowVarianceQuantity").prop("checked",true);
 	$("#formulaDescriptionQuantity").val("");
 	$("#kpiQuantity").val("");
 	$("#textarea_cds").html("");
@@ -66,6 +67,12 @@ var updateQuantityFn  = function(){
 	 var value_type=$("#valueTypeQuantity").val();
 	 var kpi_id = $("#kpiQuantity").val();
 	 
+	 var is_variance="";
+	 if($('#isShowVarianceQuantity').prop('checked')==true){
+		 is_variance=1;
+	 }else{
+		 is_variance=0;
+	 }
 	 var is_active="";
 	 if($('#isActiveQuantity').prop('checked')==true){
 		 is_active=1;
@@ -88,6 +95,7 @@ var updateQuantityFn  = function(){
 		"formula_desc":formula_desc,
 		"formula_cds_id":formula_cds_id,
 		"formula_cds_name":formula_cds_name,
+		"is_show_variance":is_variance,
 		"is_active":is_active,
 		//"department_code":department_id,
 		
@@ -142,7 +150,12 @@ var insertQuantityFn = function(param) {
 	 console.log(position);
 	 */
 	 
-	 
+	 var is_variance="";
+	 if($('#isShowVarianceQuantity').prop('checked')==true){
+		 is_variance=1;
+	 }else{
+		 is_variance=0;
+	 }
 	 var is_active="";
 	 if($('#isActiveQuantity').prop('checked')==true){
 		 is_active=1;
@@ -166,6 +179,7 @@ var insertQuantityFn = function(param) {
 			 "formula_desc":formula_desc,
 			 "formula_cds_id":formula_cds_id,
 			 "formula_cds_name":formula_cds_name,
+			 "is_show_variance":is_variance,
 			 "is_active":is_active,
 			// "department_code":department_id,
 			 "org":organization,
@@ -207,7 +221,7 @@ var cdsListFn = function(data){
 			cdsListHTML+="<td id=\"cds_name-"+indexEntry['cds_id']+"\">"+indexEntry['cds_name']+"</td>";
 			cdsListHTML+="<td style=\"text-align:right\">";
 			cdsListHTML+="<button class=\"btn btn-warning btn-xs btn-gear sum\" id=\"sum-"+indexEntry['cds_id']+"\" >Sum</button>&nbsp;";
-			//cdsListHTML+="<button  class=\"btn btn-danger btn-xs btn-gear average\" id=\"avg-"+indexEntry['cds_id']+"\">Average</button>";
+			cdsListHTML+="<button  class=\"btn btn-danger btn-xs btn-gear last\" id=\"last-"+indexEntry['cds_id']+"\">Last</button>";
 			cdsListHTML+="</td>";
 		cdsListHTML+="</tr>";
 	});
@@ -300,7 +314,11 @@ structure_name
 		$("#textarea_cds").keyup();
 		//get formula cds id end
 		
-		
+		if(data['is_show_variance']==1){
+			$("#isShowVarianceQuantity").prop("checked",true);
+		}else{
+			$("#isShowVarianceQuantity").prop("checked",false);
+		}
 		if(data['is_active']==1){
 			$("#isActiveQuantity").prop("checked",true);
 		}else{
@@ -579,7 +597,7 @@ $(document).ready(function(){
 	$(document).on("click",".sum",function(){
 		formulaEngineFn(this.id);
 	});
-	$(document).on("click",".average",function(){
+	$(document).on("click",".last",function(){
 		formulaEngineFn(this.id);
 	});
 	//calculation end

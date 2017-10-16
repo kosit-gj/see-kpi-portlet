@@ -6,6 +6,7 @@ var clearQualityFormFn = function(){
 	$("#appraisalItemNameQuality").val("");
 	//$("#appraisalLevelQuality").val("");
 	$("#appraisalLevelQuality option:first").attr('selected','selected');
+	$("#isShowVarianceQuality").prop("checked",true);
 	$("#isActiveQuality").prop("checked",true);
 	//$("#structure_id_quality").val("");
 	
@@ -23,6 +24,12 @@ var updateQualityFn  = function(){
 	 var organization=($('[name="organizationQuality[]"]').val());
 	 var position=($('[name="positionQuality[]"]').val());
 	 
+	 var is_variance="";
+	 if($('#isShowVarianceQuality').prop('checked')==true){
+		 is_variance=1;
+	 }else{
+		 is_variance=0;
+	 }
 	 var is_active="";
 	 if($('#isActiveQuality').prop('checked')==true){
 		 is_active=1;
@@ -39,6 +46,7 @@ var updateQualityFn  = function(){
 		"item_name":item_name,
 		 "appraisal_level":appraisal_level_id,
 		 "structure_id":structure_id,
+		 "is_show_variance":is_variance,
 		 "is_active":is_active,
 		 "form_id":"2",
 		 //"department_code":department_id
@@ -68,7 +76,12 @@ var insertQualityFn = function(param) {
 	// var department_id=$("#departmentQuality").val();
 	 var organization=($('[name="organizationQuality[]"]').val());
 	 var position=($('[name="positionQuality[]"]').val());
-	 
+	 var is_variance="";
+	 if($('#isShowVarianceQuality').prop('checked')==true){
+		 is_variance=1;
+	 }else{
+		 is_variance=0;
+	 }
 	 var is_active="";
 	 if($('#isActiveQuality').prop('checked')==true){
 		 is_active=1;
@@ -86,6 +99,7 @@ var insertQualityFn = function(param) {
 			 "item_name":item_name,
 			 "appraisal_level":appraisal_level_id,
 			 "structure_id":structure_id,
+			 "is_show_variance":is_variance,
 			 "is_active":is_active,
 			// "department_code":department_id,
 			 "org":organization,
@@ -135,7 +149,11 @@ is_active
 		$("#appraisalItemNameQuality").val(data['item_name']);
 		$("#appraisalItemIdQuality").val(data['item_id']);
 		
-
+		if(data['is_show_variance']==1){
+			$("#isShowVarianceQuality").prop("checked",true);
+		}else{
+			$("#isShowVarianceQuality").prop("checked",false);
+		}
 		if(data['is_active']==1){
 			$("#isActiveQuality").prop("checked",true);
 		}else{
@@ -165,6 +183,7 @@ is_active
 		*/	
 		clearQualityFormFn();
 		$("#isActiveQuality").prop("checked",true);
+		$("#isShowVarianceQuality").prop("checked",true);
 		appraisalLevelListFn("Quality",$("#embed_appraisal_level_id").val(),defaultAll=false,multiSelect=true);	
 		//dropDrowDepartmentFn("Quality",$("#embed_department_id").val(),defaultAll=false);
 		dropDrowOrgFn("Quality",$("#embed_org_id").val(),defaultAll=false);
