@@ -430,7 +430,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 						if(data['threshold']==1){
 							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])))+"</td>";
 						}else{
-							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['achievement'])))+"</td>";
+							htmlTemplateQuantity+="<td style=\"text-align: right;padding-right: 10px;background:"+hexToRgb("#"+indexEntry['color'],0.7)+"\">"+addCommas(parseFloat(notNullFn(indexEntry['achievement'])))+"</td>";
 						}
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weight_percent'])).toFixed(2))+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2))+"</td>";

@@ -498,7 +498,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK3RgqSLy1toc4lkh2JVFQ5ipuRB106vU&callback=initMap" async defer></script>
  -->
 <script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK3RgqSLy1toc4lkh2JVFQ5ipuRB106vU"
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPuP76ST9iq964sAptAX-tZ9KVa-LXgSI"
 	async defer></script>
 
 
