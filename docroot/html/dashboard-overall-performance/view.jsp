@@ -396,8 +396,8 @@
 								title="" data-toggle="tooltip" style="cursor: pointer;"
 								data-original-title="Year">
 
-								<option value="1">2016</option>
-								<option value="2">2017</option>
+<!-- 								<option value="1">2016</option> -->
+<!-- 								<option value="2">2017</option> -->
 
 							</select>
 						</div>
@@ -416,7 +416,7 @@
 							<select name="app_type" id="app_type"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Entity Type">
+								data-original-title="Entity Type" >
 
 								<option value="1">Individual Test</option>
 								<option value="2">Organization Test</option>
@@ -442,10 +442,9 @@
 							<select name="apprasiaLevel" id="apprasiaLevel"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Level">
+								data-original-title="Level" disabled>
 
-								<option value="">Appraisal Level1</option>
-								<option value="">Appraisal Level2</option>
+<!-- 								<option value="">Appraisal Level : List Error</option> -->
 
 							</select>
 						</div>
@@ -454,10 +453,9 @@
 							<select name="organization" id="organization"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Organization">
+								data-original-title="Organization" disabled>
 
-								<option value="">Organization 1</option>
-								<option value="">Organization 2</option>
+<!-- 								<option value="">Organization : List Error</option> -->
 
 							</select>
 						</div>

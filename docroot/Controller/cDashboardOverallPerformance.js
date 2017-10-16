@@ -146,7 +146,7 @@
 	                "chartLeftMargin": "35",
 	                "chartRightMargin": "35",
 	                //Dynamic tool-tips with HTML and macro variables
-	                "plotTooltext": "<div id='nameDiv'>$name</div>{br}Urgency : <b>$xDataValue</b>{br}Impact : <b>$yDataValue</b>{br}Achievement : <b>$zvalue%</b>",
+	                "plotTooltext": "<div id='nameDiv'>$name</div>{br}Urgency : <b>$xDataValue</b>{br}Impact : <b>$yDataValue</b>{br}Achievement : <b>$zvalue%</b>{br}Last Updated: 2017-09-26 17:36:32",
 	                
 	                "theme": "fint"
 	            },
@@ -158,6 +158,7 @@
 	            "dataplotclick" : function(ev, props) {
 	            	var objDataset = ev.sender.getJSONData().dataset;
 	            	console.log(objDataset);
+	            	console.log(props);
 	            	console.log(props.displayValue);
 	            	var clickLabel = $("#nameDiv").text();
 	            	$.each(objDataset,function(index,indexEntry){

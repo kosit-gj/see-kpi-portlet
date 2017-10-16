@@ -218,6 +218,9 @@
 		                 "exportEnabled" :"0",
 		                 "valueBelowPivot": "1",
 		                 "bgColor": "#ffffff",
+		                 "chartTopMargin":"0",
+		                 "chartRightMargin":"0",
+		                 "chartLeftMargin":"0",
 		            },
 		            "colorRange": {
 		                "color": color
@@ -330,7 +333,7 @@
 		                "yAxisNameFontBold": "1",
 		                //"yAxisNameFontItalic": "1",
 		                "yAxisNameAlpha": "80",
-		                "yAxisMaxValue": (data['bar_chart']['max_value'] <= 4 ? "5" : data['bar_chart']['max_value']*(1.05)),
+		                //"yAxisMaxValue": (data['bar_chart']['max_value'] <= 4 ? "5" : data['bar_chart']['max_value']*(1.05)),
 		                //"numberPrefix": "$",
 		                "showBorder": "0",
 		                "paletteColors": "#"+tokenID.theme_color,
@@ -879,7 +882,7 @@ var listDashBoardAllKPIFn = function(data){
 	  htmlData1+="<tr>";
 	  htmlData3+="<tr>";
 	   htmlData1+="<td>"+indexEntry['perspective']+"</td>";
-	   htmlData1+="<td>"+indexEntry['item']+"</td>";
+	   htmlData1+="<td>"+indexEntry['item']+"<br>Last Updated: 2017-09-26 17:36"+"</td>";
 	   htmlData1+="<td>"+indexEntry['uom']+"</td>";
 	   
 	   //loop here..

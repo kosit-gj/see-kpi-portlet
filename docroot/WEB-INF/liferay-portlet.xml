@@ -1284,7 +1284,7 @@
 		<footer-portlet-javascript> 
 			/js/fusioncharts/js/themes/fusioncharts.theme.fint.js
 		</footer-portlet-javascript>   
-		  
+		 <footer-portlet-javascript>/js/fusioncharts/js/fusioncharts.powercharts.js</footer-portlet-javascript> 
 		 
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
