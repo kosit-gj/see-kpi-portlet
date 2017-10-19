@@ -6,7 +6,7 @@ var clearQualityFormFn = function(){
 	$("#appraisalItemNameQuality").val("");
 	//$("#appraisalLevelQuality").val("");
 	$("#appraisalLevelQuality option:first").attr('selected','selected');
-	$("#isShowVarianceQuality").prop("checked",true);
+	$("#isShowVarianceQuality").prop("checked",false);
 	$("#isActiveQuality").prop("checked",true);
 	//$("#structure_id_quality").val("");
 	

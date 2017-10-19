@@ -135,7 +135,7 @@
 		accordionHtml += "	<div id='bodyOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"'>";	
 		accordionHtml += "		<div class='panel-body'>";
 		//#Start Body Accordion
-		accordionHtml += "				<div class='span12 graphLTopHeader'>"+data['perspective_name']+" - "+data['item_name']+" (หน่วย : "+data['uom_name']+")"+"</div>";		
+		accordionHtml += "				<div class='span12 graphLTopHeader'>"+data['perspective_name']+" - "+data['item_name']+" (หน่วย : "+data['uom_name']+") "+"Last Updated: "+data['etl_dttm']+"</div>";		
 		//#btn next & previous kpi
 		if(kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val()))-1] !=  undefined && parent == "group1"){
 			accordionHtml += "			<span id='previous' class='arrow' data-previous='"+kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val()))-1]+"'></span>";
@@ -168,9 +168,9 @@
 		accordionHtml += "					</div>";
 		accordionHtml += "				</div>";	
 		accordionHtml += "				</div>";
-		accordionHtml += "				<div class='span8'>";
+		accordionHtml += "				<div class='span8' style='overflow: auto'>";
 		//accordionHtml += "					<div class='graphLTopHeader' style='margin-bottom: 3px;'>KPI: "+data['item_name']+"</div>";
-		accordionHtml += "					<div id='chartOrgBar-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"'></div>";
+		accordionHtml += "					<div id='chartOrgBar-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"' style='min-width:500px;'></div>";
 		accordionHtml += "				</div>";
 		accordionHtml += "			</div>";
 		//#End Body Accordion
@@ -192,10 +192,10 @@
 	 });
 		    var cSatScoreChart = new FusionCharts({
 		        type: 'angulargauge',
-			    dataLoadStartMessage: "Loading chart. Please wait",
+		        dataLoadStartMessage: "Loading chart. Please wait",
 			    baseChartMessageFont: "Arial",
 			    baseChartMessageFontSize: "18",
-			    baseChartMessageColor: "#FC0000",
+			    baseChartMessageColor: "#993300",
 		        renderAt:  "chartOrgGauge-"+(type == "org" ? data['org_id'] : data['emp_id'] ),
 		        width: '100%',
 		        height: '200',
@@ -204,7 +204,7 @@
 		            "chart": {
 		                 "baseFontSize":"11",
 		                 "captionFontSize":"14",
-		                 "lowerLimit": "0",
+		                 //"lowerLimit": "0",
 		                 //"upperLimit": "120000",
 		                 "gaugeFillMix": "{dark-30},{light-60},{dark-10}",
 		                 "gaugeFillRatio": "15",
@@ -309,7 +309,7 @@
 		        type: 'column2d',
 		        dataLoadStartMessage: "Loading chart. Please wait",
 			    baseChartMessageFont: "Arial",
-			    baseChartMessageFontSize: "16",
+			    baseChartMessageFontSize: "18",
 			    baseChartMessageColor: "#993300",
 		        renderAt: "chartOrgBar-"+(type == "org" ? data['org_id'] : data['emp_id'] ),
 		        width: '100%',
@@ -402,7 +402,7 @@
 	        renderAt: 'chart-container',
 	        dataLoadStartMessage: "Loading chart. Please wait",
 		    baseChartMessageFont: "Arial",
-		    baseChartMessageFontSize: "16",
+		    baseChartMessageFontSize: "18",
 		    baseChartMessageColor: "#993300",
 	        width: '100%',
 	        height: '255',
@@ -410,8 +410,66 @@
 	        dataFormat: 'json',
 	        dataSource: {
 	            "chart": {
+	            	"xAxisname": "Month",
+	                "yAxisName": "Monthly Actual",
+	                "xAxisNameFont": "Arial",
+	                "xAxisNameFontSize": "14",
+	                "xAxisNameFontColor": "#993300",
+	                "xAxisNameFontBold": "1",
+	                "xAxisNameFontItalic": "1",
+	                "xAxisNameAlpha": "80",
+	                "yAxisNameFont": "Arial",
+	                "yAxisNameFontSize": "14",
+	                "yAxisNameFontColor": "#993300",
+	                "yAxisNameFontBold": "1",
+	                "yAxisNameFontItalic": "1",
+	                "yAxisNameAlpha": "80",
+	                
+	                //"numberPrefix": "$",
+	               	//"sNumberSuffix" : "%",
+	                //"sYAxisMaxValue" : "50",
+					"showValues": "0",
+					//Cosmetics
+					"paletteColors": "#"+tokenID.theme_color+",#1aaf5d,#f2c500",
+	                "baseFontColor" : "#333333",
+	                //"baseFont" : "Helvetica Neue,Arial",
+	                //"captionFontSize" : "14",
+	                //"subcaptionFontSize" : "14",
+	                //"subcaptionFontBold" : "0",
+	                "showBorder" : "0",
+	                "bgColor" : "#ffffff",
+	                "showShadow" : "0",
+	                "canvasBgColor" : "#ffffff",
+	                "canvasBorderAlpha" : "0",
+	                "divlineAlpha" : "100",
+	                "divlineColor" : "#999999",
+	                "divlineThickness" : "1",
+	                "divLineIsDashed" : "1",
+	                "divLineDashLen" : "1",
+	                "divLineGapLen" : "1",
+	                "usePlotGradientColor" : "0",
+	                "showplotborder" : "0",
+	                "showXAxisLine" : "1",
+	                "xAxisLineThickness" : "1",
+	                "xAxisLineColor" : "#999999",
+	                "showAlternateHGridColor" : "0",
+	                "showAlternateVGridColor" : "0",
+	                "toolTipColor": "#ffffff",
+	                "toolTipBorderThickness": "0",
+	                "toolTipBgColor": "#000000",
+	                "toolTipBgAlpha": "80",
+	                "toolTipBorderRadius": "4",
+	                "toolTipPadding": "10",
+	                "legendBgAlpha" : "0",
+	                "legendBorderAlpha" : "0",
+	                "legendShadow" : "0",
+	                "legendItemFontSize" : "10",
+	                "legendItemFontColor" : "#666666",
+	                "useRoundEdges":"1",
+	                "chartRightMargin":"-35",
 	                //"caption": "Harry's SuperMart",
 	                //"subCaption": "Sales analysis of last year",
+	            	/*
 	                "xAxisname": "Month",
 	                "yAxisName": "Monthly Actual",
 	                "xAxisNameFont": "Arial",
@@ -454,10 +512,123 @@
 	                "legendShadow": '0',
 	                "legendItemFontSize": '10',
 	                "legendItemFontColor": '#666666',
-	                "useRoundEdges":"1"
+	                "useRoundEdges":"1"*/
 	            },
 	            "categories": data['categories'],
 	            "dataset": data['dataset'],
+	            "annotations": data['annotations'],
+	            
+	        },
+
+            
+	        "events": {
+	            "annotationclick" : function(ev, props) {
+	              
+	            	$("#param_item_result_id").val("");
+                 	$("#param_item_result_id").val(props.groupId.split("-")[0]);
+                 	//$("#param_link").val("email");
+        			$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/kpi-result");
+        			$("form#linkParam").submit();
+        		  return false;
+	             
+	    		}    
+	        }
+	    }).render();
+	 return false;
+ };
+ var generateChartBarLineDualFn = function(data,type){	
+	 
+	 var salesAnlysisChart = new FusionCharts({//scrollcombidy2d mscombidy2d
+	        type: (data['is_show_variance'] == "1" ? "scrollcombidy2d":"mscombi2d"),
+	        renderAt: 'chart-container',
+	        dataLoadStartMessage: "Loading chart. Please wait",
+		    baseChartMessageFont: "Arial",
+		    baseChartMessageFontSize: "18",
+		    baseChartMessageColor: "#993300",
+	        width: '100%',
+	        height: '255',
+	        renderAt: "chartOrgBar-"+(type == "org" ? data['org_id'] : data['emp_id'] ),
+	        dataFormat: 'json',
+	        dataSource: {
+	            "chart": {
+	            	"xAxisname": "Month",
+	                "yAxisName": "Monthly Actual",
+	                "xAxisNameFont": "Arial",
+	                "xAxisNameFontSize": "14",
+	                "xAxisNameFontColor": "#993300",
+	                "xAxisNameFontBold": "1",
+	                "xAxisNameFontItalic": "1",
+	                "xAxisNameAlpha": "80",
+	                "yAxisNameFont": "Arial",
+	                "yAxisNameFontSize": "14",
+	                "yAxisNameFontColor": "#993300",
+	                "yAxisNameFontBold": "1",
+	                "yAxisNameFontItalic": "1",
+	                "yAxisNameAlpha": "80",
+	                "sYAxisName": "Variance",
+	                //Font properties for secondary y-axis
+                	"sYAxisNameFont": "Arial",
+                	"sYAxisNameFontSize": "14",
+                	"sYAxisNameFontColor": "#993300",
+                	"sYAxisNameFontBold": "1",
+                	"sYAxisNameFontItalic": "1",
+                	"sYAxisNameAlpha": "80",
+	                //"numberPrefix": "$",
+	               	//"sNumberSuffix" : "%",
+	                //"sYAxisMaxValue" : "50",
+					"showValues": "0",
+					//Cosmetics
+					"paletteColors": "#"+tokenID.theme_color+",#613CAA",//,#1aaf5d
+	                "baseFontColor" : "#333333",
+	                //"baseFont" : "Helvetica Neue,Arial",
+	                //"captionFontSize" : "14",
+	                //"subcaptionFontSize" : "14",
+	                //"subcaptionFontBold" : "0",
+	                "showBorder" : "0",
+	                "bgColor" : "#ffffff",
+	                "showShadow" : "0",
+	                "canvasBgColor" : "#ffffff",
+	                "canvasBorderAlpha" : "0",
+	                "divlineAlpha" : "100",
+	                "divlineColor" : "#999999",
+	                "divlineThickness" : "1",
+	                "divLineIsDashed" : "1",
+	                "divLineDashLen" : "1",
+	                "divLineGapLen" : "1",
+	                "usePlotGradientColor" : "0",
+	                "showplotborder" : "0",
+	                "showXAxisLine" : "1",
+	                "xAxisLineThickness" : "1",
+	                "xAxisLineColor" : "#999999",
+	                "showAlternateHGridColor" : "0",
+	                "showAlternateVGridColor" : "0",
+	                "toolTipColor": "#ffffff",
+	                "toolTipBorderThickness": "0",
+	                "toolTipBgColor": "#000000",
+	                "toolTipBgAlpha": "80",
+	                "toolTipBorderRadius": "4",
+	                "toolTipPadding": "10",
+	                "legendBgAlpha" : "0",
+	                "legendBorderAlpha" : "0",
+	                "legendShadow" : "0",
+	                "legendItemFontSize" : "10",
+	                "legendItemFontColor" : "#666666",
+	                "useRoundEdges":"1",
+	                "anchorRadius": "4",
+					"anchorBorderThickness": "2",
+					"anchorBgColor": "#FCFDFC",
+					"chartRightMargin":"-35",
+					//"anchorBorderColor": "#127fcb",
+					//"anchorSides": "6",
+					"scrollheight": "4",
+					//"numVisiblePlot": "6",
+					"flatScrollBars": "1",
+					"scrollPadding":"10",
+					
+	            },
+	            "categories": data['bar_chart']['categories'],
+	            "dataset": data['bar_chart']['dataset'],
+	            "trendlines": data['bar_chart']['trendlines'],
 	            "annotations": data['annotations']
 	        },
 
@@ -783,7 +954,7 @@ var listDashBoardFn = function(data){
 		 $.when(
 				 generateChartGaugeFn(indexEntry,(emp == "" ? "org" :"emp")),
 				 indexEntry['chart_type'] == "yearly" ? 
-						 generateChartBarFn(indexEntry,(emp == "" ? "org" :"emp")) : 
+						 generateChartBarLineDualFn(indexEntry,(emp == "" ? "org" :"emp")) : 
 						 generateChartBarLineAreaFn(indexEntry,(emp == "" ? "org" :"emp"))
 				).then(function() {
 				    //console.log(inedx+" Loading Chart: Success");
@@ -881,8 +1052,8 @@ var listDashBoardAllKPIFn = function(data){
 	  var htmlData2="";
 	  htmlData1+="<tr>";
 	  htmlData3+="<tr>";
-	   htmlData1+="<td>"+indexEntry['perspective']+"</td>";
-	   htmlData1+="<td>"+indexEntry['item']+"<br>Last Updated: 2017-09-26 17:36"+"</td>";
+	   htmlData1+="<td>"+indexEntry['perspective']+"</td>";//etl_dttm
+	   htmlData1+="<td>"+indexEntry['item']+"<br>Last Updated: "+indexEntry['etl_dttm']+"</td>";
 	   htmlData1+="<td>"+indexEntry['uom']+"</td>";
 	   
 	   //loop here..
@@ -984,7 +1155,7 @@ var listDashBoardAllKPIFn = function(data){
 	 	$(".advance-search input").val("");
 	 	
 	 	$("#btnSearchAdvance").click(function(){
-			if($("#app_type").val() == "1"){
+			if($("#app_type").val() == "2"){
 				if($("#emp_name_id").val() ==""){
 					callFlashSlide("Employee Name is Require !");
 					return false;
@@ -1027,12 +1198,12 @@ var listDashBoardAllKPIFn = function(data){
 
 			$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));
 			$("#kpi").val($("#get_item_id").val());
-			if($("#app_type").val() == "1"){
+			if($("#app_type").val() == "2"){
 
 				//$("#position").removeAttr('disabled');
 				$("#emp_name").removeAttr('disabled');
 				$("#apprasiaLevel , #organization").attr("disabled", 'disabled');
-			}else if($("#app_type").val() == "2"){
+			}else if($("#app_type").val() == "1"){
 
 				$("#emp_name").attr("disabled", 'disabled');
 				$("#apprasiaLevel , #organization").removeAttr('disabled');
@@ -1071,7 +1242,7 @@ var listDashBoardAllKPIFn = function(data){
 		
 		$("#app_type").change(function(){
 			console.log("app_type change");
-			if($("#app_type").val() == "1"){
+			if($("#app_type").val() == "2"){
 
 				//$("#position").removeAttr('disabled');
 				$("#emp_name").removeAttr('disabled');
@@ -1080,7 +1251,7 @@ var listDashBoardAllKPIFn = function(data){
 
 				$("#apprasiaLevel , #organization").attr("disabled", 'disabled');
 			
-			}else if($("#app_type").val() == "2"){
+			}else if($("#app_type").val() == "1"){
 				//$("#position").attr("disabled", 'disabled');
 				$("#emp_name").attr("disabled", 'disabled');
 				$('#organization').change();

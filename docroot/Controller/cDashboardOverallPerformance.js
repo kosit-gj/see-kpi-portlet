@@ -392,7 +392,7 @@ var getDataBubbleFn = function(page,rpp){
 		$(".app_url_hidden").show();
 		
 		$("#btnSearchAdvance").click(function(){
-			if($("#app_type").val() == "1"){
+			if($("#app_type").val() == "2"){
 				if($("#emp_name_id").val() ==""){
 					callFlashSlide("Employee Name is Require !");
 					return false;
@@ -425,7 +425,7 @@ var getDataBubbleFn = function(page,rpp){
 		//Autocomplete Search End
 		
 		$("#app_type").change(function(){
-			if($("#app_type").val() == "1"){
+			if($("#app_type").val() == "2"){
 
 				//$("#position").removeAttr('disabled');
 				$("#emp_name").removeAttr('disabled');
@@ -435,7 +435,7 @@ var getDataBubbleFn = function(page,rpp){
 				//$('#organization').val($('#organization option:first-child').val());
 				$("#apprasiaLevel , #organization").attr("disabled", 'disabled');
 			
-			}else if($("#app_type").val() == "2"){
+			}else if($("#app_type").val() == "1"){
 				//$("#position").attr("disabled", 'disabled');
 				$("#emp_name").attr("disabled", 'disabled');
 				$("#apprasiaLevel , #organization").removeAttr('disabled');

@@ -125,7 +125,7 @@ var setDataToTemplateFn = function(data,actionType){
 	 */
 	/*information start*/
 	
-	if($("#embed_appraisal_type_id").val()==1){
+	if($("#embed_appraisal_type_id").val()==2){
 		$("#titlePanelInformation").html("Employee Information");
 		
 		$("#employee_code").html(head['emp_code']);
@@ -480,7 +480,7 @@ var listDataFn = function(data) {
 				htmlHTML+="</th>";
 			}
 			
-			if($("#embed_appraisal_type_id").val()==1){
+			if($("#embed_appraisal_type_id").val()==2){
 				
 				htmlHTML+=" <th style=\"width:8%\">Status</th>";
 				htmlHTML+=" <th style=\"width:10%\">Emp Code</th>";
@@ -488,7 +488,7 @@ var listDataFn = function(data) {
 				htmlHTML+=" <th style=\"width:15%\">Organization</th>";
 				htmlHTML+=" <th style=\"width:15%\">Position</th>";
 							
-			}else if($("#embed_appraisal_type_id").val()==2){
+			}else if($("#embed_appraisal_type_id").val()==1){
 				
 				htmlHTML+=" <th style=\"width:8%\">Status</th>";
 				htmlHTML+=" <th style=\"width:10%\">Org Code</th>";
@@ -518,16 +518,16 @@ var listDataFn = function(data) {
 						
 				}else{
 					
-					if($("#embed_appraisal_type_id").val()==1){
+					if($("#embed_appraisal_type_id").val()==2){
 						htmlHTML+="	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-"+itemEntry['emp_id']+"' type='checkbox' value="+itemEntry['emp_id']+"-"+itemEntry['emp_code']+"></td>";
-					}else if($("#embed_appraisal_type_id").val()==2){
+					}else if($("#embed_appraisal_type_id").val()==1){
 						htmlHTML+="	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-"+itemEntry['org_id']+"' type='checkbox' value="+itemEntry['org_id']+"-"+itemEntry['org_code']+"></td>";
 						//alert(itemEntry['org_id']);
 					}
 				}
 				
 				
-				if($("#embed_appraisal_type_id").val()==1){
+				if($("#embed_appraisal_type_id").val()==2){
 					htmlHTML+="  <td id='status-"+itemEntry['emp_id']+"'>"+itemEntry['status']+"";
 					htmlHTML+="  <input type='hidden' id='emp_result_id-"+itemEntry['emp_id']+"' name='emp_result_id-"+itemEntry['emp_id']+"' value='"+itemEntry['emp_result_id']+"'>";
 					htmlHTML+="  <input type='hidden' id='is_coporate_kpi-"+itemEntry['emp_id']+"' name='is_coporate_kpi-"+itemEntry['emp_id']+"' value='"+itemEntry['is_coporate_kpi']+"'>";
@@ -907,10 +907,10 @@ var actionAssignmentFn = function(param){
 		}else{
 			employees+=",{";
 		}
-			if($("#embed_appraisal_type_id").val()==1){
+			if($("#embed_appraisal_type_id").val()==2){
 				employees+="\"emp_id\":\""+indexEntry+"\",\"emp_code\":\""+empldoyees_code[index]+"\",";
 				employees+="\"org_id\":\"\",\"org_code\":\"\"";
-			}else if($("#embed_appraisal_type_id").val()==2){
+			}else if($("#embed_appraisal_type_id").val()==1){
 				employees+="\"emp_id\":\"\",\"emp_code\":\"\",";
 				employees+="\"org_id\":\""+indexEntry+"\",\"org_code\":\""+empldoyees_code[index]+"\"";
 			}
@@ -2271,7 +2271,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 		
 		
 		$("#appraisalType").change(function(){
-			if($("#appraisalType").val()==2){
+			if($("#appraisalType").val()==1){
 				
 				$("#Position").prop("disabled",true);
 				$("#empName").prop("disabled",true);

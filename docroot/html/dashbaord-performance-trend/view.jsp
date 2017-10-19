@@ -126,7 +126,7 @@
 		position: relative;
    		top: 0px;
 	}
-	.aui .advance-search .span3{width: 24.242%;}
+	.aui .advance-search .span3{width: 26.5612%;}
 	/*All Form Start*/
 	.aui .modal-body{
 		max-height: 400px;
@@ -138,7 +138,9 @@
 	.aui #btnCoppy{
 		width:100%;
 	}
-	
+	.graphLTop {
+	width: 25.73% !important;
+	}
 	/*All Form End*/
   }
  /* Portrait tablet to landscape and desktop End############*/ 
@@ -278,6 +280,9 @@
     padding-top: 3px;
     text-align: left;
     vertical-align: top;
+}
+.aui .table-bordered {
+	border-collapse: collapse !important;
 }
 .aui .pagination {
     margin: 0;
@@ -689,7 +694,7 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 							</select>
 						</div>
 						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;">
-							<select name="app_type" id="app_type"
+							<select name="app_type" id="app_type" 
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
 								data-original-title="Entity Type">
@@ -700,7 +705,7 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 							</select>
 						</div>
 						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;" id="txtEmpInput">
-							<input data-toggle="tooltip" data-placement="top"
+							<input data-toggle="tooltip" data-placement="top" disabled
 								title="Employee Name" class="span12 m-b-n ui-autocomplete-input"
 								placeholder="Employee Name" id="emp_name" name="emp_name"
 								type="text"> <input class="form-control input-sm"
@@ -715,10 +720,10 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 <!-- 						</div> -->
 						<div style="margin-left: 5px; margin-bottom: 3px;"
 							class="form-group pull-left span3" id="apprasiaLevelArea">
-							<select name="apprasiaLevel" id="apprasiaLevel"
+							<select name="apprasiaLevel" id="apprasiaLevel" 
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Level" disabled>
+								data-original-title="Level" >
 
 								<option value="">Appraisal Level1</option>
 								<option value="">Appraisal Level2</option>
@@ -730,7 +735,7 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 							<select name="organization" id="organization"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Organization" disabled>
+								data-original-title="Organization" >
 
 								<option value="">Organization 1</option>
 								<option value="">Organization 2</option>
@@ -814,7 +819,7 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 					</div>
 				</div>
 
-				<div id="scrollSubOrg3" style='width: 444px;max-height:500px; float: left; overflow-x: scroll;overflow-y: scroll;position: relative;'>
+				<div id="scrollSubOrg3" style='width: 444px;max-height:500px; float: left; overflow-x: auto;overflow-y: auto;position: relative;'>
 					<table class='table table-bordered' id='tableAllKPI2' style="width: 325px;">
 
 						<thead>

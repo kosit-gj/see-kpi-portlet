@@ -472,10 +472,11 @@ plid = layout.getPlid();
 .aui .cus_information_area label{
 	margin-bottom: 1px;
 }
-}
 
+/* .portlet-borderless-container{ */
+/*  position: unset !important; */
+/* } */
 </style>
-
 <body class="gray-bg ">
 
 

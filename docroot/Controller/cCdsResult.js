@@ -24,10 +24,10 @@ var getDataFn = function(page,rpp){
 	var position= $("#param_position_id").val();
 	var emp_name= $("#param_emp_id").val();
 	
-	if(app_type == "1"){
+	if(app_type == "2"){
 		$("#tableCdsResult thead tr").find("th:first").html("Emp&nbsp;Code&emsp;");
 		$("#tableCdsResult thead tr").find("th:first").next().html("Emp&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
-	}else if(app_type == "2"){
+	}else if(app_type == "1"){
 		$("#tableCdsResult thead tr").find("th:first").html("Org&nbsp;Code&emsp;");
 		$("#tableCdsResult thead tr").find("th:first").next().html("Org&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
 	}
@@ -84,10 +84,10 @@ var listCdsResultFn = function (data) {
 // 		+indexEntry["appraisal_level"]+indexEntry["appraisal_item"]);
 	
 		htmlTable += "<tr class='rowSearch'>";//cds_result_id
-		if($("#param_app_type").val() == "1"){
+		if($("#param_app_type").val() == "2"){
 			htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_id"]+ "</td>";
 			htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_name"]+ "</td>";
-		}else if($("#param_app_type").val() == "2"){
+		}else if($("#param_app_type").val() == "1"){
 			htmlTable += "<td class='columnSearch'>"+ indexEntry["org_code"]+ "</td>";
 			htmlTable += "<td class='columnSearch'>"+ indexEntry["org_name"]+ "</td>";
 		};
@@ -582,11 +582,11 @@ $(document).ready(function() {
   //Auto Complete Employee Name end
 	
 	$("#app_type").change(function(){
-		if($("#app_type").val() == "1"){
+		if($("#app_type").val() == "2"){
 
 			$("#position").removeAttr('disabled');
 			$("#emp_name").removeAttr('disabled');
-		}else if($("#app_type").val() == "2"){
+		}else if($("#app_type").val() == "1"){
 			$("#position").attr("disabled", 'disabled');
 			$("#emp_name").attr("disabled", 'disabled');
 			$("#position").val("");

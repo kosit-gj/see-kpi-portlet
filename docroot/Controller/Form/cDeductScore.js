@@ -7,7 +7,7 @@ var clearDeductScoreFormFn = function(){
 	//$("#appraisalLevelDeductScore").val("");
 	$("#appraisalLevelDeductScore option:first").attr('selected','selected');	
 	$("#maxValueDeductScore").val("");
-	$("#isShowVarianceDeductScore").prop("checked",true);
+	$("#isShowVarianceDeductScore").prop("checked",false);
 	$("#isActiveDeductScore").prop("checked",true);
 	$("#DeductScoreUnitDeductScore").val("");
 	

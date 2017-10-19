@@ -336,7 +336,7 @@
   	min-width: 600px; 
 }
 #listPieChart tspan {
-    font-weight: bold;
+/*     font-weight: bold; */
 }
 .aui .modal-dialog{
     overflow-y: initial !important;
@@ -424,7 +424,7 @@
 							</select>
 						</div>
 						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;" id="txtEmpInput">
-							<input data-toggle="tooltip" data-placement="top"
+							<input data-toggle="tooltip" data-placement="top" disabled
 								title="Employee Name" class="span12 m-b-n ui-autocomplete-input"
 								placeholder="Employee Name" id="emp_name" name="emp_name"
 								type="text"> <input class="form-control input-sm"
@@ -442,7 +442,7 @@
 							<select name="apprasiaLevel" id="apprasiaLevel"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Level" disabled>
+								data-original-title="Level" >
 
 <!-- 								<option value="">Appraisal Level : List Error</option> -->
 
@@ -453,7 +453,7 @@
 							<select name="organization" id="organization"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Organization" disabled>
+								data-original-title="Organization" >
 
 <!-- 								<option value="">Organization : List Error</option> -->
 

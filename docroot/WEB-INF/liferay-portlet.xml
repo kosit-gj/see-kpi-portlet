@@ -89,7 +89,7 @@
 	    <header-portlet-css>/css/appraisal-item.css</header-portlet-css>
 		<header-portlet-css>/css/jquery.multiselect.css</header-portlet-css>
 		<header-portlet-css>/css/bootstrap-duallistbox.css</header-portlet-css>
-   
+   		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
    		
 		    
  	                       
@@ -109,7 +109,9 @@
 	    <footer-portlet-javascript>/Controller/cAppraisalItem.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/Form/cDeductScore.js</footer-portlet-javascript>   
 	    <footer-portlet-javascript>/Controller/Form/cQuality.js</footer-portlet-javascript>  
-	    <footer-portlet-javascript>/Controller/Form/cQuantity.js</footer-portlet-javascript>  
+	    <footer-portlet-javascript>/Controller/Form/cQuantity.js</footer-portlet-javascript> 
+	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
+	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript> 
 	      
 	      
 		<css-class-wrapper>appraisal-item-portlet</css-class-wrapper>
@@ -946,6 +948,7 @@
 		<header-portlet-css>/font-awesome/css/font-awesome.css</header-portlet-css>
 		<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
 		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
 	   	<header-portlet-css>/css/tywMain.css</header-portlet-css>
 	    <header-portlet-css>/css/appraisal-assignment.css</header-portlet-css>  
 	    <header-portlet-css>/js/Fixed-Header-Table-master/css/defaultTheme.css</header-portlet-css>  
@@ -957,6 +960,8 @@
 	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/plugins/slimscroll/jquery.slimscroll.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
+	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/Fixed-Header-Table-master/jquery.fixedheadertable.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/noUiSlider.10.0.0/nouislider.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/noUiSlider.10.0.0/wNumb.min.js</footer-portlet-javascript>
@@ -1064,8 +1069,7 @@
 		</footer-portlet-javascript> 
 		<footer-portlet-javascript> 
 			/js/fusioncharts/js/themes/fusioncharts.theme.fint.js
-		</footer-portlet-javascript>   
-		 
+		</footer-portlet-javascript> 
 		       
 		   
 		<!-- 

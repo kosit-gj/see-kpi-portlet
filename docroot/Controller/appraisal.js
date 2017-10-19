@@ -760,7 +760,7 @@ var listAppraisalDetailFn = function(data){
 		 
 		 
 		//set header start
-		 if($("#embed_appraisalType").val()==1){
+		 if($("#embed_appraisalType").val()==2){
 			 
 			 $("#orgInformation").hide();
 			 $("#empInformation").show();
@@ -781,7 +781,7 @@ var listAppraisalDetailFn = function(data){
 			 $(".txtPeriod").html(data['head'][0]['appraisal_period_desc']);
 			 $(".txtGrandTotalWeigh").html(data['head'][0]['result_score']);
 		 
-		 }else if($("#embed_appraisalType").val()==2){
+		 }else if($("#embed_appraisalType").val()==1){
 			 
 			 $("#orgInformation").show();
 			 $("#empInformation").hide();
@@ -1674,7 +1674,7 @@ var listDataFn = function(data){
 		htmlHTML+=" <thead>";
 			htmlHTML+=" <tr>";
 				
-			if($("#embed_appraisalType").val()=="1"){
+			if($("#embed_appraisalType").val()=="2"){
 				
 				htmlHTML+=" <th style=\"width:auto;\"><b>Emp Code</b></th>";
 				htmlHTML+=" <th style=\"widthauto;\"><b>Emp Name</b></th>";
@@ -1684,7 +1684,7 @@ var listDataFn = function(data){
 				htmlHTML+=" <th style=\"width:auto;\"><b>Action</b></th>";
 				//htmlHTML+=" <th style=\"width:auto; text-align:center;\"><b>Manage</b></th>";
 				
-			}else if($("#embed_appraisalType").val()=="2"){
+			}else if($("#embed_appraisalType").val()=="1"){
 				
 				htmlHTML+=" <th style=\"width:auto;\"><b>Org Code</b></th>";
 				htmlHTML+=" <th style=\"widthauto;\"><b>Org Name</b></th>";
@@ -1710,7 +1710,7 @@ var listDataFn = function(data){
 			$.each(indexEntry['items'],function(index2,itemEntry){	
 				
 		
-				if($("#embed_appraisalType").val()=="1"){
+				if($("#embed_appraisalType").val()=="2"){
 					
 				
 					htmlHTML+="<tr>";
@@ -1733,7 +1733,7 @@ var listDataFn = function(data){
 					
 					htmlHTML+="</tr>";
 					
-				}else if($("#embed_appraisalType").val()=="2"){
+				}else if($("#embed_appraisalType").val()=="1"){
 					
 					htmlHTML+="<tr>";
 					
@@ -2396,7 +2396,7 @@ $(document).ready(function() {
 		appraisalTypeFn();
 		
 		$("#appraisalType").change(function(){
-			if($("#appraisalType").val()==2){
+			if($("#appraisalType").val()==1){
 				
 				$("#Position").prop("disabled",true);
 				$("#EmpName").prop("disabled",true);

@@ -82,6 +82,9 @@ var connectionServiceFn = function(username,password,plid){
 		success:function(data){
 			 sessionStorage.setItem("tokenID",data);
 			 tokenID= eval("("+ sessionStorage.getItem("tokenID")+")");
+			 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+				 $(".aui body *").css({'font-weight':400});
+			 } 
 			if(checkSession(data)==true){
 				checkConnection=true;
 			}

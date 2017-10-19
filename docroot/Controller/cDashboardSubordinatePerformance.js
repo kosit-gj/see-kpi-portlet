@@ -673,7 +673,7 @@ var listDashBoardFn = function(data){
 		
 		
 		$("#btnSearchAdvance").click(function(){
-			if($("#app_type").val() == "1"){
+			if($("#app_type").val() == "2"){
 				if($("#emp_name_id").val() ==""){
 					callFlashSlide("Employee Name is Require !");
 					return false;
@@ -715,12 +715,12 @@ var listDashBoardFn = function(data){
 
 			$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));
 			$("#kpi").val($("#get_item_id").val());
-			if($("#app_type").val() == "1"){
+			if($("#app_type").val() == "2"){
 
 				//$("#position").removeAttr('disabled');
 				$("#emp_name").removeAttr('disabled');
 				$("#apprasiaLevel , #organization").attr("disabled", 'disabled');
-			}else if($("#app_type").val() == "2"){
+			}else if($("#app_type").val() == "1"){
 
 				$("#emp_name").attr("disabled", 'disabled');
 				$("#apprasiaLevel , #organization").removeAttr('disabled');
@@ -757,7 +757,7 @@ var listDashBoardFn = function(data){
 		//Autocomplete Search End
 		
 		$("#app_type").change(function(){
-			if($("#app_type").val() == "1"){
+			if($("#app_type").val() == "2"){
 
 				//$("#position").removeAttr('disabled');
 				$("#emp_name").removeAttr('disabled');
@@ -766,7 +766,7 @@ var listDashBoardFn = function(data){
 
 				$("#apprasiaLevel , #organization").attr("disabled", 'disabled');
 			
-			}else if($("#app_type").val() == "2"){
+			}else if($("#app_type").val() == "1"){
 				//$("#position").attr("disabled", 'disabled');
 				$("#emp_name").attr("disabled", 'disabled');
 				$('#organization').change();

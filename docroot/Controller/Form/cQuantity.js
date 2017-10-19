@@ -12,7 +12,7 @@ var clearQuantityFormFn = function(){
 	$("#baselineValueQuantity").val("");
 	$("#uomQuantity option:first").attr('selected','selected');
 	$("#isActiveQuantity").prop("checked",true);
-	$("#isShowVarianceQuantity").prop("checked",true);
+	$("#isShowVarianceQuantity").prop("checked",false);
 	$("#formulaDescriptionQuantity").val("");
 	$("#kpiQuantity").val("");
 	$("#textarea_cds").html("");

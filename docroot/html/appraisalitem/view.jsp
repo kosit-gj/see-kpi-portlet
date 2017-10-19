@@ -6,6 +6,7 @@
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
+
 <%
 /*
 PortletSession portletSession1 = renderRequest.getPortletSession();
@@ -757,8 +758,12 @@ overflow-y: visible;
 }
 
 
-
-
+/* .portlet-borderless-container{ */
+/*  position: unset; */
+/* } */
+.ui-state-default{
+	width: 100% !important;
+}
 </style>
 <body class=" gray-bg ">
 <!--  #####################Content data here ######################-->
