@@ -5,6 +5,7 @@
  galbalDataTemp['extract'] = false;
  galbalDataTemp['All_KPI'] = [];
  galbalDataTemp['collapse_show']="";
+ galbalDataTemp['double_click']=false;
 //# Generate Drop Down List
  var generateDropDownList = function(url,type,request,initValue){
  	var html="";
@@ -156,6 +157,7 @@
 	        },
 	        "events": {
 	            "dataplotclick" : function(ev, props) {
+	            	
 	            	var objDataset = ev.sender.getJSONData().dataset;
 	            	console.log(objDataset);
 	            	console.log(props);

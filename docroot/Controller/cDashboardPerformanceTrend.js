@@ -7,6 +7,7 @@
  galbalDataTemp['extract'] = false;
  galbalDataTemp['All_KPI'] = {};
  galbalDataTemp['collapse_show']="";
+ galbalDataTemp['double_click']=false;
 //# Generate Drop Down List
  var generateDropDownList = function(url,type,request,initValue){
  	var html="";
@@ -467,7 +468,7 @@
 	                "legendItemFontSize" : "10",
 	                "legendItemFontColor" : "#666666",
 	                "useRoundEdges":"1",
-	                "chartRightMargin":"-35",
+	                "chartRightMargin":"0",
 	                //"caption": "Harry's SuperMart",
 	                //"subCaption": "Sales analysis of last year",
 	            	/*
@@ -618,7 +619,7 @@
 	                "anchorRadius": "4",
 					"anchorBorderThickness": "2",
 					"anchorBgColor": "#FCFDFC",
-					"chartRightMargin":"-35",
+					"chartRightMargin":(data['is_show_variance'] == "1" ? "-35" :"0"),
 					//"anchorBorderColor": "#127fcb",
 					//"anchorSides": "6",
 					"scrollheight": "4",
@@ -1234,7 +1235,7 @@ var listDashBoardAllKPIFn = function(data){
 			//#Change Param Function
 			$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
 			$("#apprasiaLevel").change(function(){$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));$("#organization").change();});
-			$("#organization").change(function(){console.log("organization change");$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));});
+			$("#organization").change(function(){$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));});
 			
 			
 		}

@@ -520,7 +520,7 @@
 	                "xAxisMinValue": "0",
 	                //"xAxisMaxValue": "5",
 	                "yAxisMinValue": "0",
-	                //"yAxisMaxValue": "5",
+	                "yAxisMaxValue": (parseFloat(data['max_value']*1.15).toFixed(0)),
 	                "xAxisNameFont": "Arial",
 	                "xAxisNameFontSize": "16",
 	                "xAxisNameFontColor": "#993300",
@@ -548,7 +548,7 @@
 	                "plotTooltext": "<div id='nameDiv'>$name</div>{br}Target : <b>$xDataValue</b>{br}Actual : <b>$yDataValue</b>{br}Achievement : <b>$zvalue%</b>",
 	                "theme": "fint"
 	            },
-	            "dataset" : data
+	            "dataset" : data['dataset']
 	        },
 	        "events": {
 	            "dataplotclick" : function(ev, props) {
@@ -635,7 +635,7 @@
 
 var listDashBoardFn = function(data){
 	 $("#txtTopic").html(data['header']);
-	 generateChartBubbleFn(data['dataset']);
+	 generateChartBubbleFn(data);
 	 var html = "";
 	 var kpi_id = galbalDataTemp["item_id"];
 	 if (kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val())) - 1] != undefined ) {

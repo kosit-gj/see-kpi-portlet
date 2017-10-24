@@ -165,7 +165,7 @@ var pinSymbol = function (color) {
 				$.each(data['google_map'],function(index,indexEntry){
 					locations.push([indexEntry['org_id']+"-"+indexEntry['org_name'],parseFloat(indexEntry['latitude']),parseFloat(indexEntry['longitude']),indexEntry['color_code'],[indexEntry]]);
 				});
-				console.log(locations);
+				//console.log(locations);
 				
 				
 				var mapOptions = {
@@ -198,9 +198,10 @@ var pinSymbol = function (color) {
 							  //console.log(locations[i][4]);
 							  $("body").mLoading();
 							  listDataPerformanceDetailFn(locations[i][4],marker.title,"gmap");
-							  $("body").mLoading('hide');
+							  
+							  //$("body").mLoading('hide');
 							  //alert(locations[i][0].split("-")[0]);
-							  //console.log(i);
+							  console.log(locations[i][4]);
 							}
 						  })(marker, i));
 
@@ -346,9 +347,10 @@ var listDataPerformanceDetailFn = function(data,district,type){
 				
 			"ร้อยละ"
 				*/
+				
 				dataTableHTML+="<tr>";
 					dataTableHTML+="<td>"+indexEntry2['perspective_name']+" </td>";
-					dataTableHTML+="<td>"+indexEntry2['item_name']+"<br><span class='LastUpdateText'>Last Updated: "+indexEntry2['elt_dttm']+"</span></td>";
+					dataTableHTML+="<td>"+indexEntry2['item_name']+"<br><span class='LastUpdateText'>Last Updated: "+indexEntry2['etl_dttm']+"</span></td>";
 					dataTableHTML+="<td>"+indexEntry2['uom_name']+" </td>";
 					dataTableHTML+="<td>";
 					
@@ -452,7 +454,7 @@ setTimeout(function(){
         performanceColor: 'blue',
         rangeColors: rangeColorsThreshold
 	}).css("opacity","1");
-
+	$("body").mLoading('hide');
 	},1000);
 
 /*
@@ -474,7 +476,7 @@ if(type == "gmap"){
 }
 
 if(window.innerWidth >= 768 && (data !="" )){
-	console.log(data);
+	
 	
 	scroll = $(window).scrollTop();
 	if (scroll >= 290) {
@@ -510,7 +512,7 @@ $(window).on('resize',function(){
 	
 	
 	if(window.innerWidth >= 768 && (data !="" )){
-		console.log(data);
+		
 		
 		scroll = $(window).scrollTop();
 		if (scroll >= 290) {
@@ -648,9 +650,9 @@ var createJvectorMap = function(objColorData,objDataAvg){
   				$("body").append("<input type=\"hidden\" id=\"districtNameHi\" value=\""+map.getRegionName(code)+"\">");
   				
   				var district = code.substring(3);
-  				$("body").mLoading();
+  				//$("body").mLoading();
   				showPerformanceDetailFn(district,$("#districtNameHi").val());
-  				$("body").mLoading('hide');
+  				$("body").mLoading();
   		    },
     	    onRegionTipShow: function (e, el, code) {
     	        el.html(el.html() + ' , Avg. : '+(notNullFn(objDataAvg[code]) == "NaN"? '0.00':notNullFn(objDataAvg[code])));

@@ -342,7 +342,7 @@ var listErrorFn =function(data){
 }
 //-------------------  Drop Down List Appraisal Level FN END ---------------------
 var getBrowserWidth = function(){
-    var wSearchAdvance = $('.cSearchAdvance').width()-2;
+    var wSearchAdvance = $('.cSearchAdvance').width()-4;
     var wTarget = $('#drop_down_list_appraisal_type').width();
     var wCalTarget = $('#drop_down_list_appraisal_type').width()*4+20;
     var height = $('#drop_down_list_appraisal_type').height()+0.25;
@@ -361,6 +361,7 @@ var getBrowserWidth = function(){
 			$("#txtEmpInput").css({"height":height});
 	
 		}
+		//console.log(wSearchAdvance-wCalTarget+wTarget);
 };
 
 $(document).ready(function() {
