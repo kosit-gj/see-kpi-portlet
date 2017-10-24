@@ -517,3 +517,8 @@ hr {
 	
 	font-weight: 400 !important;
 }
+.aui .LastUpdateText{
+	font-size: 11.5px;
+    font-style: oblique;
+    color: #2139C9;
+}

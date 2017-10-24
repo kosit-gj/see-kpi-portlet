@@ -280,7 +280,7 @@ var listDataPerformanceDetailFn = function(data,district,type){
 	}
 	$("#detailArea").html(mainArea);
 	$("#BranchPerTitle").html("Branch Performance:"+district);
-	console.log(data);
+	//console.log(data);
 	$.each(data,function(index,indexEntry){
 	
 	var dataTableHTML="";
@@ -296,7 +296,7 @@ var listDataPerformanceDetailFn = function(data,district,type){
 			dataTableHTML+="<thead>";
 				dataTableHTML+="<tr>";
 					dataTableHTML+="<th>Perspective</th>";
-					dataTableHTML+="<th>KPI</th>";
+					dataTableHTML+="<th style='min-width: 130px;'>KPI</th>";
 					dataTableHTML+="<th>UOM</th>";
 					dataTableHTML+="<th style='text-align:center;min-width: 250px;'>KPI Result</th>";	
 			dataTableHTML+="</tr>";
@@ -348,7 +348,7 @@ var listDataPerformanceDetailFn = function(data,district,type){
 				*/
 				dataTableHTML+="<tr>";
 					dataTableHTML+="<td>"+indexEntry2['perspective_name']+" </td>";
-					dataTableHTML+="<td>"+indexEntry2['item_name']+"</td>";
+					dataTableHTML+="<td>"+indexEntry2['item_name']+"<br><span class='LastUpdateText'>Last Updated: "+indexEntry2['elt_dttm']+"</span></td>";
 					dataTableHTML+="<td>"+indexEntry2['uom_name']+" </td>";
 					dataTableHTML+="<td>";
 					
@@ -362,16 +362,16 @@ var listDataPerformanceDetailFn = function(data,district,type){
 							dataTableHTML+="</thead>";
 							dataTableHTML+="<tbody>";
 								dataTableHTML+="<tr>";
-									dataTableHTML+="<td style=' text-align: right !important;'>"+indexEntry2['target']+"</td>";
-									dataTableHTML+="<td style=' text-align: right !important;'>"+indexEntry2['forecast']+"</td>";
-									dataTableHTML+="<td style=' text-align: right !important;'>"+indexEntry2['actual']+"</td>";
+									dataTableHTML+="<td style=' text-align: right !important;'>"+notNullFn(indexEntry2['target'])+"</td>";
+									dataTableHTML+="<td style=' text-align: right !important;'>"+notNullFn(indexEntry2['forecast'])+"</td>";
+									dataTableHTML+="<td style=' text-align: right !important;'>"+notNullFn(indexEntry2['actual'])+"</td>";
 								dataTableHTML+="</tr>";
 								dataTableHTML+="<tr>";
-									dataTableHTML+="<td>%Taget<span style='float:right'>"+parseFloat(indexEntry2['percent_target']).toFixed(2)+"</span></td>";
+									dataTableHTML+="<td>%Taget<span style='float:right'>"+notNullFn(indexEntry2['percent_target'])+"</span></td>";
 									dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:0;'  >"+indexEntry2['percent_target_str']+"</div></td>";
 								dataTableHTML+="</tr>";
 								dataTableHTML+="<tr>";
-									dataTableHTML+="<td>%Forecast<span style='float:right'>"+parseFloat(indexEntry2['percent_forecast']).toFixed(2)+"</span></td>";
+									dataTableHTML+="<td>%Forecast<span style='float:right'>"+notNullFn(indexEntry2['percent_forecast'])+"</span></td>";
 									dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:0;'>"+indexEntry2['percent_forecast_str']+"</div></td>";
 								dataTableHTML+="</tr>";
 							dataTableHTML+="</tbody>";
@@ -402,7 +402,7 @@ var listDataPerformanceDetailFn = function(data,district,type){
     config.waveOffset = 0.25;
     config.circleThickness = 0.05;
     
-	var gauge = loadLiquidFillGauge("fillgauge"+indexEntry['org_id'], indexEntry['pct'],config);
+	var gauge = loadLiquidFillGauge("fillgauge"+indexEntry['org_id'], notNullFn(indexEntry['pct']),config);
 	
 	
 
@@ -477,7 +477,7 @@ if(window.innerWidth >= 768 && (data !="" )){
 	console.log(data);
 	
 	scroll = $(window).scrollTop();
-	if (scroll >= 280) {
+	if (scroll >= 290) {
 		  scrollID.addClass('fixed');
 		  if(type == "gmap"){
 			  $("#mapGoogle").css({"width" : "43%"});
@@ -492,7 +492,7 @@ if(window.innerWidth >= 768 && (data !="" )){
 		scroll = $(window).scrollTop();
 	  
 	  
-	  if (scroll >= 280) {
+	  if (scroll >= 290) {
 		  scrollID.addClass('fixed');
 		  if(type == "gmap"){
 			  $("#mapGoogle").css({"width" : "43%"});
@@ -513,7 +513,7 @@ $(window).on('resize',function(){
 		console.log(data);
 		
 		scroll = $(window).scrollTop();
-		if (scroll >= 280) {
+		if (scroll >= 290) {
 			  scrollID.addClass('fixed');
 			  if(type == "gmap"){
 				  $("#mapGoogle").css({"width" : "43%"});
@@ -530,7 +530,7 @@ $(window).on('resize',function(){
 			scroll = $(window).scrollTop();
 		  
 		  
-		  if (scroll >= 280) {
+		  if (scroll >= 290) {
 			  scrollID.addClass('fixed');
 			  if(type == "gmap"){
 				  $("#mapGoogle").css({"width" : "43%"});
@@ -653,8 +653,7 @@ var createJvectorMap = function(objColorData,objDataAvg){
   				$("body").mLoading('hide');
   		    },
     	    onRegionTipShow: function (e, el, code) {
-    	    	
-    	        el.html(el.html() + ' , Avg. : '+parseFloat(notNullFn(objDataAvg[code])).toFixed(2));
+    	        el.html(el.html() + ' , Avg. : '+(notNullFn(objDataAvg[code]) == "NaN"? '0.00':notNullFn(objDataAvg[code])));
     	    }
     	
     	});
@@ -682,7 +681,7 @@ var searchAdvanceFn = function() {
 	
 	if($("#embed_region").val()==""){
 		
-		$("#mapArea").html("<div id='mapPerfomanceArea'  style='height:557px;'></div>");
+		$("#mapArea").html("<div id='mapPerfomanceArea'  style='height:"+(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)?"500px":"557px")+";'></div>");
 		$("#mapPerfomanceArea").show();
 		$("#mapGooglePerfomanceArea").hide();
 		getColorJvectorMap();

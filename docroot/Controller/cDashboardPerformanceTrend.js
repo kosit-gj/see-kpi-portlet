@@ -2,6 +2,7 @@
  var galbalDashboard=[];
  var galbalDataTemp = [];
  var changeAutocomplete=true;
+ var mobileStatus=/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
  galbalDataTemp['galbalOrg'] = [];
  galbalDataTemp['extract'] = false;
  galbalDataTemp['All_KPI'] = {};
@@ -135,7 +136,7 @@
 		accordionHtml += "	<div id='bodyOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"'>";	
 		accordionHtml += "		<div class='panel-body'>";
 		//#Start Body Accordion
-		accordionHtml += "				<div class='span12 graphLTopHeader'>"+data['perspective_name']+" - "+data['item_name']+" (หน่วย : "+data['uom_name']+") "+"Last Updated: "+data['etl_dttm']+"</div>";		
+		accordionHtml += "				<div class='span12 graphLTopHeader'>"+data['perspective_name']+" - "+data['item_name']+" (หน่วย : "+data['uom_name']+") "+"<span class='LastUpdateText'>Last Updated: "+data['etl_dttm']+"</spen></div>";		
 		//#btn next & previous kpi
 		if(kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val()))-1] !=  undefined && parent == "group1"){
 			accordionHtml += "			<span id='previous' class='arrow' data-previous='"+kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val()))-1]+"'></span>";
@@ -539,7 +540,7 @@
  var generateChartBarLineDualFn = function(data,type){	
 	 
 	 var salesAnlysisChart = new FusionCharts({//scrollcombidy2d mscombidy2d
-	        type: (data['is_show_variance'] == "1" ? "scrollcombidy2d":"mscombi2d"),
+	        type: (data['is_show_variance'] == "1" ? "mscombidy2d":"mscombi2d"),
 	        renderAt: 'chart-container',
 	        dataLoadStartMessage: "Loading chart. Please wait",
 		    baseChartMessageFont: "Arial",
@@ -829,7 +830,14 @@ var getDataKPIFn = function(page,rpp){
 								});
 			  }
 			});
-
+			//"touchmove"
+			//"touchend"
+			/*
+			 $('#scrollSubOrg3').bind('touchmove', function(e) { 
+				console.log($(this).scrollTop()); // Replace this with your code.
+				});	 
+			  
+			 */
 
 			$("#scrollSubOrg3").bind("scroll", function() {
 								    var offset = $(this).scrollTop();
@@ -1053,7 +1061,7 @@ var listDashBoardAllKPIFn = function(data){
 	  htmlData1+="<tr>";
 	  htmlData3+="<tr>";
 	   htmlData1+="<td>"+indexEntry['perspective']+"</td>";//etl_dttm
-	   htmlData1+="<td>"+indexEntry['item']+"<br>Last Updated: "+indexEntry['etl_dttm']+"</td>";
+	   htmlData1+="<td>"+indexEntry['item']+"<br><span class='LastUpdateText'>Last Updated: "+indexEntry['etl_dttm']+"</span></td>";
 	   htmlData1+="<td>"+indexEntry['uom']+"</td>";
 	   
 	   //loop here..
@@ -1072,16 +1080,16 @@ var listDashBoardAllKPIFn = function(data){
 	     htmlData2+="</thead>";
 	     htmlData2+="<tbody>";
 	      htmlData2+="<tr>";
-	      htmlData2+="<td style='text-align:right;'>"+addCommas(indexEntry2['target'])+"</td>";
-	      htmlData2+="<td style='text-align:right;'>"+addCommas(indexEntry2['forecast'])+"</td>";
-	      htmlData2+="<td style='text-align:right;'>"+addCommas(indexEntry2['actual'])+"</td>";
+	      htmlData2+="<td style='text-align:right;'>"+addCommas(notNullFn(indexEntry2['target']))+"</td>";
+	      htmlData2+="<td style='text-align:right;'>"+addCommas(notNullFn(indexEntry2['forecast']))+"</td>";
+	      htmlData2+="<td style='text-align:right;'>"+addCommas(notNullFn(indexEntry2['actual']))+"</td>";
 	      htmlData2+="</tr>";
 	      htmlData2+="<tr>";
-	      htmlData2+="<td>%Target<span style='float:right'>"+parseFloat(indexEntry2['percent_target']).toFixed(2)+"</span></td>";
+	      htmlData2+="<td>%Target<span style='float:right'>"+notNullFn(indexEntry2['percent_target'])+"</span></td>";
 	      htmlData2+="<td colspan='2'><div class='sparkline' id='perTarget"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_target_str']+"</div></td>";
 	      htmlData2+="</tr>";
 	      htmlData2+="<tr>";
-	      htmlData2+="<td>%Forecast<span style='float:right'>"+parseFloat(indexEntry2['percent_forecast']).toFixed(2)+"</span></td>";
+	      htmlData2+="<td>%Forecast<span style='float:right'>"+notNullFn(indexEntry2['percent_forecast'])+"</span></td>";
 	      htmlData2+="<td colspan='2'><div class='sparkline' id='perForecast"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_forecast_str']+"</div></td>";  
 	      htmlData2+="</tr>";
 	     htmlData2+="</tbody>";
@@ -1102,16 +1110,16 @@ var listDashBoardAllKPIFn = function(data){
 	    htmlData3+="</thead>";
 	     htmlData3+="<tbody>";
 	      htmlData3+="<tr>";
-	      htmlData3+="<td style='text-align:right;'>"+indexEntry2['target']+"</td>";
-	      htmlData3+="<td style='text-align:right;'>"+indexEntry2['forecast']+"</td>";
-	      htmlData3+="<td style='text-align:right;'>"+indexEntry2['actual']+"</td>";
+	      htmlData3+="<td style='text-align:right;'>"+addCommas(notNullFn(indexEntry2['target']))+"</td>";
+	      htmlData3+="<td style='text-align:right;'>"+addCommas(notNullFn(indexEntry2['forecast']))+"</td>";
+	      htmlData3+="<td style='text-align:right;'>"+addCommas(notNullFn(indexEntry2['actual']))+"</td>";
 	      htmlData3+="</tr>";
 	      htmlData3+="<tr>";
-	       htmlData3+="<td>%Target<span style='float:right'>"+parseFloat(indexEntry2['percent_target']).toFixed(2)+"</span></td>";
+	       htmlData3+="<td>%Target<span style='float:right'>"+notNullFn(indexEntry2['percent_target'])+"</span></td>";
 	       htmlData3+="<td colspan='2'><div class='sparkline' id='perTarget"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_target_str']+"</div></td>";
 	      htmlData3+="</tr>";
 	      htmlData3+="<tr>";
-	       htmlData3+="<td>%Forecast<span style='float:right'>"+parseFloat(indexEntry2['percent_forecast']).toFixed(2)+"</span></td>";
+	       htmlData3+="<td>%Forecast<span style='float:right'>"+notNullFn(indexEntry2['percent_forecast'])+"</span></td>";
 	       htmlData3+="<td colspan='2'><div class='sparkline' id='perForecast"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_forecast_str']+"</div></td>";   
 	      htmlData3+="</tr>";
 	      htmlData3+="</tbody>";

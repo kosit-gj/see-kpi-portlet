@@ -630,12 +630,12 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 }
 .aui .header-fixed-kpi1 { 
     position: absolute; 
-    top: 0px; display:none;
+    top: -1px; display:none;
     width:740px;
 }
 .aui .header-fixed-kpi2 { 
     position: absolute; 
-    top: 0px; display:none;
+    top: -1px; display:none;
     width:310px;
 }
 .aui .modal-body{

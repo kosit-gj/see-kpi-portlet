@@ -666,6 +666,11 @@ margin-bottom:1px;
 }
 /* Modal action plan END */
 
+
+.aui .ca-menu li{
+    line-height: 0px;
+}
+
 </style>
 
 
