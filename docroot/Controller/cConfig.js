@@ -1,7 +1,7 @@
 var restfulURL="";
 /*#######Office#######*/
 
-restfulURL="http://192.168.1.254";
+//restfulURL="http://192.168.1.254";
 
 /*#######Localhost#######*/
 //restfulURL="http://localhost";
@@ -11,3 +11,6 @@ restfulURL="http://192.168.1.254";
 
 /*#######Cloud#######*/
 //restfulURL="http://210.4.153.18";
+
+/*#######PJoe######*/
+restfulURL="http://192.168.43.79";
