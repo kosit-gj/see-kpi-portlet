@@ -134,6 +134,11 @@ Route::group(['middleware' => 'cors'], function()
 	Route::post('appraisal/action_plan/{item_result_id}','AppraisalController@add_action');	
 	Route::patch('appraisal/action_plan/{item_result_id}','AppraisalController@update_action');	
 	Route::delete('appraisal/action_plan/{item_result_id}','AppraisalController@delete_action');	
+	Route::get('appraisal/reason/{item_result_id}','AppraisalController@list_reason');
+	Route::get('appraisal/reason/{item_result_id}/{reason_id}','AppraisalController@show_reason');
+	Route::post('appraisal/reason/{item_result_id}','AppraisalController@add_reason');	
+	Route::patch('appraisal/reason/{item_result_id}','AppraisalController@update_reason');	
+	Route::delete('appraisal/reason/{item_result_id}','AppraisalController@delete_reason');		
 	
 	// Database Connection //
 	Route::get('database_connection', 'DatabaseConnectionController@index');
@@ -189,6 +194,7 @@ Route::group(['middleware' => 'cors'], function()
 	// Org //
 	Route::get('org', 'OrgController@index');
 	Route::get('org/parent_list', 'OrgController@parent_list');
+	Route::get('org/province_list', 'OrgController@province_list');
 	Route::get('org/al_list', 'OrgController@al_list');
 	Route::post('org', 'OrgController@store');
 	Route::post('org/import', 'OrgController@import');
@@ -275,14 +281,21 @@ Route::group(['middleware' => 'cors'], function()
 	Route::post('dashboard/emp_list', 'DashboardController@emp_list');*/
 	Route::get('dashboard/year_list', 'DashboardController@year_list');
 	Route::post('dashboard/period_list', 'DashboardController@period_list');
+	Route::get('dashboard/region_list', 'DashboardController@region_list');
+	Route::get('dashboard/district_list', 'DashboardController@district_list');
 	Route::get('dashboard/appraisal_level', 'DashboardController@appraisal_level');
 	Route::post('dashboard/org_list', 'DashboardController@org_list');
+	Route::post('dashboard/kpi_map_list', 'DashboardController@kpi_map_list');
 	Route::post('dashboard/kpi_list', 'DashboardController@kpi_list');
 	Route::post('dashboard/content', 'DashboardController@dashboard_content'); //Post Method
 	Route::post('dashboard/all_content', 'DashboardController@all_dashboard_content'); //Post Method
 	Route::get('dashboard/kpi_overall', 'DashboardController@kpi_overall');
 	Route::get('dashboard/kpi_overall_pie', 'DashboardController@kpi_overall_pie');
 	Route::get('dashboard/kpi_overall_bubble', 'DashboardController@kpi_overall_bubble');
+	Route::get('dashboard/performance_trend', 'DashboardController@performance_trend');
+	Route::get('dashboard/gantt', 'DashboardController@gantt');
+	Route::get('dashboard/branch_performance', 'DashboardController@branch_performance');
+	Route::get('dashboard/branch_details', 'DashboardController@branch_details');	
 	
 	//Dashbaord Emp
 	Route::get('dashboard_emp/year_list', 'DashboardEmpController@year_list');
@@ -302,9 +315,12 @@ Route::group(['middleware' => 'cors'], function()
 	// Mail //
 	Route::get('mail/send','MailController@send');
 	Route::get('mail/monthly','MailController@monthly');
+	Route::get('mail/quarterly','MailController@quarterly');
 	
 	// Report //
 	Route::get('report/usage_log','ReportController@usage_log');
+	Route::get('report/al_list','ReportController@al_list');
+	Route::get('hello','ReportController@hellasso');
 	
 	Route::get('404', ['as' => 'notfound', function () {
 		return response()->json(['status' => '404']);

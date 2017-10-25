@@ -25,6 +25,17 @@ class ReportController extends Controller
 		$this->middleware('jwt.auth');
 	}
 	
+    public function al_list()
+    {
+		$items = DB::select("
+			Select level_id, appraisal_level_name
+			From appraisal_level 
+			Where is_active = 1 
+			order by appraisal_level_name
+		");
+		return response()->json($items);
+    }	
+	
 	public function usage_log(Request $request) 
 	{
 
@@ -53,15 +64,20 @@ class ReportController extends Controller
 		
 		// empty($request->branch_code) ?: ($query .= " and b.branch_code = ? " AND $qinput[] =  $request->branch_code);
 		// empty($request->personnel_name) ?: ($query .= " and b.thai_full_name like ? " AND  $qinput[] = '%' . $request->personnel_name . '%');
-		// if (!empty($request->usage_start_date) and empty($request->usage_end_date)) {
-			// $query .= " and cast(a.usage_dttm as date) >= cast(? as date) ";
-			// $qinput[] = $request->usage_start_date;		
-		// } elseif (empty($request->usage_start_date) and empty($request->usage_end_date)) {
-		// } else {
-			// $query .= " and cast(a.usage_dttm as date) between cast(? as date) and cast(? as date) ";
-			// $qinput[] = $request->usage_start_date;
-			// $qinput[] = $request->usage_end_date;				
-		// }
+		if (!empty($request->usage_start_date) and empty($request->usage_end_date)) {
+			$query .= " and date(a.created_dttm) >= date(?) ";
+			$qinput[] = $request->usage_start_date;		
+		} elseif (empty($request->usage_start_date) and empty($request->usage_end_date)) {
+		} else {
+			$query .= " and date(a.created_dttm) between date(?) and date(?) ";
+			$qinput[] = $request->usage_start_date;
+			$qinput[] = $request->usage_end_date;				
+		}
+		empty($request->emp_id) ?: ($query .= " and b.emp_id = ? " AND $qinput[] = $request->emp_id);
+		empty($request->position_id) ?: ($query .= " and b.position_id = ? " AND $qinput[] = $request->position_id);
+		empty($request->level_id) ?: ($query .= " and b.level_id = ? " AND $qinput[] = $request->level_id);
+		empty($request->org_id) ?: ($query .= " and b.org_id = ? " AND $qinput[] = $request->org_id);
+		
 	
 		$items = DB::select($query . $qfooter, $qinput);
 		$count = DB::select("select found_rows() as total_count");

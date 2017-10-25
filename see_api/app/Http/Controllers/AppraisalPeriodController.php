@@ -119,7 +119,7 @@ class AppraisalPeriodController extends Controller
 		empty($request->appraisal_year) ?: ($query .= " and appraisal_year = ? " AND $qinput[] = $request->appraisal_year);
 		empty($request->appraisal_period_desc) ?: ($query .= " and appraisal_period_desc like ? " AND $qinput[] = '%'.$request->appraisal_period_desc.'%');
 		
-		$qfooter = " order by appraisal_period_desc asc ";
+		$qfooter = " order by a.period_id asc ";
 		$items = DB::select($query.$qfooter,$qinput);
 		return response()->json($items);
 	}

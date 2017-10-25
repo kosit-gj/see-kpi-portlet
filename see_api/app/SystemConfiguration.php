@@ -19,6 +19,6 @@ class SystemConfiguration extends Model
 	public $incrementing = true;
 	//public $timestamps = false;
 	//protected $guarded = array();
-	protected $fillable = array('current_appraisal_year','period_start_month_id','appraisal_frequency_id','bonus_frequency_id','bonus_prorate','daily_bonus_rate','monthly_bonus_rate','nof_date_bonus','salary_raise_frequency_id','result_type','raise_type','threshold','theme_color');
+	protected $fillable = array('current_appraisal_year','period_start_month_id','appraisal_frequency_id','bonus_frequency_id','bonus_prorate','daily_bonus_rate','monthly_bonus_rate','nof_date_bonus','salary_raise_frequency_id','result_type','raise_type','threshold','theme_color','email_reminder_flag','mail_driver','mail_host','mail_port','mail_username','mail_password','mail_encryption','web_domain');
 	protected $hidden = ['created_by', 'updated_by', 'created_dttm', 'updated_dttm'];
 }

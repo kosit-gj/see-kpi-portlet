@@ -35,7 +35,7 @@ class CDSResultController extends Controller
 			$items = Excel::load($f, function($reader){})->get();			
 			foreach ($items as $i) {
 				
-				if ($i->appraisal_type_id == 1) {
+				if ($i->appraisal_type_id == 2) {
 					$validator = Validator::make($i->toArray(), [
 						'employee_id' => 'required|max:50',
 						'appraisal_type_id' => 'integer',
@@ -204,7 +204,7 @@ class CDSResultController extends Controller
 		$x = Excel::create($filename, function($excel) use($items, $filename, $request) {
 			$excel->sheet($filename, function($sheet) use($items, $request) {
 				
-				if ($request->appraisal_type_id == 1) {
+				if ($request->appraisal_type_id == 2) {
 					$sheet->appendRow(array('Appraisal Type ID', 'Level ID', 'Level Name', 'Organization ID', 'Organization Name', 'Employee ID', 'Employee Name', 'Position ID', 'Position Name', 'CDS ID', 'CDS Name', 'Year', 'Month', 'CDS Value'));
 
 					foreach ($items as $i) {
@@ -294,7 +294,7 @@ class CDSResultController extends Controller
 			from appraisal_level
 			where is_active = 1
 			and is_hr = 0
-			order by appraisal_level_name
+			order by level_id
 		");
 		return response()->json($items);
     }

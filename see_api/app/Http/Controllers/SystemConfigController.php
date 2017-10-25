@@ -78,6 +78,14 @@ class SystemConfigController extends Controller
 			'result_type' => 'required|integer',
 			'raise_type' => 'required|integer',
 			'theme_color' => 'required|max:15',
+			'email_reminder_flag' => 'boolean',
+			'mail_driver' => 'max:50',
+			'mail_host' => 'max:50',
+			'mail_port' => 'max:50',
+			'mail_username' => 'max:50',
+			'mail_password' => 'max:50',
+			'mail_encryption' => 'max:50',
+			'web_domain' => 'max:255'
 		]);
 
 		if ($validator->fails()) {

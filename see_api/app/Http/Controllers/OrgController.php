@@ -30,11 +30,13 @@ class OrgController extends Controller
 		empty($request->level_id) ? $level = "" : $level = " and a.level_id = " . $request->level_id . " ";
 		empty($request->org_code) ? $org = "" : $org = " and a.org_code = " . $request->org_code . " ";
 		$items = DB::select("
-			select a.org_id, a.org_code, a.org_name, a.org_abbr, a.is_active, b.org_name parent_org_name, a.parent_org_code, a.level_id, c.appraisal_level_name
+			select a.org_id, a.org_code, a.org_name, a.org_abbr, a.is_active, b.org_name parent_org_name, a.parent_org_code, a.level_id, c.appraisal_level_name, a.longitude, a.latitude, a.province_code, d.province_name
 			from org a left outer join
 			org b on b.org_code = a.parent_org_code
 			left outer join appraisal_level c
-			on a.level_id = c.level_id where 1=1 " . $level . $org . "
+			on a.level_id = c.level_id 
+			left outer join province d on a.province_code = d.province_code
+			where 1=1 " . $level . $org . "
 			order by a.org_code asc
 		");
 		return response()->json($items);
@@ -53,13 +55,23 @@ class OrgController extends Controller
 		return response()->json($items);		
 	}
 	
+	public function province_list()
+	{
+		$items = DB::select("
+			select province_code, province_name
+			from province
+			order by province_name asc
+		");
+		return response()->json($items);	
+	}
+	
 	public function al_list()
 	{
 		$items = DB::select("
 			select level_id, appraisal_level_name, parent_id
 			from appraisal_level
 			where is_active = 1
-			order by appraisal_level_name asc
+			order by level_id asc
 		");
 		foreach ($items as $i) {
 			$parent_org = DB::select("
@@ -121,6 +133,8 @@ class OrgController extends Controller
 						$org->org_abbr = $i->org_abbr;
 						$org->parent_org_code = $i->parent_org_code;
 						$org->is_active = 1;
+						$org->latitude = $i->latitude;
+						$org->longitude = $i->longitude;
 						$org->created_by = Auth::id();
 						$org->updated_by = Auth::id();
 						try {
@@ -129,7 +143,7 @@ class OrgController extends Controller
 							$errors[] = ['org_code' => $i->org_code, 'errors' => substr($e,0,254)];
 						}
 					} else {
-
+ 						Org::where('org_code',$i->org_code)->update(['org_name' => $i->org_name,'org_abbr' => $i->org_abbr,'parent_org_code' => $i->parent_org_code,'latitude' => $i->latitude,'longitude' => $i->longitude]);
 					}
 				}					
 			}
@@ -146,6 +160,9 @@ class OrgController extends Controller
 			'org_abbr' => 'max:255',
 			'parent_org_code' => 'max:15',
 			'level_id' => 'integer',
+			'latitude' => 'numeric',
+			'longitude' => 'numeric',
+			'province_code' => 'integer',			
 			'is_active' => 'required|integer',
 		]);
 
@@ -203,6 +220,9 @@ class OrgController extends Controller
 			'org_abbr' => 'max:255',
 			'parent_org_code' => 'max:15',
 			'level_id' => 'integer',
+			'latitude' => 'numeric',
+			'longitude' => 'numeric',
+			'province_code' => 'integer',
 			'is_active' => 'required|integer',
 		]);
 

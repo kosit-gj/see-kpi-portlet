@@ -41,7 +41,7 @@ class AppraisalAssignmentController extends Controller
 		$items = DB::select("
 			Select appraisal_type_id, appraisal_type_name
 			From appraisal_type
-			Order by appraisal_type_name
+			Order by appraisal_type_id
 		");
 		return response()->json($items);
 	}
@@ -343,7 +343,7 @@ class AppraisalAssignmentController extends Controller
 				From appraisal_level 
 				Where is_active = 1 
 				and is_hr = 0
-				Order by appraisal_level_name			
+				Order by level_id			
 			");
 		} else {
 			$items = DB::select("
@@ -353,6 +353,7 @@ class AppraisalAssignmentController extends Controller
 				and e.chief_emp_code = ?
 				and e.is_active = 1			
 				and al.is_hr = 0
+				Order by level_id	
 			", array($emp->emp_code));
 		}
 		
@@ -443,9 +444,9 @@ class AppraisalAssignmentController extends Controller
 		$qinput = array();
 		if ($all_emp[0]->count_no > 0) {
 
-			if ($request->appraisal_type_id == 1) {
+			if ($request->appraisal_type_id == 2) {
 				$query_unassign = "
-					Select distinct null as emp_result_id,  'Unassigned' as status, emp_id, emp_code, emp_name, o.org_id, o.org_code, o.org_name, p.position_name, 'Individual' as appraisal_type_name, 1 appraisal_type_id, 0 period_id, 'Unassigned' appraisal_period_desc
+					Select distinct null as emp_result_id,  'Unassigned' as status, emp_id, emp_code, emp_name, o.org_id, o.org_code, o.org_name, p.position_name, 'Individual' as appraisal_type_name, 2 appraisal_type_id, 0 period_id, 'Unassigned' appraisal_period_desc
 					From employee e
 					left outer join org o
 					on e.org_id = o.org_id
@@ -520,7 +521,7 @@ class AppraisalAssignmentController extends Controller
 			} else {
 			
 				$query_unassign = "
-					Select distinct null as emp_result_id,  'Unassigned' as status, null emp_id, null emp_code, null emp_name, o.org_id, o.org_code, o.org_name, null position_name, 'Organization' as appraisal_type_name, 2 appraisal_type_id, 0 period_id, 'Unassigned' appraisal_period_desc
+					Select distinct null as emp_result_id,  'Unassigned' as status, null emp_id, null emp_code, null emp_name, o.org_id, o.org_code, o.org_name, null position_name, 'Organization' as appraisal_type_name, 1 appraisal_type_id, 0 period_id, 'Unassigned' appraisal_period_desc
 					From org o
 					Where o.is_active = 1
 				";
@@ -590,9 +591,9 @@ class AppraisalAssignmentController extends Controller
 			
 		} else {
 		
-			if ($request->appraisal_type_id == 1) {
+			if ($request->appraisal_type_id == 2) {
 				$query_unassign = "
-					Select distinct null as emp_result_id,  'Unassigned' as status, e.emp_id, emp_code, emp_name, o.org_id, o.org_code, o.org_name, p.position_name, 'Individual' as appraisal_type_name, 1 appraisal_type_id, 0 period_id, 'Unassigned' appraisal_period_desc
+					Select distinct null as emp_result_id,  'Unassigned' as status, e.emp_id, emp_code, emp_name, o.org_id, o.org_code, o.org_name, p.position_name, 'Individual' as appraisal_type_name, 2 appraisal_type_id, 0 period_id, 'Unassigned' appraisal_period_desc
 					From employee e left outer join	org o 
 					on e.org_id = o.org_id
 					left outer join position p
@@ -675,7 +676,7 @@ class AppraisalAssignmentController extends Controller
 			} else {
 			
 				$query_unassign = "
-					Select distinct null as emp_result_id,  'Unassigned' as status, null emp_id, null emp_code, null emp_name, o.org_id, o.org_code, o.org_name, null position_name, 'Organization' as appraisal_type_name, 2 appraisal_type_id, 0 period_id, 'Unassigned' appraisal_period_desc
+					Select distinct null as emp_result_id,  'Unassigned' as status, null emp_id, null emp_code, null emp_name, o.org_id, o.org_code, o.org_name, null position_name, 'Organization' as appraisal_type_name, 1 appraisal_type_id, 0 period_id, 'Unassigned' appraisal_period_desc
 					From org o
 					Where o.is_active = 1
 				";
@@ -744,7 +745,7 @@ class AppraisalAssignmentController extends Controller
 			}
 		}	
 		
-		$items = DB::select($query_unassign . " order by period_id asc ", $qinput);
+		$items = DB::select($query_unassign . " order by period_id,emp_code,org_code asc ", $qinput);
 		
 		// Get the current page from the url if it's not set default to 1
 		empty($request->page) ? $page = 1 : $page = $request->page;
@@ -813,7 +814,7 @@ class AppraisalAssignmentController extends Controller
 		empty($request->appraisal_level_id) ?: ($query .= " and d.level_id = ? " AND $qinput[] = $request->appraisal_level_id);	
 		empty($request->appraisal_level_id) ?: ($query .= " and c.appraisal_level_id = ? " AND $qinput[] = $request->appraisal_level_id);	
 		
-		$qfooter = " order by b.seq_no, a.item_name, ar.structure_weight_percent desc ";
+		$qfooter = " order by b.seq_no, a.item_id, ar.structure_weight_percent desc ";
 		
 		$items = DB::select($query . $qfooter, $qinput);
 		
@@ -1188,14 +1189,14 @@ class AppraisalAssignmentController extends Controller
 					$period_id = $p->period_id;
 					$qinput = array();
 					
-					if ($request->head_params['appraisal_type_id'] == 1) {
+					if ($request->head_params['appraisal_type_id'] == 2) {
 					
 						$query_unassign = "
 							 select emp_id 
 							 from emp_result
 							 where emp_id = ?
 							 and period_id = ?
-							 and appraisal_type_id = 1
+							 and appraisal_type_id = 2
 						";
 						$qinput[] = $e['emp_id'];
 					
@@ -1205,7 +1206,7 @@ class AppraisalAssignmentController extends Controller
 							 from emp_result
 							 where org_id = ?
 							 and period_id = ?
-							 and appraisal_type_id = 2
+							 and appraisal_type_id = 1
 						";
 						$qinput[] = $e['org_id'];					
 					}
@@ -1222,7 +1223,7 @@ class AppraisalAssignmentController extends Controller
 					if (empty($check_unassign)) {
 						$stage = WorkflowStage::find($request->head_params['action_to']);
 						
-						if ($request->head_params['appraisal_type_id'] == 1) {
+						if ($request->head_params['appraisal_type_id'] == 2) {
 							$employee = Employee::find($e['emp_code']);
 							if (empty($employee)) {
 								$chief_emp_code = null;
@@ -1391,13 +1392,13 @@ class AppraisalAssignmentController extends Controller
 				$period_id = $appraisal_period->first()->period_id;
 				$qinput = array();
 				
-				if ($request->head_params['appraisal_type_id'] == 1) {
+				if ($request->head_params['appraisal_type_id'] == 2) {
 					$query_unassign = "
 						 select emp_id 
 						 from emp_result
 						 Where emp_id = ?
 						 and period_id = ?
-						 and appraisal_type_id = 1
+						 and appraisal_type_id = 2
 					";
 					$qinput[] = $e['emp_id'];
 				} else {
@@ -1406,7 +1407,7 @@ class AppraisalAssignmentController extends Controller
 						 from emp_result
 						 Where org_id = ?
 						 and period_id = ?
-						 and appraisal_type_id = 2
+						 and appraisal_type_id = 1
 					";
 					$qinput[] = $e['org_id'];				
 				}
@@ -1423,7 +1424,7 @@ class AppraisalAssignmentController extends Controller
 				if (empty($check_unassign)) {
 					$stage = WorkflowStage::find($request->head_params['action_to']);
 					
-					if ($request->head_params['appraisal_type_id'] == 1) {
+					if ($request->head_params['appraisal_type_id'] == 2) {
 						$employee = Employee::find($e['emp_code']);
 						if (empty($employee)) {
 							$chief_emp_code = null;
@@ -1701,6 +1702,7 @@ class AppraisalAssignmentController extends Controller
 		}			
 		
 		foreach ($request->appraisal_items as $i) {
+			
 			if ($i['select_flag'] == 1) {
 				if (array_key_exists ( 'form_id' , $i ) == false) {
 					$i['form_id'] = 0;
@@ -1824,7 +1826,7 @@ class AppraisalAssignmentController extends Controller
 		
 		$mail_error = '';
 		
-		if ($emp_result->appraisal_type_id == 1) {
+		if ($emp_result->appraisal_type_id == 2) {
 			$employee = Employee::where('emp_id',$emp_result->emp_id)->first();
 			if (empty($employee)) {
 				$chief_emp_code = null;
