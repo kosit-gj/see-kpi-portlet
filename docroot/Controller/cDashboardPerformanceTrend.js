@@ -292,9 +292,9 @@
 		 	type: 'bullet',
 		 	width:'170',
 		 	height: '20',
-		 	targetWidth: '4',
+		 	targetWidth: '6',
 		    targetColor: '#fefefe',
-		    performanceColor: '#ee9c57',
+		    performanceColor: '#9C6627',
 		    rangeColors: data[0]['rangeColor']
 		 } );
  };
@@ -750,8 +750,8 @@ var generateSubTableKPIFn = function(item,data){
 
 var getOrgFn = function(data){
 	galbalDataTemp['galbalOrg'] = [];
-	  if(data[0]['org']!=undefined){
-	   $.each(data[0]['org'],function(index,indexEntry){
+	  if(data[5]['org']!=undefined){
+	   $.each(data[5]['org'],function(index,indexEntry){
 		   
 		galbalDataTemp['galbalOrg'].push({"org_id":indexEntry['org_id'],"org_name":indexEntry['org']});
 	    //console.log(indexEntry['org']);

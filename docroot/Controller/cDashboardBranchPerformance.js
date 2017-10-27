@@ -457,8 +457,9 @@ $(".ui-accordion-header").click(function(){
 	        type: 'bullet',
 	        width:'120',
 	        height: '20',
-	        targetColor:  '#000000',
-	        performanceColor: 'blue',
+	        targetWidth: '6',
+		    targetColor: '#fefefe',
+		    performanceColor: '#9C6627',
 	        rangeColors: rangeColorsThreshold
 		}).css("opacity","1");
 		$(this).attr("data-sparkline","active" )
@@ -479,8 +480,9 @@ setTimeout(function(){
         type: 'bullet',
         width:'120',
         height: '20',
-        targetColor: '#000000',
-        performanceColor: 'blue',
+        targetWidth: '6',
+	    targetColor: '#fefefe',
+	    performanceColor: '#9C6627',
         rangeColors: rangeColorsThreshold
 	}).css("opacity","1");
 	$("body").mLoading('hide');
