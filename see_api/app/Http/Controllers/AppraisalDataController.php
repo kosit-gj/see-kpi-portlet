@@ -32,7 +32,7 @@ class AppraisalDataController extends Controller
 			From appraisal_structure s, form_type t
 			Where s.form_id = t.form_id
 			And t.form_name = 'Deduct Score'
-			And s.is_active = 1 order by structure_name
+			And s.is_active = 1 order by structure_id
 		");
 		return response()->json($items);
 	}
@@ -43,6 +43,7 @@ class AppraisalDataController extends Controller
 			select period_id, appraisal_period_desc
 			From appraisal_period
 			Where appraisal_year = (select current_appraisal_year from system_config where config_id = 1)
+			order by period_id
 		");
 		return response()->json($items);
 	}	
@@ -53,7 +54,7 @@ class AppraisalDataController extends Controller
 			select level_id, appraisal_level_name
 			from appraisal_level
 			where is_active = 1
-			order by appraisal_level_name
+			order by level_id
 		");
 		return response()->json($items);
     }
@@ -63,6 +64,7 @@ class AppraisalDataController extends Controller
 		$items = DB::select("
 			select *
 			from appraisal_type		
+			order by appraisal_type_id
 		");
 		return response()->json($items);
 	}

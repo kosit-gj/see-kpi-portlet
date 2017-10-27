@@ -1,4 +1,4 @@
-var galbalDashboard=[];
+var galbalDashboard=[]; 
 var galbalDataTemp = [];
 var generateDropDownList = function(url,type,request,initValue){
  	var html="";
@@ -165,16 +165,17 @@ var pinSymbol = function (color) {
 				$.each(data['google_map'],function(index,indexEntry){
 					locations.push([indexEntry['org_id']+"-"+indexEntry['org_name'],parseFloat(indexEntry['latitude']),parseFloat(indexEntry['longitude']),indexEntry['color_code'],[indexEntry]]);
 				});
-				//console.log(locations);
-				
-				
+				console.log(locations);
+				data['longitude']
+				data['latitude']
 				var mapOptions = {
-						  center: {lat: (locations[0] == undefined ? parseFloat("13.7251088") :locations[0][1]), lng: (locations[0] == undefined ? parseFloat("100.4847133") :locations[0][2])},
-						  zoom: (locations[0] == undefined ? 5 : 15),
-						}
+						  center: {lat: (locations[0] == undefined ? parseFloat("13.7251088") :data['latitude']), lng: (locations[0] == undefined ? parseFloat("100.4847133") :data['longitude'])},
+						  zoom: (locations[0] == undefined ? 5 : 10),
+						  mapTypeId: google.maps.MapTypeId.ROADMAP
+						};
 							
 						var maps = new google.maps.Map(document.getElementById("mapGooglePerfomanceArea"),mapOptions);
-						
+						var bounds  = new google.maps.LatLngBounds();
 						var marker, i, info;
 
 						for (i = 0; i < locations.length; i++) {  
@@ -187,7 +188,7 @@ var pinSymbol = function (color) {
 							});
 
 							info = new google.maps.InfoWindow();
-
+							bounds.extend(marker.position);
 						  google.maps.event.addListener(marker, 'click', (function(marker, i) {
 							 
 							return function() {
@@ -201,11 +202,14 @@ var pinSymbol = function (color) {
 							  
 							  //$("body").mLoading('hide');
 							  //alert(locations[i][0].split("-")[0]);
-							  console.log(locations[i][4]);
+							  //console.log(locations[i][4]);
 							}
 						  })(marker, i));
 
 						}
+						
+						maps.fitBounds(bounds); 	// # auto-zoom
+						//maps.panToBounds(bounds); 	// # auto-center 
 				
 				
 				
@@ -388,7 +392,7 @@ var listDataPerformanceDetailFn = function(data,district,type){
 		dataTableHTML+="</table>"; 
 	dataTableHTML+="</div>";
 	$("#detailPerfomanceArea").append(dataTableHTML);
-	
+	//D3 Liquid Fill Gaug
 	var config = liquidFillGaugeDefaultSettings();
 	config.circleColor = indexEntry['color_code'];
 	config.textColor = "black";
@@ -399,7 +403,7 @@ var listDataPerformanceDetailFn = function(data,district,type){
 	
 	config.circleThickness = 0.2;
 	config.textVertPosition = 0.5;
-	config.waveAnimateTime = 1000;
+	config.waveAnimateTime = 8000;
 	config.waveHeight = 0.15;
     config.waveOffset = 0.25;
     config.circleThickness = 0.05;
@@ -416,7 +420,32 @@ var listDataPerformanceDetailFn = function(data,district,type){
 
 $("#detailPerfomanceArea" ).accordion({
     heightStyle: "content",
-    collapsible: true
+    collapsible: true,
+    beforeActivate: function(event, ui) {
+        // The accordion believes a panel is being opened
+       if (ui.newHeader[0]) {
+           var currHeader  = ui.newHeader;
+           var currContent = currHeader.next('.ui-accordion-content');
+        // The accordion believes a panel is being closed
+       } else {
+           var currHeader  = ui.oldHeader;
+           var currContent = currHeader.next('.ui-accordion-content');
+       }
+        // Since we've changed the default behavior, this detects the actual status
+       var isPanelSelected = currHeader.attr('aria-selected') == 'true';
+       
+        // Toggle the panel's header
+       currHeader.toggleClass('ui-corner-all',isPanelSelected).toggleClass('accordion-header-active ui-state-active ui-corner-top',!isPanelSelected).attr('aria-selected',((!isPanelSelected).toString()));
+       
+       // Toggle the panel's icon
+       currHeader.children('.ui-icon').toggleClass('ui-icon-triangle-1-e',isPanelSelected).toggleClass('ui-icon-triangle-1-s',!isPanelSelected);
+       
+        // Toggle the panel's content
+       currContent.toggleClass('accordion-content-active',!isPanelSelected)    
+       if (isPanelSelected) { currContent.slideUp(); }  else { currContent.slideDown(); }
+
+       return false; // Cancels the default action
+   }
 });
 
 $(".ui-accordion-header").click(function(){

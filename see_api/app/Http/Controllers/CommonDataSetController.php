@@ -83,8 +83,14 @@ class CommonDataSetController extends Controller
 		
 		//empty($request->appraisal_level_id) ?: ($query .= " And c.appraisal_level_id = ? " AND $qinput[] = $request->appraisal_level_id);
 		empty($request->cds_id) ?: ($query .= " And cds_id = ? " AND $qinput[] = $request->cds_id);
+		if ($request->is_sql == '') {
+		} else {
+			$query .= " and is_sql = ? ";
+			$qinput[] = $request->is_sql;
+		}
+
 		
-		$qfooter = " Order by cds_name asc ";
+		$qfooter = " Order by cds_id asc ";
 		
 		$items = DB::select($query . $qfooter, $qinput);
 		

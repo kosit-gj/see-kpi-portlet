@@ -297,7 +297,7 @@ structure_name
 		dropDrowkpiTypeFn("Quantity",data['kpi_type_id'],defaultAll=false);
 		dropDrowValueTypeFn("Quantity",data['value_type_id'],defaultAll=false);
 		
-		dropDrowremindConditionFn("Quantity",data['remind_condition_id'],defaultAll=false,defaultEmpty=true);
+		dropDrowremindConditionFn("Quantity",data['remind_condition_id'],defaultAll=false,defaultEmpty=false);
 		
 		$("#baselineValueQuantity").val(data['baseline_value']);
 		$("#formulaDescriptionQuantity").val(data['formula_desc']);
@@ -426,7 +426,7 @@ structure_name
 		dropDrowkpiTypeFn("Quantity",$("#embed_kpi_type_id").val(),defaultAll=false);
 		uomListFn("Quantity");
 		dropDrowValueTypeFn("Quantity",'',defaultAll=false);
-		dropDrowremindConditionFn("Quantity",'',defaultAll=false,defaultEmpty=true);
+		dropDrowremindConditionFn("Quantity",'',defaultAll=false,defaultEmpty=false);
 		$("#btnAddAnotherQuantity").show();
 		//SEARCH
 		//Autocomplete Search Start.

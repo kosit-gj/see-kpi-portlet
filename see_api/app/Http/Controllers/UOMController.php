@@ -29,7 +29,7 @@ class UOMController extends Controller
 		$items = DB::select("
 			select uom_id, uom_name, is_active
 			from uom
-			order by uom_name asc
+			order by uom_id asc
 		");
 		return response()->json($items);
 	}

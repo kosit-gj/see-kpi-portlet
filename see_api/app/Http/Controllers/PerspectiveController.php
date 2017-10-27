@@ -29,7 +29,7 @@ class PerspectiveController extends Controller
 		$items = DB::select("
 			select perspective_id, perspective_name, perspective_abbr, color_code, is_active
 			from perspective
-			order by perspective_name asc
+			order by perspective_id asc
 		");
 		return response()->json($items);
 	}

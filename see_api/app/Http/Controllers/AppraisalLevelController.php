@@ -28,11 +28,11 @@ class AppraisalLevelController extends Controller
 	public function index(Request $request)
 	{		
 		$items = DB::select("
-			SELECT a.level_id, a.appraisal_level_name, a.is_all_employee, a.is_active, a.parent_id, a.is_hr, a.no_weight, b.appraisal_level_name parent_level_name
+			SELECT a.level_id, a.appraisal_level_name, a.is_all_employee, a.district_flag, a.is_active, a.parent_id, a.is_hr, a.no_weight, b.appraisal_level_name parent_level_name
 			FROM appraisal_level a
 			left outer join appraisal_level b
 			on a.parent_id = b.level_id
-			order by a.appraisal_level_name
+			order by a.level_id asc
 		");
 		return response()->json($items);
 	}
@@ -45,6 +45,7 @@ class AppraisalLevelController extends Controller
 			'is_all_employee' => 'required|boolean',
 			'is_active' => 'required|boolean',
 			'is_hr' => 'required|boolean',
+			'district_flag' => 'boolean',
 			'no_weight' => 'required|boolean'
 		]);
 
@@ -84,6 +85,7 @@ class AppraisalLevelController extends Controller
 			'is_all_employee' => 'required|boolean',
 			'is_active' => 'required|boolean',
 			'is_hr' => 'required|boolean',
+			'district_flag' => 'boolean',
 			'no_weight' => 'required|boolean'
 		]);
 

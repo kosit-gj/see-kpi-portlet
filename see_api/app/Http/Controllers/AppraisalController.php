@@ -8,6 +8,7 @@ use App\AppraisalItemResult;
 use App\AppraisalLevel;
 use App\EmpResultStage;
 use App\ActionPlan;
+use App\Reason;
 use App\SystemConfiguration;
 
 use Auth;
@@ -48,7 +49,7 @@ class AppraisalController extends Controller
 			Select period_id, period_no, appraisal_period_desc
 			from appraisal_period
 			where appraisal_year = ?
-			order by start_date asc, appraisal_period_desc asc
+			order by period_id asc
 		", array($request->appraisal_year));
 		return response()->json($items);
 	}	
@@ -69,7 +70,7 @@ class AppraisalController extends Controller
 				From appraisal_level 
 				Where is_active = 1 
 				and is_hr = 0
-				Order by appraisal_level_name			
+				Order by level_id asc			
 			");
 		} else {
 			
@@ -168,7 +169,7 @@ class AppraisalController extends Controller
 				where el.level_id = al.level_id
 				and el.emp_code in ({$in_emp})
 				and al.is_hr = 0
-				order by al.appraisal_level_name
+				order by al.level_id asc
 			");
 		}
 		
@@ -616,7 +617,7 @@ class AppraisalController extends Controller
 			empty($request->position_id) ?: ($query .= " and a.position_id = ? " AND $qinput[] = $request->position_id);
 			empty($request->emp_id) ?: ($query .= " And a.emp_id = ? " AND $qinput[] = $request->emp_id);
 			
-			$items = DB::select($query, $qinput);
+			$items = DB::select($query. " order by period_id,emp_code,org_code  asc ", $qinput);
 			
 		} else {
 
@@ -708,7 +709,7 @@ class AppraisalController extends Controller
 
 			empty($in_emp) ? $in_emp = "null" : null;			
 			
-			if ($request->appraisal_type_id == 1) {
+			if ($request->appraisal_type_id == 2) {
 				$query = "
 					select a.emp_result_id, b.emp_code, b.emp_name, d.appraisal_level_name, e.appraisal_type_id, e.appraisal_type_name, p.position_name, o.org_code, o.org_name, po.org_name parent_org_name, f.to_action, a.stage_id, g.period_id, concat(g.appraisal_period_desc,' Start Date: ',g.start_date,' End Date: ',g.end_date) appraisal_period_desc
 					from emp_result a
@@ -740,7 +741,7 @@ class AppraisalController extends Controller
 				empty($request->position_id) ?: ($query .= " and a.position_id = ? " AND $qinput[] = $request->position_id);
 				empty($request->emp_id) ?: ($query .= " And a.emp_id = ? " AND $qinput[] = $request->emp_id);
 				
-				$items = DB::select($query, $qinput);	
+				$items = DB::select($query. " order by period_id,emp_code,org_code  asc ", $qinput);	
 				
 			} else {
 			
@@ -774,7 +775,7 @@ class AppraisalController extends Controller
 				empty($request->position_id) ?: ($query .= " and a.position_id = ? " AND $qinput[] = $request->position_id);
 				empty($request->emp_id) ?: ($query .= " And a.emp_id = ? " AND $qinput[] = $request->emp_id);
 				
-				$items = DB::select($query, $qinput);			
+				$items = DB::select($query. " order by period_id,emp_code,org_code  asc ", $qinput);			
 			
 			}
 	
@@ -870,11 +871,25 @@ class AppraisalController extends Controller
 			left outer join emp_result h
 			on a.emp_result_id = h.emp_result_id
 			where a.emp_result_id = ?
+			order by b.item_id
 		", array($emp_result_id));
 		
 		$groups = array();
 		foreach ($items as $item) {
 			$key = $item->structure_name;
+			$color = DB::select("
+				select color_code
+				from result_threshold
+				where ? between begin_threshold and end_threshold
+				and result_threshold_group_id = ?
+			", array($item->achievement, $item->result_threshold_group_id));
+			
+			if (empty($color)) {
+				$item->color = null;
+			} else {
+				$item->color = $color[0]->color_code;
+			}
+			
 			$hint = array();
 			if ($item->form_id == 2) {
 				$hint = DB::select("
@@ -1251,9 +1266,6 @@ class AppraisalController extends Controller
 				'plan_end_date' => 'date|date_format:Y-m-d',
 				'actual_start_date' => 'date|date_format:Y-m-d',
 				'actual_end_date' => 'date|date_format:Y-m-d',
-				'plan_value' => 'numeric',
-				'actual_cost' => 'numeric',
-				'earned_value' => 'numeric',
 				'completed_percent' => 'numeric'
 			]);
 			if ($validator->fails()) {
@@ -1296,9 +1308,6 @@ class AppraisalController extends Controller
 					'plan_end_date' => 'date|date_format:Y-m-d',
 					'actual_start_date' => 'date|date_format:Y-m-d',
 					'actual_end_date' => 'date|date_format:Y-m-d',
-					'plan_value' => 'numeric',
-					'actual_cost' => 'numeric',
-					'earned_value' => 'numeric',
 					'completed_percent' => 'numeric'
 				]);
 
@@ -1343,7 +1352,19 @@ class AppraisalController extends Controller
 			order by target_score asc
 		",array($header[0]->threshold_group_id));
 		
+		$result_threshold_color = DB::select("
+			select begin_threshold, end_threshold, color_code
+			from appraisal_item_result a
+			left outer join emp_result b
+			on a.emp_result_id = b.emp_result_id
+			left outer join result_threshold c
+			on b.result_threshold_group_id = c.result_threshold_group_id
+			where a.item_result_id = ?
+			order by begin_threshold desc		
+		", array($item_result_id));
+		
 		$header[0]->threshold_color = $threshold_color;
+		$header[0]->result_threshold_color = $result_threshold_color;
 		
 		$actions = DB::select("
 			select a.*, b.emp_name responsible, c.phase_name
@@ -1383,6 +1404,101 @@ class AppraisalController extends Controller
 		
 		return response()->json(['status' => 200, 'data' => ["success" => $successes, "error" => $errors]]);
 	}
+	
+	public function add_reason(Request $request, $item_result_id)
+	{
+		try {
+			$item_result = AppraisalItemResult::findOrFail($item_result_id);
+		} catch (ModelNotFoundException $e) {
+			return response()->json(['status' => 404, 'data' => 'Appraisal Item Result not found.']);
+		}		
+		
+		$validator = Validator::make($request->all(), [
+			'reason_name' => 'required|max:255'
+		]);
+		
+		if ($validator->fails()) {
+			return response()->json(['status' => 400, 'data' => $validator->errors()]);
+		} else {
+			$item = new Reason;
+			$item->reason_name = $request->reason_name;
+			$item->item_result_id = $item_result_id;
+			$item->created_by = Auth::id();
+			$item->updated_by = Auth::id();
+			$item->save();
+		}			
+		
+		return response()->json(['status' => 200, 'data' => $item]);
+			
+	}	
+	
+	public function show_reason($item_result_id,$reason_id)
+	{
+		try {
+			$item = Reason::findOrFail($reason_id);
+		} catch (ModelNotFoundException $e) {
+			return response()->json(['status' => 404, 'data' => 'Reason not found.']);
+		}
+		return response()->json($item);
+			
+	}
+	
+	public function list_reason($item_result_id)
+	{
+		$items = DB::select("
+			SELECT @rownum := @rownum + 1 AS rank, a.reason_id, a.reason_name, a.created_dttm
+			FROM reason a, (SELECT @rownum := 0) b
+			where a.item_result_id = ?
+			order by a.created_dttm asc
+		", array($item_result_id));
+		return response()->json($items);
+	}
+	
+	public function update_reason(Request $request, $item_result_id)
+	{
+		try {
+			$item = Reason::findOrFail($request->reason_id);
+		} catch (ModelNotFoundException $e) {
+			return response()->json(['status' => 404, 'data' => 'Reason not found.']);
+		}
+		
+		$validator = Validator::make($request->all(), [
+			'reason_name' => 'required|max:255'
+		]);
+
+		if ($validator->fails()) {
+			return response()->json(['status' => 400, 'data' => $validator->errors()]);
+		} else {
+			$item->reason_name = $request->reason_name;
+			$item->updated_by = Auth::id();
+			$item->save();
+		}
+	
+		return response()->json(['status' => 200, 'data' => $item]);
+				
+	}
+	
+	public function delete_reason(Request $request, $item_result_id)
+	{
+		try {
+			$item = Reason::findOrFail($request->reason_id);
+		} catch (ModelNotFoundException $e) {
+			return response()->json(['status' => 404, 'data' => 'Reason not found.']);
+		}	
+
+		try {
+			$item->delete();
+		} catch (Exception $e) {
+			if ($e->errorInfo[1] == 1451) {
+				return response()->json(['status' => 400, 'data' => 'Cannot delete because this Reason is in use.']);
+			} else {
+				return response()->json($e->errorInfo);
+			}
+		}
+		
+		return response()->json(['status' => 200]);
+		
+	}	
 	
 	public function auto_action_employee_name(Request $request)
 	{

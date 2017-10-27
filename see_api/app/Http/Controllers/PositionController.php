@@ -42,7 +42,7 @@ class PositionController extends Controller
 			select position_id, position_name, position_code, is_active
 			from position
 			where position_name like ?
-			order by position_name asc
+			order by position_code asc
 		", array('%'.$request->position_name.'%'));
 		return response()->json($items);
 	}

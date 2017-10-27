@@ -56,7 +56,7 @@ class AppraisalItemController extends Controller
 	{	
 		$qinput = array();
 		$query = "
-			select s.seq_no, s.structure_name, s.structure_id, i.item_id, i.item_name,
+			select s.seq_no, s.structure_name, s.structure_id, i.item_id, i.item_name, ifnull(i.kpi_id,'') kpi_id,
 			p.perspective_name, u.uom_name, i.max_value, i.unit_deduct_score, i.is_active, f.form_name, f.app_url, f.form_id
 			from appraisal_item i
 			left outer join appraisal_structure s
@@ -80,7 +80,7 @@ class AppraisalItemController extends Controller
 		empty($request->item_id) ?: ($query .= " And i.item_id = ? " AND $qinput[] = $request->item_id);
 		empty($request->org_id) ?: ($query .= " and exists ( select 1 from appraisal_item_org lv where lv.item_id = i.item_id and lv.org_id = ? ) " AND $qinput[] = $request->org_id);		
 		
-		$qfooter = " Order by s.seq_no, item_name ";
+		$qfooter = " Order by isnull(i.kpi_id), i.kpi_id asc, i.item_id asc";
 		
 		$items = DB::select($query . $qfooter, $qinput);
 		
@@ -115,6 +115,11 @@ class AppraisalItemController extends Controller
 			if (!isset($groups[$key])) {
 				if ($s->form_name == 'Quantity') {
 					$columns = [
+						[
+							'column_display' => 'KPI ID',
+							'column_name' => 'kpi_id',
+							'data_type' => 'text',
+						],							
 						[
 							'column_display' => 'Appraisal Item Name',
 							'column_name' => 'item_name',
@@ -288,7 +293,7 @@ class AppraisalItemController extends Controller
 			From appraisal_level 
 			Where is_active = 1 
 			and is_hr = 0
-			order by appraisal_level_name
+			order by level_id
 		");
 		return response()->json($items);
     }
@@ -308,7 +313,7 @@ class AppraisalItemController extends Controller
 		$items = DB::select("
 			Select perspective_id, perspective_name
 			From perspective
-			Where is_active = 1 order by perspective_name		
+			Where is_active = 1 order by perspective_id		
 		");
 		return response()->json($items);
 	}
@@ -316,9 +321,11 @@ class AppraisalItemController extends Controller
 	public function structure_list()
 	{
 		$items = DB::select("
-			Select structure_id, structure_name
-			From appraisal_structure
-			Where is_active = 1 order by structure_name		
+			Select structure_id, structure_name, b.form_name
+			From appraisal_structure a
+			left outer join form_type b
+			on a.form_id = b.form_id
+			Where a.is_active = 1 order by structure_id		
 		");
 		return response()->json($items);
 	}
@@ -328,7 +335,7 @@ class AppraisalItemController extends Controller
 		$items = DB::select("
 			Select uom_id, uom_name
 			From uom
-			Where is_active = 1 order by uom_name		
+			Where is_active = 1 order by uom_id		
 		");
 		return response()->json($items);
 	}	
@@ -426,14 +433,17 @@ class AppraisalItemController extends Controller
 				'kpi_type_id' => 'required|integer',
 				'perspective_id' => 'required|integer',
 				'structure_id' => 'required|integer',
+				'appraisal_level' => 'required',
+				'formula_cds_id' => 'required',
 				'uom_id' => 'required|integer',
 				'remind_condition_id' => 'integer',
 				'value_type_id' => 'integer',
-				'baseline_value' => 'required|numeric|digits_between:1,15',
+				'is_show_variance' => 'boolean',
 				'formula_desc' => 'max:1000',
 			//	'formula_cds_id' => 'required|max:1000',
 			//	'formula_cds_name' => 'required|max:1000',
-				'is_active' => 'required|boolean'
+				'is_active' => 'required|boolean',
+				'kpi_id' => 'numeric'
 			]);
 
 			if ($validator->fails()) {
@@ -499,6 +509,7 @@ class AppraisalItemController extends Controller
 			$validator = Validator::make($request->all(), [
 				'item_name' => 'required|max:255|unique:appraisal_item',
 				'structure_id' => 'required|integer',
+				'appraisal_level' => 'required',
 				'is_active' => 'required|boolean'
 			]);
 
@@ -551,6 +562,7 @@ class AppraisalItemController extends Controller
 			$validator = Validator::make($request->all(), [
 				'item_name' => 'required|max:255|unique:appraisal_item',
 				'structure_id' => 'required|integer',
+				'appraisal_level' => 'required',
 				'max_value' => 'required|numeric',
 				'unit_deduct_score' => 'required|numeric|digits_between:1,4',
 				'is_active' => 'required|boolean'
@@ -649,12 +661,15 @@ class AppraisalItemController extends Controller
 				'kpi_type_id' => 'required|integer',
 				'perspective_id' => 'required|integer',
 				'structure_id' => 'required|integer',
+				'appraisal_level' => 'required',
+				'formula_cds_id' => 'required',
 				'uom_id' => 'required|integer',
 				'remind_condition_id' => 'integer',
 				'value_type_id' => 'integer',
-				'baseline_value' => 'required|numeric|digits_between:1,15',
+				'is_show_variance' => 'boolean',
 				'formula_desc' => 'max:1000',
-				'is_active' => 'required|boolean'
+				'is_active' => 'required|boolean',
+				'kpi_id' => 'numeric'
 			]);
 
 			if ($validator->fails()) {
@@ -721,6 +736,7 @@ class AppraisalItemController extends Controller
 			$validator = Validator::make($request->all(), [
 				'item_name' => 'required|max:255|unique:appraisal_item,item_name,'.$item_id . ',item_id',
 				'structure_id' => 'required|integer',
+				'appraisal_level' => 'required',
 				'is_active' => 'required|boolean'
 			]);
 
@@ -772,6 +788,7 @@ class AppraisalItemController extends Controller
 			$validator = Validator::make($request->all(), [
 				'item_name' => 'required|max:255|unique:appraisal_item,item_name,'.$item_id . ',item_id',
 				'structure_id' => 'required|integer',
+				'appraisal_level' => 'required',
 				'max_value' => 'required|numeric',
 				'unit_deduct_score' => 'required|numeric|digits_between:1,4',
 				'is_active' => 'required|boolean'
@@ -878,7 +895,6 @@ class AppraisalItemController extends Controller
 								$newitem->structure_id = $item->structure_id;
 								$newitem->perspective_id = $item->perspective_id;
 								$newitem->uom_id = $item->uom_id;
-								$newitem->baseline_value = $item->baseline_value;
 								$newitem->max_value = $item->max_value;
 								$newitem->unit_deduct_score = $item->unit_deduct_score;
 								$newitem->is_active = $item->is_active;
