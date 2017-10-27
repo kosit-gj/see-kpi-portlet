@@ -1063,25 +1063,25 @@ var createDataTableFn = function(options){
 					return o.value.lastIndexOf(r.text)
 				} else return o.selectionStart
 			};
-			jQuery('.numberOnly').keypress(function (evt) { 
-				//console.log("Keypress");
-				 var charCode = (evt.which) ? evt.which : event.keyCode;
-				 var number = this.value.split('.');
-				 if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
-				    return false;
-				 }
-				    //just one dot
-				 if(number.length>1 && charCode == 46){
-				    return false;
-				 }
-				    //get the carat position
-				 var caratPos = getSelectionStart(this);
-				 var dotPos = this.value.indexOf(".");
-				 if( caratPos > dotPos && dotPos>-1 && (number[1].length > 1)){
-				    return false;
-				 }
-				 return true;
-			});
+//			jQuery('.numberOnly').keypress(function (evt) { 
+//				//console.log("Keypress");
+//				 var charCode = (evt.which) ? evt.which : event.keyCode;
+//				 var number = this.value.split('.');
+//				 if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+//				    return false;
+//				 }
+//				    //just one dot
+//				 if(number.length>1 && charCode == 46){
+//				    return false;
+//				 }
+//				    //get the carat position
+//				 var caratPos = getSelectionStart(this);
+//				 var dotPos = this.value.indexOf(".");
+//				 if( caratPos > dotPos && dotPos>-1 && (number[1].length > 1)){
+//				    return false;
+//				 }
+//				 return true;
+//			});
 			$.getScript($("#url_portlet").val()+"/js/plugins/jquery_mask/jquery.mask.min.js", function(){
 
 				  $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {
@@ -1103,8 +1103,28 @@ var createDataTableFn = function(options){
 					        }
 					    }
 					  });
+				  $('.numberOnly').mask('Z9999999999.00', {
+
+					  translation: {
+					    'Z': {
+					       pattern: /-/,
+					      optional: true
+					    }
+					  }
+					})
 
 			});
+//			$.getScript($("#url_portlet").val()+"/js/jquery.inputmask.bundle.js", function(){
+//				$('.numberOnly').inputmask("numeric", {
+//				    radixPoint: ".",
+//				    groupSeparator: ",",
+//				    digits: 2,
+//				    autoGroup: true,
+//				    //prefix: '$ ', //Space after $, this will not truncate the first character.
+//				    rightAlign: false,
+//				    oncleared: function () { self.Value(''); }
+//				});
+//			});
 //			$(".numberOnly").ForceNumericOnly();
 //			$(".numberOnly").keyup(function (e) {
 //				IsNumeric($(this).val(),this);

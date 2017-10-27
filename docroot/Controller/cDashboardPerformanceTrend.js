@@ -293,8 +293,8 @@
 		 	width:'170',
 		 	height: '20',
 		 	targetWidth: '4',
-		    targetColor: '#003f7f',
-		    performanceColor: '#00007f',
+		    targetColor: '#fefefe',
+		    performanceColor: '#ee9c57',
 		    rangeColors: data[0]['rangeColor']
 		 } );
  };
