@@ -719,14 +719,11 @@ var listAppraisalDetailFn = function(data){
 					$("#informConfirm").empty();
 					var id=this.id.split("-");
 					id=id[1];
-					
-					getDataGanttChartFn(id,$("#ganntChartZoom").val());
-					//$("#ganttOrgTxt").text($("#txtOrgName").text());
-					//$("#ganttAppraisalItemTxt").text($("#item_name-"+id).text());
+					getDataGanttChartFn(id);
+					//getDataGanttChartFn(id,$("#gantt_amount").val(),$("#gantt_unit").val());
 					$("#gantt_item_result_id").val(id);
 					$("#ganttChartModal").modal().css({"margin-top":"0px"});
-					//$("#phase_item_result_id").val(id)
-					//getPhaseFn(id);
+			
 					
 				});
 				
@@ -1465,14 +1462,12 @@ var listPhaseFn = function(data){
 	});	
 	/*bindding popover end*/
 	
-	
-	
 }
 var clearFormPhaseFn = function(){
 	 $("#phaseName").val("");
 	 $("#pahse_id_edit").val("");
 	 $("#phase_action").val("add");
-	 $("#phaseIsActive").prop('checked',false);
+	 $("#phaseIsActive").prop('checked',true);
 }
 var getPhaseFn = function(id){
 	
@@ -2118,14 +2113,48 @@ var generateGanttChartFn = function(dataSource){
 	
  return false;
 };
+var diffDateFn =function(date1,date2){
+	// Here are the two dates to compare
+	/*
+	var date1 = '2011-12-24';
+	var date2 = '2012-02-01';
+	*/
+	// First we split the values to arrays date1[0] is the year, [1] the month and [2] the day
+	date1 = date1.split('-');
+	date2 = date2.split('-');
 
-var getDataGanttChartFn = function(item_result_id,ganttPaneDuration){
+	// Now we convert the array to a Date object, which has several helpful methods
+	date1 = new Date(date1[0], date1[1], date1[2]);
+	date2 = new Date(date2[0], date2[1], date2[2]);
+
+	// We use the getTime() method and get the unixtime (in milliseconds, but we want seconds, therefore we divide it through 1000)
+	date1_unixtime = parseInt(date1.getTime() / 1000);
+	date2_unixtime = parseInt(date2.getTime() / 1000);
+
+	// This is the calculated difference in seconds
+	var timeDifference = date2_unixtime - date1_unixtime;
+
+	// in Hours
+	var timeDifferenceInHours = timeDifference / 60 / 60;
+
+	// and finaly, in days :)
+	var timeDifferenceInDays = timeDifferenceInHours  / 24;
+
+	return timeDifferenceInDays;
+}
+
+var getDataGanttChartFn = function(item_result_id,ganttPaneDuration,ganttPaneDurationUnit){
 	var ganttPaneDurationVarible="";
-	if(ganttPaneDuration==undefined || ganttPaneDuration==""){
-		ganttPaneDurationVarible==90
+	var ganttPaneDurationUnit="";
+	
+	
+	if(ganttPaneDurationUnit==undefined || ganttPaneDurationUnit==""){
+		ganttPaneDurationUnit='d';
 	}else{
-		ganttPaneDurationVarible=ganttPaneDuration
+		ganttPaneDurationUnit=ganttPaneDurationUnit;
 	}
+	
+	
 	
 	$.ajax({
 		url:restfulURL+"/see_api/public/dashboard/gantt",
@@ -2135,6 +2164,28 @@ var getDataGanttChartFn = function(item_result_id,ganttPaneDuration){
 		async:false,
 		success:function(data){
 		//console.log(data);
+			var tasksLength=0;
+			var startDate="";
+			var endDate="";
+			tasksLength=data['tasks']['task'].length;
+			if(tasksLength>0){
+				
+				startDate=data['tasks']['task'][0]['start'];
+				endDate=data['tasks']['task'][(tasksLength-1)]['end'];
+				
+				console.log("ganttPaneDuration="+ganttPaneDuration);
+				if(ganttPaneDuration==undefined || ganttPaneDuration==""){
+					ganttPaneDurationVarible=diffDateFn(startDate,endDate);
+					//console.log(diffDateFn(startDate,endDate));
+				}else{
+					ganttPaneDurationVarible=ganttPaneDuration;
+				}
+			//console.log(diffDateFn(startDate,endDate));
+			//alert(ganttPaneDurationVarible);
+				$("#selectGanntChartViewDaily").val(ganttPaneDurationVarible);
+			}else{
+				$("#selectGanntChartViewDaily").val(1);
+			}
 		if(data['header']['emp_name']=="" || data['header']['emp_name']==null){
 			$(".ganntChartTitleOrg").show();
 			$(".ganntChartTitleEmp").hide();
@@ -2158,9 +2209,10 @@ var getDataGanttChartFn = function(item_result_id,ganttPaneDuration){
 	                "dateformat": "dd/mm/yyyy",
 	                "outputdateformat": "ddds mns yy",
 	                "ganttwidthpercent": "60",
+	               // "ganttPaneDuration": 12,
 	                "ganttPaneDuration": ganttPaneDurationVarible,
 	               // "ganttPaneDurationUnit": "d",
-	                "ganttPaneDurationUnit": "m",
+	                "ganttPaneDurationUnit": ganttPaneDurationUnit,
 	                "plottooltext": "$processName{br} $label starting date $start{br}$label ending date $end",
 	                "legendBorderAlpha": "0",
 	                "legendShadow": "0",
@@ -2200,7 +2252,7 @@ var getDataGanttChartFn = function(item_result_id,ganttPaneDuration){
 	            */
 	            
 	        }
-			console.log(objectGantt);
+			//console.log(objectGantt);
 			generateGanttChartFn(objectGantt);
 			 
 			/* test here start*/
@@ -2238,6 +2290,20 @@ var getDataGanttChartFn = function(item_result_id,ganttPaneDuration){
 		}
 	});
 };
+
+var listViewDailyOrMonthlyFn = function(){
+	html="";
+	for(var i=1;i<=365;i++){
+		if(i==1){
+			html+="<option value="+i+">"+i+" day</option>";
+		}else{
+			html+="<option value="+i+">"+i+" days</option>";
+		}
+		
+	}
+	$("#selectGanntChartViewDaily").html(html);
+}
+
 $(document).ready(function() {
 	
 	 	
@@ -3026,19 +3092,12 @@ $(document).ready(function() {
 	 });
 	//binding tooltip end
 	 
-	 //gantt chart zoom start
-	 $("#ganntChartZoom").change(function(){
-		// alert($(this).val());
-		getDataGanttChartFn($("#gantt_item_result_id").val(),$(this).val());
-		$("#gantt_zoom").val($(this).val());
-		
-	 });
-	 //gantt chart zoom end
+	
 	 //gantt chart print start
 	 $("#btnPrint").click(function(){
 		 
 		 
-		 var url="../../see-kpi-portlet/print/gantt-chart.jsp?restfulURL="+restfulURL+"&item_result_id="+$("#gantt_item_result_id").val()+"&zoom="+$("#gantt_zoom").val()+"";
+		 var url="../../see-kpi-portlet/print/gantt-chart.jsp?restfulURL="+restfulURL+"&item_result_id="+$("#gantt_item_result_id").val()+"&gantt_unit="+$("#gantt_unit").val()+"&gantt_amount="+$("#gantt_amount").val()+"";
 		 url+="&entityType="+$("#embed_appraisalType").val();
 		 url+="&period="+$(".ganntChartTitleEmpArea .ganttAppraisalPeriodDescTxt").text();
 		 url+="&organization="+$(".ganntChartTitleEmpArea  .ganttOrgTxt").text();
@@ -3049,6 +3108,33 @@ $(document).ready(function() {
 	 });
 	 
 	 //gantt chart print edn
+	 
+	 //gantt chart  view daily or monthly start.
+	 listViewDailyOrMonthlyFn();
+	 $("#selectGanntChartType").change(function(){
+	
+	 	if($(this).val()=="m"){
+	 		$("#selectGanntChartViewDaily").hide();
+	 		$("#selectGanntChartViewMonthly").show();
+	 	}else{
+	 		$("#selectGanntChartViewDaily").show();
+	 		$("#selectGanntChartViewMonthly").hide();
+	 	}
+	 	$("#gantt_unit").val($(this).val());
+	 });
+	 $("#selectGanntChartType").change();
+	 $("#btnGanttSubmit").click(function(){
+	
+		if($("#gantt_unit").val()=="m"){
+			$("#gantt_amount").val($("#selectGanntChartViewMonthly").val());
+		}else{
+			$("#gantt_amount").val($("#selectGanntChartViewDaily").val());
+		}
+		
+		getDataGanttChartFn($("#gantt_item_result_id").val(),$("#gantt_amount").val(),$("#gantt_unit").val());
+		
+	 });
+	 //gantt chart  view daily or monthly end.
 	 
 	 
 	 

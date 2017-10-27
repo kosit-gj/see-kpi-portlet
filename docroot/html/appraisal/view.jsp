@@ -1631,7 +1631,7 @@ Is Active
                 -->
                 <div class="ibox float-e-margins">
 							<div class="ibox-title" style="background-color: rgb(255, 224, 18); border-color: rgb(255, 224, 18); text-align:right;">
-
+								<!-- 
 								Zoom
 			                	<select id='ganntChartZoom' style='width:65px;'>
 			                		<option value='90'>100%</option>
@@ -1641,6 +1641,31 @@ Is Active
 			                		<option value='20'>20%</option>
 			                		<option value='10'>0%</option>
 			                	</select>
+			                	 -->
+			                	 
+			                	<select id='selectGanntChartType' style='width:75px;'>
+			                		<option value='d'>Daily</option>
+			                		<option value='m'>Monthly</option>
+			                	</select>
+			                	<select id='selectGanntChartViewDaily' style='width:75px;'>
+			                		
+			                	</select>
+			                	<select id='selectGanntChartViewMonthly' style='width:85px; display:none;'>
+			                		<option value='1'>1 Month</option>
+			                		<option value='2'>2 Months</option>
+			                		<option value='3'>3 Months</option>
+			                		<option value='4'>4 Months</option>
+			                		<option value='5'>5 Months</option>
+			                		<option value='6'>6 Months</option>
+			                		<option value='7'>7 Months</option>
+			                		<option value='8'>8 Months</option>
+			                		<option value='9'>9 Months</option>
+			                		<option value='10'>10 Months</option>
+			                		<option value='11'>11 Months</option>
+			                		<option value='12'>12 Months</option>
+			                	</select>
+			                	
+			                	<button class='btn btn-primary' id='btnGanttSubmit'><i class=""></i> Submit</button>
 			                	<button class='btn btn-primary' id='btnPrint'><i class="icon-print"></i> Print</button>
 
 							</div>
@@ -1703,7 +1728,8 @@ Is Active
 	             </div>
 	              -->
 	             <input type="hidden" name="gantt_item_result_id" id="gantt_item_result_id" value="">
-	             <input type="hidden" name="gantt_zoom" id="gantt_zoom" value="">
+	             <input type="hidden" name="gantt_unit" id="gantt_unit" value="">
+	             <input type="hidden" name="gantt_amount" id="gantt_amount" value="">
                 <!-- content end -->
             </div>
            

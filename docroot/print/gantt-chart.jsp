@@ -32,7 +32,8 @@
 <%
 	String restfulURL = request.getParameter("restfulURL");
 	String item_result_id = request.getParameter("item_result_id");
-	String zoom = request.getParameter("zoom");
+	String gantt_unit = request.getParameter("gantt_unit");
+	String gantt_amount = request.getParameter("gantt_amount");
 	
 	String entityType = request.getParameter("entityType");
 	String period = request.getParameter("period");
@@ -86,7 +87,9 @@ if(entityType.equals("2")){
 
 var restfulURL="<%=restfulURL%>";
 var item_result_id="<%=item_result_id%>";
-var zoom="<%=zoom%>";
+var gantt_unit="<%=gantt_unit%>";
+var gantt_amount="<%=gantt_amount%>";
+
 
 var generateGanttChartFn = function(dataSource){
 	
@@ -102,6 +105,8 @@ var generateGanttChartFn = function(dataSource){
 	
  return false;
 };
+
+/*
 var getDataGanttChartFn = function(item_result_id,ganttPaneDuration){
 	var ganttPaneDurationVarible="";
 	if(ganttPaneDuration==undefined || ganttPaneDuration==""){
@@ -109,7 +114,6 @@ var getDataGanttChartFn = function(item_result_id,ganttPaneDuration){
 	}else{
 		ganttPaneDurationVarible=ganttPaneDuration
 	}
-	
 	$.ajax({
 		url:restfulURL+"/see_api/public/dashboard/gantt",
 		type:"get",
@@ -165,22 +169,118 @@ var getDataGanttChartFn = function(item_result_id,ganttPaneDuration){
 	                     }
 	                 ]
 	             }
-	            /*
-	            "categories":data['categories'],
-	            "processes":data['processes'],
-	            "datatable":data['datatable'],
-	            "tasks":data['tasks']
-	            */
-	            
+	        
 	        }
-			//console.log(objectGantt);
+			generateGanttChartFn(objectGantt);
+		}
+	});
+};
+*/
+
+var getDataGanttChartFn = function(item_result_id,ganttPaneDuration,ganttPaneDurationUnit){
+	var ganttPaneDurationVarible="";
+	var ganttPaneDurationUnit="";
+	
+	
+	if(ganttPaneDurationUnit==undefined || ganttPaneDurationUnit==""){
+		ganttPaneDurationUnit='d';
+	}else{
+		ganttPaneDurationUnit=ganttPaneDurationUnit;
+	}
+	
+	
+	
+	$.ajax({
+		url:restfulURL+"/see_api/public/dashboard/gantt",
+		type:"get",
+		dataType:"json",
+		data:{"item_result_id":item_result_id},
+		async:false,
+		success:function(data){
+		//console.log(data);
+			var tasksLength=0;
+			var startDate="";
+			var endDate="";
+			tasksLength=data['tasks']['task'].length;
+			if(tasksLength>0){
+				
+				startDate=data['tasks']['task'][0]['start'];
+				endDate=data['tasks']['task'][(tasksLength-1)]['end'];
+				
+				console.log("ganttPaneDuration="+ganttPaneDuration);
+				if(ganttPaneDuration==undefined || ganttPaneDuration==""){
+					ganttPaneDurationVarible=diffDateFn(startDate,endDate);
+					console.log(diffDateFn(startDate,endDate));
+				}else{
+					ganttPaneDurationVarible=ganttPaneDuration;
+				}
+			//console.log(diffDateFn(startDate,endDate));
+			//alert(ganttPaneDurationVarible);
+				
+			}
+			
+		
+		
+			var dataGantt="";
+			var objectGantt={};
+			objectGantt={
+	            "chart": {
+	            	//"exportenabled": "1",
+	                //"exportatclient": "1",
+	                //"caption": "Action Plan",
+	                //"subcaption": "Planned vs Actual",                
+	                "dateformat": "dd/mm/yyyy",
+	                "outputdateformat": "ddds mns yy",
+	                "ganttwidthpercent": "60",
+	               // "ganttPaneDuration": 12,
+	                "ganttPaneDuration": ganttPaneDurationVarible,
+	               // "ganttPaneDurationUnit": "d",
+	                "ganttPaneDurationUnit": ganttPaneDurationUnit,
+	                "plottooltext": "$processName{br} $label starting date $start{br}$label ending date $end",
+	                "legendBorderAlpha": "0",
+	                "legendShadow": "0",
+	                "usePlotGradientColor": "0",
+	                "showCanvasBorder": "0",
+	                "flatScrollBars": "1",
+	                "gridbordercolor": "#333333",
+	                "gridborderalpha": "5",
+	                "slackFillColor": "#e44a00",
+	                "taskBarFillMix": "light+0"
+	            }, 
+	             "categories":data['categories'],
+	             "processes":data['processes'],
+	             "datatable":data['datatable'],
+	             "tasks":data['tasks'],
+	             "legend": {
+	                 "item": [
+	                     {
+	                         "label": "Planned",
+	                         "color": "#008ee4"
+	                     },
+	                     {
+	                         "label": "Actual",
+	                         "color": "#6baa01"
+	                     },
+	                     {
+	                         "label": "Slack (Delay)",
+	                         "color": "#e44a00"
+	                     }
+	                 ]
+	             }
+	        }
 			generateGanttChartFn(objectGantt);
 			 
-		
+			/* test here start*/
+			$("#ganttChartModal").modal().css({"margin-top":"0px"});
+
+			
 			
 		}
 	});
 };
+
+
+
 $(document).ready(function(){
 	//alert("hello jquery");
 	/*
@@ -188,7 +288,7 @@ $(document).ready(function(){
 	alert(zoom);
 	alert(restfulURL);
 	*/
-	getDataGanttChartFn(item_result_id,zoom);
+	getDataGanttChartFn(item_result_id,gantt_amount,gantt_unit);
 	
 	setTimeout(function(){
 		window.print();
