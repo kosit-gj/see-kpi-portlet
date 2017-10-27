@@ -60,8 +60,6 @@
 		<footer-portlet-javascript> 
 			/js/fusioncharts/js/themes/fusioncharts.theme.fint.js
 		</footer-portlet-javascript>   
-		 
-		<footer-portlet-javascript>/js/jquery-print.js</footer-portlet-javascript>
 		                     
  		                  
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>

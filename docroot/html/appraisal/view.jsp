@@ -1642,12 +1642,14 @@ Is Active
 			                		<option value='10'>0%</option>
 			                	</select>
 			                	 -->
-			                	 
-			                	<select id='selectGanntChartType' style='width:75px;'>
-			                		<option value='d'>Daily</option>
-			                		<option value='m'>Monthly</option>
-			                	</select>
-			                	<select id='selectGanntChartViewDaily' style='width:75px;'>
+			                	 <div style='display:none;'>
+				                	<select id='selectGanntChartType' style='width:75px;' >
+				                		<option value='d'>Daily</option>
+				                		<option value='m'>Monthly</option>
+				                	</select>
+			                	 </div>
+			                	Please select range of day
+			                	<select id='selectGanntChartViewDaily' style='width:100px;'>
 			                		
 			                	</select>
 			                	<select id='selectGanntChartViewMonthly' style='width:85px; display:none;'>
