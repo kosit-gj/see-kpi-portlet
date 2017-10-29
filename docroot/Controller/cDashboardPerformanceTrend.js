@@ -1,4 +1,4 @@
- var restfulPathDashboard="/see_api/public/cds_result";
+ var restfulPathDashboard="/see_api/public/cds_result"; 
  var galbalDashboard=[];
  var galbalDataTemp = [];
  var changeAutocomplete=true;

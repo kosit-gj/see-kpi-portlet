@@ -1,4 +1,4 @@
-var galbalDashboard=[]; 
+var galbalDashboard=[];
 var galbalDataTemp = [];
 var generateDropDownList = function(url,type,request,initValue){
  	var html="";
