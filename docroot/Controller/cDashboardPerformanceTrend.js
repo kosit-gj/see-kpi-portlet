@@ -210,7 +210,7 @@
 		                 //"upperLimit": "120000",
 		                 "gaugeFillMix": "{dark-30},{light-60},{dark-10}",
 		                 "gaugeFillRatio": "15",
-		                 "majorTMNumber": "4",
+		                 "majorTMNumber": "5",
 		                 "majorTMColor": "#333",
 		                 "majorTMAlpha": "100",
 		                 "majorTMHeight": "15",
@@ -294,7 +294,7 @@
 		 	height: '20',
 		 	targetWidth: '6',
 		    targetColor: '#fefefe',
-		    performanceColor: '#9C6627',
+		    performanceColor: '#282a4b',
 		    rangeColors: data[0]['rangeColor']
 		 } );
  };
@@ -750,8 +750,17 @@ var generateSubTableKPIFn = function(item,data){
 
 var getOrgFn = function(data){
 	galbalDataTemp['galbalOrg'] = [];
-	  if(data[5]['org']!=undefined){
-	   $.each(data[5]['org'],function(index,indexEntry){
+	var tempOrg=[];
+	try {
+		tempOrg = data[5]['org'];
+		
+		}
+		catch(err) {
+		    console.log(err.message);
+		    tempOrg = data[0]['org'];
+		}
+	  if(tempOrg!=undefined){
+	   $.each(tempOrg,function(index,indexEntry){
 		   
 		galbalDataTemp['galbalOrg'].push({"org_id":indexEntry['org_id'],"org_name":indexEntry['org']});
 	    //console.log(indexEntry['org']);
@@ -794,6 +803,7 @@ var getDataKPIFn = function(page,rpp){
 			getOrgFn(data);
 			listDashBoardAllKPIFn(data);
 			$("#ModalKPI").modal('show');
+			
 			$("#scrollOrg *").scrollTop(0).scrollLeft(0);
 			$('#subTableKPI1 , #subTableKPI2').css('margin-top', "0");
 			$("#subTableKPI1").html($("#tableAllKPI1 > thead").clone()).show();
@@ -854,6 +864,9 @@ var getDataKPIFn = function(page,rpp){
 				generateChartBulletSparkFn(data);
 				//$('.sparkline').show();
 				$("body").mLoading('hide');
+				var widthBody = $(" #ModalKPI .modal-body").width();
+				var widthScrollSubOrg1 = $("#scrollSubOrg1").width();
+				$("#scrollSubOrg3").width(widthBody-widthScrollSubOrg1);
 			}, 2000);
 			
 		}
@@ -925,6 +938,7 @@ var listDashBoardFn = function(data){
 	 $("#accordion").hide();
 	 var org= $("#param_org_id").val();
 	 var emp= $("#param_emp").val();
+	 
 	 var html = "";
 	 if(emp == ""){
 		 $.each(data , function(inedx,indexEntry){
@@ -953,6 +967,7 @@ var listDashBoardFn = function(data){
 			 };
 		 }); 
 	 }
+	 
 	 
 	 $("#accordion").html(html);
 	 
@@ -1037,6 +1052,7 @@ var listDashBoardFn = function(data){
 				  getDataKPIFn();
 				  
 				  $("body").mLoading();
+				  
 //				  document.body.scrollTop = 0;
 //				  document.documentElement.scrollTop = 0;
 				  $('html, body').animate({
@@ -1223,6 +1239,10 @@ var listDashBoardAllKPIFn = function(data){
 	
 			$("#btnSearchAdvance").click();
 			$("#get_sending_status").val("false");
+			//#Change Param Function
+			$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
+			$("#apprasiaLevel").change(function(){$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));$("#organization").change();});
+			$("#organization").change(function(){console.log("organization change");$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));});
 		}else{
 			//Generate DropDown List
 			$("#year").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/year_list","GET"));
@@ -1292,5 +1312,10 @@ var listDashBoardAllKPIFn = function(data){
 			 $("#scrollSubOrg2").width(740);
 			 
 		 }
+		 $(window).on('resize',function(){
+			 var widthBody = $(" #ModalKPI .modal-body").width();
+			 var widthScrollSubOrg1 = $("#scrollSubOrg1").width();
+			 $("#scrollSubOrg3").width(widthBody-widthScrollSubOrg1);
+		 });
 	 }
  });

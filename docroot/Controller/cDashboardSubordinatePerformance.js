@@ -731,6 +731,10 @@ var listDashBoardFn = function(data){
 	
 			$("#btnSearchAdvance").click();
 			$("#get_sending_status").val("false");
+			//#Change Param Function
+			$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
+			$("#apprasiaLevel").change(function(){$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));$("#organization").change();});
+			$("#organization").change(function(){console.log("organization change");$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));});
 		}else{
 			//Generate DropDown List
 			$("#year").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/year_list","GET"));

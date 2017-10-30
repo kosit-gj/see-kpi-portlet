@@ -459,7 +459,7 @@ $(".ui-accordion-header").click(function(){
 	        height: '20',
 	        targetWidth: '6',
 		    targetColor: '#fefefe',
-		    performanceColor: '#9C6627',
+		    performanceColor: '#282a4b',
 	        rangeColors: rangeColorsThreshold
 		}).css("opacity","1");
 		$(this).attr("data-sparkline","active" )
@@ -482,7 +482,7 @@ setTimeout(function(){
         height: '20',
         targetWidth: '6',
 	    targetColor: '#fefefe',
-	    performanceColor: '#9C6627',
+	    performanceColor: '#282a4b',
         rangeColors: rangeColorsThreshold
 	}).css("opacity","1");
 	$("body").mLoading('hide');
