@@ -354,7 +354,7 @@ var listDataPerformanceDetailFn = function(data,district,type){
 				
 				dataTableHTML+="<tr>";
 					dataTableHTML+="<td>"+indexEntry2['perspective_name']+" </td>";
-					dataTableHTML+="<td>"+indexEntry2['item_name']+"<br><span class='LastUpdateText'>Last Updated: "+indexEntry2['etl_dttm']+"</span></td>";
+					dataTableHTML+="<td>"+indexEntry2['item_name']+"<br><span class='LastUpdateText'>As of: "+indexEntry2['etl_dttm']+"</span></td>";
 					dataTableHTML+="<td>"+indexEntry2['uom_name']+" </td>";
 					dataTableHTML+="<td>";
 					

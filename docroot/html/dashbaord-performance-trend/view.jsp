@@ -67,7 +67,9 @@
 		    top:0px;
 		}
 	.aui .advance-search .span3{width: 24.504%;}
-	
+	.graphLTop {
+		width: 28.1% !important;
+		}
   }
   /* Large desktop End######################################*/
   
@@ -95,6 +97,9 @@
 			width:100%;
 		}
 		/*All End*/
+		.graphLTop {
+		width: 27.362% !important;
+		}
  	
   }
  /*  desktop End############################################*/
@@ -139,7 +144,7 @@
 		width:100%;
 	}
 	.graphLTop {
-	width: 25.73% !important;
+	width: 25.72% !important;
 	}
 	/*All Form End*/
   }

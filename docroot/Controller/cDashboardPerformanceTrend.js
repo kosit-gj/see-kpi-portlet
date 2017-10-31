@@ -3,6 +3,8 @@
  var galbalDataTemp = [];
  var changeAutocomplete=true;
  var mobileStatus=/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+ var galbalOrgID=[];
+ var orgArray=[];
  galbalDataTemp['galbalOrg'] = [];
  galbalDataTemp['extract'] = false;
  galbalDataTemp['All_KPI'] = {};
@@ -137,7 +139,7 @@
 		accordionHtml += "	<div id='bodyOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"'>";	
 		accordionHtml += "		<div class='panel-body'>";
 		//#Start Body Accordion
-		accordionHtml += "				<div class='span12 graphLTopHeader'>"+data['perspective_name']+" - "+data['item_name']+" (หน่วย : "+data['uom_name']+") "+"<span class='LastUpdateText'>Last Updated: "+data['etl_dttm']+"</spen></div>";		
+		accordionHtml += "				<div class='span12 graphLTopHeader'>"+data['perspective_name']+" - "+data['item_name']+" (หน่วย : "+data['uom_name']+") "+"<span class='LastUpdateText'>As of: "+data['etl_dttm']+"</spen></div>";		
 		//#btn next & previous kpi
 		if(kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val()))-1] !=  undefined && parent == "group1"){
 			accordionHtml += "			<span id='previous' class='arrow' data-previous='"+kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val()))-1]+"'></span>";
@@ -748,29 +750,50 @@ var generateSubTableKPIFn = function(item,data){
 		});	
 };
 
-var getOrgFn = function(data){
-	galbalDataTemp['galbalOrg'] = [];
-	var tempOrg=[];
-	try {
-		tempOrg = data[5]['org'];
-		
-		}
-		catch(err) {
-		    console.log(err.message);
-		    tempOrg = data[0]['org'];
-		}
-	  if(tempOrg!=undefined){
-	   $.each(tempOrg,function(index,indexEntry){
-		   
-		galbalDataTemp['galbalOrg'].push({"org_id":indexEntry['org_id'],"org_name":indexEntry['org']});
-	    //console.log(indexEntry['org']);
-	   });
-	   
-	   listHeaderFn(galbalDataTemp['galbalOrg']);
-	  }
+//var getOrgFn = function(data){
+//	galbalDataTemp['galbalOrg'] = [];
+//	var tempOrg=[];
+//	try {
+//		tempOrg = data[5]['org'];
+//		
+//		}
+//		catch(err) {
+//		    console.log(err.message);
+//		    tempOrg = data[0]['org'];
+//		}
+//	  if(tempOrg!=undefined){
+//	   $.each(tempOrg,function(index,indexEntry){
+//		   
+//		galbalDataTemp['galbalOrg'].push({"org_id":indexEntry['org_id'],"org_name":indexEntry['org']});
+//	    //console.log(indexEntry['org']);
+//	   });
+//	   
+//	   listHeaderFn(galbalDataTemp['galbalOrg']);
+//	  }
+//	  
+//};
+var getOrgFn = function(dataOrg,data){
+	 
+	 galbalDataTemp['galbalOrg'] = [];
+	 galbalOrgID=[];
+	 
+	 if(data[0]['org']!=undefined){
 	  
-};
+	     $.each(data[0]['org'],function(index,indexEntry){   
+	    var orgId = index.split("_");
+	    orgId = orgId[1];
+	    galbalOrgID.push(orgId);
 
+	     });
+	   
+	     $.each(galbalOrgID,function(index,indexEntry){   
+	   galbalDataTemp['galbalOrg'].push({"org_id":indexEntry,"org_name":dataOrg["id_"+indexEntry]});
+	     });
+	 
+	     listHeaderFn(galbalDataTemp['galbalOrg']);
+	    
+	 }  
+	};
 var getDataKPIFn = function(page,rpp){
 	var year= $("#param_year").val();
 	var period= $("#param_period").val();
@@ -800,16 +823,117 @@ var getDataKPIFn = function(page,rpp){
 		success : function(data) {
 			
 			galbalDataTemp['All_KPI']=data;
-			getOrgFn(data);
+			//getOrgFn(data);
 			listDashBoardAllKPIFn(data);
 			$("#ModalKPI").modal('show');
+			setScrollFn();
+
+//			$("#scrollOrg *").scrollTop(0).scrollLeft(0);
+//			$('#subTableKPI1 , #subTableKPI2').css('margin-top', "0");
+//			$("#subTableKPI1").html($("#tableAllKPI1 > thead").clone()).show();
+//			$("#subTableKPI2").html($("#tableAllKPI2 > thead").clone()).show(); 
+//			 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+//				  
+//				 
+//			 }
+//			$("#scrollOrg *").unbind( "mouseenter , mouseleave, scroll" );
+//			$( "#scrollSubOrg1" ).bind({
+//			  mouseenter: function() {
+//			   
+//			    //console.log("in");
+//			    $("#scrollSubOrg3").unbind( "scroll" );
+//			    $("#scrollSubOrg2").bind("scroll", function() {
+//			            
+//								    var offset = $(this).scrollTop();
+//								    //console.log(offset);
+//								    $('#scrollSubOrg3').scrollTop(offset);
+//							        $('#subTableKPI1').css('margin-top', offset);
+//							        $('#subTableKPI2').css('margin-top', offset);
+//
+//								});
+//			    
+//			    
+//			  },
+//			  mouseleave: function() {
+//			    $("#scrollSubOrg2").unbind("scroll");
+//			    //console.log("out");
+//			    $("#scrollSubOrg3").bind("scroll", function() {
+//			             //$("#scrollSubOrg2").unbind( "scroll" );
+//								    var offset = $(this).scrollTop();
+//			         
+//								    $('#scrollSubOrg2').scrollTop(offset);
+//							        $('#subTableKPI1').css('margin-top', offset);
+//							        $('#subTableKPI2').css('margin-top', offset);
+//
+//								});
+//			  }
+//			});
+//			//"touchmove"
+//			//"touchend"
+//			/*
+//			 $('#scrollSubOrg3').bind('touchmove', function(e) { 
+//				console.log($(this).scrollTop()); // Replace this with your code.
+//				});	 
+//			  
+//			 */
+//
+//			$("#scrollSubOrg3").bind("scroll", function() {
+//								    var offset = $(this).scrollTop();
+//			         
+//								    $('#scrollSubOrg2').scrollTop(offset);
+//							        $('#subTableKPI1').css('margin-top', offset);
+//							        $('#subTableKPI2').css('margin-top', offset);
+//
+//								});
 			
-			$("#scrollOrg *").scrollTop(0).scrollLeft(0);
-			$('#subTableKPI1 , #subTableKPI2').css('margin-top', "0");
-			$("#subTableKPI1").html($("#tableAllKPI1 > thead").clone()).show();
-			$("#subTableKPI2").html($("#tableAllKPI2 > thead").clone()).show(); 
+			setTimeout(function(){ 
+				
+				generateChartBulletSparkFn(data);
+				//$('.sparkline').show();
+				$("body").mLoading('hide');
+				var widthBody = $(" #scrollOrg").width();
+				var widthScrollSubOrg1 = $("#scrollSubOrg1").width();
+				$("#scrollSubOrg3").width(widthBody-widthScrollSubOrg1);
+				console.log("NoResize \n widthBody : "+widthBody+"\n widthScrollSubOrg1 : "+widthScrollSubOrg1+"\n Total : "+(widthBody-widthScrollSubOrg1));
+			}, 2000);
 			
-			$("#scrollOrg *").unbind( "mouseenter , mouseleave, scroll" );
+		}
+	});	
+};
+var setScrollFn = function () {
+	$("#scrollOrg *").scrollTop(0).scrollLeft(0);
+	$('#subTableKPI1 , #subTableKPI2').css('margin-top', "0");
+	$("#subTableKPI1").html($("#tableAllKPI1 > thead").clone()).show();
+	$("#subTableKPI2").html($("#tableAllKPI2 > thead").clone()).show(); 
+	 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+		 //"touchmove"
+		 //"touchend"
+		 $("#scrollOrg *").unbind( "touchmove , scroll" );
+		 $('#scrollSubOrg2').bind('touchmove', function(e) { 
+				console.log("Org2 "+$(this).scrollTop()); // Replace this with your code.
+				$("#scrollSubOrg3").unbind( "scroll" );
+			    $("#scrollSubOrg2").bind("scroll", function() {
+			            
+								    var offset = $(this).scrollTop();
+								    //console.log(offset);
+								    $('#scrollSubOrg3').scrollTop(offset);
+							        $('#subTableKPI1').css('margin-top', offset);
+							        $('#subTableKPI2').css('margin-top', offset);
+
+								});
+				});	
+		 $('#scrollSubOrg3').bind('touchmove', function(e) { 
+				console.log("Org3 "+$(this).scrollTop()); // Replace this with your code.
+				 $("#scrollSubOrg2").unbind("scroll");
+				 $("#scrollSubOrg3").bind("scroll", function() {
+					var offset = $(this).scrollTop();
+				    $('#scrollSubOrg2').scrollTop(offset);
+					$('#subTableKPI1').css('margin-top', offset);
+					$('#subTableKPI2').css('margin-top', offset);
+				 	});
+				});	
+	 }else{
+		 $("#scrollOrg *").unbind( "mouseenter , mouseleave, scroll" );
 			$( "#scrollSubOrg1" ).bind({
 			  mouseenter: function() {
 			   
@@ -841,15 +965,6 @@ var getDataKPIFn = function(page,rpp){
 								});
 			  }
 			});
-			//"touchmove"
-			//"touchend"
-			/*
-			 $('#scrollSubOrg3').bind('touchmove', function(e) { 
-				console.log($(this).scrollTop()); // Replace this with your code.
-				});	 
-			  
-			 */
-
 			$("#scrollSubOrg3").bind("scroll", function() {
 								    var offset = $(this).scrollTop();
 			         
@@ -858,21 +973,9 @@ var getDataKPIFn = function(page,rpp){
 							        $('#subTableKPI2').css('margin-top', offset);
 
 								});
-			
-			setTimeout(function(){ 
-				
-				generateChartBulletSparkFn(data);
-				//$('.sparkline').show();
-				$("body").mLoading('hide');
-				var widthBody = $(" #ModalKPI .modal-body").width();
-				var widthScrollSubOrg1 = $("#scrollSubOrg1").width();
-				$("#scrollSubOrg3").width(widthBody-widthScrollSubOrg1);
-			}, 2000);
-			
-		}
-	});	
-};
-
+	 }
+	
+}
  
  var searchAdvanceFn = function (year,period,app_lv,org,kpi,app_type,emp,position) {
 	//embed parameter start
@@ -1078,12 +1181,14 @@ var listDashBoardAllKPIFn = function(data){
 	  htmlData1+="<tr>";
 	  htmlData3+="<tr>";
 	   htmlData1+="<td>"+indexEntry['perspective']+"</td>";//etl_dttm
-	   htmlData1+="<td>"+indexEntry['item']+"<br><span class='LastUpdateText'>Last Updated: "+indexEntry['etl_dttm']+"</span></td>";
+	   htmlData1+="<td>"+indexEntry['item']+"<br><span class='LastUpdateText'>As of: "+indexEntry['etl_dttm']+"</span></td>";
 	   htmlData1+="<td>"+indexEntry['uom']+"</td>";
 	   
 	   //loop here..
 	   $.each(indexEntry['org'],function(index2,indexEntry2){
-	   
+		if(indexEntry2!=""){ 
+		   orgArray[index2]=indexEntry2['org'];
+		}
 	   if(indexEntry2['org_id']==org){
 	    
 	    htmlData2+="<td>"; 
@@ -1154,7 +1259,7 @@ var listDashBoardAllKPIFn = function(data){
 	  
 	  
 	 });
-	 
+	 getOrgFn(orgArray,data);
 	 $("#listData1").html(htmlData1);
 	 $("#listData2").html(htmlData3);
 	 
@@ -1313,8 +1418,9 @@ var listDashBoardAllKPIFn = function(data){
 			 
 		 }
 		 $(window).on('resize',function(){
-			 var widthBody = $(" #ModalKPI .modal-body").width();
-			 var widthScrollSubOrg1 = $("#scrollSubOrg1").width();
+			 var widthBody = $(" #scrollOrg").width();
+			 var widthScrollSubOrg1 = $("#scrollSubOrg1").width()+20;
+			 console.log("Resize \n widthBody : "+widthBody+"\n widthScrollSubOrg1 : "+widthScrollSubOrg1+"\n Total : "+(widthBody-widthScrollSubOrg1));
 			 $("#scrollSubOrg3").width(widthBody-widthScrollSubOrg1);
 		 });
 	 }
