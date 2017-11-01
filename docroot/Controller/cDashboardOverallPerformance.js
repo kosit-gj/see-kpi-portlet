@@ -5,7 +5,8 @@
  galbalDataTemp['extract'] = false;
  galbalDataTemp['All_KPI'] = [];
  galbalDataTemp['collapse_show']="";
- galbalDataTemp['double_click']=false;
+ galbalDataTemp['click'];
+ galbalDataTemp['click_Timeout']
 //# Generate Drop Down List
  var generateDropDownList = function(url,type,request,initValue){
  	var html="";
@@ -159,30 +160,22 @@
 	            "dataplotclick" : function(ev, props) {
 	            	
 	            	var objDataset = ev.sender.getJSONData().dataset;
-	            	console.log(objDataset);
-	            	console.log(props);
-	            	console.log(props.displayValue);
+	            	//console.log(objDataset);
+	            	//console.log(props);
+	            	//console.log(props.displayValue);
 	            	var clickLabel = $("#nameDiv").text();
+	            	if(galbalDataTemp['click'] == null || galbalDataTemp['click'] == "" || galbalDataTemp['click']['id'] != clickLabel){
+	            		galbalDataTemp['click']={id:clickLabel,double_click:false};
+	            		clearTimeout(galbalDataTemp['click_Timeout']);
+	            		galbalDataTemp['click_Timeout'] = setTimeout(function(){ console.log("*** Clear Timeout ***");galbalDataTemp['click']['id']=""; }, 1000);
+	            	}else if(galbalDataTemp['click']['id'] == clickLabel){
+	            		galbalDataTemp['click']['double_click'] =true;
+	            	}
+	            	console.log(galbalDataTemp['click']['double_click']);
 	            	$.each(objDataset,function(index,indexEntry){
 	            		$.each(indexEntry['data'],function(index2,indexEntry2){
-		            	  if(clickLabel == indexEntry2['name']){
-//		            		  var year= $("#param_year").val();
-//		            			var period= $("#param_period").val();
-//		            			var app_type= $("#param_app_type").val();
-//		            			var emp= $("#param_emp").val();
-//		            			var position= $("#param_position").val();
-//		            			var app_lv= $("#param_app_lv").val();
-//		            			var org= $("#param_org_id").val();
-//		            			var item= $("#param_item").val(indexEntry2['item_id']);
-//		            			var paramLink =
-//		            			"year_id="+year+
-//		            			"&period_id="+period+
-//		        				"&appraisal_type_id="+app_type+
-//		        				"&emp_id="+emp+
-//		        				"&position_id="+position+
-//		        				"&level_id="+app_lv+
-//		        				"&org_id="+org+
-//		        				"&item_id="+item;
+		            	  if(clickLabel == indexEntry2['name'] && galbalDataTemp['click']['double_click'] == true){
+//		            		  
 		            			$("#param_item").val(indexEntry2['item_id']);
 		            			$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/subordinate-performance");
 		            			$("form#linkParam").submit();
@@ -191,7 +184,7 @@
 //			            			$("form#linkParam").submit();
 //		            				}, 1000);
 		            			
-		            		  //getDataBubbleFn();
+		            			galbalDataTemp['click']['id']="";
 		            		  return false;
 		            	  }
 	            	 	});

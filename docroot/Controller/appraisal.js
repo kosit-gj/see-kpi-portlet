@@ -915,27 +915,27 @@ var dropdownListPhaseFn_bk = function(nameArea,id){
 }
 
 var dropdownListPhaseFn = function(){
-	phaseArray=[];
-	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal/phase_list",
-		type:"get",
-		dataType:"json",
-		async:false,
-		headers:{Authorization:"Bearer "+tokenID.token},
-		success:function(data){
-			if(data!="" && data!=[]){
-			
-				$.each(data,function(index,indexEntry){
-					phaseArray.push(indexEntry);
-				});
-				
-			}
-			//$("#uom"+nameArea).html(htmlOption);
-			
-		}
-	});
-	
-}
+	 phaseArray=[];
+	 $.ajax({
+	  url:restfulURL+"/see_api/public/appraisal/phase_list/"+$("#phase_item_result_id").val(),
+	  type:"get",
+	  dataType:"json",
+	  async:false,
+	  headers:{Authorization:"Bearer "+tokenID.token},
+	  success:function(data){
+	   if(data!="" && data!=[]){
+	   
+	    $.each(data,function(index,indexEntry){
+	     phaseArray.push(indexEntry);
+	    });
+	    
+	   }
+	   //$("#uom"+nameArea).html(htmlOption);
+	   
+	  }
+	 });
+	 
+	}
 
 
 

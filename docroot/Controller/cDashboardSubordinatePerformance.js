@@ -6,6 +6,8 @@
  galbalDataTemp['extract'] = false;
  galbalDataTemp['All_KPI'] = [];
  galbalDataTemp['collapse_show']="";
+ galbalDataTemp['click'];
+ galbalDataTemp['click_Timeout'];
 //# Generate Drop Down List
  var generateDropDownList = function(url,type,request,initValue){
  	var html="";
@@ -553,12 +555,20 @@
 	        "events": {
 	            "dataplotclick" : function(ev, props) {
 	            	var objDataset = ev.sender.getJSONData().dataset;
-	            	console.log(objDataset);
-	            	console.log(props.displayValue);
+	            	//console.log(objDataset);
+	            	//console.log(props.displayValue);
 	            	var clickLabel =  $("#nameDiv").text();
+	            	if(galbalDataTemp['click'] == null || galbalDataTemp['click'] == "" || galbalDataTemp['click']['id'] != clickLabel){
+	            		galbalDataTemp['click']={id:clickLabel,double_click:false};
+	            		clearTimeout(galbalDataTemp['click_Timeout']);
+	            		galbalDataTemp['click_Timeout'] = setTimeout(function(){ console.log("*** Clear Timeout ***");galbalDataTemp['click']['id']="";  }, 1000);
+	            	}else if(galbalDataTemp['click']['id'] == clickLabel){
+	            		galbalDataTemp['click']['double_click'] =true;
+	            	}
+	            	console.log(galbalDataTemp['click']['double_click']);
 	            	$.each(objDataset,function(index,indexEntry){
 	            		$.each(indexEntry['data'],function(index2,indexEntry2){
-		            	  if(clickLabel == indexEntry2['name']){
+		            	  if(clickLabel == indexEntry2['name'] && galbalDataTemp['click']['double_click'] == true ){
 		            		  	var temp_org = $("#param_org_id").val();
 		            		  	var temp_lv = $("#param_app_lv").val();
 		            			$("#param_item").val($("#param_kpi_id").val());
@@ -568,6 +578,7 @@
 		            			$("form#linkParam").submit();
 		            			$("#param_org_id").val(temp_org);
 		            		  	$("#param_app_lv").val(temp_lv);
+		            		  	galbalDataTemp['click']['id']="";
 		            		  return false;
 		            	  }
 	            	 	});

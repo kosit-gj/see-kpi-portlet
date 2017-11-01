@@ -9,7 +9,7 @@
  galbalDataTemp['extract'] = false;
  galbalDataTemp['All_KPI'] = {};
  galbalDataTemp['collapse_show']="";
- galbalDataTemp['double_click']=false;
+ galbalDataTemp['click'];
 //# Generate Drop Down List
  var generateDropDownList = function(url,type,request,initValue){
  	var html="";
