@@ -892,11 +892,11 @@ overflow-y: visible;
 										
 												
 				                                    <div class="span4 m-b-xs">
-					                                    <div class="form-group"><label class="span5 control-label-search">Appraisal Level</label>
+					                                    <div class="form-group"><label class="span5 control-label-search">Level</label>
 			
 						                                    <div class="span7" id="appraisalLevelArea">
 						                                    
-							                                    <select data-toggle="tooltip" title="Appraisal Level" class="input form-control input-sm"  id="appraisalLevel" name="appraisalLevel">
+							                                    <select data-toggle="tooltip" title="Level" class="input form-control input-sm"  id="appraisalLevel" name="appraisalLevel">
 							                                    	
 							                                    	<option value="0"></option>
 																	
@@ -1015,7 +1015,7 @@ overflow-y: visible;
          			<div class="row-fluid result_area">
 				         		<div class="span12">
 					         	<div class="ibox-title">
-	                                <div class='titlePanelSearch'>Appraisal Item Result</div>
+	                                <div class='titlePanelSearch'>Appraisal Item List</div>
 	         					</div>
 	         					
 	         					
@@ -1094,7 +1094,7 @@ overflow-y: visible;
             <div class="modal-body">
                 
                 <table class='table table-striped'>
-                <h2> Copy to Appraisal Level:</h2>
+                <h2> Copy to Level:</h2>
                
                 	<tbody id='listLevelData'>
 	                	
@@ -1141,11 +1141,11 @@ overflow-y: visible;
                 	 		<!-- form start -->
 			                <div class='form-file-mangement'>
 				                <div class="form-label-customs">
-				                	Appraisal Item Name <span class='redFont '>*</span>
+				                	KPI Name <span class='redFont '>*</span>
 				                </div>
 				                
 				                <div class="form-input-customs">
-				                	<input type="text" class="form-control input-sm span12" placeholder="Appraisal Item Name" id="appraisalItemNameDeductScore">
+				                	<input type="text" class="form-control input-sm span12" placeholder="KPI Name" id="appraisalItemNameDeductScore">
 				                	
 				                </div>
 				                <br style="clear:both">
@@ -1154,7 +1154,7 @@ overflow-y: visible;
 			                <div class='form-file-mangement'>
 				                <div class="form-label-customs">
 				                
-				                	Appraisal Level <span class='redFont'>*</span>
+				                	Level <span class='redFont'>*</span>
 				                </div>
 				                
 				                <div class="form-input-customs" id="appraisalLevelAreaDeductScore">
@@ -1319,11 +1319,11 @@ overflow-y: visible;
                 	 		<!-- form start -->
 			                <div class='form-file-mangement'>
 				                <div class="form-label-customs">
-				                	Appraisal Item Name <span class='redFont '>*</span>
+				                	KPI Name <span class='redFont '>*</span>
 				                </div>
 				                
 				                <div class="form-input-customs">
-				                	<input id="appraisalItemNameQuality" type="text" class="form-control input-sm span12" placeholder="Appraisal Item Name" >
+				                	<input id="appraisalItemNameQuality" type="text" class="form-control input-sm span12" placeholder="KPI Name" >
 				                	
 				                </div>
 				                <br style="clear:both">
@@ -1332,7 +1332,7 @@ overflow-y: visible;
 			                <div class='form-file-mangement'>
 				                <div class="form-label-customs">
 				                
-				                	Appraisal Level <span class='redFont'>*</span>
+				                	Level <span class='redFont'>*</span>
 				                </div>
 				                
 				                <div class="form-input-customs" id="appraisalLevelAreaQuality">
@@ -1471,11 +1471,11 @@ overflow-y: visible;
                 	 		<!-- form start -->
 			                <div class='form-file-mangement'>
 				                <div class=" form-label-quantity">
-				                	Appraisal Item Name <span class='redFont '>*</span>
+				                	KPI Name <span class='redFont '>*</span>
 				                </div>
 				                
 				                <div class="form-input-customs">
-				                	<input type="text" class="form-control input-sm  span12" placeholder="Appraisal Item Name" id="appraisalItemNameQuantity">
+				                	<input type="text" class="form-control input-sm  span12" placeholder="KPI Name" id="appraisalItemNameQuantity">
 				                </div>
 				                <br style="clear:both">
 			                </div>
@@ -1510,7 +1510,7 @@ overflow-y: visible;
 			                 -->
 			               <div class='form-file-mangement'>
 				                <div class="form-label-quantity">
-				                	Appraisal Level <span class='redFont '>*</span>
+				                	Level <span class='redFont '>*</span>
 				                </div>
 				                
 				                <div class="form-input-customs" id="appraisalLevelAreaQuantity">
@@ -1736,11 +1736,11 @@ overflow-y: visible;
 											<div class="row-fluid">
 											<!-- 
 				                                    <div class="span6 m-b-xs">
-					                                    <div class="form-group"><label class="span4 control-label-search">Appraisal Level</label>
+					                                    <div class="form-group"><label class="span4 control-label-search">Level</label>
 			
 						                                    <div class="span8" id="appraisalLevelSearchAreaQuantity">
 						                                    
-							                                    <select name="flag_2" id="appraisalLevelSearchQuantity" class="input form-control input-sm" title="Appraisal Level" data-toggle="tooltip">
+							                                    <select name="flag_2" id="appraisalLevelSearchQuantity" class="input form-control input-sm" title="Level" data-toggle="tooltip">
 							                                    	<option value="0"></option>
 																</select>
 																
