@@ -125,7 +125,7 @@ var assignTemplateQualityFn = function(structureName,data){
 	//has weight
 	if(data['no_weight']==0){
 			htmlTemplateQuality+="<tr>";
-				htmlTemplateQuality+="<th style=\"width:40%\"><b>Appraisal Item Name</b></th>";
+				htmlTemplateQuality+="<th style=\"width:40%\"><b>KPI Name</b></th>";
 				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Target</b></th>";
 				htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>Score</b></th>  ";      
 				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>%Weight</b></th>  ";  
@@ -139,7 +139,7 @@ var assignTemplateQualityFn = function(structureName,data){
 	}else{
 		
 		htmlTemplateQuality+="<tr>";
-			htmlTemplateQuality+="<th style=\"width:40%\"><b>Appraisal Item Name</b></th>";
+			htmlTemplateQuality+="<th style=\"width:40%\"><b>KPI Name</b></th>";
 			htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Target</b></th>";
 			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>Score</b></th>  ";      
 		 
@@ -245,7 +245,7 @@ var assignTemplateDeductFn = function(structureName,data){
 			
 		
 			htmlTemplateDeduct+="<tr>";
-				htmlTemplateDeduct+="<th style=\"width:30%\"><b>Appraisal Item Name</b></th>";
+				htmlTemplateDeduct+="<th style=\"width:30%\"><b>KPI Name</b></th>";
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Max Value</b></th>";
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Actual Value</b></th>";
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Over Value</b></th>";
@@ -258,7 +258,7 @@ var assignTemplateDeductFn = function(structureName,data){
 			htmlTemplateDeduct+="</tr>";
 		}else{
 			htmlTemplateDeduct+="<tr>";
-				htmlTemplateDeduct+="<th style=\"width:35%\"><b>Appraisal Item Name</b></th>";
+				htmlTemplateDeduct+="<th style=\"width:35%\"><b>KPI Name</b></th>";
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Max Value</b></th>";
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Actual Value</b></th>";
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Over Value</b></th>";
@@ -358,7 +358,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 		htmlTemplateQuantity+="<tr>";
 		
 			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>Perspective</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>Appraisal Item Name</b></th>";
+			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>KPI Name</b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Target </b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Forecast </b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Actual </b></th>";
@@ -383,7 +383,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 	//no_weight	
 		htmlTemplateQuantity+="<tr>";
 			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>Perspective</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>Appraisal Item Name</b></th>";
+			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>KPI Name</b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Target </b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Forecast </b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Actual </b></th>";
@@ -1157,8 +1157,8 @@ update_dttm
 	        type: 'bullet',
 	        width:'80',
 	        //targetColor: rageGreenColor,
-	        targetColor: 'blue',
-	        performanceColor: 'blue',
+	        targetColor: '#fefefe',
+		    performanceColor: '#282a4b',
 	        rangeColors: rangeColorsThreshold});
 	    
 	    
@@ -1166,8 +1166,8 @@ update_dttm
 	        type: 'bullet',
 	        width:'80',
 	        //targetColor: rageGreenColor,
-	        targetColor: 'blue',
-	        performanceColor: 'blue',
+	        targetColor: '#fefefe',
+		    performanceColor: '#282a4b',
 	        rangeColors: rangeColorsThreshold});
 	    
 	   
@@ -1673,7 +1673,7 @@ var listDataFn = function(data){
 				
 				htmlHTML+=" <th style=\"width:auto;\"><b>Emp Code</b></th>";
 				htmlHTML+=" <th style=\"widthauto;\"><b>Emp Name</b></th>";
-				htmlHTML+=" <th style=\"width:auto;\"><b>Appraisal Level</b> </th>";
+				htmlHTML+=" <th style=\"width:auto;\"><b>Level</b> </th>";
 				htmlHTML+=" <th style=\"width:auto;\"><b>Organization </b></th>";
 				htmlHTML+=" <th style=\"width:auto;\"><b>Position</b> </th>";
 				htmlHTML+=" <th style=\"width:auto;\"><b>Action</b></th>";
@@ -1683,7 +1683,7 @@ var listDataFn = function(data){
 				
 				htmlHTML+=" <th style=\"width:auto;\"><b>Org Code</b></th>";
 				htmlHTML+=" <th style=\"widthauto;\"><b>Org Name</b></th>";
-				htmlHTML+=" <th style=\"width:auto;\"><b>Appraisal Level</b> </th>";
+				htmlHTML+=" <th style=\"width:auto;\"><b>Level</b> </th>";
 				htmlHTML+=" <th style=\"width:auto;\"><b>Action</b></th>";
 				//htmlHTML+=" <th style=\"width:auto; text-align:center;\"><b>Manage</b></th>";
 				

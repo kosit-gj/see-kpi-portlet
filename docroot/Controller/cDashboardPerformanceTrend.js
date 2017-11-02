@@ -212,7 +212,7 @@
 		                 //"upperLimit": "120000",
 		                 "gaugeFillMix": "{dark-30},{light-60},{dark-10}",
 		                 "gaugeFillRatio": "15",
-		                 "majorTMNumber": "5",
+		                 "majorTMNumber": "7",
 		                 "majorTMColor": "#333",
 		                 "majorTMAlpha": "100",
 		                 "majorTMHeight": "15",
@@ -231,7 +231,8 @@
 		            },
 		            "dials": {
 		                "dial": [{
-		                    "value": (data['dual_chart']['data']['actual_value']/data['dual_chart']['data']['target'])*100
+		                    //"value": (data['dual_chart']['data']['actual_value']/data['dual_chart']['data']['target'])*100
+		                	"value": (data['dual_chart']['data']['percent_achievement'])
 		                }]
 		            },
 		            "trendpoints": {
@@ -892,7 +893,7 @@ var getDataKPIFn = function(page,rpp){
 				//$('.sparkline').show();
 				$("body").mLoading('hide');
 				var widthBody = $(" #scrollOrg").width();
-				var widthScrollSubOrg1 = $("#scrollSubOrg1").width();
+				var widthScrollSubOrg1 = $("#scrollSubOrg1").width()+2;
 				$("#scrollSubOrg3").width(widthBody-widthScrollSubOrg1);
 				console.log("NoResize \n widthBody : "+widthBody+"\n widthScrollSubOrg1 : "+widthScrollSubOrg1+"\n Total : "+(widthBody-widthScrollSubOrg1));
 			}, 2000);

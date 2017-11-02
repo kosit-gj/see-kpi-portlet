@@ -137,8 +137,8 @@
 	                "plotFillAlpha": "70",
 	                "plotFillHoverColor": "",
 	                "bubbleHoverAlpha": "35",
-	                "xAxisName": "Urgency",
-	                "yAxisName": "Impact",
+	                "xAxisName": "ห่างเป้า",
+	                "yAxisName": "ความสำคัญ",
 	                "numDivlines": "2",
 	                "showValues":"0",
 	                "showPlotBorder":"1",
@@ -148,8 +148,7 @@
 	                "chartLeftMargin": "35",
 	                "chartRightMargin": "35",
 	                //Dynamic tool-tips with HTML and macro variables
-	                "plotTooltext": "<div id='nameDiv'>$name</div>{br}Urgency : <b>$xDataValue</b>{br}Impact : <b>$yDataValue</b>{br}Achievement : <b>$zvalue%</b>{br}Last Updated: 2017-09-26 17:36:32",
-	                
+	                //"plotTooltext": "<div id='nameDiv'>$name</div>{br}Urgency : <b>$xDataValue</b>{br}Impact : <b>$yDataValue</b>{br}Achievement : <b>$zvalue%</b>{br}Last Updated: 2017-09-26 17:36:32",
 	                "theme": "fint"
 	            },
 	            "categories": data['categories'],

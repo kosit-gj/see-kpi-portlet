@@ -746,7 +746,7 @@ margin-bottom:1px;
 									<select data-toggle="tooltip" title="" data-original-title="Level"
 										class="input form-control input-sm span12" id="AppraisalLevel"
 										name="AppraisalLevel">
-										<option>All Appraisal Level</option>
+										<option>All Level</option>
 										<option>ระดับบริหาร</option>
 										<option>ระดับการจัดการ</option>
 										<option>ระดับบังคับบัญชา</option>
@@ -792,7 +792,7 @@ margin-bottom:1px;
 				<div class="row-fluid search_result" >
 					<div class="span12">
 						<div class="ibox-title">
-							<div class='titlePanel'>Appraisal List</div>
+							<div class='titlePanel'>KPI Result List</div>
 						</div>
 
 
@@ -873,7 +873,7 @@ margin-bottom:1px;
 						<span aria-hidden="true">×</span><span class="sr-only"></span>
 					</button>
 					<!-- <i class="fa fa-laptop modal-icon"></i> -->
-					<h4 class="modal-title" id="modalTitleRole">Appraisal</h4>
+					<h4 class="modal-title" id="modalTitleRole">KPI Result</h4>
 					<!-- 
                 <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
                  -->
@@ -1045,7 +1045,7 @@ margin-bottom:1px;
 					<div class="span12">
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<div class='titlePanel'>Appraisal</div>
+								<div class='titlePanel'>KPI Result</div>
 							</div>
 					
 							<div class="ibox-content ibox-content-radius">
@@ -1316,47 +1316,47 @@ Is Active
             <!-- smart cricle area -->
             
 		<div class="container" id='smartArea' style='margin-top:10px; width:1050px;'>
-			     
+
 			    <ul class="ca-menu">
-			                    <li style='background:#aed6f1;'>
+			                    <li style='background:#ED1C24;'> 
 			                        <a href="#">
-			                           <!--  <span class="ca-icon">A</span> -->
+			                           <!--  <span class="ca-icon">A</span> #aed6f1 --> 
 			                            <div class="ca-content" >
 			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>S</h2>
 			                                <h3 class="ca-sub" style='font-size: 17px; color:#ffffff;'>SPECIFIC</h3>
 			                            </div>
 			                        </a>                   
 			                    </li>
-			                    <li style='background:#85c1e9;'>
+			                    <li style='background:#DBAE0F;'>
 			                        <a href="#">
-			                          <!--  <span class="ca-icon">I</span>-->
+			                          <!--  <span class="ca-icon">I</span> #85c1e9-->
 			                            <div class="ca-content">
 			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>M</h2>
 			                                <h3 class="ca-sub" style='font-size: 17px; color:#ffffff;'>MEASURABLE</h3>
 			                            </div>
 			                        </a>                   
 			                    </li>
-			                    <li style='background:#3498db;'>
+			                    <li style='background:#EF59A0;'>
 			                        <a href="#">
-			                           <!-- <span class="ca-icon">C</span>-->
+			                           <!-- <span class="ca-icon">C</span> #3498db-->
 			                            <div class="ca-content">
 			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>A</h2>
 			                                <h3 class="ca-sub" style='font-size: 17px; color:#ffffff;'>ATTAINABLE</h3>
 			                            </div>
 			                        </a>                    
 			                    </li>
-			                    <li style='background:#1f74ad;'>
+			                    <li style='background:#009245;'>
 			                        <a href="#">
-			                           <!-- <span class="ca-icon">S</span>-->
+			                           <!-- <span class="ca-icon">S</span> #1f74ad-->
 			                            <div class="ca-content">
 			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>R</h2>
 			                                <h3 class="ca-sub"  style='font-size: 17px; color:#ffffff;'>RELEVANT</h3>
 			                            </div>
 			                        </a>  
 			                    </li>
-			                     <li style='background:#144d73;'>
+			                     <li style='background:#F7931E;'>
 			                        <a href="#">
-			                           <!-- <span class="ca-icon">T</span>-->
+			                           <!-- <span class="ca-icon">T</span> #144d73-->
 			                            <div class="ca-content">
 			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>T</h2>
 			                                <h3 class="ca-sub" style='font-size: 17px; color:#ffffff;'>TIME-BOUND</h3>
@@ -1398,7 +1398,7 @@ Is Active
 														</div>
 														<div class='actionPlanList'>
 															<div style='padding-top:10px; padding-left: 10px;'>
-																Appraisal Item: <span id='actionPlanAppraisalItem'></span>
+																KPI: <span id='actionPlanAppraisalItem'></span>
 															</div>
 														</div>
 														 
@@ -1685,7 +1685,7 @@ Is Active
 					                		Organization: <span class='ganttOrgTxt'></span>
 					                	</div>
 					                	<div class='span4 ' style='font-weight:bold;padding:10px;'>
-					                		Appraisal Item: <span class='ganttAppraisalItemTxt'></span>
+					                		KPI: <span class='ganttAppraisalItemTxt'></span>
 					                	</div>
 					                </div>
 					                <div class='ganntChartTititle ganntChartTitleEmpArea'>
@@ -1702,7 +1702,7 @@ Is Active
 						                		Employee: <span class='ganttEmpTxt'></span>
 						                	</div>
 						                	<div class='span6 ' style='font-weight:bold;padding:10px; padding-top:5px'>
-						                		Appraisal Item: <span class='ganttAppraisalItemTxt'></span>
+						                		KPI: <span class='ganttAppraisalItemTxt'></span>
 						                	</div>
 						                </div>
 					                
