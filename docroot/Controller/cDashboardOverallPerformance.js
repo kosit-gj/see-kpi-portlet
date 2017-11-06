@@ -333,8 +333,8 @@ var getDataAllKPIFn = function(page,rpp){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,// w8 data 
 		success : function(data) {
-			consolr.log(data);
-			consolr.log(data!="" || data!=null || data!=[] || data!=undefined);
+			console.log(data);
+			console.log(data!="" || data!=null || data!=[] || data!=undefined);
 			if(data!="" || data!=null || data!=[] || data!=undefined ){
 				$("#btn_kpi").show();
 			}else{

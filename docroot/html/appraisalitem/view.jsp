@@ -1217,8 +1217,8 @@ overflow-y: visible;
 				                &nbsp;
 				                </div>
 				                <div class="form-input-customs">
-				                	<input type="checkbox" checked="" name="isShowVarianceDeductScore" id="isShowVarianceDeductScore" value="1">
-				                	<span style="margin-right: 10px;">Is Show Variance</span>
+<!-- 				                	<input type="checkbox" checked="" name="isShowVarianceDeductScore" id="isShowVarianceDeductScore" value="1"> -->
+<!-- 				                	<span style="margin-right: 10px;">Is Show Variance</span> -->
 					             	<input type="checkbox" checked   name="isActiveDeductScore" id="isActiveDeductScore" value="1">
 					              	<span>Is Active</span>
 				                </div>
@@ -1363,8 +1363,8 @@ overflow-y: visible;
 				                <div class="form-label-customs"> 
 				                </div>
 				                <div class="form-input-customs">
-				                	<input type="checkbox" checked="" name="isShowVarianceQuality" id="isShowVarianceQuality" value="1">
-				                	<span style="margin-right: 10px;">Is Show Variance</span>
+<!-- 				                	<input type="checkbox" checked="" name="isShowVarianceQuality" id="isShowVarianceQuality" value="1"> -->
+<!-- 				                	<span style="margin-right: 10px;">Is Show Variance</span> -->
 					             <input type="checkbox" checked  name="isActive" id="isActiveQuality" value="1">
 					              <span>Is Active</span>
 				                </div>
