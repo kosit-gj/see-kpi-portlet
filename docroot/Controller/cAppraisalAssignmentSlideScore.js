@@ -2214,18 +2214,18 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	$("#btnAddAnother").removeAttr("disabled");
 	$("#btnSubmit").removeAttr("disabled");
 	//Default end
-	if(is_hr==0){
-	
-		$("#btnAssignment").attr("disabled","disabled");
-		$("#btnAddAnother").attr("disabled","disabled");
-		$("#btnSubmit").attr("disabled","disabled");
-		
-	}else{
-		//alert(is_hr);
-		$("#btnAssignment").removeAttr("disabled");
-		$("#btnAddAnother").removeAttr("disabled");
-		$("#btnSubmit").removeAttr("disabled");
-	}
+//	if(is_hr==0){
+//	
+//		$("#btnAssignment").attr("disabled","disabled");
+//		$("#btnAddAnother").attr("disabled","disabled");
+//		$("#btnSubmit").attr("disabled","disabled");
+//		
+//	}else{
+//		//alert(is_hr);
+//		$("#btnAssignment").removeAttr("disabled");
+//		$("#btnAddAnother").removeAttr("disabled");
+//		$("#btnSubmit").removeAttr("disabled");
+//	}
 	
 		
 	var getSelectionStart = function (o) {

@@ -1,12 +1,14 @@
  var restfulPathDashboard="/see_api/public/cds_result";
  var galbalDashboard=[];
  var galbalDataTemp = [];
+ var rangeColorsThreshold=[];
  galbalDataTemp['galbalOrg'] = [];
  galbalDataTemp['extract'] = false;
  galbalDataTemp['All_KPI'] = [];
  galbalDataTemp['collapse_show']="";
  galbalDataTemp['click'];
- galbalDataTemp['click_Timeout']
+ galbalDataTemp['click_Timeout'];
+ 
 //# Generate Drop Down List
  var generateDropDownList = function(url,type,request,initValue){
  	var html="";
@@ -254,12 +256,14 @@
 	            	  if(clickLabel == indexEntry['label']){
 	            		  $("#param_perspective").val("");
 	            		  getDataBubbleFn();
+	            		  getDataAllKPIFn();
 	            		  return false;
 	            	  }
 		                $.each(indexEntry['category'],function(index2,indexEntry2){
 							if (clickLabel == indexEntry2['label']) {
 								$("#param_perspective").val(indexEntry2['perspective_id']);
 								getDataBubbleFn();
+								getDataAllKPIFn();
 								return false;
 							}
 		                });
@@ -296,12 +300,93 @@
 			async:false,// w8 data 
 			success : function(data) {
 				galbalDashboard=data;
+				$("#btn_kpi").hide();
 				$("#captionPieChart").html("<div id='txtTopic' class='span12 graphLTopHeader'>"+data['header'].replace("Performance by Perspective", "<div style='display: inline-block;'>Performance by Perspective</div>")+"</div>");
 				generateChartPieFn(data);
 				
 			}
 		});	
 };
+var getDataAllKPIFn = function(page,rpp){
+	var year= $("#param_year").val();
+	var period= $("#param_period").val();
+	var app_type= $("#param_app_type").val();
+	var emp= $("#param_emp").val();
+	//var position= $("#param_position").val();
+	var app_lv= $("#param_app_lv").val();
+	var org= $("#param_org_id").val();
+	var perspective= $("#param_perspective").val();
+	$.ajax({
+		url : restfulURL+"/see_api/public/dashboard/perspective_details",
+		type : "get",
+		dataType : "json",
+		data:{
+			"year_id"				:		year,
+			"period_id"				:		period,
+			"appraisal_type_id"		:		app_type,
+			"emp_id"				:		emp,
+			//"position_id"			:		position,
+			"level_id"				:		app_lv,
+			"org_id"				:		org,
+			"perspective_id" 		:		perspective 
+		},
+		headers:{Authorization:"Bearer "+tokenID.token},
+		async:false,// w8 data 
+		success : function(data) {
+			consolr.log(data);
+			consolr.log(data!="" || data!=null || data!=[] || data!=undefined);
+			if(data!="" || data!=null || data!=[] || data!=undefined ){
+				$("#btn_kpi").show();
+			}else{
+				$("#btn_kpi").hide();
+			}
+			listAllKPIFn(data);
+			
+		}
+	});	
+};
+var listAllKPIFn = function(data){
+	
+	var dataTableHTML="";
+	$.each(data,function(index2,indexEntry2){
+		rangeColorsThreshold = indexEntry2['rangeColor'];
+		dataTableHTML+="<tr>";
+			dataTableHTML+="<td>"+indexEntry2['perspective_name']+" </td>";
+			dataTableHTML+="<td>"+indexEntry2['item_name']+"<br><span class='LastUpdateText'>As of: "+indexEntry2['etl_dttm']+"</span></td>";
+			dataTableHTML+="<td>"+indexEntry2['uom_name']+" </td>";
+			dataTableHTML+="<td>";
+			
+			dataTableHTML+="<table class='tableInside table-striped'>";
+				dataTableHTML+="<thead>";
+					dataTableHTML+="<tr>";
+						dataTableHTML+="<th style='min-width: 100px;'>Target</th>";
+						dataTableHTML+="<th style='min-width: 100px;'>Forecast</th>";
+						dataTableHTML+="<th style='min-width: 100px;'>Actual</th>";
+					dataTableHTML+="</tr>";
+					dataTableHTML+="</thead>";
+					dataTableHTML+="<tbody>";
+						dataTableHTML+="<tr>";
+							dataTableHTML+="<td style=' text-align: right !important;'>"+notNullFn(indexEntry2['target'])+"</td>";
+							dataTableHTML+="<td style=' text-align: right !important;'>"+notNullFn(indexEntry2['forecast'])+"</td>";
+							dataTableHTML+="<td style=' text-align: right !important;'>"+notNullFn(indexEntry2['actual'])+"</td>";
+						dataTableHTML+="</tr>";
+						dataTableHTML+="<tr>";
+							dataTableHTML+="<td>%Taget<span style='float:right'>"+notNullFn(indexEntry2['percent_target'])+"</span></td>";
+							dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:0;'  >"+indexEntry2['percent_target_str']+"</div></td>";
+						dataTableHTML+="</tr>";
+						dataTableHTML+="<tr>";
+							dataTableHTML+="<td>%Forecast<span style='float:right'>"+notNullFn(indexEntry2['percent_forecast'])+"</span></td>";
+							dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:0;'>"+indexEntry2['percent_forecast_str']+"</div></td>";
+						dataTableHTML+="</tr>";
+					dataTableHTML+="</tbody>";
+				dataTableHTML+="</table>";
+			dataTableHTML+="</td>";
+		dataTableHTML+="</tr>";
+		
+	});
+	$("#kpiList").html(dataTableHTML);
+	
+}
 var getDataBubbleFn = function(page,rpp){
 	var year= $("#param_year").val();
 	var period= $("#param_period").val();
@@ -328,7 +413,11 @@ var getDataBubbleFn = function(page,rpp){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,// w8 data 
 		success : function(data) {
-			$("#captionBubbleChart").html("<div id='txtTopic' class='span12 graphLTopHeader'>"+data['header'].replace("Performance by KPI", "<div style='display: inline-block;'>Performance by KPI</div>")+"</div>");
+			var htmlCaption="";
+			htmlCaption +="<div id='txtTopic' class='span12 graphLTopHeader'>"+data['header'].replace("Performance by KPI", "<div style='display: inline-block;'>Performance by KPI</div>");
+			htmlCaption +="<div style='display: inline-block;'><button id='btn_kpi' type='button' data-target='#ModalKPI' data-toggle='modal' class='btn btn-xs btn-white' > <i class='fa fa-table fa-table' aria-hidden='true'></i> All KPI</button></div>";
+			htmlCaption +="</div>";
+			$("#captionBubbleChart").html(htmlCaption);
 			generateChartBubbleFn(data);
 			
 		}
@@ -356,6 +445,7 @@ var getDataBubbleFn = function(page,rpp){
 		//embed parameter end
 		getDataFn();
 		getDataBubbleFn();
+		getDataAllKPIFn();
 };
  
 
@@ -442,6 +532,22 @@ var getDataBubbleFn = function(page,rpp){
 		});
 		//$("#app_type").change();
 		
+		$("#btn_kpi").click(function(){
+			if($(this).attr("data-sparkline") != "active" ){
+				$(".sparkline").sparkline('html', {
+			        type: 'bullet',
+			        width:'120',
+			        height: '20',
+			        targetWidth: '6',
+				    targetColor: '#fefefe',
+				    performanceColor: '#282a4b',
+			        rangeColors: rangeColorsThreshold
+				}).css("opacity","1");
+				$(this).attr("data-sparkline","active" )
+			}
+			
+			
+		});
 		
 		
 		

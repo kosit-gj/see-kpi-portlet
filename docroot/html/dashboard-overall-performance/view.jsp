@@ -36,7 +36,11 @@
  /* Large desktop Start#####################################*/
  @media (min-width: 1200px) { 
 	
-
+	.modal.large {
+		width: 80%;
+		margin-left: -40%;
+		top: 0px;
+	}
 	.aui .advance-search .span3{width: 29.354%;}
 	
   }
@@ -44,7 +48,11 @@
   
   /*  desktop Start#########################################*/
  @media (min-width: 980px) and (max-width: 1199px) {
- 
+ 		.modal.large {
+			width: 80%;
+			margin-left: -40%;
+			top: 0px;
+		}
 		.aui .advance-search .span3{width: 28.754%;}
 		/*All Start*/
 		.aui #btnSearchAdvance{
@@ -61,8 +69,8 @@
  @media (min-width: 768px) and (max-width: 979px) {
  		
 	.modal.large {
-		    width: 90%;
-		    margin-left:-45%;  
+		    width: 80%;
+		    margin-left:-40%;  
 		    top:0px;
 		}
 	.modal.medium {
@@ -93,7 +101,10 @@
  
  /* Landscape phone to portrait tablet Start################*/
  @media (max-width: 767px) { 
- 
+ .modal.large {
+		width: '';
+		top: 0px;
+	}
 
 	
   }
@@ -353,6 +364,35 @@
 .aui .fusioncharts-caption{
 	font-weight: bold;
 }
+.tableInside{
+	width:100%;
+}
+.aui .table th, .aui .table td {
+    border-top: 1px solid #ddd;
+    line-height: 20px;
+    padding-bottom: 3px;
+    padding-right: 0;
+    padding-top: 3px;
+    text-align: left;
+    vertical-align: top;
+}
+.aui .table-bordered {
+/* 	border-collapse: collapse !important; */
+}
+.aui .table th, .aui .table td{
+	font-size: 13px;
+}
+table#tableAllKPI .aui .table th, .aui .table td{
+	padding: 2px;
+}
+.aui #showAllKPI{
+	display: inline-block;
+    float: right;
+}
+.aui #btn_kpi{
+	display: none;
+	margin-left: 5px; font-weight: 700; display: inline-block; margin-top: 3px;
+}
 </style>
 
 
@@ -515,6 +555,43 @@
 	<form id="linkParam" method="POST" target="_blank" action="POST">
 		
 	</form>
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalKPI"
+		class="modal inmodal large" style="display: none;">
+		<div class="modal-dialog " >
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
+						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span>
+					</button>
+					<h4 class="modal-title" id="modalTitleRole">All KPI</h4>
+
+				</div>
+				<div class="modal-body">
+					<!-- ############################################################################ -->
+				<div style="overflow: auto" class="table-responsive p-b-xxs" >
+					<table style="width: 100%;min-width: 720px;" class="table table-bordered fixedHeader" id="tableAllKPI">
+						<thead style="height: 66px !important;">
+							<tr>
+								<th>Perspective</th>
+								<th style="min-width: 130px;">KPI</th>
+								<th style="min-width: 45px;">UOM</th>
+								<th style="text-align: center; min-width: 250px;">KPI
+									Result</th>
+							</tr>
+						</thead>
+						<tbody id="kpiList">
+						</tbody>
+					</table>
+				</div>
+					<!-- ############################################################################ -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+				
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
  
  
