@@ -278,6 +278,9 @@ plid = layout.getPlid();
 	#btnDelActionPlan{
 		width:100%;
 	}
+	#btnDownloadAttachFile{
+		width:100%;
+	}
 	/*btn area end*/
  
   }
@@ -344,6 +347,9 @@ plid = layout.getPlid();
 		width:100%;
 	}
 	#btnDelActionPlan{
+		width:100%;
+	}
+	#btnDownloadAttachFile{
 		width:100%;
 	}
 	/*btn area end*/
@@ -669,6 +675,10 @@ margin-bottom:1px;
 
 .aui .ca-menu li{
     line-height: 0px;
+}
+
+.aui .appraisal_result .popover{
+	width:120px;
 }
 
 </style>
@@ -1297,6 +1307,91 @@ Is Active
         </div>
     </div>
 </div>
+<!-- Modal Reason End -->
+
+<!-- Modal attach file Start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="attachFileModal" class="modal inmodal " style="display: none; margin-top: 0px;">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
+                <h5 class="modal-title">Attach Files</h5>
+            </div>
+            <div class="modal-body">
+               
+			<div style='margin-bottom:5px;'>
+			<form id="attachFileForm">  
+			<table style='width:100%'> 
+				<tr>
+					
+					<td>
+					      
+						<input  style='width:100%;height:100%;'  type='file' name='attach_files_attachment' id='attach_files_attachment' class="dropify" accept=".xls, .xlsx"  multiple>
+						<span style='text-align:right;'>
+						
+						</span>
+					</td>
+				</tr>
+				
+			</table> 
+			<!--  
+			<input align="right" type='submit' class="btn btn-primary" type="button" id="btnSaveAttach" value='Upload'>               
+			-->
+			</form>
+			</div>
+			<input type="hidden" name="attach_file_item_result_id" id="attach_file_item_result_id" value="">
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+					<button class="btn btn-success" type="submit" id="btnSaveAttach" form="attachFileForm">Upload</button>
+					<button data-dismiss="modal" class="btn btn-danger btnCancle"
+						type="button">Cancel</button>
+						<div class="alert alert-warning information" id="information"
+						style="display: none;  position:relative;"></div>
+				</div>
+         
+        </div>
+    </div>
+</div>
+<!-- Modal attach file End -->
+
+
+<!-- Modal Download Attach File Start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="downloadAttachFileModal" class="modal inmodal " style="display: none; margin-top: 0px;">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
+                <h5 class="modal-title">Download Files</h5>
+            </div>
+            <div class="modal-body">
+            <!-- content start -->
+			<table class='table'>
+				<thead>
+					<tr>
+						<th style='width:5%;'>
+						<b>No.</b>
+						</th>
+						<th style='width:50%;'>
+						<b>Attach Files</b>
+						</th>
+						<th style='text-align:center; width:10%;'>
+						<b>Manage</b>
+						</th>
+					</tr>
+				</thead>
+				<tbody id='listDataAttachFile'>
+					
+				</tbody>
+			</table>
+            <!-- content end -->
+            </div>
+         
+        </div>
+    </div>
+</div>
+<!-- Modal Download attach file End -->
+
 
 <!-- modal action plan start -->
 <div aria-hidden="true" role="dialog" tabindex="-1" id="actionPlanModal" class="modal inmodal large" style="display: none; margin-top: 0px;">
@@ -1491,6 +1586,9 @@ Is Active
 											</div>
 											<div class='span6'>
 												<div class='saveAndCancelArea' >
+													<button type="button" class="btn btn-primary input-sm" name="btn-" id="btnDownloadAttachFile">
+														Download
+													</button>
 													<button type="button" class="btn btn-primary input-sm" name="btn-" id="btnSaveActionPlan">
 														Save
 													</button>
@@ -1786,6 +1884,12 @@ Is Active
 	
 
 </body>
+
+<script src="/see-kpi-portlet/js/jquery3.1.1.js"></script>
+<script type="text/javascript">
+ var jQuery_1_1_3 = $.noConflict(true);
+</script>
+ 
 	
 	
 

@@ -1,6 +1,8 @@
 var globalData="";
 var phaseArray=[];
 var globalCount=0;
+//Variable to store your files
+var files;
 // funciton global start
 //form2
 
@@ -276,6 +278,7 @@ var assignTemplateDeductFn = function(structureName,data){
 							htmlTemplateDeduct+="<tr>";
 									htmlTemplateDeduct+="<td class=''> "+indexEntry['item_name']+"</td>";
 									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['max_value'])).toFixed(2))+"</td>";
+									//htmlTemplateDeduct+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore\" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
 									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
 									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2))+"</td>";
 									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['deduct_score_unit'])).toFixed(2))+"</td>";
@@ -286,6 +289,7 @@ var assignTemplateDeductFn = function(structureName,data){
 							htmlTemplateDeduct+="<tr>";
 									htmlTemplateDeduct+="<td class=''> "+indexEntry['item_name']+"</td>";
 									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['max_value'])).toFixed(2))+"</td>";
+									//htmlTemplateDeduct+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore\" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
 									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
 									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2))+"</td>";
 									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['deduct_score_unit'])).toFixed(2))+"</td>";
@@ -423,9 +427,8 @@ var assignTemplateQuantityFn = function(structureName,data){
 						htmlTemplateQuantity+="<td>"+indexEntry['perspective_name']+"</td>";
 						htmlTemplateQuantity+="<td id=\"item_name-"+indexEntry['item_result_id']+"\">"+indexEntry['item_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
-						
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+indexEntry['forecast_value']+"></td>";
-						
+						//htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly \" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
 						if(data['threshold']==1){
 							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])))+"</td>";
@@ -437,7 +440,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 						
 	
 						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
-						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"   &lt;button style='width:100px;' class='btn btn-success btn-small btn-gear reason' id='reason-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Reason&lt;/button&gt;  &lt;button style='width:100px;' class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Gantt Chart&lt;/button&gt;  &lt;button style='width:100px;' class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt; &lt;button style='width:100px;' id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"   &lt;button style='width:100px;' class='btn btn-success btn-small btn-gear reason' id='reason-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Reason&lt;/button&gt;  &lt;button style='width:100px;' class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Gantt Chart&lt;/button&gt;  &lt;button style='width:100px;' class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt; &lt;button style='width:100px;' id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100px;' class='btn btn-success btn-small btn-gear attach_file'&gt;Attach File&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
 						htmlTemplateQuantity+="	</td>";
 							
 					htmlTemplateQuantity+="</tr>";
@@ -450,7 +453,9 @@ var assignTemplateQuantityFn = function(structureName,data){
 						
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input type=\"text\"  class=\"span10 input-sm-small numberOnly itemScore\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+indexEntry['forecast_value']+"></td>";
 						
+						//htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input type=\"text\"  class=\"span10 input-sm-small numberOnly \" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
+						
 						if(data['threshold']==1){
 							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])).toFixed(2))+"</td>";
 						}else{
@@ -458,7 +463,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 						}
 						
 						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
-						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Gantt&lt;/button&gt; &lt;button class='btn btn-warning btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-danger btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" style='text-align:center;' data-original-title=\"\" title=\"\"></i>";
+						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Gantt&lt;/button&gt; &lt;button class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100px;' class='btn btn-success btn-small btn-gear attach_file'&gt;Attach File&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" style='text-align:center;' data-original-title=\"\" title=\"\"></i>";
 						htmlTemplateQuantity+="	</td>";
 							
 					htmlTemplateQuantity+="</tr>";
@@ -667,10 +672,15 @@ var listAppraisalDetailFn = function(data){
 			/*bindding popover start*/
 			//Using
 			$(".popover-edit-del").popover();
+			
+			
 			$(".appraisal_result").off("click",".popover-edit-del");
 			$(".appraisal_result").on("click",".popover-edit-del",function(){
 				
 				$(".popover").css({"text-align":"center"});
+				//$(".popover").css({"text-align":"center","width":"120px"});
+				//$("#tableAppraisalAssignment .popover-content").css({"width":"120px;"});
+				//$("#tableAppraisalAssignment .popover").css({"width":"120px;"});
 				//action_plan Start
 				$(".action_plan").on("click",function() {
 					
@@ -682,6 +692,22 @@ var listAppraisalDetailFn = function(data){
 					$("#action_actionplan").val("add");
 					
 				});
+				//attach flie start
+				$(".attach_file").click(function(){
+					
+					$("#informConfirm").empty();
+					var id=this.id.split("-");
+					id=id[1];
+					
+					$("#attachFileModal").modal().css({"margin-top":"0px"});
+					$("#attach_file_item_result_id").val(id)
+					$('.dropify').dropify();
+					
+					
+				});
+			
+				
+			
 				//phase Start
 				$(".phase").on("click",function(event) {
 					event.preventDefault();
@@ -1332,6 +1358,7 @@ var getActionPlanFn = function(id){
 	
 }
 
+
 /* phase function start*/
 var deletePhaseFn = function(id){
 	
@@ -1432,6 +1459,7 @@ var listPhaseFn = function(data){
 	
 	/*bindding popover start*/
 	$(".popover-edit-del").popover();
+	
 	$("#listDataPhase").off("click",".popover-edit-del");
 	$("#listDataPhase").on("click",".popover-edit-del",function(){
 		//Delete Start
@@ -1485,6 +1513,64 @@ var getPhaseFn = function(id){
 	});
 	
 }
+/* phase function end*/
+/* attach function start*/
+var getAttachFileFn = function(id){
+	
+	$.ajax({
+		url:restfulURL+"/see_api/public/appraisal/upload_file/"+id,
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			//console.log(data);
+			listAttachFileFn(data);
+		}
+	});
+	
+}
+
+var listAttachFileFn = function(data){
+	var host = "http://"+window.location.hostname;
+
+	//console.log(data);
+	var html="";
+	
+	$.each(data,function(index,indexEntry){
+		html+="<tr>";
+			html+="<td  style='text-align:center;'>"+(index+1)+"</td>";
+			html+="<td>"+indexEntry['doc_path']+"</td>";
+			html+="<td style='text-align:center;'><a target=\"_blank\" href=\""+host+"/see_api/public/"+indexEntry['doc_path']+"\" class='attachDownload' id='attachDownload-"+indexEntry['result_doc_id']+"'><i class='fa fa-download'></i></a>,<a class=\"delAttach\" id=\"delAttach-"+indexEntry['result_doc_id']+"\" href=\"#\"><i style='color:red;' class='icon-trash'></i></a></td>";
+		html+="</tr>";
+	});
+
+	$("#listDataAttachFile").html(html);
+	$(".delAttach").click(function(){
+		var id = this.id;
+		id = id.split("-");
+		id=id[1];
+		deleteAttachFileFn(id);
+	});
+	
+}
+var deleteAttachFileFn = function(id){
+
+	
+	$.ajax({
+		url:restfulURL+"/see_api/public/appraisal/delete_file/"+id,
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			if(data['status']==200){
+				getAttachFileFn($("#item_result_id").val());
+			}
+		}
+	});
+}
+/* attach function end*/
 /* phase function end*/
 
 
@@ -2011,18 +2097,30 @@ var saveAppraisalFn = function(){
 		appraisal+="\"item_result_id\":\""+item_result_id+"\",";
 		if(typeScore=="forecast"){
 			appraisal+="\"forecast_value\":\""+$(indexEntry).val()+"\",";
+			appraisal+="\"actual_value\":\"\",";
+			//appraisal+="\"actual_value\":\""+$("#actual-"+item_result_id).val()+"\",";
 			appraisal+="\"score\":\"\"";
-		}else{
+			
+		}else if(typeScore=="competencyScore"){
 			appraisal+="\"forecast_value\":\"\",";
+			appraisal+="\"actual_value\":\"\",";
 			appraisal+="\"score\":\""+$(indexEntry).val()+"\"";
 		}
+//			else{
+//			
+//			appraisal+="\"forecast_value\":\"\",";
+//			appraisal+="\"actual_value\":\""+$("#actual-"+item_result_id).val()+"\",";
+//			appraisal+="\"score\":\"\"";
+//			
+//		}
 		
 		
 		appraisal+="}";
 	});
 	appraisal+="]";
-	var appraisalObject=eval("("+appraisal+")");
 	//console.log(appraisal);
+	var appraisalObject=eval("("+appraisal+")");
+	//console.log(appraisalObject);
 	
 	$.ajax({
 		url:restfulURL+"/see_api/public/appraisal/"+$("#emp_result_id").val(),
@@ -3149,6 +3247,90 @@ $(document).ready(function() {
 	});
 	
 	//Button Click Stage History End.
+	
+	
+
+	//####  FILE IMPORT  START #### 
+	
+	// Add events
+	$('#attach_files_attachment').on('change', prepareUpload);
+
+	// Grab the files and set them to our variable
+	function prepareUpload(event)
+	{
+	  files = event.target.files;
+	  //start upload file
+	  //uploadFiles(event);
+		
+	}
+	
+	$('form#attachFileForm').on('submit', uploadFiles);
+	function uploadFiles(event)
+	{
+		var validate_header_id="";
+		if(!$("#attach_files_attachment").val()){
+			return false;
+		
+		}
+	  event.stopPropagation(); // Stop stuff happening
+	  event.preventDefault(); // Totally stop stuff happening
+
+		// Create a formdata object and add the files
+		var data = new FormData();
+		//console.log(data);
+		jQuery_1_1_3.each(files, function(key, value)
+		{
+			data.append(key, value);
+			//data.append("process_type",$("#embedParamSearchProcessType").val());
+		});
+
+
+		jQuery_1_1_3.ajax({
+			url:restfulURL+"/see_api/public/appraisal/upload_file/"+$("#attach_file_item_result_id").val(),
+			type: 'POST',
+			data: data,
+			cache: false,
+			dataType: 'json',
+			processData: false, // Don't process the files
+			contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+			headers:{Authorization:"Bearer "+tokenID.token},
+			async:false,
+			success: function(data, textStatus, jqXHR)
+			{
+				//console.log(data);
+				if(data['status']==200 && data['data'].length>0){
+					
+					callFlashSlideInModal("Upload Successfully.",".information");
+					$('#attach_files_attachment').val("");
+					$(".dropify-clear").click();
+
+				}else{
+					
+					//callFlashSlideInModal("Can't Upload file .","#information3");
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown)
+			{
+				// Handle errors here
+				//console.log('ERRORS: ' + textStatus);
+				callFlashSlideInModal('ERRORS: ' + textStatus,".information");
+				// STOP LOADING SPINNER
+			}
+		});
+		
+
+		return false;
+	}	
+	//### FILE IMPORT END ###
+	// download attach file start
+	$("#btnDownloadAttachFile").click(function(){
+		
+		$("#informConfirm").empty();
+		var id=$("#item_result_id").val();
+		$("#downloadAttachFileModal").modal().css({"margin-top":"0px"});
+		getAttachFileFn(id);
+	});
+	//download attahc file end
 });
 
 
