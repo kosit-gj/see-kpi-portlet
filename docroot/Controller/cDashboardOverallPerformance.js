@@ -334,11 +334,11 @@ var getDataAllKPIFn = function(page,rpp){
 		async:false,// w8 data 
 		success : function(data) {
 			console.log(data);
-			console.log(data!="" || data!=null || data!=[] || data!=undefined);
-			if(data!="" || data!=null || data!=[] || data!=undefined ){
-				$("#btn_kpi").show();
-			}else{
+			
+			if(data =="" || data ==null ){
 				$("#btn_kpi").hide();
+			}else{
+				$("#btn_kpi").show();
 			}
 			listAllKPIFn(data);
 			
@@ -372,11 +372,11 @@ var listAllKPIFn = function(data){
 						dataTableHTML+="</tr>";
 						dataTableHTML+="<tr>";
 							dataTableHTML+="<td>%Taget<span style='float:right'>"+notNullFn(indexEntry2['percent_target'])+"</span></td>";
-							dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:0;'  >"+indexEntry2['percent_target_str']+"</div></td>";
+							dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:1;'  >"+indexEntry2['percent_target_str']+"</div></td>";
 						dataTableHTML+="</tr>";
 						dataTableHTML+="<tr>";
 							dataTableHTML+="<td>%Forecast<span style='float:right'>"+notNullFn(indexEntry2['percent_forecast'])+"</span></td>";
-							dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:0;'>"+indexEntry2['percent_forecast_str']+"</div></td>";
+							dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:1;'>"+indexEntry2['percent_forecast_str']+"</div></td>";
 						dataTableHTML+="</tr>";
 					dataTableHTML+="</tbody>";
 				dataTableHTML+="</table>";
@@ -533,17 +533,22 @@ var getDataBubbleFn = function(page,rpp){
 		//$("#app_type").change();
 		
 		$("#btn_kpi").click(function(){
+			$("body").mLoading('show');
 			if($(this).attr("data-sparkline") != "active" ){
-				$(".sparkline").sparkline('html', {
-			        type: 'bullet',
-			        width:'120',
-			        height: '20',
-			        targetWidth: '6',
-				    targetColor: '#fefefe',
-				    performanceColor: '#282a4b',
-			        rangeColors: rangeColorsThreshold
-				}).css("opacity","1");
-				$(this).attr("data-sparkline","active" )
+				setTimeout(function(){ 
+					$(".sparkline").sparkline('html', {
+				        type: 'bullet',
+				        width:'120',
+				        height: '20',
+				        targetWidth: '6',
+					    targetColor: '#fefefe',
+					    performanceColor: '#282a4b',
+				        rangeColors: rangeColorsThreshold
+					}).css("opacity","1");
+					$(this).attr("data-sparkline","active" );
+					$("body").mLoading('hide');
+				}, 1000);
+				
 			}
 			
 			
