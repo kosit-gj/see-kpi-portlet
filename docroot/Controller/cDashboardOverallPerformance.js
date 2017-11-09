@@ -338,7 +338,7 @@ var getDataAllKPIFn = function(page,rpp){
 			if(data =="" || data ==null ){
 				$("#btn_kpi").hide();
 			}else{
-				$("#btn_kpi").show();
+				$("#btn_kpi").hide();
 			}
 			listAllKPIFn(data);
 			

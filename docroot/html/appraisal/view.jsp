@@ -1746,10 +1746,12 @@ Is Active
 				                		<option value='m'>Monthly</option>
 				                	</select>
 			                	 </div>
+			                	 <div style='display:none;'>
 			                	Please select range of day
-			                	<select id='selectGanntChartViewDaily' style='width:100px;'>
+			                	<select  id='selectGanntChartViewDaily' style='width:100px;'>
 			                		
 			                	</select>
+			                	</div>
 			                	<select id='selectGanntChartViewMonthly' style='width:85px; display:none;'>
 			                		<option value='1'>1 Month</option>
 			                		<option value='2'>2 Months</option>

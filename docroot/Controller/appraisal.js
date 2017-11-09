@@ -2283,7 +2283,8 @@ var getDataGanttChartFn = function(item_result_id,ganttPaneDuration,ganttPaneDur
 				}
 			//console.log(diffDateFn(startDate,endDate));
 			//alert(ganttPaneDurationVarible);
-				$("#selectGanntChartViewDaily").val(ganttPaneDurationVarible);
+				//$("#selectGanntChartViewDaily").val(ganttPaneDurationVarible);
+				$("#selectGanntChartViewDaily").val(365);
 			}else{
 				$("#selectGanntChartViewDaily").val(1);
 			}
@@ -2310,8 +2311,8 @@ var getDataGanttChartFn = function(item_result_id,ganttPaneDuration,ganttPaneDur
 	                "dateformat": "dd/mm/yyyy",
 	                "outputdateformat": "ddds mns yy",
 	                "ganttwidthpercent": "60",
-	               // "ganttPaneDuration": 12,
-	                "ganttPaneDuration": ganttPaneDurationVarible,
+	                "ganttPaneDuration": "365",
+	               // "ganttPaneDuration": ganttPaneDurationVarible,
 	               // "ganttPaneDurationUnit": "d",
 	                "ganttPaneDurationUnit": ganttPaneDurationUnit,
 	                "plottooltext": "$processName{br} $label starting date $start{br}$label ending date $end",
