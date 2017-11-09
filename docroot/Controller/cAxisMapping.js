@@ -12,7 +12,7 @@
 	    			"colunms":[
 	    				 
 	    			           {"colunmsDisplayName":"Axis Type ID","width":"15%","id":"axis_type_id","colunmsType":"text"},
-	    			           {"colunmsDisplayName":"Axis Value_name","width":"10%","id":"axis_value_name","colunmsType":"text"},
+	    			           {"colunmsDisplayName":"Axis Name","width":"20%","id":"axis_value_name","colunmsType":"text"},
 	    			           {"colunmsDisplayName":"Axis Value","width":"15%","id":"axis_value","colunmsType":"text","colunmsDataType":"decimal"},
 	    			           {"colunmsDisplayName":"Axis Value Start","width":"15%","id":"axis_value_start","colunmsType":"text","colunmsDataType":"decimal"},
 	    			           {"colunmsDisplayName":"Axis Value End","width":"15%","id":"axis_value_end","colunmsType":"text","colunmsDataType":"decimal"},
@@ -20,42 +20,40 @@
 	    			          ],
 	    			
 	    			     "form":[{
-	     					"label":"Appraisal Level","inputType":"dropdown",
-	     					"id":"appraisal_level_id","width":"200px","url":""+restfulURL+"/see_api/public/appraisal_grade/al_list"
+	     					"label":"Axis Type","inputType":"dropdown",
+	     					"id":"axis_type_id","width":"200px","url":""+restfulURL+"/see_api/public/axis_mapping/axis_type_list"
 	     					},
 	     			        {
-	     					"label":"Appraisal Grade","inputType":"text","placeholder":"Appraisal Grade",
-	         				"id":"grade","width":"100px","required":true
+	     					"label":"Axis Value Name","inputType":"text","placeholder":"Axis Value Name",
+	         				"id":"axis_value_name","width":"100px","required":true
 	     					
 	     					},
 	     			        {
-	     					"label":"Begin Score","inputType":"text","placeholder":"Begin Score",
-	     					"id":"begin_score","width":"250px","dataTypeInput":"number","required":true
+	     					"label":"Axis Value","inputType":"text","placeholder":"Axis Value",
+	     					"id":"axis_value","width":"250px","dataTypeInput":"number","required":true
 	     					},
-	     			        {
-	     					"label":"End Score","inputType":"text","placeholder":"End Score",
-	     					"id":"end_score","width":"200px","dataTypeInput":"number","required":true
-	     					},
+	     			       
 	     					{
-	         				"label":"Salary Raise","inputType":"text","placeholder":"Salary Raise",
-	         				"id":"salary_raise_amount","width":"200px","dataTypeInput":"number","required":true
+	         				"label":"Axis Value Start","inputType":"text","placeholder":"Axis Value Start",
+	         				"id":"axis_value_start","width":"200px","dataTypeInput":"number"
 	         				},
-	     			        {
-	     					"label":"IsAtive","inputType":"checkbox","default":"checked",
-	     					"id":"is_active","width":"200px"
-	     					}
+	         				{
+	         				"label":"Axis Value End","inputType":"text","placeholder":"Axis Value End",
+	         				"id":"axis_value_end","width":"200px","dataTypeInput":"number"
+		         			}
+	     			       
 	     					
 	     			     ],
 	     			     
 	     			    "advanceSearch":[{
-	     			    	"label":"Level","label_tooltip":"Level","inputType":"dropdown",
-	     					"id":"appraisal_level_id","width":"100%",
-	     					"url":""+restfulURL+"/see_api/public/appraisal_grade/al_list",
+	     			    	"label":"Axis Type","label_tooltip":"Axis Type","inputType":"dropdown",
+	     					"id":"axis_type_id","width":"100%",
+	     					"url":""+restfulURL+"/see_api/public/axis_mapping/axis_type_list",
 	     					"initValue":"All"
 	    			     	}],
 	     			     
-	    			 "formDetail":{"formSize":"modal-dialog","formName":"Appraisal Grade","id":"databaseConnection","pk_id":"grade_id"},       
-	    			 "serviceName":[restfulURL+"/see_api/public/appraisal_grade"],
+	    			 "formDetail":{"formSize":"modal-dialog","formName":"Axis","id":"axisForm","pk_id":"axis_mapping_id","edit_flag":true},       
+	    			 "serviceName":[restfulURL+"/see_api/public/axis_mapping"],
 	    			 "tokenID":tokenID,
 	    			 "pagignation":true,
 	    			 "expressSearch":false,
@@ -63,6 +61,7 @@
 	    	}
 	    	//console.log(options['tokenID'].token);
 	    	createDataTableFn(options);
+	    	
     	
 	 	}
 	 }

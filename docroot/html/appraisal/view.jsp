@@ -1326,7 +1326,7 @@ Is Active
 					
 					<td>
 					      
-						<input  style='width:100%;height:100%;'  type='file' name='attach_files_attachment' id='attach_files_attachment' class="dropify" accept=".xls, .xlsx"  multiple>
+						<input  style='width:100%;height:100%;'  type='file' name='attach_files_attachment' id='attach_files_attachment' class="dropify" accept=".xls, .xlsx, .pdf"  multiple>
 						<span style='text-align:right;'>
 						
 						</span>

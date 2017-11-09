@@ -428,6 +428,8 @@ var listDataFn = function(data,options){
 		//console.log($(this).next().find('.edit').hide());
 		//console.log($(this).parent().prev().text());
 		//console.log($(this).parent().prev().text());
+	if(options['formDetail']['edit_flag']==true){
+	}else{
 		if($(this).parent().prev().text()==0 && $(this).parent().prev().text()!=""){
 			
 			$(this).next().find('.edit').attr("disabled","disabled");
@@ -435,7 +437,7 @@ var listDataFn = function(data,options){
 			
 			$(this).next().find('.edit').removeAttr("disabled");
 		}
-		
+	}
 		//Delete Start
 		$(".del").on("click",function() {
 			

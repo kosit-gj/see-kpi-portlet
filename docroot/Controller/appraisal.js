@@ -50,8 +50,20 @@ var listErrorActionPlanFn =function(data){
 	return errorData;
 }
 //List Error Function End
-var dropdownDeductScoreFn = function(score){
+var dropdownDeductScoreFn = function(score,nof_target_score){
 	htmlTemplateQuality = "";
+	
+	console.log(score);
+	console.log(nof_target_score);
+	
+	for(var i=0;i<=nof_target_score;i++){
+		if(score==i){
+			htmlTemplateQuality+="<option  selected='selected'>"+i+"</option>";
+		}else{
+			htmlTemplateQuality+="<option >"+i+"</option>";
+		}
+	}
+	/*
 	if(score==0){
 		htmlTemplateQuality+="<option selected='selected'>0</option>";
 		htmlTemplateQuality+="<option >1</option>";
@@ -83,6 +95,7 @@ var dropdownDeductScoreFn = function(score){
 		htmlTemplateQuality+="<option>3</option>";
 		htmlTemplateQuality+="<option selected='selected'>4</option>";
 	}
+	*/
 	
 	
 	return htmlTemplateQuality;
@@ -163,7 +176,7 @@ var assignTemplateQualityFn = function(structureName,data){
 								
 								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
 								htmlTemplateQuality+="<select style='width:50px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
-									htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['score']));
+									htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['score']),indexEntry['nof_target_score']);
 								htmlTemplateQuality+="<select>";
 								//htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
 								htmlTemplateQuality+="</td>";
@@ -179,7 +192,7 @@ var assignTemplateQualityFn = function(structureName,data){
 								
 								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
 								htmlTemplateQuality+="<select style='width:50px; height: 25px;padding: 0 0 0 5px;font-size:13px; text-align:right;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore input form-control input-sm-small numberOnly'>";
-									htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['score']));
+									htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['score']),indexEntry['nof_target_score']);
 								htmlTemplateQuality+="<select>";
 								//htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
 								htmlTemplateQuality+="</td>";

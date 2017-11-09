@@ -81,7 +81,12 @@ var displayTypeFn  = function(dataValue,dataType){
 	var displayType="";	
 	
 	if(dataType=="text"){
-		displayType= dataValue;
+		if(parseInt(dataValue)==0){
+			displayType= '';
+		}else{
+			displayType= dataValue;
+		}
+		
 	}else if(dataType=="checkbox"){
 		if(dataValue==1){
 			displayType= "<input checked type='checkbox' id='' name='' disabled='disabled'>";
