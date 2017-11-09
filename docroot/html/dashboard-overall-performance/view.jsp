@@ -38,8 +38,9 @@
 	
 	.modal.large {
 		width: 80%;
-		margin-left: -40%;
+		margin-left: -25.5%;
 		top: 0px;
+		max-width: 768px;
 	}
 	.aui .advance-search .span3{width: 29.354%;}
 	
@@ -393,6 +394,21 @@ table#tableAllKPI .aui .table th, .aui .table td{
 	display: none;
 	margin-left: 5px; font-weight: 700; display: inline-block; margin-top: 3px;
 }
+.table-fixed thead {
+  width: 97%;
+}
+.table-fixed tbody {
+  height: 100%;
+  overflow-y: auto;
+  width: 100%;
+}
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+  display: block;
+}
+.table-fixed tbody td, .table-fixed thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
+}
 </style>
 
 
@@ -574,7 +590,7 @@ table#tableAllKPI .aui .table th, .aui .table td{
 							<tr>
 								<th>Perspective</th>
 								<th style="min-width: 130px;">KPI</th>
-								<th style="min-width: 45px;">UOM</th>
+								<th style="min-width: 65px;">UOM</th>
 								<th style="text-align: center; min-width: 250px;">KPI
 									Result</th>
 							</tr>

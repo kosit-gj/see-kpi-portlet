@@ -338,7 +338,7 @@ var getDataAllKPIFn = function(page,rpp){
 			if(data =="" || data ==null ){
 				$("#btn_kpi").hide();
 			}else{
-				$("#btn_kpi").hide();
+				$("#btn_kpi").show();
 			}
 			listAllKPIFn(data);
 			
@@ -385,6 +385,31 @@ var listAllKPIFn = function(data){
 		
 	});
 	$("#kpiList").html(dataTableHTML);
+	$("#btn_kpi").off("click");
+	$("#btn_kpi").on("click");
+	$("#btn_kpi").click(function(){
+		
+		if($("#btn_kpi").attr("data-sparkline") != "active" ){
+			$("body").mLoading('show');
+			$("#btn_kpi").attr("data-sparkline","active" );
+			setTimeout(function(){ 
+				$(".sparkline").sparkline('html', {
+			        type: 'bullet',
+			        width:'120',
+			        height: '20',
+			        targetWidth: '6',
+				    targetColor: '#fefefe',
+				    performanceColor: '#282a4b',
+			        rangeColors: rangeColorsThreshold
+				}).css("opacity","1");
+				
+				$("body").mLoading('hide');
+			}, 1000);
+			
+		}
+		
+		
+	});
 	
 }
 var getDataBubbleFn = function(page,rpp){
@@ -532,27 +557,7 @@ var getDataBubbleFn = function(page,rpp){
 		});
 		//$("#app_type").change();
 		
-		$("#btn_kpi").click(function(){
-			$("body").mLoading('show');
-			if($(this).attr("data-sparkline") != "active" ){
-				setTimeout(function(){ 
-					$(".sparkline").sparkline('html', {
-				        type: 'bullet',
-				        width:'120',
-				        height: '20',
-				        targetWidth: '6',
-					    targetColor: '#fefefe',
-					    performanceColor: '#282a4b',
-				        rangeColors: rangeColorsThreshold
-					}).css("opacity","1");
-					$(this).attr("data-sparkline","active" );
-					$("body").mLoading('hide');
-				}, 1000);
-				
-			}
-			
-			
-		});
+		
 		
 		
 		

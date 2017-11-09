@@ -543,8 +543,8 @@
  };
  var generateChartBarLineDualFn = function(data,type){	
 	 
-	 var salesAnlysisChart = new FusionCharts({//scrollcombidy2d mscombidy2d
-	        type: (data['is_show_variance'] == "1" ? "mscombidy2d":"mscombi2d"),
+	 var salesAnlysisChart = new FusionCharts({//scrollcombidy2d mscombidy2d  mscombi2d
+	        type: "mscombidy2d",
 	        renderAt: 'chart-container',
 	        dataLoadStartMessage: "Loading chart. Please wait",
 		    baseChartMessageFont: "Arial",
@@ -570,7 +570,7 @@
 	                "yAxisNameFontBold": "1",
 	                "yAxisNameFontItalic": "1",
 	                "yAxisNameAlpha": "80",
-	                "sYAxisName": "Variance",
+	                "sYAxisName": (data['is_show_variance'] == "1" ? "Diff":"Growth"),
 	                //Font properties for secondary y-axis
                 	"sYAxisNameFont": "Arial",
                 	"sYAxisNameFontSize": "14",
@@ -579,7 +579,7 @@
                 	"sYAxisNameFontItalic": "1",
                 	"sYAxisNameAlpha": "80",
 	                //"numberPrefix": "$",
-	               	//"sNumberSuffix" : "%",
+	               	"sNumberSuffix" : "%",
 	                //"sYAxisMaxValue" : "50",
 					"showValues": "0",
 					//Cosmetics
@@ -1011,7 +1011,7 @@ var listHeaderFn=function(galbalOrg){
 	 htmlHeader1+="<div class='fontBold '>KPI</div>";
 	 htmlHeader1+="</th>";
 	 
-	 htmlHeader1+="<th style='width:60px;'>";
+	 htmlHeader1+="<th style='width:73px;'>";
 	 htmlHeader1+="<div class='fontBold '>UOM</div>";
 	 htmlHeader1+="</th>";
 	 
