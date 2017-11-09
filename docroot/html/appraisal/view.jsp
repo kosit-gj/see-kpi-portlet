@@ -1767,7 +1767,7 @@ Is Active
 			                		<option value='12'>12 Months</option>
 			                	</select>
 			                	
-			                	<button class='btn btn-primary' id='btnGanttSubmit'><i class=""></i> Submit</button>
+			                	<button  style='display:none;' class='btn btn-primary' id='btnGanttSubmit'><i class=""></i> Submit</button>
 			                	<button class='btn btn-primary' id='btnPrint'><i class="icon-print"></i> Print</button>
 
 							</div>
