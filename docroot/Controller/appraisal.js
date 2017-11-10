@@ -1554,7 +1554,7 @@ var listAttachFileFn = function(data){
 		html+="<tr>";
 			html+="<td  style='text-align:center;'>"+(index+1)+"</td>";
 			html+="<td>"+indexEntry['doc_path']+"</td>";
-			html+="<td style='text-align:center;'><a target=\"_blank\" href=\""+host+"/see_api/public/"+indexEntry['doc_path']+"\" class='attachDownload' id='attachDownload-"+indexEntry['result_doc_id']+"'><i class='fa fa-download'></i></a>,<a class=\"delAttach\" id=\"delAttach-"+indexEntry['result_doc_id']+"\" href=\"#\"><i style='color:red;' class='icon-trash'></i></a></td>";
+			html+="<td style='text-align:center;'><a target=\"_blank\" href=\""+restfulURL+"/see_api/public/"+indexEntry['doc_path']+"\" class='attachDownload' id='attachDownload-"+indexEntry['result_doc_id']+"'><i class='fa fa-download'></i></a>,<a class=\"delAttach\" id=\"delAttach-"+indexEntry['result_doc_id']+"\" href=\"#\"><i style='color:red;' class='icon-trash'></i></a></td>";
 		html+="</tr>";
 	});
 
