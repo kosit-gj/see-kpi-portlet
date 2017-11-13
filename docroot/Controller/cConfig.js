@@ -1,11 +1,11 @@
 var restfulURL="";
-var serviceName="/see_api";
+var serviceName="see_api";
 /*#######Office#######*/
 
 //restfulURL="http://192.168.1.254";
 
 /*#######Localhost#######*/
-restfulURL="http://localhost";
+restfulURL="http://192.168.1.42";
 
 /*#######Poroduction#######*/
 //restfulURL="http://172.16.11.109";
