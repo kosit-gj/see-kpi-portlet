@@ -64,7 +64,7 @@ var updateDeductScoreFn  = function(){
 	 
 	 
 	 $.ajax({
-	    url:restfulURL+"/see_api/public/appraisal_item/"+item_id,
+	    url:restfulURL+"/"+serviceName+"/public/appraisal_item/"+item_id,
 	    type:"PATCH",
 	    dataType:"json",
 	    headers:{Authorization:"Bearer "+tokenID.token},
@@ -127,7 +127,7 @@ var insertDeductScoreFn = function(param) {
 	 }
 
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal_item",
+		url:restfulURL+"/"+serviceName+"/public/appraisal_item",
 		type:"post",
 		dataType:"json",
 		async:false,

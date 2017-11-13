@@ -34,7 +34,7 @@ $(document).ready(function(){
      				    }
      				    ],
     			 "formDetail":{"formSize":"modal-dialog","formName":"Position","id":"position","pk_id":"position_id"},       
-    			 "serviceName":[restfulURL+"/see_api/public/position"],
+    			 "serviceName":[restfulURL+"/"+serviceName+"/public/position"],
     			 "tokenID":tokenID,
     			 "pagignation":false,
     			 "expressSearch":false,
@@ -53,7 +53,7 @@ $(document).ready(function(){
     	$("form#searchAdvanceForm #position_name input").autocomplete({
             source: function (request, response) {
             	$.ajax({
-    				 url:restfulURL+"/see_api/public/position/auto",
+    				 url:restfulURL+"/"+serviceName+"/public/position/auto",
     				 type:"POST",
     				 dataType:"json",
     				 data:{

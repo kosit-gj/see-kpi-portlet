@@ -34,11 +34,11 @@
             			},
 //    			        {
 //    					"label":"Parent Org.","inputType":"dropdown","initValue":"","updateList":true,
-//    					"id":"parent_org_code","width":"250px","url":""+restfulURL+"/see_api/public/org/parent_list",
+//    					"id":"parent_org_code","width":"250px","url":""+restfulURL+"/"+serviceName+"/public/org/parent_list",
 //    					},
     					{
         				"label":"Appraisal Level","inputType":"dropdown","initValue":"","updateList":true,
-        				"id":"level_id","width":"250px","url":""+restfulURL+"/see_api/public/org/al_list"
+        				"id":"level_id","width":"250px","url":""+restfulURL+"/"+serviceName+"/public/org/al_list"
         				},
         				{
         	    			"label":"Parent Org.","initValue":"","inputType":"cascades",
@@ -50,7 +50,7 @@
         	    		},
         	    		{
             				"label":"Province Name","inputType":"dropdown","initValue":"",
-            				"id":"province_code","width":"250px","url":""+restfulURL+"/see_api/public/org/province_list"
+            				"id":"province_code","width":"250px","url":""+restfulURL+"/"+serviceName+"/public/org/province_list"
             			},
             			{
         					"label":"Latitude","inputType":"text","dataTypeInput":"geographic","placeholder":"Latitude",
@@ -69,7 +69,7 @@
     			 "advanceSearch":[{
  	 					"label":"Level","label_tooltip":"Level","inputType":"dropdown",
  	 					"id":"level_id","width":"100%","initValue":"All Level",
- 	 					"url":""+restfulURL+"/see_api/public/org/al_list"
+ 	 					"url":""+restfulURL+"/"+serviceName+"/public/org/al_list"
  	 					},
  	 					{
  	 	 				"label":"Organization","label_tooltip":"Organization","inputType":"cascades","initValue":"All Organization",
@@ -80,7 +80,7 @@
  	 	 					}
  	 	 				}],
     			 "formDetail":{"formSize":"modal-dialog","formName":"Organization","id":"organization","pk_id":"org_id"},       
-    			 "serviceName":[restfulURL+"/see_api/public/org"],
+    			 "serviceName":[restfulURL+"/"+serviceName+"/public/org"],
     			 "tokenID":tokenID,
     			 "pagignation":false,
     			 "expressSearch":false,

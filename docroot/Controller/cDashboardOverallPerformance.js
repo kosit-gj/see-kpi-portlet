@@ -1,4 +1,4 @@
- var restfulPathDashboard="/see_api/public/cds_result";
+ var restfulPathDashboard="/"+serviceName+"/public/cds_result";
  var galbalDashboard=[];
  var galbalDataTemp = [];
  var rangeColorsThreshold=[];
@@ -284,7 +284,7 @@
 		var org= $("#param_org_id").val();
 
 		$.ajax({
-			url : restfulURL+"/see_api/public/dashboard/kpi_overall_pie",
+			url : restfulURL+"/"+serviceName+"/public/dashboard/kpi_overall_pie",
 			type : "get",
 			dataType : "json",
 			data:{
@@ -317,7 +317,7 @@ var getDataAllKPIFn = function(page,rpp){
 	var org= $("#param_org_id").val();
 	var perspective= $("#param_perspective").val();
 	$.ajax({
-		url : restfulURL+"/see_api/public/dashboard/perspective_details",
+		url : restfulURL+"/"+serviceName+"/public/dashboard/perspective_details",
 		type : "get",
 		dataType : "json",
 		data:{
@@ -422,7 +422,7 @@ var getDataBubbleFn = function(page,rpp){
 	var org= $("#param_org_id").val();
 	var perspective= $("#param_perspective").val();
 	$.ajax({
-		url : restfulURL+"/see_api/public/dashboard/kpi_overall_bubble",
+		url : restfulURL+"/"+serviceName+"/public/dashboard/kpi_overall_bubble",
 		type : "get",
 		dataType : "json",
 		data:{
@@ -486,16 +486,16 @@ var getDataBubbleFn = function(page,rpp){
 	 	}
 	 	$(".advance-search input").val("");
 	 	//Generate DropDown List
-		$("#year").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/year_list","GET"));
-		$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));
-		$("#app_type").html(generateDropDownList(restfulURL+"/see_api/public/appraisal_assignment/appraisal_type_list","GET"));
-		$("#apprasiaLevel").html(generateDropDownList(restfulURL+"/see_api/public/appraisal/al_list","GET"));
-		$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));
-		$("#kpi").html((generateDropDownList(restfulURL+"/see_api/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val()})));
+		$("#year").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/year_list","GET"));
+		$("#period").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));
+		$("#app_type").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list","GET"));
+		$("#apprasiaLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/al_list","GET"));
+		$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));
+		$("#kpi").html((generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val()})));
 		
 		//#Change Param Function
-		$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
-		$("#apprasiaLevel").change(function(){$("#organization").html(generateDropDownList(restfulURL+"/see_api/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));$("#organization").change();});
+		$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
+		$("#apprasiaLevel").change(function(){$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));$("#organization").change();});
 		
 		
 		$(".app_url_hidden").show();
@@ -529,8 +529,8 @@ var getDataBubbleFn = function(page,rpp){
 		
 		
 		//Autocomplete Search Start
-		//generateAutocomplete("#position",restfulURL+"/see_api/public/cds_result/auto_position_name","post",{"position_name":null});
-		generateAutocomplete("#emp_name",restfulURL+"/see_api/public/cds_result/auto_emp_name","post",{"emp_name":null});
+		//generateAutocomplete("#position",restfulURL+"/"+serviceName+"/public/cds_result/auto_position_name","post",{"position_name":null});
+		generateAutocomplete("#emp_name",restfulURL+"/"+serviceName+"/public/cds_result/auto_emp_name","post",{"emp_name":null});
 		//Autocomplete Search End
 		
 		$("#app_type").change(function(){

@@ -6,7 +6,7 @@ $(document).ready(function(){
 var dropDrowOrgFn = function(appraisalLevelId){
 
 	$.ajax({
-		url:restfulURL+"/see_api/public/org",
+		url:restfulURL+"/"+serviceName+"/public/org",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -32,8 +32,8 @@ var appraisalLevelListFn = function(nameArea,id){
 	}
 	
 	$.ajax({
-		//url:restfulURL+"/see_api/public/appraisal_item/al_list",
-		url:restfulURL+"/see_api/public/report/al_list",
+		//url:restfulURL+"/"+serviceName+"/public/appraisal_item/al_list",
+		url:restfulURL+"/"+serviceName+"/public/report/al_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -60,8 +60,8 @@ var appraisalTypeFn = function(nameArea,id){
 	}
 	
 	$.ajax({
-		//http://192.168.1.52/see_api/public/appraisal_assignment/appraisal_type_list
-		url:restfulURL+"/see_api/public/appraisal_assignment/appraisal_type_list",
+		//http://192.168.1.52/"+serviceName+"/public/appraisal_assignment/appraisal_type_list
+		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -151,7 +151,7 @@ var getDataFn = function(page,rpp){
 	
 	
 	$.ajax({
-		url : restfulURL+"/see_api/public/report/usage_log",
+		url : restfulURL+"/"+serviceName+"/public/report/usage_log",
 		type : "get",
 		dataType : "json",
 		data:{"page":page,"rpp":rpp,
@@ -274,7 +274,7 @@ if(connectionServiceFn(username,password,plid)==true){
 	$("#Position").autocomplete({
         source: function (request, response) {
         	$.ajax({
-				 url:restfulURL+"/see_api/public/appraisal_assignment/auto_position_name",
+				 url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_position_name",
 				 type:"post",
 				 dataType:"json",
 				 headers:{Authorization:"Bearer "+tokenID.token},
@@ -302,7 +302,7 @@ if(connectionServiceFn(username,password,plid)==true){
 	$("#empName").autocomplete({
         source: function (request, response) {
         	$.ajax({
-				 url:restfulURL+"/see_api/public/appraisal_assignment/auto_employee_name",
+				 url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_employee_name",
 				 type:"post",
 				 dataType:"json",
 				 headers:{Authorization:"Bearer "+tokenID.token},

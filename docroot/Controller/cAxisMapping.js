@@ -21,7 +21,7 @@
 	    			
 	    			     "form":[{
 	     					"label":"Axis Type","inputType":"dropdown",
-	     					"id":"axis_type_id","width":"200px","url":""+restfulURL+"/see_api/public/axis_mapping/axis_type_list"
+	     					"id":"axis_type_id","width":"200px","url":""+restfulURL+"/"+serviceName+"/public/axis_mapping/axis_type_list"
 	     					},
 	     			        {
 	     					"label":"Axis Value Name","inputType":"text","placeholder":"Axis Value Name",
@@ -48,12 +48,12 @@
 	     			    "advanceSearch":[{
 	     			    	"label":"Axis Type","label_tooltip":"Axis Type","inputType":"dropdown",
 	     					"id":"axis_type_id","width":"100%",
-	     					"url":""+restfulURL+"/see_api/public/axis_mapping/axis_type_list",
+	     					"url":""+restfulURL+"/"+serviceName+"/public/axis_mapping/axis_type_list",
 	     					"initValue":"All"
 	    			     	}],
 	     			     
 	    			 "formDetail":{"formSize":"modal-dialog","formName":"Axis","id":"axisForm","pk_id":"axis_mapping_id","edit_flag":true},       
-	    			 "serviceName":[restfulURL+"/see_api/public/axis_mapping"],
+	    			 "serviceName":[restfulURL+"/"+serviceName+"/public/axis_mapping"],
 	    			 "tokenID":tokenID,
 	    			 "pagignation":true,
 	    			 "expressSearch":false,

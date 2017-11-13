@@ -7,10 +7,10 @@ var galbalDataCDS=[];
 var tempCdsId ="";
 var tempCdsName ="";
 var pageNumberDefault=1;
-var restfulPathCDS="/see_api/public/cds";
-var restfulPathDropDownAppraisalLevel="/see_api/public/cds/al_list";
-var restfulPathDropDownConnection="/see_api/public/cds/connection_list";
-var restfulPathAutocomplete="/see_api/public/cds/auto_cds";
+var restfulPathCDS="/"+serviceName+"/public/cds";
+var restfulPathDropDownAppraisalLevel="/"+serviceName+"/public/cds/al_list";
+var restfulPathDropDownConnection="/"+serviceName+"/public/cds/connection_list";
+var restfulPathAutocomplete="/"+serviceName+"/public/cds/auto_cds";
 
 
  

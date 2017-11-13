@@ -1,4 +1,4 @@
-var restfulPathKPI="/see_api/public/kpi_type";
+var restfulPathKPI="/"+serviceName+"/public/kpi_type";
 
 $(document).ready(function(){
 	

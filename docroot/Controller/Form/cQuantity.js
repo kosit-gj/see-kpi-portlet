@@ -81,7 +81,7 @@ var updateQuantityFn  = function(){
 	 }
 	 
 	 $.ajax({
-	    url:restfulURL+"/see_api/public/appraisal_item/"+item_id,
+	    url:restfulURL+"/"+serviceName+"/public/appraisal_item/"+item_id,
 	    type:"PATCH",
 	    dataType:"json",
 	    headers:{Authorization:"Bearer "+tokenID.token},
@@ -164,7 +164,7 @@ var insertQuantityFn = function(param) {
 	 }
 
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal_item",
+		url:restfulURL+"/"+serviceName+"/public/appraisal_item",
 		type:"post",
 		dataType:"json",
 		async:false,
@@ -236,7 +236,7 @@ var cdsGetFn = function(page,rpp){
 	//var appraisal_level=$("#embed_appraisal_level_quantity").val();
 	var cds_name=$("#embed_cds_name_quantity").val();
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal_item/cds_list",
+		url:restfulURL+"/"+serviceName+"/public/appraisal_item/cds_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -373,7 +373,7 @@ structure_name
 
 	        source: function (request, response) {
 	        	$.ajax({
-					 url:restfulURL+"/see_api/public/cds/auto_cds",
+					 url:restfulURL+"/"+serviceName+"/public/cds/auto_cds",
 					 type:"post",
 					 dataType:"json",
 					 headers:{Authorization:"Bearer "+tokenID.token},
@@ -439,7 +439,7 @@ structure_name
 
 	        source: function (request, response) {
 	        	$.ajax({
-					 url:restfulURL+"/see_api/public/cds/auto_cds",
+					 url:restfulURL+"/"+serviceName+"/public/cds/auto_cds",
 					 type:"post",
 					 dataType:"json",
 					 headers:{Authorization:"Bearer "+tokenID.token},

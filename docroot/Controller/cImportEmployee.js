@@ -1,8 +1,8 @@
-var restfulPathImportEmployee="/see_api/public/import_employee";
-var restfulPathAppraisalLevel="/see_api/public/appraisal_level";
-var restfulPathDropDownOrganization="/see_api/public/org";
-var restfulPathPositionAutocomplete="/see_api/public/position/auto";
-var restfulPathEmployeeAutocomplete="/see_api/public/import_employee/auto_employee_name";
+var restfulPathImportEmployee="/"+serviceName+"/public/import_employee";
+var restfulPathAppraisalLevel="/"+serviceName+"/public/appraisal_level";
+var restfulPathDropDownOrganization="/"+serviceName+"/public/org";
+var restfulPathPositionAutocomplete="/"+serviceName+"/public/position/auto";
+var restfulPathEmployeeAutocomplete="/"+serviceName+"/public/import_employee/auto_employee_name";
 //Global variable
 var galbalDataImportEmp=[];
 var galbalDataTemp = [];

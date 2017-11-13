@@ -1,7 +1,7 @@
 var gobalDataGroup=[];
 var getDataGroupFn = function(){
 	$.ajax({
-		url:restfulURL + "/see_api/public/result_threshold/group",
+		url:restfulURL + "/"+serviceName+"/public/result_threshold/group",
 		type : "get",
 		dataType : "json",
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -30,7 +30,7 @@ var clearGroupFn = function(){
 };
 var findOneGroupFn = function(id) {
 	$.ajax({
-		url:restfulURL+ "/see_api/public/result_threshold/group/"+id,
+		url:restfulURL+ "/"+serviceName+"/public/result_threshold/group/"+id,
 		type : "get",
 		dataType : "json",
 		async:false,
@@ -125,7 +125,7 @@ var listGroupFn = function (data){
 			$(document).on("click","#btnConfirmOK",function(){
 			console.log(id);
 				$.ajax({
-					 url:restfulURL+"/see_api/public/result_threshold/group/"+id,
+					 url:restfulURL+"/"+serviceName+"/public/result_threshold/group/"+id,
 					 type : "delete",
 					 dataType:"json",
 					 async:false,
@@ -165,7 +165,7 @@ var updateGroupFn = function () {
 	}
 	
 	$.ajax({
-		url:restfulURL+"/see_api/public/result_threshold/group/"+$("#group_id").val(),
+		url:restfulURL+"/"+serviceName+"/public/result_threshold/group/"+$("#group_id").val(),
 		type : "PATCH",
 		dataType : "json",
 		data : {
@@ -219,7 +219,7 @@ $(document).ready(function(){
     	  
     	    			    {
     	    				"label":"Group","inputType":"dropdown",
-        	    			"id":"result_threshold_group_id","width":"200px","url":""+restfulURL+"/see_api/public/result_threshold/group"
+        	    			"id":"result_threshold_group_id","width":"200px","url":""+restfulURL+"/"+serviceName+"/public/result_threshold/group"
         	    			},
         	    			{
         	    			"label":"Color","inputType":"color",
@@ -231,12 +231,12 @@ $(document).ready(function(){
     	    			"advanceSearch":[{
         	 					"label":"Group","inputType":"dropdown",
         	 					"id":"result_threshold_group_id","width":"100%",
-        	 					"url":""+restfulURL+"/see_api/public/result_threshold/group",
+        	 					"url":""+restfulURL+"/"+serviceName+"/public/result_threshold/group",
         	 					"initValue":"All Group"
         	 					}],
     	    			
     			 "formDetail":{"formSize":"modal-dialog","formName":"Result Threshold","id":"resultThreshold","pk_id":"result_threshold_id"},       
-    			 "serviceName":[restfulURL+"/see_api/public/result_threshold"],
+    			 "serviceName":[restfulURL+"/"+serviceName+"/public/result_threshold"],
     			 "tokenID":tokenID,
     			 "pagignation":false,
     			 "expressSearch":false,
@@ -295,7 +295,7 @@ $(document).ready(function(){
     			$(document).on("click","#btnConfirmGroupOK",function(){
     			
     				$.ajax({
-    					 url:restfulURL+"/see_api/public/result_threshold/group",
+    					 url:restfulURL+"/"+serviceName+"/public/result_threshold/group",
     					 type : "POST",
     					 dataType:"json",
     					 data:{"result_threshold_group_name" : $("#createThreshold_name").val(),"is_active":"1"},

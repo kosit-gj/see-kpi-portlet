@@ -27,7 +27,7 @@ var insertCriteriaFn = function () {
 //		   });
 //	});
 		$.ajax({
-			url:restfulURL+"/see_api/public/appraisal_level/"+$("#crierai_id").val()+"/criteria",
+			url:restfulURL+"/"+serviceName+"/public/appraisal_level/"+$("#crierai_id").val()+"/criteria",
 			type : "PATCH",
 			dataType : "json",
 			headers:{Authorization:"Bearer "+tokenID.token},
@@ -63,7 +63,7 @@ var listAppraisalCriteria = function(id) {
 	no_weight = "";
 	is_check = "";
 	$.ajax({ 
-		url:restfulURL+"/see_api/public/appraisal_level/"+id+"/criteria",
+		url:restfulURL+"/"+serviceName+"/public/appraisal_level/"+id+"/criteria",
 		type : "get",
 		dataType : "json",
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -189,7 +189,7 @@ $(document).ready(function(){
 		 	    				"id":"is_active","width":"200px"
 		 	    				},{
 		    					"label":"Parent Appraisal Level","inputType":"dropdown","initValue":"","updateList":true,
-		    					"id":"parent_id","width":"250px","url":""+restfulURL+"/see_api/public/appraisal_level"
+		    					"id":"parent_id","width":"250px","url":""+restfulURL+"/"+serviceName+"/public/appraisal_level"
 		    					},  
 		 	    				
 		 	    					
@@ -197,7 +197,7 @@ $(document).ready(function(){
 		 	    			
 		 	    			
 		 			 "formDetail":{"formSize":"modal-dialog","formName":"Appraisal Level","id":"appraisalLevelForm","pk_id":"level_id"},       
-		 			 "serviceName":[restfulURL+"/see_api/public/appraisal_level"],
+		 			 "serviceName":[restfulURL+"/"+serviceName+"/public/appraisal_level"],
 		 			 "tokenID":tokenID,
 		 			 "pagignation":false,
 		 			 "expressSearch":false,

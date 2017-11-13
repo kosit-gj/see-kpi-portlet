@@ -4,11 +4,11 @@
 var tempSystemconId ="";
 var galbalSystemcon=[];
 var galbalDataEmpThreshold =[];
-var restfulPathdropDownListMonth="see_api/public/system_config/month_list";
-var restfulPathSystemcon="/see_api/public/system_config";
+var restfulPathdropDownListMonth=""+serviceName+"/public/system_config/month_list";
+var restfulPathSystemcon="/"+serviceName+"/public/system_config";
 var restfulPathDropDownMonth=restfulPathSystemcon+"/month_list";
 var restfulPathDropDownFrequency=restfulPathSystemcon+"/frequency_list";
-var restfulPathEmpThreshold="/see_api/public/emp_threshold";
+var restfulPathEmpThreshold="/"+serviceName+"/public/emp_threshold";
 
 var maxData = 0;
 //Check Validation

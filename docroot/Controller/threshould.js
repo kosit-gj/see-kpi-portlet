@@ -1,7 +1,7 @@
 var gobalDataGroup=[];
 var getDataGroupFn = function(){
 	$.ajax({
-		url:restfulURL + "/see_api/public/threshold/group",
+		url:restfulURL + "/"+serviceName+"/public/threshold/group",
 		type : "get",
 		dataType : "json",
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -30,7 +30,7 @@ var clearGroupFn = function(){
 };
 var findOneGroupFn = function(id) {
 	$.ajax({
-		url:restfulURL+ "/see_api/public/threshold/group/"+id,
+		url:restfulURL+ "/"+serviceName+"/public/threshold/group/"+id,
 		type : "get",
 		dataType : "json",
 		async:false,
@@ -125,7 +125,7 @@ var listGroupFn = function (data){
 			$(document).on("click","#btnConfirmOK",function(){
 			console.log(id);
 				$.ajax({
-					 url:restfulURL+"/see_api/public/threshold/group/"+id,
+					 url:restfulURL+"/"+serviceName+"/public/threshold/group/"+id,
 					 type : "delete",
 					 dataType:"json",
 					 async:false,
@@ -165,7 +165,7 @@ var updateGroupFn = function () {
 	}
 	
 	$.ajax({
-		url:restfulURL+"/see_api/public/threshold/group/"+$("#group_id").val(),
+		url:restfulURL+"/"+serviceName+"/public/threshold/group/"+$("#group_id").val(),
 		type : "PATCH",
 		dataType : "json",
 		data : {
@@ -213,7 +213,7 @@ $(document).ready(function(){
     			          ],
     			"form":[{
     	    				"label":"Structure Name","inputType":"dropdown",
-    	    				"id":"structure_id","width":"200px","url":""+restfulURL+"/see_api/public/threshold/structure_list"
+    	    				"id":"structure_id","width":"200px","url":""+restfulURL+"/"+serviceName+"/public/threshold/structure_list"
     	    				},
     	    			    {
     	    				"label":"Threshold Name","inputType":"text",
@@ -230,7 +230,7 @@ $(document).ready(function(){
         	    			},
     	    			    {
     	    				"label":"Group","inputType":"dropdown",
-        	    			"id":"threshold_group_id","width":"200px","url":""+restfulURL+"/see_api/public/threshold/group"
+        	    			"id":"threshold_group_id","width":"200px","url":""+restfulURL+"/"+serviceName+"/public/threshold/group"
         	    			},
         	    			{
         	    			"label":"Color","inputType":"color","default":"All",
@@ -242,18 +242,18 @@ $(document).ready(function(){
     	    			"advanceSearch":[{
     	 					"label":"Structure Name","inputType":"dropdown",
     	 					"id":"structure_id","width":"100%",
-    	 					"url":""+restfulURL+"/see_api/public/threshold/structure_list",
+    	 					"url":""+restfulURL+"/"+serviceName+"/public/threshold/structure_list",
     	 					"initValue":"All Structure Name"
     	 					},
     	 					{
         	 					"label":"Group","inputType":"dropdown",
         	 					"id":"threshold_group_id","width":"100%",
-        	 					"url":""+restfulURL+"/see_api/public/threshold/group",
+        	 					"url":""+restfulURL+"/"+serviceName+"/public/threshold/group",
         	 					"initValue":"All Group"
         	 					}],
     	    			
     			 "formDetail":{"formSize":"modal-dialog","formName":"Threshould","id":"databaseConnection","pk_id":"threshold_id"},       
-    			 "serviceName":[restfulURL+"/see_api/public/threshold"],
+    			 "serviceName":[restfulURL+"/"+serviceName+"/public/threshold"],
     			 "tokenID":tokenID,
     			 "pagignation":false,
     			 "expressSearch":false,
@@ -311,7 +311,7 @@ $(document).ready(function(){
     			$(document).on("click","#btnConfirmGroupOK",function(){
     			
     				$.ajax({
-    					 url:restfulURL+"/see_api/public/threshold/group",
+    					 url:restfulURL+"/"+serviceName+"/public/threshold/group",
     					 type : "POST",
     					 dataType:"json",
     					 data:{"threshold_group_name" : $("#createThreshold_name").val(),"is_active":"1"},

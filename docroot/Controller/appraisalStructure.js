@@ -35,7 +35,7 @@
     					   },
     					   {
 	    					"label":"Form Type","inputType":"dropdown","default":"All",
-	    					"id":"form_id","width":"250px","url":""+restfulURL+"/see_api/public/appraisal_structure/form_list"
+	    					"id":"form_id","width":"250px","url":""+restfulURL+"/"+serviceName+"/public/appraisal_structure/form_list"
 	    					},                             
 	    					{
         					"label":"IsActive","inputType":"checkbox","default":"checked",
@@ -44,7 +44,7 @@
     					
     			     ],
     			 "formDetail":{"formSize":"modal-dialog","formName":"Appraisal Structure","id":"appraisalStructure","pk_id":"structure_id"},       
-    			 "serviceName":[restfulURL+"/see_api/public/appraisal_structure"],
+    			 "serviceName":[restfulURL+"/"+serviceName+"/public/appraisal_structure"],
     			 "tokenID":tokenID,
     			 "pagignation":false,
     			 "expressSearch":false,

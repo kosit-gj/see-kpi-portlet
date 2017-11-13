@@ -6,7 +6,7 @@ var tempEmpName="";
 var tempEmpId="";  
 var galbalDataTemp = [];
 var pageNumberDefault=1;
-var restfulPathAppData="/see_api/public/appraisal_data";
+var restfulPathAppData="/"+serviceName+"/public/appraisal_data";
  
 var restfulPathDropDownStructure=restfulPathAppData+"/structure_list";
 var restfulPathDropDownAppraisalLevel=restfulPathAppData+"/al_list";

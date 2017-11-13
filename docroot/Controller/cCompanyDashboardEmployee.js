@@ -462,9 +462,9 @@ var ex_data3 = [{
 ];
 
 var getEmpListFn = function(){
-	//http://192.168.1.58/kpi_api/public/dashboard/emp_list?emp_code=2007004
+	//http://192.168.1.58/"+serviceName+"/public/dashboard/emp_list?emp_code=2007004
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/dashboard/emp_list",
+		url:restfulURL+"/"+serviceName+"/public/dashboard/emp_list",
 		type:"post",
 		dataType:"json",
 		async:false,
@@ -484,7 +484,7 @@ var getEmpListFn = function(){
 var yearListFn = function(){
 
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/dashboard/year_list",
+		url:restfulURL+"/"+serviceName+"/public/dashboard/year_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -503,7 +503,7 @@ var yearListFn = function(){
 var monthListFn = function(appraisal_year){
 
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/dashboard/month_list",
+		url:restfulURL+"/"+serviceName+"/public/dashboard/month_list",
 		type:"post",
 		dataType:"json",
 		async:false,
@@ -952,7 +952,7 @@ var listBalanceScorecardFn = function(data){
 
 var getBalanceScorecardFn = function(period_id){
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/dashboard/balance_scorecard",
+		url:restfulURL+"/"+serviceName+"/public/dashboard/balance_scorecard",
 		type:"post",
 		dataType:"json",
 		async:false,
@@ -1043,7 +1043,7 @@ getDataMonthlyVarianceFn = function(appraisal_year,appraisal_item_id){
 	
 	$.ajax({
 		//url:"../Model/barChartMutiSeries.jsp",
-		url:restfulURL+"/kpi_api/public/dashboard/monthly_variance",
+		url:restfulURL+"/"+serviceName+"/public/dashboard/monthly_variance",
 		type:"post",
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -1142,7 +1142,7 @@ getDataMonthlyGrowthFn = function(appraisal_year,appraisal_item_id){
 	
 	$.ajax({
 		//url:"../Model/barChartMutiSeries.jsp",
-		url:restfulURL+"/kpi_api/public/dashboard/monthly_growth",
+		url:restfulURL+"/"+serviceName+"/public/dashboard/monthly_growth",
 		type:"post",
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -1229,7 +1229,7 @@ getDataYTDGrowthFn = function(appraisal_year,appraisal_item_id){
 	var appraisal_item_id =(appraisal_item_id == undefined || appraisal_item_id == ""  ? "" : appraisal_item_id);
 	
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/dashboard/ytd_monthly_growth",
+		url:restfulURL+"/"+serviceName+"/public/dashboard/ytd_monthly_growth",
 		type:"post",
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -1293,7 +1293,7 @@ getDataYTDVarianceFn = function(appraisal_year,appraisal_item_id){
 	var appraisal_item_id =(appraisal_item_id == undefined || appraisal_item_id == ""  ? "" : appraisal_item_id);
 	
 	$.ajax({
-		url:restfulURL+"/kpi_api/public/dashboard/ytd_monthly_variance",
+		url:restfulURL+"/"+serviceName+"/public/dashboard/ytd_monthly_variance",
 		type:"post",
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},

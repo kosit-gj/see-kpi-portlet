@@ -15,7 +15,7 @@ var checkSession = function(paramTokenID){
 		return false;
 	}
 	$.ajax({
-		url:restfulURL+"/see_api/public/session",
+		url:restfulURL+"/"+serviceName+"/public/session",
 		type:"GET",
 		dataType:"json",
 		//data:{"plid":}
@@ -68,8 +68,8 @@ var connectionServiceFn = function(username,password,plid){
 	var checkConnection=true;
 	$.ajax({
 		
-		url:restfulURL+"/see_api/public/session",
-		//url:"http://localhost/see_api/public/session",
+		url:restfulURL+"/"+serviceName+"/public/session",
+		//url:"http://localhost/"+serviceName+"/public/session",
 		type:"POST",
 		dataType:"text",
 		data:{"username":username,"password":password,"plid":plid},
@@ -160,7 +160,7 @@ function addCommas(nStr)
 //	
 //	$.ajax({
 //			
-//			url:restfulURL+"/see_api/public/session",
+//			url:restfulURL+"/"+serviceName+"/public/session",
 //			type:"POST",
 //			dataType:"text",
 //			//data:{"username":"1","password":"11"},//HR
@@ -435,7 +435,7 @@ $( document ).ajaxStop(function() {
 
 //var checkSession = function(){
 //	$.ajax({
-//		url:restfulURL+"/see_api/public/session",
+//		url:restfulURL+"/"+serviceName+"/public/session",
 //		type:"GET",
 //		dataType:"json",
 //		headers:{Authorization:"Bearer "+tokenID.token},
@@ -459,7 +459,7 @@ $( document ).ajaxStop(function() {
 
 var logoutFn = function(){
 	$.ajax({
-		url:restfulURL+"/see_api/public/session",
+		url:restfulURL+"/"+serviceName+"/public/session",
 		type:"DELETE",
 		dataType:"json",
 		headers:{Authorization:"Bearer "+tokenID.token},

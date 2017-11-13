@@ -3,12 +3,12 @@ var galbalDataCDSResult=[];
 var golbalDataError=[];
 var galbalDataTemp = [];
 var pageNumberDefault=1;
-var restfulPathCdsResult="/see_api/public/cds_result";
+var restfulPathCdsResult="/"+serviceName+"/public/cds_result";
 
 var restfulPathDropDownYear=restfulPathCdsResult+"/year_list";
 var restfulPathDropDownMonth=restfulPathCdsResult+"/month_list";
 var restfulPathDropDownAppraisalLevel=restfulPathCdsResult+"/al_list";
-var restfulPathDropDownAppraisalType="/see_api/public/appraisal_assignment/appraisal_type_list";
+var restfulPathDropDownAppraisalType="/"+serviceName+"/public/appraisal_assignment/appraisal_type_list";
 var restfulPathPositionAutocomplete=restfulPathCdsResult+"/auto_position_name";
 var restfulPathEmployeeAutocomplete=restfulPathCdsResult+"/auto_emp_name";
 
@@ -265,7 +265,7 @@ var dropDownListOrganization = function(){
 	html+="<select data-placement='top' id=\"org_id\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Organization\" name=\"org_id\">";
 	html+="<option  selected value=''>All Organization</option>";
 	$.ajax ({
-		url:restfulURL+"/see_api/public/org",
+		url:restfulURL+"/"+serviceName+"/public/org",
 		type:"get" ,
 		dataType:"json" ,
 		data:{"level_id":$("#app_lv").val()},
@@ -417,7 +417,7 @@ $(document).ready(function() {
 		$("#org_name").autocomplete({
 	        source: function (request, response) {
 	        	$.ajax({
-					 url:restfulURL+"/see_api/public/org/auto_org_name",
+					 url:restfulURL+"/"+serviceName+"/public/org/auto_org_name",
 					 type:"post",
 					 dataType:"json",
 					 headers:{Authorization:"Bearer "+tokenID.token},

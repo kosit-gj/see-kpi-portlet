@@ -9,8 +9,8 @@ var files;
 //var connectionServiceFn = function(username,password){
 //	$.ajax({
 //		
-//		url:restfulURL+"/see_api/public/session",
-//		//url:"http://localhost/see_api/public/session",
+//		url:restfulURL+"/"+serviceName+"/public/session",
+//		//url:"http://localhost/"+serviceName+"/public/session",
 //		type:"POST",
 //		dataType:"text",
 //		data:{"username":username,"password":password},
@@ -526,7 +526,7 @@ var dropDrowYearListFn = function(nameArea,id){
 		nameArea="";
 	}
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal/year_list",
+		url:restfulURL+"/"+serviceName+"/public/appraisal/year_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -549,7 +549,7 @@ var dropDrowYearListFn = function(nameArea,id){
 var dropDrowPeriodListFn = function(year,id){
 
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal/period_list",
+		url:restfulURL+"/"+serviceName+"/public/appraisal/period_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -572,7 +572,7 @@ var dropDrowPeriodListFn = function(year,id){
 var dropDrowAppraisalLevelFn = function(id){
 
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal/al_list",
+		url:restfulURL+"/"+serviceName+"/public/appraisal/al_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -595,7 +595,7 @@ var dropDrowAppraisalLevelFn = function(id){
 var dropDrowDepartmentFn = function(id){
 
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal/dep_list",
+		url:restfulURL+"/"+serviceName+"/public/appraisal/dep_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -617,7 +617,7 @@ var dropDrowDepartmentFn = function(id){
 var dropDrowOrgFn = function(appraisalLevelId){
 
 	$.ajax({
-		url:restfulURL+"/see_api/public/org",
+		url:restfulURL+"/"+serviceName+"/public/org",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -641,7 +641,7 @@ var dropDrowOrgFn = function(appraisalLevelId){
 var dropDrowSectionFn = function(department_code,id){
 
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal/sec_list",
+		url:restfulURL+"/"+serviceName+"/public/appraisal/sec_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -899,7 +899,7 @@ var listAppraisalDetailFn = function(data){
 var findOneFn = function(id){
 
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal/"+id,
+		url:restfulURL+"/"+serviceName+"/public/appraisal/"+id,
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -927,7 +927,7 @@ var dropdownListPhaseFn_bk = function(nameArea,id){
         "phase_name": "Alpha"
 	*/
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal/phase_list",
+		url:restfulURL+"/"+serviceName+"/public/appraisal/phase_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -956,7 +956,7 @@ var dropdownListPhaseFn_bk = function(nameArea,id){
 var dropdownListPhaseFn = function(){
 	 phaseArray=[];
 	 $.ajax({
-	  url:restfulURL+"/see_api/public/appraisal/phase_list/"+$("#phase_item_result_id").val(),
+	  url:restfulURL+"/"+serviceName+"/public/appraisal/phase_list/"+$("#phase_item_result_id").val(),
 	  type:"get",
 	  dataType:"json",
 	  async:false,
@@ -1322,7 +1322,7 @@ var insertActionPlanInlineFn = function(){
 		 $(".new_responsible").autocomplete({
 		        source: function (request, response) {
 		        	$.ajax({
-						 url:restfulURL+"/see_api/public/appraisal/action_plan/auto_employee_name",
+						 url:restfulURL+"/"+serviceName+"/public/appraisal/action_plan/auto_employee_name",
 						 type:"get",
 						 dataType:"json",
 						 headers:{Authorization:"Bearer "+tokenID.token},
@@ -1358,7 +1358,7 @@ var insertActionPlanInlineFn = function(){
 var getActionPlanFn = function(id){
 	globalCount=0;
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal/action_plan/"+id,
+		url:restfulURL+"/"+serviceName+"/public/appraisal/action_plan/"+id,
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1376,7 +1376,7 @@ var getActionPlanFn = function(id){
 var deletePhaseFn = function(id){
 	
 	 $.ajax({
-		      url:restfulURL+"/see_api/public/phase/"+id,
+		      url:restfulURL+"/"+serviceName+"/public/phase/"+id,
 		      type:"DELETE",
 		      dataType:"json",
 			  headers:{Authorization:"Bearer "+tokenID.token},
@@ -1406,7 +1406,7 @@ var findOnePhaseFn = function(id){
 	
 	//get data for structure
 	$.ajax({
-		url:restfulURL+"/see_api/public/phase/"+id,
+		url:restfulURL+"/"+serviceName+"/public/phase/"+id,
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1513,7 +1513,7 @@ var clearFormPhaseFn = function(){
 var getPhaseFn = function(id){
 	
 	$.ajax({
-		url:restfulURL+"/see_api/public/phase",
+		url:restfulURL+"/"+serviceName+"/public/phase",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1531,7 +1531,7 @@ var getPhaseFn = function(id){
 var getAttachFileFn = function(id){
 	
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal/upload_file/"+id,
+		url:restfulURL+"/"+serviceName+"/public/appraisal/upload_file/"+id,
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1554,7 +1554,7 @@ var listAttachFileFn = function(data){
 		html+="<tr>";
 			html+="<td  style='text-align:center;'>"+(index+1)+"</td>";
 			html+="<td>"+indexEntry['doc_path']+"</td>";
-			html+="<td style='text-align:center;'><a target=\"_blank\" href=\""+restfulURL+"/see_api/public/"+indexEntry['doc_path']+"\" class='attachDownload' id='attachDownload-"+indexEntry['result_doc_id']+"'><i class='fa fa-download'></i></a>,<a class=\"delAttach\" id=\"delAttach-"+indexEntry['result_doc_id']+"\" href=\"#\"><i style='color:red;' class='icon-trash'></i></a></td>";
+			html+="<td style='text-align:center;'><a target=\"_blank\" href=\""+restfulURL+"/"+serviceName+"/public/"+indexEntry['doc_path']+"\" class='attachDownload' id='attachDownload-"+indexEntry['result_doc_id']+"'><i class='fa fa-download'></i></a>,<a class=\"delAttach\" id=\"delAttach-"+indexEntry['result_doc_id']+"\" href=\"#\"><i style='color:red;' class='icon-trash'></i></a></td>";
 		html+="</tr>";
 	});
 
@@ -1571,7 +1571,7 @@ var deleteAttachFileFn = function(id){
 
 	
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal/delete_file/"+id,
+		url:restfulURL+"/"+serviceName+"/public/appraisal/delete_file/"+id,
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1592,7 +1592,7 @@ var deleteAttachFileFn = function(id){
 var deleteReasonFn = function(id){
 	
 	 $.ajax({
-		      url:restfulURL+"/see_api/public/appraisal/reason/"+$("#reason_item_result_id").val(),
+		      url:restfulURL+"/"+serviceName+"/public/appraisal/reason/"+$("#reason_item_result_id").val(),
 		      type:"DELETE",
 		      dataType:"json",
 			  data:{"reason_id":id},
@@ -1617,7 +1617,7 @@ var deleteReasonFn = function(id){
 var findOneReasonFn = function(id){
 	
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal/reason/"+$("#reason_item_result_id").val()+"/"+id,
+		url:restfulURL+"/"+serviceName+"/public/appraisal/reason/"+$("#reason_item_result_id").val()+"/"+id,
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1697,7 +1697,7 @@ var clearFormReasonFn = function(){
 var getReasonFn = function(id){
 	
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal/reason/"+id,
+		url:restfulURL+"/"+serviceName+"/public/appraisal/reason/"+id,
 		
 		type:"get",
 		dataType:"json",
@@ -1928,7 +1928,7 @@ var getDataFn = function(page,rpp){
 	var appraisal_type_id= ($("#embed_appraisalType").val());
 	
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal",
+		url:restfulURL+"/"+serviceName+"/public/appraisal",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -1993,7 +1993,7 @@ var searchAdvanceFn = function() {
 var dropDrowAsignToEditFn = function(paramStageID){
 
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal/edit_assign_to",
+		url:restfulURL+"/"+serviceName+"/public/appraisal/edit_assign_to",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -2015,7 +2015,7 @@ var dropDrowAsignToEditFn = function(paramStageID){
 }
 var dropDrowActionEditFn = function(stage_id,to_appraisal_level_id){
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal/edit_action_to",
+		url:restfulURL+"/"+serviceName+"/public/appraisal/edit_action_to",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -2048,8 +2048,8 @@ var appraisalTypeFn = function(nameArea,id){
 	}
 	
 	$.ajax({
-		//http://192.168.1.52/see_api/public/appraisal_assignment/appraisal_type_list
-		url:restfulURL+"/see_api/public/appraisal_assignment/appraisal_type_list",
+		//http://192.168.1.52/"+serviceName+"/public/appraisal_assignment/appraisal_type_list
+		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -2136,7 +2136,7 @@ var saveAppraisalFn = function(){
 	//console.log(appraisalObject);
 	
 	$.ajax({
-		url:restfulURL+"/see_api/public/appraisal/"+$("#emp_result_id").val(),
+		url:restfulURL+"/"+serviceName+"/public/appraisal/"+$("#emp_result_id").val(),
 		type:"patch",
 		dataType:"json",
 		async:false,
@@ -2172,7 +2172,7 @@ var calculateBunusFn= function(){
 	*/
 	
 //	$.ajax({
-//		url:restfulURL+"/see_api/public/appraisal/calculate_weight",
+//		url:restfulURL+"/"+serviceName+"/public/appraisal/calculate_weight",
 //		type:"post",
 //		dataType:"json",
 //		async:false,
@@ -2271,7 +2271,7 @@ var getDataGanttChartFn = function(item_result_id,ganttPaneDuration,ganttPaneDur
 	
 	
 	$.ajax({
-		url:restfulURL+"/see_api/public/dashboard/gantt",
+		url:restfulURL+"/"+serviceName+"/public/dashboard/gantt",
 		type:"get",
 		dataType:"json",
 		data:{"item_result_id":item_result_id},
@@ -2481,11 +2481,11 @@ $(document).ready(function() {
 		$("#AppraisalLevel").change();
 		
 		//Auto complete Start
-		//http://192.168.1.52/see_api/public/appraisal_assignment/auto_position_name
+		//http://192.168.1.52/"+serviceName+"/public/appraisal_assignment/auto_position_name
 		$("#Position").autocomplete({
 	        source: function (request, response) {
 	        	$.ajax({
-					 url:restfulURL+"/see_api/public/appraisal/auto_position_name",
+					 url:restfulURL+"/"+serviceName+"/public/appraisal/auto_position_name",
 					 type:"get",
 					 dataType:"json",
 					 headers:{Authorization:"Bearer "+tokenID.token},
@@ -2514,7 +2514,7 @@ $(document).ready(function() {
 //		$("#organization").autocomplete({
 //	        source: function (request, response) {
 //	        	$.ajax({
-//					 url:restfulURL+"/see_api/public/appraisal/auto_org_name",
+//					 url:restfulURL+"/"+serviceName+"/public/appraisal/auto_org_name",
 //					 type:"get",
 //					 dataType:"json",
 //					 headers:{Authorization:"Bearer "+tokenID.token},
@@ -2549,7 +2549,7 @@ $(document).ready(function() {
 		$("#EmpName").autocomplete({
 	        source: function (request, response) {
 	        	$.ajax({
-					 url:restfulURL+"/see_api/public/appraisal/auto_employee_name",
+					 url:restfulURL+"/"+serviceName+"/public/appraisal/auto_employee_name",
 					 type:"get",
 					 dataType:"json",
 					 headers:{Authorization:"Bearer "+tokenID.token},
@@ -2700,7 +2700,7 @@ $(document).ready(function() {
 				 $(".responsible").autocomplete({
 				        source: function (request, response) {
 				        	$.ajax({
-								 url:restfulURL+"/see_api/public/appraisal/action_plan/auto_employee_name",
+								 url:restfulURL+"/"+serviceName+"/public/appraisal/action_plan/auto_employee_name",
 								 type:"get",
 								 dataType:"json",
 								 headers:{Authorization:"Bearer "+tokenID.token},
@@ -2815,7 +2815,7 @@ $(document).ready(function() {
 				
 				
 					$.ajax({
-						     url:restfulURL+"/see_api/public/appraisal/action_plan/"+$("#item_result_id").val(),
+						     url:restfulURL+"/"+serviceName+"/public/appraisal/action_plan/"+$("#item_result_id").val(),
 						     type:"PATCH",
 						     dataType:"json",
 						     data:{"actions":actions},
@@ -2937,7 +2937,7 @@ $(document).ready(function() {
 					//console.log(actions);
 				
 					  $.ajax({
-						     url:restfulURL+"/see_api/public/appraisal/action_plan/"+$("#item_result_id").val(),
+						     url:restfulURL+"/"+serviceName+"/public/appraisal/action_plan/"+$("#item_result_id").val(),
 						     type:"POST",
 						     dataType:"json",
 						     data:{"actions": actions },
@@ -3008,7 +3008,7 @@ $(document).ready(function() {
 			 	  
 
 					  $.ajax({
-						     url:restfulURL+"/see_api/public/appraisal/action_plan/"+$("#item_result_id").val(),
+						     url:restfulURL+"/"+serviceName+"/public/appraisal/action_plan/"+$("#item_result_id").val(),
 						     type:"DELETE",
 						     dataType:"json",
 						     data:{"actions": actions },
@@ -3077,7 +3077,7 @@ $(document).ready(function() {
 		 		
 		 	
 			 	  $.ajax({
-					     url:restfulURL+"/see_api/public/phase",
+					     url:restfulURL+"/"+serviceName+"/public/phase",
 					     type:"POST",
 					     dataType:"json",
 					     data:{"phase_name": $("#phaseName").val(),"is_active":is_active,"item_result_id":$("#phase_item_result_id").val()},
@@ -3102,7 +3102,7 @@ $(document).ready(function() {
 		 	}else{
 		 		
 		 		 $.ajax({
-						     url:restfulURL+"/see_api/public/phase/"+$("#pahse_id_edit").val(),
+						     url:restfulURL+"/"+serviceName+"/public/phase/"+$("#pahse_id_edit").val(),
 						     type:"PATCH",
 						     dataType:"json",
 						     data:{"phase_name": $("#phaseName").val(),"is_active":is_active,"item_result_id":$("#phase_item_result_id").val()},
@@ -3142,7 +3142,7 @@ $(document).ready(function() {
 		 		
 		 	
 			 	  $.ajax({
-					     url:restfulURL+"/see_api/public/appraisal/reason/"+$("#reason_item_result_id").val(),
+					     url:restfulURL+"/"+serviceName+"/public/appraisal/reason/"+$("#reason_item_result_id").val(),
 					     type:"POST",
 					     dataType:"json",
 					     data:{"reason_name": $("#reason_name").val()},
@@ -3167,7 +3167,7 @@ $(document).ready(function() {
 		 	}else{
 		 		
 		 		 $.ajax({
-						     url:restfulURL+"/see_api/public/appraisal/reason/"+$("#reason_item_result_id").val(),
+						     url:restfulURL+"/"+serviceName+"/public/appraisal/reason/"+$("#reason_item_result_id").val(),
 						     type:"PATCH",
 						     dataType:"json",
 						     data:{"reason_name": $("#reason_name").val(),"reason_id":$("#reason_id_edit").val()},
@@ -3300,7 +3300,7 @@ $(document).ready(function() {
 
 
 		jQuery_1_1_3.ajax({
-			url:restfulURL+"/see_api/public/appraisal/upload_file/"+$("#attach_file_item_result_id").val(),
+			url:restfulURL+"/"+serviceName+"/public/appraisal/upload_file/"+$("#attach_file_item_result_id").val(),
 			type: 'POST',
 			data: data,
 			cache: false,

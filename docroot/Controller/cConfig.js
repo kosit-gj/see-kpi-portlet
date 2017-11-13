@@ -5,7 +5,7 @@ var serviceName="/see_api";
 //restfulURL="http://192.168.1.254";
 
 /*#######Localhost#######*/
-restfulURL="http://192.168.1.42";
+restfulURL="http://localhost";
 
 /*#######Poroduction#######*/
 //restfulURL="http://172.16.11.109";
