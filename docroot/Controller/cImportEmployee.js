@@ -36,14 +36,21 @@ var validateFileFn = function(data){
 
 	$.each(data,function(index,indexEntry){
 		if(indexEntry[Object.keys(indexEntry)[0]]!= undefined || indexEntry[Object.keys(indexEntry)[0]]==null){
+		
 			if(indexEntry[Object.keys(indexEntry)[0]]== null){//The employee code field is null
 				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+Object.keys(indexEntry)[0]+" : null <i class='fa fa-level-down'></i><br>";
 			}else{
-				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+Object.keys(indexEntry)[0]+": "+indexEntry[Object.keys(indexEntry)[0]]+" <i class='fa fa-level-down'></i><br>";}
+				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+Object.keys(indexEntry)[0]+": "+indexEntry[Object.keys(indexEntry)[0]]+" <i class='fa fa-level-down'></i><br>";
 			}
-	     $.each(indexEntry['errors'],function(index2,indexEntry2){
-	    	 validateFile+="<font color='red'>&emsp;*</font> "+indexEntry2+"<br>";
-	     });
+			if(indexEntry['errors']!=null || indexEntry['errors']!=undefined || indexEntry['errors']!=""){
+				validateFile+="<font color='red'>&emsp;*</font> "+indexEntry['errors']+"<br>";
+			}
+		}
+		 
+//	     $.each(indexEntry['errors'],function(index2,indexEntry2){
+//	    	 console.log("test4");
+//	    	 //validateFile+="<font color='red'>&emsp;*</font> "+indexEntry2+"<br>";
+//	     });
 	 
 	});
 	callFlashSlideInModal(validateFile,"#informationFile","error");

@@ -33,11 +33,11 @@ var getDataFn = function(page,rpp){
 		data:{"page":page,"rpp":rpp,
 			
 			"structure_id":structure,
-			"appraisal_level_id":app_lv,
+			"level_id":app_lv,
 			"appraisal_type_id":app_type,
-			"appraisal_item_id":app_item,
+			"item_id":app_item,
 			"period_id":period,
-			"emp_code":emp_code
+			"emp_id":emp_code
 		},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,// w8 data 
@@ -153,7 +153,7 @@ var dropDownListAppraisalLevel = function(){
 		success:function(data){
 			$.each(data,function(index,indexEntry){
 
-					html+="<option  value="+indexEntry["appraisal_level_id"]+">"+indexEntry["appraisal_level_name"]+"</option>";	
+					html+="<option  value="+indexEntry["level_id"]+">"+indexEntry["appraisal_level_name"]+"</option>";	
 		
 			});	
 
@@ -239,8 +239,8 @@ var listErrorFn =function(data){
 		if(data[index]['errors']['period_id']!=undefined){
 			errorData+="<font color='red'>*</font> "+data[index]['errors']['period_id']+"<br>";
 		}
-		if(data[index]['errors']['appraisal_item_id']!=undefined){
-			errorData+="<font color='red'>*</font> "+data[index]['errors']['appraisal_item_id']+"<br>";
+		if(data[index]['errors']['item_id']!=undefined){
+			errorData+="<font color='red'>*</font> "+data[index]['errors']['item_id']+"<br>";
 		}
 		if(data[index]['errors']['data_value']!=undefined){
 			errorData+="<font color='red'>*</font> "+data[index]['errors']['data_value']+"<br>";
@@ -306,9 +306,9 @@ $(document).ready(function() {
 				 dataType:"json",
 				 data:{
 					 "structure_id":$("#structure").val(),
-					 "appraisal_level_id":$("#app_item_id").val(),
-					 "appraisal_item_name":request.term},
-				//async:false,
+					 "level_id":$("#app_lv").val(),
+					 "item_name":request.term},
+				 async:false,
 				 headers:{Authorization:"Bearer "+tokenID.token},
                  error: function (xhr, textStatus, errorThrown) {
                         console.log('Error: ' + xhr.responseText);
@@ -317,9 +317,9 @@ $(document).ready(function() {
 					  
 						response($.map(data, function (item) {
                             return {
-                                label: item.appraisal_item_name,
-                                value: item.appraisal_item_name,
-                                appraisal_item_id : item.appraisal_item_id
+                                label: item.item_name,
+                                value: item.item_name,
+                                item_id : item.item_id
                                 
                             };
                         }));
@@ -333,17 +333,15 @@ $(document).ready(function() {
         },
 		select:function(event, ui) {
 			$("#app_item").val(ui.item.value);
-            $("#app_item_id").val(ui.item.appraisal_item_id);
+            $("#app_item_id").val(ui.item.item_id);
             tempAppItemName = ui.item.label;
-            tempAppItemId=ui.item.appraisal_item_id;
+            tempAppItemId=ui.item.item_id;
             return false;
         },change: function(e, ui) {  
-
- 
 			if ($("#app_item").val() == tempAppItemName) {
 				$("#app_item_id").val(tempAppItemId);
 			}  else if (ui.item != null){
-				$("#app_item_id").val(ui.item.appraisal_item_id);
+				$("#app_item_id").val(ui.item.item_id);
 			}else {
 				$("#app_item_id").val("");
 			}
@@ -424,9 +422,9 @@ $(document).ready(function() {
 		
 		var param="";
 		param+="&structure_id="+paramStructure;
-		param+="&appraisal_level_id="+paramAppLv;
+		param+="&level_id="+paramAppLv;
 		param+="&appraisal_type_id="+paramAppType;
-		param+="&appraisal_item_id="+paramAppItem;
+		param+="&item_id="+paramAppItem;
 		param+="&period_id="+paramPeriod;
 		param+="&emp_code="+paramEmpCode;
 		//alert(restfulURL+restfulPathCdsResult+"/export?token="+tokenID.token+""+param);

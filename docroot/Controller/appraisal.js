@@ -50,17 +50,23 @@ var listErrorActionPlanFn =function(data){
 	return errorData;
 }
 //List Error Function End
-var dropdownDeductScoreFn = function(score,nof_target_score){
+var dropdownDeductScoreFn = function(score,nof_target_score,hint){
 	htmlTemplateQuality = "";
 	
 	console.log(score);
 	console.log(nof_target_score);
 	
 	for(var i=0;i<=nof_target_score;i++){
-		if(score==i){
-			htmlTemplateQuality+="<option  selected='selected'>"+i+"</option>";
+		var hintValue="";
+		if(hint[i]['hint']!="" || hint[i]['hint']!=undefined || hint[i]['hint']!=""){
+			hintValue=hint[i]['hint'];
 		}else{
-			htmlTemplateQuality+="<option >"+i+"</option>";
+			hintValue=i;
+		}
+		if(score==i){
+			htmlTemplateQuality+="<option value='"+i+"'  selected='selected'>"+hintValue+"</option>";
+		}else{
+			htmlTemplateQuality+="<option value='"+i+"'>"+hintValue+"</option>";
 		}
 	}
 	/*
@@ -175,8 +181,8 @@ var assignTemplateQualityFn = function(structureName,data){
 								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\""+hintHtml+"\">"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 								
 								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
-								htmlTemplateQuality+="<select style='width:50px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
-									htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['score']),indexEntry['nof_target_score']);
+								htmlTemplateQuality+="<select style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
+									htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['score']),indexEntry['nof_target_score'],data['hint']);
 								htmlTemplateQuality+="<select>";
 								//htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
 								htmlTemplateQuality+="</td>";
@@ -191,8 +197,8 @@ var assignTemplateQualityFn = function(structureName,data){
 								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\""+hintHtml+"\">"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 								
 								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
-								htmlTemplateQuality+="<select style='width:50px; height: 25px;padding: 0 0 0 5px;font-size:13px; text-align:right;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore input form-control input-sm-small numberOnly'>";
-									htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['score']),indexEntry['nof_target_score']);
+								htmlTemplateQuality+="<select style='width:180px; height: 25px;padding: 0 0 0 5px;font-size:13px; text-align:left;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore input form-control input-sm-small numberOnly'>";
+									htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['score']),indexEntry['nof_target_score'],data['hint']);
 								htmlTemplateQuality+="<select>";
 								//htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
 								htmlTemplateQuality+="</td>";

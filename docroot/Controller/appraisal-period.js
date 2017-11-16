@@ -27,7 +27,7 @@ var DropdownAppraisalYear = function(){
 			async:false,
 			success : function(data) {
 				$.each(data,function(index,indexEntry){
-					if(year==indexEntry['appraisal_year']){
+					if(indexEntry['default_value']==1){
 						html += "<option selected value=\""+data[index]["appraisal_year"]+"\">"+data[index]["appraisal_year"]+"</option>";	
 					}else{
 						html += "<option value=\""+data[index]["appraisal_year"]+"\">"+data[index]["appraisal_year"]+"</option>";	
@@ -54,7 +54,8 @@ var DropdownStartYear = function(){
 			async:false,
 			success : function(data) {
 				$.each(data,function(index,indexEntry){
-					if(year==indexEntry['appraisal_year']){
+					
+					if(indexEntry['default_value']==1){
 						html += "<option selected value=\""+data[index]["appraisal_year"]+"\">"+data[index]["appraisal_year"]+"</option>";	
 					}else{
 						html += "<option value=\""+data[index]["appraisal_year"]+"\">"+data[index]["appraisal_year"]+"</option>";	

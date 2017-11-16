@@ -65,6 +65,7 @@ var updateQuantityFn  = function(){
 	 var kpi_type_id=$("#kpiTypeQuantity").val();
 	 var remind_condition_id=$("#remindCOnditionQuantity").val();
 	 var value_type=$("#valueTypeQuantity").val();
+	 var function_type = $("#functionTypeQuantity").val();
 	 var kpi_id = $("#kpiQuantity").val();
 	 
 	 var is_variance="";
@@ -105,6 +106,7 @@ var updateQuantityFn  = function(){
 		 "kpi_type_id":kpi_type_id,
 		 "remind_condition_id":remind_condition_id,
 		 "value_type_id":value_type,
+		 "function_type":function_type,
 		 "kpi_id":kpi_id,
 		 "form_id":"1"
 		},
@@ -142,6 +144,7 @@ var insertQuantityFn = function(param) {
 	 var kpi_type_id=$("#kpiTypeQuantity").val();
 	 var remind_condition_id = $("#remindCOnditionQuantity").val();
 	 var value_type = $("#valueTypeQuantity").val();
+	 var function_type = $("#functionTypeQuantity").val();
 	 var kpi_id = $("#kpiQuantity").val();
 	
 	 /*
@@ -188,6 +191,7 @@ var insertQuantityFn = function(param) {
 			 "kpi_type_id":kpi_type_id,
 			 "remind_condition_id":remind_condition_id,
 			 "value_type_id":value_type,
+			 "function_type":function_type,
 			 "kpi_id":kpi_id,
 			 "form_id":"1"
 		},
