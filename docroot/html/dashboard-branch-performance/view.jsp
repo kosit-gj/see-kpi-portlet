@@ -278,6 +278,14 @@
 ::-webkit-scrollbar {
     width: 12px;
 }
+
+.aui #detailArea *{
+-webkit-overflow-scrolling: touch; 
+overflow:auto;
+}
+.aui #detailArea h3{
+overflow:hidden !important;
+}
  
 /* /* Track */ */
 /* ::-webkit-scrollbar-track { */

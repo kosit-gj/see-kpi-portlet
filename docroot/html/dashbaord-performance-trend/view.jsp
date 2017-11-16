@@ -118,6 +118,10 @@
 		    top:0px;
 		}
 		
+		.aui .modal{
+		  left:1%;
+		}
+		
 	.aui .ibox-title2{
 		height:45px;
 	}

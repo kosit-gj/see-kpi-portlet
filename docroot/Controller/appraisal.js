@@ -911,9 +911,18 @@ var findOneFn = function(id){
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
-			
-			listAppraisalDetailFn(data);
-			setThemeColorFn(tokenID.theme_color);
+			if(data['head'].length>0){
+				
+				listAppraisalDetailFn(data);
+				setThemeColorFn(tokenID.theme_color);
+				if(data['head'][0]['edit_flag']==0){
+					$("#btnSubmit").attr("disabled","disabled");	
+					$("#btnAddAnother").attr("disabled","disabled");
+				}
+			}else{
+				callFlashSlide("Data is empty.");
+				return false;
+			}
 
 		}
 	});

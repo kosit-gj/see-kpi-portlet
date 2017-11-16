@@ -550,7 +550,7 @@ $(document).ready(function() {
                             return {
                                 label: item.emp_name,
                                 value: item.emp_name,
-                                emp_code: item.emp_code
+                                emp_id: item.emp_id
                             };
                         }));
 					
@@ -563,15 +563,15 @@ $(document).ready(function() {
         },
 		select:function(event, ui) {
 			$("#emp_name").val(ui.item.value);
-            $("#emp_name_id").val(ui.item.emp_code);
+            $("#emp_name_id").val(ui.item.emp_id);
             galbalDataTemp['emp_name'] = ui.item.value;
-            galbalDataTemp['emp_id']=ui.item.emp_code;
+            galbalDataTemp['emp_id']=ui.item.emp_id;
             return false;
         },change: function(e, ui) {  
 			if ($("#emp_name").val() == galbalDataTemp['emp_name']) {
 				$("#emp_name_id").val(galbalDataTemp['emp_id']);
 			} else if (ui.item != null){
-				$("#emp_name_id").val(ui.item.emp_code);
+				$("#emp_name_id").val(ui.item.emp_id);
 			} else {
 				$("#emp_name_id").val("");
 				
