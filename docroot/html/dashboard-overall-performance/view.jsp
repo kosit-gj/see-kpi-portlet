@@ -79,7 +79,9 @@
 		    margin-left:-25%;  
 		    top:0px;
 		}
-		
+	.aui .modal{
+		  left:1%;
+		}	
 	.aui .ibox-title2{
 		height:45px;
 	}
@@ -408,6 +410,12 @@ table#tableAllKPI .aui .table th, .aui .table td{
 .table-fixed tbody td, .table-fixed thead > tr> th {
   float: left;
   border-bottom-width: 0;
+}
+
+.aui #ModalKPI .modal-body *{
+-webkit-overflow-scrolling: touch ; 
+/* overflow-scrolling:touch !important; */
+overflow:auto;
 }
 </style>
 

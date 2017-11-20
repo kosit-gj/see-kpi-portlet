@@ -1,6 +1,8 @@
 var globalData="";
 var phaseArray=[];
 var globalCount=0;
+var username = "";
+var password = "";
 //Variable to store your files
 var files;
 // funciton global start
@@ -55,19 +57,29 @@ var dropdownDeductScoreFn = function(score,nof_target_score,hint){
 	
 	console.log(score);
 	console.log(nof_target_score);
+	console.log(hint);
 	
 	for(var i=0;i<=nof_target_score;i++){
 		var hintValue="";
-		if(hint[i]['hint']!="" || hint[i]['hint']!=undefined || hint[i]['hint']!=""){
+		
+		
+		
+		try {
 			hintValue=hint[i]['hint'];
-		}else{
-			hintValue=i;
 		}
+		catch(err) {
+			//hintValue=i;
+		   console.log(err.message);
+		}
+		
 		if(score==i){
 			htmlTemplateQuality+="<option value='"+i+"'  selected='selected'>"+hintValue+"</option>";
 		}else{
 			htmlTemplateQuality+="<option value='"+i+"'>"+hintValue+"</option>";
 		}
+		
+		
+		
 	}
 	/*
 	if(score==0){
@@ -235,6 +247,7 @@ var assignTemplateQualityFn = function(structureName,data){
 	htmlTemplateQuality+="</div>";
 htmlTemplateQuality+="</div>";
 return htmlTemplateQuality;
+
 //$("#appraisal_template_area").append(htmlTemplateQuality);
 
 };
@@ -541,7 +554,7 @@ var dropDrowYearListFn = function(nameArea,id){
 			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
-				if(id==indexEntry['appraisal_year']){
+				if(index==0){
 					htmlOption+="<option selected='selected' value="+indexEntry['appraisal_year']+">"+indexEntry['appraisal_year']+"</option>";
 				}else{
 					htmlOption+="<option value="+indexEntry['appraisal_year']+">"+indexEntry['appraisal_year']+"</option>";
@@ -915,10 +928,22 @@ var findOneFn = function(id){
 				
 				listAppraisalDetailFn(data);
 				setThemeColorFn(tokenID.theme_color);
-				if(data['head'][0]['edit_flag']==0){
+				
+				
+				
+				
+				if((data['head'][0]['edit_flag']==0)){
 					$("#btnSubmit").attr("disabled","disabled");	
-					$("#btnAddAnother").attr("disabled","disabled");
+					
+				}else if($("#actionToAssign").val()==null){
+					$("#btnSubmit").attr("disabled","disabled");
+					
+				}else if((username.toLowerCase()!=data['head'][0]['chief_emp_code'].toLowerCase())){
+					//$("#btnSubmit").removeAttr("disabled");
+					$("#btnSubmit").attr("disabled","disabled");
 				}
+
+				
 			}else{
 				callFlashSlide("Data is empty.");
 				return false;
@@ -2442,8 +2467,11 @@ $(document).ready(function() {
 
 //	var username = getParamValue('username');
 //	var password = getParamValue('password');
-	var username = $('#user_portlet').val();
-	var password = $('#pass_portlet').val();
+	
+	
+	
+	 username = $('#user_portlet').val();
+	 password = $('#pass_portlet').val();
 	var plid = $('#plid_portlet').val();
 	/*Fixed for Test.*/
 //	 username = "1";
@@ -2484,8 +2512,10 @@ $(document).ready(function() {
 		$("#AppraisalYear").change(function(){
 			dropDrowPeriodListFn($(this).val());	
 		});
-		$("#AppraisalYear").change();
-		
+		setTimeout(function(){
+			$("#AppraisalYear").change();
+		},1000);
+
 		dropDrowAppraisalLevelFn();
 		//dropDrowOrgFn();
 		//dropDrowDepartmentFn();

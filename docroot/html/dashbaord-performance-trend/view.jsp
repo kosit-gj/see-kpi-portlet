@@ -651,6 +651,12 @@ table#tableAllKPI2 .aui .table th, .aui .table td{
 	overflow-x: auto !important;
 }
 /* End All KPI */
+.aui #ModalKPI .modal-body ,.aui #ModalKPI #scrollSubOrg3 , .aui #ModalKPI #scrollSubOrg3 table{
+-webkit-overflow-scrolling: touch ; 
+/* overflow-scrolling:touch !important; */
+overflow:auto;
+}
+
 </style>
 
 

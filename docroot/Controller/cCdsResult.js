@@ -85,7 +85,7 @@ var listCdsResultFn = function (data) {
 	
 		htmlTable += "<tr class='rowSearch'>";//cds_result_id
 		if($("#param_app_type").val() == "2"){
-			htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_id"]+ "</td>";
+			htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_code"]+ "</td>";
 			htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_name"]+ "</td>";
 		}else if($("#param_app_type").val() == "1"){
 			htmlTable += "<td class='columnSearch'>"+ indexEntry["org_code"]+ "</td>";

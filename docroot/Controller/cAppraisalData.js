@@ -426,7 +426,7 @@ $(document).ready(function() {
 		param+="&appraisal_type_id="+paramAppType;
 		param+="&item_id="+paramAppItem;
 		param+="&period_id="+paramPeriod;
-		param+="&emp_code="+paramEmpCode;
+		param+="&emp_id="+paramEmpCode;
 		//alert(restfulURL+restfulPathCdsResult+"/export?token="+tokenID.token+""+param);
 		$("form#formExportToExcel").attr("action",restfulURL+restfulPathAppData+"/export?token="+tokenID.token+""+param);
 		$("form#formExportToExcel").submit();

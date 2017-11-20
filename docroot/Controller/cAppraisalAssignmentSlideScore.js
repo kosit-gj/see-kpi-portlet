@@ -2226,13 +2226,13 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	
 		$("#btnAssignment").attr("disabled","disabled");
 		$("#btnAddAnother").attr("disabled","disabled");
-		$("#btnSubmit").attr("disabled","disabled");
+		//$("#btnSubmit").attr("disabled","disabled");
 		
 	}else{
 		//alert(is_hr);
 		$("#btnAssignment").removeAttr("disabled");
 		$("#btnAddAnother").removeAttr("disabled");
-		$("#btnSubmit").removeAttr("disabled");
+		//$("#btnSubmit").removeAttr("disabled");
 	}
 	
 		
