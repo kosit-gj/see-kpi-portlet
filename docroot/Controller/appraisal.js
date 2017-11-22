@@ -396,6 +396,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>Perspective</b> </th>";
 			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>KPI Name</b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Target </b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>UOM </b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Forecast </b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Actual </b></th>";
 			if(data['threshold']==1){
@@ -421,6 +422,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>Perspective</b> </th>";
 			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>KPI Name</b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Target </b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>UOM </b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Forecast </b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Actual </b></th>";
 			
@@ -459,6 +461,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 						htmlTemplateQuantity+="<td>"+indexEntry['perspective_name']+"</td>";
 						htmlTemplateQuantity+="<td id=\"item_name-"+indexEntry['item_result_id']+"\">"+indexEntry['item_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
+						htmlTemplateQuantity+="<td>"+indexEntry['uom_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+indexEntry['forecast_value']+"></td>";
 						//htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly \" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
@@ -482,7 +485,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 						htmlTemplateQuantity+="<td>"+indexEntry['perspective_name']+"</td>";
 						htmlTemplateQuantity+="<td>"+indexEntry['item_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
-						
+						htmlTemplateQuantity+="<td>"+indexEntry['uom_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input type=\"text\"  class=\"span10 input-sm-small numberOnly itemScore\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+indexEntry['forecast_value']+"></td>";
 						
 						//htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input type=\"text\"  class=\"span10 input-sm-small numberOnly \" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
@@ -508,6 +511,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 					htmlTemplateQuantity+="<td></td>";
 					htmlTemplateQuantity+="<td></td>";
 					htmlTemplateQuantity+="<td ></td>";
+					htmlTemplateQuantity+="<td></td>";
 					htmlTemplateQuantity+="<td></td>";
 					htmlTemplateQuantity+="<td></td>";
 					htmlTemplateQuantity+="<td></td>";

@@ -1656,7 +1656,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 					htmlTemplateQuantity+="<th style=\"width:3%;  text-align:center;\" class=''><b>Select</b></th>";
 					htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>Appraisal Item Name</b></th>";
 					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Target</b> </th>";
-
+					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>UOM</b> </th>";
 					htmlTemplateQuantity+="<th style=\"width:10%;  text-align:center;\" class='thBox'><b>Forecast Value</b> </th>";
 					
 					
@@ -1683,12 +1683,14 @@ var assignTemplateQuantityFn = function(structureName,data){
 							
 							htmlTemplateQuantity+="<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['item_id']+"'></td>";
 							htmlTemplateQuantity+="<td style=\"width:20%\" class='id-"+indexEntry['structure_id']+"-item_name' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' style='padding-top:7px;'>"+indexEntry['item_name']+"</td>";
+							
 							htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target' class='id-"+indexEntry['structure_id']+"-target input form-control input-sm-small numberOnly' type='text'>";
 							htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-kpi_type_id' class='id-"+indexEntry['structure_id']+"-kpi_type_id input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['kpi_type_id']+">";
 							htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-nof_target_score' class='id-"+indexEntry['structure_id']+"-nof_target_score input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['nof_target_score']+">";
 							//htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-total_weight' class='id-"+indexEntry['structure_id']+"-total_weight input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['total_weight']+">";
 							htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_result_id' class='id-"+indexEntry['structure_id']+"-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
 							htmlTemplateQuantity+="</td>";
+							htmlTemplateQuantity+="<td style=\"width:5%\">"+indexEntry['uom_name']+"</td>";
 							
 						    htmlTemplateQuantity+="<td style=\"width:10%;text-align:center;\"><input  class='input-sm-small scoreText0' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast'></td>";
 						   
@@ -1745,6 +1747,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 				htmlTemplateQuantity+="<th style=\"width:3%; text-align:center;\" class=''><b>Select</b></th>";
 				htmlTemplateQuantity+="<th style=\"width:30%\" class=''><b>Appraisal Item Name</b></th>";
 				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Target</b> </th>";
+				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>UOM</b> </th>";
 				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Forecast Value</b> </th>";
 				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>%Weight</b></th>";
 				htmlTemplateQuantity+="</tr>";
@@ -1763,6 +1766,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 						htmlTemplateQuantity+="<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['item_id']+"'></td>";
 						htmlTemplateQuantity+="<td style=\"width:30%\" class='id-"+indexEntry['structure_id']+"-item_name' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' style='padding-top:7px;'>"+indexEntry['item_name']+"</td>";
 						htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input class='input-sm-small' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target'></td>";
+						htmlTemplateQuantity+="<td style=\"width:5%\">"+indexEntry['uom_name']+"</td>";
 						htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input class='input-sm-small' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast'></td>";
 						htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly'  type='text'></td>";
 					htmlTemplateQuantity+="</tr>";
