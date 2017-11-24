@@ -39,7 +39,12 @@
 
  			
  			$.each(data,function(index,indexEntry){
- 				html+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1] == undefined  ?  Object.keys(indexEntry)[0]:Object.keys(indexEntry)[1]]+"</option>";	
+ 				if(index==0){
+ 					html+="<option selected value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1] == undefined  ?  Object.keys(indexEntry)[0]:Object.keys(indexEntry)[1]]+"</option>";	
+ 				}else{
+ 					html+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1] == undefined  ?  Object.keys(indexEntry)[0]:Object.keys(indexEntry)[1]]+"</option>";	
+ 	 				
+ 				}
  			});	
 
  		}
@@ -301,7 +306,8 @@
 			success : function(data) {
 				galbalDashboard=data;
 				$("#btn_kpi").hide();
-				$("#captionPieChart").html("<div id='txtTopic' class='span12 graphLTopHeader'>"+data['header'].replace("Performance by Perspective", "<div style='display: inline-block;'>Performance by Perspective</div>")+"</div>");
+				$("#captionPieChart").html("<input type='hidden' id='overall_name' name='overall_name' value='"+data['name']+"'><div id='txtTopic' class='span12 graphLTopHeader'>"+data['header'].replace("Performance by Perspective", "<div style='display: inline-block;'>Performance by Perspective</div>")+"</div>");
+				$("#overall_name_on_list_kpi").html(data['name']);
 				generateChartPieFn(data);
 				
 			}
@@ -442,6 +448,7 @@ var getDataBubbleFn = function(page,rpp){
 			htmlCaption +="<div id='txtTopic' class='span12 graphLTopHeader'>"+data['header'].replace("Performance by KPI", "<div style='display: inline-block;'>Performance by KPI</div>");
 			htmlCaption +="<div style='display: inline-block;'><button id='btn_kpi' type='button' data-target='#ModalKPI' data-toggle='modal' class='btn btn-xs btn-white' > <i class='fa fa-table fa-table' aria-hidden='true'></i> All KPI</button></div>";
 			htmlCaption +="</div>";
+			
 			$("#captionBubbleChart").html(htmlCaption);
 			generateChartBubbleFn(data);
 			

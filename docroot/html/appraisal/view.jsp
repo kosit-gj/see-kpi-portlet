@@ -681,6 +681,10 @@ margin-bottom:1px;
 	width:120px;
 }
 
+.aui select, .aui input[type="text"] {
+    font-size: 13px;
+}
+
 </style>
 
 

@@ -290,24 +290,24 @@ weight_percent: '',
 		//mapping data start
 		//form1
 		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox").prop("checked",true);
-		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target").val(indexEntry['target_value']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target").val(addCommas(indexEntry['target_value']));
 		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_result_id").val(indexEntry['item_result_id']);
-		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast").val(indexEntry['forecast_value']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast").val(addCommas(indexEntry['forecast_value']));
 
-		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score0").val(indexEntry['score0']);	
-		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score1").val(indexEntry['score1']);	
-		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score2").val(indexEntry['score2']);
-		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score3").val(indexEntry['score3']);
-		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score4").val(indexEntry['score4']);
-		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score5").val(indexEntry['score5']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score0").val(addCommas(indexEntry['score0']));	
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score1").val(addCommas(indexEntry['score1']));	
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score2").val(addCommas(indexEntry['score2']));
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score3").val(addCommas(indexEntry['score3']));
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score4").val(addCommas(indexEntry['score4']));
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score5").val(addCommas(indexEntry['score5']));
 
 		
-		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight").val(indexEntry['weight_percent']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight").val(addCommas(indexEntry['weight_percent']));
 		
 		//form2
 		
 		//form3
-		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-maxValue").val(indexEntry['max_value']);
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-maxValue").val(addCommas(indexEntry['max_value']));
 		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-deductScoreUnit").val(indexEntry['deduct_score_unit']);
 		
 		
@@ -748,18 +748,18 @@ var actionUpdateAssignmentFn = function(){
 					appraisal_items+="\"form_id\":\"1\",";
 					appraisal_items+="\"item_id\":\""+$(appraisalItemEntry).val()+"\",";
 					appraisal_items+="\"item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-item_name").text()+"\",";
-					appraisal_items+="\"target_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val()+"\",";
-					appraisal_items+="\"forecast_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-forecast").val()+"\",";
-					appraisal_items+="\"score0\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score0").val()+"\",";
-					appraisal_items+="\"score1\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score1").val()+"\",";
-					appraisal_items+="\"score2\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score2").val()+"\",";
-					appraisal_items+="\"score3\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score3").val()+"\",";
-					appraisal_items+="\"score4\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score4").val()+"\",";
-					appraisal_items+="\"score5\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score5").val()+"\",";
+					appraisal_items+="\"target_value\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val())+"\",";
+					appraisal_items+="\"forecast_value\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-forecast").val())+"\",";
+					appraisal_items+="\"score0\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score0").val())+"\",";
+					appraisal_items+="\"score1\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score1").val())+"\",";
+					appraisal_items+="\"score2\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score2").val())+"\",";
+					appraisal_items+="\"score3\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score3").val())+"\",";
+					appraisal_items+="\"score4\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score4").val())+"\",";
+					appraisal_items+="\"score5\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score5").val())+"\",";
 
-					appraisal_items+="\"total_weight\":\""+$("#total_weight-"+$(structureEntry).val()).val()+"\",";
+					appraisal_items+="\"total_weight\":\""+removeComma($("#total_weight-"+$(structureEntry).val()).val())+"\",";
 
-					appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\",";
+					appraisal_items+="\"weight_percent\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val())+"\",";
 					
 					
 					
@@ -792,9 +792,9 @@ var actionUpdateAssignmentFn = function(){
 				appraisal_items+="\"item_id\":\""+$(appraisalItemEntry).val()+"\",";
 				appraisal_items+="\"item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-item_name").text()+"\",";
 				appraisal_items+="\"form_id\":\"2\",";
-				appraisal_items+="\"target_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val()+"\",";
-				appraisal_items+="\"total_weight\":\""+$("#total_weight-"+$(structureEntry).val()).val()+"\",";
-				appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\",";
+				appraisal_items+="\"target_value\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val())+"\",";
+				appraisal_items+="\"total_weight\":\""+removeComma($("#total_weight-"+$(structureEntry).val()).val())+"\",";
+				appraisal_items+="\"weight_percent\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val())+"\",";
 				
 				
 				if($(this).prop("checked")==true){
@@ -854,7 +854,7 @@ var actionUpdateAssignmentFn = function(){
 
 
 	var appraisal_itemsObj=eval("(["+appraisal_items+"])");
-	//console.log(appraisal_itemsObj);
+	console.log(appraisal_itemsObj);
 
 	
 	$.ajax({
@@ -954,16 +954,16 @@ var actionAssignmentFn = function(param){
 					appraisal_items+="\"form_id\":\"1\",";
 					appraisal_items+="\"item_id\":\""+$(appraisalItemEntry).val()+"\",";
 					appraisal_items+="\"item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-item_name").text()+"\",";
-					appraisal_items+="\"target_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val()+"\",";
-					appraisal_items+="\"forecast_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-forecast").val()+"\",";
-					appraisal_items+="\"score0\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score0").val()+"\",";
-					appraisal_items+="\"score1\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score1").val()+"\",";
-					appraisal_items+="\"score2\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score2").val()+"\",";
-					appraisal_items+="\"score3\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score3").val()+"\",";
-					appraisal_items+="\"score4\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score4").val()+"\",";
-					appraisal_items+="\"score5\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score5").val()+"\",";
-					appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\",";
-					appraisal_items+="\"total_weight\":\""+$("#total_weight-"+$(structureEntry).val()).val()+"\",";
+					appraisal_items+="\"target_value\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val())+"\",";
+					appraisal_items+="\"forecast_value\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-forecast").val())+"\",";
+					appraisal_items+="\"score0\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score0").val())+"\",";
+					appraisal_items+="\"score1\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score1").val())+"\",";
+					appraisal_items+="\"score2\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score2").val())+"\",";
+					appraisal_items+="\"score3\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score3").val())+"\",";
+					appraisal_items+="\"score4\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score4").val())+"\",";
+					appraisal_items+="\"score5\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score5").val())+"\",";
+					appraisal_items+="\"weight_percent\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val())+"\",";
+					appraisal_items+="\"total_weight\":\""+removeComma($("#total_weight-"+$(structureEntry).val()).val())+"\",";
 					appraisal_items+="\"select_flag\":\"1\"";
 				
 				
@@ -986,9 +986,9 @@ var actionAssignmentFn = function(param){
 				appraisal_items+="\"item_id\":\""+$(appraisalItemEntry).val()+"\",";
 				appraisal_items+="\"item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-item_name").text()+"\",";
 				appraisal_items+="\"form_id\":\"2\",";
-				appraisal_items+="\"target_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val()+"\",";
-				appraisal_items+="\"weight_percent\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val()+"\",";
-				appraisal_items+="\"total_weight\":\""+$("#total_weight-"+$(structureEntry).val()).val()+"\",";
+				appraisal_items+="\"target_value\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val())+"\",";
+				appraisal_items+="\"weight_percent\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-weight").val())+"\",";
+				appraisal_items+="\"total_weight\":\""+removeComma($("#total_weight-"+$(structureEntry).val()).val())+"\",";
 				appraisal_items+="\"select_flag\":\"1\"";
 				appraisal_items+="}";
 				countAppraisalItem++;
@@ -1557,8 +1557,8 @@ var assignTemplateQualityFn = function(structureName,data){
 					htmlTemplateQuality+="<tr>";
 						htmlTemplateQuality+="<td style=\"width:3%;text-align:center;\" class='object-center'  ><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['item_id']+"'></td>";
 						htmlTemplateQuality+="<td style=\"width:67%\" style='padding-top:7px;' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' class='id-"+indexEntry['structure_id']+"-item_name'>"+indexEntry['item_name']+"</td>";
-						htmlTemplateQuality+="<td style=\"width:15%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target' class='id-"+indexEntry['structure_id']+"-target input form-control input-sm-small numberOnly' type='text'></td>";
-						htmlTemplateQuality+="<td style=\"width:15%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quality input form-control input-sm-small numberOnly' type='text'></td>";
+						htmlTemplateQuality+="<td style=\"width:15%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target' class='id-"+indexEntry['structure_id']+"-target input form-control input-sm-small numberOnly addComma' type='text'></td>";
+						htmlTemplateQuality+="<td style=\"width:15%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quality input form-control input-sm-small numberOnly addComma' type='text'></td>";
 						htmlTemplateQuality+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_result_id' class='id-"+indexEntry['structure_id']+"-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
 						
 					htmlTemplateQuality+="</tr>";
@@ -1632,6 +1632,9 @@ var assignTemplateDeductFn = function(structureName,data){
 	//$("#appraisal_template_area").append(htmlTemplateDeduct);
 };
 
+
+
+
 var assignTemplateQuantityFn = function(structureName,data){
 	
 	item_id_array=[];
@@ -1684,7 +1687,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 							htmlTemplateQuantity+="<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['item_id']+"'></td>";
 							htmlTemplateQuantity+="<td style=\"width:20%\" class='id-"+indexEntry['structure_id']+"-item_name' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' style='padding-top:7px;'>"+indexEntry['item_name']+"</td>";
 							
-							htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target' class='id-"+indexEntry['structure_id']+"-target input form-control input-sm-small numberOnly' type='text'>";
+							htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target' class='id-"+indexEntry['structure_id']+"-target input form-control input-sm-small numberOnly addComma' type='text'>";
 							htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-kpi_type_id' class='id-"+indexEntry['structure_id']+"-kpi_type_id input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['kpi_type_id']+">";
 							htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-nof_target_score' class='id-"+indexEntry['structure_id']+"-nof_target_score input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['nof_target_score']+">";
 							//htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-total_weight' class='id-"+indexEntry['structure_id']+"-total_weight input form-control input-sm-small numberOnly' type='hidden' value="+indexEntry['total_weight']+">";
@@ -1692,16 +1695,16 @@ var assignTemplateQuantityFn = function(structureName,data){
 							htmlTemplateQuantity+="</td>";
 							htmlTemplateQuantity+="<td style=\"width:5%\">"+indexEntry['uom_name']+"</td>";
 							
-						    htmlTemplateQuantity+="<td style=\"width:10%;text-align:center;\"><input  class='input-sm-small scoreText0' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast'></td>";
+						    htmlTemplateQuantity+="<td style=\"width:10%;text-align:center;\"><input  class='input-sm-small scoreText0 addComma' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast'></td>";
 						   
-						    htmlTemplateQuantity+="<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText1' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score0' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score0'></td>";
-							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText2' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score1' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score1'></td>";
-							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText3' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score2' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score2'></td>";
-							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText4' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score3' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score3'></td>";
-							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText5' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score4' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score4'></td>";
-							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText6' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score5' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score5'></td>";
+						    htmlTemplateQuantity+="<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText1 addComma' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score0' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score0'></td>";
+							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText2 addComma' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score1' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score1'></td>";
+							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText3 addComma' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score2' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score2'></td>";
+							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText4 addComma' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score3' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score3'></td>";
+							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText5 addComma' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score4' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score4'></td>";
+							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText6 addComma' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score5' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score5'></td>";
 							
-							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly'  type='text'></td>";
+							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly addComma'  type='text'></td>";
 							
 						 
 							
@@ -1765,10 +1768,10 @@ var assignTemplateQuantityFn = function(structureName,data){
 						htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_result_id' class='id-"+indexEntry['structure_id']+"-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
 						htmlTemplateQuantity+="<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['item_id']+"'></td>";
 						htmlTemplateQuantity+="<td style=\"width:30%\" class='id-"+indexEntry['structure_id']+"-item_name' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' style='padding-top:7px;'>"+indexEntry['item_name']+"</td>";
-						htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input class='input-sm-small' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target'></td>";
+						htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input class='input-sm-small addCommma' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target'></td>";
 						htmlTemplateQuantity+="<td style=\"width:5%\">"+indexEntry['uom_name']+"</td>";
-						htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input class='input-sm-small' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast'></td>";
-						htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly'  type='text'></td>";
+						htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input class='input-sm-small addCommma' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast'></td>";
+						htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly addCommma'  type='text'></td>";
 					htmlTemplateQuantity+="</tr>";
 					
 				});
@@ -2103,6 +2106,12 @@ var createTemplateAssignmentFn = function(data){
 	$(".weight_sum").keyup(function(){
 		calculationGrandTotalFn(this.id);
 	})
+	$(".addComma").keyup(function(){
+		//Comma();
+		$(this).val(Comma($(this).val()));
+		//console.log(Comma($(this).val()));
+	})
+	
 	$(".appraisalItem-checkbox").click(function(){
 		//alert("hello");
 		if($(this).hasClass('notCal')){

@@ -462,7 +462,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 						htmlTemplateQuantity+="<td id=\"item_name-"+indexEntry['item_result_id']+"\">"+indexEntry['item_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 						htmlTemplateQuantity+="<td>"+indexEntry['uom_name']+"</td>";
-						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+indexEntry['forecast_value']+"></td>";
+						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore addComma\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+addCommas(indexEntry['forecast_value'])+"></td>";
 						//htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly \" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
 						if(data['threshold']==1){
@@ -486,7 +486,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 						htmlTemplateQuantity+="<td>"+indexEntry['item_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 						htmlTemplateQuantity+="<td>"+indexEntry['uom_name']+"</td>";
-						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input type=\"text\"  class=\"span10 input-sm-small numberOnly itemScore\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+indexEntry['forecast_value']+"></td>";
+						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input type=\"text\"  class=\"span10 input-sm-small numberOnly addComma itemScore\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+addCommas(indexEntry['forecast_value'])+"></td>";
 						
 						//htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input type=\"text\"  class=\"span10 input-sm-small numberOnly \" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
@@ -881,6 +881,12 @@ var listAppraisalDetailFn = function(data){
 				 }
 				 return true;
 			});
+			
+			$(".addComma").keyup(function(){
+				//Comma();
+				$(this).val(Comma($(this).val()));
+				//console.log(Comma($(this).val()));
+			})
 		//set header end
 
 	});
@@ -2104,12 +2110,21 @@ var appraisalTypeFn = function(nameArea,id){
 			
 			//htmlOption+="<option  value=''>All Appraisal Type</option>";
 			$.each(data,function(index,indexEntry){
-				if(id==indexEntry['appraisal_type_id']){
-					htmlOption+="<option selected='selected' value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
+				if(id==undefined){
+						if(index==0){	
+							htmlOption+="<option selected='selected' value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
+						}else{
+							htmlOption+="<option value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
+						}
 				}else{
-					htmlOption+="<option value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
-					
+					if(id==indexEntry['appraisal_type_id']){
+							htmlOption+="<option selected='selected' value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
+						}else{
+							htmlOption+="<option value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
+							
+					}
 				}
+				
 			});
 			$("#appraisalType"+nameArea).html(htmlOption);
 		}
@@ -2153,7 +2168,7 @@ var saveAppraisalFn = function(){
 		}
 		appraisal+="\"item_result_id\":\""+item_result_id+"\",";
 		if(typeScore=="forecast"){
-			appraisal+="\"forecast_value\":\""+$(indexEntry).val()+"\",";
+			appraisal+="\"forecast_value\":\""+removeComma($(indexEntry).val())+"\",";
 			appraisal+="\"actual_value\":\"\",";
 			//appraisal+="\"actual_value\":\""+$("#actual-"+item_result_id).val()+"\",";
 			appraisal+="\"score\":\"\"";
@@ -2516,9 +2531,9 @@ $(document).ready(function() {
 		$("#AppraisalYear").change(function(){
 			dropDrowPeriodListFn($(this).val());	
 		});
-		setTimeout(function(){
+		//setTimeout(function(){
 			$("#AppraisalYear").change();
-		},1000);
+		//},1000);
 
 		dropDrowAppraisalLevelFn();
 		//dropDrowOrgFn();
@@ -2625,7 +2640,11 @@ $(document).ready(function() {
 	    });
 		appraisalTypeFn();
 		
+		//$("#Position").prop("disabled",true);
+		//$("#EmpName").prop("disabled",true);
+		
 		$("#appraisalType").change(function(){
+			
 			if($("#appraisalType").val()==1){
 				
 				$("#Position").prop("disabled",true);
@@ -2639,7 +2658,10 @@ $(document).ready(function() {
 				$("#EmpName").prop("disabled",false);
 			}
 		});
+		
 		$("#appraisalType").change();
+		
+		
 		
 	//set parameter end
 		

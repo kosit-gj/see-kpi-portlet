@@ -599,8 +599,7 @@ overflow:auto;
 								<th>Perspective</th>
 								<th style="min-width: 130px;">KPI</th>
 								<th style="min-width: 65px;">UOM</th>
-								<th style="text-align: center; min-width: 250px;">KPI
-									Result</th>
+								<th style="text-align: center; min-width: 250px;" id='overall_name_on_list_kpi'>KPI Result</th>
 							</tr>
 						</thead>
 						<tbody id="kpiList">
