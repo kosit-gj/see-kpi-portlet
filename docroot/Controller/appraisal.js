@@ -144,7 +144,7 @@ var assignTemplateQualityFn = function(structureName,data){
 	htmlTemplateQuality+="<div class='titlePanel'>"+structureName+"</div>";
 		if(data['no_weight']==0){ // has weight;
 			if(data['result_type']==1){
-				htmlTemplateQuality+="<div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+				htmlTemplateQuality+="<div class='totalWeight'>Total Weight "+data['total_weight_percent']+"%</div>";
 			}else{
 				htmlTemplateQuality+="<div class='totalWeight'>Total Score "+data['total_weight']+"</div>";
 			}
@@ -262,7 +262,7 @@ var assignTemplateDeductFn = function(structureName,data){
 	if(data['no_weight']==0){ // has weight;
 		
 		if(data['result_type']==1){
-			htmlTemplateDeduct+="<div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+			htmlTemplateDeduct+="<div class='totalWeight'>Total Weight "+data['total_weight_percent']+"%</div>";
 		}else{
 			htmlTemplateDeduct+="<div class='totalWeight'>Total Score "+data['total_weight']+"</div>";
 		}
@@ -377,7 +377,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 	htmlTemplateQuantity+="      <div class='titlePanel'>"+structureName+"</div>";
 	if(data['no_weight']==0){ // has weight;
 		if(data['result_type']==1){
-			htmlTemplateQuantity+="      <div class='totalWeight'>Total Weight "+data['total_weight']+"%</div>";
+			htmlTemplateQuantity+="      <div class='totalWeight'>Total Weight "+data['total_weight_percent']+"%</div>";
 		}else{
 			htmlTemplateQuantity+="      <div class='totalWeight'>Total Score "+data['total_weight']+"</div>";
 		}

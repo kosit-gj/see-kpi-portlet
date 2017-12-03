@@ -1440,7 +1440,7 @@ var dropDrowActionFn = function(paramStageID,nameArea){
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"stage_id":paramStageID},
+		data:{"stage_id":paramStageID,"appraisal_type_id":$("#embed_appraisal_type_id").val()},
 		success:function(data){
 			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			var htmlOption="";
