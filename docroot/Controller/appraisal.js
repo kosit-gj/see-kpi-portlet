@@ -2376,8 +2376,8 @@ var getDataGanttChartFn = function(item_result_id,ganttPaneDuration,ganttPaneDur
 			var objectGantt={};
 			objectGantt={
 	            "chart": {
-	            	//"exportenabled": "1",
-	                //"exportatclient": "1",
+	            	"exportenabled": "1",
+	                "exportatclient": "1",
 	                //"caption": "Action Plan",
 	                //"subcaption": "Planned vs Actual",                
 	                "dateformat": "dd/mm/yyyy",
