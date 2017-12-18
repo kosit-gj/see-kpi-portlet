@@ -249,7 +249,7 @@ if(connectionServiceFn(username,password,plid)==true){
 	
 
 	$("#appraisalType").change(function(){
-		if($("#appraisalType").val()==2){
+		if($("#appraisalType").val()==1){
 			
 			$("#Position").prop("disabled",true);
 			$("#empName").prop("disabled",true);

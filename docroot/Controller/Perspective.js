@@ -35,7 +35,7 @@
     					
     			     ],
         	     "formDetail":{"formSize":"modal-dialog","formName":"Perspective","id":"perspective","pk_id":"perspective_id"},       
-    			 "serviceName":[restfulURL+"/see_api/public/perspective"],
+    			 "serviceName":[restfulURL+"/"+serviceName+"/public/perspective"],
     			 "tokenID":tokenID,
     			 "pagignation":false,
     			 "expressSearch":false
