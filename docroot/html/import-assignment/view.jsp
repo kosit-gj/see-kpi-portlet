@@ -143,7 +143,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	padding-right: 0px;
 }
 </style>
-<div class="">
+<div class="app_url_hidden">
 <!-- app_url_hidden -->
 	<div class="row-fluid">
 		<!-- start--row-fluid -->
