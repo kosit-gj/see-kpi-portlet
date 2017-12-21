@@ -25,6 +25,7 @@
 		<portlet id="UOM"></portlet>
 		<portlet id="Appraisal-Structure"></portlet>
 		<portlet id="kpi-type"></portlet>
+		<portlet id="import-assignment"></portlet>
 		<portlet id="import-employee"></portlet>
 		<portlet id="cds-result"></portlet>
 		<portlet id="appraisal-data"></portlet>
