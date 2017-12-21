@@ -46,9 +46,6 @@
 		<portlet id="dashboard-branch-performance"></portlet>
 		<portlet id="dashboard-overall-performance"></portlet>
 		<portlet id="axisMapping"></portlet>
-	</category>
-
-	<category name="category.sample">
 		<portlet id="benchmark-data"></portlet>
 		<portlet id="benchmark-chart"></portlet>
 	</category>
