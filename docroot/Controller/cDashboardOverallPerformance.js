@@ -2,6 +2,8 @@
  var galbalDashboard=[];
  var galbalDataTemp = [];
  var rangeColorsThreshold=[];
+ var currentUrl = document.URL;//window.location.protocol+"//"
+ galbalDataTemp['protocol']=currentUrl.split(":")[0]+"://";
  galbalDataTemp['galbalOrg'] = [];
  galbalDataTemp['extract'] = false;
  galbalDataTemp['All_KPI'] = [];
@@ -185,10 +187,10 @@
 		            	  if(clickLabel == indexEntry2['name'] && galbalDataTemp['click']['double_click'] == true){
 //		            		  
 		            			$("#param_item").val(indexEntry2['item_id']);
-		            			$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/subordinate-performance");
+		            			$("form#linkParam").attr("action", galbalDataTemp['protocol']+window.location.host+"/web/guest/subordinate-performance");
 		            			$("form#linkParam").submit();
 //		            			setTimeout(function(){
-//		            				$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/performance-trend");
+//		            				$("form#linkParam").attr("action", galbalDataTemp['protocol']+window.location.host+"/web/guest/performance-trend");
 //			            			$("form#linkParam").submit();
 //		            				}, 1000);
 		            			

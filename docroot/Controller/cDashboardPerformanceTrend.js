@@ -5,11 +5,16 @@
  var mobileStatus=/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
  var galbalOrgID=[];
  var orgArray=[];
+ var currentUrl = document.URL;
+ galbalDataTemp['protocol']=currentUrl.split(":")[0]+"://";
  galbalDataTemp['galbalOrg'] = [];
  galbalDataTemp['extract'] = false;
  galbalDataTemp['All_KPI'] = {};
  galbalDataTemp['collapse_show']="";
  galbalDataTemp['click'];
+ 
+
+ console.log(url.split(":")[0]);
 //# Generate Drop Down List
  var generateDropDownList = function(url,type,request,initValue){
  	var html="";
@@ -391,7 +396,7 @@
 		            	$("#param_item_result_id").val("");
 	                 	$("#param_item_result_id").val(props.groupId.split("-")[0]);
 	                 	//$("#param_link").val("email");
-            			$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/kpi-result");
+            			$("form#linkParam").attr("action",galbalDataTemp['protocol']+window.location.host+"/web/guest/kpi-result");
             			$("form#linkParam").submit();
             		  return false;
 		             
@@ -532,7 +537,7 @@
 	            	$("#param_item_result_id").val("");
                  	$("#param_item_result_id").val(props.groupId.split("-")[0]);
                  	//$("#param_link").val("email");
-        			$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/kpi-result");
+        			$("form#linkParam").attr("action",galbalDataTemp['protocol']+window.location.host+"/web/guest/kpi-result");
         			$("form#linkParam").submit();
         		  return false;
 	             
@@ -644,7 +649,7 @@
 	            	$("#param_item_result_id").val("");
                  	$("#param_item_result_id").val(props.groupId.split("-")[0]);
                  	//$("#param_link").val("email");
-        			$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/kpi-result");
+        			$("form#linkParam").attr("action",galbalDataTemp['protocol']+window.location.host+"/web/guest/kpi-result");
         			$("form#linkParam").submit();
         		  return false;
 	             
@@ -1165,7 +1170,7 @@ var listDashBoardFn = function(data){
 				  
 
 				  
-				  //http://localhost/"+serviceName+"/public/dashboard/all_content
+				  //https://localhost/"+serviceName+"/public/dashboard/all_content
 				});
 			$( "#accordion" ).sortable({
 				 // revert: true

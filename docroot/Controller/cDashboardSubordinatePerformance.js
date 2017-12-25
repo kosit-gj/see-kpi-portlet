@@ -2,6 +2,8 @@
  var galbalDashboard=[];
  var galbalDataTemp = [];
  var changeAutocomplete=true;
+ var currentUrl = document.URL;
+ galbalDataTemp['protocol']=currentUrl.split(":")[0]+"://";
  galbalDataTemp['galbalOrg'] = [];
  galbalDataTemp['extract'] = false;
  galbalDataTemp['All_KPI'] = [];
@@ -574,7 +576,7 @@
 		            			$("#param_item").val($("#param_kpi_id").val());
 		            		  	$("#param_org_id").val(indexEntry2['org_id']);
 		            		  	$("#param_app_lv").val(indexEntry2['level_id']);
-		            			$("form#linkParam").attr("action","http://"+window.location.host+"/web/guest/performance-trend");
+		            			$("form#linkParam").attr("action", galbalDataTemp['protocol']+window.location.host+"/web/guest/performance-trend");
 		            			$("form#linkParam").submit();
 		            			$("#param_org_id").val(temp_org);
 		            		  	$("#param_app_lv").val(temp_lv);
