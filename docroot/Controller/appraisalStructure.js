@@ -42,12 +42,12 @@
 	            				}
 	    					
 		    				],
-//	    			"formIf":[	{
-//	            				"style":"style=\"\"","id_header":"\"is_unlimited_deduction_header\"",
-//	    						"label":"Unlimited Deduction","inputType":"checkbox","default":"checked",
-//	            				"id":"is_unlimited_deduction","width":"250px"
-//	            				}
-//	    			     	 ],
+	    			"formIf":[	{
+	            				"style":"display:none;","class_header":"\"is_unlimited_deduction_header\"",
+	    						"label":"Unlimited Deduction","inputType":"checkbox","default":"unchecked",
+	            				"id":"is_unlimited_deduction","width":"250px"
+	            				}
+	    			     	 ],
 	    			 "formDetail":{"formSize":"modal-dialog","formName":"Appraisal Structure","id":"appraisalStructure","pk_id":"structure_id"},       
 	    			 "serviceName":[restfulURL+"/"+serviceName+"/public/appraisal_structure"],
 	    			 "tokenID":tokenID,
@@ -59,7 +59,22 @@
 	    	//console.log(options['tokenID'].token);
 	    	//console.log(options)
 	    	createDataTableFn(options);
-	     	 
+	    	
+	    	$("#form_id").change(function() {
+
+				if($("#form_id").val()==3) { //if Deduct Score
+							
+					$(".is_unlimited_deduction_header").show();
+					$(".checkbox-is_unlimited_deduction").prop('checked',true);
+					
+				}
+				else {
+
+					$(".is_unlimited_deduction_header").hide();
+					$(".checkbox-is_unlimited_deduction").prop('checked',false);
+				}
+				
+	    	}); 
 	 	}
 	 }
 	 

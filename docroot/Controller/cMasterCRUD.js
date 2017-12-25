@@ -342,7 +342,21 @@ var mapObjectToFormFn  =function(data,options){
 			
 	});
 	
-	Unlimited_Deduction_mapObjectCheckBox(data,options);
+	if(options['formIf']!==undefined) {
+		$.each(options['formIf'],function(index,indexEntry) {
+			
+			if(indexEntry['inputType']=="checkbox"){
+		
+				if(data[indexEntry['id']]==1){
+					
+					$(".checkbox-"+indexEntry['id']).prop('checked',true);
+					
+				}else{
+					$(".checkbox-"+indexEntry['id']).prop('checked',false);
+				}
+			}	
+		});
+	}
 
 //	$.each(data,function(index,indexEntry){
 //		if(options[''])
@@ -677,8 +691,6 @@ formHTML+="        <div class=\"modal-body\">";
 formHTML+="           <div class=\"row-fluid\">";
 formHTML+="           <div class=\"span12 form-horizontal p-t-xxs\">";
 
-
-var nc_AppraisalStracture = 0;
 $.each(options['form'],function(index,indexEntry){
 	formHTML+="           <div class=\"form-group p-xxs\">";
 	formHTML+="                <label class=\"control-label\">";
@@ -691,37 +703,25 @@ $.each(options['form'],function(index,indexEntry){
 	formHTML+=					createInputTypeFn(indexEntry,options['tokenID']);
 	formHTML+="                </div>";
 	formHTML+="                </div>";
-	
-	if(nc_AppraisalStracture==3 && options['formDetail']['pk_id']=='structure_id') { //for appraisal-structure by toto
-
-		formHTML+="           <div class=\"form-group p-xxs\" id=\"Unlimited_Deduction_checkbox_header\" style=\"display: none;\">";
-		formHTML+="                <label class=\"control-label\">";
-		formHTML+="                		Unlimited Deduction";
-		formHTML+="                </label>";
-		formHTML+="                <div class=\"controls\">";
-		formHTML+="				   <div id=\"Unlimited_Deduction_checkbox\"></div>";
-		formHTML+="                </div>";
-		formHTML+="           </div>";
-	}
-	nc_AppraisalStracture ++;
-	
 });
 
-//$.each(options['formIf'],function(index,indexEntry){
-//	formHTML+="			<div "+indexEntry['id']+""+indexEntry['style']+">";
-//	formHTML+="           <div class=\"form-group p-xxs\">";
-//	formHTML+="                <label class=\"control-label\">";
-//	formHTML+="                "+indexEntry['label']+"";
-//								if(indexEntry['required']==true){
-//									formHTML+="<span class='redFont '>*</span>";
-//								}
-//	formHTML+="                </label>";
-//	formHTML+="                <div class=\"controls\">";
-//	formHTML+=					createInputTypeFn(indexEntry,options['tokenID']);
-//	formHTML+="                </div>";
-//	formHTML+="           	</div>";
-//	formHTML+="        	</div>";
-//});
+if(options['formIf']!==undefined) {
+	$.each(options['formIf'],function(index,indexEntry){
+		formHTML+="			<div class="+indexEntry['class_header']+" style="+indexEntry['style']+">";
+		formHTML+="           <div class=\"form-group p-xxs\">";
+		formHTML+="                <label class=\"control-label\">";
+		formHTML+="                "+indexEntry['label']+"";
+									if(indexEntry['required']==true){
+										formHTML+="<span class='redFont '>*</span>";
+									}
+		formHTML+="                </label>";
+		formHTML+="                <div class=\"controls\">";
+		formHTML+=					createInputTypeFn(indexEntry,options['tokenID']);
+		formHTML+="                </div>";
+		formHTML+="           	</div>";
+		formHTML+="        	</div>";
+	});
+}
 
 formHTML+="        </div></div></div></div>";
 formHTML+="        <div class=\"modal-footer\">";
@@ -1272,21 +1272,9 @@ var createDataTableFn = function(options){
 	});
 }
 
-var Unlimited_Deduction_mapObjectCheckBox = function(data,options) {
-	if(options['formDetail']['pk_id']=='structure_id') {
-		
-		if(data['is_unlimited_deduction']==1){
-			$(".checkbox-is_unlimited_deduction").prop('checked',true); // in file appraisalStructure
-					
-		}else if(data['is_unlimited_deduction']==0){
-			$(".checkbox-is_unlimited_deduction").prop('checked',false);
-		}
-	}
-}
-
 var Unlimited_Deduction_clear_data_empty = function(options) {
 	if(options['formDetail']['pk_id']=='structure_id') {
-		$("#Unlimited_Deduction_checkbox_header").hide();
+		$(".is_unlimited_deduction_header").hide();
 		$(".checkbox-is_unlimited_deduction").prop('checked',false);
 	}
 }

@@ -536,7 +536,7 @@
 	   	
 	    <header-portlet-css>/css/appraisalStructure.css</header-portlet-css>    
 	       
-                    
+ 
 	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
@@ -545,9 +545,8 @@
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
-	    
+	      
 	    <footer-portlet-javascript>/Controller/appraisalStructure.js</footer-portlet-javascript>
-	    <footer-portlet-javascript>/Controller/appraisalStructure2.js</footer-portlet-javascript>
 	    <!-- include file  end--> 
 		   
 		        
@@ -1438,7 +1437,7 @@
 			<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript> 
 			<footer-portlet-javascript>/Controller/cBenchmark_chart.js</footer-portlet-javascript>
 			<css-class-wrapper>benchmark-chart-portlet</css-class-wrapper>
-		</portlet>
+		</portlet> 
 		<role-mapper> 
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link> 
