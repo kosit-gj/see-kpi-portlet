@@ -10,7 +10,7 @@
 		<css-class-wrapper>see-kpi-portlet</css-class-wrapper>    
 	</portlet>   
     
-	                                                                                                                                                             
+	                                                                                                                                                              
 	<portlet>                                                  
 		<portlet-name>appraisal</portlet-name>         
 		<icon>/icon.png</icon>                             
@@ -547,6 +547,7 @@
 	    <footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
 	    
 	    <footer-portlet-javascript>/Controller/appraisalStructure.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/appraisalStructure2.js</footer-portlet-javascript>
 	    <!-- include file  end--> 
 		   
 		        

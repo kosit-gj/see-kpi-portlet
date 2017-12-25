@@ -2,6 +2,7 @@
 var golbalDataCRUD =[];
 var golbalDataCascades = [];
 var dataSearch="";
+
 var addCommas =  function(nStr)
 {
     nStr += '';
@@ -125,7 +126,7 @@ var searchMultiFn=function(search,searchName){
 
 
 var insertFn = function(data,options,param){
-	
+
 	$.ajax({
 		
 		url:options['serviceName'],
@@ -149,6 +150,9 @@ var insertFn = function(data,options,param){
 						clearFn(options);
 						
 						$("#modal-"+options['formDetail']['id']).modal('hide');
+						
+						Unlimited_Deduction_clear_data_empty(options);
+						
 					}else{
 						
 						//callFlashSlide("Insert success.");
@@ -156,6 +160,8 @@ var insertFn = function(data,options,param){
 						
 						getDataFn($("#pageNumber").val(),$("#rpp").val(),options,dataSearch);
 						clearFn(options);
+						
+						Unlimited_Deduction_clear_data_empty(options);
 						 
 					}
 				  
@@ -248,7 +254,7 @@ var clearFn = function(options){
 	});
 }
 var updateFn = function(data,options){
-	
+	//console.log(data)
 	$.ajax({
 			url:options['serviceName']+"/"+$("#id").val(),
 			type : "patch",
@@ -323,7 +329,7 @@ var mapObjectToFormFn  =function(data,options){
 			//alert("form#"+options['formDetail']['id']+" > #"+indexEntry['id']);
 			//alert(data[indexEntry['id']]);
 		}else if(indexEntry['inputType']=="checkbox"){
-			
+
 			if(data[indexEntry['id']]==1){
 				
 				$(".checkbox-"+indexEntry['id']).prop('checked',true);
@@ -333,21 +339,20 @@ var mapObjectToFormFn  =function(data,options){
 			}
 			
 		}
-		
-
-		
+			
 	});
-		
 	
+	Unlimited_Deduction_mapObjectCheckBox(data,options);
+
 //	$.each(data,function(index,indexEntry){
 //		if(options[''])
 //		$("#"+index).val(indexEntry);
 //	});
 	$("#modal-"+options['formDetail']['id']).modal();
 }
+
 var fineOneFn = function(id,options){
 	$.ajax({
-		
 		url:options['serviceName']+"/"+id,
 		type : "GET",
 		dataType : "json",
@@ -371,7 +376,7 @@ var displayTypeFn = function(colunms,options){
 	return htmlTbody;
 };
 var listDataFn = function(data,options){
-	
+
 	var htmlTbody="";
 	$.each(data,function(index,indexEntry) {
 		//console.log(indexEntry);
@@ -379,6 +384,7 @@ var listDataFn = function(data,options){
 		$.each(options['colunms'],function(index2,indexEntry2){
 			
 			if(indexEntry2['colunmsType']=='checkbox'){
+				//console.log(indexEntry[indexEntry2['id']])
 				if(indexEntry[indexEntry2['id']]==1){
 					htmlTbody+="<td style='text-align:center;' class=\"columnSearch"+options['formDetail']['id']+"\"><input type='checkbox' disabled='disabled' checked='checked'></td>";
 				}else{
@@ -484,6 +490,7 @@ var getDataFn = function(page,rpp,options,search){
 	}else{
 		data="page="+paramPage+"&rpp="+paramrpp;
 	}
+
 	$.ajax({
 		url : options['serviceName'],
 		type : "get",
@@ -559,7 +566,6 @@ var createInputTypeFn  = function(object,tokenID){
 		
 	}
 	if(object['inputType']=="dropdown"){
-		
 		$.ajax({
 			url:object['url'],
 			dataType:"json",
@@ -567,25 +573,23 @@ var createInputTypeFn  = function(object,tokenID){
 			async:false,
 			headers:{Authorization:"Bearer "+tokenID.token},
 			success:function(data){
-				inputType="<select "+inputTooltip+" class=\"span12 m-b-n\" id=\""+object['id']+"\" name=\""+object['id']+"\" style=\"width:"+object['width']+"\">";			
+				inputType="<select "+inputTooltip+" class=\"span12 m-b-n\" id=\""+object['id']+"\" name=\""+object['id']+"\" style=\"width:"+object['width']+"\">";
 				//initValue
 				if(object['initValue']!=undefined){
 					inputType+="<option value=''>"+object['initValue']+"</option>";
 				}
-				golbalDataCascades[object['id']] = data;
+				
+				golbalDataCascades[object['id']] = data
 				
 				$.each(data,function(index,indexEntry){
-				
-					
 					if(dataSearch==indexEntry[Object.keys(indexEntry)[0]]){
-						
 						inputType+="<option selected value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1]]+"</option>";
 					}else{
 						inputType+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1]]+"</option>";
 					}
 				});
 				inputType+="</select>";
-				//alert(inputType);
+				//alert(inputType)
 			}
 		})
 		
@@ -657,7 +661,7 @@ expressSearch+="</div>";
 return expressSearch;
 }
 var createFormFn = function(options){
-	
+
 var formHTML="";
 formHTML+="<form id='"+options['formDetail']['id']+"' name='"+options['formDetail']['id']+"'>";
 formHTML+="<div aria-hidden=\"true\" role=\"dialog\" tabindex=\"-1\" id=\"modal-"+options['formDetail']['id']+"\" class=\"modal inmodal\" style=\"display: none;\">";
@@ -674,7 +678,7 @@ formHTML+="           <div class=\"row-fluid\">";
 formHTML+="           <div class=\"span12 form-horizontal p-t-xxs\">";
 
 
- 
+var nc_AppraisalStracture = 0;
 $.each(options['form'],function(index,indexEntry){
 	formHTML+="           <div class=\"form-group p-xxs\">";
 	formHTML+="                <label class=\"control-label\">";
@@ -687,9 +691,38 @@ $.each(options['form'],function(index,indexEntry){
 	formHTML+=					createInputTypeFn(indexEntry,options['tokenID']);
 	formHTML+="                </div>";
 	formHTML+="                </div>";
+	
+	if(nc_AppraisalStracture==3 && options['formDetail']['pk_id']=='structure_id') { //for appraisal-structure by toto
 
-
+		formHTML+="           <div class=\"form-group p-xxs\" id=\"Unlimited_Deduction_checkbox_header\" style=\"display: none;\">";
+		formHTML+="                <label class=\"control-label\">";
+		formHTML+="                		Unlimited Deduction";
+		formHTML+="                </label>";
+		formHTML+="                <div class=\"controls\">";
+		formHTML+="				   <div id=\"Unlimited_Deduction_checkbox\"></div>";
+		formHTML+="                </div>";
+		formHTML+="           </div>";
+	}
+	nc_AppraisalStracture ++;
+	
 });
+
+//$.each(options['formIf'],function(index,indexEntry){
+//	formHTML+="			<div "+indexEntry['id']+""+indexEntry['style']+">";
+//	formHTML+="           <div class=\"form-group p-xxs\">";
+//	formHTML+="                <label class=\"control-label\">";
+//	formHTML+="                "+indexEntry['label']+"";
+//								if(indexEntry['required']==true){
+//									formHTML+="<span class='redFont '>*</span>";
+//								}
+//	formHTML+="                </label>";
+//	formHTML+="                <div class=\"controls\">";
+//	formHTML+=					createInputTypeFn(indexEntry,options['tokenID']);
+//	formHTML+="                </div>";
+//	formHTML+="           	</div>";
+//	formHTML+="        	</div>";
+//});
+
 formHTML+="        </div></div></div></div>";
 formHTML+="        <div class=\"modal-footer\">";
 formHTML+="       	 	<input type=\"hidden\" name=\"id\" id=\"id\" value=\"\">";
@@ -702,32 +735,35 @@ formHTML+="        </div>";
 formHTML+="    </div>";
 formHTML+="</div>";
 formHTML+="</div>";   
-formHTML+="</form>"; 
+formHTML+="</form>";
+
 return formHTML;
 }
+
 var createScriptCascadesFn = function(options){
 	if(options['advanceSearch']!=undefined){
-	$.each(options['advanceSearch'],function(index,indexEntry){
-		if(indexEntry['inputType'] == "cascades"){
-			$("form#searchAdvanceForm  #"+indexEntry['cascades']['id'] +" select").change(function(){
-				var htmlChange = "";
-				if(indexEntry['initValue']!=undefined){
-					htmlChange+="<option value=''>"+indexEntry['initValue']+"</option>";
-				}
-				$.each(golbalDataCascades[indexEntry['cascades']['id']],function(index2,indexEntry2){
-					if(indexEntry2[indexEntry['cascades']['id']] == $("form#searchAdvanceForm  #"+indexEntry['cascades']['id']+" select").val()){
-						
-						$.each(indexEntry2[indexEntry['cascades']['listData']],function(index3,indexEntry3){
-							//htmlChange+="<option value="+indexEntry3+">"+indexEntry3+"</option>";
-							htmlChange+="<option value="+(indexEntry3[Object.keys(indexEntry3)[0]] != undefined ? indexEntry3[Object.keys(indexEntry3)[0]] : indexEntry3)+">"+(indexEntry3[Object.keys(indexEntry3)[1]] != undefined ? indexEntry3[Object.keys(indexEntry3)[1]] : indexEntry3)+"</option>";
-						});
+		$.each(options['advanceSearch'],function(index,indexEntry){
+			if(indexEntry['inputType'] == "cascades"){
+				$("form#searchAdvanceForm  #"+indexEntry['cascades']['id'] +" select").change(function(){
+					var htmlChange = "";
+					if(indexEntry['initValue']!=undefined){
+						htmlChange+="<option value=''>"+indexEntry['initValue']+"</option>";
 					}
+					$.each(golbalDataCascades[indexEntry['cascades']['id']],function(index2,indexEntry2){
+						if(indexEntry2[indexEntry['cascades']['id']] == $("form#searchAdvanceForm  #"+indexEntry['cascades']['id']+" select").val()){
+							
+							$.each(indexEntry2[indexEntry['cascades']['listData']],function(index3,indexEntry3){
+								//htmlChange+="<option value="+indexEntry3+">"+indexEntry3+"</option>";
+								htmlChange+="<option value="+(indexEntry3[Object.keys(indexEntry3)[0]] != undefined ? indexEntry3[Object.keys(indexEntry3)[0]] : indexEntry3)+">"+(indexEntry3[Object.keys(indexEntry3)[1]] != undefined ? indexEntry3[Object.keys(indexEntry3)[1]] : indexEntry3)+"</option>";
+							});
+						}
+					});
+					$("form#searchAdvanceForm  #"+indexEntry['id']+" select").html(htmlChange);
 				});
-				$("form#searchAdvanceForm  #"+indexEntry['id']+" select").html(htmlChange);
-			});
-		}
-	});
-	};
+			}
+		});
+	}
+	
 	$.each(options['form'],function(index,indexEntry){
 		if(indexEntry['inputType'] == "cascades"){
 			$("form#"+options['formDetail']['id']+"  #"+indexEntry['cascades']['id']).change(function(){
@@ -854,9 +890,7 @@ var createDataTableFn = function(options){
 		type:"get",
 		async:false,
 		success:function(data){
-			
-			
-			
+
 			$("#mainContent").html(data);
 			
 			if(expressSearch==true){
@@ -1171,16 +1205,17 @@ var createDataTableFn = function(options){
 				//console.log(data);
 				
 				if($("#action").val()=="add"){
-					console.log(data);
+					//console.log(data);
 					insertFn(data,options);
 				}else{
-					
+					console.log(data);
 					updateFn(data,options);
 				}
 			});
 			
 			
 			$("#btnAddAnother").click(function(){
+
 				var checkboxes = $("form#"+options['formDetail']['id']).find('input[type="checkbox"]');
 				$.each( checkboxes, function( key, value ) {
 				    if (value.checked === false) {
@@ -1205,6 +1240,8 @@ var createDataTableFn = function(options){
 				clearFn(options);
 				$("#btnAddAnother").show();
 				$("#modalFormArea select option:first").prop("selected", true);
+				
+				Unlimited_Deduction_clear_data_empty(options);
 				
 				$(window).scrollTop(0);
 				setTimeout(function(){
@@ -1234,3 +1271,23 @@ var createDataTableFn = function(options){
 		}
 	});
 }
+
+var Unlimited_Deduction_mapObjectCheckBox = function(data,options) {
+	if(options['formDetail']['pk_id']=='structure_id') {
+		
+		if(data['is_unlimited_deduction']==1){
+			$(".checkbox-is_unlimited_deduction").prop('checked',true); // in file appraisalStructure
+					
+		}else if(data['is_unlimited_deduction']==0){
+			$(".checkbox-is_unlimited_deduction").prop('checked',false);
+		}
+	}
+}
+
+var Unlimited_Deduction_clear_data_empty = function(options) {
+	if(options['formDetail']['pk_id']=='structure_id') {
+		$("#Unlimited_Deduction_checkbox_header").hide();
+		$(".checkbox-is_unlimited_deduction").prop('checked',false);
+	}
+}
+
