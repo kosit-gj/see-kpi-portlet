@@ -258,17 +258,20 @@ var listErrorFn =function(data){
 	 	}
 		
 		 $("#appraisalType").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list","GET"));
+		 $("#appraisalType").change(function(){
+			 $("#appraisalLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/al_list","GET",{"appraisal_type_id":$("#appraisalType").val()}));				
+			 $("#appraisalLevel").change();
+		 });
 		generateAutocomplete("#empName",restfulURL+"/"+serviceName+"/public/cds_result/auto_emp_name","post",{"emp_name":null});
 		generateAutocomplete("#Position",restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_position_name","post",{"position_name":null});
-		$("#appraisalLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/al_list","GET"));
 		$("#organization").multiselect({
 			 minWidth:'100%;'
 		});
 		$("#appraisalLevel").change(function(){
-			$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/import_assignment/org_list","GET",{"level_id":$("#appraisalLevel").val()}));
+			$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/import_assignment/org_list","GET",{"appraisal_type_id":$("#appraisalType").val(),"level_id":$("#appraisalLevel").val()}));
 			$("#organization").multiselect( 'refresh' );
 		});
-		$("#appraisalLevel").change();
+		$("#appraisalType").change();
 		$("#YearList").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/year_list","GET"));
 		$("#periodFrequency").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/frequency_list","GET"));
 		$("#appraisalLevel").multiselect({
@@ -326,9 +329,17 @@ var listErrorFn =function(data){
 
 				var param="";
 				param+="&appraisal_type_id="		+		$("#embed_appraisal_type_id").val();
-				param+="&appraisal_item_id="		+		item_id;
-				param+="&appraisal_level_id="		+		$("#embed_appraisal_level_id").val().split(",");
-				param+="&org_id="					+		$("#embed_organization").val().split(",");
+
+				$.each(item_id,function(index,indexEntry){
+				      param+="&appraisal_item_id[]="+indexEntry;
+				});
+
+				$.each($("#embed_appraisal_level_id").val().split(","),function(index,indexEntry){
+				      param+="&appraisal_level_id[]="+indexEntry;
+				});
+				$.each($("#embed_organization").val().split(","),function(index,indexEntry){
+				      param+="&org_id[]="+indexEntry;
+				});
 				param+="&position_id="				+		$("#embed_position_id").val();
 				param+="&emp_id="					+		$("#embed_emp_id").val();
 				param+="&period_id="				+		$("#embed_period_id").val();

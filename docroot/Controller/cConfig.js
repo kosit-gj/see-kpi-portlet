@@ -1,5 +1,8 @@
 var restfulURL="";
 var serviceName="see_api";
+
+var serviceName_IMPkpi="impexpservices_api/public";
+var restfulURL_IMPkpi="http://localhost";
 /*#######Office#######*/
 
 //restfulURL="http://192.168.1.254";
