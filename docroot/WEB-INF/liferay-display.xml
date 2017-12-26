@@ -48,5 +48,6 @@
 		<portlet id="axisMapping"></portlet>
 		<portlet id="benchmark-data"></portlet>
 		<portlet id="benchmark-chart"></portlet>
+		<portlet id="import-appraisal-item"></portlet>
 	</category>
 </display>
