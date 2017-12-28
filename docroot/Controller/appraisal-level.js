@@ -152,11 +152,13 @@ $(document).ready(function(){
 			 		options={
 		 			"colunms":[
 		 			         
-		 			           {"colunmsDisplayName":"Appraisal Level Name","width":"30%","id":"appraisal_level_name","colunmsType":"text"},
+		 			           {"colunmsDisplayName":"Appraisal Level Name","width":"25%","id":"appraisal_level_name","colunmsType":"text"},
 		 			           {"colunmsDisplayName":"View All Employee","width":"20%","id":"is_all_employee","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"Is HR","width":"10%","id":"is_hr","colunmsType":"checkbox"},
+		 			           {"colunmsDisplayName":"Is HR","width":"7%","id":"is_hr","colunmsType":"checkbox"},
 		 			           {"colunmsDisplayName":"No Weight","width":"10%","id":"no_weight","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"District","width":"10%","id":"district_flag","colunmsType":"checkbox"},
+		 			           {"colunmsDisplayName":"District","width":"8%","id":"district_flag","colunmsType":"checkbox"},
+		 			           {"colunmsDisplayName":"Organization","width":"10%","id":"is_org","colunmsType":"checkbox"},
+		 			           {"colunmsDisplayName":"Individual","width":"10%","id":"is_individual","colunmsType":"checkbox"},
 		 			           {"colunmsDisplayName":"Is Active","width":"10%","id":"is_active","colunmsType":"checkbox"},
 		 			           {"colunmsDisplayName":"Parent","width":"20%","id":"parent_level_name","colunmsType":"text"}
 		 			          
@@ -182,12 +184,22 @@ $(document).ready(function(){
 			 	    			"id":"no_weight","width":"200px"
 			 	    			},
 			 	    			{
-			 	    				"label":"District","inputType":"checkbox","default":"uncheck",
-			 	    				"id":"district_flag","width":"200px"
-			 	    			},{
+			 	    			"label":"District","inputType":"checkbox","default":"uncheck",
+			 	    			"id":"district_flag","width":"200px"
+			 	    			},
+			 	    			{
+			 	    			"label":"Organization","inputType":"checkbox","default":"uncheck",
+			 	    			"id":"is_org","width":"200px"
+			 	    			},
+			 	    			{
+				 	    		"label":"Individual","inputType":"checkbox","default":"uncheck",
+				 	    		"id":"is_individual","width":"200px"
+				 	    		},
+			 	    			{
 		 	    				"label":"IsActive","inputType":"checkbox","default":"checked",
 		 	    				"id":"is_active","width":"200px"
-		 	    				},{
+		 	    				},
+		 	    				{
 		    					"label":"Parent Appraisal Level","inputType":"dropdown","initValue":"","updateList":true,
 		    					"id":"parent_id","width":"250px","url":""+restfulURL+"/"+serviceName+"/public/appraisal_level"
 		    					},  
