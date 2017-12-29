@@ -528,6 +528,7 @@ plid = layout.getPlid();
 											<th style='width: auto'>Position&nbsp;Name&emsp;&emsp;&emsp;</th>
 											<th style='width: auto'>Chief&nbsp;Emp&nbsp;Code&emsp;</th>
 											<th style='width: auto'>Appraisal&nbsp;Level&emsp;</th>
+											<th style='width: auto'>Dotline&nbsp;Code&emsp;</th>
 <!-- 											<th style='width: auto text-align:center;'>IsActive</th> -->
 											<th style='width: auto;text-align: center;' class='objectCenter'>Manage</th>
 										</tr>
@@ -782,6 +783,12 @@ plid = layout.getPlid();
 								<label class="control-label">ERP User:</label>
 								<div class="controls">
 									<input type="text" class="form-control input-sm span12" placeholder="" id="from_emp_erp_user">
+								</div>
+							</div>
+							<div class="form-group p-xxs">
+								<label class="control-label">Dotline Code:</label>
+								<div class="controls">
+									<input type="text" class="form-control input-sm span12" placeholder="" id="from_dotline_code">
 								</div>
 							</div>
 							<div class="form-group p-xxs">

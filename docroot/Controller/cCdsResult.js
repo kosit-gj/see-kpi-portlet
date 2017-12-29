@@ -467,10 +467,6 @@ $(document).ready(function() {
 
 	
 
-	
-	
-	
-	
 	//Autocomplete Search Position Start
 	$("#position").autocomplete({
         source: function (request, response) {
@@ -620,7 +616,9 @@ $(document).ready(function() {
 		param+="&org_id="+paramQrg;
 		param+="&position_id="+paramPositionCode;
 		param+="&emp_id="+paramEmpCode;
-		//alert(restfulURL+restfulPathCdsResult+"/export?token="+tokenID.token+""+param);
+		
+		//console.log(restfulURL+restfulPathCdsResult+"/export?token="+tokenID.token+""+param)
+
 		$("form#formExportToExcel").attr("action",restfulURL+restfulPathCdsResult+"/export?token="+tokenID.token+""+param);
 		$("form#formExportToExcel").submit();
 	});
@@ -673,7 +671,7 @@ $(document).ready(function() {
 			success: function(data, textStatus, jqXHR)
 			{
 				
-				console.log(data);
+				//console.log(data);
 				if(data['status']==200 && data['errors'].length==0){
 							
 					callFlashSlide("Import CDS Result Successfully");

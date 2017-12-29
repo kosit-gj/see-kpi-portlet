@@ -97,7 +97,10 @@ var listErrorFn =function(data){
 		}
 		if(data[index]['errors']['employee_type']!=undefined){
 			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['employee_type']+"<br>";
-		}		
+		}
+		if(data[index]['errors']['dotline_code']!=undefined){
+			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['dotline_code']+"<br>";
+		}
 		
 
 	});
@@ -129,6 +132,7 @@ var clearFn = function() {
 	$("#from_emp_email").val("");
 	$("#from_emp_salary").val("");
 	$("#from_emp_erp_user").val("");
+	$("#from_dotline_code").val("");
 	
 
 	$("#from_checkboxIs_active").prop("checked",false);
@@ -147,6 +151,7 @@ var clearFn = function() {
 
 //--------  GetData Start
 var getDataFn = function(page,rpp){
+
 	var Organization= $("#param_Organization").val();
 	var position= $("#param_Position").val();
 	var empName= $("#param_EmpName").val();
@@ -199,6 +204,7 @@ var findOneFn = function(id) {
 				$("#from_emp_email").val(data['email']);
 				$("#from_emp_salary").val(data['s_amount']);
 				$("#from_emp_erp_user").val(data['erp_user']);
+				$("#from_dotline_code").val(data['dotline_code']);
 				$("#from_emp_type").val(data['emp_type']);
 
 				
@@ -252,6 +258,7 @@ var listImportEmployeeFn = function(data) {
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["position_name"])+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["chief_emp_code"])+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["appraisal_level_name"])+"</td>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["dotline_code"])+"</td>";
 		//htmlTable += "<td class='objectCenter'>"+IsActive+"</td>";
 		//<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["_id"]+ " data-target=#ModalLevel data-toggle='modal'>Ruld</button>&nbsp;
 		//&lt;button class='btn btn-primary btn-xs btn-gear add' id=1 data-target=#ModalLevel data-toggle='modal'&gt;Role&lt;/button&gt;
@@ -378,8 +385,6 @@ var listAppraisalLevel = function() {
 
 //-------- Update Start
 var updateFn = function () {
-
-
 	
 	var isActive="";
 	//IsAction
@@ -407,6 +412,7 @@ var updateFn = function () {
 			"email":$("#from_emp_email").val(),
 			"s_amount":$("#from_emp_salary").val(),
 			"erp_user":$("#from_emp_erp_user").val(),
+			"dotline_code":$("#from_dotline_code").val(),
 			"emp_type":$("#from_emp_type").val(),
 			"is_active":isActive
 		},	
@@ -935,10 +941,5 @@ $(document).ready(function() {
          } else {
              drDestroy.init();
          }
-     });
-		
-
-
-    
-	
+     });	
 });
