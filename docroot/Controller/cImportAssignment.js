@@ -256,22 +256,26 @@ var listErrorFn =function(data){
 		 if(connectionServiceFn(username,password,plid)==false){
 	 		return false;
 	 	}
-		
+		 
+		$("#organization").multiselect({
+				 minWidth:'100%;'
+		});		
 		 $("#appraisalType").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list","GET"));
+		 /*
 		 $("#appraisalType").change(function(){
 			 $("#appraisalLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/al_list","GET",{"appraisal_type_id":$("#appraisalType").val()}));				
 			 $("#appraisalLevel").change();
-		 });
+		 });*/
 		generateAutocomplete("#empName",restfulURL+"/"+serviceName+"/public/cds_result/auto_emp_name","post",{"emp_name":null});
 		generateAutocomplete("#Position",restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_position_name","post",{"position_name":null});
-		$("#organization").multiselect({
-			 minWidth:'100%;'
-		});
+		$("#appraisalLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/al_list","GET"));		
 		$("#appraisalLevel").change(function(){
-			$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/import_assignment/org_list","GET",{"appraisal_type_id":$("#appraisalType").val(),"level_id":$("#appraisalLevel").val()}));
+//			$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/import_assignment/org_list","GET",{"appraisal_type_id":$("#appraisalType").val(),"level_id":$("#appraisalLevel").val()}));
+			$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/import_assignment/org_list","GET",{"level_id":$("#appraisalLevel").val()}));
 			$("#organization").multiselect( 'refresh' );
 		});
-		$("#appraisalType").change();
+//		$("#appraisalType").change();
+		$("#appraisalLevel").change();
 		$("#YearList").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/year_list","GET"));
 		$("#periodFrequency").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/frequency_list","GET"));
 		$("#appraisalLevel").multiselect({
