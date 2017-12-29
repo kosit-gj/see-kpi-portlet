@@ -32,6 +32,7 @@ var checkSession = function(paramTokenID){
 				//window.location.href = "../login.html"; 
 			}else{
 				is_hr =(data['is_hr'] == null   ? 0 : data['is_hr']);
+				is_self_assign =(data['is_self_assign'] == null   ? 0 : data['is_self_assign']);
 				console.log("login success");
 				check=true;
 				setThemeColorFn(tokenID.theme_color);

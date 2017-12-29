@@ -2235,7 +2235,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	$("#btnAddAnother").removeAttr("disabled");
 	$("#btnSubmit").removeAttr("disabled");
 	//Default end
-	if(is_hr==0){
+	if(is_hr==0 && is_self_assign ==0){
 	
 		$("#btnAssignment").attr("disabled","disabled");
 		$("#btnAddAnother").attr("disabled","disabled");
