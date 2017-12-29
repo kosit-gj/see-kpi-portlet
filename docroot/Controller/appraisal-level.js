@@ -152,19 +152,20 @@ $(document).ready(function(){
 			 		options={
 		 			"colunms":[
 		 			         
-		 			           {"colunmsDisplayName":"Appraisal Level Name","width":"25%","id":"appraisal_level_name","colunmsType":"text"},
-		 			           {"colunmsDisplayName":"View All Employee","width":"20%","id":"is_all_employee","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"Is HR","width":"7%","id":"is_hr","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"No Weight","width":"10%","id":"no_weight","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"District","width":"8%","id":"district_flag","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"Organization","width":"10%","id":"is_org","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"Individual","width":"10%","id":"is_individual","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"Is Active","width":"10%","id":"is_active","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"Parent","width":"20%","id":"parent_level_name","colunmsType":"text"}
+		 			           {"colunmsDisplayName":"Appraisal Level Name","width":"","id":"appraisal_level_name","colunmsType":"text"},
+		 			           {"colunmsDisplayName":"View All Employee","width":"","id":"is_all_employee","colunmsType":"checkbox"},
+		 			           {"colunmsDisplayName":"Is HR","width":"","id":"is_hr","colunmsType":"checkbox"},
+		 			           {"colunmsDisplayName":"Is Self Assign","width":"","id":"is_self_assign","colunmsType":"checkbox"},
+		 			           {"colunmsDisplayName":"No Weight","width":"","id":"no_weight","colunmsType":"checkbox"},
+		 			           {"colunmsDisplayName":"District","width":"","id":"district_flag","colunmsType":"checkbox"},
+		 			           {"colunmsDisplayName":"Organization","width":"","id":"is_org","colunmsType":"checkbox"},
+		 			           {"colunmsDisplayName":"Individual","width":"","id":"is_individual","colunmsType":"checkbox"},
+		 			           {"colunmsDisplayName":"Is Active","width":"","id":"is_active","colunmsType":"checkbox"},
+		 			           {"colunmsDisplayName":"Parent","width":"","id":"parent_level_name","colunmsType":"text"}
 		 			          
 		 			           
 		 			          ],
-		
+		 			          
 		 	    			
 		 	    			"form":[{
 		 	    				"label":"Appraisal Level Name","inputType":"text","placeholder":"Appraisal Level Name",
@@ -179,6 +180,10 @@ $(document).ready(function(){
 		 	 	    			"label":"Is HR","inputType":"checkbox","default":"uncheck",
 		 	 	    			"id":"is_hr","width":"200px"
 		 	 	    			},
+		 	 	    			{
+			 	 	    		"label":"Is Self Assign","inputType":"checkbox","default":"uncheck",
+			 	 	    		"id":"is_self_assign","width":"200px"
+			 	 	    		},
 		 	    			    {
 			 	    			"label":"No Weight","inputType":"checkbox","default":"uncheck",
 			 	    			"id":"no_weight","width":"200px"
