@@ -101,6 +101,9 @@ var listErrorFn =function(data){
 		if(data[index]['errors']['dotline_code']!=undefined){
 			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['dotline_code']+"<br>";
 		}
+		if(data[index]['errors']['has_second_line']!=undefined){
+			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['has_second_line']+"<br>";
+		}
 		
 
 	});
@@ -133,6 +136,7 @@ var clearFn = function() {
 	$("#from_emp_salary").val("");
 	$("#from_emp_erp_user").val("");
 	$("#from_dotline_code").val("");
+	$("#from_has_second_line").val("");
 	
 
 	$("#from_checkboxIs_active").prop("checked",false);
@@ -206,6 +210,7 @@ var findOneFn = function(id) {
 				$("#from_emp_erp_user").val(data['erp_user']);
 				$("#from_dotline_code").val(data['dotline_code']);
 				$("#from_emp_type").val(data['emp_type']);
+				$("#from_has_second_line").val(data['has_second_line']);
 
 				
 				//IsAction
@@ -259,6 +264,7 @@ var listImportEmployeeFn = function(data) {
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["chief_emp_code"])+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["appraisal_level_name"])+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["dotline_code"])+"</td>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["has_second_line"])+"</td>";
 		//htmlTable += "<td class='objectCenter'>"+IsActive+"</td>";
 		//<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["_id"]+ " data-target=#ModalLevel data-toggle='modal'>Ruld</button>&nbsp;
 		//&lt;button class='btn btn-primary btn-xs btn-gear add' id=1 data-target=#ModalLevel data-toggle='modal'&gt;Role&lt;/button&gt;
@@ -414,6 +420,7 @@ var updateFn = function () {
 			"erp_user":$("#from_emp_erp_user").val(),
 			"dotline_code":$("#from_dotline_code").val(),
 			"emp_type":$("#from_emp_type").val(),
+			"has_second_line":$("#from_has_second_line").val(),
 			"is_active":isActive
 		},	
 		success : function(data) {
