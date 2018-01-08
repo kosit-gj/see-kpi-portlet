@@ -136,10 +136,10 @@ var clearFn = function() {
 	$("#from_emp_salary").val("");
 	$("#from_emp_erp_user").val("");
 	$("#from_dotline_code").val("");
-	$("#from_has_second_line").val("");
 	
-
+	$("#from_checkboxHas_second_line").prop("checked",false);
 	$("#from_checkboxIs_active").prop("checked",false);
+	
 	
 	 $(".from_data_role").prop('checked', false); 
 	 
@@ -210,9 +210,12 @@ var findOneFn = function(id) {
 				$("#from_emp_erp_user").val(data['erp_user']);
 				$("#from_dotline_code").val(data['dotline_code']);
 				$("#from_emp_type").val(data['emp_type']);
-				$("#from_has_second_line").val(data['has_second_line']);
-
 				
+				if(data['has_second_line']==1){
+					$('#from_checkboxHas_second_line').prop('checked', true);
+				}else{
+					$('#from_checkboxHas_second_line').prop('checked', false);
+				}		
 				//IsAction
 				if(data['is_active']==1){
 					$('#from_checkboxIs_active').prop('checked', true);
@@ -249,9 +252,15 @@ var listImportEmployeeFn = function(data) {
 	$("#listEmployee").empty();
 	var htmlAppraisalLevel= "";
 	var htmlTable = "";
+	var has_second_checkbox;
 	//console.log(data);
 	$.each(data,function(index,indexEntry) {
-
+		if(indexEntry["has_second_line"]==1) {
+			has_second_checkbox = "checked disabled";
+		}
+		else {
+			has_second_checkbox = "disabled";
+		}
 //		$.each(indexEntry["appraisal_level"],function(index,indexEntry){
 //			htmlAppraisalLevel+=indexEntry["appraisal_level_name"]+"<br>";
 //		});
@@ -263,8 +272,8 @@ var listImportEmployeeFn = function(data) {
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["position_name"])+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["chief_emp_code"])+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["appraisal_level_name"])+"</td>";
-		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["dotline_code"])+"</td>";
-		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["has_second_line"])+"</td>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["dotline_code"])+"</td>"
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+"<div align='center'><input type=\"checkbox\" "+has_second_checkbox+">"+"</div></td>";
 		//htmlTable += "<td class='objectCenter'>"+IsActive+"</td>";
 		//<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["_id"]+ " data-target=#ModalLevel data-toggle='modal'>Ruld</button>&nbsp;
 		//&lt;button class='btn btn-primary btn-xs btn-gear add' id=1 data-target=#ModalLevel data-toggle='modal'&gt;Role&lt;/button&gt;
@@ -393,11 +402,18 @@ var listAppraisalLevel = function() {
 var updateFn = function () {
 	
 	var isActive="";
+	var hasSecondLine="";
 	//IsAction
 	if($("#from_checkboxIs_active:checked").is(":checked")){
 		isActive="1";
 	}else{
 		isActive="0";
+	}
+	
+	if($("#from_checkboxHas_second_line:checked").is(":checked")){
+		hasSecondLine="1";
+	}else{
+		hasSecondLine="0";
 	}
 	
 	$.ajax({
@@ -420,7 +436,7 @@ var updateFn = function () {
 			"erp_user":$("#from_emp_erp_user").val(),
 			"dotline_code":$("#from_dotline_code").val(),
 			"emp_type":$("#from_emp_type").val(),
-			"has_second_line":$("#from_has_second_line").val(),
+			"has_second_line":hasSecondLine,
 			"is_active":isActive
 		},	
 		success : function(data) {

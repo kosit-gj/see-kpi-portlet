@@ -793,12 +793,6 @@ plid = layout.getPlid();
 								</div>
 							</div>
 							<div class="form-group p-xxs">
-								<label class="control-label">Has Second Line:</label>
-								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_has_second_line">
-								</div>
-							</div>
-							<div class="form-group p-xxs">
 								<label class="control-label">Employee Type:</label>
 								<div id="drop_down_emp_typy" class="controls"></div>
 							</div>
@@ -807,6 +801,15 @@ plid = layout.getPlid();
 								<div class="controls">
 									<label for="" class="checkbox" style="cursor:default">
                   					<input id="from_checkboxIs_corporate_kpi" name="from_checkboxIs_corporate_kpi" type="checkbox"
+										value="" style="margin-top: 4px;">
+                					</label>
+								</div>
+							</div>
+							<div class="form-group p-xxs">
+								<label class="control-label">Has Second Line:</label>
+								<div class="controls">
+									<label for="" class="checkbox" style="cursor:default">
+                  					<input id="from_checkboxHas_second_line" name="from_checkboxHas_second_line" type="checkbox"
 										value="" style="margin-top: 4px;">
                 					</label>
 								</div>
