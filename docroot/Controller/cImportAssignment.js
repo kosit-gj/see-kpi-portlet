@@ -4,6 +4,7 @@
  
 //# Generate Drop Down List
  var generateDropDownList = function(url,type,request,initValue){
+	
  	var html="";
  	
  	if(initValue!=undefined){
@@ -18,7 +19,7 @@
  		headers:{Authorization:"Bearer "+tokenID.token},
  		async:false,
  		success:function(data){
-
+ 			console.log(data)
 
  			
  			$.each(data,function(index,indexEntry){
@@ -246,7 +247,6 @@ var listErrorFn =function(data){
 	/*return errorData;*/
 }
 
-
  $(document).ready(function(){
 	var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
@@ -263,9 +263,23 @@ var listErrorFn =function(data){
 		 $("#appraisalType").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list","GET"));
 		 
 		 $("#appraisalType").change(function(){
-			 $("#appraisalLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/al_list","GET",{"appraisal_type_id":$("#appraisalType").val()}));				
-			 $("#appraisalLevel").change();
+			 
+			var url_check_controller_org;
+			if($("#appraisalType").val()==1) {
+				url_check_controller_org = "appraisal_assignment/al_list_org";
+			}
+			else if($("#appraisalType").val()==2) {
+				url_check_controller_org = "appraisal_assignment/al_list_org_individual";
+				$("#appraisalLevelEmp").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/al_list_emp","GET",{"emp_code":session_emp_code}));
+			}
+			
+			$("#appraisalLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/"+url_check_controller_org+"","GET",{"emp_code":session_emp_code})); //session_emp_code in cMain.js			
+			$("#appraisalLevel").change();
 		 });
+		 
+			$("#appraisalLevelEmp").multiselect();
+			
+			
 		 $("#appraisalType").change();
 		generateAutocomplete("#empName",restfulURL+"/"+serviceName+"/public/cds_result/auto_emp_name","post",{"emp_name":null});
 		generateAutocomplete("#Position",restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_position_name","post",{"position_name":null});
@@ -296,14 +310,14 @@ var listErrorFn =function(data){
 		$("#assignFrequency").change();
 		$("#appraisalType").change(function(){
 			if($("#appraisalType").val() == "2"){
-
-				$("#empName,#Position").removeAttr('disabled');
-				$("#apprasiaLevel").attr("disabled", 'disabled');
+				console.log("type=2")
+				$("#empName,#Position,#appraisalLevelEmp").removeAttr('disabled');
+				$("#appraisalLevel").attr("disabled", 'disabled');
 			
 			}else if($("#appraisalType").val() == "1"){
-				
-				$("#empName,#Position").attr("disabled", 'disabled');
-				$("#empName,#empName_id,#Position,#Position_id").val("");
+				console.log("type=1")
+				$("#empName,#Position,#appraisalLevelEmp").attr("disabled", 'disabled');
+				$("#empName,#empName_id,#Position,#Position_id,#appraisalLevelEmp").val("");
 			
 				
 			}

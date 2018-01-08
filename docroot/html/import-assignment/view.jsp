@@ -261,15 +261,22 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 				<div class="ibox-content breadcrumbs2">
 
 					<div class="row-fluid">
-
 						<div id="appraisalTypeArea" class="form-group pull-left span4"
 							style="margin-left: 5px; margin-bottom: 3px;">
 							<select data-toggle="tooltip" title="Entity Type"
 								class="input form-control input-sm" id="appraisalType"
 								name="appraisalType">
-
 								<option value="0"></option>
-
+							</select>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div id='appraisalLevelEmpArea' class="form-group pull-left span4"
+							style="margin-left: 5px; margin-bottom: 3px;">
+							<select data-toggle="tooltip" title="Emp Level" multiple="multiple"
+								class="input form-control input-sm" id="appraisalLevelEmp"
+								name="appraisalLevelEmp">
+								<option value="0"></option>
 							</select>
 						</div>
 						<div id="empNameArea" class="form-group pull-left span4"
@@ -286,18 +293,14 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								disabled data-original-title="Position"> <input
 								type="hidden" id="Position_id">
 						</div>
-
-
-
+					</div>
+					<div class="row-fluid">
 						<div id='appraisalLevelArea' class="form-group pull-left span4"
 							style="margin-left: 5px; margin-bottom: 3px;">
-							<select data-toggle="tooltip" title="Level" multiple="multiple"
+							<select data-toggle="tooltip" title="Org Level" multiple="multiple"
 								class="input form-control input-sm" id="appraisalLevel"
 								name="appraisalLevel">
-
 								<option value="0"></option>
-
-
 							</select>
 						</div>
 						<div class="form-group pull-left span4" style="margin-left: 5px">
@@ -308,19 +311,16 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								<option value=''>All Organization</option>
 							</select>
 						</div>
-
-
-
 						<div id='yearArea' class="form-group pull-left span4"
 							style="margin-left: 5px; margin-bottom: 3px;">
 							<select data-toggle="tooltip" title="Year"
 								class="input form-control input-sm" id="YearList"
 								name="YearList">
-
 								<option value="0"></option>
-
 							</select>
 						</div>
+					</div>
+					<div class="row-fluid">
 						<div id="periodFrequencyArea" class="form-group pull-left span4"
 							style="margin-left: 5px; margin-bottom: 3px;">
 							<select data-toggle="tooltip" title="Period frequency"
@@ -334,10 +334,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							<select data-toggle="tooltip" title="Assign Frequency"
 								class="input form-control input-sm" id="assignFrequency"
 								name="assignFrequency">
-
 								<option value="1">ครั้งเดียวทุกงวด</option>
 								<option value="2">ทีละงวด</option>
-
 							</select>
 						</div>
 						<div id="periodArea" class="form-group pull-left span4"
@@ -346,18 +344,14 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								data-toggle="Period" title="Period"
 								class="input form-control input-sm" id="period_id"
 								name="period_id">
-
 								<option value=""></option>
-
 							</select>
 						</div>
-
-
-
+					</div>
+					<div class="row-fluid">
 						<form id="formExportToExcel" action="" method="post"
 							class="form-group pull-right m-b-none"
 							style="margin-bottom: 0px;">
-
 							<div class="form-group pull-right m-b-none "
 								style="margin-bottom: 5px;">
 								<button type="button" class="btn btn-info input-sm"
@@ -368,7 +362,6 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									type="button" style="margin-bottom: 3px">
 									<i class="fa fa-download"></i> Export
 								</button>
-
 								<button id="btn_import" type="button" data-target="#ModalImport"
 									data-toggle="modal" class="btn btn-success btn-sm "
 									style="margin-bottom: 3px">
@@ -377,18 +370,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							</div>
 						</form>
 					</div>
-
-
-
 				</div>
 				<!-- content end -->
 			</div>
-
 		</div>
-		
-		
-		
-
 	</div>
 	<!-- end--row-fluid -->
 	<div class="row-fluid" id="import_assignment_list_content">

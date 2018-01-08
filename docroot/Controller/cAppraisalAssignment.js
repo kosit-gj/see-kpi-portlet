@@ -6,7 +6,6 @@ var empldoyees_code = [];
 var appraisal_item_id_array=[];
 
 
-
 //var is_hr = 0;
 var clearFn = function(){
 	$(':input')
@@ -2069,7 +2068,6 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	
 	//btn assignment start
 	$("#btnAssignment").click(function(){
-		
 		
 		
 		

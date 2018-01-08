@@ -508,7 +508,7 @@ plid = layout.getPlid();
          					
          						<div class="ibox-content breadcrumbs2"> 
          						
-         						<div  class="row-fluid ">
+         						<div  class="row-fluid">
 									
 									<div id="appraisalTypeArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
@@ -520,28 +520,50 @@ plid = layout.getPlid();
 								
 										</select>
 									</div>
-									 <div id="empNameArea" class="form-group pull-left span4"
+								</div>
+								<div class="row-fluid">
+									<div id='appraisalLevelEmpArea' class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
+										<select data-toggle="tooltip" title="Employee Level"
+											class="input form-control input-sm" id="appraisalLevelEmp"
+											name="appraisalLevelEmp">
+											<option value="0"></option>
+										</select>
+									</div>
+									<div id="empNameArea" class="form-group pull-left span4"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										
 										<input data-toggle="tooltip" type="text" class="form-control input-sm span12 "
 											placeholder="Emp Name" id="empName" data-original-title="Employee Name">
+											
+<!-- 										<select data-toggle="tooltip" title="Employee Name" -->
+<!-- 											class="input form-control input-sm" id="empName" -->
+<!-- 											name="empName"> -->
+<!-- 											<option value="0"></option> -->
+<!-- 										</select> -->
+										
 									</div>
 									 <div id="PositionArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
+										
 										<input data-toggle="tooltip" type="text" id="Position" placeholder="Position"
 											class="form-control input-sm span12" data-original-title="Position">
+										
+<!-- 										<select data-toggle="tooltip" title="Employee Position" -->
+<!-- 											class="input form-control input-sm" id="Position" -->
+<!-- 											name="Position"> -->
+<!-- 											<option value="0"></option> -->
+<!-- 										</select> -->
+										
 									</div>
-									
-									
-									
+								</div>
+								<div class="row-fluid">
 									<div id='appraisalLevelArea' class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Level"
+										<select data-toggle="tooltip" title="OrgLevel"
 											class="input form-control input-sm" id="appraisalLevel"
 											name="appraisalLevel">
-								
 											<option value="0"></option>
-								
-								
 										</select>
 									</div>
 									<div class="form-group pull-left span4" style="margin-left: 5px">
@@ -559,10 +581,6 @@ plid = layout.getPlid();
 											placeholder="Organization" id="organization" data-original-title="Organization">
 									</div>
 								-->
-								
-									
-									
-								 
 									<div id='yearArea' class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<select data-toggle="tooltip" title="Year"
@@ -572,6 +590,8 @@ plid = layout.getPlid();
 								
 										</select>
 									</div>
+								</div>
+								<div class="row-fluid">
 									<div id="periodFrequencyArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<select data-toggle="tooltip" title="Period frequency"
@@ -603,8 +623,8 @@ plid = layout.getPlid();
 								
 								
 								
-								
-							
+							</div>
+							<div class="row-fluid">
 								<div class="form-group pull-right m-b-none "
 									style="margin-bottom: 5px;">
 									<button type="button" class="btn btn-info input-sm"
@@ -869,7 +889,6 @@ plid = layout.getPlid();
          					 
   </div>
  </div>
-  
   <div id='embedParamSearch'></div>
   <div id='embedStructureCheckWeight'></div>           					
       <!-- <button data-toggle="modal" data-target="#ModalKPI" id="btnAddKPI" class="btn btn-info input-sm" type="button"><i class="fa fa-plus-square"></i>&nbsp;Assign KPI</button>	 -->				
