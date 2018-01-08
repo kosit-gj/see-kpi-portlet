@@ -257,7 +257,7 @@ var listErrorFn =function(data){
 	 		return false;
 	 	}
 		 
-		$("#organization").multiselect({
+		$("#organization,#appraisalLevelEmp,#appraisalLevel").multiselect({
 				 minWidth:'100%;'
 		});		
 		 $("#appraisalType").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list","GET"));
@@ -271,13 +271,15 @@ var listErrorFn =function(data){
 			else if($("#appraisalType").val()==2) {
 				url_check_controller_org = "appraisal_assignment/al_list_org_individual";
 				$("#appraisalLevelEmp").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/al_list_emp","GET",{"emp_code":session_emp_code}));
+				$("#appraisalLevelEmp").multiselect( 'refresh' );
 			}
 			
-			$("#appraisalLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/"+url_check_controller_org+"","GET",{"emp_code":session_emp_code})); //session_emp_code in cMain.js			
+			$("#appraisalLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/"+url_check_controller_org+"","GET",{"emp_code":session_emp_code})); //session_emp_code in cMain.js	
+			$("#appraisalLevel").multiselect( 'refresh' );
 			$("#appraisalLevel").change();
 		 });
 		 
-			$("#appraisalLevelEmp").multiselect();
+			
 			
 			
 		 $("#appraisalType").change();
@@ -293,9 +295,7 @@ var listErrorFn =function(data){
 //		$("#appraisalLevel").change();
 		$("#YearList").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/year_list","GET"));
 		$("#periodFrequency").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/frequency_list","GET"));
-		$("#appraisalLevel").multiselect({
-			 minWidth:'100%;'
-		});
+
 		
 		$(".app_url_hidden").show();
 		
