@@ -228,21 +228,40 @@ var listAssignmentFn = function(data){
  
 var listErrorFn =function(data){
 	var validateFile="";
-/*
-	$.each(data,function(index,indexEntry){
-		if(indexEntry[Object.keys(indexEntry)[0]]!= undefined || indexEntry[Object.keys(indexEntry)[0]]==null){
-			if(indexEntry[Object.keys(indexEntry)[0]]== null){
-				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+Object.keys(indexEntry)[0]+" : null <i class='fa fa-level-down'></i><br>";
+
+$.each(data,function(index,indexEntry){
+   if(indexEntry['appraisal_type_id'] == null || indexEntry['appraisal_type_id'] == "" ){
+				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Appraisal_type_id : null , ";
 			}else{
-				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+Object.keys(indexEntry)[0]+": "+data[index][Object.keys(indexEntry)[0]]+" <i class='fa fa-level-down'></i><br>";}
+				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Appraisal_type_id : "+indexEntry['appraisal_type_id']+", ";
 			}
-	     $.each(indexEntry['errors'],function(index2,indexEntry2){
+			if(indexEntry['emp_id'] == null || indexEntry['emp_id'] == "" ){
+				validateFile+="<font color='#FFC446'></i></font> Emp_id : null, ";
+			}else{
+				validateFile+="<font color='#FFC446'></i></font> Emp_id : "+indexEntry['emp_id']+", ";
+			}
+			if(indexEntry['level_id'] == null || indexEntry['level_id'] == "" ){
+				validateFile+="<font color='#FFC446'></font> Level_id : null, ";
+			}else{
+				validateFile+="<font color='#FFC446'></font> Level_id : "+indexEntry['level_id']+", ";
+			}
+			if(indexEntry['org_id'] == null || indexEntry['org_id'] == "" ){
+				validateFile+="<font color='#FFC446'></font> Org_id : null,<br>";
+			}else{
+				validateFile+="<font color='#FFC446'></font> Org_id : "+indexEntry['org_id']+",<br>";
+			}
+			if(indexEntry['period_id'] == null || indexEntry['period_id'] == "" ){
+				validateFile+="<font color='#FFC446'></font> Period_id : null, ";
+			}else{
+				validateFile+="<font color='#FFC446'></font> Period_id : "+indexEntry['period_id']+" <br>";
+			}
+    $.each(indexEntry['data'],function(index2,indexEntry2){
 	    	 validateFile+="<font color='red'>&emsp;*</font> "+indexEntry2+"<br>";
 	     });
+    
 	 
-	});*/
-	//callFlashSlideInModal(errorData);
-	callFlashSlideInModal(validateFile,"#information","error");
+	});
+	callFlashSlideInModal(validateFile,"#informationFile","error");
 	/*return errorData;*/
 }
 
@@ -416,14 +435,14 @@ var listErrorFn =function(data){
 					if(data['status']==200 && data['errors'].length==0){
 								
 						callFlashSlide("Import Assignment Successfully");
-						getDataFn();
+						//getDataFn();
 						$("body").mLoading('hide');
 						$('#file').val("");
 						$('#ModalImport').modal('hide');
 						
 					}else{
 						listErrorFn(data['errors']);
-						getDataFn();
+						//getDataFn();
 						$("body").mLoading('hide');
 					}
 				},
