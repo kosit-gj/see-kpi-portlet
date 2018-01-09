@@ -151,8 +151,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 	margin-bottom: 0;
 }
 
-.aui .portlet-frame select {
-	width: 100%;
+ .aui .breadcrumbs2 select { 
+ 	width: 100%; 
 }
 
 .aui .portlet-frame input {
@@ -260,22 +260,30 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 				<div class="ibox-content breadcrumbs2">
 
+<!-- 					<div class="row-fluid"> -->
+<!-- 						<div id="appraisalTypeArea" class="form-group pull-left span4" -->
+<!-- 							style="margin-left: 5px; margin-bottom: 3px;"> -->
+<!-- 							<select data-toggle="tooltip" title="Entity Type" -->
+<!-- 								class="input form-control input-sm" id="appraisalType" -->
+<!-- 								name="appraisalType"> -->
+<!-- 								<option value="0"></option> -->
+<!-- 							</select> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 					<div class="row-fluid">
+<!-- 						<div id='appraisalLevelEmpArea' class="form-group pull-left span4" -->
+<!-- 							style="margin-left: 5px; margin-bottom: 3px;"> -->
+<!-- 							<select data-toggle="tooltip" title="Emp Level" multiple="multiple" -->
+<!-- 								class="input form-control input-sm" id="appraisalLevelEmp" -->
+<!-- 								name="appraisalLevelEmp"> -->
+<!-- 								<option value="0"></option> -->
+<!-- 							</select> -->
+<!-- 						</div> -->
 						<div id="appraisalTypeArea" class="form-group pull-left span4"
 							style="margin-left: 5px; margin-bottom: 3px;">
 							<select data-toggle="tooltip" title="Entity Type"
 								class="input form-control input-sm" id="appraisalType"
 								name="appraisalType">
-								<option value="0"></option>
-							</select>
-						</div>
-					</div>
-					<div class="row-fluid">
-						<div id='appraisalLevelEmpArea' class="form-group pull-left span4"
-							style="margin-left: 5px; margin-bottom: 3px;">
-							<select data-toggle="tooltip" title="Emp Level" multiple="multiple"
-								class="input form-control input-sm" id="appraisalLevelEmp"
-								name="appraisalLevelEmp">
 								<option value="0"></option>
 							</select>
 						</div>
