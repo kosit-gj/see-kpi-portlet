@@ -33,6 +33,7 @@ var checkSession = function(paramTokenID){
 			}else{
 				is_hr =(data['is_hr'] == null   ? 0 : data['is_hr']);
 				is_self_assign =(data['is_self_assign'] == null   ? 0 : data['is_self_assign']);
+				session_emp_code =(data['emp_code'] == null   ? 0 : data['emp_code']);
 				console.log("login success");
 				check=true;
 				setThemeColorFn(tokenID.theme_color);

@@ -353,6 +353,7 @@ var findOneFn = function(id,actionType){
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
+			//console.log(data)
 			//console.log(data['head'].length);
 			
 			if(data['head'].length>0){
@@ -2265,7 +2266,16 @@ var createTemplateAssignmentFn = function(data){
 	}
 	 
 };
-var getTemplateFn = function(emp_result_id){
+var getTemplateFn = function(emp_result_id) {
+	
+	var check_appraisalLevel;
+	if($("#appraisalType").val()==1) {
+		check_appraisalLevel = $("#appraisalLevel").val();
+	}
+	else if($("#appraisalType").val()==2) {
+		check_appraisalLevel = $("#appraisalLevelEmp").val();
+	}
+	
 	$.ajax({
 		//http://192.168.1.52/"+serviceName+"/public/appraisal_assignment/period_list
 		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/template",
@@ -2273,7 +2283,7 @@ var getTemplateFn = function(emp_result_id){
 		dataType:"json",
 		async:false,
 		data:{
-			'appraisal_level_id':$("#appraisalLevel").val(),
+			'appraisal_level_id':check_appraisalLevel,
 			'emp_result_id':emp_result_id
 
 			},
@@ -2425,8 +2435,6 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 				$("#Position").val("");
 				$("#empName").val("");
 				$("#appraisalLevelEmp").val("");
-				appraisalLevelListFn();
-				dropDrowOrgFn($("#appraisalLevel").val());
 				
 			}else{
 				$("#Position").prop("disabled",false);
@@ -2435,6 +2443,8 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 				appraisalLevelListEmpLevelFn();
 				$("#appraisalLevelEmp").change();
 			}
+			appraisalLevelListFn();
+			dropDrowOrgFn($("#appraisalLevel").val());
 		});
 		$("#appraisalType").change();
 		

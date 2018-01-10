@@ -226,7 +226,7 @@ var listAssignmentFn = function(data){
 
 };
  
-var listErrorFn =function(data){
+var listErrorFn = function(data){
 	var validateFile="";
 
 $.each(data,function(index,indexEntry){
@@ -251,7 +251,7 @@ $.each(data,function(index,indexEntry){
 				validateFile+="<font color='#FFC446'></font> Org_id : "+indexEntry['org_id']+",<br>";
 			}
 			if(indexEntry['period_id'] == null || indexEntry['period_id'] == "" ){
-				validateFile+="<font color='#FFC446'></font> Period_id : null, ";
+				validateFile+="<font color='#FFC446'></font> Period_id : null, <br>";
 			}else{
 				validateFile+="<font color='#FFC446'></font> Period_id : "+indexEntry['period_id']+" <br>";
 			}
@@ -261,7 +261,7 @@ $.each(data,function(index,indexEntry){
     
 	 
 	});
-	callFlashSlideInModal(validateFile,"#informationFile","error");
+	callFlashSlideInModal(validateFile,"#information","error");
 	/*return errorData;*/
 }
 
