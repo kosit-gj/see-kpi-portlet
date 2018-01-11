@@ -38,26 +38,26 @@ plid = layout.getPlid();
 <style>
 
  /* Large desktop Start#####################################*/
- @media (min-width: 1200px) { 
- 
+ @media (min-width: 1200px) {
+
 	.modal.large {
 		    width: 90%;
-		    margin-left:-45%;  
+		    margin-left:-45%;
 		    top:0px;
 		}
-		
+
 	.aui .modal-body{
-		/*max-height: 400px;*/	
+		/*max-height: 400px;*/
 	}
-	
+
 	#smartArea{
 	display:show;
 	}
-	
+
 	.breadcrumbs2 .row-fluid .span4{
 			width: 32.624%;
 		}
-	
+
 	#actionPlanModal{
 		margin-top:0px;
 
@@ -68,91 +68,91 @@ plid = layout.getPlid();
 	.desktopArea{
 		display:block;
 	}
-	
+
 	.saveAndCancelArea{
 		text-align:right;
-	}	
-	
+	}
+
 	#actualvsTargetBar{
 		display:'';
 	}
 	#actualvsForecastBar{
 		display:'';
 	}
-	
+
 	.aui .row-fluid#advanceSearchAppraisal .span3{
 		width: 24.5%;
 	}
 
 
-	 
+
   }
   /* Large desktop End######################################*/
-  
+
   /*  desktop Start#########################################*/
  @media (min-width: 980px) and (max-width: 1199px) {
- 
+
  	.modal.large {
 		    width: 90%;
-		    margin-left:-45%;  
+		    margin-left:-45%;
 		    top:0px;
 		}
-		
+
 	.aui .modal-body{
-		/*max-height: 400px;*/	
+		/*max-height: 400px;*/
 	}
 	#smartArea{
 	display:none;
 	}
-	
+
 	.breadcrumbs2 .row-fluid .span4{
 			width: 32.624%;
 		}
-		
+
 	#actionPlanModal{
 		margin-top:0px;
 	}
-		
+
 	#actionPlanModal{
 		margin-top:0px;
 	}
-	
-	
+
+
 	.moblieArea{
 		display:none;
 	}
 	.desktopArea{
 		display:block;
 	}
-	
+
 	.saveAndCancelArea{
 		text-align:right;
 	}
-	
+
 	#actualvsTargetBar{
 		display:'';
 	}
 	#actualvsForecastBar{
 		display:'';
-	}	
-	
+	}
+
 	.aui #advanceSearchAppraisal.row-fluid .span3 {
     	width: 32.5%;
 	}
-		
- 	
+
+
   }
  /*  desktop End############################################*/
- 
+
  /* Portrait tablet to landscape and desktop Start##########*/
  @media (min-width: 768px) and (max-width: 979px) {
- 
+
 	.aui .modal{
 		left:1%;
 	}
 	.modal.large {
 		    width: 90%;
-		    margin-left:-45%;  
+		    margin-left:-45%;
 		    top:0px;
 		}
 	.pagingText{
@@ -164,20 +164,20 @@ plid = layout.getPlid();
 	.pagianation_area{
 		position:'';
 	}
-	
+
 	.aui .modal-body{
-		/*max-height: 400px;*/	
+		/*max-height: 400px;*/
 	}
 	#smartArea{
 	display:none;
 	}
-	
+
 	#actionPlanModal{
 		margin-top:0px;
 	}
 
-	
-	
+
+
 	.moblieArea{
 		display:block;
 		font-size:0.8em;
@@ -185,35 +185,35 @@ plid = layout.getPlid();
 	.desktopArea{
 		display:none;
 	}
-	
+
 	.saveAndCancelArea{
 		text-align:right;
 	}
-	
-	
-	
+
+
+
 	#actualvsTargetBar{
 		display:none;
 	}
 	#actualvsForecastBar{
 		display:none;
 	}
-	
+
 	.aui #advanceSearchAppraisal.row-fluid .span3 {
 	    width: 24.2%;
 	}
- 
+
 
   }
- /* Portrait tablet to landscape and desktop End############*/ 
- 
+ /* Portrait tablet to landscape and desktop End############*/
+
  /* Landscape phone to portrait tablet Start################*/
- @media (max-width: 767px) { 
- 	
+ @media (max-width: 767px) {
+
  	.modal.large {
- 	
+
 	    width: '';
-	    top:0px;    
+	    top:0px;
 	}
 	#grandTototalWeightArea{
 		position: relative;
@@ -222,27 +222,27 @@ plid = layout.getPlid();
 	.aui .p-t-xxs {
     	text-align: left;
 	}
-	
-	
+
+
 		.pagianation_area{
 		/*position:absolute;*/
 	}
-	
+
 	.aui .modal-body{
-		/*max-height: 300px;*/	
+		/*max-height: 300px;*/
 	}
 	#smartArea{
 	display:none;
 	}
-	
+
 	#actionPlanModal{
 		margin-top:0px;
 	}
-	
+
 	#actionPlanModal{
 		margin-top:0px;
 	}
-	
+
 	.moblieArea{
 		display:block;
 		font-size:0.7em;
@@ -253,14 +253,14 @@ plid = layout.getPlid();
 	.saveAndCancelArea{
 		text-align:left;
 	}
-	
+
 	#actualvsTargetBar{
 		display:'';
 	}
 	#actualvsForecastBar{
 		display:'';
 	}
-	
+
 	/*btn area start*/
 	#btnSaveActionPlan{
 		width:100%;
@@ -268,7 +268,7 @@ plid = layout.getPlid();
 	#btnCancelActionPlan{
 		width:100%;
 	}
-	
+
 	#btnAddActionPlan{
 		width:100%;
 	}
@@ -282,13 +282,13 @@ plid = layout.getPlid();
 		width:100%;
 	}
 	/*btn area end*/
- 
+
   }
- /* Landscape phone to portrait tablet End##################*/ 
- 
+ /* Landscape phone to portrait tablet End##################*/
+
  /* Landscape phones and down Start#########################*/
- @media (max-width: 480px) { 
- 	
+ @media (max-width: 480px) {
+
  	.pagingText{
 		display:none;
 	}
@@ -304,15 +304,15 @@ plid = layout.getPlid();
 	#smartArea{
 	display:none;
 	}
-	
+
 	#actionPlanModal{
 		margin-top:0px;
 	}
-	
+
 	#actionPlanModal{
 		margin-top:0px;
 	}
-	
+
 	.moblieArea{
 		display:block;
 		font-size:0.6em;
@@ -323,15 +323,15 @@ plid = layout.getPlid();
 	.saveAndCancelArea{
 		text-align:left;
 	}
-	
+
 	#actualvsTargetBar{
 		display:none;
 	}
 	#actualvsForecastBar{
 		display:none;
 	}
-	
-	
+
+
 	/*btn area start*/
 	#btnSaveActionPlan{
 		width:100%;
@@ -339,7 +339,7 @@ plid = layout.getPlid();
 	#btnCancelActionPlan{
 		width:100%;
 	}
-	
+
 	#btnAddActionPlan{
 		width:100%;
 	}
@@ -353,12 +353,12 @@ plid = layout.getPlid();
 		width:100%;
 	}
 	/*btn area end*/
- 
+
 
   }
   /* Landscape phones and down End##########################*/
-  
-  
+
+
 
 .ibox-content {
     background-color: #fff;
@@ -403,9 +403,9 @@ plid = layout.getPlid();
     padding: 5px;
 }
 .aui .modal-footer {
-  
+
     border-radius: 0;
-   
+
 }
 
 /*
@@ -440,7 +440,7 @@ plid = layout.getPlid();
     color: #8d8d8d;
     font-weight: 200;
     margin-bottom: 0;
-    
+
 }
 .aui #breadcrumbs {
     margin-bottom: 0;
@@ -486,7 +486,7 @@ plid = layout.getPlid();
 /*
 .modal.large {
     width: 90%;
-    margin-left:-45%;  
+    margin-left:-45%;
     top:0px;
 }
 */
@@ -534,7 +534,7 @@ margin-bottom:1px;
 
 .aui .btn {
 	font-size: 14px;
- 	padding: 4px 12px; 
+ 	padding: 4px 12px;
 	width: auto;
 	margin-top: 0px;
 	display: inline;
@@ -551,7 +551,7 @@ margin-bottom:1px;
 /* Modal action plan START */
 
 .boxActionPlainArea{
-	
+
 }
 .boxActionPlainArea .boxActionL{
 	/*float:left;*/
@@ -577,12 +577,12 @@ margin-bottom:1px;
   	padding:5px;
   	height: 89px;
   	background:#fff;
-	
+
 }
 .boxForecastArea{
 	width:28.5%;
 	float:right;
-	
+
 	/*
 	border-width: 1px 1px 1px 1px;
 	border-color: #cccccc;
@@ -590,20 +590,20 @@ margin-bottom:1px;
   	margin:1px;
   	padding:5px;
   	*/
-  	
+
 }
 .boxActualPercentageArea{
 	width:39%;
 	float:right;
 	margin-left: 0.5%;
-	
+
 	/*
 	border-width: 1px 1px 1px 1px;
 	border-color: #cccccc;
   	border-style: solid;
   	margin:1px;
   	padding:5px;*/
-  	
+
 }
 .fontBold{
 	font-weight:bold;
@@ -689,18 +689,18 @@ margin-bottom:1px;
 
 
 <body class=" gray-bg ">
-<div class='row-fluid'>
-	<div id="slide_status" class='span12'>
-		<div id="btnCloseSlide">×</div>
-		<div id="slide_status_area"></div>
-	</div>
-</div>
+  <div class='row-fluid'>
+    <div id="slide_status" class='span12'>
+      <div id="btnCloseSlide">×</div>
+      <div id="slide_status_area"></div>
+    </div>
+  </div>
 
 
 	<div class="app_url_hidden">
 		<div class="container1">
 			<div id="includePage" class="ng-view ng-scope">
-			<!-- 
+			<!--
 				<h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Appraisal</span> </h2>
  			-->
 				<div class="row-fluid">
@@ -713,85 +713,83 @@ margin-bottom:1px;
 							</div>
 
 							<div class="ibox-content breadcrumbs2">
-														
-								<div class="row-fluid" id='advanceSearchAppraisal'>
-							
-							<div class="form-group pull-left span3" style="margin-left: 5px">
-									<select data-toggle="tooltip" title="" data-original-title="Year"
-										class="input form-control input-sm span12" id="AppraisalYear"
-										name="AppraisalYear">
-									</select>
-								</div>
-								<div class="form-group pull-left span3" style="margin-left: 5px">
-									<select data-toggle="tooltip" title="" data-original-title="Period"
-										class="input form-control input-sm span12" id="AppraisalPeriod"
-										name="AppraisalPeriod">
-										<option>All Appraisal Period</option>
-									</select>
-								</div>
-								
-								
-								<div class="form-group pull-left span3" style="margin-left: 5px">
-										<select data-toggle="tooltip" title="" data-original-title="Entity Type "
-											class="input form-control input-sm span12" id="appraisalType"
-											name="appraisalType">
-								
-										</select>
-									</div>
-									
-									<div id="" class="form-group pull-left span3" style="margin-left: 5px">
-										<input data-toggle="tooltip" title="" data-original-title="Employee Name"
-											class="form-control input-sm searchAdvanceText span12"
-											placeholder="Employee Name" type="text" id="EmpName" name="EmpName">
-									</div>
-									
-									<div id="" class="form-group pull-left span3" style="margin-left: 5px">
-										<input data-toggle="tooltip" title="" data-original-title="Position"
-											class="form-control input-sm searchAdvanceText span12"
-											placeholder="Position" type="text" id="Position" name="Position">
-									</div>
-									
-									
-								
-								
-								
-								
-								<div class="form-group pull-left span3" style="margin-left: 5px">
-									<select data-toggle="tooltip" title="" data-original-title="Level"
-										class="input form-control input-sm span12" id="AppraisalLevel"
-										name="AppraisalLevel">
-										<option>All Level</option>
-										<option>ระดับบริหาร</option>
-										<option>ระดับการจัดการ</option>
-										<option>ระดับบังคับบัญชา</option>
-										<option>ระดับเจ้าหน้าที่</option>
-										<option>HR</option>
-									</select>
-								</div>
-								
-								<div class="form-group pull-left span3" style="margin-left: 5px">
-									<select data-toggle="tooltip" title="" data-original-title="organization"
-										class="input form-control input-sm span12" id="organization"
-										name="organization">
-										<option>All Organization</option>
-									</select>
-								</div>
-							
-								
-								
-								
-								<div class="form-group span3 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
-									<button type="button" class="btn btn-info input-sm"
-										name="btnSearchAdvance" id="btnSearchAdvance">
-										<i class="fa fa-search"></i>&nbsp;Search
-									</button>
-									&nbsp;
-								</div>
-							
-							</div>
-														
-							
-							
+
+                <div class="row-fluid" id='advanceSearchAppraisal'>
+
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select data-toggle="tooltip" title="" data-original-title="Year" class="input form-control input-sm span12"
+                      id="AppraisalYear" name="AppraisalYear">
+                    </select>
+                  </div>
+
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select data-toggle="tooltip" title="" data-original-title="Period" class="input form-control input-sm span12"
+                      id="AppraisalPeriod" name="AppraisalPeriod">
+                      <option>All Appraisal Period</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select id="appraisalType" name="appraisalType" data-toggle="tooltip"
+                      title="" data-original-title="Entity Type " class="input form-control input-sm span12">
+                    </select>
+                  </div>
+
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select id="AppraisalEmpLevel" name="AppraisalEmpLevel" data-toggle="tooltip"
+                      title="" data-original-title="Employee Level" class="input form-control input-sm span12">
+                      <option>All Level</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <input data-toggle="tooltip" title="" data-original-title="Employee Name"
+                      class="form-control input-sm searchAdvanceText span12" placeholder="Employee Name"
+                      type="text" id="EmpName" name="EmpName" />
+                  </div>
+
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <input data-toggle="tooltip" title="" data-original-title="Position" class="form-control input-sm searchAdvanceText span12"
+                      placeholder="Position" type="text" id="Position" name="Position" />
+                  </div>
+
+                  <!-- Cancel by SeeKPI(TFG) Defect No.263
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select id="AppraisalLevel" name="AppraisalLevel" data-toggle="tooltip" title="" data-original-title="Level" class="input form-control input-sm span12" >
+                      <option>All Level</option>
+                      <option>ระดับบริหาร</option>
+                      <option>ระดับการจัดการ</option>
+                      <option>ระดับบังคับบัญชา</option>
+                      <option>ระดับเจ้าหน้าที่</option>
+                      <option>HR</option>
+                    </select>
+                  </div> -->
+
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip"
+                      title="" data-original-title="Organization Level" class="input form-control input-sm span12">
+                      <option>All Level</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select data-toggle="tooltip" title="" data-original-title="organization"
+                      class="input form-control input-sm span12" id="organization" name="organization">
+                      <option>All Organization</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group span3 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
+                    <button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance">
+                      <i class="fa fa-search"></i>&nbsp;Search
+                    </button>
+                    &nbsp;
+                  </div>
+
+                </div>
+
+
+
 								</div>
 
 							</div>
@@ -818,9 +816,9 @@ margin-bottom:1px;
 	                                    	<div class="span6 pagianation_area" >
 												<div class="pagination_top pagination"></div>
 	                                    	</div>
-	                                    
+
 		                                    <div class="span6 object-right paging-text">
-		                                    
+
 		                                    	<div class='pagingDropdown'>
 		                                 			<select  id='countPaginationTop'  class="form-control input-sm countPagination">
 					                                     <option>10</option>
@@ -828,30 +826,30 @@ margin-bottom:1px;
 					                                     <option>50</option>
 					                                     <option>100</option>
 					                                 </select>
-		                                 		
+
 		                                 		</div>
 												<div class='pagingText'>Results per page</div>
-		                                    
+
 		                                    </div>
-		                                    
-                                    	</div> 
+
+                                    	</div>
                                     	 <!-- pagination end -->
-						
 
 
 
 
-							
-							<div id="listAppraisal"></div>	
+
+
+							<div id="listAppraisal"></div>
 
 							<!-- pagination start -->
 							<div class="row-fluid">
 	                                    	<div class="span6 pagianation_area">
-	
+
 												  <p class="pagination_bottom pagination"></p>
-												
+
 	                                    	</div>
-	                                    
+
 		                                    <div class="span6 object-right paging-text">
 		                                    	<div class='pagingDropdown'>
 		                                 			<select  id='countPaginationBottom'  class="form-control input-sm countPagination">
@@ -859,12 +857,12 @@ margin-bottom:1px;
 					                                     <option>20</option>
 					                                     <option>50</option>
 					                                     <option>100</option>
-					                                 </select> 
+					                                 </select>
 			                                 	</div>
 												<div class='pagingText'>Results per page</div>
 		                                    </div>
-		                                   
-                                    	</div> 
+
+                                    	</div>
 							<!-- pagination end -->
 							<!-- end table -->
 						</div>
@@ -875,7 +873,7 @@ margin-bottom:1px;
 
 			</div>
 	</div>
-	
+
 	<!-- Modal Start Appraisal -->
 
 	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalAppraisal"
@@ -888,20 +886,20 @@ margin-bottom:1px;
 					</button>
 					<!-- <i class="fa fa-laptop modal-icon"></i> -->
 					<h4 class="modal-title" id="modalTitleRole">KPI Result</h4>
-					<!-- 
+					<!--
                 <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
                  -->
 				</div>
 				<div class="modal-body">
 					<!-- content start -->
-					<!-- 
+					<!--
 					<h2>
 						<i class="fa fa fa-pencil-square-o icon-title"></i> <span
 							id="modalDescription">Appraisal</span>
 					</h2>
 					<hr>
 					 -->
-					
+
 					<!-- -------------From Employee Start------------- -->
 					<div class="row-fluid">
 					<div class="span12">
@@ -914,9 +912,9 @@ margin-bottom:1px;
 								<div class="container-fluid"  id='empInformation'>
 									<div class='hasWeightGrandTotalArea'>
 										<div class="span10 ">
-												
+
 												<div class="row-fluid">
-												
+
 													<label class="span3 textInfo">Employee code:</label>
 													<label class="span3  textData txtEmpCode" id="txtEmpCode"></label>
 													<label class="span3 textInfo">Employee Name:</label>
@@ -929,13 +927,13 @@ margin-bottom:1px;
 													<label class="span3  textData txtOrgName" id="txtOrgName"></label>
 												</div>
 												<div class="row-fluid">
-													
+
 													<label class="span3 textInfo">Chief Employee Code:</label>
 													<label class="span3  textData txtChiefEmpCode" id="txtChiefEmpCode"></label>
 													<label class="span3 textInfo">Chief Employee Name:</label>
 													<label class="span3  textData txtChiefEmpName" id="txtChiefEmpName"></label>
 												</div>
-											
+
 												<div class="row-fluid">
 													<label class="span3 textInfo">Period:</label>
 													<label class="span3  textData txtPeriod"  id="txtPeriod"></label>
@@ -944,18 +942,18 @@ margin-bottom:1px;
 										<div class="span2" id='grandTototalWeightArea'>
 												<label class="span12 p-t-xxsg text-center ">Grand Total</label>
 												<label class="span12 p-t-xxsg text-center txtGrandTotalWeigh" id="txtGrandTotalWeigh" style="font-size: 300%;"></label>
-										
+
 										</div>
-									
-									
+
+
 									</div>
-									
+
 									<div class='noWeightGrandTotalArea'>
 									<!--  -->
 									<div class="span12">
-												
+
 												<div class="row-fluid">
-												
+
 													<label class="span3 textInfo">Employee code:</label>
 													<label class="span3  textData txtEmpCode" id="txtEmpCode"></label>
 													<label class="span3 textInfo">Employee Name:</label>
@@ -968,32 +966,32 @@ margin-bottom:1px;
 													<label class="span3  textData txtOrgName" id="txtOrgName"></label>
 												</div>
 												<div class="row-fluid">
-													
+
 													<label class="span3 textInfo">Chief Employee Code:</label>
 													<label class="span3  textData txtChiefEmpCode" id="txtChiefEmpCode"></label>
 													<label class="span3 textInfo">Chief Employee Name:</label>
 													<label class="span3  textData txtChiefEmpName" id="txtChiefEmpName"></label>
 												</div>
-											
+
 												<div class="row-fluid">
 													<label class="span3 textInfo">Period:</label>
 													<label class="span3  textData txtPeriod"  id="txtPeriod"></label>
 												</div>
 										</div>
-										
+
 									<!--  -->
-									</div>	
+									</div>
 
 								</div>
-								
+
 								<div class="container-fluid"  id='orgInformation'>
-								
+
 									<div class='hasWeightGrandTotalArea'>
-								
+
 											<div class="span10 ">
-													
+
 													<div class="row-fluid">
-													
+
 														<label class="span3 textInfo">Organization code:</label>
 														<label class="span3  textData txtOrgCodeOrg" id="txtOrgCodeOrg"></label>
 														<label class="span3 textInfo">Organization Name:</label>
@@ -1005,22 +1003,22 @@ margin-bottom:1px;
 														<label class="span3 textInfo">Period:</label>
 														<label class="span3  textData txtPeriodOrg"  id="txtPeriodOrg"></label>
 													</div>
-													
+
 											</div>
 											<div class="span2" id='grandTototalWeightArea'>
 													<label class="span12 p-t-xxsg text-center ">Grand Total </label>
 													<label class="span12 p-t-xxsg text-center txtGrandTotalWeighOrg" id="txtGrandTotalWeighOrg" style="font-size: 300%;"></label>
-											
+
 											</div>
-									
+
 									</div>
-									
+
 									<div class='noWeightGrandTotalArea'>
-									
+
 											<div class="span12 ">
-													
+
 													<div class="row-fluid">
-													
+
 														<label class="span3 textInfo">Organization code:</label>
 														<label class="span3 textInfo textData txtOrgCodeOrg" id="txtOrgCodeOrg"></label>
 														<label class="span3 textInfo">Organization Name:</label>
@@ -1032,14 +1030,14 @@ margin-bottom:1px;
 														<label class="span3 textInfo">Period:</label>
 														<label class="span3 textInfo textData txtPeriodOrg"  id="txtPeriodOrg"></label>
 													</div>
-													
+
 											</div>
-											
+
 									</div>
-									
+
 
 								</div>
-								
+
 
 							</div>
 						</div>
@@ -1048,12 +1046,12 @@ margin-bottom:1px;
 
 				</div>
 				<!-- -------------From Employee Start------------- -->
-				
-				
-				
-				
-					
-					
+
+
+
+
+
+
 					<!-- -------------From Appraisal Start------------- -->
 					<div class="row-fluid">
 					<div class="span12">
@@ -1061,9 +1059,9 @@ margin-bottom:1px;
 							<div class="ibox-title">
 								<div class='titlePanel'>KPI Result</div>
 							</div>
-					
+
 							<div class="ibox-content ibox-content-radius">
-									
+
 									<div id='appraisal_template_area'></div>
 
 
@@ -1075,55 +1073,55 @@ margin-bottom:1px;
 				</div>
 				<!-- -------------From Appraisal Start------------- -->
 
-		
+
 					<!-- content end -->
 				</div>
 				<div class="modal-footer">
-				
-					
+
+
 					<div class='row-fluid'>
-						<!-- 
+						<!--
 						<div class="span3 ">
-							 <div class="form-group p-xxs"> 
-								 <label class="span5 p-t-xxs"><b>Assign to:</b></label> 
-								 <div class="span7"> 
+							 <div class="form-group p-xxs">
+								 <label class="span5 p-t-xxs"><b>Assign to:</b></label>
+								 <div class="span7">
 									 <select data-toggle="tooltip" title="" class="input form-control input-sm" id="assignTo" name="assignTo">
-							
+
 									 </select>
-								 </div> 
-							 </div> 
+								 </div>
+							 </div>
 						 </div>
 						  -->
 						 <div class="span3 ">
-							 <div class="form-group p-xxs"> 
-								 <label class="span4 p-t-xxs"><b>Action:</b></label> 
-								 <div class="span8"> 
+							 <div class="form-group p-xxs">
+								 <label class="span4 p-t-xxs"><b>Action:</b></label>
+								 <div class="span8">
 									<select data-toggle="tooltip" title="" class="input form-control input-sm" id="actionToAssign" name="actionToAssign">
-								
+
 									</select>
-								 </div> 
-							 </div> 
+								 </div>
+							 </div>
 						 </div>
 						 <div class="span5 ">
-	            			<div class="form-group "> 
-								 <label class="span3 p-t-xxs"><b>Remark:</b></label> 
-								 <div class="span9"> 
+	            			<div class="form-group ">
+								 <label class="span3 p-t-xxs"><b>Remark:</b></label>
+								 <div class="span9">
 									 <input type='text' name='remark_footer' id='remark_footer' class='span12' value=''>
-								 </div> 
-							 </div>  
+								 </div>
+							 </div>
 	            		</div>
-	            		
-						 
+
+
 						  <div class="span4 offset0">
-						  
+
 							  	<button class="btn btn-success" type="button" id="btnSubmit">Submit</button>
 								<input type='hidden' id='emp_result_id' name='emp_result_id' value=''>
 								<button data-dismiss="modal" class="btn btn-danger btnCancle" type="button">Cancel</button>
-						  
+
 						  </div>
-					
+
 					</div>
-					
+
 					<div class="row-fluid" style='text-align:left;'>
             		<a href="#" id='slideUpDownStageHistory' style='display:none;'>Work Flow Stage History</a>
             		<div id='slideStageHistory' style='display:none;'>
@@ -1173,10 +1171,10 @@ margin-bottom:1px;
 	<input type="hidden" name="id" id="id" value="">
 	<input type="hidden" name="action" id="action" value="add">
 	<!-- Modal End Appraisal -->
-	
-	
-	
-	 
+
+
+
+
 <!-- Modal Phase Start -->
 <div aria-hidden="true" role="dialog" tabindex="-1" id="phaseModal" class="modal inmodal " style="display: none; margin-top: 0px;">
     <div class="modal-dialog">
@@ -1186,9 +1184,9 @@ margin-bottom:1px;
                 <h5 class="modal-title">Phase </h5>
             </div>
             <div class="modal-body">
-               
+
 <div style='margin-bottom:5px;'>
-<table style='width:100%'> 
+<table style='width:100%'>
 	<tr>
 		<td style='width:100px; '><b>Phase Name</b></td>
 		<td><input  type='text' name='phaseName' id='phaseName' placeholder='Phase Name' class='input form-control input-sm-small span4' value=''></td>
@@ -1197,7 +1195,7 @@ margin-bottom:1px;
 		<td ><b>Is Active</b></td>
 		<td style='text-align:left;'><input type='checkbox' name='phaseIsActive' id='phaseIsActive' class='input form-control input-sm-small' value='0'></td>
 	</tr>
-</table>                
+</table>
 	<div align="right">
 	     <button class="btn btn-success" id="btnSavePhase" type="button">&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Save&nbsp;&nbsp;</button>&nbsp;&nbsp;
 	     <button class="btn btn-danger" id='btnCancelPhase' type="button"><i class="fa fa-times-circle"></i>&nbsp;Cancel</button>
@@ -1221,37 +1219,37 @@ margin-bottom:1px;
 		</tr>
 	</thead>
 	<tbody id='listDataPhase'>
-		
+
 	</tbody>
-	
+
 
 	<input type="hidden" name="pahse_id_edit" id="pahse_id_edit" value="">
 	<input type="hidden" name="phase_action" id="phase_action" value="add">
 	<input type="hidden" name="phase_item_result_id" id="phase_item_result_id" value="">
-	
-	
+
+
 </table>
 
 
 
 
-<!-- 
+<!--
 Phase
 Phase Name
 Is Active
  -->
-				
-	               
-                               
+
+
+
                 <!-- form start -->
                 <!-- content end -->
             </div>
-         
+
         </div>
     </div>
-    
-    
-   
+
+
+
 </div>
 
 
@@ -1264,15 +1262,15 @@ Is Active
                 <h5 class="modal-title">Reason</h5>
             </div>
             <div class="modal-body">
-               
+
 <div style='margin-bottom:5px;'>
-<table style='width:100%'> 
+<table style='width:100%'>
 	<tr>
 		<td style='width:100px; '><b>Reason </b></td>
 		<td><input  style='margin-bottom:5px;'  type='text' name='reason_name' id='reason_name' placeholder='Reason' class='input form-control input-sm-small span5' value=''></td>
 	</tr>
-	
-</table>                
+
+</table>
 	<div align="right">
 	     <button class="btn btn-success" id="btnSaveReason" type="button">&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Save&nbsp;&nbsp;</button>&nbsp;&nbsp;
 	     <button class="btn btn-danger" id='btnCancelReason' type="button"><i class="fa fa-times-circle"></i>&nbsp;Cancel</button>
@@ -1293,21 +1291,21 @@ Is Active
 					</tr>
 				</thead>
 				<tbody id='listDataReason'>
-					
+
 				</tbody>
-				
-			
+
+
 				<input type="hidden" name="reason_id_edit" id="reason_id_edit" value="">
 				<input type="hidden" name="reason_action" id="reason_action" value="add">
 				<input type="hidden" name="reason_item_result_id" id="reason_item_result_id" value="">
-				
-				
+
+
 			</table>
-          
+
                 <!-- form start -->
                 <!-- content end -->
             </div>
-         
+
         </div>
     </div>
 </div>
@@ -1322,24 +1320,24 @@ Is Active
                 <h5 class="modal-title">Attach Files</h5>
             </div>
             <div class="modal-body">
-               
+
 			<div style='margin-bottom:5px;'>
-			<form id="attachFileForm">  
-			<table style='width:100%'> 
+			<form id="attachFileForm">
+			<table style='width:100%'>
 				<tr>
-					
+
 					<td>
-					      
+
 						<input  style='width:100%;height:100%;'  type='file' name='attach_files_attachment' id='attach_files_attachment' class="dropify" accept=".xls, .xlsx, .pdf,doc,docx,jpeg"  multiple>
 						<span style='text-align:right;'>
-						
+
 						</span>
 					</td>
 				</tr>
-				
-			</table> 
-			<!--  
-			<input align="right" type='submit' class="btn btn-primary" type="button" id="btnSaveAttach" value='Upload'>               
+
+			</table>
+			<!--
+			<input align="right" type='submit' class="btn btn-primary" type="button" id="btnSaveAttach" value='Upload'>
 			-->
 			</form>
 			</div>
@@ -1353,7 +1351,7 @@ Is Active
 						<div class="alert alert-warning information" id="information"
 						style="display: none;  position:relative;"></div>
 				</div>
-         
+
         </div>
     </div>
 </div>
@@ -1385,12 +1383,12 @@ Is Active
 					</tr>
 				</thead>
 				<tbody id='listDataAttachFile'>
-					
+
 				</tbody>
 			</table>
             <!-- content end -->
             </div>
-         
+
         </div>
     </div>
 </div>
@@ -1405,26 +1403,26 @@ Is Active
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
                 <h5 class="modal-title">Action Plan</h5>
             </div>
-          
-            
-            
 
 
- 
+
+
+
+
 
             <!-- smart cricle area -->
-            
+
 		<div class="container" id='smartArea' style='margin-top:10px; width:1050px;'>
 
 			    <ul class="ca-menu">
-			                    <li style='background:#ED1C24;'> 
+			                    <li style='background:#ED1C24;'>
 			                        <a href="#">
-			                           <!--  <span class="ca-icon">A</span> #aed6f1 --> 
+			                           <!--  <span class="ca-icon">A</span> #aed6f1 -->
 			                            <div class="ca-content" >
 			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>S</h2>
 			                                <h3 class="ca-sub" style='font-size: 17px; color:#ffffff;'>SPECIFIC</h3>
 			                            </div>
-			                        </a>                   
+			                        </a>
 			                    </li>
 			                    <li style='background:#DBAE0F;'>
 			                        <a href="#">
@@ -1433,7 +1431,7 @@ Is Active
 			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>M</h2>
 			                                <h3 class="ca-sub" style='font-size: 17px; color:#ffffff;'>MEASURABLE</h3>
 			                            </div>
-			                        </a>                   
+			                        </a>
 			                    </li>
 			                    <li style='background:#EF59A0;'>
 			                        <a href="#">
@@ -1442,7 +1440,7 @@ Is Active
 			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>A</h2>
 			                                <h3 class="ca-sub" style='font-size: 17px; color:#ffffff;'>ATTAINABLE</h3>
 			                            </div>
-			                        </a>                    
+			                        </a>
 			                    </li>
 			                    <li style='background:#009245;'>
 			                        <a href="#">
@@ -1451,7 +1449,7 @@ Is Active
 			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>R</h2>
 			                                <h3 class="ca-sub"  style='font-size: 17px; color:#ffffff;'>RELEVANT</h3>
 			                            </div>
-			                        </a>  
+			                        </a>
 			                    </li>
 			                     <li style='background:#F7931E;'>
 			                        <a href="#">
@@ -1460,32 +1458,32 @@ Is Active
 			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>T</h2>
 			                                <h3 class="ca-sub" style='font-size: 17px; color:#ffffff;'>TIME-BOUND</h3>
 			                            </div>
-			                        </a>  
+			                        </a>
 			                    </li>
 			    </ul>
 			</div>
             <!-- smart cricle area -->
-            
+
             <div class="modal-body">
                 <!-- content start -->
-                 
+
 				<div class="row-fluid">
 				<!-- start--row-fluid -->
 				   <div class="span12">
 				           <div class="ibox float-e-margins">
-				           <!-- 
-				                <div class="ibox-title" style="background-color: rgb(83, 120, 253); border-color: rgb(83, 120, 253); min-height:0px;">      
-				                    <div class="titlePanelSearch">Action Plan</div> 
+				           <!--
+				                <div class="ibox-title" style="background-color: rgb(83, 120, 253); border-color: rgb(83, 120, 253); min-height:0px;">
+				                    <div class="titlePanelSearch">Action Plan</div>
 				    			</div>
 				    		-->
-				    			<div class="ibox-content breadcrumbs2" style="border-color: rgb(83, 120, 253);"> 
-				    						
+				    			<div class="ibox-content breadcrumbs2" style="border-color: rgb(83, 120, 253);">
+
 				    				<div class="row-fluid ">
-											
+
 											<div class='boxActionPlainArea alert alert-success'>
 												<div class='span6'>
 													<div class='boxActionL'>
-														<!-- 
+														<!--
 														<div class='actionPlanList'>
 														Phase <span id='actionPlanPhase'></span>
 														</div>
@@ -1500,21 +1498,21 @@ Is Active
 																KPI: <span id='actionPlanAppraisalItem'></span>
 															</div>
 														</div>
-														 
-														
+
+
 													</div>
 												</div>
 												<div class='span6'>
 													<div class='boxActionR'>
-														
+
 														<div class='boxActualPercentageArea'>
-														
+
 															<div class='boxActualvsForecast boxForecastVsActual'>
 																<div  class='fontBold desktopArea'>
-																	%Actual vs Forecast 
+																	%Actual vs Forecast
 																</div>
 																<div class='fontBold moblieArea' >
-																	%Actual vs Forecast 
+																	%Actual vs Forecast
 																</div>
 																<div >
 																	<span id='actionPlanActualVSforecast'></span>% <span id='actualvsForecastBar'></span>
@@ -1522,17 +1520,17 @@ Is Active
 															</div>
 															<div class='boxActualvsTarget boxForecastVsActual'>
 																<div class='fontBold desktopArea'>
-																	% Actual vs Target 
+																	% Actual vs Target
 																</div>
 																<div class='fontBold moblieArea' >
-																	% Actual vs Target 
+																	% Actual vs Target
 																</div>
 																<div>
 																<span id='actionPlanActualVSTarget'></span>% <span id='actualvsTargetBar'></span>
 																</div>
-																
+
 															</div>
-															 
+
 														</div>
 														<div class='boxForecastArea'>
 															<div class='boxForecastResult boxForecastVsActual'>
@@ -1560,19 +1558,19 @@ Is Active
 														</div>
 													</div>
 												</div>
-												
-												
+
+
 												<br style='clear:both'>
 											</div>
 									</div>
-						
-					    		
-				
+
+
+
 									<div class='row-fluid' style='margin-top:5px;margin-bottom:5px;'>
 										<div class=' alert alert-block'>
 											<div class='span6'>
 												<button type="button" class="btn btn-success input-sm" name="btn-" id="btnAddActionPlan">
-												
+
 													Add
 												</button>
 												<button type="button" class="btn btn-warning  input-sm" name="btn-" id="btnEditActionPlan">
@@ -1586,7 +1584,7 @@ Is Active
             									<input type="hidden" id="actionplan_emp_id" value="" name="actionplan_emp_id">
             									<input type="hidden" id="actionplan_emp_name" value="" name="actionplan_emp_name">
             									<input type="hidden" id="item_result_id" value="3" name="item_result_id">
-            									
+
 											</div>
 											<div class='span6'>
 												<div class='saveAndCancelArea' >
@@ -1599,7 +1597,7 @@ Is Active
 													<button type="button" class="btn btn-danger input-sm" name="btn-" id="btnCancelActionPlan">
 														Cancel
 													</button>
-													
+
 												</div>
 											</div>
 											<br style='clear:both'>
@@ -1622,11 +1620,11 @@ Is Active
 <!-- 													<th style='width:7%;text-align:right;'><b>PV</b></th> -->
 <!-- 													<th style='width:7%;text-align:right;'><b>AC</b></th> -->
 <!-- 													<th style='width:7%;text-align:right;'><b>EV</b></th> -->
-													
+
 												</tr>
 											</thead>
 											<tbody id='listDataActionPlan'>
-												<!-- 
+												<!--
 												<tr>
 													<td>
 													<center>
@@ -1635,7 +1633,7 @@ Is Active
 													</td>
 													<td>Plan</td>
 													<td>
-												
+
 														<input type='text' name='planStart' id='planStart' class='datepicker input-small' style="height:20px;margin-right:3px;" value='08/07/2017'>
 													</td>
 													<td>
@@ -1657,11 +1655,11 @@ Is Active
 													<td>
 													ศักดิ์สิทธิ์ ยศกระจารุกุล
 													</td>
-													
+
 													<td>
 													<center>20</center>
 													</td>
-													
+
 													<td>
 													<center>-</center>
 													</td>
@@ -1674,28 +1672,28 @@ Is Active
 												</tr>
 												 -->
 											</tbody>
-											
+
 										</table>
 									</div>
-				
-				
+
+
 				</div><!-- content end -->
 					    </div>
-					    		
+
 					</div>
-				
+
 				</div>
 				<!-- end--row-fluid -->
 				<div class="alert alert-warning information" id="information3"
 						style="display: none;"></div>
                 <!-- content end -->
             </div>
-           
+
         </div>
     </div>
-    
-    
-   
+
+
+
 </div>
 <!-- modal action plan end -->
 
@@ -1716,7 +1714,7 @@ Is Active
 
             <div class="modal-body">
                 <!-- content start -->
-                 <!-- 
+                 <!--
                 <div class='container' >
 	                <div class='row-fluid ' >
 	                	<div class='span4 ' style='font-weight:bold;'>
@@ -1733,7 +1731,7 @@ Is Active
                 -->
                 <div class="ibox float-e-margins">
 							<div class="ibox-title" style="background-color: rgb(255, 224, 18); border-color: rgb(255, 224, 18); text-align:right;">
-								<!-- 
+								<!--
 								Zoom
 			                	<select id='ganntChartZoom' style='width:65px;'>
 			                		<option value='90'>100%</option>
@@ -1753,7 +1751,7 @@ Is Active
 			                	 <div style='display:none;'>
 			                	Please select range of day
 			                	<select  id='selectGanntChartViewDaily' style='width:100px;'>
-			                		
+
 			                	</select>
 			                	</div>
 			                	<select id='selectGanntChartViewMonthly' style='width:85px; display:none;'>
@@ -1770,17 +1768,17 @@ Is Active
 			                		<option value='11'>11 Months</option>
 			                		<option value='12'>12 Months</option>
 			                	</select>
-			                	
+
 			                	<button  style='display:none;' class='btn btn-primary' id='btnGanttSubmit'><i class=""></i> Submit</button>
 			                	<button class='btn btn-primary' id='btnPrint'><i class="icon-print"></i> Print</button>
 
 							</div>
 							<!-- ibox-content-radius -->
 							<div class="ibox-content " style="border-color: rgb(255, 224, 18);">
-							
-							
-							
-							
+
+
+
+
 									 <div class='row-fluid  ganntChartTititle ganntChartTitleOrg'  >
 					                	<div class='span4 ' style='font-weight:bold;padding:10px;'>
 					                		Period: <span class='ganttAppraisalPeriodDescTxt'></span>
@@ -1809,9 +1807,9 @@ Is Active
 						                		KPI: <span class='ganttAppraisalItemTxt'></span>
 						                	</div>
 						                </div>
-					                
+
 					                </div>
-	                
+
 									  <div style='text-align:center;'>
 					                 	<div id='ganttChart' ></div>
 									  </div>
@@ -1819,8 +1817,8 @@ Is Active
 							</div>
 				</div>
 
-              
-				<!-- 
+
+				<!--
 				<div style='text-align:right;'>
 						Zoom
 	                	<select id='ganntChartZoom' style='width:65px;'>
@@ -1838,17 +1836,17 @@ Is Active
 	             <input type="hidden" name="gantt_amount" id="gantt_amount" value="">
                 <!-- content end -->
             </div>
-           
+
         </div>
     </div>
-    
-    
-   
+
+
+
 </div>
 <!-- modal gantt chart end -->
 
 
-	
+
 <!-- Modal Confirm Start -->
 <div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal" class="modal inmodal " style="display: none;">
     <div class="modal-dialog ">
@@ -1868,7 +1866,7 @@ Is Active
 	                 		<label>Confirm to Delete Data?</label>
 	                </div>
                 </div>
-                               
+
                 <!-- form start -->
                 <!-- content end -->
             </div>
@@ -1880,14 +1878,14 @@ Is Active
             </div>
         </div>
     </div>
-    
-    
-   
+
+
+
 </div>
 <!-- Modal Confirm End -->
 
 <div id="embedParamSearch"></div>
-	
+
 
 </body>
 
@@ -1895,18 +1893,3 @@ Is Active
 <script type="text/javascript">
  var jQuery_1_1_3 = $.noConflict(true);
 </script>
- 
-	
-	
-
-
-
-
-	
-
-    
-    	
-    
-
-
-

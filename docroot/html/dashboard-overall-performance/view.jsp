@@ -34,8 +34,8 @@
 }
 
  /* Large desktop Start#####################################*/
- @media (min-width: 1200px) { 
-	
+ @media (min-width: 1200px) {
+
 	.modal.large {
 		width: 80%;
 		margin-left: -25.5%;
@@ -43,10 +43,10 @@
 		max-width: 768px;
 	}
 	.aui .advance-search .span3{width: 29.354%;}
-	
+
   }
   /* Large desktop End######################################*/
-  
+
   /*  desktop Start#########################################*/
  @media (min-width: 980px) and (max-width: 1199px) {
  		.modal.large {
@@ -60,71 +60,71 @@
 		margin-bottom:5px;
 		width:100%;
 		}
-		
+
 		/*All End*/
- 	
+
   }
  /*  desktop End############################################*/
- 
+
  /* Portrait tablet to landscape and desktop Start##########*/
  @media (min-width: 768px) and (max-width: 979px) {
- 		
+
 	.modal.large {
 		    width: 80%;
-		    margin-left:-40%;  
+		    margin-left:-40%;
 		    top:0px;
 		}
 	.modal.medium {
 		    width: 50%;
-		    margin-left:-25%;  
+		    margin-left:-25%;
 		    top:0px;
 		}
 	.aui .modal{
 		  left:1%;
-		}	
+		}
 	.aui .ibox-title2{
 		height:45px;
 	}
-	
+
 	.aui .ibox-title{
 		min-height: 0px;
 	}
-	
-	
+
+
 	.aui .advance-search .span3{width: 27.938%;}
 	/*All Form Start*/
-	
+
 	.aui #btnSearchAdvance{
 		margin-bottom:5px;
 		width:100%;
 	}
 	/*All Form End*/
   }
- /* Portrait tablet to landscape and desktop End############*/ 
- 
+ /* Portrait tablet to landscape and desktop End############*/
+
  /* Landscape phone to portrait tablet Start################*/
- @media (max-width: 767px) { 
+ @media (max-width: 767px) {
  .modal.large {
 		width: '';
 		top: 0px;
 	}
 
-	
+
   }
- /* Landscape phone to portrait tablet End##################*/ 
- 
+ /* Landscape phone to portrait tablet End##################*/
+
  /* Landscape phones and down Start#########################*/
- @media (max-width: 480px) { 
- 	
-	
+ @media (max-width: 480px) {
+
+
 
   }
   /* Landscape phones and down End##########################*/
-  
-  
-  
+
+
+
   /* main start*/
- 
+
        .aui .portlet-content, .aui .portlet-minimized .portlet-content-container {
 	    -moz-border-bottom-colors: none;
 	    -moz-border-left-colors: none;
@@ -220,7 +220,7 @@
 /* Update by au */
 .aui .btn {
 	font-size: 14px;
- 	padding: 4px 12px; 
+ 	padding: 4px 12px;
 	width: auto;
 	margin-top: 0px;
 	display: inline;
@@ -347,7 +347,7 @@
 	margin-top: 15px;
 }
 #listBubbleChart{
-  	min-width: 600px; 
+  	min-width: 600px;
 }
 #listPieChart tspan {
 /*     font-weight: bold; */
@@ -413,7 +413,7 @@ table#tableAllKPI .aui .table th, .aui .table td{
 }
 
 .aui #ModalKPI .modal-body *{
--webkit-overflow-scrolling: touch ; 
+-webkit-overflow-scrolling: touch ;
 /* overflow-scrolling:touch !important; */
 overflow:auto;
 }
@@ -459,34 +459,35 @@ overflow:auto;
 							<select name="year" id="year" class="input form-control input-sm"
 								title="" data-toggle="tooltip" style="cursor: pointer;"
 								data-original-title="Year">
-
-<!-- 								<option value="1">2016</option> -->
-<!-- 								<option value="2">2017</option> -->
-
 							</select>
 						</div>
+
 						<div style="margin-left: 5px; margin-bottom: 3px;"
 							class="form-group pull-left span3" id="periodArea">
 							<select name="period" id="period"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
 								data-original-title="Period">
-
-								
-
 							</select>
 						</div>
+
 						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;">
 							<select name="app_type" id="app_type"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
 								data-original-title="Entity Type" >
-
 								<option value="1">Individual Test</option>
 								<option value="2">Organization Test</option>
-
 							</select>
 						</div>
+
+						<div class="form-group pull-left span3" style="margin-left:5px; margin-bottom:3px;">
+							<select id="AppraisalEmpLevel" name="AppraisalEmpLevel" data-toggle="tooltip"
+								title="" data-original-title="Employee Level" class="input form-control input-sm span12">
+								<option>All Level</option>
+							</select>
+						</div>
+
 						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;" id="txtEmpInput">
 							<input data-toggle="tooltip" data-placement="top" disabled
 								title="Employee Name" class="span12 m-b-n ui-autocomplete-input"
@@ -501,17 +502,23 @@ overflow:auto;
 <!-- 							<input class="form-control input-sm" id="position_id" -->
 <!-- 								name="position_id" value="" type="hidden"> -->
 <!-- 						</div> -->
-						<div style="margin-left: 5px; margin-bottom: 3px;"
+
+						<%-- <div style="margin-left: 5px; margin-bottom: 3px;"
 							class="form-group pull-left span3" id="apprasiaLevelArea">
 							<select name="apprasiaLevel" id="apprasiaLevel"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
 								data-original-title="Level" >
+							</select>
+						</div> --%>
 
-<!-- 								<option value="">Appraisal Level : List Error</option> -->
-
+						<div class="form-group pull-left span3" style="margin-left:5px; margin-bottom:3px;">
+							<select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip"
+								title="" data-original-title="Organization Level" class="input form-control input-sm span12">
+								<option>All Level</option>
 							</select>
 						</div>
+
 						<div style="margin-left: 5px; margin-bottom: 3px;"
 							class="form-group pull-left span3" id="organizationArea">
 							<select name="organization" id="organization"
@@ -523,7 +530,7 @@ overflow:auto;
 
 							</select>
 						</div>
-						
+
 
 
 						<div style="margin-bottom: 5px;"
@@ -544,11 +551,11 @@ overflow:auto;
 		</div>
 
 	</div>
-	
+
 	<!-- content accordion start -->
 	<div class="ibox-content" id="listSubordinate" >
-		
-		
+
+
 		<div style="">
 		<div class="row-fluid ">
 			<div class="span5 " >
@@ -569,7 +576,7 @@ overflow:auto;
 			</div>
 		</div>
 		</div>
-		
+
 	</div>
 	<!-- content accordion end -->
 
@@ -577,7 +584,7 @@ overflow:auto;
 
 
 	<form id="linkParam" method="POST" target="_blank" action="POST">
-		
+
 	</form>
 	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalKPI"
 		class="modal inmodal large" style="display: none;">
@@ -610,11 +617,9 @@ overflow:auto;
 					<!-- content end -->
 				</div>
 				<div class="modal-footer">
-				
+
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
- 
- 
