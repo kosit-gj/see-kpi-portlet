@@ -377,7 +377,6 @@
 <div class="app_url_hidden" style="display: block;">
 	<div class="row-fluid app_url_hidden">
 		<!-- start--row-fluid -->
-
 		<div class="span12">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title"
@@ -424,13 +423,27 @@
 
 							</select>
 						</div>
+						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;">
+		                    <select id="AppraisalEmpLevel" name="AppraisalEmpLevel" data-toggle="tooltip"
+		                      title="" data-original-title="Employee Level" class="input form-control input-sm">
+		                      <option value="">All Employee Level</option>
+		                	</select>
+		                </div>
+		                
 						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;" id="txtEmpInput">
 							<input data-toggle="tooltip" data-placement="top" disabled
 								title="Employee Name" class="span12 m-b-n ui-autocomplete-input"
 								placeholder="Employee Name" id="emp_name" name="emp_name"
-								type="text"> <input class="form-control input-sm"
-								id="emp_name_id" name="emp_name_id" value="" type="hidden">
+								type="text" />
+							<input class="form-control input-sm" id="emp_name_id" name="emp_name_id" value="" type="hidden" />
 						</div>
+						
+						<div class="form-group pull-left span3" style="margin-left: 5px">
+		                    <select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip"
+		                      title="" data-original-title="Organization Level" class="input form-control input-sm">
+		                      <option value="">All Organization Level</option>
+		                    </select>
+		                </div>
 <!-- 						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;" > -->
 <!-- 							<input data-toggle="tooltip" data-placement="top" -->
 <!-- 								title="Position" class="span12 m-b-n ui-autocomplete-input" -->
@@ -438,7 +451,7 @@
 <!-- 							<input class="form-control input-sm" id="position_id" -->
 <!-- 								name="position_id" value="" type="hidden"> -->
 <!-- 						</div> -->
-						<div style="margin-left: 5px; margin-bottom: 3px;"
+						<!-- <div style="margin-left: 5px; margin-bottom: 3px;"
 							class="form-group pull-left span3" id="apprasiaLevelArea">
 							<select name="apprasiaLevel" id="apprasiaLevel"
 								class="input form-control input-sm" title=""
@@ -449,7 +462,7 @@
 								<option value="">Appraisal Level2</option>
 
 							</select>
-						</div>
+						</div> -->
 						<div style="margin-left: 5px; margin-bottom: 3px;"
 							class="form-group pull-left span3" id="organizationArea">
 							<select name="organization" id="organization"
@@ -489,10 +502,10 @@
 				</div>
 				<!-- content end -->
 			</div>
-
 		</div>
-
 	</div>
+	
+	
 	
 	<!-- content accordion start -->
 	<div class="ibox-content" id="listSubordinate" >

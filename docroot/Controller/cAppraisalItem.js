@@ -310,6 +310,7 @@ var findOneFn = function(id,form_url) {
 		  headers:{Authorization:"Bearer "+tokenID.token},
 		  async:false,
 		  success:function(data){ 
+			console.log(data);
 			$("#modal-"+form_url).modal();
 			if(form_url=="quantity"){
 				

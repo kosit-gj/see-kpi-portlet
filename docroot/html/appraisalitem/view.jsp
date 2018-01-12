@@ -1929,7 +1929,7 @@ overflow-y: visible;
 								                	<!-- 
 								                	<textarea id="formulaDescriptionQuantity" class="form-control input-sm"  style="width: 664px; height: 100px;">([sum:จำนวนยอดขายสุทธิต่อไตรมาส]/[sum:จำนวนเป้าหมายยอดขายสุทธิต่อไตรมาส]*100)</textarea>
 								                	 -->
-								                	<div id="textarea_cds" class="form-control input-sm span12" contenteditable> </div>
+								                	<div id="textarea_cds" class="form-control input-sm span12" contenteditable="true"> </div>
 								                	
 								                </div>
 								               
