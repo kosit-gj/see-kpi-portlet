@@ -1,5 +1,6 @@
 var restfulPathImportEmployee="/"+serviceName+"/public/import_employee";
-var restfulPathAppraisalLevel="/"+serviceName+"/public/appraisal_level";
+// var restfulPathAppraisalLevel="/"+serviceName+"/public/appraisal_level";
+var restfulPathAppraisalLevel="/"+serviceName+"/public/import_employee/assign/appraisal_level";
 var restfulPathDropDownOrganization="/"+serviceName+"/public/org";
 var restfulPathPositionAutocomplete="/"+serviceName+"/public/position/auto";
 var restfulPathEmployeeAutocomplete="/"+serviceName+"/public/import_employee/auto_employee_name";
