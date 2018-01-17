@@ -189,7 +189,8 @@ var setDataToTemplateFn = function(data,actionType){
 	
 	$("#assignTo").change();
 	*/
-	dropDrowActionEditFn(head['stage_id']);
+	//dropDrowActionEditFn(head['stage_id']);
+	dropDrowActionEditFn(head['stage_id'],head['emp_code']);
 	
 	
 	
@@ -403,7 +404,7 @@ var getDataFn = function(page,rpp) {
 	var embed_organization =$("#embed_organization").val().split("-");
 	embed_organization=embed_organization[0];
 	
-	console.log(emp_id)
+	//console.log(emp_id)
 	//console.log(appraisal_level_id,appraisal_type_id,period_id,position_id,emp_id,embed_year_list,embed_period_frequency,embed_organization,embed_organization,embed_organization)
 	
 	$.ajax({
@@ -430,7 +431,7 @@ var getDataFn = function(page,rpp) {
 		},
 		success:function(data){
 			
-			console.log(data);
+			//console.log(data);
 			
 			listDataFn(data);
 			setThemeColorFn(tokenID.theme_color);
@@ -1171,7 +1172,7 @@ var appraisalLevelListFn = function(){
 		data:{"emp_code":session_emp_code},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
-			console.log(data);
+			//console.log(data);
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['level_id']){
@@ -1222,7 +1223,7 @@ var appraisalLevelListEmpLevelToOrgFn = function(){
 		data:{"emp_code":session_emp_code,"level_id":$("#appraisalLevelEmp").val()},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
-			console.log(data);
+			//console.log(data);
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['level_id']){
@@ -1551,13 +1552,13 @@ var dropDrowAsignToEditFn = function(paramStageID){
 	});
 }
 
-var dropDrowActionFn = function(paramStageID,nameArea){
+//var dropDrowActionFn = function(paramStageID,nameArea){
+var dropDrowActionFn = function(employee_code){
+	//console.log(employee_code,'200');
 
-
-
-	if(nameArea==undefined){
-		nameArea="";
-	}
+//	if(nameArea==undefined) {
+//		nameArea="";
+//	}
 	
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/new_action_to",
@@ -1565,35 +1566,40 @@ var dropDrowActionFn = function(paramStageID,nameArea){
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"stage_id":paramStageID,"appraisal_type_id":$("#embed_appraisal_type_id").val()},
+		//data:{"stage_id":paramStageID,"appraisal_type_id":$("#embed_appraisal_type_id").val()},
+		data:{"emp_code":employee_code},
 		success:function(data){
+			//console.log(data)
 			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			var htmlOption="";
-			$.each(data,function(index,indexEntry){
+			$.each(data,function(index,indexEntry) {
 				if(id==indexEntry['stage_id']){
 					htmlOption+="<option selected='selected' value="+indexEntry['stage_id']+">"+indexEntry['to_action']+"</option>";
 				}else{
 					htmlOption+="<option value="+indexEntry['stage_id']+">"+indexEntry['to_action']+"</option>";
 				}
 			});
-			$("#actionAssign"+nameArea).html(htmlOption);
+			//$("#actionAssign"+nameArea).html(htmlOption);
+			$("#actionAssign").html(htmlOption);
 		}
 	});
 }
 
-var dropDrowActionEditFn = function(paramStageID,paramToAppraisalLevel){
+//var dropDrowActionEditFn = function(paramStageID,paramToAppraisalLevel){
+var dropDrowActionEditFn = function(paramStageID,employee_code){
+	console.log(employee_code,'employee_code?')
+	console.log(paramStageID,'paramStageID?')
 
-
-
-	
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/edit_action_to",
 		type:"get",
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"stage_id":paramStageID,"to_appraisal_level_id":paramToAppraisalLevel},
+		//data:{"stage_id":paramStageID,"to_appraisal_level_id":paramToAppraisalLevel},
+		data:{"stage_id":paramStageID,"emp_code":employee_code},
 		success:function(data){
+			console.log(data)
 			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
@@ -2649,7 +2655,10 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 			});
 			$("#assignTo").change();
 			*/
-			dropDrowActionFn($(this).val());
+			//var Emp_Code = JSON.stringify(empldoyees_code[0]);
+			//console.log(empldoyees_code[0])
+			dropDrowActionFn(empldoyees_code[0]);
+			//dropDrowActionFn($(this).val());
 			
 			//check assignment if reject  remark is require.
 			$("#actionAssign").off("change");

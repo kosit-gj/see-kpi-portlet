@@ -43,7 +43,7 @@
  };
  
  
- var getDataFn = function(page,rpp){
+ var getDataFn = function() {
 		var year= $("#param_year").val();
 		var period= $("#param_period").val();
 		var app_type= $("#param_app_type").val();
@@ -52,33 +52,54 @@
 		var app_lv= $("#param_app_lv").val();
 		var org= $("#param_org_id").val();
 		var kpi= $("#param_kpi_id").val();
+		var output_type = $("#output_type").val();
+		
+		var parameter = {
+				logo: "/imake/Jasper/jasper_service_api/resources/jasper/1588_6832_th.jpg",
+				param_year: year,
+				param_period: period,
+				param_level: app_lv,
+				param_org: org,
+				param_kpi: kpi
+		}
+		var data = JSON.stringify(parameter);
+		var url_report_jasper = "http://35.198.242.63:9000/generate?template_name=Appraisal_Report&template_format="+output_type+"&used_connection=1&inline=1&data="+data+"";
+		$('#iFrame_report').attr('src',url_report_jasper);
+		// $("#report_download_ul").show();
+		
+//		$.ajax({
+//			//url : restfulURL+"/"+serviceName+"/public/dashboard/kpi_overall",
+//			url : url_report_jasper,
+//			type : "post",
+//			//dataType : "json",
+//			//data:{ "logo": "/imake/Jasper/jasper_service_api/resources/jasper/1588_6832_th.jpg", "param_year": "2017", "param_period": 1, "param_level": "All", "param_org": "All", "param_kpi": "All" },
+//			data:{
+//				"logo": "/imake/Jasper/jasper_service_api/resources/jasper/1588_6832_th.jpg",
+//				"param_year":year,
+//				"param_period":period,
+//				"param_level":app_lv,
+//				"param_org":org,
+//				"param_kpi":kpi
+//				//"appraisal_type_id":app_type,
+//				//"emp_id":emp,
+//				//"position_id":position,
+//			},
+//			//headers:{Authorization:"Bearer "+tokenID.token},
+//			async:false,// w8 data 
+//			success : function(data) {
+//				console.log("success")
+//				$("#report_download_ul").show();
+//				$('#iFrame_report').attr('src',url_report_jasper);
+//				//galbalDashboard=data;
+//				//listDashBoardFn(data);
+//				
+//			}
+//		});
 
-		$.ajax({
-			url : restfulURL+"/"+serviceName+"/public/dashboard/kpi_overall",
-			type : "get",
-			dataType : "json",
-			data:{
-				"year_id":year,
-				"period_id":period,
-				"appraisal_type_id":app_type,
-				"emp_id":emp,
-				//"position_id":position,
-				"level_id":app_lv,
-				"org_id":org,
-				"item_id":kpi		
-			},
-			headers:{Authorization:"Bearer "+tokenID.token},
-			async:false,// w8 data 
-			success : function(data) {
-				//galbalDashboard=data;
-				//listDashBoardFn(data);
-				
-			}
-		});	
 };
 
  
- var searchAdvanceFn = function (year,period,app_lv,org,kpi) {
+ var searchAdvanceFn = function (year,period,app_lv,org,kpi,output_type) {
 	//embed parameter start
 		
 		var htmlParam="";
@@ -88,6 +109,7 @@
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' 	name='param_app_lv' 	value='"+app_lv+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' 	name='param_org_id' 	value='"+org+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_kpi_id' 	name='param_kpi_id' 	value='"+kpi+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_output_type' name='param_output_type' 	value='"+output_type+"'>";
 		$(".paramEmbed").remove();
 		$("form#linkParam").append(htmlParam);
 		//embed parameter end
@@ -136,16 +158,20 @@ var listDashBoardFn = function(data){
 		
 		
 		$("#btnSearchAdvance").click(function(){
-
 			searchAdvanceFn(
 					$("#year").val(),
 					$("#period").val(),
 					$("#apprasiaLevel").val(),
 					$("#organization").val(),
-					$("#kpi").val()
+					$("#kpi").val(),
+					$("#output_type").val()
 					);
 			$("#listSubordinate").show();
 			return false;
+		});
+		
+		$("#output_type").change(function(){
+			$('#iFrame_report').attr('src','');
 		});
 		
 		//Generate DropDown List

@@ -494,6 +494,16 @@
 
 							</select>
 						</div>
+						<div style="margin-left: 5px; margin-bottom: 3px;"
+							class="form-group pull-left span2" id="kpiArea">
+							<select name="output_type" id="output_type" class="input form-control input-sm"
+								title="" data-toggle="tooltip" style="cursor: pointer;"
+								data-original-title="Output Type">
+								<option value="pdf">PDF</option>
+								<option value="xls">Excel</option>
+
+							</select>
+						</div>
 
 
 						<div style="margin-bottom: 5px;"
@@ -525,14 +535,14 @@
 	
 	
 		<div>
-		<aside id="sticky-social" style="position: absolute;">
-		    <ul>
-		        <li><a href="#" class="entypo-facebook ex-pdf" target="_blank"><span>PDF</span><i class="fa fa-file-pdf-o fa-1x" aria-hidden="true"></i></a></li>
-		        <li><a href="#" class="entypo-twitter ex-excel" target="_blank"><span>Excel</span><i class="fa fa-file-excel-o fa-1x" aria-hidden="true"></i></a></li>
-		    </ul>
-		</aside>
+<!-- 		<aside id="sticky-social" style="position: absolute;"> -->
+<!-- 		    <ul id="report_download_ul" style="display:none;"> -->
+<!-- 		        <li><a href="#" id="pdf_download" class="entypo-facebook ex-pdf"><span>PDF</span><i class="fa fa-file-pdf-o fa-1x" aria-hidden="true"></i></a></li> -->
+<!-- 		        <li><a href="#" id="excel_download" class="entypo-twitter ex-excel"><span>Excel</span><i class="fa fa-file-excel-o fa-1x" aria-hidden="true"></i></a></li> -->
+<!-- 		    </ul> -->
+<!-- 		</aside> -->
 		</div>
-		<iframe src="http://localhost/jasper/setting.php" frameborder="0" style="width :100%;height: 600px;">
+		<iframe id="iFrame_report" frameborder="0" style="width :100%;height: 500px;">
   			<p>Your browser does not support iframes.</p>
 		</iframe>
 	</div>
