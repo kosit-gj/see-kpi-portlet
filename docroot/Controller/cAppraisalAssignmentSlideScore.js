@@ -385,16 +385,13 @@ var findOneFn = function(id,actionType){
 //Get Data
 var getDataFn = function(page,rpp) {
 	
-
-//	if($("#embed_appraisal_type_id").val()==1) {
-//		var appraisal_level_id = $("#embed_appraisal_level_id_org").val();
-//	}
-//	else {
-//		var appraisal_level_id = $("#embed_appraisal_level_id_emp").val();
-//	}
-	
 	var appraisal_level_id_org = $("#embed_appraisal_level_id_org").val();
 	var appraisal_level_id = $("#embed_appraisal_level_id_emp").val();
+	
+	if($("#appraisalType").val()==1) {
+		appraisal_level_id = "";
+	}
+	
 	var appraisal_type_id= $("#embed_appraisal_type_id").val();
 	var period_id= $("#embed_period_id").val();
 	var position_id= $("#embed_position_id").val();
@@ -1154,25 +1151,44 @@ var searchAdvanceFn = function() {
 /*#########################  Custom Function Data #######################*/
 
 //var appraisalLevelListFn = function(nameArea,id){
-var appraisalLevelListFn = function(){
+var appraisalLevelListOrgFn = function(){
 	//console.log(session_emp_code)
-	var url_check_controller;
-	if($("#appraisalType").val()==1) {
-		url_check_controller = "al_list_org";
-	}
-	else if($("#appraisalType").val()==2) {
-		url_check_controller = "al_list_org_individual";
-	}
 	$.ajax({
 		//url:restfulURL+"/"+serviceName+"/public/appraisal_item/al_list",
-		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/"+url_check_controller+"",
+		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/al_list_org",
 		type:"get",
 		dataType:"json",
 		async:false,
 		data:{"emp_code":session_emp_code},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
-			//console.log(data);
+			console.log(data);
+			var htmlOption="";
+			$.each(data,function(index,indexEntry){
+				if(id==indexEntry['level_id']){
+					htmlOption+="<option selected='selected' value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
+				}else{
+					htmlOption+="<option value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
+					
+				}
+			});
+			$("#appraisalLevel").html(htmlOption);
+		}
+	});
+}
+
+var appraisalLevelListIndividualFn = function(){
+	//console.log(session_emp_code)
+	$.ajax({
+		//url:restfulURL+"/"+serviceName+"/public/appraisal_item/al_list",
+		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/al_list_org_individual",
+		type:"get",
+		dataType:"json",
+		async:false,
+		data:{"emp_code":session_emp_code},
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			console.log(data);
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['level_id']){
@@ -1406,16 +1422,53 @@ var dropDrowDepartmentFn = function(id){
 		}
 	});
 }
-var dropDrowOrgFn = function(appraisalLevelId){
+//var dropDrowOrgFn = function(appraisalLevelId){
+//	$.ajax({
+//		url:restfulURL+"/"+serviceName+"/public/org",
+//		type:"get",
+//		dataType:"json",
+//		async:false,
+//		headers:{Authorization:"Bearer "+tokenID.token},
+//		data:{"level_id":appraisalLevelId},
+//		success:function(data){
+//			//console.log(data)
+//			var htmlOption="";
+//			htmlOption+="<option value=''>All Organization</option>";
+//			$.each(data,function(index,indexEntry){
+//				if(id==indexEntry['org_id']){
+//					htmlOption+="<option selected='selected' value="+indexEntry['org_id']+">"+indexEntry['org_name']+"</option>";
+//				}else{
+//					htmlOption+="<option value="+indexEntry['org_id']+">"+indexEntry['org_name']+"</option>";
+//				}
+//			});
+//			$("#organization").html(htmlOption);
+//		}
+//	});
+//}
 
+var dropDrowOrgFn = function(appraisalLevelId) {
+	
+//	console.log(appraisalLevelId);
+//	console.log($("#appraisalType").val());
+//	console.log($("#appraisalLevelEmp").val());
+	
+	var service_url_Check;
+	if($("#appraisalType").val()==1) {
+		service_url_Check = "org";
+	}
+	else {
+		service_url_Check = "org/list_org_for_emp";
+	}
+	
 	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/org",
+		url:restfulURL+"/"+serviceName+"/public/"+service_url_Check+"",
 		type:"get",
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"level_id":appraisalLevelId},
+		data:{"level_id":appraisalLevelId,"emp_code":session_emp_code,"level_id_emp":$("#appraisalLevelEmp").val()},
 		success:function(data){
+			console.log(data)
 			var htmlOption="";
 			htmlOption+="<option value=''>All Organization</option>";
 			$.each(data,function(index,indexEntry){
@@ -2423,48 +2476,48 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 		periodFrequencyFn();
 		yearListFn();
 		
-		$("#appraisalLevel").change(function(){
-			dropDrowOrgFn($(this).val());	
-		});
-		$("#appraisalLevel").change();
-		
-		//dropDrowOrgFn();
-		
-		
-		$("#appraisalType").change(function(){
+		$("#appraisalType").change(function() {
 			if($("#appraisalType").val()==1){
 				
 				$("#Position").prop("disabled",true);
 				$("#empName").prop("disabled",true);
 				$("#appraisalLevelEmp").prop("disabled",true);
-				
 				$("#Position").val("");
 				$("#empName").val("");
 				$("#appraisalLevelEmp").val("");
 				
-			}else{
+				appraisalLevelListOrgFn();
+				dropDrowOrgFn($("#appraisalLevel").val());	
+				
+			}
+			else {
+				
 				$("#Position").prop("disabled",false);
 				$("#empName").prop("disabled",false);
 				$("#appraisalLevelEmp").prop("disabled",false);
+				
+				//appraisalLevelListIndividualFn();
 				appraisalLevelListEmpLevelFn();
-				$("#appraisalLevelEmp").change();
+				appraisalLevelListEmpLevelToOrgFn();
+				dropDrowOrgFn($("#appraisalLevel").val());
 			}
-			appraisalLevelListFn();
-			dropDrowOrgFn($("#appraisalLevel").val());
 		});
 		$("#appraisalType").change();
 		
-		$("#appraisalLevelEmp").change(function(){
+		$("#appraisalLevelEmp").change(function() {
 			appraisalLevelListEmpLevelToOrgFn();
 			dropDrowOrgFn($("#appraisalLevel").val());
 		});
 		
-		$("#empName").change(function(){
+		$("#appraisalLevel").change(function() {
+			dropDrowOrgFn($("#appraisalLevel").val());
+		});
+
+		$("#empName").change(function() {
 			empNameAutoCompelteChangeToPositionName();
 		});
-		
+
 		$(".app_url_hidden").show();
-		
 	
 		//Org Autocomplete Start
 		/*
