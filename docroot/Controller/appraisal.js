@@ -2078,6 +2078,7 @@ var getDataFn = function(page,rpp){
 	var AppraisalYear = $("#embed_AppraisalYear").val();
 	var AppraisalPeriod= $("#embed_AppraisalPeriod").val();
 	var AppraisalLevel= $("#embed_AppraisalLevel").val();
+	var AppraisalLevelOrg = $("#embed_AppraisalLevelOrg").val();
 	var Organization= $("#embed_Org").val();
 	var org_id=Organization.split('-');
 	org_id=org_id[0];
@@ -2101,6 +2102,7 @@ var getDataFn = function(page,rpp){
 			"appraisal_year":AppraisalYear,
 			"period_no":AppraisalPeriod,
 			"level_id":AppraisalLevel,
+			"level_id_org":AppraisalLevelOrg,
 			"org_id":org_id,
 			"position_id":Position,
 			"emp_id":EmpID,
@@ -2142,6 +2144,7 @@ var searchAdvanceFn = function() {
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_AppraisalYear' name='embed_AppraisalYear' value='"+$("#AppraisalYear").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_AppraisalPeriod' name='embed_AppraisalPeriod' value='"+$("#AppraisalPeriod").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_AppraisalLevel' name='embed_AppraisalLevel' value='"+AppraisalLevel_+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_AppraisalLevelOrg' name='embed_AppraisalLevelOrg' value='"+$("#AppraisalOrgLevel").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_Org' name='embed_Org' value='"+$("#organization").val()+"'>";
 	//embedParam+="<input type='hidden' class='embed_param_search' id='embed_Section' name='embed_Section' value='"+$("#Section").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_Position' name='embed_Position' value='"+Position+"'>";
