@@ -363,42 +363,43 @@ plid = layout.getPlid();
 								<h5>Advance Search</h5>
 							</div>
 				<div class="ibox-content breadcrumbs2">
-					<div class="row-fluid p-t-xxs cSearchAdvance">
-					<div id="drop_down_list_year" class="form-group pull-left span3"
-							style="margin-left: 5px">
+					<div class="row-fluid">
+						<div id="drop_down_list_year" class="form-group pull-left span3" style="margin-left: 5px">
 							<select class="input span12 m-b-n" ></select>
 							</div>
-						<div id="drop_down_list_month" class="form-group pull-left span3"
-							style="margin-left: 5px"><select class="input span12 m-b-n" ></select>
-						</div>
-						<div id="drop_down_list_appraisal_type"
-							class="form-group pull-left span3" style="margin-left: 5px">
+						<div id="drop_down_list_month" class="form-group pull-left span3" style="margin-left: 5px">
 							<select class="input span12 m-b-n" ></select>
 						</div>
-						<div class="form-group pull-left span3" style="margin-left: 5px" id="txtEmpInput">
+						<div id="drop_down_list_appraisal_type" class="form-group pull-left span3" style="margin-left: 5px">
+							<select class="input span12 m-b-n" ></select>
+						</div>
+						<div class="form-group pull-left span3" style="margin-left: 5px">
+							<select class="input span12 m-b-n" id="app_lv_emp" data-toggle="tooltip" title="EmpLevel"></select>
+						</div>
+<!-- 					</div> -->
+<!-- 					<div class="row-fluid"> -->
+						<div class="form-group pull-left span3" id="txtEmpInput" style="margin-left: 5px">
 							<input data-toggle="tooltip" data-placement="top"
 								title="Employee Name" class="span12 m-b-n ui-autocomplete-input"
 								placeholder="Employee Name" id="emp_name" name="emp_name"
 								type="text"> <input class="form-control input-sm"
 								id="emp_name_id" name="emp_name_id" value="" type="hidden">
 						</div>
-						<div class="form-group pull-left span3" style="margin-left: 5px" >
+						<div class="form-group pull-left span3" style="margin-left: 5px">
 							<input data-toggle="tooltip" data-placement="top"
 								title="Position" class="span12 m-b-n ui-autocomplete-input"
 								placeholder="Position" id="position" name="position" type="text">
 							<input class="form-control input-sm" id="position_id"
 								name="position_id" value="" type="hidden">
 						</div>
-				
-						
-						<div id="drop_down_list_appraisal_level"
-							class="form-group pull-left span3" style="margin-left: 5px">
+						<div id="drop_down_list_appraisal_level" class="form-group pull-left span3" style="margin-left: 5px" data-toggle="tooltip" title="OrgLevel">
 							<select class="input span12 m-b-n" ></select>
 						</div>
-						<div id="drop_down_list_organization"
-							class="form-group pull-left span3" style="margin-left: 5px">
+						<div id="drop_down_list_organization" class="form-group pull-left span3" style="margin-left: 5px" data-toggle="tooltip" title="Organization">
 							<select class="input span12 m-b-n" ></select>
 						</div>
+<!-- 					</div> -->
+<!-- 					<div class="row-fluid"> -->
 <!-- 						<div class="form-group pull-left span3" style="margin-left: 5px"> -->
 <!-- 							<input data-toggle="tooltip" data-placement="top" -->
 <!-- 								title="Organization" class="span12 m-b-n ui-autocomplete-input" -->
@@ -433,7 +434,6 @@ plid = layout.getPlid();
 							</button>
 						</div>
 						</div>
-
 					</div>
 				</div>
 

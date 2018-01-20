@@ -19,6 +19,7 @@ var getDataFn = function(page,rpp){
 	var year= $("#param_year").val();
 	var month= $("#param_month").val();
 	var app_lv= $("#param_app_lv").val();
+	var app_lv_emp = $("#param_app_lv_emp").val();
 	var app_type= $("#param_app_type").val();
 	var org= $("#param_org_id").val();
 	var position= $("#param_position_id").val();
@@ -30,7 +31,11 @@ var getDataFn = function(page,rpp){
 	}else if(app_type == "1"){
 		$("#tableCdsResult thead tr").find("th:first").html("Org&nbsp;Code&emsp;");
 		$("#tableCdsResult thead tr").find("th:first").next().html("Org&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
+		app_lv_emp = "";
 	}
+	
+	//console.log(app_lv_emp)
+	
 	$.ajax({
 		url : restfulURL+restfulPathCdsResult,
 		type : "get",
@@ -40,6 +45,7 @@ var getDataFn = function(page,rpp){
 			"month_id":month,
 			"appraisal_type_id":app_type,
 			"level_id":app_lv,
+			"level_id_emp":app_lv_emp,
 			"org_id":org,
 			"position_id":position,
 			"emp_id":emp_name		
@@ -60,13 +66,14 @@ var getDataFn = function(page,rpp){
 //------------------- GetData FN END ---------------------
 
 //-------------------  Appraisal Data FN ---------------------
-var searchAdvanceFn = function (year,month,app_lv,app_type,org_id,position,emp_name) {
+var searchAdvanceFn = function (year,month,app_lv,app_lv_emp,app_type,org_id,position,emp_name) {
 //embed parameter start
 	
 	var htmlParam="";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_year' name='param_year' value='"+year+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_month' name='param_month' value='"+month+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' name='param_app_lv' value='"+app_lv+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv_emp' name='param_app_lv_emp' value='"+app_lv_emp+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_type' name='param_app_type' value='"+app_type+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' name='param_org_id' value='"+org_id+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_position_id' name='param_position_id' value='"+position+"'>";
@@ -208,16 +215,16 @@ var dropDownListYear = function(){
 
 var dropDownListAppraisalLevel = function(){
 	var html="";
-	
-	
-	html+="<select data-placement='top' id=\"app_lv\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Level\" name=\"app_lv\">";
+	html+="<select data-placement='top' id=\"app_lv\" class=\"input span12 m-b-n\" name=\"app_lv\">";
 	html+="<option  selected value=''>All Appraisal Level</option>";
 	$.ajax ({
-		url:restfulURL+restfulPathDropDownAppraisalLevel,
+		//url:restfulURL+restfulPathDropDownAppraisalLevel,
+		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/al_list_org",
 		type:"get" ,
 		dataType:"json" ,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
+		data:{"emp_code":session_emp_code},
 		success:function(data){
 				//galbalDqsRoleObj=data;
 			$.each(data,function(index,indexEntry){
@@ -232,12 +239,50 @@ var dropDownListAppraisalLevel = function(){
 	return html;
 };
 
+var CdsResultLevelListEmpLevelFn = function(){
+	//console.log(session_emp_code)
+	var html="";
+	$.ajax({
+		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/al_list_emp",
+		type:"get",
+		dataType:"json",
+		async:false,
+		data:{"emp_code":session_emp_code},
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			console.log(data);
+			$.each(data,function(index,indexEntry){
+				html+="<option value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
+			});
+			$("#app_lv_emp").html(html);
+		}
+	});
+}
+
+var CdsResultLevelListEmpLevelToOrgFn = function(){
+	$.ajax({
+		//url:restfulURL+"/"+serviceName+"/public/appraisal_item/al_list",
+		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/al_list_emp_org",
+		type:"get",
+		dataType:"json",
+		async:false,
+		data:{"emp_code":session_emp_code,"level_id":$("#app_lv_emp").val()},
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			//console.log(data);
+			var htmlOption="";
+			$.each(data,function(index,indexEntry){
+					htmlOption+="<option value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
+			});
+			$("#app_lv").html(htmlOption);
+		}
+	});
+}
+
 //-------------------  Drop Down List Appraisal Type FN Strart ---------------------
 
 var dropDownListAppraisalType = function(){
 	var html="";
-	
-	
 	html+="<select data-placement='top' id=\"app_type\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Entity Type\" name=\"app_type\">";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalType,
@@ -248,42 +293,46 @@ var dropDownListAppraisalType = function(){
 		success:function(data){
 				//galbalDqsRoleObj=data;
 			$.each(data,function(index,indexEntry){
-
 					html+="<option  value="+indexEntry["appraisal_type_id"]+">"+indexEntry["appraisal_type_name"]+"</option>";	
-		
 			});	
-
 		}
 	});	
 	html+="</select>";
 	return html;
 };
-var dropDownListOrganization = function(){
+
+var dropDownListOrganization = function() {
+	var service_url_Check;
+	if($("#app_type").val()==1) {
+		service_url_Check = "org";
+	}
+	else {
+		service_url_Check = "org/list_org_for_emp";
+	}
+	
 	var html="";
-	
-	
-	html+="<select data-placement='top' id=\"org_id\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Organization\" name=\"org_id\">";
+	html+="<select data-placement='top' id=\"org_id\" class=\"input span12 m-b-n\" name=\"org_id\">";
 	html+="<option  selected value=''>All Organization</option>";
 	$.ajax ({
-		url:restfulURL+"/"+serviceName+"/public/org",
+		//url:restfulURL+"/"+serviceName+"/public/org",
+		url:restfulURL+"/"+serviceName+"/public/"+service_url_Check+"",
 		type:"get" ,
 		dataType:"json" ,
-		data:{"level_id":$("#app_lv").val()},
+		//data:{"level_id":$("#app_lv").val()},
+		data:{"level_id":$("#app_lv").val(),"emp_code":session_emp_code,"level_id_emp":$("#app_lv_emp").val()},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
 				//galbalDqsRoleObj=data;
 			$.each(data,function(index,indexEntry){
-
 					html+="<option  value="+indexEntry["org_id"]+">"+indexEntry["org_name"]+"</option>";	
-		
-			});	
-
+			});
 		}
 	});	
 	html+="</select>";
 	return html;
 };
+
 var listErrorFn =function(data){
 	var errorData="";
 	//alert(data['errors'] instanceof  Array);
@@ -347,20 +396,20 @@ var getBrowserWidth = function(){
     var wCalTarget = $('#drop_down_list_appraisal_type').width()*4+20;
     var height = $('#drop_down_list_appraisal_type').height()+0.25;
     
-		if(window.innerWidth < 980){
-			$("#txtEmpInput").css({"width":""});
-			$("#txtEmpInput").css({"height":""});
-		} else if(window.innerWidth < 1366){
-			// Small Device
-    
-			$("#txtEmpInput").width(wSearchAdvance-wCalTarget+wTarget);
-			$("#txtEmpInput").css({"height":height});
-		} else {
-			// Large Device
-			$("#txtEmpInput").width(wSearchAdvance-wCalTarget+wTarget);
-			$("#txtEmpInput").css({"height":height});
-	
-		}
+//		if(window.innerWidth < 980){
+//			$("#txtEmpInput").css({"width":""});
+//			$("#txtEmpInput").css({"height":""});
+//		} else if(window.innerWidth < 1366){
+//			// Small Device
+//    
+//			$("#txtEmpInput").width(wSearchAdvance-wCalTarget+wTarget);
+//			$("#txtEmpInput").css({"height":height});
+//		} else {
+//			// Large Device
+//			$("#txtEmpInput").width(wSearchAdvance-wCalTarget+wTarget);
+//			$("#txtEmpInput").css({"height":height});
+//	
+//		}
 		//console.log(wSearchAdvance-wCalTarget+wTarget);
 };
 
@@ -385,15 +434,10 @@ $(document).ready(function() {
 	$(".sr-only").hide();
 	$("#drop_down_list_year").html(dropDownListYear());
 	$("#drop_down_list_month").html(dropDownListMonth());
-	$("#drop_down_list_appraisal_level").html(dropDownListAppraisalLevel());
-	$("#drop_down_list_organization").html(dropDownListOrganization());
 	$("#drop_down_list_appraisal_type").html(dropDownListAppraisalType());
 	$("#countPaginationTop").val( $("#countPaginationTop option:first-child").val());
 	$("#countPaginationBottom").val( $("#countPaginationBottom option:first-child").val());
-	
-	$("#app_lv").change(function(){
-		$("#drop_down_list_organization").html(dropDownListOrganization());
-	});
+
 	$(".app_url_hidden").show();
 	getBrowserWidth();
 	$("#btnSearchAdvance").click(function(){
@@ -403,6 +447,7 @@ $(document).ready(function() {
 				$("#year").val(),
 				$("#month").val(),
 				$("#app_lv").val(),
+				$("#app_lv_emp").val(),
 				$("#app_type").val(),
 				$("#org_id").val(),
 				$("#position_id").val(),
@@ -464,60 +509,58 @@ $(document).ready(function() {
 	         }
 	    });
 	*/
-
 	
-
 	//Autocomplete Search Position Start
-	$("#position").autocomplete({
-        source: function (request, response) {
-        	$.ajax({
-				 url:restfulURL+restfulPathPositionAutocomplete,
-				 type:"post",
-				 dataType:"json",
-				 data:{
-					 "position_name":request.term
-				 },
-				//async:false,
-				 headers:{Authorization:"Bearer "+tokenID.token},
-                 error: function (xhr, textStatus, errorThrown) {
-                        console.log('Error: ' + xhr.responseText);
-                    },
-				 success:function(data){
-					  
-						response($.map(data, function (item) {
-                            return {
-                                label: item.position_name,
-                                value: item.position_name,
-                                position_id : item.position_id
-                                
-                            };
-                        }));
-					
-				},
-				beforeSend:function(){
-					$("body").mLoading('hide');	
-				}
-				
-				});
-        },
-		select:function(event, ui) {
-			$("#position").val(ui.item.value);
-            $("#position_id").val(ui.item.position_id);
-            galbalDataTemp['position_name'] = ui.item.label;
-            galbalDataTemp['position_id']=ui.item.position_id;
-            return false;
-        },change: function(e, ui) {  
-
- 
-			if ($("#position").val() == galbalDataTemp['position_name']) {
-				$("#position_id").val(galbalDataTemp['position_id']);
-			}  else if (ui.item != null){
-				$("#position_id").val(ui.item.position_id);
-			}else {
-				$("#position_id").val("");
-			}
-         }
-    });
+//	$("#position").autocomplete({
+//        source: function (request, response) {
+//        	$.ajax({
+//				 url:restfulURL+restfulPathPositionAutocomplete,
+//				 type:"post",
+//				 dataType:"json",
+//				 data:{
+//					 "position_name":request.term
+//				 },
+//				//async:false,
+//				 headers:{Authorization:"Bearer "+tokenID.token},
+//                 error: function (xhr, textStatus, errorThrown) {
+//                        console.log('Error: ' + xhr.responseText);
+//                    },
+//				 success:function(data){
+//					  
+//						response($.map(data, function (item) {
+//                            return {
+//                                label: item.position_name,
+//                                value: item.position_name,
+//                                position_id : item.position_id
+//                                
+//                            };
+//                        }));
+//					
+//				},
+//				beforeSend:function(){
+//					$("body").mLoading('hide');	
+//				}
+//				
+//				});
+//        },
+//		select:function(event, ui) {
+//			$("#position").val(ui.item.value);
+//            $("#position_id").val(ui.item.position_id);
+//            galbalDataTemp['position_name'] = ui.item.label;
+//            galbalDataTemp['position_id']=ui.item.position_id;
+//            return false;
+//        },change: function(e, ui) {  
+//
+// 
+//			if ($("#position").val() == galbalDataTemp['position_name']) {
+//				$("#position_id").val(galbalDataTemp['position_id']);
+//			}  else if (ui.item != null){
+//				$("#position_id").val(ui.item.position_id);
+//			}else {
+//				$("#position_id").val("");
+//			}
+//         }
+//    });
 	
 
    
@@ -541,12 +584,13 @@ $(document).ready(function() {
                         console.log('Error: ' + xhr.responseText);
                     },
 				 success:function(data){
-					  
+					  	console.log(data)
 						response($.map(data, function (item) {
                             return {
                                 label: item.emp_name,
                                 value: item.emp_name,
-                                emp_id: item.emp_id
+                                emp_id: item.emp_id,
+                                emp_code: item.emp_code
                             };
                         }));
 					
@@ -562,6 +606,7 @@ $(document).ready(function() {
             $("#emp_name_id").val(ui.item.emp_id);
             galbalDataTemp['emp_name'] = ui.item.value;
             galbalDataTemp['emp_id']=ui.item.emp_id;
+            galbalDataTemp['emp_code']=ui.item.emp_code;
             return false;
         },change: function(e, ui) {  
 			if ($("#emp_name").val() == galbalDataTemp['emp_name']) {
@@ -575,15 +620,43 @@ $(document).ready(function() {
         	
          }
     });
+
+	var empNameAutoCompelteChangeToPositionName = function() {
+		console.log(galbalDataTemp['emp_code'])
+		
+			$.ajax({
+				url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_position_name2",
+				type:"post",
+				dataType:"json",
+				async:false,
+				headers:{Authorization:"Bearer "+tokenID.token},
+				data:{"emp_code":galbalDataTemp['emp_code']},
+				success:function(data){
+					console.log(data)
+					if(data.length!==0) {
+						$("#position_id").val(data[0].position_id);
+						$("#position").val(data[0].position_name);
+					}
+				}
+			});
+	}
     
   //Auto Complete Employee Name end
 	
 	$("#app_type").change(function(){
-		if($("#app_type").val() == "2"){
+		if($("#app_type").val() == "2") {
 
+			$("#app_lv_emp").removeAttr('disabled');
 			$("#position").removeAttr('disabled');
 			$("#emp_name").removeAttr('disabled');
-		}else if($("#app_type").val() == "1"){
+			
+			CdsResultLevelListEmpLevelFn();
+			CdsResultLevelListEmpLevelToOrgFn();
+			$("#drop_down_list_organization").html(dropDownListOrganization());
+			
+		}else if($("#app_type").val() == "1") {
+			
+			$("#app_lv_emp").attr("disabled", 'disabled');
 			$("#position").attr("disabled", 'disabled');
 			$("#emp_name").attr("disabled", 'disabled');
 			$("#position").val("");
@@ -591,9 +664,25 @@ $(document).ready(function() {
 			$("#emp_name").val("");
 			$("#emp_name_id").val("");
 			
+			$("#drop_down_list_appraisal_level").html(dropDownListAppraisalLevel());
+			$("#drop_down_list_organization").html(dropDownListOrganization());
+			
 		}
 	});
 	$("#app_type").change();
+	
+	$("#app_lv").change(function() {
+		$("#drop_down_list_organization").html(dropDownListOrganization());
+	});
+	
+	$("#app_lv_emp").change(function() {
+		CdsResultLevelListEmpLevelToOrgFn();
+		$("#drop_down_list_organization").html(dropDownListOrganization());
+	});
+	
+	$("#emp_name").change(function() {
+		empNameAutoCompelteChangeToPositionName();
+	});
 	
 	
 	
@@ -602,6 +691,7 @@ $(document).ready(function() {
 		var paramYear=$("#year").val();
 		var paramMonth=$("#month").val();
 		var paramAppLv=$("#app_lv").val();
+		var paramAppLvEmp=$("#app_lv_emp").val();
 		var paramAppType= $("#app_type").val();
 		var paramQrg= $("#org_id").val();
 		var paramPositionCode=$("#position_id").val();
@@ -612,12 +702,13 @@ $(document).ready(function() {
 		param+="&current_appraisal_year="+paramYear;
 		param+="&month_id="+paramMonth;
 		param+="&level_id="+paramAppLv;
+		param+="&level_id_emp="+paramAppLvEmp;
 		param+="&appraisal_type_id="+paramAppType;
 		param+="&org_id="+paramQrg;
 		param+="&position_id="+paramPositionCode;
 		param+="&emp_id="+paramEmpCode;
 		
-		//console.log(restfulURL+restfulPathCdsResult+"/export?token="+tokenID.token+""+param)
+		console.log(restfulURL+restfulPathCdsResult+"/export?token="+tokenID.token+""+param)
 
 		$("form#formExportToExcel").attr("action",restfulURL+restfulPathCdsResult+"/export?token="+tokenID.token+""+param);
 		$("form#formExportToExcel").submit();
