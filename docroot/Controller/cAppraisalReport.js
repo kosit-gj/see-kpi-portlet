@@ -56,6 +56,7 @@
 		
 		var parameter = {
 				logo: "/imake/Jasper/jasper_service_api/resources/jasper/1588_6832_th.jpg",
+				//logo: "C:\\jasper\\1588_6832_th.jpg",
 				param_year: year,
 				param_period: period,
 				param_level: app_lv,
@@ -63,7 +64,8 @@
 				param_kpi: kpi
 		}
 		var data = JSON.stringify(parameter);
-		var url_report_jasper = "http://35.198.242.63:9000/generate?template_name=Appraisal_Report&template_format="+output_type+"&used_connection=1&inline=1&data="+data+"";
+		var url_report_jasper = "http://35.198.242.63:9000/generate?template_name=Appraisal_Report&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
+		//var url_report_jasper = restfulURL+"/jasper_service_api/public/generate?template_name=Appraisal_Report&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
 		$('#iFrame_report').attr('src',url_report_jasper);
 		// $("#report_download_ul").show();
 		

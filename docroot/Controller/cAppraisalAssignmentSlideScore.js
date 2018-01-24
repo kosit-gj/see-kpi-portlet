@@ -1468,7 +1468,7 @@ var dropDrowOrgFn = function(appraisalLevelId) {
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{"level_id":appraisalLevelId,"emp_code":session_emp_code,"level_id_emp":$("#appraisalLevelEmp").val()},
 		success:function(data){
-			console.log(data)
+			//console.log(data)
 			var htmlOption="";
 			htmlOption+="<option value=''>All Organization</option>";
 			$.each(data,function(index,indexEntry){
@@ -1652,7 +1652,7 @@ var dropDrowActionEditFn = function(paramStageID,employee_code){
 		//data:{"stage_id":paramStageID,"to_appraisal_level_id":paramToAppraisalLevel},
 		data:{"stage_id":paramStageID,"emp_code":employee_code},
 		success:function(data){
-			console.log(data)
+			//console.log(data)
 			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){

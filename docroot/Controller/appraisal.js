@@ -118,10 +118,9 @@ var dropdownDeductScoreFn = function(score,nof_target_score,hint){
 
 	return htmlTemplateQuality;
 }
-var assignTemplateQualityFn = function(structureName,data){
+var assignTemplateQualityFn = function(structureName,data,check_disabled_first,check_disabled_second){
 	var item_result_id_array=[];
 	var htmlTemplateQuality="";
-
 
 	var hintCount = 0;
 	var hintHtml="";
@@ -133,7 +132,6 @@ var assignTemplateQualityFn = function(structureName,data){
 		}
 		hintCount++;
 	});
-
 
 	htmlTemplateQuality+="";
 	htmlTemplateQuality+="<div class=\"row-fluid\">";
@@ -160,7 +158,8 @@ var assignTemplateQualityFn = function(structureName,data){
 			htmlTemplateQuality+="<tr>";
 				htmlTemplateQuality+="<th style=\"width:40%\"><b>KPI Name</b></th>";
 				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Target</b></th>";
-				htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>Score</b></th>  ";
+				htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>First Line Score</b></th>";
+				htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>Second Line Score</b></th>";
 				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>%Weight</b></th>  ";
 				if(data['result_type']==1){
 					htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Weight Score</b></th>  ";
@@ -174,7 +173,8 @@ var assignTemplateQualityFn = function(structureName,data){
 		htmlTemplateQuality+="<tr>";
 			htmlTemplateQuality+="<th style=\"width:40%\"><b>KPI Name</b></th>";
 			htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Target</b></th>";
-			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>Score</b></th>  ";
+			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>First Line Score</b></th>";
+			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>Second Line Score</b></th>";
 
 		htmlTemplateQuality+="</tr>";
 	}
@@ -193,11 +193,19 @@ var assignTemplateQualityFn = function(structureName,data){
 								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\""+hintHtml+"\">"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 
 								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
-								htmlTemplateQuality+="<select style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
-									htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['score']),indexEntry['nof_target_score'],data['hint']);
+								htmlTemplateQuality+="<select "+check_disabled_first+" style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
+								htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['first_score']),indexEntry['nof_target_score'],data['hint']);
 								htmlTemplateQuality+="<select>";
 								//htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
 								htmlTemplateQuality+="</td>";
+								
+								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
+								htmlTemplateQuality+="<select "+check_disabled_second+" style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' id='competencyScore_Second-"+indexEntry['item_result_id']+"' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
+								htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['second_score']),indexEntry['nof_target_score'],data['hint']);
+								htmlTemplateQuality+="<select>";
+								//htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
+								htmlTemplateQuality+="</td>";
+								
 								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weight_percent'])).toFixed(2))+"</td>";
 								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2))+"</td>";
 
@@ -209,10 +217,16 @@ var assignTemplateQualityFn = function(structureName,data){
 								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\""+hintHtml+"\">"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 
 								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
-								htmlTemplateQuality+="<select style='width:180px; height: 25px;padding: 0 0 0 5px;font-size:13px; text-align:left;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore input form-control input-sm-small numberOnly'>";
-									htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['score']),indexEntry['nof_target_score'],data['hint']);
+								htmlTemplateQuality+="<select "+check_disabled_first+" style='width:180px; height: 25px;padding: 0 0 0 5px;font-size:13px; text-align:left;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore input form-control input-sm-small numberOnly'>";
+								htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['first_score']),indexEntry['nof_target_score'],data['hint']);
 								htmlTemplateQuality+="<select>";
 								//htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
+								htmlTemplateQuality+="</td>";
+								
+								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
+								htmlTemplateQuality+="<select "+check_disabled_second+" style='width:180px; height: 25px;padding: 0 0 0 5px;font-size:13px; text-align:left;' id='competencyScore_Second-"+indexEntry['item_result_id']+"' class='competencyScore itemScore input form-control input-sm-small numberOnly'>";
+								htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['second_score']),indexEntry['nof_target_score'],data['hint']);
+								htmlTemplateQuality+="<select>";
 								htmlTemplateQuality+="</td>";
 
 
@@ -223,7 +237,8 @@ var assignTemplateQualityFn = function(structureName,data){
 					//has weight
 					if(data['no_weight']==0){
 						htmlTemplateQuality+="<tr>";
-
+							
+							htmlTemplateQuality+="<td class=''></td>";
 							htmlTemplateQuality+="<td class=''></td>";
 							htmlTemplateQuality+="<td class='' ></td>";
 							htmlTemplateQuality+="<td class=''></td>";
@@ -652,12 +667,14 @@ var dropDrowAppraisalOrgLevelFn = function(id){
 var dropDrowIndividualOrgLevelFn = function(id){
 
 	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_level_individual",
+		//url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_level_individual",
+		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/al_list_emp_org",
 		type:"get",
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"level_id": $("#AppraisalEmpLevel").val()},
+		//data:{"level_id": $("#AppraisalEmpLevel").val()},
+		data:{"emp_code":session_emp_code,"level_id":$("#AppraisalEmpLevel").val()},
 		success:function(data){
 			var htmlOption="";
 			htmlOption+="<option value=''>All Level</option>";
@@ -748,14 +765,23 @@ var dropDrowOrgFn = function(appraisalLevelId){
 }
 
 var dropDrowIndividualOrgFn = function(appraisalLevelId){
-
+	var service_url_Check;
+	if($("#appraisalType").val()==1) {
+		service_url_Check = "org";
+	}
+	else {
+		service_url_Check = "org/list_org_for_emp";
+	}
+	
 	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_individual",
+		//url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_individual",
+		url:restfulURL+"/"+serviceName+"/public/"+service_url_Check+"",
 		type:"get",
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"emp_level":$("#AppraisalEmpLevel").val(), "org_level":$("#AppraisalOrgLevel").val()},
+		data:{"level_id":$("#AppraisalOrgLevel").val(),"emp_code":session_emp_code,"level_id_emp":$("#AppraisalEmpLevel").val()},
+		//data:{"emp_level":$("#AppraisalEmpLevel").val(), "org_level":$("#AppraisalOrgLevel").val()},
 		success:function(data){
 			var htmlOption="";
 			htmlOption+="<option value=''>All Organization</option>";
@@ -806,7 +832,23 @@ var splitData = function(data){
 }
 
 var listAppraisalDetailFn = function(data){
-
+	
+	var check_disabled_first;
+	var check_disabled_second;
+	if(data['head'][0]['chief_emp_code']==session_emp_code) {
+		check_disabled_second = "disabled"; //disabled second line 
+	}else if(data['head'][0]['has_second_line']==1) {
+		if(data['head'][0]['second_chief_emp_code']==session_emp_code) {
+			check_disabled_first = "disabled"; //disabled first line 
+		}
+	} else {
+		check_disabled_first = "disabled";
+		check_disabled_second = "disabled";
+	}
+	
+	//console.log(check_disabled_first,session_emp_code,'first')
+	//console.log(check_disabled_second,session_emp_code,'second')
+	
 	$("#appraisal_template_area").empty();
 	$.each(data['group'],function(index,groupEntry){
 
@@ -907,7 +949,7 @@ var listAppraisalDetailFn = function(data){
 
 			//$("#appraisal_template_area").append(assignTemplateQualityFn(index,groupEntry));
 		}else if(groupEntry['form_url']=='quality'){
-			$("#appraisal_template_area").append(assignTemplateQualityFn(index,groupEntry));
+			$("#appraisal_template_area").append(assignTemplateQualityFn(index,groupEntry,check_disabled_first,check_disabled_second));
 		}else if(groupEntry['form_url']=='deduct'){
 			$("#appraisal_template_area").append(assignTemplateDeductFn(index,groupEntry));
 		}
@@ -1044,6 +1086,7 @@ var findOneFn = function(id){
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
+			//console.log(data)
 			if(data['head'].length>0){
 
 				listAppraisalDetailFn(data);
@@ -2270,6 +2313,11 @@ var saveAppraisalFn = function(){
 //	     score: ''
 //	  },...
 //	]"
+	var competencyScore_First = "";
+	var competencyScore_Second = "";
+	var sum_ScoreCompetency = 0;
+	var competencyScore_Avg = "";
+	
 	var appraisal="";
 	appraisal+="[";
 	$.each($(".itemScore").get(),function(index,indexEntry){
@@ -2287,14 +2335,26 @@ var saveAppraisalFn = function(){
 		appraisal+="\"item_result_id\":\""+item_result_id+"\",";
 		if(typeScore=="forecast"){
 			appraisal+="\"forecast_value\":\""+removeComma($(indexEntry).val())+"\",";
-			appraisal+="\"actual_value\":\"\",";
+			appraisal+="\"actual_value\":\"\"";
 			//appraisal+="\"actual_value\":\""+$("#actual-"+item_result_id).val()+"\",";
-			appraisal+="\"score\":\"\"";
 
 		}else if(typeScore=="competencyScore"){
 			appraisal+="\"forecast_value\":\"\",";
 			appraisal+="\"actual_value\":\"\",";
-			appraisal+="\"score\":\""+$(indexEntry).val()+"\"";
+			appraisal+="\"first_score\":\""+$(indexEntry).val()+"\"";
+			
+			competencyScore_First = parseInt($(indexEntry).val());
+			
+		}else if(typeScore=="competencyScore_Second"){
+			appraisal+="\"forecast_value\":\"\",";
+			appraisal+="\"actual_value\":\"\",";
+			appraisal+="\"second_score\":\""+$(indexEntry).val()+"\",";
+	
+			competencyScore_Second = parseInt($(indexEntry).val());
+			sum_ScoreCompetency = competencyScore_First + competencyScore_Second;
+			competencyScore_Avg = sum_ScoreCompetency / 2;
+			
+			appraisal+="\"score\":\""+competencyScore_Avg+"\"";
 		}
 //			else{
 //
@@ -2307,8 +2367,9 @@ var saveAppraisalFn = function(){
 
 		appraisal+="}";
 	});
+	
 	appraisal+="]";
-	//console.log(appraisal);
+	console.log(appraisal);
 	var appraisalObject=eval("("+appraisal+")");
 	//console.log(appraisalObject);
 
