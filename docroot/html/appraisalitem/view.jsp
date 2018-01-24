@@ -1537,10 +1537,13 @@ overflow-y: visible;
 				                <div class="form-label-quantity"> 
 				                </div>
 				                <div class="form-input-customs">
-				                	<input type="checkbox" checked="" name="isShowVarianceQuantity" id="isShowVarianceQuantity" value="1">
+				                 <input type="checkbox" checked="" name="isShowVarianceQuantity" id="isShowVarianceQuantity" value="1">
 				                	<span style="margin-right: 10px;">Is Show Variance</span>
 					             <input type="checkbox" checked='checked'  name="isActiveQuantity" id="isActiveQuantity" value="1">
-					              <span>Is Active</span>
+					              	<span>Is Active</span>
+					              <br>
+					             <input type="checkbox" name="isCorporateKPI" id="isCorporateKPI" value="1">
+					              	<span>Is Corporate KPI</span>
 				                </div>
 				                <br style="clear:both">   		
 			                </div>
@@ -1602,7 +1605,8 @@ overflow-y: visible;
 			                 
 			                 <div class='form-file-mangement'>
 				                <div class="form-label-quantity">
-				                	KPI Type <span class='redFont '>*</span>
+				                	KPI Type&nbsp;
+<!-- 				                	<span class='redFont '>*</span> -->
 				                </div>
 				                
 				                <div class="form-input-customs" id="kpiTypeAreaQuantity">

@@ -13,6 +13,7 @@ var clearQuantityFormFn = function(){
 	$("#uomQuantity option:first").attr('selected','selected');
 	$("#isActiveQuantity").prop("checked",true);
 	$("#isShowVarianceQuantity").prop("checked",false);
+	$("#isCorporateKPI").prop("checked",false);
 	$("#formulaDescriptionQuantity").val("");
 	$("#kpiQuantity").val("");
 	$("#textarea_cds").html("");
@@ -80,6 +81,12 @@ var updateQuantityFn  = function(){
 	 }else{
 		 is_active=0;
 	 }
+	 var is_corporate_kpi="";
+	 if($('#isCorporateKPI').prop('checked')==true){
+		 is_corporate_kpi=1;
+	 }else{
+		 is_corporate_kpi=0;
+	 }
 	 
 	 $.ajax({
 	    url:restfulURL+"/"+serviceName+"/public/appraisal_item/"+item_id,
@@ -98,6 +105,7 @@ var updateQuantityFn  = function(){
 		"formula_cds_name":formula_cds_name,
 		"is_show_variance":is_variance,
 		"is_active":is_active,
+		"is_corporate_kpi":is_corporate_kpi,
 		//"department_code":department_id,
 		
 		"org":organization,
@@ -165,6 +173,12 @@ var insertQuantityFn = function(param) {
 	 }else{
 		 is_active=0;
 	 }
+	 var is_corporate_kpi="";
+	 if($('#isCorporateKPI').prop('checked')==true){
+		 is_corporate_kpi=1;
+	 }else{
+		 is_corporate_kpi=0;
+	 }
 
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/appraisal_item",
@@ -184,6 +198,7 @@ var insertQuantityFn = function(param) {
 			 "formula_cds_name":formula_cds_name,
 			 "is_show_variance":is_variance,
 			 "is_active":is_active,
+			 "is_corporate_kpi":is_corporate_kpi,
 			// "department_code":department_id,
 			 "org":organization,
 			 "position":position,
@@ -327,6 +342,11 @@ structure_name
 			$("#isActiveQuantity").prop("checked",true);
 		}else{
 			$("#isActiveQuantity").prop("checked",false);
+		}
+		if(data['is_corporate_kpi']==1){
+			$("#isCorporateKPI").prop("checked",true);
+		}else{
+			$("#isCorporateKPI").prop("checked",false);
 		}
 		
 		//remind_condition_id

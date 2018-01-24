@@ -667,14 +667,14 @@ var dropDrowAppraisalOrgLevelFn = function(id){
 var dropDrowIndividualOrgLevelFn = function(id){
 
 	$.ajax({
-		//url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_level_individual",
-		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/al_list_emp_org",
+		url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_level_individual",
+		//url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/al_list_emp_org",
 		type:"get",
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
-		//data:{"level_id": $("#AppraisalEmpLevel").val()},
-		data:{"emp_code":session_emp_code,"level_id":$("#AppraisalEmpLevel").val()},
+		data:{"level_id": $("#AppraisalEmpLevel").val()},
+		//data:{"emp_code":session_emp_code,"level_id":$("#AppraisalEmpLevel").val()},
 		success:function(data){
 			var htmlOption="";
 			htmlOption+="<option value=''>All Level</option>";
@@ -765,23 +765,23 @@ var dropDrowOrgFn = function(appraisalLevelId){
 }
 
 var dropDrowIndividualOrgFn = function(appraisalLevelId){
-	var service_url_Check;
-	if($("#appraisalType").val()==1) {
-		service_url_Check = "org";
-	}
-	else {
-		service_url_Check = "org/list_org_for_emp";
-	}
+//	var service_url_Check;
+//	if($("#appraisalType").val()==1) {
+//		service_url_Check = "org";
+//	}
+//	else {
+//		service_url_Check = "org/list_org_for_emp";
+//	}
 	
 	$.ajax({
-		//url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_individual",
-		url:restfulURL+"/"+serviceName+"/public/"+service_url_Check+"",
+		url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_individual",
+		//url:restfulURL+"/"+serviceName+"/public/"+service_url_Check+"",
 		type:"get",
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"level_id":$("#AppraisalOrgLevel").val(),"emp_code":session_emp_code,"level_id_emp":$("#AppraisalEmpLevel").val()},
-		//data:{"emp_level":$("#AppraisalEmpLevel").val(), "org_level":$("#AppraisalOrgLevel").val()},
+		//data:{"level_id":$("#AppraisalOrgLevel").val(),"emp_code":session_emp_code,"level_id_emp":$("#AppraisalEmpLevel").val()},
+		data:{"emp_level":$("#AppraisalEmpLevel").val(), "org_level":$("#AppraisalOrgLevel").val()},
 		success:function(data){
 			var htmlOption="";
 			htmlOption+="<option value=''>All Organization</option>";
