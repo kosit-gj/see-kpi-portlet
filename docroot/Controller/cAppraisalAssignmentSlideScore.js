@@ -386,10 +386,10 @@ var findOneFn = function(id,actionType){
 var getDataFn = function(page,rpp) {
 	
 	var appraisal_level_id_org = $("#embed_appraisal_level_id_org").val();
-	var appraisal_level_id = $("#embed_appraisal_level_id_emp").val();
+	var appraisal_level_id_emp = $("#embed_appraisal_level_id_emp").val();
 	
 	if($("#appraisalType").val()==1) {
-		appraisal_level_id = "";
+		appraisal_level_id_emp = "";
 	}
 	
 	var appraisal_type_id= $("#embed_appraisal_type_id").val();
@@ -415,7 +415,7 @@ var getDataFn = function(page,rpp) {
 			"rpp":rpp,
 //			"appraisal_year":"",
 //			"frequency_id":"",
-			"appraisal_level_id":appraisal_level_id,
+			"appraisal_level_id_emp":appraisal_level_id_emp,
 			"appraisal_level_id_org":appraisal_level_id_org,
 			"appraisal_type_id":appraisal_type_id,
 			"period_id":period_id,
@@ -428,7 +428,7 @@ var getDataFn = function(page,rpp) {
 		},
 		success:function(data){
 			
-			//console.log(data);
+			console.log(data);
 			
 			listDataFn(data);
 			setThemeColorFn(tokenID.theme_color);
