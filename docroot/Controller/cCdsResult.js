@@ -215,7 +215,6 @@ var dropDownListYear = function(){
 
 var dropDownListAppraisalLevel = function(){
 	var html="";
-	html+="<select data-placement='top' id=\"app_lv\" class=\"input span12 m-b-n\" name=\"app_lv\">";
 	html+="<option  selected value=''>All Appraisal Level</option>";
 	$.ajax ({
 		//url:restfulURL+restfulPathDropDownAppraisalLevel,
@@ -236,10 +235,11 @@ var dropDownListAppraisalLevel = function(){
 		}
 	});	
 	html+="</select>";
-	return html;
+	$("#app_lv").html(html);
+	//return html;
 };
 
-var CdsResultLevelListEmpLevelFn = function(){
+var dropDownListEmpLevelFn = function(){
 	//console.log(session_emp_code)
 	var html="";
 	$.ajax({
@@ -259,7 +259,7 @@ var CdsResultLevelListEmpLevelFn = function(){
 	});
 }
 
-var CdsResultLevelListEmpLevelToOrgFn = function(){
+var dropDownListEmpLevelToOrgFn = function(){
 	$.ajax({
 		//url:restfulURL+"/"+serviceName+"/public/appraisal_item/al_list",
 		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/al_list_emp_org",
@@ -302,6 +302,7 @@ var dropDownListAppraisalType = function(){
 };
 
 var dropDownListOrganization = function() {
+	console.log("test")
 	var service_url_Check;
 	if($("#app_type").val()==1) {
 		service_url_Check = "org";
@@ -650,8 +651,8 @@ $(document).ready(function() {
 			$("#position").removeAttr('disabled');
 			$("#emp_name").removeAttr('disabled');
 			
-			CdsResultLevelListEmpLevelFn();
-			CdsResultLevelListEmpLevelToOrgFn();
+			dropDownListEmpLevelFn();
+			dropDownListEmpLevelToOrgFn();
 			$("#drop_down_list_organization").html(dropDownListOrganization());
 			
 		}else if($("#app_type").val() == "1") {
@@ -664,7 +665,7 @@ $(document).ready(function() {
 			$("#emp_name").val("");
 			$("#emp_name_id").val("");
 			
-			$("#drop_down_list_appraisal_level").html(dropDownListAppraisalLevel());
+			dropDownListAppraisalLevel();
 			$("#drop_down_list_organization").html(dropDownListOrganization());
 			
 		}
@@ -676,7 +677,7 @@ $(document).ready(function() {
 	});
 	
 	$("#app_lv_emp").change(function() {
-		CdsResultLevelListEmpLevelToOrgFn();
+		dropDownListEmpLevelToOrgFn();
 		$("#drop_down_list_organization").html(dropDownListOrganization());
 	});
 	
