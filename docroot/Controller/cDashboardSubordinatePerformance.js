@@ -597,6 +597,7 @@
 		//var position= $("#param_position").val();
 		var org= $("#param_org_id").val();
 		var kpi= $("#param_kpi_id").val();
+		var app_lv = $("#param_app_lv").val();
 
 		$.ajax({
 			url : restfulURL+"/"+serviceName+"/public/dashboard/kpi_overall",
