@@ -168,6 +168,7 @@ function addCommas(nStr)
 	return x1 + x2;
 }
 function removeComma(nStr){
+	nStr = (nStr == undefined || nStr == null || nStr=="" ? "0" : nStr);
 	return parseFloat(nStr.replace(/,/g, ''))
 }
 
