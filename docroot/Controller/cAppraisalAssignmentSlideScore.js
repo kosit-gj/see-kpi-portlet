@@ -415,7 +415,7 @@ var getDataFn = function(page,rpp) {
 			"rpp":rpp,
 //			"appraisal_year":"",
 //			"frequency_id":"",
-			"appraisal_level_id_emp":appraisal_level_id_emp,
+			"appraisal_level_id":appraisal_level_id_emp,
 			"appraisal_level_id_org":appraisal_level_id_org,
 			"appraisal_type_id":appraisal_type_id,
 			"period_id":period_id,
