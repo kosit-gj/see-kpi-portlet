@@ -1197,17 +1197,23 @@ overflow-y: visible;
 				                </div>
 				                <br style="clear:both">
 			                </div>
+			                
 			                <div class='form-file-mangement'>
 				                <div class="form-label-customs">
-				                
 				                	Deduct Score/Unit <span class='redFont'>*</span>
 				                </div>
-				                
 				                <div class="form-input-customs">
-				                
-				                		<input type="text" class="form-control input-sm numberOnly  span12" placeholder="Deduct Score/Unit" id="DeductScoreUnitDeductScore">
-				                	
-				                		
+				                	<input type="text" class="form-control input-sm numberOnly  span12" placeholder="Deduct Score/Unit" id="DeductScoreUnitDeductScore">
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                	Value Get Zero <span class='redFont'>*</span>
+				                </div>
+				                <div class="form-input-customs">
+				                	<input type="text" class="form-control input-sm numberOnly  span12" placeholder="Value Get Zero" id="ValueGetZero">
 				                </div>
 				                <br style="clear:both">
 			                </div>

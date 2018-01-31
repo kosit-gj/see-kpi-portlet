@@ -10,6 +10,7 @@ var clearDeductScoreFormFn = function(){
 	//$("#isShowVarianceDeductScore").prop("checked",false);
 	$("#isActiveDeductScore").prop("checked",true);
 	$("#DeductScoreUnitDeductScore").val("");
+	$("#ValueGetZero").val("");
 	
 	//$("#structure_id_deduct").val("");
 	
@@ -45,6 +46,7 @@ var updateDeductScoreFn  = function(){
 	 var structure_id=$("#structure_id_deduct").val();
 	 var max_value=$("#maxValueDeductScore").val();
 	 var unit_deduct_score=$("#DeductScoreUnitDeductScore").val();
+	 var value_get_zero=$("#ValueGetZero").val();
 	 //var department_id=$("#departmentDeductScore").val();
 	 var organization=($('[name="organizationDeductScore[]"]').val());
 	 var position=($('[name="positionDeductScore[]"]').val());
@@ -74,6 +76,7 @@ var updateDeductScoreFn  = function(){
 		 "structure_id":structure_id,
 		 "max_value":max_value,
 		 "unit_deduct_score":unit_deduct_score,
+		 "value_get_zero":value_get_zero,
 //		 "is_show_variance ":is_variance,
 		 "is_active":is_active,
 		// "department_code":department_id,
@@ -110,6 +113,7 @@ var insertDeductScoreFn = function(param) {
 	 var structure_id=$("#structure_id_deduct").val();
 	 var max_value=$("#maxValueDeductScore").val();
 	 var unit_deduct_score=$("#DeductScoreUnitDeductScore").val();
+	 var value_get_zero=$("#ValueGetZero").val();
 	 //var department_id=$("#departmentDeductScore").val();
 	 var organization=($('[name="organizationDeductScore[]"]').val());
 	 var position=($('[name="positionDeductScore[]"]').val());
@@ -138,6 +142,7 @@ var insertDeductScoreFn = function(param) {
 			 "structure_id":structure_id,
 			 "max_value":max_value,
 			 "unit_deduct_score":unit_deduct_score,
+			 "value_get_zero":value_get_zero,
 //			 "is_show_variance":is_variance,
 			 "is_active":is_active,
 			 //"department_code":department_id,
@@ -190,6 +195,7 @@ var initailDeductScoreFormFn = function(action,structureId,structureName,data){
 		$("#appraisalItemNameDeductScore").val(data['item_name']);
 		$("#maxValueDeductScore").val(data['max_value']);
 		$("#DeductScoreUnitDeductScore").val(data['unit_deduct_score']);
+		$("#ValueGetZero").val(data['value_get_zero']);
 		
 //		if(data['is_show_variance']==1){
 //			$("#isShowVarianceDeductScore").prop("checked",true);
