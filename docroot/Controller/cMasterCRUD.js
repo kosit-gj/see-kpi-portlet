@@ -263,6 +263,7 @@ var updateFn = function(data,options){
 			headers:{Authorization:"Bearer "+options['tokenID'].token},
 			success : function(data,status) {
 				if(data['status']=="200"){
+					//console.log(data)
 					//alert("Update Success");
 					callFlashSlide("Update success.");
 					$("#modal-"+options['formDetail']['id']).modal('hide');
@@ -289,8 +290,8 @@ var mapObjectToFormFn  =function(data,options){
 
 		if(indexEntry['inputType']=="text" || indexEntry['inputType']=="date"){
 			$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).val(data[indexEntry['id']]);
-		}else if(indexEntry['inputType']=="dropdown" || indexEntry['inputType']=="cascades" ){
-			if(indexEntry['updateList']== true && indexEntry['updateList']!=undefined){
+		}else if(indexEntry['inputType']=="dropdown" || indexEntry['inputType']=="cascades" ) {
+			if(indexEntry['updateList']== true && indexEntry['updateList']!=undefined) {
 				$.ajax({
 					url:indexEntry['url'],
 					dataType:"json",
@@ -317,9 +318,18 @@ var mapObjectToFormFn  =function(data,options){
 						$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).html(inputType);
 						//alert(inputType);
 					}
-				})
+				});
 			}
 			$("form#"+options['formDetail']['id']+"  #"+indexEntry['id']).val(data[indexEntry['id']]).change();
+			if(indexEntry['DefaultDropDown']!== undefined && indexEntry['DefaultDropDown']=="access_type") {
+				if(data['database_type_id']==0) {
+					$("#access_type").val("ODBC");
+					$("#access_type").change();
+				} else {
+					$("#access_type").val("JDBC");
+					$("#access_type").change();
+				}
+			}
 			//alert("form#"+options['formDetail']['id']+" > #"+indexEntry['id']);
 			//alert(data[indexEntry['id']]);
 		}else if(indexEntry['inputType']=="color"){
@@ -328,7 +338,8 @@ var mapObjectToFormFn  =function(data,options){
 			
 			//alert("form#"+options['formDetail']['id']+" > #"+indexEntry['id']);
 			//alert(data[indexEntry['id']]);
-		}else if(indexEntry['inputType']=="checkbox"){
+		}
+		else if(indexEntry['inputType']=="checkbox"){
 
 			if(data[indexEntry['id']]==1){
 				
@@ -580,32 +591,39 @@ var createInputTypeFn  = function(object,tokenID){
 		
 	}
 	if(object['inputType']=="dropdown"){
-		$.ajax({
-			url:object['url'],
-			dataType:"json",
-			type:"get",
-			async:false,
-			headers:{Authorization:"Bearer "+tokenID.token},
-			success:function(data){
-				inputType="<select "+inputTooltip+" class=\"span12 m-b-n\" id=\""+object['id']+"\" name=\""+object['id']+"\" style=\"width:"+object['width']+"\">";
-				//initValue
-				if(object['initValue']!=undefined){
-					inputType+="<option value=''>"+object['initValue']+"</option>";
-				}
-				
-				golbalDataCascades[object['id']] = data
-				
-				$.each(data,function(index,indexEntry){
-					if(dataSearch==indexEntry[Object.keys(indexEntry)[0]]){
-						inputType+="<option selected value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1]]+"</option>";
-					}else{
-						inputType+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1]]+"</option>";
+		if(object['DefaultDropDown']!==undefined && object['DefaultDropDown']=="access_type") {
+			inputType="<select "+inputTooltip+" class=\"span12 m-b-n\" id=\""+object['id']+"\" name=\""+object['id']+"\" style=\"width:"+object['width']+"\">";
+			inputType+="<option value='JDBC'>JDBC</option>";
+			inputType+="<option value='ODBC'>ODBC</option>";
+			inputType+="</select>";
+		} else {
+			$.ajax({
+				url:object['url'],
+				dataType:"json",
+				type:"get",
+				async:false,
+				headers:{Authorization:"Bearer "+tokenID.token},
+				success:function(data){
+					inputType="<select "+inputTooltip+" class=\"span12 m-b-n\" id=\""+object['id']+"\" name=\""+object['id']+"\" style=\"width:"+object['width']+"\">";
+					//initValue
+					if(object['initValue']!=undefined){
+						inputType+="<option value=''>"+object['initValue']+"</option>";
 					}
-				});
-				inputType+="</select>";
-				//alert(inputType)
-			}
-		})
+					
+					golbalDataCascades[object['id']] = data
+					
+					$.each(data,function(index,indexEntry){
+						if(dataSearch==indexEntry[Object.keys(indexEntry)[0]]){
+							inputType+="<option selected value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1]]+"</option>";
+						}else{
+							inputType+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1]]+"</option>";
+						}
+					});
+					inputType+="</select>";
+					//alert(inputType)
+				}
+			})
+		}
 		
 	}else if(object['inputType']=="text" || object['inputType']=="autoComplete"|| object['inputType']=='hidden'){
 
@@ -692,7 +710,7 @@ formHTML+="           <div class=\"row-fluid\">";
 formHTML+="           <div class=\"span12 form-horizontal p-t-xxs\">";
 
 $.each(options['form'],function(index,indexEntry){
-	formHTML+="           <div class=\"form-group p-xxs\">";
+	formHTML+="           <div class=\"form-group p-xxs\" id=\"form-group-"+indexEntry['id']+"\">";
 	formHTML+="                <label class=\"control-label\">";
 	formHTML+="                "+indexEntry['label']+"";
 								if(indexEntry['required']==true){
@@ -702,7 +720,7 @@ $.each(options['form'],function(index,indexEntry){
 	formHTML+="                <div class=\"controls\">";
 	formHTML+=					createInputTypeFn(indexEntry,options['tokenID']);
 	formHTML+="                </div>";
-	formHTML+="                </div>";
+	formHTML+="           </div>";
 });
 
 if(options['formIf']!==undefined) {
