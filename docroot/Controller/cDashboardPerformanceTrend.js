@@ -1309,6 +1309,19 @@ var CreateOrgLevelWhitEmpLevel = function(){
 	));
 }
 
+var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
+	$("#AppraisalOrgLevel").html(generateDropDownList(
+		restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_level_by_empname",
+		"GET",
+		{"emp_id": emp_id}
+	));
+	$("#organization").html(generateDropDownList(
+		restfulURL+"/"+serviceName+"/public/appraisal/parameter/organization_by_empname",
+		"GET",
+		{"emp_id": emp_id}
+	));
+}
+
 
 
  $(document).ready(function(){
@@ -1516,7 +1529,7 @@ var CreateOrgLevelWhitEmpLevel = function(){
 	                        console.log('Error: ' + xhr.responseText);
 	                    },
 					 success:function(data){
-						  
+						  	console.log(data)
 							response($.map(data, function (item) {
 	                            return {
 	                                label: item[Object.keys(item)[2]],
@@ -1534,6 +1547,7 @@ var CreateOrgLevelWhitEmpLevel = function(){
 					});
 	        },
 			select:function(event, ui) {
+				CreateOrgLevelAndOrganizByEmpName(ui.item.value_id);
 				$("#emp_name").val(ui.item.value);
 	            $("#emp_name_id").val(ui.item.value_id);
 	            galbalDataTemp["#emp_name"] = ui.item.label;
