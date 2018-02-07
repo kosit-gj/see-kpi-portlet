@@ -428,7 +428,7 @@ var getDataFn = function(page,rpp) {
 		},
 		success:function(data){
 			
-			console.log(data);
+			//console.log(data);
 			
 			listDataFn(data);
 			setThemeColorFn(tokenID.theme_color);
@@ -582,11 +582,13 @@ var listDataFn = function(data) {
 						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;View\"></i>";
 					}else if(is_hr==1 &&  itemEntry['status']!='Accepted'){
 						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
-						
-						
-					}else if(is_hr==0){
+					}else if(is_self_assign==1 &&  itemEntry['status']=='Accepted'){
+						//htmlHTML+="  <i title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;View&lt;/button&gt;   &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
+						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;View\"></i>";
+					}else if(is_self_assign==1 &&  itemEntry['status']!='Accepted'){
+						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
+					}else if(is_hr==0 || is_self_assign==0){
 						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;View\"></i>";
-						
 					}
 				}
 				
@@ -1162,7 +1164,7 @@ var appraisalLevelListOrgFn = function(){
 		data:{"emp_code":session_emp_code},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
-			console.log(data);
+			//console.log(data);
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['level_id']){
@@ -1188,7 +1190,7 @@ var appraisalLevelListIndividualFn = function(){
 		data:{"emp_code":session_emp_code},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
-			console.log(data);
+			//console.log(data);
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['level_id']){
@@ -1640,8 +1642,8 @@ var dropDrowActionFn = function(employee_code){
 
 //var dropDrowActionEditFn = function(paramStageID,paramToAppraisalLevel){
 var dropDrowActionEditFn = function(paramStageID,employee_code){
-	console.log(employee_code,'employee_code?')
-	console.log(paramStageID,'paramStageID?')
+	//console.log(employee_code,'employee_code?')
+	//console.log(paramStageID,'paramStageID?')
 
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/edit_action_to",
@@ -1713,7 +1715,7 @@ var periodFn = function(nameArea){
 //form2
 var assignTemplateQualityFn = function(structureName,data){
 	
-	console.log(data['threshold'],structureName,'threshold assignTemplateQualityFn')
+	//console.log(data['threshold'],structureName,'threshold assignTemplateQualityFn')
 	
 	var htmlTemplateQuality="";
 	htmlTemplateQuality+="";
@@ -1769,7 +1771,7 @@ return htmlTemplateQuality;
 
 var assignTemplateDeductFn = function(structureName,data){
 	
-	console.log(data['threshold'],structureName,'threshold assignTemplateDeductFn')
+	//console.log(data['threshold'],structureName,'threshold assignTemplateDeductFn')
 	
 	var htmlTemplateDeduct="";
 	htmlTemplateDeduct+="<div class=\"row-fluid\">";
@@ -1832,7 +1834,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 	
 	if(data['threshold']==1){
 		// threshold == 1
-		console.log(data['threshold'],structureName,'threshold = 1 in assignTemplateQuantityFn')
+		//console.log(data['threshold'],structureName,'threshold = 1 in assignTemplateQuantityFn')
 			htmlTemplateQuantity+="<div class=\"row-fluid\">";
 			htmlTemplateQuantity+="	<div class=\"span12\">";
 			htmlTemplateQuantity+="  <div class=\"ibox-title2\">";
@@ -1919,7 +1921,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 			
 	}else{
 		
-		console.log(data['threshold'],structureName,'threshold = 0 in assignTemplateQuantityFn')
+		//console.log(data['threshold'],structureName,'threshold = 0 in assignTemplateQuantityFn')
 		// threshold == 0
 		
 		htmlTemplateQuantity+="<div class=\"row-fluid\">";
@@ -2057,7 +2059,7 @@ var calculationGrandTotalFn = function(id){
 		var dataId=this.id.split("-");
 		var apprailsal_item_id=dataId[1];
 		var structure_id=dataId[2];
-		grandTotalWieght+=getNum(parseFloat($("#id-"+apprailsal_item_id+"-"+structure_id+"-weight").val().replace(',', '')));
+		grandTotalWieght+=getNum(removeComma($("#id-"+apprailsal_item_id+"-"+structure_id+"-weight").val()));
 		
 	});
 			   
