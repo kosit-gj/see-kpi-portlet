@@ -1294,10 +1294,12 @@ var CreateParamKpi = function(){
 }
 
 var CreateOrgWhitEmpLevelOrgLevel = function(){
+	if(galbalDataTemp["#emp_name_id"]==undefined) { var emp_id = ""; } else { var emp_id = galbalDataTemp["#emp_name_id"]; }
+	//console.log(emp_id)
 	$("#organization").html( generateDropDownList(
 		restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_individual",
 		"GET",
-		{"emp_level":$("#AppraisalEmpLevel").val(), "org_level":$("#AppraisalOrgLevel").val()}
+		{"emp_level":$("#AppraisalEmpLevel").val(), "org_level":$("#AppraisalOrgLevel").val(), "emp_id":emp_id}
 	));
 }
 
