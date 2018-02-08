@@ -166,42 +166,42 @@
 	            "categories": data['categories'],
 	            "dataset" 	: data['dataset'],
 	            "trendlines" : data['trendlines']
-	        },
-	        "events": {
-	            "dataplotclick" : function(ev, props) {
-	            	
-	            	var objDataset = ev.sender.getJSONData().dataset;
-	            	//console.log(objDataset);
-	            	//console.log(props);
-	            	//console.log(props.displayValue);
-	            	var clickLabel = $("#nameDiv").text();
-	            	if(galbalDataTemp['click'] == null || galbalDataTemp['click'] == "" || galbalDataTemp['click']['id'] != clickLabel){
-	            		galbalDataTemp['click']={id:clickLabel,double_click:false};
-	            		clearTimeout(galbalDataTemp['click_Timeout']);
-	            		galbalDataTemp['click_Timeout'] = setTimeout(function(){ console.log("*** Clear Timeout ***");galbalDataTemp['click']['id']=""; }, 1000);
-	            	}else if(galbalDataTemp['click']['id'] == clickLabel){
-	            		galbalDataTemp['click']['double_click'] =true;
-	            	}
-	            	console.log(galbalDataTemp['click']['double_click']);
-	            	$.each(objDataset,function(index,indexEntry){
-	            		$.each(indexEntry['data'],function(index2,indexEntry2){
-		            	  if(clickLabel == indexEntry2['name'] && galbalDataTemp['click']['double_click'] == true){
-//		            		  
-		            			$("#param_item").val(indexEntry2['item_id']);
-		            			$("form#linkParam").attr("action", galbalDataTemp['protocol']+window.location.host+"/web/guest/subordinate-performance");
-		            			$("form#linkParam").submit();
-//		            			setTimeout(function(){
-//		            				$("form#linkParam").attr("action", galbalDataTemp['protocol']+window.location.host+"/web/guest/performance-trend");
-//			            			$("form#linkParam").submit();
-//		            				}, 1000);
-		            			
-		            			galbalDataTemp['click']['id']="";
-		            		  return false;
-		            	  }
-	            	 	});
-		              });
-	            }    
 	        }
+//	        "events": {
+//	            "dataplotclick" : function(ev, props) {
+//	            	
+//	            	var objDataset = ev.sender.getJSONData().dataset;
+//	            	//console.log(objDataset);
+//	            	//console.log(props);
+//	            	//console.log(props.displayValue);
+//	            	var clickLabel = $("#nameDiv").text();
+//	            	if(galbalDataTemp['click'] == null || galbalDataTemp['click'] == "" || galbalDataTemp['click']['id'] != clickLabel){
+//	            		galbalDataTemp['click']={id:clickLabel,double_click:false};
+//	            		clearTimeout(galbalDataTemp['click_Timeout']);
+//	            		galbalDataTemp['click_Timeout'] = setTimeout(function(){ console.log("*** Clear Timeout ***");galbalDataTemp['click']['id']=""; }, 1000);
+//	            	}else if(galbalDataTemp['click']['id'] == clickLabel){
+//	            		galbalDataTemp['click']['double_click'] =true;
+//	            	}
+//	            	console.log(galbalDataTemp['click']['double_click']);
+//	            	$.each(objDataset,function(index,indexEntry){
+//	            		$.each(indexEntry['data'],function(index2,indexEntry2){
+//		            	  if(clickLabel == indexEntry2['name'] && galbalDataTemp['click']['double_click'] == true){
+////		            		  
+//		            			$("#param_item").val(indexEntry2['item_id']);
+//		            			$("form#linkParam").attr("action", galbalDataTemp['protocol']+window.location.host+"/web/guest/subordinate-performance");
+//		            			$("form#linkParam").submit();
+////		            			setTimeout(function(){
+////		            				$("form#linkParam").attr("action", galbalDataTemp['protocol']+window.location.host+"/web/guest/performance-trend");
+////			            			$("form#linkParam").submit();
+////		            				}, 1000);
+//		            			
+//		            			galbalDataTemp['click']['id']="";
+//		            		  return false;
+//		            	  }
+//	            	 	});
+//		              });
+//	            }    
+//	        }
 	    }).render();
 	 
  };
