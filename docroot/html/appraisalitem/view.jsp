@@ -1666,6 +1666,7 @@ overflow-y: visible;
 				                	<select class="form-control input-sm span12"    id="functionTypeQuantity">
 				                			<option value='1'>Sum</option>
 				                			<option value='2'>Last</option>
+				                			<option value='3'>Avg</option>
 				                	</select>
 				                </div>
 				                <br style="clear:both">
