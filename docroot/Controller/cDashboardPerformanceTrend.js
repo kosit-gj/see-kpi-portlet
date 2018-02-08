@@ -1320,6 +1320,16 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 		"GET",
 		{"emp_id": emp_id}
 	));
+	$("#kpi").html( generateDropDownList(
+			restfulURL+"/"+serviceName+"/public/dashboard/kpi_list",
+			"POST",
+			{
+				"appraisal_level": ($("#app_type").val() == "1") ? $("#AppraisalOrgLevel").val() : $("#AppraisalEmpLevel").val(),
+				"org_id": $("#organization").val(),
+				"emp_id": $("#emp_name_id").val(),
+				"appraisal_type_id": $("#app_type").val()
+			}
+	));
 }
 
 
@@ -1529,7 +1539,7 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 	                        console.log('Error: ' + xhr.responseText);
 	                    },
 					 success:function(data){
-						  	console.log(data)
+						  	//console.log(data)
 							response($.map(data, function (item) {
 	                            return {
 	                                label: item[Object.keys(item)[2]],
