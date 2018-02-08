@@ -690,7 +690,7 @@ var listDashBoardFn = function(data){
 	$("#organization").html( generateDropDownList(
 		restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_individual",
 		"GET",
-		{"emp_level":$("#AppraisalEmpLevel").val(), "org_level":$("#AppraisalOrgLevel").val(), "emp_id":emp_id}
+		{"emp_level":$("#AppraisalEmpLevel").val(), "org_level":$("#AppraisalOrgLevel").val(), "emp_id":emp_id,"period_id": $("#period").val()}
 	));
  }
  
@@ -698,7 +698,7 @@ var listDashBoardFn = function(data){
 	$("#AppraisalOrgLevel").html(generateDropDownList(
 		restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_level_individual",
 		"GET",
-		{"level_id": $("#AppraisalEmpLevel").val()}
+		{"level_id": $("#AppraisalEmpLevel").val(),"period_id": $("#period").val()}
 	));
  }
  
@@ -706,12 +706,12 @@ var listDashBoardFn = function(data){
 		$("#AppraisalOrgLevel").html(generateDropDownList(
 			restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_level_by_empname",
 			"GET",
-			{"emp_id": emp_id}
+			{"emp_id": emp_id,"period_id": $("#period").val()}
 		));
 		$("#organization").html(generateDropDownList(
 			restfulURL+"/"+serviceName+"/public/appraisal/parameter/organization_by_empname",
 			"GET",
-			{"emp_id": emp_id}
+			{"emp_id": emp_id,"org_level": $("#AppraisalOrgLevel").val(),"period_id": $("#period").val()}
 		));
 		 $("#kpi").html( generateDropDownList(
 					restfulURL+"/"+serviceName+"/public/dashboard/kpi_list",

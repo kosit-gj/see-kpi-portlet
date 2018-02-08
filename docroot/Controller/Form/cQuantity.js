@@ -324,6 +324,7 @@ structure_name
 		$("#appraisalItemNameQuantity").val(data['item_name']);	
 		$("#textarea_cds").html(data['formula_cds_name']);
 		$("#kpiQuantity").val(data['kpi_id']);
+		$("#functionTypeQuantity").val(data['function_type']);
 		
 		
 		//get formula cds id start

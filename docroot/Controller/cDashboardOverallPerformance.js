@@ -493,12 +493,12 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 	$("#AppraisalOrgLevel").html(generateDropDownList(
 		restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_level_by_empname",
 		"GET",
-		{"emp_id": emp_id}
+		{"emp_id": emp_id,"period_id": $("#period").val()}
 	));
 	$("#organization").html(generateDropDownList(
 		restfulURL+"/"+serviceName+"/public/appraisal/parameter/organization_by_empname",
 		"GET",
-		{"emp_id": emp_id}
+		{"emp_id": emp_id,"org_level": $("#AppraisalOrgLevel").val(),"period_id": $("#period").val()}
 	));
 }
 
