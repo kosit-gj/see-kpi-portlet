@@ -406,7 +406,7 @@
 		    
 	 return false;
  };
- var generateChartBarLineAreaFn = function(data,type){	
+ var generateChartBarLineAreaFn = function(data,type){
 	 var salesAnlysisChart = new FusionCharts({
 	        type: 'mscombi2d',
 	        renderAt: 'chart-container',
@@ -547,7 +547,6 @@
 	 return false;
  };
  var generateChartBarLineDualFn = function(data,type){	
-	 
 	 var salesAnlysisChart = new FusionCharts({//scrollcombidy2d mscombidy2d  mscombi2d
 	        type: "mscombidy2d",
 	        renderAt: 'chart-container',
@@ -584,7 +583,7 @@
                 	"sYAxisNameFontItalic": "1",
                 	"sYAxisNameAlpha": "80",
 	                //"numberPrefix": "$",
-	               	"sNumberSuffix" : "%",
+	               	"sNumberSuffix" : (data['is_show_variance'] == "1" ? "":"%"),
 	                //"sYAxisMaxValue" : "50",
 					"showValues": "0",
 					//Cosmetics
