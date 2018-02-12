@@ -293,6 +293,7 @@
 		var emp= $("#param_emp").val();
 		//var position= $("#param_position").val();
 		var app_lv= $("#param_app_lv").val();
+		var app_lv_org= $("#param_app_lv_org").val();
 		var org= $("#param_org_id").val();
 
 		$.ajax({
@@ -306,6 +307,7 @@
 				"emp_id"				:		emp,
 				//"position_id"			:		position,
 				"level_id"				:		app_lv,
+				"org_level_id"			:		app_lv_org,
 				"org_id"				:		org	
 			},
 			headers:{Authorization:"Bearer "+tokenID.token},
@@ -435,6 +437,8 @@ var getDataBubbleFn = function(page,rpp){
 	var app_lv= $("#param_app_lv").val();
 	var org= $("#param_org_id").val();
 	var perspective= $("#param_perspective").val();
+	var app_lv_org= $("#param_app_lv_org").val();
+	
 	$.ajax({
 		url : restfulURL+"/"+serviceName+"/public/dashboard/kpi_overall_bubble",
 		type : "get",
@@ -446,6 +450,7 @@ var getDataBubbleFn = function(page,rpp){
 			"emp_id"				:		emp,
 			//"position_id"			:		position,
 			"level_id"				:		app_lv,
+			"org_level_id"			:		app_lv_org,
 			"org_id"				:		org,
 			"perspective_id" 		:		perspective 
 		},
@@ -468,6 +473,7 @@ var getDataBubbleFn = function(page,rpp){
  var searchAdvanceFn = function (year,period,app_lv,org,app_type,emp,emp_name,position) {
 	//embed parameter start
 	 var AppraisalLevel_ = ($("#app_type").val() == "1") ? $("#AppraisalOrgLevel").val() : $("#AppraisalEmpLevel").val() ;
+	 var AppraisalLevelOrg_ = $("#AppraisalOrgLevel").val();
 		
 		var htmlParam="";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_year' 		name='param_year' 		value='"+year+"'>";
@@ -477,6 +483,7 @@ var getDataBubbleFn = function(page,rpp){
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_emp_name' 	name='param_emp_name' 	value='"+emp_name+"'>";
 		//htmlParam+="<input type='hidden' class='paramEmbed' id='param_position' 	name='param_position' 	value='"+position+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' 		name='param_app_lv' 	value='"+AppraisalLevel_+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv_org' 	name='param_app_lv_org' value='"+AppraisalLevelOrg_+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' 		name='param_org_id' 	value='"+org+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_perspective' 	name='param_perspective'value=''>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_item' 		name='param_item' 		value=''>";
