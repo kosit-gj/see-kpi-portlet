@@ -135,7 +135,7 @@
 		var org_id 			=	$("#embed_organization").val().split(",");
 		$.ajax({
 			url : restfulURL+"/"+serviceName+"/public/import_assignment/item_list",
-			type : "get",
+			type : "post",
 			dataType : "json",
 			data:{
 				"position_id"			:		position_id,
@@ -230,32 +230,37 @@ var listErrorFn = function(data){
 	var validateFile="";
 
 $.each(data,function(index,indexEntry){
-   if(indexEntry['appraisal_type_id'] == null || indexEntry['appraisal_type_id'] == "" ){
-				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Appraisal_type_id : null , ";
-			}else{
-				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Appraisal_type_id : "+indexEntry['appraisal_type_id']+", ";
-			}
-			if(indexEntry['emp_id'] == null || indexEntry['emp_id'] == "" ){
-				validateFile+="<font color='#FFC446'></i></font> Emp_id : null, ";
-			}else{
-				validateFile+="<font color='#FFC446'></i></font> Emp_id : "+indexEntry['emp_id']+", ";
-			}
-			if(indexEntry['level_id'] == null || indexEntry['level_id'] == "" ){
-				validateFile+="<font color='#FFC446'></font> Level_id : null, ";
-			}else{
-				validateFile+="<font color='#FFC446'></font> Level_id : "+indexEntry['level_id']+", ";
-			}
-			if(indexEntry['org_id'] == null || indexEntry['org_id'] == "" ){
-				validateFile+="<font color='#FFC446'></font> Org_id : null,<br>";
-			}else{
-				validateFile+="<font color='#FFC446'></font> Org_id : "+indexEntry['org_id']+",<br>";
-			}
-			if(indexEntry['period_id'] == null || indexEntry['period_id'] == "" ){
-				validateFile+="<font color='#FFC446'></font> Period_id : null, <br>";
-			}else{
-				validateFile+="<font color='#FFC446'></font> Period_id : "+indexEntry['period_id']+" <br>";
-			}
-    $.each(indexEntry['data'],function(index2,indexEntry2){
+	if(indexEntry['title'] == null || indexEntry['title'] == "" ){
+		validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> null,  ";
+	}else{
+		validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+indexEntry['title']+",  ";
+	}
+	if(indexEntry['appraisal_type_id'] == null || indexEntry['appraisal_type_id'] == "" ){
+		validateFile+="<font color='#FFC446'></font> Appraisal_type_id:null,  ";
+	}else{
+		validateFile+="<font color='#FFC446'></font> Appraisal_type_id:"+indexEntry['appraisal_type_id']+",  ";
+	}
+	if(indexEntry['emp_id'] == null || indexEntry['emp_id'] == "" ){
+		validateFile+="<font color='#FFC446'></i></font> Emp_id:null,  ";
+	}else{
+		validateFile+="<font color='#FFC446'></i></font> Emp_id:"+indexEntry['emp_id']+",  ";
+	}
+	if(indexEntry['level_id'] == null || indexEntry['level_id'] == "" ){
+		validateFile+="<font color='#FFC446'></font> Level_id:null,<br>";
+	}else{
+		validateFile+="<font color='#FFC446'></font> Level_id:"+indexEntry['level_id']+",<br>";
+	}
+	if(indexEntry['org_id'] == null || indexEntry['org_id'] == "" ){
+		validateFile+="<font color='#FFC446'>&emsp;</font> Org_id:null,  ";
+	}else{
+		validateFile+="<font color='#FFC446'>&emsp;</font> Org_id:"+indexEntry['org_id']+",  ";
+	}
+	if(indexEntry['period_id'] == null || indexEntry['period_id'] == "" ){
+		validateFile+="<font color='#FFC446'></font> Period_id:null,<br>";
+	}else{
+		validateFile+="<font color='#FFC446'></font> Period_id:"+indexEntry['period_id']+"<br>";
+	}
+    $.each(indexEntry['error_desc'],function(index2,indexEntry2){
 	    	 validateFile+="<font color='red'>&emsp;*</font> "+indexEntry2+"<br>";
 	     });
     
@@ -287,7 +292,8 @@ $.each(data,function(index,indexEntry){
 			 //$("#appraisalLevel").change();
 			$("#appraisalLevel").multiselect( 'refresh' );
 		});
-		generateAutocomplete("#empName",restfulURL+"/"+serviceName+"/public/cds_result/auto_emp_name","post",{"emp_name":null});
+		//generateAutocomplete("#empName",restfulURL+"/"+serviceName+"/public/cds_result/auto_emp_name","post",{"emp_name":null});
+		generateAutocomplete("#empName",restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_employee_name","post",{"emp_name":null});
 		generateAutocomplete("#Position",restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_position_name","post",{"position_name":null});
 		$("#appraisalLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/import_assignment/level_list","GET",{"appraisal_type_id":$("#appraisalType").val()}));		
 		$("#appraisalLevel").change(function(){
@@ -371,8 +377,14 @@ $.each(data,function(index,indexEntry){
 				param+="&appraisal_year="			+		$("#embed_year_list").val();
 				param+="&frequency_id="				+		$("#embed_period_frequency").val();
 				
-				$("form#formExportToExcel").attr("action",restfulURL+"/"+serviceName+"/public/import_assignment/export?token="+tokenID.token+""+param);
+				if ($("#embed_appraisal_type_id").val() == "1") {
+					$("form#formExportToExcel").attr("action",restfulURL+"/"+serviceName+"/public/import_assignment/export_organization?token="+tokenID.token+""+param);
+				} else {
+					$("form#formExportToExcel").attr("action",restfulURL+"/"+serviceName+"/public/import_assignment/export_individual?token="+tokenID.token+""+param);
+				}
+				
 				$("form#formExportToExcel").submit();
+				
 				
 				}
 			else{
