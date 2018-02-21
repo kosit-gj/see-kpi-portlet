@@ -378,6 +378,12 @@ plid = layout.getPlid();
 						</div>
 <!-- 					</div> -->
 <!-- 					<div class="row-fluid"> -->
+						<div id="drop_down_list_appraisal_level" class="form-group pull-left span3" style="margin-left: 5px" data-toggle="tooltip" title="OrgLevel">
+							<select class="input span12 m-b-n" id="app_lv"></select>
+						</div>
+						<div id="drop_down_list_organization" class="form-group pull-left span3" style="margin-left: 5px" data-toggle="tooltip" title="Organization">
+							<select class="input span12 m-b-n" ></select>
+						</div>
 						<div class="form-group pull-left span3" id="txtEmpInput" style="margin-left: 5px">
 							<input data-toggle="tooltip" data-placement="top"
 								title="Employee Name" class="span12 m-b-n ui-autocomplete-input"
@@ -392,12 +398,7 @@ plid = layout.getPlid();
 							<input class="form-control input-sm" id="position_id"
 								name="position_id" value="" type="hidden">
 						</div>
-						<div id="drop_down_list_appraisal_level" class="form-group pull-left span3" style="margin-left: 5px" data-toggle="tooltip" title="OrgLevel">
-							<select class="input span12 m-b-n" id="app_lv"></select>
-						</div>
-						<div id="drop_down_list_organization" class="form-group pull-left span3" style="margin-left: 5px" data-toggle="tooltip" title="Organization">
-							<select class="input span12 m-b-n" ></select>
-						</div>
+						
 <!-- 					</div> -->
 <!-- 					<div class="row-fluid"> -->
 <!-- 						<div class="form-group pull-left span3" style="margin-left: 5px"> -->

@@ -334,64 +334,52 @@ plid = layout.getPlid();
 
 		</div>
 
-				<div class="row-fluid app_url_hidden" class="p-t-xxs">
+
+
+
+
+
+		<div class="row-fluid app_url_hidden" >
 					<!-- start--row-fluid -->
 
-					<div class="">
+					<div class="col-lg-12">
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
 								<h5>Advance Search</h5>
 							</div>
-				<div class="ibox-content breadcrumbs2">
-					<div class="row-fluid">
-						<div id="drop_down_list_year" class="form-group pull-left span3" style="margin-left: 5px">
-							<select class="input span12 m-b-n" ></select>
+
+							<div class="ibox-content breadcrumbs2">
+					<div class="row-fluid p-t-xxs">
+						<div id="drop_down_list_structure"
+							class="form-group pull-left span2" style="margin-left: 5px">
+							<select d id="structure" class="input span12 m-b-n" data-toggle="tooltip"  style="cursor: pointer;" data-original-title="Structure"><option  value="">All Structure</option></select>
 						</div>
-						
-						<div id="drop_down_list_period" class="form-group pull-left span3" style="margin-left: 5px">
-							<select class="input span12 m-b-n" ></select>
+						<div id="drop_down_list_appraisal_level"
+							class="form-group pull-left span2" style="margin-left: 5px">
+							<select d id="app_lv" class="input span12 m-b-n" data-toggle="tooltip"  style="cursor: pointer;" data-original-title="Appraisal Level"><option  value="">All Appraisal Level</option></select>
 						</div>
-						<div id="drop_down_list_appraisal_type" class="form-group pull-left span3" style="margin-left: 5px;display:none;">
-							<select class="input span12 m-b-n" ></select>
+						<div id="drop_down_list_appraisal_type"
+							class="form-group pull-left span2" style="margin-left: 5px;display: none;">
+							<select data-placement="top" id="app_type" class="input span12 m-b-n" data-toggle="tooltip" title="" name="app_type" style="cursor: pointer;" data-original-title="Appraisal Type"></select>
 						</div>
-						<div class="form-group pull-left span3" style="margin-left: 5px">
-							<select class="input span12 m-b-n" id="app_lv_emp" data-toggle="tooltip" title="EmpLevel"></select>
+						<div class="form-group pull-left span2" style="margin-left: 5px">
+							<input data-toggle="tooltip" title="Appraisal Item"
+								data-placement="top" class="span12 m-b-n ui-autocomplete-input"
+								placeholder="Appraisal Item" id="app_item" name="app_item"
+								type="text"> <input class="form-control input-sm"
+								id="app_item_id" name="app_item_id" value="" type="hidden">
 						</div>
-<!-- 					</div> -->
-<!-- 					<div class="row-fluid"> -->
-						<div id="drop_down_list_appraisal_level" class="form-group pull-left span3" style="margin-left: 5px" data-toggle="tooltip" title="OrgLevel">
-							<select class="input span12 m-b-n" id="app_lv"></select>
+						<div id="drop_down_list_period" class="form-group pull-left span2"
+							style="margin-left: 5px">
+							<select data-placement="top" id="period" class="input span12 m-b-n" data-toggle="tooltip" title="" name="period" style="cursor: pointer;" data-original-title="Period"></select>
 						</div>
-						<div id="drop_down_list_organization" class="form-group pull-left span3" style="margin-left: 5px" data-toggle="tooltip" title="Organization">
-							<select class="input span12 m-b-n" ></select>
-						</div>
-						<div class="form-group pull-left span3" id="txtEmpInput" style="margin-left: 5px">
-							<input data-toggle="tooltip" data-placement="top"
-								title="Employee Name" class="span12 m-b-n ui-autocomplete-input"
+						<div class="form-group pull-left span2" style="margin-left: 5px;width: 155px;">
+							<input data-toggle="tooltip" title="Employee Name"
+								data-placement="top" class="span12 m-b-n ui-autocomplete-input"
 								placeholder="Employee Name" id="emp_name" name="emp_name"
 								type="text"> <input class="form-control input-sm"
 								id="emp_name_id" name="emp_name_id" value="" type="hidden">
 						</div>
-						<div class="form-group pull-left span3" style="margin-left: 5px">
-							<input data-toggle="tooltip" data-placement="top"
-								title="Position" class="span12 m-b-n ui-autocomplete-input"
-								placeholder="Position" id="position" name="position" type="text">
-							<input class="form-control input-sm" id="position_id"
-								name="position_id" value="" type="hidden">
-						</div>
-						
-<!-- 					</div> -->
-<!-- 					<div class="row-fluid"> -->
-<!-- 						<div class="form-group pull-left span3" style="margin-left: 5px"> -->
-<!-- 							<input data-toggle="tooltip" data-placement="top" -->
-<!-- 								title="Organization" class="span12 m-b-n ui-autocomplete-input" -->
-<!-- 								placeholder="Organization" id="org_name" name="org_name" type="text"> -->
-<!-- 							<input class="form-control input-sm" id="org_id" -->
-<!-- 								name="org_id" value="" type="hidden"> -->
-<!-- 						</div> -->
-						
-<!-- 						<div id="dis-non" class="form-group pull-left span1" style="margin-left: 5px;">  </div> -->
-						<div class="form-group pull-right m-b-none">
 						<div class="form-group pull-right m-b-none ">
 							<button id="btn_import" type="button" data-target="#ModalImport"
 								data-toggle="modal" class="btn btn-success btn-sm "
@@ -404,31 +392,28 @@ plid = layout.getPlid();
 								class="pull-right " style="margin-bottom: 0px; margin-left: 5px">
 								<button id="exportToExcel" class="btn btn-warning btn-sm"
 									type="button">
-									<i class="fa fa-download"></i> Export
+									<i class="fa fa-download"></i> Download
 								</button>
 							</form>
 						</div>
 						<div class="form-group pull-right m-b-none ">
 							<button type="button" name="btnSearchAdvance"
 								id="btnSearchAdvance" class="btn btn-info input-sm "
-								style="margin-left: 0px">
+								style="margin-left: 5px">
 								<i class="fa fa-search"></i>&nbsp;Search
 							</button>
 						</div>
-						</div>
 					</div>
-				</div>
-
 							</div>
 							<!-- content end -->
 						</div>
 
 					</div>
 
-
+				</div>
 				<!-- end--row-fluid -->
 				<div class="row-fluid" id="appraisal_data_list_content">
-					<div class="">
+					<div class="col-lg-12">
 						<div class="ibox-title">
 							<h5>Appraisal Data List</h5>
 						</div>

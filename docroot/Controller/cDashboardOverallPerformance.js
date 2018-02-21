@@ -214,6 +214,7 @@
 		catch(err) {
 		    console.log(err.message);
 		}
+	hoverColor = hoverColor == null || hoverColor == undefined ? "" : hoverColor;
 	 var topProductsChart = new FusionCharts({
 	        type: 'multilevelpie',
 	        dataLoadStartMessage: "Loading chart. Please wait",

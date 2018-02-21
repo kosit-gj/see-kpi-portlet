@@ -420,6 +420,7 @@
 	        dataFormat: 'json',
 	        dataSource: {
 	            "chart": {
+	            	
 	            	"xAxisname": "Month",
 	                "yAxisName": "Monthly Actual",
 	                "xAxisNameFont": "Arial",
@@ -440,7 +441,8 @@
 	                //"sYAxisMaxValue" : "50",
 					"showValues": "0",
 					//Cosmetics
-					"paletteColors": "#"+tokenID.theme_color+",#1aaf5d,#f2c500",
+					"anchorBorderThickness": "2",
+					"paletteColors": "#"+tokenID.theme_color+",#1aaf5d,#613caa",
 	                "baseFontColor" : "#333333",
 	                //"baseFont" : "Helvetica Neue,Arial",
 	                //"captionFontSize" : "14",
@@ -476,7 +478,8 @@
 	                "legendItemFontSize" : "10",
 	                "legendItemFontColor" : "#666666",
 	                "useRoundEdges":"1",
-	                "chartRightMargin":"0",
+	                "chartRightMargin":"30",
+	                
 	                //"caption": "Harry's SuperMart",
 	                //"subCaption": "Sales analysis of last year",
 	            	/*

@@ -727,6 +727,23 @@ overflow:auto;
 		                	</select>
 		                </div>
 		                
+		                <div class="form-group pull-left span3" style="margin-left: 5px">
+		                    <select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip"
+		                      title="" data-original-title="Organization Level" class="input form-control input-sm">
+		                      <option value="">All Organization Level</option>
+		                    </select>
+		                </div>
+		                
+						<div style="margin-left: 5px; margin-bottom: 3px;"
+							class="form-group pull-left span3" id="organizationArea">
+							<select name="organization" id="organization"
+								class="input form-control input-sm" title=""
+								data-toggle="tooltip" style="cursor: pointer;"
+								data-original-title="Organization" >
+								<option value="">Organization 1</option>
+								<option value="">Organization 2</option>
+							</select>
+						</div>
 						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;" id="txtEmpInput">
 							<input data-toggle="tooltip" data-placement="top" disabled
 								title="Employee Name" class="span12 m-b-n ui-autocomplete-input"
@@ -758,23 +775,7 @@ overflow:auto;
 						</div> 
 						-->
 						
-						<div class="form-group pull-left span3" style="margin-left: 5px">
-		                    <select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip"
-		                      title="" data-original-title="Organization Level" class="input form-control input-sm">
-		                      <option value="">All Organization Level</option>
-		                    </select>
-		                </div>
-		                
-						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span3" id="organizationArea">
-							<select name="organization" id="organization"
-								class="input form-control input-sm" title=""
-								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Organization" >
-								<option value="">Organization 1</option>
-								<option value="">Organization 2</option>
-							</select>
-						</div>
+						
 						
 						<div style="margin-left: 5px; margin-bottom: 3px;"
 							class="form-group pull-left span3" id="kpiArea">

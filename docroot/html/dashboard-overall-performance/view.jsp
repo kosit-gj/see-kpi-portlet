@@ -487,7 +487,23 @@ overflow:auto;
 								<option>All Level</option>
 							</select>
 						</div>
+						<div class="form-group pull-left span3" style="margin-left:5px; margin-bottom:3px;">
+							<select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip"
+								title="" data-original-title="Organization Level" class="input form-control input-sm span12">
+								<option>All Level</option>
+							</select>
+						</div>
 
+						<div style="margin-left: 5px; margin-bottom: 3px;"
+							class="form-group pull-left span3" id="organizationArea">
+							<select name="organization" id="organization"
+								class="input form-control input-sm" title=""
+								data-toggle="tooltip" style="cursor: pointer;"
+								data-original-title="Organization" >
+
+<!-- 								<option value="">Organization : List Error</option> -->
+
+							</select>
 						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;" id="txtEmpInput">
 							<input data-toggle="tooltip" data-placement="top" disabled
 								title="Employee Name" class="span12 m-b-n ui-autocomplete-input"
@@ -512,23 +528,7 @@ overflow:auto;
 							</select>
 						</div> --%>
 
-						<div class="form-group pull-left span3" style="margin-left:5px; margin-bottom:3px;">
-							<select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip"
-								title="" data-original-title="Organization Level" class="input form-control input-sm span12">
-								<option>All Level</option>
-							</select>
-						</div>
 
-						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span3" id="organizationArea">
-							<select name="organization" id="organization"
-								class="input form-control input-sm" title=""
-								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Organization" >
-
-<!-- 								<option value="">Organization : List Error</option> -->
-
-							</select>
 						</div>
 
 

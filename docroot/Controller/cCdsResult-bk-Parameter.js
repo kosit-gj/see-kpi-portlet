@@ -512,63 +512,56 @@ $(document).ready(function() {
 	*/
 	
 	//Autocomplete Search Position Start
-	$("#position").autocomplete({
-        source: function (request, response) {
-        	$.ajax({
-        		
-        		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_position_name2",
-				type:"post",
-				dataType:"json",
-				async:false,
-				headers:{Authorization:"Bearer "+tokenID.token},
-				data:{"emp_code":request.term},
-				 data:{
-					 	"position_name":request.term ,
-					 	"emp_name":($("#emp_id").val()==""?"":$("#emp_name").val()),
-					 	"org_id":$("#org_id").val()
-				 },
-
-				//async:false,
-				 headers:{Authorization:"Bearer "+tokenID.token},
-                 error: function (xhr, textStatus, errorThrown) {
-                        console.log('Error: ' + xhr.responseText);
-                    },
-				 success:function(data){
-					  
-						response($.map(data, function (item) {
-                            return {
-                                label: item.position_name,
-                                value: item.position_name,
-                                position_id : item.position_id
-                                
-                            };
-                        }));
-					
-				},
-				beforeSend:function(){
-					$("body").mLoading('hide');	
-				}
-				
-				});
-        },
-		select:function(event, ui) {
-			$("#position").val(ui.item.value);
-            $("#position_id").val(ui.item.position_id);
-            galbalDataTemp['position_name'] = ui.item.label;
-            galbalDataTemp['position_id']=ui.item.position_id;
-            return false;
-        },change: function(e, ui) {  
-
- 
-			if ($("#position").val() == galbalDataTemp['position_name']) {
-				$("#position_id").val(galbalDataTemp['position_id']);
-			}  else if (ui.item != null){
-				$("#position_id").val(ui.item.position_id);
-			}else {
-				$("#position_id").val("");
-			}
-         }
-    });
+//	$("#position").autocomplete({
+//        source: function (request, response) {
+//        	$.ajax({
+//				 url:restfulURL+restfulPathPositionAutocomplete,
+//				 type:"post",
+//				 dataType:"json",
+//				 data:{
+//					 "position_name":request.term
+//				 },
+//				//async:false,
+//				 headers:{Authorization:"Bearer "+tokenID.token},
+//                 error: function (xhr, textStatus, errorThrown) {
+//                        console.log('Error: ' + xhr.responseText);
+//                    },
+//				 success:function(data){
+//					  
+//						response($.map(data, function (item) {
+//                            return {
+//                                label: item.position_name,
+//                                value: item.position_name,
+//                                position_id : item.position_id
+//                                
+//                            };
+//                        }));
+//					
+//				},
+//				beforeSend:function(){
+//					$("body").mLoading('hide');	
+//				}
+//				
+//				});
+//        },
+//		select:function(event, ui) {
+//			$("#position").val(ui.item.value);
+//            $("#position_id").val(ui.item.position_id);
+//            galbalDataTemp['position_name'] = ui.item.label;
+//            galbalDataTemp['position_id']=ui.item.position_id;
+//            return false;
+//        },change: function(e, ui) {  
+//
+// 
+//			if ($("#position").val() == galbalDataTemp['position_name']) {
+//				$("#position_id").val(galbalDataTemp['position_id']);
+//			}  else if (ui.item != null){
+//				$("#position_id").val(ui.item.position_id);
+//			}else {
+//				$("#position_id").val("");
+//			}
+//         }
+//    });
 	
 
    
@@ -615,7 +608,6 @@ $(document).ready(function() {
             galbalDataTemp['emp_name'] = ui.item.value;
             galbalDataTemp['emp_id']=ui.item.emp_id;
             galbalDataTemp['emp_code']=ui.item.emp_code;
-            empNameAutoCompelteChangeToPositionName();
             return false;
         },change: function(e, ui) {  
 			if ($("#emp_name").val() == galbalDataTemp['emp_name']) {
@@ -631,25 +623,23 @@ $(document).ready(function() {
     });
 
 	var empNameAutoCompelteChangeToPositionName = function() {
-
+		console.log(galbalDataTemp['emp_code'])
 		
-		
-		$.ajax({
-			url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_position_name2",
-			type:"post",
-			dataType:"json",
-			async:false,
-			headers:{Authorization:"Bearer "+tokenID.token},
-			data:{"emp_name":galbalDataTemp['emp_name']},
-			success:function(data){
-				if(data.length!==0) {
-					$("#position_id").val(data[0].position_id);
-					$("#position").val(data[0].position_name);
-					galbalDataTemp['position_name'] = data[0].position_name;
-					galbalDataTemp['position_id'] = data[0].position_id;
+			$.ajax({
+				url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_position_name2",
+				type:"post",
+				dataType:"json",
+				async:false,
+				headers:{Authorization:"Bearer "+tokenID.token},
+				data:{"emp_code":galbalDataTemp['emp_code']},
+				success:function(data){
+					console.log(data)
+					if(data.length!==0) {
+						$("#position_id").val(data[0].position_id);
+						$("#position").val(data[0].position_name);
+					}
 				}
-			}
-		});
+			});
 	}
     
   //Auto Complete Employee Name end
@@ -674,7 +664,6 @@ $(document).ready(function() {
 			$("#position_id").val("");
 			$("#emp_name").val("");
 			$("#emp_name_id").val("");
-			$("#app_lv_emp").empty();
 			
 			dropDownListAppraisalLevel();
 			$("#drop_down_list_organization").html(dropDownListOrganization());
@@ -692,7 +681,10 @@ $(document).ready(function() {
 		$("#drop_down_list_organization").html(dropDownListOrganization());
 	});
 	
-
+	$("#emp_name").change(function() {
+		empNameAutoCompelteChangeToPositionName();
+	});
+	
 	
 	
 	//#### Call Export User Function Start ####

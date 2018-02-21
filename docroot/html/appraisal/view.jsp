@@ -741,7 +741,21 @@ margin-bottom:1px;
                       <option>All Level</option>
                     </select>
                   </div>
+                  
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip"
+                      title="" data-original-title="Organization Level" class="input form-control input-sm span12">
+                      <option>All Level</option>
+                    </select>
+                  </div>
 
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select data-toggle="tooltip" title="" data-original-title="organization"
+                      class="input form-control input-sm span12" id="organization" name="organization">
+                      <option>All Organization</option>
+                    </select>
+                  </div>
+                  
                   <div class="form-group pull-left span3" style="margin-left: 5px">
                     <input data-toggle="tooltip" title="" data-original-title="Employee Name"
                       class="form-control input-sm searchAdvanceText span12" placeholder="Employee Name"
@@ -765,19 +779,7 @@ margin-bottom:1px;
                     </select>
                   </div> -->
 
-                  <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip"
-                      title="" data-original-title="Organization Level" class="input form-control input-sm span12">
-                      <option>All Level</option>
-                    </select>
-                  </div>
 
-                  <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select data-toggle="tooltip" title="" data-original-title="organization"
-                      class="input form-control input-sm span12" id="organization" name="organization">
-                      <option>All Organization</option>
-                    </select>
-                  </div>
 
                   <div class="form-group span3 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
                     <button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance">

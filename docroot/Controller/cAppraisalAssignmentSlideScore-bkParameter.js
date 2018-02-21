@@ -2526,10 +2526,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 		});
 
 //		$("#empName").change(function() {
-//			if($("#empName").val().split("-")[1]!=undefined){
-//				empNameAutoCompelteChangeToPositionName();
-//			}
-//	
+//			empNameAutoCompelteChangeToPositionName();
 //		});
 
 		$(".app_url_hidden").show();
@@ -2621,25 +2618,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 				});
         }
     });
-	var empNameAutoCompelteChangeToPositionName = function(name) {
-		
-//		var empNameCodeToPosition= $("#empName").val().split("-");
-//		empNameCodeToPosition=empNameCodeToPosition[1];
-		
-		$.ajax({
-			url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_position_name2",
-			type:"post",
-			dataType:"json",
-			async:false,
-			headers:{Authorization:"Bearer "+tokenID.token},
-			data:{"emp_name":name},
-			success:function(data){
-				if(data.length!==0) {
-					$("#Position").val(data[0].position_id+"-"+data[0].position_name);
-				}
-			}
-		});
-}
+	
 	$("#empName").autocomplete({
 		source: function (request, response) {
         	$.ajax({
@@ -2658,7 +2637,6 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
                             return {
                                 label: item.emp_code+"-"+item.emp_name,
                                 value: item.emp_code+"-"+item.emp_name,
-                                name: item.emp_name,
                             };
                         }));
 				},
@@ -2667,15 +2645,28 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 				}
 				
 				});
-        },
-		select:function(event, ui) {
-			$("#empName").val(ui.item.value);
-            empNameAutoCompelteChangeToPositionName(ui.item.name);
-            return false;
         }
     });
 	
-	
+	var empNameAutoCompelteChangeToPositionName = function() {
+		
+			var empNameCodeToPosition= $("#empName").val().split("-");
+			empNameCodeToPosition=empNameCodeToPosition[0];
+			
+			$.ajax({
+				url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_position_name2",
+				type:"post",
+				dataType:"json",
+				async:false,
+				headers:{Authorization:"Bearer "+tokenID.token},
+				data:{"emp_code":empNameCodeToPosition},
+				success:function(data){
+					if(data.length!==0) {
+						$("#Position").val(data[0].position_id+"-"+data[0].position_name);
+					}
+				}
+			});
+	}
 	
 	
 	//Auto Complete End

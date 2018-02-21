@@ -530,7 +530,26 @@ plid = layout.getPlid();
 											<option value="0"></option>
 										</select>
 									</div>
-									<div id="empNameArea" class="form-group pull-left span4"
+									<div id='appraisalLevelArea' class="form-group pull-left span4"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<select data-toggle="tooltip" title="OrgLevel"
+											class="input form-control input-sm" id="appraisalLevel"
+											name="appraisalLevel">
+											<option value="0"></option>
+										</select>
+									</div>
+									<div class="form-group pull-left span4" style="margin-left: 5px">
+										<select data-toggle="tooltip" title="" data-original-title="organization"
+											class="input form-control input-sm span12" id="organization"
+											name="organization">
+											<option value=''>All Organization</option>
+										</select>
+									</div>
+									
+									
+								</div>
+								<div class="row-fluid">
+								<div id="empNameArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										
 										<input data-toggle="tooltip" type="text" class="form-control input-sm span12 "
@@ -556,23 +575,7 @@ plid = layout.getPlid();
 <!-- 										</select> -->
 										
 									</div>
-								</div>
-								<div class="row-fluid">
-									<div id='appraisalLevelArea' class="form-group pull-left span4"
-										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="OrgLevel"
-											class="input form-control input-sm" id="appraisalLevel"
-											name="appraisalLevel">
-											<option value="0"></option>
-										</select>
-									</div>
-									<div class="form-group pull-left span4" style="margin-left: 5px">
-										<select data-toggle="tooltip" title="" data-original-title="organization"
-											class="input form-control input-sm span12" id="organization"
-											name="organization">
-											<option value=''>All Organization</option>
-										</select>
-									</div>
+									
 									
 									<!-- 
 									<div id="organizationArea" class="form-group pull-left span4"
