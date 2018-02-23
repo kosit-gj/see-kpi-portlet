@@ -480,6 +480,7 @@ plid = layout.getPlid();
 <!-- 								<th style='width: auto text-align:center;'>Select</th> -->
 								<th style='width: auto'>CDS&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
 <!-- 								<th style='width: auto'>Appraisal&nbsp;Level&emsp;</th> -->
+								<th style='width: auto; text-align: center;'>Is_hr&emsp;</th>
 								<th style='width: auto; text-align: center;'>IsSQL&emsp;</th>
 								<th style='width: auto; text-align: center;'>IsActive&emsp;</th>
 								<th style='width: 10%; text-align: center;'>Manage</th>
@@ -637,6 +638,15 @@ plid = layout.getPlid();
 											
  
 <!-- 						</div> -->
+						<div class="form-group p-xxs">
+								<label class="control-label">Is HR:</label>
+								<div class="controls">
+									<label for="" class="checkbox" style="cursor:default">
+                  					<input id="checkbox_is_hr" name="checkbox_is_hr" type="checkbox"
+										value="" style="margin-top: 2px;">
+                					</label>
+								</div>
+						</div>
 						<div class="form-group p-xxs">
 								<label class="control-label">Is SQL:</label>
 								<div class="controls">

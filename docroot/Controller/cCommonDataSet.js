@@ -79,6 +79,7 @@ var clearFn = function() {
 	$("#f_connection").removeAttr("disabled");
 	$("#btn_Execute").removeAttr("disabled");
 	
+	$("#checkbox_is_hr").prop("checked",false);
 	$("#checkbox_is_sql").prop("checked",false);
 	$("#checkbox_is_active").prop("checked",false);
 	
@@ -156,6 +157,12 @@ var findOneFn = function(id) {
 			$("#drop_down_list_connection").html(dropDownListConnection(data['connection_id']));
 			
 			//IsSQL
+			//IsAction
+			if(data['is_hr']==1){
+				$('#checkbox_is_hr').prop('checked', true);
+			}else{
+				$('#checkbox_is_hr').prop('checked', false);
+			}
 			if(data['is_sql']==1){
 				$('#checkbox_is_sql').prop('checked', true);
 				$("#btn_Execute").removeAttr("disabled");
@@ -190,11 +197,19 @@ var findOneFn = function(id) {
 var listCommonDataSetFn = function(data) {
 	//alert("listCommonDataSetFn");
 	var htmlTable = "";
+	var Is_hr = "";
 	var IsSQL ="";
 	var IsActive ="";
 	$.each(data,function(index,indexEntry) {
 		
 		//console.log(indexEntry["cdsName"]+indexEntry["appraisalLevel"]+indexEntry["isSql"]+indexEntry["isActive"]);
+		if (indexEntry["is_hr"]== "1"){
+			//IsSQL = "<div class=\"checkbox m-n \"><input disabled value=\"1\" type=\"checkbox\" checked><label> </label></div>";
+			Is_hr ="<input disabled type=\"checkbox\"  value=\"1\" checked>";
+		}else if (indexEntry["is_hr"]== "0"){
+			//IsSQL = "<div class=\"checkbox m-n \"><input disabled value=\"0\" type=\"checkbox\" ><label> </label></div>";
+			Is_hr ="<input disabled type=\"checkbox\"  value=\"0\">";
+		}
 		if (indexEntry["is_sql"]== "1"){
 			//IsSQL = "<div class=\"checkbox m-n \"><input disabled value=\"1\" type=\"checkbox\" checked><label> </label></div>";
 			IsSQL ="<input disabled type=\"checkbox\"  value=\"1\" checked>";
@@ -214,6 +229,7 @@ var listCommonDataSetFn = function(data) {
 //		htmlTable += "<td id=\"objectCenter\" class='objectCenter 'style=\"\">"+"<input  style=\"margin-bottom: 3px;\"type=\"checkbox\"  class='selectCdsCheckbox' id=kpiCheckbox-"+indexEntry["cds_id"]+" value=\""+indexEntry["cds_id"]+"\">"+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["cds_name"]+ "</td>";
 //		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["appraisal_level_name"]+ "</td>";
+		htmlTable += "<td id=\"objectCenter\" >"+Is_hr+"</td>";
 		htmlTable += "<td id=\"objectCenter\" >"+IsSQL+"</td>";
 		htmlTable += "<td id=\"objectCenter\" >"+IsActive+"</td>";
 		
@@ -296,10 +312,14 @@ var listCommonDataSetFn = function(data) {
 // -------- Update Start
 var updateFn = function () {
 
-	
-	var IsSQL = "";
-	var IsAction="";
-	
+	var checkboxIsHR="";
+	var checkboxIsSQL = "";
+	var checkboxIsActive="";
+	if($("#checkbox_is_hr:checked").is(":checked")){
+		checkboxIsHR="1";
+	}else{
+		checkboxIsHR="0";
+	}
 	if($("#checkbox_is_sql:checked").is(":checked")){
 		checkboxIsSQL="1";
 	}else{
@@ -320,6 +340,7 @@ var updateFn = function () {
 			"cds_desc":$("#f_cds_description").val(),
 			//"appraisal_level_id":$("#f_app_lv").val(),
 			"connection_id":$("#f_connection").val(),
+			"is_hr":checkboxIsHR ,
 			"is_sql":checkboxIsSQL ,
 			"cds_sql":$("#txt_sql").val(),
 			"is_active":checkboxIsActive
@@ -346,9 +367,15 @@ var updateFn = function () {
 
 // --------  Insert  Start
 var insertFn = function (param) {
+	 var checkboxIsHR = "";
 	 var checkboxIsSQL = "";
 	 var checkboxIsActive = "";
 	 
+	if($("#checkbox_is_hr:checked").is(":checked")){
+		checkboxIsHR="1";
+	}else{
+		checkboxIsHR="0";
+	}
 	if($("#checkbox_is_sql:checked").is(":checked")){
 		checkboxIsSQL="1";
 	}else{
@@ -369,6 +396,7 @@ var insertFn = function (param) {
 			"cds_desc":$("#f_cds_description").val(),
 			//"appraisal_level_id":$("#f_app_lv").val(),
 			"connection_id":$("#f_connection").val(),
+			"is_hr":checkboxIsHR ,
 			"is_sql":checkboxIsSQL ,
 			"cds_sql":$("#txt_sql").val(),
 			"is_active":checkboxIsActive
@@ -388,6 +416,7 @@ var insertFn = function (param) {
 						//alert("saveAndAnother" );
 						getDataFn($(".pagination .active").attr( "data-lp" ),$("#rpp").val());
 						clearFn();
+						$("#checkbox_is_hr").prop("checked",false);
 						$("#checkbox_is_sql").prop("checked",true);
 						$("#checkbox_is_active").prop("checked",true);
 						callFlashSlideInModal("Insert Data is Successfully.");
@@ -581,6 +610,7 @@ $(document).ready(function() {
 		//$("#f_app_lv").val( $("#f_app_lv option:first-child").val());
 		$("#f_connection").val( $("#f_connection option:first-child").val());
 		$("#btnAddAnother").show();
+		$("#checkbox_is_hr").prop("checked",false);
 		$("#checkbox_is_sql").prop("checked",true);
 		$("#checkbox_is_active").prop("checked",true);
 		

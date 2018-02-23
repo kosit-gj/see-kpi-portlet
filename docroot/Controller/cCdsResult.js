@@ -215,7 +215,7 @@ var dropDownListYear = function(){
 
 var dropDownListAppraisalLevel = function(){
 	var html="";
-	html+="<option  selected value=''>All Appraisal Level</option>";
+	//html+="<option  selected value=''>All Appraisal Level</option>";
 	$.ajax ({
 		//url:restfulURL+restfulPathDropDownAppraisalLevel,
 		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/al_list_org",
@@ -585,7 +585,7 @@ $(document).ready(function() {
 				 type:"post",
 				 dataType:"json",
 				 data:{
-					 "emp_name":request.term},
+					 "emp_name":request.term,"emp_code":session_emp_code,"org_id":$("#org_id").val()},
 				//async:false,
 				 headers:{Authorization:"Bearer "+tokenID.token},
                  error: function (xhr, textStatus, errorThrown) {

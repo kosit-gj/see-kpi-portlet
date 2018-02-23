@@ -295,11 +295,15 @@ This is the <b>Usage Log</b> portlet in View mode.2
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<input data-toggle="tooltip" type="text" class="form-control input-sm span12 "
 											placeholder="Emp Name" id="empName" data-original-title="Employee Name">
+											<input class="form-control input-sm"
+											id="empName_id" name="empName_id" value="" type="hidden">
 									</div>
 									 <div id="PositionArea" class="form-group span3"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<input data-toggle="tooltip" type="text" id="Position" placeholder="Position"
+										<input data-toggle="tooltip" type="text" id="position" placeholder="Position"
 											class="form-control input-sm span12" data-original-title="Position">
+											<input class="form-control input-sm" id="position_id"
+											name="position_id" value="" type="hidden">
 									</div>
 									
 									

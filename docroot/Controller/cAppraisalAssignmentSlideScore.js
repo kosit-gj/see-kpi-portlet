@@ -425,7 +425,7 @@ var getDataFn = function(page,rpp) {
 			"appraisal_year":embed_year_list,
 			"frequency_id":embed_period_frequency,
 			"org_id":embed_organization,
-			"emp_id":emp_id	
+			"emp_code":emp_id	
 			
 		},
 		success:function(data){
@@ -2648,7 +2648,8 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 				 dataType:"json",
 				 headers:{Authorization:"Bearer "+tokenID.token},
 				 //data:{"emp_name":request.term},
-				 data:{"emp_name":request.term,"emp_code":session_emp_code,"level_id":$("#appraisalLevelEmp").val()},
+				 data:{"emp_name":request.term,"emp_code":session_emp_code,"org_id":$("#organization").val()//"level_id":$("#appraisalLevelEmp").val()
+					 },
 				 //async:false,
                  error: function (xhr, textStatus, errorThrown) {
                         console.log('Error: ' + xhr.responseText);

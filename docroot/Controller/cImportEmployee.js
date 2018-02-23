@@ -792,9 +792,9 @@ $(document).ready(function() {
 				});
         },
 		select:function(event, ui) {
-			$("#search_emp_name").val(ui.item.value);
+			$("#search_emp_name").val(ui.item.value+"("+ui.item.emp_code+")");
             $("#search_emp_id").val(ui.item.emp_code);
-            galbalDataTemp["search_emp_name"]= ui.item.value;
+            galbalDataTemp["search_emp_name"]= ui.item.value+"("+ui.item.emp_code+")";
             galbalDataTemp["search_emp_id"]= ui.item.emp_code;
 
             return false;

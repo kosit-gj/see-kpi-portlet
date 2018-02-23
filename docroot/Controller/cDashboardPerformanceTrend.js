@@ -40,7 +40,7 @@
  			    }
  			}
  			catch(err) {
- 			    console.log(err.message);
+ 			    console.log("Error item_id : "+err.message);
  			}
 
  			
@@ -1364,8 +1364,8 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 					$("#organization").val(),
 					$("#kpi").val(),
 					$("#app_type").val(),
-					$("#emp_name_id").val()//,
-					//$("#position_id").val()
+					$("#emp_name_id").val(),
+					$("#position_id").val()
 					);
 			$("#accordion").show();
 			$("#accordion").children().children().next().eq(0).collapse('show');;
@@ -1450,7 +1450,7 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 			$("#app_type").change(function(){
 				if($("#app_type").val() == "1"){
 					$("#AppraisalEmpLevel").val("").prop("disabled", true);
-					$("#emp_name, #emp_name_id").val("").prop("disabled", true);
+					$("#emp_name, #emp_name_id ,#position ,#position_id").val("").prop("disabled", true);
 					
 					// Create #AppraisalOrgLevel
 					$("#AppraisalOrgLevel").html( generateDropDownList(
@@ -1458,21 +1458,17 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 						"GET")
 					);
 					
-					if($("#app_type").val() == "1"){
-						// Create #organization whit #AppraisalOrgLevel
-						$("#organization").html( generateDropDownList(
-							restfulURL+"/"+serviceName+"/public/dashboard/org_list",
-							"POST",
-							{"appraisal_level":$("#AppraisalOrgLevel").val()}
-						));
-					} else {
-						CreateOrgWhitEmpLevelOrgLevel(); // Create #organization whit #AppraisalEmpLevel and #AppraisalOrgLevel
-					}
+					$("#organization").html( generateDropDownList(
+						restfulURL+"/"+serviceName+"/public/dashboard/org_list",
+						"POST",
+						{"appraisal_level":$("#AppraisalOrgLevel").val()}
+					));
+
 					
 					CreateParamKpi(); // Create #kpi
 					
 				} else {
-					$("#emp_name").prop("disabled", false);
+					$("#emp_name,#position").prop("disabled", false);
 					
 					// Create #AppraisalEmpLevel
 					$("#AppraisalEmpLevel").prop("disabled", false).html( generateDropDownList(
@@ -1525,8 +1521,83 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 		
 		$(".app_url_hidden").show();
 		
-		// Create #emp_name
-		// generateAutocomplete("#emp_name",restfulURL+"/"+serviceName+"/public/cds_result/auto_emp_name","post",{"emp_name":null});
+		//Autocomplete Search Position Start
+		$("#position").autocomplete({
+	        source: function (request, response) {
+	        	$.ajax({
+	        		
+	        		url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/auto_position_list",
+					type:"post",
+					dataType:"json",
+					async:false,
+					headers:{Authorization:"Bearer "+tokenID.token},
+					data:{"emp_code":request.term},
+					 data:{
+						 	"position_name":request.term ,
+						 	"emp_name":($("#emp_id").val()==""?"":$("#emp_name").val()),
+						 	"org_id":$("#organization").val()
+					 },
+
+					//async:false,
+					 headers:{Authorization:"Bearer "+tokenID.token},
+	                 error: function (xhr, textStatus, errorThrown) {
+	                        console.log('Error: ' + xhr.responseText);
+	                    },
+					 success:function(data){
+						  
+							response($.map(data, function (item) {
+	                            return {
+	                                label: item.position_name,
+	                                value: item.position_name,
+	                                position_id : item.position_id
+	                                
+	                            };
+	                        }));
+						
+					},
+					beforeSend:function(){
+						$("body").mLoading('hide');	
+					}
+					
+					});
+	        },
+			select:function(event, ui) {
+				$("#position").val(ui.item.value);
+	            $("#position_id").val(ui.item.position_id);
+	            galbalDataTemp['position_name'] = ui.item.label;
+	            galbalDataTemp['position_id']=ui.item.position_id;
+	            return false;
+	        },change: function(e, ui) {  
+
+	 
+				if ($("#position").val() == galbalDataTemp['position_name']) {
+					$("#position_id").val(galbalDataTemp['position_id']);
+				}  else if (ui.item != null){
+					$("#position_id").val(ui.item.position_id);
+				}else {
+					$("#position_id").val("");
+				}
+	         }
+	    });
+		var empNameAutoCompelteChangeToPositionName = function(name) {
+			
+//			var empNameCodeToPosition= $("#empName").val().split("-");
+//			empNameCodeToPosition=empNameCodeToPosition[1];
+			
+			$.ajax({
+				url:restfulURL + "/" + serviceName + "/public/appraisal/parameter/auto_position_list",
+				type:"post",
+				dataType:"json",
+				async:false,
+				headers:{Authorization:"Bearer "+tokenID.token},
+				data:{"emp_name":name},
+				success:function(data){
+					if(data.length!==0) {
+						$("#Position").val(data[0].position_id+"-"+data[0].position_name);
+					}
+				}
+			});
+	}
 		$("#emp_name").autocomplete({
 	        source: function (request, response) {
 	        	$.ajax({
@@ -1535,7 +1606,8 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 					 dataType:"json",
 					 data: {
 							"emp_name": request.term,
-							"level_id": $("#AppraisalEmpLevel").val()
+							//"level_id": $("#AppraisalEmpLevel").val()
+							"emp_code":session_emp_code,"org_id":$("#organization").val()
 						},
 					//async:false,
 					 headers:{Authorization:"Bearer "+tokenID.token},
@@ -1543,7 +1615,7 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 	                        console.log('Error: ' + xhr.responseText);
 	                    },
 					 success:function(data){
-						  	//console.log(data)
+						  
 							response($.map(data, function (item) {
 	                            return {
 	                                label: item[Object.keys(item)[2]],
@@ -1562,48 +1634,23 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 	        },
 			select:function(event, ui) {
 				CreateOrgLevelAndOrganizByEmpName(ui.item.value_id);
-				$("#emp_name").val(ui.item.value);
-	            $("#emp_name_id").val(ui.item.value_id);
-	            galbalDataTemp["#emp_name"] = ui.item.label;
-	            galbalDataTemp["#emp_name_id"]=ui.item.value_id;
+				$("#emp_name").val(ui.item.value+"("+ui.item.value_id+")");
+	            $("#emp_name"+"_id").val(ui.item.value_id);
+	            galbalDataTemp["#emp_name"] = ui.item.label+"("+ui.item.value_id+")";
+	            galbalDataTemp["#emp_name"+"_id"]=ui.item.value_id;
+	            empNameAutoCompelteChangeToPositionName(ui.item.value);
 	            return false;
 	        },change: function(e, ui) {   
 				if ($("#emp_name").val() == galbalDataTemp["#emp_name"]) {
-					$("#emp_name_id").val(galbalDataTemp["#emp_name_id"]);
+					$("#emp_name"+"_id").val(galbalDataTemp["#emp_name"+"_id"]);
 				}  else if (ui.item != null){
-					$("#emp_name_id").val(ui.item.value_id);
+					$("#emp_name"+"_id").val(ui.item.value_id);
 				}else {
-					$("#emp_name_id").val("");
+					$("#emp_name"+"_id").val("");
 				}
 	         }
 	    });
-		
-		/*
-		$("#app_type").change(function(){
-			console.log("app_type change");
-			if($("#app_type").val() == "2"){
-
-				//$("#position").removeAttr('disabled');
-				$("#emp_name").removeAttr('disabled');
-				$('#apprasiaLevel').val($('#apprasiaLevel option:first-child').val());
-				$('#apprasiaLevel').change();
-
-				$("#apprasiaLevel , #organization").attr("disabled", 'disabled');
-			
-			}else if($("#app_type").val() == "1"){
-				//$("#position").attr("disabled", 'disabled');
-				$("#emp_name").attr("disabled", 'disabled');
-				$('#organization').change();
-				$("#apprasiaLevel , #organization").removeAttr('disabled');
-				//$("#position").val("");
-				//$("#position_id").val("");
-				$("#emp_name").val("");
-				$("#emp_name_id").val("");
-				
-			}
-		});
-		//$("#app_type").change();
-		*/
+		//Autocomplete Search End
 
 		//binding tooltip start
 		 $('[data-toggle="tooltip"]').css({"cursor":"pointer"});

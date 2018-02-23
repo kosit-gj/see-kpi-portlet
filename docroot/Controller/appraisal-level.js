@@ -207,7 +207,12 @@ $(document).ready(function(){
 		 	    				{
 		    					"label":"Parent Appraisal Level","inputType":"dropdown","initValue":"","updateList":true,
 		    					"id":"parent_id","width":"250px","url":""+restfulURL+"/"+serviceName+"/public/appraisal_level"
-		    					},  
+		    					},
+		    					{
+		    	    			"label":"Default Stage ID","inputType":"text","placeholder":"Default Stage ID","default":"1",
+		    	    			"id":"default_stage_id","width":"50px","dataTypeInput":"number","required":true,
+		    					 } 
+		    					
 		 	    				
 		 	    					
 		 	    			],

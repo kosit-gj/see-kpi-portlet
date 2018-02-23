@@ -184,7 +184,7 @@ var dropDownListYear = function(){
 
 var dropDownListAppraisalLevel = function(){
 	var html="";
-	html+="<option  selected value=''>All Appraisal Level</option>";
+	//html+="<option  selected value=''>All Appraisal Level</option>";
 	$.ajax ({
 		//url:restfulURL+restfulPathDropDownAppraisalLevel,
 		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/al_list_org",
@@ -462,7 +462,7 @@ $(document).ready(function() {
 				 type:"post",
 				 dataType:"json",
 				 data:{
-					 "emp_name":request.term},
+					 "emp_name":request.term,"emp_code":session_emp_code,"org_id":$("#org_id").val()},
 				//async:false,
 				 headers:{Authorization:"Bearer "+tokenID.token},
                  error: function (xhr, textStatus, errorThrown) {
@@ -487,12 +487,12 @@ $(document).ready(function() {
 				});
         },
 		select:function(event, ui) {
-			$("#emp_name").val(ui.item.value);
+			$("#emp_name").val(ui.item.value+"("+ui.item.value_id+")");
             $("#emp_name_id").val(ui.item.emp_id);
-            galbalDataTemp['emp_name'] = ui.item.value;
+            galbalDataTemp['emp_name'] = ui.item.value+"("+ui.item.value_id+")";
             galbalDataTemp['emp_id']=ui.item.emp_id;
             galbalDataTemp['emp_code']=ui.item.emp_code;
-            empNameAutoCompelteChangeToPositionName();
+            empNameAutoCompelteChangeToPositionName(ui.item.value);
             return false;
         },change: function(e, ui) {  
 			if ($("#emp_name").val() == galbalDataTemp['emp_name']) {
@@ -507,7 +507,7 @@ $(document).ready(function() {
          }
     });
 
-	var empNameAutoCompelteChangeToPositionName = function() {
+	var empNameAutoCompelteChangeToPositionName = function(name) {
 
 		
 		
@@ -517,7 +517,7 @@ $(document).ready(function() {
 			dataType:"json",
 			async:false,
 			headers:{Authorization:"Bearer "+tokenID.token},
-			data:{"emp_name":galbalDataTemp['emp_name']},
+			data:{"emp_name":name},
 			success:function(data){
 				if(data.length!==0) {
 					$("#position_id").val(data[0].position_id);

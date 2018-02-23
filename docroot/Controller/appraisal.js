@@ -2735,8 +2735,11 @@ $(document).ready(function() {
 			        Authorization: "Bearer " + tokenID.token
 			      },
 			      data: {
-			        "position_name": request.term,
-			        "level_id": $("#AppraisalEmpLevel").val()
+//			        "position_name": request.term,
+//			        "level_id": $("#AppraisalEmpLevel").val()
+			        "position_name":request.term ,
+					"emp_name":($("#EmpName").val().split("-")[1]==undefined?"":$("#EmpName").val().split("-")[1]),
+					"org_id":$("#organization").val()
 			      },
 			      //async:false,
 			      error: function(xhr, textStatus, errorThrown) {
@@ -2757,7 +2760,25 @@ $(document).ready(function() {
 			  }
 			});
 
-
+			var empNameAutoCompelteChangeToPositionName = function(name) {
+				
+//				var empNameCodeToPosition= $("#empName").val().split("-");
+//				empNameCodeToPosition=empNameCodeToPosition[1];
+				
+				$.ajax({
+					url:restfulURL + "/" + serviceName + "/public/appraisal/parameter/auto_position_list",
+					type:"post",
+					dataType:"json",
+					async:false,
+					headers:{Authorization:"Bearer "+tokenID.token},
+					data:{"emp_name":name},
+					success:function(data){
+						if(data.length!==0) {
+							$("#Position").val(data[0].position_id+"-"+data[0].position_name);
+						}
+					}
+				});
+		}
 			/* org_id, position_id, emp_name */
 			$("#EmpName").autocomplete({
 			  source: function(request, response) {
@@ -2771,7 +2792,9 @@ $(document).ready(function() {
 			      },
 			      data: {
 			        "emp_name": request.term,
-			        "level_id": $("#AppraisalEmpLevel").val()
+//			        "level_id": $("#AppraisalEmpLevel").val()
+			        "emp_code":session_emp_code,
+			        "org_id":$("#organization").val()
 			      },
 			      // "position_id":splitData($("#Position").val()),"org_id":splitData($("#organization").val())},
 			      //async:false,
@@ -2782,7 +2805,8 @@ $(document).ready(function() {
 			        response($.map(data, function(item) {
 			          return {
 			            label: item.emp_id + "-" + item.emp_name,
-			            value: item.emp_id + "-" + item.emp_name
+			            value: item.emp_id + "-" + item.emp_name,
+			            name: item.emp_name,
 			          };
 			        }));
 			      },
@@ -2790,7 +2814,12 @@ $(document).ready(function() {
 			        $("body").mLoading('hide');
 			      }
 			    });
-			  }
+		        },
+				select:function(event, ui) {
+					$("#EmpName").val(ui.item.value);
+		            empNameAutoCompelteChangeToPositionName(ui.item.name);
+		            return false;
+		        }
 			});
 
 	//set parameter end
