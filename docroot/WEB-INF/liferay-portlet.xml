@@ -258,7 +258,8 @@
 		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
-	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>	     
+	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/plugins/jquery_mask/jquery.mask.min.js</footer-portlet-javascript>	     
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>  
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
 	    
