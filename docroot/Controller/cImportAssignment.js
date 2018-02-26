@@ -287,9 +287,8 @@ $.each(data,function(index,indexEntry){
 	 		return false;
 	 	}
 		 
-		$("#organization").multiselect({
-				 minWidth:'100%;'
-		});		
+		// $("#organization").multiselect({minWidth:'100%;'});
+		$("#organization").multiselect({minWidth:'100%;'}).multiselectfilter();
 		 $("#appraisalType").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list","GET"));
 		 
 		$("#appraisalType").change(function(){
@@ -305,7 +304,8 @@ $.each(data,function(index,indexEntry){
 		$("#appraisalLevel").change(function(){
 			$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/import_assignment/org_list","GET",{"appraisal_type_id":$("#appraisalType").val(),"level_id":$("#appraisalLevel").val()}));
 //			$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/import_assignment/org_list","GET",{"level_id":$("#appraisalLevel").val()}));
-			$("#organization").multiselect( 'refresh' );
+			$("#organization").multiselect('refresh').multiselectfilter();
+//			$("#organization").multiselect( 'refresh' );
 		});
 //		$("#appraisalType").change();
 		$("#appraisalLevel").change();
