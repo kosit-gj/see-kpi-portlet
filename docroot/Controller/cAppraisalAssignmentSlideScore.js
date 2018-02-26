@@ -2,10 +2,12 @@
 //var tokenID= eval("("+localStorage.getItem("tokenID")+")");
 //Global variable
 var globalData=[];
+var galbalDataTemp=[];
 var empldoyees_code = [];
 var empldoyees_id = [];
 var org_id_to_assign;
 var item_id_array=[];
+
 
 
 
@@ -165,7 +167,7 @@ var setDataToTemplateFn = function(data,actionType){
 			htmlStage+="<td>"+indexEntry['created_dttm']+"</td>";
 			htmlStage+="<td>"+indexEntry['from_action']+"</td>";
 			htmlStage+="<td>"+indexEntry['to_action']+"</td>";
-			htmlStage+="<td>"+indexEntry['remark']+"</td>";
+			htmlStage+="<td>"+notNullTextFn(indexEntry['remark'])+"</td>";
 		htmlStage+="</tr>";
 
 	});
@@ -1116,15 +1118,16 @@ var searchAdvanceFn = function() {
 
 
 	*/
-	var Position= $("#Position").val().split("-");
-	Position=Position[0];
+	var Position= $("#Position_id").val();
+//	var Position= $("#Position").val().split("-");
+//	Position=Position[0];
 	
 	//var Position = $("#Position").val();
 	
 
-	
-	var empNameCode= $("#empName").val().split("-");
-	empNameCode=empNameCode[0];
+	var empNameCode= $("#empName_id").val();
+	//var empNameCode= $("#empName").val().split("-");
+	//empNameCode=empNameCode[0];
 	//var empNameCode= $("#empName").val();
 	
 	
@@ -2587,9 +2590,11 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	
 	//Auto complete Start
 	
+
 	$("#Position").autocomplete({
         source: function (request, response) {
         	$.ajax({
+        		
         		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_position_name2",
 				type:"post",
 				dataType:"json",
@@ -2598,28 +2603,50 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 				data:{"emp_code":request.term},
 				 data:{
 					 	"position_name":request.term ,
-					 	"emp_name":($("#empName").val().split("-")[1]==undefined?"":$("#empName").val().split("-")[1]),
+					 	"emp_name":($("#empName_id").val()==""?"":$("#empName").val().split("(")[0]),
 					 	"org_id":$("#organization").val()
 				 },
-				 //async:false,
+
+				//async:false,
+				 headers:{Authorization:"Bearer "+tokenID.token},
                  error: function (xhr, textStatus, errorThrown) {
                         console.log('Error: ' + xhr.responseText);
                     },
 				 success:function(data){
-					 	console.log(data)
+					  
 						response($.map(data, function (item) {
                             return {
-                                label: item.position_id+"-"+item.position_name,
-                                value: item.position_id+"-"+item.position_name
+                                label: item.position_name,
+                                value: item.position_name,
+                                position_id : item.position_id
+                                
                             };
                         }));
+					
 				},
 				beforeSend:function(){
 					$("body").mLoading('hide');	
 				}
 				
 				});
-        }
+        },
+		select:function(event, ui) {
+			$("#Position").val(ui.item.value);
+            $("#Position_id").val(ui.item.position_id);
+            galbalDataTemp['position_name'] = ui.item.label;
+            galbalDataTemp['position_id']=ui.item.position_id;
+            return false;
+        },change: function(e, ui) {  
+
+ 
+			if ($("#Position").val() == galbalDataTemp['position_name']) {
+				$("#Position_id").val(galbalDataTemp['position_id']);
+			}  else if (ui.item != null){
+				$("#Position_id").val(ui.item.position_id);
+			}else {
+				$("#Position_id").val("");
+			}
+         }
     });
 	var empNameAutoCompelteChangeToPositionName = function(name) {
 		
@@ -2635,33 +2662,39 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 			data:{"emp_name":name},
 			success:function(data){
 				if(data.length!==0) {
-					$("#Position").val(data[0].position_id+"-"+data[0].position_name);
+					$("#Position_id").val(data[0].position_id);
+					$("#Position").val(data[0].position_name);
+					galbalDataTemp['position_name'] = data[0].position_name;
+					galbalDataTemp['position_id'] = data[0].position_id;
 				}
 			}
 		});
 }
-	$("#empName").autocomplete({
-		source: function (request, response) {
+
+$("#empName").autocomplete({
+		
+        source: function (request, response) {
         	$.ajax({
 				 url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_employee_name2",
 				 type:"post",
 				 dataType:"json",
+				 data:{
+					 "emp_name":request.term,"emp_code":session_emp_code,"org_id":$("#organization").val()},
+				//async:false,
 				 headers:{Authorization:"Bearer "+tokenID.token},
-				 //data:{"emp_name":request.term},
-				 data:{"emp_name":request.term,"emp_code":session_emp_code,"org_id":$("#organization").val()//"level_id":$("#appraisalLevelEmp").val()
-					 },
-				 //async:false,
                  error: function (xhr, textStatus, errorThrown) {
                         console.log('Error: ' + xhr.responseText);
                     },
 				 success:function(data){
+					  	console.log(data)
 						response($.map(data, function (item) {
                             return {
-                                label: item.emp_code+"-"+item.emp_name,
-                                value: item.emp_code+"-"+item.emp_name,
-                                name: item.emp_name,
+                                label: item.emp_name,
+                                value: item.emp_name,
+                                emp_code: item.emp_code
                             };
                         }));
+					
 				},
 				beforeSend:function(){
 					$("body").mLoading('hide');	
@@ -2670,12 +2703,24 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 				});
         },
 		select:function(event, ui) {
-			$("#empName").val(ui.item.value);
-            empNameAutoCompelteChangeToPositionName(ui.item.name);
+			$("#empName").val(ui.item.value+"("+ui.item.emp_code+")");
+            $("#empName_id").val(ui.item.emp_code);
+            galbalDataTemp['empName'] = ui.item.value+"("+ui.item.emp_code+")";
+            galbalDataTemp['empName_id']=ui.item.emp_code;
+            empNameAutoCompelteChangeToPositionName(ui.item.value);
             return false;
-        }
+        },change: function(e, ui) {  
+			if ($("#empName").val() == galbalDataTemp['empName']) {
+				$("#empName_id").val(galbalDataTemp['empName_id']);
+			} else if (ui.item != null){
+				$("#empName_id").val(ui.item.emp_id);
+			} else {
+				$("#empName_id").val("");
+				
+			}
+        	
+         }
     });
-	
 	
 	
 	

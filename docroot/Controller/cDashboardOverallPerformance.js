@@ -655,7 +655,7 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 					data:{"emp_code":request.term},
 					 data:{
 						 	"position_name":request.term ,
-						 	"emp_name":($("#emp_id").val()==""?"":$("#emp_name").val()),
+						 	"emp_name":($("#emp_id").val()==""?"":$("#emp_name").val().split("(")[0]),
 						 	"org_id":$("#organization").val()
 					 },
 
@@ -714,7 +714,10 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 				data:{"emp_name":name},
 				success:function(data){
 					if(data.length!==0) {
-						$("#Position").val(data[0].position_id+"-"+data[0].position_name);
+						$("#position").val(data[0].position_name);
+						$("#position_id").val(data[0].position_id);
+						galbalDataTemp['position_name'] = data[0].position_name;
+						galbalDataTemp['position_id'] = data[0].position_id;
 					}
 				}
 			});
@@ -741,7 +744,8 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 	                            return {
 	                                label: item[Object.keys(item)[2]],
 	                                value: item[Object.keys(item)[2]],
-	                                value_id : item[Object.keys(item)[0]]
+	                                value_id : item[Object.keys(item)[0]],
+	                                value_code : item[Object.keys(item)[1]],
 	                                
 	                            };
 	                        }));
@@ -755,9 +759,9 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 	        },
 			select:function(event, ui) {
 				CreateOrgLevelAndOrganizByEmpName(ui.item.value_id);
-				$("#emp_name").val(ui.item.value+"("+ui.item.value_id+")");
+				$("#emp_name").val(ui.item.value+"("+ui.item.value_code+")");
 	            $("#emp_name"+"_id").val(ui.item.value_id);
-	            galbalDataTemp["#emp_name"] = ui.item.label+"("+ui.item.value_id+")";
+	            galbalDataTemp["#emp_name"] = ui.item.label+"("+ui.item.value_code+")";
 	            galbalDataTemp["#emp_name"+"_id"]=ui.item.value_id;
 	            empNameAutoCompelteChangeToPositionName(ui.item.value);
 	            return false;

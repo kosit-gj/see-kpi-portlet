@@ -104,7 +104,15 @@
 				}else {
 					$(id+"_id").val("");
 					if(changeAutocomplete == true){
-						$("#kpi").html((generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));
+						$("#kpi").html((generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/kpi_list","POST",{
+							"period":$("#period").val(),
+							"appraisal_type_id":$("#app_type").val(),
+							"level_id":($("#app_type").val() == 1 ? $("#AppraisalEmpLevel").val() : $("#AppraisalOrgLevel").val()),
+							"org_id":$("#organization").val(),
+							"emp_id":$("#emp_name_id").val(),
+							"position_id":$("#position_id").val()
+							})));
+						
 						changeAutocomplete = false;
 					}
 					
@@ -995,8 +1003,8 @@ var setScrollFn = function () {
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_emp' 		name='param_emp' 		value='"+emp+"'>";
 		//htmlParam+="<input type='hidden' class='paramEmbed' id='param_position' name='param_position' 	value='"+position+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' 	name='param_app_lv' 	value='"+app_lv+"'>";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' 	name='param_org_id' 	value='"+org+"'>";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_kpi_id' 	name='param_kpi_id' 	value='"+kpi+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' 	name='param_org_id' 	value='"+notNullTextFn(org)+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_kpi_id' 	name='param_kpi_id' 	value='"+notNullTextFn(kpi)+"'>";
 		$(".paramEmbed").remove();
 		$("body").append(htmlParam);
 		//embed parameter end
@@ -1282,17 +1290,18 @@ var listDashBoardAllKPIFn = function(data){
 	 
 };
 
-var CreateParamKpi = function(){
-	 $("#kpi").html( generateDropDownList(
-		restfulURL+"/"+serviceName+"/public/dashboard/kpi_list",
-		"POST",
-		{
-			"appraisal_level": ($("#app_type").val() == "1") ? $("#AppraisalOrgLevel").val() : $("#AppraisalEmpLevel").val(),
-			"org_id": $("#organization").val(),
-			"emp_id": $("#emp_name_id").val(),
-			"appraisal_type_id": $("#app_type").val()
-		}
-	));
+var dropDownKpi = function(){
+
+	 $("#kpi").html((generateDropDownList(
+			restfulURL+"/"+serviceName+"/public/dashboard/kpi_list",
+			"POST",{
+			"period":$("#period").val(),
+			"appraisal_type_id":$("#app_type").val(),
+			"appraisal_level":($("#app_type").val() == 1 ? $("#AppraisalOrgLevel").val() : $("#AppraisalEmpLevel").val()),
+			"org_id":$("#organization").val(),
+			"emp_id":$("#emp_name_id").val(),
+			"position_id":$("#position_id").val()
+			})));
 }
 
 var CreateOrgWhitEmpLevelOrgLevel = function(){
@@ -1301,7 +1310,9 @@ var CreateOrgWhitEmpLevelOrgLevel = function(){
 	$("#organization").html( generateDropDownList(
 		restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_individual",
 		"GET",
-		{"emp_level":$("#AppraisalEmpLevel").val(),"org_level":$("#AppraisalOrgLevel").val(), "emp_id":emp_id,"period_id": $("#period").val()}
+		{"emp_level":$("#AppraisalEmpLevel").val(),"org_level":$("#AppraisalOrgLevel").val(), "emp_id":emp_id//,"period_id": $("#period").val()
+			
+		}
 	));
 }
 
@@ -1309,7 +1320,9 @@ var CreateOrgLevelWhitEmpLevel = function(){
 	$("#AppraisalOrgLevel").html(generateDropDownList(
 		restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_level_individual",
 		"GET",
-		{"level_id": $("#AppraisalEmpLevel").val(),"period_id": $("#period").val()}
+		{"level_id": $("#AppraisalEmpLevel").val()//,"period_id": $("#period").val()
+			
+		}
 	));
 }
 
@@ -1445,7 +1458,9 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 			 */
 			// Change on #year for create #period
 			$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
-			
+			$("#period").change(function(){
+				dropDownKpi();
+			});
 			// Change on #app_type for create #AppraisalEmpLevel and #apprasiaEmpLevel
 			$("#app_type").change(function(){
 				if($("#app_type").val() == "1"){
@@ -1465,7 +1480,7 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 					));
 
 					
-					CreateParamKpi(); // Create #kpi
+					dropDownKpi(); // Create #kpi
 					
 				} else {
 					$("#emp_name,#position").prop("disabled", false);
@@ -1479,7 +1494,7 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 					
 					CreateOrgLevelWhitEmpLevel(); // Create #AppraisalOrgLevel (cascade -> #AppraisalEmpLevel)
 					CreateOrgWhitEmpLevelOrgLevel(); // Create #organization whit #AppraisalEmpLevel and #AppraisalOrgLevel
-					CreateParamKpi(); // Create #kpi
+					dropDownKpi(); // Create #kpi
 				}
 			});
 			
@@ -1492,21 +1507,21 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 						{"appraisal_level":$("#AppraisalOrgLevel").val()}
 					));
 					
-					CreateParamKpi(); // Create #kpi
+					dropDownKpi(); // Create #kpi
 				} else {
 					CreateOrgWhitEmpLevelOrgLevel(); // Create #organization whit #AppraisalEmpLevel and #AppraisalOrgLevel
-					CreateParamKpi(); // Create #kpi
+					dropDownKpi(); // Create #kpi
 				}
 			});
 			
 			$("#AppraisalEmpLevel").change(function(){				
 				CreateOrgLevelWhitEmpLevel(); // Create #AppraisalOrgLevel (cascade -> #AppraisalEmpLevel)
 				CreateOrgWhitEmpLevelOrgLevel(); // Create #organization whit #AppraisalEmpLevel and #AppraisalOrgLevel
-				CreateParamKpi(); // Create #kpi
+				dropDownKpi(); // Create #kpi
 			});
 			
 			$("#organization").change(function(){
-				CreateParamKpi(); // Create #kpi
+				dropDownKpi(); // Create #kpi
 			});
 
 			
@@ -1534,7 +1549,7 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 					data:{"emp_code":request.term},
 					 data:{
 						 	"position_name":request.term ,
-						 	"emp_name":($("#emp_id").val()==""?"":$("#emp_name").val()),
+						 	"emp_name":($("#emp_id").val()==""?"":$("#emp_name").val().split("(")[0]),
 						 	"org_id":$("#organization").val()
 					 },
 
@@ -1566,6 +1581,7 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 	            $("#position_id").val(ui.item.position_id);
 	            galbalDataTemp['position_name'] = ui.item.label;
 	            galbalDataTemp['position_id']=ui.item.position_id;
+	            dropDownKpi();
 	            return false;
 	        },change: function(e, ui) {  
 
@@ -1593,7 +1609,11 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 				data:{"emp_name":name},
 				success:function(data){
 					if(data.length!==0) {
-						$("#Position").val(data[0].position_id+"-"+data[0].position_name);
+					
+						$("#position_id").val(data[0].position_id);
+						$("#position").val(data[0].position_name);
+						galbalDataTemp['position_name'] = data[0].position_name;
+						galbalDataTemp['position_id'] = data[0].position_id;
 					}
 				}
 			});
@@ -1620,7 +1640,8 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 	                            return {
 	                                label: item[Object.keys(item)[2]],
 	                                value: item[Object.keys(item)[2]],
-	                                value_id : item[Object.keys(item)[0]]
+	                                value_id : item[Object.keys(item)[0]],
+	                                value_code : item[Object.keys(item)[1]],
 	                                
 	                            };
 	                        }));
@@ -1633,12 +1654,13 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 					});
 	        },
 			select:function(event, ui) {
-				CreateOrgLevelAndOrganizByEmpName(ui.item.value_id);
-				$("#emp_name").val(ui.item.value+"("+ui.item.value_id+")");
+				//CreateOrgLevelAndOrganizByEmpName(ui.item.value_id);
+				$("#emp_name").val(ui.item.value+"("+ui.item.value_code+")");
 	            $("#emp_name"+"_id").val(ui.item.value_id);
 	            galbalDataTemp["#emp_name"] = ui.item.label+"("+ui.item.value_id+")";
 	            galbalDataTemp["#emp_name"+"_id"]=ui.item.value_id;
 	            empNameAutoCompelteChangeToPositionName(ui.item.value);
+	            dropDownKpi();
 	            return false;
 	        },change: function(e, ui) {   
 				if ($("#emp_name").val() == galbalDataTemp["#emp_name"]) {

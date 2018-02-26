@@ -554,7 +554,8 @@ plid = layout.getPlid();
 										
 										<input data-toggle="tooltip" type="text" class="form-control input-sm span12 "
 											placeholder="Emp Name" id="empName" data-original-title="Employee Name">
-											
+											<input class="form-control input-sm"
+											id="empName_id" name="empName_id" value="" type="hidden">
 <!-- 										<select data-toggle="tooltip" title="Employee Name" -->
 <!-- 											class="input form-control input-sm" id="empName" -->
 <!-- 											name="empName"> -->
@@ -567,7 +568,8 @@ plid = layout.getPlid();
 										
 										<input data-toggle="tooltip" type="text" id="Position" placeholder="Position"
 											class="form-control input-sm span12" data-original-title="Position">
-										
+										<input class="form-control input-sm" id="Position_id"
+											name="Position_id" value="" type="hidden">
 <!-- 										<select data-toggle="tooltip" title="Employee Position" -->
 <!-- 											class="input form-control input-sm" id="Position" -->
 <!-- 											name="Position"> -->

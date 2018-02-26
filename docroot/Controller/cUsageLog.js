@@ -1,5 +1,6 @@
 //binding tooltip.
 var golbalData=[];
+var galbalDataTemp=[];
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
 });
@@ -199,7 +200,7 @@ var searchAdvance = function(){
 	
 
 	
-	var empNameCode= $("#empName").val();//.split("-");
+	var empNameCode= $("#empName_id").val();//.split("-");
 	//empNameCode=empNameCode[0];
 	
 	
@@ -311,7 +312,7 @@ if(connectionServiceFn(username,password,plid)==true){
 				data:{"emp_code":request.term},
 				 data:{
 					 	"position_name":request.term ,
-					 	"emp_name":($("#empName_id").val()==""?"":$("#emp_name").val()),
+					 	"emp_name":($("#empName_id").val()==""?"":$("#empName").val().split("(")[0]),
 					 	"org_id":$("#organization").val()
 				 },
 
@@ -390,11 +391,11 @@ if(connectionServiceFn(username,password,plid)==true){
 		
         source: function (request, response) {
         	$.ajax({
-				 url:restfulURL+restfulPathEmployeeAutocomplete,
+				 url:restfulURL+"/"+serviceName+"/public/cds_result/auto_emp_name",
 				 type:"post",
 				 dataType:"json",
 				 data:{
-					 "emp_name":request.term,"emp_code":session_emp_code,"org_id":$("#org_id").val()},
+					 "emp_name":request.term,"emp_code":session_emp_code,"org_id":$("#organization").val()},
 				//async:false,
 				 headers:{Authorization:"Bearer "+tokenID.token},
                  error: function (xhr, textStatus, errorThrown) {
@@ -419,16 +420,16 @@ if(connectionServiceFn(username,password,plid)==true){
 				});
         },
 		select:function(event, ui) {
-			$("#empName").val(ui.item.value+"("+ui.item.value_id+")");
+			$("#empName").val(ui.item.value+"("+ui.item.emp_code+")");
             $("#empName_id").val(ui.item.emp_id);
-            galbalDataTemp['empName'] = ui.item.value+"("+ui.item.value_id+")";
+            galbalDataTemp['empName'] = ui.item.value+"("+ui.item.emp_code+")";
             galbalDataTemp['empName_id']=ui.item.emp_id;
             galbalDataTemp['emp_code']=ui.item.emp_code;
             empNameAutoCompelteChangeToPositionName(ui.item.value);
             return false;
         },change: function(e, ui) {  
 			if ($("#empName").val() == galbalDataTemp['empName']) {
-				$("#empNamee_id").val(galbalDataTemp['empName_id']);
+				$("#empName_id").val(galbalDataTemp['empName_id']);
 			} else if (ui.item != null){
 				$("#empName_id").val(ui.item.emp_id);
 			} else {

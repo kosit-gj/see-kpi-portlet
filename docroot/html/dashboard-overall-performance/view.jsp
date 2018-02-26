@@ -42,7 +42,7 @@
 		top: 0px;
 		max-width: 768px;
 	}
-	.aui .advance-search .span3{width: 29.354%;}
+	.aui .advance-search .span3{width: 24.5%;}
 
   }
   /* Large desktop End######################################*/
@@ -54,7 +54,7 @@
 			margin-left: -40%;
 			top: 0px;
 		}
-		.aui .advance-search .span3{width: 28.754%;}
+ 		.aui .advance-search .span3{width: 32.5%;} 
 		/*All Start*/
 		.aui #btnSearchAdvance{
 		margin-bottom:5px;
@@ -91,7 +91,7 @@
 	}
 
 
-	.aui .advance-search .span3{width: 27.938%;}
+ 	.aui .advance-search .span3{width: 24.2%;} 
 	/*All Form Start*/
 
 	.aui #btnSearchAdvance{

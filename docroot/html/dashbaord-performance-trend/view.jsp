@@ -723,14 +723,14 @@ overflow:auto;
 						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;">
 		                    <select id="AppraisalEmpLevel" name="AppraisalEmpLevel" data-toggle="tooltip"
 		                      title="" data-original-title="Employee Level" class="input form-control input-sm">
-		                      <option value="">All Employee Level</option>
+<!-- 		                      <option value="">All Employee Level</option> -->
 		                	</select>
 		                </div>
 		                
 		                <div class="form-group pull-left span3" style="margin-left: 5px">
 		                    <select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip"
 		                      title="" data-original-title="Organization Level" class="input form-control input-sm">
-		                      <option value="">All Organization Level</option>
+<!-- 		                      <option value="">All Organization Level</option> -->
 		                    </select>
 		                </div>
 		                

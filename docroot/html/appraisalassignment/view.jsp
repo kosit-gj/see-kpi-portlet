@@ -462,11 +462,15 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									style="margin-left: 5px; margin-bottom: 3px;">
 									<input data-toggle="tooltip" type="text" class="form-control input-sm span12 "
 										placeholder="Emp Name" id="empName" data-original-title="Employee Name">
+										<input class="form-control input-sm"
+											id="empName_id" name="empName_id" value="" type="hidden">
 								</div>
 								<div id="PositionArea" class="form-group pull-left span2"
 									style="margin-left: 5px; margin-bottom: 3px;">
 									<input data-toggle="tooltip" type="text" id="Position" placeholder="Position"
 										class="form-control input-sm span12" data-original-title="Position">
+										<input class="form-control input-sm" id="Position_id"
+											name="Position_id" value="" type="hidden">
 								</div>
 							
 								<div class="form-group pull-right m-b-none "

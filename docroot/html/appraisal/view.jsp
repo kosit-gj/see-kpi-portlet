@@ -760,11 +760,15 @@ margin-bottom:1px;
                     <input data-toggle="tooltip" title="" data-original-title="Employee Name"
                       class="form-control input-sm searchAdvanceText span12" placeholder="Employee Name"
                       type="text" id="EmpName" name="EmpName" />
+                      <input class="form-control input-sm"
+											id="EmpName_id" name="EmpName_id" value="" type="hidden">
                   </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
                     <input data-toggle="tooltip" title="" data-original-title="Position" class="form-control input-sm searchAdvanceText span12"
                       placeholder="Position" type="text" id="Position" name="Position" />
+                      <input class="form-control input-sm" id="Position_id"
+											name="Position_id" value="" type="hidden">
                   </div>
 
                   <!-- Cancel by SeeKPI(TFG) Defect No.263

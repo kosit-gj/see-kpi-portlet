@@ -401,7 +401,7 @@ $(document).ready(function() {
 				data:{"emp_code":request.term},
 				 data:{
 					 	"position_name":request.term ,
-					 	"emp_name":($("#emp_id").val()==""?"":$("#emp_name").val()),
+					 	"emp_name":($("#emp_id").val()==""?"":$("#emp_name").val().split("(")[0]),
 					 	"org_id":$("#org_id").val()
 				 },
 
@@ -487,9 +487,9 @@ $(document).ready(function() {
 				});
         },
 		select:function(event, ui) {
-			$("#emp_name").val(ui.item.value+"("+ui.item.value_id+")");
+			$("#emp_name").val(ui.item.value+"("+ui.item.emp_code+")");
             $("#emp_name_id").val(ui.item.emp_id);
-            galbalDataTemp['emp_name'] = ui.item.value+"("+ui.item.value_id+")";
+            galbalDataTemp['emp_name'] = ui.item.value+"("+ui.item.emp_code+")";
             galbalDataTemp['emp_id']=ui.item.emp_id;
             galbalDataTemp['emp_code']=ui.item.emp_code;
             empNameAutoCompelteChangeToPositionName(ui.item.value);
