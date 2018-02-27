@@ -180,7 +180,8 @@ var listCdsResultFn = function (data) {
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["year"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ $("#param_month_name").val()+ "</td>";
 		//htmlTable += "<td class='columnSearch'>"+ indexEntry["month_name"]+ "</td>";
-		htmlTable += "<td class='columnSearch' style='text-align: right;padding-right: 10px;'> <input id='cdsValueID-"+indexEntry["cds_result_id"]+"'style='text-align:right;width: 130px;' class='cdsValue numberOnlyCds addCommaCds' disabled type=\"text\"  value='"+ addCommas(parseFloat(indexEntry["cds_value"]).toFixed(2))+ "'></td>";
+		htmlTable += "<td class='columnSearch' style='text-align: right;padding-right: 10px;'> <input id='cdsValueID-"+indexEntry["cds_result_id"];
+		htmlTable +="'style='text-align:right;width: 130px;' class='cdsValue numberOnlyCds addCommaCds' disabled type=\"text\"  value='"+ addCommas(parseFloat(indexEntry["cds_value"]).toFixed(2))+ "'></td>";
 		//htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;text-align: center;\"><i id='"+ indexEntry["cds_result_id"]+ "' class='fa fa-trash del' style='color: red; cursor: pointer;'></i></td>";
 		if(indexEntry["cds_result_id"] == null){
 			htmlTable += "<td class='columnSearch'></td>";
@@ -586,10 +587,10 @@ $(document).ready(function() {
 	 	}
 	 }
 	$("#org_name").val("");
-	$("#position").val("");
+	$("#cds_result_position").val("");
 	$("#emp_name").val("");
 	$("#org_id").val("");
-	$("#position_id").val("");
+	$("#cds_result_position_id").val("");
 	$("#emp_name_id").val("");
 	
 	$(".sr-only").hide();
@@ -612,7 +613,7 @@ $(document).ready(function() {
 				$("#app_lv_emp").val(),
 				$("#app_type").val(),
 				$("#org_id").val(),
-				$("#position_id").val(),
+				$("#cds_result_position_id").val(),
 				$("#emp_name_id").val());
 		$("#cds_result_list_content").show();
 		getBrowserWidthCds();
@@ -677,7 +678,7 @@ $(document).ready(function() {
 	});
 	
 	//Autocomplete Search Position Start
-	$("#position").autocomplete({
+	$("#cds_result_position").autocomplete({
         source: function (request, response) {
         	$.ajax({
         		
@@ -717,20 +718,20 @@ $(document).ready(function() {
 				});
         },
 		select:function(event, ui) {
-			$("#position").val(ui.item.value);
-            $("#position_id").val(ui.item.position_id);
+			$("#cds_result_position").val(ui.item.value);
+            $("#cds_result_position_id").val(ui.item.position_id);
             galbalDataTemp['position_name'] = ui.item.label;
             galbalDataTemp['position_id']=ui.item.position_id;
             return false;
         },change: function(e, ui) {  
 
  
-			if ($("#position").val() == galbalDataTemp['position_name']) {
-				$("#position_id").val(galbalDataTemp['position_id']);
+			if ($("#cds_result_position").val() == galbalDataTemp['position_name']) {
+				$("#cds_result_position_id").val(galbalDataTemp['position_id']);
 			}  else if (ui.item != null){
-				$("#position_id").val(ui.item.position_id);
+				$("#cds_result_position_id").val(ui.item.position_id);
 			}else {
-				$("#position_id").val("");
+				$("#cds_result_position_id").val("");
 			}
          }
     });
@@ -808,8 +809,8 @@ $(document).ready(function() {
 			data:{"emp_name":galbalDataTemp['emp_name']},
 			success:function(data){
 				if(data.length!==0) {
-					$("#position_id").val(data[0].position_id);
-					$("#position").val(data[0].position_name);
+					$("#cds_result_position_id").val(data[0].position_id);
+					$("#cds_result_position").val(data[0].position_name);
 					galbalDataTemp['position_name'] = data[0].position_name;
 					galbalDataTemp['position_id'] = data[0].position_id;
 				}
@@ -823,7 +824,7 @@ $(document).ready(function() {
 		if($("#app_type").val() == "2") {
 
 			$("#app_lv_emp").removeAttr('disabled');
-			$("#position").removeAttr('disabled');
+			$("#cds_result_position").removeAttr('disabled');
 			$("#emp_name").removeAttr('disabled');
 			
 			dropDownListEmpLevelFn();
@@ -833,10 +834,10 @@ $(document).ready(function() {
 		}else if($("#app_type").val() == "1") {
 			
 			$("#app_lv_emp").attr("disabled", 'disabled');
-			$("#position").attr("disabled", 'disabled');
+			$("#cds_result_position").attr("disabled", 'disabled');
 			$("#emp_name").attr("disabled", 'disabled');
-			$("#position").val("");
-			$("#position_id").val("");
+			$("#cds_result_position").val("");
+			$("#cds_result_position_id").val("");
 			$("#emp_name").val("");
 			$("#emp_name_id").val("");
 			$("#app_lv_emp").empty();
@@ -868,7 +869,7 @@ $(document).ready(function() {
 		var paramAppLvEmp=$("#app_lv_emp").val();
 		var paramAppType= $("#app_type").val();
 		var paramQrg= $("#org_id").val();
-		var paramPositionCode=$("#position_id").val();
+		var paramPositionCode=$("#cds_result_position_id").val();
 		var paramEmpCode=$("#emp_name_id").val();
 
 		
