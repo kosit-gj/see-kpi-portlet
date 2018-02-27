@@ -405,7 +405,7 @@ if(connectionServiceFn(username,password,plid)==true){
 					  	console.log(data)
 						response($.map(data, function (item) {
                             return {
-                                label: item.emp_name,
+                                label: item.emp_name+"("+item.emp_code+")",
                                 value: item.emp_name,
                                 emp_id: item.emp_id,
                                 emp_code: item.emp_code

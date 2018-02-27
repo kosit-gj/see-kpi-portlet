@@ -432,7 +432,7 @@ $.each(data,function(index,indexEntry){
 						  	console.log(data)
 							response($.map(data, function (item) {
 	                            return {
-	                                label: item.emp_name,
+	                                label: item.emp_name+"("+item.emp_code+")",
 	                                value: item.emp_name,
 	                                emp_id: item.emp_id,
 	                                emp_code: item.emp_code
@@ -447,9 +447,9 @@ $.each(data,function(index,indexEntry){
 					});
 	        },
 			select:function(event, ui) {
-				$("#empName").val(ui.item.value+"("+ui.item.emp_code+")");
+				$("#empName").val(ui.item.label);
 	            $("#empName_id").val(ui.item.emp_id);
-	            galbalDataTemp['emp_name'] = ui.item.value+"("+ui.item.emp_code+")";
+	            galbalDataTemp['emp_name'] = ui.item.label;
 	            galbalDataTemp['emp_id']=ui.item.emp_id;
 	            galbalDataTemp['emp_code']=ui.item.emp_code;
 	            empNameAutoCompelteChangeToPositionName(ui.item.value);

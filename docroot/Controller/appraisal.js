@@ -2826,7 +2826,7 @@ $(document).ready(function() {
 							  	console.log(data)
 								response($.map(data, function (item) {
 		                            return {
-		                                label: item.emp_name,
+		                                label: item.emp_name+"("+item.emp_code+")",
 		                                value: item.emp_name,
 		                                emp_id: item.emp_id,
 		                                emp_code: item.emp_code
@@ -2841,9 +2841,9 @@ $(document).ready(function() {
 						});
 		        },
 				select:function(event, ui) {
-					$("#EmpName").val(ui.item.value+"("+ui.item.emp_code+")");
+					$("#EmpName").val(ui.item.label);
 		            $("#EmpName_id").val(ui.item.emp_id);
-		            galbalDataTemp['EmpName'] = ui.item.value+"("+ui.item.emp_code+")";
+		            galbalDataTemp['EmpName'] = ui.item.label;
 		            galbalDataTemp['EmpName_id']=ui.item.emp_id;
 		            empNameAutoCompelteChangeToPositionName(ui.item.value);
 		            return false;

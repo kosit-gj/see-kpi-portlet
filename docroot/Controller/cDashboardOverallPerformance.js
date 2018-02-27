@@ -742,7 +742,7 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 						  
 							response($.map(data, function (item) {
 	                            return {
-	                                label: item[Object.keys(item)[2]],
+	                                label: item[Object.keys(item)[2]]+"("+item[Object.keys(item)[1]]+")",
 	                                value: item[Object.keys(item)[2]],
 	                                value_id : item[Object.keys(item)[0]],
 	                                value_code : item[Object.keys(item)[1]],
@@ -758,10 +758,10 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 					});
 	        },
 			select:function(event, ui) {
-				CreateOrgLevelAndOrganizByEmpName(ui.item.value_id);
-				$("#emp_name").val(ui.item.value+"("+ui.item.value_code+")");
+				//CreateOrgLevelAndOrganizByEmpName(ui.item.value_id);
+				$("#emp_name").val(ui.item.label);
 	            $("#emp_name"+"_id").val(ui.item.value_id);
-	            galbalDataTemp["#emp_name"] = ui.item.label+"("+ui.item.value_code+")";
+	            galbalDataTemp["#emp_name"] = ui.item.label;
 	            galbalDataTemp["#emp_name"+"_id"]=ui.item.value_id;
 	            empNameAutoCompelteChangeToPositionName(ui.item.value);
 	            return false;

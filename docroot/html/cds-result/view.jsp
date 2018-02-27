@@ -46,20 +46,20 @@ plid = layout.getPlid();
 	background-color: #fafafa;
 }
 
-.aui .countPagination {
+.aui .countCdsPagination {
 	width: 70px;
 	margin-bottom: 0px:
 }
 
-.popover {
-	width: 208px;
+#tableCdsResult .popover {
+	width: 129px;
 }
 
 .aui .pagination {
 	margin: 5px 0;
 }
 
-.pagingDropdown {
+.pagingCdsDropdown {
 	float: right;
 	padding-top: 5px;
 }
@@ -151,27 +151,27 @@ plid = layout.getPlid();
 }
 /* Large desktop */
 @media ( min-width : 1200px) {
-.aui #confrimModal {
-		left: 55%;
-	}
+/* .aui #confrimModalCdsResult { */
+/* 		left: 55%; */
+/* 	} */
 	.aui #txtEmpInput{
 /* 		width:27.5%; */
 	}
 }
 /* Portrait tablet to landscape and desktop */
 @media ( min-width : 980px) and (max-width: 1199px) {
-	  .aui #confrimModal {
-		left: 57%;
-	}
+/* 	  .aui #confrimModalCdsResult { */
+/* 		left: 57%; */
+/* 	} */
 	.aui #txtEmpInput{
 /* 		width:26.5%; */
 	}
 }
 /* Portrait tablet to landscape and desktop */
 @media ( min-width : 768px) and (max-width: 979px) {
-	.aui #confrimModal {
-		left: 58.5%;
-	}
+	.aui #confrimModalCdsResult,.aui  #downloadAttachFileModal,.aui #ModalImport { 
+		left: 1%; 
+ 	} 
 	.aui #dis-non{display:none;}
 	.aui .ResultsPerPageTop {
 		position: absolute;
@@ -198,25 +198,25 @@ plid = layout.getPlid();
 	.aui #widthPersenBottom {
 		width: 11%;
 	}
-	.aui .txtCountPaginationTop {
+	.aui .txtcountCdsPaginationTop {
 		position: absolute;
 		left: -14.9%;
 		top: 51px;
 		width: 41.66666667%;
 	}
-	.aui .selectCountPaginationTop {
+	.aui .selectcountCdsPaginationTop {
 		position: absolute;
 		left: 86.5%;
 		top: 51px;
 		width: 24%;
 	}
-	.aui .txtCountPaginationBottom {
+	.aui .txtcountCdsPaginationBottom {
 		left: -11.5%;
 		top: -45px;
 		width: 43.96666667%;
 		position: relative;
 	}
-	.aui .selectCountPaginationBottom {
+	.aui .selectcountCdsPaginationBottom {
 		left: 90.1%;
 		top: -75px;
 		width: 25%;
@@ -226,9 +226,9 @@ plid = layout.getPlid();
 
 /* Landscape phone to portrait tablet */
 @media ( max-width : 767px) {
-	.aui #confrimModal {
-		left: 23.5%;
-	}
+/* 	.aui #confrimModalCdsResult { */
+/* 		left: 23.5%; */
+/* 	} */
 	.aui #dis-non{display:none;}
 	.aui .ResultsPerPageTop {
 		position: absolute;
@@ -240,19 +240,17 @@ plid = layout.getPlid();
 		top: -40px;
 	}
 	@media ( min-width : 481px) and (max-width: 615px) {
-		.aui #confrimModal {
-			left: 16.5%;
-		}
+/* 		.aui #confrimModalCdsResult { */
+/* 			left: 16.5%; */
+/* 		} */
 		.aui .height-32-px {
 			height: 42px
 		}
-		.aui #confrimModal {
-			left: 16.5%;
-		}
+
 		.aui .ResultsPerPageTop {
 			position: absolute;
 			left: -20px;
-			top: 5px;
+			top: 42px;
 		}
 		.aui .ResultsPerPageBottom {
 			position: static;
@@ -266,25 +264,25 @@ plid = layout.getPlid();
 		.aui #widthPersenBottom {
 			width: 11.2%;
 		}
-		.aui .txtCountPaginationTop {
+		.aui .txtcountCdsPaginationTop {
 			position: absolute;
 			left: -14.9%;
 			top: 51px;
 			width: 41.66666667%;
 		}
-		.aui .selectCountPaginationTop {
+		.aui .selectcountCdsPaginationTop {
 			position: absolute;
 			left: 86.5%;
 			top: 51px;
 			width: 24%;
 		}
-		.aui .txtCountPaginationBottom {
+		.aui .txtcountCdsPaginationBottom {
 			left: -11.5%;
 			top: -45px;
 			width: 43.96666667%;
 			position: relative;
 		}
-		.aui .selectCountPaginationBottom {
+		.aui .selectcountCdsPaginationBottom {
 			left: 90.1%;
 			top: -75px;
 			width: 25%;
@@ -294,8 +292,13 @@ plid = layout.getPlid();
 
 	/* Landscape phones and down */
 	@media ( max-width : 480px) {
-		.aui #confrimModal {
+		.aui #confrimModalCdsResult {
 			left: 1%;
+		}
+		.aui .ResultsPerPageTop {
+			position: absolute;
+			left: -20px;
+			top: 42px;
 		}
 		.aui .ResultsPerPageBottom {
 			position: static;
@@ -312,31 +315,35 @@ plid = layout.getPlid();
 		.aui .height-32-px {
 			height: 42px
 		}
-		.aui .txtCountPaginationTop {
+		.aui .txtcountCdsPaginationTop {
 			position: absolute;
 			left: -25%;
 			top: 40px;
 			width: 41.66666667%;
 		}
-		.aui .selectCountPaginationTop {
+		.aui .selectcountCdsPaginationTop {
 			position: absolute;
 			left: 78.5%;
 			top: 42px;
 			width: 24%;
 		}
-		.aui .txtCountPaginationBottom {
+		.aui .txtcountCdsPaginationBottom {
 			left: -21.2%;
 			top: -5px;
 			width: 43.96666667%;
 			position: relative;
 		}
-		.aui .selectCountPaginationBottom {
+		.aui .selectcountCdsPaginationBottom {
 			left: 82.9%;
 			top: -34px;
 			width: 25%;
 			position: relative;
 		}
 	}
+}
+.aui .not-active {
+  pointer-events: none;
+  cursor: default;
 }
 </style>
 
@@ -394,22 +401,11 @@ plid = layout.getPlid();
 						<div class="form-group pull-left span3" style="margin-left: 5px">
 							<input data-toggle="tooltip" data-placement="top"
 								title="Position" class="span12 m-b-n ui-autocomplete-input"
-								placeholder="Position" id="position" name="position" type="text">
-							<input class="form-control input-sm" id="position_id"
-								name="position_id" value="" type="hidden">
+								placeholder="Position" id="cds_result_position" name="cds_result_position" type="text">
+							<input class="form-control input-sm" id="cds_result_position_id"
+								name="cds_result_position_id" value="" type="hidden">
 						</div>
 						
-<!-- 					</div> -->
-<!-- 					<div class="row-fluid"> -->
-<!-- 						<div class="form-group pull-left span3" style="margin-left: 5px"> -->
-<!-- 							<input data-toggle="tooltip" data-placement="top" -->
-<!-- 								title="Organization" class="span12 m-b-n ui-autocomplete-input" -->
-<!-- 								placeholder="Organization" id="org_name" name="org_name" type="text"> -->
-<!-- 							<input class="form-control input-sm" id="org_id" -->
-<!-- 								name="org_id" value="" type="hidden"> -->
-<!-- 						</div> -->
-						
-<!-- 						<div id="dis-non" class="form-group pull-left span1" style="margin-left: 5px;">  </div> -->
 						<div class="form-group pull-right m-b-none">
 						<div class="form-group pull-right m-b-none ">
 							<button id="btn_import" type="button" data-target="#ModalImport"
@@ -453,8 +449,19 @@ plid = layout.getPlid();
 							<h5>CDS Result List</h5>
 						</div>
 
-
+						
+						
 						<div class="ibox-content" style="position: relative;">
+						
+							<div class="span12"> 
+								<button id="btnEditCdsresult" name="btnEditCdsresult" class="btn btn-warning input-sm" type="button"> Edit </button>
+								<button id="btnSaveCdsresult" name="btnSaveCdsresult" class="btn btn-primary input-sm" type="button" disabled> Save </button>
+								<button id="btnCancelCdsresult" name="btnCancelCdsresult"  class="btn btn-danger input-sm" type="button" disabled> Cancel </button>
+							</div>
+							
+							
+						
+						
 						<div class="row-fluid">
 								<div class="height-32-px"></div>
 						</div>
@@ -463,13 +470,13 @@ plid = layout.getPlid();
 							<div class="row-fluid">
 								<div id="width-100-persen" class="span9 m-b-xs">
 									
-									<span class="pagination_top m-b-none pagination"></span>
+									<span class="paginationCds_top m-b-none pagination"></span>
 
 								</div>
 								<div class="span3 object-right ResultsPerPageTop">
 		                                    
-			                                    <div class='pagingDropdown'>
-		                                 			<select  id='countPaginationTop'  class="form-control input-sm countPagination">
+			                                    <div class='pagingCdsDropdown'>
+		                                 			<select  id='countCdsPaginationTop'  class="form-control input-sm countCdsPagination">
 					                                     <option>10</option>
 					                                     <option>20</option>
 					                                     <option>50</option>
@@ -480,19 +487,6 @@ plid = layout.getPlid();
 												<div class='pagingText'>Results per page</div>
 		                                    
 		                          </div>
-
-<!-- 								<div class="span2 object-right paging-text p-t-xs txtCountPaginationTop">Results -->
-<!-- 									per page</div> -->
-<!-- 								<div id="widthPersenTop" class="span1 p-b-xxs selectCountPaginationTop "> -->
-
-<!-- 									<select name="account" id="countPaginationTop" class="form-control input-sm countPagination"> -->
-<!-- 										<option>10</option> -->
-<!-- 										<option>20</option> -->
-<!-- 										<option>50</option> -->
-<!-- 										<option>100</option> -->
-<!-- 									</select> -->
-
-<!-- 								</div> -->
 							</div>
 							<!-- pagination end -->
 							<div class="table-responsive p-b-xxs" style="overflow:auto">
@@ -525,13 +519,13 @@ plid = layout.getPlid();
 							<div class="row-fluid">
 								<div id="width-100-persen" class="span9 m-b-xs ">
 
-									<span class="pagination_bottom m-b-none pagination"></span>
+									<span class="paginationCds_bottom m-b-none pagination"></span>
 
 								</div>
 								<div class="span3 object-right ResultsPerPageBottom">
 		                                    
-		                                    	<div class='pagingDropdown'>
-		                                 			<select  id='countPaginationBottom'  class="form-control input-sm countPagination">
+		                                    	<div class='pagingCdsDropdown'>
+		                                 			<select  id='countCdsPaginationBottom'  class="form-control input-sm countCdsPagination">
 					                                     <option>10</option>
 					                                     <option>20</option>
 					                                     <option>50</option>
@@ -541,11 +535,11 @@ plid = layout.getPlid();
 												<div class='pagingText'>Results per page</div>
 		                        </div>
 
-<!-- 								<div class="span2 object-right paging-text p-t-xs txtCountPaginationBottom">Results -->
+<!-- 								<div class="span2 object-right paging-text p-t-xs txtcountCdsPaginationBottom">Results -->
 <!-- 									per page</div> -->
-<!-- 								<div id="widthPersenBottom" class="span1 p-b-xxs selectCountPaginationBottom"> -->
+<!-- 								<div id="widthPersenBottom" class="span1 p-b-xxs selectcountCdsPaginationBottom"> -->
 
-<!-- 									<select name="account" id="countPaginationBottom" class="form-control input-sm countPagination"> -->
+<!-- 									<select name="account" id="countCdsPaginationBottom" class="form-control input-sm countCdsPagination"> -->
 <!-- 										<option>10</option> -->
 <!-- 										<option>20</option> -->
 <!-- 										<option>50</option> -->
@@ -577,7 +571,7 @@ plid = layout.getPlid();
 						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only">Close</span>
 					</button>
 					<!-- <i class="fa fa-laptop modal-icon"></i> -->
-					<h4 class="modal-title" id="">CDS Result</h4>
+					<h4 id="txtTitleImport" class="modal-title" id="">Import CDS Result</h4>
 					<!-- 
                 <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
                  -->      
@@ -599,10 +593,6 @@ plid = layout.getPlid();
 							
 							<h6 class="label-content-import-export">
 
-<!-- 							<input class="btn btn-success" type="submit" -->
-<!-- 								name="importFileMobile" id="importFileMobile" value="Import" -->
-<!-- 								style="margin-top: 0px; margin-bottom: 0px;"> -->
-							<!-- 								<strong>Note</strong> : Data size should de less 10MB -->
 
 							</h6>
 						
@@ -617,17 +607,54 @@ plid = layout.getPlid();
 					<button class="btn btn-success" type="submit" id="importFileMobile" form="fileImportCdsResult">Import</button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>
-						<div class="alert alert-warning information" id="information"
+						<div class="alert alert-warning information" id="informationImport"
 						style="display: none;height:120px; overflow-y: scroll; position:relative;"></div>
+					<input id="attachFileCdsResultId" type="hidden" value="" />
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Modal End  -->
-	
+	<!-- Modal Download Attach File Start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="downloadAttachFileModal" class="modal inmodal " style="display: none; margin-top: 0px;">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
+						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only">Close</span>
+					</button>
+                <h5 class="modal-title">Download Files</h5>
+            </div>
+            <div class="modal-body">
+            <!-- content start -->
+			<table class='table'>
+				<thead>
+					<tr>
+						<th style='width:5%;'>
+						<b>No.</b>
+						</th>
+						<th style='width:50%;'>
+						<b>Attach Files</b>
+						</th>
+						<th style='text-align:center; width:10%;'>
+						<b>Manage</b>
+						</th>
+					</tr>
+				</thead>
+				<tbody id='listDataAttachFile'>
+
+				</tbody>
+			</table>
+            <!-- content end -->
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal Download attach file End -->
 		<!-- Modal Confirm Start -->
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal"
-		class="modal inmodal in" style="width:400px;left:calc;display: none;">
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModalCdsResult"
+		class="modal inmodal in" style="display: none; margin-top: 0px;">
 		<div class="modal-dialog">
 			<div class="modal-content  bounceInRight">
 				<div class="modal-header">
@@ -645,7 +672,7 @@ plid = layout.getPlid();
 					<div class="form-kpi-mangement">
 						<div class="form-kpi-label" align="center">
 
-							<label>Confirm to Delete Data?</label>
+							<label style="margin-top: 25px; margin-bottom: 25px;">Confirm to Delete Data?</label>
 						</div>
 					</div>
 

@@ -775,7 +775,7 @@ $(document).ready(function() {
 						response($.map(data, function (item) {
 							var dataSet = new Object();
 							//autocomplete default values REQUIRED
-							dataSet.label = item.emp_name;
+							dataSet.label = item.emp_name+"("+item.emp_code+")";
 							dataSet.value = item.emp_name;
 
                             //extend values

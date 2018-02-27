@@ -2689,7 +2689,7 @@ $("#empName").autocomplete({
 					  	console.log(data)
 						response($.map(data, function (item) {
                             return {
-                                label: item.emp_name,
+                                label: item.emp_name+"("+item.emp_code+")",
                                 value: item.emp_name,
                                 emp_code: item.emp_code
                             };
@@ -2703,9 +2703,9 @@ $("#empName").autocomplete({
 				});
         },
 		select:function(event, ui) {
-			$("#empName").val(ui.item.value+"("+ui.item.emp_code+")");
+			$("#empName").val(ui.item.label);
             $("#empName_id").val(ui.item.emp_code);
-            galbalDataTemp['empName'] = ui.item.value+"("+ui.item.emp_code+")";
+            galbalDataTemp['empName'] = ui.item.label;
             galbalDataTemp['empName_id']=ui.item.emp_code;
             empNameAutoCompelteChangeToPositionName(ui.item.value);
             return false;

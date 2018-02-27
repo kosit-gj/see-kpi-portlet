@@ -919,7 +919,7 @@ var listDashBoardFn = function(data){
 						  
 							response($.map(data, function (item) {
 	                            return {
-	                                label: item[Object.keys(item)[2]],
+	                                label: item[Object.keys(item)[2]]+"("+item[Object.keys(item)[1]]+")",
 	                                value: item[Object.keys(item)[2]],
 	                                value_id : item[Object.keys(item)[0]]
 	                                
@@ -935,7 +935,7 @@ var listDashBoardFn = function(data){
 	        },
 			select:function(event, ui) {
 				CreateOrgLevelAndOrganizByEmpName(ui.item.value_id);
-				$("#emp_name").val(ui.item.value);
+				$("#emp_name").val(ui.item.label);
 	            $("#emp_name_id").val(ui.item.value_id);
 	            galbalDataTemp["#emp_name"] = ui.item.label;
 	            galbalDataTemp["#emp_name_id"]=ui.item.value_id;
