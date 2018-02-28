@@ -259,26 +259,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 				</div>
 
 				<div class="ibox-content breadcrumbs2">
-
-<!-- 					<div class="row-fluid"> -->
-<!-- 						<div id="appraisalTypeArea" class="form-group pull-left span4" -->
-<!-- 							style="margin-left: 5px; margin-bottom: 3px;"> -->
-<!-- 							<select data-toggle="tooltip" title="Entity Type" -->
-<!-- 								class="input form-control input-sm" id="appraisalType" -->
-<!-- 								name="appraisalType"> -->
-<!-- 								<option value="0"></option> -->
-<!-- 							</select> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
 					<div class="row-fluid">
-<!-- 						<div id='appraisalLevelEmpArea' class="form-group pull-left span4" -->
-<!-- 							style="margin-left: 5px; margin-bottom: 3px;"> -->
-<!-- 							<select data-toggle="tooltip" title="Emp Level" multiple="multiple" -->
-<!-- 								class="input form-control input-sm" id="appraisalLevelEmp" -->
-<!-- 								name="appraisalLevelEmp"> -->
-<!-- 								<option value="0"></option> -->
-<!-- 							</select> -->
-<!-- 						</div> -->
 						<div id="appraisalTypeArea" class="form-group pull-left span4"
 							style="margin-left: 5px; margin-bottom: 3px;">
 							<select data-toggle="tooltip" title="Entity Type"
@@ -287,22 +268,6 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								<option value="0"></option>
 							</select>
 						</div>
-						<div id="empNameArea" class="form-group pull-left span4"
-							style="margin-left: 5px; margin-bottom: 3px;">
-							<input data-toggle="tooltip" type="text"
-								class="form-control input-sm span12 " placeholder="Emp Name"
-								id="empName" data-original-title="Employee Name" disabled>
-							<input type="hidden" id="empName_id">
-						</div>
-						<div id="PositionArea" class="form-group pull-left span4"
-							style="margin-left: 5px; margin-bottom: 3px;">
-							<input data-toggle="tooltip" type="text" id="Position"
-								placeholder="Position" class="form-control input-sm span12"
-								disabled data-original-title="Position"> <input
-								type="hidden" id="Position_id">
-						</div>
-					</div>
-					<div class="row-fluid">
 						<div id='appraisalLevelArea' class="form-group pull-left span4"
 							style="margin-left: 5px; margin-bottom: 3px;">
 							<select data-toggle="tooltip" title="Org Level" multiple="multiple"
@@ -319,6 +284,23 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 								<option value=''>All Organization</option>
 							</select>
 						</div>
+					</div>
+					
+					<div class="row-fluid">
+						<div id="empNameArea" class="form-group pull-left span4"
+							style="margin-left: 5px; margin-bottom: 3px;">
+							<input data-toggle="tooltip" type="text"
+								class="form-control input-sm span12 " placeholder="Emp Name"
+								id="empName" data-original-title="Employee Name" disabled>
+							<input type="hidden" id="empName_id">
+						</div>
+						<div id="PositionArea" class="form-group pull-left span4"
+							style="margin-left: 5px; margin-bottom: 3px;">
+							<input data-toggle="tooltip" type="text" id="Position"
+								placeholder="Position" class="form-control input-sm span12"
+								disabled data-original-title="Position"> <input
+								type="hidden" id="Position_id">
+						</div>
 						<div id='yearArea' class="form-group pull-left span4"
 							style="margin-left: 5px; margin-bottom: 3px;">
 							<select data-toggle="tooltip" title="Year"
@@ -328,6 +310,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							</select>
 						</div>
 					</div>
+					
 					<div class="row-fluid">
 						<div id="periodFrequencyArea" class="form-group pull-left span4"
 							style="margin-left: 5px; margin-bottom: 3px;">

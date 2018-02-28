@@ -242,12 +242,12 @@ $.each(data,function(index,indexEntry){
 		validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+indexEntry['title']+",  ";
 	}
 	if(indexEntry['appraisal_type_id'] == null || indexEntry['appraisal_type_id'] == "" ){
-		validateFile+="<font color='#FFC446'></font> Appraisal_type_id:null,  ";
+		validateFile+=" ";
 	}else{
 		validateFile+="<font color='#FFC446'></font> Appraisal_type_id:"+indexEntry['appraisal_type_id']+",  ";
 	}
 	if(indexEntry['emp_id'] == null || indexEntry['emp_id'] == "" ){
-		validateFile+="<font color='#FFC446'></i></font> Emp_id:null,  ";
+		validateFile+=" ";
 	}else{
 		validateFile+="<font color='#FFC446'></i></font> Emp_id:"+indexEntry['emp_id']+",  ";
 	}
@@ -348,7 +348,7 @@ $.each(data,function(index,indexEntry){
 			
 		});
 		
-		//Autocomplete Search Position Start
+	//Autocomplete Search Position Start
 		$("#Position").autocomplete({
 	        source: function (request, response) {
 	        	$.ajax({
@@ -406,23 +406,21 @@ $.each(data,function(index,indexEntry){
 				}
 	         }
 	    });
+	//Autocomplete Search Position End
 		
 
-	   
-		//Autocomplete Search Position End
-		
-
-	  //Auto Complete Employee Name end
-		
+	//Auto Complete Employee Name Start
 		$("#empName").autocomplete({
-			
 	        source: function (request, response) {
 	        	$.ajax({
-					 url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_employee_name2",
+					 url:restfulURL+"/"+serviceName+"/public/import_assignment/auto_employee_name",
 					 type:"post",
 					 dataType:"json",
 					 data:{
-						 "emp_name":request.term,"emp_code":session_emp_code,"org_id":$("#org_id").val()},
+						 "emp_name":request.term, 
+						 "emp_code":session_emp_code, 
+						 "org_id":$("#organization").val()
+					 },
 					//async:false,
 					 headers:{Authorization:"Bearer "+tokenID.token},
 	                 error: function (xhr, textStatus, errorThrown) {
@@ -448,7 +446,7 @@ $.each(data,function(index,indexEntry){
 	        },
 			select:function(event, ui) {
 				$("#empName").val(ui.item.label);
-	            $("#empName_id").val(ui.item.emp_id);
+	            $("#empName_id").val(ui.item.emp_code);
 	            galbalDataTemp['emp_name'] = ui.item.label;
 	            galbalDataTemp['emp_id']=ui.item.emp_id;
 	            galbalDataTemp['emp_code']=ui.item.emp_code;
@@ -456,9 +454,9 @@ $.each(data,function(index,indexEntry){
 	            return false;
 	        },change: function(e, ui) {  
 				if ($("#empName").val() == galbalDataTemp['emp_name']) {
-					$("#empName_id").val(galbalDataTemp['emp_id']);
+					$("#empName_id").val(galbalDataTemp['emp_code']);
 				} else if (ui.item != null){
-					$("#empName_id").val(ui.item.emp_id);
+					$("#empName_id").val(ui.item.emp_code);
 				} else {
 					$("#empName_id").val("");
 					
@@ -488,8 +486,8 @@ $.each(data,function(index,indexEntry){
 				}
 			});
 		}
-	    
-	  //Auto Complete Employee Name end
+	//Auto Complete Employee Name end
+		
 		
 		//#### Call Export Function Start ####
 		$("#exportToExcel").click(function(){
