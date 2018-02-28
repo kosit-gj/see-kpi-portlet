@@ -5,6 +5,7 @@ var globalData=[];
 var galbalDataTemp=[];
 var empldoyees_code = [];
 var empldoyees_id = [];
+var position_id = [];
 var org_id_to_assign;
 var item_id_array=[];
 
@@ -127,7 +128,9 @@ var setDataToTemplateFn = function(data,actionType){
 	working_start_date
 	 */
 	/*information start*/
-	
+	galbalDataTemp['cds_result_emp_id'] = notNullTextFn(head['emp_id']);
+	galbalDataTemp['cds_result_org_id'] = notNullTextFn(head['org_id']);
+	galbalDataTemp['cds_result_position_id'] = notNullTextFn(head['position_id']);
 	if($("#embed_appraisal_type_id").val()==2){
 		$("#titlePanelInformation").html("Employee Information");
 		
@@ -296,7 +299,8 @@ weight_percent: '',
 		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox").prop("checked",true);
 		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target").val(addCommas(indexEntry['target_value']));
 		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_result_id").val(indexEntry['item_result_id']);
-		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast").val(addCommas(indexEntry['forecast_value']));
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-actualValue").val(addCommas(notNullFn(indexEntry['actual_value'])));
+		//$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast").val(addCommas(indexEntry['forecast_value']));
 
 		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score0").val(addCommas(indexEntry['score0']));	
 		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score1").val(addCommas(indexEntry['score1']));	
@@ -313,7 +317,7 @@ weight_percent: '',
 		//form3
 		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-maxValue").val(addCommas(indexEntry['max_value']));
 		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-deductScoreUnit").val(indexEntry['deduct_score_unit']);
-		
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-valueGetZero").val(indexEntry['value_get_zero']==null ? "" :indexEntry['value_get_zero']);
 		
 		//embedParamAppraisal for get updated.
 		
@@ -324,6 +328,12 @@ weight_percent: '',
 		
 	});
 	
+	$.each(data,function(index,indexEntry){
+	
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-valueGetZero").val(indexEntry['value_get_zero']==null ? "" :indexEntry['value_get_zero']);
+
+		
+	});
 //	if(actionType=='view'){
 //	alert("view 1");	
 //		$(".btnAssignment").hide();
@@ -392,7 +402,7 @@ var getDataFn = function(page,rpp) {
 	var appraisal_level_id_org = $("#embed_appraisal_level_id_org").val();
 	var appraisal_level_id_emp = $("#embed_appraisal_level_id_emp").val();
 	
-	if($("#appraisalType").val()==1) {
+	if($("#embed_appraisal_type_id").val()==1) {
 		appraisal_level_id_emp = "";
 	}
 	
@@ -541,9 +551,9 @@ var listDataFn = function(data) {
 				}else{
 					
 					if($("#embed_appraisal_type_id").val()==2){
-						htmlHTML+="	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-"+itemEntry['emp_id']+"' type='checkbox' value="+itemEntry['emp_id']+"-"+itemEntry['emp_code']+"-"+itemEntry['org_id']+"></td>";
+						htmlHTML+="	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-"+itemEntry['emp_id']+"' type='checkbox' value="+itemEntry['emp_id']+"-"+itemEntry['emp_code']+"-"+itemEntry['org_id']+"-"+itemEntry['period_id']+"></td>";
 					}else if($("#embed_appraisal_type_id").val()==1){
-						htmlHTML+="	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-"+itemEntry['org_id']+"' type='checkbox' value="+itemEntry['org_id']+"-"+itemEntry['org_code']+"-"+itemEntry['org_id']+"></td>";
+						htmlHTML+="	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-"+itemEntry['org_id']+"' type='checkbox' value="+itemEntry['org_id']+"-"+itemEntry['org_id']+"-"+itemEntry['org_id']+"></td>";
 						//alert(itemEntry['org_id']);
 					}
 				}
@@ -699,13 +709,14 @@ var listDataFn = function(data) {
 				var emp_result_id= $(this).parent().parent().parent().parent().children().eq(1).children().val();
 				var period_id = $(this).parent().parent().parent().parent().children().eq(2).children().val();
 				$("#period_id_edit").val(period_id);
-				findOneFn(emp_result_id);
+				findOneFn(emp_result_id,"");
 				$(this).parent().parent().parent().children().click();
 				$(window).scrollTop(0);
 				$(".modal-body").scrollTop(0);
 				$(".fht-tbody").scrollTop(0);
 
 			}
+			$(".scoreText0").attr("disabled","disabled");
 		});
 		$(".view").on("click",function() {
 			var view=this.id.split("-");
@@ -765,7 +776,7 @@ var actionUpdateAssignmentFn = function(){
 					appraisal_items+="\"item_id\":\""+$(appraisalItemEntry).val()+"\",";
 					appraisal_items+="\"item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-item_name").text().replace(/[\n\r]/g, '')+"\",";
 					appraisal_items+="\"target_value\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val())+"\",";
-					appraisal_items+="\"forecast_value\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-forecast").val())+"\",";
+					//appraisal_items+="\"forecast_value\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-forecast").val())+"\",";
 					appraisal_items+="\"score0\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score0").val())+"\",";
 					appraisal_items+="\"score1\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score1").val())+"\",";
 					appraisal_items+="\"score2\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score2").val())+"\",";
@@ -842,7 +853,7 @@ var actionUpdateAssignmentFn = function(){
 				appraisal_items+="\"max_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-maxValue").val()+"\",";
 				appraisal_items+="\"total_weight\":\""+$("#total_weight-"+$(structureEntry).val()).val()+"\",";
 				appraisal_items+="\"deduct_score_unit\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-deductScoreUnit").val()+"\",";
-				
+				appraisal_items+="\"value_get_zero\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-valueGetZero").val()+"\",";
 //				console.log("-----------------");
 //				console.log(appraisalItemEntry);
 //				console.log("Appraisal item = "+$(appraisalItemEntry).val());
@@ -933,7 +944,8 @@ var actionAssignmentFn = function(param){
 		}
 			if($("#embed_appraisal_type_id").val()==2){
 				employees+="\"emp_id\":\""+indexEntry+"\",\"emp_code\":\""+empldoyees_code[index]+"\",";
-				employees+="\"org_id\":\""+org_id_to_assign+"\",\"org_code\":\"\"";
+				employees+="\"org_id\":\""+org_id_to_assign+"\",\"org_code\":\"\",";
+				employees+="\"position_id\":\""+position_id[index]+"\"";
 			}else if($("#embed_appraisal_type_id").val()==1){
 				employees+="\"emp_id\":\"\",\"emp_code\":\"\",";
 				employees+="\"org_id\":\""+indexEntry+"\",\"org_code\":\""+empldoyees_code[index]+"\"";
@@ -971,7 +983,7 @@ var actionAssignmentFn = function(param){
 					appraisal_items+="\"item_id\":\""+$(appraisalItemEntry).val()+"\",";
 					appraisal_items+="\"item_name\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-item_name").text()+"\",";
 					appraisal_items+="\"target_value\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-target").val())+"\",";
-					appraisal_items+="\"forecast_value\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-forecast").val())+"\",";
+					//appraisal_items+="\"forecast_value\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-forecast").val())+"\",";
 					appraisal_items+="\"score0\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score0").val())+"\",";
 					appraisal_items+="\"score1\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score1").val())+"\",";
 					appraisal_items+="\"score2\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-score2").val())+"\",";
@@ -1026,6 +1038,7 @@ var actionAssignmentFn = function(param){
 				appraisal_items+="\"form_id\":\"3\",";
 				appraisal_items+="\"max_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-maxValue").val()+"\",";
 				appraisal_items+="\"deduct_score_unit\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-deductScoreUnit").val()+"\",";
+				appraisal_items+="\"value_get_zero\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-valueGetZero").val()+"\",";
 				appraisal_items+="\"total_weight\":\""+$("#total_weight-"+$(structureEntry).val()).val()+"\",";
 				appraisal_items+="\"select_flag\":\"1\"";
 				appraisal_items+="}";
@@ -1067,6 +1080,7 @@ var actionAssignmentFn = function(param){
 			"remark":$("#remark_footer").val(),
 			 
 			},
+			
 			"employees": employeesObj,
 			"appraisal_items":appraisal_itemsObj
 		},
@@ -1776,7 +1790,7 @@ return htmlTemplateQuality;
 };
 
 var assignTemplateDeductFn = function(structureName,data){
-	
+	var tempCheckDataVGZ ="";
 	//console.log(data['threshold'],structureName,'threshold assignTemplateDeductFn')
 	
 	var htmlTemplateDeduct="";
@@ -1795,19 +1809,24 @@ var assignTemplateDeductFn = function(structureName,data){
 		htmlTemplateDeduct+="<thead>";
 			htmlTemplateDeduct+="<tr>";
 				htmlTemplateDeduct+="<th style=\"width:3%\"><b>Select</b></th>";
-				htmlTemplateDeduct+="<th style=\"width:67%\"><b>Appraisal checkWeigthOverItem Name</b></th>";
+				htmlTemplateDeduct+="<th style=\"width:52%\"><b>Appraisal checkWeigthOverItem Name</b></th>";
 				htmlTemplateDeduct+="<th style=\"width:15%; text-align:center;\"><b>Max Value </b></th>";
 				htmlTemplateDeduct+="<th style=\"width:15%; text-align:center;\"><b>Deduct Score/Unit </b></th>";
+				htmlTemplateDeduct+="<th style=\"width:15%; text-align:center;\"><b>Value&nbsp;Get&nbsp;Zero&nbsp;</b></th>";
 				htmlTemplateDeduct+="</tr>";
 					htmlTemplateDeduct+="</thead>";
 					htmlTemplateDeduct+="<tbody id=\"\">";
 					
 					$.each(data['items'],function(index,indexEntry){
 						htmlTemplateDeduct+="<tr>";
+							
+								
 								htmlTemplateDeduct+="<td style=\"width:3%;text-align:center;\" class='object-center' ><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox notCal appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['item_id']+"'></td>";
-								htmlTemplateDeduct+="<td style=\"width:67%\" style='padding-top:7px;' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' class='id-"+indexEntry['structure_id']+"-item_name'>"+indexEntry['item_name']+"</td>";
+								htmlTemplateDeduct+="<td style=\"width:52%\" style='padding-top:7px;' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' class='id-"+indexEntry['structure_id']+"-item_name'>"+indexEntry['item_name']+"</td>";
 								htmlTemplateDeduct+="<td style=\"width:15%;text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-maxValue' class='id-"+indexEntry['structure_id']+"-maxValue  input form-control input-sm-small numberOnly addComma' type='text' value='"+indexEntry['max_value']+"'></td>";
 								htmlTemplateDeduct+="<td style=\"width:15%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-deductScoreUnit' class='id-"+indexEntry['structure_id']+"-deductScoreUnit    input form-control input-sm-small numberOnly addComma' type='text' value='"+indexEntry['unit_deduct_score']+"'>     </td>";
+								htmlTemplateDeduct+="<td style=\"width:15%; text-align:center; \"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-valueGetZero' class='id-"+indexEntry['structure_id']+"-valueGetZero  input form-control input-sm-small numberOnly addComma' type='text' value='"+(indexEntry['value_get_zero']==null ? "" :indexEntry['value_get_zero'])+"'></td>";								
+								
 								htmlTemplateDeduct+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_result_id' class='id-"+indexEntry['structure_id']+"-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
 						htmlTemplateDeduct+="</tr>";
 					});
@@ -1857,7 +1876,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 					htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>Appraisal Item Name</b></th>";
 					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Target</b> </th>";
 					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>UOM</b> </th>";
-					htmlTemplateQuantity+="<th style=\"width:10%;  text-align:center;\" class='thBox'><b>Forecast Value</b> </th>";
+					htmlTemplateQuantity+="<th style=\"width:10%;  text-align:right;padding-right: 10px;\" class='thBox'><b>Actual</b> </th>";
 					
 					
 					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#"+data['threshold_color'][0]['color_code']+"' class='redBOxL'>1</div></th>";
@@ -1891,8 +1910,9 @@ var assignTemplateQuantityFn = function(structureName,data){
 							htmlTemplateQuantity+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_result_id' class='id-"+indexEntry['structure_id']+"-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
 							htmlTemplateQuantity+="</td>";
 							htmlTemplateQuantity+="<td style=\"width:5%\">"+indexEntry['uom_name']+"</td>";
-							
-						    htmlTemplateQuantity+="<td style=\"width:10%;text-align:center;\"><input  class='input-sm-small scoreText0 numberOnly addComma' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast'></td>";
+//							htmlTemplateQuantity+="<td style=\"width:5%;text-align:right;padding-right: 10px;\">"+notNullFn(indexEntry['actual_value'])+"</td>";
+							htmlTemplateQuantity+="<td style=\"width:5%;text-align:right;padding-right: 10px;\"><input  class='input-sm-small scoreText0 numberOnly addComma' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-actualValue' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-actualValue' disabled value='"+notNullFn(indexEntry['actual_value'])+"'></td>";
+						    //htmlTemplateQuantity+="<td style=\"width:10%;text-align:center;\"><input  class='input-sm-small scoreText0 numberOnly addComma' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast'></td>";
 						   
 						    htmlTemplateQuantity+="<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText1 addComma' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score0' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score0'></td>";
 							htmlTemplateQuantity+="<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText2 addComma' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score1' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-score1'></td>";
@@ -1948,7 +1968,8 @@ var assignTemplateQuantityFn = function(structureName,data){
 				htmlTemplateQuantity+="<th style=\"width:30%\" class=''><b>Appraisal Item Name</b></th>";
 				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Target</b> </th>";
 				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>UOM</b> </th>";
-				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Forecast Value</b> </th>";
+				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:right;padding-right: 10px;\" class=''><b>Actual</b> </th>";
+//				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Forecast Value</b> </th>";
 				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>%Weight</b></th>";
 				htmlTemplateQuantity+="</tr>";
 				htmlTemplateQuantity+="</thead>";
@@ -1967,7 +1988,9 @@ var assignTemplateQuantityFn = function(structureName,data){
 						htmlTemplateQuantity+="<td style=\"width:30%\" class='id-"+indexEntry['structure_id']+"-item_name' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' style='padding-top:7px;'>"+indexEntry['item_name']+"</td>";
 						htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input class='input-sm-small numberOnly addComma' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-target'></td>";
 						htmlTemplateQuantity+="<td style=\"width:5%\">"+indexEntry['uom_name']+"</td>";
-						htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input class='input-sm-small numberOnly addComma' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast'></td>";
+//						htmlTemplateQuantity+="<td style=\"width:5%;text-align:right;padding-right: 10px;\">"+notNullFn(indexEntry['actual_value'])+"</td>";
+						htmlTemplateQuantity+="<td style=\"width:5%;text-align:right;padding-right: 10px;\"><input class='input-sm-small numberOnly addComma' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-actualValue' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-actualValue' disabled value='"+notNullFn(indexEntry['actual_value'])+"'></td>";
+						//htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input class='input-sm-small numberOnly addComma' type='text' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast' name='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast'></td>";
 						htmlTemplateQuantity+="<td style=\"width:5%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-weight' class='id-"+indexEntry['structure_id']+"-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly addComma'  type='text'></td>";
 					htmlTemplateQuantity+="</tr>";
 					
@@ -2751,6 +2774,7 @@ $("#empName").autocomplete({
 					empldoyees_id.push(emp_id[0]);
 					empldoyees_code.push(emp_id[1]);
 					org_id_to_assign = emp_id[2];
+					position_id.push(emp_id[3]);
 				}
 			});
 		if(empldoyees_id.length==0){
@@ -2799,7 +2823,7 @@ $("#empName").autocomplete({
 			
 			});
 		}
-		
+		$(".scoreText0").attr("disabled","disabled");
 		/*
 		console.log(empldoyees_id);
 		console.log(empldoyees_code);

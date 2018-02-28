@@ -483,11 +483,14 @@ plid = layout.getPlid();
 								<table class="table table-striped " id="tableAppraisalData" >
 									<thead>
 										<tr>
-											<th style='width: auto'>Period&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
+<!-- 											<th style='width: auto'>Period&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th> -->
 											<th style='width: auto'>Structure&emsp;&emsp;&emsp;&emsp;&emsp;</th>
 											<th style='width: auto'>Appraisal&nbsp;Item&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
 											<th style='width: auto'>Emp&nbsp;Code&emsp;</th>
 											<th style='width: auto'>Emp&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
+											<th style='width: auto'>Level&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
+											<th style='width: auto'>Organization&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
+											<th style='width: auto'>Position&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
 											<th style='width:auto;text-align: right;'>Data&nbsp;Value&emsp;</th>
 											
 										</tr>

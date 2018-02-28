@@ -273,7 +273,7 @@ var callFlashSlideInModal =function(text,id,flashType){
 //check value not null
 var notNullFn = function(data){
 	var dataNotNull="";
-	if((data == '' || data == 'undefinided' || data == null )){
+	if((data == '' || data == undefined || data == 'undefined' || data == null ||data == 'null')){
 		dataNotNull="0.00";
 	}else{
 		dataNotNull=data;
@@ -283,7 +283,7 @@ var notNullFn = function(data){
 //check value not null
 var notNullTextFn = function(data){
 	var dataNotNull="";
-	if((data == '' || data == 'undefinided' || data == null )){
+	if((data == '' || data == undefined || data == 'undefined' || data == null ||data == 'null')){
 		dataNotNull="";
 	}else{
 		dataNotNull=data;

@@ -424,8 +424,8 @@ plid = layout.getPlid();
 							</form>
 						</div>
 						<div class="form-group pull-right m-b-none ">
-							<button type="button" name="btnSearchAdvance"
-								id="btnSearchAdvance" class="btn btn-info input-sm "
+							<button type="button" name="btnSearchAdvanceCdsResult"
+								id="btnSearchAdvanceCdsResult" class="btn btn-info input-sm "
 								style="margin-left: 0px">
 								<i class="fa fa-search"></i>&nbsp;Search
 							</button>
@@ -494,10 +494,12 @@ plid = layout.getPlid();
 									<thead>
 										<tr>
 											<th style='width: auto'>Emp&nbsp;Code&emsp;</th>
-											<th style='width: auto'>Emp&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
+											<th style='width: auto'>Emp&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
 											<th style='width: auto'>Appraisal&nbsp;Level&emsp;</th>
+											<th style='width: auto' class="theadThField">Organization&emsp;&emsp;&emsp;</th>
+											<th style='width: auto' class="theadThField">Position&nbsp;Name&emsp;&emsp;&emsp;</th>
 											<th style='width: auto'>CDS&nbsp;ID&emsp;</th>
-											<th style='width: auto'>CDS&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
+											<th style='width: auto'>CDS&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
 											<th style='width: auto'>Year&emsp;</th>
 											<th style='width: auto'>Month&emsp;</th>
 											<th style='width:auto;text-align: right;'>CDS&nbsp;Value&emsp;</th>

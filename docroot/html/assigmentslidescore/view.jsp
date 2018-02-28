@@ -476,6 +476,292 @@ plid = layout.getPlid();
 /* .portlet-borderless-container{ */
 /*  position: unset !important; */
 /* } */
+
+/* ++++++++++++++++++++CDS Result++++++++++++++++++++++ */
+
+
+
+.aui #ModalCdsResult .countCdsPagination {
+	width: 70px;
+	margin-bottom: 0px:
+}
+
+#tableCdsResult .popover {
+	width: 129px;
+}
+
+.aui #ModalCdsResult .pagination {
+	margin: 5px 0;
+}
+
+#ModalCdsResult .pagingCdsDropdown {
+	float: right;
+	padding-top: 5px;
+}
+
+.aui #ModalCdsResult .btn {
+	font-size: 14px;
+	padding: 5px 12px;
+	width: auto;
+	margin-top: 0px;
+	display: inline;
+}
+
+.aui #ModalCdsResult .form-group {
+	margin-bottom: 5px;
+}
+
+#ModalCdsResult .p-t-xxs {
+	padding-top: 5px;
+}
+
+#ModalCdsResult .p-b-xxs {
+	padding-bottom: 5px;
+}
+
+/* new */
+.aui #ModalCdsResult .modal-header .close{
+	font-size: 1.4em !important;
+    margin-top: 4px !important;
+    padding-top: 5px !important;
+}
+.aui #cds_result_list_content{
+	display: none;
+}
+.aui #ModalCdsResult .control-label {
+	cursor: default;
+}
+
+#ModalCdsResult .ibox-title {
+	padding: 1px 10px;
+}
+
+.aui #ModalCdsResult h5 {
+	margin: 7px 0;
+}
+
+#ModalCdsResult .ibox-content {
+	background-color: #fff;
+	border: 1px solid #ffe57f;
+	color: inherit;
+	margin-bottom: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+#ModalCdsResult .gray-bg {
+	background-color: #f3f3f4;
+}
+
+#ModalCdsResult #objectCenter {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.aui #ModalCdsResult .checkbox input[type="checkbox"] {
+	opacity: 1;
+	z-index: 1;
+}
+
+#table_Sql {
+	border-left-width: 1px;
+}
+
+.aui #ModalCdsResult .modal {
+	top: 2%;
+}
+.aui #ModalCdsResult #file{
+	width: 100%;
+	height: 100%;
+}
+/* Large desktop */
+@media ( min-width : 1200px) {
+
+
+}
+/* Portrait tablet to landscape and desktop */
+@media ( min-width : 980px) and (max-width: 1199px) {
+
+
+}
+/* Portrait tablet to landscape and desktop */
+@media ( min-width : 768px) and (max-width: 979px) {
+	.aui #confrimModalCdsResult,.aui  #downloadAttachFileModal,.aui #ModalImport { 
+		left: 1%; 
+ 	} 
+	.aui #ModalCdsResult #dis-non{display:none;}
+	.aui .ResultsPerPageTop {
+		position: absolute;
+		left: -20px;
+		top: 5px;
+	}
+	.aui .ResultsPerPageBottom {
+		position: relative;
+		top: -40px;
+	}
+	.aui #ModalCdsResult [class*="span"],.aui #ModalCdsResult .uneditable-input[class*="span"],.aui #ModalCdsResult .row-fluid [class*="span"]
+		{
+		display: block;
+		float: none;
+		width: 100%;
+		margin-left: 0;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+	.aui #widthPersenTop {
+		width: 10.1%;
+	}
+	.aui #widthPersenBottom {
+		width: 11%;
+	}
+	.aui .txtcountCdsPaginationTop {
+		position: absolute;
+		left: -14.9%;
+		top: 51px;
+		width: 41.66666667%;
+	}
+	.aui .selectcountCdsPaginationTop {
+		position: absolute;
+		left: 86.5%;
+		top: 51px;
+		width: 24%;
+	}
+	.aui .txtcountCdsPaginationBottom {
+		left: -11.5%;
+		top: -45px;
+		width: 43.96666667%;
+		position: relative;
+	}
+	.aui .selectcountCdsPaginationBottom {
+		left: 90.1%;
+		top: -75px;
+		width: 25%;
+		position: relative;
+	}
+}
+
+/* Landscape phone to portrait tablet */
+@media ( max-width : 767px) {
+/* 	.aui #confrimModalCdsResult { */
+/* 		left: 23.5%; */
+/* 	} */
+	.aui #ModalCdsResult #dis-non{display:none;}
+	.aui .ResultsPerPageTop {
+		position: absolute;
+		left: -20px;
+		top: 5px;
+	}
+	.aui .ResultsPerPageBottom {
+		position: relative;
+		top: -40px;
+	}
+	@media ( min-width : 481px) and (max-width: 615px) {
+
+		.aui .height-32-px {
+			height: 42px
+		}
+
+		.aui .ResultsPerPageTop {
+			position: absolute;
+			left: -20px;
+			top: 42px;
+		}
+		.aui .ResultsPerPageBottom {
+			position: static;
+		}
+		.aui #width-100-persen {
+			
+		}
+		.aui #widthPersenTop {
+			width: 10.3%;
+		}
+		.aui #widthPersenBottom {
+			width: 11.2%;
+		}
+		.aui .txtcountCdsPaginationTop {
+			position: absolute;
+			left: -14.9%;
+			top: 51px;
+			width: 41.66666667%;
+		}
+		.aui .selectcountCdsPaginationTop {
+			position: absolute;
+			left: 86.5%;
+			top: 51px;
+			width: 24%;
+		}
+		.aui .txtcountCdsPaginationBottom {
+			left: -11.5%;
+			top: -45px;
+			width: 43.96666667%;
+			position: relative;
+		}
+		.aui .selectcountCdsPaginationBottom {
+			left: 90.1%;
+			top: -75px;
+			width: 25%;
+			position: relative;
+		}
+	}
+
+	/* Landscape phones and down */
+	@media ( max-width : 480px) {
+		.aui #confrimModalCdsResult {
+			left: 1%;
+		}
+		.aui .ResultsPerPageTop {
+			position: absolute;
+			left: -20px;
+			top: 42px;
+		}
+		.aui .ResultsPerPageBottom {
+			position: static;
+		}
+		.aui #width-100-persen {
+			width: 110%;
+		}
+		.aui #widthPersenTop {
+			width: 17%;
+		}
+		.aui #widthPersenBottom {
+			width: 19.1%;
+		}
+		.aui .height-32-px {
+			height: 42px
+		}
+		.aui .txtcountCdsPaginationTop {
+			position: absolute;
+			left: -25%;
+			top: 40px;
+			width: 41.66666667%;
+		}
+		.aui .selectcountCdsPaginationTop {
+			position: absolute;
+			left: 78.5%;
+			top: 42px;
+			width: 24%;
+		}
+		.aui .txtcountCdsPaginationBottom {
+			left: -21.2%;
+			top: -5px;
+			width: 43.96666667%;
+			position: relative;
+		}
+		.aui .selectcountCdsPaginationBottom {
+			left: 82.9%;
+			top: -34px;
+			width: 25%;
+			position: relative;
+		}
+	}
+}
+.aui #ModalCdsResult .not-active {
+  pointer-events: none;
+  cursor: default;
+}
+
+
 </style>
 <body class="gray-bg ">
 
@@ -958,7 +1244,10 @@ plid = layout.getPlid();
 										
 									</div>
 								</div>
-								
+								<br style="clear:both">
+								<button id="linkToCdsResult" class="btn btn-warning btn-sm pull-right" type="button">
+									<i class="fa fa-external-link"></i> CDS Result
+								</button>
 								<div id='orgInformation' class='container-fluid'>
 								
 									
@@ -1183,7 +1472,323 @@ plid = layout.getPlid();
    
 </div>
 <!-- Modal Confirm End -->
-      
-          
+
+<!--    ###########################################Model CDS Result##########################################    -->
+<!-- Modal KPI Start Edit -->
+
+  <div aria-hidden="true" role="dialog" tabindex="-1" id="ModalCdsResult" class="modal inmodal  large" style="display: none;">
+    <div class="modal-dialog  ">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
+             
+                <h4 class="modal-title" id="modalTitleRole">CDS Result</h4>
+               
+            </div>
+            <div class="modal-body">
+            	
+				<div class="row-fluid app_url_hidden" class="p-t-xxs">
+					<!-- start--row-fluid -->
+
+					<div class="">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>Advance Search</h5>
+							</div>
+							
+							<div class="ibox-content breadcrumbs2">
+								<div class="row-fluid">
+									<div id="drop_down_list_year" class="form-group pull-left span2" style="margin-left: 5px;margin-top: 2px;">
+										<select class="input span12 m-b-n" ></select>
+										</div>
+									<div id="drop_down_list_month" class="form-group pull-left span2" style="margin-left: 5px;margin-top: 2px;">
+										<select class="input span12 m-b-n" ></select>
+									</div>
+									
+									
+									<div class="form-group pull-right m-b-none">
+			
+									<div class="form-group pull-right m-b-none " style="margin-top: 2px;">
+										<button type="button" name="btnSearchAdvanceCdsResult"
+											id="btnSearchAdvanceCdsResult" class="btn btn-info input-sm "
+											style="margin-left: 0px">
+											<i class="fa fa-search"></i>&nbsp;Search
+										</button>
+									</div>
+									</div>
+								</div>
+							</div>
+				
+				
+							<div class="row-fluid" id="cds_result_list_content">
+								<div class="">
+									<div class="ibox-title" >
+										<h5>CDS Result List</h5>
+									</div>
+			
+									
+									
+									<div class="ibox-content" style="position: relative;">
+									
+										<div class="span12"> 
+											<button id="btnEditCdsresult" name="btnEditCdsresult" class="btn btn-warning input-sm" type="button"> Edit </button>
+											<button id="btnSaveCdsresult" name="btnSaveCdsresult" class="btn btn-primary input-sm" type="button" disabled> Save </button>
+											<button id="btnCancelCdsresult" name="btnCancelCdsresult"  class="btn btn-danger input-sm" type="button" disabled> Cancel </button>
+										</div>
+										
+										
+									
+									
+									<div class="row-fluid">
+											<div class="height-32-px"></div>
+									</div>
+										<!-- start table -->
+									<!-- pagination start -->
+										<div class="row-fluid">
+											<div id="width-100-persen" class="span9 m-b-xs">
+												
+												<span class="paginationCds_top m-b-none pagination"></span>
+			
+											</div>
+											<div class="span3 object-right ResultsPerPageTop">
+					                                    
+						                                    <div class='pagingCdsDropdown'>
+					                                 			<select  id='countCdsPaginationTop'  class="form-control input-sm countCdsPagination">
+								                                     <option>10</option>
+								                                     <option>20</option>
+								                                     <option>50</option>
+								                                     <option>100</option>
+								                                 </select>
+					                                 		
+					                                 		</div>
+															<div class='pagingText' style="padding-top: 10px;">Results per page</div>
+					                                    
+					                          </div>
+										</div>
+										<!-- pagination end -->
+										<div class="table-responsive p-b-xxs" style="overflow:auto">
+											<table class="table table-striped " id="tableCdsResult" >
+												<thead>
+													<tr>
+														<th style='width: auto'>Emp&nbsp;Code&emsp;</th>
+														<th style='width: auto'>Emp&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
+														<th style='width: auto'>Appraisal&nbsp;Level&emsp;</th>
+														<th style='width: auto'>Organization&emsp;&emsp;&emsp;</th>
+														<th style='width: auto'>Position&nbsp;Name&emsp;&emsp;&emsp;</th>
+														<th style='width: auto'>CDS&nbsp;ID&emsp;</th>
+														<th style='width: auto'>CDS&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
+														<th style='width: auto'>Year&emsp;</th>
+														<th style='width: auto'>Month&emsp;</th>
+														<th style='width:auto;text-align: right;'>CDS&nbsp;Value&emsp;</th>
+														<th style='width: auto; text-align: center;'>Manage</th>
+													</tr>
+												</thead>
+												<tbody id="listCdsResult">
+			
+												</tbody>
+											</table>
+			
+			
+										</div>
+			
+										<!-- end table -->
+										
+										<!-- pagination start -->
+										
+										<div class="row-fluid">
+											<div id="width-100-persen" class="span9 m-b-xs ">
+			
+												<span class="paginationCds_bottom m-b-none pagination"></span>
+			
+											</div>
+											<div class="span3 object-right ResultsPerPageBottom">
+					                                    
+					                                    	<div class='pagingCdsDropdown'>
+					                                 			<select  id='countCdsPaginationBottom'  class="form-control input-sm countCdsPagination">
+								                                     <option>10</option>
+								                                     <option>20</option>
+								                                     <option>50</option>
+								                                     <option>100</option>
+								                                 </select> 
+						                                 	</div>
+															<div class='pagingText' style="padding-top: 10px;">Results per page</div>
+					                        </div>
+			
+			
+										</div>
+										<!-- pagination end -->
+										<!-- end table -->
+										
+									</div>
+									<!-- content end -->
+								</div>
+							</div>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+
+							</div>
+							<!-- content end -->
+						</div>
+
+					</div>
+                
+                
+                
+               
+                
+                <!-- content end -->
+            </div>
+            
+        </div>
+    </div>
+    
+</div>                      
+<!-- Modal KPI End Edit -->
+<!-- Modal Import CDS Result -->
+
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalImport"
+		class="modal inmodal" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
+						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only">Close</span>
+					</button>
+					<!-- <i class="fa fa-laptop modal-icon"></i> -->
+					<h4 id="txtTitleImport" class="modal-title" id="">Import CDS Result</h4>
+					<!-- 
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                 -->      
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					
+    
+					<!-- form start -->
+					 
+
+					<div class="form-group">
+					<form id="fileImportCdsResult">
+						 
+							<h4>FILE IMPORT</h4>
+							<div class="fileUpload ">
+								<input style="width:100%;height: 100%" type="file" id="file" class="dropify" accept=".xls, .xlsx"  /><span></span>
+							</div>
+							
+							<h6 class="label-content-import-export">
+
+
+							</h6>
+						
+					</form>
+					
+						<!-- start table -->
+					</div>
+					<!-- form End -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-success" type="submit" id="importFileMobile" form="fileImportCdsResult">Import</button>
+					<button data-dismiss="modal" class="btn btn-danger btnCancle"
+						type="button">Cancel</button>
+						<div class="alert alert-warning information" id="informationImport"
+						style="display: none;height:120px; overflow-y: scroll; position:relative;"></div>
+					<input id="attachFileCdsResultId" type="hidden" value="" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End  -->
+	<!-- Modal Download Attach File Start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="downloadAttachFileModal" class="modal inmodal " style="display: none; margin-top: 0px;">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
+						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only">Close</span>
+					</button>
+                <h5 class="modal-title">Download Files</h5>
+            </div>
+            <div class="modal-body">
+            <!-- content start -->
+			<table class='table'>
+				<thead>
+					<tr>
+						<th style='width:5%;'>
+						<b>No.</b>
+						</th>
+						<th style='width:50%;'>
+						<b>Attach Files</b>
+						</th>
+						<th style='text-align:center; width:10%;'>
+						<b>Manage</b>
+						</th>
+					</tr>
+				</thead>
+				<tbody id='listDataAttachFile'>
+
+				</tbody>
+			</table>
+            <!-- content end -->
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal Download attach file End -->
+		<!-- Modal Confirm Start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModalCdsResult"
+		class="modal inmodal in" style="display: none; margin-top: 0px;">
+		<div class="modal-dialog">
+			<div class="modal-content  bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button" style="padding-top:3px">
+						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only">Close</span>
+					</button>
+					<h5 class="modal-title">Confirm Dialog</h5>
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
+                <hr>
+                 -->
+					<!-- form start -->
+					<div class="form-kpi-mangement">
+						<div class="form-kpi-label" align="center">
+
+							<label style="margin-top: 25px; margin-bottom: 25px;">Confirm to Delete Data?</label>
+						</div>
+					</div>
+
+					<!-- form start -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+					<div align="center">
+						<button class="btn btn-success" id="btnConfirmOK" type="button">
+							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
+						</button>
+						&nbsp;&nbsp;
+						<button data-dismiss="modal" class="btn btn-danger" type="button">
+							<i class="fa fa-times-circle"></i>&nbsp;Cancel
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal Confirm End -->
+	          
 </body>
 

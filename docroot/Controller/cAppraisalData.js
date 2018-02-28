@@ -98,11 +98,14 @@ var listAppraisalDataFn = function (data) {
 	$.each(data,function(index,indexEntry) {
 		
 		htmlTable += "<tr class='rowSearch'>";
-		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_period_desc"]+ "</td>";
+		//htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_period_desc"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["structure_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["item_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_code"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["emp_name"]+ "</td>";
+		htmlTable += "<td class='columnSearch'>"+ indexEntry["appraisal_level_name"]+ "</td>";
+		htmlTable += "<td class='columnSearch'>"+ indexEntry["org_name"]+ "</td>";
+		htmlTable += "<td class='columnSearch'>"+ indexEntry["position_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch' style='text-align: right;padding-right: 10px;'>"+ addCommas(parseFloat(notNullFn(indexEntry["actual_value"])).toFixed(2))+ "</td>";
 		htmlTable += "</tr>";//parseFloat().toLocaleString()
 	});
