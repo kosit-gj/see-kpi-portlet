@@ -550,6 +550,98 @@ var backToTopFn = function(){
 	return false;
 }
 
+
+var ImportLiferayUser = function(data) {
+	$("#userImportModal").modal();
+	$(document).off("click","#btnUserImportOK");
+	$(document).on("click","#btnUserImportOK",function(){
+		
+		var importResp = [], importIdx = 0, progressTxt = 1;
+		
+		$("body").mLoading('hide');	
+		$("#btnUserImportOK").prop('disabled', true);
+		$("#userImportProgressbar").toggle();
+		
+		$.each(data.emp, function( key, value ) {
+					
+			//console.log( key + ": Code:" + value.emp_code + ", Fname:" + fname + ", Lname:" + lname + ", Email:" + value.email );
+					
+			$.ajax({
+				url:"http://localhost:8080/api/jsonws/user/add-user",
+				type : "POST",
+				dataType:"JSON",
+				async:false,
+				cache: false,
+				data:{
+					"companyId": $("#companyID").val(),
+				    "autoPassword": false,
+				    "password1": value.emp_code,
+					"password2": value.emp_code,
+					"autoScreenName": false,
+					"screenName": value.emp_code,
+					"emailAddress": value.email,
+					"facebookId": 0,
+					"openId": null,
+					"locale": 0,
+					"firstName": value.emp_name,
+					"middleName": null,
+					"lastName": null,
+					"prefixId": 0,
+					"suffixId": 0,
+					"male": true,
+					"birthdayMonth": 1,
+					"birthdayDay": 1,
+					"birthdayYear": 1970,
+					"jobTitle": null,
+					"groupIds": null,
+					"organizationIds": null,
+					"roleIds": null,
+					"userGroupIds": null,
+					"sendEmail": false
+				},
+				beforeSend:function(){
+					$("body").mLoading('hide');	
+				},
+				success:function(dataImp){
+					// console.log(data2);
+					var dataException = dataImp.exception;
+					if(dataException != null){
+						importResp[importIdx] = {"emp_code":value.emp_code, "exception":dataImp.exception};
+						importIdx = importIdx + 1;
+						//console.log(dataImp.exception);
+					}
+				}
+			});
+			
+			// Progress bar //
+			var progressVal = (progressTxt / data.emp.length) * 100;
+		    $("#userImportProgressbar").progressbar({
+		        value: progressVal
+		    });
+		    if(progressTxt == data.emp.length){
+		    	$("#progressText").html("<b> Complete!! </b>");
+		    }else{
+		    	$("#progressText").html("<b>"+progressTxt+" / "+data.emp.length+"  ("+progressVal.toFixed(2)+"%)</b>");
+		    }		    
+		    progressTxt = progressTxt + 1;
+		});
+		
+		// Display Import Response //
+		if(importResp.length > 0){
+			//$("#btnUserImportOK").prop('disabled', true);
+			var validateFile="";
+			$.each(importResp, function(index, indexEntry){
+				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+indexEntry.emp_code+" : "+indexEntry.exception+" <br>";
+			});
+			callFlashSlideInModal(validateFile, "#userImportInfo", "error");
+		}else{
+			$("#userImportModal").modal('hide');
+			callFlashSlide("Import User Successfully");
+		}
+	});
+}
+
+
 $(document).ready(function() {
 
 	var username = $('#user_portlet').val();
@@ -906,10 +998,18 @@ $(document).ready(function() {
 					$("body").mLoading('hide');
 					$('#ModalImport').modal('hide');
 					
+					if(data["emp"].length > 0){
+						ImportLiferayUser(data);
+					}
+					
 				}else{
 					validateFileFn(data['errors']);
 					getDataFn($(".pagination .active").attr( "data-lp" ),$("#rpp").val());
 					$("body").mLoading('hide');
+					
+					if(data["emp"].length > 0){
+						ImportLiferayUser(data);
+					}
 				}
 			},
 			error: function(jqXHR, textStatus, errorThrown)

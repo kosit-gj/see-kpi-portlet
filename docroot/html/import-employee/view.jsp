@@ -21,12 +21,35 @@ layout = themeDisplay.getLayout();
 plid = layout.getPlid();
 //out.print(username);
 //out.print("password2="+password);
+
+long companyID = themeDisplay.getCompanyId();
+String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 %>
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
 <input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
+
+<input type="hidden" id="companyID" name="companyID" value="<%= companyID %>">
+<input type="hidden" id="pAuth" name="pAuth" value="<%= pAuth %>">
+
 <style>
+.progressBar {
+	display: none;
+	margin: 15px 0 0;
+	position: relative;
+	height:25px;
+	text-align:center;
+}
+.progressBarText {
+	color: blue;
+    position: absolute;
+    margin: 3px -30px 0px !important;
+}
+.ui-corner-all {
+    padding: 0px !important; 
+}
+
 .aui .breadcrumbs2 {
 	background: rgba(0, 0, 0, 0)
 		linear-gradient(to bottom, #fff 0px, #f6f6f6 47%, #ededed 100%) repeat
@@ -889,6 +912,50 @@ plid = layout.getPlid();
 		</div>
 	</div>
 	<!-- Modal Confirm End -->
+	
+	
+	
+	<!-- Modal User Import Start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="userImportModal"
+		class="modal inmodal in" style="width:400px;left:calc;display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content  bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button" style="padding-top:3px">
+						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only">Close</span>
+					</button>
+					<h5 class="modal-title">Confirm Dialog</h5>
+				</div>
+				<div class="modal-body">
+					<div class="form-kpi-mangement">
+						<div class="form-kpi-label" align="center">
+
+							<label>Do you want to create a user?</label>
+							<div id="inform_on_confirm" class='information'></div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div align="center">
+						<button class="btn btn-success" id="btnUserImportOK" type="button">
+							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
+						</button>
+						&nbsp;&nbsp;
+						<button data-dismiss="modal" class="btn btn-danger" type="button">
+							<i class="fa fa-times-circle"></i>&nbsp;Cancel
+						</button>
+					</div>
+					<div id="userImportProgressbar" class="progressBar"> <span id="progressText" class="progressBarText"></span> </div> 
+					<div class="alert alert-warning information" id="userImportInfo"
+						style="height:220px; overflow-y: scroll; position:relative; display: none;">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal User Import End -->
+	
+	
 	
 <input type="hidden" name="id" id="id" value="">
 <input type="hidden" name="action" id="action" value="add">
