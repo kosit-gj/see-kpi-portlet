@@ -597,7 +597,8 @@ var ImportLiferayUser = function(data) {
 					"organizationIds": null,
 					"roleIds": null,
 					"userGroupIds": null,
-					"sendEmail": false
+					"sendEmail": false,
+					"p_auth": $("#pAuth").val()
 				},
 				beforeSend:function(){
 					$("body").mLoading('hide');	
