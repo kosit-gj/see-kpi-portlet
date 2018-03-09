@@ -241,7 +241,7 @@ var cdsListFn = function(data){
 			cdsListHTML+="<td style=\"text-align:right\">";
 			cdsListHTML+="<button class=\"btn btn-primary btn-xs btn-gear avg\" id=\"avg-"+indexEntry['cds_id']+"\" >Avg</button>&nbsp;";
 			cdsListHTML+="<button class=\"btn btn-warning btn-xs btn-gear sum\" id=\"sum-"+indexEntry['cds_id']+"\" >Sum</button>&nbsp;";
-			cdsListHTML+="<button  class=\"btn btn-danger btn-xs btn-gear last\" id=\"last-"+indexEntry['cds_id']+"\">Last</button>";
+			cdsListHTML+="<button  class=\"btn btn-danger btn-xs btn-gear btnLast\" id=\"last-"+indexEntry['cds_id']+"\">Last</button>";
 			cdsListHTML+="</td>";
 		cdsListHTML+="</tr>";
 	});
@@ -626,7 +626,7 @@ $(document).ready(function(){
 	$(document).on("click",".sum",function(){
 		formulaEngineFn(this.id);
 	});
-	$(document).on("click",".last",function(){
+	$(document).on("click",".btnLast",function(){
 		formulaEngineFn(this.id);
 	});
 	//calculation end

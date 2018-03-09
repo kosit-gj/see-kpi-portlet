@@ -551,9 +551,9 @@ var listDataFn = function(data) {
 				}else{
 					
 					if($("#embed_appraisal_type_id").val()==2){
-						htmlHTML+="	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-"+itemEntry['emp_id']+"' type='checkbox' value="+itemEntry['emp_id']+"-"+itemEntry['emp_code']+"-"+itemEntry['org_id']+"-"+itemEntry['period_id']+"></td>";
+						htmlHTML+="	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-"+itemEntry['emp_id']+"' type='checkbox' value="+itemEntry['emp_id']+"-"+itemEntry['emp_code']+"-"+itemEntry['org_id']+"-"+itemEntry['period_id']+"-"+itemEntry['default_stage_id']+"></td>";
 					}else if($("#embed_appraisal_type_id").val()==1){
-						htmlHTML+="	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-"+itemEntry['org_id']+"' type='checkbox' value="+itemEntry['org_id']+"-"+itemEntry['org_id']+"-"+itemEntry['org_id']+"></td>";
+						htmlHTML+="	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-"+itemEntry['org_id']+"' type='checkbox' value="+itemEntry['org_id']+"-"+itemEntry['org_id']+"-"+itemEntry['org_id']+"--"+itemEntry['default_stage_id']+"></td>";
 						//alert(itemEntry['org_id']);
 					}
 				}
@@ -2763,6 +2763,7 @@ $("#empName").autocomplete({
 	$("#btnAssignment").click(function(){
 		empldoyees_code=[];
 		empldoyees_id=[];
+		default_stage_id=[];
 		$(".information").hide();
 		$("#btnAddAnother").show();
 		$(".embed_appraisal_id").remove();
@@ -2775,6 +2776,7 @@ $("#empName").autocomplete({
 					empldoyees_code.push(emp_id[1]);
 					org_id_to_assign = emp_id[2];
 					position_id.push(emp_id[3]);
+					default_stage_id.push(emp_id[4]);
 				}
 			});
 		if(empldoyees_id.length==0){
@@ -2806,7 +2808,8 @@ $("#empName").autocomplete({
 			*/
 			//var Emp_Code = JSON.stringify(empldoyees_code[0]);
 			//console.log(empldoyees_code[0])
-			dropDrowActionFn(empldoyees_code[0]);
+			//dropDrowActionFn(empldoyees_code[0]);
+			dropDrowActionEditFn(default_stage_id[0],empldoyees_code[0]);
 			//dropDrowActionFn($(this).val());
 			
 			//check assignment if reject  remark is require.
