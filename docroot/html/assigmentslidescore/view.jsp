@@ -1245,9 +1245,6 @@ plid = layout.getPlid();
 									</div>
 								</div>
 								<br style="clear:both">
-								<button id="linkToCdsResult" class="btn btn-warning btn-sm pull-right" type="button">
-									<i class="fa fa-external-link"></i> CDS Result
-								</button>
 								<div id='orgInformation' class='container-fluid'>
 								
 									
@@ -1265,12 +1262,16 @@ plid = layout.getPlid();
 										<label style='min-height:auto;' class="span3 textInfo textData">Period:</label>
 										<label style='min-height:auto;' class="span3 textInfo textData" id="periodOrg"></label>
 									</div>
-									
-									
-									
+
+									<div class="row-fluid" >
+										<button id="linkToCdsResult" class="btn btn-warning btn-sm pull-right" type="button">
+											<i class="fa fa-external-link"></i> CDS Result
+										</button>
+									</div>
+
 								</div>
 									
-						          <br style="clear:both">
+<!-- 						          <br style="clear:both"> -->
 	                            <!-- content table end-->				
 	   					</div>
 	   				</div>
@@ -1573,8 +1574,8 @@ plid = layout.getPlid();
 														<th style='width: auto'>Emp&nbsp;Code&emsp;</th>
 														<th style='width: auto'>Emp&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
 														<th style='width: auto'>Appraisal&nbsp;Level&emsp;</th>
-														<th style='width: auto'>Organization&emsp;&emsp;&emsp;</th>
-														<th style='width: auto'>Position&nbsp;Name&emsp;&emsp;&emsp;</th>
+														<th style='width: auto' class="theadThField">Organization&emsp;&emsp;&emsp;</th>
+														<th style='width: auto' class="theadThField">Position&nbsp;Name&emsp;&emsp;&emsp;</th>
 														<th style='width: auto'>CDS&nbsp;ID&emsp;</th>
 														<th style='width: auto'>CDS&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
 														<th style='width: auto'>Year&emsp;</th>

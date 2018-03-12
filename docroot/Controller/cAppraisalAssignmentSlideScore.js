@@ -4,6 +4,7 @@
 var globalData=[];
 var galbalDataTemp=[];
 var empldoyees_code = [];
+var organization_code = [];
 var empldoyees_id = [];
 var position_id = [];
 var org_id_to_assign;
@@ -196,7 +197,7 @@ var setDataToTemplateFn = function(data,actionType){
 	$("#assignTo").change();
 	*/
 	//dropDrowActionEditFn(head['stage_id']);
-	dropDrowActionEditFn(head['stage_id'],head['emp_code']);
+	dropDrowActionEditFn(head['stage_id'],head['emp_code'],head['org_code']);
 	
 	
 	
@@ -551,9 +552,9 @@ var listDataFn = function(data) {
 				}else{
 					
 					if($("#embed_appraisal_type_id").val()==2){
-						htmlHTML+="	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-"+itemEntry['emp_id']+"' type='checkbox' value="+itemEntry['emp_id']+"-"+itemEntry['emp_code']+"-"+itemEntry['org_id']+"-"+itemEntry['period_id']+"-"+itemEntry['default_stage_id']+"></td>";
+						htmlHTML+="	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-"+itemEntry['emp_id']+"' type='checkbox' value="+itemEntry['emp_id']+"-"+itemEntry['emp_code']+"-"+itemEntry['org_id']+"-"+itemEntry['period_id']+"-"+itemEntry['default_stage_id']+"-"+"></td>";
 					}else if($("#embed_appraisal_type_id").val()==1){
-						htmlHTML+="	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-"+itemEntry['org_id']+"' type='checkbox' value="+itemEntry['org_id']+"-"+itemEntry['org_id']+"-"+itemEntry['org_id']+"--"+itemEntry['default_stage_id']+"></td>";
+						htmlHTML+="	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-"+itemEntry['org_id']+"' type='checkbox' value="+itemEntry['org_id']+"-"+itemEntry['org_id']+"-"+itemEntry['org_id']+"--"+itemEntry['default_stage_id']+"-/"+itemEntry['org_code']+"></td>";
 						//alert(itemEntry['org_id']);
 					}
 				}
@@ -1642,7 +1643,7 @@ var dropDrowActionFn = function(employee_code){
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		//data:{"stage_id":paramStageID,"appraisal_type_id":$("#embed_appraisal_type_id").val()},
-		data:{"emp_code":employee_code},
+		data:{"emp_code":employee_code,"appraisal_type_id":$("#param_app_type").val()},
 		success:function(data){
 			//console.log(data)
 			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
@@ -1661,18 +1662,18 @@ var dropDrowActionFn = function(employee_code){
 }
 
 //var dropDrowActionEditFn = function(paramStageID,paramToAppraisalLevel){
-var dropDrowActionEditFn = function(paramStageID,employee_code){
+var dropDrowActionEditFn = function(paramStageID,employee_code,org_code){
 	//console.log(employee_code,'employee_code?')
 	//console.log(paramStageID,'paramStageID?')
 
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/edit_action_to",
-		type:"get",
+		type:"POST",
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		//data:{"stage_id":paramStageID,"to_appraisal_level_id":paramToAppraisalLevel},
-		data:{"stage_id":paramStageID,"emp_code":employee_code},
+		data:{"appraisal_type_id":$("#embed_appraisal_type_id").val(),"stage_id":paramStageID,"emp_code":employee_code,"org_code":org_code},
 		success:function(data){
 			//console.log(data)
 			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
@@ -2375,7 +2376,7 @@ var getTemplateFn = function(emp_result_id) {
 	$.ajax({
 		//http://192.168.1.52/"+serviceName+"/public/appraisal_assignment/period_list
 		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/template",
-		type:"get",
+		type:"GET",
 		dataType:"json",
 		async:false,
 		data:{
@@ -2764,6 +2765,7 @@ $("#empName").autocomplete({
 		empldoyees_code=[];
 		empldoyees_id=[];
 		default_stage_id=[];
+		organization_code = []
 		$(".information").hide();
 		$("#btnAddAnother").show();
 		$(".embed_appraisal_id").remove();
@@ -2771,12 +2773,13 @@ $("#empName").autocomplete({
 			$.each($(".asign_emp").get(),function(index,indexEntry){
 				if($(indexEntry).is(":checked")){
 					var emp_id=$(indexEntry).val().split("-");
-					
+					var org_id=$(indexEntry).val().split("-/");
 					empldoyees_id.push(emp_id[0]);
 					empldoyees_code.push(emp_id[1]);
 					org_id_to_assign = emp_id[2];
 					position_id.push(emp_id[3]);
 					default_stage_id.push(emp_id[4]);
+					organization_code.push(org_id[1]);
 				}
 			});
 		if(empldoyees_id.length==0){
@@ -2809,7 +2812,7 @@ $("#empName").autocomplete({
 			//var Emp_Code = JSON.stringify(empldoyees_code[0]);
 			//console.log(empldoyees_code[0])
 			//dropDrowActionFn(empldoyees_code[0]);
-			dropDrowActionEditFn(default_stage_id[0],empldoyees_code[0]);
+			dropDrowActionEditFn(default_stage_id[0],empldoyees_code[0],organization_code[0]);
 			//dropDrowActionFn($(this).val());
 			
 			//check assignment if reject  remark is require.
