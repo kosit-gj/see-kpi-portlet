@@ -340,6 +340,7 @@ $.each(data,function(index,indexEntry){
 				
 			}
 		});
+		$("#appraisalType").change();
 		
 		//Search Start
 		$("#btnSearchAdvance").click(function(){

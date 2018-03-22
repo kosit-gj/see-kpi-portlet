@@ -896,9 +896,9 @@ plid = layout.getPlid();
 										<select data-toggle="tooltip" title="Assign Frequency"
 											class="input form-control input-sm" id="assignFrequency"
 											name="assignFrequency">
-								
-											<option value="1">ครั้งเดียวทุกงวด</option>
 											<option value="2">ทีละงวด</option>
+											<option value="1">ครั้งเดียวทุกงวด</option>
+											
 								
 										</select>
 									</div>

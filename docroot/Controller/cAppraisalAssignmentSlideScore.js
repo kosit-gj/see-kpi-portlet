@@ -1236,7 +1236,7 @@ var appraisalLevelListEmpLevelFn = function(){
 		async:false,
 		data:{"emp_code":session_emp_code},
 		headers:{Authorization:"Bearer "+tokenID.token},
-		success:function(data){
+		success:function(data) {
 			//console.log(data);
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
@@ -1378,7 +1378,6 @@ var appraisalTypeFn = function(nameArea,id){
 					htmlOption+="<option selected='selected' value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
 				}else{
 					htmlOption+="<option value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
-					
 				}
 			});
 			$("#appraisalType"+nameArea).html(htmlOption);
@@ -1892,7 +1891,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 					//htmlTemplateQuantity+="<th style=\"width:3%;  text-align:center;\" class=''></th>";
 					htmlTemplateQuantity+="</tr>";
 					htmlTemplateQuantity+="</thead>";
-					htmlTemplateQuantity+="<tbody id=\"\">";
+					htmlTemplateQuantity+="<tbody id=\"fixClickKPI-"+data['structure_id']+"\">";
 					$.each(data['items'],function(index,indexEntry){
 						
 						item_id_array.push(indexEntry['item_id']);
@@ -1974,7 +1973,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>%Weight</b></th>";
 				htmlTemplateQuantity+="</tr>";
 				htmlTemplateQuantity+="</thead>";
-				htmlTemplateQuantity+="<tbody id=\"\">";
+				htmlTemplateQuantity+="<tbody id=\"fixClickKPI-"+data['structure_id']+"\">";
 				$.each(data['items'],function(index,indexEntry){
 					
 					item_id_array.push(indexEntry['item_id']);
@@ -2511,7 +2510,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 
 		//dropDrowDepartmentFn();
 		//appraisalLevelListFn();
-		appraisalTypeFn('','1');
+		appraisalTypeFn('','2');
 		periodFrequencyFn();
 		yearListFn();
 		
@@ -2834,8 +2833,8 @@ $("#empName").autocomplete({
 		console.log(empldoyees_id);
 		console.log(empldoyees_code);
 		*/
-		
-		
+		//auto click
+		$("#tableQuality .appraisalItem-checkbox,#tableDeduct .appraisalItem-checkbox,#fixClickKPI-2 .appraisalItem-checkbox").click();
 		
 	});
 	//btn assignment end
