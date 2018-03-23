@@ -1262,13 +1262,11 @@ plid = layout.getPlid();
 										<label style='min-height:auto;' class="span3 textInfo textData">Period:</label>
 										<label style='min-height:auto;' class="span3 textInfo textData" id="periodOrg"></label>
 									</div>
-
-									<div class="row-fluid" >
-										<button id="linkToCdsResult" class="btn btn-warning btn-sm pull-right" type="button">
-											<i class="fa fa-external-link"></i> CDS Result
-										</button>
-									</div>
-
+								</div>
+								<div class="row-fluid" >
+									<button id="linkToCdsResult" class="btn btn-warning btn-sm pull-right" type="button">
+										<i class="fa fa-external-link"></i> CDS Result
+									</button>
 								</div>
 									
 <!-- 						          <br style="clear:both"> -->

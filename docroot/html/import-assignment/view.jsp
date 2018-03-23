@@ -325,8 +325,8 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							<select data-toggle="tooltip" title="Assign Frequency"
 								class="input form-control input-sm" id="assignFrequency"
 								name="assignFrequency">
-								<option value="1">ครั้งเดียวทุกงวด</option>
 								<option value="2">ทีละงวด</option>
+								<option value="1">ครั้งเดียวทุกงวด</option>
 							</select>
 						</div>
 						<div id="periodArea" class="form-group pull-left span4"
