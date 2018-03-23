@@ -233,7 +233,7 @@ var listCommonDataSetFn = function(data) {
 		htmlTable += "<td id=\"objectCenter\" >"+IsSQL+"</td>";
 		htmlTable += "<td id=\"objectCenter\" >"+IsActive+"</td>";
 		
-		htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"<button class='btn btn-warning btn-xs edit' id="+ indexEntry["cds_id"]+ " data-target=#ModalCommonData data-toggle='modal'>Edit</button>&nbsp;" ;
+		htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"<button class='btn btn-warning btn-xs edit' id="+ indexEntry["cds_id"]+ " data-target=#ModalCommonData data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>Edit</button>&nbsp;" ;
 		htmlTable += "<button id="+indexEntry["cds_id"]+" class='btn btn-danger btn-xs del'>Delete</button>\"></i></td>";
 		htmlTable += "</tr>";
 	});
@@ -274,7 +274,10 @@ var listCommonDataSetFn = function(data) {
 			var id = this.id;
 			$(this).parent().parent().parent().children().click();
 			 
-			$("#confrimModal").modal();
+			$("#confrimModal").modal({
+				"backdrop" : setModalPopup[0],
+				"keyboard" : setModalPopup[1]
+			});
 			$(document).off("click","#btnConfirmOK");
 			$(document).on("click","#btnConfirmOK",function(){
 			
@@ -613,6 +616,10 @@ $(document).ready(function() {
 		$("#checkbox_is_hr").prop("checked",false);
 		$("#checkbox_is_sql").prop("checked",true);
 		$("#checkbox_is_active").prop("checked",true);
+		$("#ModalCommonData").modal({
+			"backdrop" : setModalPopup[0],
+			"keyboard" : setModalPopup[1]
+		});
 		
 	});
 	

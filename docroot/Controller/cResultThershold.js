@@ -280,7 +280,10 @@ $(document).ready(function(){
     		gobalDataGroup['first'] = true;
     		gobalDataGroup['Modal'] = "off";
     		getDataGroupFn();
-     		$("#ModalCreateGroup").modal();
+     		$("#ModalCreateGroup").modal({
+     			"backdrop" : setModalPopup[0],
+				"keyboard" : setModalPopup[1]
+     		});
      		
      		$("#btnSaveGroup").click(function(){
      			$(".btnModalClose").click();

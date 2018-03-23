@@ -440,7 +440,7 @@ plid = layout.getPlid();
 
 				<div class="row-fluid">
 					<div class="span12">
-						<button type="button" class="btn btn-success" id="btnAddCommonDataSet" data-target="#ModalCommonData" data-toggle="modal" >
+						<button type="button" class="btn btn-success" id="btnAddCommonDataSet">
 							<i class="fa fa-plus-square"></i>&nbsp;Add CDS
 						</button>
 					</div>

@@ -240,7 +240,10 @@ $(document).ready(function(){
 		 		//console.log($(this).parent().parent().parent().prev().prev().prev().prev().prev().get());
 		 		$("#ac_appraisal_level_name").html("<b>"+$(this).parent().parent().parent().prev().prev().prev().prev().prev().prev().text()+"</b>");
 		 		listAppraisalCriteria(id);
-		 		$("#addModalCriteria").modal();
+		 		$("#addModalCriteria").modal({
+		 			"backdrop" : setModalPopup[0],
+					"keyboard" : setModalPopup[1]
+		 		});
 		 		
 		 		$("#btnCriteriaSubmit").off("click");
 		 		$("#btnCriteriaSubmit").on("click",function(){

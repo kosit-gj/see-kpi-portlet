@@ -475,7 +475,10 @@ var listDataFn = function(data,options){
 			$(".btnModalClose").click();
 			var id=this.id.split("-");
 			id=id[1];
-			$("#confrimModal").modal();
+			$("#confrimModal").modal({
+				"backdrop" : setModalPopup[0],
+				"keyboard" : setModalPopup[1]
+			});
 			$(this).parent().parent().parent().children().click();
 			$(document).off("click","#btnConfirmOK");
 			$(document).on("click","#btnConfirmOK",function(){
@@ -918,7 +921,11 @@ var createDataTableFn = function(options){
 				$("#btnAdd").css({"display":"none"});
 			}else{
 				$("#btnAddData").html(options['formDetail']['formName']);
-				$("#btnAdd").attr("data-target","#modal-"+options['formDetail']['id']);
+				$("#btnAdd").attr({
+					"data-target" : "#modal-"+options['formDetail']['id']+"",
+					"data-backdrop" : setModalPopup[0],
+					"data-keyboard" : setModalPopup[1]
+				});
 			}
 			$("#titilePage").html(options['formDetail']['formName']);
 			$("#titlePanel").html(options['formDetail']['formName']+" List");

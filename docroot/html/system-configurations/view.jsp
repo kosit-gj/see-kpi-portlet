@@ -342,7 +342,7 @@ plid = layout.getPlid();
 									</div>
 									<div class="span5">
 										
-										<button  data-target="#ModalSetupReminder" data-toggle="modal" class=" btn btn-warning " type="button" id="btnSetupReminder" style="margin-top: -5px;" ><i class="fa fa-cogs"></i> Edit</button>
+										<button  class=" btn btn-warning " type="button" id="btnSetupReminder" style="margin-top: -5px;" ><i class="fa fa-cogs"></i> Edit</button>
 										
 										
 									</div>

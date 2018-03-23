@@ -583,6 +583,10 @@ $(document).ready(function () {
 				$("#form_mail_password").val(galbalDataSystemcon["mail_password"]);
 				$("#form_mail_encryption").val(galbalDataSystemcon["mail_encryption"]);
 				$("#form_web_domain").val(galbalDataSystemcon["web_domain"]);
+				$("#ModalSetupReminder").modal({
+					"backdrop" : setModalPopup[0],
+					"keyboard" : setModalPopup[1]
+				});
 			});
 			$("#btnEmailSubmit").click(function(){
 				updateMailFn();

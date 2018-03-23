@@ -110,7 +110,7 @@ var listDataFn = function(data) {
 	
 		mainContentHTML+=" 			<input type='hidden' name='structure_name' class='' value='"+index+"'>";
 		mainContentHTML+=" 			<input type='hidden' name='structure_id' class='' value='"+indexEntry['structure_id']+"'>";
-		mainContentHTML+="          <b class='titleQuantityForm' style='position:relative;top:7px'>"+index+"</b>&nbsp;&nbsp;<button style='float:right;' data-toggle=\"modal\" data-target=\"#modal-"+indexEntry['form_url']+"\" id=\"btnAddKPI\" class=\"btn btn-info input-sm btnAdd\" type=\"button\"><i class=\"fa fa-plus-square\"></i>&nbsp;Add "+index+"</button>";
+		mainContentHTML+="          <b class='titleQuantityForm' style='position:relative;top:7px'>"+index+"</b>&nbsp;&nbsp;<button style='float:right;' data-toggle=\"modal\" data-target=\"#modal-"+indexEntry['form_url']+"\" id=\"btnAddKPI\" data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"' class=\"btn btn-info input-sm btnAdd\" type=\"button\"><i class=\"fa fa-plus-square\"></i>&nbsp;Add "+index+"</button>";
 		mainContentHTML+="      </div>";
 				
 		mainContentHTML+="		<div class=\"ibox-content\">";
@@ -187,7 +187,10 @@ var listDataFn = function(data) {
 			$("#informConfirm").empty();
 			var id=this.id.split("-");
 			id=id[1];
-			$("#confrimModal").modal();
+			$("#confrimModal").modal({
+				"backdrop" : setModalPopup[0],
+				"keyboard" : setModalPopup[1]
+			});
 			$(this).parent().parent().parent().children().click();
 			$(document).off("click","#btnConfirmOK");
 			$(document).on("click","#btnConfirmOK",function(){
@@ -311,7 +314,10 @@ var findOneFn = function(id,form_url) {
 		  async:false,
 		  success:function(data){ 
 			console.log(data);
-			$("#modal-"+form_url).modal();
+			$("#modal-"+form_url).modal({
+				"backdrop" : setModalPopup[0],
+				"keyboard" : setModalPopup[1]
+			});
 			if(form_url=="quantity"){
 				
 				initailQuantityFormFn('edit',data['structure_id'],data['structure_name'],data);

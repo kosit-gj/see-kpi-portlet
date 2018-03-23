@@ -376,7 +376,10 @@ $(document).ready(function(){
 		     		DropdowAppraisalFrequency();
 		     		DropdowBonusFrequency();
 		     		DropdowSalaryRaiseFrequency();
-		     		$("#Modalcreate").modal();
+		     		$("#Modalcreate").modal({
+		     			"backdrop" : setModalPopup[0],
+						"keyboard" : setModalPopup[1]
+		     		});
 		     		
 		     		$("#btnAppPeriod").click(function(){
 		     			
