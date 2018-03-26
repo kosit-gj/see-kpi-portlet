@@ -280,7 +280,7 @@ var listImportEmployeeFn = function(data) {
 		//&lt;button class='btn btn-primary btn-xs btn-gear add' id=1 data-target=#ModalLevel data-toggle='modal'&gt;Role&lt;/button&gt;
 		htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del\" data-trigger=\"focus\" tabindex=\""+index+"\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" " +
 				//"<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["emp_id"]+ " data-target=#ModalLevel data-toggle='modal'>Role</button>&nbsp;" +
-				"<button class='btn btn-warning btn-xs btn-gear edit' id="+ indexEntry["emp_code"]+ " data-target=#ModalEditEmp data-toggle='modal'>Edit</button>&nbsp;" +
+				"<button class='btn btn-warning btn-xs btn-gear edit' id="+ indexEntry["emp_code"]+ " data-target=#ModalEditEmp data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>Edit</button>&nbsp;" +
 		        "<button id="+indexEntry["emp_code"]+" class='btn btn-danger btn-xs btn-gear del'>Delete</button>\"></i></td>";
 		htmlTable += "</tr>";
 		
@@ -321,7 +321,10 @@ var listImportEmployeeFn = function(data) {
 			var id = this.id;
 			$(this).parent().parent().parent().children().click();
 			 
-			$("#confrimModal").modal();
+			$("#confrimModal").modal({
+				"backdrop" : setModalPopup[0],
+				"keyboard" : setModalPopup[1]
+			});
 			$(document).off("click","#btnConfirmOK");
 			$(document).on("click","#btnConfirmOK",function(){
 			
@@ -441,7 +444,7 @@ var updateFn = function () {
 			"is_active":isActive
 		},	
 		success : function(data) {
-			
+
 			if (data['status'] == "200") {
 				getDataFn($("#pageNumber").val(),$("#rpp").val());
 				clearFn();
@@ -697,12 +700,16 @@ $(document).ready(function() {
 				return false;
 			}
 		});
-		if (chackSelect == true){
+		
+		if (chackSelect == true) {
 			listAppraisalLevel();
 			
-			$("#ModalLevel").modal();
-			}
-		else{
+			$("#ModalLevel").modal({
+				"backdrop" : setModalPopup[0],
+				"keyboard" : setModalPopup[1]
+			});
+			
+		} else {
 			callFlashSlide("Please Select Employee !!!");
 		}
 
@@ -944,6 +951,10 @@ $(document).ready(function() {
 	
 	//FILE IMPORT MOBILE START
 	$("#btn_import").click(function () {
+		$("#ModalImport").modal({
+			"backdrop" : setModalPopup[0],
+			"keyboard" : setModalPopup[1]
+		});
 		$('#file').val("");
 		$(".btnModalClose").click();
 		$(".dropify-clear").click(); 

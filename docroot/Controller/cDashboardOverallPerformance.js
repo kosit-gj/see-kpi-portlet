@@ -460,7 +460,7 @@ var getDataBubbleFn = function(page,rpp){
 		success : function(data) {
 			var htmlCaption="";
 			htmlCaption +="<div id='txtTopic' class='span12 graphLTopHeader'>"+data['header'].replace("Performance by KPI", "<div style='display: inline-block;'>Performance by KPI</div>");
-			htmlCaption +="<div style='display: inline-block;'><button id='btn_kpi' type='button' data-target='#ModalKPI' data-toggle='modal' class='btn btn-xs btn-white' > <i class='fa fa-table fa-table' aria-hidden='true'></i> All KPI</button></div>";
+			htmlCaption +="<div style='display: inline-block;'><button id='btn_kpi' type='button' data-target='#ModalKPI' data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"' class='btn btn-xs btn-white' > <i class='fa fa-table fa-table' aria-hidden='true'></i> All KPI</button></div>";
 			htmlCaption +="</div>";
 			
 			$("#captionBubbleChart").html(htmlCaption);

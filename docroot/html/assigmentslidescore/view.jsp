@@ -922,8 +922,7 @@ plid = layout.getPlid();
 										name="btnSearchAdvance" id="btnSearchAdvance">
 										<i class="fa fa-search"></i>&nbsp;Search
 									</button>
-									<button type="button" data-target='#ModalAssignment'
-										data-toggle='modal' class="btn btn-warning input-sm"
+									<button type="button" class="btn btn-warning input-sm"
 										name="btnAssignment" id="btnAssignment">
 										<i class="fa fa-sign-in"></i>&nbsp;Assign
 									</button>

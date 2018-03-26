@@ -387,8 +387,7 @@ User u = themeDisplay.getUser();
 <!-- 						<div id="dis-non" class="form-group pull-left span1" style="margin-left: 5px;">  </div> -->
 						<div class="form-group pull-right m-b-none">
 						<div class="form-group pull-right m-b-none ">
-							<button id="btn_import" type="button" data-target="#ModalImport"
-								data-toggle="modal" class="btn btn-success btn-sm "
+							<button id="btn_import" type="button" class="btn btn-success btn-sm "
 								style="margin-left: 5px">
 								<i class="fa fa-upload"></i>&nbsp;Import&nbsp;&nbsp;
 							</button>

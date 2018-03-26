@@ -611,7 +611,10 @@ $(document).ready(function() {
 		$("#drop_down_list_year").html(dropDownListYear($("#embed_year_list").val()));
 		$("#drop_down_list_month").html(dropDownListMonth(new Date().getMonth()+1));
 		
-		$("#ModalCdsResult").modal();
+		$("#ModalCdsResult").modal({
+			"backdrop" : setModalPopup[0],
+			"keyboard" : setModalPopup[1]
+		});
 		$(".app_url_hidden").show();
 	});
 	

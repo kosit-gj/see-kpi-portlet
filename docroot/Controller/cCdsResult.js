@@ -912,6 +912,10 @@ $(document).ready(function() {
 	
 	//FILE IMPORT MOBILE START
 	$("#btn_import").click(function () {
+		$("#ModalImport").modal({
+			"backdrop" : setModalPopup[0],
+			"keyboard" : setModalPopup[1]
+		});
 		clearFn();
 	});
 	

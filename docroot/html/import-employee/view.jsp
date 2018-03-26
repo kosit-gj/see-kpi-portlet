@@ -472,8 +472,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 								style="margin-left: 5px;"><i class="fa fa-pencil-square-o"></i>&nbsp;Assign&nbsp;Level</button>
 						</div>
 						<div class="form-group pull-right m-b-none ">
-							<button id="btn_import" type="button" data-target="#ModalImport"
-								data-toggle="modal" class="btn btn-success btn-sm " style="margin-left: 5px;">
+							<button id="btn_import" type="button" class="btn btn-success btn-sm " style="margin-left: 5px;">
 								<i class="fa fa-upload"></i>&nbsp;Import</button>
 						</div>
 						<div class="form-group pull-right m-b-none ">

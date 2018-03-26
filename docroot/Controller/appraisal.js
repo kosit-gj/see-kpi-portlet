@@ -1057,7 +1057,10 @@ var listAppraisalDetailFn = function(data){
 //	});
 	dropDrowActionEditFn(data['head'][0]['stage_id'],data['head'][0]['emp_code'],data['head'][0]['org_code']);
 	$("#assignTo").change();
-	$("#ModalAppraisal").modal().css({"margin-top":"0px"});
+	$("#ModalAppraisal").modal({
+		"backdrop" : setModalPopup[0],
+		"keyboard" : setModalPopup[1]
+	}).css({"margin-top":"0px"});
 
 
 

@@ -140,7 +140,7 @@
 			accordionHtml += "</div>";
 			accordionHtml += "<div class='accordion-btn'>";
 			accordionHtml += "<button id='btn_extract' type='button' class='btn btn-xs btn-white' style='margin-top: -1px;font-weight: 700;'> <i class='fa fa-plus-square' aria-hidden='true'></i> Expand</button>";
-			accordionHtml += "<button id='btn_kpi' type='button' data-target='#ModalKPI' data-toggle='modal' class='btn btn-xs btn-white' style='margin-top: -1px;margin-left: 5px;font-weight: 700;'> <i class='fa fa-table fa-table' aria-hidden='true'></i> All KPI</button>";
+			accordionHtml += "<button id='btn_kpi' type='button' class='btn btn-xs btn-white' style='margin-top: -1px;margin-left: 5px;font-weight: 700;'> <i class='fa fa-table fa-table' aria-hidden='true'></i> All KPI</button>";
 			accordionHtml += "</div>";
 		}else{
 			accordionHtml += "<span class='fa fa-caret-right'></span> "+data['org_name']+"&emsp;";	
@@ -841,7 +841,10 @@ var getDataKPIFn = function(page,rpp){
 			galbalDataTemp['All_KPI']=data;
 			//getOrgFn(data);
 			listDashBoardAllKPIFn(data);
-			$("#ModalKPI").modal('show');
+			$("#ModalKPI").modal({
+				"backdrop" : setModalPopup[0],
+				"keyboard" : setModalPopup[1]
+			});
 			setScrollFn();
 
 //			$("#scrollOrg *").scrollTop(0).scrollLeft(0);
@@ -1167,7 +1170,7 @@ var listDashBoardFn = function(data){
 			$("#btn_kpi").click(function(event){
 				  event.stopPropagation();
 				  event.preventDefault();
-				  $("#ModalKPI").modal('hide');
+				  //$("#ModalKPI").modal('hide');
 				  getDataKPIFn();
 				  
 				  $("body").mLoading();

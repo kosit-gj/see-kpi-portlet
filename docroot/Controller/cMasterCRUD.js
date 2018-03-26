@@ -373,7 +373,10 @@ var mapObjectToFormFn  =function(data,options){
 //		if(options[''])
 //		$("#"+index).val(indexEntry);
 //	});
-	$("#modal-"+options['formDetail']['id']).modal();
+	$("#modal-"+options['formDetail']['id']).modal({
+		"backdrop" : setModalPopup[0],
+		"keyboard" : setModalPopup[1]
+	});
 }
 
 var fineOneFn = function(id,options){
@@ -840,7 +843,7 @@ var createBtnAdvanceImportOptionFn = function(object){
 	}
 	
 	var AdvanceImportOption="";
-	AdvanceImportOption+="    		<button style=\"margin-bottom: 5px;\"  type=\"button\" class=\"btn btn-success input-sm\" name=\"btn_import\" id=\"btn_import\" data-target='#modal-import' data-toggle='modal'><i class='fa fa-upload'></i>&nbsp;Import</button>";
+	AdvanceImportOption+="    		<button style=\"margin-bottom: 5px;\"  type=\"button\" class=\"btn btn-success input-sm\" name=\"btn_import\" id=\"btn_import\" data-target='#modal-import' data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'><i class='fa fa-upload'></i>&nbsp;Import</button>";
  	return AdvanceImportOption;
 }
 var createAvanceSearchFn = function(options){

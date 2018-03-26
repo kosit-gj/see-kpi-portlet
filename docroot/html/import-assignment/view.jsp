@@ -353,8 +353,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 									type="button" style="margin-bottom: 3px">
 									<i class="fa fa-download"></i> Export
 								</button>
-								<button id="btn_import" type="button" data-target="#ModalImport"
-									data-toggle="modal" class="btn btn-success btn-sm "
+								<button id="btn_import" type="button" class="btn btn-success btn-sm "
 									style="margin-bottom: 3px">
 									<i class="fa fa-upload"></i>&nbsp;Import&nbsp;&nbsp;
 								</button>

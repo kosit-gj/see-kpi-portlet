@@ -374,7 +374,10 @@ var findOneFn = function(id,actionType){
 			
 			if(data['head'].length>0){
 				setDataToTemplateFn(data,actionType);
-				$("#ModalAssignment").modal();
+				$("#ModalAssignment").modal({
+					"backdrop" : setModalPopup[0],
+					"keyboard" : setModalPopup[1]
+				});
 				$("#action").val("edit");
 				$("#id").val(id);
 				$("#btnAddAnother").hide();
@@ -680,7 +683,10 @@ var listDataFn = function(data) {
 			
 			var emp_result_id= $(this).parent().parent().parent().parent().children().eq(1).children().val();
 			
-			$("#confrimModal").modal();
+			$("#confrimModal").modal({
+				"backdrop" : setModalPopup[0],
+				"keyboard" : setModalPopup[1]
+			});
 			$(this).parent().parent().parent().children().click();
 			$(document).off("click","#btnConfirmOK");
 			$(document).on("click","#btnConfirmOK",function(){
@@ -2785,7 +2791,10 @@ $("#empName").autocomplete({
 			callFlashSlide("Please choose Employees or Organization for Assignment.");
 			return false;
 		}else{
-
+			$("#ModalAssignment").modal({
+				"backdrop" : setModalPopup[0],
+				"keyboard" : setModalPopup[1]
+			});
 			sessionStorage.setItem('is_coporate_kpi',$("#is_coporate_kpi-"+empldoyees_id[0]).val());
 			
 
