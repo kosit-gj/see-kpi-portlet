@@ -9,6 +9,7 @@ var empldoyees_id = [];
 var position_id = [];
 var org_id_to_assign;
 var item_id_array=[];
+var emailLinkAssignment = false;
 
 
 
@@ -369,7 +370,6 @@ var findOneFn = function(id,actionType){
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
-			//console.log(data)
 			//console.log(data['head'].length);
 			
 			if(data['head'].length>0){
@@ -2367,10 +2367,11 @@ var createTemplateAssignmentFn = function(data){
 	}
 	 
 };
+
+var check_appraisalLevel;
 var getTemplateFn = function(emp_result_id) {
 	
 	console.log(org_id_to_assign)
-	var check_appraisalLevel;
 	if($("#appraisalType").val()==1) {
 		check_appraisalLevel = $("#appraisalLevel").val();
 	}
@@ -2393,7 +2394,6 @@ var getTemplateFn = function(emp_result_id) {
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			
-			//console.log(data);
 			createTemplateAssignmentFn(data);
 		
 			//SET FIXED HEADER 
@@ -2849,7 +2849,6 @@ $("#empName").autocomplete({
 	//btn assignment end
 	//btn action assign start
 		$("#btnSubmit").click(function(){
-					
 //					alert($("#actionAssign option:selected").text());
 //					alert($("#remark_footer").val());
 					
@@ -2889,6 +2888,11 @@ $("#empName").autocomplete({
 							}else{
 								actionUpdateAssignmentFn();
 							}
+							
+							if(emailLinkAssignment==true) {
+								window.location.replace("assignment");
+							}
+							
 						}else{
 							callFlashSlideInModal("Please choose Appraisal item ID.","#information","error");
 						}

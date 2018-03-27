@@ -1,6 +1,6 @@
 <?xml version="1.0"?> 
 <!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.2.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_2_0.dtd">
- 
+
 <liferay-portlet-app>
 	<portlet>
 		<portlet-name>see-kpi</portlet-name> 
@@ -546,7 +546,7 @@
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
-	      
+	    
 	    <footer-portlet-javascript>/Controller/appraisalStructure.js</footer-portlet-javascript>
 	    <!-- include file  end--> 
 		   
@@ -1471,6 +1471,45 @@
 		    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>  
 		    <footer-portlet-javascript>/Controller/cImportAppraisalItem.js</footer-portlet-javascript>
 			<css-class-wrapper>import-appraisal-item-portlet</css-class-wrapper>
+		</portlet>
+		<portlet>
+			<portlet-name>email-link-assignment</portlet-name>
+			<icon>/icon.png</icon>
+			<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
+			<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
+			<header-portlet-css>/css/plugins/iCheck/custom.css</header-portlet-css>
+			<header-portlet-css>/font-awesome/css/font-awesome.css</header-portlet-css>
+			<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
+			<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
+			 <header-portlet-css>/css/dropify.css</header-portlet-css>
+			<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
+		   	<header-portlet-css>/css/tywMain.css</header-portlet-css>
+		    <header-portlet-css>/css/appraisal-assignment.css</header-portlet-css>  
+		    <header-portlet-css>/js/Fixed-Header-Table-master/css/defaultTheme.css</header-portlet-css>  
+	  		 <header-portlet-css>/js/noUiSlider.10.0.0/nouislider.min.css</header-portlet-css> 
+		                        
+		    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+		    <footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+		    <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
+			<footer-portlet-javascript>/js/plugins/slimscroll/jquery.slimscroll.min.js</footer-portlet-javascript>
+			<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
+			<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
+		    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+			<footer-portlet-javascript>/js/Fixed-Header-Table-master/jquery.fixedheadertable.min.js</footer-portlet-javascript>
+			<footer-portlet-javascript>/js/noUiSlider.10.0.0/nouislider.js</footer-portlet-javascript>
+			<footer-portlet-javascript>/js/noUiSlider.10.0.0/wNumb.min.js</footer-portlet-javascript>
+			<footer-portlet-javascript>/js/dropify.js</footer-portlet-javascript>
+		    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
+		    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
+		    
+		    
+		    <footer-portlet-javascript>/Controller/cAppraisalAssignmentSlideScore.js</footer-portlet-javascript>
+		    <footer-portlet-javascript>/Controller/cCdsResultForAssignment.js</footer-portlet-javascript>
+		    <footer-portlet-javascript>/Controller/cEmailLinkAssignment.js</footer-portlet-javascript>
+			<css-class-wrapper>
+				email-link-assignment-portlet
+			</css-class-wrapper>
 		</portlet>
 		<role-mapper> 
 		<role-name>administrator</role-name>
