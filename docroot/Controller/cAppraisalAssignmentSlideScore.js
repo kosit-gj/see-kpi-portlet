@@ -917,7 +917,8 @@ var actionUpdateAssignmentFn = function(){
 				   callFlashSlideInModal("Updated","#information");
 				   
 					if(emailLinkAssignment==true) {
-						window.location.replace("assignment");
+						var url_redirect = $(location).attr('href').split("/").splice(0, 5).join("/");
+						window.location.replace(url_redirect+"/assignment");
 						return false;
 					}
 					
