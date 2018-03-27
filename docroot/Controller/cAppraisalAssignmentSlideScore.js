@@ -371,6 +371,10 @@ var findOneFn = function(id,actionType){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			//console.log(data['head'].length);
+			if(emailLinkAssignment==true) {
+				url_period_id = data['head'][0]['period_id'];
+				$("#period_id_edit").val(url_period_id);
+			}
 			
 			if(data['head'].length>0){
 				setDataToTemplateFn(data,actionType);
@@ -889,7 +893,6 @@ var actionUpdateAssignmentFn = function(){
 
 	var appraisal_itemsObj=eval("(["+appraisal_items+"])");
 	console.log(appraisal_itemsObj);
-
 	
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/"+$("#id").val(),
@@ -912,6 +915,12 @@ var actionUpdateAssignmentFn = function(){
 			if(data['status']==200){
 				   //callFlashSlide("Updated.");Â 
 				   callFlashSlideInModal("Updated","#information");
+				   
+					if(emailLinkAssignment==true) {
+						window.location.replace("assignment");
+						return false;
+					}
+					
 			       getDataFn($("#pageNumber").val(),$("#rpp").val());
 				   $("#ModalAssignment").modal('hide');
 				   $("#action").val("add");
@@ -2874,6 +2883,7 @@ $("#empName").autocomplete({
 								}else{
 									actionUpdateAssignmentFn();
 								}
+								
 							}else{
 								callFlashSlideInModal("Please choose Appraisal item ID.","#information","error");
 							}
@@ -2887,10 +2897,6 @@ $("#empName").autocomplete({
 								actionAssignmentFn("saveOnly");
 							}else{
 								actionUpdateAssignmentFn();
-							}
-							
-							if(emailLinkAssignment==true) {
-								window.location.replace("assignment");
 							}
 							
 						}else{

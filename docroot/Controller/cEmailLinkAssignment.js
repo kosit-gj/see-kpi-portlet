@@ -15,6 +15,8 @@ $(document).ready(function() {
 			var url_appraisal_type_id;
 			var url_org_id;
 			
+			var url_period_id;
+			
 			var getUrlParameter = function getUrlParameter(sParam) {
 			    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
 			        sURLVariables = sPageURL.split('&'),
@@ -62,6 +64,7 @@ $(document).ready(function() {
 			embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id_org' name='embed_appraisal_level_id_org' value='"+url_level_id_org+"'>";
 			embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id_emp' name='embed_appraisal_level_id_emp' value='"+url_level_id_emp+"'>";
 			embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_type_id' name='embed_appraisal_type_id' value='"+url_appraisal_type_id+"'>";
+			embedParam+="<input type='hidden' class='embed_param_search' id='period_id_edit' name='period_id_edit' value=''>";
 			$("#embedParamSearch").append(embedParam);
 			
 			check_appraisalLevel = url_appraisal_type_id;
