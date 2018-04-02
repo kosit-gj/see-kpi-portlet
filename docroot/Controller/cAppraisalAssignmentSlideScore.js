@@ -2195,7 +2195,7 @@ var calculationGrandTotalFn = function(id){
 				var structure_id=dataId[2];
 				//if(apprailsal_item_id==apprailsal_item_id1 && structure_id==structure_id1){
 					if($(indexEntry).val().trim()!="" && $("#id-"+apprailsal_item_id+"-"+structure_id+"-checkbox").prop("checked")==true){
-						total_weigth_quality+=(parseFloat($(indexEntry).val().replace(',', '')));
+						total_weigth_quality=(parseFloat(Number(total_weigth_quality).toFixed(2)))+(parseFloat($(indexEntry).val().replace(',', '')));
 						//alert(grandTotalWieght);
 						//$("#weigth_total_quality_percentage").html( "["+total_weigth_quality+"]");
 						
