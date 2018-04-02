@@ -881,7 +881,10 @@ var listAppraisalDetailFn = function(data){
 					$("#informConfirm").empty();
 					var id=this.id.split("-");
 					id=id[1];
-					$("#actionPlanModal").modal().css({"margin-top":"0px"});
+					$("#actionPlanModal").modal({
+						"backdrop" : setModalPopup[0],
+						"keyboard" : setModalPopup[1]
+					}).css({"margin-top":"0px"});
 					getActionPlanFn(id);
 					$("#action_actionplan").val("add");
 
@@ -893,7 +896,10 @@ var listAppraisalDetailFn = function(data){
 					var id=this.id.split("-");
 					id=id[1];
 
-					$("#attachFileModal").modal().css({"margin-top":"0px"});
+					$("#attachFileModal").modal({
+						"backdrop" : setModalPopup[0],
+						"keyboard" : setModalPopup[1]
+					}).css({"margin-top":"0px"});
 					$("#attach_file_item_result_id").val(id)
 					$('.dropify').dropify();
 
@@ -911,7 +917,10 @@ var listAppraisalDetailFn = function(data){
 					var id=this.id.split("-");
 					id=id[1];
 
-					$("#phaseModal").modal().css({"margin-top":"0px"});
+					$("#phaseModal").modal({
+						"backdrop" : setModalPopup[0],
+						"keyboard" : setModalPopup[1]
+					}).css({"margin-top":"0px"});
 					$("#phaseName").off("fucus");
 					$("#phase_item_result_id").val(id)
 					getPhaseFn(id);
@@ -926,7 +935,10 @@ var listAppraisalDetailFn = function(data){
 					var id=this.id.split("-");
 					id=id[1];
 
-					$("#reasonModal").modal().css({"margin-top":"0px"});
+					$("#reasonModal").modal({
+						"backdrop" : setModalPopup[0],
+						"keyboard" : setModalPopup[1]
+					}).css({"margin-top":"0px"});
 					$("#reason").off("fucus");
 					$("#reason_item_result_id").val(id);
 					getReasonFn(id);
@@ -942,7 +954,10 @@ var listAppraisalDetailFn = function(data){
 					getDataGanttChartFn(id);
 					//getDataGanttChartFn(id,$("#gantt_amount").val(),$("#gantt_unit").val());
 					$("#gantt_item_result_id").val(id);
-					$("#ganttChartModal").modal().css({"margin-top":"0px"});
+					$("#ganttChartModal").modal({
+						"backdrop" : setModalPopup[0],
+						"keyboard" : setModalPopup[1]
+					}).css({"margin-top":"0px"});
 
 
 				});
@@ -1693,7 +1708,10 @@ var listPhaseFn = function(data){
 			$("#informConfirm").empty();
 			var id=this.id.split("-");
 			id=id[1];
-			$("#confrimModal").modal().css({"margin-top":"0px"});
+			$("#confrimModal").modal({
+				"backdrop" : setModalPopup[0],
+				"keyboard" : setModalPopup[1]
+			}).css({"margin-top":"0px"});
 			//$(this).parent().parent().parent().children().click();
 			$(document).off("click","#btnConfirmOK");
 			$(document).on("click","#btnConfirmOK",function(){
@@ -1875,7 +1893,10 @@ var listReasonFn = function(data){
 			$("#informConfirm").empty();
 			var id=this.id.split("-");
 			id=id[1];
-			$("#confrimModal").modal().css({"margin-top":"0px"});
+			$("#confrimModal").modal({
+				"backdrop" : setModalPopup[0],
+				"keyboard" : setModalPopup[1]
+			}).css({"margin-top":"0px"});
 			//$(this).parent().parent().parent().children().click();
 			$(document).off("click","#btnConfirmOK");
 			$(document).on("click","#btnConfirmOK",function(){
@@ -2618,7 +2639,10 @@ var getDataGanttChartFn = function(item_result_id,ganttPaneDuration,ganttPaneDur
 			generateGanttChartFn(objectGantt);
 
 			/* test here start*/
-			$("#ganttChartModal").modal().css({"margin-top":"0px"});
+			$("#ganttChartModal").modal({
+				"backdrop" : setModalPopup[0],
+				"keyboard" : setModalPopup[1]
+			}).css({"margin-top":"0px"});
 			/* test here end.*/
 //			var dataGantt="";
 
@@ -2681,7 +2705,10 @@ $(document).ready(function() {
 			//Start Action plan by email link here..
 			setTimeout(function() {
 			  if ($("#param_link").val() == "email") {
-			    $("#actionPlanModal").modal().css({
+			    $("#actionPlanModal").modal({
+			    	"backdrop" : setModalPopup[0],
+					"keyboard" : setModalPopup[1]
+			    }).css({
 			      "margin-top": "0px"
 			    });
 			    getActionPlanFn($("#param_item_result_id").val());
@@ -3619,7 +3646,10 @@ $(document).ready(function() {
 
 		$("#informConfirm").empty();
 		var id=$("#item_result_id").val();
-		$("#downloadAttachFileModal").modal().css({"margin-top":"0px"});
+		$("#downloadAttachFileModal").modal({
+			"backdrop" : setModalPopup[0],
+			"keyboard" : setModalPopup[1]
+		}).css({"margin-top":"0px"});
 		getAttachFileFn(id);
 	});
 	//download attahc file end
