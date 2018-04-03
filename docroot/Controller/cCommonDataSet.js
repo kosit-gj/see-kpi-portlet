@@ -244,7 +244,7 @@ var listCommonDataSetFn = function(data) {
 //	});
 	
 	//function popover
-	$(".popover-edit-del").popover();
+	$(".popover-edit-del").popover(setPopoverDisplay);
 	
 	$("#tableCommonDataSet").off("click",".popover-edit-del");
 	$("#tableCommonDataSet").on("click",".popover-edit-del",function(){

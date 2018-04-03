@@ -178,7 +178,7 @@ var listDataFn = function(data) {
 	$("#main_conntent_list_data").html(mainContentHTML);
 	
 
-	$(".popover-edit-del").popover().css({"width":"120px"});
+	$(".popover-edit-del").popover(setPopoverDisplay).css({"width":"120px"});
 	$("#main_conntent_list_data").off("click",".popover-edit-del");
 	$("#main_conntent_list_data").on("click",".popover-edit-del",function(){
 		$(".popover").css({"text-align":"center"});

@@ -200,7 +200,7 @@ var listCdsResultFn = function (data) {
 		htmlTable += "</tr>";////parseFloat().toLocaleString()
 	});
 	$("#listCdsResult").html(htmlTable);
-	$(".popover-edit-del-cds").popover();
+	$(".popover-edit-del-cds").popover(setPopoverDisplay);
 	$("#tableCdsResult").off("click",".popover-edit-del-cds");
 	$("#tableCdsResult").on("click",".popover-edit-del-cds",function(){
 		

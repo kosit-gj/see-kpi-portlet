@@ -865,7 +865,7 @@ var listAppraisalDetailFn = function(data){
 
 			/*bindding popover start*/
 			//Using
-			$(".popover-edit-del").popover();
+			$(".popover-edit-del").popover(setPopoverDisplay);
 
 
 			$(".appraisal_result").off("click",".popover-edit-del");
@@ -1699,7 +1699,7 @@ var listPhaseFn = function(data){
 	$("#listDataPhase").html(htmlTR);
 
 	/*bindding popover start*/
-	$(".popover-edit-del").popover();
+	$(".popover-edit-del").popover(setPopoverDisplay);
 
 	$("#listDataPhase").off("click",".popover-edit-del");
 	$("#listDataPhase").on("click",".popover-edit-del",function(){
@@ -1885,7 +1885,7 @@ var listReasonFn = function(data){
 	$("#listDataReason").html(htmlTR);
 
 	/*bindding popover start*/
-	$(".popover-edit-del").popover();
+	$(".popover-edit-del").popover(setPopoverDisplay);
 	$("#listDataReason").off("click",".popover-edit-del");
 	$("#listDataReason").on("click",".popover-edit-del",function(){
 		//Delete Start

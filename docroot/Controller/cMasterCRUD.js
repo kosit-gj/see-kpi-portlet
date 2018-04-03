@@ -456,7 +456,7 @@ var listDataFn = function(data,options){
 	});
 	
 	$("#listData").html(htmlTbody);
-	$(".popover-edit-del").popover();
+	$(".popover-edit-del").popover(setPopoverDisplay);
 	$("#table-"+options['formDetail']['id']).off("click",".popover-edit-del");
 	$("#table-"+options['formDetail']['id']).on("click",".popover-edit-del",function(){
 		//console.log($(this).next().find('.edit').hide());

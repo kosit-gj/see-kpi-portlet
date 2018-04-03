@@ -540,7 +540,7 @@ var listDataFn = function(data) {
 	
 	$("#listDatas").html(htmlHTML);
 	
-	$(".popover-edit-del").popover();
+	$(".popover-edit-del").popover(setPopoverDisplay);
 	$("#listDatas").off("click",".popover-edit-del");
 	$("#listDatas").on("click",".popover-edit-del",function(){
 		//Delete Start

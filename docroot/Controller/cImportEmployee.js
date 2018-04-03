@@ -290,7 +290,7 @@ var listImportEmployeeFn = function(data) {
 	$("#listEmployee").html(htmlTable);
 	
 	//function popover
-	$(".popover-edit-del").popover();
+	$(".popover-edit-del").popover(setPopoverDisplay);
 	
 	
 	$("#tableEmployee").off("click",".popover-edit-del");

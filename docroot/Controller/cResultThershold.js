@@ -74,7 +74,7 @@ var listGroupFn = function (data){
 	$("#formListThresholdGroup").html(htmlTable);
 
 	//function popover
-	$(".popover-edit-del2").popover();
+	$(".popover-edit-del2").popover(setPopoverDisplay);
 	
 	$("#formTableThresholdGroup").off("click",".popover-edit-del2");
 	$("#formTableThresholdGroup").on("click",".popover-edit-del2",function(){
