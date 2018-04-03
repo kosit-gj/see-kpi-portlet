@@ -4,12 +4,12 @@ var is_hr = [];
 const setModalPopup = ['static','false'];
 //const setModalPopup = ['""','""'];
 
-//const setPopoverDisplay = {
-//		delay : {
-//			hide : 100
-//		}
-//};
-const setPopoverDisplay = {};
+const setPopoverDisplay = {
+		delay : {
+			hide : 100
+		}
+};
+//const setPopoverDisplay = {};
 
 //tokenID= eval("("+sessionStorage.getItem("tokenID")+")");
 
