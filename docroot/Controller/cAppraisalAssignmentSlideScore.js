@@ -390,9 +390,15 @@ var findOneFn = function(id,actionType){
 //					$("#btnSubmit").attr("disabled","disabled");	
 //					$("#btnAddAnother").attr("disabled","disabled");
 					
-					$("#ModalAssignment").find('input[type="text"]').attr('disabled', 'disabled');
-					$("#ModalAssignment").find('input[type="checkbox"]').attr('disabled', 'disabled');
-					$("#ModalAssignment").find('#remark_footer').removeAttr('disabled');
+					if(emailLinkAssignment==true) {
+						var AssignmentEmailLink = '#AssignmentEmailLink';
+					} else {
+						var AssignmentEmailLink = '#ModalAssignment';
+					}
+					
+					$(""+AssignmentEmailLink+"").find('input[type="text"]').attr('disabled', 'disabled');
+					$(""+AssignmentEmailLink+"").find('input[type="checkbox"]').attr('disabled', 'disabled');
+					$(""+AssignmentEmailLink+"").find('#remark_footer').removeAttr('disabled');
 
 				}
 				
