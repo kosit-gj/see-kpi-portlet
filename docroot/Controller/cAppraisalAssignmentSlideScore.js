@@ -200,15 +200,14 @@ var setDataToTemplateFn = function(data,actionType){
 	//dropDrowActionEditFn(head['stage_id']);
 	dropDrowActionEditFn(head['stage_id'],head['emp_code'],head['org_code']);
 	
-	
-	
 	//set premission button management start
 	//alert(head['stage_id']);
-	if(   head['status']=='Accepted' || actionType=='view'){
+	if(head['status']=='Accepted' || actionType=='view'){
 //		$(".btnAssignment").hide();
 //		$("#btnSubmit").hide();
-		$("#ModalAssignment").find('input[type="text"]').attr('disabled', 'disabled'); 
-		$("#ModalAssignment").find('input[type="checkbox"]').attr('disabled', 'disabled'); 
+		$("#ModalAssignment").find('input[type="text"]').attr('disabled', 'disabled');
+		$("#ModalAssignment").find('input[type="checkbox"]').attr('disabled', 'disabled');
+		$("#ModalAssignment").find('#remark_footer').removeAttr('disabled');
 	}else{
 //		$(".btnAssignment").show();
 //		$("#btnSubmit").show();
@@ -388,8 +387,12 @@ var findOneFn = function(id,actionType){
 				
 				if(data['head'][0]['edit_flag']==0){
 					
-					$("#btnSubmit").attr("disabled","disabled");	
-					$("#btnAddAnother").attr("disabled","disabled");
+//					$("#btnSubmit").attr("disabled","disabled");	
+//					$("#btnAddAnother").attr("disabled","disabled");
+					
+					$("#ModalAssignment").find('input[type="text"]').attr('disabled', 'disabled');
+					$("#ModalAssignment").find('input[type="checkbox"]').attr('disabled', 'disabled');
+					$("#ModalAssignment").find('#remark_footer').removeAttr('disabled');
 
 				}
 				

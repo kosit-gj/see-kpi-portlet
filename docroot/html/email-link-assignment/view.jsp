@@ -783,7 +783,7 @@ plid = layout.getPlid();
 				<div class="ibox-title">
 	            	<div class='titlePanel'>Assignment</div>
 	         	</div>
-	         	<div class="ibox-content">
+	         	<div class="ibox-content" id="ModalAssignment">
 			    	<!-- panel0 start -->
 			        <div class="row-fluid cus_information_area" >
 				  		<div class="span12">
@@ -892,7 +892,7 @@ plid = layout.getPlid();
 						 
             		</div>
             		
-            		<div class="span3 pull-right">
+            		<div class="span2 pull-right">
             				<input type="hidden" name="id" id="id" value="">
 		   					<input type="hidden" name="period_id_edit" id="period_id_edit" value="">
 			   				<input type="hidden" name="action" id="action" value="add">

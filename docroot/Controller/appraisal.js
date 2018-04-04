@@ -6,6 +6,7 @@ var username = "";
 var password = "";
 //Variable to store your files
 var files;
+var emailLinkAppraisal = false;
 // funciton global start
 //form2
 
@@ -839,6 +840,10 @@ var splitData = function(data){
 
 var listAppraisalDetailFn = function(data){
 	
+	if(emailLinkAppraisal==true) {
+		$("#embed_appraisalType").val(data['head'][0]['appraisal_type_id']);
+	}
+	
 	var check_disabled_first;
 	var check_disabled_second;
 	if(data['head'][0]['chief_emp_code']==session_emp_code) {
@@ -990,7 +995,6 @@ var listAppraisalDetailFn = function(data){
 			 $(".noWeightGrandTotalArea").show();
 		 }
 
-
 		//set header start
 		 if($("#embed_appraisalType").val()==2){
 
@@ -1110,7 +1114,7 @@ var findOneFn = function(id){
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
-			//console.log(data)
+			//console.log(data);
 			if(data['head'].length>0){
 
 				listAppraisalDetailFn(data);
@@ -1119,13 +1123,25 @@ var findOneFn = function(id){
 
 
 
+//				if((data['head'][0]['edit_flag']==0)){
+//					$("#btnSubmit").attr("disabled","disabled");
+//				}else if($("#actionToAssign").val()==null){
+//					$("#btnSubmit").attr("disabled","disabled");
+//
+//				}
+				
 				if((data['head'][0]['edit_flag']==0)){
-					$("#btnSubmit").attr("disabled","disabled");
-
-				}else if($("#actionToAssign").val()==null){
-					$("#btnSubmit").attr("disabled","disabled");
-
+					$("#ModalAppraisal").find('input[type="text"]').attr('disabled', 'disabled'); 
+					$("#ModalAppraisal").find('input[type="checkbox"]').attr('disabled', 'disabled');
+					$("#ModalAppraisal").find('select').attr('disabled', 'disabled');
+					
+					$("#ModalAppraisal").find('#actionToAssign,#remark_footer').removeAttr('disabled');
 				}
+				
+				if($("#actionToAssign").val()==null){
+					$("#btnSubmit").attr("disabled","disabled");
+				}
+				
 //				else if((username.toLowerCase()!=data['head'][0]['chief_emp_code'].toLowerCase())){
 //					//$("#btnSubmit").removeAttr("disabled");
 //					$("#btnSubmit").attr("disabled","disabled");
@@ -2416,10 +2432,15 @@ var saveAppraisalFn = function(){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			if(data['status']==200){
-
-
+				
 				$("#ModalAppraisal").modal('hide');
 				callFlashSlide("Saved.");
+				
+				if(emailLinkAppraisal==true) {
+					var url_redirect = $(location).attr('href').split("/").splice(0, 5).join("/");
+					window.location.replace(url_redirect+"/kpi-result");
+					return false;
+				}
 
 			}else if(data['status']==400){
 
