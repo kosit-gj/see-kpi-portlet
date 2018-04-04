@@ -1131,11 +1131,16 @@ var findOneFn = function(id){
 //				}
 				
 				if((data['head'][0]['edit_flag']==0)){
-					$("#ModalAppraisal").find('input[type="text"]').attr('disabled', 'disabled'); 
-					$("#ModalAppraisal").find('input[type="checkbox"]').attr('disabled', 'disabled');
-					$("#ModalAppraisal").find('select').attr('disabled', 'disabled');
+					if(emailLinkAppraisal==true) {
+						var AppraisalEmailLink = '#AppraisalEmailLink';
+					} else {
+						var AppraisalEmailLink = '#ModalAppraisal';
+					}
+					$(""+AppraisalEmailLink+"").find('input[type="text"]').attr('disabled', 'disabled'); 
+					$(""+AppraisalEmailLink+"").find('input[type="checkbox"]').attr('disabled', 'disabled');
+					$(""+AppraisalEmailLink+"").find('select').attr('disabled', 'disabled');
 					
-					$("#ModalAppraisal").find('#actionToAssign,#remark_footer').removeAttr('disabled');
+					$(""+AppraisalEmailLink+"").find('#actionToAssign,#remark_footer').removeAttr('disabled');
 				}
 				
 				if($("#actionToAssign").val()==null){
@@ -2350,7 +2355,6 @@ var validationAppraisalFn = function(data){
 }
 
 var saveAppraisalFn = function(){
-
 
 //	"stage_id,
 //	appraisal: [

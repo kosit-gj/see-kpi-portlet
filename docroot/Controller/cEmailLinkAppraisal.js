@@ -29,15 +29,14 @@ $(document).ready(function() {
 			
 			var embedParam="";
 			embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisalType' name='embed_appraisalType' value=''>";
-			embedParam+="<input type='hidden' class='embed_param_search' id='emp_result_id' name='emp_result_id' value='"+url_emp_result_id+"'>";
 			$("#embedParamSearch").append(embedParam);
+			$("#emp_result_id").val(url_emp_result_id);
 			
 			if(url_emp_result_id==undefined) {
 				$(".app_url_hidden").hide();
 				console.log('undefined '+url_emp_result_id);
 				return false;
 			}
-			
 			
 			findOneFn(url_emp_result_id);
 

@@ -707,7 +707,7 @@ margin-bottom:1px;
 							<div class="ibox-title">
 								<div class='titlePanel'>KPI Result</div>
 							</div>
-							<div class="ibox-content breadcrumbs2" id="ModalAppraisal">
+							<div class="ibox-content breadcrumbs2" id="AppraisalEmailLink">
 							
 								<!-- -------------From Employee Start------------- -->
 								<div class="row-fluid">
