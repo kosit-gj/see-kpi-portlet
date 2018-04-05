@@ -1,4 +1,85 @@
- $(document).ready(function(){
+//------ List Appraisal Level Start
+var listAppraisalLevel = function() {
+	var htmlTable="";
+	var htmlDropDown="";
+	$.ajax ({
+		url:""+restfulURL+"/"+serviceName+"/public/org/al_list" ,
+		type:"get" ,
+		dataType:"json" ,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		async:false,
+		success:function(data){
+			//console.log(data);
+			htmlDropDown+="<option  value=''></option>";
+			$.each(data,function(index,indexEntry){
+				htmlTable+="<tr>";
+				htmlTable+="<td>";
+				htmlTable+="<input  style=\"margin-bottom: 2px;\" id=\"form_role_item-"+indexEntry["level_id"]+"\" class=\"from_data_role\"";
+				htmlTable+="type='checkbox' value=\""+indexEntry["level_id"]+"\">";
+				htmlTable+="</td>";
+				htmlTable+="<td style=\"vertical-align:middle\">"+indexEntry["appraisal_level_name"]+"</td>";
+				htmlTable+="</tr>";
+				htmlDropDown+="<option  value="+indexEntry["level_id"]+">"+indexEntry["appraisal_level_name"]+"</option>";
+//				}		
+			});	
+		}
+	});	
+	$("#formListAppraisalLevel").html(htmlTable);
+	//console.log(htmlDropDown);
+	$("#from_Level_id").html(htmlDropDown);
+	
+	 $(".from_data_role").click(function(){  // à¹€à¸¡à¸·à¹ˆà¸­à¸„à¸¥à¸´à¸� checkbox  à¹ƒà¸”à¹†  
+	        if($(this).prop("checked")==true){ // à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸š property  à¸�à¸²à¸£ à¸‚à¸­à¸‡   
+	            var indexObj=$(this).index(".from_data_role"); //   
+	            $(".from_data_role").not(":eq("+indexObj+")").prop( "checked", false ); // à¸¢à¸�à¹€à¸¥à¸´à¸�à¸�à¸²à¸£à¸„à¸¥à¸´à¸� à¸£à¸²à¸¢à¸�à¸²à¸£à¸­à¸·à¹ˆà¸™  
+	        }  
+	    });  
+}
+var assignLevelOrgFn = function () {
+	var chackSelect =  false;
+	var org =[];
+	var level = [];
+	//console.log("insertRoleFn");
+	$.each($(".selectBoxorganization").get(),function(index,indexEntry){
+		if($(indexEntry).is(":checked")){
+			org.push(indexEntry.id.split("-")[1]);
+		}
+	});
+	//console.log("selectEmpCheckbox Pass");
+	$.each($(".from_data_role").get(),function(index,indexEntry){
+		if($(indexEntry).is(":checked")){
+			level.push($(indexEntry).val());
+			chackSelect = true;
+		}
+	});
+	//console.log("from_data_role Pass");
+	if (chackSelect == false){callFlashSlideInModal("<font color='red'>*</font> Please Select Appraisal level !!!","#information3"); return false;}
+	//console.log("chackSelect Pass");
+		$.ajax({
+			url : ""+restfulURL+"/"+serviceName+"/public/org/role",
+			type : "PATCH",
+			dataType : "json",
+			headers:{Authorization:"Bearer "+tokenID.token},
+			async:false,
+			data:{
+				"orgs"	:	org,
+				"roles"	:	level
+				},
+			success : function(data) {
+				//console.log("ajax Pass");
+				if(data['status']==200){
+					callFlashSlide("Add Appraisal level Successfully.");
+					getDataFn($("#pageNumber").val(),$("#rpp").val(),golbalDataCascades['options'],dataSearch);
+					$('#ModalLevel').modal('hide');
+					
+				}
+			}
+		});
+	
+	return false;
+}
+ 
+$(document).ready(function(){
     
 	 var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
@@ -10,8 +91,9 @@
 	 		
     	var options={
     			"colunms":[
-    			           {"colunmsDisplayName":"Organization Code","width":"14%","id":"org_code","colunmsType":"text"},
-    			           {"colunmsDisplayName":"Organization","width":"18%","id":"org_name","colunmsType":"text"},
+    					   {"colunmsDisplayName":"Select","width":"5%","id":"org_id","colunmsType":"selectBox"},
+    			           {"colunmsDisplayName":"Org. Code","width":"14%","id":"org_code","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Org. Name","width":"18%","id":"org_name","colunmsType":"text"},
     			           {"colunmsDisplayName":"Abbreviation","width":"10%","id":"org_abbr","colunmsType":"text"},
     			           {"colunmsDisplayName":"Appraisal Level","width":"11%","id":"appraisal_level_name","colunmsType":"text"},
     			           {"colunmsDisplayName":"Parent Org.","width":"13%","id":"parent_org_name","colunmsType":"text"},
@@ -87,9 +169,9 @@
     			 "advanceSearchSet":true,
     			 "btnAddOption":false,
     			 "btnAdvanceDownloadOption":{"url":""+$("#url_portlet").val()+"/file/appraisal_organization_template.xlsx"},
-    			 "btnAdvanceImportOption":{"formName":"Import Organization","accept":".xls ,.xlsx"}
+    			 "btnAdvanceImportOption":{"formName":"Import Organization","accept":".xls ,.xlsx"},
     			 //"btnManageOption":{"id":"BtnID","name":"BtnName"},
-    			 //"btnAdvanceSearchOption":{"id":"BtnID","name":"<i class=\"fa fa-plus-square\"></i>&nbsp;Btn"}
+    			 "btnAdvanceSearchLastOption":{"id":"btnAssignLevel","name":"<i class=\"fa fa-pencil-square-o\"></i>&nbsp;Assign&nbsp;Level","ClassBtnColor":"btn-primary"}
     	}
     	
     	createDataTableFn(options);
@@ -98,6 +180,33 @@
 			  $('.geographic').mask('999.000000');
 
 		});
+    	$(document).on('click','#btnAssignLevel',function(){
+    		$(".btnModalClose").click();
+    		$("#formListAppraisalLevel").empty();
+    		var chackSelect =  false;
+    		$.each($(".selectBoxorganization").get(),function(index,indexEntry){
+    			if($(indexEntry).is(":checked")){
+    				chackSelect = true;
+    				return false;
+    			}
+    		});
+    		if (chackSelect == true){
+    			listAppraisalLevel();
+    			
+    			$("#ModalLevel").modal({
+    				"backdrop" : setModalPopup[0],
+    				"keyboard" : setModalPopup[1]
+    			});
+    			}
+    		else{
+    			callFlashSlide("Please Select Organization !!!");
+    		}
+    	});
+    	$(document).on('click','#btnLvSubmit',function(){
+    		assignLevelOrgFn();
+    		return false;
+    	});
+    	
 		}
 	 }
 	//binding tooltip start

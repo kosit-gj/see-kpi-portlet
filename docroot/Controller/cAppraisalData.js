@@ -579,7 +579,9 @@ $(document).ready(function() {
 		clearParamSearch(dataClearParam);// in cMain.js
 		dropDownListEmpLevelToOrgFn();
 		dropDownListOrganization();
+
 	});
+	
 	
 	$("#org_id").change(function() {
 		clearParamSearch(dataClearParam);// in cMain.js

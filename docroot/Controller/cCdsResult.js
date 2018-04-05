@@ -16,12 +16,6 @@ var loadingFn = function(){
 	setTimeout(function(){ $("body").mLoading('hide'); }, 200);
 };
 
-var dataClearParam = [
-	{'id':'#cds_result_position', 'val': ""+cMain_position_name+""},
-	{'id':'#cds_result_position_id', 'val': cMain_position_id},
-	{'id':'#emp_name', 'val': ""+cMain_emp_name+""},
-	{'id':'#emp_name_id', 'val': cMain_emp_id}
-];
 var clearFn = function(){
 //	$(':input')
 //	  .not(':button, :submit, :reset, :hidden')
@@ -614,6 +608,14 @@ $(document).ready(function() {
 	 		return false;
 	 	}
 	 }
+	 
+	 var dataClearParam = [
+			{'id':'#cds_result_position', 'val': ""+cMain_position_name+""},
+			{'id':'#cds_result_position_id', 'val': cMain_position_id},
+			{'id':'#emp_name', 'val': ""+cMain_emp_name+""},
+			{'id':'#emp_name_id', 'val': cMain_emp_id}
+		];
+	 
 	$("#org_name").val("");
 	$("#cds_result_position").val("");
 	$("#emp_name").val("");

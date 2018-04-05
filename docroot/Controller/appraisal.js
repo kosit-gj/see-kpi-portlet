@@ -7,12 +7,6 @@ var password = "";
 //Variable to store your files
 var files;
 var emailLinkAppraisal = false;
-var dataClearParam = [
-	{'id':'#Position', 'val': ""+cMain_position_name+""},
-	{'id':'#Position_id', 'val': cMain_position_id},
-	{'id':'#EmpName', 'val': ""+cMain_emp_name+""},
-	{'id':'#EmpName_id', 'val': cMain_emp_id}
-];
 // funciton global start
 //form2
 
@@ -2732,7 +2726,14 @@ $(document).ready(function() {
 
 	if(username!="" && username!=null & username!=[] && username!=undefined ){
 		if(connectionServiceFn(username,password,plid)==true){
-
+			
+			var dataClearParam = [
+				{'id':'#Position', 'val': ""+cMain_position_name+""},
+				{'id':'#Position_id', 'val': cMain_position_id},
+				{'id':'#EmpName', 'val': ""+cMain_emp_name+""},
+				{'id':'#EmpName_id', 'val': cMain_emp_id}
+			];
+			
 			//Start Action plan by email link here..
 			setTimeout(function() {
 			  if ($("#param_link").val() == "email") {
@@ -2785,6 +2786,7 @@ $(document).ready(function() {
 			
 			$("#AppraisalOrgLevel").change(function(){
 				clearParamSearch(dataClearParam);// in cMain.js
+				
 				if($("#appraisalType").val() == "1"){
 					dropDrowOrgFn($(this).val());
 				} else {

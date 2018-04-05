@@ -211,6 +211,7 @@ function clearParamSearch(data) {
 			$(""+data[i]['id']+"").val(data[i]['val']);
 		}
 	}
+
 }
 
 //var getNewSessionFn = function(){

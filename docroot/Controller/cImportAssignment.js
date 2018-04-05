@@ -319,7 +319,8 @@ $.each(data,function(index,indexEntry){
 		$("#organization").change(function() {
 			clearParamSearch(dataClearParam);// in cMain.js
 		});
-		
+
+
 //		$("#appraisalType").change();
 		$("#appraisalLevel").change();
 		$("#YearList").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/year_list","GET"));
