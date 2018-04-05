@@ -1502,6 +1502,9 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 			});
 			
 			$("#AppraisalOrgLevel").change(function(){
+				var dataClearParam = ['#position','#position_id','#emp_name','#emp_name_id'];
+				clearParamSearch(dataClearParam);// in cMain.js
+				
 				if($("#app_type").val() == "1"){
 					// Create #organization whit #AppraisalOrgLevel
 					$("#organization").html( generateDropDownList(
@@ -1517,13 +1520,19 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 				}
 			});
 			
-			$("#AppraisalEmpLevel").change(function(){				
+			$("#AppraisalEmpLevel").change(function(){
+				var dataClearParam = ['#position','#position_id','#emp_name','#emp_name_id'];
+				clearParamSearch(dataClearParam);// in cMain.js
+				
 				CreateOrgLevelWhitEmpLevel(); // Create #AppraisalOrgLevel (cascade -> #AppraisalEmpLevel)
 				CreateOrgWhitEmpLevelOrgLevel(); // Create #organization whit #AppraisalEmpLevel and #AppraisalOrgLevel
 				dropDownKpi(); // Create #kpi
 			});
 			
 			$("#organization").change(function(){
+				var dataClearParam = ['#position','#position_id','#emp_name','#emp_name_id'];
+				clearParamSearch(dataClearParam);// in cMain.js
+				
 				dropDownKpi(); // Create #kpi
 			});
 

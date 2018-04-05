@@ -302,10 +302,17 @@ $.each(data,function(index,indexEntry){
 		//generateAutocomplete("#Position",restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_position_name2","post",{"position_name":null});
 		$("#appraisalLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/import_assignment/level_list","GET",{"appraisal_type_id":$("#appraisalType").val()}));		
 		$("#appraisalLevel").change(function(){
+			var dataClearParam = ['#Position','#Position_id','#empName','#empName_id'];
+			clearParamSearch(dataClearParam);// in cMain.js
 			$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/import_assignment/org_list","GET",{"appraisal_type_id":$("#appraisalType").val(),"level_id":$("#appraisalLevel").val()}));
 //			$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/import_assignment/org_list","GET",{"level_id":$("#appraisalLevel").val()}));
 			$("#organization").multiselect('refresh').multiselectfilter();
 //			$("#organization").multiselect( 'refresh' );
+		});
+		
+		$("#organization").change(function() {
+			var dataClearParam = ['#Position','#Position_id','#empName','#empName_id'];
+			clearParamSearch(dataClearParam);// in cMain.js
 		});
 //		$("#appraisalType").change();
 		$("#appraisalLevel").change();

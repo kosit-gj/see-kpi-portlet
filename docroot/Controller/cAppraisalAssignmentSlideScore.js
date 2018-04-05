@@ -2568,11 +2568,15 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 		$("#appraisalType").change();
 		
 		$("#appraisalLevelEmp").change(function() {
+			var dataClearParam = ['#Position','#Position_id','#empName','#empName_id'];
+			clearParamSearch(dataClearParam);// in cMain.js
 			appraisalLevelListEmpLevelToOrgFn();
 			dropDrowOrgFn($("#appraisalLevel").val());
 		});
 		
 		$("#appraisalLevel").change(function() {
+			var dataClearParam = ['#Position','#Position_id','#empName','#empName_id'];
+			clearParamSearch(dataClearParam);// in cMain.js
 			dropDrowOrgFn($("#appraisalLevel").val());
 		});
 
@@ -2615,7 +2619,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	        }
 	    });
 	    */
-		//Org Autocomplete End
+		//Org  End
 		
 	
 	

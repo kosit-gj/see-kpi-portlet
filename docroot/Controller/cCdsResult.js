@@ -462,7 +462,7 @@ var dropDownListEmpLevelFn = function(){
 		data:{"emp_code":session_emp_code},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
-			console.log(data);
+			//console.log(data);
 			$.each(data,function(index,indexEntry){
 				html+="<option value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
 			});
@@ -514,7 +514,7 @@ var dropDownListAppraisalType = function(){
 };
 
 var dropDownListOrganization = function() {
-	console.log("test")
+	//console.log("test")
 	var service_url_Check;
 	if($("#app_type").val()==1) {
 		service_url_Check = "org";
@@ -524,7 +524,7 @@ var dropDownListOrganization = function() {
 	}
 	
 	var html="";
-	html+="<select data-placement='top' id=\"org_id\" class=\"input span12 m-b-n\" name=\"org_id\">";
+//	html+="<select data-placement='top' id=\"org_id\" class=\"input span12 m-b-n\" name=\"org_id\">";
 	html+="<option  selected value=''>All Organization</option>";
 	$.ajax ({
 		//url:restfulURL+"/"+serviceName+"/public/org",
@@ -543,7 +543,7 @@ var dropDownListOrganization = function() {
 		}
 	});	
 	html+="</select>";
-	return html;
+	$("#org_id").html(html);
 };
 
 var listErrorFn =function(data){
@@ -852,7 +852,7 @@ $(document).ready(function() {
 			
 			dropDownListEmpLevelFn();
 			dropDownListEmpLevelToOrgFn();
-			$("#drop_down_list_organization").html(dropDownListOrganization());
+			dropDownListOrganization();
 			
 		}else if($("#app_type").val() == "1") {
 			
@@ -866,19 +866,29 @@ $(document).ready(function() {
 			$("#app_lv_emp").empty();
 			
 			dropDownListAppraisalLevel();
-			$("#drop_down_list_organization").html(dropDownListOrganization());
+			dropDownListOrganization();
 			
 		}
 	});
 	$("#app_type").change();
 	
 	$("#app_lv").change(function() {
-		$("#drop_down_list_organization").html(dropDownListOrganization());
+		var dataClearParam = ['#cds_result_position','#cds_result_position_id','#emp_name','#emp_name_id'];
+		clearParamSearch(dataClearParam);// in cMain.js
+		dropDownListOrganization();
 	});
 	
 	$("#app_lv_emp").change(function() {
+		var dataClearParam = ['#cds_result_position','#cds_result_position_id','#emp_name','#emp_name_id'];
+		clearParamSearch(dataClearParam);// in cMain.js
 		dropDownListEmpLevelToOrgFn();
-		$("#drop_down_list_organization").html(dropDownListOrganization());
+		dropDownListOrganization();
+	});
+	
+	$("#org_id").change(function() {
+		//console.log("org_id");
+		var dataClearParam = ['#cds_result_position','#cds_result_position_id','#emp_name','#emp_name_id'];
+		clearParamSearch(dataClearParam);// in cMain.js
 	});
 	
 

@@ -861,6 +861,9 @@ var listDashBoardFn = function(data){
 			});
 			
 			$("#AppraisalOrgLevel").change(function(){
+				var dataClearParam = ['#emp_name','#emp_name_id'];
+				clearParamSearch(dataClearParam);// in cMain.js
+				
 				if($("#app_type").val() == "1"){
 					// Create #organization whit #AppraisalOrgLevel
 					$("#organization").html( generateDropDownList(
@@ -876,13 +879,19 @@ var listDashBoardFn = function(data){
 				}
 			});
 			
-			$("#AppraisalEmpLevel").change(function(){				
+			$("#AppraisalEmpLevel").change(function(){
+				var dataClearParam = ['#emp_name','#emp_name_id'];
+				clearParamSearch(dataClearParam);// in cMain.js
+				
 				CreateOrgLevelWhitEmpLevel(); // Create #AppraisalOrgLevel (cascade -> #AppraisalEmpLevel)
 				CreateOrgWhitEmpLevelOrgLevel(); // Create #organization whit #AppraisalEmpLevel and #AppraisalOrgLevel
 				CreateParamKpi(); // Create #kpi
 			});
 			
 			$("#organization").change(function(){
+				var dataClearParam = ['#emp_name','#emp_name_id'];
+				clearParamSearch(dataClearParam);// in cMain.js
+				
 				CreateParamKpi(); // Create #kpi
 			});
 
