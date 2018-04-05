@@ -15,6 +15,13 @@ var loadingFn = function(){
 	$("body").mLoading();
 	setTimeout(function(){ $("body").mLoading('hide'); }, 200);
 };
+
+var dataClearParam = [
+	{'id':'#cds_result_position', 'val': ""+cMain_position_name+""},
+	{'id':'#cds_result_position_id', 'val': cMain_position_id},
+	{'id':'#emp_name', 'val': ""+cMain_emp_name+""},
+	{'id':'#emp_name_id', 'val': cMain_emp_id}
+];
 var clearFn = function(){
 //	$(':input')
 //	  .not(':button, :submit, :reset, :hidden')
@@ -873,23 +880,21 @@ $(document).ready(function() {
 	$("#app_type").change();
 	
 	$("#app_lv").change(function() {
-		var dataClearParam = ['#cds_result_position','#cds_result_position_id','#emp_name','#emp_name_id'];
 		clearParamSearch(dataClearParam);// in cMain.js
 		dropDownListOrganization();
 	});
 	
 	$("#app_lv_emp").change(function() {
-		var dataClearParam = ['#cds_result_position','#cds_result_position_id','#emp_name','#emp_name_id'];
 		clearParamSearch(dataClearParam);// in cMain.js
 		dropDownListEmpLevelToOrgFn();
 		dropDownListOrganization();
 	});
 	
 	$("#org_id").change(function() {
-		//console.log("org_id");
-		var dataClearParam = ['#cds_result_position','#cds_result_position_id','#emp_name','#emp_name_id'];
 		clearParamSearch(dataClearParam);// in cMain.js
 	});
+	
+	clearParamSearch(dataClearParam);// in cMain.js
 	
 
 	

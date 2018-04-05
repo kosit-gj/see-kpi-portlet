@@ -287,6 +287,13 @@ $.each(data,function(index,indexEntry){
 	 		return false;
 	 	}
 		 
+		 var dataClearParam = [
+				{'id':'#Position', 'val': ""+cMain_position_name+""},
+				{'id':'#Position_id', 'val': cMain_position_id},
+				{'id':'#empName', 'val': ""+cMain_emp_name+""},
+				{'id':'#empName_id', 'val': session_emp_code}
+			];
+		 
 		// $("#organization").multiselect({minWidth:'100%;'});
 		$("#organization").multiselect({minWidth:'100%;'}).multiselectfilter();
 		 $("#appraisalType").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list","GET"));
@@ -302,7 +309,6 @@ $.each(data,function(index,indexEntry){
 		//generateAutocomplete("#Position",restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_position_name2","post",{"position_name":null});
 		$("#appraisalLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/import_assignment/level_list","GET",{"appraisal_type_id":$("#appraisalType").val()}));		
 		$("#appraisalLevel").change(function(){
-			var dataClearParam = ['#Position','#Position_id','#empName','#empName_id'];
 			clearParamSearch(dataClearParam);// in cMain.js
 			$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/import_assignment/org_list","GET",{"appraisal_type_id":$("#appraisalType").val(),"level_id":$("#appraisalLevel").val()}));
 //			$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/import_assignment/org_list","GET",{"level_id":$("#appraisalLevel").val()}));
@@ -311,9 +317,9 @@ $.each(data,function(index,indexEntry){
 		});
 		
 		$("#organization").change(function() {
-			var dataClearParam = ['#Position','#Position_id','#empName','#empName_id'];
 			clearParamSearch(dataClearParam);// in cMain.js
 		});
+		
 //		$("#appraisalType").change();
 		$("#appraisalLevel").change();
 		$("#YearList").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/year_list","GET"));
@@ -348,6 +354,8 @@ $.each(data,function(index,indexEntry){
 			}
 		});
 		$("#appraisalType").change();
+		
+		clearParamSearch(dataClearParam);
 		
 		//Search Start
 		$("#btnSearchAdvance").click(function(){

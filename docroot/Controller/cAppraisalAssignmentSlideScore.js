@@ -13,7 +13,6 @@ var emailLinkAssignment = false;
 
 
 
-
 //var is_hr = 0;
 var clearFn = function(){
 	$(':input')
@@ -1170,7 +1169,7 @@ var searchAdvanceFn = function() {
 	//empNameCode=empNameCode[0];
 	//var empNameCode= $("#empName").val();
 	
-	
+	console.log(Position,empNameCode,'searchAdvanceFn');
 	
 	$(".embed_param_search").remove();
 	
@@ -2483,6 +2482,13 @@ var plid = $('#plid_portlet').val();
 if(username!="" && username!=null & username!=[] && username!=undefined ){
 	
 	if(connectionServiceFn(username,password,plid)==true){
+		
+		var dataClearParam = [
+			{'id':'#Position', 'val': ""+cMain_position_name+""},
+			{'id':'#Position_id', 'val': cMain_position_id},
+			{'id':'#empName', 'val': ""+cMain_emp_name+""},
+			{'id':'#empName_id', 'val': session_emp_code}
+		];
 			
 		
 	//Default start
@@ -2568,14 +2574,12 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 		$("#appraisalType").change();
 		
 		$("#appraisalLevelEmp").change(function() {
-			var dataClearParam = ['#Position','#Position_id','#empName','#empName_id'];
 			clearParamSearch(dataClearParam);// in cMain.js
 			appraisalLevelListEmpLevelToOrgFn();
 			dropDrowOrgFn($("#appraisalLevel").val());
 		});
 		
 		$("#appraisalLevel").change(function() {
-			var dataClearParam = ['#Position','#Position_id','#empName','#empName_id'];
 			clearParamSearch(dataClearParam);// in cMain.js
 			dropDrowOrgFn($("#appraisalLevel").val());
 		});
@@ -2639,6 +2643,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	$("#assignFrequency").change();
 	//htmlOption+="<option value="+i+">à¸£à¸­à¸šà¸�à¸²à¸£à¸›à¸£à¸°à¹€à¸¡à¸´à¸™"+i+"</option>";
 	
+	clearParamSearch(dataClearParam);// in cMain.js
 	
 	//Auto complete Start
 	

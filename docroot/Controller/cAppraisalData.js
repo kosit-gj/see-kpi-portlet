@@ -26,7 +26,6 @@ var restfulPathDropDownAppraisalType="/"+serviceName+"/public/appraisal_assignme
 var restfulPathPositionAutocomplete=restfulPathCdsResult+"/auto_position_name";
 var restfulPathEmployeeAutocomplete=restfulPathCdsResult+"/auto_emp_name";
 
-
 //------------------- GetData FN Start ---------------------
 var getDataFn = function(page,rpp){
 	var year= $("#param_year").val();
@@ -356,6 +355,13 @@ $(document).ready(function() {
 	 		return false;
 	 	}
 	 }
+	 
+	 var dataClearParam = [
+			{'id':'#position', 'val': ""+cMain_position_name+""},
+			{'id':'#position_id', 'val': cMain_position_id},
+			{'id':'#emp_name', 'val': ""+cMain_emp_name+""},
+			{'id':'#emp_name_id', 'val': cMain_emp_id}
+		];
 
 	$(".sr-only").hide();
 	$("#org_name").val("");
@@ -565,22 +571,21 @@ $(document).ready(function() {
 	$("#app_type").change();
 	
 	$("#app_lv").change(function() {
-		var dataClearParam = ['#position','#position_id','#emp_name','#emp_name_id'];
 		clearParamSearch(dataClearParam);// in cMain.js
 		dropDownListOrganization();
 	});
 	
 	$("#app_lv_emp").change(function() {
-		var dataClearParam = ['#position','#position_id','#emp_name','#emp_name_id'];
 		clearParamSearch(dataClearParam);// in cMain.js
 		dropDownListEmpLevelToOrgFn();
 		dropDownListOrganization();
 	});
 	
 	$("#org_id").change(function() {
-		var dataClearParam = ['#position','#position_id','#emp_name','#emp_name_id'];
 		clearParamSearch(dataClearParam);// in cMain.js
 	});
+	
+	clearParamSearch(dataClearParam);// in cMain.js
 	
 	
     // -------------------  Appraisal Data END ---------------------	

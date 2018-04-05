@@ -7,6 +7,12 @@ var password = "";
 //Variable to store your files
 var files;
 var emailLinkAppraisal = false;
+var dataClearParam = [
+	{'id':'#Position', 'val': ""+cMain_position_name+""},
+	{'id':'#Position_id', 'val': cMain_position_id},
+	{'id':'#EmpName', 'val': ""+cMain_emp_name+""},
+	{'id':'#EmpName_id', 'val': cMain_emp_id}
+];
 // funciton global start
 //form2
 
@@ -2773,15 +2779,12 @@ $(document).ready(function() {
 			$("#appraisalType").change();
 			
 			$("#AppraisalEmpLevel").change(function(){
-				var dataClearParam = ['#Position','#Position_id','#EmpName','#EmpName_id'];
 				clearParamSearch(dataClearParam);// in cMain.js
 				dropDrowIndividualOrgLevelFn($(this).val());
 			});
 			
 			$("#AppraisalOrgLevel").change(function(){
-				var dataClearParam = ['#Position','#Position_id','#EmpName','#EmpName_id'];
 				clearParamSearch(dataClearParam);// in cMain.js
-				
 				if($("#appraisalType").val() == "1"){
 					dropDrowOrgFn($(this).val());
 				} else {
@@ -2790,9 +2793,10 @@ $(document).ready(function() {
 			});
 			
 			$("#organization").change(function(){
-				var dataClearParam = ['#Position','#Position_id','#EmpName','#EmpName_id'];
 				clearParamSearch(dataClearParam);// in cMain.js
 			});
+			
+			clearParamSearch(dataClearParam);// in cMain.js
 
 			//Auto complete Start
 			

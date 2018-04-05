@@ -12,7 +12,6 @@
  galbalDataTemp['All_KPI'] = {};
  galbalDataTemp['collapse_show']="";
  galbalDataTemp['click'];
- 
 
 // console.log(url.split(":")[0]);
 //# Generate Drop Down List
@@ -1363,6 +1362,14 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 		 if(connectionServiceFn(username,password,plid)==false){
 	 		return false;
 	 	}
+		 
+		 var dataClearParam = [
+				{'id':'#position', 'val': ""+cMain_position_name+""},
+				{'id':'#position_id', 'val': cMain_position_id},
+				{'id':'#emp_name', 'val': ""+cMain_emp_name+""},
+				{'id':'#emp_name_id', 'val': cMain_emp_id}
+			];
+		 
 	 	$(".advance-search input").val("");
 	 	
 	 	$("#btnSearchAdvance").click(function(){
@@ -1502,7 +1509,6 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 			});
 			
 			$("#AppraisalOrgLevel").change(function(){
-				var dataClearParam = ['#position','#position_id','#emp_name','#emp_name_id'];
 				clearParamSearch(dataClearParam);// in cMain.js
 				
 				if($("#app_type").val() == "1"){
@@ -1521,28 +1527,24 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 			});
 			
 			$("#AppraisalEmpLevel").change(function(){
-				var dataClearParam = ['#position','#position_id','#emp_name','#emp_name_id'];
 				clearParamSearch(dataClearParam);// in cMain.js
-				
 				CreateOrgLevelWhitEmpLevel(); // Create #AppraisalOrgLevel (cascade -> #AppraisalEmpLevel)
 				CreateOrgWhitEmpLevelOrgLevel(); // Create #organization whit #AppraisalEmpLevel and #AppraisalOrgLevel
 				dropDownKpi(); // Create #kpi
 			});
 			
 			$("#organization").change(function(){
-				var dataClearParam = ['#position','#position_id','#emp_name','#emp_name_id'];
 				clearParamSearch(dataClearParam);// in cMain.js
-				
 				dropDownKpi(); // Create #kpi
 			});
 
-			
 			
 			/**
 			 * Change parameter event.
 			 */
 			$("#year").change(); // Change for create #period
 			$("#app_type").change(); // Change for create #apprasiaEmpLevel or #apprasiaOrgLevel -> #organization
+			clearParamSearch(dataClearParam);// in cMain.js
 			
 		}
 		

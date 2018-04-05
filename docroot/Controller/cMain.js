@@ -1,6 +1,13 @@
 /* for portlet*/
 var tokenID= [];
 var is_hr = [];
+
+var is_all_employee;
+var cMain_emp_id;
+var cMain_emp_name;
+var cMain_position_id;
+var cMain_position_name;
+
 const setModalPopup = ['static','false'];
 //const setModalPopup = ['""','""'];
 
@@ -10,6 +17,8 @@ const setPopoverDisplay = {
 		}
 };
 //const setPopoverDisplay = {};
+
+
 
 //tokenID= eval("("+sessionStorage.getItem("tokenID")+")");
 
@@ -40,9 +49,17 @@ var checkSession = function(paramTokenID){
 				sessionStorage.clear();
 				//window.location.href = "../login.html"; 
 			}else{
+				console.log(data);
 				is_hr =(data['is_hr'] == null   ? 0 : data['is_hr']);
 				is_self_assign =(data['is_self_assign'] == null   ? 0 : data['is_self_assign']);
 				session_emp_code =(data['emp_code'] == null   ? 0 : data['emp_code']);
+				
+				is_all_employee = data['is_all_employee'];
+				cMain_emp_id = data['emp_id'];
+				cMain_emp_name = data['emp_name'];
+				cMain_position_id = data['position_id'];
+				cMain_position_name = data['position_name'];
+				
 				console.log("login success");
 				check=true;
 				setThemeColorFn(tokenID.theme_color);
@@ -184,8 +201,15 @@ function removeComma(nStr){
 function clearParamSearch(data) {
 	var i;
 	var dataLength = data.length;
-	for (i = 0; i < dataLength; i++) {
-		$(""+data[i]+"").val("");
+	
+	if(is_all_employee==1) {
+		for (i = 0; i < dataLength; i++) {
+			$(""+data[i]['id']+"").val("");
+		}
+	} else {
+		for (i = 0; i < dataLength; i++) {
+			$(""+data[i]['id']+"").val(data[i]['val']);
+		}
 	}
 }
 

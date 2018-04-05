@@ -10,7 +10,6 @@
  galbalDataTemp['collapse_show']="";
  galbalDataTemp['click'];
  galbalDataTemp['click_Timeout'];
- 
 //# Generate Drop Down List
  var generateDropDownList = function(url,type,request,initValue){
  	var html="";
@@ -520,6 +519,14 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 		 if(connectionServiceFn(username,password,plid)==false){
 	 		return false;
 	 	}
+		 
+		 var dataClearParam = [
+				{'id':'#position', 'val': ""+cMain_position_name+""},
+				{'id':'#position_id', 'val': cMain_position_id},
+				{'id':'#emp_name', 'val': ""+cMain_emp_name+""},
+				{'id':'#emp_name_id', 'val': cMain_emp_id}
+			];
+		 
 	 	$(".advance-search input").val("");
 	 	
 	 	//Generate DropDown List
@@ -577,12 +584,10 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 		$("#app_type").change();
 		
 		$("#organization").change(function() {
-			var dataClearParam = ['#position','#position_id','#emp_name','#emp_name_id'];
 			clearParamSearch(dataClearParam);// in cMain.js
 		});
 		
 		$("#AppraisalOrgLevel").change(function(){
-			var dataClearParam = ['#position','#position_id','#emp_name','#emp_name_id'];
 			clearParamSearch(dataClearParam);// in cMain.js
 			
 			if($("#app_type").val() == "1"){
@@ -602,7 +607,6 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 		});
 		
 		$("#AppraisalEmpLevel").change(function(){
-			var dataClearParam = ['#position','#position_id','#emp_name','#emp_name_id'];
 			clearParamSearch(dataClearParam);// in cMain.js
 			
 			$("#AppraisalOrgLevel").html(generateDropDownList(
@@ -617,6 +621,8 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 				{"emp_level":$("#AppraisalEmpLevel").val(), "org_level":$("#AppraisalOrgLevel").val()}
 			));
 		});
+		
+		clearParamSearch(dataClearParam);// in cMain.js
 			
 		
 	
