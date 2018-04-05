@@ -2773,17 +2773,26 @@ $(document).ready(function() {
 			$("#appraisalType").change();
 			
 			$("#AppraisalEmpLevel").change(function(){
+				var dataClearParam = ['#Position','#Position_id','#EmpName','#EmpName_id'];
+				clearParamSearch(dataClearParam);// in cMain.js
 				dropDrowIndividualOrgLevelFn($(this).val());
 			});
 			
 			$("#AppraisalOrgLevel").change(function(){
+				var dataClearParam = ['#Position','#Position_id','#EmpName','#EmpName_id'];
+				clearParamSearch(dataClearParam);// in cMain.js
+				
 				if($("#appraisalType").val() == "1"){
 					dropDrowOrgFn($(this).val());
 				} else {
 					dropDrowIndividualOrgFn($(this).val());
 				}
 			});
-
+			
+			$("#organization").change(function(){
+				var dataClearParam = ['#Position','#Position_id','#EmpName','#EmpName_id'];
+				clearParamSearch(dataClearParam);// in cMain.js
+			});
 
 			//Auto complete Start
 			

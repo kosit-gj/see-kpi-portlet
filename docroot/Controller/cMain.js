@@ -181,6 +181,14 @@ function removeComma(nStr){
 	return parseFloat(nStr.replace(/,/g, ''))
 }
 
+function clearParamSearch(data) {
+	var i;
+	var dataLength = data.length;
+	for (i = 0; i < dataLength; i++) {
+		$(""+data[i]+"").val("");
+	}
+}
+
 //var getNewSessionFn = function(){
 //	
 //	var userName=$("#user_portlet").val();

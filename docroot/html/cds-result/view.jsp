@@ -389,7 +389,7 @@ plid = layout.getPlid();
 							<select class="input span12 m-b-n" id="app_lv"></select>
 						</div>
 						<div id="drop_down_list_organization" class="form-group pull-left span3" style="margin-left: 5px" data-toggle="tooltip" title="Organization">
-							<select class="input span12 m-b-n" ></select>
+							<select data-placement='top' id="org_id" class="input span12 m-b-n" name="org_id"></select>
 						</div>
 						<div class="form-group pull-left span3" id="txtEmpInput" style="margin-left: 5px">
 							<input data-toggle="tooltip" data-placement="top"

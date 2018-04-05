@@ -576,7 +576,15 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 		});
 		$("#app_type").change();
 		
+		$("#organization").change(function() {
+			var dataClearParam = ['#position','#position_id','#emp_name','#emp_name_id'];
+			clearParamSearch(dataClearParam);// in cMain.js
+		});
+		
 		$("#AppraisalOrgLevel").change(function(){
+			var dataClearParam = ['#position','#position_id','#emp_name','#emp_name_id'];
+			clearParamSearch(dataClearParam);// in cMain.js
+			
 			if($("#app_type").val() == "1"){
 				$("#organization").html( generateDropDownList(
 					restfulURL+"/"+serviceName+"/public/dashboard/org_list",
@@ -594,6 +602,9 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 		});
 		
 		$("#AppraisalEmpLevel").change(function(){
+			var dataClearParam = ['#position','#position_id','#emp_name','#emp_name_id'];
+			clearParamSearch(dataClearParam);// in cMain.js
+			
 			$("#AppraisalOrgLevel").html(generateDropDownList(
 				restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_level_individual",
 				"GET",
