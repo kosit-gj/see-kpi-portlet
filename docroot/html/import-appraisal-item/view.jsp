@@ -360,7 +360,7 @@ User u = themeDisplay.getUser();
 							<div class="ibox-title">
 								<h5>Import Appraisal Item</h5>
 							</div>
-				<div class="ibox-content breadcrumbs2" style="padding-bottom:100px">
+				<div class="ibox-content breadcrumbs2" >
 					<div class="row-fluid p-t-xxs cSearchAdvance">
 			
 						
