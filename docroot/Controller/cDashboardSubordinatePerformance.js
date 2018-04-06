@@ -905,7 +905,7 @@ var listDashBoardFn = function(data){
 			 */
 			$("#year").change(); // Change for create #period
 			$("#app_type").change(); // Change for create #apprasiaEmpLevel or #apprasiaOrgLevel -> #organization
-			clearParamSearch(dataClearParam);// in cMain.js
+			setParamSearch(dataClearParam);// in cMain.js
 			
 		}
 		

@@ -2643,7 +2643,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	$("#assignFrequency").change();
 	//htmlOption+="<option value="+i+">à¸£à¸­à¸šà¸�à¸²à¸£à¸›à¸£à¸°à¹€à¸¡à¸´à¸™"+i+"</option>";
 	
-	clearParamSearch(dataClearParam);// in cMain.js
+	setParamSearch(dataClearParam);// in cMain.js
 	
 	//Auto complete Start
 	

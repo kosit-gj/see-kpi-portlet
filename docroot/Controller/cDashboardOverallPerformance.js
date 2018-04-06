@@ -622,7 +622,7 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 			));
 		});
 		
-		clearParamSearch(dataClearParam);// in cMain.js
+		setParamSearch(dataClearParam);// in cMain.js
 			
 		
 	

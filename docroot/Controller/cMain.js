@@ -201,17 +201,19 @@ function removeComma(nStr){
 function clearParamSearch(data) {
 	var i;
 	var dataLength = data.length;
-	
-	if(is_all_employee==1) {
-		for (i = 0; i < dataLength; i++) {
-			$(""+data[i]['id']+"").val("");
-		}
-	} else {
+	for (i = 0; i < dataLength; i++) {
+		$(""+data[i]['id']+"").val("");
+	}
+}
+
+function setParamSearch(data) {
+	var i;
+	var dataLength = data.length;
+	if(is_all_employee==0) {
 		for (i = 0; i < dataLength; i++) {
 			$(""+data[i]['id']+"").val(data[i]['val']);
 		}
 	}
-
 }
 
 //var getNewSessionFn = function(){

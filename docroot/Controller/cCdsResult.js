@@ -896,7 +896,7 @@ $(document).ready(function() {
 		clearParamSearch(dataClearParam);// in cMain.js
 	});
 	
-	clearParamSearch(dataClearParam);// in cMain.js
+	setParamSearch(dataClearParam);// in cMain.js
 	
 
 	
