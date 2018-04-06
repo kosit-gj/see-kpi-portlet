@@ -270,7 +270,7 @@ return htmlTemplateQuality;
 };
 
 var assignTemplateDeductFn = function(structureName,data){
-
+	
 	var htmlTemplateDeduct="";
 	htmlTemplateDeduct+="<div class=\"row-fluid\">";
 	htmlTemplateDeduct+="<div class=\"span12\">";
@@ -301,12 +301,17 @@ var assignTemplateDeductFn = function(structureName,data){
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Actual Value</b></th>";
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Over Value</b></th>";
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Deduct Score/Unit</b> </th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Value&nbsp;Get&nbsp;Zero&nbsp;</b> </th>";
+				
+				if(data['is_value_get_zero']==1){
+					htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Value&nbsp;Get&nbsp;Zero&nbsp;</b> </th>";
+				}
+				
 				if(data['result_type']==1){
 					htmlTemplateDeduct+="<th style='width:20%;text-align: right;'><b>Weight Score </b></th>";
 				}else{
 					htmlTemplateDeduct+="<th style='width:20%;text-align: right;'><b>Result Score </b></th>";
 				}
+				
 			htmlTemplateDeduct+="</tr>";
 		}else{
 			htmlTemplateDeduct+="<tr>";
@@ -315,7 +320,11 @@ var assignTemplateDeductFn = function(structureName,data){
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Actual Value</b></th>";
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Over Value</b></th>";
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Deduct Score/Unit</b> </th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Value&nbsp;Get&nbsp;Zero&nbsp;</b> </th>";
+				
+				if(data['is_value_get_zero']==1){
+					htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Value&nbsp;Get&nbsp;Zero&nbsp;</b> </th>";
+				}
+				
 				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Score </b></th>";
 			htmlTemplateDeduct+="</tr>";
 		}
@@ -333,7 +342,9 @@ var assignTemplateDeductFn = function(structureName,data){
 									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
 									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2))+"</td>";
 									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['deduct_score_unit'])).toFixed(2))+"</td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+(indexEntry['value_get_zero']==null?"   ":indexEntry['value_get_zero'])+"</td>";//indexEntry['value_get_zero']==null?"":indexEntry['value_get_zero']
+									if(data['is_value_get_zero']==1){
+										htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+(indexEntry['value_get_zero']==null?"   ":indexEntry['value_get_zero'])+"</td>";//indexEntry['value_get_zero']==null?"":indexEntry['value_get_zero']
+									}
 									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2))+"</td>";
 
 							htmlTemplateDeduct+="</tr>";
@@ -345,7 +356,11 @@ var assignTemplateDeductFn = function(structureName,data){
 									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
 									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2))+"</td>";
 									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['deduct_score_unit'])).toFixed(2))+"</td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+(indexEntry['value_get_zero']==null?"   ":indexEntry['value_get_zero'])+"</td>";
+									
+									if(data['is_value_get_zero']==1){
+										htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+(indexEntry['value_get_zero']==null?"   ":indexEntry['value_get_zero'])+"</td>";
+									}
+									
 									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])).toFixed(2))+"</td>";
 
 							htmlTemplateDeduct+="</tr>";
@@ -357,7 +372,9 @@ var assignTemplateDeductFn = function(structureName,data){
 								htmlTemplateDeduct+="<td class=''></td>";
 								htmlTemplateDeduct+="<td class=''></td>";
 								htmlTemplateDeduct+="<td class=''></td>";
-								htmlTemplateDeduct+="<td class=''></td>";
+								if(data['is_value_get_zero']==1){
+									htmlTemplateDeduct+="<td class=''></td>";
+								}
 								htmlTemplateDeduct+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>Total</b></td>";
 								htmlTemplateDeduct+="<td class=''  style='text-align: right;padding-right: 10px;font-weight: bold; font-size:16px'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
 						htmlTemplateDeduct+="</tr>";

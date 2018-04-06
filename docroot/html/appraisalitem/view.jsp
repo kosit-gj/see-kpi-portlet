@@ -1208,7 +1208,7 @@ overflow-y: visible;
 				                <br style="clear:both">
 			                </div>
 			                
-			                <div class='form-file-mangement'>
+			                <div class='form-file-mangement is_value_get_zero_form'>
 				                <div class="form-label-customs">
 				                	Value Get Zero <span class='redFont'>*</span>
 				                </div>

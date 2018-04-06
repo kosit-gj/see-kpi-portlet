@@ -175,7 +175,6 @@ var insertDeductScoreFn = function(param) {
 
 
 var initailDeductScoreFormFn = function(action,structureId,structureName,data){
-
 	
 	/*
 	item_name,
@@ -207,6 +206,13 @@ var initailDeductScoreFormFn = function(action,structureId,structureName,data){
 		}else{
 			$("#isActiveDeductScore").prop("checked",false);
 		}
+		
+		if(data['is_value_get_zero']==1){
+			$(".is_value_get_zero_form").show();
+		}else{
+			$(".is_value_get_zero_form").hide();
+		}
+		
 		$("#appraisalItemIdDeductScore").val(data['item_id']);
 		$("#actionDeductScore").val("edit");
 		$("#btnAddAnotherDeductScore").hide();

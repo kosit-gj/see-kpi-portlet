@@ -99,9 +99,16 @@ var displayTypeFn  = function(dataValue,dataType){
 
 //List Data
 var listDataFn = function(data) {
-	//console.log(data);
+	console.log(data);
 	var  mainContentHTML="";
+	var btnDeduct = "";
 	$.each(data,function(index,indexEntry){
+		if(indexEntry['form_url']=='deduct') {
+			btnDeduct = "btnDeduct isValueGetZero-"+indexEntry['is_value_get_zero']+"";
+		} else {
+			btnDeduct = "";
+		}
+		
 		//console.log(index);
 		//structure_id
 		mainContentHTML+="<div class=\"row-fluid\">";
@@ -110,7 +117,7 @@ var listDataFn = function(data) {
 	
 		mainContentHTML+=" 			<input type='hidden' name='structure_name' class='' value='"+index+"'>";
 		mainContentHTML+=" 			<input type='hidden' name='structure_id' class='' value='"+indexEntry['structure_id']+"'>";
-		mainContentHTML+="          <b class='titleQuantityForm' style='position:relative;top:7px'>"+index+"</b>&nbsp;&nbsp;<button style='float:right;' data-toggle=\"modal\" data-target=\"#modal-"+indexEntry['form_url']+"\" id=\"btnAddKPI\" data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"' class=\"btn btn-info input-sm btnAdd\" type=\"button\"><i class=\"fa fa-plus-square\"></i>&nbsp;Add "+index+"</button>";
+		mainContentHTML+="          <b class='titleQuantityForm' style='position:relative;top:7px'>"+index+"</b>&nbsp;&nbsp;<button style='float:right;' data-toggle=\"modal\" data-target=\"#modal-"+indexEntry['form_url']+"\" id=\"btnAddKPI\" data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"' class=\"btn btn-info input-sm btnAdd "+btnDeduct+"\" type=\"button\"><i class=\"fa fa-plus-square\"></i>&nbsp;Add "+index+"</button>";
 		mainContentHTML+="      </div>";
 				
 		mainContentHTML+="		<div class=\"ibox-content\">";
@@ -1038,6 +1045,17 @@ $(document).ready(function(){
 	$(document).on("click",".btnAdd",function(){
 		$(window).scrollTop(0);
 		$(".modal-body").scrollTop(0);
+	});
+	
+	$(document).on("click",".btnDeduct",function(){
+		var btnDeduct = $(this).attr('class').split(' ')[5];
+		var isValueGetZero = btnDeduct.split("-")[1];
+
+		if(isValueGetZero==1) {
+			$(".is_value_get_zero_form").show();
+		} else {
+			$(".is_value_get_zero_form").hide();
+		}
 	});
 	
 

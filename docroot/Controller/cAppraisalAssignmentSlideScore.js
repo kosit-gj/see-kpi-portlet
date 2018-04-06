@@ -1836,8 +1836,10 @@ var assignTemplateDeductFn = function(structureName,data){
 				htmlTemplateDeduct+="<th style=\"width:52%\"><b>Appraisal checkWeigthOverItem Name</b></th>";
 				htmlTemplateDeduct+="<th style=\"width:15%; text-align:center;\"><b>Max Value </b></th>";
 				htmlTemplateDeduct+="<th style=\"width:15%; text-align:center;\"><b>Deduct Score/Unit </b></th>";
-				htmlTemplateDeduct+="<th style=\"width:15%; text-align:center;\"><b>Value&nbsp;Get&nbsp;Zero&nbsp;</b></th>";
-				htmlTemplateDeduct+="</tr>";
+				if(data['is_value_get_zero']== 1) {
+					htmlTemplateDeduct+="<th style=\"width:15%; text-align:center;\"><b>Value&nbsp;Get&nbsp;Zero&nbsp;</b></th>";
+				}
+					htmlTemplateDeduct+="</tr>";
 					htmlTemplateDeduct+="</thead>";
 					htmlTemplateDeduct+="<tbody id=\"\">";
 					
@@ -1849,8 +1851,9 @@ var assignTemplateDeductFn = function(structureName,data){
 								htmlTemplateDeduct+="<td style=\"width:52%\" style='padding-top:7px;' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' class='id-"+indexEntry['structure_id']+"-item_name'>"+indexEntry['item_name']+"</td>";
 								htmlTemplateDeduct+="<td style=\"width:15%;text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-maxValue' class='id-"+indexEntry['structure_id']+"-maxValue  input form-control input-sm-small numberOnly addComma' type='text' value='"+indexEntry['max_value']+"'></td>";
 								htmlTemplateDeduct+="<td style=\"width:15%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-deductScoreUnit' class='id-"+indexEntry['structure_id']+"-deductScoreUnit    input form-control input-sm-small numberOnly addComma' type='text' value='"+indexEntry['unit_deduct_score']+"'>     </td>";
-								htmlTemplateDeduct+="<td style=\"width:15%; text-align:center; \"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-valueGetZero' class='id-"+indexEntry['structure_id']+"-valueGetZero  input form-control input-sm-small numberOnly addComma' type='text' value='"+(indexEntry['value_get_zero']==null ? "" :indexEntry['value_get_zero'])+"'></td>";								
-								
+								if(data['is_value_get_zero']== 1) {
+									htmlTemplateDeduct+="<td style=\"width:15%; text-align:center; \"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-valueGetZero' class='id-"+indexEntry['structure_id']+"-valueGetZero  input form-control input-sm-small numberOnly addComma' type='text' value='"+(indexEntry['value_get_zero']==null ? "" :indexEntry['value_get_zero'])+"'></td>";								
+								}
 								htmlTemplateDeduct+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_result_id' class='id-"+indexEntry['structure_id']+"-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
 						htmlTemplateDeduct+="</tr>";
 					});
