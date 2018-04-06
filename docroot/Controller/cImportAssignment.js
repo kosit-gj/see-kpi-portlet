@@ -356,7 +356,7 @@ $.each(data,function(index,indexEntry){
 		});
 		$("#appraisalType").change();
 		
-		clearParamSearch(dataClearParam);
+		setParamSearch(dataClearParam);
 		
 		//Search Start
 		$("#btnSearchAdvance").click(function(){
