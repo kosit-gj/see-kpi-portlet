@@ -151,8 +151,6 @@ var insertFn = function(data,options,param){
 						
 						$("#modal-"+options['formDetail']['id']).modal('hide');
 						
-						Unlimited_Deduction_clear_data_empty(options);
-						
 					}else{
 						
 						//callFlashSlide("Insert success.");
@@ -160,8 +158,6 @@ var insertFn = function(data,options,param){
 						
 						getDataFn($("#pageNumber").val(),$("#rpp").val(),options,dataSearch);
 						clearFn(options);
-						
-						Unlimited_Deduction_clear_data_empty(options);
 						 
 					}
 				  
@@ -251,6 +247,12 @@ var clearFn = function(options){
 			}
 			
 		}
+		
+		if(options['formDetail']['id']=='appraisalStructure') {
+			$(".is_unlimited_deduction_header").hide();
+			$(".is_value_get_zero_header").hide();
+		}
+		
 	});
 }
 var updateFn = function(data,options){
@@ -1276,8 +1278,6 @@ var createDataTableFn = function(options){
 				$("#btnAddAnother").show();
 				$("#modalFormArea select option:first").prop("selected", true);
 				
-				Unlimited_Deduction_clear_data_empty(options);
-				
 				$(window).scrollTop(0);
 				setTimeout(function(){
 					$(".modal-body").scrollTop(0);
@@ -1305,12 +1305,5 @@ var createDataTableFn = function(options){
 	    	setThemeColorFn(tokenID.theme_color);
 		}
 	});
-}
-
-var Unlimited_Deduction_clear_data_empty = function(options) {
-	if(options['formDetail']['pk_id']=='structure_id') {
-		$(".is_unlimited_deduction_header").hide();
-		$(".checkbox-is_unlimited_deduction").prop('checked',false);
-	}
 }
 
