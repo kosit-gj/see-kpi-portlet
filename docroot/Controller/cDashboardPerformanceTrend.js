@@ -1364,10 +1364,18 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 	 	}
 		 
 		 var dataClearParam = [
+				{'id':'#position', 'val': ""},
+				{'id':'#position_id', 'val': ""},
+				{'id':'#emp_name', 'val': ""},
+				{'id':'#emp_name_id', 'val': ""}
+			];
+		 
+		 var dataSetParam = [
 				{'id':'#position', 'val': ""+cMain_position_name+""},
 				{'id':'#position_id', 'val': cMain_position_id},
 				{'id':'#emp_name', 'val': ""+cMain_emp_name+""},
-				{'id':'#emp_name_id', 'val': cMain_emp_id}
+				{'id':'#emp_name_id', 'val': cMain_emp_id},
+				{'id':'#AppraisalEmpLevel', 'val': ""+cMain_level_id+""}
 			];
 		 
 	 	$(".advance-search input").val("");
@@ -1544,7 +1552,7 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 			 */
 			$("#year").change(); // Change for create #period
 			$("#app_type").change(); // Change for create #apprasiaEmpLevel or #apprasiaOrgLevel -> #organization
-			setParamSearch(dataClearParam);// in cMain.js
+			setParamSearch(dataSetParam);// in cMain.js
 			
 		}
 		
@@ -1640,7 +1648,7 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 					 dataType:"json",
 					 data: {
 							"emp_name": request.term,
-							//"level_id": $("#AppraisalEmpLevel").val()
+							"level_id": $("#AppraisalEmpLevel").val(),
 							"emp_code":session_emp_code,"org_id":$("#organization").val()
 						},
 					//async:false,

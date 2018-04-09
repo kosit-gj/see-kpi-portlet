@@ -2487,12 +2487,19 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	if(connectionServiceFn(username,password,plid)==true){
 		
 		var dataClearParam = [
+			{'id':'#Position', 'val': ""},
+			{'id':'#Position_id', 'val': ""},
+			{'id':'#empName', 'val': ""},
+			{'id':'#empName_id', 'val': ""}
+		];
+		
+		var dataSetParam = [
 			{'id':'#Position', 'val': ""+cMain_position_name+""},
 			{'id':'#Position_id', 'val': cMain_position_id},
 			{'id':'#empName', 'val': ""+cMain_emp_name+""},
-			{'id':'#empName_id', 'val': session_emp_code}
+			{'id':'#empName_id', 'val': session_emp_code},
+			{'id':'#appraisalLevelEmp', 'val': ""+cMain_level_id+""}
 		];
-			
 		
 	//Default start
 	$("#btnSubmit").removeAttr("disabled");
@@ -2561,8 +2568,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 				appraisalLevelListOrgFn();
 				dropDrowOrgFn($("#appraisalLevel").val());	
 				
-			}
-			else {
+			} else {
 				
 				$("#Position").prop("disabled",false);
 				$("#empName").prop("disabled",false);
@@ -2575,6 +2581,8 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 			}
 		});
 		$("#appraisalType").change();
+		
+		setParamSearch(dataSetParam);// in cMain.js
 		
 		$("#appraisalLevelEmp").change(function() {
 			clearParamSearch(dataClearParam);// in cMain.js
@@ -2645,8 +2653,6 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	});
 	$("#assignFrequency").change();
 	//htmlOption+="<option value="+i+">à¸£à¸­à¸šà¸�à¸²à¸£à¸›à¸£à¸°à¹€à¸¡à¸´à¸™"+i+"</option>";
-	
-	setParamSearch(dataClearParam);// in cMain.js
 	
 	//Auto complete Start
 	
@@ -2739,7 +2745,11 @@ $("#empName").autocomplete({
 				 type:"post",
 				 dataType:"json",
 				 data:{
-					 "emp_name":request.term,"emp_code":session_emp_code,"org_id":$("#organization").val()},
+					 "emp_name":request.term,
+					 "emp_code":session_emp_code,
+					 "org_id":$("#organization").val(),
+					 "level_id":$("#appraisalLevelEmp").val()
+					 },
 				//async:false,
 				 headers:{Authorization:"Bearer "+tokenID.token},
                  error: function (xhr, textStatus, errorThrown) {

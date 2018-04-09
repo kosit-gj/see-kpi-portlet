@@ -7,6 +7,7 @@ var cMain_emp_id;
 var cMain_emp_name;
 var cMain_position_id;
 var cMain_position_name;
+var cMain_level_id;
 
 const setModalPopup = ['static','false'];
 //const setModalPopup = ['""','""'];
@@ -59,6 +60,7 @@ var checkSession = function(paramTokenID){
 				cMain_emp_name = data['emp_name'];
 				cMain_position_id = data['position_id'];
 				cMain_position_name = data['position_name'];
+				cMain_level_id = data['level_id'];
 				
 				console.log("login success");
 				check=true;
@@ -207,6 +209,7 @@ function clearParamSearch(data) {
 }
 
 function setParamSearch(data) {
+	console.log(data,'setParamSearch');
 	var i;
 	var dataLength = data.length;
 	if(is_all_employee==0) {

@@ -2745,10 +2745,18 @@ $(document).ready(function() {
 		if(connectionServiceFn(username,password,plid)==true){
 			
 			var dataClearParam = [
+				{'id':'#Position', 'val': ""},
+				{'id':'#Position_id', 'val': ""},
+				{'id':'#EmpName', 'val': ""},
+				{'id':'#EmpName_id', 'val': ""}
+			];
+			
+			var dataSetParam = [
 				{'id':'#Position', 'val': ""+cMain_position_name+""},
 				{'id':'#Position_id', 'val': cMain_position_id},
 				{'id':'#EmpName', 'val': ""+cMain_emp_name+""},
-				{'id':'#EmpName_id', 'val': cMain_emp_id}
+				{'id':'#EmpName_id', 'val': cMain_emp_id},
+				{'id':'#AppraisalEmpLevel', 'val': ""+cMain_level_id+""}
 			];
 			
 			//Start Action plan by email link here..
@@ -2815,7 +2823,7 @@ $(document).ready(function() {
 				clearParamSearch(dataClearParam);// in cMain.js
 			});
 			
-			setParamSearch(dataClearParam);// in cMain.js
+			setParamSearch(dataSetParam);// in cMain.js
 
 			//Auto complete Start
 			
@@ -2908,7 +2916,11 @@ $(document).ready(function() {
 						 type:"GET",
 						 dataType:"json",
 						 data:{
-							 "emp_name":request.term,"emp_code":session_emp_code,"org_id":$("#organization").val()},
+							 "emp_name":request.term,
+							 "emp_code":session_emp_code,
+							 "org_id":$("#organization").val(),
+							 "level_id":$("#AppraisalEmpLevel").val()
+							 },
 						//async:false,
 						 headers:{Authorization:"Bearer "+tokenID.token},
 		                 error: function (xhr, textStatus, errorThrown) {

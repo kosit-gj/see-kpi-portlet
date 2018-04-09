@@ -737,8 +737,14 @@ var listDashBoardFn = function(data){
 	 	}
 		 
 		 var dataClearParam = [
+				{'id':'#emp_name', 'val': ""},
+				{'id':'#emp_name_id', 'val': ""}
+			];
+		 
+		 var dataSetParam = [
 				{'id':'#emp_name', 'val': ""+cMain_emp_name+""},
-				{'id':'#emp_name_id', 'val': cMain_emp_id}
+				{'id':'#emp_name_id', 'val': cMain_emp_id},
+				{'id':'#AppraisalEmpLevel', 'val': ""+cMain_level_id+""}
 			];
 		 
 	 	$(".advance-search input").val("");
@@ -905,7 +911,7 @@ var listDashBoardFn = function(data){
 			 */
 			$("#year").change(); // Change for create #period
 			$("#app_type").change(); // Change for create #apprasiaEmpLevel or #apprasiaOrgLevel -> #organization
-			setParamSearch(dataClearParam);// in cMain.js
+			setParamSearch(dataSetParam);// in cMain.js
 			
 		}
 		

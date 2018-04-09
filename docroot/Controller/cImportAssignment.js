@@ -292,11 +292,19 @@ $.each(data,function(index,indexEntry){
 	 		return false;
 	 	}
 		 
-		 var dataClearParam = [
+		 var dataSetParam = [
 				{'id':'#Position', 'val': ""+cMain_position_name+""},
 				{'id':'#Position_id', 'val': cMain_position_id},
 				{'id':'#empName', 'val': ""+cMain_emp_name+""},
-				{'id':'#empName_id', 'val': session_emp_code}
+				{'id':'#empName_id', 'val': session_emp_code},
+				{'id':'#appraisalLevel', 'val': ""+cMain_level_id+""}
+			];
+		 
+		 var dataClearParam = [
+				{'id':'#Position', 'val': ""},
+				{'id':'#Position_id', 'val': ""},
+				{'id':'#empName', 'val': ""},
+				{'id':'#empName_id', 'val': ""}
 			];
 		 
 		// $("#organization").multiselect({minWidth:'100%;'});
@@ -361,7 +369,7 @@ $.each(data,function(index,indexEntry){
 		});
 		$("#appraisalType").change();
 		
-		setParamSearch(dataClearParam);
+		setParamSearch(dataSetParam);
 		
 		//Search Start
 		$("#btnSearchAdvance").click(function(){

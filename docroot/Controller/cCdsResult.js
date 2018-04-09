@@ -609,11 +609,19 @@ $(document).ready(function() {
 	 	}
 	 }
 	 
-	 var dataClearParam = [
+	 var dataSetParam = [
 			{'id':'#cds_result_position', 'val': ""+cMain_position_name+""},
 			{'id':'#cds_result_position_id', 'val': cMain_position_id},
 			{'id':'#emp_name', 'val': ""+cMain_emp_name+""},
-			{'id':'#emp_name_id', 'val': cMain_emp_id}
+			{'id':'#emp_name_id', 'val': cMain_emp_id},
+			{'id':'#app_lv_emp', 'val': ""+cMain_level_id+""}
+		];
+	 
+	 var dataClearParam = [
+			{'id':'#cds_result_position', 'val': ""},
+			{'id':'#cds_result_position_id', 'val': ""},
+			{'id':'#emp_name', 'val': ""},
+			{'id':'#emp_name_id', 'val': ""}
 		];
 	 
 	$("#org_name").val("");
@@ -783,7 +791,11 @@ $(document).ready(function() {
 				 type:"post",
 				 dataType:"json",
 				 data:{
-					 "emp_name":request.term,"emp_code":session_emp_code,"org_id":$("#org_id").val()},
+					 "emp_name":request.term,
+					 "emp_code":session_emp_code,
+					 "org_id":$("#org_id").val(),
+					 "level_id":$("#app_lv_emp").val()
+					 },
 				//async:false,
 				 headers:{Authorization:"Bearer "+tokenID.token},
                  error: function (xhr, textStatus, errorThrown) {
@@ -896,7 +908,7 @@ $(document).ready(function() {
 		clearParamSearch(dataClearParam);// in cMain.js
 	});
 	
-	setParamSearch(dataClearParam);// in cMain.js
+	setParamSearch(dataSetParam);// in cMain.js
 	
 
 	
