@@ -570,7 +570,7 @@ var ImportLiferayUser = function(data) {
 			//console.log( key + ": Code:" + value.emp_code + ", Fname:" + fname + ", Lname:" + lname + ", Email:" + value.email );
 					
 			$.ajax({
-				url:"http://localhost:8080/api/jsonws/user/add-user",
+				url: lifeRayApiUrl+"/api/jsonws/user/add-user",
 				type : "POST",
 				dataType:"JSON",
 				async:false,
