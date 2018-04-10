@@ -29,7 +29,8 @@ var dropDrowOrgFn = function(appraisalLevelId){
 var appraisalLevelEmpListFn = function(id){
 
 	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/emp_level",
+		//url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/emp_level",
+		url:restfulURL+"/"+serviceName+"/public/report/emp_list_level",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -72,19 +73,13 @@ var dropDrowAppraisalOrgLevelFn = function(id){
 			$("#AppraisalOrgLevel").html(htmlOption);
 		}
 	});
-	
-	if($("#appraisalType").val() == "1"){
-		dropDrowOrgFn($("#AppraisalOrgLevel").val());
-	} else {
-		dropDrowIndividualOrgFn($("#AppraisalOrgLevel").val());
-	}
 }
 
 var dropDrowIndividualOrgLevelFn = function(id){
 
 	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_level_individual",
-		//url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/al_list_emp_org",
+		//url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_level_individual",
+		url:restfulURL+"/"+serviceName+"/public/report/org_list_individual",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -109,8 +104,8 @@ var dropDrowIndividualOrgLevelFn = function(id){
 
 var dropDrowIndividualOrgFn = function(){
 	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_individual",
-		//url:restfulURL+"/"+serviceName+"/public/"+service_url_Check+"",
+		//url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_individual",
+		url:restfulURL+"/"+serviceName+"/public/report/org_individual",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -255,7 +250,7 @@ var getDataFn = function(page,rpp){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success : function(data) {
-			console.log(data);
+			//console.log(data);
 			listDataFn(data);
 			golbalData=data;
 			paginationSetUpFn(golbalData['current_page'],golbalData['last_page'],golbalData['last_page']);
@@ -315,6 +310,13 @@ var plid = $('#plid_portlet').val();
 
 if(connectionServiceFn(username,password,plid)==true){
 	
+	var dataClearParam = [
+		{'id':'#position', 'val': ""},
+		{'id':'#position_id', 'val': ""},
+		{'id':'#empName', 'val': ""},
+		{'id':'#empName_id', 'val': ""}
+	];
+	
 	//SEARCH PARAM 
 	appraisalTypeFn();
 	
@@ -325,8 +327,7 @@ if(connectionServiceFn(username,password,plid)==true){
 			$("#empName").prop("disabled",true);
 			$("#appraisalLevel").prop("disabled",true);
 			
-			$("#position").val("");
-			$("#empName").val("");
+			clearParamSearch(dataClearParam);// in cMain.js
 			$("#appraisalLevel").val("");
 			
 			dropDrowAppraisalOrgLevelFn(); //list org_level
@@ -336,6 +337,9 @@ if(connectionServiceFn(username,password,plid)==true){
 			$("#position").prop("disabled",false);
 			$("#empName").prop("disabled",false);
 			$("#appraisalLevel").prop("disabled",false);
+			
+			clearParamSearch(dataClearParam);// in cMain.js
+			
 			appraisalLevelEmpListFn(); //list emp_level
 			dropDrowIndividualOrgLevelFn(); //list org_level
 			dropDrowIndividualOrgFn(); //list_organization
@@ -344,11 +348,14 @@ if(connectionServiceFn(username,password,plid)==true){
 	$("#appraisalType").change();
 	
 	$("#appraisalLevel").change(function(){
+		clearParamSearch(dataClearParam);// in cMain.js
 		dropDrowIndividualOrgLevelFn(); //list org_level
 		dropDrowIndividualOrgFn(); //list_organization
 	});
 	
 	$("#AppraisalOrgLevel").change(function(){
+		clearParamSearch(dataClearParam);// in cMain.js
+		
 		if($("#appraisalType").val() == "1"){
 			dropDrowOrgFn($(this).val());
 		} else {
@@ -495,7 +502,7 @@ if(connectionServiceFn(username,password,plid)==true){
                         console.log('Error: ' + xhr.responseText);
                     },
 				 success:function(data){
-					  	console.log(data)
+					  	//console.log(data)
 						response($.map(data, function (item) {
                             return {
                                 label: item.emp_name+"("+item.emp_code+")",
