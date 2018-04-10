@@ -291,6 +291,17 @@ This is the <b>Usage Log</b> portlet in View mode.2
 								
 										</select>
 									</div>
+									
+									<div id='appraisalLevelArea' class="form-group span3"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<select data-toggle="tooltip" title="EmpLevel"
+											class="input form-control input-sm span12" id="appraisalLevel"
+											name="appraisalLevel">
+								
+								
+										</select>
+									</div>
+									
 									 <div id="empNameArea" class="form-group span3"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<input data-toggle="tooltip" type="text" class="form-control input-sm span12 "
@@ -306,19 +317,18 @@ This is the <b>Usage Log</b> portlet in View mode.2
 											name="position_id" value="" type="hidden">
 									</div>
 									
-									
-									
-									<div id='appraisalLevelArea' class="form-group span3"
+									<div id='AppraisalOrgLevelArea' class="form-group span3"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Level"
-											class="input form-control input-sm span12" id="appraisalLevel"
-											name="appraisalLevel">
+										<select data-toggle="tooltip" title="OrgLevel"
+											class="input form-control input-sm span12" id="AppraisalOrgLevel"
+											name="AppraisalOrgLevel">
 								
-											<option value="">Level</option>
+											<option value="">All Level</option>
 								
 								
 										</select>
 									</div>
+									
 									<div class="form-group span3" style="margin-left: 5px; margin-bottom: 3px;">
 										<select data-toggle="tooltip" title="" data-original-title="organization"
 											class="input form-control input-sm span12" id="organization"
