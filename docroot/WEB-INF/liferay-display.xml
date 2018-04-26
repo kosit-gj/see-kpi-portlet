@@ -51,5 +51,6 @@
 		<portlet id="import-appraisal-item"></portlet>
 		<portlet id="email-link-assignment"></portlet>
 		<portlet id="email-link-appraisal"></portlet>
+		<portlet id="status-report"></portlet>
 	</category>
 </display>
