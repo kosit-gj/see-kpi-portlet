@@ -142,14 +142,14 @@ var listDashBoardFn = function(data){
 		$("#year").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/year_list","GET"));
 		$("#period").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));
 		$("#app_type").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list","GET"));
-		$("#apprasiaLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_emp","GET"));
-		$("#apprasiaLevelOrg").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_org","GET",{"level_id":$("#apprasiaLevel").val()},"All"));
-		$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevelOrg").val()},"All"));
+		$("#apprasiaLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_emp","GET","","All Emp level"));
+		$("#apprasiaLevelOrg").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_org","GET",{"level_id":$("#apprasiaLevel").val()},"All Org Level"));
+		$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/org_list","get",{"appraisal_level":$("#apprasiaLevelOrg").val()},"All Organization"));
 		
 		//#Change Param Function
 		$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
-		$("#apprasiaLevel").change(function(){$("#apprasiaLevelOrg").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_org","get",{"level_id":$("#apprasiaLevel").val()},"All"));$("#apprasiaLevelOrg").change();});
-		$("#apprasiaLevelOrg").change(function(){$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevelOrg").val()},"All"));$("#organization").change();});
+		$("#apprasiaLevel").change(function(){$("#apprasiaLevelOrg").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_org","get",{"level_id":$("#apprasiaLevel").val()},"All Org Level"));$("#apprasiaLevelOrg").change();});
+		$("#apprasiaLevelOrg").change(function(){$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/org_list","get",{"appraisal_level":$("#apprasiaLevelOrg").val()},"All Organization"));$("#organization").change();});
 		//$("#organization").change(function(){console.log("organization change");$("#kpi").html((generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":1})));});
 		
 		
