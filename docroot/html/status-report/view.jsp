@@ -486,6 +486,16 @@
 								data-original-title="Organization" >
 							</select>
 						</div>
+						<div style="margin-left: 5px; margin-bottom: 3px;"
+							class="form-group pull-left span1" id="kpiArea">
+							<select name="output_type" id="output_type" class="input form-control input-sm"
+								title="" data-toggle="tooltip" style="cursor: pointer;"
+								data-original-title="Output Type">
+								<option value="pdf">PDF</option>
+								<option value="xls">Excel</option>
+
+							</select>
+						</div>
 						<div style="margin-bottom: 5px;"
 							class="form-group pull-right m-b-none ">
 							<button id="btnSearchAdvance" name="btnSearchAdvance"

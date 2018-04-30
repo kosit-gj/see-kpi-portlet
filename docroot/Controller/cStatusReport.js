@@ -52,6 +52,7 @@
 		var app_lv= $("#param_app_lv").val();
 		var org= $("#param_org_id").val();
 		var app_lv_org= $("#param_app_lv_org").val();
+		var output_type = $("#param_output").val();
 		
 		var parameter = {
 				param_year: year,
@@ -61,12 +62,12 @@
 				param_org_id: org,
 		}
 		var data = JSON.stringify(parameter);
-		var url_report_jasper = restfulURL+"/"+serviceName+"/public/generate?template_name=tfg-report&template_format=pdf&used_connection=1&inline=1&data="+data;
+		var url_report_jasper = restfulURL+"/"+serviceName+"/public/generate?template_name=tfg-report&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
 		$('#iFrame_report').attr('src',url_report_jasper);
 };
 
  
- var searchAdvanceFn = function (year,period,app_lv,org,app_lv_org) {
+ var searchAdvanceFn = function (year,period,app_lv,org,app_lv_org,output) {
 	//embed parameter start
 		
 		var htmlParam="";
@@ -76,6 +77,7 @@
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' 	name='param_app_lv' 	value='"+app_lv+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' 	name='param_org_id' 	value='"+org+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv_org' 	name='param_app_lv_org' 	value='"+app_lv_org+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_output' 	name='param_output' 	value='"+output+"'>";
 		$(".paramEmbed").remove();
 		$("form#linkParam").append(htmlParam);
 		//embed parameter end
@@ -129,7 +131,8 @@ var listDashBoardFn = function(data){
 					$("#period").val(),
 					$("#apprasiaLevel").val(),
 					$("#organization").val(),
-					$("#apprasiaLevelOrg").val()
+					$("#apprasiaLevelOrg").val(),
+					$("#output_type").val()
 					);
 			$("#listSubordinate").show();
 			return false;
@@ -160,6 +163,10 @@ var listDashBoardFn = function(data){
 		 });
 		//binding tooltip end
 		 $(".lfr-hudcrumbs").removeClass("lfr-hudcrumbs");
+		 
+		 $("#output_type").change(function(){
+				$('#iFrame_report').attr('src','');
+		});
 		 
 		 
 	 }
