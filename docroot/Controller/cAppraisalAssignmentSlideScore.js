@@ -904,7 +904,7 @@ var actionUpdateAssignmentFn = function(){
 
 
 	var appraisal_itemsObj=eval("(["+appraisal_items+"])");
-	console.log(appraisal_itemsObj);
+	//console.log(appraisal_itemsObj);
 	
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/"+$("#id").val(),
@@ -1173,7 +1173,7 @@ var searchAdvanceFn = function() {
 	//empNameCode=empNameCode[0];
 	//var empNameCode= $("#empName").val();
 	
-	console.log(Position,empNameCode,'searchAdvanceFn');
+	//console.log(Position,empNameCode,'searchAdvanceFn');
 	
 	$(".embed_param_search").remove();
 	
@@ -2396,7 +2396,7 @@ var createTemplateAssignmentFn = function(data){
 var check_appraisalLevel;
 var getTemplateFn = function(emp_result_id) {
 	
-	console.log(org_id_to_assign)
+	//console.log(org_id_to_assign)
 	if($("#appraisalType").val()==1) {
 		check_appraisalLevel = $("#appraisalLevel").val();
 	}
@@ -2651,6 +2651,15 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 		
 	});
 	
+	$("#YearList").change(function(){
+		
+		
+		//alert(period);
+		
+		dropDrowPeriodFn($(this).val(),$("#assignFrequency").val());
+		
+	});
+	
 	
 	$("#assignFrequency").change(function(){
 		dropDrowPeriodFn($("#periodFrequency").val(),$(this).val())
@@ -2760,7 +2769,7 @@ $("#empName").autocomplete({
                         console.log('Error: ' + xhr.responseText);
                     },
 				 success:function(data){
-					  	console.log(data)
+					  	//console.log(data)
 						response($.map(data, function (item) {
                             return {
                                 label: item.emp_name+"("+item.emp_code+")",
