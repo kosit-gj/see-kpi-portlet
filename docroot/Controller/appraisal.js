@@ -588,7 +588,7 @@ var dropDrowYearListFn = function(nameArea,id){
 		nameArea="";
 	}
 	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/appraisal/year_list",
+		url:restfulURL+"/"+serviceName+"/public/appraisal/year_list_assignment",
 		type:"get",
 		dataType:"json",
 		async:false,

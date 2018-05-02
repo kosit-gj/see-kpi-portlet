@@ -1406,7 +1406,7 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 	 	
 	 	//Generate DropDown List
 	 	if($("#get_sending_status").val() == "true" && $("#get_sending_status").val() != null){
-	 		$("#year").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/year_list","GET"));
+	 		$("#year").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/year_list_assignment","GET"));
 			$("#year").val($("#get_year_id").val());
 			$("#period").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));
 			$("#period").val($("#get_period_id").val());
