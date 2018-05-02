@@ -1466,7 +1466,7 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 			/**
 			 * Generate DropDown List.
 			 */
-			$("#year").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/year_list","GET"));			
+			$("#year").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/year_list_assignment","GET"));			
 			$("#app_type").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list","GET"));
 			
 			
