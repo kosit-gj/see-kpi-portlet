@@ -401,6 +401,10 @@ var findOneFn = function(id,actionType){
 
 				}
 				
+				if($("#actionAssign").val()==null){
+					$("#btnSubmit").attr("disabled","disabled");
+				}
+				
 			}else{
 				callFlashSlide("Data is empty.");
 				return false;
