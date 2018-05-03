@@ -403,6 +403,8 @@ var findOneFn = function(id,actionType){
 				
 				if($("#actionAssign").val()==null){
 					$("#btnSubmit").attr("disabled","disabled");
+				} else {
+					$("#btnSubmit").removeAttr("disabled");
 				}
 				
 			}else{
