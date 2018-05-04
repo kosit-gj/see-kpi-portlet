@@ -336,7 +336,7 @@ $.each(data,function(index,indexEntry){
 
 //		$("#appraisalType").change();
 		$("#appraisalLevel").change();
-		$("#YearList").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/year_list","GET"));
+		$("#YearList").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/year_list_assignment","GET"));
 		$("#periodFrequency").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/frequency_list","GET"));
 		$("#appraisalLevel").multiselect({
 			 minWidth:'100%;'
