@@ -350,7 +350,10 @@ $.each(data,function(index,indexEntry){
 			dropDrowPeriodFn($(this).val(),$("#assignFrequency").val());
 		});
 		$("#assignFrequency").change(function(){
-			dropDrowPeriodFn($("#periodFrequency").val(),$(this).val())
+			dropDrowPeriodFn($("#periodFrequency").val(),$(this).val());
+		});
+		$("#YearList").change(function(){
+			dropDrowPeriodFn($("#periodFrequency").val(),$("#assignFrequency").val());
 		});
 		$("#assignFrequency").change();
 		$("#appraisalType").change(function(){
