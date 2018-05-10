@@ -5,11 +5,15 @@
  galbalDataTemp['galbalOrg'] = [];
  
 //# Generate Drop Down List
- var generateDropDownList = function(url,type,request,initValue){
+ var generateDropDownList = function(url,type,request,initValue,initValue2){
  	var html="";
  	
  	if(initValue!=undefined){
  		html+="<option value='All'>"+initValue+"</option>";
+	}
+ 	
+ 	if(initValue2!=undefined){
+ 		html+="<option value='Unassign'>"+initValue2+"</option>";
 	}
 
  	$.ajax ({
@@ -52,6 +56,7 @@
 		var app_lv= $("#param_app_lv").val();
 		var org= $("#param_org_id").val();
 		var app_lv_org= $("#param_app_lv_org").val();
+		var status= $("#param_status").val();
 		var output_type = $("#param_output").val();
 		
 		var parameter = {
@@ -60,6 +65,7 @@
 				param_emp_level: app_lv,
 				param_org_level: app_lv_org,
 				param_org_id: org,
+				param_status: status
 		}
 		var data = JSON.stringify(parameter);
 		
@@ -69,7 +75,7 @@
 };
 
  
- var searchAdvanceFn = function (year,period,app_lv,org,app_lv_org,output) {
+ var searchAdvanceFn = function (year,period,app_lv,org,app_lv_org,status,output) {
 	//embed parameter start
 		
 		var htmlParam="";
@@ -79,6 +85,7 @@
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' 	name='param_app_lv' 	value='"+app_lv+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' 	name='param_org_id' 	value='"+org+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv_org' 	name='param_app_lv_org' 	value='"+app_lv_org+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_status' 	name='param_status' 	value='"+status+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_output' 	name='param_output' 	value='"+output+"'>";
 		$(".paramEmbed").remove();
 		$("form#linkParam").append(htmlParam);
@@ -134,6 +141,7 @@ var listDashBoardFn = function(data){
 					$("#apprasiaLevel").val(),
 					$("#organization").val(),
 					$("#apprasiaLevelOrg").val(),
+					$("#status").val(),
 					$("#output_type").val()
 					);
 			$("#listSubordinate").show();
@@ -147,6 +155,7 @@ var listDashBoardFn = function(data){
 		$("#apprasiaLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_emp","GET","","All Emp level"));
 		$("#apprasiaLevelOrg").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_org","GET",{"level_id":$("#apprasiaLevel").val()},"All Org Level"));
 		$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/org_list","get",{"appraisal_level":$("#apprasiaLevelOrg").val()},"All Organization"));
+		$("#status").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/status_list","GET",{},"All Status","Unassign"));
 		
 		//#Change Param Function
 		$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});

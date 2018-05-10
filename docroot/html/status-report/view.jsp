@@ -487,6 +487,14 @@
 							</select>
 						</div>
 						<div style="margin-left: 5px; margin-bottom: 3px;"
+							class="form-group pull-left span2" id="statusArea">
+							<select name="status" id="status"
+								class="input form-control input-sm" title=""
+								data-toggle="tooltip" style="cursor: pointer;"
+								data-original-title="Status" >
+							</select>
+						</div>
+						<div style="margin-left: 5px; margin-bottom: 3px;"
 							class="form-group pull-left span1" id="kpiArea">
 							<select name="output_type" id="output_type" class="input form-control input-sm"
 								title="" data-toggle="tooltip" style="cursor: pointer;"
