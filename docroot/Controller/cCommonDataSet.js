@@ -199,6 +199,7 @@ var listCommonDataSetFn = function(data) {
 	var htmlTable = "";
 	var Is_hr = "";
 	var IsSQL ="";
+	var IsSum ="";
 	var IsActive ="";
 	$.each(data,function(index,indexEntry) {
 		
@@ -217,6 +218,13 @@ var listCommonDataSetFn = function(data) {
 			//IsSQL = "<div class=\"checkbox m-n \"><input disabled value=\"0\" type=\"checkbox\" ><label> </label></div>";
 			IsSQL ="<input disabled type=\"checkbox\"  value=\"0\">";
 		}
+		if (indexEntry["is_sum_up"]== "1"){
+			//IsSQL = "<div class=\"checkbox m-n \"><input disabled value=\"1\" type=\"checkbox\" checked><label> </label></div>";
+			IsSum ="<input disabled type=\"checkbox\"  value=\"1\" checked>";
+		}else if (indexEntry["is_sum_up"]== "0"){
+			//IsSQL = "<div class=\"checkbox m-n \"><input disabled value=\"0\" type=\"checkbox\" ><label> </label></div>";
+			IsSum ="<input disabled type=\"checkbox\"  value=\"0\">";
+		}
 		if (indexEntry["is_active"]=="1"){
 			//IsActive = "<div class=\"checkbox m-n \"><input disabled value=\"1\" type=\"checkbox\" checked><label> </label></div>";
 			
@@ -231,6 +239,7 @@ var listCommonDataSetFn = function(data) {
 //		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["appraisal_level_name"]+ "</td>";
 		htmlTable += "<td id=\"objectCenter\" >"+Is_hr+"</td>";
 		htmlTable += "<td id=\"objectCenter\" >"+IsSQL+"</td>";
+		htmlTable += "<td id=\"objectCenter\" >"+IsSum+"</td>";
 		htmlTable += "<td id=\"objectCenter\" >"+IsActive+"</td>";
 		
 		htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"<button class='btn btn-warning btn-xs edit' id="+ indexEntry["cds_id"]+ " data-target=#ModalCommonData data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>Edit</button>&nbsp;" ;
@@ -333,6 +342,11 @@ var updateFn = function () {
 	}else{
 		checkboxIsActive="0";
 	}
+	if($("#checkbox_is_sum:checked").is(":checked")){
+		checkboxIsSum="1";
+	}else{
+		checkboxIsSum="0";
+	}
 	
 	$.ajax({
 		url:restfulURL+restfulPathCDS+"/"+$("#id").val(),
@@ -346,7 +360,8 @@ var updateFn = function () {
 			"is_hr":checkboxIsHR ,
 			"is_sql":checkboxIsSQL ,
 			"cds_sql":$("#txt_sql").val(),
-			"is_active":checkboxIsActive
+			"is_active":checkboxIsActive,
+			"is_sum_up":checkboxIsSum
 		},	
 		//headers:{Authorization:"Bearer "+tokenID.token},
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -384,10 +399,17 @@ var insertFn = function (param) {
 	}else{
 		checkboxIsSQL="0";
 	}
+	
 	if($("#checkbox_is_active:checked").is(":checked")){
 		checkboxIsActive="1";
 	}else{
 		checkboxIsActive="0";
+	}
+	
+	if($("#checkbox_is_sum:checked").is(":checked")){
+		checkboxIsSum="1";
+	}else{
+		checkboxIsSum="0";
 	}
 	
 	$.ajax({
@@ -402,7 +424,8 @@ var insertFn = function (param) {
 			"is_hr":checkboxIsHR ,
 			"is_sql":checkboxIsSQL ,
 			"cds_sql":$("#txt_sql").val(),
-			"is_active":checkboxIsActive
+			"is_active":checkboxIsActive,
+			"is_sum_up":checkboxIsSum
 		},	
 		//headers:{Authorization:"Bearer "+tokenID.token},
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -530,6 +553,8 @@ var executeSQLFn = function (txtSQL) {
 }
 
 var listSqlFn = function (data) {
+	console.log(data);
+	
 	var tableSql = "";
 	var tableSqlHead = "";
 	var tableSqlBody = "";
@@ -616,6 +641,7 @@ $(document).ready(function() {
 		$("#checkbox_is_hr").prop("checked",false);
 		$("#checkbox_is_sql").prop("checked",true);
 		$("#checkbox_is_active").prop("checked",true);
+		$("#checkbox_is_sum").prop("checked",false);
 		$("#ModalCommonData").modal({
 			"backdrop" : setModalPopup[0],
 			"keyboard" : setModalPopup[1]

@@ -151,7 +151,7 @@ $(document).ready(function(){
 	 	
 			 		options={
 		 			"colunms":[
-		 			         
+		 					   {"colunmsDisplayName":"Seq",           "width":"","id":"seq_no","colunmsType":"text"},
 		 			           {"colunmsDisplayName":"Appraisal Level Name","width":"","id":"appraisal_level_name","colunmsType":"text"},
 		 			           {"colunmsDisplayName":"View All Employee","width":"","id":"is_all_employee","colunmsType":"checkbox"},
 		 			           {"colunmsDisplayName":"Is HR","width":"","id":"is_hr","colunmsType":"checkbox"},
@@ -167,7 +167,12 @@ $(document).ready(function(){
 		 			          ],
 		 			          
 		 	    			
-		 	    			"form":[{
+		 	    			"form":[
+		 	    				{
+								"label":"Seq","inputType":"text","placeholder":"Seq",
+								"id":"seq_no","width":"250px","dataTypeInput":"number","required":true,
+								},
+		 	    				{
 		 	    				"label":"Appraisal Level Name","inputType":"text","placeholder":"Appraisal Level Name",
 		 	        			"id":"appraisal_level_name","width":"250px","required":true
 		 	    					

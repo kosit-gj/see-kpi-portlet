@@ -482,6 +482,7 @@ plid = layout.getPlid();
 <!-- 								<th style='width: auto'>Appraisal&nbsp;Level&emsp;</th> -->
 								<th style='width: auto; text-align: center;'>Is_hr&emsp;</th>
 								<th style='width: auto; text-align: center;'>IsSQL&emsp;</th>
+								<th style='width: auto; text-align: center;'>IsSumUp&emsp;</th>
 								<th style='width: auto; text-align: center;'>IsActive&emsp;</th>
 								<th style='width: 10%; text-align: center;'>Manage</th>
 							</tr>
@@ -652,6 +653,15 @@ plid = layout.getPlid();
 								<div class="controls">
 									<label for="" class="checkbox" style="cursor:default">
                   					<input id="checkbox_is_sql" name="checkbox_is_sql" type="checkbox"
+										value="" style="margin-top: 2px;">
+                					</label>
+								</div>
+						</div>
+						<div class="form-group p-xxs">
+								<label class="control-label">Is Sum Up:</label>
+								<div class="controls">
+									<label for="" class="checkbox" style="cursor:default">
+                  					<input id="checkbox_is_sum" name="checkbox_is_sum" type="checkbox"
 										value="" style="margin-top: 2px;">
                 					</label>
 								</div>
