@@ -82,6 +82,7 @@ var clearFn = function() {
 	$("#checkbox_is_hr").prop("checked",false);
 	$("#checkbox_is_sql").prop("checked",false);
 	$("#checkbox_is_active").prop("checked",false);
+	$("#checkbox_is_sum").prop("checked",false);
 	
 	$(".btnModalClose").click();
 	
