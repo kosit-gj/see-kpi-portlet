@@ -164,6 +164,11 @@ var findOneFn = function(id) {
 			}else{
 				$('#checkbox_is_hr').prop('checked', false);
 			}
+			if(data['is_sum_up']==1){
+				$('#checkbox_is_sum').prop('checked', true);
+			}else{
+				$('#checkbox_is_sum').prop('checked', false);
+			}
 			if(data['is_sql']==1){
 				$('#checkbox_is_sql').prop('checked', true);
 				$("#btn_Execute").removeAttr("disabled");
@@ -444,6 +449,7 @@ var insertFn = function (param) {
 						getDataFn($(".pagination .active").attr( "data-lp" ),$("#rpp").val());
 						clearFn();
 						$("#checkbox_is_hr").prop("checked",false);
+						$("#checkbox_is_sum").prop("checked",false);
 						$("#checkbox_is_sql").prop("checked",true);
 						$("#checkbox_is_active").prop("checked",true);
 						callFlashSlideInModal("Insert Data is Successfully.");
