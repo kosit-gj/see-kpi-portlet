@@ -30,389 +30,225 @@
 <input type="hidden" id="get_item_id" name="get_item_id" value="<%=PortalUtil.getOriginalServletRequest(request).getParameter("param_item")%>">
 <input type="hidden" id="get_sending_status" name="get_sending_status" value="<%=PortalUtil.getOriginalServletRequest(request).getParameter("sending_status")%>">
 <style>
+/* Large desktop Start#####################################*/
+@media ( min-width : 1200px) {
+	.aui .portlet-frame .row-fluid .span4 {
+		width: 32.624%;
+	}
+}
+/* Large desktop End######################################*/
+
+/*  desktop Start#########################################*/
+@media ( min-width : 980px) and (max-width: 1199px) {
+	.aui .portlet-frame .row-fluid .span4{
+			width: 32.624%;
+		}
+}
+/*  desktop End############################################*/
+
+/* Portrait tablet to landscape and desktop Start##########*/
+@media ( min-width : 768px) and (max-width: 979px) {
+}
+/* Portrait tablet to landscape and desktop End############*/
+
+/* Landscape phone to portrait tablet Start################*/
+@media ( max-width : 767px) {
+}
+/* Landscape phone to portrait tablet End##################*/
+
+/* Landscape phones and down Start#########################*/
+@media ( max-width : 480px) {
+}
+/* Landscape phones and down End##########################*/
 .aui #breadcrumbs {
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
-.aui input[type="radio"], .aui input[type="checkbox"]{
-	margin: -5px 0 0;
+
+.breadcrumbs2 {
+	background: rgba(0, 0, 0, 0)
+		linear-gradient(to bottom, #fff 0px, #f6f6f6 47%, #ededed 100%) repeat
+		scroll 0 0;
+	border-radius: 0;
+	margin-bottom: 0;
+	padding-bottom: 5px
 }
-.aui label{
-	margin-bottom: 0px;
+
+.ibox-title {
+	padding: 1px 10px;
 }
-.aui form{
-	margin: 0 0 5px;
+
+.ibox-title2 {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	border-bottom-style: none;
+	border-bottom-width: 0;
+	border-image-outset: 0 0 0 0;
+	border-image-repeat: stretch stretch;
+	border-image-slice: 100% 100% 100% 100%;
+	border-image-source: none;
+	border-image-width: 1 1 1 1;
+	border-left-style: solid;
+	border-left-width: 0;
+	border-right-style: solid;
+	border-right-width: 0;
+	border-top-style: solid;
+	border-top-width: 3px;
+	color: black;
+	margin-bottom: 0;
+	min-height: 32px;
+	padding-bottom: 0;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 0;
 }
-.aui .filter{
+
+.aui .modal-header .close {
+	font-size: 1.4em !important;
+	margin-top: 4px !important;
+	padding-top: 5px !important;
+}
+
+.aui #file {
+	width: 100% !important;
+	height: 100% !important;
+}
+
+.aui .titlePanelIbox {
+	margin-bottom: 7px;
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 7px;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 20px;
+	text-rendering: optimizelegibility;
+}
+
+.aui .titlePanelIboxSub {
+	margin-bottom: 7px;
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 7px;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 17px;
+	text-rendering: optimizelegibility;
+}
+
+.ibox-content {
+	background-color: #fff;
+	border: 1px solid #ffe57f;
+	color: inherit;
 	margin-bottom: 5px;
-    margin-top: 5px;
-}
-.aui .form-group > .control-label-search{
-	padding-top: 5px;
-}
-.aui .titlePanelSearch {
-    font-weight: bold;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
- /* Large desktop Start#####################################*/
- @media (min-width: 1200px) { 
-	
-
-	.aui .advance-search .span34{width: 24.504%;}
-	
-  }
-  /* Large desktop End######################################*/
-  
-  /*  desktop Start#########################################*/
- @media (min-width: 980px) and (max-width: 1199px) {
- 
-		.aui .advance-search .span34{width: 24.364%;}
-		/*All Start*/
-		.aui #btnSearchAdvance{
-		margin-bottom:5px;
-		width:100%;
-		}
-		
-		/*All End*/
- 	
-  }
- /*  desktop End############################################*/
- 
- /* Portrait tablet to landscape and desktop Start##########*/
- @media (min-width: 768px) and (max-width: 979px) {
- 		
-	.modal.large {
-		    width: 90%;
-		    margin-left:-45%;  
-		    top:0px;
-		}
-	.modal.medium {
-		    width: 50%;
-		    margin-left:-25%;  
-		    top:0px;
-		}
-		
-	.aui .ibox-title2{
-		height:45px;
-	}
-	
-	.aui .ibox-title{
-		min-height: 0px;
-	}
-	
-	
-	.aui .advance-search .span34{width: 24.242%;}
-	/*All Form Start*/
-	
-	.aui #btnSearchAdvance{
-		margin-bottom:5px;
-		width:100%;
-	}
-	/*All Form End*/
-  }
- /* Portrait tablet to landscape and desktop End############*/ 
- 
- /* Landscape phone to portrait tablet Start################*/
- @media (max-width: 767px) { 
- 
-
-	
-  }
- /* Landscape phone to portrait tablet End##################*/ 
- 
- /* Landscape phones and down Start#########################*/
- @media (max-width: 480px) { 
- 	
-	
-
-  }
-  /* Landscape phones and down End##########################*/
-  
-  
-  
-  /* main start*/
- 
-       .aui .portlet-content, .aui .portlet-minimized .portlet-content-container {
-	    -moz-border-bottom-colors: none;
-	    -moz-border-left-colors: none;
-	    -moz-border-right-colors: none;
-	    -moz-border-top-colors: none;
-	    border-color: #eaeaea;
-	    border-image: none;
-	    border-style: solid;
-	    border-width: 0 1px 1px;
-	    padding: 10px 10px 10px;
-	}
-
-.aui select {
-    background-color: white;
-    border: 1px solid #ccc;
-    width: 100%;
+.aui .portlet-frame  select, .aui .portlet-frame textarea, .aui .portlet-frame input[type="text"], .aui .portlet-frame input[type="password"],
+	.aui .portlet-frame input[type="datetime"], .aui .portlet-frame input[type="datetime-local"], .aui .portlet-frame input[type="date"],
+	.aui .portlet-frame input[type="month"], .aui .portlet-frame input[type="time"], .aui .portlet-frame input[type="week"],
+	.aui .portlet-frame input[type="number"], .aui .portlet-frame input[type="email"], .aui .portlet-frame input[type="url"],
+	.aui .portlet-frame input[type="search"], .aui .portlet-frame input[type="tel"], .aui .portlet-frame input[type="color"],
+	.aui .portlet-frame .uneditable-input {
+	padding: 2px;
 }
-.aui input{
+
+.aui .portlet-frame input[type="color"], .aui .portlet-frame input[type="date"], .aui .portlet-frame input[type="datetime"],
+	.aui .portlet-frame input[type="datetime-local"], .aui .portlet-frame input[type="email"], .aui .portlet-frame input[type="month"],
+	.aui .portlet-frame input[type="number"], .aui .portlet-frame input[type="password"], .aui .portlet-frame input[type="search"],
+	.aui .portlet-frame input[type="tel"], .aui .portlet-frame input[type="text"], .aui .portlet-frame input[type="time"],
+	.aui .portlet-frame input[type="url"], .aui .portlet-frame input[type="week"], .aui .portlet-frame select, .aui .portlet-frame textarea,
+	.aui .portlet-frame .uneditable-input {
+	border: 1px solid #ddd;
+	color: #8d8d8d;
+	font-weight: 200;
+	margin-bottom: 0;
+}
+
+ .aui .breadcrumbs2 select { 
+ 	width: 100%; 
+}
+
+.aui .portlet-frame input {
 	width: 100%;
 }
 
-.ibox-content {
-    background-color: #fff;
-    border: 1px solid #ffe57f;
-    color: inherit;
-    margin-bottom: 5px;
-    padding: 5px;
-}
-
-.aui .pagination {
-    margin: 0;
-}
-.aui #listSubordinate{
-	display:none;
-/*  	height: 430px;  */
-    position: relative;
-}
-.display-none{
-	display:none;
-}
-.pagingText {
-    float: right;
-    margin-right: 5px;
-    padding-top: 5px;
-}
-.gray-bg {
-    background-color: #f3f3f4;
-}
-
-.ibox-content {
-    background-color: #fff;
-    border: 1px solid #ffe57f;
-    color: inherit;
-    margin-bottom: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-.form-file-mangement {
-    height: 37px;
-}
-.form-label-customs{
-	font-weight: bold;
-}
-.aui hr{
-	margin: 10px 0;
-}
-/* main end*/
-
-/*local start*/
-
-
-.breadcrumbs2{
-
-	background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #fff 0px, #f6f6f6 47%, #ededed 100%) repeat scroll 0 0;
-    border-radius: 0;
-    margin-bottom: 0;
-  	padding-bottom: 5px
-
-}
-.wrapper-content{
-	padding: 10px;
-}
-.aui .table thead th{
-	font-weight:bold;
-}
-.aui .form-group > .control-label-search{
-   	/*font-weight:bold;*/
-}
-
-
-/*local end*/
-/* Update by au */
-.aui .btn {
+.aui .portlet-frame .btn {
 	font-size: 14px;
- 	padding: 4px 12px; 
+	padding: 4px 12px;
 	width: auto;
 	margin-top: 0px;
 	display: inline;
 }
-.aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input {
-    height: 30px;
-    padding: none;
-    font-size: 14px;
+
+.aui .breadcrumbs2 select, .aui breadcrumbs2 textarea, .aui .breadcrumbs2 input[type="text"],
+	.aui .portlet-frame input[type="password"], .aui .portlet-frame input[type="datetime"], .aui .portlet-frame input[type="datetime-local"],
+	.aui .portlet-frame input[type="date"], .aui .portlet-frame input[type="month"], .aui .portlet-frame input[type="time"],
+	.aui .portlet-frame input[type="week"], .aui .portlet-frame input[type="number"], .aui .portlet-frame input[type="email"],
+	.aui .portlet-frame input[type="url"], .aui .portlet-frame input[type="search"], .aui .portlet-frame input[type="tel"],
+	.aui .portlet-frame input[type="color"], .aui .portlet-frame .uneditable-input {
+	height: 30px;
+	padding: none;
+	font-size: 14px;
 }
 
-
-
-.fontBold {
-	font-weight: bold;
+.aui .portlet-frame  select, .aui .portlet-frame  input[type="text"] {
+	font-size: 14px;
 }
 
-.aui .alert, .aui .portlet-msg-alert, .aui .portlet-msg-error, .aui .portlet-msg-help,
-	.aui .portlet-msg-info, .aui .portlet-msg-progress, .aui .portlet-msg-success
-	{
-	padding: 8px 8px 8px 14px;
-	color: #555;
-	margin-bottom: 0;
+.ui-state-default {
+	width: 100% !important;
 }
 
-.aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"],
-	.aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"],
-	.aui input[type="month"], .aui input[type="time"], .aui input[type="week"],
-	.aui input[type="number"], .aui input[type="email"], .aui input[type="url"],
-	.aui input[type="search"], .aui input[type="tel"], .aui input[type="color"],
-	.aui .uneditable-input {
-	height: '';
+.ui-multiselect {
+	padding: 5px;
+	line-height: 18px !important;
 }
 
-.aui input[type="color"], .aui input[type="date"], .aui input[type="datetime"],
-	.aui input[type="datetime-local"], .aui input[type="email"], .aui input[type="month"],
-	.aui input[type="number"], .aui input[type="password"], .aui input[type="search"],
-	.aui input[type="tel"], .aui input[type="text"], .aui input[type="time"],
-	.aui input[type="url"], .aui input[type="week"], .aui select, .aui textarea,
-	.aui .uneditable-input {
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
+	border-top-right-radius: 0;
+}
+
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl {
+	border-top-left-radius: 0;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {
+	border-bottom-left-radius: 0;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+	border-bottom-right-radius: 0;
+}
+
+.ui-multiselect-header span.ui-icon {
+	top: 5px;
+}
+
+.aui ul, .aui ol {
+	margin: 0px 0px 0px 0px;
+}
+
+.ui-icon {
+	margin-top: 0;
+}
+
+.aui input[type="radio"], .aui input[type="checkbox"] {
+	margin: -2px 0 0;
+}
+
+.aui label {
 	margin-bottom: 0px;
 }
 
-
-/* Next & Back */
-.arrow {
-	cursor: pointer;
-	position: relative;
-	display: block;
-	top: 43%; //
-	margin: 100px 0 0 100px;
-	width: 25px;
-	height: 25px;
-	border: solid 3px #999;
-	border-radius: 100%;
-	z-index: 1;
-	transition: all .2s linear;
-	opacity: 0.3;
+.ui-multiselect-checkboxes li {
+	padding-right: 0px;
 }
-
-.arrow:before, .arrow:after {
-	content: "";
-	position: absolute;
-	width: 35%;
-	height: 10%;
-	top: 41%;
-	left: 55%;
-	background: #999;
-	z-index: 2;
-	transform: translate(-50%, -50%) rotate(45deg);
-	transition: all .2s linear;
+.aui #import_assignment_list_content {
+	display: none;
 }
-
-.arrow:after {
-	z-index: 3;
-	top: 59%;
-	left: 55%;
-	transform: translate(-50%, -50%) rotate(-45deg);
-}
-
-.arrow:hover {
-	border: solid 6px #777;
-}
-
-.arrow:hover:after, .arrow:hover:before {
-	background: #777;
-}
-
-.arrow:active {
-	border: solid 6px #111;
-}
-
-.arrow:active:after, .arrow:active:before {
-	background: #111;
-}
-
-.aui #previous {
-	transform: rotate(180deg);
-	display: block;
-	float: left;
-	margin-left: 0px;
-	position: absolute;
-}
-
-.aui #next {
-	position: absolute;
-	right: 0px;
-	margin-right: 15px;
-	margin-top: 0px;
-}
-/* Next & Back */
-#nameDiv{
-    font-size: 14px;
-    border-bottom: 1px dashed #666666;
-    font-weight:bold;
-    padding-bottom: 3px;
-    margin-bottom: 3px;
-    display: inline-block;
-}
-.graphLTopHeader {
-	font-weight: bold;
-	font-size: 18px;
-	color: black;
-	text-align: center;
-	margin-top: 15px;
-}
-#listBubbleChart{
- 	min-width: 600px;
-}
-.aui .modal-dialog{
-    overflow-y: initial !important;
-}
-.aui .modal-body{
-    max-height: calc(100vh - 200px);
-    overflow-y: auto;
-}
-/* entypo */
-
-#sticky-social [class*="entypo-"]:before {
-   font-family: "entypo", sans-serif;
-}
-#sticky-social a { 
-   text-decoration: none;
-}
-#sticky-social ul {
-   list-style: none;
-   margin: 0;
-   padding: 0;
-}
-
-#sticky-social {
-   left: 0;
-   position: fixed;
-   top: 0px;
-}
-#sticky-social a {
-   background: #333;
-   color: #fff;
-   display: block;
-   height: 35px;
-   font: 16px "Open Sans", sans-serif;
-   line-height: 35px;
-   position: relative;
-   text-align: center;
-   width: 35px;
-}
-#sticky-social a span {
-   line-height: 35px;
-   left: -120px;
-   position: absolute;
-   text-align:center;
-   width:120px;
-   display:none;
-}
-#sticky-social a:hover span {
-   left: 100%;
-   display:block;
-}
-#sticky-social a[class*="ex-pdf"],
-#sticky-social a[class*="ex-pdf"]:hover,
-#sticky-social a[class*="ex-pdf"] span { background: #f1331e; }
-
-#sticky-social a[class*="ex-excel"],
-#sticky-social a[class*="ex-excel"]:hover,
-#sticky-social a[class*="ex-excel"] span { background: #0cc523; }
-  
-
 </style>
 
 
@@ -432,36 +268,33 @@
 			<div class="ibox float-e-margins">
 				<div class="ibox-title"
 					style="background-color: rgb(83, 120, 253); border-color: rgb(83, 120, 253); min-height: 0px;">
-					<div class="titlePanelSearch">Advance Search</div>
+					<div class="titlePanelIbox">Advance Search</div>
 				</div>
 
 				<div class="ibox-content breadcrumbs2 advance-search"
 					style="border-color: rgb(83, 120, 253);">
 
-					<div class="row-fluid ">
+					<div class="row-fluid">
 
 						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span2" id="yearArea">
+							class="form-group pull-left span3" id="yearArea">
 							<select name="year" id="year" class="input form-control input-sm"
 								title="" data-toggle="tooltip" style="cursor: pointer;"
 								data-original-title="Year">
 								<option value="2017">2017</option>
-
 							</select>
 						</div>
 						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span2" id="periodArea">
+							class="form-group pull-left span3" id="periodArea">
 							<select name="period" id="period"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
 								data-original-title="Period">
-
 								<option value="">Period</option>
-
 							</select>
 						</div>
 						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span2" id="apprasiaLevelArea">
+							class="form-group pull-left span3" id="apprasiaLevelArea">
 							<select name="apprasiaLevel" id="apprasiaLevel"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
@@ -470,7 +303,7 @@
 							</select>
 						</div>
 						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span2" id="apprasiaLevelArea2">
+							class="form-group pull-left span3" id="apprasiaLevelArea2">
 							<select name="apprasiaLevelOrg" id="apprasiaLevelOrg"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
@@ -478,16 +311,18 @@
 								<option value="">Level</option>
 							</select>
 						</div>
+					</div>
+					<div class="row-fluid">
 						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span2" id="organizationArea">
-							<select name="organization" id="organization"
-								class="input form-control input-sm" title=""
-								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Organization" >
+							class="form-group pull-left span3" id="organizationArea">
+							<select data-toggle="tooltip" title=""
+								data-original-title="organization" multiple="multiple"
+								class="input form-control input-sm span12" id="organization"
+								name="organization">
 							</select>
 						</div>
 						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span2" id="statusArea">
+							class="form-group pull-left span3" id="statusArea">
 							<select name="status" id="status"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
@@ -495,17 +330,15 @@
 							</select>
 						</div>
 						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span1" id="kpiArea">
+							class="form-group pull-left span3" id="kpiArea">
 							<select name="output_type" id="output_type" class="input form-control input-sm"
 								title="" data-toggle="tooltip" style="cursor: pointer;"
 								data-original-title="Output Type">
 								<option value="pdf">PDF</option>
 								<option value="xls">Excel</option>
-
 							</select>
 						</div>
-						<div style="margin-bottom: 5px;"
-							class="form-group pull-right m-b-none ">
+						<div class="form-group span3">
 							<button id="btnSearchAdvance" name="btnSearchAdvance"
 								class="btn btn-info input-sm" type="button">
 								<i class="fa fa-search"></i>&nbsp;Search
