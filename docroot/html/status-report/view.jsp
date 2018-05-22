@@ -276,7 +276,7 @@
 
 					<div class="row-fluid">
 
-						<div style="margin-left: 5px; margin-bottom: 3px;"
+						<div style="margin-bottom:5px;"
 							class="form-group pull-left span3" id="yearArea">
 							<select name="year" id="year" class="input form-control input-sm"
 								title="" data-toggle="tooltip" style="cursor: pointer;"
@@ -284,7 +284,7 @@
 								<option value="2017">2017</option>
 							</select>
 						</div>
-						<div style="margin-left: 5px; margin-bottom: 3px;"
+						<div style="margin-bottom:5px;"
 							class="form-group pull-left span3" id="periodArea">
 							<select name="period" id="period"
 								class="input form-control input-sm" title=""
@@ -293,7 +293,7 @@
 								<option value="">Period</option>
 							</select>
 						</div>
-						<div style="margin-left: 5px; margin-bottom: 3px;"
+						<div style="margin-bottom:5px;"
 							class="form-group pull-left span3" id="apprasiaLevelArea">
 							<select name="apprasiaLevel" id="apprasiaLevel"
 								class="input form-control input-sm" title=""
@@ -302,7 +302,7 @@
 								<option value="">Level</option>
 							</select>
 						</div>
-						<div style="margin-left: 5px; margin-bottom: 3px;"
+						<div style="margin-bottom:5px;"
 							class="form-group pull-left span3" id="apprasiaLevelArea2">
 							<select name="apprasiaLevelOrg" id="apprasiaLevelOrg"
 								class="input form-control input-sm" title=""
@@ -313,15 +313,15 @@
 						</div>
 					</div>
 					<div class="row-fluid">
-						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span3" id="organizationArea">
-							<select data-toggle="tooltip" title=""
+						<div style="margin-bottom:5px;"
+							class="form-group pull-left span6" id="organizationArea">
+							<select data-toggle="tooltip" title="Organization"
 								data-original-title="organization" multiple="multiple"
 								class="input form-control input-sm span12" id="organization"
 								name="organization">
 							</select>
 						</div>
-						<div style="margin-left: 5px; margin-bottom: 3px;"
+						<div style="margin-bottom:5px;"
 							class="form-group pull-left span3" id="statusArea">
 							<select name="status" id="status"
 								class="input form-control input-sm" title=""
@@ -329,8 +329,8 @@
 								data-original-title="Status" >
 							</select>
 						</div>
-						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span3" id="kpiArea">
+						<div style="margin-bottom:5px;"
+							class="form-group pull-left span1" id="kpiArea">
 							<select name="output_type" id="output_type" class="input form-control input-sm"
 								title="" data-toggle="tooltip" style="cursor: pointer;"
 								data-original-title="Output Type">
