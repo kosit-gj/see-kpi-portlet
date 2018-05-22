@@ -338,7 +338,7 @@
 								<option value="xls">Excel</option>
 							</select>
 						</div>
-						<div class="form-group span3">
+						<div style="margin-left: 5px;" class="form-group span2">
 							<button id="btnSearchAdvance" name="btnSearchAdvance"
 								class="btn btn-info input-sm" type="button">
 								<i class="fa fa-search"></i>&nbsp;Search
