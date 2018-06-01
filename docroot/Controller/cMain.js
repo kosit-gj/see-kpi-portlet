@@ -50,7 +50,7 @@ var checkSession = function(paramTokenID){
 				sessionStorage.clear();
 				//window.location.href = "../login.html"; 
 			}else{
-				console.log(data);
+				//console.log(data);
 				is_hr =(data['is_hr'] == null   ? 0 : data['is_hr']);
 				is_self_assign =(data['is_self_assign'] == null   ? 0 : data['is_self_assign']);
 				session_emp_code =(data['emp_code'] == null   ? 0 : data['emp_code']);

@@ -344,9 +344,9 @@ var listImportEmployeeFn = function(data) {
 					       $("#confrimModal").modal('hide');
 					       
 					     }else if (data['status'] == "400"){
-					    	 callFlashSlideInModal(data['data'],"#inform_on_confirm","error");
+					    	 callFlashSlide(""+data['data']+"");
 					    	 //backToTopFn();
-					    	}
+					     }
 					     	
 					 }
 				});
