@@ -242,8 +242,8 @@ $(document).ready(function(){
 		 		id=id[1];
 		 		$("#crierai_id").val(id);
 		 		//console.log("3");
-		 		//console.log($(this).parent().parent().parent().prev().prev().prev().prev().prev().get());
-		 		$("#ac_appraisal_level_name").html("<b>"+$(this).parent().parent().parent().prev().prev().prev().prev().prev().prev().text()+"</b>");
+		 		//console.log($(this).parent().parent().parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().text());
+		 		$("#ac_appraisal_level_name").html("<b>"+$(this).parent().parent().parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().text()+"</b>");
 		 		listAppraisalCriteria(id);
 		 		$("#addModalCriteria").modal({
 		 			"backdrop" : setModalPopup[0],
