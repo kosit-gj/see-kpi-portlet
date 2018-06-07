@@ -345,6 +345,9 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 							style="margin-bottom: 0px;">
 							<div class="form-group pull-right m-b-none "
 								style="margin-bottom: 5px;">
+								<span id="loadingGif" style='display: none;'>
+									<img src="../../see-kpi-portlet/img/uploading.gif" width="20">&nbsp;<b>Exporting...</b>&nbsp;
+								</span>
 								<button type="button" class="btn btn-info input-sm"
 									name="btnSearchAdvance" id="btnSearchAdvance" style="margin-bottom: 3px">
 									<i class="fa fa-search"></i>&nbsp;Search

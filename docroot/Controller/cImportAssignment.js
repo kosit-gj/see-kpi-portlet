@@ -521,6 +521,27 @@ $.each(data,function(index,indexEntry){
 		}
 	//Auto Complete Employee Name end
 		
+		function saveOrOpenBlob(blob, fileName) {
+		    window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
+		    window.requestFileSystem(window.TEMPORARY, 1024 * 1024, function (fs) {
+		        fs.root.getFile(fileName, { create: true }, function (fileEntry) {
+		            fileEntry.createWriter(function (fileWriter) {
+		                fileWriter.addEventListener("writeend", function () {
+		                    window.location = fileEntry.toURL();
+		                }, false);
+		                fileWriter.write(blob, "_blank");
+		            }, function () { });
+		        }, function () { });
+		    }, function () { });
+		}
+		
+		function saveBlob(blob, fileName) {
+		    var a = document.createElement("a");
+		    a.href = window.URL.createObjectURL(blob);
+		    a.download = fileName;
+		    a.click();
+		}
+		
 		
 		//#### Call Export Function Start ####
 		$("#exportToExcel").click(function(){
@@ -535,44 +556,110 @@ $.each(data,function(index,indexEntry){
 					}
 				});
 				
-
-				var param="";
-				param+="&appraisal_type_id="		+		$("#embed_appraisal_type_id").val();
-
+				$("#loadingGif").show();
+				//var param="";
+				var n;
+				var in_item_id="";
+				var in_level_id="";
+				var in_org_id="";
+				
+				//param+="&appraisal_type_id="		+		$("#embed_appraisal_type_id").val();
+				var appraisal_type_id = $("#embed_appraisal_type_id").val();
+				
+				n = 0;
 				$.each(item_id,function(index,indexEntry){
-				      param+="&appraisal_item_id[]="+indexEntry;
+				      //param+="&appraisal_item_id[]="+indexEntry;
+					(n==0) ? in_item_id+=""+indexEntry+"" : in_item_id+=","+indexEntry+"";
+				      n++;
 				});
-
+				
+				n = 0;
 				$.each($("#embed_appraisal_level_id").val().split(","),function(index,indexEntry){
-				      param+="&appraisal_level_id[]="+indexEntry;
+				      //param+="&appraisal_level_id[]="+indexEntry;
+				      (n==0) ? in_level_id+=""+indexEntry+"" : in_level_id+=","+indexEntry+"";
+				      n++;
 				});
+				
+				n = 0;
 				$.each($("#embed_organization").val().split(","),function(index,indexEntry){
-				      param+="&org_id[]="+indexEntry;
+				      //param+="&org_id[]="+indexEntry;
+					  (n==0) ? in_org_id+=""+indexEntry+"" : in_org_id+=","+indexEntry+"";
+				      n++;
 				});
-				param+="&position_id="				+		$("#embed_position_id").val();
-				param+="&emp_id="					+		$("#embed_emp_id").val();
-				param+="&period_id="				+		$("#embed_period_id").val();
-				param+="&appraisal_year="			+		$("#embed_year_list").val();
-				param+="&frequency_id="				+		$("#embed_period_frequency").val();
+//				param+="&position_id="				+		$("#embed_position_id").val();
+//				param+="&emp_id="					+		$("#embed_emp_id").val();
+//				param+="&period_id="				+		$("#embed_period_id").val();
+//				param+="&appraisal_year="			+		$("#embed_year_list").val();
+//				param+="&frequency_id="				+		$("#embed_period_frequency").val();
+				
+				var position_id = $("#embed_position_id").val();
+				var emp_id = $("#embed_emp_id").val();
+				var period_id = $("#embed_period_id").val();
+				var appraisal_year = $("#embed_year_list").val();
+				var frequency_id = $("#embed_period_frequency").val();
+				
+				var formData = new FormData();
+				formData.append("appraisal_type_id", appraisal_type_id);
+				formData.append("position_id", position_id);
+				formData.append("emp_id", emp_id);
+				formData.append("period_id", period_id);
+				formData.append("appraisal_year", appraisal_year);
+				formData.append("frequency_id", frequency_id);
+				formData.append("appraisal_item_id", in_item_id);
+				formData.append("appraisal_level_id", in_level_id);
+				formData.append("org_id", in_org_id);
+				
+				//Send form via AJAX
+				var xhr = new XMLHttpRequest();
 				
 				if ($("#embed_appraisal_type_id").val() == "1") {
-					$("form#formExportToExcel").attr("action",restfulURL+"/"+serviceName+"/public/import_assignment/export_organization?token="+tokenID.token+""+param);
+					//$("form#formExportToExcel").attr("action",restfulURL+"/"+serviceName+"/public/import_assignment/export_organization?token="+tokenID.token+""+param);
+					xhr.open("POST", restfulURL+"/"+serviceName+"/public/import_assignment/export_organization");
 				} else {
-					$("form#formExportToExcel").attr("action",restfulURL+"/"+serviceName+"/public/import_assignment/export_individual?token="+tokenID.token+""+param);
+					xhr.open("POST", restfulURL+"/"+serviceName+"/public/import_assignment/export_individual");
+					//$("form#formExportToExcel").attr("action",restfulURL+"/"+serviceName+"/public/import_assignment/export_individual?token="+tokenID.token+""+param);
 				}
 				
-				$("form#formExportToExcel").submit();
-				
-				
+				try {
+					xhr.setRequestHeader("Authorization", "Bearer " + tokenID.token);
+					xhr.responseType = "blob";
+					xhr.onload = function (event) {
+				         var blob = xhr.response;
+				         var datetime = currentDateTimeFn();
+				         saveBlob(blob, "import_assignment "+datetime);
+						 if (xhr.status == 200) {
+							$("#loadingGif").hide();
+						 } else {
+							 $("#loadingGif").hide();
+							 callFlashSlide("Error! cannot export this file");
+						 }
+				         //var fileName = xhr.getResponseHeader("fileName") //if you have the fileName header available
+				         //var link = document.createElement('a');
+				         //link.href = window.URL.createObjectURL(blob);
+				         //link.download=fileName;
+				         //link.click();
+				    }
+					
+					xhr.onerror = function(e) {
+						  console.log("Error " + e.target.status + " occurred while receiving the document.");
+						  $("#loadingGif").hide();
+						  callFlashSlide("Error! cannot export this file");
+					}
+					
+					xhr.send(formData);
+				} catch(err) {
+					console.log(err.message);
+					callFlashSlide("Error! cannot export this file");
 				}
-			else{
+				
+				//$("form#formExportToExcel").submit();
+				
+			} else {
 				callFlashSlide("Please Select KPI Name !!!");
 			}
 			
-			
 		});
 	    //#### Call Export Function End ####
-		
 		
 		//FILE IMPORT MOBILE START
 		$("#btn_import").click(function () {
