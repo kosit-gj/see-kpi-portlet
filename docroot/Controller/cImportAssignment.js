@@ -536,10 +536,32 @@ $.each(data,function(index,indexEntry){
 		}
 		
 		function saveBlob(blob, fileName) {
-		    var a = document.createElement("a");
-		    a.href = window.URL.createObjectURL(blob);
-		    a.download = fileName;
-		    a.click();
+//		    var a = document.createElement("a");
+//		    a.href = window.URL.createObjectURL(blob);
+//		    a.download = fileName;
+//		    a.click();
+			
+		    var downloadUrl = window.URL.createObjectURL(blob);
+            var downloadLink = document.createElement('a');
+            downloadLink.href = downloadUrl;
+            downloadLink.download = fileName;
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            setTimeout(function() {
+                if (typeof window.navigator.msSaveBlob !== 'undefined') {
+                	window.navigator.msSaveBlob(blob, fileName)
+                } else {
+                	window.URL.revokeObjectURL(downloadUrl);
+                }
+            }, 100);
+		}
+		
+		function getXHR() {
+			if (window.XMLHttpRequest) {
+				return new XMLHttpRequest();
+			 } else {
+				return new ActiveXObject("Microsoft.XMLHTTP");
+			 }
 		}
 		
 		
@@ -610,7 +632,7 @@ $.each(data,function(index,indexEntry){
 				formData.append("org_id", in_org_id);
 				
 				//Send form via AJAX
-				var xhr = new XMLHttpRequest();
+				var xhr = getXHR();
 				
 				if ($("#embed_appraisal_type_id").val() == "1") {
 					//$("form#formExportToExcel").attr("action",restfulURL+"/"+serviceName+"/public/import_assignment/export_organization?token="+tokenID.token+""+param);
@@ -625,19 +647,20 @@ $.each(data,function(index,indexEntry){
 					xhr.responseType = "blob";
 					xhr.onload = function (event) {
 				         var blob = xhr.response;
-				         var datetime = currentDateTimeFn();
-				         saveBlob(blob, "import_assignment "+datetime);
+				         var currentdate = new Date(); 
+				         var datetime = + currentdate.getFullYear() + ""
+				                        + (currentdate.getMonth()+1)  + "" 
+				                        + currentdate.getDate() + "_"  
+				                        + currentdate.getHours() + ""  
+				                        + currentdate.getMinutes() + "" 
+				                        + currentdate.getSeconds();
+				         saveBlob(blob, "import_assignment_"+datetime+".xlsx");
 						 if (xhr.status == 200) {
 							$("#loadingGif").hide();
 						 } else {
 							 $("#loadingGif").hide();
 							 callFlashSlide("Error! cannot export this file");
 						 }
-				         //var fileName = xhr.getResponseHeader("fileName") //if you have the fileName header available
-				         //var link = document.createElement('a');
-				         //link.href = window.URL.createObjectURL(blob);
-				         //link.download=fileName;
-				         //link.click();
 				    }
 					
 					xhr.onerror = function(e) {
