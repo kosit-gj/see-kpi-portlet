@@ -209,7 +209,7 @@ function clearParamSearch(data) {
 }
 
 function setParamSearch(data) {
-	console.log(data,'setParamSearch');
+	//console.log(data,'setParamSearch');
 	var i;
 	var dataLength = data.length;
 	if(is_all_employee==0) {

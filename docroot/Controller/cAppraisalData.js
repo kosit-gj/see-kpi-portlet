@@ -18,13 +18,14 @@ var restfulPathDropDownPeriod=restfulPathAppData+"/period_list";
 //var restfulPathAutocompleteEmployeeName=restfulPathAppData+"/auto_emp_name";
 //restfulPathCdsResult
 var restfulPathCdsResult="/"+serviceName+"/public/cds_result";
+var restfulPathAppraisalData="/"+serviceName+"/public/appraisal_data";
 
 var restfulPathDropDownYear=restfulPathCdsResult+"/year_list";
 var restfulPathDropDownPeriod="/"+serviceName+"/public/dashboard/period_list";
 var restfulPathDropDownAppraisalLevel=restfulPathCdsResult+"/al_list";
 var restfulPathDropDownAppraisalType="/"+serviceName+"/public/appraisal_assignment/appraisal_type_list";
 var restfulPathPositionAutocomplete=restfulPathCdsResult+"/auto_position_name";
-var restfulPathEmployeeAutocomplete=restfulPathCdsResult+"/auto_emp_name";
+var restfulPathEmployeeAutocomplete=restfulPathAppraisalData+"/auto_emp_name_new";
 
 //------------------- GetData FN Start ---------------------
 var getDataFn = function(page,rpp){
@@ -36,6 +37,7 @@ var getDataFn = function(page,rpp){
 	var org= $("#param_org_id").val();
 	var position= $("#param_position_id").val();
 	var emp_name= $("#param_emp_id").val();
+	var structure_id = $("#param_structure_id").val();
 	$.ajax({
 		url : restfulURL+restfulPathAppData,
 		type : "get",
@@ -49,7 +51,8 @@ var getDataFn = function(page,rpp){
 			"level_id_emp":app_lv_emp,
 			"org_id":org,
 			"position_id":position,
-			"emp_id":emp_name	
+			"emp_id":emp_name,
+			"structure_id": structure_id
 		},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,// w8 data 
@@ -69,7 +72,7 @@ var getDataFn = function(page,rpp){
 
 //------------------- Search Appraisal Data FN Start ---------------------
 
-var searchAdvanceFn = function (year,period,app_lv,app_lv_emp,app_type,org_id,position,emp_name) {
+var searchAdvanceFn = function (year,period,app_lv,app_lv_emp,app_type,org_id,position,emp_name,structure_id) {
 	//embed parameter start
 	
 	var htmlParam="";
@@ -81,6 +84,7 @@ var searchAdvanceFn = function (year,period,app_lv,app_lv_emp,app_type,org_id,po
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' name='param_org_id' value='"+org_id+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_position_id' name='param_position_id' value='"+position+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_emp_id' name='param_emp_id' value='"+emp_name+"'>";
+	htmlParam+="<input type='hidden' class='paramEmbed' id='param_structure_id' name='param_structure_id' value='"+structure_id+"'>";
 	$(".paramEmbed").remove();
 	$("body").append(htmlParam);
 	//embed parameter end
@@ -214,14 +218,13 @@ var dropDownListEmpLevelFn = function(){
 	//console.log(session_emp_code)
 	var html="";
 	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/al_list_emp",
+		url:restfulURL+"/"+serviceName+"/public/appraisal_data/al_list_emp",
 		type:"get",
 		dataType:"json",
 		async:false,
-		data:{"emp_code":session_emp_code},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
-			console.log(data);
+			//console.log(data);
 			$.each(data,function(index,indexEntry){
 				html+="<option value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
 			});
@@ -233,7 +236,7 @@ var dropDownListEmpLevelFn = function(){
 var dropDownListEmpLevelToOrgFn = function(){
 	$.ajax({
 		//url:restfulURL+"/"+serviceName+"/public/appraisal_item/al_list",
-		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/al_list_emp_org",
+		url:restfulURL+"/"+serviceName+"/public/appraisal_data/al_list_emp_org",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -282,7 +285,7 @@ var dropDownListOrganization = function() {
 		service_url_Check = "org";
 	}
 	else {
-		service_url_Check = "org/list_org_for_emp";
+		service_url_Check = "appraisal_data/list_org_for_emp";
 	}
 	
 	var html="";
@@ -308,6 +311,24 @@ var dropDownListOrganization = function() {
 	$("#org_id").html(html);
 	//return html;
 };
+
+var dropdownStructure = function () {
+	var html="";
+	$.ajax ({
+		url:restfulURL+"/"+serviceName+"/public/appraisal_data/structure_list2",
+		type:"get" ,
+		dataType:"json" ,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		async:false,
+		success:function(data){
+			$.each(data,function(index,indexEntry){
+					html+="<option  value="+indexEntry["structure_id"]+">"+indexEntry["structure_name"]+"</option>";	
+			});
+		}
+	});	
+	html+="</select>";
+	$("#structure_id").html(html);
+}
 //-------------------  Drop Down List Appraisal Item FN END ---------------------
 
 var listErrorFn =function(data){
@@ -360,8 +381,7 @@ $(document).ready(function() {
 			{'id':'#position', 'val': ""+cMain_position_name+""},
 			{'id':'#position_id', 'val': cMain_position_id},
 			{'id':'#emp_name', 'val': ""+cMain_emp_name+""},
-			{'id':'#emp_name_id', 'val': cMain_emp_id},
-			{'id':'#app_lv_emp', 'val': ""+cMain_level_id+""}
+			{'id':'#emp_name_id', 'val': cMain_emp_id}
 		];
 	 
 	 var dataClearParam = [
@@ -398,7 +418,8 @@ $(document).ready(function() {
 				$("#app_type").val(),
 				$("#org_id").val(),
 				$("#position_id").val(),
-				$("#emp_name_id").val());
+				$("#emp_name_id").val(),
+				$("#structure_id").val());
 				
 		$("#appraisal_data_list_content").show();
 		return false;
@@ -411,7 +432,7 @@ $(document).ready(function() {
         source: function (request, response) {
         	$.ajax({
         		
-        		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/auto_position_name2",
+        		url:restfulURL+"/"+serviceName+"/public/appraisal_data/auto_position_name2",
 				type:"post",
 				dataType:"json",
 				async:false,
@@ -491,7 +512,7 @@ $(document).ready(function() {
                         console.log('Error: ' + xhr.responseText);
                     },
 				 success:function(data){
-					  	console.log(data)
+					  	//console.log(data)
 						response($.map(data, function (item) {
                             return {
                                 label: item.emp_name+"("+item.emp_code+")",
@@ -553,6 +574,8 @@ $(document).ready(function() {
     
   //Auto Complete Employee Name end
 	
+	dropdownStructure();
+	
 	$("#app_type").change(function(){
 		if($("#app_type").val() == "2") {
 
@@ -599,7 +622,7 @@ $(document).ready(function() {
 		clearParamSearch(dataClearParam);// in cMain.js
 	});
 	
-	setParamSearch(dataSetParam);// in cMain.js
+	//setParamSearch(dataSetParam);// in cMain.js
 	
 	
     // -------------------  Appraisal Data END ---------------------	
@@ -629,6 +652,7 @@ $(document).ready(function() {
 		var paramQrg= $("#org_id").val();
 		var paramPositionCode=$("#position_id").val();
 		var paramEmpCode=$("#emp_name_id").val();
+		var paramStructureId=$("#structure_id").val();
 
 		
 		var param="";
@@ -640,6 +664,7 @@ $(document).ready(function() {
 		param+="&org_id="+paramQrg;
 		param+="&position_id="+paramPositionCode;
 		param+="&emp_id="+paramEmpCode;
+		param+="&structure_id="+paramStructureId;
 		//alert(restfulURL+restfulPathCdsResult+"/export?token="+tokenID.token+""+param);
 		$("form#formExportToExcel").attr("action",restfulURL+restfulPathAppData+"/export?token="+tokenID.token+""+param);
 		$("form#formExportToExcel").submit();
@@ -692,7 +717,7 @@ $(document).ready(function() {
 			success: function(data, textStatus, jqXHR)
 			{
 				
-				console.log(data);
+				//console.log(data);
 				if(data['status']==200 && data['errors'].length==0){
 							
 					callFlashSlide("Import CDS Result Successfully");

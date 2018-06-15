@@ -9,6 +9,8 @@ var empldoyees_id = [];
 var position_id = [];
 var org_id_to_assign;
 var item_id_array=[];
+var emp_result_id_action = [];
+var stage_id_action = [];
 var emailLinkAssignment = false;
 
 
@@ -436,6 +438,7 @@ var getDataFn = function(page,rpp) {
 	var embed_period_frequency =$("#embed_period_frequency").val();
 	var embed_organization =$("#embed_organization").val().split("-");
 	embed_organization=embed_organization[0];
+	var status = $("#embed_status").val();
 	
 	//console.log(emp_id)
 	//console.log(appraisal_level_id,appraisal_type_id,period_id,position_id,emp_id,embed_year_list,embed_period_frequency,embed_organization,embed_organization,embed_organization)
@@ -459,7 +462,8 @@ var getDataFn = function(page,rpp) {
 			"appraisal_year":embed_year_list,
 			"frequency_id":embed_period_frequency,
 			"org_id":embed_organization,
-			"emp_code":emp_id	
+			"emp_code":emp_id,
+			"status":status
 			
 		},
 		success:function(data){
@@ -502,7 +506,12 @@ var embedParam = function(id){
 
 //List Data
 var listDataFn = function(data) {
-
+	var statusAction;
+	if(is_hr==0 && is_self_assign ==0) {
+		statusAction ="style=\"margin-bottom: 5px;\"";
+	} else {
+		statusAction ="style=\"margin-bottom: 5px;\"";
+	}
 
 
 	htmlHTML="";
@@ -514,7 +523,13 @@ var listDataFn = function(data) {
 	htmlHTML+="<div class=\"row-fluid\">";
 	htmlHTML+="<div class=\"span12\">";
 	htmlHTML+="<div class=\"ibox-title2\">";
-	htmlHTML+="<div class=\"titlePanel2\">"+indexEntry['appraisal_period_desc']+" </div> ";
+	if(index!='p0'){
+		htmlHTML+="<div class=\"titlePanel2\">"+indexEntry['appraisal_period_desc']+" ";
+		htmlHTML+="<button "+statusAction+" type=\"button\" class=\"btn btn-primary input-sm\" name=\"btnAction\" id=\"btnAction\"><i class=\"fa fa-sign-in\"></i>&nbsp;Action</button>";
+		htmlHTML+="</div>";
+	} else {
+		htmlHTML+="<div class=\"titlePanel2\">"+indexEntry['appraisal_period_desc']+" </div> ";
+	}
             
 	htmlHTML+="</div>";
 			
@@ -527,7 +542,9 @@ var listDataFn = function(data) {
 		htmlHTML+=" <thead>";
 			htmlHTML+=" <tr>";
 			if(index!='p0'){
-				htmlHTML+=" <th style=\"width:5%; text-align:center; \" class=\"object-center\"></th>";
+				htmlHTML+="<th style=\"width:5%; text-align:center; \" class=\"object-center\">";
+				htmlHTML+="<input "+statusAction+" type=\"checkbox\" name=\"statusSelectAll\" id=\"statusSelectAll\" style=\"margin-top:-3px;\">";
+				htmlHTML+="</th>";
 			}else{
 				htmlHTML+="<th style=\"width:5%; text-align:center;\" class=\"object-center\">";
 				htmlHTML+="<input type=\"checkbox\" name=\"unassignSelectAll\" id=\"unassignSelectAll\" style=\"margin-top:-3px;\">";
@@ -568,8 +585,12 @@ var listDataFn = function(data) {
 
 				htmlHTML+="<tr>";
 				if(index!='p0'){
-					htmlHTML+="	<td class='object-center'></td>";
-						
+					if($("#embed_appraisal_type_id").val()==2){
+						htmlHTML+="	<td class='object-center' style='text-align:center;'><input "+statusAction+" class='action_emp' id='id-"+itemEntry['emp_id']+"' type='checkbox' value="+itemEntry['emp_id']+"-"+itemEntry['emp_code']+"-"+itemEntry['org_id']+"-"+itemEntry['period_id']+"-"+itemEntry['default_stage_id']+" data-id='"+itemEntry['emp_result_id']+"-"+itemEntry['stage_id']+"'></td>";
+					}else if($("#embed_appraisal_type_id").val()==1){
+						htmlHTML+="	<td class='object-center' style='text-align:center;'><input "+statusAction+" class='action_emp' id='id-"+itemEntry['org_id']+"' type='checkbox' value="+itemEntry['org_id']+"-"+itemEntry['org_id']+"-"+itemEntry['org_id']+"--"+itemEntry['default_stage_id']+"-/"+itemEntry['org_code']+" data-id='"+itemEntry['emp_result_id']+"-"+itemEntry['stage_id']+"'></td>";
+						//alert(itemEntry['org_id']);
+					}
 				}else{
 					
 					if($("#embed_appraisal_type_id").val()==2){
@@ -699,6 +720,103 @@ var listDataFn = function(data) {
 	   
 	});
 	
+	$("#statusSelectAll").click
+	
+	$('#statusSelectAll').click(function() {
+	   if($('#statusSelectAll').prop('checked')){
+		   $(".action_emp").prop('checked',true);
+	   }else{
+		   $(".action_emp").prop('checked',false);;
+	   }
+	   
+	});
+	
+	$("#btnAction").click(function(){
+		empldoyees_code=[];
+		empldoyees_id=[];
+		default_stage_id=[];
+		organization_code = [];
+		emp_result_id_action = [];
+		stage_id_action = [];
+		$("#remark_footer_action").val("");
+		$(".information").hide();
+		$("#btnAddAnother").show();
+			$.each($(".action_emp").get(),function(index,indexEntry){
+				if($(indexEntry).is(":checked")){
+					var emp_id=$(indexEntry).val().split("-");
+					var org_id=$(indexEntry).val().split("-/");
+					var data_id=$(indexEntry).attr("data-id").split("-");
+					empldoyees_id.push(emp_id[0]);
+					empldoyees_code.push(emp_id[1]);
+					org_id_to_assign = emp_id[2];
+					position_id.push(emp_id[3]);
+					organization_code.push(org_id[1]);
+					emp_result_id_action.push(data_id[0]);
+					stage_id_action.push(data_id[1]);
+				}
+			});
+		if(empldoyees_id.length==0){
+			callFlashSlide("Please choose Employees or Organization for Action.");
+			return false;
+		}else{
+//			sessionStorage.setItem('is_coporate_kpi',$("#is_coporate_kpi-"+empldoyees_id[0]).val());
+			
+
+			$(".cus_information_area").hide();
+			//Default start
+			$("#btnSubmitAction").removeAttr("disabled");
+			$("#btnAddAnother").removeAttr("disabled");
+			//Default end
+			//getTemplateFn();
+			
+			
+			/*dropDrowAsignToFn();
+			$("#assignTo").off("change");
+			$("#assignTo").change(function(){
+				dropDrowActionFn($(this).val());
+			});
+			$("#assignTo").change();
+			*/
+			//var Emp_Code = JSON.stringify(empldoyees_code[0]);
+			//console.log(empldoyees_code[0])
+			//dropDrowActionFn(empldoyees_code[0]);
+			dropDrowActionEditFn2(stage_id_action[0],empldoyees_code[0],organization_code[0]);
+			if($("#actionAction").val()==null){
+				$("#btnSubmitAction").attr("disabled","disabled");
+			} else {
+				$("#btnSubmitAction").removeAttr("disabled");
+			}
+			//dropDrowActionFn($(this).val());
+			
+			$("#ModalAction").modal({
+				"backdrop" : setModalPopup[0],
+				"keyboard" : setModalPopup[1]
+			});
+			
+			//check assignment if reject  remark is require.
+			$("#actionAction").off("change");
+			$("#actionAction").on("change",function(){
+				//alert("hello jquery");
+				
+			});
+			
+			$(window).scrollTop(0);
+			setTimeout(function(){
+				$(".modal-body").scrollTop(0);
+				$(".fht-tbody").scrollTop(0);
+			
+			});
+		}
+		//$(".scoreText0").attr("disabled","disabled");
+		/*
+		console.log(empldoyees_id);
+		console.log(empldoyees_code);
+		*/
+		//auto click
+		//$("#tableQuality .appraisalItem-checkbox,#tableDeduct .appraisalItem-checkbox,#fixClickKPI-2 .appraisalItem-checkbox").click();
+		
+	});
+	
 	$(".popover-edit-del").popover(setPopoverDisplay);
 	$("#listDatas").off("click",".popover-edit-del");
 	$("#listDatas").on("click",".popover-edit-del",function(){
@@ -774,6 +892,39 @@ var listDataFn = function(data) {
 	});	
 	
 };
+
+//Update Action start
+var actionActionAssignmentFn = function() {
+	$.ajax({
+		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/update_action",
+		type:"PATCH",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		
+		data:{"head_params":
+			{
+			"emp_result_id": emp_result_id_action,
+			"action_to": $("#actionAction").val(),
+			"remark": $("#remark_footer_action").val()
+			}
+		},
+		success:function(data){
+			if(data['status']==200){
+				   //callFlashSlideInModal("Updated","#information2");
+			       getDataFn($("#pageNumber").val(),$("#rpp").val());
+			       callFlashSlide("Updated Successfully.");
+				   $("#ModalAction").modal('hide');
+				   $("#action").val("add");
+			}
+			
+		}
+		
+	});
+	
+};
+//Update Action end
+
 //Update Assignment start
 var actionUpdateAssignmentFn = function(){
 
@@ -1201,6 +1352,7 @@ var searchAdvanceFn = function() {
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_period_frequency' name='embed_period_frequency' value='"+$("#periodFrequency").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_year_list' name='embed_year_list' value='"+$("#YearList").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_organization' name='embed_organization' value='"+$("#organization").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_status' name='embed_status' value='"+$("#appraisalStatus").val()+"'>";
 	
 	
 	
@@ -1366,7 +1518,34 @@ var appraisalLevelListEmpLevelToOrgFn = function(){
 //		}
 //	});
 //}
-
+var appraisalStatusFn = function(nameArea,id){
+	
+	if(nameArea==undefined){
+		nameArea="";
+	}
+	
+	var htmlOption="";
+	htmlOption+="<option value='Unassigned'>Unassigned</option>";
+	
+	$.ajax({
+		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/status_list",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			$.each(data,function(index,indexEntry){
+				if(id==indexEntry['status']){
+					htmlOption+="<option selected='selected' value='"+indexEntry['to_action']+"'>"+indexEntry['status']+"</option>";
+				}else{
+					htmlOption+="<option value='"+indexEntry['to_action']+"'>"+indexEntry['status']+"</option>";
+					
+				}
+			});
+			$("#appraisalStatus"+nameArea).html(htmlOption);
+		}
+	});
+}
 
 var yearListFn = function(nameArea,id){
 	
@@ -1724,6 +1903,35 @@ var dropDrowActionEditFn = function(paramStageID,employee_code,org_code){
 				}
 			});
 			$("#actionAssign").html(htmlOption);
+		}
+	});
+}
+
+var dropDrowActionEditFn2 = function(paramStageID,employee_code,org_code){
+//	console.log(employee_code,'employee_code?')
+//	console.log(paramStageID,'paramStageID?')
+//	console.log(org_code,'org_code?')
+
+	$.ajax({
+		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/edit_action_to",
+		type:"POST",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		//data:{"stage_id":paramStageID,"to_appraisal_level_id":paramToAppraisalLevel},
+		data:{"appraisal_type_id":$("#embed_appraisal_type_id").val(),"stage_id":paramStageID,"emp_code":employee_code,"org_code":org_code},
+		success:function(data){
+			//console.log(data)
+			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
+			var htmlOption="";
+			$.each(data,function(index,indexEntry){
+				if(id==indexEntry['stage_id']){
+					htmlOption+="<option selected='selected' value="+indexEntry['stage_id']+">"+indexEntry['to_action']+"</option>";
+				}else{
+					htmlOption+="<option value="+indexEntry['stage_id']+">"+indexEntry['to_action']+"</option>";
+				}
+			});
+			$("#actionAction").html(htmlOption);
 		}
 	});
 }
@@ -2518,9 +2726,10 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 		
 	//Default start
 	$("#btnSubmit").removeAttr("disabled");
+	$("#btnSubmitAction").removeAttr("disabled");
 	$("#btnAssignment").removeAttr("disabled");
 	$("#btnAddAnother").removeAttr("disabled");
-	$("#btnSubmit").removeAttr("disabled");
+	//$("#btnSubmit").removeAttr("disabled");
 	//Default end
 	if(is_hr==0 && is_self_assign ==0){
 	
@@ -2569,6 +2778,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 		appraisalTypeFn('','2');
 		periodFrequencyFn();
 		yearListFn();
+		appraisalStatusFn();
 		
 		$("#appraisalType").change(function() {
 			if($("#appraisalType").val()==1){
@@ -2912,7 +3122,6 @@ $("#empName").autocomplete({
 		
 	});
 	//btn assignment end
-	//btn action assign start
 		$("#btnSubmit").click(function(){
 //					alert($("#actionAssign option:selected").text());
 //					alert($("#remark_footer").val());
@@ -2962,6 +3171,15 @@ $("#empName").autocomplete({
 					}
 			
 		});
+		
+		$("#btnSubmitAction").click(function(){
+			if(($("#actionAction option:selected").text()=="Reject") && ($("#remark_footer_action").val()=="")){
+				callFlashSlideInModal("Please fill Remark for Reject Workflow State.","#information2","error");
+				return false;
+			}
+			actionActionAssignmentFn();
+		});
+		
 		$(document).on("click","#btnAddAnother",function(){
 			
 

@@ -806,6 +806,15 @@ plid = layout.getPlid();
 								
 										</select>
 									</div>
+									
+									<div id="appraisalStatusArea" class="form-group pull-left span4"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<select data-toggle="tooltip" title="Status"
+											class="input form-control input-sm" id="appraisalStatus"
+											name="appraisalStatus">
+
+										</select>
+									</div>
 								</div>
 								<div class="row-fluid">
 									<div id='appraisalLevelEmpArea' class="form-group pull-left span4"
@@ -1431,6 +1440,95 @@ plid = layout.getPlid();
     
 </div>                      
 <!-- Modal KPI End Edit -->
+
+
+<!-- Modal Action Start Edit -->
+
+  <div aria-hidden="true" role="dialog" tabindex="-1" id="ModalAction" class="modal inmodal small" style="display: none;">
+    <div class="modal-dialog  ">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
+                <h4 class="modal-title" id="modalTitleRole">Action</h4>
+            </div>
+            <div class="modal-body">
+            	<div class="row-fluid">
+            		<div class="span4">
+	            		<div class="form-group"> 
+							<label class="span4 p-t-xxs"><b>Action:</b></label> 
+							 <div class="span8"> 
+									<select id='actionAction' class='input form-control input-sm'>
+				   					</select>
+							 </div> 
+						 </div> 
+            		</div>
+            		<div class="span8">
+            			<div class="form-group"> 
+							 <label class="span3 p-t-xxs"><b>Remark:</b></label> 
+							 <div class="span9"> 
+								 <input type='text' name='remark_footer_action' id='remark_footer_action' class='span12' value=''>
+							 </div> 
+						 </div> 
+            		</div>
+            	</div>
+            </div>
+            <div class="modal-footer">
+            	<div class="row-fluid">
+            		<div class="span12 offset0">
+            				<input type="hidden" name="id_action" id="id_action" value="">
+			   				<button class="btn btn-primary" type="button" id="btnSubmitAction">Submit</button>
+			                <button data-dismiss="modal" class="btn btn-white btnCancle" type="button">Cancel</button>
+            		</div>
+            	</div>
+   				<div class="alert alert-warning information" id="information2" style="display: none;"></div>
+			   	<!-- 
+            	<div class="row-fluid">
+            		<div class='span12'>
+
+		   				<div class='btnAssignment'>
+
+	            			<div class='labelAssign'>Assign to:&nbsp; </div>
+	            			<div class='dropdownListAssign' id='assignToArea'>
+	            			
+		            			<select id='assignTo' class='input form-control input-sm'>
+				   				</select>
+			   				</div>
+			   				
+			   				<div class='labelAssign'>Action:&nbsp; </div>
+	            			<div class='dropdownListAssign' id='actionAssignArea'>
+		            			<select id='actionAssign' class='input form-control input-sm'>
+				   				</select>
+			   				</div>
+			   				
+		   				</div>
+		   				
+		   				<div class='btnManagement'>
+		   					<input type="hidden" name="id" id="id" value="">
+		   					<input type="hidden" name="period_id_edit" id="period_id_edit" value="">
+			   				<input type="hidden" name="action" id="action" value="add">
+			   				<button class="btn btn-primary" type="button" id="btnSubmit">Submit</button>
+			                <button data-dismiss="modal" class="btn btn-white btnCancle" type="button">Cancel</button>
+			                
+		   				</div>
+		   				
+            		
+		            		
+		   				<br style='clear:both'>
+		   				<div class="alert alert-warning information" id="information" style="display: none;"></div>
+			   			<br style='clear:both'>
+			   			<br style='clear:both'>
+		   			</div>
+		   		
+		   			
+   				</div>
+            	-->
+           	 	
+            </div>
+        </div>
+    </div>
+    
+</div>                      
+<!-- Modal Action End Edit -->
 
 
 <!-- Modal Confirm Start -->

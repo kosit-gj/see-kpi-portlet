@@ -343,25 +343,24 @@ plid = layout.getPlid();
 								<h5>Advance Search</h5>
 							</div>
 				<div class="ibox-content breadcrumbs2">
+						<div id="drop_down_list_appraisal_type" class="form-group pull-left span3" style="margin-left: 5px; display: none;">
+							<select class="input span12 m-b-n" ></select>
+						</div>
 					<div class="row-fluid">
 						<div id="drop_down_list_year" class="form-group pull-left span3" style="margin-left: 5px">
 							<select class="input span12 m-b-n" ></select>
 						</div>
-						
 						<div id="drop_down_list_period" class="form-group pull-left span3" style="margin-left: 5px">
-							<select class="input span12 m-b-n" ></select>
-						</div>
-						<div id="drop_down_list_appraisal_type" class="form-group pull-left span3" style="margin-left: 5px;display:none;">
 							<select class="input span12 m-b-n" ></select>
 						</div>
 						<div class="form-group pull-left span3" style="margin-left: 5px">
 							<select class="input span12 m-b-n" id="app_lv_emp" data-toggle="tooltip" title="EmpLevel"></select>
 						</div>
-<!-- 					</div> -->
-<!-- 					<div class="row-fluid"> -->
 						<div id="drop_down_list_appraisal_level" class="form-group pull-left span3" style="margin-left: 5px" data-toggle="tooltip" title="OrgLevel">
 							<select class="input span12 m-b-n" id="app_lv"></select>
 						</div>
+					</div>
+					<div class="row-fluid">
 						<div id="drop_down_list_organization" class="form-group pull-left span3" style="margin-left: 5px; clear: both;" data-toggle="tooltip" title="Organization">
 							<select data-placement='top' id="org_id" class="input span12 m-b-n" name="org_id"></select>
 						</div>
@@ -379,7 +378,11 @@ plid = layout.getPlid();
 							<input class="form-control input-sm" id="position_id"
 								name="position_id" value="" type="hidden">
 						</div>
-						
+						<div id="drop_down_list_structure" class="form-group pull-left span3" style="margin-left: 5px;" data-toggle="tooltip" title="Structure">
+							<select data-placement='top' id="structure_id" class="input span12 m-b-n" name="structure_id"></select>
+						</div>
+					</div>
+					<div class="row-fluid">
 <!-- 					</div> -->
 <!-- 					<div class="row-fluid"> -->
 <!-- 						<div class="form-group pull-left span3" style="margin-left: 5px"> -->
