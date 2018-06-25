@@ -2732,7 +2732,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 		var dataSetParam = [
 			{'id':'#Position', 'val': ""+cMain_position_name+""},
 			{'id':'#Position_id', 'val': cMain_position_id},
-			{'id':'#empName', 'val': ""+cMain_emp_name+""},
+			{'id':'#empName', 'val': ""+cMain_emp_name+"("+session_emp_code+")"},
 			{'id':'#empName_id', 'val': session_emp_code},
 			{'id':'#appraisalLevelEmp', 'val': ""+cMain_level_id+""}
 		];
@@ -2792,6 +2792,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 		periodFrequencyFn();
 		yearListFn();
 		//appraisalStatusFn();
+		setParamSearch(dataSetParam);// in cMain.js
 		
 		$("#appraisalType").change(function() {
 			if($("#appraisalType").val()==1){
@@ -2821,8 +2822,6 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 			}
 		});
 		$("#appraisalType").change();
-		
-		setParamSearch(dataSetParam);// in cMain.js
 		
 		$("#appraisalLevelEmp").change(function() {
 			clearParamSearch(dataClearParam);// in cMain.js

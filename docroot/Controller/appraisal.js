@@ -2754,7 +2754,7 @@ $(document).ready(function() {
 			var dataSetParam = [
 				{'id':'#Position', 'val': ""+cMain_position_name+""},
 				{'id':'#Position_id', 'val': cMain_position_id},
-				{'id':'#EmpName', 'val': ""+cMain_emp_name+""},
+				{'id':'#EmpName', 'val': ""+cMain_emp_name+"("+session_emp_code+")"},
 				{'id':'#EmpName_id', 'val': cMain_emp_id},
 				{'id':'#AppraisalEmpLevel', 'val': ""+cMain_level_id+""}
 			];
