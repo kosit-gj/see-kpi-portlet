@@ -1539,7 +1539,11 @@ var appraisalStatusFn = function(nameArea,id){
 			"period_id":$("#period_id").val(),
 			"appraisal_frequency_id":$("#frequency_id").val(),
 			"appraisal_year":$("#YearList").val(),
-			"appraisal_type_id":$("#appraisalType").val()
+			"appraisal_type_id":$("#appraisalType").val(),
+			"emp_code":($("#empName_id").val()==""?"":$("#empName_id").val()),
+			"position_id":($("#Position_id").val()==""?"":$("#Position_id").val())
+//			"emp_id":($("#empName_id").val()==""?"":$("#empName").val().split("(")[0]),
+//			"position_id":($("#Position_id").val()==""?"":$("#empName").val().split("(")[0])
 		},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
@@ -2952,6 +2956,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
             $("#Position_id").val(ui.item.position_id);
             galbalDataTemp['position_name'] = ui.item.label;
             galbalDataTemp['position_id']=ui.item.position_id;
+            appraisalStatusFn();
             return false;
         },change: function(e, ui) {  
 
@@ -3029,6 +3034,7 @@ $("#empName").autocomplete({
             galbalDataTemp['empName'] = ui.item.label;
             galbalDataTemp['empName_id']=ui.item.emp_code;
             empNameAutoCompelteChangeToPositionName(ui.item.value);
+            appraisalStatusFn();
             return false;
         },change: function(e, ui) {  
 			if ($("#empName").val() == galbalDataTemp['empName']) {
