@@ -807,16 +807,6 @@ plid = layout.getPlid();
 										</select>
 									</div>
 									
-									<div id="appraisalStatusArea" class="form-group pull-left span4"
-										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Status"
-											class="input form-control input-sm" id="appraisalStatus"
-											name="appraisalStatus">
-
-										</select>
-									</div>
-								</div>
-								<div class="row-fluid">
 									<div id='appraisalLevelEmpArea' class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<select data-toggle="tooltip" title="Employee Level"
@@ -825,6 +815,7 @@ plid = layout.getPlid();
 											<option value="0"></option>
 										</select>
 									</div>
+									
 									<div id='appraisalLevelArea' class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<select data-toggle="tooltip" title="OrgLevel"
@@ -833,6 +824,9 @@ plid = layout.getPlid();
 											<option value="0"></option>
 										</select>
 									</div>
+								</div>
+								
+								<div class="row-fluid">
 									<div class="form-group pull-left span4" style="margin-left: 5px">
 										<select data-toggle="tooltip" title="" data-original-title="organization"
 											class="input form-control input-sm span12" id="organization"
@@ -841,12 +835,8 @@ plid = layout.getPlid();
 										</select>
 									</div>
 									
-									
-								</div>
-								<div class="row-fluid">
-								<div id="empNameArea" class="form-group pull-left span4"
+									<div id="empNameArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										
 										<input data-toggle="tooltip" type="text" class="form-control input-sm span12 "
 											placeholder="Emp Name" id="empName" data-original-title="Employee Name">
 											<input class="form-control input-sm"
@@ -856,11 +846,10 @@ plid = layout.getPlid();
 <!-- 											name="empName"> -->
 <!-- 											<option value="0"></option> -->
 <!-- 										</select> -->
-										
 									</div>
-									 <div id="PositionArea" class="form-group pull-left span4"
+									
+									<div id="PositionArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										
 										<input data-toggle="tooltip" type="text" id="Position" placeholder="Position"
 											class="form-control input-sm span12" data-original-title="Position">
 										<input class="form-control input-sm" id="Position_id"
@@ -870,10 +859,11 @@ plid = layout.getPlid();
 <!-- 											name="Position"> -->
 <!-- 											<option value="0"></option> -->
 <!-- 										</select> -->
-										
 									</div>
 									
 									
+								</div>
+								<div class="row-fluid">
 									<!-- 
 									<div id="organizationArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
@@ -890,8 +880,7 @@ plid = layout.getPlid();
 								
 										</select>
 									</div>
-								</div>
-								<div class="row-fluid">
+									
 									<div id="periodFrequencyArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<select data-toggle="tooltip" title="Period frequency"
@@ -900,6 +889,7 @@ plid = layout.getPlid();
 											<option value="0"></option>
 										</select>
 									</div>
+									
 									<div id="assignFrequencyArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<select data-toggle="tooltip" title="Assign Frequency"
@@ -911,31 +901,40 @@ plid = layout.getPlid();
 								
 										</select>
 									</div>
+								</div>
+								<div class="row-fluid">
+									
 									<div id="periodArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<select data-toggle="tooltip" disabled='disabled' data-toggle="Period" title="Period"
 											class="input form-control input-sm" id="period_id" name="period_id">
-								
 											<option value=""></option>
-								
 										</select>
-								</div>
+									</div>
 								
-								
-								
-							</div>
-							<div class="row-fluid">
-								<div class="form-group pull-right m-b-none "
+									<div id="appraisalStatusArea" class="form-group pull-left span4"
+										style="margin-left: 5px; margin-bottom: 3px;">
+										<select data-toggle="tooltip" title="Status"
+											class="input form-control input-sm" id="appraisalStatus"
+											name="appraisalStatus">
+
+										</select>
+									</div>
+									
+									<div class="form-group pull-right m-b-none "
 									style="margin-bottom: 5px;">
-									<button type="button" class="btn btn-info input-sm"
-										name="btnSearchAdvance" id="btnSearchAdvance">
-										<i class="fa fa-search"></i>&nbsp;Search
-									</button>
-									<button type="button" class="btn btn-warning input-sm"
-										name="btnAssignment" id="btnAssignment">
-										<i class="fa fa-sign-in"></i>&nbsp;Assign
-									</button>
+										<button type="button" class="btn btn-info input-sm"
+											name="btnSearchAdvance" id="btnSearchAdvance">
+											<i class="fa fa-search"></i>&nbsp;Search
+										</button>
+										<button type="button" class="btn btn-warning input-sm"
+											name="btnAssignment" id="btnAssignment">
+											<i class="fa fa-sign-in"></i>&nbsp;Assign
+										</button>
+									</div>
+									
 								</div>
+							<div class="row-fluid">
 							
 							</div>
          						
@@ -1351,7 +1350,7 @@ plid = layout.getPlid();
             	
             	<div class="row-fluid" style='text-align:left;'>
             		<a href="#" id='slideUpDownStageHistory' style='display:none;'>Work Flow Stage History</a>
-            		<div id='slideStageHistory' style='display:none;'>
+            		<div id='slideStageHistory' style='display:none; max-width: none;'>
             			<table class='table'>
             				<thead>
             					<tr>

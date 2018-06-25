@@ -539,7 +539,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 							</div>
 							<!-- pagination end -->
 							<!-- start table -->
-							<div class="row-fluid" style="overflow:auto;">
+							<div class="row-fluid" style="overflow:auto; max-width: none;">
 								<table class="table table-striped" id="tableEmployee">
 									<thead>
 										<tr>

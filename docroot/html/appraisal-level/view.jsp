@@ -36,6 +36,10 @@ plid = layout.getPlid();
 .popover {
 	width: 210px;
 }
+.aui .table thead th {
+    font-size: 13px;
+    font-weight: normal;
+}
 </style>
 
 <!-- Modal Import Appraisal Criteria -->

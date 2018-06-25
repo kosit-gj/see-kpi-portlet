@@ -320,6 +320,7 @@ var dropdownStructure = function () {
 		dataType:"json" ,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
+		data:{"level_id":$("#app_lv_emp").val()},
 		success:function(data){
 			$.each(data,function(index,indexEntry){
 					html+="<option  value="+indexEntry["structure_id"]+">"+indexEntry["structure_name"]+"</option>";	
@@ -574,8 +575,6 @@ $(document).ready(function() {
     
   //Auto Complete Employee Name end
 	
-	dropdownStructure();
-	
 	$("#app_type").change(function(){
 		if($("#app_type").val() == "2") {
 
@@ -614,6 +613,7 @@ $(document).ready(function() {
 		clearParamSearch(dataClearParam);// in cMain.js
 		dropDownListEmpLevelToOrgFn();
 		dropDownListOrganization();
+		dropdownStructure();
 
 	});
 	
@@ -621,6 +621,8 @@ $(document).ready(function() {
 	$("#org_id").change(function() {
 		clearParamSearch(dataClearParam);// in cMain.js
 	});
+	
+	dropdownStructure();
 	
 	//setParamSearch(dataSetParam);// in cMain.js
 	

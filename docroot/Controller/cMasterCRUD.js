@@ -945,7 +945,7 @@ var createDataTableFn = function(options){
 			var tableHTML="";
 			var styleCss ="text-align: right;";
 			var styleCssCenter ="text-align:center;";
-			tableHTML+="<table class=\"table table-striped\" id=\"table-"+options['formDetail']['id']+"\">" ;                               		
+			tableHTML+="<table class=\"table table-striped\" id=\"table-"+options['formDetail']['id']+"\" style=\"max-width: none;\">";                               		
 			tableHTML+="    <thead>";
 			tableHTML+="        <tr>"
 			$.each(options['colunms'],function(index,indexEntry){

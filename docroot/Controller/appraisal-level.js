@@ -156,8 +156,8 @@ $(document).ready(function(){
 		 			           {"colunmsDisplayName":"View All Employee","width":"","id":"is_all_employee","colunmsType":"checkbox"},
 		 			           {"colunmsDisplayName":"Is HR","width":"","id":"is_hr","colunmsType":"checkbox"},
 		 			           {"colunmsDisplayName":"Is Self Assign","width":"","id":"is_self_assign","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"No Weight","width":"","id":"no_weight","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"District","width":"","id":"district_flag","colunmsType":"checkbox"},
+		 			           {"colunmsDisplayName":"Is Group Action","width":"","id":"is_group_action","colunmsType":"checkbox"},
+		 			           {"colunmsDisplayName":"Is Show Quality","width":"","id":"is_show_quality","colunmsType":"checkbox"},
 		 			           {"colunmsDisplayName":"Organization","width":"","id":"is_org","colunmsType":"checkbox"},
 		 			           {"colunmsDisplayName":"Individual","width":"","id":"is_individual","colunmsType":"checkbox"},
 		 			           {"colunmsDisplayName":"Is Active","width":"","id":"is_active","colunmsType":"checkbox"},
@@ -189,6 +189,14 @@ $(document).ready(function(){
 			 	 	    		"label":"Is Self Assign","inputType":"checkbox","default":"uncheck",
 			 	 	    		"id":"is_self_assign","width":"200px"
 			 	 	    		},
+			 	 	    		{
+				 	    		"label":"Is Group Action","inputType":"checkbox","default":"uncheck",
+				 	    		"id":"is_group_action","width":"200px"
+				 	    		},
+				 	    		{
+					 	    	"label":"Is Show Quality","inputType":"checkbox","default":"uncheck",
+					 	    	"id":"is_show_quality","width":"200px"
+					 	    	},
 		 	    			    {
 			 	    			"label":"No Weight","inputType":"checkbox","default":"uncheck",
 			 	    			"id":"no_weight","width":"200px"

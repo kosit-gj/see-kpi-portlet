@@ -506,18 +506,18 @@ var embedParam = function(id){
 
 //List Data
 var listDataFn = function(data) {
-	var statusAction;
-	if(is_hr==0 && is_self_assign ==0) {
-		statusAction ="style=\"margin-bottom: 5px;\"";
-	} else {
-		statusAction ="style=\"margin-bottom: 5px;\"";
-	}
-
 
 	htmlHTML="";
 	$.each(data['group'],function(index,indexEntry){
+		
+		var statusAction;
+		if(indexEntry['items'][0]['is_group_action']==0) {
+			statusAction ="style=\"margin-bottom: 5px; display: none;\"";
+		} else {
+			statusAction ="style=\"margin-bottom: 5px;\"";
+		}
 		//console.log(index);
-//	console.log(indexEntry['items']);
+	//console.log(indexEntry['items']);
 //	console.log(indexEntry['appraisal_period_desc']);
 	
 	htmlHTML+="<div class=\"row-fluid\">";
@@ -536,14 +536,14 @@ var listDataFn = function(data) {
 		htmlHTML+="<div class=\"ibox-content\">";
 					
 					
-		htmlHTML+="<div class=\"table-responsive\" style='overflow:auto;'>";
+		htmlHTML+="<div class=\"table-responsive\" style='overflow:auto; max-width: none;'>";
 		htmlHTML+="<table id=\"tableListAppraisalUser\" class=\"table table-striped\">";
            		
 		htmlHTML+=" <thead>";
 			htmlHTML+=" <tr>";
 			if(index!='p0'){
 				htmlHTML+="<th style=\"width:5%; text-align:center; \" class=\"object-center\">";
-				htmlHTML+="<input "+statusAction+" type=\"checkbox\" name=\"statusSelectAll\" id=\"statusSelectAll\" style=\"margin-top:-3px;\">";
+				htmlHTML+="<input style=\"margin-bottom: 5px;\" type=\"checkbox\" name=\"statusSelectAll\" id=\"statusSelectAll\" style=\"margin-top:-3px;\">";
 				htmlHTML+="</th>";
 			}else{
 				htmlHTML+="<th style=\"width:5%; text-align:center;\" class=\"object-center\">";
@@ -579,16 +579,16 @@ var listDataFn = function(data) {
 	htmlHTML+=" </tr>";
 		htmlHTML+=" </thead>";
 			htmlHTML+=" <tbody>";
-			$.each(indexEntry['items'],function(index2,itemEntry){	
+			$.each(indexEntry['items'],function(index2,itemEntry){
 				
 		
 
 				htmlHTML+="<tr>";
 				if(index!='p0'){
 					if($("#embed_appraisal_type_id").val()==2){
-						htmlHTML+="	<td class='object-center' style='text-align:center;'><input "+statusAction+" class='action_emp' id='id-"+itemEntry['emp_id']+"' type='checkbox' value="+itemEntry['emp_id']+"-"+itemEntry['emp_code']+"-"+itemEntry['org_id']+"-"+itemEntry['period_id']+"-"+itemEntry['default_stage_id']+" data-id='"+itemEntry['emp_result_id']+"-"+itemEntry['stage_id']+"'></td>";
+						htmlHTML+="	<td class='object-center' style='text-align:center;'><input style=\"margin-bottom: 5px;\" class='action_emp' id='id-"+itemEntry['emp_id']+"' type='checkbox' value="+itemEntry['emp_id']+"-"+itemEntry['emp_code']+"-"+itemEntry['org_id']+"-"+itemEntry['period_id']+"-"+itemEntry['default_stage_id']+" data-id='"+itemEntry['emp_result_id']+"-"+itemEntry['stage_id']+"'></td>";
 					}else if($("#embed_appraisal_type_id").val()==1){
-						htmlHTML+="	<td class='object-center' style='text-align:center;'><input "+statusAction+" class='action_emp' id='id-"+itemEntry['org_id']+"' type='checkbox' value="+itemEntry['org_id']+"-"+itemEntry['org_id']+"-"+itemEntry['org_id']+"--"+itemEntry['default_stage_id']+"-/"+itemEntry['org_code']+" data-id='"+itemEntry['emp_result_id']+"-"+itemEntry['stage_id']+"'></td>";
+						htmlHTML+="	<td class='object-center' style='text-align:center;'><input style=\"margin-bottom: 5px;\" class='action_emp' id='id-"+itemEntry['org_id']+"' type='checkbox' value="+itemEntry['org_id']+"-"+itemEntry['org_id']+"-"+itemEntry['org_id']+"--"+itemEntry['default_stage_id']+"-/"+itemEntry['org_code']+" data-id='"+itemEntry['emp_result_id']+"-"+itemEntry['stage_id']+"'></td>";
 						//alert(itemEntry['org_id']);
 					}
 				}else{
@@ -1532,6 +1532,15 @@ var appraisalStatusFn = function(nameArea,id){
 		type:"get",
 		dataType:"json",
 		async:false,
+		data:{
+			"emp_level":$("#appraisalLevelEmp").val(),
+			"org_level":$("#appraisalLevel").val(),
+			"org_id":$("#organization").val(),
+			"period_id":$("#period_id").val(),
+			"appraisal_frequency_id":$("#frequency_id").val(),
+			"appraisal_year":$("#YearList").val(),
+			"appraisal_type_id":$("#appraisalType").val()
+		},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			$.each(data,function(index,indexEntry){
@@ -1996,7 +2005,7 @@ var assignTemplateQualityFn = function(structureName,data){
 		
 	htmlTemplateQuality+="</div>";
 	htmlTemplateQuality+="<div class=\"ibox-content\">";
-	htmlTemplateQuality+="<div class=\"table-responsive scrollbar-inner\"  style='overflow:auto;'>";
+	htmlTemplateQuality+="<div class=\"table-responsive scrollbar-inner\"  style='overflow:auto; max-width: none;'>";
 	htmlTemplateQuality+="<table id=\"tableQuality\" style='top: -37px;'  class=\"table table-striped tableQuality fixedHeader\">";
 	htmlTemplateQuality+="<thead>";
 		htmlTemplateQuality+="<tr>";
@@ -2050,7 +2059,7 @@ var assignTemplateDeductFn = function(structureName,data){
 	htmlTemplateDeduct+="</div>";
 		
 		htmlTemplateDeduct+="<div class=\"ibox-content\">";
-		htmlTemplateDeduct+="<div class=\"table-responsive scrollbar-inner\"  style='overflow:auto;'>";
+		htmlTemplateDeduct+="<div class=\"table-responsive scrollbar-inner\"  style='overflow:auto; max-width: none;'>";
 		htmlTemplateDeduct+="<table id=\"tableDeduct\" style='top: -37px;' class=\"table table-striped tableDeduct fixedHeader\">";
               		
 		htmlTemplateDeduct+="<thead>";
@@ -2118,7 +2127,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 			htmlTemplateQuantity+="      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-"+data['structure_id']+"'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-"+data['structure_id']+"'></span>Total Weight <span id='weigth_total_quantity_percentage_target-"+data['structure_id']+"'>"+data['total_weight']+"%</span></div>";
 			htmlTemplateQuantity+="  </div>";
 			htmlTemplateQuantity+="	<div class=\"ibox-content\">";
-			htmlTemplateQuantity+=" <div class=\"table-responsive scrollbar-inner\"  style='overflow:auto;'>";
+			htmlTemplateQuantity+=" <div class=\"table-responsive scrollbar-inner\"  style='overflow:auto; max-width: none;'>";
 			htmlTemplateQuantity+="<table style='width:100%; top: -38px;' id=\"tableQauntity\" class=\"table table-striped tableQauntity fixedHeader\">";
 			htmlTemplateQuantity+="<thead>";
 				htmlTemplateQuantity+="<tr>";
@@ -2210,7 +2219,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 		htmlTemplateQuantity+="      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-"+data['structure_id']+"'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-"+data['structure_id']+"'></span>Total Weight <span id='weigth_total_quantity_percentage_target-"+data['structure_id']+"'>"+data['total_weight']+"%</span></div>";
 		htmlTemplateQuantity+="  </div>";
 		htmlTemplateQuantity+="	<div class=\"ibox-content\">";
-		htmlTemplateQuantity+=" <div class=\"table-responsive scrollbar-inner\"  style='overflow:auto;'>";
+		htmlTemplateQuantity+=" <div class=\"table-responsive scrollbar-inner\"  style='overflow:auto; max-width: none;'>";
 		htmlTemplateQuantity+="<table style='width:100%; top: -38px;' id=\"tableQauntity\" class=\"table table-striped tableQauntity fixedHeader\">";
 		htmlTemplateQuantity+="<thead>";
 			htmlTemplateQuantity+="<tr>";
@@ -2778,7 +2787,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 		appraisalTypeFn('','2');
 		periodFrequencyFn();
 		yearListFn();
-		appraisalStatusFn();
+		//appraisalStatusFn();
 		
 		$("#appraisalType").change(function() {
 			if($("#appraisalType").val()==1){
@@ -2791,7 +2800,8 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 				$("#appraisalLevelEmp").val("");
 				
 				appraisalLevelListOrgFn();
-				dropDrowOrgFn($("#appraisalLevel").val());	
+				dropDrowOrgFn($("#appraisalLevel").val());
+				appraisalStatusFn();
 				
 			} else {
 				
@@ -2803,6 +2813,7 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 				appraisalLevelListEmpLevelFn();
 				appraisalLevelListEmpLevelToOrgFn();
 				dropDrowOrgFn($("#appraisalLevel").val());
+				appraisalStatusFn();
 			}
 		});
 		$("#appraisalType").change();
@@ -2813,11 +2824,17 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 			clearParamSearch(dataClearParam);// in cMain.js
 			appraisalLevelListEmpLevelToOrgFn();
 			dropDrowOrgFn($("#appraisalLevel").val());
+			appraisalStatusFn();
 		});
 		
 		$("#appraisalLevel").change(function() {
 			clearParamSearch(dataClearParam);// in cMain.js
 			dropDrowOrgFn($("#appraisalLevel").val());
+			appraisalStatusFn();
+		});
+		
+		$("#organization,#YearList,#periodFrequency,#assignFrequency,#period_id").change(function() {
+			appraisalStatusFn();
 		});
 
 //		$("#empName").change(function() {
