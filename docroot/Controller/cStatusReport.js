@@ -69,9 +69,13 @@
 		}
 		var data = JSON.stringify(parameter);
 		
-		$('#iFrame_report').attr('src',url_report_jasper);
+		//$('#iFrame_report').attr('src',url_report_jasper);
 		var url_report_jasper = restfulURL+"/"+serviceName+"/public/generate?template_name=tfg-report&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
-		$('#iFrame_report').attr('src',url_report_jasper);
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			window.open(url_report_jasper,"_blank");
+		 } else {
+			 $('#iFrame_report').attr('src',url_report_jasper);
+		 }
 };
 
  

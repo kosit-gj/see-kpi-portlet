@@ -483,7 +483,7 @@ plid = layout.getPlid();
 
 
 							<div class="table-responsive" style="overflow:auto">
-								<table class="table table-striped " id="tableAppraisalData" >
+								<table class="table table-striped " id="tableAppraisalData" style="max-width: none;">
 									<thead>
 										<tr>
 <!-- 											<th style='width: auto'>Period&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th> -->

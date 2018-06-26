@@ -183,6 +183,11 @@ plid = layout.getPlid();
 }
 
 @media ( min-width : 768px) and (max-width: 979px) {
+	#ModalCommonData {
+		left: 15%;
+		right: 15%;
+	}
+	
 	#confrimModal {
 		left: 58.5%;
 	}
@@ -474,7 +479,7 @@ plid = layout.getPlid();
 							<!-- pagination end -->
 
 				<div class="table-responsive" style="overflow:auto;">
-					<table class="table table-striped" id="tableCommonDataSet">
+					<table class="table table-striped" id="tableCommonDataSet" style="max-width: none;">
 						<thead>
 							<tr>
 <!-- 								<th style='width: auto text-align:center;'>Select</th> -->

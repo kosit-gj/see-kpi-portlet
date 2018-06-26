@@ -330,7 +330,7 @@
 							</select>
 						</div>
 						<div style="margin-bottom:5px;"
-							class="form-group pull-left span1" id="kpiArea">
+							class="form-group pull-left span3" id="kpiArea">
 							<select name="output_type" id="output_type" class="input form-control input-sm"
 								title="" data-toggle="tooltip" style="cursor: pointer;"
 								data-original-title="Output Type">
@@ -338,10 +338,12 @@
 								<option value="xls">Excel</option>
 							</select>
 						</div>
-						<div style="margin-left: 5px;" class="form-group span2">
-							<button id="btnSearchAdvance" name="btnSearchAdvance"
-								class="btn btn-info input-sm" type="button">
-								<i class="fa fa-search"></i>&nbsp;Search
+					</div>
+					<div class="row-fluid">
+						<div class="form-group span12 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
+							<button type="button" id="btnSearchAdvance" name="btnSearchAdvance"
+									class="btn btn-info input-sm" type="button">
+									<i class="fa fa-search"></i>&nbsp;Search
 							</button>
 						</div>
 					</div>

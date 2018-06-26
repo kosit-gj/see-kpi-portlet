@@ -489,7 +489,7 @@ plid = layout.getPlid();
 							</div>
 							<!-- pagination end -->
 							<div class="table-responsive p-b-xxs" style="overflow:auto">
-								<table class="table table-striped " id="tableCdsResult" >
+								<table class="table table-striped " id="tableCdsResult" style="max-width: none;">
 									<thead>
 										<tr>
 											<th style='width: auto'>Emp&nbsp;Code&emsp;</th>

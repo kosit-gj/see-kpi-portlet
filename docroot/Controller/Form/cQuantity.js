@@ -239,9 +239,9 @@ var cdsListFn = function(data){
 			cdsListHTML+="<td >"+indexEntry['cds_id']+"</td>";
 			cdsListHTML+="<td id=\"cds_name-"+indexEntry['cds_id']+"\">"+indexEntry['cds_name']+"</td>";
 			cdsListHTML+="<td style=\"text-align:right\">";
-			cdsListHTML+="<button class=\"btn btn-primary btn-xs btn-gear avg\" id=\"avg-"+indexEntry['cds_id']+"\" >Avg</button>&nbsp;";
-			cdsListHTML+="<button class=\"btn btn-warning btn-xs btn-gear sum\" id=\"sum-"+indexEntry['cds_id']+"\" >Sum</button>&nbsp;";
-			cdsListHTML+="<button  class=\"btn btn-danger btn-xs btn-gear btnLast\" id=\"last-"+indexEntry['cds_id']+"\">Last</button>";
+			cdsListHTML+="<button style=\"margin-top: 3px;\" class=\"btn btn-primary btn-xs btn-gear avg\" id=\"avg-"+indexEntry['cds_id']+"\" >Avg</button>";
+			cdsListHTML+="<button style=\"margin-top: 3px; margin-left: 3px;\" class=\"btn btn-warning btn-xs btn-gear sum\" id=\"sum-"+indexEntry['cds_id']+"\" >Sum</button>";
+			cdsListHTML+="<button style=\"margin-top: 3px; margin-left: 3px;\" class=\"btn btn-danger btn-xs btn-gear btnLast\" id=\"last-"+indexEntry['cds_id']+"\">Last</button>";
 			cdsListHTML+="</td>";
 		cdsListHTML+="</tr>";
 	});

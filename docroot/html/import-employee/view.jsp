@@ -250,6 +250,10 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 }
 
 @media ( min-width : 768px) and (max-width: 979px) {
+	#ModalLevel {
+		left: 15%;
+		right: 15%;
+	}
 	.aui #confrimModal {
 		left: 58.5%;
 	}
@@ -539,8 +543,8 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 							</div>
 							<!-- pagination end -->
 							<!-- start table -->
-							<div class="row-fluid" style="overflow:auto; max-width: none;">
-								<table class="table table-striped" id="tableEmployee">
+							<div class="row-fluid" style="overflow:auto;">
+								<table class="table table-striped" id="tableEmployee" style="max-width: none;">
 									<thead>
 										<tr>
 											<th style='width: auto text-align:center;'>Select</th>

@@ -2035,7 +2035,7 @@ var listDataFn = function(data){
 
 
 		htmlHTML+="<div class=\"table-responsive\" style='overflow:auto;'>";
-		htmlHTML+="<table id=\"tablethreshould\" class=\"table table-striped\">";
+		htmlHTML+="<table id=\"tablethreshould\" class=\"table table-striped\" style=\"max-width: none\">";
 
 		htmlHTML+=" <thead>";
 			htmlHTML+=" <tr>";

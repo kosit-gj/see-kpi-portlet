@@ -536,8 +536,8 @@ var listDataFn = function(data) {
 		htmlHTML+="<div class=\"ibox-content\">";
 					
 					
-		htmlHTML+="<div class=\"table-responsive\" style='overflow:auto; max-width: none;'>";
-		htmlHTML+="<table id=\"tableListAppraisalUser\" class=\"table table-striped\">";
+		htmlHTML+="<div class=\"table-responsive\" style='overflow:auto;'>";
+		htmlHTML+="<table id=\"tableListAppraisalUser\" class=\"table table-striped\" style=\"max-width: none;\">";
            		
 		htmlHTML+=" <thead>";
 			htmlHTML+=" <tr>";
@@ -2794,6 +2794,19 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 		//appraisalStatusFn();
 		setParamSearch(dataSetParam);// in cMain.js
 		
+		$("#periodFrequency").change(function() {
+			dropDrowPeriodFn($(this).val(),$("#assignFrequency").val());
+		});
+		
+		$("#YearList").change(function() {
+			dropDrowPeriodFn($(this).val(),$("#assignFrequency").val());
+		});
+		
+		$("#assignFrequency").change(function() {
+			dropDrowPeriodFn($("#periodFrequency").val(),$(this).val())
+		});
+		$("#assignFrequency").change();
+		
 		$("#appraisalType").change(function() {
 			if($("#appraisalType").val()==1){
 				
@@ -2880,32 +2893,6 @@ if(username!="" && username!=null & username!=[] && username!=undefined ){
 	    });
 	    */
 		//Org  End
-		
-	
-	
-	$("#periodFrequency").change(function(){
-		
-		
-		//alert(period);
-		
-		dropDrowPeriodFn($(this).val(),$("#assignFrequency").val());
-		
-	});
-	
-	$("#YearList").change(function(){
-		
-		
-		//alert(period);
-		
-		dropDrowPeriodFn($(this).val(),$("#assignFrequency").val());
-		
-	});
-	
-	
-	$("#assignFrequency").change(function(){
-		dropDrowPeriodFn($("#periodFrequency").val(),$(this).val())
-	});
-	$("#assignFrequency").change();
 	//htmlOption+="<option value="+i+">à¸£à¸­à¸šà¸�à¸²à¸£à¸›à¸£à¸°à¹€à¸¡à¸´à¸™"+i+"</option>";
 	
 	//Auto complete Start
