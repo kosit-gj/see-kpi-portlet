@@ -32,6 +32,10 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 
 /* Portrait tablet to landscape and desktop Start##########*/
 @media ( min-width : 768px) and (max-width: 979px) {
+	#ModalImport {
+		left: 15%;
+		right: 15%;
+	}
 }
 /* Portrait tablet to landscape and desktop End############*/
 
@@ -156,7 +160,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 }
 
 .aui .portlet-frame input {
-	width: 100%;
+/* 	width: 100%; */
 }
 
 .aui .portlet-frame .btn {
