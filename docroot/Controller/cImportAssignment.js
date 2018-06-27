@@ -22,7 +22,7 @@
 
  			
  			$.each(data,function(index,indexEntry){
- 				console.log(is_all_employee,'is_all_employee');
+ 				//console.log(is_all_employee,'is_all_employee');
  				if(is_all_employee==0) {
 	 				if(index==0 && indexEntry!=""){
 	 					html+="<option selected value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1] == undefined  ?  Object.keys(indexEntry)[0]:Object.keys(indexEntry)[1]]+"</option>";	
@@ -659,7 +659,7 @@ $.each(data,function(index,indexEntry){
 							$("#loadingGif").hide();
 						 } else {
 							 $("#loadingGif").hide();
-							 callFlashSlide("Error! cannot export this file");
+							 callFlashSlide("Error! cannot export this file because this excel many data","error");
 						 }
 				    }
 					
