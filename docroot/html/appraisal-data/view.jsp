@@ -160,9 +160,9 @@ plid = layout.getPlid();
 /* Portrait tablet to landscape and desktop */
 @media ( min-width : 768px) and (max-width: 979px) {
 	.aui .ResultsPerPageTop {
-		position: absolute;
+		position: relative;
 		left: -20px;
-		top: 46px;
+		top: -40px;
 	}
 	.aui .ResultsPerPageBottom {
 		position: relative;
@@ -213,9 +213,9 @@ plid = layout.getPlid();
 /* Landscape phone to portrait tablet */
 @media ( max-width : 767px) {
 	.aui .ResultsPerPageTop {
-		position: absolute;
+		position: relative;
 		left: -20px;
-		top: 46px;
+		top: -40px;
 	}
 	.aui .ResultsPerPageBottom {
 		position: relative;
@@ -228,10 +228,8 @@ plid = layout.getPlid();
 		.aui #confrimModal {
 			left: 16.5%;
 		}
-		.aui.ResultsPerPageTop {
-			position: absolute;
-			left: -20px;
-			top: 46px;
+		.aui .ResultsPerPageTop {
+			position: static;
 		}
 		.aui .ResultsPerPageBottom {
 			position: static;
@@ -275,6 +273,9 @@ plid = layout.getPlid();
 	@media ( max-width : 480px) {
 		.aui #confrimModal {
 			left: 1%;
+		}
+		.aui .ResultsPerPageTop {
+			position: static;
 		}
 		.aui .ResultsPerPageBottom {
 			position: static;

@@ -153,7 +153,7 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 	htmlTemplateQuality+="</div>";
 	htmlTemplateQuality+="<div class=\"ibox-content\">";
 	htmlTemplateQuality+="<div class=\"table-responsive scrollbar-inner\" style='overflow:auto;'>";
-	htmlTemplateQuality+="<table id=\"tablethreshould\" class=\"table table-striped\">";
+	htmlTemplateQuality+="<table id=\"tablethreshould\" class=\"table table-striped\" style='max-width: none;'>";
 	htmlTemplateQuality+="<thead>";
 	//has weight
 	if(data['no_weight']==0){
@@ -288,7 +288,7 @@ var assignTemplateDeductFn = function(structureName,data){
 
 		htmlTemplateDeduct+="<div class=\"ibox-content\">";
 		htmlTemplateDeduct+="<div class=\"table-responsive scrollbar-inner\" style='overflow:auto;'>";
-		htmlTemplateDeduct+="<table id=\"tablethreshould\" class=\"table table-striped\">";
+		htmlTemplateDeduct+="<table id=\"tablethreshould\" class=\"table table-striped\" style='max-width: none;'>";
 
 		htmlTemplateDeduct+="<thead>";
 		//has weight
@@ -424,7 +424,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 	htmlTemplateQuantity+="  </div>";
 	htmlTemplateQuantity+="	<div class=\"ibox-content\">";
 	htmlTemplateQuantity+=" <div class=\"table-responsive scrollbar-inner\" style='overflow:auto;'>";
-	htmlTemplateQuantity+="<table id=\"tableAppraisalAssignment\" class=\"table table-striped\">";
+	htmlTemplateQuantity+="<table id=\"tableAppraisalAssignment\" class=\"table table-striped\" style='max-width: none;'>";
 	htmlTemplateQuantity+="<thead>";
 
 	//has weight

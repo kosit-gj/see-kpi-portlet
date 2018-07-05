@@ -250,6 +250,14 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 }
 
 @media ( min-width : 768px) and (max-width: 979px) {
+	#ModalEditEmp {
+		left: 15%;
+		right: 15%;
+	}
+	#ModalImport {
+		left: 15%;
+		right: 15%;
+	}
 	#ModalLevel {
 		left: 15%;
 		right: 15%;

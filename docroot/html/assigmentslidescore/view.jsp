@@ -82,7 +82,10 @@ plid = layout.getPlid();
  
  /* Portrait tablet to landscape and desktop Start##########*/
  @media (min-width: 768px) and (max-width: 979px) {
- 
+ 	#ModalAssignment {
+ 		left: 2%;
+ 		right: 2%;
+ 	}
 	
 	.modal.large {
 		    width: 90%;

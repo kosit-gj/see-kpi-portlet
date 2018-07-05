@@ -167,6 +167,10 @@ User u = themeDisplay.getUser();
 }
 /* Portrait tablet to landscape and desktop */
 @media ( min-width : 768px) and (max-width: 979px) {
+	#ModalImport {
+		left:15%;
+		right:15%;
+	}
 	.aui #confrimModal {
 		left: 58.5%;
 	}

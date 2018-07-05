@@ -1865,8 +1865,8 @@ overflow-y: visible;
                                         <thead>
 	                                        <tr>
 	                                            <th style="width:5%">ID</th>
-	                                            <th style="width:75%">Description </th>
-	                                            <th style="width:20%; text-align:center;"></th>
+	                                            <th style="width: auto;">Description </th>
+	                                            <th style="width: auto; text-align:center;"></th>
 	                                        </tr>
                                         </thead>
                                         <tbody id="listCDS">

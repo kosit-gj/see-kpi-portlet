@@ -569,7 +569,7 @@ $.each(data,function(index,indexEntry){
 		$("#exportToExcel").click(function(){
 	
 			var chackSelect =  $(".selectCheckbox").is(":checked");
-			console.log($(".selectCheckbox").is(":checked"));
+			//console.log($(".selectCheckbox").is(":checked"));
 			if (chackSelect == true){
 				var item_id =[];
 				$.each($(".selectCheckbox").get(),function(index,indexEntry){
@@ -654,8 +654,8 @@ $.each(data,function(index,indexEntry){
 				                        + currentdate.getHours() + ""  
 				                        + currentdate.getMinutes() + "" 
 				                        + currentdate.getSeconds();
-				         saveBlob(blob, "import_assignment_"+datetime+".xlsx");
 						 if (xhr.status == 200) {
+							 saveBlob(blob, "import_assignment_"+datetime+".xlsx");
 							$("#loadingGif").hide();
 						 } else {
 							 $("#loadingGif").hide();
@@ -664,15 +664,16 @@ $.each(data,function(index,indexEntry){
 				    }
 					
 					xhr.onerror = function(e) {
-						  console.log("Error " + e.target.status + " occurred while receiving the document.");
+						  //console.log("Error " + e.target.status + " occurred while receiving the document.");
 						  $("#loadingGif").hide();
-						  callFlashSlide("Error! cannot export this file");
+						  callFlashSlide("Error "+ e.target.status);
 					}
 					
 					xhr.send(formData);
 				} catch(err) {
-					console.log(err.message);
-					callFlashSlide("Error! cannot export this file");
+					//console.log(err.message);
+					$("#loadingGif").hide();
+					callFlashSlide("Error "+err.message);
 				}
 				
 				//$("form#formExportToExcel").submit();
