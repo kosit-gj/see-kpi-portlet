@@ -46,7 +46,7 @@
 		<footer-portlet-javascript>/js/plugins/slimscroll/jquery.slimscroll.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.sparkline.min.js</footer-portlet-javascript>
-		 
+		
 		 <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	     <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
 		
@@ -91,6 +91,7 @@
 		<header-portlet-css>/css/jquery.multiselect.css</header-portlet-css>
 		<header-portlet-css>/css/bootstrap-duallistbox.css</header-portlet-css>
    		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
+   		<header-portlet-css>/js/textEditor_LineControl/editor.css</header-portlet-css>
    		
 		    
  	                       
@@ -101,9 +102,9 @@
 	    <footer-portlet-javascript>/js/jquery.multiselect.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/jquery.bootstrap-duallistbox.js</footer-portlet-javascript>
 	    
-	   
+	     
 	 
-	    
+	   
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>    
 	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
@@ -113,7 +114,7 @@
 	    <footer-portlet-javascript>/Controller/Form/cQuantity.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript> 
-	      
+	    <footer-portlet-javascript>/js/textEditor_LineControl/editor.js</footer-portlet-javascript>  
 	      
 		<css-class-wrapper>appraisal-item-portlet</css-class-wrapper>
 	</portlet>

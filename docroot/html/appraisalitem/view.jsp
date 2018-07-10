@@ -1388,6 +1388,18 @@ overflow-y: visible;
                 
                 <div class='row-fluid'>
 	                	<div class='span12' >
+	                		<!-- panel1 start-->
+	                		<div class="ibox-title3">
+		                          <div class='titlePanel'>Description</div>
+		                      </div>
+		   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px;'>
+		   							<!-- content  start-->	 
+		                             	<textarea id="formulaDescriptionQuality" style="width: 95%" class=""></textarea>
+										
+		                            <!-- content  end-->				
+		   					</div>
+		   				
+	                		<!-- panel1 end -->
 	                		
 	                		<!-- panel1 start-->
 	                		<div class="ibox-title3">

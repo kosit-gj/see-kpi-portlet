@@ -123,7 +123,7 @@ var dropdownDeductScoreFn = function(score,nof_target_score,hint){
 var assignTemplateQualityFn = function(structureName,data,check_disabled_first,check_disabled_second){
 	var item_result_id_array=[];
 	var htmlTemplateQuality="";
-
+	var info_item="";
 	var hintCount = 0;
 	var hintHtml="";
 	$.each(data['hint'],function(index,indexEntry){
@@ -187,11 +187,14 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 
 					item_result_id_array.push(indexEntry['item_result_id']);
 
+					if(indexEntry['formula_desc'] != null || indexEntry['formula_desc'] != ""){
+						info_item="<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>KPI Name : </strong>"+indexEntry['item_name']+"' info-data='"+indexEntry['formula_desc']+"'>i</span>";
+					}else{info_item ="";console.log("no");}
 					//has weight
 						if(data['no_weight']==0){
 							htmlTemplateQuality+="<tr>";
-
-								htmlTemplateQuality+="<td class=''>"+indexEntry['item_name']+"</td>";
+								console.log(indexEntry['formula_desc']);
+								htmlTemplateQuality+="<td class=''>"+indexEntry['item_name']+"  "+info_item+"</td>";
 								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\""+hintHtml+"\">"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 
 								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
@@ -215,7 +218,7 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 						}else{
 							htmlTemplateQuality+="<tr>";
 
-								htmlTemplateQuality+="<td class=''>"+indexEntry['item_name']+"</td>";
+								htmlTemplateQuality+="<td class=''>"+indexEntry['item_name']+"  "+info_item+"</td>";
 								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\""+hintHtml+"\">"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 
 								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
@@ -1003,7 +1006,7 @@ var listAppraisalDetailFn = function(data){
 			 html:true
 		 });
 		//binding tooltip end
-
+		 
 		 if(data['head'][0]['no_weight']==0){
 			 $(".hasWeightGrandTotalArea").show();
 			 $(".noWeightGrandTotalArea").hide();
@@ -1081,6 +1084,20 @@ var listAppraisalDetailFn = function(data){
 				$(this).val(Comma($(this).val()));
 				//console.log(Comma($(this).val()));
 			})
+			$(".infoItem").off("click");
+			 $(".infoItem").on("click",function() {
+					$("#htmlInfoItemName").empty();
+					$("#htmlInfoItem").empty();
+					
+					$("#htmlInfoItemName").html($(this).attr('info-itemName') );
+					$("#htmlInfoItem").html($(this).attr('info-data') );
+					$("#infoItemModal").modal({
+						"backdrop" : setModalPopup[0],
+						"keyboard" : setModalPopup[1]
+					});
+					
+					
+				});
 		//set header end
 
 	});

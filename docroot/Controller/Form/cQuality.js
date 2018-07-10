@@ -4,6 +4,7 @@ var clearQualityFormFn = function(){
 	
 	$("#informationQuality").hide();
 	$("#appraisalItemNameQuality").val("");
+	$("#formulaDescriptionQuality").val("");
 	//$("#appraisalLevelQuality").val("");
 	$("#appraisalLevelQuality option:first").attr('selected','selected');
 	//$("#isShowVarianceQuality").prop("checked",false);
@@ -18,6 +19,7 @@ var updateQualityFn  = function(){
 
 	 var item_name=$("#appraisalItemNameQuality").val();
 	 var item_id=$("#appraisalItemIdQuality").val();
+	 var formula_desc=$("#formulaDescriptionQuality").val();
 	 var appraisal_level_id=$("#appraisalLevelQuality").val();
 	 var structure_id=$("#structure_id_quality").val();
 	 //var department_id=$("#departmentQuality").val();
@@ -49,6 +51,7 @@ var updateQualityFn  = function(){
 		 //"is_show_variance":is_variance,
 		 "is_active":is_active,
 		 "form_id":"2",
+		 "formula_desc":formula_desc,
 		 //"department_code":department_id
 		 "org":organization,
 		 "position":position,
@@ -73,6 +76,7 @@ var insertQualityFn = function(param) {
 	 var item_name=$("#appraisalItemNameQuality").val();
 	 var appraisal_level_id=$("#appraisalLevelQuality").val();
 	 var structure_id=$("#structure_id_quality").val();
+	 var formula_desc=$("#formulaDescriptionQuality").val();
 	// var department_id=$("#departmentQuality").val();
 	 var organization=($('[name="organizationQuality[]"]').val());
 	 var position=($('[name="positionQuality[]"]').val());
@@ -101,6 +105,7 @@ var insertQualityFn = function(param) {
 			 "structure_id":structure_id,
 			 //"is_show_variance":is_variance,
 			 "is_active":is_active,
+			 "formula_desc":formula_desc,
 			// "department_code":department_id,
 			 "org":organization,
 			 "position":position,
@@ -148,7 +153,7 @@ is_active
 		
 		$("#appraisalItemNameQuality").val(data['item_name']);
 		$("#appraisalItemIdQuality").val(data['item_id']);
-		
+		$("#formulaDescriptionQuality").val(data['formula_desc']);
 //		if(data['is_show_variance']==1){
 //			$("#isShowVarianceQuality").prop("checked",true);
 //		}else{

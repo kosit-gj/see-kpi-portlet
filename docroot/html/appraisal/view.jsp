@@ -684,7 +684,9 @@ margin-bottom:1px;
 .aui select, .aui input[type="text"] {
     font-size: 13px;
 }
-
+.aui .infoItem:hover{
+background-color:#71cccc !important;
+}
 </style>
 
 
@@ -1882,6 +1884,39 @@ Is Active
 	                <button data-dismiss="modal" class="btn btn-danger" type="button"><i class="fa fa-times-circle"></i>&nbsp;Cancel</button>
             	</div>
             </div>
+        </div>
+    </div>
+
+
+
+</div>
+<!-- Modal Confirm End -->
+<!-- Modal Confirm Start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="infoItemModal" class="modal inmodal " style="display: none;">
+    <div class="modal-dialog ">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button style="padding-top:5px" type="button" class="close" data-dismiss="modal"><span aria-hidden="true"><i class="fa fa-times"></i></span><span class="sr-only"></span></button>
+                <h4 class="modal-title">Description</h4>
+            </div>
+            <div class="modal-body">
+                <!-- content start -->
+                <!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
+                <hr>
+                 -->
+                <!-- form start -->
+                <div class="alert alert-info" id="htmlInfoItemName">
+			     
+			    </div>
+                <div class="form-kpi-mangement">
+	                <div id="htmlInfoItem">
+	                </div>
+                </div>
+
+                <!-- form start -->
+                <!-- content end -->
+            </div>
+            
         </div>
     </div>
 
