@@ -100,6 +100,7 @@
 	    <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/jquery.multiselect.js</footer-portlet-javascript>
+	     <footer-portlet-javascript>/js/jquery.bootstrap-duallistbox.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/textEditor_LineControl/editor.js</footer-portlet-javascript>
 	    
 	     
@@ -114,7 +115,7 @@
 	    <footer-portlet-javascript>/Controller/Form/cQuantity.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript> 
-	    <footer-portlet-javascript>/js/summernote-textediter/summernote.js</footer-portlet-javascript>  
+	    
 	      
 		<css-class-wrapper>appraisal-item-portlet</css-class-wrapper>
 	</portlet>
