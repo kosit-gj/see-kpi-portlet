@@ -6,9 +6,7 @@
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
-<div class="row">
-<div id="summernote"><p>Hello Summernote</p></div>
-</div>
+
 <%
 /*
 PortletSession portletSession1 = renderRequest.getPortletSession();
