@@ -5,6 +5,7 @@ var clearQualityFormFn = function(){
 	$("#informationQuality").hide();
 	$("#appraisalItemNameQuality").val("");
 	$("#formulaDescriptionQuality").val("");
+	$('#formulaDescriptionQuality').Editor("setText", "");
 	//$("#appraisalLevelQuality").val("");
 	$("#appraisalLevelQuality option:first").attr('selected','selected');
 	//$("#isShowVarianceQuality").prop("checked",false);
@@ -19,7 +20,8 @@ var updateQualityFn  = function(){
 
 	 var item_name=$("#appraisalItemNameQuality").val();
 	 var item_id=$("#appraisalItemIdQuality").val();
-	 var formula_desc=$("#formulaDescriptionQuality").val();
+	 //var formula_desc=$("#formulaDescriptionQuality").val();
+	 var formula_desc= $('#formulaDescriptionQuality').Editor("getText");
 	 var appraisal_level_id=$("#appraisalLevelQuality").val();
 	 var structure_id=$("#structure_id_quality").val();
 	 //var department_id=$("#departmentQuality").val();
@@ -76,7 +78,8 @@ var insertQualityFn = function(param) {
 	 var item_name=$("#appraisalItemNameQuality").val();
 	 var appraisal_level_id=$("#appraisalLevelQuality").val();
 	 var structure_id=$("#structure_id_quality").val();
-	 var formula_desc=$("#formulaDescriptionQuality").val();
+	 //var formula_desc=$("#formulaDescriptionQuality").val();
+	 var formula_desc= $('#formulaDescriptionQuality').Editor("getText");
 	// var department_id=$("#departmentQuality").val();
 	 var organization=($('[name="organizationQuality[]"]').val());
 	 var position=($('[name="positionQuality[]"]').val());
@@ -153,7 +156,8 @@ is_active
 		
 		$("#appraisalItemNameQuality").val(data['item_name']);
 		$("#appraisalItemIdQuality").val(data['item_id']);
-		$("#formulaDescriptionQuality").val(data['formula_desc']);
+		//$("#formulaDescriptionQuality").val(data['formula_desc']);
+		 $('#formulaDescriptionQuality').Editor("setText",data['formula_desc']);
 //		if(data['is_show_variance']==1){
 //			$("#isShowVarianceQuality").prop("checked",true);
 //		}else{

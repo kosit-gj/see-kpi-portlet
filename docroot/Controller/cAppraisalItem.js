@@ -1085,6 +1085,15 @@ $(document).ready(function(){
 			
 		}
 	 });
+	 //https://www.jqueryscript.net/text/Responsive-WYSIWYG-Text-Editor-with-jQuery-Bootstrap-LineControl-Editor.html
+	 $("#formulaDescriptionQuality").Editor({
+		 'print':false,
+		 'insert_img':false,
+		 'insert_table':false,
+		 'insert_link':false,
+		 'unlink':false,
+		 'togglescreen':false
+		 });
 	 
 	 //binding advance multi select start
 	 

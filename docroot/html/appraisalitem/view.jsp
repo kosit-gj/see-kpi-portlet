@@ -170,9 +170,10 @@ plid = layout.getPlid();
  		
 	 		  float: right;
 	 	}
-	 	.form-label-customs{
+	 	.aui .form-label-customs{
 	 		text-align: right;
 	 	}
+
 	 	.aui .row-fluid .span4{
 			width: 32.624%;
 		}
@@ -252,6 +253,9 @@ plid = layout.getPlid();
  	.form-label-quantity{
 		text-align: left;
 		}
+	.aui .form-label-customs{
+	 	text-align: left;
+	 }
 	.form-input-customs-title{
 		width: 250px;
 	}
@@ -763,6 +767,16 @@ overflow-y: visible;
 /* } */
 .ui-state-default{
 	width: 100% !important;
+}
+
+
+
+/*      Text Editer       */
+.aui .btn-group{
+ display: inline-flex;
+}
+.aui .line-control-menu-bar .btn-group{
+	width: auto !important;
 }
 </style>
 <body class=" gray-bg ">
