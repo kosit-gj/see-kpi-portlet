@@ -2603,6 +2603,7 @@ var getDataGanttChartFn = function(item_result_id,ganttPaneDuration,ganttPaneDur
 		dataType:"json",
 		data:{"item_result_id":item_result_id},
 		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 		//console.log(data);
 			var tasksLength=0;

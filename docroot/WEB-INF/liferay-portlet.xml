@@ -91,8 +91,8 @@
 		<header-portlet-css>/css/jquery.multiselect.css</header-portlet-css>
 		<header-portlet-css>/css/bootstrap-duallistbox.css</header-portlet-css>
    		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
-   		<header-portlet-css>/js/textEditor_LineControl/editor.css</header-portlet-css>
-   		
+		<header-portlet-css>/js/textEditor_LineControl/editor.css</header-portlet-css>
+
 		    
  	                       
 	    <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
@@ -100,7 +100,7 @@
 	    <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/jquery.multiselect.js</footer-portlet-javascript>
-	    <footer-portlet-javascript>/js/jquery.bootstrap-duallistbox.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/textEditor_LineControl/editor.js</footer-portlet-javascript>
 	    
 	     
 	 
@@ -114,7 +114,7 @@
 	    <footer-portlet-javascript>/Controller/Form/cQuantity.js</footer-portlet-javascript> 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript> 
-	    <footer-portlet-javascript>/js/textEditor_LineControl/editor.js</footer-portlet-javascript>  
+	    <footer-portlet-javascript>/js/summernote-textediter/summernote.js</footer-portlet-javascript>  
 	      
 		<css-class-wrapper>appraisal-item-portlet</css-class-wrapper>
 	</portlet>
