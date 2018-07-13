@@ -910,6 +910,7 @@ var listAppraisalDetailFn = function(data){
 						"backdrop" : setModalPopup[0],
 						"keyboard" : setModalPopup[1]
 					}).css({"margin-top":"0px"});
+					$("#phase_item_result_id").val(id);
 					getActionPlanFn(id);
 					$("#action_actionplan").val("add");
 
