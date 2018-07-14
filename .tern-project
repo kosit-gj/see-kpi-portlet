@@ -1,1 +1,23 @@
-{"ide":{"scriptPaths":[]},"libs":["ecma5","browser"],"plugins":{"guess-types":{},"outline":{},"liferay":{},"aui":{},"yui":{}}}
+{
+  "libs": [
+    "ecma5",
+    "browser"
+  ],
+  "plugins": {
+    "guess-types": {
+      
+    },
+    "outline": {
+      
+    },
+    "liferay": {
+      
+    },
+    "aui": {
+      
+    },
+    "yui": {
+      
+    }
+  }
+}
