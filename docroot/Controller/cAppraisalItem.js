@@ -385,9 +385,10 @@ var appraisalLevelListFn = function(nameArea,id,defaultAll,multiSelect){
 	if(multiSelect==true){
 	
 		if(id!=undefined && id!=''){
-			$.each(id,function(index,indexEntry){
-				level_array.push(indexEntry['level_id']);
-			});
+			level_array.push(id);
+//			$.each(id,function(index,indexEntry){
+//				level_array.push(indexEntry['level_id']);
+//			});
 			//console.log(level_array);
 		}
 		
