@@ -22,13 +22,11 @@ var getDataFn = function() {
 	var template_name ="";
 	  
 	if(appraisalType == 1){
-		template_name="report_tfg";
+		template_name="report_tfg_org";
 		parameter = {
 				org_id: organization,
 //				param_period: AppraisalPeriod,
-				position_id: "",
-				emp_id: "",
-				level_id: "",
+//				level_id: "",
 				level_org_id: AppraisalOrgLevel,
 				appraisal_type_id: appraisalType
 			  };

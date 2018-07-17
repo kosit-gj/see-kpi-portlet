@@ -127,7 +127,13 @@
 	}
 	
 	.aui .ibox-title{
-		min-height: 0px;
+		border-image: none;
+	    border-style: solid solid none;
+	    border-width: 3px 0 0;
+	    color: black;
+	    margin-bottom: 0;
+	    min-height: 35px;
+	    padding: 0px 10px;
 	}
 	
 	
@@ -676,8 +682,8 @@ overflow:auto;
 		<div class="span12">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title"
-					style="background-color: rgb(83, 120, 253); border-color: rgb(83, 120, 253); min-height: 0px;">
-					<div class="titlePanelSearch">Advance Search</div>
+					style="background-color: rgb(83, 120, 253); border-color: rgb(83, 120, 253); min-height: 0px; padding-top: 7px;">
+					<div class="titlePanelSearch" style="padding-bottom: 5px;">Advance Search</div>
 				</div>
 
 				<div class="ibox-content breadcrumbs2 advance-search"
@@ -753,7 +759,7 @@ overflow:auto;
 							class="form-group pull-right m-b-none ">
 							<button id="btnSearchAdvance" name="btnSearchAdvance"
 								class="btn btn-info input-sm" type="button">
-								<i class="fa fa-download"></i>&nbsp;Export
+								<i class="fa fa-download"></i>&nbsp;Download
 							</button>
 
 						</div>

@@ -9,7 +9,7 @@ var files;
 var emailLinkAppraisal = false;
 
 var getDataFn = function() {
-	
+	 $("body").mLoading('show'); //Loading
 	var AppraisalPeriod= $("#AppraisalPeriod").val();
 	var appraisalType= $("#appraisalType").val();
 	var AppraisalEmpLevel= $("#AppraisalEmpLevel").val();
@@ -50,6 +50,7 @@ var getDataFn = function() {
 		} else {
 			$('#iFrame_report').attr('src',url_report_jasper);
 		}
+	 $("body").mLoading('hide'); //Loading
 };
 
 
