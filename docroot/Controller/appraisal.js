@@ -509,7 +509,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 
 
 						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
-						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"   &lt;button style='width:100px;' class='btn btn-success btn-small btn-gear reason' id='reason-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Reason&lt;/button&gt;  &lt;button style='width:100px;' class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Gantt Chart&lt;/button&gt;  &lt;button style='width:100px;' class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt; &lt;button style='width:100px;' id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100px;' class='btn btn-success btn-small btn-gear attach_file'&gt;Attach File&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"   &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear reason' id='reason-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Reason&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Gantt Chart&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt; &lt;button style='width:100%;' id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;Attach File&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
 						htmlTemplateQuantity+="	</td>";
 
 					htmlTemplateQuantity+="</tr>";
@@ -532,7 +532,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 						}
 
 						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
-						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Gantt&lt;/button&gt; &lt;button class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100px;' class='btn btn-success btn-small btn-gear attach_file'&gt;Attach File&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" style='text-align:center;' data-original-title=\"\" title=\"\"></i>";
+						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;Gantt&lt;/button&gt; &lt;button class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;Attach File&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" style='text-align:center;' data-original-title=\"\" title=\"\"></i>";
 						htmlTemplateQuantity+="	</td>";
 
 					htmlTemplateQuantity+="</tr>";
@@ -882,13 +882,34 @@ var listAppraisalDetailFn = function(data){
 
 			/*bindding popover start*/
 			//Using
-			$(".popover-edit-del").popover(setPopoverDisplay);
+			if( /iPhone|iPad|iPod/i.test(navigator.userAgent) ) {
+				$(".popover-edit-del").popover({
+					delay : {
+						hide : 100
+					},
+					container: '.ibox-content'
+				});
+				
+			} else {
+				$(".popover-edit-del").popover({
+					delay : {
+						hide : 100
+					}
+				});
+			}
+//			$(".popover-edit-del").popover(setPopoverDisplay);
 
 
 			$(".appraisal_result").off("click",".popover-edit-del");
 			$(".appraisal_result").on("click",".popover-edit-del",function(){
-
-				$(".popover").css({"text-align":"center"});
+				
+				if( /iPhone|iPad|iPod/i.test(navigator.userAgent) ) {
+					$(".popover").css({"text-align":"center","width": "120px","margin-left":"78px"});
+//					$(".popover").css({"text-align":"center","width": "120px","margin-left":"78px","margin-top":"-62px"});
+				} else {
+					$(".popover").css({"text-align":"center"});
+				}
+//				$(".popover").css({"text-align":"center"});
 				//$(".popover").css({"text-align":"center","width":"120px"});
 				//$("#tableAppraisalAssignment .popover-content").css({"width":"120px;"});
 				//$("#tableAppraisalAssignment .popover").css({"width":"120px;"});
