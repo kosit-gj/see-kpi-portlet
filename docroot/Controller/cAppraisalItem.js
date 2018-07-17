@@ -384,11 +384,11 @@ var appraisalLevelListFn = function(nameArea,id,defaultAll,multiSelect){
 
 	if(multiSelect==true){
 	
-		if(id!=undefined && id!=''){
-			level_array.push(id);
-//			$.each(id,function(index,indexEntry){
-//				level_array.push(indexEntry['level_id']);
-//			});
+		if(id!=undefined && id!='' && Array.isArray(id)){
+//			level_array.push(id);
+			$.each(id,function(index,indexEntry){
+				level_array.push(indexEntry['level_id']);
+			});
 			//console.log(level_array);
 		}
 		
@@ -707,7 +707,7 @@ var dropDrowOrgFn = function(nameArea,id,defaultAll){
 		url:restfulURL+"/"+serviceName+"/public/org",
 		type:"get",
 		dataType:"json",
-		async:false,
+		async:true,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
@@ -757,7 +757,7 @@ var dropDrowPositionFn = function(nameArea,id,defaultAll){
 		url:restfulURL+"/"+serviceName+"/public/position",
 		type:"get",
 		dataType:"json",
-		async:false,
+		async:true,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
