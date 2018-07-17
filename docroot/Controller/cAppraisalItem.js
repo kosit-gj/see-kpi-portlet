@@ -728,7 +728,13 @@ var dropDrowOrgFn = function(nameArea,id,defaultAll){
 			
 			$("#org"+nameArea+"Form").html(htmlOption);
 			$("#organization"+nameArea).val(org_array);
-			$('select[name="organization'+nameArea+'[]"]').bootstrapDualListbox();
+			$('select[name="organization'+nameArea+'[]"]').bootstrapDualListbox({
+				bootstrap2Compatible: true,
+				moveOnSelect: false,
+				preserveSelectionOnMove: 'moved'
+			});
+			$(".move,.moveall,.remove,.removeall").css("width", "50%");
+//			$('select[name="organization'+nameArea+'[]"]').bootstrapDualListbox();
 			
 		}
 	});
@@ -777,7 +783,13 @@ var dropDrowPositionFn = function(nameArea,id,defaultAll){
 			htmlOption+="</select>";
 			$("#position"+nameArea+"Form").html(htmlOption);
 			$("#position"+nameArea).val(position_array);
-			$('select[name="position'+nameArea+'[]"]').bootstrapDualListbox();
+			$('select[name="position'+nameArea+'[]"]').bootstrapDualListbox({
+				bootstrap2Compatible: true,
+				moveOnSelect: false,
+				preserveSelectionOnMove: 'moved'
+			});
+			$(".move,.moveall,.remove,.removeall").css("width", "50%");
+//			$('select[name="position'+nameArea+'[]"]').bootstrapDualListbox();
 			
 		}
 	});
