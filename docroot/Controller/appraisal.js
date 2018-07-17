@@ -127,11 +127,7 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 	var hintCount = 0;
 	var hintHtml="";
 	$.each(data['hint'],function(index,indexEntry){
-		if(hintCount==0){
-			hintHtml+=indexEntry['hint'];
-		}else{
-			hintHtml+="<br>"+indexEntry['hint'];
-		}
+		hintHtml+="<div style='text-align: left;\'>"+indexEntry['hint']+"</div>";
 		hintCount++;
 	});
 
@@ -404,11 +400,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 	var hintCount = 0;
 	var hintHtml="";
 	$.each(data['hint'],function(index,indexEntry){
-		if(hintCount==0){
-			hintHtml+=index+" "+indexEntry['hint'];
-		}else{
-			hintHtml+="<br>"+index+" "+indexEntry['hint'];
-		}
+		hintHtml+="<div style='text-align: left;\'>"+indexEntry['hint']+"</div>";
 		hintCount++;
 	});
 
