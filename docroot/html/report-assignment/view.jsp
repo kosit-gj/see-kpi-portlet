@@ -682,7 +682,7 @@ overflow:auto;
 		<div class="span12">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title"
-					style="background-color: rgb(83, 120, 253); border-color: rgb(83, 120, 253); min-height: 0px; padding-top: 7px;">
+					style=" padding-bottom: 10px; background-color: rgb(83, 120, 253); border-color: rgb(83, 120, 253); min-height: 0px; padding-top: 7px;" >
 					<div class="titlePanelSearch" style="padding-bottom: 5px;">Advance Search</div>
 				</div>
 
@@ -759,7 +759,7 @@ overflow:auto;
 							class="form-group pull-right m-b-none ">
 							<button id="btnSearchAdvance" name="btnSearchAdvance"
 								class="btn btn-info input-sm" type="button">
-								<i class="fa fa-download"></i>&nbsp;Download
+								<i class="fa fa-download"></i>&nbsp;Export
 							</button>
 
 						</div>

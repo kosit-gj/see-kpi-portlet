@@ -256,7 +256,7 @@ var getDataFn2 = function() {
 	var data = JSON.stringify(parameter);
 	
 	//$('#iFrame_report').attr('src',url_report_jasper);
-	var url_report_jasper = restfulURL+"/"+serviceName+"/public/generate?template_name=kpiapus&template_format=xls&used_connection=1&inline=1&data="+data;
+	var url_report_jasper = restfulURL+"/"+serviceName+"/public/generate?template_name=Report-Assignment&template_format=xls&used_connection=1&inline=1&data="+data;
 	window.open(url_report_jasper,"_blank");
 	return false;
 };
