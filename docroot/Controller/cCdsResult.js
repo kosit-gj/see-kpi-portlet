@@ -188,7 +188,7 @@ var listCdsResultFn = function (data) {
 		htmlTable += "<td class='columnSearch'>"+ $("#param_month_name").val()+ "</td>";
 		//htmlTable += "<td class='columnSearch'>"+ indexEntry["month_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch' style='text-align: right;padding-right: 10px;'> <input id='cdsValueID-"+indexEntry["cds_result_id"]+"-"+indexEntry["cds_id"]+"-"+indexEntry["org_id"]+"-"+indexEntry["emp_id"]+"-"+indexEntry["position_id"]+"-"+indexEntry["level_id"]+"-"+indexEntry["year"]+"-"+indexEntry["month"];
-		htmlTable +="'style='text-align:right;width: 130px;' class='cdsValue numberOnlyCds addCommaCds' disabled type=\"text\"  value='"+ (indexEntry["cds_value"] == "" ? "" :addCommas(parseFloat(indexEntry["cds_value"]).toFixed(2)))+ "'></td>";
+		htmlTable +="'style='text-align:right;width: 130px;' class='cdsValue addCommaCds' disabled type=\"text\"  value='"+ (indexEntry["cds_value"] == "" ? "" :addCommas(parseFloat(indexEntry["cds_value"]).toFixed(2)))+ "'></td>";
 		//htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;text-align: center;\"><i id='"+ indexEntry["cds_result_id"]+ "' class='fa fa-trash del' style='color: red; cursor: pointer;'></i></td>";
 		if(indexEntry["cds_result_id"] == null){
 			htmlTable += "<td class='columnSearch'></td>";

@@ -1194,6 +1194,11 @@ var listDashBoardAllKPIFn = function(data){
 	 var org= ($("#param_emp").val() == "" ? $("#param_org_id").val() :$("#param_emp").val());
 	var htmlData1="";
 	var htmlData3="";
+	var forecast;
+	var target;
+	var actual;
+	var percent_target;
+	var percent_forecast;
 	 $.each(data,function(index,indexEntry){
 	  var htmlData2="";
 	  htmlData1+="<tr>";
@@ -1204,6 +1209,11 @@ var listDashBoardAllKPIFn = function(data){
 	   
 	   //loop here..
 	   $.each(indexEntry['org'],function(index2,indexEntry2){
+		    target = (indexEntry2['target']==null || indexEntry2['target']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['target']));
+			forecast = (indexEntry2['forecast']==null || indexEntry2['forecast']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['forecast']));
+			actual = (indexEntry2['actual']==null || indexEntry2['actual']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['actual']));
+			percent_target = (indexEntry2['percent_target']==null || indexEntry2['percent_target']=='') ? '' : addCommas(notNullFn(indexEntry2['percent_target']));
+			percent_forecast = (indexEntry2['percent_forecast']==null || indexEntry2['percent_forecast']=='') ? '' : addCommas(notNullFn(indexEntry2['percent_forecast']));
 		if(indexEntry2!=""){ 
 		   orgArray[index2]=indexEntry2['org'];
 		}
@@ -1220,16 +1230,16 @@ var listDashBoardAllKPIFn = function(data){
 	     htmlData2+="</thead>";
 	     htmlData2+="<tbody>";
 	      htmlData2+="<tr>";
-	      htmlData2+="<td style='text-align:right;'>"+addCommas(notNullFn(indexEntry2['target']))+"</td>";
-	      htmlData2+="<td style='text-align:right;'>"+addCommas(notNullFn(indexEntry2['forecast']))+"</td>";
-	      htmlData2+="<td style='text-align:right;'>"+addCommas(notNullFn(indexEntry2['actual']))+"</td>";
+	      htmlData2+="<td style='text-align:right;'>"+target+"</td>";
+	      htmlData2+="<td style='text-align:right;'>"+forecast+"</td>";
+	      htmlData2+="<td style='text-align:right;'>"+actual+"</td>";
 	      htmlData2+="</tr>";
 	      htmlData2+="<tr>";
-	      htmlData2+="<td>%Target<span style='float:right'>"+addCommas(notNullFn(indexEntry2['percent_target']))+"</span></td>";
+	      htmlData2+="<td>%Target<span style='float:right'>"+percent_target+"</span></td>";
 	      htmlData2+="<td colspan='2'><div class='sparkline' id='perTarget"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_target_str']+"</div></td>";
 	      htmlData2+="</tr>";
 	      htmlData2+="<tr>";
-	      htmlData2+="<td>%Forecast<span style='float:right'>"+addCommas(notNullFn(indexEntry2['percent_forecast']))+"</span></td>";
+	      htmlData2+="<td>%Forecast<span style='float:right'>"+percent_forecast+"</span></td>";
 	      htmlData2+="<td colspan='2'><div class='sparkline' id='perForecast"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_forecast_str']+"</div></td>";  
 	      htmlData2+="</tr>";
 	     htmlData2+="</tbody>";
@@ -1250,16 +1260,16 @@ var listDashBoardAllKPIFn = function(data){
 	    htmlData3+="</thead>";
 	     htmlData3+="<tbody>";
 	      htmlData3+="<tr>";
-	      htmlData3+="<td style='text-align:right;'>"+addCommas(notNullFn(indexEntry2['target']))+"</td>";
-	      htmlData3+="<td style='text-align:right;'>"+addCommas(notNullFn(indexEntry2['forecast']))+"</td>";
-	      htmlData3+="<td style='text-align:right;'>"+addCommas(notNullFn(indexEntry2['actual']))+"</td>";
+	      htmlData3+="<td style='text-align:right;'>"+target+"</td>";
+	      htmlData3+="<td style='text-align:right;'>"+forecast+"</td>";
+	      htmlData3+="<td style='text-align:right;'>"+actual+"</td>";
 	      htmlData3+="</tr>";
 	      htmlData3+="<tr>";
-	       htmlData3+="<td>%Target<span style='float:right'>"+addCommas(notNullFn(indexEntry2['percent_target']))+"</span></td>";
+	       htmlData3+="<td>%Target<span style='float:right'>"+percent_target+"</span></td>";
 	       htmlData3+="<td colspan='2'><div class='sparkline' id='perTarget"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_target_str']+"</div></td>";
 	      htmlData3+="</tr>";
 	      htmlData3+="<tr>";
-	       htmlData3+="<td>%Forecast<span style='float:right'>"+addCommas(notNullFn(indexEntry2['percent_forecast']))+"</span></td>";
+	       htmlData3+="<td>%Forecast<span style='float:right'>"+percent_forecast+"</span></td>";
 	       htmlData3+="<td colspan='2'><div class='sparkline' id='perForecast"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_forecast_str']+"</div></td>";   
 	      htmlData3+="</tr>";
 	      htmlData3+="</tbody>";

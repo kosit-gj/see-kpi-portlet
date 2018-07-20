@@ -627,7 +627,7 @@ var dropDrowkpiTypeFn = function(nameArea,id,defaultAll){
 		nameArea="";
 	}
 	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/kpi_type",
+		url:restfulURL+"/"+serviceName+"/public/kpi_type/list_kpi_type",
 		type:"get",
 		dataType:"json",
 		async:false,

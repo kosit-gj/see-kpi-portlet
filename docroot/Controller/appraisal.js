@@ -494,7 +494,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 				if(data['no_weight']==0){
 					htmlTemplateQuantity+="<tr >";
 						htmlTemplateQuantity+="<td>"+indexEntry['perspective_name']+"</td>";
-						htmlTemplateQuantity+="<td id=\"item_name-"+indexEntry['item_result_id']+"\">"+indexEntry['item_name']+paperclip+"</td>";
+						htmlTemplateQuantity+="<td id=\"item_name-"+indexEntry['item_result_id']+"\">"+indexEntry['item_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 						htmlTemplateQuantity+="<td>"+indexEntry['uom_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore addComma\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(2))+"></td>";
@@ -510,7 +510,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 
 
 						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
-						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"   &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear reason' id='reason-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Reason&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Gantt Chart&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt; &lt;button style='width:100%;' id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;Attach File&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"   &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear reason' id='reason-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Reason&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Gantt Chart&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt; &lt;button style='width:100%;' id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;Attach File&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>"+paperclip;
 						htmlTemplateQuantity+="	</td>";
 
 					htmlTemplateQuantity+="</tr>";
@@ -518,7 +518,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 					//no_weight
 					htmlTemplateQuantity+="<tr >";
 						htmlTemplateQuantity+="<td>"+indexEntry['perspective_name']+"</td>";
-						htmlTemplateQuantity+="<td>"+indexEntry['item_name']+paperclip+"</td>";
+						htmlTemplateQuantity+="<td>"+indexEntry['item_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 						htmlTemplateQuantity+="<td>"+indexEntry['uom_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input type=\"text\"  class=\"span10 input-sm-small numberOnly addComma itemScore\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(2))+"></td>";
@@ -533,7 +533,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 						}
 
 						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
-						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;Gantt&lt;/button&gt; &lt;button class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;Attach File&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" style='text-align:center;' data-original-title=\"\" title=\"\"></i>";
+						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;Gantt&lt;/button&gt; &lt;button class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;Attach File&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" style='text-align:center;' data-original-title=\"\" title=\"\"></i>"+paperclip;
 						htmlTemplateQuantity+="	</td>";
 
 					htmlTemplateQuantity+="</tr>";
@@ -734,7 +734,6 @@ var dropDrowAppraisalEmpLevelFn = function(id){
 			$("#AppraisalEmpLevel").html(htmlOption);
 		}
 	});
-	dropDrowIndividualOrgLevelFn();
 }
 
 var dropDrowDepartmentFn = function(id){
@@ -2832,7 +2831,7 @@ $(document).ready(function() {
 			    $("#Position").prop("disabled", false);
 			    $("#EmpName").prop("disabled", false);
 				$("#AppraisalEmpLevel").prop("disabled", false);
-				dropDrowAppraisalEmpLevelFn();				
+				dropDrowAppraisalEmpLevelFn();
 			  }
 			});
 			$("#appraisalType").change();
@@ -2857,6 +2856,7 @@ $(document).ready(function() {
 			});
 			
 			setParamSearch(dataSetParam);// in cMain.js
+			dropDrowIndividualOrgLevelFn();
 
 			//Auto complete Start
 			

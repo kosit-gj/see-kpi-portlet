@@ -2011,7 +2011,7 @@ var assignTemplateQualityFn = function(structureName,data){
 		
 	htmlTemplateQuality+="</div>";
 	htmlTemplateQuality+="<div class=\"ibox-content\">";
-	htmlTemplateQuality+="<div class=\"table-responsive scrollbar-inner\"  style='overflow:auto;'>";
+	htmlTemplateQuality+="<div class=\"table-responsive scrollbar-inner\">";
 	htmlTemplateQuality+="<table id=\"tableQuality\" style='top: -37px; max-width: none;'  class=\"table table-striped tableQuality fixedHeader\">";
 	htmlTemplateQuality+="<thead>";
 		htmlTemplateQuality+="<tr>";
@@ -2065,7 +2065,7 @@ var assignTemplateDeductFn = function(structureName,data){
 	htmlTemplateDeduct+="</div>";
 		
 		htmlTemplateDeduct+="<div class=\"ibox-content\">";
-		htmlTemplateDeduct+="<div class=\"table-responsive scrollbar-inner\"  style='overflow:auto;'>";
+		htmlTemplateDeduct+="<div class=\"table-responsive scrollbar-inner\">";
 		htmlTemplateDeduct+="<table id=\"tableDeduct\" style='top: -37px; max-width: none;' class=\"table table-striped tableDeduct fixedHeader\">";
               		
 		htmlTemplateDeduct+="<thead>";
@@ -2133,7 +2133,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 			htmlTemplateQuantity+="      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-"+data['structure_id']+"'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-"+data['structure_id']+"'></span>Total Weight <span id='weigth_total_quantity_percentage_target-"+data['structure_id']+"'>"+data['total_weight']+"%</span></div>";
 			htmlTemplateQuantity+="  </div>";
 			htmlTemplateQuantity+="	<div class=\"ibox-content\">";
-			htmlTemplateQuantity+=" <div class=\"table-responsive scrollbar-inner\"  style='overflow:auto;'>";
+			htmlTemplateQuantity+=" <div class=\"table-responsive scrollbar-inner\">";
 			htmlTemplateQuantity+="<table style='width:100%; top: -38px; max-width: none;' id=\"tableQauntity\" class=\"table table-striped tableQauntity fixedHeader\">";
 			htmlTemplateQuantity+="<thead>";
 				htmlTemplateQuantity+="<tr>";

@@ -270,6 +270,11 @@ var getColorJvectorMap = function(){
 }
 var listDataPerformanceDetailFn = function(data,district,type){
 	//console.log(data);
+	var forecast;
+	var target;
+	var actual;
+	var percent_target;
+	var percent_forecast;
 	var scrollID =  $('#mapArea').children();
 	var scroll;
 	$(window).off("scroll","resize");
@@ -314,6 +319,12 @@ var listDataPerformanceDetailFn = function(data,district,type){
 					 rangeColorsThreshold=indexEntry2['rangeColor'];
 					
 				}
+				
+				target = (indexEntry2['target']==null || indexEntry2['target']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['target']));
+				forecast = (indexEntry2['forecast']==null || indexEntry2['forecast']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['forecast']));
+				actual = (indexEntry2['actual']==null || indexEntry2['actual']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['actual']));
+				percent_target = (indexEntry2['percent_target']==null || indexEntry2['percent_target']=='') ? '' : addCommas(notNullFn(indexEntry2['percent_target']));
+				percent_forecast = (indexEntry2['percent_forecast']==null || indexEntry2['percent_forecast']=='') ? '' : addCommas(notNullFn(indexEntry2['percent_forecast']));
 				
 				/*
 			actual
@@ -368,16 +379,16 @@ var listDataPerformanceDetailFn = function(data,district,type){
 							dataTableHTML+="</thead>";
 							dataTableHTML+="<tbody>";
 								dataTableHTML+="<tr>";
-									dataTableHTML+="<td style=' text-align: right !important;'>"+addCommas(notNullFn(indexEntry2['target']))+"</td>";
-									dataTableHTML+="<td style=' text-align: right !important;'>"+addCommas(notNullFn(indexEntry2['forecast']))+"</td>";
-									dataTableHTML+="<td style=' text-align: right !important;'>"+addCommas(notNullFn(indexEntry2['actual']))+"</td>";
+									dataTableHTML+="<td style=' text-align: right !important;'>"+target+"</td>";
+									dataTableHTML+="<td style=' text-align: right !important;'>"+forecast+"</td>";
+									dataTableHTML+="<td style=' text-align: right !important;'>"+actual+"</td>";
 								dataTableHTML+="</tr>";
 								dataTableHTML+="<tr>";
-									dataTableHTML+="<td>%Taget<span style='float:right'>"+addCommas(notNullFn(indexEntry2['percent_target']))+"</span></td>";
+									dataTableHTML+="<td>%Taget<span style='float:right'>"+percent_target+"</span></td>";
 									dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:0;'  >"+indexEntry2['percent_target_str']+"</div></td>";
 								dataTableHTML+="</tr>";
 								dataTableHTML+="<tr>";
-									dataTableHTML+="<td>%Forecast<span style='float:right'>"+addCommas(notNullFn(indexEntry2['percent_forecast']))+"</span></td>";
+									dataTableHTML+="<td>%Forecast<span style='float:right'>"+percent_forecast+"</span></td>";
 									dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:0;'>"+indexEntry2['percent_forecast_str']+"</div></td>";
 								dataTableHTML+="</tr>";
 							dataTableHTML+="</tbody>";

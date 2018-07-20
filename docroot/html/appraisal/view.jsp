@@ -36,11 +36,6 @@ plid = layout.getPlid();
 <input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
 
 <style>
-.table-responsive {
-	white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
  /* Large desktop Start#####################################*/
  @media (min-width: 1200px) {
 
@@ -206,6 +201,12 @@ plid = layout.getPlid();
 	.aui #advanceSearchAppraisal.row-fluid .span3 {
 	    width: 24.2%;
 	}
+	
+	.aui .table-responsive {
+		white-space: nowrap;
+	    /*overflow: hidden;*/
+	    text-overflow: ellipsis;
+	}
 
 
   }
@@ -256,6 +257,12 @@ plid = layout.getPlid();
 	}
 	.saveAndCancelArea{
 		text-align:left;
+	}
+	
+	.aui .table-responsive {
+		white-space: nowrap;
+	    /*overflow: hidden;*/
+	    text-overflow: ellipsis;
 	}
 
 	#actualvsTargetBar{
@@ -326,6 +333,12 @@ plid = layout.getPlid();
 	}
 	.saveAndCancelArea{
 		text-align:left;
+	}
+	
+	.aui .table-responsive {
+		white-space: nowrap;
+	    /*overflow: hidden;*/
+	    text-overflow: ellipsis;
 	}
 
 	#actualvsTargetBar{
