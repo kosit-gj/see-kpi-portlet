@@ -399,6 +399,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 	var htmlTemplateQuantity = "";
 	var hintCount = 0;
 	var hintHtml="";
+	var paperclip;
 	$.each(data['hint'],function(index,indexEntry){
 		hintHtml+="<div style='text-align: left;\'>"+indexEntry['hint']+"</div>";
 		hintCount++;
@@ -476,7 +477,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 			htmlTemplateQuantity+="<tbody id=\"\" class='appraisal_result'>";
 			$.each(data['items'],function(index,indexEntry){
 
-
+				paperclip = (indexEntry['files_amount'] > 0) ? "&nbsp;&nbsp;<i class='fa fa-paperclip' style='font-weight: bold;'></i>" : "";
 				item_result_id_array.push(indexEntry['item_result_id']);
 				/*
 				item_result_id
@@ -493,7 +494,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 				if(data['no_weight']==0){
 					htmlTemplateQuantity+="<tr >";
 						htmlTemplateQuantity+="<td>"+indexEntry['perspective_name']+"</td>";
-						htmlTemplateQuantity+="<td id=\"item_name-"+indexEntry['item_result_id']+"\">"+indexEntry['item_name']+"</td>";
+						htmlTemplateQuantity+="<td id=\"item_name-"+indexEntry['item_result_id']+"\">"+indexEntry['item_name']+paperclip+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 						htmlTemplateQuantity+="<td>"+indexEntry['uom_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore addComma\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(2))+"></td>";
@@ -517,7 +518,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 					//no_weight
 					htmlTemplateQuantity+="<tr >";
 						htmlTemplateQuantity+="<td>"+indexEntry['perspective_name']+"</td>";
-						htmlTemplateQuantity+="<td>"+indexEntry['item_name']+"</td>";
+						htmlTemplateQuantity+="<td>"+indexEntry['item_name']+paperclip+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 						htmlTemplateQuantity+="<td>"+indexEntry['uom_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input type=\"text\"  class=\"span10 input-sm-small numberOnly addComma itemScore\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(2))+"></td>";
