@@ -36,7 +36,11 @@ plid = layout.getPlid();
 <input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
 
 <style>
-
+.table-responsive {
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
  /* Large desktop Start#####################################*/
  @media (min-width: 1200px) {
 
