@@ -169,7 +169,7 @@ var dropDrowAppraisalEmpLevelFn = function(id){
 			$("#AppraisalEmpLevel").html(htmlOption);
 		}
 	});
-	dropDrowIndividualOrgLevelFn();
+	//dropDrowIndividualOrgLevelFn();
 }
 
 var dropDrowIndividualOrgLevelFn = function(id){
@@ -549,6 +549,7 @@ $(document).ready(function() {
 	});
     
     $(".app_url_hidden").show();
+    dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
 		
   }
 });
