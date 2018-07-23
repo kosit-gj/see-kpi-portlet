@@ -55,5 +55,6 @@
 		<portlet id="report-KPIs"></portlet>
 		<portlet id="report-tfg"></portlet>
 		<portlet id="report-assignment"></portlet>
+		<portlet id="job-log"></portlet>
 	</category>
 </display>
