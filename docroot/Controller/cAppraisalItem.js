@@ -2,7 +2,6 @@
 /*#########################  Main Function Data #######################*/
 //Global variable
 var globalData=[];
-
 //Get Data
 var getDataFn = function(page,rpp) {
 	
@@ -877,6 +876,8 @@ var listLevelForCopyFn = function(){
 /*#########################  Custom Function Data #######################*/
 
 
+
+
 //Ready to call Function.
 $(document).ready(function(){
 	
@@ -889,9 +890,8 @@ $(document).ready(function(){
 	if(username!="" && username!=null & username!=[] && username!=undefined ){
 		if(connectionServiceFn(username,password,plid)==true){
 	
-	
-	
 
+	
 	
 	//$('#include_deduct_score').load($("#url_portlet").val()+'/Form/deduct-score.html');
 	//$('#include_quality').load($("#url_portlet").val()+'/Form/quality.html');
@@ -1099,7 +1099,7 @@ $(document).ready(function(){
 		}
 	 });
 	 //https://www.jqueryscript.net/text/Responsive-WYSIWYG-Text-Editor-with-jQuery-Bootstrap-LineControl-Editor.html
-	 $("#formulaDescriptionQuality").Editor({
+	/* $("#formulaDescriptionQuality").Editor({
 		 'print':false,
 		 'insert_img':false,
 		 'insert_table':false,
@@ -1107,7 +1107,7 @@ $(document).ready(function(){
 		 'unlink':false,
 		 'togglescreen':false
 		 });
-	 
+	 */
 	 //binding advance multi select start
 	 
 	  //var demo1 = $('select[name="duallistbox_demo1[]"]').bootstrapDualListbox();

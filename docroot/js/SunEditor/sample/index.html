@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="https://github.com/JiHong88" />
+    <meta name="keywords" content="wysiwyg,editor,javascript,suneditor,wysiwyg eidtor,rich text editor,html editor,contenteditable,위지위그 에디터 웹에디터">
+    <meta name="description" content="Pure javascript wysiwyg web editor" />
+    <title>Suneditor</title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="bootstrap/bootstrap.css" media="all">
+    <script type="text/javascript" src="bootstrap/tether.min.js"></script>
+    <script type="text/javascript" src="bootstrap/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+    <!-- main css -->
+    <link rel="stylesheet" href="css/sample.css" media="all">
+    <link rel="stylesheet" href="css/github.css">
+    <link rel="stylesheet" href="css/github-frameworks.css">
+    <!-- suneditor -->
+    <link href="../src/css/suneditor.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="../src/suneditor.js"></script>
+    <script>
+        $.getJSON('https://api.github.com/repos/JiHong88/SunEditor', function(data) {
+            $('#stargazers').html(' Stargazers ' + data.stargazers_count);
+        });
+    </script>
+</head>
+<body class="back_index" style="min-width:100%; background-color:#000;">
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html" title="Suneditor"><b>Suneditor</b></a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="html/getting-started.html" title="Getting started">Getting started</a></li>
+                <li><a href="html/examples.html" title="Examples">Examples</a></li>
+                <li><a href="html/customize.html" title="Customize">Customize</a></li>
+                <li><a href="html/document.html" title="Document">Document</a></li>
+                <li>&nbsp;&nbsp;</li>
+                <li><a href="//codeload.github.com/JiHong88/SunEditor/zip/master" class="down-icon" title="Download">Download</a></li>
+                <li>
+                    <a href="https://github.com/JiHong88/SunEditor" target="_blank" id="stargazers" class="github-cat" title="go to github"> Stargazers 00</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="content">
+    <form name="frm">
+        <textarea id="editor" style="width:100%; height:400px;">Hi</textarea>
+    </form>
+    <div class="intro">
+        <p>The Suneditor is based on pure JavaScript</p>
+        <span>Suneditor is a lightweight, flexible, customizable WYSIWYG text editor for your web applications</span><br>
+        <span>Supported Browser -</span><br>
+        <span style="color:#ffe2a4;">Chrome, Safari, Opera, Firefox, Edge, IE 11, Mobile web</span><br>
+    </div>
+    <footer>
+        <p>Suneditor create by JiHong.Lee</p>
+        <p>Based on javascript</p>
+        <p>Suneditor distributed under the MIT license.</p>
+        <p><a href="https://github.com/JiHong88/SunEditor" target="_blank" style="color:#f4b124;">go to GitHub suneditor</a></p>
+    </footer>
+</div>
+
+<script>
+    SUNEDITOR.create('editor');
+</script>
+</body>
+</html>

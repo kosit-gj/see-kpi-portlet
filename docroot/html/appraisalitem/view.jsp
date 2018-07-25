@@ -30,7 +30,12 @@ plid = layout.getPlid();
 <input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
 
 <style>
-
+.aui .sun-editor{
+ z-index: 999999999999;
+}
+.sun-editor .sun-editor-id-toolbar .editor_tool {
+    height: 18px;
+    }
 .ui-multiselect-menu{
 	z-index: 5555;
 }
@@ -1407,9 +1412,11 @@ overflow-y: visible;
 		                          <div class='titlePanel'>Description</div>
 		                      </div>
 		   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px;'>
-		   							<!-- content  start-->	 
-		                             	<textarea id="formulaDescriptionQuality" style="width: 95%" class=""></textarea>
-										
+		   							<!-- content  start-->	
+		   							<div id=sunEdit>
+		   								 <textarea id="formulaDescriptionQuality" style="width: 95%" class=""></textarea> 
+		   							</div> 
+		                             	
 		                            <!-- content  end-->				
 		   					</div>
 		   				

@@ -1,11 +1,13 @@
 
 //Cleaning
+
 var clearQualityFormFn = function(){
 	
 	$("#informationQuality").hide();
 	$("#appraisalItemNameQuality").val("");
 	$("#formulaDescriptionQuality").val("");
-	$('#formulaDescriptionQuality').Editor("setText", "");
+//	$('#formulaDescriptionQuality').Editor("setText", "");
+	// editorFormulaDescriptionQuality.setContent("");
 	//$("#appraisalLevelQuality").val("");
 	$("#appraisalLevelQuality option:first").attr('selected','selected');
 	//$("#isShowVarianceQuality").prop("checked",false);
@@ -16,12 +18,11 @@ var clearQualityFormFn = function(){
 
 //Update
 var updateQualityFn  = function(){
-	
-
 	 var item_name=$("#appraisalItemNameQuality").val();
 	 var item_id=$("#appraisalItemIdQuality").val();
 	 //var formula_desc=$("#formulaDescriptionQuality").val();
-	 var formula_desc= $('#formulaDescriptionQuality').Editor("getText");
+	 var formula_desc= editorFormulaDescriptionQuality.getContent();
+	 //var formula_desc= $('#formulaDescriptionQuality').Editor("getText");
 	 var appraisal_level_id=$("#appraisalLevelQuality").val();
 	 var structure_id=$("#structure_id_quality").val();
 	 //var department_id=$("#departmentQuality").val();
@@ -73,13 +74,13 @@ var updateQualityFn  = function(){
 };
 //Insert
 var insertQualityFn = function(param) {
-	
-	
+	suneditorFn();
 	 var item_name=$("#appraisalItemNameQuality").val();
 	 var appraisal_level_id=$("#appraisalLevelQuality").val();
 	 var structure_id=$("#structure_id_quality").val();
 	 //var formula_desc=$("#formulaDescriptionQuality").val();
-	 var formula_desc= $('#formulaDescriptionQuality').Editor("getText");
+	 var formula_desc= editorFormulaDescriptionQuality.getContent();
+	 // var formula_desc= $('#formulaDescriptionQuality').Editor("getText");
 	// var department_id=$("#departmentQuality").val();
 	 var organization=($('[name="organizationQuality[]"]').val());
 	 var position=($('[name="positionQuality[]"]').val());
@@ -147,6 +148,7 @@ structure_id,
 is_active
 */
 	if(action=='edit'){
+		suneditorFn();
 		clearQualityFormFn();
 		appraisalLevelListFn("Quality",data['appraisal_level'],defaultAll=false,multiSelect=true);	
 		
@@ -157,7 +159,10 @@ is_active
 		$("#appraisalItemNameQuality").val(data['item_name']);
 		$("#appraisalItemIdQuality").val(data['item_id']);
 		//$("#formulaDescriptionQuality").val(data['formula_desc']);
-		 $('#formulaDescriptionQuality').Editor("setText",data['formula_desc']);
+		// $('#formulaDescriptionQuality').Editor("setText",data['formula_desc']);
+		editorFormulaDescriptionQuality.setContent(data['formula_desc']);
+		
+		console.log(data['formula_desc']);
 //		if(data['is_show_variance']==1){
 //			$("#isShowVarianceQuality").prop("checked",true);
 //		}else{
@@ -175,14 +180,6 @@ is_active
 		$("#structure_id_quality").val(structureId);
 		$("#modalQualityDescription").html("Edit "+structureName);
 
-		
-		
-		
-		
-		
-	
-	
-		
 	}else if(action=='add'){
 		/*
 		item_name,
@@ -279,3 +276,54 @@ $(document).ready(function(){
 		 return true;
 	});
 });
+
+var editorFormulaDescriptionQuality ;
+var suneditorFn = function() {
+	var htmlOption = '<textarea id="formulaDescriptionQuality" style="width: 95%" class=""></textarea>';
+	$("#sunEdit").html(htmlOption);
+	editorFormulaDescriptionQuality = SUNEDITOR.create('formulaDescriptionQuality', {
+
+	    height: 250,
+	   width: '100%',
+
+	   // new CSS font properties
+	   addFont: null,
+
+	   // width/heigh of the video
+	   videoX: 560,
+	   videoY: 315,
+
+	   // image file input
+	   imageFileInput: undefined,
+
+	   // image url input
+	   imageUrlInput: undefined,
+
+	   // image size
+	   imageSize: '350px',
+	   
+	   // image upload url
+	   imageUploadUrl: null,
+
+	   // font list
+	   fontList: null,
+	   
+	   // font size list
+	   fontSizeList: null,
+
+	   // show/hide toolbar icons
+	   buttonList: [
+	     ['undo', 'redo'],
+	     ['fontSize', 'formats'],
+	     ['bold', 'underline', 'italic', 'strike', 'removeFormat'],
+	     ['fontColor', 'hiliteColor'],
+	     ['indent', 'outdent'],
+	     ['align', 'line', 'list'],
+	     //['align', 'line', 'list', 'table'],
+	   //['link', 'image', 'video'],
+	     ['fullScreen'] //,['fullScreen', 'codeView'],
+	    // ['preview', 'print']
+	   ]
+	   
+	 });
+}
