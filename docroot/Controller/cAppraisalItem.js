@@ -116,7 +116,11 @@ var listDataFn = function(data) {
 	
 		mainContentHTML+=" 			<input type='hidden' name='structure_name' class='' value='"+index+"'>";
 		mainContentHTML+=" 			<input type='hidden' name='structure_id' class='' value='"+indexEntry['structure_id']+"'>";
-		mainContentHTML+="          <b class='titleQuantityForm' style='position:relative;top:7px'>"+index+"</b>&nbsp;&nbsp;<button style='float:right;' data-toggle=\"modal\" data-target=\"#modal-"+indexEntry['form_url']+"\" id=\"btnAddKPI\" data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"' class=\"btn btn-info input-sm btnAdd "+btnDeduct+"\" type=\"button\"><i class=\"fa fa-plus-square\"></i>&nbsp;Add "+index+"</button>";
+		if(indexEntry['form_url']=='quality') {
+			mainContentHTML+="          <b class='titleQuantityForm' style='position:relative;top:7px'>"+index+"</b>&nbsp;&nbsp;<button style='float:right;' data-target=\"#modal-"+indexEntry['form_url']+"\" id=\"btnAddKPI\" class=\"btn btn-info input-sm btnAdd "+btnDeduct+"\" type=\"button\"><i class=\"fa fa-plus-square\"></i>&nbsp;Add "+index+"</button>";
+		} else {
+			mainContentHTML+="          <b class='titleQuantityForm' style='position:relative;top:7px'>"+index+"</b>&nbsp;&nbsp;<button style='float:right;' data-toggle=\"modal\" data-target=\"#modal-"+indexEntry['form_url']+"\" id=\"btnAddKPI\" data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"' class=\"btn btn-info input-sm btnAdd "+btnDeduct+"\" type=\"button\"><i class=\"fa fa-plus-square\"></i>&nbsp;Add "+index+"</button>";
+		}
 		mainContentHTML+="      </div>";
 				
 		mainContentHTML+="		<div class=\"ibox-content\">";

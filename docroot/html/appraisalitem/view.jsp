@@ -1414,7 +1414,7 @@ overflow-y: visible;
 		   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px;'>
 		   							<!-- content  start-->	
 		   							<div id=sunEdit>
-		   								 <textarea id="formulaDescriptionQuality" style="width: 95%" class=""></textarea> 
+		   								 <!-- <textarea id="formulaDescriptionQuality" style="width: 95%" class=""></textarea>  -->
 		   							</div> 
 		                             	
 		                            <!-- content  end-->				

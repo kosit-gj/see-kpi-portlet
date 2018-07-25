@@ -5,7 +5,7 @@ var clearQualityFormFn = function(){
 	
 	$("#informationQuality").hide();
 	$("#appraisalItemNameQuality").val("");
-	$("#formulaDescriptionQuality").val("");
+	//$("#formulaDescriptionQuality").val("");
 //	$('#formulaDescriptionQuality').Editor("setText", "");
 	// editorFormulaDescriptionQuality.setContent("");
 	//$("#appraisalLevelQuality").val("");
@@ -13,7 +13,7 @@ var clearQualityFormFn = function(){
 	//$("#isShowVarianceQuality").prop("checked",false);
 	$("#isActiveQuality").prop("checked",true);
 	//$("#structure_id_quality").val("");
-	
+	suneditorFn();
 }
 
 //Update
@@ -74,7 +74,6 @@ var updateQualityFn  = function(){
 };
 //Insert
 var insertQualityFn = function(param) {
-	suneditorFn();
 	 var item_name=$("#appraisalItemNameQuality").val();
 	 var appraisal_level_id=$("#appraisalLevelQuality").val();
 	 var structure_id=$("#structure_id_quality").val();
@@ -147,9 +146,10 @@ appraisal_level_id,
 structure_id,
 is_active
 */
+clearQualityFormFn();
+
 	if(action=='edit'){
-		suneditorFn();
-		clearQualityFormFn();
+		/*clearQualityFormFn();*/
 		appraisalLevelListFn("Quality",data['appraisal_level'],defaultAll=false,multiSelect=true);	
 		
 		//dropDrowDepartmentFn("Quality",data['department_code'],defaultAll=false);
@@ -187,7 +187,7 @@ is_active
 		structure_id,
 		is_active
 		*/	
-		clearQualityFormFn();
+/*		clearQualityFormFn();*/
 		$("#isActiveQuality").prop("checked",true);
 		//$("#isShowVarianceQuality").prop("checked",true);
 		appraisalLevelListFn("Quality",$("#embed_appraisal_level_id").val(),defaultAll=false,multiSelect=true);	
@@ -195,11 +195,10 @@ is_active
 		dropDrowOrgFn("Quality",$("#embed_org_id").val(),defaultAll=false);
 		dropDrowPositionFn("Quality",$("#embed_position_id").val(),defaultAll=false);
 		$("#btnAddAnotherQuality").show();
-
+		
 		//set header
 		$("#structure_id_quality").val(structureId);
 		$("#modalQualityDescription").html("Add "+structureName);
-		
 	}
 }
 $(document).ready(function(){
@@ -207,7 +206,10 @@ $(document).ready(function(){
 	
 	//$("button[data-target='#modal-quality']").click(function(){
 	$(document).on("click","button[data-target='#modal-quality']",function(){
-		
+		$("#modal-quality").modal({
+			"backdrop" : setModalPopup[0],
+			"keyboard" : setModalPopup[1]
+		});
 		var structureId=$(this).prev().prev().get();
 		var structureName=$(this).prev().prev().prev().get();
 		initailQualityFormFn('add',$(structureId).val(),$(structureName).val());
@@ -276,6 +278,7 @@ $(document).ready(function(){
 		 return true;
 	});
 });
+
 
 var editorFormulaDescriptionQuality ;
 var suneditorFn = function() {
