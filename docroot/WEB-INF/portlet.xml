@@ -1519,8 +1519,8 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>Report KPIs</title>
-			<short-title>Report KPIs</short-title>
+			<title>KPI Summar</title>
+			<short-title>KPI Summar</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>
@@ -1552,8 +1552,8 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>Report Tfg</title>
-			<short-title>Report Tfg</short-title>
+			<title>Performance Form</title>
+			<short-title>Performance Form</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>
@@ -1585,8 +1585,8 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>Report Assignment</title>
-			<short-title>Report Assignment</short-title>
+			<title>Appraisal Summary</title>
+			<short-title>Appraisal Summary</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>
