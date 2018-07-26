@@ -45,7 +45,7 @@ var getDataFn = function() {
 	}
 	
 	  var data = JSON.stringify(parameter);
-	  var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name="+template_name+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
+	  var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name="+template_name+"&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
 //	 	var url_report_jasper = "http://localhost/see_api/public/generate?template_name=report_kpis_org&template_format=pdf&used_connection=1&inline=1&data={%22param_period%22:%221%22,%22param_org%22:%22895%22}";
 		
 	 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {

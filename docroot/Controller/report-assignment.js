@@ -45,7 +45,7 @@ var getDataFn = function() {
 	}
 	
 	  var data = JSON.stringify(parameter);
-	  var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name=report-appraisal-summary&template_format=xls&used_connection=1&inline=1&data="+data;
+	  var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name=report-appraisal-summary&token="+tokenID.token+"&template_format=xls&used_connection=1&inline=1&data="+data;
 			window.open(url_report_jasper,"_blank");
 			$("body").mLoading('hide'); //Loading
 		return false;
