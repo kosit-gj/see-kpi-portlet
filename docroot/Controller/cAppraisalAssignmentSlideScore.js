@@ -1527,7 +1527,7 @@ var appraisalStatusFn = function(nameArea,id){
 	}
 	
 	var htmlOption="";
-	htmlOption+="<option value='Unassigned'>Unassigned</option>";
+//	htmlOption+="<option value='Unassigned'>Unassigned</option>";
 	
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/status_list",
