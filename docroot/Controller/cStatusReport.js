@@ -70,7 +70,7 @@
 		var data = JSON.stringify(parameter);
 		
 		//$('#iFrame_report').attr('src',url_report_jasper);
-		var url_report_jasper = restfulURL+"/"+serviceName+"/public/generate?template_name=tfg-report&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
+		var url_report_jasper = restfulURL+"/"+serviceName+"/public/generate?template_name=report-data-entry-status&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
 		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 			window.open(url_report_jasper,"_blank");
 		 } else {
