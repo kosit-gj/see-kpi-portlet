@@ -22,7 +22,7 @@ var getDataFn = function() {
 	var template_name ="";
 	  
 	if(appraisalType == 1){
-		template_name="report_tfg_org";
+		template_name="report-org-performance";
 		parameter = {
 				org_id: organization,
 //				param_period: AppraisalPeriod,
@@ -32,7 +32,7 @@ var getDataFn = function() {
 			  };
 	}
 	if(appraisalType == 2){
-		template_name="report_tfg";
+		template_name="report-ind-performance";
 		parameter = {
 				org_id: organization,
 //				param_period: AppraisalPeriod,
@@ -45,7 +45,7 @@ var getDataFn = function() {
 	}
 	
 	  var data = JSON.stringify(parameter);
-	  var url_report_jasper = restfulURL+"/"+serviceName+"/public/generate?template_name="+template_name+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
+	  var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name="+template_name+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
 //	 	var url_report_jasper = "http://localhost/see_api/public/generate?template_name=report_kpis_org&template_format=pdf&used_connection=1&inline=1&data={%22param_period%22:%221%22,%22param_org%22:%22895%22}";
 		
 	 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {

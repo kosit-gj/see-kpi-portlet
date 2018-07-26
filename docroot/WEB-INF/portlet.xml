@@ -1505,7 +1505,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>report-KPIs</portlet-name>
-		<display-name>Report KPIs</display-name>
+		<display-name>KPI Summar</display-name>
 		<portlet-class>
 			com.liferay.util.bridges.mvc.MVCPortlet
 		</portlet-class>
@@ -1538,7 +1538,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>report-tfg</portlet-name>
-		<display-name>Report Tfg</display-name>
+		<display-name>Performance Form</display-name>
 		<portlet-class>
 			com.liferay.util.bridges.mvc.MVCPortlet
 		</portlet-class>
@@ -1571,7 +1571,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>report-assignment</portlet-name>
-		<display-name>Report Assignment</display-name>
+		<display-name>Appraisal Summary</display-name>
 		<portlet-class>
 			com.liferay.util.bridges.mvc.MVCPortlet
 		</portlet-class>

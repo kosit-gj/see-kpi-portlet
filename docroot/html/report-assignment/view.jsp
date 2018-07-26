@@ -8,311 +8,297 @@
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 <%
-	String username = themeDisplay.getUser().getScreenName();
-	String password = (String) request.getSession().getAttribute(WebKeys.USER_PASSWORD);
-	layout = themeDisplay.getLayout();
-	plid = layout.getPlid();
+/*
+PortletSession portletSession1 = renderRequest.getPortletSession();
+portletSession1.setAttribute("password", "authenticated", PortletSession.APPLICATION_SCOPE);
+String pwd = (String) portletSession1.getAttribute("password", PortletSession.APPLICATION_SCOPE);
+out.print(pwd);
+String password=PortalUtil.getUser(request).getPassword();
+*/
+
+String username = themeDisplay.getUser().getScreenName();
+String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWORD);
+//out.print(username);
+
+String param_link = PortalUtil.getOriginalServletRequest(request).getParameter("param_link");
+String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getParameter("param_item_result_id");
+layout = themeDisplay.getLayout();
+plid = layout.getPlid();
+//out.print(param);
+//out.print("password2="+password);
 %>
-<input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
-<input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
-<input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
-<input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
-<input type="hidden" id="get_year_id" name="get_year_id" value="<%= PortalUtil.getOriginalServletRequest(request).getParameter("param_year")%>">
-<input type="hidden" id="get_period_id" name="get_period_id" value="<%= PortalUtil.getOriginalServletRequest(request).getParameter("param_period")%>">
-<input type="hidden" id="get_appraisal_type_id" name="get_appraisal_type_id" value="<%= PortalUtil.getOriginalServletRequest(request).getParameter("param_app_type")%>">
-<input type="hidden" id="get_emp_id" name="get_emp_id" value="<%= PortalUtil.getOriginalServletRequest(request).getParameter("param_emp")%>">
-<input type="hidden" id="get_emp_name" name="get_emp_name" value="<%= PortalUtil.getOriginalServletRequest(request).getParameter("param_emp_name")%>">
-<input type="hidden" id="get_position_id" name="get_position_id" value="<%=PortalUtil.getOriginalServletRequest(request).getParameter("param_position")%>">
-<input type="hidden" id="get_level_id" name="get_level_id" value="<%= PortalUtil.getOriginalServletRequest(request).getParameter("param_app_lv")%>">
-<input type="hidden" id="get_org_id" name="get_org_id" value="<%= PortalUtil.getOriginalServletRequest(request).getParameter("param_org_id")%>">
-<input type="hidden" id="get_item_id" name="get_item_id" value="<%=PortalUtil.getOriginalServletRequest(request).getParameter("param_item")%>">
-<input type="hidden" id="get_sending_status" name="get_sending_status" value="<%=PortalUtil.getOriginalServletRequest(request).getParameter("sending_status")%>">
 
 <style>
-.aui #breadcrumbs {
-	margin-bottom: 0px;
-}
-.aui input[type="radio"], .aui input[type="checkbox"]{
-	margin: -5px 0 0;
-}
-.aui label{
-	margin-bottom: 0px;
-}
-.aui form{
-	margin: 0 0 5px;
-}
-.aui .filter{
-	margin-bottom: 5px;
-    margin-top: 5px;
-}
-.aui .form-group > .control-label-search{
-	padding-top: 5px;
-}
-.aui .titlePanelSearch {
-    font-weight: bold;
-}
-
- /* Large desktop Start#####################################*/
- @media (min-width: 1200px) { 
-	
-	.modal.large {
-		    width: 90%;
-		    margin-left:-45%;  
-		    top:0px;
-		}
-		
-	.modal.medium {
-		    width: 50%;
-		    margin-left:-25%;  
-		    top:0px;
-		}
-	.aui .advance-search .span3{width: 24.504%;}
-	.graphLTop {
-		width: 28.1% !important;
-		}
-  }
-  /* Large desktop End######################################*/
-  
-  /*  desktop Start#########################################*/
+ /*  desktop Start#########################################*/
  @media (min-width: 980px) and (max-width: 1199px) {
- 
+
  	.modal.large {
 		    width: 90%;
-		    margin-left:-45%;  
+		    margin-left:-45%;
 		    top:0px;
 		}
-		
-		.modal.medium {
-		    width: 50%;
-		    margin-left:-25%;  
-		    top:0px;
+
+	.aui .modal-body{
+		/*max-height: 400px;*/
+	}
+	#smartArea{
+	display:none;
+	}
+
+	.breadcrumbs2 .row-fluid .span4{
+			width: 32.624%;
 		}
-		.aui .advance-search .span3{width: 24.364%;}
-		/*All Start*/
-		.aui #btnSearchAdvance{
-		margin-bottom:5px;
-		width:100%;
-		}
-		.aui #btnCoppy{
-			width:100%;
-		}
-		/*All End*/
-		.graphLTop {
-		width: 27.362% !important;
-		}
- 	
+
+	#actionPlanModal{
+		margin-top:0px;
+	}
+
+	#actionPlanModal{
+		margin-top:0px;
+	}
+
+
+	.moblieArea{
+		display:none;
+	}
+	.desktopArea{
+		display:block;
+	}
+
+	.saveAndCancelArea{
+		text-align:right;
+	}
+
+	#actualvsTargetBar{
+		display:'';
+	}
+	#actualvsForecastBar{
+		display:'';
+	}
+
+	.aui #advanceSearchAppraisal.row-fluid .span3 {
+    	width: 32.5%;
+	}
+
+
   }
  /*  desktop End############################################*/
- 
+
  /* Portrait tablet to landscape and desktop Start##########*/
  @media (min-width: 768px) and (max-width: 979px) {
- 		
+
+	.aui .modal{
+		left:1%;
+	}
 	.modal.large {
 		    width: 90%;
-		    margin-left:-45%;  
+		    margin-left:-45%;
 		    top:0px;
 		}
-	.modal.medium {
-		    width: 50%;
-		    margin-left:-25%;  
-		    top:0px;
-		}
-		
-		.aui .modal{
-		  left:1%;
-		}
-		
-	.aui .ibox-title2{
-		height:45px;
+	.pagingText{
+		display:block;
 	}
-	
-	.aui .ibox-title{
-		border-image: none;
-	    border-style: solid solid none;
-	    border-width: 3px 0 0;
-	    color: black;
-	    margin-bottom: 0;
-	    min-height: 35px;
-	    padding: 0px 10px;
+	.aui .p-t-xxs {
+    	text-align: right;
 	}
-	
-	
-	.aui .btnAdd{
-		position: relative;
-   		top: 0px;
+	.pagianation_area{
+		position:'';
 	}
-	.aui .advance-search .span3{width: 26.5612%;}
-	/*All Form Start*/
+
 	.aui .modal-body{
-		max-height: 400px;
+		/*max-height: 400px;*/
 	}
-	.aui #btnSearchAdvance{
-		margin-bottom:5px;
-		width:100%;
+	#smartArea{
+	display:none;
 	}
-	.aui #btnCoppy{
-		width:100%;
+
+	#actionPlanModal{
+		margin-top:0px;
 	}
-	.graphLTop {
-	width: 25.72% !important;
+
+
+
+	.moblieArea{
+		display:block;
+		font-size:0.8em;
 	}
-	/*All Form End*/
+	.desktopArea{
+		display:none;
+	}
+
+	.saveAndCancelArea{
+		text-align:right;
+	}
+
+
+
+	#actualvsTargetBar{
+		display:none;
+	}
+	#actualvsForecastBar{
+		display:none;
+	}
+
+	.aui #advanceSearchAppraisal.row-fluid .span3 {
+	    width: 24.2%;
+	}
+
+
   }
- /* Portrait tablet to landscape and desktop End############*/ 
- 
+ /* Portrait tablet to landscape and desktop End############*/
+
  /* Landscape phone to portrait tablet Start################*/
- @media (max-width: 767px) { 
- 
- .modal.large {
- 	
+ @media (max-width: 767px) {
+
+ 	.modal.large {
+
 	    width: '';
-	    top:0px;    
+	    top:0px;
 	}
-	
-	.modal.medium {
-		   width: '';
-	   	   top:0px;  
-		}
-	
- 	.pagingText{
- 		display:none;
- 	}
-	.aui .form-group > .control-label-search {
+	#grandTototalWeightArea{
+		position: relative;
+    	top: -300px;
+	}
+	.aui .p-t-xxs {
     	text-align: left;
 	}
-	
-	.aui .ibox-title2{
-		height:63px;
+
+
+		.pagianation_area{
+		/*position:absolute;*/
 	}
-	
-	.aui .btnAdd{
-		position: relative;
-   		top: -22px;
-	}
-	/*All Form Start*/
+
 	.aui .modal-body{
-		max-height: 350px;
+		/*max-height: 300px;*/
 	}
-	/*All Form End*/
-	
+	#smartArea{
+	display:none;
+	}
+
+	#actionPlanModal{
+		margin-top:0px;
+	}
+
+	#actionPlanModal{
+		margin-top:0px;
+	}
+
+	.moblieArea{
+		display:block;
+		font-size:0.7em;
+	}
+	.desktopArea{
+		display:none;
+	}
+	.saveAndCancelArea{
+		text-align:left;
+	}
+
+	#actualvsTargetBar{
+		display:'';
+	}
+	#actualvsForecastBar{
+		display:'';
+	}
+
+	/*btn area start*/
+	#btnSaveActionPlan{
+		width:100%;
+	}
+	#btnCancelActionPlan{
+		width:100%;
+	}
+
+	#btnAddActionPlan{
+		width:100%;
+	}
+	#btnEditActionPlan{
+		width:100%;
+	}
+	#btnDelActionPlan{
+		width:100%;
+	}
+	#btnDownloadAttachFile{
+		width:100%;
+	}
+	/*btn area end*/
+
   }
- /* Landscape phone to portrait tablet End##################*/ 
- 
+ /* Landscape phone to portrait tablet End##################*/
+
  /* Landscape phones and down Start#########################*/
- @media (max-width: 480px) { 
- 	
-	.aui .form-group > .control-label-search{
+ @media (max-width: 480px) {
+
+ 	.pagingText{
+		display:none;
+	}
+	.aui .p-t-xxs {
     	text-align: left;
 	}
-	
-	.aui .ibox-title2{
-		height:63px;
+	.pagianation_area{
+		/*position:absolute;*/
 	}
-	
-	.aui .btnAdd{
-		position: relative;
-   		top: -22px;
-	}
-	.aui .graphLTop {
-		width:95%;
-	}
-	/*All Form Start*/
-	/*
 	.aui .modal-body{
-		max-height: 300px;
+		/*max-height: 300px;*/
 	}
-	*/
-	/*All Form End*/
- 	
- 	
+	#smartArea{
+	display:none;
+	}
+
+	#actionPlanModal{
+		margin-top:0px;
+	}
+
+	#actionPlanModal{
+		margin-top:0px;
+	}
+
+	.moblieArea{
+		display:block;
+		font-size:0.6em;
+	}
+	.desktopArea{
+		display:none;
+	}
+	.saveAndCancelArea{
+		text-align:left;
+	}
+
+	#actualvsTargetBar{
+		display:none;
+	}
+	#actualvsForecastBar{
+		display:none;
+	}
+
+
+	/*btn area start*/
+	#btnSaveActionPlan{
+		width:100%;
+	}
+	#btnCancelActionPlan{
+		width:100%;
+	}
+
+	#btnAddActionPlan{
+		width:100%;
+	}
+	#btnEditActionPlan{
+		width:100%;
+	}
+	#btnDelActionPlan{
+		width:100%;
+	}
+	#btnDownloadAttachFile{
+		width:100%;
+	}
+	/*btn area end*/
+
 
   }
   /* Landscape phones and down End##########################*/
-  
-  
-  
-  /* main start*/
-        table {
-            width: 100%;
-        }
-       .aui .portlet-content, .aui .portlet-minimized .portlet-content-container {
-	    -moz-border-bottom-colors: none;
-	    -moz-border-left-colors: none;
-	    -moz-border-right-colors: none;
-	    -moz-border-top-colors: none;
-	    border-color: #eaeaea;
-	    border-image: none;
-	    border-style: solid;
-	    border-width: 0 1px 1px;
-	    padding: 10px 10px 10px;
-	}
-	/*
-	.aui #modal-quantity{
-    background-clip: padding-box;
-    background-color: white;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 6px;
-    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-    left: 34%;
-    margin-left: -280px;
-    outline: 0 none;
-    position: fixed;
-    top: 0%;
-    width: 1000px;
-    z-index: 1050;
-    */
-}
-.aui .modal-footer {
-    background-color: #f5f5f5;
-    border-radius: 0;
-    border-top: 1px solid #ddd;
-    box-shadow: 0 1px 0 white inset;
-    margin-bottom: 0;
-    padding: 14px 15px 15px;
-    text-align: right;
-}
-.aui select {
-    background-color: white;
-    border: 1px solid #ccc;
-    width: 100%;
-}
-.aui input{
-	width: 100%;
-}
 
-.ibox-content {
-    background-color: #fff;
-    border: 1px solid #ffe57f;
-    color: inherit;
-    margin-bottom: 5px;
-    padding: 5px;
-}
-.aui .table th, .aui .table td {
-    border-top: 1px solid #ddd;
-    line-height: 20px;
-    padding-bottom: 3px;
-    padding-right: 0;
-    padding-top: 3px;
-    text-align: left;
-    vertical-align: top;
-}
-.aui .table-bordered {
-	border-collapse: collapse !important;
-}
-.aui .pagination {
-    margin: 0;
-}
-.display-none{
-	display:none;
-}
-.pagingText {
-    float: right;
-    margin-right: 5px;
-    padding-top: 5px;
-}
-.gray-bg {
-    background-color: #f3f3f4;
-}
+
 
 .ibox-content {
     background-color: #fff;
@@ -323,530 +309,439 @@
     padding-right: 15px;
 }
 
-.form-file-mangement {
-    height: 37px;
+#countPaginationTop{
+	width:60px;
 }
-.form-label-customs{
-	font-weight: bold;
+#countPaginationBottom{
+	width:60px;
 }
-.aui hr{
-	margin: 10px 0;
+#btnPaginationTop{
+	width:300px;
+	float:left;
 }
-/* main end*/
+#dropdownPaginationTop{
+	/*width:100px;*/
+	float:right;
+}
+#btnPaginationBottom{
+	width:300px;
+	float:left;
+}
+#dropdownPaginationBottom{
+	/*width:100px;*/
+	float:right;
+}
+.aui .pagination {
+   margin: 0;
+}
+.pagingText {
+    float: right;
+    margin-right: 5px;
+    padding-top: 5px;
+}
+.aui .popover-content {
+    padding: 5px;
+}
+.aui .modal-footer {
 
-/*local start*/
+    border-radius: 0;
 
+}
 
+/*
+.aui .modal {
+    background-clip: padding-box;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    left: 23%;
+    margin-left: -280px;
+    outline: 0 none;
+    position: fixed;
+    top: 0%;
+    width: 90%;
+    z-index: 1050;
+}
+*/
+.aui input, .aui textarea, .aui .uneditable-input {
+   /* width: 47px;*/
+}
+
+ .aui .table td {
+    border-top: 1px solid #ddd;
+    line-height: 16px;
+    padding: 5px;
+    text-align: left;
+    vertical-align: top;
+}
+.aui input[type="color"], .aui input[type="date"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="email"], .aui input[type="month"], .aui input[type="number"], .aui input[type="password"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="text"], .aui input[type="time"], .aui input[type="url"], .aui input[type="week"], .aui select, .aui textarea, .aui .uneditable-input {
+    border: 1px solid #ddd;
+    color: #8d8d8d;
+    font-weight: 200;
+    margin-bottom: 0;
+
+}
+.aui #breadcrumbs {
+    margin-bottom: 0;
+}
 .breadcrumbs2{
 
 	background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #fff 0px, #f6f6f6 47%, #ededed 100%) repeat scroll 0 0;
     border-radius: 0;
     margin-bottom: 0;
-  	padding-bottom: 5px
+  	/*padding-bottom: 0px*/
 
 }
-.wrapper-content{
-	padding: 10px;
+.aui .searchAdvanceText{
+	/*width:94%;*/
 }
-.aui .table thead th{
-	font-weight:bold;
+.aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input{
+	padding:5px;
+	padding-top:0px;
+	height: 30px;
 }
-.aui .form-group > .control-label-search{
-   	/*font-weight:bold;*/
+.aui .p-t-xxs{
+ padding-top: 5px;
+ /*text-align: right;
+ font-weight: bold;*/
 }
-.aui .pagination{
- /*display:absolute;*/
-}
-.aui .popover-content{
-padding:5px;
+.aui .p-t-xxsg{
+ padding-top: 5px;
+ text-align: right;
+ font-weight: bold;
 }
 
-
-.aui .table th, .aui .table td{
+.aui .pagination ul > li:last-child > a, .aui .pagination ul > li:last-child > span{
+   border-bottom-right-radius: 0;
+   border-top-right-radius: 0;
+}
+.aui .pagination ul > li:first-child > a, .aui .pagination ul > li:first-child > span{
+	border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+.aui .table td{
 	font-size: 13px;
 }
-.aui .countPagination2{
-	height:30px;
+/*
+.modal.large {
+    width: 90%;
+    margin-left:-45%;
+    top:0px;
+}
+*/
+.aui #assignTo{
+	width:100%;
+}
+.aui #actionToAssign{
+	width:100%;
 }
 
-/*local end*/
+.aui .row-fluid [class*="span"]{
+min-height: auto;
+margin-bottom:1px;
+}
+
+.textInfo{
+	font-wieght:bold;
+	/*text-align:right;*/
+}
+/*
+.aui label {
+    color: #555;
+    font-size: 16px;
+}
+*/
+.aui #btnSearchAdvance{
+	left:4px; position:relative;
+}
+.aui .textData{
+	  font-weight: bold;
+}
+
+/* Important part */
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+.aui .table td{
+	text-align: '';
+}
 /* Update by au */
+
 .aui .btn {
 	font-size: 14px;
- 	padding: 4px 12px; 
+ 	padding: 4px 12px;
 	width: auto;
 	margin-top: 0px;
 	display: inline;
 }
+
+
 .aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input {
     height: 30px;
-    padding: none;
+    padding: 0 0 0 5px;
     font-size: 14px;
 }
-</style>
-<style>
-.boxActionPlainArea {
-	
+
+
+/* Modal action plan START */
+
+.boxActionPlainArea{
+
+}
+.boxActionPlainArea .boxActionL{
+	/*float:left;*/
+	/*width:55%;*/
+	/*border:1px solid #cccccc;*/
+	margin-top: 3px;
 }
 
-.boxActionPlainArea .boxActionL {
-	float: left;
-	width: 50%;
+.boxActionPlainArea .boxActionR{
+	/*float:right;*/
+	/*width:565px;*/
+	/*width:45%;*/
 	/*border:1px solid #cccccc;*/
 }
 
-.boxActionPlainArea .boxActionR {
-	float: right;
-	width: 565px;
-	/*border:1px solid #cccccc;*/
-}
-
-.boxTargetArea {
-	width: 25%;
-	float: right;
+.boxTargetArea{
+	width:27%;
+	float:left;
 	border-width: 1px 1px 1px 1px;
 	border-color: #cccccc;
-	border-style: solid;
-	margin: 1px;
-	padding: 5px;
-	height: 89px;
-	background: #fff;
-}
+  	border-style: solid;
+  	margin-top:3px;
+  	padding:5px;
+  	height: 89px;
+  	background:#fff;
 
-.fontBold {
-	font-weight: bold;
 }
+.boxForecastArea{
+	width:28.5%;
+	float:right;
 
-.aui .alert, .aui .portlet-msg-alert, .aui .portlet-msg-error, .aui .portlet-msg-help,
-	.aui .portlet-msg-info, .aui .portlet-msg-progress, .aui .portlet-msg-success
-	{
-	padding: 8px 8px 8px 14px;
-	color: #555;
-	margin-bottom: 0;
-}
+	/*
+	border-width: 1px 1px 1px 1px;
+	border-color: #cccccc;
+  	border-style: solid;
+  	margin:1px;
+  	padding:5px;
+  	*/
 
-.aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"],
-	.aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"],
-	.aui input[type="month"], .aui input[type="time"], .aui input[type="week"],
-	.aui input[type="number"], .aui input[type="email"], .aui input[type="url"],
-	.aui input[type="search"], .aui input[type="tel"], .aui input[type="color"],
-	.aui .uneditable-input {
-	height: '';
 }
+.boxActualPercentageArea{
+	width:39%;
+	float:right;
+	margin-left: 0.5%;
 
-.aui input[type="color"], .aui input[type="date"], .aui input[type="datetime"],
-	.aui input[type="datetime-local"], .aui input[type="email"], .aui input[type="month"],
-	.aui input[type="number"], .aui input[type="password"], .aui input[type="search"],
-	.aui input[type="tel"], .aui input[type="text"], .aui input[type="time"],
-	.aui input[type="url"], .aui input[type="week"], .aui select, .aui textarea,
-	.aui .uneditable-input {
-	margin-bottom: 0px;
-}
+	/*
+	border-width: 1px 1px 1px 1px;
+	border-color: #cccccc;
+  	border-style: solid;
+  	margin:1px;
+  	padding:5px;*/
 
-.ui-accordion .ui-accordion-header {
-	margin: 0px;
-	padding: 0px;
 }
-
-/* accordian */
-
-.aui .panel {
-	margin-bottom: 20px;
-	background-color: #fff;
-	border: 1px solid transparent;
-	border-radius: 0px;
-	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-	box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-}
-
-.aui .panel-group .panel {
-	margin-bottom: 5px;
-	border-radius: 0px;
-}
-
-.aui .panel-default {
-	border-color: #C5C5C5;
-}
-
-.aui .panel-default:HOVER {
-	border-color: #CCCCCC;
-}
-
-.aui .panel-default>.panel-heading {
-	color: #333;
-	/*     background-color: #fc0; */
-	background: #f6f6f6;
-	border-color: #fc0;
-	padding: 1px;
-	padding-bottom: 1px;
-/* 	max-height: 32px; */
-}
-
-.aui .panel-default>.panel-heading:HOVER {
-	background: #ededed;
-}
-
-.aui .panel-group .panel-heading {
-	border-bottom: 0;
-}
-
-.aui .panel-heading {
-	display: block;
-	text-decoration: none;
-	margin: 0px 0px;
-	border-bottom: 1px solid transparent;
-	/*     border-top-left-radius: 3px; */
-	/*     border-top-right-radius: 3px; */
-}
-
-.aui .panel-heading a {
-	display: block !important;
-	font-size: 14px !important;
-	font-weight: bold !important;
-	padding: 9.5px 10px 8px 10px;
-	margin: -11px 0px;
-	text-decoration: none;
-}
-
-.aui .panel-heading a:hover {
-	display: block;
-	/*     color: dimgrey !important; */
-	text-decoration: none;
-}
-.aui .accordion-content{
-		width: auto !important;
-		margin-top: 0px; 
-		float: left !important; 
-		display:flex !important;
-	}
-.aui .accordion-btn {
-/*     text-align: right; */
-/*     margin-top: 5px; */
-	display: inline-block;
-    float: right;
-}
-.aui .panel-body {
-	margin: 10px;
-}
-
-.aui #accordion {
-	display: none;
-}
-/* accordian */
-/* Next & Back */
-.arrow {
-	cursor: pointer;
-	position: relative;
-	display: block;
-	top: 43%; //
-	margin: 100px 0 0 100px;
-	width: 25px;
-	height: 25px;
-	border: solid 3px #999;
-	border-radius: 100%;
-	z-index: 1;
-	transition: all .2s linear;
-	opacity: 0.3;
-}
-
-.arrow:before, .arrow:after {
-	content: "";
-	position: absolute;
-	width: 35%;
-	height: 10%;
-	top: 41%;
-	left: 55%;
-	background: #999;
-	z-index: 2;
-	transform: translate(-50%, -50%) rotate(45deg);
-	transition: all .2s linear;
-}
-
-.arrow:after {
-	z-index: 3;
-	top: 59%;
-	left: 55%;
-	transform: translate(-50%, -50%) rotate(-45deg);
-}
-
-.arrow:hover {
-	border: solid 6px #777;
-}
-
-.arrow:hover:after, .arrow:hover:before {
-	background: #777;
-}
-
-.arrow:active {
-	border: solid 6px #111;
-}
-
-.arrow:active:after, .arrow:active:before {
-	background: #111;
-}
-
-.aui #previous {
-	transform: rotate(180deg);
-	display: block;
-	float: left;
-	margin-left: 10px;
-	position: absolute;
-}
-
-.aui #next {
-	position: absolute;
-	right: 0px;
-	margin-right: 20px;
-	margin-top: 0px;
-}
-/* Next & Back */
-.graphLTop {
-	float: left;
-	padding: 5px;
-	border: 1px solid #cccccc;
-	margin: 2px;
-	width: 28.8%;
-	font-weight: bold;
-	background: #ddd;
-}
-
-.graphLTop .textGRaphTop {
-	text-align: center;
-}
-
-.graphLTopHeader {
-	font-weight: bold;
-	font-size: 18px;
-	color: black;
-}
-
-/* Start All KPI */
 .fontBold{
-	font-size:16px;
 	font-weight:bold;
 }
-.fontNumber{
-	text-align:right;
-}
-.fontString{
-	text-align:left;
+.boxForecastVsActual{
+	border-width: 1px 1px 1px 1px;
+	border-color: #cccccc;
+  	border-style: solid;
+  	padding:3.5px;
+  	background:#fff;
+  	margin-top:3px;
+  	height: 40px;
 }
 .fontCenter{
 	text-align:center;
 }
-.tableInside{
-	width:100%;
+.actionPlanList{
+
+	padding:5px;
+	border-width: 1px 1px 1px 1px;
+	border-color: #cccccc;
+  	border-style: solid;
+  	margin-bottom:3px;
+  	font-weight: bold;
+  	background:#fff;
+  	/*height: 37.5px;*/
+  	min-height: 37.5px;
 }
-table#tableAllKPI1 .aui .table th, .aui .table td{
-	padding: 2px;
+.boxTargetData{
+	padding-top:20px;
 }
-table#tableAllKPI2 .aui .table th, .aui .table td{
-	padding: 2px;
-}
-.aui .header-fixed-kpi1 { 
-    position: absolute; 
-    top: -1px; display:none;
-    width:740px;
-}
-.aui .header-fixed-kpi2 { 
-    position: absolute; 
-    top: -1px; display:none;
-    width:310px;
-}
-.aui .modal-body{
-	overflow-x: auto !important;
-}
-/* End All KPI */
-.aui #ModalKPI .modal-body ,.aui #ModalKPI #scrollSubOrg3 , .aui #ModalKPI #scrollSubOrg3 table{
--webkit-overflow-scrolling: touch ; 
-/* overflow-scrolling:touch !important; */
-overflow:auto;
+.aui .alert, .aui .portlet-msg-alert, .aui .portlet-msg-error, .aui .portlet-msg-help, .aui .portlet-msg-info, .aui .portlet-msg-progress, .aui .portlet-msg-success{
+	padding: 8px 8px 8px 14px;
+	color:#555;
+	margin-bottom: 0;
 }
 
+
+.aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input{
+	height:'';
+}
+
+.aui input[type="color"], .aui input[type="date"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="email"], .aui input[type="month"], .aui input[type="number"], .aui input[type="password"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="text"], .aui input[type="time"], .aui input[type="url"], .aui input[type="week"], .aui select, .aui textarea, .aui .uneditable-input{
+	margin-bottom: 0px;
+}
+
+.ui-autocomplete{
+	z-index: 999999;
+}
+
+.actionplan_input{
+	display:none;
+}
+.jqstooltip{
+	display:none;
+}
+#jqstooltip{
+	display:none;
+}
+.ganntChartTititle{
+	/*background-color: #fffbdc;*/
+    border: 1px solid #f1d875;
+   /* padding:10px;
+    margin-bottom:5px;
+    */
+}
+/* Modal action plan END */
+
+
+.aui .ca-menu li{
+    line-height: 0px;
+}
+
+.aui .appraisal_result .popover{
+	width:120px;
+}
+
+.aui select, .aui input[type="text"] {
+    font-size: 13px;
+}
+.aui .infoItem:hover{
+background-color:#71cccc !important;
+}
 </style>
+<input type="hidden" id="param_link" name="param_link" value="<%=param_link%>">
+<input type="hidden" id="param_item_result_id" name="param_item_result_id" value="<%=param_item_result_id%>">
+
+<input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
+<input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
+<input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
+<input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
 
 
-<div class='row-fluid '>
-	<div class='col-xs-12'>
-		<div id="slide_status" class="span12" style="z-index: 9000;">
-			<div id="btnCloseSlide"><i class='fa fa-times'></i></div>
-			<div id="slide_status_area"></div>
-		</div>
-	</div>
+<body class=" gray-bg ">
+  <div class='row-fluid'>
+    <div id="slide_status" class='span12'>
+      <div id="btnCloseSlide">×</div>
+      <div id="slide_status_area"></div>
+    </div>
+  </div>
+
+
+  <div class="app_url_hidden">
+    <div class="container1">
+      <div id="includePage" class="ng-view ng-scope">
+        <!--
+				<h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Appraisal</span> </h2>
+ 			-->
+        <div class="row-fluid">
+          <!-- start--row-fluid -->
+
+          <div class="span12">
+            <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                <div class='titlePanel'>Advance Search</div>
+              </div>
+
+              <div class="ibox-content breadcrumbs2">
+
+                <div class="row-fluid" id='advanceSearchAppraisal'>
+
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select data-toggle="tooltip" title="" data-original-title="Year" class="input form-control input-sm span12" id="AppraisalYear" name="AppraisalYear">
+                    </select>
+                  </div>
+
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select data-toggle="tooltip" title="" data-original-title="Period" class="input form-control input-sm span12" id="AppraisalPeriod" name="AppraisalPeriod">
+                      <option>All Appraisal Period</option>
+                    </select>
+                  </div>
+<div style="Display:none">
+  <div class="form-group pull-left span3" style="margin-left: 5px" style="display:none">
+                    <select id="appraisalType" name="appraisalType" data-toggle="tooltip" title="" data-original-title="Entity Type " class="input form-control input-sm span12">
+                    </select>
+                  </div> 
 </div>
+                 
 
-<div class="app_url_hidden" style="display: block;">
-	<div class="row-fluid app_url_hidden">
-		<!-- start--row-fluid -->
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select id="AppraisalEmpLevel" name="AppraisalEmpLevel" data-toggle="tooltip" title="" data-original-title="Employee Level" class="input form-control input-sm span12">
+                      <option>All Level</option>
+                    </select>
+                  </div>
 
-		<div class="span12">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title"
-					style=" padding-bottom: 10px; background-color: rgb(83, 120, 253); border-color: rgb(83, 120, 253); min-height: 0px; padding-top: 7px;" >
-					<div class="titlePanelSearch" style="padding-bottom: 5px;">Advance Search</div>
-				</div>
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip" title="" data-original-title="Organization Level" class="input form-control input-sm span12">
+                      <option>All Level</option>
+                    </select>
+                  </div>
 
-				<div class="ibox-content breadcrumbs2 advance-search"
-					style="border-color: rgb(83, 120, 253);">
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select data-toggle="tooltip" title="" data-original-title="organization" class="input form-control input-sm span12" id="organization" name="organization">
+                      <option>All Organization</option>
+                    </select>
+                  </div>
 
-					<div class="row-fluid ">
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <input data-toggle="tooltip" title="" data-original-title="Employee Name" class="form-control input-sm searchAdvanceText span12" placeholder="Employee Name" type="text" id="EmpName" name="EmpName" />
+                    <input class="form-control input-sm" id="EmpName_id" name="EmpName_id" value="" type="hidden">
+                  </div>
 
-						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span3" id="yearArea">
-							<select name="year" id="year" class="input form-control input-sm"
-								title="" data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Year">
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <input data-toggle="tooltip" title="" data-original-title="Position" class="form-control input-sm searchAdvanceText span12" placeholder="Position" type="text" id="Position" name="Position" />
+                    <input class="form-control input-sm" id="Position_id" name="Position_id" value="" type="hidden">
+                  </div>
+                  <div style="display:none">
+                     <div class="form-group pull-left span3" style="margin-left: 5px">
+					<select name="output_type" id="output_type" class="input form-control input-sm span12""title="" data-toggle="tooltip" style="cursor: pointer;"data-original-title="Output Type">
+							<!-- <option value="pdf">PDF</option> -->
+							<option value="xls">Excel</option>
+					</select>
+				 </div>
+                  </div>
+               
+                  
+                  <div class="form-group span3 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
+                    <button type="button" class="btn btn-info input-sm" name="btnexport" id="btnExport">
+                      <i class="icon-download-alt"></i>&nbsp;Export
+                    </button> &nbsp;
+                  </div>
 
-								<option value="1">2016</option>
-								<option value="2">2017</option>
+                </div>
+              </div>
+            </div>
+            <!-- content end -->
+          </div>
+        </div>
+      </div>
+      <!-- end--row-fluid -->
+    </div>
+  </div>
+  <iframe id="iFrame_report" frameborder="0" style="width :100%;height: 500px;">
+  			<p>Your browser does not support iframes.</p>
+		</iframe>
+</body>
 
-							</select>
-						</div>
-						
-						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span3" id="periodArea">
-							<select name="period" id="period"
-								class="input form-control input-sm" title=""
-								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Period">
-
-								<option value="">Period1</option>
-								<option value="">Period1</option>
-
-							</select>
-						</div>																
-						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;">
-		                    <select id="AppraisalEmpLevel" name="AppraisalEmpLevel" data-toggle="tooltip"
-		                      title="" data-original-title="Employee Level" class="input form-control input-sm">
-<!-- 		                      <option value="">All Employee Level</option> -->
-		                	</select>
-		                </div>
-		                
-		                <div class="form-group pull-left span3" style="margin-left: 5px">
-		                    <select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip"
-		                      title="" data-original-title="Organization Level" class="input form-control input-sm">
-<!-- 		                      <option value="">All Organization Level</option> -->
-		                    </select>
-		                </div>
-		                </div>
-		                <div class="row-fluid ">
-						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span3" id="organizationArea">
-							<select name="organization" id="organization"
-								class="input form-control input-sm" title=""
-								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Organization" >
-								<option value="">Organization 1</option>
-								<option value="">Organization 2</option>
-							</select>
-						</div>
-						<!-- 
-						<div style="margin-left: 5px; margin-bottom: 3px;"
-							class="form-group pull-left span3" id="apprasiaLevelArea">
-							<select name="apprasiaLevel" id="apprasiaLevel" 
-								class="input form-control input-sm" title=""
-								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Level" >
-
-								<option value="">Appraisal Level1</option>
-								<option value="">Appraisal Level2</option>
-
-							</select>
-						</div> 
-						-->
-						
-						<div style="margin-bottom: 5px;"
-							class="form-group pull-right m-b-none ">
-							<button id="btnSearchAdvance" name="btnSearchAdvance"
-								class="btn btn-info input-sm" type="button">
-								<i class="fa fa-download"></i>&nbsp;Export
-							</button>
-
-						</div>
-
-					</div>
-
-				</div>
-				<!-- content end -->
-			</div>
-
-		</div>
-
-	</div>
-	
-	<!-- content accordion start -->
-	<div class="panel-group" id="accordion" role="tablist"
-		aria-multiselectable="true">
-	
-	</div>
-	<!-- content accordion end -->
-
-
-
-
-	
-</div>
- 
- <div aria-hidden="true" role="dialog" tabindex="-1" id="ModalKPI"
-		class="modal inmodal large" style="display: none;">
-		<div class="modal-dialog " >
-			<div class="modal-content animated bounceInRight">
-				<div class="modal-header">
-					<button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
-						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span>
-					</button>
-					<h4 class="modal-title" id="modalTitleRole">All KPI</h4>
-
-				</div>
-				<div class="modal-body">
-<!-- ############################################################################ -->
-				<div id="scrollOrg"style="overflow:auto;min-width:1184px;max-height:500px;" class="table-responsive p-b-xxs">
-				<div id="scrollSubOrg1"style='width: 740px;max-height:482px; float: left;overflow: hidden;position: relative;'>
-					<div id="scrollSubOrg2" style="float: left; position: relative; overflow-y: scroll; width: 757px; overflow-x: hidden; max-height: 482px;">
-					<table class='table table-bordered' id='tableAllKPI1'>
-
-						<thead>
-							<tr id="listHeader1" style='height: 66px;'>
-
-							</tr>
-						</thead>
-						<tbody id='listData1'>
-
-						</tbody>
-
-					</table>
-					<table class='table table-bordered header-fixed-kpi1' id='subTableKPI1'></table>
-					</div>
-				</div>
-
-				<div id="scrollSubOrg3" style='width: 444px;max-height:500px; float: left; overflow-x: auto;overflow-y: auto;position: relative;'>
-					<table class='table table-bordered' id='tableAllKPI2' style="width: 325px;">
-
-						<thead>
-							<tr id="listHeader2" style='height: 66px;'>
-
-							</tr>
-						</thead>
-						<tbody id='listData2'>
-
-						</tbody>
-
-					</table>
-					<table class='table table-bordered header-fixed-kpi2' id='subTableKPI2'></table>
-				</div>
-				</div>
-<!-- ############################################################################ -->
-					<!-- content end -->
-				</div>
-				<div class="modal-footer">
-				
-				</div>
-			</div>
-		</div>
-	</div>
-	<form id="linkParam" method="POST" target="_blank" action="POST">
-		<input type="hidden" value="" name="param_item_result_id" id="param_item_result_id" class="">
-		<input type="hidden" value="email" name="param_link" id="param_link" class="" >
-		
-	</form>
- 
+<script src="/see-kpi-portlet/js/jquery3.1.1.js"></script>
+<script type="text/javascript">
+ var jQuery_1_1_3 = $.noConflict(true);
+</script>
