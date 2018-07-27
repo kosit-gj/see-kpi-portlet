@@ -56,5 +56,6 @@
 		<portlet id="report-tfg"></portlet>
 		<portlet id="report-assignment"></portlet>
 		<portlet id="job-log"></portlet>
+		<portlet id="Report Lenso"></portlet>
 	</category>
 </display>
