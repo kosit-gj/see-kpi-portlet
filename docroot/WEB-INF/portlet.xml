@@ -1519,8 +1519,8 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>KPI Summar</title>
-			<short-title>KPI Summar</short-title>
+			<title>KPI Summary</title>
+			<short-title>KPI Summary</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>
