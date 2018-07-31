@@ -2259,6 +2259,15 @@ var getDataFn = function(page,rpp){
 			globalData=data;
 			paginationSetUpFn(globalData['current_page'],globalData['last_page'],globalData['last_page']);
 			$(".search_result").show();
+			if(data['system_config']!=null) { //year list is same in system config
+				if(data['system_config']['show_grand_total_flag']==1) {
+					$(".grandTototalWeightArea").show();
+				} else {
+					$(".grandTototalWeightArea").hide();
+				}
+			} else {
+				$(".grandTototalWeightArea").show();
+			}
 		}
 	});
 };
