@@ -964,7 +964,7 @@ background-color:#71cccc !important;
 													<label class="span3  textData txtPeriod"  id="txtPeriod"></label>
 												</div>
 										</div>
-										<div class="span2" id='grandTototalWeightArea'>
+										<div class="span2 grandTototalWeightArea" id='grandTototalWeightArea'>
 												<label class="span12 p-t-xxsg text-center ">Grand Total</label>
 												<label class="span12 p-t-xxsg text-center txtGrandTotalWeigh" id="txtGrandTotalWeigh" style="font-size: 300%;"></label>
 
@@ -1030,7 +1030,7 @@ background-color:#71cccc !important;
 													</div>
 
 											</div>
-											<div class="span2" id='grandTototalWeightArea'>
+											<div class="span2 grandTototalWeightArea" id='grandTototalWeightArea'>
 													<label class="span12 p-t-xxsg text-center ">Grand Total </label>
 													<label class="span12 p-t-xxsg text-center txtGrandTotalWeighOrg" id="txtGrandTotalWeighOrg" style="font-size: 300%;"></label>
 
