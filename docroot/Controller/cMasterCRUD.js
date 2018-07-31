@@ -249,6 +249,7 @@ var clearFn = function(options){
 		}
 		
 		if(options['formDetail']['id']=='appraisalStructure') {
+			$(".is_unlimited_reward_header").hide();
 			$(".is_unlimited_deduction_header").hide();
 			$(".is_value_get_zero_header").hide();
 		}

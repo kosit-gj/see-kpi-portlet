@@ -10,12 +10,12 @@
 	    	var options={
 	    			"colunms":[
 	    			           {"colunmsDisplayName":"Seq",           "width":"5% ","id":"seq_no","colunmsType":"text"},
-	    			           {"colunmsDisplayName":"Structure Name","width":"25%","id":"structure_name","colunmsType":"text"},
-	    			           {"colunmsDisplayName":"#Target Score", "width":"15%","id":"nof_target_score","colunmsType":"text","colunmsDataType":"int"},
-	    			           {"colunmsDisplayName":"Form Type",     "width":"15%","id":"form_name","colunmsType":"text"},
+	    			           {"colunmsDisplayName":"Structure Name","width":"20%","id":"structure_name","colunmsType":"text"},
+	    			           {"colunmsDisplayName":"#Target Score", "width":"12%","id":"nof_target_score","colunmsType":"text","colunmsDataType":"int"},
+	    			           {"colunmsDisplayName":"Form Type",     "width":"13%","id":"form_name","colunmsType":"text"},
 	
 	//    			           {"colunmsDisplayName":"Form Type","width":"65%","id":"form_id","colunmsType":"radio"},
-	    			           
+	    			           {"colunmsDisplayName":"Unlimited Reward","width":"15%","id":"is_unlimited_reward","colunmsType":"checkbox"},
 	    			           {"colunmsDisplayName":"Unlimited Deduction","width":"15%","id":"is_unlimited_deduction","colunmsType":"checkbox"},
 	    			           {"colunmsDisplayName":"Value Get Zero","width":"15%","id":"is_value_get_zero","colunmsType":"checkbox"},
 	    			           {"colunmsDisplayName":"IsActive",      "width":"10%","id":"is_active","colunmsType":"checkbox"},
@@ -44,6 +44,11 @@
 	    					
 		    				],
 	    			"formIf":[	{
+		        				"style":"display:none;","class_header":"\"is_unlimited_reward_header\"",
+								"label":"Unlimited Reward","inputType":"checkbox","default":"unchecked",
+		        				"id":"is_unlimited_reward","width":"250px"
+		        				},
+	    						{
 	            				"style":"display:none;","class_header":"\"is_unlimited_deduction_header\"",
 	    						"label":"Unlimited Deduction","inputType":"checkbox","default":"unchecked",
 	            				"id":"is_unlimited_deduction","width":"250px"
@@ -69,18 +74,26 @@
 	    	$("#form_id").change(function() {
 
 				if($("#form_id").val()==3) { //if Deduct Score
-							
-					$(".is_unlimited_deduction_header").show();
-					$(".is_value_get_zero_header").show();
-					$(".checkbox-is_unlimited_deduction").prop('checked',true);
-					$(".checkbox-is_value_get_zero").prop('checked',true);
+					
+					$(".is_unlimited_reward_header").hide();
+					$(".checkbox-is_unlimited_reward").prop('checked',false);
+					
+					$(".is_unlimited_deduction_header,.is_value_get_zero_header").show();
+					$(".checkbox-is_unlimited_deduction,.checkbox-is_value_get_zero").prop('checked',true);
+					
+				} else if($("#form_id").val()==4) { //if Reward Score
+					
+					$(".is_unlimited_deduction_header,.is_value_get_zero_header").hide();
+					$(".checkbox-is_unlimited_deduction,.checkbox-is_value_get_zero").prop('checked',false);
+					
+					$(".is_unlimited_reward_header").show();
+					$(".checkbox-is_unlimited_reward").prop('checked',true);
 					
 				} else {
-
-					$(".is_unlimited_deduction_header").hide();
-					$(".is_value_get_zero_header").hide();
-					$(".checkbox-is_unlimited_deduction").prop('checked',false);
-					$(".checkbox-is_value_get_zero").prop('checked',false);
+					
+					$(".is_unlimited_deduction_header,.is_value_get_zero_header,.is_unlimited_reward_header").hide();
+					$(".checkbox-is_unlimited_deduction,.checkbox-is_value_get_zero,.checkbox-is_unlimited_reward").prop('checked',false);
+					
 				}
 				
 	    	}); 

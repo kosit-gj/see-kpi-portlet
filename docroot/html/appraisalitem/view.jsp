@@ -366,6 +366,9 @@ plid = layout.getPlid();
  	#modalDeductScoreDescription{
  		font-size:25px;
  	}
+ 	#modalRewardScoreDescription{
+ 		font-size:25px;
+ 	}
  	
  	/*Deduct Score Start*/
  	/*Quality Start*/
@@ -480,6 +483,9 @@ plid = layout.getPlid();
  		 float: left;
  	}
  	#modalDeductScoreDescription{
+ 		font-size:20px;
+ 	}
+ 	#modalRewardScoreDescription{
  		font-size:20px;
  	}
  	/*Deduct Score Start*/
@@ -1318,6 +1324,184 @@ overflow-y: visible;
     </div>
 </div>                      
 <!-- Modal  DeductScore End  -->
+
+<!-- Modal RewardScore  Start  -->
+
+  <div aria-hidden="true" role="dialog" tabindex="-1" id="modal-reward" class="modal inmodal" style="display: none;">
+    <div class="modal-dialog  ">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
+             
+                <h4 class="modal-title" id="modalTitleRewardScore"><span id="modalRewardScoreDescription"> </span> </h4>
+               
+            </div>
+            <div class="modal-body">
+                <!-- content start -->
+               
+                <div class='row-fluid'>
+                	<div class="span12">
+                	 		<!-- form start -->
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                	KPI Name <span class='redFont '>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs">
+				                	<input type="text" class="form-control input-sm span12" placeholder="KPI Name" id="appraisalItemNameRewardScore">
+				                	
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                
+				                	Level <span class='redFont'>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs" id="appraisalLevelAreaRewardScore">
+				                
+				                		<select class="form-control input-sm" id="appraisalLevelRewardScore">
+					                		
+					                	</select>
+				                		
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                
+			                <!-- 
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                	Department <span class='redFont '>*</span>
+				                </div>
+				                
+				                <div class="form-input-customs" id="departmentAreaDeductScore">
+				                	<select class="form-control input-sm" id="departmentDeductScore">
+				                		<option></option>
+				                	</select>
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                 -->
+			                
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                
+				                	Max Value <span class='redFont'>*</span>
+				                </div>
+				                
+				                <div id="maxValueAreaRewardScore" class="form-input-customs">
+				                
+				                		<input type="text" class="form-control input-sm numberOnly span12" placeholder="Max Value " id="maxValueRewardScore">
+				                	
+				                		
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs">
+				                	Reward Score/Unit <span class='redFont'>*</span>
+				                </div>
+				                <div class="form-input-customs">
+				                	<input type="text" class="form-control input-sm numberOnly  span12" placeholder="Reward Score/Unit" id="RewardScoreUnitRewardScore">
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
+<!-- 			                <div class='form-file-mangement is_value_get_zero_form'> -->
+<!-- 				                <div class="form-label-customs"> -->
+<!-- 				                	Value Get Zero <span class='redFont'>*</span> -->
+<!-- 				                </div> -->
+<!-- 				                <div class="form-input-customs"> -->
+<!-- 				                	<input type="text" class="form-control input-sm numberOnly  span12" placeholder="Value Get Zero" id="ValueGetZero"> -->
+<!-- 				                </div> -->
+<!-- 				                <br style="clear:both"> -->
+<!-- 			                </div> -->
+			                
+			                <div class='form-file-mangement'>
+				                <div class="form-label-customs"> 
+				                &nbsp;
+				                </div>
+				                <div class="form-input-customs">
+<!-- 				                	<input type="checkbox" checked="" name="isShowVarianceDeductScore" id="isShowVarianceDeductScore" value="1"> -->
+<!-- 				                	<span style="margin-right: 10px;">Is Show Variance</span> -->
+					             	<input type="checkbox" checked   name="isActiveRewardScore" id="isActiveRewardScore" value="1">
+					              	<span>Is Active</span>
+				                </div>
+				                <br style="clear:both">   		
+			                </div>
+			                <!-- form end -->	
+                	</div>
+                	
+                </div>
+                
+                <div class='row-fluid'>
+	                	<div class='span12' >
+	                		
+	                		<!-- panel1 start-->
+	                		<div class="ibox-title3">
+		                          <div class='titlePanel'>Organization</div>
+		                      </div>
+		   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px;'>
+		   							<!-- content  start-->	 
+		                             	<form id="orgRewardScoreForm" action="#" method="post">
+										    <select multiple="multiple" size="10" name="<portlet:namespace />organizationRewardScore[]" id='organizationRewardScore'>
+												
+										    </select>
+										  </form>
+		                            <!-- content  end-->				
+		   					</div>
+	                		<!-- panel1 end -->
+	                		
+	                		
+		                <!-- 
+	                	</div>
+	                	
+	                	<div class='span6' >
+	                	 -->
+	                		<!-- panel2 start-->
+	                		
+	                		<div class="ibox-title3">
+		                          <div class='titlePanel'>Position</div>
+		                      </div>
+		   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px;'>
+		   							<!-- content  start-->	 
+			                		 <form id="positionRewardScoreForm" action="#" method="post">
+									    <select multiple="multiple" size="10" name="<portlet:namespace />positionRewardScore[]" id='positionRewardScore'>
+									     
+									    </select>
+									    
+									  </form>
+		                            <!-- content  end-->				
+		   					</div>
+		   					
+	                		<!-- panel2 end -->
+	                		
+	                		
+							   
+	                	</div>
+                	</div>
+                	
+                <br style="clear:both">
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+           	 	<input type="hidden" name="structure_id_reward" id="structure_id_reward" value="">
+           	 	<input type="hidden" name="appraisalItemIdRewardScore" id="appraisalItemIdRewardScore" value="">
+   				<input type="hidden" name="actionRewardScore" id="actionRewardScore" value="add">
+   				
+   				<button class="btn btn-primary" type="button" id="btnSubmitRewardScore">Save</button>
+   				<button class="btn btn-primary" type="button" id="btnAddAnotherRewardScore">Save & Add Another</button>
+                <button data-dismiss="modal" class="btn btn-white btnCancleRewardScore" type="button">Cancel</button>
+                <div class="alert alert-warning information" id="informationRewardScore" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+</div>                      
+<!-- Modal  DeductScore End  -->
 <!-- 
 <script src="../../tyw-kpi-portlet/Controller/Form/cDeductScore.js"></script>
  -->
@@ -1414,7 +1598,7 @@ overflow-y: visible;
 		   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px;'>
 		   							<!-- content  start-->	
 		   							<div id=sunEdit>
-		   								 <!-- <textarea id="formulaDescriptionQuality" style="width: 95%" class=""></textarea>  -->
+		   								 <!-- <textarea id="formulaDescriptionQuality" style="width: 95%" class=""></textarea>  --> 
 		   							</div> 
 		                             	
 		                            <!-- content  end-->				
