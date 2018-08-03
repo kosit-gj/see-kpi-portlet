@@ -1717,8 +1717,8 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>Assignment Log</title>
-			<short-title>Assignment Log</short-title>
+			<title>Assignment Logging</title>
+			<short-title>Assignment Logging</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>
