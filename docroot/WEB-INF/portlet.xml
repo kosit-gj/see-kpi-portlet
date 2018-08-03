@@ -1651,8 +1651,8 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>Report Lenso</title>
-			<short-title>Report Lenso</short-title>
+			<title>Report KPI with comment</title>
+			<short-title>Report KPI with comment</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>
