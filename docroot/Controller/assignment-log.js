@@ -22,7 +22,7 @@ var getDataFn = function() {
 	var template_name ="";
 	  
 	if(appraisalType == 1){
-		template_name="report-org-kpi";
+		template_name="assignment-logging-org";
 		parameter = {
 				param_org: organization,
 				param_period: AppraisalPeriod,
@@ -30,7 +30,7 @@ var getDataFn = function() {
 			  };
 	}
 	if(appraisalType == 2){
-		template_name="report-ind-kpi";
+		template_name="assignment-logging-ind";
 		parameter = {
 				param_org: organization,
 				param_period: AppraisalPeriod,
