@@ -354,6 +354,26 @@ plid = layout.getPlid();
 									</div>
 
                                  </div> 
+                                     <div class="row-fluid">
+							
+									<div class="span5 object-right" >
+									<label class='text-label'>  Enable Assignment Logging  &nbsp;:</label>
+									
+									</div>
+									<div class="span5">
+										
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 20px;">
+											  <input  type="radio" name="optionsEnableAssignmentLogging" id="optionsEnableAssignmentLoggingOn" value="1">
+											  Yes
+										</label>
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+											<input type="radio" name="optionsEnableAssignmentLogging" id="optionsEnableAssignmentLoggingOff" value="0" checked='checked'>
+											  No 
+										</label>
+										
+									</div>
+
+                                 </div> 
                                  <div class="row-fluid">
 							
 									<div class="span5 object-right" >
