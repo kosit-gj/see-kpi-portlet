@@ -70,8 +70,6 @@ var getDataFn = function(page,rpp){
 			if(data["email_reminder_flag"] == 1){$("#emailReminderOn").prop("checked", true);}
 			else if(data["email_reminder_flag"] == 0){$("#emailReminderOff").prop("checked", true);}
 			
-			if(data["show_grand_total_flag"] == 1){$("#optionsShowGrandtotalOn").prop("checked", true);}
-			else if(data["show_grand_total_flag"] == 0){$("#optionsShowGrandtotalOff").prop("checked", true);}
 			
 			if(data["item_result_log"] == 1){$("#optionsEnableAssignmentLoggingOn").prop("checked", true);}
 			else if(data["item_result_log"] == 0){$("#optionsEnableAssignmentLoggingOff").prop("checked", true);}
@@ -251,7 +249,6 @@ var updateFn = function() {
 	var resultType=0;
 	var threshold=0;
 	var emailReminder=0;
-	var showGrandTotal=0;
 	var item_result_log=0;
 	if($("#raiseFixAmount:checked").is(":checked")){raiseType=1;}
 	else if($("#raisePercentage:checked").is(":checked")){raiseType=2;}
@@ -266,8 +263,6 @@ var updateFn = function() {
 	if($("#emailReminderOn:checked").is(":checked")){emailReminder=1;}
 	else if($("#emailReminderOff:checked").is(":checked")){emailReminder=0;}
 	
-	if($("#optionsShowGrandtotalOn:checked").is(":checked")){showGrandTotal=1;}
-	else if($("#optionsShowGrandtotalOff:checked").is(":checked")){showGrandTotal=0;}
 	
 	if($("#optionsEnableAssignmentLoggingOn:checked").is(":checked")){item_result_log=1;} 
 	else if($("#optionsEnableAssignmentLoggingOff:checked").is(":checked")){item_result_log=0;} 
@@ -292,7 +287,6 @@ var updateFn = function() {
 			"result_type"			            :  resultType,
 			"threshold"							:  threshold,
 			"email_reminder_flag"				:  emailReminder,
-			"show_grand_total_flag"				:  showGrandTotal,
 			"item_result_log"					:  item_result_log, 
 			"theme_color"			            :  $("#themeColor").val()
 			

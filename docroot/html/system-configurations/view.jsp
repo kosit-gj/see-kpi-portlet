@@ -334,7 +334,7 @@ plid = layout.getPlid();
 									</div>
 
                                  </div> 
-                                 <div class="row-fluid">
+                                 <!-- <div class="row-fluid">
 							
 									<div class="span5 object-right" >
 									<label class='text-label'>  Show Grand Total  &nbsp;:</label>
@@ -353,7 +353,7 @@ plid = layout.getPlid();
 										
 									</div>
 
-                                 </div> 
+                                 </div>  -->
                                      <div class="row-fluid">
 							
 									<div class="span5 object-right" >
