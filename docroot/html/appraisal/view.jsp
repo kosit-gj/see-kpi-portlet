@@ -3,6 +3,7 @@
 <%@ page import="javax.portlet.*"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 <liferay-theme:defineObjects />
@@ -708,6 +709,7 @@ background-color:#71cccc !important;
 
 
 <body class=" gray-bg ">
+
   <div class='row-fluid'>
     <div id="slide_status" class='span12'>
       <div id="btnCloseSlide">×</div>
@@ -728,7 +730,7 @@ background-color:#71cccc !important;
 					<div class="span12">
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<div class='titlePanel'>Advance Search</div>
+								<div class='titlePanel'><liferay-ui:message key="advance-search" /></div>
 							</div>
 
 							<div class="ibox-content breadcrumbs2">
