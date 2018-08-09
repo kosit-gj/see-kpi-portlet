@@ -654,45 +654,12 @@ plid = layout.getPlid();
 								</div>
 						</div>
 						<div class="form-group p-xxs">
-								<label class="control-label">Is SQL:</label>
-								<div class="controls">
-									<label for="" class="checkbox" style="cursor:default">
-                  					<input id="checkbox_is_sql" name="checkbox_is_sql" type="checkbox"
-										value="" style="margin-top: 2px;">
-                					</label>
-								</div>
-						</div>
-						<div class="form-group p-xxs">
 								<label class="control-label">Is Sum Up:</label>
 								<div class="controls">
 									<label for="" class="checkbox" style="cursor:default">
                   					<input id="checkbox_is_sum" name="checkbox_is_sum" type="checkbox"
 										value="" style="margin-top: 2px;">
                 					</label>
-								</div>
-						</div>
-						<div class="form-group p-xxs">
-							<label class="control-label">Connection:</label>
-								<div class="controls" id="drop_down_list_connection">
-								</div>
-						</div>
-						
-						<div class="form-group p-xxs">
-							<label class="control-label">SQL: <button class="btn btn-xs btn-white " type="button" id="btn_Execute">Execute</button>&nbsp;</label>
-								<div class="controls">
-									<textarea id="txt_sql" class="form-control span12" placeholder="" style="height: 95px;"></textarea>
-								</div>
-											
-
-						</div>
-						<div class="form-group p-xxs">
-							<label class="control-label">Sample Data:</label>
-								<div style="overflow:auto ;min-height: 145px;border:1px solid #cccccc;  border-radius: 5px; " class="controls">
-									
-										<table class="table table-bordered" id="table_Sql">
-
-										</table>
-							
 								</div>
 						</div>
 						<div class="form-group p-xxs">
@@ -703,6 +670,80 @@ plid = layout.getPlid();
 										value="" style="margin-top: 2px;">
                 					</label>
 								</div>
+						</div>
+						<div class="form-group p-xxs">
+								<label class="control-label">Is SQL:</label>
+								<div class="controls">
+									<label for="" class="checkbox" style="cursor:default">
+                  					<input id="checkbox_is_sql" name="checkbox_is_sql" type="checkbox"
+										value="" style="margin-top: 2px;">
+                					</label>
+								</div>
+						</div>
+						<div id="sql_box">
+							<div class="form-group p-xxs">
+								<label class="control-label">Connection:</label>
+									<div class="controls" id="drop_down_list_connection">
+									</div>
+							</div>
+							<div class="form-group p-xxs">
+									<label class="control-label">SQL Org:</label>
+									<div class="controls">
+										<label for="" class="checkbox" style="cursor:default">
+	                  					<input id="checkbox_is_sql_org" name="checkbox_is_sql_org" type="checkbox"
+											value="" style="margin-top: 2px;">
+	                					</label>
+									</div>
+							</div>
+							<div id="sql_org_box">
+								<div class="form-group p-xxs">
+									<label class="control-label">SQL: <button class="btn btn-xs btn-white " type="button" id="btn_Execute_org">Execute</button>&nbsp;</label>
+										<div class="controls">
+											<textarea id="txt_sql_org" class="form-control span12" placeholder="" style="height: 95px;"></textarea>
+										</div>
+													
+		
+								</div>
+								<div class="form-group p-xxs">
+									<label class="control-label">Sample Data:</label>
+										<div style="overflow:auto ;min-height: 145px;border:1px solid #cccccc;  border-radius: 5px; " class="controls">
+											
+												<table class="table table-bordered" id="table_Sql">
+		
+												</table>
+									
+										</div>
+								</div>
+							</div>
+							<div class="form-group p-xxs">
+									<label class="control-label">SQL Emp:</label>
+									<div class="controls">
+										<label for="" class="checkbox" style="cursor:default">
+	                  					<input id="checkbox_is_sql_emp" name="checkbox_is_sql_emp" type="checkbox"
+											value="" style="margin-top: 2px;">
+	                					</label>
+									</div>
+							</div>
+							<div id="sql_emp_box">
+								<div class="form-group p-xxs">
+									<label class="control-label">SQL: <button class="btn btn-xs btn-white " type="button" id="btn_Execute_emp">Execute</button>&nbsp;</label>
+										<div class="controls">
+											<textarea id="txt_sql_emp" class="form-control span12" placeholder="" style="height: 95px;"></textarea>
+										</div>
+													
+		
+								</div>
+								<div class="form-group p-xxs">
+									<label class="control-label">Sample Data:</label>
+										<div style="overflow:auto ;min-height: 145px;border:1px solid #cccccc;  border-radius: 5px; " class="controls">
+											
+												<table class="table table-bordered" id="table_SqlEmp">
+		
+												</table>
+									
+										</div>
+								</div>
+							</div>
 						</div>
 						
 					</div>
