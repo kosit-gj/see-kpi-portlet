@@ -2617,10 +2617,12 @@ var createTemplateAssignmentFn = function(data){
 		$(".grandTotalWeight").hide();
 
 		$("input.total_weigth_quantity").attr('disabled','disabled');
+		$("input.total_weigth_quantity").val(1);
 		
 		
 	}else{
 		$("input.total_weigth_quantity").removeAttr('disabled');
+		$("input.total_weigth_quantity").val('');
 		$(".totalWeight").show();
 		$(".grandTotalWeight").show();
 	}
