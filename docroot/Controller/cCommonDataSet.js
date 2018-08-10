@@ -181,13 +181,18 @@ var findOneFn = function(id) {
 				$('#checkbox_is_sql_org').prop('checked', true);
 				$('#sql_org_box').show();
 				$('#txt_sql_org').val(data['cds_sql_org']);
+				$('#txt_sql_emp').val(data['cds_sql_emp']);
 			} else if(data['sql_statement_for']==2) {
 				$('#checkbox_is_sql_emp').prop('checked', true);
 				$('#sql_emp_box').show();
+				$('#txt_sql_org').val(data['cds_sql_org']);
 				$('#txt_sql_emp').val(data['cds_sql_emp']);
 			} else if(data['sql_statement_for']=='1,2'){
 				$('#checkbox_is_sql_org,#checkbox_is_sql_emp').prop('checked', true);
 				$('#sql_org_box,#sql_emp_box').show();
+				$('#txt_sql_org').val(data['cds_sql_org']);
+				$('#txt_sql_emp').val(data['cds_sql_emp']);
+			} else {
 				$('#txt_sql_org').val(data['cds_sql_org']);
 				$('#txt_sql_emp').val(data['cds_sql_emp']);
 			}
