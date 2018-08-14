@@ -1,4 +1,4 @@
-<?xml version="1.0"?>  
+<?xml version="1.0"?>
   
 <portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0">
 	
@@ -114,7 +114,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
-		<!-- <resource-bundle>content/Language</resource-bundle> -->
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Appraisal Assignment</title>
 			<short-title>Appraisal Assignment</short-title>
