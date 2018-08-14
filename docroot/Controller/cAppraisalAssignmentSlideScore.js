@@ -852,6 +852,7 @@ var listDataFn = function(data) {
 			sessionStorage.setItem('is_coporate_kpi',$("#is_coporate_kpi-"+id).val());
 			
 			$(".information").hide();
+			$("#remark_footer").val("");
 			var status= $(this).parent().parent().parent().parent().children().eq(1).text();
 			if(status.trim()=="Unassigned"){
 				callFlashSlide("Can't edit. because unassigned status.","error");
@@ -3058,7 +3059,8 @@ $("#empName").autocomplete({
 		empldoyees_code=[];
 		empldoyees_id=[];
 		default_stage_id=[];
-		organization_code = []
+		organization_code = [];
+		$("#remark_footer").val("");
 		$(".information").hide();
 		$("#btnAddAnother").show();
 		$(".embed_appraisal_id").remove();
