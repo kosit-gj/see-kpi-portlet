@@ -289,7 +289,7 @@ var listDataPerformanceDetailFn = function(data,district,type){
 		mainArea+="<div id='noData'>No data to display.</div>";
 	}
 	$("#detailArea").html(mainArea);
-	$("#BranchPerTitle").html("Branch Performance:"+district);
+	$("#BranchPerTitle").html($(".lt-branch-performance").val()+" : "+district);
 	//console.log(data);
 	$.each(data,function(index,indexEntry){
 	
@@ -305,10 +305,10 @@ var listDataPerformanceDetailFn = function(data,district,type){
 		dataTableHTML+="<table class='table table-bordered' style='width:100%;'>";
 			dataTableHTML+="<thead>";
 				dataTableHTML+="<tr>";
-					dataTableHTML+="<th>Perspective</th>";
-					dataTableHTML+="<th style='min-width: 130px;'>KPI</th>";
-					dataTableHTML+="<th>UOM</th>";
-					dataTableHTML+="<th style='text-align:center;min-width: 250px;'>KPI Result</th>";	
+					dataTableHTML+="<th>"+$(".lt-perspective").val()+"</th>";
+					dataTableHTML+="<th style='min-width: 130px;'>"+$(".lt-kpi").val()+"</th>";
+					dataTableHTML+="<th>"+$(".lt-uom").val()+"</th>";
+					dataTableHTML+="<th style='text-align:center;min-width: 250px;'>"+$(".lt-kpi-result").val()+"</th>";	
 			dataTableHTML+="</tr>";
 			dataTableHTML+="</thead>";
 			dataTableHTML+="<tbody>";
@@ -372,9 +372,9 @@ var listDataPerformanceDetailFn = function(data,district,type){
 					dataTableHTML+="<table class='tableInside table-striped'>";
 						dataTableHTML+="<thead>";
 							dataTableHTML+="<tr>";
-								dataTableHTML+="<th style='min-width: 90px;'>Target</th>";
-								dataTableHTML+="<th style='min-width: 60px;'>Forecast</th>";
-								dataTableHTML+="<th style='min-width: 60px;'>Actual</th>";
+								dataTableHTML+="<th style='min-width: 90px;'>"+$(".lt-target").val()+"</th>";
+								dataTableHTML+="<th style='min-width: 60px;'>"+$(".lt-forecast").val()+"</th>";
+								dataTableHTML+="<th style='min-width: 60px;'>"+$(".lt-actual").val()+"</th>";
 							dataTableHTML+="</tr>";
 							dataTableHTML+="</thead>";
 							dataTableHTML+="<tbody>";
@@ -384,11 +384,11 @@ var listDataPerformanceDetailFn = function(data,district,type){
 									dataTableHTML+="<td style=' text-align: right !important;'>"+actual+"</td>";
 								dataTableHTML+="</tr>";
 								dataTableHTML+="<tr>";
-									dataTableHTML+="<td>%Taget<span style='float:right'>"+percent_target+"</span></td>";
+									dataTableHTML+="<td>"+$(".lt-percent-target").val()+"<span style='float:right'>"+percent_target+"</span></td>";
 									dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:0;'  >"+indexEntry2['percent_target_str']+"</div></td>";
 								dataTableHTML+="</tr>";
 								dataTableHTML+="<tr>";
-									dataTableHTML+="<td>%Forecast<span style='float:right'>"+percent_forecast+"</span></td>";
+									dataTableHTML+="<td>"+$(".lt-percent-forecast").val()+"<span style='float:right'>"+percent_forecast+"</span></td>";
 									dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:0;'>"+indexEntry2['percent_forecast_str']+"</div></td>";
 								dataTableHTML+="</tr>";
 							dataTableHTML+="</tbody>";
