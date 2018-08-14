@@ -87,6 +87,7 @@
 
 		<header-portlet-css>/css/appraisal-item.css</header-portlet-css>
 		<header-portlet-css>/css/jquery.multiselect.css</header-portlet-css>
+		<header-portlet-css>/css/jquery.multiselect.filter.css</header-portlet-css>
 		<header-portlet-css>/css/bootstrap-duallistbox.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
 		<!-- <header-portlet-css>/js/textEditor_LineControl/editor.css</header-portlet-css> -->
@@ -96,9 +97,11 @@
 
 		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+<!-- 		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript> -->
+		<footer-portlet-javascript>/js/JQueryUI1.11.4/jquery-ui.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.multiselect.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.multiselect.filter.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootstrap-duallistbox.js</footer-portlet-javascript>
 		<!-- <footer-portlet-javascript>/js/textEditor_LineControl/editor.js</footer-portlet-javascript> -->
 		<!-- <footer-portlet-javascript>/js/SunEditor/src/suneditor.min.js</footer-portlet-javascript> -->

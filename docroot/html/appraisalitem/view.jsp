@@ -600,6 +600,10 @@ plid = layout.getPlid();
 .aui input{
 	width: 100%;
 }
+.ui-multiselect-filter input{
+	width: 100px;
+	height: 15px !important;
+}
 
 .ibox-content {
     background-color: #fff;
@@ -812,7 +816,7 @@ overflow-y: visible;
 							<div class="row-fluid p-t-xxs">
 									
 									<div id="appraisalLevelArea" class="form-group pull-left span4" style="margin-left: 5px">
-											<select data-toggle="tooltip" title="Level"
+											<select data-toggle="tooltip" title="LevelEmp"
 											class="input form-control input-sm" id="appraisalLevel"
 											name="appraisalLevel">
 
@@ -821,16 +825,26 @@ overflow-y: visible;
 										</select>
 									</div>
 									
-									<div id="OrganizationArea"
-										class="form-group pull-left span4" style="margin-left: 5px">
-										<input data-toggle="tooltip" title="Organization "
-											placeholder="Organization " type='text'
-											name='Organization'
-											class='input form-control input-sm span12'
-											id='Organization'>
+									<div id="appraisalLevelOrgArea" class="form-group pull-left span4" style="margin-left: 5px">
+											<select data-toggle="tooltip" title="LevelOrg"
+											class="input form-control input-sm" id="appraisalLevelOrg"
+											name="appraisalLevelOrg">
+
+											<option value="0"></option>
+
+										</select>
 									</div>
-									 
-									 
+									
+									<div id="OrganizationArea" class="form-group pull-left span4" style="margin-left: 5px">
+										<select data-toggle="tooltip" title=""
+											data-original-title="Organization" multiple="multiple"
+											class="input form-control input-sm span12" id="Organization"
+											name="Organization">
+											<option value=''>All Organization</option>
+										</select>
+									</div>
+								</div>
+								<div class="row-fluid p-t-xxs">
 									<div id="structureArea" class="form-group pull-left span4"
 										style="margin-left: 5px">
 										<select data-toggle="tooltip" title="Structure"
@@ -853,16 +867,6 @@ overflow-y: visible;
 
 										</select>
 									</div>
-									<div id="appraisalItemNameArea"
-										class="form-group pull-left span4" style="margin-left: 5px">
-										<input data-toggle="tooltip" title="KPI"
-											placeholder="KPI" type='text'
-											name='appraisalItemName'
-											class='input form-control input-sm span12'
-											id='appraisalItemName'>
-									</div>
-									
-									
 									<div id="perspectiveArea" class="form-group pull-left span4"
 										style="margin-left: 5px">
 										<select data-toggle="tooltip" title="Perspective"
@@ -872,6 +876,16 @@ overflow-y: visible;
 											<option value="0"></option>
 
 										</select>
+									</div>
+								</div>
+								<div class="row-fluid p-t-xxs">
+									<div id="appraisalItemNameArea"
+										class="form-group pull-left span4" style="margin-left: 5px">
+										<input data-toggle="tooltip" title="KPI"
+											placeholder="KPI" type='text'
+											name='appraisalItemName'
+											class='input form-control input-sm span12'
+											id='appraisalItemName'>
 									</div>
 									
 									 <!-- 
