@@ -1,4 +1,4 @@
- var restfulPathDashboard="/"+serviceName+"/public/cds_result"; 
+ var restfulPathDashboard="/"+serviceName+"/public/cds_result";
  var galbalDashboard=[];
  var galbalDataTemp = [];
  var changeAutocomplete=true;
@@ -138,8 +138,8 @@
 			accordionHtml += "	<div style='margin-bottom: auto; margin-top: auto;'><span class='fa fa-caret-right'></span> "+data['org_name']+"&emsp;</div>";
 			accordionHtml += "</div>";
 			accordionHtml += "<div class='accordion-btn'>";
-			accordionHtml += "<button id='btn_extract' type='button' class='btn btn-xs btn-white' style='margin-top: -1px;font-weight: 700;'> <i class='fa fa-plus-square' aria-hidden='true'></i> Expand</button>";
-			accordionHtml += "<button id='btn_kpi' type='button' class='btn btn-xs btn-white' style='margin-top: -1px;margin-left: 5px;font-weight: 700;'> <i class='fa fa-table fa-table' aria-hidden='true'></i> All KPI</button>";
+			accordionHtml += "<button id='btn_extract' type='button' class='btn btn-xs btn-white' style='margin-top: -1px;font-weight: 700;'> <i class='fa fa-plus-square' aria-hidden='true'></i>"+$(".lt-expand").val()+"</button>";
+			accordionHtml += "<button id='btn_kpi' type='button' class='btn btn-xs btn-white' style='margin-top: -1px;margin-left: 5px;font-weight: 700;'> <i class='fa fa-table fa-table' aria-hidden='true'></i>"+$(".lt-all-kpi").val()+"</button>";
 			accordionHtml += "</div>";
 		}else{
 			accordionHtml += "<span class='fa fa-caret-right'></span> "+data['org_name']+"&emsp;";	
@@ -166,15 +166,15 @@
 		//accordionHtml += "				<div class='graphLTopHeader'>Perspective: "+data['perspective_name']+"</div>";
 		accordionHtml += "					<div>";
 		accordionHtml += "						<div class='graphLTop'>";
-		accordionHtml += "							<div class='textGRaphTop'>Target</div>";
+		accordionHtml += "							<div class='textGRaphTop'>"+$(".lt-target").val()+"</div>";
 		accordionHtml += "							<div class='textGRaphTop'>"+addCommas(data['dual_chart']['data']['target'])+"</div>";
 		accordionHtml += "						</div>";
 		accordionHtml += "						<div class='graphLTop'>";
-		accordionHtml += "							<div class='textGRaphTop'>Forecast</div>";
+		accordionHtml += "							<div class='textGRaphTop'>"+$(".lt-forecast").val()+"</div>";
 		accordionHtml += "							<div class='textGRaphTop'>"+addCommas(data['dual_chart']['data']['forecast'])+"</div>";
 		accordionHtml += "						</div>";
 		accordionHtml += "						<div class='graphLTop'>";
-		accordionHtml += "							<div class='textGRaphTop'>Actual</div>";
+		accordionHtml += "							<div class='textGRaphTop'>"+$(".lt-actual").val()+"</div>";
 		accordionHtml += "							<div class='textGRaphTop'>"+addCommas(data['dual_chart']['data']['actual_value'])+"</div>";
 		accordionHtml += "						</div>";
 		accordionHtml += "						<br style='clear: both'>";
@@ -673,9 +673,9 @@ var generateSubTableKPIFn = function(item,data){
 	ContentHTML+="<table class='tableInside table-striped'>";
 	ContentHTML+="	<thead>";
 	ContentHTML+="		<tr>";
-	ContentHTML+="			<th><div class='fontBold ' style='width:100px'>Target</div></th>";
-	ContentHTML+="			<th><div class='fontBold ' style='width:100px'>Forecast</div></th>";
-	ContentHTML+="			<th><div class='fontBold ' style='width:100px'>Actual</div></th>";
+	ContentHTML+="			<th><div class='fontBold ' style='width:100px'>"+$(".lt-target").val()+"</div></th>";
+	ContentHTML+="			<th><div class='fontBold ' style='width:100px'>"+$(".lt-forecast").val()+"</div></th>";
+	ContentHTML+="			<th><div class='fontBold ' style='width:100px'>"+$(".lt-actual").val()+"</div></th>";
 	ContentHTML+="		</tr>";
 	ContentHTML+="	</thead>";
 	ContentHTML+="	<tbody>";
@@ -685,11 +685,11 @@ var generateSubTableKPIFn = function(item,data){
 	ContentHTML+="			<td>"+data['actual']+"</td>";
 	ContentHTML+="		</tr>";
 	ContentHTML+="		<tr>";
-	ContentHTML+="			<td>%Target</td>";
+	ContentHTML+="			<td>"+$(".lt-percent-target").val()+"</td>";
 	ContentHTML+="			<td colspan='2'><div id='perTarget-Item-"+item+"-Org-"+data['org_code']+"' class='sparkline'></div></td>";
 	ContentHTML+="		</tr>";
 	ContentHTML+="		<tr>";
-	ContentHTML+="			<td>%Forecast</td>";
+	ContentHTML+="			<td>"+$(".lt-percent-forecast").val()+"</td>";
 	ContentHTML+="			<td colspan='2'><div id='perForecast-Item-"+item+"-Org-"+data['org_code']+"' class='sparkline'></div></td>";
 	ContentHTML+="		</tr>";
 	ContentHTML+="	</tbody>";
@@ -1021,15 +1021,15 @@ var listHeaderFn=function(galbalOrg){
 	 var htmlHeaderSummary2 = "";
 	 var org= ($("#param_emp").val() == "" ? $("#param_org_id").val() :$("#param_emp").val());
 	 htmlHeader1+="<th style='width:120px;'>";
-	 htmlHeader1+="<div class='fontBold '> Perspective</div>";
+	 htmlHeader1+="<div class='fontBold '>"+$(".lt-perspective").val()+"</div>";
 	 htmlHeader1+="</th>";
 	 
 	 htmlHeader1+="<th style='width:237px;'>";
-	 htmlHeader1+="<div class='fontBold '>KPI</div>";
+	 htmlHeader1+="<div class='fontBold '>"+$(".lt-kpi").val()+"</div>";
 	 htmlHeader1+="</th>";
 	 
 	 htmlHeader1+="<th style='width:73px;'>";
-	 htmlHeader1+="<div class='fontBold '>UOM</div>";
+	 htmlHeader1+="<div class='fontBold '>"+$(".lt-uom").val()+"</div>";
 	 htmlHeader1+="</th>";
 	 
 	 $.each(galbalOrg,function(index,indexEntry){
@@ -1223,9 +1223,9 @@ var listDashBoardAllKPIFn = function(data){
 	    htmlData2+="<table class='tableInside table-striped'>";
 	    htmlData2+="<thead>";
 	    htmlData2+="<tr>";
-	    htmlData2+="<th><div class='fontBold ' style='min-width:102px'>Target</div></th>";
-	    htmlData2+="<th><div class='fontBold '  style='min-width:100px'>Forecast</div></th>";
-	    htmlData2+="<th><div class='fontBold ' style='min-width:100px'>Actual</div></th>";
+	    htmlData2+="<th><div class='fontBold ' style='min-width:102px'>"+$(".lt-target").val()+"</div></th>";
+	    htmlData2+="<th><div class='fontBold '  style='min-width:100px'>"+$(".lt-forecast").val()+"</div></th>";
+	    htmlData2+="<th><div class='fontBold ' style='min-width:100px'>"+$(".lt-actual").val()+"</div></th>";
 	      htmlData2+="</tr>";
 	     htmlData2+="</thead>";
 	     htmlData2+="<tbody>";
@@ -1235,11 +1235,11 @@ var listDashBoardAllKPIFn = function(data){
 	      htmlData2+="<td style='text-align:right;'>"+actual+"</td>";
 	      htmlData2+="</tr>";
 	      htmlData2+="<tr>";
-	      htmlData2+="<td>%Target<span style='float:right'>"+percent_target+"</span></td>";
+	      htmlData2+="<td>"+$(".lt-percent-target").val()+"<span style='float:right'>"+percent_target+"</span></td>";
 	      htmlData2+="<td colspan='2'><div class='sparkline' id='perTarget"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_target_str']+"</div></td>";
 	      htmlData2+="</tr>";
 	      htmlData2+="<tr>";
-	      htmlData2+="<td>%Forecast<span style='float:right'>"+percent_forecast+"</span></td>";
+	      htmlData2+="<td>"+$(".lt-percent-forecast").val()+"<span style='float:right'>"+percent_forecast+"</span></td>";
 	      htmlData2+="<td colspan='2'><div class='sparkline' id='perForecast"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_forecast_str']+"</div></td>";  
 	      htmlData2+="</tr>";
 	     htmlData2+="</tbody>";
@@ -1253,9 +1253,9 @@ var listDashBoardAllKPIFn = function(data){
 	    htmlData3+="<table class='tableInside table-striped'>";
 	    htmlData3+="<thead>";
 	     htmlData3+="<tr>";
-	      htmlData3+="<th><div class='fontBold ' style='min-width:102px;'>Target</div></th>";
-	      htmlData3+="<th><div class='fontBold ' style='min-width:100px;'>Forecast</div></th>";
-	      htmlData3+="<th><div class='fontBold ' style='min-width:100px;'>Actual</div></th>";
+	      htmlData3+="<th><div class='fontBold ' style='min-width:102px;'>"+$(".lt-target").val()+"</div></th>";
+	      htmlData3+="<th><div class='fontBold ' style='min-width:100px;'>"+$(".lt-forecast").val()+"</div></th>";
+	      htmlData3+="<th><div class='fontBold ' style='min-width:100px;'>"+$(".lt-actual").val()+"</div></th>";
 	      htmlData3+="</tr>";
 	    htmlData3+="</thead>";
 	     htmlData3+="<tbody>";
@@ -1265,11 +1265,11 @@ var listDashBoardAllKPIFn = function(data){
 	      htmlData3+="<td style='text-align:right;'>"+actual+"</td>";
 	      htmlData3+="</tr>";
 	      htmlData3+="<tr>";
-	       htmlData3+="<td>%Target<span style='float:right'>"+percent_target+"</span></td>";
+	       htmlData3+="<td>"+$(".lt-percent-target").val()+"<span style='float:right'>"+percent_target+"</span></td>";
 	       htmlData3+="<td colspan='2'><div class='sparkline' id='perTarget"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_target_str']+"</div></td>";
 	      htmlData3+="</tr>";
 	      htmlData3+="<tr>";
-	       htmlData3+="<td>%Forecast<span style='float:right'>"+percent_forecast+"</span></td>";
+	       htmlData3+="<td>"+$(".lt-percent-forecast").val()+"<span style='float:right'>"+percent_forecast+"</span></td>";
 	       htmlData3+="<td colspan='2'><div class='sparkline' id='perForecast"+index+"-Item-"+indexEntry['item_id']+"-Org-"+indexEntry2['org_code']+"'>"+indexEntry2['percent_forecast_str']+"</div></td>";   
 	      htmlData3+="</tr>";
 	      htmlData3+="</tbody>";

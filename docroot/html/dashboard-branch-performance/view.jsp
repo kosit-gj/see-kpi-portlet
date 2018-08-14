@@ -530,16 +530,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 
 
 <!-- Language Template for js -->
-<input class="lt-perspective" type="hidden" value="<liferay-ui:message key="perspective"/>"/>
-<input class="lt-kpi" type="hidden" value="<liferay-ui:message key="kpi"/>"/>
-<input class="lt-uom" type="hidden" value="<liferay-ui:message key="uom"/>"/>
-<input class="lt-kpi-result" type="hidden" value="<liferay-ui:message key="kpi-result"/>"/>
-<input class="lt-target" type="hidden" value="<liferay-ui:message key="target"/>"/>
-<input class="lt-forecast" type="hidden" value="<liferay-ui:message key="forecast"/>"/>
-<input class="lt-actual" type="hidden" value="<liferay-ui:message key="actual"/>"/>
-<input class="lt-percent-forecast" type="hidden" value="<liferay-ui:message key="percent-forecast"/>"/>
-<input class="lt-percent-target" type="hidden" value="<liferay-ui:message key="percent-target"/>"/>
-<input class="lt-branch-performance" type="hidden" value="<liferay-ui:message key="branch-performance"/>"/>
+<%@ include file="/html/language-js-template/view.jsp" %>
 
 
 

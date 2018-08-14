@@ -628,11 +628,4 @@ overflow:auto;
 
 
 <!-- Language Template for js -->
-<input class="lt-performance-by-perspective" type="hidden" value="<liferay-ui:message key="performance-by-perspective"/>"/>
-<input class="lt-performance-by-kpi" type="hidden" value="<liferay-ui:message key="performance-by-kpi"/>"/>
-<input class="lt-target" type="hidden" value="<liferay-ui:message key="target"/>"/>
-<input class="lt-forecast" type="hidden" value="<liferay-ui:message key="forecast"/>"/>
-<input class="lt-actual" type="hidden" value="<liferay-ui:message key="actual"/>"/>
-<input class="lt-percent-forecast" type="hidden" value="<liferay-ui:message key="percent-forecast"/>"/>
-<input class="lt-percent-target" type="hidden" value="<liferay-ui:message key="percent-target"/>"/>
-<input class="lt-all-kpi" type="hidden" value="<liferay-ui:message key="all-kpi"/>"/>
+<%@ include file="/html/language-js-template/view.jsp" %>
