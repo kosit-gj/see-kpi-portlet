@@ -5,6 +5,7 @@
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 <%
@@ -1683,6 +1684,11 @@ Is Active
 <!-- Modal Confirm End -->
 
 <div id="embedParamSearch"></div>
+
+
+
+<!-- Language Template for js -->
+<%@ include file="/html/language-js-template/view.jsp" %>
 
 
 </body>
