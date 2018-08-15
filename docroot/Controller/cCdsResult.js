@@ -102,12 +102,12 @@ var getCdsResultDataFn = function(page,rpp){
 	var emp_name= $("#param_emp_id").val();
 	$("#listCdsResult").empty();
 	if(app_type == "2"){
-		$("#tableCdsResult thead tr").find("th:first").html("Emp&nbsp;Code&emsp;");
-		$("#tableCdsResult thead tr").find("th:first").next().html("Emp&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
+		$("#tableCdsResult thead tr").find("th:first").html($(".lt-emp-code").val());
+		$("#tableCdsResult thead tr").find("th:first").next().html($(".lt-emp-name").val());
 		$(".theadThField").show();
 	}else if(app_type == "1"){
-		$("#tableCdsResult thead tr").find("th:first").html("Org&nbsp;Code&emsp;");
-		$("#tableCdsResult thead tr").find("th:first").next().html("Org&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
+		$("#tableCdsResult thead tr").find("th:first").html($(".lt-org-code").val());
+		$("#tableCdsResult thead tr").find("th:first").next().html($(".lt-org-name").val());
 		$(".theadThField").hide();
 		app_lv_emp = "";
 	}
@@ -193,9 +193,9 @@ var listCdsResultFn = function (data) {
 		if(indexEntry["cds_result_id"] == null){
 			htmlTable += "<td class='columnSearch'></td>";
 		}else{
-			htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del-cds\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"<button class='btn btn-warning btn-xs downloadAttachFileCds'style='width:95%' id='downloadAttachFileCds-"+ indexEntry["cds_result_id"]+ "' data-target=#downloadAttachFileModal data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>Dowload</button>&nbsp;" ;
-			htmlTable += "<button class='btn btn-success btn-xs attachFileCds' style='width:95%;' id='attachFileCds-"+ indexEntry["cds_result_id"]+ "' data-target=#ModalImport data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>Attach File</button>&nbsp;";
-			htmlTable += "<button style='width:95%' id='delCds-"+indexEntry["cds_result_id"]+"' class='btn btn-danger btn-xs delCds'>Delete</button>\"></i></td>";
+			htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del-cds\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"<button class='btn btn-warning btn-xs downloadAttachFileCds'style='width:95%' id='downloadAttachFileCds-"+ indexEntry["cds_result_id"]+ "' data-target=#downloadAttachFileModal data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>"+$(".lt-download").val()+"</button>&nbsp;" ;
+			htmlTable += "<button class='btn btn-success btn-xs attachFileCds' style='width:95%;' id='attachFileCds-"+ indexEntry["cds_result_id"]+ "' data-target=#ModalImport data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>"+$(".lt-attach-files").val()+"</button>&nbsp;";
+			htmlTable += "<button style='width:95%' id='delCds-"+indexEntry["cds_result_id"]+"' class='btn btn-danger btn-xs delCds'>"+$(".lt-delete").val()+"</button>\"></i></td>";
 		}
 		
 		htmlTable += "</tr>";////parseFloat().toLocaleString()
@@ -210,7 +210,7 @@ var listCdsResultFn = function (data) {
 			var id = this.id.split("-")[1];
 			
 			$("#attachFileCdsResultId").val(id);
-			$("#txtTitleImport").html("Attach File");	
+			$("#txtTitleImport").html($(".lt-attach-files").val());
 			
 			
 		});
@@ -373,7 +373,7 @@ var dropDownListMonth = function(){
 	var html="";
 	
 	
-	html+="<select id=\"monthCdsResult\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Month\" name=\"monthCdsResult\">";
+	html+="<select id=\"monthCdsResult\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\""+$(".lt-month").val()+"\" name=\"monthCdsResult\">";
 	//html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownMonth ,
@@ -401,7 +401,7 @@ var dropDownListYear = function(){
 	var html="";
 	
 	
-	html+="<select id=\"yearCdsResult\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Year\" name=\"yearCdsResult\">";
+	html+="<select id=\"yearCdsResult\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\""+$(".lt-year").val()+"\" name=\"yearCdsResult\">";
 	//html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownYear ,
@@ -496,7 +496,7 @@ var dropDownListEmpLevelToOrgFn = function(){
 
 var dropDownListAppraisalType = function(){
 	var html="";
-	html+="<select data-placement='top' id=\"app_type\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Entity Type\" name=\"app_type\">";
+	html+="<select data-placement='top' id=\"app_type\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\""+$(".lt-entity-type").val()+"\" name=\"app_type\">";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalType,
 		type:"get" ,
