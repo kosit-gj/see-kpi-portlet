@@ -153,26 +153,26 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 	htmlTemplateQuality+="<thead>";
 	//has weight
 	if(data['no_weight']==0){
-			htmlTemplateQuality+="<tr>";
-				htmlTemplateQuality+="<th style=\"width:40%\"><b>KPI Name</b></th>";
-				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Target</b></th>";
-				htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>First Line Score</b></th>";
-				htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>Second Line Score</b></th>";
-				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>%Weight</b></th>  ";
+			htmlTemplateQuality+="<tr style='white-space: nowrap;'>";
+				htmlTemplateQuality+="<th style=\"width:40%\"><b>"+$(".lt-kpi-name").val()+"</b></th>";
+				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>"+$(".lt-target").val()+"</b></th>";
+				htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>"+$(".lt-first-line-score").val()+"</b></th>";
+				htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>"+$(".lt-second-line-score").val()+"</b></th>";
+				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>"+$(".lt-percent-weight").val()+"</b></th>  ";
 				if(data['result_type']==1){
-					htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Weight Score</b></th>  ";
+					htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>"+$(".lt-weight-score").val()+"</b></th>  ";
 				}else{
-					htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Result Score</b></th>  ";
+					htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>"+$(".lt-result-score").val()+"</b></th>  ";
 				}
 
 			htmlTemplateQuality+="</tr>";
 	}else{
 
 		htmlTemplateQuality+="<tr>";
-			htmlTemplateQuality+="<th style=\"width:40%\"><b>KPI Name</b></th>";
-			htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Target</b></th>";
-			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>First Line Score</b></th>";
-			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>Second Line Score</b></th>";
+			htmlTemplateQuality+="<th style=\"width:40%\"><b>"+$(".lt-kpi-name").val()+"</b></th>";
+			htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>"+$(".lt-target").val()+"</b></th>";
+			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>"+$(".lt-first-line-score").val()+"</b></th>";
+			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>"+$(".lt-second-line-score").val()+"</b></th>";
 
 		htmlTemplateQuality+="</tr>";
 	}
@@ -243,7 +243,7 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 							htmlTemplateQuality+="<td class=''></td>";
 							htmlTemplateQuality+="<td class='' ></td>";
 							htmlTemplateQuality+="<td class=''></td>";
-							htmlTemplateQuality+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>Total</b></td>";
+							htmlTemplateQuality+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>"+$(".lt-total").val()+"</b></td>";
 							htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;font-weight: bold;font-size:16px'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
 
 						htmlTemplateQuality+="</tr>";
@@ -278,9 +278,9 @@ var assignTemplateDeductFn = function(structureName,data){
 	if(data['no_weight']==0){ // has weight;
 
 		if(data['result_type']==1){
-			htmlTemplateDeduct+="<div class='totalWeight'>Total Weight "+data['total_weight_percent']+"%</div>";
+			htmlTemplateDeduct+="<div class='totalWeight'>"+$(".lt-total-weight").val()+" "+data['total_weight_percent']+"%</div>";
 		}else{
-			htmlTemplateDeduct+="<div class='totalWeight'>Total Score "+data['total_weight']+"</div>";
+			htmlTemplateDeduct+="<div class='totalWeight'>"+$(".lt-total-score").val()+" "+data['total_weight']+"</div>";
 		}
 	}
 	htmlTemplateDeduct+="</div>";
@@ -294,37 +294,37 @@ var assignTemplateDeductFn = function(structureName,data){
 		if(data['no_weight']==0){
 
 
-			htmlTemplateDeduct+="<tr>";
-				htmlTemplateDeduct+="<th style=\"width:30%\"><b>KPI Name</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Max Value</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Actual Value</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Over Value</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Deduct Score/Unit</b> </th>";
+			htmlTemplateDeduct+="<tr style='white-space: nowrap;'>";
+				htmlTemplateDeduct+="<th style=\"width:30%\"><b>"+$(".lt-kpi-name").val()+"</b></th>";
+				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-max-value").val()+"</b></th>";
+				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-actual-value").val()+"</b></th>";
+				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-over-value").val()+"</b></th>";
+				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-deduct-score").val()+"/"+$(".lt-unit").val()+"</b> </th>";
 				
 				if(data['is_value_get_zero']==1){
-					htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Value&nbsp;Get&nbsp;Zero&nbsp;</b> </th>";
+					htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-value-get-zero").val()+"</b> </th>";
 				}
 				
 				if(data['result_type']==1){
-					htmlTemplateDeduct+="<th style='width:20%;text-align: right;'><b>Weight Score </b></th>";
+					htmlTemplateDeduct+="<th style='width:20%;text-align: right;'><b>"+$(".lt-weight-score").val()+"</b></th>";
 				}else{
-					htmlTemplateDeduct+="<th style='width:20%;text-align: right;'><b>Result Score </b></th>";
+					htmlTemplateDeduct+="<th style='width:20%;text-align: right;'><b>"+$(".lt-result-score").val()+"</b></th>";
 				}
 				
 			htmlTemplateDeduct+="</tr>";
 		}else{
 			htmlTemplateDeduct+="<tr>";
-				htmlTemplateDeduct+="<th style=\"width:35%\"><b>KPI Name</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Max Value</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Actual Value</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Over Value</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Deduct Score/Unit</b> </th>";
+				htmlTemplateDeduct+="<th style=\"width:35%\"><b>"+$(".lt-kpi-name").val()+"</b></th>";
+				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-max-value").val()+"</b></th>";
+				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-actual-value").val()+"</b></th>";
+				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-over-value").val()+"</b></th>";
+				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-deduct-score").val()+"/"+$(".lt-unit").val()+"</b> </th>";
 				
 				if(data['is_value_get_zero']==1){
-					htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Value&nbsp;Get&nbsp;Zero&nbsp;</b> </th>";
+					htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-value-get-zero").val()+"</b> </th>";
 				}
 				
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Score </b></th>";
+				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-score").val()+"</b></th>";
 			htmlTemplateDeduct+="</tr>";
 		}
 			htmlTemplateDeduct+="</thead>";
@@ -374,7 +374,7 @@ var assignTemplateDeductFn = function(structureName,data){
 								if(data['is_value_get_zero']==1){
 									htmlTemplateDeduct+="<td class=''></td>";
 								}
-								htmlTemplateDeduct+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>Total</b></td>";
+								htmlTemplateDeduct+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>"+$(".lt-total").val()+"</b></td>";
 								htmlTemplateDeduct+="<td class=''  style='text-align: right;padding-right: 10px;font-weight: bold; font-size:16px'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
 						htmlTemplateDeduct+="</tr>";
 					}
@@ -412,9 +412,9 @@ var assignTemplateQuantityFn = function(structureName,data){
 	htmlTemplateQuantity+="      <div class='titlePanel'>"+structureName+"</div>";
 	if(data['no_weight']==0){ // has weight;
 		if(data['result_type']==1){
-			htmlTemplateQuantity+="      <div class='totalWeight'>Total Weight "+data['total_weight_percent']+"%</div>";
+			htmlTemplateQuantity+="      <div class='totalWeight'>"+$(".lt-total-weight").val()+" "+data['total_weight_percent']+"%</div>";
 		}else{
-			htmlTemplateQuantity+="      <div class='totalWeight'>Total Score "+data['total_weight']+"</div>";
+			htmlTemplateQuantity+="      <div class='totalWeight'>"+$(".lt-total-score").val()+" "+data['total_weight']+"</div>";
 		}
 	}
 	htmlTemplateQuantity+="  </div>";
@@ -426,49 +426,49 @@ var assignTemplateQuantityFn = function(structureName,data){
 	//has weight
 	if(data['no_weight']==0){
 
-		htmlTemplateQuantity+="<tr>";
+		htmlTemplateQuantity+="<tr style='white-space: nowrap;'>";
 
-			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>Perspective</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>KPI Name</b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Target </b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>UOM </b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Forecast </b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Actual </b></th>";
+			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>"+$(".lt-perspective").val()+"</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>"+$(".lt-kpi-name").val()+"</b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-target").val()+"</b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-uom").val()+"</b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-forecast").val()+"</b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-actual").val()+"</b></th>";
 			if(data['threshold']==1){
-				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Score </b></th>";
+				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-score").val()+"</b></th>";
 			}else{
-				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Achievement </b></th>";
+				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-percent-achievement").val()+"</b></th>";
 			}
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Weight </b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-percent-weight").val()+"</b></th>";
 			if(data['result_type']==1){
-				htmlTemplateQuantity+="<th style='width:10%;text-align: right;' class=''><b>Weight Score</b> </th>";
+				htmlTemplateQuantity+="<th style='width:10%;text-align: right;' class=''><b>"+$(".lt-weight-score").val()+"</b> </th>";
 			}else{
-				htmlTemplateQuantity+="<th style='width:10%;text-align: right;' class=''><b>Result Score</b> </th>";
+				htmlTemplateQuantity+="<th style='width:10%;text-align: right;' class=''><b>"+$(".lt-result-score").val()+"</b> </th>";
 			}
 
-			htmlTemplateQuantity+="<th style='width:10%;text-align: center;' class=''><b>Manage</b> </th>";
+			htmlTemplateQuantity+="<th style='width:10%;text-align: center;' class=''><b>"+$(".lt-manage").val()+"</b> </th>";
 
 
 		htmlTemplateQuantity+="</tr>";
 
 	}else{
 	//no_weight
-		htmlTemplateQuantity+="<tr>";
-			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>Perspective</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>KPI Name</b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Target </b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>UOM </b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Forecast </b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Actual </b></th>";
+		htmlTemplateQuantity+="<tr style='white-space: nowrap;'>";
+			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>"+$(".lt-perspective").val()+"</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>"+$(".lt-kpi-name").val()+"</b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-target").val()+"</b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".uom").val()+"</b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-forecast").val()+"</b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-actual").val()+"</b></th>";
 
 			if(data['threshold']==1){
-				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Score </b></th>";
+				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-score").val()+"</b></th>";
 			}else{
-				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Achievement </b></th>";
+				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-percent-achievement").val()+"</b></th>";
 			}
 
 
-			htmlTemplateQuantity+="<th style='width:15%;text-align: center;' class=''><b>Manage</b> </th>";
+			htmlTemplateQuantity+="<th style='width:15%;text-align: center;' class=''><b>"+$(".lt-manage").val()+"</b> </th>";
 
 		htmlTemplateQuantity+="</tr>";
 	}
@@ -510,7 +510,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 
 
 						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
-						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"   &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear reason' id='reason-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Reason&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Gantt Chart&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt; &lt;button style='width:100%;' id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;Attach File&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>"+paperclip;
+						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"   &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear reason' id='reason-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;"+$(".lt-reason").val()+"&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;"+$(".lt-gantt-chart").val()+"&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;"+$(".lt-phase").val()+"&lt;/button&gt; &lt;button style='width:100%;' id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-success btn-small btn-gear action_plan'&gt;"+$(".lt-action-plan").val()+"&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;"+$(".lt-attach-files").val()+"&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>"+paperclip;
 						htmlTemplateQuantity+="	</td>";
 
 					htmlTemplateQuantity+="</tr>";
@@ -533,7 +533,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 						}
 
 						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
-						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;Gantt&lt;/button&gt; &lt;button class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;Attach File&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" style='text-align:center;' data-original-title=\"\" title=\"\"></i>"+paperclip;
+						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;"+$(".lt-gantt").val()+"&lt;/button&gt; &lt;button class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;"+$(".lt-phase").val()+"&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear action_plan'&gt;"+$(".lt-action-plan").val()+"&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;"+$(".lt-attach-files").val()+"&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" style='text-align:center;' data-original-title=\"\" title=\"\"></i>"+paperclip;
 						htmlTemplateQuantity+="	</td>";
 
 					htmlTemplateQuantity+="</tr>";
@@ -551,7 +551,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 					htmlTemplateQuantity+="<td></td>";
 					htmlTemplateQuantity+="<td></td>";
 					htmlTemplateQuantity+="<td></td>";
-					htmlTemplateQuantity+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>Total</b></td>";
+					htmlTemplateQuantity+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>"+$(".lt-total").val()+"</b></td>";
 					htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;font-weight: bold; font-size:16px;'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
 				htmlTemplateQuantity+="</tr>";
 			}
@@ -1039,7 +1039,7 @@ var listAppraisalDetailFn = function(data){
 
 
 
-			 $("#titlePanelInformation").html("Employee Information");
+			 $("#titlePanelInformation").html($(".lt-employee-information").val());
 
 			 $(".txtEmpCode").html(data['head'][0]['emp_code']);
 			 $(".txtEmpName").html(data['head'][0]['emp_name']);
@@ -1056,7 +1056,7 @@ var listAppraisalDetailFn = function(data){
 			 $("#orgInformation").show();
 			 $("#empInformation").hide();
 
-			 $("#titlePanelInformation").html("Organization Information");
+			 $("#titlePanelInformation").html($(".lt-organization-information").val());
 
 			 $(".txtOrgCodeOrg").html(data['head'][0]['org_code']);
 			 $(".txtOrgNameOrg").html(data['head'][0]['org_name']);
@@ -1202,7 +1202,7 @@ var findOneFn = function(id){
 
 
 			}else{
-				callFlashSlide("Data is empty.");
+				callFlashSlide($(".lt-data-is-empty").val());
 				return false;
 			}
 
@@ -1757,7 +1757,7 @@ var listPhaseFn = function(data){
 
 			htmlTR+="<td style='text-align:center;'>";
 
-			htmlTR+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear edit_phase' id=edit_phase-"+indexEntry['phase_id']+" data-target='' data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=del_phase-"+indexEntry['phase_id']+" class='btn btn-danger btn-small btn-gear phaseDel'&gt;Delete&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+			htmlTR+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear edit_phase' id=edit_phase-"+indexEntry['phase_id']+" data-target='' data-toggle='modal'&gt;"+$(".lt-edit").vla()+"&lt;/button&gt;&nbsp;&lt;button id=del_phase-"+indexEntry['phase_id']+" class='btn btn-danger btn-small btn-gear phaseDel'&gt;"+$(".lt-delete").val()+"&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
 
 			htmlTR+="</td>";
 		htmlTR+="</tr>";
@@ -1900,7 +1900,7 @@ var deleteReasonFn = function(id){
 			  success:function(data){
 				if(data['status']==200){
 
-					   callFlashSlide("Delete Successfully.");       
+					   callFlashSlide($(".lt-delete-successfully").val());       
 				       getReasonFn($("#reason_item_result_id").val());
 					   $("#confrimModal").modal('hide');
 
@@ -1946,7 +1946,7 @@ var listReasonFn = function(data){
 			htmlTR+="<td>"+indexEntry['rank']+"</td>";
 			htmlTR+="<td>"+indexEntry['reason_name']+"</td>";
 			htmlTR+="<td style='text-align:center;'>";
-			htmlTR+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear edit_reason' id=edit_reason-"+indexEntry['reason_id']+" data-target='' data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=del_reason-"+indexEntry['reason_id']+" class='btn btn-danger btn-small btn-gear reasonDel'&gt;Delete&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+			htmlTR+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear edit_reason' id=edit_reason-"+indexEntry['reason_id']+" data-target='' data-toggle='modal'&gt;"+$(".lt-edit").val()+"&lt;/button&gt;&nbsp;&lt;button id=del_reason-"+indexEntry['reason_id']+" class='btn btn-danger btn-small btn-gear reasonDel'&gt;"+$(".lt-delete").val()+"&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
 			htmlTR+="</td>";
 		htmlTR+="</tr>";
 	});
@@ -2069,24 +2069,24 @@ var listDataFn = function(data){
 		htmlHTML+="<table id=\"tablethreshould\" class=\"table table-striped\" style=\"max-width: none\">";
 
 		htmlHTML+=" <thead>";
-			htmlHTML+=" <tr>";
+			htmlHTML+=" <tr style='white-space:nowrap;'>";
 
 			if($("#embed_appraisalType").val()=="2"){
 
-				htmlHTML+=" <th style=\"width:auto;\"><b>Emp Code</b></th>";
-				htmlHTML+=" <th style=\"widthauto;\"><b>Emp Name</b></th>";
-				htmlHTML+=" <th style=\"width:auto;\"><b>Level</b> </th>";
-				htmlHTML+=" <th style=\"width:auto;\"><b>Organization </b></th>";
-				htmlHTML+=" <th style=\"width:auto;\"><b>Position</b> </th>";
-				htmlHTML+=" <th style=\"width:auto;\"><b>Action</b></th>";
+				htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-emp-code").val()+"</b></th>";
+				htmlHTML+=" <th style=\"widthauto;\"><b>"+$(".lt-emp-name").val()+"</b></th>";
+				htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-level").val()+"</b> </th>";
+				htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-organization").val()+"</b></th>";
+				htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-position").val()+"</b> </th>";
+				htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-action").val()+"</b></th>";
 				//htmlHTML+=" <th style=\"width:auto; text-align:center;\"><b>Manage</b></th>";
 
 			}else if($("#embed_appraisalType").val()=="1"){
 
-				htmlHTML+=" <th style=\"width:auto;\"><b>Org Code</b></th>";
-				htmlHTML+=" <th style=\"widthauto;\"><b>Org Name</b></th>";
-				htmlHTML+=" <th style=\"width:auto;\"><b>Level</b> </th>";
-				htmlHTML+=" <th style=\"width:auto;\"><b>Action</b></th>";
+				htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-org-code").val()+"</b></th>";
+				htmlHTML+=" <th style=\"widthauto;\"><b>"+$(".lt-org-name").val()+"</b></th>";
+				htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-level").val()+"</b> </th>";
+				htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-action").val()+"</b></th>";
 				//htmlHTML+=" <th style=\"width:auto; text-align:center;\"><b>Manage</b></th>";
 
 			}
@@ -2495,7 +2495,7 @@ var saveAppraisalFn = function(){
 			if(data['status']==200){
 				
 				$("#ModalAppraisal").modal('hide');
-				callFlashSlide("Saved.");
+				callFlashSlide($(".lt-saved").val());
 				
 				if(emailLinkAppraisal==true) {
 					var url_redirect = $(location).attr('href').split("/").splice(0, 5).join("/");
@@ -3070,7 +3070,7 @@ $(document).ready(function() {
 				$("input.action_plan_id").prop("disabled",true);
 				return false;
 			  }else{
-				  callFlashSlideInModal("Can't add Action Plan. Because your doing Update Data!.","#information3","error");
+				  callFlashSlideInModal($(".lt-can-not-add-action-plan-because-your-doing-update-data").val(),"#information3","error");
 			  }
 		  });
 
@@ -3079,7 +3079,7 @@ $(document).ready(function() {
 		  $("#btnEditActionPlan").click(function() {
 
 				if($("#action_new_actionplan").val()=="add"){
-					callFlashSlideInModal("Can't edit Action Plan. Because your doing insert Data!.","#information3","error");
+					callFlashSlideInModal($(".lt-can-not-edit-action-plan-because-your-doing-insert-data").val(),"#information3","error");
 					return false;
 				  }
 
@@ -3366,7 +3366,7 @@ $(document).ready(function() {
 
 								      if(data['data']['error'].length==0){
 										getActionPlanFn($("#item_result_id").val());
-									    callFlashSlideInModal("Insert Successfully.","#information3");
+									    callFlashSlideInModal($(".lt-insert-successfully").val(),"#information3");
 								     
 								      }else{
 										callFlashSlideInModal(listErrorActionPlanFn(data['data']['error']),"#information3","error");
@@ -3435,7 +3435,7 @@ $(document).ready(function() {
 
 								 if(data['data']['error'].length==0){
 										getActionPlanFn($("#item_result_id").val());
-									    callFlashSlideInModal("Delete Successfully.","#information3");
+									    callFlashSlideInModal($(".lt-delete-successfully").val(),"#information3");
 								     
 								      }else{
 										callFlashSlideInModal(listErrorActionPlanFn(data['data']['error']),"#information3","error");
@@ -3730,7 +3730,7 @@ $(document).ready(function() {
 				//console.log(data);
 				if(data['status']==200 && data['data'].length>0){
 
-					callFlashSlideInModal("Upload Successfully.",".information");
+					callFlashSlideInModal($(".lt-upload-successfully").val(),".information");
 					$('#attach_files_attachment').val("");
 					$(".dropify-clear").click();
 

@@ -56,26 +56,28 @@
 <input class="lt-value-get-zero" type="hidden" value="<liferay-ui:message key="value-get-zero"/>"/>
 <input class="lt-view" type="hidden" value="<liferay-ui:message key="view"/>"/>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- Appraisal (kpi result) -->
+<input class="lt-action-plan" type="hidden" value="<liferay-ui:message key="action-plan"/>"/>
+<input class="lt-actual-value" type="hidden" value="<liferay-ui:message key="actual-value"/>"/>
+<input class="lt-can-not-add-action-plan-because-your-doing-update-data" type="hidden" value="<liferay-ui:message key="can-not-add-action-plan-because-your-doing-update-data"/>"/>
+<input class="lt-can-not-edit-action-plan-because-your-doing-insert-data" type="hidden" value="<liferay-ui:message key="can-not-edit-action-plan-because-your-doing-insert-data"/>"/>
+<input class="lt-delete-successfully" type="hidden" value="<liferay-ui:message key="delete-successfully"/>"/>
+<input class="lt-delete-successfully" type="hidden" value="<liferay-ui:message key="delete-successfully"/>"/>
+<input class="lt-first-line-score" type="hidden" value="<liferay-ui:message key="first-line-score"/>"/>
+<input class="lt-gantt" type="hidden" value="<liferay-ui:message key="gantt"/>"/>
+<input class="lt-gantt-chart" type="hidden" value="<liferay-ui:message key="gantt-chart"/>"/>
+<input class="lt-insert-successfully" type="hidden" value="<liferay-ui:message key="insert-successfully"/>"/>
+<input class="lt-kpi-name" type="hidden" value="<liferay-ui:message key="kpi-name"/>"/>
+<input class="lt-level" type="hidden" value="<liferay-ui:message key="level"/>"/>
+<input class="lt-over-value" type="hidden" value="<liferay-ui:message key="over-value"/>"/>
+<input class="lt-percent-achievement" type="hidden" value="<liferay-ui:message key="percent-achievement"/>"/>
+<input class="lt-phase" type="hidden" value="<liferay-ui:message key="phase"/>"/>
+<input class="lt-reason" type="hidden" value="<liferay-ui:message key="reason"/>"/>
+<input class="lt-result-score" type="hidden" value="<liferay-ui:message key="result-score"/>"/>
+<input class="lt-saved" type="hidden" value="<liferay-ui:message key="saved"/>"/>
+<input class="lt-score" type="hidden" value="<liferay-ui:message key="score"/>"/>
+<input class="lt-second-line-score" type="hidden" value="<liferay-ui:message key="second-line-score"/>"/>
+<input class="lt-total" type="hidden" value="<liferay-ui:message key="total"/>"/>
+<input class="lt-total-score" type="hidden" value="<liferay-ui:message key="total-score"/>"/>
+<input class="lt-upload-successfully" type="hidden" value="<liferay-ui:message key="upload-successfully"/>"/>
+<input class="lt-weight-score" type="hidden" value="<liferay-ui:message key="weight-score"/>"/>
