@@ -49,7 +49,7 @@ var getChartLine = function(){
 		success:function(data){
 			if(data['status']=='400'||data['status']=='404'){
 				console.log(data['data']);
-				callFlashSlide("Require:"+data['data']);
+				callFlashSlide(data['data']);
 				return false;
 			}
 				if(genTableChartLine(data)) {generateChartbar2D();}
@@ -146,7 +146,7 @@ var findOneFn = function($this){
 		success:function(data){
 			if(data['status']=='400'||data['status']=='404'){
 				console.log(data['data']);
-				callFlashSlide("Require:"+data['data']);
+				callFlashSlide(data['data']);
 				return false;
 			}
 			
@@ -293,13 +293,13 @@ var generateChartbar2D = function(id){  //chart bar by Daris
 		success:function(data){
 			if(data['status']=='400'||data['status']=='404'){
 				console.log(data['data']);
-				callFlashSlide("Require:"+data['data']);
+				callFlashSlide(data['data']);
 				return false;
 			}
 			htmlBar += "<div class='barChart' style='white-space: nowrap;'>"
 			$.each(data,function(index,indexEntry){
 				if(indexEntry['id']== param_id)
-					button = "<a class='btn-link' onclick='findOneFn(this)' style='color: #ff9900; ' id='"+indexEntry['id']+"'>"+indexEntry['name']+"</a>";
+					button = "<a class='btn-link' onclick='findOneFn(this)' style='color: #"+tokenID.theme_color+"; ' id='"+indexEntry['id']+"'>"+indexEntry['name']+"</a>";
 				else
 					button = "<a class='btn-link' onclick='findOneFn(this)' style='color: #0d0d0d;' id='"+indexEntry['id']+"'>"+indexEntry['name']+"</a>";
 				
@@ -317,7 +317,7 @@ var generateChartbar2D = function(id){  //chart bar by Daris
 				htmlBar += "</div>"
 				htmlBar += yoy;
 				htmlBar += "<span class='barChart__bar'>";
-				htmlBar += "<span class='barChart__barFill'style='padding-top: 2px;'>";
+				htmlBar += "<span class='barChart__barFill'style='padding-top: 2px; background-color: #"+tokenID.theme_color+";'>";
 				htmlBar += "<p style='text-align: center; color:#000000;'>"+indexEntry['total']+"%</p>";
 				htmlBar += "</span>";
 				htmlBar += "</span>";
