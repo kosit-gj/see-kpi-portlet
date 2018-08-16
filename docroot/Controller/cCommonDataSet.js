@@ -146,7 +146,7 @@ var findOneFn = function(id) {
 		dataType : "json",
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success : function(data) {		
-	
+			$('#sql_org_box,#sql_emp_box').hide();
 			$("#f_cds_name").val(data['cds_name']);
 			$("#f_cds_description").val(data['cds_desc']);
 			
@@ -721,6 +721,7 @@ $(document).ready(function() {
 	$("#checkbox_is_sql").change(function name() {
 		if($("#checkbox_is_sql:checked").is(":checked")){
 			$("#sql_box").show();
+			$("#sql_emp_box").show();
 			$("#sql_org_box").hide();
 			$("#checkbox_is_sql_org").prop("checked", false);
 			$("#checkbox_is_sql_emp").prop("checked", true);
@@ -764,7 +765,9 @@ $(document).ready(function() {
 	
 	
 	
-	 $("#btn_Execute_org,#btn_Execute_emp").click(function () {
+	 $("#btn_Execute_org,#btn_Execute_emp").click(function (event) {
+		 event.stopPropagation();
+		 event.preventDefault();
 		 var text_sql = this.id=="btn_Execute_org" ? $("#txt_sql_org").val() : $("#txt_sql_emp").val();
 		 executeSQLFn(text_sql);
 		 
@@ -859,6 +862,16 @@ $(document).ready(function() {
 	 });
 	//binding tooltip end
 	
+	 $('.icon-info-circled').hover(function(){
+			//$(this).css('color','#222222');
+			$(this).append('<div id="list-info" ><p>'+$(this).data('info')+'</p></div>');
+			setTimeout( function(){
+				$('#list-info').css({'opacity':0.96, 'bottom':25});
+			},100);
+		}, function(){
+			//$(this).css('color','auto');
+			$('#list-info').remove();
+		});
 	// ------------------- Common Data Set END -------------------
 	
 
