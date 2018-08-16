@@ -1,10 +1,13 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
 <%@ page import="javax.portlet.*"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
+
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
+<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 <%
@@ -677,7 +680,7 @@ overflow:auto;
 			<div class="ibox float-e-margins">
 				<div class="ibox-title"
 					style="background-color: rgb(83, 120, 253); border-color: rgb(83, 120, 253); min-height: 0px;">
-					<div class="titlePanelSearch">Advance Search</div>
+					<div class="titlePanelSearch"><liferay-ui:message key="advanced-search"/></div>
 				</div>
 
 				<div class="ibox-content breadcrumbs2 advance-search"
@@ -689,7 +692,7 @@ overflow:auto;
 							class="form-group pull-left span3" id="yearArea">
 							<select name="year" id="year" class="input form-control input-sm"
 								title="" data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Year">
+								data-original-title="<liferay-ui:message key="year"/>">
 
 								<option value="1">2016</option>
 								<option value="2">2017</option>
@@ -702,7 +705,7 @@ overflow:auto;
 							<select name="period" id="period"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Period">
+								data-original-title="<liferay-ui:message key="period"/>">
 
 								<option value="">Period1</option>
 								<option value="">Period1</option>
@@ -714,7 +717,7 @@ overflow:auto;
 							<select name="app_type" id="app_type" 
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Entity Type">
+								data-original-title="<liferay-ui:message key="entity-type"/>">
 								<option value="1">Individual Test</option>
 								<option value="2">Organization Test</option>
 							</select>
@@ -722,14 +725,14 @@ overflow:auto;
 						
 						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;">
 		                    <select id="AppraisalEmpLevel" name="AppraisalEmpLevel" data-toggle="tooltip"
-		                      title="" data-original-title="Employee Level" class="input form-control input-sm">
+		                      title="" data-original-title="<liferay-ui:message key="employee-level"/>" class="input form-control input-sm">
 <!-- 		                      <option value="">All Employee Level</option> -->
 		                	</select>
 		                </div>
 		                
 		                <div class="form-group pull-left span3" style="margin-left: 5px">
 		                    <select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip"
-		                      title="" data-original-title="Organization Level" class="input form-control input-sm">
+		                      title="" data-original-title="<liferay-ui:message key="organization-level"/>" class="input form-control input-sm">
 <!-- 		                      <option value="">All Organization Level</option> -->
 		                    </select>
 		                </div>
@@ -739,23 +742,23 @@ overflow:auto;
 							<select name="organization" id="organization"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Organization" >
+								data-original-title="<liferay-ui:message key="organization"/>" >
 								<option value="">Organization 1</option>
 								<option value="">Organization 2</option>
 							</select>
 						</div>
 						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;" id="txtEmpInput">
 							<input data-toggle="tooltip" data-placement="top" disabled
-								title="Employee Name" class="span12 m-b-n ui-autocomplete-input"
-								placeholder="Employee Name" id="emp_name" name="emp_name"
+								title="<liferay-ui:message key="employee-name"/>" class="span12 m-b-n ui-autocomplete-input"
+								placeholder="<liferay-ui:message key="employee-name"/>" id="emp_name" name="emp_name"
 								type="text"> <input class="form-control input-sm"
 								id="emp_name_id" name="emp_name_id" value="" type="hidden">
 						</div>
 						
 						<div class="form-group pull-left span3" style="margin-left: 5px;margin-bottom: 3px;" >
 							<input data-toggle="tooltip" data-placement="top"
-								title="Position" class="span12 m-b-n ui-autocomplete-input"
-								placeholder="Position" id="position" name="position" type="text">
+								title="<liferay-ui:message key="position"/>" class="span12 m-b-n ui-autocomplete-input"
+								placeholder="<liferay-ui:message key="position"/>" id="position" name="position" type="text">
 							<input class="form-control input-sm" id="position_id"
 								name="position_id" value="" type="hidden">
 						</div>
@@ -781,7 +784,7 @@ overflow:auto;
 							class="form-group pull-left span3" id="kpiArea">
 							<select name="kpi" id="kpi" class="input form-control input-sm"
 								title="" data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="KPI">
+								data-original-title="<liferay-ui:message key="kpi"/>">
 
 								<option value="">KPI1</option>
 								<option value="">KPI2</option>
@@ -794,7 +797,7 @@ overflow:auto;
 							class="form-group pull-right m-b-none ">
 							<button id="btnSearchAdvance" name="btnSearchAdvance"
 								class="btn btn-info input-sm" type="button">
-								<i class="fa fa-search"></i>&nbsp;Search
+								<i class="fa fa-search"></i>&nbsp;<liferay-ui:message key="search"/>
 							</button>
 
 						</div>
@@ -830,7 +833,7 @@ overflow:auto;
 					<button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
 						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span>
 					</button>
-					<h4 class="modal-title" id="modalTitleRole">All KPI</h4>
+					<h4 class="modal-title" id="modalTitleRole"><liferay-ui:message key="all-kpi"/></h4>
 
 				</div>
 				<div class="modal-body">
@@ -885,3 +888,7 @@ overflow:auto;
 		
 	</form>
  
+ 
+ 
+ <!-- Language Template for js -->
+<%@ include file="/html/language-js-template/view.jsp" %>

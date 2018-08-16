@@ -192,9 +192,9 @@ var listCdsResultFn = function (data) {
 		if(indexEntry["cds_result_id"] == null){
 			htmlTable += "<td class='columnSearch'></td>";
 		}else{
-			htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del-cds\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"<button class='btn btn-warning btn-xs downloadAttachFileCds'style='width:95%' id='downloadAttachFileCds-"+ indexEntry["cds_result_id"]+ "' data-target=#downloadAttachFileModal data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>Dowload</button>&nbsp;" ;
-			htmlTable += "<button class='btn btn-success btn-xs attachFileCds' style='width:95%;' id='attachFileCds-"+ indexEntry["cds_result_id"]+ "' data-target=#ModalImport data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>Attach File</button>&nbsp;";
-			htmlTable += "<button style='width:95%' id='delCds-"+indexEntry["cds_result_id"]+"' class='btn btn-danger btn-xs delCds'>Delete</button>\"></i></td>";
+			htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del-cds\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"<button class='btn btn-warning btn-xs downloadAttachFileCds'style='width:95%' id='downloadAttachFileCds-"+ indexEntry["cds_result_id"]+ "' data-target=#downloadAttachFileModal data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>"+$(".lt-download").val()+"</button>&nbsp;" ;
+			htmlTable += "<button class='btn btn-success btn-xs attachFileCds' style='width:95%;' id='attachFileCds-"+ indexEntry["cds_result_id"]+ "' data-target=#ModalImport data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>"+$(".lt-attach-files").val()+"</button>&nbsp;";
+			htmlTable += "<button style='width:95%' id='delCds-"+indexEntry["cds_result_id"]+"' class='btn btn-danger btn-xs delCds'>"+$(".lt-delete").val()+"</button>\"></i></td>";
 		}
 		
 		htmlTable += "</tr>";////parseFloat().toLocaleString()
@@ -209,7 +209,7 @@ var listCdsResultFn = function (data) {
 			var id = this.id.split("-")[1];
 			
 			$("#attachFileCdsResultId").val(id);
-			$("#txtTitleImport").html("Attach File");	
+			$("#txtTitleImport").html($(".lt-attach-files").val());	
 			
 			
 		});

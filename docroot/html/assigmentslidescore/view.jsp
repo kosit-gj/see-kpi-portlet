@@ -1,9 +1,12 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
 <%@ page import="javax.portlet.*"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
+
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
+<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 <%
@@ -810,7 +813,7 @@ plid = layout.getPlid();
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
                                
-                                  <div class='titlePanelSearch'>Advance Search</div> 
+                                  <div class='titlePanelSearch'><liferay-ui:message key="advanced-search"/></div> 
          					</div>
          					
          						<div class="ibox-content breadcrumbs2"> 
@@ -819,7 +822,7 @@ plid = layout.getPlid();
 									
 									<div id="appraisalTypeArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Entity Type"
+										<select data-toggle="tooltip" title="<liferay-ui:message key="entity-type"/>"
 											class="input form-control input-sm" id="appraisalType"
 											name="appraisalType">
 								
@@ -830,7 +833,7 @@ plid = layout.getPlid();
 									
 									<div id='appraisalLevelEmpArea' class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Employee Level"
+										<select data-toggle="tooltip" title="<liferay-ui:message key="employee-level"/>"
 											class="input form-control input-sm" id="appraisalLevelEmp"
 											name="appraisalLevelEmp">
 											<option value="0"></option>
@@ -839,7 +842,7 @@ plid = layout.getPlid();
 									
 									<div id='appraisalLevelArea' class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="OrgLevel"
+										<select data-toggle="tooltip" title="<liferay-ui:message key="organization-level"/>"
 											class="input form-control input-sm" id="appraisalLevel"
 											name="appraisalLevel">
 											<option value="0"></option>
@@ -849,7 +852,7 @@ plid = layout.getPlid();
 								
 								<div class="row-fluid">
 									<div class="form-group pull-left span4" style="margin-left: 5px">
-										<select data-toggle="tooltip" title="" data-original-title="organization"
+										<select data-toggle="tooltip" data-original-title="<liferay-ui:message key="organization"/>"
 											class="input form-control input-sm span12" id="organization"
 											name="organization">
 											<option value=''>All Organization</option>
@@ -859,7 +862,7 @@ plid = layout.getPlid();
 									<div id="empNameArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<input data-toggle="tooltip" type="text" class="form-control input-sm span12 "
-											placeholder="Emp Name" id="empName" data-original-title="Employee Name">
+											placeholder="<liferay-ui:message key="employee-name"/>" id="empName" data-original-title="<liferay-ui:message key="employee-name"/>">
 											<input class="form-control input-sm"
 											id="empName_id" name="empName_id" value="" type="hidden">
 <!-- 										<select data-toggle="tooltip" title="Employee Name" -->
@@ -871,8 +874,8 @@ plid = layout.getPlid();
 									
 									<div id="PositionArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<input data-toggle="tooltip" type="text" id="Position" placeholder="Position"
-											class="form-control input-sm span12" data-original-title="Position">
+										<input data-toggle="tooltip" type="text" id="Position" placeholder="<liferay-ui:message key="position"/>"
+											class="form-control input-sm span12" data-original-title="<liferay-ui:message key="position"/>">
 										<input class="form-control input-sm" id="Position_id"
 											name="Position_id" value="" type="hidden">
 <!-- 										<select data-toggle="tooltip" title="Employee Position" -->
@@ -894,7 +897,7 @@ plid = layout.getPlid();
 								-->
 									<div id='yearArea' class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Year"
+										<select data-toggle="tooltip" title="<liferay-ui:message key="year"/>"
 											class="input form-control input-sm" id="YearList" name="YearList">
 								
 											<option value="0"></option>
@@ -904,7 +907,7 @@ plid = layout.getPlid();
 									
 									<div id="periodFrequencyArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Period frequency"
+										<select data-toggle="tooltip" title="<liferay-ui:message key="period-frequency"/>"
 											class="input form-control input-sm" id="periodFrequency"
 											name="periodFrequency">
 											<option value="0"></option>
@@ -913,7 +916,7 @@ plid = layout.getPlid();
 									
 									<div id="assignFrequencyArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Assign Frequency"
+										<select data-toggle="tooltip" title="<liferay-ui:message key="assign-frequency"/>"
 											class="input form-control input-sm" id="assignFrequency"
 											name="assignFrequency">
 											<option value="2">ทีละงวด</option>
@@ -927,7 +930,7 @@ plid = layout.getPlid();
 									
 									<div id="periodArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" disabled='disabled' data-toggle="Period" title="Period"
+										<select data-toggle="tooltip" disabled='disabled' data-toggle="Period" title="<liferay-ui:message key="period"/>"
 											class="input form-control input-sm" id="period_id" name="period_id">
 											<option value=""></option>
 										</select>
@@ -935,7 +938,7 @@ plid = layout.getPlid();
 								
 									<div id="appraisalStatusArea" class="form-group pull-left span4"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Status"
+										<select data-toggle="tooltip" title="<liferay-ui:message key="status"/>"
 											class="input form-control input-sm" id="appraisalStatus"
 											name="appraisalStatus">
 
@@ -946,11 +949,11 @@ plid = layout.getPlid();
 									style="margin-bottom: 5px;">
 										<button type="button" class="btn btn-info input-sm"
 											name="btnSearchAdvance" id="btnSearchAdvance">
-											<i class="fa fa-search"></i>&nbsp;Search
+											<i class="fa fa-search"></i>&nbsp;<liferay-ui:message key="search"/>
 										</button>
 										<button type="button" class="btn btn-warning input-sm"
 											name="btnAssignment" id="btnAssignment">
-											<i class="fa fa-sign-in"></i>&nbsp;Assign
+											<i class="fa fa-sign-in"></i>&nbsp;<liferay-ui:message key="assign"/>
 										</button>
 									</div>
 									
@@ -1126,7 +1129,7 @@ plid = layout.getPlid();
          			<div class="row-fluid search_result">
 				         		<div class="span12">
 					         	<div class="ibox-title">
-	                                <div class='titlePanel'>Employee List</div>
+	                                <div class='titlePanel'><liferay-ui:message key="employee-list"/></div>
 	         					</div>
 	         					
 	         					
@@ -1150,7 +1153,7 @@ plid = layout.getPlid();
 					                                 </select>
 		                                 		
 		                                 		</div>
-												<div class='pagingText'>Results per page</div>
+												<div class='pagingText'><liferay-ui:message key="results-per-page"/></div>
 		                                    
 		                                    </div>
 		                                    
@@ -1186,7 +1189,7 @@ plid = layout.getPlid();
 					                                     <option>100</option>
 					                                 </select> 
 			                                 	</div>
-												<div class='pagingText'>Results per page</div>
+												<div class='pagingText'><liferay-ui:message key="results-per-page"/></div>
 		                                    </div>
 		                                    <!-- 
 		                                    <div class="span1">
@@ -1219,7 +1222,7 @@ plid = layout.getPlid();
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
              
-                <h4 class="modal-title" id="modalTitleRole">Assignment</h4>
+                <h4 class="modal-title" id="modalTitleRole"><liferay-ui:message key="assignment"/></h4>
                
             </div>
             <div class="modal-body">
@@ -1234,7 +1237,7 @@ plid = layout.getPlid();
                 <div class="row-fluid cus_information_area" >
 	  					<div class="span12">
 	                      <div class="ibox-title2">
-	                          <div class='titlePanel' id='titlePanelInformation'>Employee Information</div>
+	                          <div class='titlePanel' id='titlePanelInformation'><liferay-ui:message key="employee-information"/></div>
 	                      </div>
 	   					
 	   					<div class="ibox-content">
@@ -1242,32 +1245,32 @@ plid = layout.getPlid();
 	   							<!-- content table start-->	
 	   							<div id='empInformation' class='container-fluid'>
 	   								<div class="row-fluid">
-										<label style='min-height:auto;' class="span3 textInfo textData">Employee code:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData"><liferay-ui:message key="employee-code"/>:</label>
 										<label style='min-height:auto;' class="span3 textInfo textData" id="employee_code"></label>
-										<label style='min-height:auto;' class="span3 textInfo textData">Employee Name:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData"><liferay-ui:message key="employee-name"/>:</label>
 										<label style='min-height:auto;' class="span3 textInfo textData" id="employee_name"></label>
 									</div>
 									<div class="row-fluid">
-										<label style='min-height:auto;' class="span3 textInfo textData">Position:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData"><liferay-ui:message key="position"/>:</label>
 										<label style='min-height:auto;' class="span3 textInfo textData" id="position"></label>
 										
-										<label style='min-height:auto;' class="span3 textInfo textData">Organization:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData"><liferay-ui:message key="organization"/>:</label>
 										<label style='min-height:auto;' class="span3 textInfo textData" id="organizationLabel"></label>
 										 
 									</div>
 									<div class="row-fluid">
 										
-										<label style='min-height:auto;' class="span3 textInfo textData">Chief Employee Code:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData"><liferay-ui:message key="chief-employee-code"/>:</label>
 										<label style='min-height:auto;' class="span3 textInfo textData" id="chief_employee_code"></label>
-										<label style='min-height:auto;' class="span3 textInfo textData">Chief Employee Name:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData"><liferay-ui:message key="chief-employee-name"/>:</label>
 										<label style='min-height:auto;' class="span3 textInfo textData" id="chief_employee_name"></label>
 									</div>
 									
 									<div class="row-fluid">
-										<label style='min-height:auto;' class="span3 textInfo textData">Period:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData"><liferay-ui:message key="period"/>: </label>
 										<label style='min-height:auto;' class="span3 textInfo textData"  id="period_label"></label>
 										
-										<label style='min-height:auto;' class="span3 textInfo textData">Start Working Date:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData"><liferay-ui:message key="start-working-date"/>: </label>
 										<label style='min-height:auto;' class="span3 textInfo textData"  id="start_working_date"></label>
 										
 									</div>
@@ -1277,23 +1280,23 @@ plid = layout.getPlid();
 								
 									
 									<div class="row-fluid">
-										<label style='min-height:auto;' class="span3 textInfo textData">Organization Code:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData"><liferay-ui:message key="organization-code"/>:</label>
 										<label style='min-height:auto;' class="span3 textInfo textData" id="organizationCodeLabelOrg"></label>
-										<label style='min-height:auto;' class="span3 textInfo textData">Organization Name:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData"><liferay-ui:message key="organization-name"/>:</label>
 										<label style='min-height:auto;' class="span3 textInfo textData" id="organizationNameLabelOrg"></label>
 										 
 									</div>
 									<div class="row-fluid">
 										
-										<label style='min-height:auto;' class="span3 textInfo textData">Parent Organization:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData"><liferay-ui:message key="parent-organization"/>:</label>
 										<label style='min-height:auto;' class="span3 textInfo textData" id="parentOrganizationOrg"></label>
-										<label style='min-height:auto;' class="span3 textInfo textData">Period:</label>
+										<label style='min-height:auto;' class="span3 textInfo textData"><liferay-ui:message key="period"/>:</label>
 										<label style='min-height:auto;' class="span3 textInfo textData" id="periodOrg"></label>
 									</div>
 								</div>
 								<div class="row-fluid" >
 									<button id="linkToCdsResult" class="btn btn-warning btn-sm pull-right" type="button">
-										<i class="fa fa-external-link"></i> CDS Result
+										<i class="fa fa-external-link"></i> <liferay-ui:message key="cds-result"/>
 									</button>
 								</div>
 									
@@ -1317,7 +1320,7 @@ plid = layout.getPlid();
             	<div class="row-fluid">
             		<div class='span12 grandTotalWeight' >
             		
-            		<span id='grandTotalWeightArea' >Grand Total Weight %</span>
+            		<span id='grandTotalWeightArea' ><liferay-ui:message key="grand-total-weight-percent"/></span>
             	
             		<span id="grandTotalWeight"  class='perscentage'>0.00</span>
             		</div>
@@ -1340,7 +1343,7 @@ plid = layout.getPlid();
             		<div class="span3 ">
             		
 	            			<div class="form-group "> 
-							 <label class="span4 p-t-xxs"><b>Action:</b></label> 
+							 <label class="span4 p-t-xxs"><b><liferay-ui:message key="action"/></b></label> 
 							 <div class="span8"> 
 									<select id='actionAssign' class='input form-control input-sm'>
 				   					</select>
@@ -1352,7 +1355,7 @@ plid = layout.getPlid();
             		<div class="span5 ">
             		
             			<div class="form-group "> 
-							 <label class="span3 p-t-xxs"><b>Remark:</b></label> 
+							 <label class="span3 p-t-xxs"><b><liferay-ui:message key="remark"/>:</b></label> 
 							 <div class="span9"> 
 								 <input type='text' name='remark_footer' id='remark_footer' class='span12' value=''>
 							 </div> 
@@ -1364,22 +1367,22 @@ plid = layout.getPlid();
             				<input type="hidden" name="id" id="id" value="">
 		   					<input type="hidden" name="period_id_edit" id="period_id_edit" value="">
 			   				<input type="hidden" name="action" id="action" value="add">
-			   				<button class="btn btn-primary" type="button" id="btnSubmit">Submit</button>
-			                <button data-dismiss="modal" class="btn btn-white btnCancle" type="button">Cancel</button>
+			   				<button class="btn btn-primary" type="button" id="btnSubmit"><liferay-ui:message key="submit"/></button>
+			                <button data-dismiss="modal" class="btn btn-white btnCancle" type="button"><liferay-ui:message key="cancel"/></button>
             		</div>
             	</div>
             	
             	<div class="row-fluid" style='text-align:left;'>
-            		<a href="#" id='slideUpDownStageHistory' style='display:none;'>Work Flow Stage History</a>
+            		<a href="#" id='slideUpDownStageHistory' style='display:none;'><liferay-ui:message key="work-flow-stage-history"/></a>
             		<div id='slideStageHistory' style='display:none; max-width: none;'>
             			<table class='table'>
             				<thead>
-            					<tr>
-            						<th  style='width:15%'>Created By</th>
-            						<th  style='width:15%'>Created Datetime</th>
-            						<th  style='width:15%'>From Stage</th>
-            						<th  style='width:15%'>To Stage</th>
-            						<th  style='width:35%'>Remark</th>
+            					<tr style="white-space: nowrap;">
+            						<th  style='width:15%'><liferay-ui:message key="created-by"/></th>
+            						<th  style='width:15%'><liferay-ui:message key="created-datetime"/></th>
+            						<th  style='width:15%'><liferay-ui:message key="from-stage"/></th>
+            						<th  style='width:15%'><liferay-ui:message key="to-stage"/></th>
+            						<th  style='width:35%'><liferay-ui:message key="remark"/></th>
             					</tr>
             				</thead>
             				<tbody id='listDataStageHistory'>
@@ -1469,13 +1472,13 @@ plid = layout.getPlid();
     <div class="modal-content animated bounceInRight">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
-                <h4 class="modal-title" id="modalTitleRole">Action</h4>
+                <h4 class="modal-title" id="modalTitleRole"><liferay-ui:message key="action"/></h4>
             </div>
             <div class="modal-body">
             	<div class="row-fluid">
             		<div class="span4">
 	            		<div class="form-group"> 
-							<label class="span4 p-t-xxs"><b>Action:</b></label> 
+							<label class="span4 p-t-xxs"><b><liferay-ui:message key="action"/>:</b></label> 
 							 <div class="span8"> 
 									<select id='actionAction' class='input form-control input-sm'>
 				   					</select>
@@ -1484,7 +1487,7 @@ plid = layout.getPlid();
             		</div>
             		<div class="span8">
             			<div class="form-group"> 
-							 <label class="span3 p-t-xxs"><b>Remark:</b></label> 
+							 <label class="span3 p-t-xxs"><b><liferay-ui:message key="remark"/>:</b></label> 
 							 <div class="span9"> 
 								 <input type='text' name='remark_footer_action' id='remark_footer_action' class='span12' value=''>
 							 </div> 
@@ -1496,8 +1499,8 @@ plid = layout.getPlid();
             	<div class="row-fluid">
             		<div class="span12 offset0">
             				<input type="hidden" name="id_action" id="id_action" value="">
-			   				<button class="btn btn-primary" type="button" id="btnSubmitAction">Submit</button>
-			                <button data-dismiss="modal" class="btn btn-white btnCancle" type="button">Cancel</button>
+			   				<button class="btn btn-primary" type="button" id="btnSubmitAction"><liferay-ui:message key="submit"/></button>
+			                <button data-dismiss="modal" class="btn btn-white btnCancle" type="button"><liferay-ui:message key="cancel"/></button>
             		</div>
             	</div>
    				<div class="alert alert-warning information" id="information2" style="display: none;"></div>
@@ -1557,7 +1560,7 @@ plid = layout.getPlid();
     <div class="modal-content animated bounceInRight">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
-                <h5 class="modal-title">Confirm Dialog</h5>
+                <h5 class="modal-title"><liferay-ui:message key="confirm-dialog"/></h5>
             </div>
             <div class="modal-body">
                 <!-- content start -->
@@ -1568,7 +1571,7 @@ plid = layout.getPlid();
                 <div class="form-kpi-mangement">
 	                <div class="form-kpi-label" align="center">
 	                
-	                 		<label>Confirm to Delete Data?</label>
+	                 		<label><liferay-ui:message key="confirm-to-delete-data"/> ? </label>
 	                </div>
                 </div>
                                
@@ -1577,8 +1580,8 @@ plid = layout.getPlid();
             </div>
             <div class="modal-footer">
             	<div align="center">
-	                <button class="btn btn-success" id="btnConfirmOK" type="button">&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;</button>&nbsp;&nbsp;
-	                <button data-dismiss="modal" class="btn btn-danger" type="button"><i class="fa fa-times-circle"></i>&nbsp;Cancel</button>
+	                <button class="btn btn-success" id="btnConfirmOK" type="button">&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;<liferay-ui:message key="yes"/>&nbsp;&nbsp;</button>&nbsp;&nbsp;
+	                <button data-dismiss="modal" class="btn btn-danger" type="button"><i class="fa fa-times-circle"></i>&nbsp;<liferay-ui:message key="cancel"/></button>
             	</div>
             </div>
         </div>
@@ -1598,7 +1601,7 @@ plid = layout.getPlid();
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
              
-                <h4 class="modal-title" id="modalTitleRole">CDS Result</h4>
+                <h4 class="modal-title" id="modalTitleRole"><liferay-ui:message key="cds-result"/></h4>
                
             </div>
             <div class="modal-body">
@@ -1609,7 +1612,7 @@ plid = layout.getPlid();
 					<div class="">
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<h5>Advance Search</h5>
+								<h5><liferay-ui:message key="advanced-search"/></h5>
 							</div>
 							
 							<div class="ibox-content breadcrumbs2">
@@ -1628,7 +1631,7 @@ plid = layout.getPlid();
 										<button type="button" name="btnSearchAdvanceCdsResult"
 											id="btnSearchAdvanceCdsResult" class="btn btn-info input-sm "
 											style="margin-left: 0px">
-											<i class="fa fa-search"></i>&nbsp;Search
+											<i class="fa fa-search"></i>&nbsp;<liferay-ui:message key="search"/>
 										</button>
 									</div>
 									</div>
@@ -1639,7 +1642,7 @@ plid = layout.getPlid();
 							<div class="row-fluid" id="cds_result_list_content">
 								<div class="">
 									<div class="ibox-title" >
-										<h5>CDS Result List</h5>
+										<h5><liferay-ui:message key="cds-result-list"/></h5>
 									</div>
 			
 									
@@ -1647,9 +1650,9 @@ plid = layout.getPlid();
 									<div class="ibox-content" style="position: relative;">
 									
 										<div class="span12"> 
-											<button id="btnEditCdsresult" name="btnEditCdsresult" class="btn btn-warning input-sm" type="button"> Edit </button>
-											<button id="btnSaveCdsresult" name="btnSaveCdsresult" class="btn btn-primary input-sm" type="button" disabled> Save </button>
-											<button id="btnCancelCdsresult" name="btnCancelCdsresult"  class="btn btn-danger input-sm" type="button" disabled> Cancel </button>
+											<button id="btnEditCdsresult" name="btnEditCdsresult" class="btn btn-warning input-sm" type="button"> <liferay-ui:message key="edit"/> </button>
+											<button id="btnSaveCdsresult" name="btnSaveCdsresult" class="btn btn-primary input-sm" type="button" disabled> <liferay-ui:message key="save"/> </button>
+											<button id="btnCancelCdsresult" name="btnCancelCdsresult"  class="btn btn-danger input-sm" type="button" disabled> <liferay-ui:message key="cancel"/> </button>
 										</div>
 										
 										
@@ -1677,7 +1680,7 @@ plid = layout.getPlid();
 								                                 </select>
 					                                 		
 					                                 		</div>
-															<div class='pagingText' style="padding-top: 10px;">Results per page</div>
+															<div class='pagingText' style="padding-top: 10px;"><liferay-ui:message key="results-per-page"/></div>
 					                                    
 					                          </div>
 										</div>
@@ -1685,18 +1688,18 @@ plid = layout.getPlid();
 										<div class="table-responsive p-b-xxs" style="overflow:auto">
 											<table class="table table-striped " id="tableCdsResult" >
 												<thead>
-													<tr>
-														<th style='width: auto'>Emp&nbsp;Code&emsp;</th>
-														<th style='width: auto'>Emp&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-														<th style='width: auto'>Appraisal&nbsp;Level&emsp;</th>
-														<th style='width: auto' class="theadThField">Organization&emsp;&emsp;&emsp;</th>
-														<th style='width: auto' class="theadThField">Position&nbsp;Name&emsp;&emsp;&emsp;</th>
-														<th style='width: auto'>CDS&nbsp;ID&emsp;</th>
-														<th style='width: auto'>CDS&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-														<th style='width: auto'>Year&emsp;</th>
-														<th style='width: auto'>Month&emsp;</th>
-														<th style='width:auto;text-align: right;'>CDS&nbsp;Value&emsp;</th>
-														<th style='width: auto; text-align: center;'>Manage</th>
+													<tr style="white-space: nowrap;">
+														<th style='width: auto'><liferay-ui:message key="emp-code"/></th>
+														<th style='width: auto'><liferay-ui:message key="emp-name"/></th>
+														<th style='width: auto'><liferay-ui:message key="appraisal-level"/></th>
+														<th style='width: auto' class="theadThField"><liferay-ui:message key="organization"/></th>
+														<th style='width: auto' class="theadThField"><liferay-ui:message key="position-name"/></th>
+														<th style='width: auto'><liferay-ui:message key="cds-id"/></th>
+														<th style='width: auto'><liferay-ui:message key="cds-name"/></th>
+														<th style='width: auto'><liferay-ui:message key="year"/></th>
+														<th style='width: auto'><liferay-ui:message key="month"/></th>
+														<th style='width:auto;text-align: right;'><liferay-ui:message key="cds-value"/></th>
+														<th style='width: auto; text-align: center;'><liferay-ui:message key="manage"/></th>
 													</tr>
 												</thead>
 												<tbody id="listCdsResult">
@@ -1727,7 +1730,7 @@ plid = layout.getPlid();
 								                                     <option>100</option>
 								                                 </select> 
 						                                 	</div>
-															<div class='pagingText' style="padding-top: 10px;">Results per page</div>
+															<div class='pagingText' style="padding-top: 10px;"><liferay-ui:message key="results-per-page"/></div>
 					                        </div>
 			
 			
@@ -1782,7 +1785,7 @@ plid = layout.getPlid();
 						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only">Close</span>
 					</button>
 					<!-- <i class="fa fa-laptop modal-icon"></i> -->
-					<h4 id="txtTitleImport" class="modal-title" id="">Import CDS Result</h4>
+					<h4 id="txtTitleImport" class="modal-title" id=""><liferay-ui:message key="import-cds-result"/></h4>
 					<!-- 
                 <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
                  -->      
@@ -1797,7 +1800,7 @@ plid = layout.getPlid();
 					<div class="form-group">
 					<form id="fileImportCdsResult">
 						 
-							<h4>FILE IMPORT</h4>
+							<h4><liferay-ui:message key="file-import"/></h4>
 							<div class="fileUpload ">
 								<input style="width:100%;height: 100%" type="file" id="file" class="dropify" accept=".xls, .xlsx"  /><span></span>
 							</div>
@@ -1815,9 +1818,9 @@ plid = layout.getPlid();
 					<!-- content end -->
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-success" type="submit" id="importFileMobile" form="fileImportCdsResult">Import</button>
+					<button class="btn btn-success" type="submit" id="importFileMobile" form="fileImportCdsResult"><liferay-ui:message key="import"/></button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
-						type="button">Cancel</button>
+						type="button"><liferay-ui:message key="cancel"/></button>
 						<div class="alert alert-warning information" id="informationImport"
 						style="display: none;height:120px; overflow-y: scroll; position:relative;"></div>
 					<input id="attachFileCdsResultId" type="hidden" value="" />
@@ -1832,9 +1835,9 @@ plid = layout.getPlid();
     <div class="modal-content animated bounceInRight">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
-						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only">Close</span>
+						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"><liferay-ui:message key="close"/></span>
 					</button>
-                <h5 class="modal-title">Download Files</h5>
+                <h5 class="modal-title"><liferay-ui:message key="download-files"/></h5>
             </div>
             <div class="modal-body">
             <!-- content start -->
@@ -1842,13 +1845,13 @@ plid = layout.getPlid();
 				<thead>
 					<tr>
 						<th style='width:5%;'>
-						<b>No.</b>
+						<b><liferay-ui:message key="no-dot"/></b>
 						</th>
 						<th style='width:50%;'>
-						<b>Attach Files</b>
+						<b><liferay-ui:message key="attach-files"/></b>
 						</th>
 						<th style='text-align:center; width:10%;'>
-						<b>Manage</b>
+						<b><liferay-ui:message key="manage"/></b>
 						</th>
 					</tr>
 				</thead>
@@ -1870,9 +1873,9 @@ plid = layout.getPlid();
 			<div class="modal-content  bounceInRight">
 				<div class="modal-header">
 					<button data-dismiss="modal" class="close" type="button" style="padding-top:3px">
-						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only">Close</span>
+						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"><liferay-ui:message key="close"/></span>
 					</button>
-					<h5 class="modal-title">Confirm Dialog</h5>
+					<h5 class="modal-title"><liferay-ui:message key="confirm-dialog"/></h5>
 				</div>
 				<div class="modal-body">
 					<!-- content start -->
@@ -1883,7 +1886,7 @@ plid = layout.getPlid();
 					<div class="form-kpi-mangement">
 						<div class="form-kpi-label" align="center">
 
-							<label style="margin-top: 25px; margin-bottom: 25px;">Confirm to Delete Data?</label>
+							<label style="margin-top: 25px; margin-bottom: 25px;"><liferay-ui:message key="confirm-to-delete-data"/> ? </label>
 						</div>
 					</div>
 
@@ -1893,11 +1896,11 @@ plid = layout.getPlid();
 				<div class="modal-footer">
 					<div align="center">
 						<button class="btn btn-success" id="btnConfirmOK" type="button">
-							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
+							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;<liferay-ui:message key="yes"/>&nbsp;&nbsp;
 						</button>
 						&nbsp;&nbsp;
 						<button data-dismiss="modal" class="btn btn-danger" type="button">
-							<i class="fa fa-times-circle"></i>&nbsp;Cancel
+							<i class="fa fa-times-circle"></i>&nbsp;<liferay-ui:message key="cancel"/>
 						</button>
 					</div>
 				</div>
@@ -1905,6 +1908,11 @@ plid = layout.getPlid();
 		</div>
 	</div>
 	<!-- Modal Confirm End -->
-	          
+	
+	
+	
+	<!-- Language Template for js -->
+	<%@ include file="/html/language-js-template/view.jsp" %>
+
 </body>
 

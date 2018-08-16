@@ -134,7 +134,7 @@ var dropDownListPeriod = function(){
 	var html="";
 	
 	
-	html+="<select id=\"period\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Period\" name=\"period\">";
+	html+="<select id=\"period\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\""+$(".lt-period").val()+"\" name=\"period\">";
 	//html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownPeriod ,
@@ -163,7 +163,7 @@ var dropDownListYear = function(){
 	var html="";
 	
 	
-	html+="<select id=\"year\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Year\" name=\"year\">";
+	html+="<select id=\"year\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\""+$(".lt-year").val()+"\" name=\"year\">";
 	//html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownYear ,
@@ -257,7 +257,7 @@ var dropDownListEmpLevelToOrgFn = function(){
 
 var dropDownListAppraisalType = function(){
 	var html="";
-	html+="<select data-placement='top' id=\"app_type\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Entity Type\" name=\"app_type\">";
+	html+="<select data-placement='top' id=\"app_type\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\""+$(".lt-entity-type").val()+"\" name=\"app_type\">";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalType,
 		type:"get" ,
@@ -338,9 +338,9 @@ var listErrorFn =function(data){
 	$.each(data,function(index,indexEntry){	
 		if(data[index]['employee_code']!= undefined || data[index]['employee_code']==null){
 			if(data[index]['employee_code']== null){//The employee code field is null
-				errorData+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Employee Code : null <i class='fa fa-level-down'></i><br>";
+				errorData+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+$(".lt-employee-code").val()+" : null <i class='fa fa-level-down'></i><br>";
 			}else{
-				errorData+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Employee Code : "+data[index]['employee_code']+" <i class='fa fa-level-down'></i><br>";}
+				errorData+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+$(".lt-employee-code").val()+" : "+data[index]['employee_code']+" <i class='fa fa-level-down'></i><br>";}
 		}
 		if(typeof data[index]['errors'] != 'object'){
 			errorData+="<font color='red'>*</font> "+data[index]['errors']+"<br>";
