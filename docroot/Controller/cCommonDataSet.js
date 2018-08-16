@@ -73,11 +73,9 @@ var clearFn = function() {
 	$("#f_cds_description").val("");
 	$("#txt_sql_org").val("");
 	$("#txt_sql_emp").val("");
-	$("#sql_emp_box").hide();
+	$("#sql_org_box").hide();
 	$("#table_Sql").html("");
 	$("#table_Sql").hide();
-	$("#table_SqlEmp").html("");
-	$("#table_SqlEmp").hide();
 	
 	
 	$("#checkbox_is_hr").prop("checked",false);
@@ -148,7 +146,7 @@ var findOneFn = function(id) {
 		dataType : "json",
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success : function(data) {		
-	
+			$('#sql_org_box,#sql_emp_box').hide();
 			$("#f_cds_name").val(data['cds_name']);
 			$("#f_cds_description").val(data['cds_desc']);
 			
@@ -175,23 +173,28 @@ var findOneFn = function(id) {
 			if(data['is_sql']==1){
 				$('#checkbox_is_sql').prop('checked', true);
 				$("#sql_box").show();
-				if(data['sql_statement_for']==1) {
-					$('#checkbox_is_sql_org').prop('checked', true);
-					$('#sql_org_box').show();
-					$('#txt_sql_org').val(data['cds_sql_org']);
-				} else if(data['sql_statement_for']==2) {
-					$('#checkbox_is_sql_emp').prop('checked', true);
-					$('#sql_emp_box').show();
-					$('#txt_sql_emp').val(data['cds_sql_emp']);
-				} else {
-					$('#checkbox_is_sql_org,#checkbox_is_sql_emp').prop('checked', true);
-					$('#sql_org_box,#sql_emp_box').show();
-					$('#txt_sql_org').val(data['cds_sql_org']);
-					$('#txt_sql_emp').val(data['cds_sql_emp']);
-				}
 			}else{
 				$('#checkbox_is_sql').prop('checked', false);
 				$("#sql_box").hide();
+			}
+			if(data['sql_statement_for']==1) {
+				$('#checkbox_is_sql_org').prop('checked', true);
+				$('#sql_org_box').show();
+				$('#txt_sql_org').val(data['cds_sql_org']);
+				$('#txt_sql_emp').val(data['cds_sql_emp']);
+			} else if(data['sql_statement_for']==2) {
+				$('#checkbox_is_sql_emp').prop('checked', true);
+				$('#sql_emp_box').show();
+				$('#txt_sql_org').val(data['cds_sql_org']);
+				$('#txt_sql_emp').val(data['cds_sql_emp']);
+			} else if(data['sql_statement_for']=='1,2'){
+				$('#checkbox_is_sql_org,#checkbox_is_sql_emp').prop('checked', true);
+				$('#sql_org_box,#sql_emp_box').show();
+				$('#txt_sql_org').val(data['cds_sql_org']);
+				$('#txt_sql_emp').val(data['cds_sql_emp']);
+			} else {
+				$('#txt_sql_org').val(data['cds_sql_org']);
+				$('#txt_sql_emp').val(data['cds_sql_emp']);
 			}
 			
 			//IsAction
@@ -486,11 +489,11 @@ var insertFn = function (param) {
 						clearFn();
 						$("#checkbox_is_hr").prop("checked",false);
 						$("#checkbox_is_sum").prop("checked",false);
-						$("#checkbox_is_sql").prop("checked",true);
-						$("#checkbox_is_sql_org").prop("checked",true);
+						$("#checkbox_is_sql").prop("checked",false);
+						$("#checkbox_is_sql_org").prop("checked",false);
 						$("#checkbox_is_active").prop("checked",true);
-						$("#sql_box").show();
-						$("#sql_org_box").show();
+						$("#sql_box").hide();
+						$("#sql_org_box").hide();
 						callFlashSlideInModal("Insert Data is Successfully.");
 					}
 			}else if (data['status'] == "400") {
@@ -598,30 +601,6 @@ var executeSQLFn = function (txtSQL) {
 	});
 }
 
-var executeSQLEmpFn = function (txtSQL) {
-	
-
-	$.ajax({
-		url : restfulURL + restfulPathCDS+"/test_sql",
-		type : "POST",
-		dataType : "json",
-		data : {"connection_id":$("#f_connection").val(),
-		"sql":txtSQL},
-		headers:{Authorization:"Bearer "+tokenID.token},
-		async : false,
-		success : function(data) {
-			if (data['status'] == "200") {
-				listSqlEmpFn(data['data']);
-				
-			} else if (data['status'] == "400") {
-				$("#table_SqlEmp").hide();
-				$("#table_SqlEmp").html("");
-				validationSqlFn(data['data']);
-			}
-		}
-	});
-}
-
 var listSqlFn = function (data) {
 	console.log(data);
 	
@@ -658,41 +637,6 @@ var listSqlFn = function (data) {
 	
 }
 
-var listSqlEmpFn = function (data) {
-	console.log(data);
-	
-	var tableSql = "";
-	var tableSqlHead = "";
-	var tableSqlBody = "";
-	tableSqlHead+="<thead><tr>";
-	tableSqlBody+="<tbody id=\"listSqlData\">";
-   
-	for ( var obj in data) {
-		if (data.hasOwnProperty(obj)) {
-			
-			tableSqlBody+="<tr class='rowSearch'>";
-			for ( var prop in data[obj]) {
-				
-				if (data[obj].hasOwnProperty(prop)) {
-					if(obj == 0){
-						tableSqlHead+="<th>"+prop+"</th>";
-					}
-					tableSqlBody += "<td class='columnSearch'>"+ data[obj][prop]+ "</td>";
-					//console.log(prop + ':' + data[obj][prop]);
-					
-				}
-			}
-			tableSqlBody+="</tr>";
-		}
-	}
-	
-	tableSqlHead+="</tr></thead>";
-	tableSqlBody+="</tbody>";
-	tableSql=tableSqlHead+tableSqlBody;
-	$("#table_SqlEmp").show();
-	$("#table_SqlEmp").html(tableSql);
-	
-}
 var backToTopFn = function(){
 	$('body,html').animate({
 		scrollTop: 0
@@ -744,10 +688,10 @@ $(document).ready(function() {
 		//$("#f_app_lv").val( $("#f_app_lv option:first-child").val());
 		$("#f_connection").val( $("#f_connection option:first-child").val());
 		$("#btnAddAnother").show();
-		$("#sql_box").show();
+		$("#sql_box").hide();
 		$("#checkbox_is_hr").prop("checked",false);
-		$("#checkbox_is_sql").prop("checked",true);
-		$("#checkbox_is_sql_org").prop("checked",true);
+		$("#checkbox_is_sql").prop("checked",false);
+		$("#checkbox_is_sql_org").prop("checked",false);
 		$("#checkbox_is_active").prop("checked",true);
 		$("#checkbox_is_sum").prop("checked",false);
 		$("#ModalCommonData").modal({
@@ -777,17 +721,16 @@ $(document).ready(function() {
 	$("#checkbox_is_sql").change(function name() {
 		if($("#checkbox_is_sql:checked").is(":checked")){
 			$("#sql_box").show();
-			$("#checkbox_is_sql_org").prop("checked", true);
-			$("#checkbox_is_sql_emp").prop("checked", false);
+			$("#sql_emp_box").show();
+			$("#sql_org_box").hide();
+			$("#checkbox_is_sql_org").prop("checked", false);
+			$("#checkbox_is_sql_emp").prop("checked", true);
 			//executeFn();
 		}else{
 			$("#sql_box").hide();
-			$("#checkbox_is_sql_org").prop("checked", true);
-			$("#checkbox_is_sql_emp").prop("checked", false);
-			$("#txt_sql_org").val("");
-			$("#txt_sql_emp").val("");
+			$("#checkbox_is_sql_org").prop("checked", false);
+			$("#checkbox_is_sql_emp").prop("checked", true);
 			$("#table_Sql").html("");
-			$("#table_SqlEmp").html("");
 		}
 	});
 	
@@ -806,12 +749,10 @@ $(document).ready(function() {
 		
 		if($("#checkbox_is_sql_org:checked").is(":checked")==false){
 			$("#sql_org_box").hide();
-			$("#txt_sql_org").val("");
 		}
 		
 		if($("#checkbox_is_sql_emp:checked").is(":checked")==false){
 			$("#sql_emp_box").hide();
-			$("#txt_sql_emp").val("");
 		}
 	});
 	
@@ -824,9 +765,11 @@ $(document).ready(function() {
 	
 	
 	
-	 $("#btn_Execute_org,#btn_Execute_emp").click(function () {
-		 this.id=="btn_Execute_org" ? executeSQLFn($("#txt_sql_org").val()) : executeSQLEmpFn($("#txt_sql_emp").val());
-		 //executeSQLFn(text_sql);
+	 $("#btn_Execute_org,#btn_Execute_emp").click(function (event) {
+		 event.stopPropagation();
+		 event.preventDefault();
+		 var text_sql = this.id=="btn_Execute_org" ? $("#txt_sql_org").val() : $("#txt_sql_emp").val();
+		 executeSQLFn(text_sql);
 		 
 		 //buildHtmlTable('#excelDataTable');
 	});
@@ -919,6 +862,16 @@ $(document).ready(function() {
 	 });
 	//binding tooltip end
 	
+	 $('.icon-info-circled').hover(function(){
+			//$(this).css('color','#222222');
+			$(this).append('<div id="list-info" ><p>'+$(this).data('info')+'</p></div>');
+			setTimeout( function(){
+				$('#list-info').css({'opacity':0.96, 'bottom':25});
+			},100);
+		}, function(){
+			//$(this).css('color','auto');
+			$('#list-info').remove();
+		});
 	// ------------------- Common Data Set END -------------------
 	
 

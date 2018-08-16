@@ -59,6 +59,11 @@
 		var status= $("#param_status").val();
 		var output_type = $("#param_output").val();
 		
+		if(org=='null') {
+			callFlashSlide("Organization is Require !");
+			return false;
+		}
+		
 		var parameter = {
 				param_year: year,
 				param_period: period,

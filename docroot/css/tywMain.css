@@ -1,3 +1,13 @@
+@font-face {
+	font-family: 'fontello';
+	src: url('../fonts/fontello.eot?49077413');
+	src: url('../fonts/fontello.eot?49077413#iefix') format('embedded-opentype'),
+		 url('../fonts/fontello.woff?49077413') format('woff'),
+		 url('../fonts/fontello.ttf?49077413') format('truetype'),
+		 url('../fonts/fontello.svg?49077413#fontello') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
 .aui body *{
    /* background-color: #cccccc;*/
 }
@@ -507,6 +517,35 @@ hr {
 	cursor:pointer;
 	color: #993399;
 }
+ .aui.icon-info-circled {
+	/*color: #666666;*/
+	color: #0993dd;
+	position: relative;
+}
+
+.aui .icon-info-circled::before {
+	font-family: "fontello";
+	font-size: 15px;
+	font-style: normal;
+	font-weight: normal;
+	speak: none;
+	content: '\e800';
+	display: inline-block;
+	text-decoration: inherit;
+	width: 1em;
+	margin-right: .2em;
+	text-align: center;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1em;
+	margin-left: .2em;
+}
+
+.aui .icon-info-circled:hover {
+	/*color: #222222  !important;*/
+	color: #0ea6f9 !important;
+}
+
 
 /* ---------- End Css By Auu ---------- */
 
