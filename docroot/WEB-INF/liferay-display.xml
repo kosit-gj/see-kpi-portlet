@@ -59,5 +59,6 @@
 		<portlet id="Report Lenso"></portlet>
 		<portlet id="report-summary-grade"></portlet>
 		<portlet id="assignment-log"></portlet>
+		<portlet id="dashboard-performance-comparison"></portlet>
 	</category>
 </display>
