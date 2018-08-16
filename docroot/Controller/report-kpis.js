@@ -22,6 +22,12 @@ var getDataFn = function() {
 	var parameter = {};
 	var template_name ="";
 	  
+	if (organization==''){
+		 $("body").mLoading('hide'); //Loading
+		callFlashSlide("Organization is Require !");
+		return false;
+	}
+	
 	if(appraisalType == 1){
 		template_name="report-org-kpi";
 		parameter = {
@@ -286,6 +292,7 @@ var refreshMultiOrganization = function() {
 	$("#organization").multiselect('refresh').multiselectfilter();
 	$("#organization_ms").css({'width':'100%'});
 	$(".ui-icon-check,.ui-icon-closethick,.ui-icon-circle-close").css({'margin-top':'3px'});
+	$('input[name=multiselect_organization]').css({'margin-bottom':'5px'});
 }
 
 
