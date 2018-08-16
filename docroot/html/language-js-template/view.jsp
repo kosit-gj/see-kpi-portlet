@@ -81,3 +81,9 @@
 <input class="lt-total-score" type="hidden" value="<liferay-ui:message key="total-score"/>"/>
 <input class="lt-upload-successfully" type="hidden" value="<liferay-ui:message key="upload-successfully"/>"/>
 <input class="lt-weight-score" type="hidden" value="<liferay-ui:message key="weight-score"/>"/>
+
+
+<!-- Performance Trend -->
+<input class="lt-employee-name-is-require" type="hidden" value="<liferay-ui:message key="employee-name-is-require"/>"/>
+
+

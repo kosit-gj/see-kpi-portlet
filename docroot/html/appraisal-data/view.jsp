@@ -490,16 +490,16 @@ plid = layout.getPlid();
 							<div class="table-responsive" style="overflow:auto">
 								<table class="table table-striped " id="tableAppraisalData" style="max-width: none;">
 									<thead>
-										<tr>
+										<tr style="white-space: nowrap;">
 <!-- 											<th style='width: auto'>Period&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th> -->
-											<th style='width: auto'><liferay-ui:message key="structure"/>&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-											<th style='width: auto'><liferay-ui:message key="appraisal-item-name"/>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-											<th style='width: auto'><liferay-ui:message key="emp-code"/>&emsp;</th>
-											<th style='width: auto'><liferay-ui:message key="emp-name"/>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-											<th style='width: auto'><liferay-ui:message key="level-name"/>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-											<th style='width: auto'><liferay-ui:message key="organization"/>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-											<th style='width: auto'><liferay-ui:message key="position-name"/>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-											<th style='width:auto;text-align: right;'><liferay-ui:message key="data-value"/>&emsp;</th>
+											<th style='width: auto'><liferay-ui:message key="structure"/></th>
+											<th style='width: auto'><liferay-ui:message key="appraisal-item-name"/></th>
+											<th style='width: auto'><liferay-ui:message key="emp-code"/></th>
+											<th style='width: auto'><liferay-ui:message key="emp-name"/></th>
+											<th style='width: auto'><liferay-ui:message key="level-name"/></th>
+											<th style='width: auto'><liferay-ui:message key="organization"/></th>
+											<th style='width: auto'><liferay-ui:message key="position-name"/></th>
+											<th style='width:auto;text-align: right;'><liferay-ui:message key="data-value"/></th>
 											
 										</tr>
 									</thead>

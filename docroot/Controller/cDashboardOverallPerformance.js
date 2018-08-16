@@ -662,7 +662,7 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 		$("#btnSearchAdvance").click(function(){
 			if($("#app_type").val() == "2"){
 				if($("#emp_name_id").val() ==""){
-					callFlashSlide("Employee Name is Require !");
+					callFlashSlide($(".lt-employee-name-is-require").val()+" !");
 					return false;
 				}
 			}
