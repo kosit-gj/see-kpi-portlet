@@ -33,7 +33,7 @@ plid = layout.getPlid();
 		linear-gradient(to bottom, #fff 0px, #f6f6f6 47%, #ededed 100%) repeat
 		scroll 0 0;
 	border-radius: 0;
-	margin-bottom: 0; 
+	margin-bottom: 0;
 	padding-bottom: 0px
 }
 
@@ -107,17 +107,20 @@ plid = layout.getPlid();
 }
 
 /* new */
-.aui .modal-header .close{
+.aui .modal-header .close {
 	font-size: 1.4em !important;
-    margin-top: 4px !important;
-    padding-top: 5px !important;
+	margin-top: 4px !important;
+	padding-top: 5px !important;
 }
-.aui textarea{
+
+.aui textarea {
 	max-width: 336px;
 }
-.aui #cds_list_content{
-	display:none;
+
+.aui #cds_list_content {
+	display: none;
 }
+
 #btnAddCommonDataSet {
 	position: relative;
 	z-index: 10;
@@ -187,7 +190,6 @@ plid = layout.getPlid();
 		left: 15%;
 		right: 15%;
 	}
-	
 	#confrimModal {
 		left: 58.5%;
 	}
@@ -359,6 +361,29 @@ plid = layout.getPlid();
 		width: 25%;
 		position: relative;
 	}
+}
+
+.aui #list-info {
+	position: absolute;
+	bottom: 90px;
+	left: -69px;
+	z-index: 3000;
+	opacity: 0;
+	width: 320px;
+	padding: 8px;
+	background-color: #333333;
+	border: 1px solid rgba(255, 255, 255, 0.9);
+	-webkit-transition: opacity 0.2s ease-out, bottom 0.2s ease-out;
+	-moz-transition: opacity 0.2s ease-out, bottom 0.2s ease-out;
+	-o-transition: opacity 0.2s ease-out, bottom 0.2s ease-out;
+	transition: opacity 0.2s ease-out, bottom 0.2s ease-out;
+}
+
+.aui  #list-info p {
+	color: #ffffff;
+	font-weight: 400;
+	font-size: 0.9em;
+	text-align: left;
 }
 </style>
 
@@ -701,7 +726,27 @@ plid = layout.getPlid();
 							</div>
 							<div id="sql_emp_box">
 								<div class="form-group p-xxs">
-									<label class="control-label">SQL Emp<br/><button class="btn btn-xs btn-white " type="button" id="btn_Execute_emp">Execute</button></label>
+									<p class="control-label"  style="font-size: 15px;margin-bottom: 5px;">SQL Emp 
+									<span style="position: relative;"
+										data-info="<b><font color='#ac80ff'>Example Format Query</font></b><br>
+										-------------------------------------<br>
+										<font color='#f92490'>SELECT</font><br>
+										&emsp;&emsp;'001' <font color='#f92490'>AS</font> <font color='#e7db74'>sql_emp_code</font>,<br> 
+										&emsp;&emsp;year(order_date) <font color='#f92490'>AS</font> <font color='#e7db74'>sql_appraisal_year</font>, <br>
+										&emsp;&emsp;month(order_date) <font color='#f92490'>AS</font> <font color='#e7db74'>sql_appraisal_month_no</font>,<br>
+										&emsp;&emsp;50 <font color='#f92490'>AS</font> <font color='#e7db74'>sql_cds_value</font><br>
+										<font color='#f92490'>FROM</font> [Table]<br>
+										<font color='#f92490'>WHERE</font> [Condition]<br>
+										-------------------------------------<br>
+										หมายเหตุ<br>
+										<font color='#ac80ff'>ผลลัพธ์ที่ได้จะประกอบด้วย 4 ฟิลด์นี้เท่านั้น</font><br>
+										<font color='#e7db74'>sql_emp_code</font> หมายถึง <font color='#ac80ff'>รหัสพนักงาน</font><br>
+										<font color='#e7db74'>sql_appraisal_year</font> หมายถึง  <font color='#ac80ff'>ปีประเมิน </font><br> 
+										<font color='#e7db74'>sql_appraisal_month_no</font> หมายถึง <font color='#ac80ff'>เดือน เช่น เดือนมกราคม เป็น 1</font><br>
+										<font color='#e7db74'>sql_cds_value</font> หมายถึง <font color='#ac80ff'>ค่าผลการดำเนินงานของ KPI</font>"
+										class="icon-info-circled"></span> : <br />
+
+										<button class="btn btn-xs btn-white " type="button" id="btn_Execute_emp">Execute</button></p>
 										<div class="controls">
 											<textarea id="txt_sql_emp" class="form-control span12" placeholder="" style="min-height:95px; resize: vertical;"></textarea>
 										</div>
@@ -711,7 +756,26 @@ plid = layout.getPlid();
 							</div>
 							<div id="sql_org_box">
 								<div class="form-group p-xxs">
-									<label class="control-label">SQL Org<br/><button class="btn btn-xs btn-white " type="button" id="btn_Execute_org">Execute</button></label>
+									<p class="control-label" style="font-size: 15px;margin-bottom: 5px;">SQL Org
+									<span style="position: relative;"
+										data-info="<b><font color='#ac80ff'>Example Format Query</font></b><br>
+										-------------------------------------<br>
+										<font color='#f92490'>SELECT</font><br>
+										&emsp;&emsp;'001' <font color='#f92490'>AS</font> <font color='#e7db74'>sql_org_code</font>,<br> 
+										&emsp;&emsp;year(order_date) <font color='#f92490'>AS</font> <font color='#e7db74'>sql_appraisal_year</font>, <br>
+										&emsp;&emsp;month(order_date) <font color='#f92490'>AS</font> <font color='#e7db74'>sql_appraisal_month_no</font>,<br>
+										&emsp;&emsp;50 <font color='#f92490'>AS</font> <font color='#e7db74'>sql_cds_value</font><br>
+										<font color='#f92490'>FROM</font> [Table]<br>
+										<font color='#f92490'>WHERE</font> [Condition]<br>
+										-------------------------------------<br>
+										หมายเหตุ<br>
+										<font color='#ac80ff'>ผลลัพธ์ที่ได้จะประกอบด้วย 4 ฟิลด์นี้เท่านั้น</font><br>
+										<font color='#e7db74'>sql_org_code</font> หมายถึง <font color='#ac80ff'>รหัสหน่วยงาน</font><br>
+										<font color='#e7db74'>sql_appraisal_year</font> หมายถึง  <font color='#ac80ff'>ปีประเมิน </font><br> 
+										<font color='#e7db74'>sql_appraisal_month_no</font> หมายถึง <font color='#ac80ff'>เดือน เช่น เดือนมกราคม เป็น 1</font><br>
+										<font color='#e7db74'>sql_cds_value</font> หมายถึง <font color='#ac80ff'>ค่าผลการดำเนินงานของ KPI</font>"
+										class="icon-info-circled"></span> : <br />
+										<button class="btn btn-xs btn-white " type="button" id="btn_Execute_org">Execute</button></p>
 										<div class="controls">
 											<textarea id="txt_sql_org" class="form-control span12" placeholder="" style="min-height:95px; resize: vertical;"></textarea>
 										</div>
