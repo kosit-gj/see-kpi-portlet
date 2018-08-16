@@ -517,13 +517,13 @@ hr {
 	cursor:pointer;
 	color: #993399;
 }
-.icon-info-circled {
+ .aui.icon-info-circled {
 	/*color: #666666;*/
 	color: #0993dd;
 	position: relative;
 }
 
-.icon-info-circled::before {
+.aui .icon-info-circled::before {
 	font-family: "fontello";
 	font-size: 15px;
 	font-style: normal;
@@ -541,7 +541,7 @@ hr {
 	margin-left: .2em;
 }
 
-.icon-info-circled:hover {
+.aui .icon-info-circled:hover {
 	/*color: #222222  !important;*/
 	color: #0ea6f9 !important;
 }
