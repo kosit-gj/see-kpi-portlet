@@ -152,7 +152,7 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 	htmlTemplateQuality+="<table id=\"tablethreshould\" class=\"table table-striped\" style='max-width: none;'>";
 	htmlTemplateQuality+="<thead>";
 	//has weight
-	if(data['no_weight']==0){
+//	if(data['no_weight']==0){
 			htmlTemplateQuality+="<tr>";
 				htmlTemplateQuality+="<th style=\"width:40%\"><b>KPI Name</b></th>";
 				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Target</b></th>";
@@ -166,16 +166,16 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 				}
 
 			htmlTemplateQuality+="</tr>";
-	}else{
-
-		htmlTemplateQuality+="<tr>";
-			htmlTemplateQuality+="<th style=\"width:40%\"><b>KPI Name</b></th>";
-			htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Target</b></th>";
-			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>First Line Score</b></th>";
-			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>Second Line Score</b></th>";
-
-		htmlTemplateQuality+="</tr>";
-	}
+//	}else{
+//
+//		htmlTemplateQuality+="<tr>";
+//			htmlTemplateQuality+="<th style=\"width:40%\"><b>KPI Name</b></th>";
+//			htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Target</b></th>";
+//			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>First Line Score</b></th>";
+//			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>Second Line Score</b></th>";
+//
+//		htmlTemplateQuality+="</tr>";
+//	}
 				htmlTemplateQuality+="</thead>";
 					htmlTemplateQuality+="<tbody id=\"\" class='appraisal_result'>";
 
@@ -187,7 +187,7 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 						info_item="<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>KPI Name : </strong>"+indexEntry['item_name']+"' info-data='"+indexEntry['formula_desc']+"'>i</span>";
 					}else{info_item ="";console.log("no");}
 					//has weight
-						if(data['no_weight']==0){
+//						if(data['no_weight']==0){
 							htmlTemplateQuality+="<tr>";
 								console.log(indexEntry['formula_desc']);
 								htmlTemplateQuality+="<td class=''>"+indexEntry['item_name']+"  "+info_item+"</td>";
@@ -211,32 +211,32 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2))+"</td>";
 
 							htmlTemplateQuality+="</tr>";
-						}else{
-							htmlTemplateQuality+="<tr>";
-
-								htmlTemplateQuality+="<td class=''>"+indexEntry['item_name']+"  "+info_item+"</td>";
-								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\""+hintHtml+"\">"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
-
-								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
-								htmlTemplateQuality+="<select "+check_disabled_first+" style='width:180px; height: 25px;padding: 0 0 0 5px;font-size:13px; text-align:left;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore input form-control input-sm-small numberOnly'>";
-								htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['first_score']),indexEntry['nof_target_score'],data['hint']);
-								htmlTemplateQuality+="<select>";
-								//htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
-								htmlTemplateQuality+="</td>";
-								
-								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
-								htmlTemplateQuality+="<select "+check_disabled_second+" style='width:180px; height: 25px;padding: 0 0 0 5px;font-size:13px; text-align:left;' id='competencyScore_Second-"+indexEntry['item_result_id']+"' class='competencyScore itemScore input form-control input-sm-small numberOnly'>";
-								htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['second_score']),indexEntry['nof_target_score'],data['hint']);
-								htmlTemplateQuality+="<select>";
-								htmlTemplateQuality+="</td>";
-
-
-							htmlTemplateQuality+="</tr>";
-						}
+//						}else{
+//							htmlTemplateQuality+="<tr>";
+//
+//								htmlTemplateQuality+="<td class=''>"+indexEntry['item_name']+"  "+info_item+"</td>";
+//								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\""+hintHtml+"\">"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
+//
+//								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
+//								htmlTemplateQuality+="<select "+check_disabled_first+" style='width:180px; height: 25px;padding: 0 0 0 5px;font-size:13px; text-align:left;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore input form-control input-sm-small numberOnly'>";
+//								htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['first_score']),indexEntry['nof_target_score'],data['hint']);
+//								htmlTemplateQuality+="<select>";
+//								//htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
+//								htmlTemplateQuality+="</td>";
+//								
+//								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
+//								htmlTemplateQuality+="<select "+check_disabled_second+" style='width:180px; height: 25px;padding: 0 0 0 5px;font-size:13px; text-align:left;' id='competencyScore_Second-"+indexEntry['item_result_id']+"' class='competencyScore itemScore input form-control input-sm-small numberOnly'>";
+//								htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['second_score']),indexEntry['nof_target_score'],data['hint']);
+//								htmlTemplateQuality+="<select>";
+//								htmlTemplateQuality+="</td>";
+//
+//
+//							htmlTemplateQuality+="</tr>";
+//						}
 					});
 
 					//has weight
-					if(data['no_weight']==0){
+//					if(data['no_weight']==0){
 						htmlTemplateQuality+="<tr>";
 							
 							htmlTemplateQuality+="<td class=''></td>";
@@ -247,7 +247,7 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 							htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;font-weight: bold;font-size:16px'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
 
 						htmlTemplateQuality+="</tr>";
-					}
+//					}
 
 					htmlTemplateQuality+="</tbody>";
 					htmlTemplateQuality+="</table>";
@@ -291,7 +291,7 @@ var assignTemplateDeductFn = function(structureName,data){
 
 		htmlTemplateDeduct+="<thead>";
 		//has weight
-		if(data['no_weight']==0){
+//		if(data['no_weight']==0){
 
 
 			htmlTemplateDeduct+="<tr>";
@@ -312,28 +312,28 @@ var assignTemplateDeductFn = function(structureName,data){
 				}
 				
 			htmlTemplateDeduct+="</tr>";
-		}else{
-			htmlTemplateDeduct+="<tr>";
-				htmlTemplateDeduct+="<th style=\"width:35%\"><b>KPI Name</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Max Value</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Actual Value</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Over Value</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Deduct Score/Unit</b> </th>";
-				
-				if(data['is_value_get_zero']==1){
-					htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Value&nbsp;Get&nbsp;Zero&nbsp;</b> </th>";
-				}
-				
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Score </b></th>";
-			htmlTemplateDeduct+="</tr>";
-		}
+//		}else{
+//			htmlTemplateDeduct+="<tr>";
+//				htmlTemplateDeduct+="<th style=\"width:35%\"><b>KPI Name</b></th>";
+//				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Max Value</b></th>";
+//				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Actual Value</b></th>";
+//				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Over Value</b></th>";
+//				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Deduct Score/Unit</b> </th>";
+//				
+//				if(data['is_value_get_zero']==1){
+//					htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Value&nbsp;Get&nbsp;Zero&nbsp;</b> </th>";
+//				}
+//				
+//				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Score </b></th>";
+//			htmlTemplateDeduct+="</tr>";
+//		}
 			htmlTemplateDeduct+="</thead>";
 					htmlTemplateDeduct+="<tbody id=\"\" class='appraisal_result'>";
 
 					$.each(data['items'],function(index,indexEntry){
 
 						//has weight
-						if(data['no_weight']==0){
+//						if(data['no_weight']==0){
 							htmlTemplateDeduct+="<tr>";
 									htmlTemplateDeduct+="<td class=''> "+indexEntry['item_name']+"</td>";
 									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['max_value'])).toFixed(2))+"</td>";
@@ -347,25 +347,25 @@ var assignTemplateDeductFn = function(structureName,data){
 									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2))+"</td>";
 
 							htmlTemplateDeduct+="</tr>";
-						}else{
-							htmlTemplateDeduct+="<tr>";
-									htmlTemplateDeduct+="<td class=''> "+indexEntry['item_name']+"</td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['max_value'])).toFixed(2))+"</td>";
-									//htmlTemplateDeduct+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore\" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2))+"</td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['deduct_score_unit'])).toFixed(2))+"</td>";
-									
-									if(data['is_value_get_zero']==1){
-										htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+(indexEntry['value_get_zero']==null?"   ":indexEntry['value_get_zero'])+"</td>";
-									}
-									
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])).toFixed(2))+"</td>";
-
-							htmlTemplateDeduct+="</tr>";
-						}
+//						}else{
+//							htmlTemplateDeduct+="<tr>";
+//									htmlTemplateDeduct+="<td class=''> "+indexEntry['item_name']+"</td>";
+//									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['max_value'])).toFixed(2))+"</td>";
+//									//htmlTemplateDeduct+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore\" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
+//									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
+//									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2))+"</td>";
+//									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['deduct_score_unit'])).toFixed(2))+"</td>";
+//									
+//									if(data['is_value_get_zero']==1){
+//										htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+(indexEntry['value_get_zero']==null?"   ":indexEntry['value_get_zero'])+"</td>";
+//									}
+//									
+//									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])).toFixed(2))+"</td>";
+//
+//							htmlTemplateDeduct+="</tr>";
+//						}
 					});
-					if(data['no_weight']==0){
+//					if(data['no_weight']==0){
 						htmlTemplateDeduct+="<tr>";
 								htmlTemplateDeduct+="<td class=''></td>";
 								htmlTemplateDeduct+="<td class=''></td>";
@@ -377,7 +377,7 @@ var assignTemplateDeductFn = function(structureName,data){
 								htmlTemplateDeduct+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>Total</b></td>";
 								htmlTemplateDeduct+="<td class=''  style='text-align: right;padding-right: 10px;font-weight: bold; font-size:16px'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
 						htmlTemplateDeduct+="</tr>";
-					}
+//					}
 
 
 					htmlTemplateDeduct+="</tbody>";
@@ -424,7 +424,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 	htmlTemplateQuantity+="<thead>";
 
 	//has weight
-	if(data['no_weight']==0){
+//	if(data['no_weight']==0){
 
 		htmlTemplateQuantity+="<tr>";
 
@@ -451,27 +451,27 @@ var assignTemplateQuantityFn = function(structureName,data){
 
 		htmlTemplateQuantity+="</tr>";
 
-	}else{
-	//no_weight
-		htmlTemplateQuantity+="<tr>";
-			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>Perspective</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>KPI Name</b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Target </b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>UOM </b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Forecast </b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Actual </b></th>";
-
-			if(data['threshold']==1){
-				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Score </b></th>";
-			}else{
-				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Achievement </b></th>";
-			}
-
-
-			htmlTemplateQuantity+="<th style='width:15%;text-align: center;' class=''><b>Manage</b> </th>";
-
-		htmlTemplateQuantity+="</tr>";
-	}
+//	}else{
+//	//no_weight
+//		htmlTemplateQuantity+="<tr>";
+//			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>Perspective</b> </th>";
+//			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>KPI Name</b></th>";
+//			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Target </b></th>";
+//			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>UOM </b></th>";
+//			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Forecast </b></th>";
+//			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Actual </b></th>";
+//
+//			if(data['threshold']==1){
+//				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Score </b></th>";
+//			}else{
+//				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Achievement </b></th>";
+//			}
+//
+//
+//			htmlTemplateQuantity+="<th style='width:15%;text-align: center;' class=''><b>Manage</b> </th>";
+//
+//		htmlTemplateQuantity+="</tr>";
+//	}
 
 		htmlTemplateQuantity+="</thead>";
 			htmlTemplateQuantity+="<tbody id=\"\" class='appraisal_result'>";
@@ -491,7 +491,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 				weight_percent
 				*/
 				//has weight
-				if(data['no_weight']==0){
+//				if(data['no_weight']==0){
 					htmlTemplateQuantity+="<tr >";
 						htmlTemplateQuantity+="<td>"+indexEntry['perspective_name']+"</td>";
 						htmlTemplateQuantity+="<td id=\"item_name-"+indexEntry['item_result_id']+"\">"+indexEntry['item_name']+"</td>";
@@ -514,34 +514,34 @@ var assignTemplateQuantityFn = function(structureName,data){
 						htmlTemplateQuantity+="	</td>";
 
 					htmlTemplateQuantity+="</tr>";
-				}else{
-					//no_weight
-					htmlTemplateQuantity+="<tr >";
-						htmlTemplateQuantity+="<td>"+indexEntry['perspective_name']+"</td>";
-						htmlTemplateQuantity+="<td>"+indexEntry['item_name']+"</td>";
-						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
-						htmlTemplateQuantity+="<td>"+indexEntry['uom_name']+"</td>";
-						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input type=\"text\"  class=\"span10 input-sm-small numberOnly addComma itemScore\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(2))+"></td>";
-
-						//htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input type=\"text\"  class=\"span10 input-sm-small numberOnly \" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
-						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
-
-						if(data['threshold']==1){
-							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])).toFixed(2))+"</td>";
-						}else{
-							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['percent_achievement'])).toFixed(2))+"</td>";
-						}
-
-						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
-						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;Gantt&lt;/button&gt; &lt;button class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;Attach File&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" style='text-align:center;' data-original-title=\"\" title=\"\"></i>"+paperclip;
-						htmlTemplateQuantity+="	</td>";
-
-					htmlTemplateQuantity+="</tr>";
-				}
+//				}else{
+//					//no_weight
+//					htmlTemplateQuantity+="<tr >";
+//						htmlTemplateQuantity+="<td>"+indexEntry['perspective_name']+"</td>";
+//						htmlTemplateQuantity+="<td>"+indexEntry['item_name']+"</td>";
+//						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
+//						htmlTemplateQuantity+="<td>"+indexEntry['uom_name']+"</td>";
+//						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input type=\"text\"  class=\"span10 input-sm-small numberOnly addComma itemScore\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(2))+"></td>";
+//
+//						//htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input type=\"text\"  class=\"span10 input-sm-small numberOnly \" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
+//						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
+//
+//						if(data['threshold']==1){
+//							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])).toFixed(2))+"</td>";
+//						}else{
+//							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['percent_achievement'])).toFixed(2))+"</td>";
+//						}
+//
+//						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
+//						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;Gantt&lt;/button&gt; &lt;button class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;Attach File&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" style='text-align:center;' data-original-title=\"\" title=\"\"></i>"+paperclip;
+//						htmlTemplateQuantity+="	</td>";
+//
+//					htmlTemplateQuantity+="</tr>";
+//				}
 
 			});
 
-			if(data['no_weight']==0){
+//			if(data['no_weight']==0){
 				htmlTemplateQuantity+="<tr >";
 					htmlTemplateQuantity+="<td></td>";
 					htmlTemplateQuantity+="<td></td>";
@@ -554,7 +554,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 					htmlTemplateQuantity+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>Total</b></td>";
 					htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;font-weight: bold; font-size:16px;'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
 				htmlTemplateQuantity+="</tr>";
-			}
+//			}
 
 			htmlTemplateQuantity+="</tbody>";
 			htmlTemplateQuantity+="</table>";
@@ -1021,13 +1021,13 @@ var listAppraisalDetailFn = function(data){
 		 });
 		//binding tooltip end
 		 
-		 if(data['head'][0]['no_weight']==0){
+//		 if(data['head'][0]['no_weight']==0){
 			 $(".hasWeightGrandTotalArea").show();
 			 $(".noWeightGrandTotalArea").hide();
-		 }else{
-			 $(".hasWeightGrandTotalArea").hide();
-			 $(".noWeightGrandTotalArea").show();
-		 }
+//		 }else{
+//			 $(".hasWeightGrandTotalArea").hide();
+//			 $(".noWeightGrandTotalArea").show();
+//		 }
 
 		//set header start
 		 if($("#embed_appraisalType").val()==2){
