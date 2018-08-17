@@ -94,6 +94,7 @@ $(document).ready(function(){
     					   {"colunmsDisplayName":"Select","width":"5%","id":"org_id","colunmsType":"selectBox"},
     			           {"colunmsDisplayName":"Org. Code","width":"14%","id":"org_code","colunmsType":"text"},
     			           {"colunmsDisplayName":"Org. Name","width":"18%","id":"org_name","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Org. Email","width":"18%","id":"org_email","colunmsType":"text"},
     			           {"colunmsDisplayName":"Abbreviation","width":"10%","id":"org_abbr","colunmsType":"text"},
     			           {"colunmsDisplayName":"Appraisal Level","width":"11%","id":"appraisal_level_name","colunmsType":"text"},
     			           {"colunmsDisplayName":"Parent Org.","width":"13%","id":"parent_org_name","colunmsType":"text"},
@@ -110,6 +111,10 @@ $(document).ready(function(){
         				"label":"Organization Name","inputType":"text","placeholder":"Organization Name",
         				"id":"org_name","width":"350px","required":true
         				},
+        				{
+            				"label":"Organization Email","inputType":"text","placeholder":"Organization Email",
+            				"id":"org_email","width":"350px"
+            			},
         				{
             				"label":"Abbreviation","inputType":"text","placeholder":"Abbreviation",
             				"id":"org_abbr","width":"250px"
