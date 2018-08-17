@@ -31,7 +31,7 @@ var clearFn = function(){
 	  /*Clear File*/
 	  
 	  $("#attachFileCdsResultId").val("");
-	  $("#txtTitleImport").html("Import CDS Result");
+	  $("#txtTitleImport").html($(".lt-import-cds-result").val());
 	
 }
 var paginationSetUpCdsResultFn = function(pageIndex,pageButton,pageTotal){
@@ -357,10 +357,10 @@ var updateCdsResultFn = function () {
 			if (data['status'] == "200") {
 				getCdsResultDataFn($("#pageCdsNumber").val(),$("#rppCds").val());
 				clearFn();
-				callFlashSlide("Update Successfully.");
+				callFlashSlide($(".lt-update-successfully").val());
 				
 			}else{
-				callFlashSlide("Update fail.");
+				callFlashSlide($(".lt-update-fail").val());
 			}
 		}
 	});
@@ -993,14 +993,14 @@ $(document).ready(function() {
 				
 				//console.log(data);
 				if(data['status']==200 && $("#attachFileCdsResultId").val()!=""){
-					callFlashSlide($("#attachFileCdsResultId").val()==""?"Import CDS Result Successfully":"Attach File Successfully");
+					callFlashSlide($("#attachFileCdsResultId").val()==""?$(".lt-import-cds-result-successfully").val():$(".lt-attach-file-successfully").val());
 					clearFn();
 					$("body").mLoading('hide');
 					$
 					$('#ModalImport').modal('hide');
 				}else if(data['status']==200 && data['errors'].length==0){
 							
-					callFlashSlide($("#attachFileCdsResultId").val()==""?"Import CDS Result Successfully":"Attach File Successfully");
+					callFlashSlide($("#attachFileCdsResultId").val()==""?$(".lt-import-cds-result-successfully").val():$(".lt-attach-file-successfully").val());
 					getCdsResultDataFn($(".pagination .active").attr( "data-lp" ),$("#rppCds").val());
 					clearFn();
 					$("body").mLoading('hide');
@@ -1046,7 +1046,7 @@ $(document).ready(function() {
      var drEvent = $('#input-file-events').dropify();
 
      drEvent.on('dropify.beforeClear', function(event, element){
-         return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+         return confirm($(".lt-do-you-really-want-to-delete").val()+" \"" + element.file.name + "\" ?");
      });
 
      drEvent.on('dropify.afterClear', function(event, element){

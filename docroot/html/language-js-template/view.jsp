@@ -86,4 +86,10 @@
 <!-- Performance Trend -->
 <input class="lt-employee-name-is-require" type="hidden" value="<liferay-ui:message key="employee-name-is-require"/>"/>
 
-
+<!-- CDS Result -->
+<input class="lt-import-cds-result" type="hidden" value="<liferay-ui:message key="import-cds-result"/>"/>
+<input class="lt-update-fail" type="hidden" value="<liferay-ui:message key="update-fail"/>"/>
+<input class="lt-update-successfully" type="hidden" value="<liferay-ui:message key="update-successfully"/>"/>
+<input class="lt-do-you-really-want-to-delete" type="hidden" value="<liferay-ui:message key="do-you-really-want-to-delete"/>"/>
+<input class="lt-attach-file-successfully" type="hidden" value="<liferay-ui:message key="attach-file-successfully"/>"/>
+<input class="lt-import-cds-result-successfully" type="hidden" value="<liferay-ui:message key="import-cds-result-successfully"/>"/>
