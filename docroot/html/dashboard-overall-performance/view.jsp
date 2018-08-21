@@ -626,6 +626,3 @@ overflow:auto;
 	</div>
 </div>
 
-
-<!-- Language Template for js -->
-<%@ include file="/html/language-js-template/view.jsp" %>

@@ -315,7 +315,7 @@
 			success : function(data) {
 				galbalDashboard=data;
 				$("#btn_kpi").hide();
-				$("#captionPieChart").html("<input type='hidden' id='overall_name' name='overall_name' value='"+data['name']+"'><div id='txtTopic' class='span12 graphLTopHeader'>"+data['header'].replace("Performance by Perspective", "<div style='display: inline-block;'>"+$(".lt-performance-by-perspective").val()+"</div>")+"</div>");
+				$("#captionPieChart").html("<input type='hidden' id='overall_name' name='overall_name' value='"+data['name']+"'><div id='txtTopic' class='span12 graphLTopHeader'>"+data['header'].replace("Performance by Perspective", "<div style='display: inline-block;'>"+Liferay.Language.get('performance-by-perspective')+"</div>")+"</div>");
 				$("#overall_name_on_list_kpi").html(data['name']);
 				generateChartPieFn(data);
 				
@@ -386,9 +386,9 @@ var listAllKPIFn = function(data){
 			dataTableHTML+="<table class='tableInside table-striped'>";
 				dataTableHTML+="<thead>";
 					dataTableHTML+="<tr>";
-						dataTableHTML+="<th style='min-width: 100px;'>"+$(".lt-target").val()+"</th>";
-						dataTableHTML+="<th style='min-width: 100px;'>"+$(".lt-forecast").val()+"</th>";
-						dataTableHTML+="<th style='min-width: 100px;'>"+$(".lt-actual").val()+"</th>";
+						dataTableHTML+="<th style='min-width: 100px;'>"+Liferay.Language.get('target')+"</th>";
+						dataTableHTML+="<th style='min-width: 100px;'>"+Liferay.Language.get('forecast')+"</th>";
+						dataTableHTML+="<th style='min-width: 100px;'>"+Liferay.Language.get('actual')+"</th>";
 					dataTableHTML+="</tr>";
 					dataTableHTML+="</thead>";
 					dataTableHTML+="<tbody>";
@@ -398,11 +398,11 @@ var listAllKPIFn = function(data){
 							dataTableHTML+="<td style=' text-align: right !important;'>"+actual+"</td>";
 						dataTableHTML+="</tr>";
 						dataTableHTML+="<tr>";
-							dataTableHTML+="<td>"+$(".lt-percent-target").val()+"<span style='float:right'>"+percent_target+"</span></td>";
+							dataTableHTML+="<td>"+Liferay.Language.get('percent-target')+"<span style='float:right'>"+percent_target+"</span></td>";
 							dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:1;'  >"+indexEntry2['percent_target_str']+"</div></td>";
 						dataTableHTML+="</tr>";
 						dataTableHTML+="<tr>";
-							dataTableHTML+="<td>"+$(".lt-percent-forecast").val()+"<span style='float:right'>"+percent_forecast+"</span></td>";
+							dataTableHTML+="<td>"+Liferay.Language.get('percent-forecast')+"<span style='float:right'>"+percent_forecast+"</span></td>";
 							dataTableHTML+="<td colspan='2'><div class='sparkline' style='opacity:1;'>"+indexEntry2['percent_forecast_str']+"</div></td>";
 						dataTableHTML+="</tr>";
 					dataTableHTML+="</tbody>";
@@ -469,8 +469,8 @@ var getDataBubbleFn = function(page,rpp){
 		async:false,// w8 data 
 		success : function(data) {
 			var htmlCaption="";
-			htmlCaption +="<div id='txtTopic' class='span12 graphLTopHeader'>"+data['header'].replace("Performance by KPI", "<div style='display: inline-block;'>"+$(".lt-performance-by-kpi").val()+"</div>");
-			htmlCaption +="<div style='display: inline-block;'><button id='btn_kpi' type='button' data-target='#ModalKPI' data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"' class='btn btn-xs btn-white' > <i class='fa fa-table fa-table' aria-hidden='true'></i>"+$(".lt-all-kpi").val()+"</button></div>";
+			htmlCaption +="<div id='txtTopic' class='span12 graphLTopHeader'>"+data['header'].replace("Performance by KPI", "<div style='display: inline-block;'>"+Liferay.Language.get('performance-by-kpi')+"</div>");
+			htmlCaption +="<div style='display: inline-block;'><button id='btn_kpi' type='button' data-target='#ModalKPI' data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"' class='btn btn-xs btn-white' > <i class='fa fa-table fa-table' aria-hidden='true'></i>"+Liferay.Language.get('all-kpi')+"</button></div>";
 			htmlCaption +="</div>";
 			
 			$("#captionBubbleChart").html(htmlCaption);
@@ -662,7 +662,7 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 		$("#btnSearchAdvance").click(function(){
 			if($("#app_type").val() == "2"){
 				if($("#emp_name_id").val() ==""){
-					callFlashSlide($(".lt-employee-name-is-require").val()+" !");
+					callFlashSlide(Liferay.Language.get('employee-name-is-require')+" !");
 					return false;
 				}
 			}
