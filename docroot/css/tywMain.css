@@ -517,7 +517,7 @@ hr {
 	cursor:pointer;
 	color: #993399;
 }
- .aui.icon-info-circled {
+ .aui .icon-info-circled {
 	/*color: #666666;*/
 	color: #0993dd;
 	position: relative;
@@ -545,7 +545,6 @@ hr {
 	/*color: #222222  !important;*/
 	color: #0ea6f9 !important;
 }
-
 
 /* ---------- End Css By Auu ---------- */
 

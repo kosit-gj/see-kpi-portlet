@@ -56,6 +56,9 @@
 		<portlet id="report-tfg"></portlet>
 		<portlet id="report-assignment"></portlet>
 		<portlet id="job-log"></portlet>
+		<portlet id="Report Lenso"></portlet>
 		<portlet id="report-summary-grade"></portlet>
+		<portlet id="assignment-log"></portlet>
+		<portlet id="dashboard-performance-comparison"></portlet>
 	</category>
 </display>
