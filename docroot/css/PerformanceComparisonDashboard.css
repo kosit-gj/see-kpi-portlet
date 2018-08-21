@@ -90,7 +90,7 @@ border-radius: 0px 0px 0px 0px;
 }
 .titlePanel{
 	/*display: inline;*/
-    font-size: 14px;
+/*     font-size: 14px;
     font-weight: bold;
     margin-right: 5px;
     padding-top: 5px;
@@ -98,6 +98,7 @@ border-radius: 0px 0px 0px 0px;
     width:200px;
     float:left;
     position:absolute;
+    width: 98%; */
 }
 .totalWeight{
 	width:auto;
