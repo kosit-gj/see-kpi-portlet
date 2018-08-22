@@ -385,7 +385,7 @@ var searchAdvanceFn = function() {
 };
 /*#########################  Main Function Data #######################*/
 /*#########################  Custom Function Data #######################*/
-var appraisalLevelListFn = function(nameArea,id,defaultAll,multiSelect){
+var appraisalLevelListFn = function(nameArea,id,defaultAll,multiSelect,showall){
 
 	var level_array=[];
 
@@ -411,6 +411,7 @@ var appraisalLevelListFn = function(nameArea,id,defaultAll,multiSelect){
 		type:"get",
 		dataType:"json",
 		async:false,
+		data:{"show_all" : showall},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
@@ -952,7 +953,7 @@ $(document).ready(function(){
 	
 	//parameter start
 	//dropDrowDepartmentFn('','',defaultAll=true);
-	appraisalLevelListFn('','',defaultAll=true,multiSelect=false);
+	appraisalLevelListFn('','',defaultAll=true,multiSelect=false,false);
 	appraisalLevelOrgListFn();
 	appraisalOrganizationListFn();
 	perspectiveListFn();
