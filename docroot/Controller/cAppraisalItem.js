@@ -411,7 +411,7 @@ var appraisalLevelListFn = function(nameArea,id,defaultAll,multiSelect,showall){
 	}
 	
 	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/al_list_emp",
+		url:restfulURL+"/"+serviceName+"/public/appraisal_item/al_list_emp",
 		type:"get",
 		dataType:"json",
 		async:false,
