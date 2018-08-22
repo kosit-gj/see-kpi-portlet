@@ -342,6 +342,10 @@ var findOneFn = function(id,form_url) {
 				
 				initailDeductScoreFormFn('edit',data['structure_id'],data['structure_name'],data);
 				
+			}else if(form_url=="reward"){
+				
+				initailRewardScoreFormFn('edit',data['structure_id'],data['structure_name'],data);
+				
 			}
 			
 			
