@@ -167,19 +167,14 @@ var listDataFn = function(data){
 								htmlTable+="<div class=\"ibox-content\" style='padding: 0 0px 0px;'>";
 								//SUB TABLE HERE..
 								
-								htmlTable+="<table class=\"table\">";
+								htmlTable+="<table class='table' style='white-space: nowrap'>";
 								htmlTable+="<thead>";
 									htmlTable+="<tr  class=\"active\">";
-										//htmlTable+="<th style='width:30px;'><b>No.</b></th>";
-										htmlTable+="<th style='width:200px;'><b>Usage Date</b></th>";
-										htmlTable+="<th style='width:100px;'><b>Employee Code</b></th>";
-										htmlTable+="<th style='width:150px;'><b>Employee Name</b></th>";
-										htmlTable+="<th style='width:200px;'><b>Organization</b></th>";
-										htmlTable+="<th style='width:300px;'><b>Menu</b></th>";
-										
-										
-									
-										
+										htmlTable+="<th style='width:200px;'><b>"+Liferay.Language.get('usage-date')+"</b></th>";
+										htmlTable+="<th style='width:100px;'><b>"+Liferay.Language.get('employee-code')+"</b></th>";
+										htmlTable+="<th style='width:150px;'><b>"+Liferay.Language.get('employee-name')+"</b></th>";
+										htmlTable+="<th style='width:200px;'><b>"+Liferay.Language.get('organization')+"</b></th>";
+										htmlTable+="<th style='width:300px;'><b>"+Liferay.Language.get('menu')+"</b></th>";
 									htmlTable+="</tr>";
 								htmlTable+="</thead>";
 									htmlTable+="<tbody>";

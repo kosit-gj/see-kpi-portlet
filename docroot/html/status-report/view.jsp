@@ -1,22 +1,27 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
 <%@ page import="javax.portlet.*"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
+
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
+<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 
 <%
 	String username = themeDisplay.getUser().getScreenName();
 	String password = (String) request.getSession().getAttribute(WebKeys.USER_PASSWORD);
+	String currentLocale = themeDisplay.getLanguageId();
 	layout = themeDisplay.getLayout();
 	plid = layout.getPlid();
-	
 %>
+
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
+<input type="hidden" id="user_locale" name="user_locale" value="<%=currentLocale%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
 <input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
 <input type="hidden" id="get_year_id" name="get_year_id" value="<%= PortalUtil.getOriginalServletRequest(request).getParameter("param_year")%>">
@@ -29,6 +34,7 @@
 <input type="hidden" id="get_org_id" name="get_org_id" value="<%= PortalUtil.getOriginalServletRequest(request).getParameter("param_org_id")%>">
 <input type="hidden" id="get_item_id" name="get_item_id" value="<%=PortalUtil.getOriginalServletRequest(request).getParameter("param_item")%>">
 <input type="hidden" id="get_sending_status" name="get_sending_status" value="<%=PortalUtil.getOriginalServletRequest(request).getParameter("sending_status")%>">
+
 <style>
 /* Large desktop Start#####################################*/
 @media ( min-width : 1200px) {
@@ -268,7 +274,7 @@
 			<div class="ibox float-e-margins">
 				<div class="ibox-title"
 					style="background-color: rgb(83, 120, 253); border-color: rgb(83, 120, 253); min-height: 0px;">
-					<div class="titlePanelIbox">Advance Search</div>
+					<div class="titlePanelIbox"><liferay-ui:message key="advanced-search"/></div>
 				</div>
 
 				<div class="ibox-content breadcrumbs2 advance-search"
@@ -280,7 +286,7 @@
 							class="form-group pull-left span3" id="yearArea">
 							<select name="year" id="year" class="input form-control input-sm"
 								title="" data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Year">
+								data-original-title="<liferay-ui:message key="year"/>">
 								<option value="2017">2017</option>
 							</select>
 						</div>
@@ -289,7 +295,7 @@
 							<select name="period" id="period"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Period">
+								data-original-title="<liferay-ui:message key="period"/>">
 								<option value="">Period</option>
 							</select>
 						</div>
@@ -298,7 +304,7 @@
 							<select name="apprasiaLevel" id="apprasiaLevel"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Emp Level" >
+								data-original-title="<liferay-ui:message key="employee-level"/>" >
 								<option value="">Level</option>
 							</select>
 						</div>
@@ -307,7 +313,7 @@
 							<select name="apprasiaLevelOrg" id="apprasiaLevelOrg"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Org Level" >
+								data-original-title="<liferay-ui:message key="organization-level"/>" >
 								<option value="">Level</option>
 							</select>
 						</div>
@@ -315,8 +321,8 @@
 					<div class="row-fluid">
 						<div style="margin-bottom:5px;"
 							class="form-group pull-left span6" id="organizationArea">
-							<select data-toggle="tooltip" title="Organization"
-								data-original-title="organization" multiple="multiple"
+							<select data-toggle="tooltip" title="<liferay-ui:message key="organization"/>"
+								data-original-title="<liferay-ui:message key="organization"/>" multiple="multiple"
 								class="input form-control input-sm span12" id="organization"
 								name="organization">
 							</select>
@@ -326,14 +332,14 @@
 							<select name="status" id="status"
 								class="input form-control input-sm" title=""
 								data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Status" >
+								data-original-title="<liferay-ui:message key="status"/>" >
 							</select>
 						</div>
 						<div style="margin-bottom:5px;"
 							class="form-group pull-left span3" id="kpiArea">
 							<select name="output_type" id="output_type" class="input form-control input-sm"
 								title="" data-toggle="tooltip" style="cursor: pointer;"
-								data-original-title="Output Type">
+								data-original-title="<liferay-ui:message key="output-type"/>">
 								<option value="pdf">PDF</option>
 								<option value="xls">Excel</option>
 							</select>
@@ -343,7 +349,7 @@
 						<div class="form-group span12 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
 							<button type="button" id="btnSearchAdvance" name="btnSearchAdvance"
 									class="btn btn-info input-sm" type="button">
-									<i class="fa fa-search"></i>&nbsp;Search
+									<i class="fa fa-search"></i>&nbsp;<liferay-ui:message key="search"/>
 							</button>
 						</div>
 					</div>
@@ -373,7 +379,7 @@
 <!-- 		</aside> -->
 		</div>
 		<iframe id="iFrame_report" frameborder="0" style="width :100%;height: 500px;">
-  			<p>Your browser does not support iframes.</p>
+  			<p><liferay-ui:message key="your-browser-does-not-support-iframes"/></p>
 		</iframe>
 	</div>
 
