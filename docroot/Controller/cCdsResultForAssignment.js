@@ -30,7 +30,7 @@ var clearFn = function(){
 	  /*Clear File*/
 	  
 	  $("#attachFileCdsResultId").val("");
-	  $("#txtTitleImport").html("Import CDS Result");
+	  $("#txtTitleImport").html($(".lt-import-cds-result").val());
 	
 }
 var paginationSetUpCdsResultFn = function(pageIndex,pageButton,pageTotal){
@@ -101,12 +101,12 @@ var getCdsResultDataFn = function(page,rpp){
 	var emp_name= $("#param_emp_id").val();
 	$("#listCdsResult").empty();
 	if(app_type == "2"){
-		$("#tableCdsResult thead tr").find("th:first").html("Emp&nbsp;Code&emsp;");
-		$("#tableCdsResult thead tr").find("th:first").next().html("Emp&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
+		$("#tableCdsResult thead tr").find("th:first").html($(".lt-emp-code").val());
+		$("#tableCdsResult thead tr").find("th:first").next().html($(".lt-emp-name").val());
 		$(".theadThField").show();
 	}else if(app_type == "1"){
-		$("#tableCdsResult thead tr").find("th:first").html("Org&nbsp;Code&emsp;");
-		$("#tableCdsResult thead tr").find("th:first").next().html("Org&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;");
+		$("#tableCdsResult thead tr").find("th:first").html($(".lt-org-code").val());
+		$("#tableCdsResult thead tr").find("th:first").next().html($(".lt-org-name").val());
 		$(".theadThField").hide();
 		
 	}
@@ -242,7 +242,7 @@ var listCdsResultFn = function (data) {
 					    	 
 						     if(data['status']==200){
 						    	 
-						       callFlashSlide("Delete Successfully.");
+						       callFlashSlide($(".lt-delete-successfully").val());
 						       getCdsResultDataFn($("#pageCdsNumber").val(),$("#rppCds").val()); 
 						       $("#confrimModalCdsResult").modal('hide');
 						       
@@ -356,10 +356,10 @@ var updateCdsResultFn = function () {
 			if (data['status'] == "200") {
 				getCdsResultDataFn($("#pageCdsNumber").val(),$("#rppCds").val());
 				clearFn();
-				callFlashSlide("Update Successfully.");
+				callFlashSlide($(".lt-update-successfully").val());
 				
 			}else{
-				callFlashSlide("Update fail.");
+				callFlashSlide($(".lt-update-fail").val());
 			}
 		}
 	});
@@ -372,7 +372,7 @@ var dropDownListMonth = function(month){
 	var html="";
 	
 	
-	html+="<select id=\"monthCdsResult\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Month\" name=\"monthCdsResult\">";
+	html+="<select id=\"monthCdsResult\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\""+$(".lt-month").val()+"\" name=\"monthCdsResult\">";
 	//html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownMonth ,
@@ -405,7 +405,7 @@ var dropDownListYear = function(year){
 	var html="";
 	
 	
-	html+="<select id=\"yearCdsResult\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Year\" name=\"yearCdsResult\">";
+	html+="<select id=\"yearCdsResult\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\""+$(".lt-year").val()+"\" name=\"yearCdsResult\">";
 	//html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownYear ,
@@ -505,7 +505,7 @@ var dropDownListEmpLevelToOrgFn = function(){
 
 var dropDownListAppraisalType = function(){
 	var html="";
-	html+="<select data-placement='top' id=\"app_type\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Entity Type\" name=\"app_type\">";
+	html+="<select data-placement='top' id=\"app_type\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\""+$(".lt-entity-type").val()+"\" name=\"app_type\">";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalType,
 		type:"get" ,
@@ -765,14 +765,14 @@ $(document).ready(function() {
 				
 				//console.log(data);
 				if(data['status']==200 && $("#attachFileCdsResultId").val()!=""){
-					callFlashSlide($("#attachFileCdsResultId").val()==""?"Import CDS Result Successfully":"Attach File Successfully");
+					callFlashSlide($("#attachFileCdsResultId").val()==""? $(".lt-import-cds-result-successfully").val() : $(".lt-attach-file-successfully").val());
 					clearFn();
 					$("body").mLoading('hide');
 					$
 					$('#ModalImport').modal('hide');
 				}else if(data['status']==200 && data['errors'].length==0){
 							
-					callFlashSlide($("#attachFileCdsResultId").val()==""?"Import CDS Result Successfully":"Attach File Successfully");
+					callFlashSlide($("#attachFileCdsResultId").val()==""? $(".lt-import-cds-result-successfully").val() : $(".lt-attach-file-successfully").val());
 					getCdsResultDataFn($(".pagination .active").attr( "data-lp" ),$("#rppCds").val());
 					clearFn();
 					$("body").mLoading('hide');
@@ -818,7 +818,7 @@ $(document).ready(function() {
      var drEvent = $('#input-file-events').dropify();
 
      drEvent.on('dropify.beforeClear', function(event, element){
-         return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+         return confirm($(".lt-do-you-really-want-to-delete").val()+" \"" + element.file.name + "\" ?");
      });
 
      drEvent.on('dropify.afterClear', function(event, element){

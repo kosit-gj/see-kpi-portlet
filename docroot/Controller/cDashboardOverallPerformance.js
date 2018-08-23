@@ -379,7 +379,7 @@ var listAllKPIFn = function(data){
 
 		dataTableHTML+="<tr>";
 			dataTableHTML+="<td>"+indexEntry2['perspective_name']+" </td>";
-			dataTableHTML+="<td>"+indexEntry2['item_name']+"<br><span class='LastUpdateText'>As of: "+indexEntry2['etl_dttm']+"</span></td>";
+			dataTableHTML+="<td>"+indexEntry2['item_name']+"<br><span class='LastUpdateText'>"+Liferay.Language.get('as-of')+": "+indexEntry2['etl_dttm']+"</span></td>";
 			dataTableHTML+="<td>"+indexEntry2['uom_name']+" </td>";
 			dataTableHTML+="<td>";
 			

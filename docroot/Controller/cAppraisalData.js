@@ -722,7 +722,7 @@ $(document).ready(function() {
 				//console.log(data);
 				if(data['status']==200 && data['errors'].length==0){
 							
-					callFlashSlide("Import CDS Result Successfully");
+					callFlashSlide($(".lt-import-cds-result-successfully").val());
 					getDataFn($(".pagination .active").attr( "data-lp" ),$("#rpp").val());
 					$('#file').val("");
 					$("body").mLoading('hide');
@@ -738,7 +738,7 @@ $(document).ready(function() {
 			error: function(jqXHR, textStatus, errorThrown)
 			{
 				// Handle errors here
-				callFlashSlide('Format Error : ' + textStatus);
+				callFlashSlide($(".lt-format-error").val()+' : ' + textStatus);
 				// STOP LOADING SPINNER
 			}
 		});
@@ -769,11 +769,11 @@ $(document).ready(function() {
      var drEvent = $('#input-file-events').dropify();
 
      drEvent.on('dropify.beforeClear', function(event, element){
-         return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+         return confirm($(".lt-do-you-really-want-to-delete").val()+" \"" + element.file.name + "\" ?");
      });
 
      drEvent.on('dropify.afterClear', function(event, element){
-         alert('File deleted');
+         alert($(".lt-file-deleted").val());
      });
 
      drEvent.on('dropify.errors', function(event, element){

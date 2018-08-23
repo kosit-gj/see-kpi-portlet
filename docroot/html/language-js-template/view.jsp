@@ -30,7 +30,6 @@
 
 <!-- Assignment -->
 <input class="lt-action" type="hidden" value="<liferay-ui:message key="action"/>"/>
-<input class="lt-appraisal-check-weigth-over-item-name" type="hidden" value="<liferay-ui:message key="appraisal-check-weigth-over-item-name"/>"/>
 <input class="lt-appraisal-item-name" type="hidden" value="<liferay-ui:message key="appraisal-item-name"/>"/>
 <input class="lt-cannot-assignment-because-weight-percent-not-equal-to" type="hidden" value="<liferay-ui:message key="cannot-assignment-because-weight-percent-not-equal-to"/>"/>
 <input class="lt-cannot-assign-structure-not-equal-to-weight-total" type="hidden" value="<liferay-ui:message key="cannot-assign-structure-not-equal-to-weight-total"/>"/>
@@ -85,6 +84,8 @@
 
 <!-- Performance Trend -->
 <input class="lt-employee-name-is-require" type="hidden" value="<liferay-ui:message key="employee-name-is-require"/>"/>
+<input class="lt-as-of" type="hidden" value="<liferay-ui:message key="as-of"/>"/>
+<input class="lt-monthly-actual" type="hidden" value="<liferay-ui:message key="monthly-actual"/>"/>
 
 <!-- CDS Result -->
 <input class="lt-import-cds-result" type="hidden" value="<liferay-ui:message key="import-cds-result"/>"/>
@@ -93,3 +94,11 @@
 <input class="lt-do-you-really-want-to-delete" type="hidden" value="<liferay-ui:message key="do-you-really-want-to-delete"/>"/>
 <input class="lt-attach-file-successfully" type="hidden" value="<liferay-ui:message key="attach-file-successfully"/>"/>
 <input class="lt-import-cds-result-successfully" type="hidden" value="<liferay-ui:message key="import-cds-result-successfully"/>"/>
+
+<!-- Appraisal Data -->
+<input class="lt-file-deleted" type="hidden" value="<liferay-ui:message key="file-deleted"/>"/>
+<input class="lt-format-error" type="hidden" value="<liferay-ui:message key="format-error"/>"/>
+<input class="lt-import-cds-result-successfully" type="hidden" value="<liferay-ui:message key="import-cds-result-successfully"/>"/>
+
+
+

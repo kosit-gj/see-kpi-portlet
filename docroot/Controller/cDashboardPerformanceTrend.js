@@ -151,7 +151,7 @@
 		accordionHtml += "	<div id='bodyOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headOrg-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"'>";	
 		accordionHtml += "		<div class='panel-body'>";
 		//#Start Body Accordion
-		accordionHtml += "				<div class='span12 graphLTopHeader'>"+data['perspective_name']+" - "+data['item_name']+" (หน่วย : "+data['uom_name']+") "+"<span class='LastUpdateText'>As of: "+data['etl_dttm']+"</spen></div>";		
+		accordionHtml += "				<div class='span12 graphLTopHeader'>"+data['perspective_name']+" - "+data['item_name']+" (หน่วย : "+data['uom_name']+") "+"<span class='LastUpdateText'>"+Liferay.Language.get('as-of')+": "+data['etl_dttm']+"</spen></div>";		
 		//#btn next & previous kpi
 		if(kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val()))-1] !=  undefined && parent == "group1"){
 			accordionHtml += "			<span id='previous' class='arrow' data-previous='"+kpi_id[kpi_id.indexOf(parseInt($("#param_kpi_id").val()))-1]+"'></span>";
@@ -1204,7 +1204,7 @@ var listDashBoardAllKPIFn = function(data){
 	  htmlData1+="<tr>";
 	  htmlData3+="<tr>";
 	   htmlData1+="<td>"+indexEntry['perspective']+"</td>";//etl_dttm
-	   htmlData1+="<td>"+indexEntry['item']+"<br><span class='LastUpdateText'>As of: "+indexEntry['etl_dttm']+"</span></td>";
+	   htmlData1+="<td>"+indexEntry['item']+"<br><span class='LastUpdateText'>"+Liferay.Language.get('as-of')+": "+indexEntry['etl_dttm']+"</span></td>";
 	   htmlData1+="<td>"+indexEntry['uom']+"</td>";
 	   
 	   //loop here..

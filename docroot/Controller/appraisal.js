@@ -140,9 +140,9 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 	htmlTemplateQuality+="<div class='titlePanel'>"+structureName+"</div>";
 		if(data['no_weight']==0){ // has weight;
 			if(data['result_type']==1){
-				htmlTemplateQuality+="<div class='totalWeight'>Total Weight "+data['total_weight_percent']+"%</div>";
+				htmlTemplateQuality+="<div class='totalWeight'>"+$(".lt-total-weight").val()+" "+data['total_weight_percent']+"%</div>";
 			}else{
-				htmlTemplateQuality+="<div class='totalWeight'>Total Score "+data['total_weight']+"</div>";
+				htmlTemplateQuality+="<div class='totalWeight'>"+$(".lt-total-score").val()+" "+data['total_weight']+"</div>";
 			}
 
 		}
@@ -184,7 +184,7 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 					item_result_id_array.push(indexEntry['item_result_id']);
 
 					if(indexEntry['formula_desc'] != null || indexEntry['formula_desc'] != ""){
-						info_item="<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>KPI Name : </strong>"+indexEntry['item_name']+"' info-data='"+indexEntry['formula_desc']+"'>i</span>";
+						info_item="<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>"+$(".lt-kpi-name").val()+" : </strong>"+indexEntry['item_name']+"' info-data='"+indexEntry['formula_desc']+"'>i</span>";
 					}else{info_item ="";console.log("no");}
 					//has weight
 //						if(data['no_weight']==0){
@@ -1757,7 +1757,7 @@ var listPhaseFn = function(data){
 
 			htmlTR+="<td style='text-align:center;'>";
 
-			htmlTR+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear edit_phase' id=edit_phase-"+indexEntry['phase_id']+" data-target='' data-toggle='modal'&gt;"+$(".lt-edit").vla()+"&lt;/button&gt;&nbsp;&lt;button id=del_phase-"+indexEntry['phase_id']+" class='btn btn-danger btn-small btn-gear phaseDel'&gt;"+$(".lt-delete").val()+"&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+			htmlTR+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear edit_phase' id=edit_phase-"+indexEntry['phase_id']+" data-target='' data-toggle='modal'&gt;"+$(".lt-edit").val()+"&lt;/button&gt;&nbsp;&lt;button id=del_phase-"+indexEntry['phase_id']+" class='btn btn-danger btn-small btn-gear phaseDel'&gt;"+$(".lt-delete").val()+"&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
 
 			htmlTR+="</td>";
 		htmlTR+="</tr>";
