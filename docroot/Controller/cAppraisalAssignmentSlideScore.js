@@ -487,7 +487,7 @@ var deleteFn = function(id) {
 	  success:function(data){ 
 		if(data['status']==200){
 			
-			   callFlashSlide("Delete Successfully.");
+			   callFlashSlide($(".lt-delete-successfully").val());
 			   getDataFn($("#pageNumber").val(),$("#rpp").val());
 			   $("#confrimModal").modal('hide');
 			   
@@ -1285,7 +1285,7 @@ var actionAssignmentFn = function(param){
 				   
 				   
 				   if(param !="saveAndAnother"){
-					   callFlashSlide("Insert Successfully.");
+					   callFlashSlide($(".lt-insert-successfully").val());
 					   getDataFn($("#pageNumber").val(),$("#rpp").val());
 					   $("#ModalAssignment").modal('hide');
 					   $("#action").val("add");		 	    
