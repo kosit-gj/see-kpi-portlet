@@ -1,12 +1,16 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
 <%@ page import="javax.portlet.*"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
+
+<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
+
 <%
 /*
 PortletSession portletSession1 = renderRequest.getPortletSession();
@@ -18,7 +22,7 @@ String password=PortalUtil.getUser(request).getPassword();
 
 String username = themeDisplay.getUser().getScreenName();
 String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWORD);
-//out.print(username);
+String currentLocale = themeDisplay.getLanguageId();
 
 String param_link = PortalUtil.getOriginalServletRequest(request).getParameter("param_link");
 String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getParameter("param_item_result_id");
@@ -634,6 +638,7 @@ background-color:#71cccc !important;
 
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
+<input type="hidden" id="user_locale" name="user_locale" value="<%=currentLocale%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
 <input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
 
@@ -659,7 +664,7 @@ background-color:#71cccc !important;
           <div class="span12">
             <div class="ibox float-e-margins">
               <div class="ibox-title">
-                <div class='titlePanel'>Advance Search</div>
+                <div class='titlePanel'><liferay-ui:message key="advanced-search"/></div>
               </div>
 
               <div class="ibox-content breadcrumbs2">
@@ -667,43 +672,43 @@ background-color:#71cccc !important;
                 <div class="row-fluid" id='advanceSearchAppraisal'>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select data-toggle="tooltip" title="" data-original-title="Year" class="input form-control input-sm span12" id="AppraisalYear" name="AppraisalYear">
+                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="year"/>" class="input form-control input-sm span12" id="AppraisalYear" name="AppraisalYear">
                     </select>
                   </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select id="appraisalType" name="appraisalType" data-toggle="tooltip" title="" data-original-title="Entity Type " class="input form-control input-sm span12">
+                    <select id="appraisalType" name="appraisalType" data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="entity-type"/>" class="input form-control input-sm span12">
                     </select>
                   </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select id="AppraisalEmpLevel" name="AppraisalEmpLevel" data-toggle="tooltip" title="" data-original-title="Employee Level" class="input form-control input-sm span12">
+                    <select id="AppraisalEmpLevel" name="AppraisalEmpLevel" data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="employee-level"/>" class="input form-control input-sm span12">
                       <option>All Level</option>
                     </select>
                   </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip" title="" data-original-title="Organization Level" class="input form-control input-sm span12">
+                    <select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="organization-level"/>" class="input form-control input-sm span12">
                       <option>All Level</option>
                     </select>
                   </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select data-toggle="tooltip" title="" multiple="multiple" data-original-title="organization" class="input form-control input-sm span12" id="organization" name="organization">
+                    <select data-toggle="tooltip" title="<liferay-ui:message key="organization"/>" multiple="multiple" data-original-title="<liferay-ui:message key="organization"/>" class="input form-control input-sm span12" id="organization" name="organization">
                     </select>
                   </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <input data-toggle="tooltip" title="" data-original-title="Employee Name" class="form-control input-sm searchAdvanceText span12" placeholder="Employee Name" type="text" id="EmpName" name="EmpName" />
+                    <input data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="employee-name"/>" class="form-control input-sm searchAdvanceText span12" placeholder="<liferay-ui:message key="employee-name"/>" type="text" id="EmpName" name="EmpName" />
                     <input class="form-control input-sm" id="EmpName_id" name="EmpName_id" value="" type="hidden">
                   </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <input data-toggle="tooltip" title="" data-original-title="Position" class="form-control input-sm searchAdvanceText span12" placeholder="Position" type="text" id="Position" name="Position" />
+                    <input data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="position"/>" class="form-control input-sm searchAdvanceText span12" placeholder="<liferay-ui:message key="position"/>" type="text" id="Position" name="Position" />
                     <input class="form-control input-sm" id="Position_id" name="Position_id" value="" type="hidden">
                   </div>
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-					<select name="output_type" id="output_type" class="input form-control input-sm span12""title="" data-toggle="tooltip" style="cursor: pointer;"data-original-title="Output Type">
+					<select name="output_type" id="output_type" class="input form-control input-sm span12""title="" data-toggle="tooltip" style="cursor: pointer;"data-original-title="<liferay-ui:message key="output-type"/>">
 							<option value="pdf">PDF</option>
 							<option value="xlsx">Excel</option>
 					</select>
@@ -711,7 +716,7 @@ background-color:#71cccc !important;
                   
                   <div class="form-group span3 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
                     <button type="button" class="btn btn-info input-sm" name="btnexport" id="btnExport">
-                      <i class="icon-download-alt"></i>&nbsp;Export
+                      <i class="icon-download-alt"></i>&nbsp;<liferay-ui:message key="export"/>
                     </button> &nbsp;
                   </div>
 
@@ -727,7 +732,7 @@ background-color:#71cccc !important;
   </div>
   
   <iframe id="iFrame_report" frameborder="0" style="width :100%;height: 500px;">
-  			<p>Your browser does not support iframes.</p>
+  			<p><liferay-ui:message key="your-browser-does-not-support-iframes"/></p>
 		</iframe>
 </body>
 
