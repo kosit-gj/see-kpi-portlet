@@ -182,14 +182,16 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 					$.each(data['items'],function(index,indexEntry){
 
 					item_result_id_array.push(indexEntry['item_result_id']);
-
-					if(indexEntry['formula_desc'] != null || indexEntry['formula_desc'] != ""){
+					
+					/*if(indexEntry['formula_desc'] != null || indexEntry['formula_desc'] != ""){*/
+					if(!(indexEntry['formula_desc'] == null || indexEntry['formula_desc'] == undefined || indexEntry['formula_desc'] == "" || indexEntry['formula_desc'].length == 0)) {
 						info_item="<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>"+$(".lt-kpi-name").val()+" : </strong>"+indexEntry['item_name']+"' info-data='"+indexEntry['formula_desc']+"'>i</span>";
-					}else{info_item ="";console.log("no");}
+					}else{
+						info_item ="";
+					}
 					//has weight
 //						if(data['no_weight']==0){
 							htmlTemplateQuality+="<tr>";
-								console.log(indexEntry['formula_desc']);
 								htmlTemplateQuality+="<td class=''>"+indexEntry['item_name']+"  "+info_item+"</td>";
 								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\""+hintHtml+"\">"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 
