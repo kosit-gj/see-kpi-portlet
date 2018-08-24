@@ -23,7 +23,7 @@ var getDataFn = function() {
 	
 	if (organization==''){
 		 $("body").mLoading('hide'); //Loading
-		callFlashSlide("Organization is Require !");
+		callFlashSlide(Liferay.Language.get("organization-is-require"));
 		return false;
 	}
 	  
@@ -50,9 +50,14 @@ var getDataFn = function() {
 			  };
 	}
 	
+	//-- set report lacale name --//
+	var currentLocale = $("#user_locale").val();
+	if(typeof currentLocale !== 'undefined'){
+		template_name = template_name+"_"+currentLocale;
+	}
+	
 	  var data = JSON.stringify(parameter);
-	  var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name="+template_name+"&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
-//	 	var url_report_jasper = "http://localhost/see_api/public/generate?template_name=report_kpis_org&template_format=pdf&used_connection=1&inline=1&data={%22param_period%22:%221%22,%22param_org%22:%22895%22}";
+	  var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name="+template_name+"&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data+"&subreport_bundle=1";
 		
 	 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 		 window.open(url_report_jasper,"_blank");

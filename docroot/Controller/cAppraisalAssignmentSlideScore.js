@@ -487,7 +487,7 @@ var deleteFn = function(id) {
 	  success:function(data){ 
 		if(data['status']==200){
 			
-			   callFlashSlide("Delete Successfully.");
+			   callFlashSlide($(".lt-delete-successfully").val());
 			   getDataFn($("#pageNumber").val(),$("#rpp").val());
 			   $("#confrimModal").modal('hide');
 			   
@@ -1307,7 +1307,7 @@ var actionAssignmentFn = function(param){
 				   
 				   
 				   if(param !="saveAndAnother"){
-					   callFlashSlide("Insert Successfully.");
+					   callFlashSlide($(".lt-insert-successfully").val());
 					   getDataFn($("#pageNumber").val(),$("#rpp").val());
 					   $("#ModalAssignment").modal('hide');
 					   $("#action").val("add");		 	    
@@ -2094,7 +2094,7 @@ var assignTemplateDeductFn = function(structureName,data){
 		htmlTemplateDeduct+="<thead>";
 			htmlTemplateDeduct+="<tr>";
 				htmlTemplateDeduct+="<th style=\"width:3%\"><b>"+$(".lt-select").val()+"</b></th>";
-				htmlTemplateDeduct+="<th style=\"width:52%\"><b>"+$(".lt-appraisal-check-weigth-over-item-name").val()+"</b></th>";
+				htmlTemplateDeduct+="<th style=\"width:52%\"><b>"+$(".lt-appraisal-item-name").val()+"</b></th>";
 				htmlTemplateDeduct+="<th style=\"width:15%; text-align:center;\"><b>"+$(".lt-max-value").val()+"</b></th>";
 				htmlTemplateDeduct+="<th style=\"width:15%; text-align:center;\"><b>"+$(".lt-deduct-score").val()+"/"+$(".lt-unit").val()+"</b></th>";
 				if(data['is_value_get_zero']== 1) {
@@ -2430,7 +2430,7 @@ var calculationGrandTotalFn = function(id){
 	var globalStructure_id=globalDataId[2];
 	//Start Default weight form quantity is 0%
 	$("#weigth_total_quantity_percentage-"+globalStructure_id)
-	.html("Cannot Assignment Because Weight% not equal to "+parseFloat($("#weigth_total_quantity_percentage_target-"+globalStructure_id).text()).toFixed(2)+"% [0%]")
+	.html($(".lt-cannot-assignment-because-weight-percent-not-equal-to").val()+" "+parseFloat($("#weigth_total_quantity_percentage_target-"+globalStructure_id).text()).toFixed(2)+"% [0%]")
 	.css({"color":"#FF0000"}).
 	addClass("weightIsOver");
 	//End Default weight form quantity is 0%
@@ -2489,7 +2489,7 @@ var calculationGrandTotalFn = function(id){
 					if(totalWeigthQuantity != parseFloat($("#weigth_total_quantity_percentage_target-"+structure_id).text())){
 						
 						$("#weigth_total_quantity_percentage-"+structure_id)
-						.html("Cannot Assignment Because Weight% not equal to "+parseFloat($("#weigth_total_quantity_percentage_target-"+structure_id).text()).toFixed(2)+"% ["+addCommas(parseFloat(totalWeigthQuantity).toFixed(2))+"%]")
+						.html($(".lt-cannot-assignment-because-weight-percent-not-equal-to").val()+" "+parseFloat($("#weigth_total_quantity_percentage_target-"+structure_id).text()).toFixed(2)+"% ["+addCommas(parseFloat(totalWeigthQuantity).toFixed(2))+"%]")
 						.css({"color":"#FF0000"}).
 						addClass("weightIsOver");
 						
@@ -2544,7 +2544,7 @@ var calculationGrandTotalFn = function(id){
 						if(total_weigth_quality != parseFloat($("#weigth_total_quality_percentage_target-"+structure_id).text())){
 							
 							$("#weigth_total_quality_percentage-"+structure_id)
-							.html("Cannot Assignment Because Weight% not equal to "+parseFloat($("#weigth_total_quality_percentage_target-"+structure_id).text())+"% ["+addCommas(parseFloat(total_weigth_quality).toFixed(2))+"%]")
+							.html($(".lt-cannot-assignment-because-weight-percent-not-equal-to").val()+" "+parseFloat($("#weigth_total_quality_percentage_target-"+structure_id).text())+"% ["+addCommas(parseFloat(total_weigth_quality).toFixed(2))+"%]")
 							.css({"color":"#FF0000"}).
 							addClass("weightIsOver");
 							

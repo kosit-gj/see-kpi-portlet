@@ -1129,6 +1129,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Usage Log</title>
 			<short-title>Usage Log</short-title>
@@ -1553,6 +1554,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Status Report</title>
 			<short-title>Status Report</short-title>
@@ -1588,6 +1590,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>KPI Summary</title>
 			<short-title>KPI Summary</short-title>
@@ -1623,6 +1626,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Performance Form</title>
 			<short-title>Performance Form</short-title>
@@ -1658,6 +1662,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Appraisal Summary</title>
 			<short-title>Appraisal Summary</short-title>
@@ -1728,6 +1733,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Benefit Summary Report</title>
 			<short-title>Benefit Summary Report</short-title>

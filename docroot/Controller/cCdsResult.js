@@ -243,7 +243,7 @@ var listCdsResultFn = function (data) {
 					    	 
 						     if(data['status']==200){
 						    	 
-						       callFlashSlide("Delete Successfully.");
+						       callFlashSlide($(".lt-delete-successfully").val());
 						       getCdsResultDataFn($("#pageCdsNumber").val(),$("#rppCds").val()); 
 						       $("#confrimModalCdsResult").modal('hide');
 						       
@@ -1016,7 +1016,7 @@ $(document).ready(function() {
 			error: function(jqXHR, textStatus, errorThrown)
 			{
 				// Handle errors here
-				callFlashSlide('Format Error : ' + textStatus);
+				callFlashSlide($(".lt-format-error").val()+' : ' + textStatus);
 				// STOP LOADING SPINNER
 			}
 		});
@@ -1050,7 +1050,7 @@ $(document).ready(function() {
      });
 
      drEvent.on('dropify.afterClear', function(event, element){
-         alert('File deleted');
+         alert($(".lt-file-deleted").val());
      });
 
      drEvent.on('dropify.errors', function(event, element){
