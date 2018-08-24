@@ -243,7 +243,7 @@ var listCdsResultFn = function (data) {
 					    	 
 						     if(data['status']==200){
 						    	 
-						       callFlashSlide("Delete Successfully.");
+						       callFlashSlide($(".lt-delete-successfully").val());
 						       getCdsResultDataFn($("#pageCdsNumber").val(),$("#rppCds").val()); 
 						       $("#confrimModalCdsResult").modal('hide');
 						       
