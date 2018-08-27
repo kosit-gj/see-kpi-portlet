@@ -621,11 +621,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 
 
 						htmlTemplateQuantity+="	<td style=\"text-align:center; display: flex; justify-content: space-between;\">";
-<<<<<<< HEAD
-						htmlTemplateQuantity+=" <span>&nbsp;&nbsp;&nbsp;&nbsp;</span><i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"   &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear reason' id='reason-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;"+$(".lt-reason").val()+"&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;"+$(".lt-gantt-chart").val()+"&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;"+$(".lt-phase").val()+"&lt;/button&gt; &lt;button style='width:100%;' id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-success btn-small btn-gear action_plan'&gt;"+$(".lt-action-plan").val()+"&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;"+$(".lt-attach-files").val()+"&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>"+paperclip;
-=======
 						htmlTemplateQuantity+=" <span>&nbsp;&nbsp;&nbsp;&nbsp;</span><i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"   &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear reason' id='reason-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Comment&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Gantt Chart&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt; &lt;button style='width:100%;' id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;Attach File&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>"+paperclip;
->>>>>>> refs/remotes/origin/lenso/develop
 						htmlTemplateQuantity+="	</td>";
 
 					htmlTemplateQuantity+="</tr>";
@@ -3849,11 +3845,7 @@ $(document).ready(function() {
 				//console.log(data);
 				if(data['status']==200 && data['data'].length>0){
 					findOneFn($("#emp_result_id").val());
-<<<<<<< HEAD
 					callFlashSlideInModal($(".lt-upload-successfully").val(),".information");
-=======
-					callFlashSlideInModal("Upload Successfully.",".information");
->>>>>>> refs/remotes/origin/lenso/develop
 					$('#attach_files_attachment').val("");
 					$(".dropify-clear").click();
 
