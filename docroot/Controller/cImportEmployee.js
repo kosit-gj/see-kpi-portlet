@@ -339,15 +339,48 @@ var listImportEmployeeFn = function(data) {
 					 dataType:"json",
 					 async:false,
 					 headers:{Authorization:"Bearer "+tokenID.token},
-				     success:function(data){    
+				     success:function(data){
 				    	 
-					     if(data['status']==200){
+				    	 if(data['status']==200){
+				    		 
+				    		 // Delete user on Liferay //
+					    	 if(data["liferay_user_id"] != null){
+					    		 $.ajax({
+					 				url: lifeRayApiUrl+"/api/jsonws/user/delete-user",
+					 				type : "POST",
+					 				dataType:"JSON",
+					 				async:false,
+					 				cache: false,
+					 				data:{
+					 					"userId" : data["liferay_user_id"]
+					 				},
+					 				beforeSend:function(){
+					 					$("body").mLoading('hide');	
+					 				},
+					 				success:function(dataImp){
+					 					var dataException = dataImp.exception;
+					 					if(dataException != null){
+					 						callFlashSlide(dataException+"");
+					 					} else {
+					 						callFlashSlide("Delete Successfully.");
+					 					}
+					 				},
+					 				error: function (jqXHR, textStatus, errorThrown) {
+					 	                  if (jqXHR.status == 500) {
+					 	                	 callFlashSlide('Internal error: ' + jqXHR.responseText);
+					 	                  } else {
+					 	                	 callFlashSlide('Unexpected error.');
+					 	                  }
+					 	              }
+					 			});					    		 
+					    	 } else {
+					    		 callFlashSlide("Delete Successfully, But not found user in liferay server.");
+					    	 }
 					    	 
-					       callFlashSlide("Delete Successfully.");
-					       getDataFn($("#pageNumber").val(),$("#rpp").val());
-					       clearFn();
-					       $("#confrimModal").modal('hide');
-					       
+					    	 getDataFn($("#pageNumber").val(),$("#rpp").val());
+					    	 clearFn();
+					    	 $("#confrimModal").modal('hide');
+					    	 
 					     }else if (data['status'] == "400"){
 					    	 callFlashSlide(""+data['data']+"");
 					    	 //backToTopFn();
