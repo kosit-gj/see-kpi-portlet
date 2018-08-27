@@ -15,7 +15,7 @@ restfulURL="http://localhost";
 
 /*#######Localhost#######*/
 //var lifeRayApiUrl = "https://tfg-winner.tfg.co.th";
-var lifeRayApiUrl = "http://localhost";
+var lifeRayApiUrl = "http://localhost:8080";
 
 /*#######Poroduction#######*/
 //restfulURL="http://172.16.11.109";
