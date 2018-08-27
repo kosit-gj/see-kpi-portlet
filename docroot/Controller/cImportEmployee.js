@@ -352,7 +352,8 @@ var listImportEmployeeFn = function(data) {
 					 				async:false,
 					 				cache: false,
 					 				data:{
-					 					"userId" : data["liferay_user_id"]
+					 					"userId" : data["liferay_user_id"],
+										"p_auth" : $("#pAuth").val()
 					 				},
 					 				beforeSend:function(){
 					 					$("body").mLoading('hide');	
