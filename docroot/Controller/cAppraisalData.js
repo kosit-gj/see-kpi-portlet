@@ -134,7 +134,7 @@ var dropDownListPeriod = function(){
 	var html="";
 	
 	
-	html+="<select id=\"period\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Period\" name=\"period\">";
+	html+="<select id=\"period\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\""+$(".lt-period").val()+"\" name=\"period\">";
 	//html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownPeriod ,
@@ -163,7 +163,7 @@ var dropDownListYear = function(){
 	var html="";
 	
 	
-	html+="<select id=\"year\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Year\" name=\"year\">";
+	html+="<select id=\"year\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\""+$(".lt-year").val()+"\" name=\"year\">";
 	//html+="<option  selected value=''>All</option>";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownYear ,
@@ -257,7 +257,7 @@ var dropDownListEmpLevelToOrgFn = function(){
 
 var dropDownListAppraisalType = function(){
 	var html="";
-	html+="<select data-placement='top' id=\"app_type\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\"Entity Type\" name=\"app_type\">";
+	html+="<select data-placement='top' id=\"app_type\" class=\"input span12 m-b-n\" data-toggle=\"tooltip\" title=\""+$(".lt-entity-type").val()+"\" name=\"app_type\">";
 	$.ajax ({
 		url:restfulURL+restfulPathDropDownAppraisalType,
 		type:"get" ,
@@ -338,9 +338,9 @@ var listErrorFn =function(data){
 	$.each(data,function(index,indexEntry){	
 		if(data[index]['employee_code']!= undefined || data[index]['employee_code']==null){
 			if(data[index]['employee_code']== null){//The employee code field is null
-				errorData+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Employee Code : null <i class='fa fa-level-down'></i><br>";
+				errorData+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+$(".lt-employee-code").val()+" : null <i class='fa fa-level-down'></i><br>";
 			}else{
-				errorData+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Employee Code : "+data[index]['employee_code']+" <i class='fa fa-level-down'></i><br>";}
+				errorData+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+$(".lt-employee-code").val()+" : "+data[index]['employee_code']+" <i class='fa fa-level-down'></i><br>";}
 		}
 		if(typeof data[index]['errors'] != 'object'){
 			errorData+="<font color='red'>*</font> "+data[index]['errors']+"<br>";
@@ -722,7 +722,7 @@ $(document).ready(function() {
 				//console.log(data);
 				if(data['status']==200 && data['errors'].length==0){
 							
-					callFlashSlide("Import CDS Result Successfully");
+					callFlashSlide($(".lt-import-cds-result-successfully").val());
 					getDataFn($(".pagination .active").attr( "data-lp" ),$("#rpp").val());
 					$('#file').val("");
 					$("body").mLoading('hide');
@@ -738,7 +738,7 @@ $(document).ready(function() {
 			error: function(jqXHR, textStatus, errorThrown)
 			{
 				// Handle errors here
-				callFlashSlide('Format Error : ' + textStatus);
+				callFlashSlide($(".lt-format-error").val()+' : ' + textStatus);
 				// STOP LOADING SPINNER
 			}
 		});
@@ -769,11 +769,11 @@ $(document).ready(function() {
      var drEvent = $('#input-file-events').dropify();
 
      drEvent.on('dropify.beforeClear', function(event, element){
-         return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+         return confirm($(".lt-do-you-really-want-to-delete").val()+" \"" + element.file.name + "\" ?");
      });
 
      drEvent.on('dropify.afterClear', function(event, element){
-         alert('File deleted');
+         alert($(".lt-file-deleted").val());
      });
 
      drEvent.on('dropify.errors', function(event, element){

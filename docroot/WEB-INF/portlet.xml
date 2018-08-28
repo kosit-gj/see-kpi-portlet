@@ -1,6 +1,7 @@
-<?xml version="1.0"?>
+<?xml version="1.0"?> 
   
 <portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0">
+	
 	<portlet>
 		<portlet-name>see-kpi</portlet-name>
 		<display-name>See Kpi</display-name>
@@ -31,8 +32,7 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
-	
-	
+		
 	
 	<portlet>
 		<portlet-name>appraisal</portlet-name>
@@ -47,6 +47,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Appraisal</title>
 			<short-title>Appraisal</short-title>
@@ -65,6 +66,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>appraisal-item</portlet-name>
 		<display-name>Appraisal Item</display-name>
@@ -96,6 +99,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet> 
 		<portlet-name>appraisal-assignment</portlet-name>
 		<display-name>Appraisal Assignment</display-name>
@@ -197,6 +202,7 @@
 		</security-role-ref>
 	</portlet>
 	
+	
 	<portlet>
 		<portlet-name>import-employee</portlet-name>
 		<display-name>Import Employee</display-name>
@@ -230,6 +236,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>cds-result</portlet-name>
 		<display-name>CDS Result</display-name>
@@ -245,6 +253,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>CDS Result</title>
 			<short-title>Cds Result</short-title>
@@ -263,6 +272,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>appraisal-data</portlet-name>
 		<display-name>Appraisal Data</display-name>
@@ -278,6 +289,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Appraisal Data</title>
 			<short-title>Appraisal Data</short-title>
@@ -331,6 +343,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>appraisal-level</portlet-name>
 		<display-name>Appraisal Level</display-name>
@@ -364,6 +378,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>appraisal-grade</portlet-name>
 		<display-name>Appraisal Grade</display-name>
@@ -397,6 +413,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>appraisal-period</portlet-name>
 		<display-name>Appraisal Period</display-name>
@@ -430,6 +448,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>System-Configurations</portlet-name>
 		<display-name>System Configurations</display-name>
@@ -463,6 +483,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>Perspective</portlet-name>
 		<display-name>Perspective</display-name>
@@ -496,6 +518,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>UOM</portlet-name>
 		<display-name>UOM</display-name>
@@ -529,6 +553,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>Appraisal-Structure</portlet-name>
 		<display-name>Appraisal Structure</display-name>
@@ -562,6 +588,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>apraisal-item-ifame</portlet-name>
 		<display-name>Apraisal Item Ifame</display-name>
@@ -631,6 +659,7 @@
 		</security-role-ref>
 	</portlet>
 	
+	
 	<portlet>
 		<portlet-name>apprial-ifame</portlet-name>
 		<display-name>Apprial Ifame</display-name>
@@ -664,6 +693,7 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	  
 	  
 	 <portlet>
 		<portlet-name>dashboards</portlet-name>
@@ -699,6 +729,7 @@
 		</security-role-ref>
 	</portlet>
 	
+	
 	<portlet>
 		<portlet-name>calculate-bonus-and-salary</portlet-name>
 		<display-name>Calculate Bonus and Salary</display-name>
@@ -732,6 +763,7 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
 	
 	<portlet>
 		<portlet-name>Dashboard-Employee</portlet-name>
@@ -802,6 +834,7 @@
 		</security-role-ref>
 	</portlet>
 	
+	
 	<portlet>
 		<portlet-name>appraisal-organization</portlet-name>
 		<display-name>Appraisal Organization</display-name>
@@ -835,6 +868,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>appraisal-position</portlet-name>
 		<display-name>Appraisal Position</display-name>
@@ -868,6 +903,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>kpi-type</portlet-name>
 		<display-name>Kpi Type</display-name>
@@ -901,6 +938,7 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
 
 	<portlet>
 		<portlet-name>assigment-slide-score</portlet-name>
@@ -920,6 +958,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Appraisal Assignment</title>
 			<short-title>Appraisal Assignment</short-title>
@@ -938,6 +977,7 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
 	
 	<portlet>
 		<portlet-name>result-thershold</portlet-name>
@@ -972,6 +1012,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>action-plan</portlet-name>
 		<display-name>Action Plan</display-name>
@@ -1003,6 +1045,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>dashbaord-performance-trend</portlet-name>
 		<display-name>Dashboard Performance Trend</display-name>
@@ -1016,6 +1060,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Dashboard Performance Trend</title>
 			<short-title>Dashboard Performance Trend</short-title>
@@ -1034,6 +1079,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>all-kpi-dashboard</portlet-name>
 		<display-name>All Kpi Dashboard</display-name>
@@ -1066,6 +1113,7 @@
 		</security-role-ref>
 	</portlet>
 	
+	
 	<portlet>
 		<portlet-name>usage-log</portlet-name>
 		<display-name>Usage Log</display-name>
@@ -1081,6 +1129,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Usage Log</title>
 			<short-title>Usage Log</short-title>
@@ -1134,8 +1183,9 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
-
 		<portlet-name>dashboard-branch-performance</portlet-name>
 		<display-name>Dashboard Branch Performance</display-name>
 		<portlet-class>
@@ -1150,6 +1200,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Dashboard Branch Performance</title>
 			<short-title>Dashboard Branch Performance</short-title>
@@ -1186,6 +1237,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Dashboard Overall Performance</title>
 			<short-title>Dashboard Overall Performance</short-title>
@@ -1204,6 +1256,7 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+		
 		
 	<portlet>
 		<portlet-name>axisMapping</portlet-name>
@@ -1238,6 +1291,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>appraisal-report</portlet-name>
 		<display-name>Appraisal Report</display-name>
@@ -1271,6 +1326,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>import-assignment</portlet-name>
 		<display-name>Import Assignment</display-name>
@@ -1305,6 +1362,7 @@
 		</security-role-ref>
 	</portlet>
 	
+	
 	<portlet>
 		<portlet-name>benchmark-data</portlet-name>
 		<display-name>Benchmark Data</display-name>
@@ -1338,6 +1396,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>benchmark-chart</portlet-name>
 		<display-name>Benchmark Chart</display-name>
@@ -1371,6 +1431,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>import-appraisal-item</portlet-name>
 		<display-name>Import Appraisal Item</display-name>
@@ -1404,6 +1466,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>email-link-assignment</portlet-name>
 		<display-name>Email Link Assignment</display-name>
@@ -1419,6 +1483,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Email Link Assignment</title>
 			<short-title>Email Link Assignment</short-title>
@@ -1437,6 +1502,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>email-link-appraisal</portlet-name>
 		<display-name>Email Link Appraisal</display-name>
@@ -1470,6 +1537,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>status-report</portlet-name>
 		<display-name>Status Report</display-name>
@@ -1485,6 +1554,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Status Report</title>
 			<short-title>Status Report</short-title>
@@ -1503,6 +1573,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>report-KPIs</portlet-name>
 		<display-name>KPI Summary</display-name>
@@ -1518,6 +1590,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>KPI Summary</title>
 			<short-title>KPI Summary</short-title>
@@ -1536,6 +1609,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>report-tfg</portlet-name>
 		<display-name>Performance Form</display-name>
@@ -1551,6 +1626,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Performance Form</title>
 			<short-title>Performance Form</short-title>
@@ -1569,6 +1645,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>report-assignment</portlet-name>
 		<display-name>Appraisal Summary</display-name>
@@ -1584,6 +1662,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Appraisal Summary</title>
 			<short-title>Appraisal Summary</short-title>
@@ -1602,6 +1681,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>job-log</portlet-name>
 		<display-name>Job Log</display-name>
@@ -1635,39 +1716,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
-	<portlet>
-		<portlet-name>Report Lenso</portlet-name>
-		<display-name>Report Lenso</display-name>
-		<portlet-class>
-			com.liferay.util.bridges.mvc.MVCPortlet
-		</portlet-class>
-		<init-param>
-			<name>view-template</name>
-			<value>/html/report lenso/view.jsp</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-			<portlet-mode>view</portlet-mode>
-		</supports>
-		<portlet-info>
-			<title>Report KPI with comment</title>
-			<short-title>Report KPI with comment</short-title>
-			<keywords></keywords>
-		</portlet-info>
-		<security-role-ref>
-			<role-name>administrator</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
+	
+	
 	<portlet>
 		<portlet-name>report-summary-grade</portlet-name>
 		<display-name>Report Summary Grade</display-name>
@@ -1683,42 +1733,10 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Benefit Summary Report</title>
 			<short-title>Benefit Summary Report</short-title>
-			<keywords></keywords>
-		</portlet-info>
-		<security-role-ref>
-			<role-name>administrator</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
-		<portlet-name>assignment-log</portlet-name>
-		<display-name>Assignment Log</display-name>
-		<portlet-class>
-			com.liferay.util.bridges.mvc.MVCPortlet
-		</portlet-class>
-		<init-param>
-			<name>view-template</name>
-			<value>/html/assignment-log/view.jsp</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-			<portlet-mode>view</portlet-mode>
-		</supports>
-		<portlet-info>
-			<title>Assignment Logging</title>
-			<short-title>Assignment Logging</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

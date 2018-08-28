@@ -1,16 +1,11 @@
 <?xml version="1.0"?>
 <!DOCTYPE display PUBLIC "-//Liferay//DTD Display 6.2.0//EN" "http://www.liferay.com/dtd/liferay-display_6_2_0.dtd">
 
-<display> 
+<display>
 	<category name="SEE KPI">
-		<!-- 
-			<portlet id="see-kpi" />  
-		-->
 		<portlet id="appraisal"></portlet>
 		<portlet id="appraisal-report"></portlet>
 		<portlet id="appraisal-item"></portlet>
-		<!-- 		<portlet id="appraisal-assignment"></portlet> -->
-
 		<portlet id="database-connection"></portlet>
 		<portlet id="common-data-set"></portlet>
 		<portlet id="threshould"></portlet>
@@ -29,18 +24,10 @@
 		<portlet id="import-employee"></portlet>
 		<portlet id="cds-result"></portlet>
 		<portlet id="appraisal-data"></portlet>
-		<!-- 	<portlet id="apraisal-item-ifame"></portlet>
-			<portlet id="apraisal-assignment-ifame"></portlet>
-			<portlet id="apprial-ifame"></portlet>
-			<portlet id="dashboards"></portlet>
-		-->
 		<portlet id="calculate-bonus-and-salary"></portlet>
-		<!-- 		<portlet id="Dashboard-Employee"></portlet> -->
-		<!-- 		<portlet id="dashboard-Kpi-by-org"></portlet> -->
 		<portlet id="assigment-slide-score"></portlet>
 		<portlet id="action-plan"></portlet>
 		<portlet id="dashbaord-performance-trend"></portlet>
-		<!-- 		<portlet id="all-kpi-dashboard"></portlet> -->
 		<portlet id="usage-log"></portlet>
 		<portlet id="dashboard-subordinate-performance"></portlet>
 		<portlet id="dashboard-branch-performance"></portlet>

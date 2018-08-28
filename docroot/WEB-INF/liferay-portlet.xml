@@ -7,7 +7,7 @@
 		<icon>/icon.png</icon>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
-		<css-class-wrapper>see-kpi-portlet</css-class-wrapper> 
+		<css-class-wrapper>see-kpi-portlet</css-class-wrapper>
 	</portlet>
 
 
@@ -97,7 +97,7 @@
 
 		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-<!-- 		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript> -->
+		<!-- <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript> -->
 		<footer-portlet-javascript>/js/JQueryUI1.11.4/jquery-ui.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.multiselect.js</footer-portlet-javascript>
@@ -1592,7 +1592,7 @@
 	<portlet>
 		<portlet-name>report-KPIs</portlet-name>
 		<icon>/icon.png</icon>
-		
+
 		<!-- include file start -->
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
@@ -1610,7 +1610,7 @@
 		<header-portlet-css>/css/jquery.multiselect.filter.css</header-portlet-css>
 		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-<!-- 		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript> -->
+		<!-- <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript> -->
 		<footer-portlet-javascript>/js/JQueryUI1.11.4/jquery-ui.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/dropify.js</footer-portlet-javascript>
@@ -1626,13 +1626,13 @@
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/report-kpis.js</footer-portlet-javascript>
 		<!-- include file end -->
-		
+
 		<css-class-wrapper>report-kpis-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>report-tfg</portlet-name>
 		<icon>/icon.png</icon>
-		
+
 		<!-- include file start -->
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
@@ -1646,13 +1646,13 @@
 		<header-portlet-css>/css/tywMain.css</header-portlet-css>
 		<header-portlet-css>/css/report-tfg.css</header-portlet-css>
 		<header-portlet-css>/css/dropify.css</header-portlet-css>
-		 
+
 		<header-portlet-css>/css/jquery.multiselect.css</header-portlet-css>
 		<header-portlet-css>/css/jquery.multiselect.filter.css</header-portlet-css>
 
 		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-<!-- 		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript> -->
+		<!-- <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript> -->
 		<footer-portlet-javascript>/js/JQueryUI1.11.4/jquery-ui.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/dropify.js</footer-portlet-javascript>
@@ -1674,7 +1674,7 @@
 	<portlet>
 		<portlet-name>report-assignment</portlet-name>
 		<icon>/icon.png</icon>
-		
+
 		<!-- include file start -->
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
@@ -1688,13 +1688,13 @@
 		<header-portlet-css>/css/tywMain.css</header-portlet-css>
 		<header-portlet-css>/css/report-tfg.css</header-portlet-css>
 		<header-portlet-css>/css/dropify.css</header-portlet-css>
-		
+
 		<header-portlet-css>/css/jquery.multiselect.css</header-portlet-css>
 		<header-portlet-css>/css/jquery.multiselect.filter.css</header-portlet-css>
 
 		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-<!-- 		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript> -->
+		<!-- <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript> -->
 		<footer-portlet-javascript>/js/JQueryUI1.11.4/jquery-ui.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/dropify.js</footer-portlet-javascript>
@@ -1742,7 +1742,7 @@
 	<portlet>
 		<portlet-name>Report Lenso</portlet-name>
 		<icon>/icon.png</icon>
-		
+
 		<!-- include file start -->
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
@@ -1766,7 +1766,7 @@
 		<footer-portlet-javascript>/js/plugins/slimscroll/jquery.slimscroll.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.sparkline.min.js</footer-portlet-javascript>
- 
+
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
 
@@ -1774,13 +1774,13 @@
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/report-lenso.js</footer-portlet-javascript>
 		<!-- include file end -->
-		
+
 		<css-class-wrapper>report lenso-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>report-summary-grade</portlet-name>
 		<icon>/icon.png</icon>
-		
+
 		<!-- include file start -->
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
@@ -1794,13 +1794,13 @@
 		<header-portlet-css>/css/tywMain.css</header-portlet-css>
 		<header-portlet-css>/css/report-tfg.css</header-portlet-css>
 		<header-portlet-css>/css/dropify.css</header-portlet-css>
-		
+
 		<header-portlet-css>/css/jquery.multiselect.css</header-portlet-css>
 		<header-portlet-css>/css/jquery.multiselect.filter.css</header-portlet-css>
 
 		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-<!-- 		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript> -->
+		<!-- <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript> -->
 		<footer-portlet-javascript>/js/JQueryUI1.11.4/jquery-ui.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/dropify.js</footer-portlet-javascript>
@@ -1812,22 +1812,21 @@
 		<footer-portlet-javascript>/js/jquery.multiselect.filter.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
-
 		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/report-summary-grade.js</footer-portlet-javascript>
 		<!-- include file end -->
-		 
+
 		<css-class-wrapper>
 			report-summary-grade-portlet
 		</css-class-wrapper>
-	</portlet> 
+	</portlet>
 	<portlet>
-		<portlet-name>assignment-log</portlet-name> 
+		<portlet-name>assignment-log</portlet-name>
 		<icon>/icon.png</icon>
 		<!-- include file start -->
-		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>  
-		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>  
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
 		<header-portlet-css>/css/plugins/iCheck/custom.css</header-portlet-css>
 		<header-portlet-css>/font-awesome/css/font-awesome.css</header-portlet-css>
 		<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
@@ -1861,27 +1860,27 @@
 	<portlet>
 		<portlet-name>dashboard-performance-comparison</portlet-name>
 		<icon>/icon.png</icon>
-		<!-- include file start -->    
+		<!-- include file start -->
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
 		<header-portlet-css>/css/plugins/iCheck/custom.css</header-portlet-css>
 		<header-portlet-css>/font-awesome/css/font-awesome.css</header-portlet-css>
 		<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
 		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
-		<header-portlet-css>/js/css3-hover-effects/style.css</header-portlet-css>    
-		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>     
-  
-		<header-portlet-css>/css/tywMain.css</header-portlet-css>    
+		<header-portlet-css>/js/css3-hover-effects/style.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
+
+		<header-portlet-css>/css/tywMain.css</header-portlet-css>
 		<header-portlet-css>/css/PerformanceComparisonDashboard.css</header-portlet-css>
-		<header-portlet-css>/css/dropify.css</header-portlet-css>  
-		<header-portlet-css>/css/jquery.barCharts.css</header-portlet-css>  
- 
+		<header-portlet-css>/css/dropify.css</header-portlet-css>
+		<header-portlet-css>/css/jquery.barCharts.css</header-portlet-css>
+
 		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/dropify.js</footer-portlet-javascript>
- 
+
 		<footer-portlet-javascript>/js/plugins/slimscroll/jquery.slimscroll.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.sparkline.min.js</footer-portlet-javascript>
@@ -1897,7 +1896,7 @@
 			/js/fusioncharts/js/fusioncharts.charts.js
 		</footer-portlet-javascript>
 
-		<footer-portlet-javascript>   
+		<footer-portlet-javascript>
 			/js/fusioncharts/js/fusioncharts.widgets.js
 		</footer-portlet-javascript>
 		<footer-portlet-javascript>

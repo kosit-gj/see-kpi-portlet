@@ -24,7 +24,7 @@ var getDataFn = function() {
 	  
 	if (organization==''){
 		 $("body").mLoading('hide'); //Loading
-		callFlashSlide("Organization is Require !");
+		callFlashSlide(Liferay.Language.get("organization-is-require"));
 		return false;
 	}
 	
@@ -50,8 +50,15 @@ var getDataFn = function() {
 			  };
 	}
 	
+	//-- set report lacale name --//
+	var currentLocale = $("#user_locale").val();
+	var template_name = "report-appraisal-summary";
+	if(typeof currentLocale !== 'undefined'){
+		template_name = template_name+"_"+currentLocale;
+	}
+	
 	  var data = JSON.stringify(parameter);
-	  var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name=report-appraisal-summary&token="+tokenID.token+"&template_format=xlsx&used_connection=1&inline=1&data="+data;
+	  var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name="+template_name+"&token="+tokenID.token+"&template_format=xlsx&used_connection=1&inline=1&data="+data;
 			window.open(url_report_jasper,"_blank");
 			$("body").mLoading('hide'); //Loading
 		return false;
@@ -302,7 +309,6 @@ var refreshMultiOrganization = function() {
 	$(".ui-icon-check,.ui-icon-closethick,.ui-icon-circle-close").css({'margin-top':'3px'});
 	$('input[name=multiselect_organization]').css({'margin-bottom':'5px'});
 }
-
 
 
 $(document).ready(function() {

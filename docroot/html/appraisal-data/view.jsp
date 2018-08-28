@@ -1,9 +1,12 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
 <%@ page import="javax.portlet.*"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
+
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
+<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 <%
@@ -341,7 +344,7 @@ plid = layout.getPlid();
 					<div class="">
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<h5>Advance Search</h5>
+								<h5><liferay-ui:message key="advanced-search"/></h5>
 							</div>
 				<div class="ibox-content breadcrumbs2">
 						<div id="drop_down_list_appraisal_type" class="form-group pull-left span3" style="margin-left: 5px; display: none;">
@@ -355,31 +358,31 @@ plid = layout.getPlid();
 							<select class="input span12 m-b-n" ></select>
 						</div>
 						<div class="form-group pull-left span3" style="margin-left: 5px">
-							<select class="input span12 m-b-n" id="app_lv_emp" data-toggle="tooltip" title="EmpLevel"></select>
+							<select class="input span12 m-b-n" id="app_lv_emp" data-toggle="tooltip" title="<liferay-ui:message key="employee-level"/>"></select>
 						</div>
-						<div id="drop_down_list_appraisal_level" class="form-group pull-left span3" style="margin-left: 5px" data-toggle="tooltip" title="OrgLevel">
+						<div id="drop_down_list_appraisal_level" class="form-group pull-left span3" style="margin-left: 5px" data-toggle="tooltip" title="<liferay-ui:message key="organization-level"/>">
 							<select class="input span12 m-b-n" id="app_lv"></select>
 						</div>
 					</div>
 					<div class="row-fluid">
-						<div id="drop_down_list_organization" class="form-group pull-left span3" style="margin-left: 5px; clear: both;" data-toggle="tooltip" title="Organization">
+						<div id="drop_down_list_organization" class="form-group pull-left span3" style="margin-left: 5px; clear: both;" data-toggle="tooltip" title="<liferay-ui:message key="organization"/>">
 							<select data-placement='top' id="org_id" class="input span12 m-b-n" name="org_id"></select>
 						</div>
 						<div class="form-group pull-left span3" id="txtEmpInput" style="margin-left: 5px">
 							<input data-toggle="tooltip" data-placement="top"
-								title="Employee Name" class="span12 m-b-n ui-autocomplete-input"
-								placeholder="Employee Name" id="emp_name" name="emp_name"
+								title="<liferay-ui:message key="employee-name"/>" class="span12 m-b-n ui-autocomplete-input"
+								placeholder="<liferay-ui:message key="employee-name"/>" id="emp_name" name="emp_name"
 								type="text"> <input class="form-control input-sm"
 								id="emp_name_id" name="emp_name_id" value="" type="hidden">
 						</div>
 						<div class="form-group pull-left span3" style="margin-left: 5px">
 							<input data-toggle="tooltip" data-placement="top"
-								title="Position" class="span12 m-b-n ui-autocomplete-input"
-								placeholder="Position" id="position" name="position" type="text">
+								title="<liferay-ui:message key="position"/>" class="span12 m-b-n ui-autocomplete-input"
+								placeholder="<liferay-ui:message key="position"/>" id="position" name="position" type="text">
 							<input class="form-control input-sm" id="position_id"
 								name="position_id" value="" type="hidden">
 						</div>
-						<div id="drop_down_list_structure" class="form-group pull-left span3" style="margin-left: 5px;" data-toggle="tooltip" title="Structure">
+						<div id="drop_down_list_structure" class="form-group pull-left span3" style="margin-left: 5px;" data-toggle="tooltip" title="<liferay-ui:message key="structure"/>">
 							<select data-placement='top' id="structure_id" class="input span12 m-b-n" name="structure_id"></select>
 						</div>
 					</div>
@@ -400,7 +403,7 @@ plid = layout.getPlid();
 							<button id="btn_import" type="button" data-target="#ModalImport"
 								data-toggle="modal" class="btn btn-success btn-sm "
 								style="margin-left: 5px">
-								<i class="fa fa-upload"></i>&nbsp;Import&nbsp;&nbsp;
+								<i class="fa fa-upload"></i>&nbsp;<liferay-ui:message key="import"/>&nbsp;&nbsp;
 							</button>
 						</div>
 						<div class="form-group pull-right m-b-none ">
@@ -408,7 +411,7 @@ plid = layout.getPlid();
 								class="pull-right " style="margin-bottom: 0px; margin-left: 5px">
 								<button id="exportToExcel" class="btn btn-warning btn-sm"
 									type="button">
-									<i class="fa fa-download"></i> Export
+									<i class="fa fa-download"></i><liferay-ui:message key="export"/>
 								</button>
 							</form>
 						</div>
@@ -416,7 +419,8 @@ plid = layout.getPlid();
 							<button type="button" name="btnSearchAdvance"
 								id="btnSearchAdvance" class="btn btn-info input-sm "
 								style="margin-left: 0px">
-								<i class="fa fa-search"></i>&nbsp;Search
+								<i class="fa fa-search"></i>&nbsp;<liferay-ui:message key="search"/>
+								
 							</button>
 						</div>
 						</div>
@@ -434,7 +438,7 @@ plid = layout.getPlid();
 				<div class="row-fluid" id="appraisal_data_list_content">
 					<div class="">
 						<div class="ibox-title">
-							<h5>Appraisal Data List</h5>
+							<h5><liferay-ui:message key="appraisal-data-list"/></h5>
 						</div>
 
 
@@ -462,7 +466,7 @@ plid = layout.getPlid();
 					                                 </select>
 		                                 		
 		                                 		</div>
-												<div class='pagingText'>Results per page</div>
+												<div class='pagingText'><liferay-ui:message key="results-per-page"/></div>
 		                                    
 		                          </div>
 
@@ -486,16 +490,16 @@ plid = layout.getPlid();
 							<div class="table-responsive" style="overflow:auto">
 								<table class="table table-striped " id="tableAppraisalData" style="max-width: none;">
 									<thead>
-										<tr>
+										<tr style="white-space: nowrap;">
 <!-- 											<th style='width: auto'>Period&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th> -->
-											<th style='width: auto'>Structure&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-											<th style='width: auto'>Appraisal&nbsp;Item&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-											<th style='width: auto'>Emp&nbsp;Code&emsp;</th>
-											<th style='width: auto'>Emp&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-											<th style='width: auto'>Level&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-											<th style='width: auto'>Organization&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-											<th style='width: auto'>Position&nbsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-											<th style='width:auto;text-align: right;'>Data&nbsp;Value&emsp;</th>
+											<th style='width: auto'><liferay-ui:message key="structure"/></th>
+											<th style='width: auto'><liferay-ui:message key="appraisal-item-name"/></th>
+											<th style='width: auto'><liferay-ui:message key="emp-code"/></th>
+											<th style='width: auto'><liferay-ui:message key="emp-name"/></th>
+											<th style='width: auto'><liferay-ui:message key="level-name"/></th>
+											<th style='width: auto'><liferay-ui:message key="organization"/></th>
+											<th style='width: auto'><liferay-ui:message key="position-name"/></th>
+											<th style='width:auto;text-align: right;'><liferay-ui:message key="data-value"/></th>
 											
 										</tr>
 									</thead>
@@ -525,7 +529,7 @@ plid = layout.getPlid();
 					                                     <option>100</option>
 					                                 </select> 
 			                                 	</div>
-												<div class='pagingText'>Results per page</div>
+												<div class='pagingText'><liferay-ui:message key="results-per-page"/></div>
 		                        </div>
 
 <!-- 								<div class="span2 object-right paging-text p-t-xs txtCountPaginationBottom">Results -->
@@ -563,10 +567,10 @@ plid = layout.getPlid();
 			<div class="modal-content  bounceInRight">
 				<div class="modal-header">
 					<button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
-						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only">Close</span>
+						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"><liferay-ui:message key="close"/></span>
 					</button>
 					<!-- <i class="fa fa-laptop modal-icon"></i> -->
-					<h4 class="modal-title" id="">Appraisal Data</h4>
+					<h4 class="modal-title" id=""><liferay-ui:message key="appraisal-data"/></h4>
 					<!-- 
                 <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
                  -->
@@ -581,7 +585,7 @@ plid = layout.getPlid();
 					<div class="form-group">
 					<form id="fileAppraisalData">
 						
-							<h4>FILE IMPORT</h4>
+							<h4><liferay-ui:message key="file-import"/></h4>
 							<div class="fileUpload ">
 								<input type="file" id="file" class="dropify" accept=".xls, .xlsx"  /><span></span>
 							</div>
@@ -601,10 +605,10 @@ plid = layout.getPlid();
 					<!-- content end -->
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-success" type="submit" id="importFileMobile" form="fileAppraisalData">Import</button>
+					<button class="btn btn-success" type="submit" id="importFileMobile" form="fileAppraisalData"><liferay-ui:message key="import"/></button>
 <!-- 					<button class="btn btn-success" type="button" id="btnRoldSubmit">Save</button> -->
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
-						type="button">Cancel</button>
+						type="button"><liferay-ui:message key="cancel"/></button>
 						<div class="alert alert-warning information" id="information"
 						style="display: none;height:120px; overflow-y: scroll; position:relative;"></div>
 				</div>
@@ -612,3 +616,8 @@ plid = layout.getPlid();
 		</div>
 	</div>
 	<!-- Modal End  -->
+	
+	
+	
+	<!-- Language Template for js -->
+	<%@ include file="/html/language-js-template/view.jsp" %>

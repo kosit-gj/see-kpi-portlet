@@ -1,9 +1,11 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
-<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
 <%@ page import="javax.portlet.*"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme"%>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys"%>
+
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
+<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
+<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme"%>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 <%
@@ -327,7 +329,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 	<div class="span12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<div class='titlePanel'>Advance Search</div>
+				<div class='titlePanel'><liferay-ui:message key="advanced-search"/></div>
 			</div>
 			<div class="ibox-content breadcrumbs2">
 
@@ -340,7 +342,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 						<select name="year" id="year"
 							class="input form-control input-sm span12" title=""
 							data-toggle="tooltip" style="cursor: pointer;"
-							data-original-title="Year">
+							data-original-title="<liferay-ui:message key="year"/>">
 
 							<option value="1">2017</option>
 
@@ -352,7 +354,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 						<select name="period" id="period"
 							class="input form-control input-sm span12" title=""
 							data-toggle="tooltip" style="cursor: pointer;"
-							data-original-title="Period">
+							data-original-title="<liferay-ui:message key="period"/>">
 
 							<option value=""></option>
 
@@ -365,7 +367,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 						<select name="region" id="region"
 							class="input form-control input-sm span12" title=""
 							data-toggle="tooltip" style="cursor: pointer;"
-							data-original-title="Region">
+							data-original-title="<liferay-ui:message key="region"/>">
 
 							<option value="">ทุกฝ่าย</option>
 							<option value="1">ฝ่ายสาขาภาคเหนือ</option>
@@ -381,7 +383,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 						<select name="district" id="district"
 							class="input form-control input-sm span12" title=""
 							data-toggle="tooltip" style="cursor: pointer;"
-							data-original-title="District">
+							data-original-title="<liferay-ui:message key="district"/>">
 
 							<option value="">ทุกเขต</option>
 							<option value="10">กรุงเทพมหานคร</option>
@@ -393,7 +395,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 						<select name="kpi" id="kpi"
 							class="input form-control input-sm span12" title=""
 							data-toggle="tooltip" style="cursor: pointer;"
-							data-original-title="KPI">
+							data-original-title="<liferay-ui:message key="kpi"/>">
 
 							<option value="">KPI1</option>
 							<option value="">KPI2</option>
@@ -409,7 +411,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 						style="margin-left: 5px; margin-bottom: 3px; text-align: right;">
 						<button type="button" class="btn btn-info input-sm"
 							name="btnSearchAdvance" id="btnSearchAdvance">
-							<i class="fa fa-search"></i>&nbsp;Search
+							<i class="fa fa-search"></i>&nbsp;<liferay-ui:message key="search"/>
 						</button>
 
 					</div>
@@ -524,6 +526,8 @@ This is the <b>Usage Log</b> portlet in View mode.2
 
 
 <div id='embedParamSearch'></div>
+
+
 <!-- 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK3RgqSLy1toc4lkh2JVFQ5ipuRB106vU&callback=initMap" async defer></script>
  -->

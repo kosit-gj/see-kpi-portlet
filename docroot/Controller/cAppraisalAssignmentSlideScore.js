@@ -135,7 +135,7 @@ var setDataToTemplateFn = function(data,actionType){
 	galbalDataTemp['cds_result_org_id'] = notNullTextFn(head['org_id']);
 	galbalDataTemp['cds_result_position_id'] = notNullTextFn(head['position_id']);
 	if($("#embed_appraisal_type_id").val()==2){
-		$("#titlePanelInformation").html("Employee Information");
+		$("#titlePanelInformation").html($(".lt-employee-information").val());
 		
 		$("#employee_code").html(head['emp_code']);
 		$("#section").html(head['section_name']);
@@ -155,7 +155,7 @@ var setDataToTemplateFn = function(data,actionType){
 	}else{
 		$("#empInformation").hide();
 		$("#orgInformation").show();
-		$("#titlePanelInformation").html("Organization Information");
+		$("#titlePanelInformation").html($(".lt-organization-information").val());
 		
 		$("#organizationCodeLabelOrg").html(head['org_code']);
 		$("#organizationNameLabelOrg").html(head['org_name']);
@@ -410,7 +410,7 @@ var findOneFn = function(id,actionType){
 				}
 				
 			}else{
-				callFlashSlide("Data is empty.");
+				callFlashSlide($(".lt-data-is-empty").val());
 				return false;
 			}
 			
@@ -487,7 +487,7 @@ var deleteFn = function(id) {
 	  success:function(data){ 
 		if(data['status']==200){
 			
-			   callFlashSlide("Delete Successfully.");
+			   callFlashSlide($(".lt-delete-successfully").val());
 			   getDataFn($("#pageNumber").val(),$("#rpp").val());
 			   $("#confrimModal").modal('hide');
 			   
@@ -525,7 +525,7 @@ var listDataFn = function(data) {
 	htmlHTML+="<div class=\"ibox-title2\">";
 	if(index!='p0'){
 		htmlHTML+="<div class=\"titlePanel2\">"+indexEntry['appraisal_period_desc']+" ";
-		htmlHTML+="<button "+statusAction+" type=\"button\" class=\"btn btn-primary input-sm\" name=\"btnAction\" id=\"btnAction\"><i class=\"fa fa-sign-in\"></i>&nbsp;Action</button>";
+		htmlHTML+="<button "+statusAction+" type=\"button\" class=\"btn btn-primary input-sm\" name=\"btnAction\" id=\"btnAction\"><i class=\"fa fa-sign-in\"></i>&nbsp;"+$(".lt-action").val()+"</button>";
 		htmlHTML+="</div>";
 	} else {
 		htmlHTML+="<div class=\"titlePanel2\">"+indexEntry['appraisal_period_desc']+" </div> ";
@@ -553,17 +553,17 @@ var listDataFn = function(data) {
 			
 			if($("#embed_appraisal_type_id").val()==2){
 				
-				htmlHTML+=" <th style=\"width:8%\">Status</th>";
-				htmlHTML+=" <th style=\"width:10%\">Emp Code</th>";
-				htmlHTML+=" <th style=\"width:10%\">Emp Name</th>";
-				htmlHTML+=" <th style=\"width:15%\">Organization</th>";
-				htmlHTML+=" <th style=\"width:15%\">Position</th>";
+				htmlHTML+=" <th style=\"width:8%\">"+$(".lt-status").val()+"</th>";
+				htmlHTML+=" <th style=\"width:10%\">"+$(".lt-emp-code").val()+"</th>";
+				htmlHTML+=" <th style=\"width:10%\">"+$(".lt-emp-name").val()+"</th>";
+				htmlHTML+=" <th style=\"width:15%\">"+$(".lt-organization").val()+"</th>";
+				htmlHTML+=" <th style=\"width:15%\">"+$(".lt-position").val()+"</th>";
 							
 			}else if($("#embed_appraisal_type_id").val()==1){
 				
-				htmlHTML+=" <th style=\"width:8%\">Status</th>";
-				htmlHTML+=" <th style=\"width:10%\">Org Code</th>";
-				htmlHTML+=" <th style=\"width:15%\">Organization</th>";
+				htmlHTML+=" <th style=\"width:8%\">"+$(".lt-status").val()+"</th>";
+				htmlHTML+=" <th style=\"width:10%\">"+$(".lt-org-code").val()+"</th>";
+				htmlHTML+=" <th style=\"width:15%\">"+$(".lt-organization").val()+"</th>";
 
 				
 			}
@@ -572,7 +572,7 @@ var listDataFn = function(data) {
 				
 				
 			if(index!='p0'){
-				htmlHTML+=" <th style=\"width:7%; text-align:center;\">Manage</th>";
+				htmlHTML+=" <th style=\"width:7%; text-align:center;\">"+$(".lt-manage").val()+"</th>";
 			}else{
 				htmlHTML+=" <th style=\"width:7%; text-align:center;\"></th>";
 			}
@@ -636,24 +636,24 @@ var listDataFn = function(data) {
 					//itemEntry['status']
 					if(is_hr==1 &&  itemEntry['status']=='Accepted'){
 						//htmlHTML+="  <i title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;View&lt;/button&gt;   &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
-						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;View\"></i>";
+						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;"+$(".lt-view").val()+"\"></i>";
 					}else if(is_hr==1 &&  itemEntry['status']=='Draft'){
 						//htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit\"></i>";
-						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
+						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;"+$(".lt-edit").val()+"&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;"+$(".lt-delete").val()+"&lt;/button&gt;\"></i>";
 					}else if(is_hr==1 &&  itemEntry['status']!='Accepted'){
-						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit\"></i>";
+						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;"+$(".lt-edit").val()+"\"></i>";
 						//htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
 					}else if(is_self_assign==1 &&  itemEntry['status']=='Accepted'){
 						//htmlHTML+="  <i title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;View&lt;/button&gt;   &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
-						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;View\"></i>";
+						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;"+$(".lt-view").val()+"\"></i>";
 					}else if(is_self_assign==1 &&  itemEntry['status']=='Draft'){
 						//htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit\"></i>";
-						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
+						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;"+$(".lt-edit").val()+"&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;"+$(".lt-delete").val()+"&lt;/button&gt;\"></i>";
 					}else if(is_self_assign==1 &&  itemEntry['status']!='Accepted'){
-						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit\"></i>";
+						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;"+$(".lt-edit").val()+"\"></i>";
 						//htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
 					}else if(is_hr==0 || is_self_assign==0){
-						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;View\"></i>";
+						htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;"+$(".lt-view").val()+"\"></i>";
 					}
 					
 				}
@@ -756,7 +756,7 @@ var listDataFn = function(data) {
 				}
 			});
 		if(empldoyees_id.length==0){
-			callFlashSlide("Please choose Employees or Organization for Action.");
+			callFlashSlide($(".lt-please-choose-employees-or-organization-for-action").val());
 			return false;
 		}else{
 //			sessionStorage.setItem('is_coporate_kpi',$("#is_coporate_kpi-"+empldoyees_id[0]).val());
@@ -1285,7 +1285,7 @@ var actionAssignmentFn = function(param){
 				   
 				   
 				   if(param !="saveAndAnother"){
-					   callFlashSlide("Insert Successfully.");
+					   callFlashSlide($(".lt-insert-successfully").val());
 					   getDataFn($("#pageNumber").val(),$("#rpp").val());
 					   $("#ModalAssignment").modal('hide');
 					   $("#action").val("add");		 	    
@@ -2008,18 +2008,18 @@ var assignTemplateQualityFn = function(structureName,data){
 
 	
 	htmlTemplateQuality+="<div class='titlePanel'>"+structureName+"</div>";
-		htmlTemplateQuality+="<div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quality_moblie_percentage-"+data['structure_id']+"'></span><span  class='checkWeigthOver' id='weigth_total_quality_percentage-"+data['structure_id']+"'></span>Total Weight <span id='weigth_total_quality_percentage_target-"+data['structure_id']+"'>"+data['total_weight']+"%<span></div>";
+		htmlTemplateQuality+="<div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quality_moblie_percentage-"+data['structure_id']+"'></span><span  class='checkWeigthOver' id='weigth_total_quality_percentage-"+data['structure_id']+"'></span>"+$(".lt-total-weight").val()+"<span id='weigth_total_quality_percentage_target-"+data['structure_id']+"'>"+data['total_weight']+"%<span></div>";
 		
 	htmlTemplateQuality+="</div>";
 	htmlTemplateQuality+="<div class=\"ibox-content\">";
 	htmlTemplateQuality+="<div class=\"table-responsive scrollbar-inner\">";
 	htmlTemplateQuality+="<table id=\"tableQuality\" style='top: -37px; max-width: none;'  class=\"table table-striped tableQuality fixedHeader\">";
 	htmlTemplateQuality+="<thead>";
-		htmlTemplateQuality+="<tr>";
-			htmlTemplateQuality+="<th style=\"width:3%\"><b>Select</b></th>";
-			htmlTemplateQuality+="<th style=\"width:67%\"><b>Appraisal Item Name</b></th>";
-			htmlTemplateQuality+="<th style=\"width:15%; text-align:center;\"><b>Target </b></th>";
-			htmlTemplateQuality+="<th style=\"width:15%; text-align:center;\"><b>%Weight</b></th>  ";      
+		htmlTemplateQuality+="<tr style='white-space: nowrap;'>";
+			htmlTemplateQuality+="<th style=\"width:3%\"><b>"+$(".lt-select").val()+"</b></th>";
+			htmlTemplateQuality+="<th style=\"width:67%\"><b>"+$(".lt-appraisal-item-name").val()+"</b></th>";
+			htmlTemplateQuality+="<th style=\"width:15%; text-align:center;\"><b>"+$(".lt-target").val()+"</b></th>";
+			htmlTemplateQuality+="<th style=\"width:15%; text-align:center;\"><b>"+$(".lt-percent-weight").val()+"</b></th>  ";      
 			htmlTemplateQuality+="</tr>";
 				htmlTemplateQuality+="</thead>";
 					htmlTemplateQuality+="<tbody id=\"listthreshould\">";
@@ -2061,7 +2061,7 @@ var assignTemplateDeductFn = function(structureName,data){
 	htmlTemplateDeduct+="<div class=\"span12\">";
 	htmlTemplateDeduct+="<div class=\"ibox-title2\">";
 	htmlTemplateDeduct+="<div class='titlePanel'>"+structureName+"</div>";
-	htmlTemplateDeduct+="<div class='totalWeight'><span class='sum_d' style='display:none;' id='weigth_total_deduct_percentage-"+data['structure_id']+"'>"+data['total_weight']+"</span>Total Weight <span class='weigth_total_deduct_percentage_target' id='weigth_total_deduct_percentage_target-"+data['structure_id']+"'>"+data['total_weight']+"%</span></div>";
+	htmlTemplateDeduct+="<div class='totalWeight'><span class='sum_d' style='display:none;' id='weigth_total_deduct_percentage-"+data['structure_id']+"'>"+data['total_weight']+"</span>"+$(".lt-total-weight").val()+"<span class='weigth_total_deduct_percentage_target' id='weigth_total_deduct_percentage_target-"+data['structure_id']+"'>"+data['total_weight']+"%</span></div>";
 	
 	htmlTemplateDeduct+="</div>";
 		
@@ -2071,12 +2071,12 @@ var assignTemplateDeductFn = function(structureName,data){
               		
 		htmlTemplateDeduct+="<thead>";
 			htmlTemplateDeduct+="<tr>";
-				htmlTemplateDeduct+="<th style=\"width:3%\"><b>Select</b></th>";
-				htmlTemplateDeduct+="<th style=\"width:52%\"><b>Appraisal checkWeigthOverItem Name</b></th>";
-				htmlTemplateDeduct+="<th style=\"width:15%; text-align:center;\"><b>Max Value </b></th>";
-				htmlTemplateDeduct+="<th style=\"width:15%; text-align:center;\"><b>Deduct Score/Unit </b></th>";
+				htmlTemplateDeduct+="<th style=\"width:3%\"><b>"+$(".lt-select").val()+"</b></th>";
+				htmlTemplateDeduct+="<th style=\"width:52%\"><b>"+$(".lt-appraisal-item-name").val()+"</b></th>";
+				htmlTemplateDeduct+="<th style=\"width:15%; text-align:center;\"><b>"+$(".lt-max-value").val()+"</b></th>";
+				htmlTemplateDeduct+="<th style=\"width:15%; text-align:center;\"><b>"+$(".lt-deduct-score").val()+"/"+$(".lt-unit").val()+"</b></th>";
 				if(data['is_value_get_zero']== 1) {
-					htmlTemplateDeduct+="<th style=\"width:15%; text-align:center;\"><b>Value&nbsp;Get&nbsp;Zero&nbsp;</b></th>";
+					htmlTemplateDeduct+="<th style=\"width:15%; text-align:center;\"><b>"+$(".lt-value-get-zero").val()+"</b></th>";
 				}
 					htmlTemplateDeduct+="</tr>";
 					htmlTemplateDeduct+="</thead>";
@@ -2131,18 +2131,18 @@ var assignTemplateQuantityFn = function(structureName,data){
 			htmlTemplateQuantity+="  <div class=\"ibox-title2\">";
 			
 			htmlTemplateQuantity+="      <div class='titlePanel'>"+structureName+"</div>";
-			htmlTemplateQuantity+="      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-"+data['structure_id']+"'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-"+data['structure_id']+"'></span>Total Weight <span id='weigth_total_quantity_percentage_target-"+data['structure_id']+"'>"+data['total_weight']+"%</span></div>";
+			htmlTemplateQuantity+="      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-"+data['structure_id']+"'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-"+data['structure_id']+"'></span>"+$(".lt-total-weight").val()+"<span id='weigth_total_quantity_percentage_target-"+data['structure_id']+"'>"+data['total_weight']+"%</span></div>";
 			htmlTemplateQuantity+="  </div>";
 			htmlTemplateQuantity+="	<div class=\"ibox-content\">";
 			htmlTemplateQuantity+=" <div class=\"table-responsive scrollbar-inner\">";
 			htmlTemplateQuantity+="<table style='width:100%; top: -38px; max-width: none;' id=\"tableQauntity\" class=\"table table-striped tableQauntity fixedHeader\">";
 			htmlTemplateQuantity+="<thead>";
-				htmlTemplateQuantity+="<tr>";
-					htmlTemplateQuantity+="<th style=\"width:3%;  text-align:center;\" class=''><b>Select</b></th>";
-					htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>Appraisal Item Name</b></th>";
-					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Target</b> </th>";
-					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>UOM</b> </th>";
-					htmlTemplateQuantity+="<th style=\"width:10%;  text-align:right;padding-right: 10px;\" class='thBox'><b>Actual</b> </th>";
+				htmlTemplateQuantity+="<tr style='white-space: nowrap;'>";
+					htmlTemplateQuantity+="<th style=\"width:3%;  text-align:center;\" class=''><b>"+$(".lt-select").val()+"</b></th>";
+					htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>"+$(".lt-appraisal-item-name").val()+"</b></th>";
+					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>"+$(".lt-target").val()+"</b> </th>";
+					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>"+$(".lt-uom").val()+"</b> </th>";
+					htmlTemplateQuantity+="<th style=\"width:10%;  text-align:right;padding-right: 10px;\" class='thBox'><b>"+$(".lt-actual").val()+"</b> </th>";
 					
 					
 					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#"+data['threshold_color'][0]['color_code']+"' class='redBOxL'>1</div></th>";
@@ -2153,7 +2153,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#"+data['threshold_color'][4]['color_code']+"' class='veryGreenBOxR'>&nbsp;</div> </th>";
 					
 					
-					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>%Weight</b></th>";
+					htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>"+$(".lt-percent-weight").val()+"</b></th>";
 					//htmlTemplateQuantity+="<th style=\"width:3%;  text-align:center;\" class=''></th>";
 					htmlTemplateQuantity+="</tr>";
 					htmlTemplateQuantity+="</thead>";
@@ -2223,20 +2223,20 @@ var assignTemplateQuantityFn = function(structureName,data){
 		
 		
 		htmlTemplateQuantity+="      <div class='titlePanel'>"+structureName+"</div>";
-		htmlTemplateQuantity+="      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-"+data['structure_id']+"'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-"+data['structure_id']+"'></span>Total Weight <span id='weigth_total_quantity_percentage_target-"+data['structure_id']+"'>"+data['total_weight']+"%</span></div>";
+		htmlTemplateQuantity+="      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-"+data['structure_id']+"'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-"+data['structure_id']+"'></span>"+$(".lt-total-weight").val()+"<span id='weigth_total_quantity_percentage_target-"+data['structure_id']+"'>"+data['total_weight']+"%</span></div>";
 		htmlTemplateQuantity+="  </div>";
 		htmlTemplateQuantity+="	<div class=\"ibox-content\">";
 		htmlTemplateQuantity+=" <div class=\"table-responsive scrollbar-inner\"  style='overflow:auto;'>";
 		htmlTemplateQuantity+="<table style='width:100%; top: -38px; max-width: none;' id=\"tableQauntity\" class=\"table table-striped tableQauntity fixedHeader\">";
 		htmlTemplateQuantity+="<thead>";
-			htmlTemplateQuantity+="<tr>";
-				htmlTemplateQuantity+="<th style=\"width:3%; text-align:center;\" class=''><b>Select</b></th>";
-				htmlTemplateQuantity+="<th style=\"width:30%\" class=''><b>Appraisal Item Name</b></th>";
-				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Target</b> </th>";
-				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>UOM</b> </th>";
-				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:right;padding-right: 10px;\" class=''><b>Actual</b> </th>";
+			htmlTemplateQuantity+="<tr style='white-space: nowrap;'>";
+				htmlTemplateQuantity+="<th style=\"width:3%; text-align:center;\" class=''><b>"+$(".lt-select").val()+"</b></th>";
+				htmlTemplateQuantity+="<th style=\"width:30%\" class=''><b>"+$(".lt-appraisal-item-name").val()+"</b></th>";
+				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>"+$(".lt-target").val()+"</b> </th>";
+				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>"+$(".lt-uom").val()+"</b> </th>";
+				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:right;padding-right: 10px;\" class=''><b>"+$(".lt-actual").val()+"</b> </th>";
 //				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>Forecast Value</b> </th>";
-				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>%Weight</b></th>";
+				htmlTemplateQuantity+="<th style=\"width:5%;  text-align:center;\" class=''><b>"+$(".lt-percent-weight").val()+"</b></th>";
 				htmlTemplateQuantity+="</tr>";
 				htmlTemplateQuantity+="</thead>";
 				htmlTemplateQuantity+="<tbody id=\"fixClickKPI-"+data['structure_id']+"\">";
@@ -2343,7 +2343,7 @@ var calculationGrandTotalFn = function(id){
 	var globalStructure_id=globalDataId[2];
 	//Start Default weight form quantity is 0%
 	$("#weigth_total_quantity_percentage-"+globalStructure_id)
-	.html("Cannot Assignment Because Weight% not equal to "+parseFloat($("#weigth_total_quantity_percentage_target-"+globalStructure_id).text()).toFixed(2)+"% [0%]")
+	.html($(".lt-cannot-assignment-because-weight-percent-not-equal-to").val()+" "+parseFloat($("#weigth_total_quantity_percentage_target-"+globalStructure_id).text()).toFixed(2)+"% [0%]")
 	.css({"color":"#FF0000"}).
 	addClass("weightIsOver");
 	//End Default weight form quantity is 0%
@@ -2397,7 +2397,7 @@ var calculationGrandTotalFn = function(id){
 					if(totalWeigthQuantity != parseFloat($("#weigth_total_quantity_percentage_target-"+structure_id).text())){
 						
 						$("#weigth_total_quantity_percentage-"+structure_id)
-						.html("Cannot Assignment Because Weight% not equal to "+parseFloat($("#weigth_total_quantity_percentage_target-"+structure_id).text()).toFixed(2)+"% ["+addCommas(parseFloat(totalWeigthQuantity).toFixed(2))+"%]")
+						.html($(".lt-cannot-assignment-because-weight-percent-not-equal-to").val()+" "+parseFloat($("#weigth_total_quantity_percentage_target-"+structure_id).text()).toFixed(2)+"% ["+addCommas(parseFloat(totalWeigthQuantity).toFixed(2))+"%]")
 						.css({"color":"#FF0000"}).
 						addClass("weightIsOver");
 						
@@ -2425,7 +2425,7 @@ var calculationGrandTotalFn = function(id){
 	//################ Calculation Quality Start####################### 
 	//Start Default weight form Quality is 0%
 	$("#weigth_total_quality_percentage-"+globalStructure_id)
-	.html("Cannot Assignment Because Weight% not equal to "+parseFloat($("#weigth_total_quality_percentage_target-"+globalStructure_id).text())+"% [0%]")
+	.html($(".lt-cannot-assignment-because-weight-percent-not-equal-to").val()+" "+parseFloat($("#weigth_total_quality_percentage_target-"+globalStructure_id).text())+"% [0%]")
 	.css({"color":"#FF0000"}).
 	addClass("weightIsOver");
 	//End Default weight form Quality is 0%
@@ -2452,7 +2452,7 @@ var calculationGrandTotalFn = function(id){
 						if(total_weigth_quality != parseFloat($("#weigth_total_quality_percentage_target-"+structure_id).text())){
 							
 							$("#weigth_total_quality_percentage-"+structure_id)
-							.html("Cannot Assignment Because Weight% not equal to "+parseFloat($("#weigth_total_quality_percentage_target-"+structure_id).text())+"% ["+addCommas(parseFloat(total_weigth_quality).toFixed(2))+"%]")
+							.html($(".lt-cannot-assignment-because-weight-percent-not-equal-to").val()+" "+parseFloat($("#weigth_total_quality_percentage_target-"+structure_id).text())+"% ["+addCommas(parseFloat(total_weigth_quality).toFixed(2))+"%]")
 							.css({"color":"#FF0000"}).
 							addClass("weightIsOver");
 							
@@ -3078,7 +3078,7 @@ $("#empName").autocomplete({
 				}
 			});
 		if(empldoyees_id.length==0){
-			callFlashSlide("Please choose Employees or Organization for Assignment.");
+			callFlashSlide($(".lt-please-choose-employees-or-organization-for-assignment").val());
 			return false;
 		}else{
 			$("#ModalAssignment").modal({
@@ -3142,7 +3142,7 @@ $("#empName").autocomplete({
 //					alert($("#remark_footer").val());
 					
 					if(($("#actionAssign option:selected").text()=="Reject") && ($("#remark_footer").val()=="")){
-						callFlashSlideInModal("Please fill Remark for Reject Workflow State.","#information","error");
+						callFlashSlideInModal($(".lt-please-fill-remark-for-reject-workflow-state").val(),"#information","error");
 						return false;
 					}
 			
@@ -3150,10 +3150,10 @@ $("#empName").autocomplete({
 					
 						if($(".checkWeigthOver").hasClass('weightIsOver')==true){
 							
-							callFlashSlideInModal("<b>Cannot Assign Structure not equal to Weight Total<b>","#information","error");
+							callFlashSlideInModal("<b>"+$(".lt-cannot-assign-structure-not-equal-to-weight-total").val()+"<b>","#information","error");
 							
 						}else if(parseFloat($("#grandTotalWeight").text())!=100){
-							callFlashSlideInModal("<b>Grand Total Weight is Not 100%.<b>","#information","error");
+							callFlashSlideInModal("<b>"+$(".lt-grand-total-weight-is-not-100-percent").val()+"<b>","#information","error");
 							
 						}else{
 							
@@ -3165,7 +3165,7 @@ $("#empName").autocomplete({
 								}
 								
 							}else{
-								callFlashSlideInModal("Please choose Appraisal item ID.","#information","error");
+								callFlashSlideInModal($(".lt-please-choose-appraisal-item-id").val(),"#information","error");
 							}
 						}
 					}else{
@@ -3180,7 +3180,7 @@ $("#empName").autocomplete({
 							}
 							
 						}else{
-							callFlashSlideInModal("Please choose Appraisal item ID.","#information","error");
+							callFlashSlideInModal($(".lt-please-choose-appraisal-item-id").val(),"#information","error");
 						}
 						
 					}
@@ -3189,7 +3189,7 @@ $("#empName").autocomplete({
 		
 		$("#btnSubmitAction").click(function(){
 			if(($("#actionAction option:selected").text()=="Reject") && ($("#remark_footer_action").val()=="")){
-				callFlashSlideInModal("Please fill Remark for Reject Workflow State.","#information2","error");
+				callFlashSlideInModal($(".lt-please-fill-remark-for-reject-workflow-state").val(),"#information2","error");
 				return false;
 			}
 			actionActionAssignmentFn();
@@ -3203,17 +3203,17 @@ $("#empName").autocomplete({
 			
 			if($(".checkWeigthOver").hasClass('weightIsOver')==true){
 				
-				callFlashSlideInModal("<b>Cannot Assign Structure not equal to Weight Total<b>","#information","error");
+				callFlashSlideInModal("<b>"+$(".lt-cannot-assign-structure-not-equal-to-weight-total").val()+"<b>","#information","error");
 				
 			}else if(parseFloat($("#grandTotalWeight").text())!=100){
-				callFlashSlideInModal("<b>Grand Total Weight is Not 100%.</b>","#information","error");
+				callFlashSlideInModal("<b>"+$(".lt-grand-total-weight-is-not-100-percent").val()+"</b>","#information","error");
 			
 			}else{
 			
 				if($(".embed_appraisal_id").get().length>0){
 					actionAssignmentFn("saveAndAnother");	
 				}else{
-					callFlashSlideInModal("Please choose Appraisal item ID.","#information","error");
+					callFlashSlideInModal($(".lt-please-choose-appraisal-item-id").val(),"#information","error");
 				}
 			}
 		});

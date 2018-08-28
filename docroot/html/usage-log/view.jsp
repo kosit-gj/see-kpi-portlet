@@ -1,11 +1,15 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
 <%@ page import="javax.portlet.*"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
+
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
+<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
+
 <%
 
 String username = themeDisplay.getUser().getScreenName();
@@ -274,7 +278,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
             <div class="span12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title"> 
-                             <div class='titlePanel'>Advance Search</div>
+                             <div class='titlePanel'><liferay-ui:message key="advanced-search"/></div>
                         </div>
                         <div class="ibox-content breadcrumbs2"> 
          					
@@ -283,7 +287,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 									
 									<div id="appraisalTypeArea" class="form-group span3"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="Entity Type"
+										<select data-toggle="tooltip" title="<liferay-ui:message key="entity-type"/>"
 											class="input form-control input-sm span12" id="appraisalType"
 											name="appraisalType">
 								
@@ -294,7 +298,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 									
 									<div id='appraisalLevelArea' class="form-group span3"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="EmpLevel"
+										<select data-toggle="tooltip" title="<liferay-ui:message key="employee-level"/>"
 											class="input form-control input-sm span12" id="appraisalLevel"
 											name="appraisalLevel">
 								
@@ -304,7 +308,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 									
 									<div id='AppraisalOrgLevelArea' class="form-group span3"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="OrgLevel"
+										<select data-toggle="tooltip" title="<liferay-ui:message key="organization-level"/>"
 											class="input form-control input-sm span12" id="AppraisalOrgLevel"
 											name="AppraisalOrgLevel">
 								
@@ -315,7 +319,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 									</div>
 									
 									<div class="form-group span3" style="margin-left: 5px; margin-bottom: 3px;">
-										<select data-toggle="tooltip" title="" data-original-title="organization"
+										<select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="organization"/>"
 											class="input form-control input-sm span12" id="organization"
 											name="organization">
 											<option value=''>All Organization</option>
@@ -325,35 +329,35 @@ This is the <b>Usage Log</b> portlet in View mode.2
 									 <div id="empNameArea" class="form-group span3"
 										style="margin-left: 5px; margin-bottom: 3px;">
 										<input data-toggle="tooltip" type="text" class="form-control input-sm span12 "
-											placeholder="Emp Name" id="empName" data-original-title="Employee Name">
+											placeholder="<liferay-ui:message key="employee-name"/>" id="empName" data-original-title="<liferay-ui:message key="employee-name"/>">
 											<input class="form-control input-sm"
 											id="empName_id" name="empName_id" value="" type="hidden">
 									</div>
 									 <div id="PositionArea" class="form-group span3"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<input data-toggle="tooltip" type="text" id="position" placeholder="Position"
-											class="form-control input-sm span12" data-original-title="Position">
+										<input data-toggle="tooltip" type="text" id="position" placeholder="<liferay-ui:message key="position"/>"
+											class="form-control input-sm span12" data-original-title="<liferay-ui:message key="position"/>">
 											<input class="form-control input-sm" id="position_id"
 											name="position_id" value="" type="hidden">
 									</div>
 									
 									 <div id="usageStartDateArea" class="form-group span3"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<input data-toggle="tooltip" type="text" id="usage_start_date" placeholder="Usage Start Date"
-											class="form-control input-sm span12" data-original-title="Usage Start Date">
+										<input data-toggle="tooltip" type="text" id="usage_start_date" placeholder="<liferay-ui:message key="usage-start-date"/>"
+											class="form-control input-sm span12" data-original-title="<liferay-ui:message key="usage-start-date"/>">
 									</div>
 									
 									 <div id="usageEndDateArea" class="form-group span3"
 										style="margin-left: 5px; margin-bottom: 3px;">
-										<input data-toggle="tooltip" type="text" id="usage_end_date" placeholder="Usage End Date"
-											class="form-control input-sm span12" data-original-title="Usage End Date">
+										<input data-toggle="tooltip" type="text" id="usage_end_date" placeholder="<liferay-ui:message key="usage-end-date"/>"
+											class="form-control input-sm span12" data-original-title="<liferay-ui:message key="usage-end-date"/>">
 									</div>
 									
 
 								<div id='btnUsageLogSearchArea' class="form-group  m-b-none " style="margin-left: 5px; margin-bottom: 3px; text-align: right;  ">
 									<button type="button" class="btn btn-info input-sm"
 										name="btnSearchAdvance" id="btnSearchAdvance">
-										<i class="fa fa-search"></i>&nbsp;Search
+										<i class="fa fa-search"></i>&nbsp;<liferay-ui:message key="search"/>
 									</button>
 									
 								</div>
@@ -396,7 +400,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 				                                 </select>
 	                                 		
 	                                 		</div>
-											<div class='pagingText'>Results per page</div>
+											<div class='pagingText'><liferay-ui:message key="results-per-page"/></div>
 	                                    
 	                                    </div>
 	                                    
@@ -438,7 +442,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 					                                     <option>100</option>
 					                                 </select> 
 			                                 	</div>
-												<div class='pagingText'>Results per page</div>
+												<div class='pagingText'><liferay-ui:message key="results-per-page"/></div>
 		                                    </div>
 		                                   
                                     	</div> 
