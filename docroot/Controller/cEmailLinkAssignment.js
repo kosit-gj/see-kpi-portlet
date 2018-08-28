@@ -64,10 +64,12 @@ $(document).ready(function() {
 			embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id_org' name='embed_appraisal_level_id_org' value='"+url_level_id_org+"'>";
 			embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id_emp' name='embed_appraisal_level_id_emp' value='"+url_level_id_emp+"'>";
 			embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_type_id' name='embed_appraisal_type_id' value='"+url_appraisal_type_id+"'>";
+			embedParam+="<input type='hidden' class='embed_param_search' id='appraisalType' name='appraisalType' value='"+url_appraisal_type_id+"'>";
 			embedParam+="<input type='hidden' class='embed_param_search' id='period_id_edit' name='period_id_edit' value=''>";
+			embedParam+="<input type='hidden' class='embed_param_search' id='appraisalLevel' name='appraisalLevel' value='"+url_level_id_org+"'>";
+			embedParam+="<input type='hidden' class='embed_param_search' id='appraisalLevelEmp' name='appraisalLevelEmp' value='"+url_level_id_emp+"'>";
 			$("#embedParamSearch").append(embedParam);
 			
-			check_appraisalLevel = url_appraisal_type_id;
 			emp_result_id = url_emp_result_id;
 			org_id_to_assign = url_org_id;
 			

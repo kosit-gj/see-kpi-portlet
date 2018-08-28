@@ -86,4 +86,5 @@
 <!-- Performance Trend -->
 <input class="lt-employee-name-is-require" type="hidden" value="<liferay-ui:message key="employee-name-is-require"/>"/>
 
-
+<!-- Performance Comparison --> 
+<input class="lt-performance-by-employee" type="hidden" value="<liferay-ui:message key="performance-by-employee"/>"/>
