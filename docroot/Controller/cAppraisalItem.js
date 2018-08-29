@@ -1062,7 +1062,6 @@ $(document).ready(function(){
 
 	//Autocomplete Organization Search Start
 
-<<<<<<< HEAD
 //	$("#Organization").autocomplete({
 //        source: function (request, response) {
 //        	$.ajax({
@@ -1090,35 +1089,6 @@ $(document).ready(function(){
 //				});
 //        }
 //    });
-=======
-	$("#Organization").autocomplete({
-        source: function (request, response) {
-        	$.ajax({
-				 url:restfulURL+"/"+serviceName+"/public/org/auto_org_name",
-				 type:"post",
-				 dataType:"json",
-				 headers:{Authorization:"Bearer "+tokenID.token},
-				 data:{"org_name":request.term},
-				 //async:false,
-                 error: function (xhr, textStatus, errorThrown) {
-                        console.log('Error: ' + xhr.responseText);
-                    },
-				 success:function(data){
-						response($.map(data, function (item) {
-                            return {
-                                label: item.org_id+"-"+item.org_name,
-                                value: item.org_id+"-"+item.org_name
-                            };
-                        }));
-				},
-				beforeSend:function(){
-					$("body").mLoading('hide');	
-				}
-				
-				});
-        }
-    });
->>>>>>> refs/remotes/origin/tfg/develop
 	//Autocomplete Organization Search End
 	
 	
