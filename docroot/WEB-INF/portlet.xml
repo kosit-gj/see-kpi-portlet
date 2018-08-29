@@ -1752,6 +1752,121 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
+	
+	
+	
+	<!-- //////////////////// 360 Degree //////////////////// -->
+	<portlet>
+		<portlet-name>appraisal-level-360degree</portlet-name>
+		<display-name>Appraisal Level 360 Degree</display-name>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/appraisal-level/view.360degree.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Appraisal Level 360 Degree</title>
+			<short-title>Appraisal Level 360 Degree</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	
+	<portlet>
+		<portlet-name>appraisal-360degree</portlet-name>
+		<display-name>Appraisal 360 Degree</display-name>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/appraisal/view.360degree.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content/Language</resource-bundle>
+		<portlet-info>
+			<title>Appraisal 360 Degree</title>
+			<short-title>Appraisal 360 Degree</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<!-- //////////////////////////////////////////////////////////// -->
+	
+	
+	
+	
+	
+	<!-- //////////////////// Salary //////////////////////////////// -->
+	<portlet>
+		<portlet-name>import-salary-range</portlet-name>
+		<display-name>Import Salary Range</display-name>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/import-salary-range/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content/Language</resource-bundle>
+		<portlet-info>
+			<title>Import Salary Range</title>
+			<short-title>Import Salary Range</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<!-- //////////////////////////////////////////////////////////// -->
+	
+	
+	
+	
+	
 	<portlet>
 		<portlet-name>dashboard-performance-comparison</portlet-name>
 		<display-name>Dashboard Performance Comparison</display-name>
