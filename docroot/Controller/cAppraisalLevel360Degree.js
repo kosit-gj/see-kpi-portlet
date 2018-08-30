@@ -412,7 +412,7 @@ $(document).ready(function(){
 				$("#addModalCriteriaSetWeightModal").modal()
 				$("#btnSetweightSubmit").off("click");
 				$("#btnSetweightSubmit").on('click',function(){
-					$(".btnModalClose").click();
+					$("#information3").hide();
 					insertSetweightFn(id[0],id[1]);
 				});
 		 	});
