@@ -146,10 +146,10 @@ var listAppraisalCriteria = function(id) {
 //--------  List Criteria End
 //-------- Update Criteria Start
 var options=[];
-var insertSetweightFn = function () {
+var insertSetweightFn = function (level_id,structure_id) {
 	var structure =[];
 	var weight = [];
-	var set_weight = [];
+	var setweight = [];
 	var checkbox = "";
 	//from_data_setweight
 	$('.from_data_setweight').each(function(index, indexEntry) {
@@ -159,19 +159,20 @@ var insertSetweightFn = function () {
 			checkbox = "0";
 		}
 		setweight.push({
-			"structure_id": ""+this.id.split("-")[1]+"",
+			"structure_id": ""+structure_id+"",
 			"assessor_group_id": ""+this.id.split("-")[1]+"",
 			"weight_percent": ""+$(".from_data_weight[id$="+this.id.split("-")[1]+"]").val()+"",
 			"checkbox": ""+checkbox+""
 		   });
 	});
+	
 		$.ajax({
-			url:restfulURL+"/"+serviceName+"/public/competency_criteria/{appraisal_level_id}",
+			url:restfulURL+"/"+serviceName+"/public/competency_criteria/"+level_id,
 			type : "PATCH",
 			dataType : "json",
 			headers:{Authorization:"Bearer "+tokenID.token},
 			async:false,
-			data:{"set_weight":set_weight},
+			data:{"set_weight":setweight},
 			success : function(data) {
 				if(data['status']==200){
 					callFlashSlide("Add Appraisal Criteria SetWeight Successfully.");
@@ -214,6 +215,11 @@ var SetWeightFn = function(level_id,structure_id,structure_name) {
 				if(index==0) {
 					$("#ac_Structure_name").html("<b>"+structure_name+"</b>");
 				}
+				if(indexEntry["weight_percent"] == null){
+					weight_percent="0.00";
+				}else{
+					weight_percent=indexEntry["weight_percent"];
+				}
 				if(indexEntry["checkbox"] == 1){
 					is_check="checked";
 				}else{
@@ -223,14 +229,14 @@ var SetWeightFn = function(level_id,structure_id,structure_name) {
 				
 				htmlTable+="<tr>";
 				htmlTable+="	<td>";
-				htmlTable+="		<input  id=\"form_structure_item-"+indexEntry["assessor_group_id"]+"\" class=\"from_data_setweight\"";
+				htmlTable+="		<input  id=\"form_structure_item-"+indexEntry["assessor_group_id"]+"-"+indexEntry["structure_id"]+"\" class=\"from_data_setweight\"";
 				htmlTable+="		<input type='checkbox'"+is_check+" value=\""+indexEntry["assessor_group_id"]+"\">";
 				htmlTable+="	</td>";
 				htmlTable+="	<td>";
 				htmlTable+=			indexEntry["assessor_group_name"];
 				htmlTable+="	</td>";
 				htmlTable+="	<td style=\"vertical-align:middle\" >";
-				htmlTable+="		<input style='margin-bottom: 0px;' class=\"span12  numberOnly\" "+no_weight+" type='text'  id=\""+indexEntry["assessor_group_id"]+"\" value=\""+indexEntry["weight_percent"]+"\" />";
+				htmlTable+="		<input style='margin-bottom: 0px;' class=\"span12 from_data_weight numberOnly\" "+no_weight+" type='text'  id=\""+indexEntry["assessor_group_id"]+"\" value=\""+indexEntry["weight_percent"]+"\" />";
 				htmlTable+="	</td>";
 				htmlTable+="</tr>";
 					
@@ -378,8 +384,9 @@ $(document).ready(function(){
 		 			 			
 		 	});
 		 	
-		 	//SetWeight
-		 	$(".addModalCriteriaSetWeight").on('click',function(){
+//		 	//SetWeight
+		 	/*$(document).on('click',(function(){
+		 		$(".addModalCriteriaSetWeight").on('click',function(){
 
 		 		var id = this.id.split("-");
 		 		SetWeightFn(id[0],id[1],id[4]);
@@ -388,19 +395,53 @@ $(document).ready(function(){
 					"keyboard" : setModalPopup[1]
 		 		}).css({'z-index': '1050'});
 		 		$('#addModalCriteria').css({'z-index' : '1030'});
-		 		
-
-//			 	$("#btnSetweightSubmit").off("click");
+	 		
+			 	$("#btnSetweightSubmit").off("click");
 		 		$("#btnSetweightSubmit").on('click',function(){
-	//	 			$(".btnModalClose").click();
-		 			insertSetweightFn();
+		 			$(".btnModalClose").click();
+	 			insertSetweightFn();
 		 		});
 		 	});
 		 	
 		 	$(".setWeightCloseModal").on('click',function(){
 		 		$('#addModalCriteria').css({'z-index' : '1045'});
 		 	});
-	 	}
+	 	}));*/
+		 	$(document).on('click','.addModalCriteriaSetWeight',function(){
+		 		var id = this.id.split("-");
+				SetWeightFn(id[0],id[1],id[4]);
+//				 $("#addModalCriteriaSetWeightModal").on('shown.bs.modal', function () {
+//			            alert('The modal is about to be shown.');
+//			    });
+				$("#addModalCriteriaSetWeightModal").modal()
+//				$("#btnSetweightSubmit").off("click");
+				$("#btnSetweightSubmit").on('click',function(){
+					$(".btnModalClose").click();
+					insertSetweightFn(id[0],id[1]);
+				});
+		 	});
 	 }
  	
+ 	};
+////SetWeight
+//	$(document).on('click','.addModalCriteriaSetWeight',function(){
+//
+//		var id = this.id.split("-");
+//		SetWeightFn(id[0],id[1],id[4]);
+//		$("#addModalCriteriaSetWeightModal").modal({
+//			"backdrop" : setModalPopup[0],
+//		"keyboard" : setModalPopup[1]
+//		}).css({'z-index': '1050'});
+//		$('#addModalCriteria').css({'z-index' : '1030'});
+//		
+//
+//// 	$("#btnSetweightSubmit").off("click");
+//		$("#btnSetweightSubmit").on('click',function(){
+////	$(".btnModalClose").click();
+//			insertSetweightFn();
+//		});
+//	});
+//	$(document).on('click','.setWeightCloseModal',function(){
+// 		$('#addModalCriteria').css({'z-index' : '1045'});
  	});
+	

@@ -44,7 +44,7 @@ plid = layout.getPlid();
 
 <!-- Modal Import Appraisal Criteria -->
 
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="addModalCriteria"
+	<div aria-hidden="true" role="dialog"  id="addModalCriteria"
 		class="modal inmodal" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content bounceInRight">
@@ -113,7 +113,7 @@ plid = layout.getPlid();
 		
 		
 	<!-- Modal Import Set Weight -->	
-		<div aria-hidden="true" role="dialog" tabindex="-1" id="addModalCriteriaSetWeightModal" class="modal inmodal" style="display: none;">
+		<div aria-hidden="true" role="dialog"  id="addModalCriteriaSetWeightModal" class="modal inmodal" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content bounceInRight">
 				<div class="modal-header">
@@ -150,7 +150,7 @@ plid = layout.getPlid();
 										<th style='width: 10%;text-align: center;'><b>%</b></th>
 									</tr>
 								</thead>
-								<tbody id="formListCriteriaSetWeight">
+								<tbody id="formListCriteriaSetWeight" aria-hidden="true">
 
 								</tbody>
 							</table>
