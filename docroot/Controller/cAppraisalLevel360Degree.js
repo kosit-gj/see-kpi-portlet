@@ -27,7 +27,7 @@ var insertCriteriaFn = function () {
 //		   });
 //	});
 		$.ajax({
-			url:restfulURL+"/"+serviceName+"/public/appraisal_level/"+$("#crierai_id").val()+"/criteria",
+			url:restfulURL+"/"+serviceName+"/public/appraisal_level_360/"+$("#crierai_id").val()+"/criteria",
 			type : "PATCH",
 			dataType : "json",
 			headers:{Authorization:"Bearer "+tokenID.token},
@@ -260,7 +260,7 @@ $(document).ready(function(){
 		 		
 		 		$("#btnCriteriaSubmit").off("click");
 		 		$("#btnCriteriaSubmit").on("click",function(){
-		 			$(".btnModalClose").click();
+		 			$("#information2").hide();
 		 			insertCriteriaFn();
 		 			
 		 		});
