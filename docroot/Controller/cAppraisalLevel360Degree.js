@@ -76,6 +76,9 @@ var listAppraisalCriteria = function(id) {
 
 			
 			$.each(data['data'],function(index,indexEntry) { 
+				if(index==0) {
+					$("#ac_appraisal_level_name").html("<b>"+indexEntry['appraisal_level_name']+"</b>");
+				}
 				console.log(indexEntry["weight_percent"]);
 				if(indexEntry["weight_percent"] == null){
 					weight_percent="0.00";
@@ -95,6 +98,9 @@ var listAppraisalCriteria = function(id) {
 				htmlTable+="	</td>";
 				htmlTable+="	<td style=\"vertical-align:middle\">";
 				htmlTable+=			indexEntry["structure_name"];
+				if(indexEntry["form_id"]==2) {
+					htmlTable+="			<a class='addModalCriteriaSetWeight' id='"+indexEntry["appraisal_level_id"]+"-"+indexEntry["structure_id"]+"-"+indexEntry['appraisal_level_name']+"-"+indexEntry['structure_name']+" 'style='padding-left:5px; cursor:pointer'><u><i class='icon-edit icon-white'> Set Weight</i></u></a>";
+					}
 				htmlTable+="	</td>";
 				htmlTable+="	<td style=\"vertical-align:middle\" >";
 				htmlTable+="		<input style='margin-bottom: 0px;' class=\"span12 from_data_weight numberOnly\" "+no_weight+" type='text'  id=\""+indexEntry["structure_id"]+"\" value=\""+weight_percent+"\" />";
@@ -136,6 +142,139 @@ var listAppraisalCriteria = function(id) {
 	});
 }
 //--------  List Criteria End
+
+//-------- Update Criteria Start
+var options=[];
+var insertSetweightFn = function (level_id,structure_id) {
+	var structure =[];
+	var weight = [];
+	var setweight = [];
+	var checkbox = "";
+	//from_data_setweight
+	$('.from_data_setweight').each(function(index, indexEntry) {
+		if($(indexEntry).is(":checked")){
+			checkbox = "1";
+		}else{
+			checkbox = "0";
+		}
+		setweight.push({
+			"structure_id": ""+structure_id+"",
+			"assessor_group_id": ""+this.id.split("-")[1]+"",
+			"weight_percent": ""+$(".from_data_weight[id$="+this.id.split("-")[1]+"]").val()+"",
+			"checkbox": ""+checkbox+""
+		   });
+	});
+	
+		$.ajax({
+			url:restfulURL+"/"+serviceName+"/public/competency_criteria/"+level_id,
+			type : "PATCH",
+			dataType : "json",
+			headers:{Authorization:"Bearer "+tokenID.token},
+			async:false,
+			data:{"set_weight":setweight},
+			success : function(data) {
+				if(data['status']==200){
+					callFlashSlide("Add Appraisal Criteria SetWeight Successfully.");
+					
+					getDataFn('','',options);
+					
+					$('#addModalCriteriaSetWeightModal').modal('hide');
+					
+				}else if (data['status'] == "400") {
+					
+					var validate = "<font color='red'>* </font>" + data['data'] + "";
+//					alert(validate);
+					callFlashSlideInModal(validate,"#information3","error");
+					
+				} 
+			}
+		});
+	
+	return false;
+}
+// -------- Update Criteria set weight End
+
+//--------  List Criteria Set Weight Start
+
+var SetWeightFn = function(level_id,structure_id,structure_name) {
+	htmlTable="";
+	weight_percent="";
+	no_weight = "";
+	is_check = "";
+	$.ajax({ 
+		url:restfulURL+"/"+serviceName+"/public/competency_criteria",
+		type : "get",
+		dataType : "json",
+		data:{"appraisal_level_id":level_id,'structure_id':structure_id},
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success : function(data) {
+			console.log(data);
+
+			$.each(data,function(index,indexEntry) {
+				if(index==0) {
+					$("#ac_Structure_name").html("<b>"+structure_name+"</b>");
+				}
+				if(indexEntry["weight_percent"] == null){
+					weight_percent="0.00";
+				}else{
+					weight_percent=indexEntry["weight_percent"];
+				}
+				if(indexEntry["checkbox"] == 1){
+					is_check="checked";
+				}else{
+					is_check="";
+				};
+		
+				
+				htmlTable+="<tr>";
+				htmlTable+="	<td>";
+				htmlTable+="		<input  id=\"form_structure_item-"+indexEntry["assessor_group_id"]+"-"+indexEntry["structure_id"]+"\" class=\"from_data_setweight\"";
+				htmlTable+="		<input type='checkbox'"+is_check+" value=\""+indexEntry["assessor_group_id"]+"\">";
+				htmlTable+="	</td>";
+				htmlTable+="	<td>";
+				htmlTable+=			indexEntry["assessor_group_name"];
+				htmlTable+="	</td>";
+				htmlTable+="	<td style=\"vertical-align:middle\" >";
+				htmlTable+="		<input style='margin-bottom: 0px;' class=\"span12 from_data_weight numberOnly\" "+no_weight+" type='text'  id=\""+indexEntry["assessor_group_id"]+"\" value=\""+indexEntry["weight_percent"]+"\" />";
+				htmlTable+="	</td>";
+				htmlTable+="</tr>";
+					
+				 
+		
+			});
+			$("#formListCriteriaSetWeight").html(htmlTable)
+			var getSelectionStart = function (o) {
+				if (o.createTextRange) {
+					var r = document.selection.createRange().duplicate()
+					r.moveEnd('character', o.value.length)
+					if (r.text == '') return o.value.length
+					return o.value.lastIndexOf(r.text)
+				} else return o.selectionStart
+			};
+			jQuery('.numberOnly').keypress(function (evt) { 
+				console.log("Keypress");
+				 var charCode = (evt.which) ? evt.which : event.keyCode;
+				 var number = this.value.split('.');
+				 if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+				    return false;
+				 }
+				    //just one dot
+				 if(number.length>1 && charCode == 46){
+				    return false;
+				 }
+				    //get the carat position
+				 var caratPos = getSelectionStart(this);
+				 var dotPos = this.value.indexOf(".");
+				 if( caratPos > dotPos && dotPos>-1 && (number[1].length > 1)){
+				    return false;
+				 }
+				 return true;	
+			});
+		}
+	});
+}
+//--------  List Criteria Set Weight End
+
 
 $(document).ready(function(){
         	//alert(createTableFn());
@@ -251,7 +390,7 @@ $(document).ready(function(){
 		 		$("#crierai_id").val(id);
 		 		//console.log("3");
 		 		//console.log($(this).parent().parent().parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().text());
-		 		$("#ac_appraisal_level_name").html("<b>"+$(this).parent().parent().parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().text()+"</b>");
+//		 		$("#ac_appraisal_level_name").html("<b>"+$(this).parent().parent().parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().text()+"</b>");
 		 		listAppraisalCriteria(id);
 		 		$("#addModalCriteria").modal({
 		 			"backdrop" : setModalPopup[0],
@@ -267,6 +406,16 @@ $(document).ready(function(){
 		 			 			
 		 	});
  	
+			$(document).on('click','.addModalCriteriaSetWeight',function(){
+		 		var id = this.id.split("-");
+				SetWeightFn(id[0],id[1],id[4]);
+				$("#addModalCriteriaSetWeightModal").modal()
+				$("#btnSetweightSubmit").off("click");
+				$("#btnSetweightSubmit").on('click',function(){
+					$(".btnModalClose").click();
+					insertSetweightFn(id[0],id[1]);
+				});
+		 	});
 	 	}
 	 }
  	
