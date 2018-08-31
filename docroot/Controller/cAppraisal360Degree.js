@@ -140,9 +140,9 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 	htmlTemplateQuality+="<div class='titlePanel'>"+structureName+"</div>";
 		if(data['no_weight']==0){ // has weight;
 			if(data['result_type']==1){
-				htmlTemplateQuality+="<div class='totalWeight'>"+$(".lt-total-weight").val()+" "+data['total_weight_percent']+"%</div>";
+				htmlTemplateQuality+="<div class='totalWeight'>Total Weight "+data['total_weight_percent']+"%</div>";
 			}else{
-				htmlTemplateQuality+="<div class='totalWeight'>"+$(".lt-total-score").val()+" "+data['total_weight']+"</div>";
+				htmlTemplateQuality+="<div class='totalWeight'>Total Score "+data['total_weight']+"</div>";
 			}
 
 		}
@@ -153,26 +153,26 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 	htmlTemplateQuality+="<thead>";
 	//has weight
 //	if(data['no_weight']==0){
-			htmlTemplateQuality+="<tr style='white-space: nowrap;'>";
-				htmlTemplateQuality+="<th style=\"width:40%\"><b>"+$(".lt-kpi-name").val()+"</b></th>";
-				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>"+$(".lt-target").val()+"</b></th>";
-				htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>"+$(".lt-first-line-score").val()+"</b></th>";
-				htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>"+$(".lt-second-line-score").val()+"</b></th>";
-				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>"+$(".lt-percent-weight").val()+"</b></th>  ";
+			htmlTemplateQuality+="<tr>";
+				htmlTemplateQuality+="<th style=\"width:40%\"><b>KPI Name</b></th>";
+				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Target</b></th>";
+				htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>First Line Score</b></th>";
+				htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>Second Line Score</b></th>";
+				htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>%Weight</b></th>  ";
 				if(data['result_type']==1){
-					htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>"+$(".lt-weight-score").val()+"</b></th>  ";
+					htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Weight Score</b></th>  ";
 				}else{
-					htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>"+$(".lt-result-score").val()+"</b></th>  ";
+					htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Result Score</b></th>  ";
 				}
 
 			htmlTemplateQuality+="</tr>";
 //	}else{
 //
 //		htmlTemplateQuality+="<tr>";
-//			htmlTemplateQuality+="<th style=\"width:40%\"><b>"+$(".lt-kpi-name").val()+"</b></th>";
-//			htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>"+$(".lt-target").val()+"</b></th>";
-//			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>"+$(".lt-first-line-score").val()+"</b></th>";
-//			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>"+$(".lt-second-line-score").val()+"</b></th>";
+//			htmlTemplateQuality+="<th style=\"width:40%\"><b>KPI Name</b></th>";
+//			htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>Target</b></th>";
+//			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>First Line Score</b></th>";
+//			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>Second Line Score</b></th>";
 //
 //		htmlTemplateQuality+="</tr>";
 //	}
@@ -182,16 +182,14 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 					$.each(data['items'],function(index,indexEntry){
 
 					item_result_id_array.push(indexEntry['item_result_id']);
-					
-					/*if(indexEntry['formula_desc'] != null || indexEntry['formula_desc'] != ""){*/
-					if(!(indexEntry['formula_desc'] == null || indexEntry['formula_desc'] == undefined || indexEntry['formula_desc'] == "" || indexEntry['formula_desc'].length == 0)) {
-						info_item="<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>"+$(".lt-kpi-name").val()+" : </strong>"+indexEntry['item_name']+"' info-data='"+indexEntry['formula_desc']+"'>i</span>";
-					}else{
-						info_item ="";
-					}
+
+					if(indexEntry['formula_desc'] != null || indexEntry['formula_desc'] != ""){
+						info_item="<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>KPI Name : </strong>"+indexEntry['item_name']+"' info-data='"+indexEntry['formula_desc']+"'>i</span>";
+					}else{info_item ="";console.log("no");}
 					//has weight
 //						if(data['no_weight']==0){
 							htmlTemplateQuality+="<tr>";
+								console.log(indexEntry['formula_desc']);
 								htmlTemplateQuality+="<td class=''>"+indexEntry['item_name']+"  "+info_item+"</td>";
 								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\""+hintHtml+"\">"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 
@@ -245,7 +243,7 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 							htmlTemplateQuality+="<td class=''></td>";
 							htmlTemplateQuality+="<td class='' ></td>";
 							htmlTemplateQuality+="<td class=''></td>";
-							htmlTemplateQuality+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>"+$(".lt-total").val()+"</b></td>";
+							htmlTemplateQuality+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>Total</b></td>";
 							htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;font-weight: bold;font-size:16px'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
 
 						htmlTemplateQuality+="</tr>";
@@ -280,9 +278,9 @@ var assignTemplateDeductFn = function(structureName,data){
 	if(data['no_weight']==0){ // has weight;
 
 		if(data['result_type']==1){
-			htmlTemplateDeduct+="<div class='totalWeight'>"+$(".lt-total-weight").val()+" "+data['total_weight_percent']+"%</div>";
+			htmlTemplateDeduct+="<div class='totalWeight'>Total Weight "+data['total_weight_percent']+"%</div>";
 		}else{
-			htmlTemplateDeduct+="<div class='totalWeight'>"+$(".lt-total-score").val()+" "+data['total_weight']+"</div>";
+			htmlTemplateDeduct+="<div class='totalWeight'>Total Score "+data['total_weight']+"</div>";
 		}
 	}
 	htmlTemplateDeduct+="</div>";
@@ -296,37 +294,37 @@ var assignTemplateDeductFn = function(structureName,data){
 //		if(data['no_weight']==0){
 
 
-			htmlTemplateDeduct+="<tr style='white-space: nowrap;'>";
-				htmlTemplateDeduct+="<th style=\"width:30%\"><b>"+$(".lt-kpi-name").val()+"</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-max-value").val()+"</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-actual-value").val()+"</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-over-value").val()+"</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-deduct-score").val()+"/"+$(".lt-unit").val()+"</b> </th>";
+			htmlTemplateDeduct+="<tr>";
+				htmlTemplateDeduct+="<th style=\"width:30%\"><b>KPI Name</b></th>";
+				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Max Value</b></th>";
+				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Actual Value</b></th>";
+				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Over Value</b></th>";
+				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Deduct Score/Unit</b> </th>";
 				
 				if(data['is_value_get_zero']==1){
-					htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-value-get-zero").val()+"</b> </th>";
+					htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Value&nbsp;Get&nbsp;Zero&nbsp;</b> </th>";
 				}
 				
 				if(data['result_type']==1){
-					htmlTemplateDeduct+="<th style='width:20%;text-align: right;'><b>"+$(".lt-weight-score").val()+"</b></th>";
+					htmlTemplateDeduct+="<th style='width:20%;text-align: right;'><b>Weight Score </b></th>";
 				}else{
-					htmlTemplateDeduct+="<th style='width:20%;text-align: right;'><b>"+$(".lt-result-score").val()+"</b></th>";
+					htmlTemplateDeduct+="<th style='width:20%;text-align: right;'><b>Result Score </b></th>";
 				}
 				
 			htmlTemplateDeduct+="</tr>";
 //		}else{
 //			htmlTemplateDeduct+="<tr>";
-//				htmlTemplateDeduct+="<th style=\"width:35%\"><b>"+$(".lt-kpi-name").val()+"</b></th>";
-//				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-max-value").val()+"</b></th>";
-//				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-actual-value").val()+"</b></th>";
-//				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-over-value").val()+"</b></th>";
-//				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-deduct-score").val()+"/"+$(".lt-unit").val()+"</b> </th>";
+//				htmlTemplateDeduct+="<th style=\"width:35%\"><b>KPI Name</b></th>";
+//				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Max Value</b></th>";
+//				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Actual Value</b></th>";
+//				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Over Value</b></th>";
+//				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Deduct Score/Unit</b> </th>";
 //				
 //				if(data['is_value_get_zero']==1){
-//					htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-value-get-zero").val()+"</b> </th>";
+//					htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Value&nbsp;Get&nbsp;Zero&nbsp;</b> </th>";
 //				}
 //				
-//				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-score").val()+"</b></th>";
+//				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>Score </b></th>";
 //			htmlTemplateDeduct+="</tr>";
 //		}
 			htmlTemplateDeduct+="</thead>";
@@ -376,7 +374,7 @@ var assignTemplateDeductFn = function(structureName,data){
 								if(data['is_value_get_zero']==1){
 									htmlTemplateDeduct+="<td class=''></td>";
 								}
-								htmlTemplateDeduct+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>"+$(".lt-total").val()+"</b></td>";
+								htmlTemplateDeduct+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>Total</b></td>";
 								htmlTemplateDeduct+="<td class=''  style='text-align: right;padding-right: 10px;font-weight: bold; font-size:16px'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
 						htmlTemplateDeduct+="</tr>";
 //					}
@@ -414,9 +412,9 @@ var assignTemplateQuantityFn = function(structureName,data){
 	htmlTemplateQuantity+="      <div class='titlePanel'>"+structureName+"</div>";
 	if(data['no_weight']==0){ // has weight;
 		if(data['result_type']==1){
-			htmlTemplateQuantity+="      <div class='totalWeight'>"+$(".lt-total-weight").val()+" "+data['total_weight_percent']+"%</div>";
+			htmlTemplateQuantity+="      <div class='totalWeight'>Total Weight "+data['total_weight_percent']+"%</div>";
 		}else{
-			htmlTemplateQuantity+="      <div class='totalWeight'>"+$(".lt-total-score").val()+" "+data['total_weight']+"</div>";
+			htmlTemplateQuantity+="      <div class='totalWeight'>Total Score "+data['total_weight']+"</div>";
 		}
 	}
 	htmlTemplateQuantity+="  </div>";
@@ -428,49 +426,49 @@ var assignTemplateQuantityFn = function(structureName,data){
 	//has weight
 //	if(data['no_weight']==0){
 
-		htmlTemplateQuantity+="<tr style='white-space: nowrap;'>";
+		htmlTemplateQuantity+="<tr>";
 
-			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>"+$(".lt-perspective").val()+"</b> </th>";
-			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>"+$(".lt-kpi-name").val()+"</b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-kpi-name").val()+"</b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-uom").val()+"</b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-forecast").val()+"</b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-actual").val()+"</b></th>";
+			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>Perspective</b> </th>";
+			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>KPI Name</b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Target </b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>UOM </b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Forecast </b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Actual </b></th>";
 			if(data['threshold']==1){
-				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-score").val()+"</b></th>";
+				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Score </b></th>";
 			}else{
-				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-percent-achievement").val()+"</b></th>";
+				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Achievement </b></th>";
 			}
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-percent-weight").val()+"</b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Weight </b></th>";
 			if(data['result_type']==1){
-				htmlTemplateQuantity+="<th style='width:10%;text-align: right;' class=''><b>"+$(".lt-weight-score").val()+"</b> </th>";
+				htmlTemplateQuantity+="<th style='width:10%;text-align: right;' class=''><b>Weight Score</b> </th>";
 			}else{
-				htmlTemplateQuantity+="<th style='width:10%;text-align: right;' class=''><b>"+$(".lt-result-score").val()+"</b> </th>";
+				htmlTemplateQuantity+="<th style='width:10%;text-align: right;' class=''><b>Result Score</b> </th>";
 			}
 
-			htmlTemplateQuantity+="<th style='width:10%;text-align: center;' class=''><b>"+$(".lt-manage").val()+"</b> </th>";
+			htmlTemplateQuantity+="<th style='width:10%;text-align: center;' class=''><b>Manage</b> </th>";
 
 
 		htmlTemplateQuantity+="</tr>";
 
 //	}else{
 //	//no_weight
-//		htmlTemplateQuantity+="<tr style='white-space: nowrap;'>";
-//			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>"+$(".lt-perspective").val()+"</b> </th>";
-//			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>"+$(".lt-kpi-name").val()+"</b></th>";
-//			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-target").val()+"</b></th>";
-//			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".uom").val()+" </b></th>";
-//			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-forecast").val()+"</b></th>";
-//			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-actual").val()+"</b></th>";
+//		htmlTemplateQuantity+="<tr>";
+//			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>Perspective</b> </th>";
+//			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>KPI Name</b></th>";
+//			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Target </b></th>";
+//			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>UOM </b></th>";
+//			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Forecast </b></th>";
+//			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Actual </b></th>";
 //
 //			if(data['threshold']==1){
-//				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-score").val()+"</b></th>";
+//				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>Score </b></th>";
 //			}else{
-//				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-percent-achievement").val()+"</b></th>";
+//				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>%Achievement </b></th>";
 //			}
 //
 //
-//			htmlTemplateQuantity+="<th style='width:15%;text-align: center;' class=''><b>"+$(".lt-manage").val()+"</b> </th>";
+//			htmlTemplateQuantity+="<th style='width:15%;text-align: center;' class=''><b>Manage</b> </th>";
 //
 //		htmlTemplateQuantity+="</tr>";
 //	}
@@ -479,7 +477,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 			htmlTemplateQuantity+="<tbody id=\"\" class='appraisal_result'>";
 			$.each(data['items'],function(index,indexEntry){
 
-				paperclip = (indexEntry['files_amount'] > 0) ? "<i class='fa fa-paperclip' style='font-weight: bold; font-size: 20px;'></i>" : "<span style='width: 15.72px;'></span>";
+				paperclip = (indexEntry['files_amount'] > 0) ? "&nbsp;&nbsp;<i class='fa fa-paperclip' style='font-weight: bold;'></i>" : "";
 				item_result_id_array.push(indexEntry['item_result_id']);
 				/*
 				item_result_id
@@ -511,8 +509,8 @@ var assignTemplateQuantityFn = function(structureName,data){
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2))+"</td>";
 
 
-						htmlTemplateQuantity+="	<td style=\"text-align:center; display: flex; justify-content: space-between;\">";
-						htmlTemplateQuantity+=" <span>&nbsp;&nbsp;&nbsp;&nbsp;</span><i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"   &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear reason' id='reason-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;"+$(".lt-reason").val()+"&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;"+$(".lt-gantt-chart").val()+"&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;"+$(".lt-phase").val()+"&lt;/button&gt; &lt;button style='width:100%;' id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-success btn-small btn-gear action_plan'&gt;"+$(".lt-action-plan").val()+"&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;"+$(".lt-attach-files").val()+"&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>"+paperclip;
+						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
+						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"   &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear reason' id='reason-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Reason&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Gantt Chart&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt; &lt;button style='width:100%;' id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;Attach File&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>"+paperclip;
 						htmlTemplateQuantity+="	</td>";
 
 					htmlTemplateQuantity+="</tr>";
@@ -535,7 +533,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 //						}
 //
 //						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
-//						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;"+$(".lt-gantt").val()+"&lt;/button&gt; &lt;button class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;"+$(".lt-phase").val()+"&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear action_plan'&gt;"+$(".lt-action-plan").val()+"&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;"+$(".lt-attach-files").val()+"&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" style='text-align:center;' data-original-title=\"\" title=\"\"></i>"+paperclip;
+//						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;Gantt&lt;/button&gt; &lt;button class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;Attach File&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" style='text-align:center;' data-original-title=\"\" title=\"\"></i>"+paperclip;
 //						htmlTemplateQuantity+="	</td>";
 //
 //					htmlTemplateQuantity+="</tr>";
@@ -553,7 +551,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 					htmlTemplateQuantity+="<td></td>";
 					htmlTemplateQuantity+="<td></td>";
 					htmlTemplateQuantity+="<td></td>";
-					htmlTemplateQuantity+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>"+$(".lt-total").val()+"</b></td>";
+					htmlTemplateQuantity+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>Total</b></td>";
 					htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;font-weight: bold; font-size:16px;'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
 				htmlTemplateQuantity+="</tr>";
 //			}
@@ -1041,7 +1039,7 @@ var listAppraisalDetailFn = function(data){
 
 
 
-			 $("#titlePanelInformation").html($(".lt-employee-information").val());
+			 $("#titlePanelInformation").html("Employee Information");
 
 			 $(".txtEmpCode").html(data['head'][0]['emp_code']);
 			 $(".txtEmpName").html(data['head'][0]['emp_name']);
@@ -1058,7 +1056,7 @@ var listAppraisalDetailFn = function(data){
 			 $("#orgInformation").show();
 			 $("#empInformation").hide();
 
-			 $("#titlePanelInformation").html($(".lt-organization-information").val());
+			 $("#titlePanelInformation").html("Organization Information");
 
 			 $(".txtOrgCodeOrg").html(data['head'][0]['org_code']);
 			 $(".txtOrgNameOrg").html(data['head'][0]['org_name']);
@@ -1147,14 +1145,251 @@ var listAppraisalDetailFn = function(data){
 		htmlStage+="</tr>";
 
 	});
+	getCommentFn();
 	$("#listDataStageHistory").html(htmlStage);
 	$("#slideUpDownStageHistory").show();
 	//Stage History List Data..
-
-
-
-
 };
+
+
+var dataComment = [];
+var  getCommentFn = function(){   // by DARIS -->  get data comment
+	 clearComment(); // function clear data
+
+	$.ajax({
+		url:restfulURL+"/"+serviceName+"/public/appraisal/comment/"+$("#emp_result_id").val(),
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			if(data['data']=='admin-empty')   return true; 
+			else if(data['data']=='my-empty') return true;
+			else {
+					dataComment = data;
+					assignTemplateCommentFn();
+				 }
+		}
+	});
+}
+
+var  updateCommentFn = function(){   // by DARIS -->  update data comment
+	$.ajax({
+		url:restfulURL+"/"+serviceName+"/public/appraisal/comment/update/insert",
+		type:"post",
+		dataType:"json",
+		data:{"data":JSON.stringify(dataChangeComment)},
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			console.log("update comment successful !");
+		}
+	});
+}
+
+var  assignTemplateCommentFn = function(){ // by DARIS -->  gen template comment
+	var htmlTemplateComment ="";
+
+	htmlTemplateComment+="<input type='hidden' id='comment_opinion_id'>";
+	htmlTemplateComment+="<input type='hidden' id='comment_assessor_group_id'>";
+	htmlTemplateComment+="<input type='hidden' id='comment_emp_id'>";
+	htmlTemplateComment+="<input type='hidden' id='comment_emp_name'>";
+	htmlTemplateComment+="<input type='hidden' id='comment_comment'>";
+	htmlTemplateComment+="<input type='hidden' id='comment_emp_result_id'>";
+	
+	htmlTemplateComment+="<div id='template-comment' class=\"row-fluid\">";
+	htmlTemplateComment+="<div class=\"span12\">";
+	htmlTemplateComment+="<div class=\"ibox-title2\">";
+	htmlTemplateComment+="<div class='titlePanel'>Comment</div>";
+	htmlTemplateComment+="</div>";
+	htmlTemplateComment+="<div class=\"ibox-content\">";
+	htmlTemplateComment+="<div class='row-fluid' style=\"margin-bottom: 10px;\">"
+	htmlTemplateComment+="<div class=\"span12\" style='margin-bottom: 10px;'>"
+	
+	if(dataComment['user']=="other") // hidden select comment
+		htmlTemplateComment+="<div style='display:none;' class=\"span12\">"; 
+	else 
+		htmlTemplateComment+="<div class=\"span12\">";
+		
+	htmlTemplateComment+="<div class=\"btn-group\">";
+	htmlTemplateComment+="<button id='btnComment' style='border-bottom-right-radius: 0; border-bottom-width: 1.5px; border-left-width: 1.5px; border-top-right-radius: 0; border-top-width: 1.5px; min-width: 100%;' data-toggle=\"dropdown\" class=\"btn btn-success dropdown-toggle\"><span style='float:left;  margin-top: 3px;' class=\"icon-th-list\"></span><span id='span-filter' style='float:right;'> &nbsp;&nbsp;ทั้งหมด</span> </button>";
+	htmlTemplateComment+="<ul style='min-width: 100%;' class=\"dropdown-menu\">";
+	htmlTemplateComment+="<li><a onclick='btnCommentFn(3)'>ทั้งหมด</a></li>";
+	htmlTemplateComment+="<li><a onclick='btnCommentFn(2)'>ตอบกลับแล้ว </a></li>";
+	htmlTemplateComment+="<li><a onclick='btnCommentFn(1)'>ยังไม่ได้ตอบกลับ</a></li>";
+	htmlTemplateComment+="</ul>";
+	htmlTemplateComment+="</div>";
+	
+	htmlTemplateComment+="<div style=\"margin-left: 0px;\" class=\"btn-group\">";
+	htmlTemplateComment+="<button style='border-bottom-left-radius: 0; border-bottom-width: 1.5px; border-left-width: 1.5px; border-top-left-radius: 0; border-top-width: 1.5px; min-width: 100%;' data-toggle=\"dropdown\" id='sel-empname' class=\"btn dropdown-toggle\"><span id='span-emp' style='float:left;'></span><span style='float:right;' class=\"caret\"></span></button>";
+	htmlTemplateComment+=" <ul id='SelComment' style='min-width: 100%;' class=\"dropdown-menu\">";
+	
+	var num=1; var emp_id = '';
+	$.each(dataComment['detail'],function(index,indexEntry){ // gen select 
+		if(num){num=0; emp_id =indexEntry['emp_id'];}
+		htmlTemplateComment+="<li onclick='detailCommentFn(\""+indexEntry['emp_id']+"\")'><a>"+indexEntry['emp_name']+"</a></li>";
+	});
+	htmlTemplateComment+="</ul>";
+	htmlTemplateComment+=" </div>";
+
+	htmlTemplateComment+="</div>";
+	htmlTemplateComment+="</div>";
+	htmlTemplateComment+="<div class='row-fluid'>";
+	htmlTemplateComment+="<div class='row-fluid'>";
+	htmlTemplateComment+="<div class='span6'>";
+	htmlTemplateComment+="<label >ส่วนที่เด่นของผู้ถูกประเมิน</label>";
+	htmlTemplateComment+="<textarea  onchange='textareaChang(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px; padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='assessor__strength_opinion' class='form-control'></textarea>";
+	htmlTemplateComment+="</div>";
+	htmlTemplateComment+="<div class='span6'>";
+	htmlTemplateComment+="<label >ความคิดเห็น/การพัฒนาตนเองของผู้ถูกการเประเมิน</label>";
+	htmlTemplateComment+="<textarea  onchange='textareaChang(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='emp__strength_opinion' class='form-control'></textarea>";
+	htmlTemplateComment+="</div>";
+	htmlTemplateComment+="</div>";
+	htmlTemplateComment+="<div class='row-fluid'>";
+	htmlTemplateComment+="<div class='span6'>";
+	htmlTemplateComment+="<label>ส่วนที่ควรปรับปรุงของผู้ถูกประเมิน</label>";
+	htmlTemplateComment+="<textarea  onchange='textareaChang(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='assessor__weakness_opinion' class='form-control'></textarea>";
+	htmlTemplateComment+="</div>";
+	htmlTemplateComment+="<div class='span6'>";
+	htmlTemplateComment+="<label>สิ่งที่ผู้ถูกประเมินทำการปรับปรุง</label>";
+	htmlTemplateComment+="<textarea onchange='textareaChang(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='emp__weakness_opinion' class='form-control'></textarea>";
+	htmlTemplateComment+="</div>";
+	htmlTemplateComment+="</div>";
+	htmlTemplateComment+="</div>";
+    htmlTemplateComment+="</div>";
+	htmlTemplateComment+="</div>";
+    htmlTemplateComment+="</div>";
+   $("#appraisal_template_area").append(htmlTemplateComment);
+   detailCommentFn(emp_id);
+}
+
+var btnCommentFn = function(num) { // by DARIS -->  change button
+   	var htmlSelect="";
+   	var commentTXT = '';
+   	$("#SelComment").html('');   // clear select comment
+   	
+   	switch(num) {
+	case 1 : $("#span-filter").html(" &nbsp;&nbsp;ยังไม่ได้ตอบกลับ ");
+			 commentTXT="no"; break;
+	case 2 : $("#span-filter").html(" &nbsp;&nbsp;ตอบกลับแล้ว ");
+			 commentTXT="yes"; break;
+	default: $("#span-filter").html(" &nbsp;&nbsp;ทั้งหมด ");
+			 commentTXT="all"; 
+   	}
+   	
+	var num=1; var emp_id = '';
+	$.each(dataComment['detail'],function(index,indexEntry){
+		if(commentTXT == indexEntry['comment'] ||commentTXT=='all' ){
+		if(num){num=0; emp_id =indexEntry['emp_id'];}
+		htmlSelect+="<li onclick='detailCommentFn(\""+indexEntry['emp_id']+"\")'><a>"+indexEntry['emp_name']+"</a></li>";
+		}
+	});
+	$("#SelComment").html(htmlSelect); // gen select comment
+	 detailCommentFn(emp_id);
+   };
+
+
+var detailCommentFn = function(id){ // by DARIS -->  show detail
+	
+	// disabled text
+	$("#assessor__strength_opinion").prop("disabled",true);
+	$("#assessor__weakness_opinion").prop("disabled",true);
+	$("#emp__strength_opinion").prop("disabled",true);
+	$("#emp__weakness_opinion").prop("disabled",true); 
+	
+	// clear value
+	$('#assessor__strength_opinion').val('');    
+	$('#assessor__weakness_opinion').val('');
+	$('#emp__strength_opinion').val('');
+	$('#emp__weakness_opinion').val('');
+	$("#span-emp").html("&nbsp;");
+	
+	$.each(dataComment['detail'],function(index,indexEntry){
+		if(indexEntry['emp_id'] == id){
+			
+			// set parameter hidden
+			$("#comment_opinion_id").val(indexEntry['opinion_id']);
+			$("#comment_assessor_group_id").val(indexEntry['assessor_group_id']);
+			$("#comment_emp_id").val(indexEntry['emp_id']);
+			$("#comment_emp_name").val(indexEntry['emp_name']);
+			$("#comment_comment").val(indexEntry['comment']);
+			$("#comment_emp_result_id").val(indexEntry['emp_result_id']);
+			
+			$("#span-emp").html(indexEntry['emp_name']+" &nbsp;&nbsp;");
+
+			// get value to text
+			$('#assessor__strength_opinion').val(indexEntry['assessor__strength_opinion']);
+			$('#assessor__weakness_opinion').val(indexEntry['assessor__weakness_opinion']);
+			$('#emp__strength_opinion').val(indexEntry['emp__strength_opinion']);
+			$('#emp__weakness_opinion').val(indexEntry['emp__weakness_opinion']);
+			
+			//disable text
+			switch(dataComment['user']) {
+			case "admin":
+				$("#assessor__strength_opinion").prop("disabled",true);
+				$("#assessor__weakness_opinion").prop("disabled",true);
+				$("#emp__strength_opinion").prop("disabled",true);
+				$("#emp__weakness_opinion").prop("disabled",true); break;
+			case "my":
+				$("#assessor__strength_opinion").prop("disabled",true);
+				$("#assessor__weakness_opinion").prop("disabled",true);
+				$("#emp__strength_opinion").prop("disabled",false);
+				$("#emp__weakness_opinion").prop("disabled",false); break;
+			case "other":
+				$("#assessor__strength_opinion").prop("disabled",false);
+				$("#assessor__weakness_opinion").prop("disabled",false);
+				$("#emp__strength_opinion").prop("disabled",true);
+				$("#emp__weakness_opinion").prop("disabled",true); break;
+			}
+		}
+	});
+}
+
+var dataChangeComment = [];
+var textareaChang = function(id){   // by DARIS -->  function onchange
+var comment = 
+	dataComment['detail'] = $.grep(dataComment['detail'], function(data, index) {
+		return data.opinion_id != $("#comment_opinion_id").val();
+	});
+	
+	if($("#emp__strength_opinion").val()==''||$("#emp__weakness_opinion").val()=='')
+		$("#comment_comment").val('no');
+	
+	dataComment['detail'].push({
+		"opinion_id" : $("#comment_opinion_id").val(),
+		"emp_id" : $("#comment_emp_id").val(),
+		"emp_result_id" : $("#comment_emp_result_id").val(),
+		"emp_name" : $("#comment_emp_name").val(),
+		"assessor_group_id" : $("#comment_assessor_group_id").val(),
+		"comment" : $("#comment_comment").val(),
+		"assessor__strength_opinion" : $("#assessor__strength_opinion").val(),
+		"assessor__weakness_opinion" : $("#assessor__weakness_opinion").val(),
+		"emp__strength_opinion" : $("#emp__strength_opinion").val(),
+		"emp__weakness_opinion" : $("#emp__weakness_opinion").val()
+	});
+	
+	dataChangeComment = $.grep(dataChangeComment, function(data, index) {
+		return data.opinion_id != $("#comment_opinion_id").val();
+	});
+	dataChangeComment.push({
+		"opinion_id" : $("#comment_opinion_id").val(),
+		"emp_id" : $("#comment_emp_id").val(),
+		"emp_result_id" : $("#comment_emp_result_id").val(),
+		"assessor_group_id" : $("#comment_assessor_group_id").val(),
+		"assessor__strength_opinion" : $("#assessor__strength_opinion").val(),
+		"assessor__weakness_opinion" : $("#assessor__weakness_opinion").val(),
+		"emp__strength_opinion" : $("#emp__strength_opinion").val(),
+		"emp__weakness_opinion" : $("#emp__weakness_opinion").val()
+	});
+}
+
+var clearComment = function(){ // by DARIS -->  clear function
+	dataChangeComment = []; 
+	dataComment = [];
+	$("#template-comment").html("");
+}
+
+
 var findOneFn = function(id){
 
 	$.ajax({
@@ -1204,7 +1439,7 @@ var findOneFn = function(id){
 
 
 			}else{
-				callFlashSlide($(".lt-data-is-empty").val());
+				callFlashSlide("Data is empty.");
 				return false;
 			}
 
@@ -1759,7 +1994,7 @@ var listPhaseFn = function(data){
 
 			htmlTR+="<td style='text-align:center;'>";
 
-			htmlTR+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear edit_phase' id=edit_phase-"+indexEntry['phase_id']+" data-target='' data-toggle='modal'&gt;"+$(".lt-edit").val()+"&lt;/button&gt;&nbsp;&lt;button id=del_phase-"+indexEntry['phase_id']+" class='btn btn-danger btn-small btn-gear phaseDel'&gt;"+$(".lt-delete").val()+"&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+			htmlTR+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear edit_phase' id=edit_phase-"+indexEntry['phase_id']+" data-target='' data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=del_phase-"+indexEntry['phase_id']+" class='btn btn-danger btn-small btn-gear phaseDel'&gt;Delete&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
 
 			htmlTR+="</td>";
 		htmlTR+="</tr>";
@@ -1881,7 +2116,6 @@ var deleteAttachFileFn = function(id){
 		success:function(data){
 			if(data['status']==200){
 				getAttachFileFn($("#item_result_id").val());
-				findOneFn($("#emp_result_id").val());
 			}
 		}
 	});
@@ -1903,7 +2137,7 @@ var deleteReasonFn = function(id){
 			  success:function(data){
 				if(data['status']==200){
 
-					   callFlashSlide($(".lt-delete-successfully").val());       
+					   callFlashSlide("Delete Successfully.");       
 				       getReasonFn($("#reason_item_result_id").val());
 					   $("#confrimModal").modal('hide');
 
@@ -1949,7 +2183,7 @@ var listReasonFn = function(data){
 			htmlTR+="<td>"+indexEntry['rank']+"</td>";
 			htmlTR+="<td>"+indexEntry['reason_name']+"</td>";
 			htmlTR+="<td style='text-align:center;'>";
-			htmlTR+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear edit_reason' id=edit_reason-"+indexEntry['reason_id']+" data-target='' data-toggle='modal'&gt;"+$(".lt-edit").val()+"&lt;/button&gt;&nbsp;&lt;button id=del_reason-"+indexEntry['reason_id']+" class='btn btn-danger btn-small btn-gear reasonDel'&gt;"+$(".lt-delete").val()+"&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
+			htmlTR+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear edit_reason' id=edit_reason-"+indexEntry['reason_id']+" data-target='' data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id=del_reason-"+indexEntry['reason_id']+" class='btn btn-danger btn-small btn-gear reasonDel'&gt;Delete&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
 			htmlTR+="</td>";
 		htmlTR+="</tr>";
 	});
@@ -2076,20 +2310,20 @@ var listDataFn = function(data){
 
 			if($("#embed_appraisalType").val()=="2"){
 
-				htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-emp-code").val()+"</b></th>";
-				htmlHTML+=" <th style=\"widthauto;\"><b>"+$(".lt-emp-name").val()+"</b></th>";
-				htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-level").val()+"</b> </th>";
-				htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-organization").val()+"</b></th>";
-				htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-position").val()+"</b> </th>";
-				htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-action").val()+"</b></th>";
+				htmlHTML+=" <th style=\"width:auto;\"><b>Emp Code</b></th>";
+				htmlHTML+=" <th style=\"widthauto;\"><b>Emp Name</b></th>";
+				htmlHTML+=" <th style=\"width:auto;\"><b>Level</b> </th>";
+				htmlHTML+=" <th style=\"width:auto;\"><b>Organization </b></th>";
+				htmlHTML+=" <th style=\"width:auto;\"><b>Position</b> </th>";
+				htmlHTML+=" <th style=\"width:auto;\"><b>Action</b></th>";
 				//htmlHTML+=" <th style=\"width:auto; text-align:center;\"><b>Manage</b></th>";
 
 			}else if($("#embed_appraisalType").val()=="1"){
 
-				htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-org-code").val()+"</b></th>";
-				htmlHTML+=" <th style=\"widthauto;\"><b>"+$(".lt-org-name").val()+"</b></th>";
-				htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-level").val()+"</b> </th>";
-				htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-action").val()+"</b></th>";
+				htmlHTML+=" <th style=\"width:auto;\"><b>Org Code</b></th>";
+				htmlHTML+=" <th style=\"widthauto;\"><b>Org Name</b></th>";
+				htmlHTML+=" <th style=\"width:auto;\"><b>Level</b> </th>";
+				htmlHTML+=" <th style=\"width:auto;\"><b>Action</b></th>";
 				//htmlHTML+=" <th style=\"width:auto; text-align:center;\"><b>Manage</b></th>";
 
 			}
@@ -2423,6 +2657,9 @@ var saveAppraisalFn = function(){
 //	     score: ''
 //	  },...
 //	]"
+	
+	updateCommentFn();   // by DARIS -->  save comment 
+	
 	var competencyScore_First = "";
 	var competencyScore_Second = "";
 	var sum_ScoreCompetency = 0;
@@ -2498,7 +2735,7 @@ var saveAppraisalFn = function(){
 			if(data['status']==200){
 				
 				$("#ModalAppraisal").modal('hide');
-				callFlashSlide($(".lt-saved").val());
+				callFlashSlide("Saved.");
 				
 				if(emailLinkAppraisal==true) {
 					var url_redirect = $(location).attr('href').split("/").splice(0, 5).join("/");
@@ -2870,6 +3107,7 @@ $(document).ready(function() {
 			setParamSearch(dataSetParam);// in cMain.js
 			dropDrowIndividualOrgLevelFn();
 
+	
 			//Auto complete Start
 			
 
@@ -3028,9 +3266,9 @@ $(document).ready(function() {
 
 			var id=this.id.split("-");
 			id=id[1];
-			$("#remark_footer").val('');
-			findOneFn(id);
 			$("#emp_result_id").val(id);
+			findOneFn(id);
+			
 			//sessionStorage.getItem("tokenID");
 
 			sessionStorage.setItem('appraisal_type_id',$('#emp_appraisal_type_id-'+id).val());
@@ -3074,7 +3312,7 @@ $(document).ready(function() {
 				$("input.action_plan_id").prop("disabled",true);
 				return false;
 			  }else{
-				  callFlashSlideInModal($(".lt-can-not-add-action-plan-because-your-doing-update-data").val(),"#information3","error");
+				  callFlashSlideInModal("Can't add Action Plan. Because your doing Update Data!.","#information3","error");
 			  }
 		  });
 
@@ -3083,7 +3321,7 @@ $(document).ready(function() {
 		  $("#btnEditActionPlan").click(function() {
 
 				if($("#action_new_actionplan").val()=="add"){
-					callFlashSlideInModal($(".lt-can-not-edit-action-plan-because-your-doing-insert-data").val(),"#information3","error");
+					callFlashSlideInModal("Can't edit Action Plan. Because your doing insert Data!.","#information3","error");
 					return false;
 				  }
 
@@ -3248,7 +3486,7 @@ $(document).ready(function() {
 								  	$("#action_actionplan").val("add");
 									if(data['data']['error'].length==0){
 							     
-								  	callFlashSlideInModal($(".lt-update-successfully").val(),"#information3");
+								  	callFlashSlideInModal("Update Successfully.","#information3");
 
 									}else{
 										callFlashSlideInModal(listErrorActionPlanFn(data['data']['error']),"#information3","error");
@@ -3370,7 +3608,7 @@ $(document).ready(function() {
 
 								      if(data['data']['error'].length==0){
 										getActionPlanFn($("#item_result_id").val());
-									    callFlashSlideInModal($(".lt-insert-successfully").val(),"#information3");
+									    callFlashSlideInModal("Insert Successfully.","#information3");
 								     
 								      }else{
 										callFlashSlideInModal(listErrorActionPlanFn(data['data']['error']),"#information3","error");
@@ -3439,7 +3677,7 @@ $(document).ready(function() {
 
 								 if(data['data']['error'].length==0){
 										getActionPlanFn($("#item_result_id").val());
-									    callFlashSlideInModal($(".lt-delete-successfully").val(),"#information3");
+									    callFlashSlideInModal("Delete Successfully.","#information3");
 								     
 								      }else{
 										callFlashSlideInModal(listErrorActionPlanFn(data['data']['error']),"#information3","error");
@@ -3733,8 +3971,8 @@ $(document).ready(function() {
 			{
 				//console.log(data);
 				if(data['status']==200 && data['data'].length>0){
-					findOneFn($("#emp_result_id").val());
-					callFlashSlideInModal($(".lt-upload-successfully").val(),".information");
+
+					callFlashSlideInModal("Upload Successfully.",".information");
 					$('#attach_files_attachment').val("");
 					$(".dropify-clear").click();
 
