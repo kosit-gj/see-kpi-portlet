@@ -371,12 +371,13 @@ var findOneFn = function(id,actionType){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			//console.log(data['head'].length);
-			if(emailLinkAssignment==true) {
-				url_period_id = data['head'][0]['period_id'];
-				$("#period_id_edit").val(url_period_id);
-			}
 			
 			if(data['head'].length>0){
+				if(emailLinkAssignment==true) {
+					url_period_id = data['head'][0]['period_id'];
+					$("#period_id_edit").val(url_period_id);
+				}
+				
 				setDataToTemplateFn(data,actionType);
 				$("#ModalAssignment").modal({
 					"backdrop" : setModalPopup[0],
