@@ -40,6 +40,12 @@ plid = layout.getPlid();
     font-size: 13px;
     font-weight: normal;
 }
+.not-active {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  color: gray !important;
+}
 </style>
 
 <!-- Modal Import Appraisal Criteria -->
@@ -100,7 +106,7 @@ plid = layout.getPlid();
 				</div>
 				<div class="modal-footer">
 				
-					<input type='hidden' id='crierai_id' name='crierai_id'>
+					<!-- <input type='hidden' id='crierai_id' name='crierai_id'> -->
 					<button class="btn btn-success" type="button" id="btnCriteriaSubmit">Save</button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button></div>

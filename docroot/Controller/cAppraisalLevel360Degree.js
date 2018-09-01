@@ -1,6 +1,8 @@
+var gSetCriteriaCurLevel, gSetWeightCurStruc;
+
 //-------- Update Criteria Start
 var options=[];
-var insertCriteriaFn = function () {
+var insertCriteriaFn = function (levelId) {
 	var structure =[];
 	var weight = [];
 	var criteria = [];
@@ -13,21 +15,14 @@ var insertCriteriaFn = function () {
 			checkbox = "0";
 		}
 		criteria.push({
-			"structure_id": ""+this.id.split("-")[1]+"",
-			"weight_percent": ""+$(".from_data_weight[id$="+this.id.split("-")[1]+"]").val()+"",
+			"structure_id": ""+this.id.split("__")[1]+"",
+			"weight_percent": ""+$(".from_data_weight[id$="+this.id.split("__")[1]+"]").val()+"",
 			"checkbox": ""+checkbox+""
-		   });
+		});
 	});
 	
-//	$('.from_data_weight').each(function(index, indexEntry) {
-//		//console.log("id: "+this.id+" weigth : "+$(indexEntry).val());
-//		criteria.push({
-//			"structure_id": ""+this.id+"",
-//			"weight_percent": ""+$(indexEntry).val()+"",	   	
-//		   });
-//	});
 		$.ajax({
-			url:restfulURL+"/"+serviceName+"/public/appraisal_level_360/"+$("#crierai_id").val()+"/criteria",
+			url:restfulURL+"/"+serviceName+"/public/appraisal_level_360/"+levelId+"/criteria",
 			type : "PATCH",
 			dataType : "json",
 			headers:{Authorization:"Bearer "+tokenID.token},
@@ -55,15 +50,15 @@ var insertCriteriaFn = function () {
 }
 // -------- Update Criteria End
 
-//--------  List Criteria  Start
 
+//--------  List Criteria  Start
 var listAppraisalCriteria = function(id) {
 	htmlTable="";
 	weight_percent="";
 	no_weight = "";
 	is_check = "";
 	$.ajax({ 
-		url:restfulURL+"/"+serviceName+"/public/appraisal_level/"+id+"/criteria",
+		url:restfulURL+"/"+serviceName+"/public/appraisal_level_360/"+id+"/criteria",
 		type : "get",
 		dataType : "json",
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -73,13 +68,11 @@ var listAppraisalCriteria = function(id) {
 			}else{
 				no_weight="";
 			};
-
 			
 			$.each(data['data'],function(index,indexEntry) { 
 				if(index==0) {
 					$("#ac_appraisal_level_name").html("<b>"+indexEntry['appraisal_level_name']+"</b>");
 				}
-				console.log(indexEntry["weight_percent"]);
 				if(indexEntry["weight_percent"] == null){
 					weight_percent="0.00";
 				}else{
@@ -93,14 +86,18 @@ var listAppraisalCriteria = function(id) {
 				
 				htmlTable+="<tr>";
 				htmlTable+="	<td>";
-				htmlTable+="		<input  id=\"form_structure_item-"+indexEntry["structure_id"]+"\" class=\"from_data_structure\"";
+				htmlTable+="		<input  id=\"form_structure_item__"+indexEntry["structure_id"]+"\" class=\"from_data_structure\"";
 				htmlTable+="		type='checkbox' "+is_check+" value=\""+indexEntry["structure_id"]+"\">";
 				htmlTable+="	</td>";
-				htmlTable+="	<td style=\"vertical-align:middle\">";
-				htmlTable+=			indexEntry["structure_name"];
+				htmlTable+="	<td style='vertical-align:middle'>";
+				htmlTable+=			"<p id='structure_name__"+indexEntry["structure_id"]+"' style='float:left;'>"+indexEntry["structure_name"]+"</p>";
 				if(indexEntry["form_id"]==2) {
-					htmlTable+="			<a class='addModalCriteriaSetWeight' id='"+indexEntry["appraisal_level_id"]+"-"+indexEntry["structure_id"]+"-"+indexEntry['appraisal_level_name']+"-"+indexEntry['structure_name']+" 'style='padding-left:5px; cursor:pointer'><u><i class='icon-edit icon-white'> Set Weight</i></u></a>";
+					if(is_check == "checked"){
+						htmlTable+="			<a class='addModalCriteriaSetWeight' id='set_weight__"+indexEntry["structure_id"]+"' style='padding-left:8px;cursor:pointer;'><u><i class='icon-edit icon-white'> Set Weight </i></u></a>";
+					}else{
+						htmlTable+="			<a class='addModalCriteriaSetWeight not-active' id='set_weight__"+indexEntry["structure_id"]+"' style='padding-left:8px;cursor:pointer;'><u><i class='icon-edit icon-white'> Set Weight </i></u></a>";
 					}
+				}
 				htmlTable+="	</td>";
 				htmlTable+="	<td style=\"vertical-align:middle\" >";
 				htmlTable+="		<input style='margin-bottom: 0px;' class=\"span12 from_data_weight numberOnly\" "+no_weight+" type='text'  id=\""+indexEntry["structure_id"]+"\" value=\""+weight_percent+"\" />";
@@ -118,8 +115,7 @@ var listAppraisalCriteria = function(id) {
 					return o.value.lastIndexOf(r.text)
 				} else return o.selectionStart
 			};
-			jQuery('.numberOnly').keypress(function (evt) { 
-				console.log("Keypress");
+			jQuery('.numberOnly').keypress(function (evt) {
 				 var charCode = (evt.which) ? evt.which : event.keyCode;
 				 var number = this.value.split('.');
 				 if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -143,9 +139,10 @@ var listAppraisalCriteria = function(id) {
 }
 //--------  List Criteria End
 
+
 //-------- Update Criteria Start
 var options=[];
-var insertSetweightFn = function (level_id,structure_id) {
+var insertSetweightFn = function (level_id, structure_id) {
 	var structure =[];
 	var weight = [];
 	var setweight = [];
@@ -159,14 +156,14 @@ var insertSetweightFn = function (level_id,structure_id) {
 		}
 		setweight.push({
 			"structure_id": ""+structure_id+"",
-			"assessor_group_id": ""+this.id.split("-")[1]+"",
-			"weight_percent": ""+$(".from_data_weight[id$="+this.id.split("-")[1]+"]").val()+"",
+			"assessor_group_id": ""+this.id.split("__")[1]+"",
+			"weight_percent": ""+$(".from_data_group_weight[id$="+this.id.split("__")[1]+"]").val()+"",
 			"checkbox": ""+checkbox+""
 		   });
 	});
 	
 		$.ajax({
-			url:restfulURL+"/"+serviceName+"/public/competency_criteria/"+level_id,
+			url:restfulURL+"/"+serviceName+"/public/competency_criteria/"+level_id+"/"+structure_id,
 			type : "PATCH",
 			dataType : "json",
 			headers:{Authorization:"Bearer "+tokenID.token},
@@ -196,7 +193,7 @@ var insertSetweightFn = function (level_id,structure_id) {
 
 //--------  List Criteria Set Weight Start
 
-var SetWeightFn = function(level_id,structure_id,structure_name) {
+var SetWeightFn = function(level_id, structure_id, structure_name) {
 	htmlTable="";
 	weight_percent="";
 	no_weight = "";
@@ -208,8 +205,6 @@ var SetWeightFn = function(level_id,structure_id,structure_name) {
 		data:{"appraisal_level_id":level_id,'structure_id':structure_id},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success : function(data) {
-			console.log(data);
-
 			$.each(data,function(index,indexEntry) {
 				if(index==0) {
 					$("#ac_Structure_name").html("<b>"+structure_name+"</b>");
@@ -228,14 +223,14 @@ var SetWeightFn = function(level_id,structure_id,structure_name) {
 				
 				htmlTable+="<tr>";
 				htmlTable+="	<td>";
-				htmlTable+="		<input  id=\"form_structure_item-"+indexEntry["assessor_group_id"]+"-"+indexEntry["structure_id"]+"\" class=\"from_data_setweight\"";
+				htmlTable+="		<input  id=\"form_structure_item__"+indexEntry["assessor_group_id"]+"__"+indexEntry["structure_id"]+"\" class=\"from_data_setweight\"";
 				htmlTable+="		<input type='checkbox'"+is_check+" value=\""+indexEntry["assessor_group_id"]+"\">";
 				htmlTable+="	</td>";
 				htmlTable+="	<td>";
 				htmlTable+=			indexEntry["assessor_group_name"];
 				htmlTable+="	</td>";
 				htmlTable+="	<td style=\"vertical-align:middle\" >";
-				htmlTable+="		<input style='margin-bottom: 0px;' class=\"span12 from_data_weight numberOnly\" "+no_weight+" type='text'  id=\""+indexEntry["assessor_group_id"]+"\" value=\""+indexEntry["weight_percent"]+"\" />";
+				htmlTable+="		<input style='margin-bottom: 0px;' class=\"span12 from_data_group_weight numberOnly\" "+no_weight+" type='text'  id=\""+indexEntry["assessor_group_id"]+"\" value=\""+indexEntry["weight_percent"]+"\" />";
 				htmlTable+="	</td>";
 				htmlTable+="</tr>";
 					
@@ -251,8 +246,7 @@ var SetWeightFn = function(level_id,structure_id,structure_name) {
 					return o.value.lastIndexOf(r.text)
 				} else return o.selectionStart
 			};
-			jQuery('.numberOnly').keypress(function (evt) { 
-				console.log("Keypress");
+			jQuery('.numberOnly').keypress(function (evt) {
 				 var charCode = (evt.which) ? evt.which : event.keyCode;
 				 var number = this.value.split('.');
 				 if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -276,147 +270,253 @@ var SetWeightFn = function(level_id,structure_id,structure_name) {
 //--------  List Criteria Set Weight End
 
 
-$(document).ready(function(){
-        	//alert(createTableFn());
-	
-	
-	 var username = $('#user_portlet').val();
-	 var password = $('#pass_portlet').val();
-	 var plid = $('#plid_portlet').val();
-	 if(username!="" && username!=null & username!=[] && username!=undefined ){
-	 	
-		 if(connectionServiceFn(username,password,plid)==true){
-	 		
-	 	
-			 		options={
-		 			"colunms":[
-		 					   {"colunmsDisplayName":"Seq",           "width":"","id":"seq_no","colunmsType":"text"},
-		 			           {"colunmsDisplayName":"Appraisal Level Name","width":"","id":"appraisal_level_name","colunmsType":"text"},
-		 			           {"colunmsDisplayName":"View All Employee","width":"","id":"is_all_employee","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"Is HR","width":"","id":"is_hr","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"Is Self Assign","width":"","id":"is_self_assign","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"Is Group Action","width":"","id":"is_group_action","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"Is Show Quality","width":"","id":"is_show_quality","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"Organization","width":"","id":"is_org","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"Individual","width":"","id":"is_individual","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"Is Active","width":"","id":"is_active","colunmsType":"checkbox"},
-		 			           {"colunmsDisplayName":"Parent","width":"","id":"parent_level_name","colunmsType":"text"}
-		 			          
-		 			           
-		 			          ],
-		 			          
-		 	    			
-		 	    			"form":[
-		 	    				{
-								"label":"Seq","inputType":"text","placeholder":"Seq",
-								"id":"seq_no","width":"250px","dataTypeInput":"number","required":true,
+$(document).ready(
+		function() {
+			var username = $('#user_portlet').val();
+			var password = $('#pass_portlet').val();
+			var plid = $('#plid_portlet').val();
+			if (username != "" && username != null & username != []
+					&& username != undefined) {
+
+				if (connectionServiceFn(username, password, plid) == true) {
+
+					options = {
+						"colunms" : [ {
+							"colunmsDisplayName" : "Seq",
+							"width" : "",
+							"id" : "seq_no",
+							"colunmsType" : "text"
+						}, {
+							"colunmsDisplayName" : "Appraisal Level Name",
+							"width" : "",
+							"id" : "appraisal_level_name",
+							"colunmsType" : "text"
+						}, {
+							"colunmsDisplayName" : "View All Employee",
+							"width" : "",
+							"id" : "is_all_employee",
+							"colunmsType" : "checkbox"
+						}, {
+							"colunmsDisplayName" : "Is HR",
+							"width" : "",
+							"id" : "is_hr",
+							"colunmsType" : "checkbox"
+						}, {
+							"colunmsDisplayName" : "Is Self Assign",
+							"width" : "",
+							"id" : "is_self_assign",
+							"colunmsType" : "checkbox"
+						}, {
+							"colunmsDisplayName" : "Is Group Action",
+							"width" : "",
+							"id" : "is_group_action",
+							"colunmsType" : "checkbox"
+						}, {
+							"colunmsDisplayName" : "Is Show Quality",
+							"width" : "",
+							"id" : "is_show_quality",
+							"colunmsType" : "checkbox"
+						}, {
+							"colunmsDisplayName" : "Organization",
+							"width" : "",
+							"id" : "is_org",
+							"colunmsType" : "checkbox"
+						}, {
+							"colunmsDisplayName" : "Individual",
+							"width" : "",
+							"id" : "is_individual",
+							"colunmsType" : "checkbox"
+						}, {
+							"colunmsDisplayName" : "Is Active",
+							"width" : "",
+							"id" : "is_active",
+							"colunmsType" : "checkbox"
+						}, {
+							"colunmsDisplayName" : "Parent",
+							"width" : "",
+							"id" : "parent_level_name",
+							"colunmsType" : "text"
+						}
+
+						],
+
+						"form" : [
+								{
+									"label" : "Seq",
+									"inputType" : "text",
+									"placeholder" : "Seq",
+									"id" : "seq_no",
+									"width" : "250px",
+									"dataTypeInput" : "number",
+									"required" : true,
 								},
-		 	    				{
-		 	    				"label":"Appraisal Level Name","inputType":"text","placeholder":"Appraisal Level Name",
-		 	        			"id":"appraisal_level_name","width":"250px","required":true
-		 	    					
-		 	    				},
-		 	    			    {
-		 	    				"label":"View All Employee","inputType":"checkbox","default":"uncheck",
-		 	    				"id":"is_all_employee","width":"250px"
-		 	    				},
-		 	    				{
-		 	 	    			"label":"Is HR","inputType":"checkbox","default":"uncheck",
-		 	 	    			"id":"is_hr","width":"200px"
-		 	 	    			},
-		 	 	    			{
-			 	 	    		"label":"Is Self Assign","inputType":"checkbox","default":"uncheck",
-			 	 	    		"id":"is_self_assign","width":"200px"
-			 	 	    		},
-			 	 	    		{
-				 	    		"label":"Is Group Action","inputType":"checkbox","default":"uncheck",
-				 	    		"id":"is_group_action","width":"200px"
-				 	    		},
-				 	    		{
-					 	    	"label":"Is Show Quality","inputType":"checkbox","default":"uncheck",
-					 	    	"id":"is_show_quality","width":"200px"
-					 	    	},
-		 	    			    {
-			 	    			"label":"No Weight","inputType":"checkbox","default":"uncheck",
-			 	    			"id":"no_weight","width":"200px"
-			 	    			},
-			 	    			{
-			 	    			"label":"District","inputType":"checkbox","default":"uncheck",
-			 	    			"id":"district_flag","width":"200px"
-			 	    			},
-			 	    			{
-			 	    			"label":"Organization","inputType":"checkbox","default":"uncheck",
-			 	    			"id":"is_org","width":"200px"
-			 	    			},
-			 	    			{
-				 	    		"label":"Individual","inputType":"checkbox","default":"uncheck",
-				 	    		"id":"is_individual","width":"200px"
-				 	    		},
-			 	    			{
-		 	    				"label":"IsActive","inputType":"checkbox","default":"checked",
-		 	    				"id":"is_active","width":"200px"
-		 	    				},
-		 	    				{
-		    					"label":"Parent Appraisal Level","inputType":"dropdown","initValue":"","updateList":true,
-		    					"id":"parent_id","width":"250px","url":""+restfulURL+"/"+serviceName+"/public/appraisal_level"
-		    					},
-		    					{
-		    	    			"label":"Default Stage ID","inputType":"text","placeholder":"Default Stage ID","default":"1",
-		    	    			"id":"default_stage_id","width":"50px","dataTypeInput":"number","required":true,
-		    					 } 
-		    					
-		 	    				
-		 	    					
-		 	    			],
-		 	    			
-		 	    			
-		 			 "formDetail":{"formSize":"modal-dialog","formName":"Appraisal Level","id":"appraisalLevelForm","pk_id":"level_id"},       
-		 			 "serviceName":[restfulURL+"/"+serviceName+"/public/appraisal_level"],
-		 			 "tokenID":tokenID,
-		 			 "pagignation":false,
-		 			 "expressSearch":false,
-		 			 "advanceSearchSet":false,
-		 			 "btnManageOption":{"id":"addModalCriteria","name":"Criteria"}
-		 	}
-		 	//console.log(options['tokenID'].token);
-		 	createDataTableFn(options);
-		 	
-		 	 
-		 	//alert("helo");
-		 	$(document).on('click','.addModalCriteria',function(){
-		 		
-		 		var id = this.id.split("-");
-		 		id=id[1];
-		 		$("#crierai_id").val(id);
-		 		//console.log("3");
-		 		//console.log($(this).parent().parent().parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().text());
-//		 		$("#ac_appraisal_level_name").html("<b>"+$(this).parent().parent().parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().text()+"</b>");
-		 		listAppraisalCriteria(id);
-		 		$("#addModalCriteria").modal({
-		 			"backdrop" : setModalPopup[0],
-					"keyboard" : setModalPopup[1]
-		 		});
-		 		
-		 		$("#btnCriteriaSubmit").off("click");
-		 		$("#btnCriteriaSubmit").on("click",function(){
-		 			$("#information2").hide();
-		 			insertCriteriaFn();
-		 			
-		 		});
-		 			 			
-		 	});
- 	
-			$(document).on('click','.addModalCriteriaSetWeight',function(){
-		 		var id = this.id.split("-");
-				SetWeightFn(id[0],id[1],id[4]);
-				$("#addModalCriteriaSetWeightModal").modal()
-				$("#btnSetweightSubmit").off("click");
-				$("#btnSetweightSubmit").on('click',function(){
-					$("#information3").hide();
-					insertSetweightFn(id[0],id[1]);
-				});
-		 	});
-	 	}
+								{
+									"label" : "Appraisal Level Name",
+									"inputType" : "text",
+									"placeholder" : "Appraisal Level Name",
+									"id" : "appraisal_level_name",
+									"width" : "250px",
+									"required" : true
+
+								},
+								{
+									"label" : "View All Employee",
+									"inputType" : "checkbox",
+									"default" : "uncheck",
+									"id" : "is_all_employee",
+									"width" : "250px"
+								},
+								{
+									"label" : "Is HR",
+									"inputType" : "checkbox",
+									"default" : "uncheck",
+									"id" : "is_hr",
+									"width" : "200px"
+								},
+								{
+									"label" : "Is Self Assign",
+									"inputType" : "checkbox",
+									"default" : "uncheck",
+									"id" : "is_self_assign",
+									"width" : "200px"
+								},
+								{
+									"label" : "Is Group Action",
+									"inputType" : "checkbox",
+									"default" : "uncheck",
+									"id" : "is_group_action",
+									"width" : "200px"
+								},
+								{
+									"label" : "Is Show Quality",
+									"inputType" : "checkbox",
+									"default" : "uncheck",
+									"id" : "is_show_quality",
+									"width" : "200px"
+								},
+								{
+									"label" : "No Weight",
+									"inputType" : "checkbox",
+									"default" : "uncheck",
+									"id" : "no_weight",
+									"width" : "200px"
+								},
+								{
+									"label" : "District",
+									"inputType" : "checkbox",
+									"default" : "uncheck",
+									"id" : "district_flag",
+									"width" : "200px"
+								},
+								{
+									"label" : "Organization",
+									"inputType" : "checkbox",
+									"default" : "uncheck",
+									"id" : "is_org",
+									"width" : "200px"
+								},
+								{
+									"label" : "Individual",
+									"inputType" : "checkbox",
+									"default" : "uncheck",
+									"id" : "is_individual",
+									"width" : "200px"
+								},
+								{
+									"label" : "IsActive",
+									"inputType" : "checkbox",
+									"default" : "checked",
+									"id" : "is_active",
+									"width" : "200px"
+								},
+								{
+									"label" : "Parent Appraisal Level",
+									"inputType" : "dropdown",
+									"initValue" : "",
+									"updateList" : true,
+									"id" : "parent_id",
+									"width" : "250px",
+									"url" : "" + restfulURL + "/" + serviceName
+											+ "/public/appraisal_level"
+								}, {
+									"label" : "Default Stage ID",
+									"inputType" : "text",
+									"placeholder" : "Default Stage ID",
+									"default" : "1",
+									"id" : "default_stage_id",
+									"width" : "50px",
+									"dataTypeInput" : "number",
+									"required" : true,
+								}
+
+						],
+
+						"formDetail" : {
+							"formSize" : "modal-dialog",
+							"formName" : "Appraisal Level",
+							"id" : "appraisalLevelForm",
+							"pk_id" : "level_id"
+						},
+						"serviceName" : [ restfulURL + "/" + serviceName
+								+ "/public/appraisal_level" ],
+						"tokenID" : tokenID,
+						"pagignation" : false,
+						"expressSearch" : false,
+						"advanceSearchSet" : false,
+						"btnManageOption" : {
+							"id" : "addModalCriteria",
+							"name" : "Criteria"
+						}
+					}
+					createDataTableFn(options);
+
+				}
+			}
+
+});
+
+
+// Set Criteria //
+$(document).on('click', '.addModalCriteria', function() {
+	$("#information2").hide();
+	
+	gSetCriteriaCurLevel = this.id.split("-")[1];
+	
+	//$("#crierai_id").val(gSetCriteriaCurLevel);
+	listAppraisalCriteria(gSetCriteriaCurLevel);
+	$("#addModalCriteria").modal({
+		"backdrop" : setModalPopup[0],
+		"keyboard" : setModalPopup[1]
+	});
+
+	$("#btnCriteriaSubmit").off("click");
+	$("#btnCriteriaSubmit").on("click", function() {
+		$("#information2").hide();
+		insertCriteriaFn(gSetCriteriaCurLevel);
+	});
+});
+
+
+// Set Criteria Weight (Form 2) //
+$(document).on('click', '.addModalCriteriaSetWeight', function() {
+	$("#information2").hide();
+	gSetWeightCurStruc = this.id.split("__")[1];
+	SetWeightFn(gSetCriteriaCurLevel, gSetWeightCurStruc, $('#structure_name__'+gSetWeightCurStruc).text()); //SetWeightFn(level_id, structure_id, structure_nam);
+	$("#addModalCriteriaSetWeightModal").modal()
+	$("#btnSetweightSubmit").off("click");
+	$("#btnSetweightSubmit").on('click', function() {
+		$("#information3").hide();
+		insertSetweightFn(gSetCriteriaCurLevel, gSetWeightCurStruc); //insertSetweightFn(level_id, structure_id)
+	});
+});
+
+
+// enable/disable Set Weight button //
+$(document).on('change', '.from_data_structure', function() {
+	var id = this.id.split("__");
+	 if ($(this).is(":checked")){
+		 $('#set_weight__'+id[1]).removeClass('not-active');
+	 } else {
+		 $('#set_weight__'+id[1]).addClass('not-active');
 	 }
- 	
- 	});
+});
