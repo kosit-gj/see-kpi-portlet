@@ -54,6 +54,7 @@
 <input class="lt-unit" type="hidden" value="<liferay-ui:message key="unit"/>"/>
 <input class="lt-value-get-zero" type="hidden" value="<liferay-ui:message key="value-get-zero"/>"/>
 <input class="lt-view" type="hidden" value="<liferay-ui:message key="view"/>"/>
+<input class="lt-group" type="hidden" value="<liferay-ui:message key="group"/>"/>
 
 <!-- Appraisal (kpi result) -->
 <input class="lt-action-plan" type="hidden" value="<liferay-ui:message key="action-plan"/>"/>
