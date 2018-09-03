@@ -278,8 +278,8 @@ var listImportEmployeeFn = function(data) {
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["position_name"])+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["chief_emp_code"])+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["appraisal_level_name"])+"</td>";
-		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["dotline_code"])+"</td>"
-		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+"<div align='center'><input type=\"checkbox\" "+has_second_checkbox+">"+"</div></td>";
+		//htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["dotline_code"])+"</td>"
+		//htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+"<div align='center'><input type=\"checkbox\" "+has_second_checkbox+">"+"</div></td>";
 		//htmlTable += "<td class='objectCenter'>"+IsActive+"</td>";
 		//<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["_id"]+ " data-target=#ModalLevel data-toggle='modal'>Ruld</button>&nbsp;
 		//&lt;button class='btn btn-primary btn-xs btn-gear add' id=1 data-target=#ModalLevel data-toggle='modal'&gt;Role&lt;/button&gt;
