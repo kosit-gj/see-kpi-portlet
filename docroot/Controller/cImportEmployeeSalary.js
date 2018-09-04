@@ -1,21 +1,19 @@
+// set global variable // 
 var restfulPathImportEmployee="/"+serviceName+"/public/import_employee";
-// var restfulPathAppraisalLevel="/"+serviceName+"/public/appraisal_level";
 var restfulPathAppraisalLevel="/"+serviceName+"/public/import_employee/assign/appraisal_level";
 var restfulPathDropDownOrganization="/"+serviceName+"/public/org";
 var restfulPathPositionAutocomplete="/"+serviceName+"/public/position/auto";
 var restfulPathEmployeeAutocomplete="/"+serviceName+"/public/import_employee/auto_employee_name";
-//Global variable
 var galbalDataImportEmp=[];
 var galbalDataTemp = [];
 var pageNumberDefault=1;
 
-//Check Validation Start
-var validationFn = function(data){
 
+// Check Validation Start //
+var validationFn = function(data){
 	var validate = "";
 	var count = 0;
 	$.each(data['data'], function(index, indexEntry) {
-
 		if (index != undefined) {
 			if (count == 0) {
 				validate += "<font color='red'>* </font>" + indexEntry + "";
@@ -23,13 +21,11 @@ var validationFn = function(data){
 				validate += "<br><font color='red'>* </font> " + indexEntry + " ";
 			}
 		}
-
 		count++;
 	});
-	
 	callFlashSlideInModal(validate,"#information2","error");
-	//callFlashSlideInModal(validate);
 };
+
 
 //Check Validation Edd
 var validateFileFn = function(data){
@@ -51,23 +47,16 @@ var validateFileFn = function(data){
 	 			    }
 	 			}
 			}
-		}
-		 
-//	     $.each(indexEntry['errors'],function(index2,indexEntry2){
-//	    	 console.log("test4");
-//	    	 //validateFile+="<font color='red'>&emsp;*</font> "+indexEntry2+"<br>";
-//	     });
-	 
+		}	 
 	});
 	callFlashSlideInModal(validateFile,"#informationFile","error");
 }
+
+
 var listErrorFn =function(data){
 	var errorData="";
 	
 	$.each(data,function(index,indexEntry){
-
-
-
 		if(data[index]['employee_code']!= undefined || data[index]['employee_code']==null){
 			if(data[index]['employee_code']== null){//The employee code field is null
 				errorData+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Employee Code : null <i class='fa fa-level-down'></i><br>";
@@ -110,23 +99,14 @@ var listErrorFn =function(data){
 		if(data[index]['errors']['has_second_line']!=undefined){
 			errorData+="<font color='red'>&emsp;*</font> "+data[index]['errors']['has_second_line']+"<br>";
 		}
-		
-
 	});
-	
-	
-	
-	//alert(errorData);
 	callFlashSlideInModal(errorData,"#information","error");
-	//callFlashSlideInModal(errorData);
-	/*return errorData;*/
 }
 
-//--------  Clear Start 
+
+// Clear Start // 
 var clearFn = function() {
-	
-	
-	
+
 	$("#from_emp_code").val("");
 	$("#from_emp_name").val("");
 	$("#from_emp_wsd").val("");
@@ -146,20 +126,16 @@ var clearFn = function() {
 	$("#from_checkboxHas_second_line").prop("checked",false);
 	$("#from_checkboxIs_active").prop("checked",false);
 	
-	
 	 $(".from_data_role").prop('checked', false); 
 	 
 	 $('#file').val("");
 
-//	$("#txtSampleData").removeAttr("disabled");
-	
 	$("#action").val("add");
 	$("#btnSubmit").val("Add");
-
 }
-//--------  Clear End
 
-//--------  GetData Start
+
+// GetData Start //
 var getDataFn = function(page,rpp){
 
 	var Organization= $("#param_Organization").val();
@@ -169,38 +145,35 @@ var getDataFn = function(page,rpp){
 		url : restfulURL+restfulPathImportEmployee,
 		type : "get",
 		dataType : "json",
-		data:{"page":page,"rpp":rpp,
+		data:{
+			"page":page,
+			"rpp":rpp,
 			"org_id":Organization,
 			"position_id":position,
 			"emp_code":empName
 		},
 		headers:{Authorization:"Bearer "+tokenID.token},
-		async:false,// w8 data 
+		async:false,
 		success : function(data) {
 			
 			listImportEmployeeFn(data['data']);
-			//total
+
+			// total //
 			galbalDataImportEmp=data;
 			paginationSetUpFn(galbalDataImportEmp['current_page'],galbalDataImportEmp['last_page'],galbalDataImportEmp['last_page']);
 		}
 	});
-	
-	
 };
-//--------  GetData End
 
 
-//-------- findOne
+// FindOne //
 var findOneFn = function(id) {
 	$.ajax({
 		url:restfulURL+restfulPathImportEmployee+"/"+id,
 		type : "get",
 		dataType : "json",
 		headers:{Authorization:"Bearer "+tokenID.token},
-		success : function(data) {		
-			//alert(txtFrom + " Name : "+data['emp_name']);
-			
-				
+		success : function(data) {
 				$("#from_emp_code").val(data['emp_code']);
 				$("#from_emp_name").val(data['emp_name']);
 				$("#from_Level_id").val(data['level_id']);
@@ -221,34 +194,32 @@ var findOneFn = function(id) {
 					$('#from_checkboxHas_second_line').prop('checked', true);
 				}else{
 					$('#from_checkboxHas_second_line').prop('checked', false);
-				}		
-				//IsAction
+				}
+				
+				// Is Action //
 				if(data['is_active']==1){
 					$('#from_checkboxIs_active').prop('checked', true);
 				}else{
 					$('#from_checkboxIs_active').prop('checked', false);
-				}		
-								
+				}				
 		}
 	});
 };
-//--------- findOne
 
-//-------- SearchFn Start
+
+// SearchFn Start //
 var searchAdvanceFn = function (Organization,Position,EmployeeName) {
-	//embed parameter start
+	
+	// embed parameter start //
 	var htmlParam="";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_Organization' name='param_Organization' value='"+Organization+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_Position' name='param_Position' value='"+Position+"'>";
 	htmlParam+="<input type='hidden' class='paramEmbed' id='param_EmpName' name='param_EmpName' value='"+EmployeeName+"'>";
 	$(".paramEmbed").remove();
 	$("body").append(htmlParam);
-	//embed parameter end
-	getDataFn(pageNumberDefault,$("#rpp").val());
-	
-	
+
+	getDataFn(pageNumberDefault,$("#rpp").val());	
 }
-// -------- SearchFn End
 
 
 //--------  ListData  Start
@@ -259,7 +230,6 @@ var listImportEmployeeFn = function(data) {
 	var htmlAppraisalLevel= "";
 	var htmlTable = "";
 	var has_second_checkbox;
-	//console.log(data);
 	$.each(data,function(index,indexEntry) {
 		if(indexEntry["has_second_line"]==1) {
 			has_second_checkbox = "checked disabled";
@@ -267,9 +237,6 @@ var listImportEmployeeFn = function(data) {
 		else {
 			has_second_checkbox = "disabled";
 		}
-//		$.each(indexEntry["appraisal_level"],function(index,indexEntry){
-//			htmlAppraisalLevel+=indexEntry["appraisal_level_name"]+"<br>";
-//		});
 		htmlTable += "<tr class='rowSearch'>";
 		htmlTable += "<td id=\"objectCenter\" class='objectCenter 'style=\"\">"+"<input  style=\"margin-bottom: 3px;\"type=\"checkbox\"  class='selectEmpCheckbox' id=kpiCheckbox-"+indexEntry["emp_code"]+" value=\""+indexEntry["emp_code"]+"\">"+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["emp_code"]+ "</td>";
@@ -278,13 +245,7 @@ var listImportEmployeeFn = function(data) {
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["position_name"])+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["chief_emp_code"])+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["appraisal_level_name"])+"</td>";
-		//htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["dotline_code"])+"</td>"
-		//htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+"<div align='center'><input type=\"checkbox\" "+has_second_checkbox+">"+"</div></td>";
-		//htmlTable += "<td class='objectCenter'>"+IsActive+"</td>";
-		//<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["_id"]+ " data-target=#ModalLevel data-toggle='modal'>Ruld</button>&nbsp;
-		//&lt;button class='btn btn-primary btn-xs btn-gear add' id=1 data-target=#ModalLevel data-toggle='modal'&gt;Role&lt;/button&gt;
 		htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del\" data-trigger=\"focus\" tabindex=\""+index+"\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" " +
-				//"<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["emp_id"]+ " data-target=#ModalLevel data-toggle='modal'>Role</button>&nbsp;" +
 				"<button class='btn btn-warning btn-xs btn-gear edit' id="+ indexEntry["emp_code"]+ " data-target=#ModalEditEmp data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>Edit</button>&nbsp;" +
 		        "<button id="+indexEntry["emp_code"]+" class='btn btn-danger btn-xs btn-gear del'>Delete</button>\"></i></td>";
 		htmlTable += "</tr>";
@@ -294,7 +255,7 @@ var listImportEmployeeFn = function(data) {
 
 	$("#listEmployee").html(htmlTable);
 	
-	//function popover
+	// function popover //
 	$(".popover-edit-del").popover(setPopoverDisplay);
 	
 	
@@ -316,9 +277,7 @@ var listImportEmployeeFn = function(data) {
 			
 			$("#id").val(this.id);
 			$("#action").val("edit");
-			$("#btnSubmit").val("Edit");		
-			
-			
+			$("#btnSubmit").val("Edit");
 		});
 		
 		
@@ -395,11 +354,10 @@ var listImportEmployeeFn = function(data) {
 		});	
 		
 	});
-	
-	
 }
 
-//------ List Appraisal Level Start
+
+// List Appraisal Level Start //
 var listAppraisalLevel = function() {
 	var htmlTable="";
 	var htmlDropDown="";
@@ -410,7 +368,6 @@ var listAppraisalLevel = function() {
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
-			//console.log(data);
 			htmlDropDown+="<option  value=''></option>";
 			$.each(data,function(index,indexEntry){
 				htmlTable+="<tr>";
@@ -420,33 +377,30 @@ var listAppraisalLevel = function() {
 				htmlTable+="</td>";
 				htmlTable+="<td style=\"vertical-align:middle\">"+indexEntry["appraisal_level_name"]+"</td>";
 				htmlTable+="</tr>";
-				htmlDropDown+="<option  value="+indexEntry["level_id"]+">"+indexEntry["appraisal_level_name"]+"</option>";
-//				}		
+				htmlDropDown+="<option  value="+indexEntry["level_id"]+">"+indexEntry["appraisal_level_name"]+"</option>";	
 			});	
 		}
-	});	
+	});
+	
 	$("#formListAppraisalLevel").html(htmlTable);
-	//console.log(htmlDropDown);
 	$("#from_Level_id").html(htmlDropDown);
 	
-	 $(".from_data_role").click(function(){  // à¹€à¸¡à¸·à¹ˆà¸­à¸„à¸¥à¸´à¸� checkbox  à¹ƒà¸”à¹†  
-	        if($(this).prop("checked")==true){ // à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸š property  à¸�à¸²à¸£ à¸‚à¸­à¸‡   
-	            var indexObj=$(this).index(".from_data_role"); //   
-	            $(".from_data_role").not(":eq("+indexObj+")").prop( "checked", false ); // à¸¢à¸�à¹€à¸¥à¸´à¸�à¸�à¸²à¸£à¸„à¸¥à¸´à¸� à¸£à¸²à¸¢à¸�à¸²à¸£à¸­à¸·à¹ˆà¸™  
+	 $(".from_data_role").click(function(){
+	        if($(this).prop("checked")==true){   
+	            var indexObj=$(this).index(".from_data_role");   
+	            $(".from_data_role").not(":eq("+indexObj+")").prop( "checked", false );  
 	        }  
 	    });  
 }
 
 
-// --------  ListData  End
-
-
-//-------- Update Start
+// Update Start //
 var updateFn = function () {
 	
 	var isActive="";
 	var hasSecondLine="";
-	//IsAction
+	
+	// IsAction //
 	if($("#from_checkboxIs_active:checked").is(":checked")){
 		isActive="1";
 	}else{
@@ -498,29 +452,29 @@ var updateFn = function () {
 	});
 	return false;
 }
-// -------- Update End
+
 
 //-------- Insert Role Start
 var insertRoleFn = function () {
 	var chackSelect =  false;
 	var emp =[];
 	var level = [];
-	//console.log("insertRoleFn");
+	
 	$.each($(".selectEmpCheckbox").get(),function(index,indexEntry){
 		if($(indexEntry).is(":checked")){
 			emp.push($(indexEntry).val());
 		}
 	});
-	//console.log("selectEmpCheckbox Pass");
+	
 	$.each($(".from_data_role").get(),function(index,indexEntry){
 		if($(indexEntry).is(":checked")){
 			level.push($(indexEntry).val());
 			chackSelect = true;
 		}
 	});
-	//console.log("from_data_role Pass");
+	
 	if (chackSelect == false){callFlashSlideInModal("<font color='red'>*</font> Please Select Appraisal level !!!","#information3"); return false;}
-	//console.log("chackSelect Pass");
+	
 		$.ajax({
 			url : restfulURL+restfulPathImportEmployee+"/role",
 			type : "PATCH",
@@ -532,7 +486,6 @@ var insertRoleFn = function () {
 				"roles"	:	level
 				},
 			success : function(data) {
-				//console.log("ajax Pass");
 				if(data['status']==200){
 					callFlashSlide("Add Role Successfully.");
 					getDataFn($("#pageNumber").val(),$("#rpp").val());
@@ -541,10 +494,10 @@ var insertRoleFn = function () {
 				}
 			}
 		});
-	
+		
 	return false;
 }
-// -------- Update Role End
+
 
 //DropDownList Organization
 var dropDownListOrganization = function(param){
@@ -952,7 +905,7 @@ $(document).ready(function() {
   //Auto Complete Employee Name end
 	
 	$("#exportToExcel").click(function(){
-		$("form#formExportToExcel").attr("action",$("#url_portlet").val()+"/file/import_employee_template.xlsx");
+		$("form#formExportToExcel").attr("action",$("#url_portlet").val()+"/file/import_employee_salary_template.xlsx");
 	});
 	
 	//#### Call Export User Function Start ####
@@ -1030,7 +983,7 @@ $(document).ready(function() {
 		});
 		$("body").mLoading();
 		$.ajax({
-			url:restfulURL+restfulPathImportEmployee,
+			url:restfulURL+"/"+serviceName+"/public/import_employee_salary",
 			type: 'POST',
 			data: data,
 			cache: false,
