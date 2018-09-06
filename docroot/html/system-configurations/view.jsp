@@ -262,9 +262,13 @@ plid = layout.getPlid();
 											  <input checked='checked'  type="radio" name="optionsRadios" id="raiseFixAmount" value="1">
 											  Fix Amount
 										</label>
-										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 12px;">
 											<input type="radio" name="optionsRadios" id="raisePercentage" value="2" >
 											  Percentage
+										</label>
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+											<input type="radio" name="optionsRadios" id="raiseSalaryStructureTable" value="3" >
+											  Salary Structure Table
 										</label>
 										
 									</div>

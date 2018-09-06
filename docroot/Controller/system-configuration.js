@@ -252,6 +252,7 @@ var updateFn = function() {
 	var item_result_log=0;
 	if($("#raiseFixAmount:checked").is(":checked")){raiseType=1;}
 	else if($("#raisePercentage:checked").is(":checked")){raiseType=2;}
+	else if($("#raiseSalaryStructureTable:checked").is(":checked")){raiseType=3;}
 	 
 	if($("#resultWeightPercentage:checked").is(":checked")){resultType=0;}
 	else if($("#resultPercentage:checked").is(":checked")){resultType=1;}
