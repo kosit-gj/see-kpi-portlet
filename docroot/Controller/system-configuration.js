@@ -59,6 +59,7 @@ var getDataFn = function(page,rpp){
 			
 			if(data["raise_type"] == 1){$("#raiseFixAmount").prop("checked", true);}
 			else if(data["raise_type"] == 2){$("#raisePercentage").prop("checked", true);}
+			else if(data["raise_type"] == 3){$("#raiseSalaryStructureTable").prop("checked", true);}
 			 
 			if(data["result_type"] == 0){$("#resultWeightPercentage").prop("checked", true);}
 			else if(data["result_type"] == 1){$("#resultPercentage").prop("checked", true);}

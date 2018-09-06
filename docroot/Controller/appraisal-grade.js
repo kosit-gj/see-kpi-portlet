@@ -1,26 +1,62 @@
- $(document).ready(function(){
-    	
-    	
+function SetSalaryRaiseAmount(){
+	 // set salary_raise_amount enable/disable //
+	 $.ajax({
+		 url: restfulURL+"/"+serviceName+"/public/system_config",
+		 type: "get",
+		 dataType: "json",
+		 headers: {Authorization:"Bearer "+tokenID.token},
+		 async: false,
+		 success: function(data) {
+			 if(data.raise_type == 3){
+				 $("#salary_raise_amount").hide();
+				 $("#salary_raise_amount").parent().append("<p style='padding-top:5px;'><font size='2.5' color='red'> ( Use salary structure table ) </font></p>");
+			 } else {
+				 $("#form-group-salary_raise_amount label").append("<span class='redFont'>*</span>");
+			 }
+		 }
+	 });
+}
+
+var SalaryRaiseAmountType = function(){
+	var returnStr = "";
+	$.ajax({
+		 url: restfulURL+"/"+serviceName+"/public/system_config",
+		 type: "get",
+		 dataType: "json",
+		 headers: {Authorization:"Bearer "+tokenID.token},
+		 async: false,
+		 success: function(data) {
+			 if(data.raise_type == 3){
+				 returnStr = "text";
+			 } else {
+				 returnStr = "decimal";
+			 }
+		 }
+	 });
+	return returnStr;
+}
+
+
+$(document).ready(function(){
+	 
 	 var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
 	 var plid = $('#plid_portlet').val();
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
 	 	
 		 if(connectionServiceFn(username,password,plid)==true){
-    	//alert(createTableFn());
 	    	var options={
 	    			"colunms":[
 	    				 
-	    			           {"colunmsDisplayName":"Appraisal Level","width":"15%","id":"appraisal_level_name","colunmsType":"text"},
-	    			           {"colunmsDisplayName":"Grade","width":"10%","id":"grade","colunmsType":"text"},
-	    			           {"colunmsDisplayName":"Begin Score","width":"15%","id":"begin_score","colunmsType":"text","colunmsDataType":"decimal"},
-	    			           {"colunmsDisplayName":"End Score","width":"15%","id":"end_score","colunmsType":"text","colunmsDataType":"decimal"},
-	    			           {"colunmsDisplayName":"Salary Raise","width":"15%","id":"salary_raise_amount","colunmsType":"text","colunmsDataType":"decimal"},
-	    			           //{"colunmsDisplayName":"Salary Raise Percent","width":"15%","id":"salary_raise_percent","colunmsType":"text","colunmsDataType":"decimal"},
-	    			           {"colunmsDisplayName":"IsActive","width":"10%","id":"is_active","colunmsType":"checkbox"},
-	    			          ],
-	    			
-	    			     "form":[{
+ 			           {"colunmsDisplayName":"Appraisal Level","width":"auto","id":"appraisal_level_name","colunmsType":"text"},
+ 			           {"colunmsDisplayName":"Grade","width":"auto","id":"grade","colunmsType":"text"},
+ 			           {"colunmsDisplayName":"Begin Score","width":"auto","id":"begin_score","colunmsType":"text","colunmsDataType":"decimal"},
+ 			           {"colunmsDisplayName":"End Score","width":"auto","id":"end_score","colunmsType":"text","colunmsDataType":"decimal"},
+ 			           {"colunmsDisplayName":"Salary Raise","width":"auto","id":"salary_raise_amount","colunmsType":"text","colunmsDataType":SalaryRaiseAmountType()},
+ 			           {"colunmsDisplayName":"IsActive","width":"auto","id":"is_active","colunmsType":"checkbox"},
+ 			          ],
+
+ 			          "form":[{
 	     					"label":"Appraisal Level","inputType":"dropdown",
 	     					"id":"appraisal_level_id","width":"200px","url":""+restfulURL+"/"+serviceName+"/public/appraisal_grade/al_list"
 	     					},
@@ -39,7 +75,7 @@
 	     					},
 	     					{
 	         				"label":"Salary Raise","inputType":"text","placeholder":"Salary Raise",
-	         				"id":"salary_raise_amount","width":"200px","dataTypeInput":"number","required":true
+	         				"id":"salary_raise_amount","width":"200px","dataTypeInput":"number","default":"0.00"
 	         				},
 	     			        {
 	     					"label":"IsAtive","inputType":"checkbox","default":"checked",
@@ -64,13 +100,14 @@
 	    	}
 	    	//console.log(options['tokenID'].token);
 	    	createDataTableFn(options);
-    	
+	    	SetSalaryRaiseAmount();
 	 	}
 	 }
-		//binding tooltip start
+	
+	 //binding tooltip start
 	 $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
 	 $('[data-toggle="tooltip"]').tooltip({
 		 html:true
 	 });
 	//binding tooltip end
-    });
+});
