@@ -9,14 +9,18 @@ var files;
 var emailLinkAppraisal = false;
 
 var dataQuality = [];
-var getQualityFn = function (check_disabled_first, check_disabled_second) {   // by DARIS --> 
+var getQualityFn = function () {   // by DARIS --> 
+	
+	dataQuality = [];
+	dataChangeQuality = [];
+	
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/show/emp_result/type_2",
         type: "get",
         dataType: "json",
         data: {
             "assessor_group_id": $("#group_id").val(),
-            "emp_result_id": $("#emp_result_id").val()
+            "emp_result_id": $("#emp_result_id").val(),
         },
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
@@ -25,13 +29,15 @@ var getQualityFn = function (check_disabled_first, check_disabled_second) {   //
             dataQuality = data;
 
             $.each(dataQuality, function (index, groupEntry) {
-                $("#appraisal_template_area").append(assignTemplateQualityFn(index, groupEntry, check_disabled_first, check_disabled_second));
+                $("#appraisal_template_area").append(assignTemplateQualityFn(index, groupEntry));
+                onchangGroupQualityFn(groupEntry['structure_id']);
+                if($("#group_id").val()!=5) $(".classAdmin").hide(); // hidden parameter
             });
         }
     });
 }
 
-var updateQualityFn = function () {   // by DARIS -->  update data comment
+var updateQualityFn = function () {   // by DARIS 
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/update/type_2",
         type: "patch",
@@ -47,44 +53,38 @@ var updateQualityFn = function () {   // by DARIS -->  update data comment
 }
 
 
-//by DARIS --> assignTemplateQualityFn
-var assignTemplateQualityFn = function (structureName, data, check_disabled_first, check_disabled_second) {
+//by DARIS 
+var assignTemplateQualityFn = function (structureName, data) {
     var item_result_id_array = [];
     var htmlTemplateQuality = "";
     var info_item = "";
     var hintHtml = "";
-    var total_weigh_score="";
+    var total_weigh_score = "";
     
+  
     $.each(data['hint'], function (index, indexEntry) {
         hintHtml += "<div style='text-align: left;\'>" + indexEntry['hint'] + "</div>";
     });
-
-
+    
+    
     htmlTemplateQuality += "";
     htmlTemplateQuality += "<div class=\"row-fluid\">";
     htmlTemplateQuality += "<div class=\"span12\">";
     htmlTemplateQuality += "<div class=\"ibox-title2\">";
 
-    //Appraisal Item Name,Target,Actual,Score,%Weight,Weight Score
     htmlTemplateQuality += "<div class='titlePanel'>" + structureName + "</div>"; // ถามพี่โจ
 
-    //	if (data['no_weight'] == 0) { // has weight;
-    //		if (data['result_type'] == 1) {
-    //			htmlTemplateQuality += "<div class='totalWeight'>" + $(".lt-total-weight").val() + " " + data['total_weight_percent'] + "%</div>";
-    //		} else {
-    //			htmlTemplateQuality += "<div class='totalWeight'>" + $(".lt-total-score").val() + " " + data['total_weight'] + "</div>";
-    //		}
-    //	}
-
+    htmlTemplateQuality += "<div class='totalWeight' id='totalWeight-"+data['structure_id']+"'></div>";
+    
     htmlTemplateQuality += "</div>";
     htmlTemplateQuality += "<div class=\"ibox-content\">";
 
-    // <----button-start
-    htmlTemplateQuality += "<div class='row-fluid' style='margin-bottom: 10px;'>"
+    // <----Parameter-start
+    htmlTemplateQuality += "<div class='row-fluid classAdmin' style='margin-bottom: 10px;'>"
     htmlTemplateQuality += "<div class=\"span12\">";
     
     htmlTemplateQuality += "<div class='span3'>"
-    htmlTemplateQuality += "<select data-original-title='Group' title=''  data-toggle='tooltip' class='span12' id='group-" + data['structure_id'] + "' onchange='groupOnChange("+check_disabled_first+","+check_disabled_second+"," + data['structure_id'] + ")'>";
+    htmlTemplateQuality += "<select data-original-title='Group' title=''  data-toggle='tooltip' class='span12' id='group-" + data['structure_id'] + "' onchange='onchangGroupQualityFn(" + data['structure_id'] + ")'>";
     $.each(data, function (index, indexEntry) {
         if (indexEntry['group_id'] != undefined)
             htmlTemplateQuality += "<option value='" + indexEntry['group_id'] + "'>" + indexEntry['group_name'] + "</option>";
@@ -93,22 +93,13 @@ var assignTemplateQualityFn = function (structureName, data, check_disabled_firs
     htmlTemplateQuality += "</div>"
     	
     htmlTemplateQuality += "<div class='span3'>"
-    htmlTemplateQuality += "<select data-original-title='Employee' title=''  data-toggle='tooltip' class='span12' id='emp-" + data['structure_id'] + "' onchange='tableOnChang("+check_disabled_first+","+check_disabled_second+"," + data['structure_id'] + ")'>";
-    $.each(data, function (index2, indexEntry2) {
-        if (indexEntry2['group_id'] != undefined && indexEntry2['group_id'] == 0)
-            $.each(indexEntry2, function (index3, indexEntry3) {
-                if (indexEntry3['emp_id'] != undefined) {
-                    htmlTemplateQuality += "<option value='" + indexEntry3['emp_id'] + "'>" + indexEntry3['emp_name'] + "</option>";
-                }
-            });
-    });
-
+    htmlTemplateQuality += "<select data-original-title='Employee' title=''  data-toggle='tooltip' class='span12' id='emp-" + data['structure_id'] + "' onchange='onchangTableQualityFn("+ data['structure_id'] + ")'>";
     htmlTemplateQuality += "</select >";
     htmlTemplateQuality += "</div>"
 
     htmlTemplateQuality += "</div>";
     htmlTemplateQuality += "</div>"
-    //button-end---->
+    //Parameter-end---->
 
     htmlTemplateQuality += "<div class=\"table-responsive scrollbar-inner\">";
     htmlTemplateQuality += "<table id=\"tablethreshould\" class=\"table table-striped\" style='max-width: none;'>";
@@ -118,65 +109,15 @@ var assignTemplateQualityFn = function (structureName, data, check_disabled_firs
     htmlTemplateQuality += "<th style='text-align: right;'><b>" + $(".lt-target").val() + "</b></th>";
     htmlTemplateQuality += "<th style='text-align: center;'><b>" + $(".lt-score").val() + "</b></th>";
     htmlTemplateQuality += "<th style='text-align: right;'><b>" + $(".lt-percent-weight").val() + "</b></th>  ";
-    if (data['result_type'] == 1) {
-        htmlTemplateQuality += "<th style='text-align: right;'><b>" + $(".lt-weight-score").val() + "</b></th>  ";
-    } else {
-        htmlTemplateQuality += "<th style='text-align: right;'><b>" + $(".lt-result-score").val() + "</b></th>  ";
-    }
+    
+    htmlTemplateQuality += "<th style='text-align: right;' id='th-score-"+data['structure_id']+"'></th>  ";
+    
     htmlTemplateQuality += "</tr>";
     htmlTemplateQuality += "</thead>";
     htmlTemplateQuality += "<tbody id=\"table-" + data['structure_id'] + "\" class='appraisal_result'>";
-    $.each(data, function (index2, indexEntry2) {
-        if (indexEntry2['group_id'] != undefined && indexEntry2['group_id'] == 0)
-            $.each(indexEntry2, function (index3, indexEntry3) {
-                if (indexEntry3['emp_id'] != undefined && indexEntry3['emp_id'] == 0) {
-                	total_weigh_score = indexEntry3['total_weigh_score'];
-                    $.each(indexEntry3['items'], function (index, indexEntry) {
-                        item_result_id_array.push(indexEntry['item_result_id']);
-
-                        if (!(indexEntry['formula_desc'] == null || indexEntry['formula_desc'] == undefined || indexEntry['formula_desc'] == "" || indexEntry['formula_desc'].length == 0)) {
-                            info_item = "<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>" + $(".lt-kpi-name").val() + " : </strong>" + indexEntry['item_name'] + "' info-data='" + indexEntry['formula_desc'] + "'>i</span>";
-                        } else {
-                            info_item = "";
-                        }
-                        
-                        // set parameter
-                        htmlTemplateQuality += "<input type='hidden' id='param_competency_result_id-" + indexEntry['item_result_id'] + "' value='" + indexEntry['competency_result_id'] + "'>";
-                        htmlTemplateQuality += "<input type='hidden' id='param_target_value-" + indexEntry['item_result_id'] + "' value='" + indexEntry['target_value'] + "'>";
-                        htmlTemplateQuality += "<input type='hidden' id='param_weight_percent-" + indexEntry['item_result_id'] + "' value='" + indexEntry['weight_percent'] + "'>";
-                        htmlTemplateQuality += "<input type='hidden' id='param_weigh_score-" + indexEntry['item_result_id'] + "' value='" + indexEntry['weigh_score'] + "'>";
-                        htmlTemplateQuality += "<input type='hidden' id='param_group_id-" + indexEntry['item_result_id'] + "' value='" + indexEntry['assessor_group_id'] + "'>";
-                        
-                        
-                        htmlTemplateQuality += "<tr>";
-                        htmlTemplateQuality += "<td class=''>" + indexEntry['item_name'] + "  " + info_item + "</td>";
-                        htmlTemplateQuality += "<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\"" + hintHtml + "\">" + addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2)) + "</div></td>";
-                        htmlTemplateQuality += "<td class='' style='text-align: center;'>";
-                        htmlTemplateQuality += "<select " + check_disabled_first + " style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' id='score-" + indexEntry['item_result_id'] + "' onchange='onchangQualityFn(" + indexEntry['item_result_id'] + ","+data['structure_id']+")' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
-                        htmlTemplateQuality += dropdownDeductScoreFn(notNullFn(indexEntry['score']), indexEntry['nof_target_score'], data['hint']);
-                        htmlTemplateQuality += "<select>";
-                        htmlTemplateQuality += "</td>";
-                        htmlTemplateQuality += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['weight_percent'])).toFixed(2)) + "</td>";
-                        htmlTemplateQuality += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2)) + "</td>";
-                        htmlTemplateQuality += "</tr>";
-                    });
-                }
-            });
-    });
-
-    htmlTemplateQuality += "<tr>";
-    htmlTemplateQuality += "<td class=''></td>";
-    htmlTemplateQuality += "<td class=''></td>";
-    htmlTemplateQuality += "<td class='' ></td>";
-    htmlTemplateQuality += "<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>" + $(".lt-total").val() + "</b></td>";
-    htmlTemplateQuality += "<td class='' style='text-align: right;padding-right: 10px;font-weight: bold;font-size:16px'><b>" + addCommas(parseFloat(notNullFn(total_weigh_score)).toFixed(2)) + "</b></td>";
-    htmlTemplateQuality += "</tr>";
     htmlTemplateQuality += "</tbody>";
     htmlTemplateQuality += "</table>";
 
-    htmlTemplateQuality += "<input type='hidden' id='structure_id-" + data['structure_id'] + "' class='structure_id' value=" + data['structure_id'] + ">";
-    htmlTemplateQuality += "<input type='hidden' id='form-" + data['structure_id'] + "' class='' value=\"form2\">";
-    htmlTemplateQuality += "<input type='hidden' id='item_result_id_array-" + data['structure_id'] + "' class='item_result_id_array' value=\"" + item_result_id_array + "\">";
     htmlTemplateQuality += "</div>";
     htmlTemplateQuality += "<br style=\"clear:both\">";
     htmlTemplateQuality += "</div>";
@@ -187,16 +128,15 @@ var assignTemplateQualityFn = function (structureName, data, check_disabled_firs
 };
 
 var dataChangeQuality =[];
-var onchangQualityFn = function(item_result_id,structureId){
-	alert(item_result_id);
-	
+var onchangDetailQualityFn = function(item_result_id,structureId){
+
 	var  competency_result_id = $("#param_competency_result_id-"+item_result_id).val();
-//	var  item_result_id = $("#param_item_result_id-"+item_result_id).val();
 	var  target_value = $("#param_target_value-"+item_result_id).val();
 	var  score = $("#score-"+item_result_id).val();
 	var  weight_percent = $("#param_weight_percent-"+item_result_id).val();
 	var  weigh_score = $("#param_weigh_score-"+item_result_id).val();
 	var  group_id = $("#param_group_id-"+item_result_id).val();
+	var  group_weight_percent = $("#param_group_weight_percent-"+item_result_id).val();
 	
 	dataQuality = $.each(dataQuality, function (index1, groupEntry1) {
 	        if (groupEntry1['structure_id'] == structureId) {
@@ -220,10 +160,9 @@ var onchangQualityFn = function(item_result_id,structureId){
 	    });
 
 	dataChangeQuality = $.grep(dataChangeQuality, function (data, index) {
-		console.log((data.competency_result_id != competency_result_id) || (data.item_result_id != item_result_id))
+			console.log((data.competency_result_id != competency_result_id) || (data.item_result_id != item_result_id))
 	        return ((data.competency_result_id != competency_result_id) || (data.item_result_id != item_result_id));
 	    });
-	
 	
 	dataChangeQuality.push({
 	        "competency_result_id": competency_result_id,
@@ -233,15 +172,13 @@ var onchangQualityFn = function(item_result_id,structureId){
 	        "weight_percent": weight_percent,
 	        "weigh_score": weigh_score,
 	        "group_id": group_id,
+	        "group_weight_percent":group_weight_percent,
 	    });
 	
 	console.log(JSON.stringify(dataChangeQuality))
-	
-	
-	
 }
 
-var tableOnChang = function (check_disabled_first, check_disabled_second,structureId) {
+var onchangTableQualityFn = function (structureId) {
     var htmlTable ="";
     var total_weigh_score ="";
     var hintHtml="";
@@ -252,7 +189,7 @@ var tableOnChang = function (check_disabled_first, check_disabled_second,structu
     	 $.each(groupEntry1['hint'], function (indexHint, indexEntryHint) {
     		 hintHtml += "<div style='text-align: left;\'>" + indexEntryHint['hint'] + "</div>";
     	    });
-    	   console.log("id :"+groupEntry1['structure_id']);
+
         if (groupEntry1['structure_id'] == structureId) {
             $.each(groupEntry1, function (index2, indexEntry2) {
                 if (indexEntry2['group_id'] != undefined && indexEntry2['group_id'] == $("#group-"+structureId).val())
@@ -272,12 +209,13 @@ var tableOnChang = function (check_disabled_first, check_disabled_second,structu
                                 htmlTable += "<input type='hidden' id='param_weight_percent-" + indexEntry['item_result_id'] + "' value='" + indexEntry['weight_percent'] + "'>";
                                 htmlTable += "<input type='hidden' id='param_weigh_score-" + indexEntry['item_result_id'] + "' value='" + indexEntry['weigh_score'] + "'>";
                                 htmlTable += "<input type='hidden' id='param_group_id-" + indexEntry['item_result_id'] + "' value='" + indexEntry['assessor_group_id'] + "'>";
+                                htmlTable += "<input type='hidden' id='param_group_weight_percent-" + indexEntry['item_result_id'] + "' value='" + indexEntry['total_weight_percent'] + "'>";
                                 
                                 htmlTable += "<tr>";
                                 htmlTable += "<td class=''>" + indexEntry['item_name'] + "  " + info_item + "</td>";
                                 htmlTable += "<td class='' style='text-align: right;padding-right: 10px;'><div id='target_value-" + indexEntry['item_result_id'] + "' data-toggle=\"tooltip\" data-placement=\"right\" title=\"" + hintHtml + "\">" + addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2)) + "</div></td>";
                                 htmlTable += "<td class='' style='text-align: center;'>";
-                                htmlTable += "<select " + check_disabled_first + " style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' onchange='onchangQualityFn(" + indexEntry['item_result_id'] + ","+structureId+")' id='score-" + indexEntry['item_result_id'] + "' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
+                                htmlTable += "<select style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' onchange='onchangDetailQualityFn(" + indexEntry['item_result_id'] + ","+structureId+")' id='score-" + indexEntry['item_result_id'] + "' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
                                 htmlTable += dropdownDeductScoreFn(notNullFn(indexEntry['score']), indexEntry['nof_target_score'], dataHint);
                                 htmlTable += "<select>";
                                 htmlTable += "</td>";
@@ -290,16 +228,19 @@ var tableOnChang = function (check_disabled_first, check_disabled_second,structu
             });
         }
     });
-    htmlTable += "<tr>";
+  
+    htmlTable += "<tr class='classAdmin th-all'>";
     htmlTable += "<td class=''></td>";
     htmlTable += "<td class=''></td>";
     htmlTable += "<td class='' ></td>";
     htmlTable += "<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>" + $(".lt-total").val() + "</b></td>";
     htmlTable += "<td class='' style='text-align: right;padding-right: 10px;font-weight: bold;font-size:16px'><b>" + addCommas(parseFloat(notNullFn(total_weigh_score)).toFixed(2)) + "</b></td>";
     htmlTable += "</tr>";
-    
+
     $("#table-"+structureId).html(htmlTable);
     
+    if($("#group-" + structureId).val() != 0 ) $(".th-all").hide();  // hide total_weigh_score
+    	
     //binding tooltip start
     $('[data-toggle="tooltip"]').css({ "cursor": "pointer" });
     $('[data-toggle="tooltip"]').tooltip({
@@ -322,23 +263,53 @@ var tableOnChang = function (check_disabled_first, check_disabled_second,structu
 }
 
 
-var groupOnChange = function  (check_disabled_first, check_disabled_second,structureId) { // By DARIS 
+var onchangGroupQualityFn = function  (structureId) { // by DARIS 
     var htmlEmp = "";
-
+    var html="";
+    
+    var no_weight = "";
+    var result_type = "";
+    var total_weight_percent = "";
+    var total_weight = "";
+    
     $.each(dataQuality, function (index1, groupEntry1) {
         if (groupEntry1['structure_id'] == structureId) {
             $.each(groupEntry1, function (index2, indexEntry2) {
-                if (indexEntry2['group_id'] != undefined && indexEntry2['group_id'] == $("#group-" + structureId).val())
-                    $.each(indexEntry2, function (index3, indexEntry3) {
-                        if (indexEntry3['emp_id'] != undefined) {
-                            htmlEmp += "<option value='" + indexEntry3['emp_id'] + "'>" + indexEntry3['emp_name'] + "</option>";
-                        }
-                    });
+                if (indexEntry2['group_id'] != undefined && indexEntry2['group_id'] == $("#group-" + structureId).val()){
+                	// has weight;
+                	no_weight = indexEntry2['no_weight'];
+                	result_type =  indexEntry2['result_type'];
+                	total_weight_percent =  indexEntry2['total_weight_percent'];
+                	total_weight =  indexEntry2['total_weight'];
+                	
+                	 $.each(indexEntry2, function (index3, indexEntry3) {
+                         if (indexEntry3['emp_id'] != undefined) {
+                             htmlEmp += "<option value='" + indexEntry3['emp_id'] + "'>" + indexEntry3['emp_name'] + "</option>";
+                         }
+                     });
+                }
             });
         } // end if
     });
     $("#emp-" + structureId).html(htmlEmp);
-    tableOnChang(check_disabled_first, check_disabled_second,structureId)
+    
+    if (no_weight == 0 ) { // has weight;
+		if (result_type == 1) {
+			 html += "" + $(".lt-total-weight").val() + " " + total_weight_percent+ "%";
+		} else {
+			 html += "" + $(".lt-total-score").val() + " " + total_weight + "";
+		}
+	}
+    $("#totalWeight-" + structureId).html(html);
+    
+    html = ""; 
+    if (result_type == 1 ) {
+    	html += "<b>" + $(".lt-weight-score").val() + "</b>";
+    } else {
+    	html += "<b>" + $(".lt-result-score").val() + "</b>";
+    }
+    $("#th-score-" + structureId).html(html);
+    onchangTableQualityFn(structureId)
 }
 
 var dataComment = [];
@@ -362,7 +333,7 @@ var getCommentFn = function () {   // by DARIS -->  get data comment
     });
 }
 
-var updateCommentFn = function () {   // by DARIS -->  update data comment
+var updateCommentFn = function () {   // by DARIS 
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/comment/update/insert",
         type: "post",
@@ -377,7 +348,7 @@ var updateCommentFn = function () {   // by DARIS -->  update data comment
     });
 }
 
-var assignTemplateCommentFn = function () { // by DARIS -->  gen template comment
+var assignTemplateCommentFn = function () { // by DARIS 
     var htmlTemplateComment = "";
 
     htmlTemplateComment += "<input type='hidden' id='comment_opinion_id'>";
@@ -402,7 +373,7 @@ var assignTemplateCommentFn = function () { // by DARIS -->  gen template commen
         htmlTemplateComment += "<div class=\"span12\">";
 
     htmlTemplateComment += "<div class='span3'>";
-    htmlTemplateComment += "<select class='span12' data-original-title='Group' title=''  data-toggle='tooltip' class='span12' id='span-filter' onchange='OnChangGroupCommentFn()'>";
+    htmlTemplateComment += "<select class='span12' data-original-title='Group' title=''  data-toggle='tooltip' class='span12' id='span-filter' onchange='onchangGroupCommentFn()'>";
     htmlTemplateComment += "<option value='all'>ทั้งหมด</option>";
     htmlTemplateComment += "<option value='yes'>ตอบกลับแล้ว</option>";
     htmlTemplateComment += "<option value='no'>ยังไม่ได้ตอบกลับ</option>";
@@ -410,7 +381,7 @@ var assignTemplateCommentFn = function () { // by DARIS -->  gen template commen
     htmlTemplateComment += "</div>";
     
     htmlTemplateComment += "<div class='span3'>";
-    htmlTemplateComment += "<select class='span12' data-original-title='Employee' title=''  data-toggle='tooltip' class='span12' id='span-emp' onchange='detailCommentFn()'>";
+    htmlTemplateComment += "<select class='span12' data-original-title='Employee' title=''  data-toggle='tooltip' class='span12' id='span-emp' onchange='onchangDetailCommentFn()'>";
    
     $.each(dataComment['detail'], function (index, indexEntry) { // gen select 
         htmlTemplateComment += "<option value='" + indexEntry['emp_id'] + "'>" + indexEntry['emp_name'] + "</option>";
@@ -419,28 +390,27 @@ var assignTemplateCommentFn = function () { // by DARIS -->  gen template commen
     htmlTemplateComment += "</select>"
     htmlTemplateComment += "</div>";
    
-
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "<div class='row-fluid'>";
     htmlTemplateComment += "<div class='row-fluid'>";
     htmlTemplateComment += "<div class='span6'>";
     htmlTemplateComment += "<label >ส่วนที่เด่นของผู้ถูกประเมิน</label>";
-    htmlTemplateComment += "<textarea  onchange='textareaChang(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px; padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='assessor__strength_opinion' class='form-control'></textarea>";
+    htmlTemplateComment += "<textarea  onchange='onchangeTextareaCommentFn(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px; padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='assessor__strength_opinion' class='form-control'></textarea>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "<div class='span6'>";
     htmlTemplateComment += "<label >ความคิดเห็น/การพัฒนาตนเองของผู้ถูกการเประเมิน</label>";
-    htmlTemplateComment += "<textarea  onchange='textareaChang(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='emp__strength_opinion' class='form-control'></textarea>";
+    htmlTemplateComment += "<textarea  onchange='onchangeTextareaCommentFn(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='emp__strength_opinion' class='form-control'></textarea>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "<div class='row-fluid'>";
     htmlTemplateComment += "<div class='span6'>";
     htmlTemplateComment += "<label>ส่วนที่ควรปรับปรุงของผู้ถูกประเมิน</label>";
-    htmlTemplateComment += "<textarea  onchange='textareaChang(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='assessor__weakness_opinion' class='form-control'></textarea>";
+    htmlTemplateComment += "<textarea  onchange='onchangeTextareaCommentFn(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='assessor__weakness_opinion' class='form-control'></textarea>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "<div class='span6'>";
     htmlTemplateComment += "<label>สิ่งที่ผู้ถูกประเมินทำการปรับปรุง</label>";
-    htmlTemplateComment += "<textarea onchange='textareaChang(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='emp__weakness_opinion' class='form-control'></textarea>";
+    htmlTemplateComment += "<textarea onchange='onchangeTextareaCommentFn(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='emp__weakness_opinion' class='form-control'></textarea>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "</div>";
@@ -448,10 +418,10 @@ var assignTemplateCommentFn = function () { // by DARIS -->  gen template commen
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "</div>";
     $("#appraisal_template_area").append(htmlTemplateComment);
-    detailCommentFn();
+    onchangDetailCommentFn();
 }
 
-var OnChangGroupCommentFn = function() { // by DARIS -->  change button
+var onchangGroupCommentFn = function() { // by DARIS 
     var htmlSelect = "";
     var commentTXT = $("#span-filter").val();
  
@@ -461,11 +431,11 @@ var OnChangGroupCommentFn = function() { // by DARIS -->  change button
         }
     });
     $("#span-emp").html(htmlSelect);
-   detailCommentFn();
+   onchangDetailCommentFn();
 };
 
 
-var detailCommentFn = function () { // by DARIS -->  show detail
+var onchangDetailCommentFn = function () { // by DARIS 
 var id = $("#span-emp").val();
     // disabled text
     $("#assessor__strength_opinion").prop("disabled", true);
@@ -523,7 +493,7 @@ var id = $("#span-emp").val();
 }
 
 var dataChangeComment = [];
-var textareaChang = function (id) {   // by DARIS -->  function onchange
+var onchangeTextareaCommentFn = function (id) {   // by DARIS 
     var comment =
         dataComment['detail'] = $.grep(dataComment['detail'], function (data, index) {
             return data.opinion_id != $("#comment_opinion_id").val();
@@ -561,7 +531,7 @@ var textareaChang = function (id) {   // by DARIS -->  function onchange
 
 }
 
-var clearComment = function () { // by DARIS -->  clear function
+var clearComment = function () { // by DARIS 
     dataChangeComment = [];
     dataComment = [];
     $("#template-comment").html("");
@@ -657,7 +627,7 @@ var dropdownDeductScoreFn = function (score, nof_target_score, hint) {
 
     return htmlTemplateQuality;
 }
-var assignTemplateQualityFn_Backup = function (structureName, data, check_disabled_first, check_disabled_second) {
+var assignTemplateQualityFn_Backup = function (structureName, data) {
     var item_result_id_array = [];
     var htmlTemplateQuality = "";
     var info_item = "";
@@ -1412,6 +1382,7 @@ var listAppraisalDetailFn = function (data) {
     //// console.log(check_disabled_second,session_emp_code,'second')
 
     $("#appraisal_template_area").empty();
+    var quality = 1;
     $.each(data['group'], function (index, groupEntry) {
 
 
@@ -1545,12 +1516,14 @@ var listAppraisalDetailFn = function (data) {
             });
             /*bindding popover end*/
 
-            getQualityFn(check_disabled_first, check_disabled_second); // By DARIS
-            //$("#appraisal_template_area").append(assignTemplateQualityFn(index,groupEntry));
         }
-        //        		else if (groupEntry['form_url'] == 'quality') {
-        //        			//$("#appraisal_template_area").append(assignTemplateQualityFn(index, groupEntry, check_disabled_first, check_disabled_second));
-        //        		} 
+        
+      else if (groupEntry['form_url'] == 'quality' && quality) {
+    	  getQualityFn(); // By DARIS assignTemplateQualityFn
+    	  quality = 0;
+//               $("#appraisal_template_area").append(assignTemplateQualityFn(index, groupEntry, check_disabled_first, check_disabled_second));
+      } 
+        
         else if (groupEntry['form_url'] == 'deduct') {
             $("#appraisal_template_area").append(assignTemplateDeductFn(index, groupEntry));
         }
@@ -1686,7 +1659,7 @@ var listAppraisalDetailFn = function (data) {
         htmlStage += "</tr>";
 
     });
-    getCommentFn(); // by DARIS -->  get data comment
+    getCommentFn(); // by DARIS 
     $("#listDataStageHistory").html(htmlStage);
     $("#slideUpDownStageHistory").show();
     //Stage History List Data..
@@ -1699,9 +1672,14 @@ var findOneFn = function (id) {
     $("#emp_result_id").val(id); // by DARIS
     $("#group_id").val($("#group_id-" + id).val()); // by DARIS
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/appraisal/" + id,
+//        url: restfulURL + "/" + serviceName + "/public/appraisal/" + id,
+    	url: restfulURL + "/" + serviceName + "/public/appraisal/show/emp_result",  // by DARIS   	
         type: "get",
         dataType: "json",
+        data: {
+            "assessor_group_id": $("#group_id").val(),
+            "emp_result_id": $("#emp_result_id").val()
+        },
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
