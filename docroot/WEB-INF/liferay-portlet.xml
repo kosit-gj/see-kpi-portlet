@@ -2,20 +2,20 @@
 <!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.2.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_2_0.dtd">
 
 <liferay-portlet-app>
-	<portlet>
+	<portlet> 
 		<portlet-name>see-kpi</portlet-name>
-		<icon>/icon.png</icon>
+		<icon>/icon.png</icon> 
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>see-kpi-portlet</css-class-wrapper>
-	</portlet>
-
-
-	<portlet>
-		<portlet-name>appraisal</portlet-name>
-		<icon>/icon.png</icon>
-
-		<!-- include file start -->
+	</portlet>  
+                         
+              
+	<portlet>           
+		<portlet-name>appraisal</portlet-name>                
+		<icon>/icon.png</icon>               
+         
+		<!-- include file start -->   
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
 		<header-portlet-css>/css/plugins/iCheck/custom.css</header-portlet-css>
