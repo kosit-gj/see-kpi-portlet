@@ -89,6 +89,9 @@
 <input class="lt-emp-strength-opinion" type="hidden" value="<liferay-ui:message key="emp-strength-opinion"/>"/> 
 <input class="lt-emp-weakness-opinion" type="hidden" value="<liferay-ui:message key="emp-weakness-opinion"/>"/> 
 <input class="lt-employee" type="hidden" value="<liferay-ui:message key="employee"/>"/>
+<input class="lt-value-not-raise" type="hidden" value="<liferay-ui:message key="value-not-raise"/>"/>
+<input class="lt-over-value-not-raise" type="hidden" value="<liferay-ui:message key="over-value-not-raise"/>"/>
+<input class="lt-reward-score-Unit" type="hidden" value="<liferay-ui:message key="reward-score-Unit"/>"/>
 
 <!-- Performance Trend -->
 <input class="lt-employee-name-is-require" type="hidden" value="<liferay-ui:message key="employee-name-is-require"/>"/>
