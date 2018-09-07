@@ -349,6 +349,14 @@ var findOneFn = function(id,form_url) {
 		}
 	});
 }
+
+var checkZero = function(){
+	if($("#maxValueDeductScore").val() == "0" && $("#maxValueDeductScore").val() !="") {
+		console.log('หากไม่ต้องให้หักคะแนนให้ใส่เป็นค่าว่าง');
+		callFlashSlide("หากไม่ต้องให้หักคะแนนให้ใส่เป็นค่าว่าง");
+	}
+}
+
 //SearchAdvance
 var searchAdvanceFn = function() {
 	/*

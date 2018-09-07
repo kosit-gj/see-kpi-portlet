@@ -11,7 +11,7 @@ var clearDeductScoreFormFn = function(){
 	$("#isActiveDeductScore").prop("checked",true);
 	$("#DeductScoreUnitDeductScore").val("");
 	$("#ValueGetZero").val("");
-	$("#ValueDoesNotRaiseSalary").val("");
+	$("#NoRaiseValue").val("");
 	
 	//$("#structure_id_deduct").val("");
 	
@@ -46,6 +46,7 @@ var updateDeductScoreFn  = function(){
 	 var appraisal_level=$("#appraisalLevelDeductScore").val();
 	 var structure_id=$("#structure_id_deduct").val();
 	 var max_value=$("#maxValueDeductScore").val();
+	 var no_raise_value=$("#NoRaiseValue").val();
 	 var unit_deduct_score=$("#DeductScoreUnitDeductScore").val();
 	 var value_get_zero=$("#ValueGetZero").val();
 	 //var department_id=$("#departmentDeductScore").val();
@@ -83,7 +84,8 @@ var updateDeductScoreFn  = function(){
 		// "department_code":department_id,
 		 "org":organization,
 		 "position":position,
-		 "form_id":"3"
+		 "form_id":"3",
+		 "no_raise_value":no_raise_value,
 		},
 	    success:function(data,status){
 		     if(data['status']=="200"){
@@ -113,6 +115,7 @@ var insertDeductScoreFn = function(param) {
 	 var appraisal_level=$("#appraisalLevelDeductScore").val();
 	 var structure_id=$("#structure_id_deduct").val();
 	 var max_value=$("#maxValueDeductScore").val();
+	 var no_raise_value=$("#NoRaiseValue").val();
 	 var unit_deduct_score=$("#DeductScoreUnitDeductScore").val();
 	 var value_get_zero=$("#ValueGetZero").val();
 	 //var department_id=$("#departmentDeductScore").val();
@@ -149,7 +152,8 @@ var insertDeductScoreFn = function(param) {
 			 //"department_code":department_id,
 			 "org":organization,
 			 "position":position,
-			 "form_id":"3"
+			 "form_id":"3",
+			 "no_raise_value":no_raise_value,
 		},
 		success:function(data){
 			//console.log(data);
@@ -196,6 +200,7 @@ var initailDeductScoreFormFn = function(action,structureId,structureName,data){
 		$("#maxValueDeductScore").val(data['max_value']);
 		$("#DeductScoreUnitDeductScore").val(data['unit_deduct_score']);
 		$("#ValueGetZero").val(data['value_get_zero']);
+		$("#NoRaiseValue").val(data['no_raise_value']);
 		
 //		if(data['is_show_variance']==1){
 //			$("#isShowVarianceDeductScore").prop("checked",true);
@@ -214,6 +219,11 @@ var initailDeductScoreFormFn = function(action,structureId,structureName,data){
 			$(".is_value_get_zero_form").hide();
 		}
 		
+		if(data['is_no_raise_value'] == 1)  
+			$(".is_no_raise_value_form").show();
+		else
+			$(".is_no_raise_value_form").hide();
+			
 		$("#appraisalItemIdDeductScore").val(data['item_id']);
 		$("#actionDeductScore").val("edit");
 		$("#btnAddAnotherDeductScore").hide();
