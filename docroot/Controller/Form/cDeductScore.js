@@ -11,6 +11,7 @@ var clearDeductScoreFormFn = function(){
 	$("#isActiveDeductScore").prop("checked",true);
 	$("#DeductScoreUnitDeductScore").val("");
 	$("#ValueGetZero").val("");
+	$("#ValueDoesNotRaiseSalary").val("");
 	
 	//$("#structure_id_deduct").val("");
 	

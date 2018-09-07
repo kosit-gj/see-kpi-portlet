@@ -1251,6 +1251,16 @@ overflow-y: visible;
 				                <br style="clear:both">
 			                </div>
 			                
+			                 <div class='form-file-mangement is_value_get_zero_form'>
+				                <div class="form-label-customs">
+				                	Value does not raise salary <span class='redFont'>*</span>
+				                </div>
+				                <div class="form-input-customs">
+				                	<input type="text" class="form-control input-sm numberOnly  span12" placeholder="Value does not raise salary" id="ValueDoesNotRaiseSalary">
+				                </div>
+				                <br style="clear:both">
+			                </div>
+			                
 			                <div class='form-file-mangement'>
 				                <div class="form-label-customs"> 
 				                &nbsp;
