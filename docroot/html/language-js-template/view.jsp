@@ -80,8 +80,15 @@
 <input class="lt-total" type="hidden" value="<liferay-ui:message key="total"/>"/>
 <input class="lt-total-score" type="hidden" value="<liferay-ui:message key="total-score"/>"/>
 <input class="lt-upload-successfully" type="hidden" value="<liferay-ui:message key="upload-successfully"/>"/>
-<input class="lt-weight-score" type="hidden" value="<liferay-ui:message key="weight-score"/>"/>
-
+<input class="lt-weight-score" type="hidden" value="<liferay-ui:message key="weight-score"/>"/>  
+<input class="lt-all-messages" type="hidden" value="<liferay-ui:message key="all-messages"/>"/>  
+<input class="lt-unanswered-messages" type="hidden" value="<liferay-ui:message key="unanswered-messages"/>"/>  
+<input class="lt-answered-messages" type="hidden" value="<liferay-ui:message key="answered-messages"/>"/> 
+<input class="lt-assessor-strength-opinion" type="hidden" value="<liferay-ui:message key="assessor-strength-opinion"/>"/> 
+<input class="lt-assessor-weakness-opinion" type="hidden" value="<liferay-ui:message key="assessor-weakness-opinion"/>"/> 
+<input class="lt-emp-strength-opinion" type="hidden" value="<liferay-ui:message key="emp-strength-opinion"/>"/> 
+<input class="lt-emp-weakness-opinion" type="hidden" value="<liferay-ui:message key="emp-weakness-opinion"/>"/> 
+<input class="lt-employee" type="hidden" value="<liferay-ui:message key="employee"/>"/>
 
 <!-- Performance Trend -->
 <input class="lt-employee-name-is-require" type="hidden" value="<liferay-ui:message key="employee-name-is-require"/>"/>

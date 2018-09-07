@@ -84,7 +84,7 @@ var assignTemplateQualityFn = function (structureName, data) {
     htmlTemplateQuality += "<div class=\"span12\">";
     
     htmlTemplateQuality += "<div class='span3'>"
-    htmlTemplateQuality += "<select data-original-title='Group' title=''  data-toggle='tooltip' class='span12' id='group-" + data['structure_id'] + "' onchange='onchangGroupQualityFn(" + data['structure_id'] + ")'>";
+    htmlTemplateQuality += "<select data-original-title='"+ $(".lt-group").val()+ "' title=''  data-toggle='tooltip' class='span12' id='group-" + data['structure_id'] + "' onchange='onchangGroupQualityFn(" + data['structure_id'] + ")'>";
     $.each(data, function (index, indexEntry) {
         if (indexEntry['group_id'] != undefined)
             htmlTemplateQuality += "<option value='" + indexEntry['group_id'] + "'>" + indexEntry['group_name'] + "</option>";
@@ -93,7 +93,7 @@ var assignTemplateQualityFn = function (structureName, data) {
     htmlTemplateQuality += "</div>"
     	
     htmlTemplateQuality += "<div class='span3'>"
-    htmlTemplateQuality += "<select data-original-title='Employee' title=''  data-toggle='tooltip' class='span12' id='emp-" + data['structure_id'] + "' onchange='onchangTableQualityFn("+ data['structure_id'] + ")'>";
+    htmlTemplateQuality += "<select data-original-title='"+ $(".lt-employee").val()+ "' title=''  data-toggle='tooltip' class='span12' id='emp-" + data['structure_id'] + "' onchange='onchangTableQualityFn("+ data['structure_id'] + ")'>";
     htmlTemplateQuality += "</select >";
     htmlTemplateQuality += "</div>"
 
@@ -373,15 +373,15 @@ var assignTemplateCommentFn = function () { // by DARIS
         htmlTemplateComment += "<div class=\"span12\">";
 
     htmlTemplateComment += "<div class='span3'>";
-    htmlTemplateComment += "<select class='span12' data-original-title='Group' title=''  data-toggle='tooltip' class='span12' id='span-filter' onchange='onchangGroupCommentFn()'>";
-    htmlTemplateComment += "<option value='all'>ทั้งหมด</option>";
-    htmlTemplateComment += "<option value='yes'>ตอบกลับแล้ว</option>";
-    htmlTemplateComment += "<option value='no'>ยังไม่ได้ตอบกลับ</option>";
+    htmlTemplateComment += "<select class='span12' data-original-title='"+ $(".lt-group").val()+ "' title=''  data-toggle='tooltip' class='span12' id='span-filter' onchange='onchangGroupCommentFn()'>";
+    htmlTemplateComment += "<option value='all'>"+ $(".lt-all-messages").val()+ "</option>";
+    htmlTemplateComment += "<option value='yes'>"+ $(".lt-answered-messages").val()+ "</option>";
+    htmlTemplateComment += "<option value='no'>"+ $(".lt-unanswered-messages").val()+ "</option>";
     htmlTemplateComment += "</select>"
     htmlTemplateComment += "</div>";
-    
+   
     htmlTemplateComment += "<div class='span3'>";
-    htmlTemplateComment += "<select class='span12' data-original-title='Employee' title=''  data-toggle='tooltip' class='span12' id='span-emp' onchange='onchangDetailCommentFn()'>";
+    htmlTemplateComment += "<select class='span12' data-original-title='"+ $(".lt-employee").val()+ "' title=''  data-toggle='tooltip' class='span12' id='span-emp' onchange='onchangDetailCommentFn()'>";
    
     $.each(dataComment['detail'], function (index, indexEntry) { // gen select 
         htmlTemplateComment += "<option value='" + indexEntry['emp_id'] + "'>" + indexEntry['emp_name'] + "</option>";
@@ -395,21 +395,21 @@ var assignTemplateCommentFn = function () { // by DARIS
     htmlTemplateComment += "<div class='row-fluid'>";
     htmlTemplateComment += "<div class='row-fluid'>";
     htmlTemplateComment += "<div class='span6'>";
-    htmlTemplateComment += "<label >ส่วนที่เด่นของผู้ถูกประเมิน</label>";
+    htmlTemplateComment += "<label >"+ $(".lt-assessor-strength-opinion").val()+ "</label>";
     htmlTemplateComment += "<textarea  onchange='onchangeTextareaCommentFn(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px; padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='assessor__strength_opinion' class='form-control'></textarea>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "<div class='span6'>";
-    htmlTemplateComment += "<label >ความคิดเห็น/การพัฒนาตนเองของผู้ถูกการเประเมิน</label>";
+    htmlTemplateComment += "<label >"+ $(".lt-emp-strength-opinion").val()+ "</label>";
     htmlTemplateComment += "<textarea  onchange='onchangeTextareaCommentFn(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='emp__strength_opinion' class='form-control'></textarea>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "<div class='row-fluid'>";
     htmlTemplateComment += "<div class='span6'>";
-    htmlTemplateComment += "<label>ส่วนที่ควรปรับปรุงของผู้ถูกประเมิน</label>";
+    htmlTemplateComment += "<label>"+ $(".lt-assessor-weakness-opinion").val()+ "</label>";
     htmlTemplateComment += "<textarea  onchange='onchangeTextareaCommentFn(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='assessor__weakness_opinion' class='form-control'></textarea>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "<div class='span6'>";
-    htmlTemplateComment += "<label>สิ่งที่ผู้ถูกประเมินทำการปรับปรุง</label>";
+    htmlTemplateComment += "<label>"+ $(".lt-emp-weakness-opinion").val()+ "</label>";
     htmlTemplateComment += "<textarea onchange='onchangeTextareaCommentFn(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='emp__weakness_opinion' class='form-control'></textarea>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "</div>";
@@ -418,6 +418,14 @@ var assignTemplateCommentFn = function () { // by DARIS
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "</div>";
     $("#appraisal_template_area").append(htmlTemplateComment);
+    
+    //binding tooltip start
+    $('[data-toggle="tooltip"]').css({ "cursor": "pointer" });
+    $('[data-toggle="tooltip"]').tooltip({
+        html: true
+    });
+    //binding tooltip end
+    
     onchangDetailCommentFn();
 }
 
