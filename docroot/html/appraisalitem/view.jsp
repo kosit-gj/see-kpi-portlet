@@ -1262,7 +1262,7 @@ overflow-y: visible;
 				                	No Raise Value  <span class='redFont'>*</span>
 				                </div>
 				                <div class="form-input-customs">
-				                	<input type="text" class="form-control input-sm numberOnly  span12" placeholder="Value does not raise salary" id="NoRaiseValue ">
+				                	<input type="text" class="form-control input-sm numberOnly  span12" placeholder="Value does not raise salary" id="NoRaiseValue">
 				                </div>
 				                <br style="clear:both">
 			                </div>
