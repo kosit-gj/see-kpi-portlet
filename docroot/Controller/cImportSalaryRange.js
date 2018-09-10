@@ -4,123 +4,125 @@ var pageNumberDefault=1;
 var gUpdateYearId, gUpdateLevelId, gUpdateStep;
 var gDeleteYearId, gDeleteLevelId, gDeleteStep;
 
-$(document).ready(function() {		
+$(document).ready(function() {
 	var username = $('#user_portlet').val();
-	 var password = $('#pass_portlet').val();
-	 var plid = $('#plid_portlet').val();
-	 if(username!="" && username!=null & username!=[] && username!=undefined ){
-	 	
-		 if(connectionServiceFn(username,password,plid)==false){
-	 		return false;
-	 	}
-	 }	 
-	 getYearFn();
-	 getLevelFn();
-	 $(".app_url_hidden").show();
-	 
-	$("#btn_search_advance").click(function(){
-			$("#param_year").val($("#year").val());
-			$("#param_level").val($("#level").val());
-			getDetailFn();
-	});
-
+	var password = $('#pass_portlet').val();
+	var plid = $('#plid_portlet').val();
 	
- });
-// dropdownYear
-var getYearFn = function(){
-	$("body").mLoading('show');	
-	var htmlYear="";
-	$.ajax({
-		url : restfulURL+"/"+serviceName+"/public/salary_structure/all_list_year",
-		 type:"get",
-		 dataType:"json",
-		 headers:{Authorization:"Bearer "+tokenID.token},
-		 //async:false,
-        error: function (xhr, textStatus, errorThrown) {
-               console.log('Error: ' + xhr.responseText);
-           },
-		 success:function(data){
-		
-				$.each(data,function(index,indexEntry){
-				htmlYear+="<option value='"+indexEntry['appraisal_year_id']+"'>"+indexEntry['appraisal_year']+"</option>"
-				});	
-				 $("#year").html(htmlYear);
-			 console.log(data);
-		 },
-		beforeSend:function(){
-			$("body").mLoading('hide');	
+	if(username!="" && username!=null & username!=[] && username!=undefined ){
+		if(connectionServiceFn(username,password,plid)==false){
+			return false;
 		}
-		
-		});
-} 
-// dropdownlevel
-var getLevelFn = function(){
-	$("body").mLoading('show');	
-	var htmlLevel="";
-	htmlLevel+="<option value=''>All level</option>"
+	}
+	
+	// Generate Parameter //
+	getYearFn();
+	getLevelFn();
+	 
+	$(".app_url_hidden").show();
+	
+	// Search Event //
+	$("#btn_search_advance").click(function(){
+		$("#param_year").val($("#year").val());
+		$("#param_level").val($("#level").val());
+		getDetailFn();
+	});
+});
+
+
+// Year(Parameter) Generate //
+var getYearFn = function() {	
+	$("body").mLoading('show');
 	$.ajax({
-		url : restfulURL+"/"+serviceName+"/public/salary_structure/all_list_level",
-		 type:"get",
-		 dataType:"json",
-/*		 data: { "data": JSON.stringify(dataChangeComment) },*/
-		 headers:{Authorization:"Bearer "+tokenID.token},
-		 //async:false,
-        error: function (xhr, textStatus, errorThrown) {
-               console.log('Error: ' + xhr.responseText);
-           },
-		 success:function(data){
-		
-				$.each(data,function(index,indexEntry){
-				htmlLevel+="<option value='"+indexEntry['level_id']+"'>"+indexEntry['appraisal_level_name']+"</option>"
-				});	
-				 $("#level").html(htmlLevel);
-			 console.log(data);
-		 },
-		beforeSend:function(){
-			$("body").mLoading('hide');	
+		url: restfulURL +"/"+serviceName+"/public/salary_structure/all_list_year",
+		type: "get",
+		dataType: "json",
+		headers: {Authorization: "Bearer "+tokenID.token },
+		success: function(result) {
+			if(result.status == 200){
+				var htmlYear = "";
+				$.each(result.data, function(index, indexEntry) {
+					htmlYear += "<option value='"+indexEntry.appraisal_year+"'>"+indexEntry.appraisal_year+"</option>";
+				});
+				$("#year").append(htmlYear);
+				$("body").mLoading('hide');
+			}
+		},
+		error: function(xhr, textStatus, errorThrown) {
+			console.log('Error: ' + xhr.responseText);
 		}
-		
-		});
+	});
+}
+
+
+// Level(Parameter) Generate //
+var getLevelFn = function() {
+	$("body").mLoading('show');
+	$.ajax({
+		url: restfulURL+"/"+serviceName+"/public/salary_structure/all_list_level",
+		type: "get",
+		dataType: "json",
+		headers: { Authorization: "Bearer "+tokenID.token },
+		success: function(result) {
+			if(result.status == 200){
+				var htmlLevel = "";
+				$.each(result.data, function(index, indexEntry) { 
+					htmlLevel += "<option value='"+indexEntry.level_id+"'>"+indexEntry.appraisal_level_name+"</option>";
+				});
+				$("#level").append(htmlLevel);
+				$("body").mLoading('hide');
+			}
+		},
+		error : function(xhr, textStatus, errorThrown) {
+			console.log('Error: ' + xhr.responseText);
+		}
+	});
 } 
 
-//table
+
+// Display search Data //
 var getDetailFn = function(){
 	$("body").mLoading('show');	
-	var htmltable="";
 	$.ajax({
-		url : restfulURL+"/"+serviceName+"/public/salary_structure",
-		 type:"get",
-		 dataType:"json",
-		 data: { 
-			 "year": $("#param_year").val(),
-			 "level": $("#param_level").val(),
-			 },
-		 headers:{Authorization:"Bearer "+tokenID.token},
-		 //async:false,
-        error: function (xhr, textStatus, errorThrown) {
-               console.log('Error: ' + xhr.responseText);
-           },
-		 success:function(data){
-//		
-				$.each(data,function(index,indexEntry){
-					htmltable+="<tr >"
-					htmltable+="<td style='width: auto' id=\"year-"+indexEntry["appraisal_year"]+"__"+indexEntry["level_id"]+"__"+split(indexEntry["step"])+"\">"+indexEntry['appraisal_year']+"</td>"
-					htmltable+="<td style='width: auto' id=\"level-"+indexEntry["appraisal_year"]+"__"+indexEntry["level_id"]+"__"+split(indexEntry["step"])+"\">"+indexEntry['appraisal_level_name']+"</td>"
-					htmltable+="<td style='width: auto' id=\"step-"+indexEntry["appraisal_year"]+"__"+indexEntry["level_id"]+"__"+split(indexEntry["step"])+"\">"+indexEntry['step']+"</td>"
-					htmltable+="<td style='width: auto' id=\"salary-"+indexEntry["appraisal_year"]+"__"+indexEntry["level_id"]+"__"+split(indexEntry["step"])+"\">"+indexEntry['s_amount']+"</td>"
-					htmltable+= "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"<button class='btn btn-warning btn-xs edit' id=edit-"+indexEntry["appraisal_year"]+"__"+indexEntry["level_id"]+"__"+split(indexEntry["step"])+ " data-target=#ModalEdit data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>Edit</button>&nbsp;" ;
-					htmltable+= "<button id=del-"+indexEntry["appraisal_year"]+"__"+indexEntry["level_id"]+"__"+split(indexEntry["step"])+" class='btn btn-danger btn-xs del'>Delete</button>\"></i></td>";
+		url: restfulURL+"/"+serviceName+"/public/salary_structure",
+		type: "get",
+		dataType: "json",
+		data: {
+			"year": $("#param_year").val(),
+			"level": $("#param_level").val(),
+			"step_from": $("#param_step_from").val(),
+			"step_to": $("#param_step_to").val()
+		},
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(result){
+				var htmltable="";
+				$.each(result.data,function(index,indexEntry){ console.log(indexEntry.appraisal_year);
+					htmltable += 
+					"<tr>" +
+						"<td class='test-right' id='year-"+indexEntry.appraisal_year+"__"+indexEntry.level_id+"__"+split(indexEntry.step)+"'>"+indexEntry.appraisal_year+"</td>" +
+						"<td id='level-"+indexEntry.appraisal_year+"__"+indexEntry.level_id+"__"+split(indexEntry.step)+"'>"+indexEntry.appraisal_level_name+"</td>" +
+						"<td class='test-right' id='step-"+indexEntry.appraisal_year+"__"+indexEntry.level_id+"__"+split(indexEntry.step)+"'>"+indexEntry.step+"</td>" +
+						"<td class='test-right' id='salary-"+indexEntry.appraisal_year+"__"+indexEntry.level_id+"__"+split(indexEntry.step)+"'>"+indexEntry.s_amount+"</td>" +
+						"<td class='test-right' id='minsalary-"+indexEntry.appraisal_year+"__"+indexEntry.level_id+"__"+split(indexEntry.step)+"'>"+indexEntry.minimum_wage_amount+"</td>" +
+						"<td id='objectCenter' style='vertical-align:middle;'><i class='fa fa-cog font-gear popover-edit-del' data-html='true' data-toggle='popover' data-placement='top' data-trigger='focus' tabindex='"+index+"' " +
+								"data-content=\"" +
+									"<button class='btn btn-warning btn-xs edit' id=edit-"+indexEntry["appraisal_year"]+"__"+indexEntry["level_id"]+"__"+split(indexEntry["step"])+ " data-target=#ModalEdit data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>Edit</button>&nbsp;" +
+									"<button id=del-"+indexEntry["appraisal_year"]+"__"+indexEntry["level_id"]+"__"+split(indexEntry["step"])+" class='btn btn-danger btn-xs del'>Delete</button>\">" +
+							"</i>" +
+						"</td>" +
+					"</tr>";
+				});
+				console.log(htmltable);
+				$("#listSalaryRange").html(htmltable);
+				$("#salary_range_list_content").show();
+				$("body").mLoading('hide');
 					
-					htmltable+="</tr>"
-				});	
-			 $("#listSalaryRange").html(htmltable);
 			 $("#salary_list_content").show();
-			 console.log(data);
 			 $(".popover-edit-del").popover(setPopoverDisplay);
 			 $("#tableSalaryRange").off("click",".popover-edit-del");
 			 $("#tableSalaryRange").on("click",".popover-edit-del",function(){
-						$(".edit").on("click",function() {
-						$(".btnModalClose").click();
+				 $(".edit").on("click",function() {
+					 $(".btnModalClose").click();
 						findOneFn(this.id);	
 						
 						});
@@ -131,13 +133,11 @@ var getDetailFn = function(){
 						     gDeleteYearId= delid.split("__")[0];
 						     gDeleteLevelId= delid.split("__")[1];
 						     gDeleteStep= delid.split("__")[2]+"."+delid.split("__")[3];
-						     
-							alert(gDeleteYearId);
 							 
 							$("#confrimModal").modal({
 								"backdrop" : setModalPopup[0],
 								"keyboard" : setModalPopup[1]
-							});
+						});
 							$(document).off("click","#btnConfirmOK");
 							$(document).on("click","#btnConfirmOK",function(){
 							
@@ -157,7 +157,7 @@ var getDetailFn = function(){
 								    	 if(data['status']==200){			  	 									   
 									    	 clearFn();
 									    	 $("#confrimModal").modal('hide');
-									    	 
+									    	 getDetailFn();
 									     }else if (data['status'] == "400"){
 									    	 callFlashSlide(""+data['data']+"");
 									    	 //backToTopFn();
@@ -175,12 +175,12 @@ var getDetailFn = function(){
 			 $(".edit").on("click",function() {
 					$(".btnModalClose").click();
 			 });
-			
+			 
+			 	
 		 },
-		beforeSend:function(){
-			$("body").mLoading('hide');	
-		}
-		
+		 error: function (xhr, textStatus, errorThrown) {
+             console.log('Error: ' + xhr.responseText);
+         },
 		});
 } 
 $("#exportToExcel").click(function(){
@@ -198,9 +198,6 @@ $("#btn_import").click(function () {
 	$(".btnModalClose").click();
 	$(".dropify-clear").click(); 
 });
-//$("#importFileMobile").click(function () {
-//	$('#file').val("");
-//});
 // Variable to store your files
 var files;
 // Add events
@@ -246,6 +243,7 @@ function uploadFiles(event)
 						
 				callFlashSlide("Import Salary Range Successfully");
 				$("body").mLoading('hide');
+				//$('#file').val("");
 				$('#ModalImport').modal('hide');
 				getDetailFn();
 			}else{
@@ -326,7 +324,7 @@ function uploadFiles(event)
 		$("#from_level").val($("#level-"+id).text());
 		$("#from_step").val($("#step-"+id).text());
 		$("#from_salary").val($("#salary-"+id).text());		
-		
+		$("#from_minimumsalary").val($("#minsalary-"+id).text());		
 		$("#btnSalarySubmit").click(function(){
 			updateFn(gUpdateYearId, gUpdateLevelId, gUpdateStep);
 			return false;
@@ -343,7 +341,9 @@ function uploadFiles(event)
 				"appraisal_year": year,
 				"level_id": level,
 				"step": step,
-				"s_amount":$("#from_salary").val()	
+				"s_amount":$("#from_salary").val(),
+				"minimum_wage_amount":$("#from_minimumsalary").val()
+											
 			},	
 			success : function(data) {
 
@@ -365,6 +365,7 @@ function uploadFiles(event)
 		$("#from_level").val("");
 		$("#from_step").val("");
 		$("#from_salary").val("");
+		$("#from_minimumsalary").val("");
 		$('#file').val("");
  };
  //Check Validation Start
