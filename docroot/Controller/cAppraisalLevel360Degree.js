@@ -502,14 +502,20 @@ $(document).on('click', '.addModalCriteriaSetWeight', function() {
 	$("#information2").hide();
 	gSetWeightCurStruc = this.id.split("__")[1];
 	SetWeightFn(gSetCriteriaCurLevel, gSetWeightCurStruc, $('#structure_name__'+gSetWeightCurStruc).text()); //SetWeightFn(level_id, structure_id, structure_nam);
-	$("#addModalCriteriaSetWeightModal").modal()
+	$("#addModalCriteriaSetWeightModal").modal().css({'z-index': '1050'});
+	$('#addModalCriteria').css({'z-index' : '1030'});
 	$("#btnSetweightSubmit").off("click");
 	$("#btnSetweightSubmit").on('click', function() {
 		$("#information3").hide();
 		insertSetweightFn(gSetCriteriaCurLevel, gSetWeightCurStruc); //insertSetweightFn(level_id, structure_id)
-	});
+	});	
 });
-
+$(document).on('click','.setWeightCloseModal',function(){
+		$('#addModalCriteria').css({'z-index' : '1045'});
+	});
+$(document).on('click','#btnSetweightSubmit',function(){
+	$('#addModalCriteria').css({'z-index' : '1045'});
+});
 
 // enable/disable Set Weight button //
 $(document).on('change', '.from_data_structure', function() {
