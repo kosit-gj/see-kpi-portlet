@@ -502,7 +502,12 @@ $(document).on('click', '.addModalCriteriaSetWeight', function() {
 	$("#information2").hide();
 	gSetWeightCurStruc = this.id.split("__")[1];
 	SetWeightFn(gSetCriteriaCurLevel, gSetWeightCurStruc, $('#structure_name__'+gSetWeightCurStruc).text()); //SetWeightFn(level_id, structure_id, structure_nam);
-	$("#addModalCriteriaSetWeightModal").modal().css({'z-index': '1050'});
+	$("#addModalCriteriaSetWeightModal").modal(
+		{
+			"backdrop" : setModalPopup[0],
+			"keyboard" : setModalPopup[1]
+		}
+	).css({'z-index': '1050'});
 	$('#addModalCriteria').css({'z-index' : '1030'});
 	$("#btnSetweightSubmit").off("click");
 	$("#btnSetweightSubmit").on('click', function() {

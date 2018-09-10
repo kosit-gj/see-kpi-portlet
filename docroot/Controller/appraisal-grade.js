@@ -15,7 +15,7 @@ function SetSalaryRaise(){
 				 $("#form-group-salary_raise_amount label").append("<span class='redFont'>*</span>");
 				 $("#structure_id").hide();
 				 $("#structure_id").val("0");
-				 $("#structure_id").parent().append("<p style='padding-top:5px;'><font size='2.5' color='red'> ( Only salary structure sable type can be used ) </font></p>");
+				 $("#structure_id").parent().append("<p style='padding-top:5px;'><font size='2.5' color='red'> ( Only salary structure table type can be used ) </font></p>");
 			 }
 		 }
 	 });
