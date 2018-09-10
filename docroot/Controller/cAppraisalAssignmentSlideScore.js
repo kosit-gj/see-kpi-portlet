@@ -320,7 +320,7 @@ weight_percent: '',
 		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-maxValue").val(addCommas(indexEntry['max_value']));
 		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-deductScoreUnit").val(indexEntry['deduct_score_unit']);
 		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-valueGetZero").val(indexEntry['value_get_zero']==null ? "" :indexEntry['value_get_zero']);
-		
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-NoRaiseValue").val(indexEntry['no_raise_value']==null ? "" :indexEntry['no_raise_value']);
 		//embedParamAppraisal for get updated.
 		
 		embedParamCheckboxAppraisalItem("id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox");
@@ -333,7 +333,7 @@ weight_percent: '',
 	$.each(data,function(index,indexEntry){
 	
 		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-valueGetZero").val(indexEntry['value_get_zero']==null ? "" :indexEntry['value_get_zero']);
-
+		$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-NoRaiseValue").val(indexEntry['no_raise_value']==null ? "" :indexEntry['no_raise_value']);
 		
 	});
 //	if(actionType=='view'){
@@ -1041,6 +1041,7 @@ var actionUpdateAssignmentFn = function(){
 				appraisal_items+="\"total_weight\":\""+$("#total_weight-"+$(structureEntry).val()).val()+"\",";
 				appraisal_items+="\"deduct_score_unit\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-deductScoreUnit").val()+"\",";
 				appraisal_items+="\"value_get_zero\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-valueGetZero").val()+"\",";
+				appraisal_items+="\"no_raise_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-NoRaiseValue").val()+"\",";
 //				console.log("-----------------");
 //				console.log(appraisalItemEntry);
 //				console.log("Appraisal item = "+$(appraisalItemEntry).val());
@@ -1233,6 +1234,7 @@ var actionAssignmentFn = function(param){
 				appraisal_items+="\"max_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-maxValue").val()+"\",";
 				appraisal_items+="\"deduct_score_unit\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-deductScoreUnit").val()+"\",";
 				appraisal_items+="\"value_get_zero\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-valueGetZero").val()+"\",";
+				appraisal_items+="\"no_raise_value\":\""+$("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-NoRaiseValue").val()+"\",";
 				appraisal_items+="\"total_weight\":\""+$("#total_weight-"+$(structureEntry).val()).val()+"\",";
 				appraisal_items+="\"select_flag\":\"1\"";
 				appraisal_items+="}";
@@ -2094,12 +2096,15 @@ var assignTemplateDeductFn = function(structureName,data){
               		
 		htmlTemplateDeduct+="<thead>";
 			htmlTemplateDeduct+="<tr>";
-				htmlTemplateDeduct+="<th style=\"width:3%\"><b>"+$(".lt-select").val()+"</b></th>";
-				htmlTemplateDeduct+="<th style=\"width:52%\"><b>"+$(".lt-appraisal-item-name").val()+"</b></th>";
-				htmlTemplateDeduct+="<th style=\"width:15%; text-align:center;\"><b>"+$(".lt-max-value").val()+"</b></th>";
-				htmlTemplateDeduct+="<th style=\"width:15%; text-align:center;\"><b>"+$(".lt-deduct-score").val()+"/"+$(".lt-unit").val()+"</b></th>";
+				htmlTemplateDeduct+="<th style=\"width:\"><b>"+$(".lt-select").val()+"</b></th>";
+				htmlTemplateDeduct+="<th style=\"width:\"><b>"+$(".lt-appraisal-item-name").val()+"</b></th>";
+				htmlTemplateDeduct+="<th style=\"width:; text-align:center;\"><b>"+$(".lt-max-value").val()+"</b></th>";
+				htmlTemplateDeduct+="<th style=\"width:; text-align:center;\"><b>"+$(".lt-deduct-score").val()+"/"+$(".lt-unit").val()+"</b></th>";
 				if(data['is_value_get_zero']== 1) {
-					htmlTemplateDeduct+="<th style=\"width:15%; text-align:center;\"><b>"+$(".lt-value-get-zero").val()+"</b></th>";
+					htmlTemplateDeduct+="<th style=\"width:; text-align:center;\"><b>"+$(".lt-value-get-zero").val()+"</b></th>";
+				}
+				if(data['is_no_raise_value']== 1) {
+					htmlTemplateDeduct+="<th style=\"width:; text-align:center;\"><b>"+$(".lt-no_raise_value").val()+"</b></th>";  // daris TH
 				}
 					htmlTemplateDeduct+="</tr>";
 					htmlTemplateDeduct+="</thead>";
@@ -2109,12 +2114,15 @@ var assignTemplateDeductFn = function(structureName,data){
 						htmlTemplateDeduct+="<tr>";
 							
 								
-								htmlTemplateDeduct+="<td style=\"width:3%;text-align:center;\" class='object-center' ><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox notCal appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['item_id']+"'></td>";
-								htmlTemplateDeduct+="<td style=\"width:52%\" style='padding-top:7px;' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' class='id-"+indexEntry['structure_id']+"-item_name'>"+indexEntry['item_name']+"</td>";
-								htmlTemplateDeduct+="<td style=\"width:15%;text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-maxValue' class='id-"+indexEntry['structure_id']+"-maxValue  input form-control input-sm-small numberOnly addComma' type='text' value='"+indexEntry['max_value']+"'></td>";
-								htmlTemplateDeduct+="<td style=\"width:15%; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-deductScoreUnit' class='id-"+indexEntry['structure_id']+"-deductScoreUnit    input form-control input-sm-small numberOnly addComma' type='text' value='"+indexEntry['unit_deduct_score']+"'>     </td>";
+								htmlTemplateDeduct+="<td style=\"width:;text-align:center;\" class='object-center' ><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-checkbox' class='appraisalItem-checkbox notCal appraisalItem-checkbox-"+indexEntry['structure_id']+"' type='checkbox' value='"+indexEntry['item_id']+"'></td>";
+								htmlTemplateDeduct+="<td style=\"width:\" style='padding-top:7px;' id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_name' class='id-"+indexEntry['structure_id']+"-item_name'>"+indexEntry['item_name']+"</td>";
+								htmlTemplateDeduct+="<td style=\"width:;text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-maxValue' class='id-"+indexEntry['structure_id']+"-maxValue  input form-control input-sm-small numberOnly addComma' type='text' value='"+indexEntry['max_value']+"'></td>";
+								htmlTemplateDeduct+="<td style=\"width:; text-align:center;\"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-deductScoreUnit' class='id-"+indexEntry['structure_id']+"-deductScoreUnit    input form-control input-sm-small numberOnly addComma' type='text' value='"+indexEntry['unit_deduct_score']+"'>     </td>";
 								if(data['is_value_get_zero']== 1) {
-									htmlTemplateDeduct+="<td style=\"width:15%; text-align:center; \"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-valueGetZero' class='id-"+indexEntry['structure_id']+"-valueGetZero  input form-control input-sm-small numberOnly addComma' type='text' value='"+(indexEntry['value_get_zero']==null ? "" :indexEntry['value_get_zero'])+"'></td>";								
+									htmlTemplateDeduct+="<td style=\"width:; text-align:center; \"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-valueGetZero' class='id-"+indexEntry['structure_id']+"-valueGetZero  input form-control input-sm-small numberOnly addComma' type='text' value='"+(indexEntry['value_get_zero']==null ? "" :indexEntry['value_get_zero'])+"'></td>";								
+								}
+								if(data['is_no_raise_value']== 1) {
+									htmlTemplateDeduct+="<td style=\"width:; text-align:center; \"><input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-NoRaiseValue' class='id-"+indexEntry['structure_id']+"-NoRaiseValue  input form-control input-sm-small numberOnly addComma' type='text' value='"+(indexEntry['no_raise_value']==null ? "" :indexEntry['no_raise_value'])+"'></td>";								
 								}
 								htmlTemplateDeduct+="<input id='id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-item_result_id' class='id-"+indexEntry['structure_id']+"-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
 						htmlTemplateDeduct+="</tr>";
