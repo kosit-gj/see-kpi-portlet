@@ -105,7 +105,7 @@ var listDataFn = function(data) {
 	var btnDeduct = "";
 	$.each(data,function(index,indexEntry){
 		if(indexEntry['form_url']=='deduct') {
-			btnDeduct = "btnDeduct isValueGetZero-"+indexEntry['is_value_get_zero']+"";
+			btnDeduct = "btnDeduct isValueGetZero-"+indexEntry['is_value_get_zero']+" is_no_raise_value-"+indexEntry['is_no_raise_value']+"";
 		} else {
 			btnDeduct = "";
 		}
@@ -1170,13 +1170,20 @@ $(document).ready(function(){
 	});
 	
 	$(document).on("click",".btnDeduct",function(){
-		var btnDeduct = $(this).attr('class').split(' ')[5];
-		var isValueGetZero = btnDeduct.split("-")[1];
-
+		
+		var isValueGetZero = $(this).attr('class').split(' ')[5].split("-")[1];
+		var is_no_raise_value = $(this).attr('class').split(' ')[6].split("-")[1];
+		
 		if(isValueGetZero==1) {
 			$(".is_value_get_zero_form").show();
 		} else {
 			$(".is_value_get_zero_form").hide();
+		}
+		
+		if(is_no_raise_value==1) {
+			$(".is_no_raise_value_form").show();
+		} else {
+			$(".is_no_raise_value_form").hide();
 		}
 	});
 	
