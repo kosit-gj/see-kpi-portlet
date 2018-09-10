@@ -42,19 +42,24 @@
 	    					
 		    				],
 	    			"formIf":[	{
-		        				"style":"display:none;","class_header":"\"is_unlimited_reward_header\"",
-								"label":"Unlimited Reward","inputType":"checkbox","default":"unchecked",
-		        				"id":"is_unlimited_reward","width":"250px"
+			        				"style":"display:none;","class_header":"\"is_unlimited_reward_header\"",
+									"label":"Unlimited Reward","inputType":"checkbox","default":"unchecked",
+			        				"id":"is_unlimited_reward","width":"250px"
 		        				},
 		        				{
-	            				"style":"display:none;","class_header":"\"is_unlimited_deduction_header\"",
-	    						"label":"Unlimited Deduction","inputType":"checkbox","default":"unchecked",
-	            				"id":"is_unlimited_deduction","width":"250px"
+		            				"style":"display:none;","class_header":"\"is_unlimited_deduction_header\"",
+		    						"label":"Unlimited Deduction","inputType":"checkbox","default":"unchecked",
+		            				"id":"is_unlimited_deduction","width":"250px"
 	            				},
 	            				{
-		            			"style":"display:none;","class_header":"\"is_value_get_zero_header\"",
-		    					"label":"Value Get Zero","inputType":"checkbox","default":"unchecked",
-		            			"id":"is_value_get_zero","width":"250px"
+			            			"style":"display:none;","class_header":"\"is_value_get_zero_header\"",
+			    					"label":"Value Get Zero","inputType":"checkbox","default":"unchecked",
+			            			"id":"is_value_get_zero","width":"250px"
+		            			},
+		            			{
+		            				"style":"display:none;","class_header":"\"is_no_raise_value_header\"",
+			    					"label":"No Raise Value","inputType":"checkbox","default":"unchecked",
+			            			"id":"is_no_raise_value","width":"250px"
 		            			}
 	    			     	 ],
 	    			 "formDetail":{"formSize":"modal-dialog","formName":"Appraisal Structure","id":"appraisalStructure","pk_id":"structure_id"},       
@@ -67,31 +72,27 @@
 	 
 	    	createDataTableFn(options);
 	    	
+	    	var curFromId = $("#form_id").val();
+	    	
 	    	$("#form_id").change(function() {
-
-				if($("#form_id").val()==3) { //if Deduct Score
-					
+	    		if($("#form_id").val()==3) { //if Deduct Score					
 					$(".is_unlimited_reward_header").hide();
 					$(".checkbox-is_unlimited_reward").prop('checked',false);
+					$(".is_unlimited_deduction_header, .is_value_get_zero_header, .is_no_raise_value_header").show();
+					$(".checkbox-is_unlimited_deduction, .checkbox-is_value_get_zero").prop('checked',true);
+					$(".checkbox-is_no_raise_value").prop('checked', false);
 					
-					$(".is_unlimited_deduction_header,.is_value_get_zero_header").show();
-					$(".checkbox-is_unlimited_deduction,.checkbox-is_value_get_zero").prop('checked',true);
-					
-				} else if($("#form_id").val()==4) { //if Reward Score
-					
-					$(".is_unlimited_deduction_header,.is_value_get_zero_header").hide();
-					$(".checkbox-is_unlimited_deduction,.checkbox-is_value_get_zero").prop('checked',false);
-					
+				} else if($("#form_id").val()==4) { //if Reward Score					
+					$(".is_unlimited_deduction_header, .is_value_get_zero_header, .is_no_raise_value_header").hide();
+					$(".checkbox-is_unlimited_deduction, .checkbox-is_value_get_zero, .checkbox-is_no_raise_value").prop('checked',false);
 					$(".is_unlimited_reward_header").show();
 					$(".checkbox-is_unlimited_reward").prop('checked',true);
-					
-				} else {
-					
-					$(".is_unlimited_deduction_header,.is_value_get_zero_header,.is_unlimited_reward_header").hide();
-					$(".checkbox-is_unlimited_deduction,.checkbox-is_value_get_zero,.checkbox-is_unlimited_reward").prop('checked',false);
-					
+						
+				} else {					
+					$(".is_unlimited_deduction_header, .is_value_get_zero_header, .is_unlimited_reward_header, .is_no_raise_value_header").hide();
+					$(".checkbox-is_unlimited_deduction, .checkbox-is_value_get_zero, .checkbox-is_unlimited_reward, .checkbox-is_no_raise_value").prop('checked',false);
+						
 				}
-				
 	    	});
 	 	}
 	 }
