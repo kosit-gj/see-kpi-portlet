@@ -96,7 +96,7 @@ var getDetailFn = function(){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(result){
 				var htmltable="";
-				$.each(result.data,function(index,indexEntry){ console.log(indexEntry.appraisal_year);
+				$.each(result.data,function(index,indexEntry){
 					htmltable += 
 					"<tr>" +
 						"<td class='test-right' id='year-"+indexEntry.appraisal_year+"__"+indexEntry.level_id+"__"+split(indexEntry.step)+"'>"+indexEntry.appraisal_year+"</td>" +
@@ -112,7 +112,6 @@ var getDetailFn = function(){
 						"</td>" +
 					"</tr>";
 				});
-				console.log(htmltable);
 				$("#listSalaryRange").html(htmltable);
 				$("#salary_range_list_content").show();
 				$("body").mLoading('hide');
@@ -146,9 +145,9 @@ var getDetailFn = function(){
 									 type : "delete",
 									 dataType:"json",
 									 data : {
-											'appraisal_year': gDeleteYearId,
-												'level_id': gDeleteLevelId,
-													'step':gDeleteStep
+										'appraisal_year': gDeleteYearId,
+										'level_id': gDeleteLevelId,
+										'step':gDeleteStep
 									 },
 									 async:false,
 									 headers:{Authorization:"Bearer "+tokenID.token},
@@ -173,16 +172,17 @@ var getDetailFn = function(){
 					});
 			 
 			 $(".edit").on("click",function() {
-					$(".btnModalClose").click();
+				$(".btnModalClose").click();
 			 });
-			 
-			 	
 		 },
 		 error: function (xhr, textStatus, errorThrown) {
              console.log('Error: ' + xhr.responseText);
          },
-		});
-} 
+	});
+}
+
+
+// Export excel template //
 $("#exportToExcel").click(function(){
 	$("form#formExportToExcel").attr("action",$("#url_portlet").val()+"/file/import_SalaryRange_template.xlsx");
 });
@@ -198,26 +198,24 @@ $("#btn_import").click(function () {
 	$(".btnModalClose").click();
 	$(".dropify-clear").click(); 
 });
-// Variable to store your files
-var files;
-// Add events
-$('#file').on('change', prepareUpload2);
+
+
+
+var files; // Variable to store your files
+$('#file').on('change', prepareUpload2); // Add events
+
 
 // Grab the files and set them to our variable
-function prepareUpload2(event)
-{
+function prepareUpload2(event){
   files = event.target.files;
 }
 $('form#fileImportSalaryRange').on('submit', uploadFiles);
 
+
 // Catch the form submit and upload the files
-function uploadFiles(event)
-{
-	
+function uploadFiles(event){
 	event.stopPropagation(); // Stop stuff happening
 	event.preventDefault(); // Totally stop stuff happening
-
-	// START A LOADING SPINNER HERE
 
 	// Create a formdata object and add the files
 	var data = new FormData();
@@ -225,6 +223,7 @@ function uploadFiles(event)
 	{
 		data.append(key, value);
 	});
+	
 	$("body").mLoading();
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/salary_structure/import",
@@ -237,13 +236,10 @@ function uploadFiles(event)
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success: function(data, textStatus, jqXHR)
 		{
-			
-			//console.log(data);
 			if(data['status']==200 && data['errors'].length==0){
 						
 				callFlashSlide("Import Salary Range Successfully");
 				$("body").mLoading('hide');
-				//$('#file').val("");
 				$('#ModalImport').modal('hide');
 				getDetailFn();
 			}else{
@@ -254,20 +250,21 @@ function uploadFiles(event)
 		},
 		error: function(jqXHR, textStatus, errorThrown)
 		{
-			// Handle errors here
 			callFlashSlide('Format Error : ' + textStatus);
-			// STOP LOADING SPINNER
 		}
 	});
 	return false;
 }
+
 
 //binding tooltip start
  $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
  $('[data-toggle="tooltip"]').tooltip({
 	 html:true
  });
-//binding tooltip end
+
+
+ 
  // Basic
  $('.dropify').dropify();
 
@@ -280,6 +277,8 @@ function uploadFiles(event)
          error:   'Dsol, le fichier trop volumineux'
      }
  });
+  
+
 // Used events
  var drEvent = $('#input-file-events').dropify();
 
@@ -312,6 +311,7 @@ function uploadFiles(event)
      return id.replace(".","__");;
  }
  
+ 
 //-------- findOne
  var findOneFn = function(id) {
 	 var id = id.split("-");
@@ -330,7 +330,9 @@ function uploadFiles(event)
 			return false;
 		});
  };
- //--------- findOne
+
+
+ 
  var updateFn = function(year, level, step){
 	 $.ajax({
 			url:restfulURL+"/"+serviceName+"/public/salary_structure/update",
@@ -359,6 +361,8 @@ function uploadFiles(event)
 			}
 	 })
  };
+ 
+ 
  var clearFn = function() {
 				
 		$("#from_year").val("");
@@ -368,6 +372,8 @@ function uploadFiles(event)
 		$("#from_minimumsalary").val("");
 		$('#file').val("");
  };
+ 
+ 
  //Check Validation Start
  var validationFn = function(data){
 
@@ -390,6 +396,7 @@ function uploadFiles(event)
  	//callFlashSlideInModal(validate);
  };
  
+
 //Check Validation Edd
  var validateFileFn = function(data){
  	var validateFile="";
