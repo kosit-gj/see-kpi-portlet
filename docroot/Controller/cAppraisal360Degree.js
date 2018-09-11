@@ -1,4 +1,4 @@
-var globalData = "";
+var globalData = ""; 
 var galbalDataTemp = [];
 var phaseArray = [];
 var globalCount = 0;
