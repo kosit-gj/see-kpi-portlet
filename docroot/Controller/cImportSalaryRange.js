@@ -106,8 +106,8 @@ var getDetailFn = function(){
 						"<td class='test-right' id='minsalary-"+indexEntry.appraisal_year+"__"+indexEntry.level_id+"__"+split(indexEntry.step)+"'>"+indexEntry.minimum_wage_amount+"</td>" +
 						"<td id='objectCenter' style='vertical-align:middle;'><i class='fa fa-cog font-gear popover-edit-del' data-html='true' data-toggle='popover' data-placement='top' data-trigger='focus' tabindex='"+index+"' " +
 								"data-content=\"" +
-									"<button class='btn btn-warning btn-xs edit' id=edit-"+indexEntry["appraisal_year"]+"__"+indexEntry["level_id"]+"__"+split(indexEntry["step"])+ " data-target=#ModalEdit data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>Edit</button>&nbsp;" +
-									"<button id=del-"+indexEntry["appraisal_year"]+"__"+indexEntry["level_id"]+"__"+split(indexEntry["step"])+" class='btn btn-danger btn-xs del'>Delete</button>\">" +
+									"<button class='btn btn-warning btn-xs edit' id=edit-"+indexEntry["appraisal_year"]+"__"+indexEntry["level_id"]+"__"+split(indexEntry["step"])+ " data-target=#ModalEdit data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>"+$('.lt-edit').val()+"</button>&nbsp;" +
+									"<button id=del-"+indexEntry["appraisal_year"]+"__"+indexEntry["level_id"]+"__"+split(indexEntry["step"])+" class='btn btn-danger btn-xs del'>"+$('.lt-delete').val()+"</button>\">" +
 							"</i>" +
 						"</td>" +
 					"</tr>";

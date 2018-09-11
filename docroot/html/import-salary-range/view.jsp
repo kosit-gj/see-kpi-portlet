@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
-
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 
@@ -366,7 +366,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 		<div class="col-lg-12">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<h5>Advance Search</h5>
+					<h5><liferay-ui:message key="advanced-search"/></h5>
 				</div>
 
 				<div class="ibox-content breadcrumbs2">
@@ -375,7 +375,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 						<div class="form-group pull-left span2" style="margin-left: 5px">
 							<select name="year" id="year"
 								class="input form-control input-sm span12" data-toggle="tooltip"
-								style="cursor: pointer;" data-original-title="Year">
+								style="cursor: pointer;" data-original-title="<liferay-ui:message key="year"/>">
 								<option value="">All Year</option>
 							</select> <input type='hidden' value="" id="param_year">
 						</div>
@@ -383,7 +383,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 						<div class="form-group pull-left span2" style="margin-left: 5px">
 							<select name="level" id="level"
 								class="input form-control input-sm span12" data-toggle="tooltip"
-								style="cursor: pointer;" data-original-title="Level">
+								style="cursor: pointer;" data-original-title="<liferay-ui:message key="level"/>">
 								<option value="">All Level</option>
 							</select> <input type='hidden' value="" id="param_level">
 						</div>
@@ -391,14 +391,14 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 						<div class="form-group pull-left span2" style="margin-left: 5px">
 							<input type="number" step="0.5" id="param_step_from"
 								class="form-control input-sm span12" name="param_step_from"
-								data-toggle="tooltip" title="Step From" placeholder="Step From"
+								data-toggle="tooltip" title="<liferay-ui:message key="step-from"/>" placeholder="<liferay-ui:message key="step-from"/>"
 								value="" />
 						</div>
 
 						<div class="form-group pull-left span2" style="margin-left: 5px">
 							<input type="number" step="0.5" id="param_step_to"
 								class="form-control input-sm span12" name="param_step_to"
-								data-toggle="tooltip" title="Step To" placeholder="Step To"
+								data-toggle="tooltip" title="<liferay-ui:message key="step-to"/>" placeholder="<liferay-ui:message key="step-to"/>"
 								value="" />
 						</div>
 
@@ -406,7 +406,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 							<div class="form-group pull-right m-b-none ">
 								<button id="btn_import" type="button"
 									class="btn btn-success btn-sm" style="margin-left: 5px;">
-									<i class="fa fa-upload"></i> Import
+									<i class="fa fa-upload"></i> <liferay-ui:message key="import"/>
 								</button>
 							</div>
 							<div class="form-group pull-right m-b-none ">
@@ -415,7 +415,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 									style="margin-bottom: 0px; margin-left: 5px;">
 									<button type="submit" id="exportToExcel"
 										class="btn btn-warning btn-sm">
-										<i class="fa fa-download"></i> Download
+										<i class="fa fa-download"></i> <liferay-ui:message key="download"/>
 									</button>
 								</form>
 							</div>
@@ -423,7 +423,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 								<button type="button" id="btn_search_advance"
 									class="btn btn-info input-sm" name="btn_search_advance"
 									style="margin-left: 5px">
-									<i class="fa fa-search"></i> Search
+									<i class="fa fa-search"></i> <liferay-ui:message key="search"/>
 								</button>
 							</div>
 						</div>
@@ -438,7 +438,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 	<!-- Start -- Salary Structure  List ---------- -->
 	<div class="row-fluid" id="salary_range_list_content" style="display:none;">
 		<div class="col-lg-12">
-			<div class="ibox-title"> <h5>Salary Structure  List</h5> </div>
+			<div class="ibox-title"> <h5><liferay-ui:message key="salary-structure-list"/></h5> </div>
 			<div class="ibox-content">
 				<div class="row-fluid"> <div class="height-32-px"></div> </div>
 
@@ -446,12 +446,12 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 					<table class="table table-striped" id="tableSalaryRange" style="max-width: none;">
 						<thead>
 							<tr style="white-space:nowrap;">
-								<th class="test-right">Year</th>
-								<th style="">Level</th>
-								<th class="test-right">Step</th>
-								<th class="test-right">Salary</th>
-								<th class="test-right">Minimum Amount</th>
-								<th class="text-center" style="text-align: center;">Manage</th>
+								<th class="test-right"><liferay-ui:message key="year"/></th>
+								<th style=""><liferay-ui:message key="level"/></th>
+								<th class="test-right"><liferay-ui:message key="step"/></th>
+								<th class="test-right"><liferay-ui:message key="salary"/></th>
+								<th class="test-right"><liferay-ui:message key="minimum-amount"/></th>
+								<th class="text-center" style="text-align: center;"><liferay-ui:message key="manage"/></th>
 							</tr>
 						</thead>
 						<tbody id="listSalaryRange">
@@ -480,17 +480,14 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span>
 					</button>
 					<!-- <i class="fa fa-laptop modal-icon"></i> -->
-					<h4 class="modal-title" id="">Import Salary Range</h4>
-					<!-- 
-                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
-                 -->
+					<h4 class="modal-title" id=""><liferay-ui:message key="import-salary-range"/></h4>
 				</div>
 				<div class="modal-body">
 					<!-- content start -->
 					<!-- form start -->
 					<div class="form-group">
 					<form id="fileImportSalaryRange">
-						<h4>FILE IMPORT</h4>
+						<h4><liferay-ui:message key="file-import"/></h4>
 						<div class="fileUpload ">
 							<input type="file" id="file" class="dropify" accept=".xls, .xlsx" style="width: 100%; height: 100%;"/><span></span>
 						</div>
@@ -500,9 +497,9 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 					<!-- content end -->
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-success" type="submit" id="importFileMobile" form="fileImportSalaryRange">Import</button>
+					<button class="btn btn-success" type="submit" id="importFileMobile" form="fileImportSalaryRange"><liferay-ui:message key="import"/></button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
-						type="button">Cancel</button>
+						type="button"><liferay-ui:message key="cancel"/></button>
 						<div class="alert alert-warning information" id="informationFile"
 						style="height:120px; overflow-y: scroll; position:relative;display: none;"></div>
 				</div>
@@ -522,7 +519,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span>
 					</button>
 					<!-- <i class="fa fa-laptop modal-icon"></i> -->
-					<h4 class="modal-title" id="modalTitleRole">Salary Range</h4>
+					<h4 class="modal-title" id="modalTitleRole"><liferay-ui:message key="salary-range"/></h4>
 					<!-- 
                 <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
                  -->
@@ -533,31 +530,31 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 					<div class="row-fluid">
 	                	<div class="span12 form-horizontal p-t-xxs">
 	                		<div class="form-group p-xxs">
-								<label class="control-label">Year:</label>
+								<label class="control-label"><liferay-ui:message key="year"/>:</label>
 								<div class="controls">
 									<input disabled type="text" class="form-control input-sm span12" placeholder="" id="from_year">
 								</div>
 							</div>
 							<div class="form-group p-xxs">
-								<label class="control-label">Level:</label>
+								<label class="control-label"><liferay-ui:message key="level"/>:</label>
 								<div class="controls">
 									<input disabled type="text" class="form-control input-sm span12" placeholder="" id="from_level">
 								</div>
 							</div>
 							<div class="form-group p-xxs">
-								<label class="control-label">Step:</label>
+								<label class="control-label"><liferay-ui:message key="step"/>:</label>
 								<div class="controls">
 									<input disabled  type="text"  class="form-control input-sm span12" id="from_step" >
 								</div>
 							</div>
 							<div class="form-group p-xxs" style="padding-top: 8px;">
-								<label class="control-label">Salary:<span class='redFont'>*</span></label>
+								<label class="control-label"><liferay-ui:message key="salary"/>:<span class='redFont'>*</span></label>
 								<div class="controls">
 									<input  title="salary" type="text" class="form-control input-sm span12" placeholder="" id="from_salary">
 								</div>
 							</div>
 							<div class="form-group p-xxs" style="padding-top: 8px;">
-								<label class="control-label">Minimum Amount:<span class='redFont'>*</span></label>
+								<label class="control-label"><liferay-ui:message key="minimum-amount"/>:<span class='redFont'>*</span></label>
 								<div class="controls">
 									<input  title="salary" type="text" class="form-control input-sm span12" placeholder="" id="from_minimumsalary">
 								</div>
@@ -568,9 +565,9 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 					<!-- content end -->
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-success" type="button" id="btnSalarySubmit">Save</button>
+					<button class="btn btn-success" type="button" id="btnSalarySubmit"><liferay-ui:message key="save"/></button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
-						type="button">Cancel</button>
+						type="button"><liferay-ui:message key="cancel"/></button>
 						<div class="alert alert-warning information" id="information2"
 						style="display: none;"></div>
 				</div>
@@ -589,7 +586,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 					<button data-dismiss="modal" class="close" type="button" style="padding-top:3px">
 						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span>
 					</button>
-					<h5 class="modal-title">Confirm Dialog</h5>
+					<h5 class="modal-title"><liferay-ui:message key="confirm-dialog"/></h5>
 				</div>
 				<div class="modal-body">
 					<!-- content start -->
@@ -600,7 +597,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 					<div class="form-kpi-mangement">
 						<div class="form-kpi-label" align="center">
 
-							<label>Confirm to Delete Data?</label>
+							<label><liferay-ui:message key="confirm-to-delete-data"/>?</label>
 							<div id="inform_on_confirm" class='information'></div>
 						</div>
 					</div>
@@ -611,11 +608,11 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 				<div class="modal-footer">
 					<div align="center">
 						<button class="btn btn-success" id="btnConfirmOK" type="button">
-							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
+							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;<liferay-ui:message key="yes"/>&nbsp;&nbsp;
 						</button>
 						&nbsp;&nbsp;
 						<button data-dismiss="modal" class="btn btn-danger" type="button">
-							<i class="fa fa-times-circle"></i>&nbsp;Cancel
+							<i class="fa fa-times-circle"></i>&nbsp;<liferay-ui:message key="cancel"/>
 						</button>
 					</div>
 					<div class="alert alert-warning information" id="information"
@@ -635,15 +632,15 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 			<div class="modal-content  bounceInRight">
 				<div class="modal-header">
 					<button data-dismiss="modal" class="close" type="button" style="padding-top:3px">
-						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only">Close</span>
+						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"><liferay-ui:message key="close"/></span>
 					</button>
-					<h5 class="modal-title">Confirm Dialog</h5>
+					<h5 class="modal-title"><liferay-ui:message key="confirm-dialog"/></h5>
 				</div>
 				<div class="modal-body">
 					<div class="form-kpi-mangement">
 						<div class="form-kpi-label" align="center">
 
-							<label>Do you want to create a user?</label>
+							<label><liferay-ui:message key="do-you-want-to-create-a-user"/>?</label>
 							<div id="inform_on_confirm" class='information'></div>
 						</div>
 					</div>
@@ -651,11 +648,11 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 				<div class="modal-footer">
 					<div align="center">
 						<button class="btn btn-success" id="btnUserImportOK" type="button">
-							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
+							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;<liferay-ui:message key="yes"/>&nbsp;&nbsp;
 						</button>
 						&nbsp;&nbsp;
 						<button data-dismiss="modal" class="btn btn-danger" type="button">
-							<i class="fa fa-times-circle"></i>&nbsp;Cancel
+							<i class="fa fa-times-circle"></i>&nbsp;<liferay-ui:message key="cancel"/>
 						</button>
 					</div>
 					<div id="userImportProgressbar" class="progressBar"> <span id="progressText" class="progressBarText"></span> </div> 
