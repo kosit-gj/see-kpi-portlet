@@ -93,6 +93,7 @@
 <input class="lt-value-not-raise" type="hidden" value="<liferay-ui:message key="value-not-raise"/>"/>
 <input class="lt-over-value-not-raise" type="hidden" value="<liferay-ui:message key="over-value-not-raise"/>"/>
 <input class="lt-reward-score-Unit" type="hidden" value="<liferay-ui:message key="reward-score-Unit"/>"/>
+<input class="lt-comment" type="hidden" value="<liferay-ui:message key="comment"/>"/>
 
 <!-- Performance Trend -->
 <input class="lt-employee-name-is-require" type="hidden" value="<liferay-ui:message key="employee-name-is-require"/>"/>

@@ -4,16 +4,17 @@ var phaseArray = [];
 var globalCount = 0;
 var username = "";
 var password = "";
+
 //Variable to store your files
 var files;
 var emailLinkAppraisal = false;
 
 var dataQuality = [];
-var getQualityFn = function () {   // by DARIS --> 
-	
-	dataQuality = [];
-	dataChangeQuality = [];
-	
+var getQualityFn = function () {   // QualityFn 
+
+    dataQuality = [];
+    dataChangeQuality = [];
+
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/show/emp_result/type_2",
         type: "get",
@@ -31,13 +32,13 @@ var getQualityFn = function () {   // by DARIS -->
             $.each(dataQuality, function (index, groupEntry) {
                 $("#appraisal_template_area").append(assignTemplateQualityFn(index, groupEntry));
                 onchangGroupQualityFn(groupEntry['structure_id']);
-                if($("#group_id").val()!=5) $(".classAdmin").hide(); // hidden parameter
+                if ($("#group_id").val() != 5) $(".classAdmin").hide(); // hidden parameter
             });
         }
     });
 }
 
-var updateQualityFn = function () {   // by DARIS 
+var updateQualityFn = function () {   // QualityFn 
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/update/type_2",
         type: "patch",
@@ -46,60 +47,52 @@ var updateQualityFn = function () {   // by DARIS
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            console.log("update data successful !");
-            console.log("data:" + JSON.stringify(dataChangeQuality));
+            console.log("Quality --> update data successful !");
         }
     });
 }
 
-
-//by DARIS 
-var assignTemplateQualityFn = function (structureName, data) {
+var assignTemplateQualityFn = function (structureName, data) {  // QualityFn
     var item_result_id_array = [];
     var htmlTemplateQuality = "";
     var info_item = "";
     var hintHtml = "";
     var total_weigh_score = "";
-    
-  
+
     $.each(data['hint'], function (index, indexEntry) {
         hintHtml += "<div style='text-align: left;\'>" + indexEntry['hint'] + "</div>";
     });
-    
-    
+
     htmlTemplateQuality += "";
     htmlTemplateQuality += "<div class=\"row-fluid\">";
     htmlTemplateQuality += "<div class=\"span12\">";
     htmlTemplateQuality += "<div class=\"ibox-title2\">";
-
-    htmlTemplateQuality += "<div class='titlePanel'>" + structureName + "</div>"; // ถามพี่โจ
-
-    htmlTemplateQuality += "<div class='totalWeight' id='totalWeight-"+data['structure_id']+"'></div>";
-    
+    htmlTemplateQuality += "<div class='titlePanel'>" + structureName + "</div>";
+    htmlTemplateQuality += "<div class='totalWeight' id='totalWeight-" + data['structure_id'] + "'></div>";
     htmlTemplateQuality += "</div>";
     htmlTemplateQuality += "<div class=\"ibox-content\">";
 
-    // <----Parameter-start
+    // <---- Parameter-start
     htmlTemplateQuality += "<div class='row-fluid classAdmin' style='margin-bottom: 10px;'>"
     htmlTemplateQuality += "<div class=\"span12\">";
-    
+
     htmlTemplateQuality += "<div class='span3'>"
-    htmlTemplateQuality += "<select data-original-title='"+ $(".lt-group").val()+ "' title=''  data-toggle='tooltip' class='span12' id='group-" + data['structure_id'] + "' onchange='onchangGroupQualityFn(" + data['structure_id'] + ")'>";
+    htmlTemplateQuality += "<select data-original-title='" + $(".lt-group").val() + "' title=''  data-toggle='tooltip' class='span12' id='group-" + data['structure_id'] + "' onchange='onchangGroupQualityFn(" + data['structure_id'] + ")'>";
     $.each(data, function (index, indexEntry) {
         if (indexEntry['group_id'] != undefined)
             htmlTemplateQuality += "<option value='" + indexEntry['group_id'] + "'>" + indexEntry['group_name'] + "</option>";
     });
     htmlTemplateQuality += "</select >";
     htmlTemplateQuality += "</div>"
-    	
+
     htmlTemplateQuality += "<div class='span3'>"
-    htmlTemplateQuality += "<select data-original-title='"+ $(".lt-employee").val()+ "' title=''  data-toggle='tooltip' class='span12' id='emp-" + data['structure_id'] + "' onchange='onchangTableQualityFn("+ data['structure_id'] + ")'>";
+    htmlTemplateQuality += "<select data-original-title='" + $(".lt-employee").val() + "' title=''  data-toggle='tooltip' class='span12' id='emp-" + data['structure_id'] + "' onchange='onchangTableQualityFn(" + data['structure_id'] + ")'>";
     htmlTemplateQuality += "</select >";
     htmlTemplateQuality += "</div>"
 
     htmlTemplateQuality += "</div>";
     htmlTemplateQuality += "</div>"
-    //Parameter-end---->
+    //Parameter-end ---->
 
     htmlTemplateQuality += "<div class=\"table-responsive scrollbar-inner\">";
     htmlTemplateQuality += "<table id=\"tablethreshould\" class=\"table table-striped\" style='max-width: none;'>";
@@ -109,100 +102,94 @@ var assignTemplateQualityFn = function (structureName, data) {
     htmlTemplateQuality += "<th style='text-align: right;'><b>" + $(".lt-target").val() + "</b></th>";
     htmlTemplateQuality += "<th style='text-align: center;'><b>" + $(".lt-score").val() + "</b></th>";
     htmlTemplateQuality += "<th style='text-align: right;'><b>" + $(".lt-percent-weight").val() + "</b></th>  ";
-    
-    htmlTemplateQuality += "<th style='text-align: right;' id='th-score-"+data['structure_id']+"'></th>  ";
-    
+    htmlTemplateQuality += "<th style='text-align: right;' id='th-score-" + data['structure_id'] + "'></th>  ";
     htmlTemplateQuality += "</tr>";
     htmlTemplateQuality += "</thead>";
     htmlTemplateQuality += "<tbody id=\"table-" + data['structure_id'] + "\" class='appraisal_result'>";
     htmlTemplateQuality += "</tbody>";
     htmlTemplateQuality += "</table>";
-
     htmlTemplateQuality += "</div>";
     htmlTemplateQuality += "<br style=\"clear:both\">";
     htmlTemplateQuality += "</div>";
     htmlTemplateQuality += "</div>";
     htmlTemplateQuality += "</div>";
     return htmlTemplateQuality;
-
 };
 
-var dataChangeQuality =[];
-var onchangDetailQualityFn = function(item_result_id,structureId){
+var dataChangeQuality = [];
+var onchangDetailQualityFn = function (item_result_id, structureId) {  // QualityFn
 
-	var  competency_result_id = $("#param_competency_result_id-"+item_result_id).val();
-	var  target_value = $("#param_target_value-"+item_result_id).val();
-	var  score = $("#score-"+item_result_id).val();
-	var  weight_percent = $("#param_weight_percent-"+item_result_id).val();
-	var  weigh_score = $("#param_weigh_score-"+item_result_id).val();
-	var  group_id = $("#param_group_id-"+item_result_id).val();
-	var  group_weight_percent = $("#param_group_weight_percent-"+item_result_id).val();
-	
-	dataQuality = $.each(dataQuality, function (index1, groupEntry1) {
-	        if (groupEntry1['structure_id'] == structureId) {
-	            $.each(groupEntry1, function (index2, indexEntry2) {
-	                if (indexEntry2['group_id'] != undefined && indexEntry2['group_id'] == $("#group-"+structureId).val())
-	                    $.each(indexEntry2, function (index3, indexEntry3) {
-	                        if (indexEntry3['emp_id'] != undefined && indexEntry3['emp_id'] == $("#emp-"+structureId).val()) {
-	                            $.each(indexEntry3['items'], function (index, indexEntry) {
-	                            	if(indexEntry['competency_result_id'] == competency_result_id && indexEntry['item_result_id'] == item_result_id){
-		                            	indexEntry['target_value'] = target_value;
-		                            	indexEntry['score'] = score;
-		                            	indexEntry['weight_percent'] = weight_percent;
-		                            	indexEntry['weigh_score'] = weigh_score;
-		                            	indexEntry['assessor_group_id'] = group_id;
-	                            	}
-	                            });
-	                        }
-	                    });
-	            });
-	        }
-	    });
+    var competency_result_id = $("#param_competency_result_id-" + item_result_id).val();
+    var target_value = $("#param_target_value-" + item_result_id).val();
+    var score = $("#score-" + item_result_id).val();
+    var weight_percent = $("#param_weight_percent-" + item_result_id).val();
+    var weigh_score = $("#param_weigh_score-" + item_result_id).val();
+    var group_id = $("#param_group_id-" + item_result_id).val();
+    var group_weight_percent = $("#param_group_weight_percent-" + item_result_id).val();
 
-	dataChangeQuality = $.grep(dataChangeQuality, function (data, index) {
-			console.log((data.competency_result_id != competency_result_id) || (data.item_result_id != item_result_id))
-	        return ((data.competency_result_id != competency_result_id) || (data.item_result_id != item_result_id));
-	    });
-	
-	dataChangeQuality.push({
-	        "competency_result_id": competency_result_id,
-	        "item_result_id": item_result_id,
-	        "target_value": target_value,
-	        "score": score,
-	        "weight_percent": weight_percent,
-	        "weigh_score": weigh_score,
-	        "group_id": group_id,
-	        "group_weight_percent":group_weight_percent,
-	    });
-	
-	console.log(JSON.stringify(dataChangeQuality))
+    dataQuality = $.each(dataQuality, function (index1, groupEntry1) {
+        if (groupEntry1['structure_id'] == structureId) {
+            $.each(groupEntry1, function (index2, indexEntry2) {
+                if (indexEntry2['group_id'] != undefined && indexEntry2['group_id'] == $("#group-" + structureId).val())
+                    $.each(indexEntry2, function (index3, indexEntry3) {
+                        if (indexEntry3['emp_id'] != undefined && indexEntry3['emp_id'] == $("#emp-" + structureId).val()) {
+                            $.each(indexEntry3['items'], function (index, indexEntry) {
+                                if (indexEntry['competency_result_id'] == competency_result_id && indexEntry['item_result_id'] == item_result_id) {
+                                    indexEntry['target_value'] = target_value;
+                                    indexEntry['score'] = score;
+                                    indexEntry['weight_percent'] = weight_percent;
+                                    indexEntry['weigh_score'] = weigh_score;
+                                    indexEntry['assessor_group_id'] = group_id;
+                                }
+                            });
+                        }
+                    });
+            });
+        }
+    });
+
+    dataChangeQuality = $.grep(dataChangeQuality, function (data, index) {
+        console.log((data.competency_result_id != competency_result_id) || (data.item_result_id != item_result_id))
+        return ((data.competency_result_id != competency_result_id) || (data.item_result_id != item_result_id));
+    });
+
+    dataChangeQuality.push({
+        "competency_result_id": competency_result_id,
+        "item_result_id": item_result_id,
+        "target_value": target_value,
+        "score": score,
+        "weight_percent": weight_percent,
+        "weigh_score": weigh_score,
+        "group_id": group_id,
+        "group_weight_percent": group_weight_percent,
+    });
 }
 
-var onchangTableQualityFn = function (structureId) {
-    var htmlTable ="";
-    var total_weigh_score ="";
-    var hintHtml="";
+var onchangTableQualityFn = function (structureId) {  // QualityFn
+    var htmlTable = "";
+    var total_weigh_score = "";
+    var hintHtml = "";
     var dataHint = [];
-    
+
     $.each(dataQuality, function (index1, groupEntry1) {
-    	dataHint = groupEntry1['hint'];
-    	 $.each(groupEntry1['hint'], function (indexHint, indexEntryHint) {
-    		 hintHtml += "<div style='text-align: left;\'>" + indexEntryHint['hint'] + "</div>";
-    	    });
+        dataHint = groupEntry1['hint'];
+        $.each(groupEntry1['hint'], function (indexHint, indexEntryHint) {
+            hintHtml += "<div style='text-align: left;\'>" + indexEntryHint['hint'] + "</div>";
+        });
 
         if (groupEntry1['structure_id'] == structureId) {
             $.each(groupEntry1, function (index2, indexEntry2) {
-                if (indexEntry2['group_id'] != undefined && indexEntry2['group_id'] == $("#group-"+structureId).val())
+                if (indexEntry2['group_id'] != undefined && indexEntry2['group_id'] == $("#group-" + structureId).val())
                     $.each(indexEntry2, function (index3, indexEntry3) {
-                        if (indexEntry3['emp_id'] != undefined && indexEntry3['emp_id'] == $("#emp-"+structureId).val()) {
-                        	total_weigh_score = indexEntry3['total_weigh_score'];
+                        if (indexEntry3['emp_id'] != undefined && indexEntry3['emp_id'] == $("#emp-" + structureId).val()) {
+                            total_weigh_score = indexEntry3['total_weigh_score'];
                             $.each(indexEntry3['items'], function (index, indexEntry) {
                                 if (!(indexEntry['formula_desc'] == null || indexEntry['formula_desc'] == undefined || indexEntry['formula_desc'] == "" || indexEntry['formula_desc'].length == 0)) {
                                     info_item = "<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>" + $(".lt-kpi-name").val() + " : </strong>" + indexEntry['item_name'] + "' info-data='" + indexEntry['formula_desc'] + "'>i</span>";
                                 } else {
                                     info_item = "";
                                 }
-                        
+
                                 // set parameter
                                 htmlTable += "<input type='hidden' id='param_competency_result_id-" + indexEntry['item_result_id'] + "' value='" + indexEntry['competency_result_id'] + "'>";
                                 htmlTable += "<input type='hidden' id='param_target_value-" + indexEntry['item_result_id'] + "' value='" + indexEntry['target_value'] + "'>";
@@ -210,12 +197,12 @@ var onchangTableQualityFn = function (structureId) {
                                 htmlTable += "<input type='hidden' id='param_weigh_score-" + indexEntry['item_result_id'] + "' value='" + indexEntry['weigh_score'] + "'>";
                                 htmlTable += "<input type='hidden' id='param_group_id-" + indexEntry['item_result_id'] + "' value='" + indexEntry['assessor_group_id'] + "'>";
                                 htmlTable += "<input type='hidden' id='param_group_weight_percent-" + indexEntry['item_result_id'] + "' value='" + indexEntry['total_weight_percent'] + "'>";
-                                
+
                                 htmlTable += "<tr>";
                                 htmlTable += "<td class=''>" + indexEntry['item_name'] + "  " + info_item + "</td>";
                                 htmlTable += "<td class='' style='text-align: right;padding-right: 10px;'><div id='target_value-" + indexEntry['item_result_id'] + "' data-toggle=\"tooltip\" data-placement=\"right\" title=\"" + hintHtml + "\">" + addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2)) + "</div></td>";
                                 htmlTable += "<td class='' style='text-align: center;'>";
-                                htmlTable += "<select style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' onchange='onchangDetailQualityFn(" + indexEntry['item_result_id'] + ","+structureId+")' id='score-" + indexEntry['item_result_id'] + "' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
+                                htmlTable += "<select style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' onchange='onchangDetailQualityFn(" + indexEntry['item_result_id'] + "," + structureId + ")' id='score-" + indexEntry['item_result_id'] + "' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
                                 htmlTable += dropdownDeductScoreFn(notNullFn(indexEntry['score']), indexEntry['nof_target_score'], dataHint);
                                 htmlTable += "<select>";
                                 htmlTable += "</td>";
@@ -228,7 +215,7 @@ var onchangTableQualityFn = function (structureId) {
             });
         }
     });
-  
+
     htmlTable += "<tr class='classAdmin th-all'>";
     htmlTable += "<td class=''></td>";
     htmlTable += "<td class=''></td>";
@@ -237,17 +224,15 @@ var onchangTableQualityFn = function (structureId) {
     htmlTable += "<td class='' style='text-align: right;padding-right: 10px;font-weight: bold;font-size:16px'><b>" + addCommas(parseFloat(notNullFn(total_weigh_score)).toFixed(2)) + "</b></td>";
     htmlTable += "</tr>";
 
-    $("#table-"+structureId).html(htmlTable);
-    
-    if($("#group-" + structureId).val() != 0 ) $(".th-all").hide();  // hide total_weigh_score
-    	
-    //binding tooltip start
+    $("#table-" + structureId).html(htmlTable);
+
+    if ($("#group-" + structureId).val() != 0) $(".th-all").hide();  // hide total_weigh_score
+
     $('[data-toggle="tooltip"]').css({ "cursor": "pointer" });
     $('[data-toggle="tooltip"]').tooltip({
         html: true
     });
-    //binding tooltip end
-    
+
     $(".infoItem").off("click");
     $(".infoItem").on("click", function () {
         $("#htmlInfoItemName").empty();
@@ -263,57 +248,56 @@ var onchangTableQualityFn = function (structureId) {
 }
 
 
-var onchangGroupQualityFn = function  (structureId) { // by DARIS 
+var onchangGroupQualityFn = function (structureId) { // QualityFn
     var htmlEmp = "";
-    var html="";
-    
+    var html = "";
     var no_weight = "";
     var result_type = "";
     var total_weight_percent = "";
     var total_weight = "";
-    
+
     $.each(dataQuality, function (index1, groupEntry1) {
         if (groupEntry1['structure_id'] == structureId) {
             $.each(groupEntry1, function (index2, indexEntry2) {
-                if (indexEntry2['group_id'] != undefined && indexEntry2['group_id'] == $("#group-" + structureId).val()){
-                	// has weight;
-                	no_weight = indexEntry2['no_weight'];
-                	result_type =  indexEntry2['result_type'];
-                	total_weight_percent =  indexEntry2['total_weight_percent'];
-                	total_weight =  indexEntry2['total_weight'];
-                	
-                	 $.each(indexEntry2, function (index3, indexEntry3) {
-                         if (indexEntry3['emp_id'] != undefined) {
-                             htmlEmp += "<option value='" + indexEntry3['emp_id'] + "'>" + indexEntry3['emp_name'] + "</option>";
-                         }
-                     });
+                if (indexEntry2['group_id'] != undefined && indexEntry2['group_id'] == $("#group-" + structureId).val()) {
+                    // has weight;
+                    no_weight = indexEntry2['no_weight'];
+                    result_type = indexEntry2['result_type'];
+                    total_weight_percent = indexEntry2['total_weight_percent'];
+                    total_weight = indexEntry2['total_weight'];
+
+                    $.each(indexEntry2, function (index3, indexEntry3) {
+                        if (indexEntry3['emp_id'] != undefined) {
+                            htmlEmp += "<option value='" + indexEntry3['emp_id'] + "'>" + indexEntry3['emp_name'] + "</option>";
+                        }
+                    });
                 }
             });
         } // end if
     });
     $("#emp-" + structureId).html(htmlEmp);
-    
-    if (no_weight == 0 ) { // has weight;
-		if (result_type == 1) {
-			 html += "" + $(".lt-total-weight").val() + " " + total_weight_percent+ "%";
-		} else {
-			 html += "" + $(".lt-total-score").val() + " " + total_weight + "";
-		}
-	}
+
+    if (no_weight == 0) { // has weight;
+        if (result_type == 1) {
+            html += "" + $(".lt-total-weight").val() + " " + total_weight_percent + "%";
+        } else {
+            html += "" + $(".lt-total-score").val() + " " + total_weight + "";
+        }
+    }
     $("#totalWeight-" + structureId).html(html);
-    
-    html = ""; 
-    if (result_type == 1 ) {
-    	html += "<b>" + $(".lt-weight-score").val() + "</b>";
+
+    html = "";
+    if (result_type == 1) {
+        html += "<b>" + $(".lt-weight-score").val() + "</b>";
     } else {
-    	html += "<b>" + $(".lt-result-score").val() + "</b>";
+        html += "<b>" + $(".lt-result-score").val() + "</b>";
     }
     $("#th-score-" + structureId).html(html);
     onchangTableQualityFn(structureId)
 }
 
 var dataComment = [];
-var getCommentFn = function () {   // by DARIS -->  get data comment
+var getCommentFn = function () {    // CommentFn 
     clearComment(); // function clear data
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/comment/" + $("#emp_result_id").val(),
@@ -333,7 +317,7 @@ var getCommentFn = function () {   // by DARIS -->  get data comment
     });
 }
 
-var updateCommentFn = function () {   // by DARIS 
+var updateCommentFn = function () {   // CommentFn 
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/comment/update/insert",
         type: "post",
@@ -342,13 +326,12 @@ var updateCommentFn = function () {   // by DARIS
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            console.log("update data successful !");
-            console.log("data:" + JSON.stringify(dataChangeComment));
+            console.log("Comment --> update data successful !");
         }
     });
 }
 
-var assignTemplateCommentFn = function () { // by DARIS 
+var assignTemplateCommentFn = function () {  // CommentFn 
     var htmlTemplateComment = "";
 
     htmlTemplateComment += "<input type='hidden' id='comment_opinion_id'>";
@@ -361,7 +344,7 @@ var assignTemplateCommentFn = function () { // by DARIS
     htmlTemplateComment += "<div id='template-comment' class=\"row-fluid\">";
     htmlTemplateComment += "<div class=\"span12\">";
     htmlTemplateComment += "<div class=\"ibox-title2\">";
-    htmlTemplateComment += "<div class='titlePanel'>Comment</div>";
+    htmlTemplateComment += "<div class='titlePanel'>" + $(".lt-comment").val() + "</div>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "<div class=\"ibox-content\">";
     htmlTemplateComment += "<div class='row-fluid' style=\"margin-bottom: 10px;\">"
@@ -373,43 +356,43 @@ var assignTemplateCommentFn = function () { // by DARIS
         htmlTemplateComment += "<div class=\"span12\">";
 
     htmlTemplateComment += "<div class='span3'>";
-    htmlTemplateComment += "<select class='span12' data-original-title='"+ $(".lt-group").val()+ "' title=''  data-toggle='tooltip' class='span12' id='span-filter' onchange='onchangGroupCommentFn()'>";
-    htmlTemplateComment += "<option value='all'>"+ $(".lt-all-messages").val()+ "</option>";
-    htmlTemplateComment += "<option value='yes'>"+ $(".lt-answered-messages").val()+ "</option>";
-    htmlTemplateComment += "<option value='no'>"+ $(".lt-unanswered-messages").val()+ "</option>";
+    htmlTemplateComment += "<select class='span12' data-original-title='" + $(".lt-group").val() + "' title=''  data-toggle='tooltip' class='span12' id='span-filter' onchange='onchangGroupCommentFn()'>";
+    htmlTemplateComment += "<option value='all'>" + $(".lt-all-messages").val() + "</option>";
+    htmlTemplateComment += "<option value='yes'>" + $(".lt-answered-messages").val() + "</option>";
+    htmlTemplateComment += "<option value='no'>" + $(".lt-unanswered-messages").val() + "</option>";
     htmlTemplateComment += "</select>"
     htmlTemplateComment += "</div>";
-   
+
     htmlTemplateComment += "<div class='span3'>";
-    htmlTemplateComment += "<select class='span12' data-original-title='"+ $(".lt-employee").val()+ "' title=''  data-toggle='tooltip' class='span12' id='span-emp' onchange='onchangDetailCommentFn()'>";
-   
+    htmlTemplateComment += "<select class='span12' data-original-title='" + $(".lt-employee").val() + "' title=''  data-toggle='tooltip' class='span12' id='span-emp' onchange='onchangDetailCommentFn()'>";
+
     $.each(dataComment['detail'], function (index, indexEntry) { // gen select 
         htmlTemplateComment += "<option value='" + indexEntry['emp_id'] + "'>" + indexEntry['emp_name'] + "</option>";
     });
-    
+
     htmlTemplateComment += "</select>"
     htmlTemplateComment += "</div>";
-   
+
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "<div class='row-fluid'>";
     htmlTemplateComment += "<div class='row-fluid'>";
     htmlTemplateComment += "<div class='span6'>";
-    htmlTemplateComment += "<label >"+ $(".lt-assessor-strength-opinion").val()+ "</label>";
+    htmlTemplateComment += "<label >" + $(".lt-assessor-strength-opinion").val() + "</label>";
     htmlTemplateComment += "<textarea  onchange='onchangeTextareaCommentFn(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px; padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='assessor__strength_opinion' class='form-control'></textarea>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "<div class='span6'>";
-    htmlTemplateComment += "<label >"+ $(".lt-emp-strength-opinion").val()+ "</label>";
+    htmlTemplateComment += "<label >" + $(".lt-emp-strength-opinion").val() + "</label>";
     htmlTemplateComment += "<textarea  onchange='onchangeTextareaCommentFn(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='emp__strength_opinion' class='form-control'></textarea>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "<div class='row-fluid'>";
     htmlTemplateComment += "<div class='span6'>";
-    htmlTemplateComment += "<label>"+ $(".lt-assessor-weakness-opinion").val()+ "</label>";
+    htmlTemplateComment += "<label>" + $(".lt-assessor-weakness-opinion").val() + "</label>";
     htmlTemplateComment += "<textarea  onchange='onchangeTextareaCommentFn(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='assessor__weakness_opinion' class='form-control'></textarea>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "<div class='span6'>";
-    htmlTemplateComment += "<label>"+ $(".lt-emp-weakness-opinion").val()+ "</label>";
+    htmlTemplateComment += "<label>" + $(".lt-emp-weakness-opinion").val() + "</label>";
     htmlTemplateComment += "<textarea onchange='onchangeTextareaCommentFn(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='emp__weakness_opinion' class='form-control'></textarea>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "</div>";
@@ -418,33 +401,30 @@ var assignTemplateCommentFn = function () { // by DARIS
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "</div>";
     $("#appraisal_template_area").append(htmlTemplateComment);
-    
-    //binding tooltip start
+
     $('[data-toggle="tooltip"]').css({ "cursor": "pointer" });
     $('[data-toggle="tooltip"]').tooltip({
         html: true
     });
-    //binding tooltip end
-    
     onchangDetailCommentFn();
 }
 
-var onchangGroupCommentFn = function() { // by DARIS 
+var onchangGroupCommentFn = function () {  // CommentFn 
     var htmlSelect = "";
     var commentTXT = $("#span-filter").val();
- 
+
     $.each(dataComment['detail'], function (index, indexEntry) { // gen select 
         if (commentTXT == indexEntry['comment'] || commentTXT == 'all') {
             htmlSelect += "<option value='" + indexEntry['emp_id'] + "'>" + indexEntry['emp_name'] + "</option>";
         }
     });
     $("#span-emp").html(htmlSelect);
-   onchangDetailCommentFn();
+    onchangDetailCommentFn();
 };
 
 
-var onchangDetailCommentFn = function () { // by DARIS 
-var id = $("#span-emp").val();
+var onchangDetailCommentFn = function () {  // CommentFn 
+    var id = $("#span-emp").val();
     // disabled text
     $("#assessor__strength_opinion").prop("disabled", true);
     $("#assessor__weakness_opinion").prop("disabled", true);
@@ -501,7 +481,7 @@ var id = $("#span-emp").val();
 }
 
 var dataChangeComment = [];
-var onchangeTextareaCommentFn = function (id) {   // by DARIS 
+var onchangeTextareaCommentFn = function (id) {    // CommentFn 
     var comment =
         dataComment['detail'] = $.grep(dataComment['detail'], function (data, index) {
             return data.opinion_id != $("#comment_opinion_id").val();
@@ -539,7 +519,7 @@ var onchangeTextareaCommentFn = function (id) {   // by DARIS
 
 }
 
-var clearComment = function () { // by DARIS 
+var clearComment = function () {  // CommentFn 
     dataChangeComment = [];
     dataComment = [];
     $("#template-comment").html("");
@@ -549,8 +529,6 @@ var clearComment = function () { // by DARIS
 //List Error Function Start
 var listErrorActionPlanFn = function (data) {
     var errorData = "";
-
-
 
     if (data[0]['action_plan_name'] != undefined) {
         errorData += "Error Task Name <b>" + data[0]['action_plan_name'] + "</b><br>";
@@ -563,29 +541,21 @@ var listErrorActionPlanFn = function (data) {
 
         });
     }
-
-
-
     return errorData;
 }
+
 //List Error Function End
 var dropdownDeductScoreFn = function (score, nof_target_score, hint) {
     htmlTemplateQuality = "";
 
-    // console.log(score);
-    // console.log(nof_target_score);
-    // console.log(hint);
-
     for (var i = 0; i <= nof_target_score; i++) {
         var hintValue = "";
-
-
 
         try {
             hintValue = hint[i]['hint'];
         }
         catch (err) {
-            //hintValue=i;
+            // hintValue=i;
             // console.log(err.message);
         }
 
@@ -594,47 +564,10 @@ var dropdownDeductScoreFn = function (score, nof_target_score, hint) {
         } else {
             htmlTemplateQuality += "<option value='" + i + "'>" + hintValue + "</option>";
         }
-
-
-
     }
-	/*
-	if(score==0){
-		htmlTemplateQuality+="<option selected='selected'>0</option>";
-		htmlTemplateQuality+="<option >1</option>";
-		htmlTemplateQuality+="<option>2</option>";
-		htmlTemplateQuality+="<option>3</option>";
-		htmlTemplateQuality+="<option>4</option>";
-	}else if(score==1){
-		htmlTemplateQuality+="<option>0</option>";
-		htmlTemplateQuality+="<option selected='selected'>1</option>";
-		htmlTemplateQuality+="<option>2</option>";
-		htmlTemplateQuality+="<option>3</option>";
-		htmlTemplateQuality+="<option>4</option>";
-	}else if(score==2){
-		htmlTemplateQuality+="<option>0</option>";
-		htmlTemplateQuality+="<option>1</option>";
-		htmlTemplateQuality+="<option selected='selected'>2</option>";
-		htmlTemplateQuality+="<option>3</option>";
-		htmlTemplateQuality+="<option>4</option>";
-	}else if(score==3){
-		htmlTemplateQuality+="<option>0</option>";
-		htmlTemplateQuality+="<option>1</option>";
-		htmlTemplateQuality+="<option>2</option>";
-		htmlTemplateQuality+="<option selected='selected'>3</option>";
-		htmlTemplateQuality+="<option>4</option>";
-	}else if(score==4){
-		htmlTemplateQuality+="<option>0</option>";
-		htmlTemplateQuality+="<option>1</option>";
-		htmlTemplateQuality+="<option>2</option>";
-		htmlTemplateQuality+="<option>3</option>";
-		htmlTemplateQuality+="<option selected='selected'>4</option>";
-	}
-	*/
-
-
     return htmlTemplateQuality;
 }
+
 var assignTemplateQualityFn_Backup = function (structureName, data) {
     var item_result_id_array = [];
     var htmlTemplateQuality = "";
@@ -659,15 +592,14 @@ var assignTemplateQualityFn_Backup = function (structureName, data) {
         } else {
             htmlTemplateQuality += "<div class='totalWeight'>" + $(".lt-total-score").val() + " " + data['total_weight'] + "</div>";
         }
-
     }
+
     htmlTemplateQuality += "</div>";
     htmlTemplateQuality += "<div class=\"ibox-content\">";
     htmlTemplateQuality += "<div class=\"table-responsive scrollbar-inner\">";
     htmlTemplateQuality += "<table id=\"tablethreshould\" class=\"table table-striped\" style='max-width: none;'>";
     htmlTemplateQuality += "<thead>";
     //has weight
-    //	if(data['no_weight']==0){
     htmlTemplateQuality += "<tr style='white-space: nowrap;'>";
     htmlTemplateQuality += "<th style=\"width:40%\"><b>" + $(".lt-kpi-name").val() + "</b></th>";
     htmlTemplateQuality += "<th style='width:15%;text-align: right;'><b>" + $(".lt-target").val() + "</b></th>";
@@ -681,31 +613,18 @@ var assignTemplateQualityFn_Backup = function (structureName, data) {
     }
 
     htmlTemplateQuality += "</tr>";
-    //	}else{
-    //
-    //		htmlTemplateQuality+="<tr>";
-    //			htmlTemplateQuality+="<th style=\"width:40%\"><b>"+$(".lt-kpi-name").val()+"</b></th>";
-    //			htmlTemplateQuality+="<th style='width:15%;text-align: right;'><b>"+$(".lt-target").val()+"</b></th>";
-    //			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>"+$(".lt-first-line-score").val()+"</b></th>";
-    //			htmlTemplateQuality+="<th style='width:10%;text-align: center;'><b>"+$(".lt-second-line-score").val()+"</b></th>";
-    //
-    //		htmlTemplateQuality+="</tr>";
-    //	}
     htmlTemplateQuality += "</thead>";
     htmlTemplateQuality += "<tbody id=\"\" class='appraisal_result'>";
 
     $.each(data['items'], function (index, indexEntry) {
 
         item_result_id_array.push(indexEntry['item_result_id']);
-
-        /*if(indexEntry['formula_desc'] != null || indexEntry['formula_desc'] != ""){*/
         if (!(indexEntry['formula_desc'] == null || indexEntry['formula_desc'] == undefined || indexEntry['formula_desc'] == "" || indexEntry['formula_desc'].length == 0)) {
             info_item = "<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>" + $(".lt-kpi-name").val() + " : </strong>" + indexEntry['item_name'] + "' info-data='" + indexEntry['formula_desc'] + "'>i</span>";
         } else {
             info_item = "";
         }
         //has weight
-        //						if(data['no_weight']==0){
         htmlTemplateQuality += "<tr>";
         htmlTemplateQuality += "<td class=''>" + indexEntry['item_name'] + "  " + info_item + "</td>";
         htmlTemplateQuality += "<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\"" + hintHtml + "\">" + addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2)) + "</div></td>";
@@ -714,46 +633,22 @@ var assignTemplateQualityFn_Backup = function (structureName, data) {
         htmlTemplateQuality += "<select " + check_disabled_first + " style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' id='competencyScore-" + indexEntry['item_result_id'] + "' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
         htmlTemplateQuality += dropdownDeductScoreFn(notNullFn(indexEntry['first_score']), indexEntry['nof_target_score'], data['hint']);
         htmlTemplateQuality += "<select>";
-        //htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
         htmlTemplateQuality += "</td>";
 
         htmlTemplateQuality += "<td class='' style='text-align: center;'>";
         htmlTemplateQuality += "<select " + check_disabled_second + " style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' id='competencyScore_Second-" + indexEntry['item_result_id'] + "' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
         htmlTemplateQuality += dropdownDeductScoreFn(notNullFn(indexEntry['second_score']), indexEntry['nof_target_score'], data['hint']);
         htmlTemplateQuality += "<select>";
-        //htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
         htmlTemplateQuality += "</td>";
 
         htmlTemplateQuality += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['weight_percent'])).toFixed(2)) + "</td>";
         htmlTemplateQuality += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2)) + "</td>";
 
         htmlTemplateQuality += "</tr>";
-        //						}else{
-        //							htmlTemplateQuality+="<tr>";
-        //
-        //								htmlTemplateQuality+="<td class=''>"+indexEntry['item_name']+"  "+info_item+"</td>";
-        //								htmlTemplateQuality+="<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\""+hintHtml+"\">"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
-        //
-        //								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
-        //								htmlTemplateQuality+="<select "+check_disabled_first+" style='width:180px; height: 25px;padding: 0 0 0 5px;font-size:13px; text-align:left;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore itemScore input form-control input-sm-small numberOnly'>";
-        //								htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['first_score']),indexEntry['nof_target_score'],data['hint']);
-        //								htmlTemplateQuality+="<select>";
-        //								//htmlTemplateQuality+="<input style='width:80px;' id='competencyScore-"+indexEntry['item_result_id']+"' class='competencyScore input form-control input-sm-small numberOnly' type='text' value="+notNullFn(indexEntry['score'])+">";
-        //								htmlTemplateQuality+="</td>";
-        //								
-        //								htmlTemplateQuality+="<td class='' style='text-align: center;'>";
-        //								htmlTemplateQuality+="<select "+check_disabled_second+" style='width:180px; height: 25px;padding: 0 0 0 5px;font-size:13px; text-align:left;' id='competencyScore_Second-"+indexEntry['item_result_id']+"' class='competencyScore itemScore input form-control input-sm-small numberOnly'>";
-        //								htmlTemplateQuality+=dropdownDeductScoreFn(notNullFn(indexEntry['second_score']),indexEntry['nof_target_score'],data['hint']);
-        //								htmlTemplateQuality+="<select>";
-        //								htmlTemplateQuality+="</td>";
-        //
-        //
-        //							htmlTemplateQuality+="</tr>";
-        //						}
     });
 
     //has weight
-    //					if(data['no_weight']==0){
+
     htmlTemplateQuality += "<tr>";
 
     htmlTemplateQuality += "<td class=''></td>";
@@ -762,128 +657,115 @@ var assignTemplateQualityFn_Backup = function (structureName, data) {
     htmlTemplateQuality += "<td class=''></td>";
     htmlTemplateQuality += "<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>" + $(".lt-total").val() + "</b></td>";
     htmlTemplateQuality += "<td class='' style='text-align: right;padding-right: 10px;font-weight: bold;font-size:16px'><b>" + addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2)) + "</b></td>";
-
     htmlTemplateQuality += "</tr>";
-    //					}
-
     htmlTemplateQuality += "</tbody>";
     htmlTemplateQuality += "</table>";
-
-    //htmlTemplateQuality+="<div class='formName hidden'>form2</div>";
     htmlTemplateQuality += "<input type='hidden' id='structure_id-" + data['structure_id'] + "' class='structure_id' value=" + data['structure_id'] + ">";
     htmlTemplateQuality += "<input type='hidden' id='form-" + data['structure_id'] + "' class='' value=\"form2\">";
     htmlTemplateQuality += "<input type='hidden' id='item_result_id_array-" + data['structure_id'] + "' class='item_result_id_array' value=\"" + item_result_id_array + "\">";
-
     htmlTemplateQuality += "</div>";
     htmlTemplateQuality += "<br style=\"clear:both\">";
     htmlTemplateQuality += "</div>";
     htmlTemplateQuality += "</div>";
     htmlTemplateQuality += "</div>";
     return htmlTemplateQuality;
-
-    //$("#appraisal_template_area").append(htmlTemplateQuality);
-
 };
 
-var assignTemplateRewardFn = function(structureName,data){
-	
-	var htmlTemplateDeduct="";
-	htmlTemplateDeduct+="<div class=\"row-fluid\">";
-	htmlTemplateDeduct+="<div class=\"span12\">";
-	htmlTemplateDeduct+="<div class=\"ibox-title2\">";
-	htmlTemplateDeduct+="<div class='titlePanel'>"+structureName+"</div>";
-	if(data['no_weight']==0){ // has weight;
- 		if(data['result_type']==1){
-			htmlTemplateDeduct+="<div class='totalWeight'>Total Weight "+data['total_weight_percent']+"%</div>";
-		}else{
-			htmlTemplateDeduct+="<div class='totalWeight'>Total Score "+data['total_weight']+"</div>";
-		}
-	}
-	htmlTemplateDeduct+="</div>";
- 		htmlTemplateDeduct+="<div class=\"ibox-content\">";
-		htmlTemplateDeduct+="<div class=\"table-responsive scrollbar-inner\">";
-		htmlTemplateDeduct+="<table id=\"tablethreshould\" class=\"table table-striped\" style='max-width: none;'>";
- 		htmlTemplateDeduct+="<thead>";
-		//has weight
-		if(data['no_weight']==0){
- 			htmlTemplateDeduct+="<tr>";
-				htmlTemplateDeduct+="<th style=\"width:30%\"><b>" + $(".lt-kpi-name").val() + "</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>" + $(".lt-max-value").val() + "</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>" + $(".lt-value-not-raise").val() + "</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>" + $(".lt-actual-value").val() + "</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>" + $(".lt-over-value").val() + "</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>" + $(".lt-over-value-not-raise").val() + "</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>" + $(".lt-reward-score-Unit").val() + "</b> </th>";
-				
-				
-				if(data['result_type']==1){
-					 htmlTemplateDeduct += "<th style='width:20%;text-align: right;'><b>" + $(".lt-weight-score").val() + "</b></th>";
-				}else{
-					 htmlTemplateDeduct += "<th style='width:20%;text-align: right;'><b>" + $(".lt-result-score").val() + "</b></th>";
-				}
-				
-			htmlTemplateDeduct+="</tr>";
-		}else{
-			htmlTemplateDeduct+="<tr>";
-				htmlTemplateDeduct+="<th style=\"width:35%\"><b>" + $(".lt-kpi-name").val() + "</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>" + $(".lt-max-value").val() + "</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>" + $(".lt-actual-value").val() + "</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>" + $(".lt-over-value").val() + "</b></th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>" + $(".lt-reward-score-Unit").val() + "</b> </th>";
-				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>" + $(".lt-score").val() + "</b> </th>";
-			htmlTemplateDeduct+="</tr>";
-		}
-			htmlTemplateDeduct+="</thead>";
-					htmlTemplateDeduct+="<tbody id=\"\" class='appraisal_result'>";
- 					$.each(data['items'],function(index,indexEntry){
- 						//has weight
-						if(data['no_weight']==0){
-							htmlTemplateDeduct+="<tr>";
-									htmlTemplateDeduct+="<td class=''> "+indexEntry['item_name']+"</td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['max_value'])).toFixed(2))+"</td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['no_raise_value'])).toFixed(2)) + "</td>";
-									//htmlTemplateDeduct+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore\" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2))+"</td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_no_raise_value'])).toFixed(2)) + "</td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['reward_score_unit'])).toFixed(2))+"</td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2))+"</td>";
- 							htmlTemplateDeduct+="</tr>";
-						}else{
-							htmlTemplateDeduct+="<tr>";
-									htmlTemplateDeduct+="<td class=''> "+indexEntry['item_name']+"</td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['max_value'])).toFixed(2))+"</td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['no_raise_value'])).toFixed(2)) + "</td>";
-									//htmlTemplateDeduct+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore\" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2))+"</td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_no_raise_value'])).toFixed(2)) + "</td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['reward_score_unit'])).toFixed(2))+"</td>";
-									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])).toFixed(2))+"</td>";
- 							htmlTemplateDeduct+="</tr>";
-						}
-					});
-					if(data['no_weight']==0){
-						htmlTemplateDeduct+="<tr>";
-								htmlTemplateDeduct+="<td class=''></td>";
-								htmlTemplateDeduct+="<td class=''></td>";
-								htmlTemplateDeduct+="<td class=''></td>";
-								htmlTemplateDeduct+="<td class=''></td>";
-								htmlTemplateDeduct+="<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>Total</b></td>";
-								htmlTemplateDeduct+="<td class=''  style='text-align: right;padding-right: 10px;font-weight: bold; font-size:16px'><b>"+addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2))+"</b></td>";
-						htmlTemplateDeduct+="</tr>";
-					}
- 					htmlTemplateDeduct+="</tbody>";
-					htmlTemplateDeduct+="</table>";
-					htmlTemplateDeduct+="<input type='hidden' id='structure_id-"+data['structure_id']+"' class='structure_id' value="+data['structure_id']+">";
-					htmlTemplateDeduct+="<input type='hidden' id='form-"+data['structure_id']+"' class='' value=\"form4\">";
- 				htmlTemplateDeduct+="</div>";
-			htmlTemplateDeduct+="<br style=\"clear:both\">"
-		htmlTemplateDeduct+="</div>";
-		htmlTemplateDeduct+="</div>";
-	htmlTemplateDeduct+="</div>";
-	return htmlTemplateDeduct;
-	//$("#appraisal_template_area").append(htmlTemplateDeduct);
+var assignTemplateRewardFn = function (structureName, data) {
+
+    var htmlTemplateDeduct = "";
+    htmlTemplateDeduct += "<div class=\"row-fluid\">";
+    htmlTemplateDeduct += "<div class=\"span12\">";
+    htmlTemplateDeduct += "<div class=\"ibox-title2\">";
+    htmlTemplateDeduct += "<div class='titlePanel'>" + structureName + "</div>";
+    if (data['no_weight'] == 0) { // has weight;
+        if (data['result_type'] == 1) {
+            htmlTemplateDeduct += "<div class='totalWeight'>Total Weight " + data['total_weight_percent'] + "%</div>";
+        } else {
+            htmlTemplateDeduct += "<div class='totalWeight'>Total Score " + data['total_weight'] + "</div>";
+        }
+    }
+    htmlTemplateDeduct += "</div>";
+    htmlTemplateDeduct += "<div class=\"ibox-content\">";
+    htmlTemplateDeduct += "<div class=\"table-responsive scrollbar-inner\">";
+    htmlTemplateDeduct += "<table id=\"tablethreshould\" class=\"table table-striped\" style='max-width: none;'>";
+    htmlTemplateDeduct += "<thead>";
+    //has weight
+    if (data['no_weight'] == 0) {
+        htmlTemplateDeduct += "<tr>";
+        htmlTemplateDeduct += "<th style=\"width:30%\"><b>" + $(".lt-kpi-name").val() + "</b></th>";
+        htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-max-value").val() + "</b></th>";
+        htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-value-not-raise").val() + "</b></th>";
+        htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-actual-value").val() + "</b></th>";
+        htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-over-value").val() + "</b></th>";
+        htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-over-value-not-raise").val() + "</b></th>";
+        htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-reward-score-Unit").val() + "</b> </th>";
+
+        if (data['result_type'] == 1) {
+            htmlTemplateDeduct += "<th style='width:20%;text-align: right;'><b>" + $(".lt-weight-score").val() + "</b></th>";
+        } else {
+            htmlTemplateDeduct += "<th style='width:20%;text-align: right;'><b>" + $(".lt-result-score").val() + "</b></th>";
+        }
+
+        htmlTemplateDeduct += "</tr>";
+    } else {
+        htmlTemplateDeduct += "<tr>";
+        htmlTemplateDeduct += "<th style=\"width:35%\"><b>" + $(".lt-kpi-name").val() + "</b></th>";
+        htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-max-value").val() + "</b></th>";
+        htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-actual-value").val() + "</b></th>";
+        htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-over-value").val() + "</b></th>";
+        htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-reward-score-Unit").val() + "</b> </th>";
+        htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-score").val() + "</b> </th>";
+        htmlTemplateDeduct += "</tr>";
+    }
+    htmlTemplateDeduct += "</thead>";
+    htmlTemplateDeduct += "<tbody id=\"\" class='appraisal_result'>";
+    $.each(data['items'], function (index, indexEntry) {
+        //has weight
+        if (data['no_weight'] == 0) {
+            htmlTemplateDeduct += "<tr>";
+            htmlTemplateDeduct += "<td class=''> " + indexEntry['item_name'] + "</td>";
+            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['max_value'])).toFixed(2)) + "</td>";
+            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['no_raise_value'])).toFixed(2)) + "</td>";
+            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>";
+            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2)) + "</td>";
+            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_no_raise_value'])).toFixed(2)) + "</td>";
+            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['reward_score_unit'])).toFixed(2)) + "</td>";
+            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2)) + "</td>";
+            htmlTemplateDeduct += "</tr>";
+        } else {
+            htmlTemplateDeduct += "<tr>";
+            htmlTemplateDeduct += "<td class=''> " + indexEntry['item_name'] + "</td>";
+            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['max_value'])).toFixed(2)) + "</td>";
+            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['no_raise_value'])).toFixed(2)) + "</td>";
+            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>";
+            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2)) + "</td>";
+            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_no_raise_value'])).toFixed(2)) + "</td>";
+            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['reward_score_unit'])).toFixed(2)) + "</td>";
+            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['score'])).toFixed(2)) + "</td>";
+            htmlTemplateDeduct += "</tr>";
+        }
+    });
+    if (data['no_weight'] == 0) {
+        htmlTemplateDeduct += "<tr>";
+        htmlTemplateDeduct += "<td class=''></td>";
+        htmlTemplateDeduct += "<td class=''></td>";
+        htmlTemplateDeduct += "<td class=''></td>";
+        htmlTemplateDeduct += "<td class=''></td>";
+        htmlTemplateDeduct += "<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>Total</b></td>";
+        htmlTemplateDeduct += "<td class=''  style='text-align: right;padding-right: 10px;font-weight: bold; font-size:16px'><b>" + addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2)) + "</b></td>";
+        htmlTemplateDeduct += "</tr>";
+    }
+    htmlTemplateDeduct += "</tbody>";
+    htmlTemplateDeduct += "</table>";
+    htmlTemplateDeduct += "<input type='hidden' id='structure_id-" + data['structure_id'] + "' class='structure_id' value=" + data['structure_id'] + ">";
+    htmlTemplateDeduct += "<input type='hidden' id='form-" + data['structure_id'] + "' class='' value=\"form4\">";
+    htmlTemplateDeduct += "</div>";
+    htmlTemplateDeduct += "<br style=\"clear:both\">"
+    htmlTemplateDeduct += "</div>";
+    htmlTemplateDeduct += "</div>";
+    htmlTemplateDeduct += "</div>";
+    return htmlTemplateDeduct;
 };
 
 var assignTemplateDeductFn = function (structureName, data) {
@@ -909,9 +791,6 @@ var assignTemplateDeductFn = function (structureName, data) {
 
     htmlTemplateDeduct += "<thead>";
     //has weight
-    //		if(data['no_weight']==0){
-
-
     htmlTemplateDeduct += "<tr style='white-space: nowrap;'>";
     htmlTemplateDeduct += "<th style=\"width:30%\"><b>" + $(".lt-kpi-name").val() + "</b></th>";
     htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-max-value").val() + "</b></th>";
@@ -932,33 +811,16 @@ var assignTemplateDeductFn = function (structureName, data) {
     }
 
     htmlTemplateDeduct += "</tr>";
-    //		}else{
-    //			htmlTemplateDeduct+="<tr>";
-    //				htmlTemplateDeduct+="<th style=\"width:35%\"><b>"+$(".lt-kpi-name").val()+"</b></th>";
-    //				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-max-value").val()+"</b></th>";
-    //				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-actual-value").val()+"</b></th>";
-    //				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-over-value").val()+"</b></th>";
-    //				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-deduct-score").val()+"/"+$(".lt-unit").val()+"</b> </th>";
-    //				
-    //				if(data['is_value_get_zero']==1){
-    //					htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-value-get-zero").val()+"</b> </th>";
-    //				}
-    //				
-    //				htmlTemplateDeduct+="<th style='width:15%;text-align: right;'><b>"+$(".lt-score").val()+"</b></th>";
-    //			htmlTemplateDeduct+="</tr>";
-    //		}
     htmlTemplateDeduct += "</thead>";
     htmlTemplateDeduct += "<tbody id=\"\" class='appraisal_result'>";
 
     $.each(data['items'], function (index, indexEntry) {
 
         //has weight
-        //						if(data['no_weight']==0){
         htmlTemplateDeduct += "<tr>";
         htmlTemplateDeduct += "<td class=''> " + indexEntry['item_name'] + "</td>";
         htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['max_value'])).toFixed(2)) + "</td>";
         htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['no_raise_value'])).toFixed(2)) + "</td>";
-        //htmlTemplateDeduct+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore\" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
         htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>";
         htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2)) + "</td>";
         htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_no_raise_value'])).toFixed(2)) + "</td>";
@@ -969,25 +831,7 @@ var assignTemplateDeductFn = function (structureName, data) {
         htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2)) + "</td>";
 
         htmlTemplateDeduct += "</tr>";
-        //						}else{
-        //							htmlTemplateDeduct+="<tr>";
-        //									htmlTemplateDeduct+="<td class=''> "+indexEntry['item_name']+"</td>";
-        //									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['max_value'])).toFixed(2))+"</td>";
-        //									//htmlTemplateDeduct+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore\" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
-        //									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
-        //									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2))+"</td>";
-        //									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['deduct_score_unit'])).toFixed(2))+"</td>";
-        //									
-        //									if(data['is_value_get_zero']==1){
-        //										htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+(indexEntry['value_get_zero']==null?"   ":indexEntry['value_get_zero'])+"</td>";
-        //									}
-        //									
-        //									htmlTemplateDeduct+="<td class='' style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])).toFixed(2))+"</td>";
-        //
-        //							htmlTemplateDeduct+="</tr>";
-        //						}
     });
-    //					if(data['no_weight']==0){
     htmlTemplateDeduct += "<tr>";
     htmlTemplateDeduct += "<td class=''></td>";
     htmlTemplateDeduct += "<td class=''></td>";
@@ -1001,8 +845,6 @@ var assignTemplateDeductFn = function (structureName, data) {
     htmlTemplateDeduct += "<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>" + $(".lt-total").val() + "</b></td>";
     htmlTemplateDeduct += "<td class=''  style='text-align: right;padding-right: 10px;font-weight: bold; font-size:16px'><b>" + addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2)) + "</b></td>";
     htmlTemplateDeduct += "</tr>";
-    //					}
-
 
     htmlTemplateDeduct += "</tbody>";
     htmlTemplateDeduct += "</table>";
@@ -1015,7 +857,6 @@ var assignTemplateDeductFn = function (structureName, data) {
     htmlTemplateDeduct += "</div>";
     htmlTemplateDeduct += "</div>";
     return htmlTemplateDeduct;
-    //$("#appraisal_template_area").append(htmlTemplateDeduct);
 };
 
 var assignTemplateQuantityFn = function (structureName, data) {
@@ -1048,8 +889,6 @@ var assignTemplateQuantityFn = function (structureName, data) {
     htmlTemplateQuantity += "<thead>";
 
     //has weight
-    //	if(data['no_weight']==0){
-
     htmlTemplateQuantity += "<tr style='white-space: nowrap;'>";
 
     htmlTemplateQuantity += "<th style=\"width:10%\" class=''><b>" + $(".lt-perspective").val() + "</b> </th>";
@@ -1074,29 +913,6 @@ var assignTemplateQuantityFn = function (structureName, data) {
 
 
     htmlTemplateQuantity += "</tr>";
-
-    //	}else{
-    //	//no_weight
-    //		htmlTemplateQuantity+="<tr style='white-space: nowrap;'>";
-    //			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>"+$(".lt-perspective").val()+"</b> </th>";
-    //			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>"+$(".lt-kpi-name").val()+"</b></th>";
-    //			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-target").val()+"</b></th>";
-    //			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".uom").val()+" </b></th>";
-    //			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-forecast").val()+"</b></th>";
-    //			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-actual").val()+"</b></th>";
-    //
-    //			if(data['threshold']==1){
-    //				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-score").val()+"</b></th>";
-    //			}else{
-    //				htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-percent-achievement").val()+"</b></th>";
-    //			}
-    //
-    //
-    //			htmlTemplateQuantity+="<th style='width:15%;text-align: center;' class=''><b>"+$(".lt-manage").val()+"</b> </th>";
-    //
-    //		htmlTemplateQuantity+="</tr>";
-    //	}
-
     htmlTemplateQuantity += "</thead>";
     htmlTemplateQuantity += "<tbody id=\"\" class='appraisal_result'>";
     $.each(data['items'], function (index, indexEntry) {
@@ -1138,34 +954,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
         htmlTemplateQuantity += "	</td>";
 
         htmlTemplateQuantity += "</tr>";
-        //				}else{
-        //					//no_weight
-        //					htmlTemplateQuantity+="<tr >";
-        //						htmlTemplateQuantity+="<td>"+indexEntry['perspective_name']+"</td>";
-        //						htmlTemplateQuantity+="<td>"+indexEntry['item_name']+"</td>";
-        //						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
-        //						htmlTemplateQuantity+="<td>"+indexEntry['uom_name']+"</td>";
-        //						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input type=\"text\"  class=\"span10 input-sm-small numberOnly addComma itemScore\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(2))+"></td>";
-        //
-        //						//htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input type=\"text\"  class=\"span10 input-sm-small numberOnly \" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
-        //						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2))+"</td>";
-        //
-        //						if(data['threshold']==1){
-        //							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['score'])).toFixed(2))+"</td>";
-        //						}else{
-        //							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['percent_achievement'])).toFixed(2))+"</td>";
-        //						}
-        //
-        //						htmlTemplateQuantity+="	<td style=\"text-align:center\">";
-        //						htmlTemplateQuantity+=" <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"&lt;button class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;"+$(".lt-gantt").val()+"&lt;/button&gt; &lt;button class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' data-target='' data-toggle='modal'&gt;"+$(".lt-phase").val()+"&lt;/button&gt;&nbsp;&lt;button id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear action_plan'&gt;"+$(".lt-action-plan").val()+"&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;"+$(".lt-attach-files").val()+"&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" style='text-align:center;' data-original-title=\"\" title=\"\"></i>"+paperclip;
-        //						htmlTemplateQuantity+="	</td>";
-        //
-        //					htmlTemplateQuantity+="</tr>";
-        //				}
-
     });
-
-    //			if(data['no_weight']==0){
     htmlTemplateQuantity += "<tr >";
     htmlTemplateQuantity += "<td></td>";
     htmlTemplateQuantity += "<td></td>";
@@ -1178,15 +967,11 @@ var assignTemplateQuantityFn = function (structureName, data) {
     htmlTemplateQuantity += "<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>" + $(".lt-total").val() + "</b></td>";
     htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;font-weight: bold; font-size:16px;'><b>" + addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2)) + "</b></td>";
     htmlTemplateQuantity += "</tr>";
-    //			}
-
     htmlTemplateQuantity += "</tbody>";
     htmlTemplateQuantity += "</table>";
     htmlTemplateQuantity += "<input type='hidden' id='structure_id-" + data['structure_id'] + "' class='structure_id' value=" + data['structure_id'] + ">";
     htmlTemplateQuantity += "<input type='hidden' id='form-" + data['structure_id'] + "' class='' value=\"form1\">";
     htmlTemplateQuantity += "<input type='hidden' id='item_result_id_array-" + data['structure_id'] + "' class='item_result_id_array' value=\"" + item_result_id_array + "\">";
-
-
     htmlTemplateQuantity += "</div>";
     htmlTemplateQuantity += "<br style=\"clear:both\">";
     htmlTemplateQuantity += "</div>";
@@ -1194,15 +979,9 @@ var assignTemplateQuantityFn = function (structureName, data) {
     htmlTemplateQuantity += "</div>";
 
     return htmlTemplateQuantity;
-    //$("#appraisal_template_area").append(htmlTemplateQuantity);
-    //// console.log(data['count']);
-    //// console.log(data['structure_id']);
-
 }
 
-
 //function global start
-
 var dropDrowYearListFn = function (nameArea, id) {
     if (nameArea == undefined) {
         nameArea = "";
@@ -1214,7 +993,6 @@ var dropDrowYearListFn = function (nameArea, id) {
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            //var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
             var htmlOption = "";
             $.each(data, function (index, indexEntry) {
                 if (index == 0) {
@@ -1231,7 +1009,6 @@ var dropDrowYearListFn = function (nameArea, id) {
 }
 
 var dropDrowPeriodListFn = function (year, id) {
-
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/period_list",
         type: "get",
@@ -1253,31 +1030,6 @@ var dropDrowPeriodListFn = function (year, id) {
     });
 }
 
-/*
-var dropDrowAppraisalLevelFn = function(id){
-
-	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/appraisal/al_list",
-		type:"get",
-		dataType:"json",
-		async:false,
-		headers:{Authorization:"Bearer "+tokenID.token},
-		success:function(data){
-			var htmlOption="";
-			htmlOption+="<option value=''>All Level</option>";
-			$.each(data,function(index,indexEntry){
-
-				if(id==indexEntry['level_id']){
-					htmlOption+="<option selected='selected' value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
-				}else{
-					htmlOption+="<option value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
-				}
-			});
-			$("#AppraisalLevel").html(htmlOption);
-		}
-	});
-}
-*/
 var dropDrowAppraisalOrgLevelFn = function (id) {
 
     $.ajax({
@@ -1312,13 +1064,11 @@ var dropDrowIndividualOrgLevelFn = function (id) {
 
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/org_level_individual",
-        //url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/al_list_emp_org",
         type: "get",
         dataType: "json",
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         data: { "level_id": $("#AppraisalEmpLevel").val() },
-        //data:{"emp_code":session_emp_code,"level_id":$("#AppraisalEmpLevel").val()},
         success: function (data) {
             var htmlOption = "";
             htmlOption += "<option value=''>All Level</option>";
@@ -1337,7 +1087,6 @@ var dropDrowIndividualOrgLevelFn = function (id) {
 }
 
 var dropDrowAppraisalEmpLevelFn = function (id) {
-
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/emp_level",
         type: "get",
@@ -1408,22 +1157,12 @@ var dropDrowOrgFn = function (appraisalLevelId) {
 }
 
 var dropDrowIndividualOrgFn = function (appraisalLevelId) {
-    //	var service_url_Check;
-    //	if($("#appraisalType").val()==1) {
-    //		service_url_Check = "org";
-    //	}
-    //	else {
-    //		service_url_Check = "org/list_org_for_emp";
-    //	}
-
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/org_individual",
-        //url:restfulURL+"/"+serviceName+"/public/"+service_url_Check+"",
         type: "get",
         dataType: "json",
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
-        //data:{"level_id":$("#AppraisalOrgLevel").val(),"emp_code":session_emp_code,"level_id_emp":$("#AppraisalEmpLevel").val()},
         data: { "emp_level": $("#AppraisalEmpLevel").val(), "org_level": $("#AppraisalOrgLevel").val() },
         success: function (data) {
             var htmlOption = "";
@@ -1492,10 +1231,6 @@ var listAppraisalDetailFn = function (data) {
         check_disabled_first = "disabled";
         check_disabled_second = "disabled";
     }
-
-    //// console.log(check_disabled_first,session_emp_code,'first')
-    //// console.log(check_disabled_second,session_emp_code,'second')
-
     $("#appraisal_template_area").empty();
     var quality = 1;
     $.each(data['group'], function (index, groupEntry) {
@@ -1522,8 +1257,6 @@ var listAppraisalDetailFn = function (data) {
                     }
                 });
             }
-            //			$(".popover-edit-del").popover(setPopoverDisplay);
-
 
             $(".appraisal_result").off("click", ".popover-edit-del");
             $(".appraisal_result").on("click", ".popover-edit-del", function () {
@@ -1534,11 +1267,6 @@ var listAppraisalDetailFn = function (data) {
                 } else {
                     $(".popover").css({ "text-align": "center" });
                 }
-                //				$(".popover").css({"text-align":"center"});
-                //$(".popover").css({"text-align":"center","width":"120px"});
-                //$("#tableAppraisalAssignment .popover-content").css({"width":"120px;"});
-                //$("#tableAppraisalAssignment .popover").css({"width":"120px;"});
-                //action_plan Start
                 $(".action_plan").on("click", function () {
 
                     $("#informConfirm").empty();
@@ -1569,8 +1297,6 @@ var listAppraisalDetailFn = function (data) {
 
 
                 });
-
-
 
                 //phase Start
                 $(".phase").on("click", function (event) {
@@ -1632,17 +1358,16 @@ var listAppraisalDetailFn = function (data) {
             /*bindding popover end*/
 
         }
-        
-      else if (groupEntry['form_url'] == 'quality' && quality) {
-    	  getQualityFn(); // By DARIS assignTemplateQualityFn
-    	  quality = 0;
-//               $("#appraisal_template_area").append(assignTemplateQualityFn(index, groupEntry, check_disabled_first, check_disabled_second));
-      } 
-        
+
+        else if (groupEntry['form_url'] == 'quality' && quality) {
+            getQualityFn(); // assignTemplateQualityFn
+            quality = 0;  // set zero
+        }
+
         else if (groupEntry['form_url'] == 'deduct') {
             $("#appraisal_template_area").append(assignTemplateDeductFn(index, groupEntry));
         }
-        
+
         else if (groupEntry['form_url'] == 'reward') {
             $("#appraisal_template_area").append(assignTemplateRewardFn(index, groupEntry));
         }
@@ -1657,10 +1382,6 @@ var listAppraisalDetailFn = function (data) {
         //		 if(data['head'][0]['no_weight']==0){
         $(".hasWeightGrandTotalArea").show();
         $(".noWeightGrandTotalArea").hide();
-        //		 }else{
-        //			 $(".hasWeightGrandTotalArea").hide();
-        //			 $(".noWeightGrandTotalArea").show();
-        //		 }
 
         //set header start
         if ($("#embed_appraisalType").val() == 2) {
@@ -1749,21 +1470,12 @@ var listAppraisalDetailFn = function (data) {
 
     });
 
-    //	dropDrowAsignToEditFn(data['head'][0]['stage_id']);
-    //	$("#assignTo").off("change");
-    //	$("#assignTo").on("change",function(){
-    //		dropDrowActionEditFn(data['head'][0]['stage_id'],$(this).val());
-    //
-    //	});
     dropDrowActionEditFn(data['head'][0]['stage_id'], data['head'][0]['emp_code'], data['head'][0]['org_code']);
     $("#assignTo").change();
     $("#ModalAppraisal").modal({
         "backdrop": setModalPopup[0],
         "keyboard": setModalPopup[1]
     }).css({ "margin-top": "0px" });
-
-
-
 
     //Stage History List Data..
     var htmlStage = "";
@@ -1778,21 +1490,18 @@ var listAppraisalDetailFn = function (data) {
         htmlStage += "</tr>";
 
     });
-    getCommentFn(); // by DARIS 
+    getCommentFn();  // CommentFn 
     $("#listDataStageHistory").html(htmlStage);
     $("#slideUpDownStageHistory").show();
     //Stage History List Data..
-
-
-
-
 };
+
 var findOneFn = function (id) {
-    $("#emp_result_id").val(id); // by DARIS
-    $("#group_id").val($("#group_id-" + id).val()); // by DARIS
+    $("#emp_result_id").val(id); // get id to value : emp_result_id
+    $("#group_id").val($("#group_id-" + id).val()); // get id to value : group_id
     $.ajax({
-//        url: restfulURL + "/" + serviceName + "/public/appraisal/" + id,
-    	url: restfulURL + "/" + serviceName + "/public/appraisal/show/emp_result",  // by DARIS   	
+        //        url: restfulURL + "/" + serviceName + "/public/appraisal/" + id,
+        url: restfulURL + "/" + serviceName + "/public/appraisal/show/emp_result",
         type: "get",
         dataType: "json",
         data: {
@@ -1802,21 +1511,10 @@ var findOneFn = function (id) {
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            //// console.log(data);
             if (data['head'].length > 0) {
 
                 listAppraisalDetailFn(data);
                 setThemeColorFn(tokenID.theme_color);
-
-
-
-
-                //				if((data['head'][0]['edit_flag']==0)){
-                //					$("#btnSubmit").attr("disabled","disabled");
-                //				}else if($("#actionToAssign").val()==null){
-                //					$("#btnSubmit").attr("disabled","disabled");
-                //
-                //				}
 
                 if ((data['head'][0]['edit_flag'] == 0)) {
                     if (emailLinkAppraisal == true) {
@@ -1834,13 +1532,6 @@ var findOneFn = function (id) {
                 if ($("#actionToAssign").val() == null) {
                     $("#btnSubmit").attr("disabled", "disabled");
                 }
-
-                //				else if((username.toLowerCase()!=data['head'][0]['chief_emp_code'].toLowerCase())){
-                //					//$("#btnSubmit").removeAttr("disabled");
-                //					$("#btnSubmit").attr("disabled","disabled");
-                //				}
-
-
             } else {
                 callFlashSlide($(".lt-data-is-empty").val());
                 return false;
@@ -1848,17 +1539,12 @@ var findOneFn = function (id) {
 
         }
     });
-
-
 }
-
 
 var dropdownListPhaseFn_bk = function (nameArea, id) {
     if (nameArea == undefined) {
         nameArea = "";
     }
-
-
 	/*
 	 	"phase_id": 1,
         "phase_name": "Alpha"
@@ -1878,12 +1564,10 @@ var dropdownListPhaseFn_bk = function (nameArea, id) {
                     htmlOption += "<option selected value='" + indexEntry['phase_id'] + "'>" + indexEntry['phase_name'] + "</option>";
                 } else {
                     htmlOption += "<option  value='" + indexEntry['phase_id'] + "'>" + indexEntry['phase_name'] + "</option>";
-
                 }
             });
             htmlOption += "</select>";
             return htmlOption;
-            //$("#uom"+nameArea).html(htmlOption);
 
         }
     });
@@ -1906,14 +1590,10 @@ var dropdownListPhaseFn = function () {
                 });
 
             }
-            //$("#uom"+nameArea).html(htmlOption);
-
         }
     });
 
 }
-
-
 
 var listActionPlanFn = function (data) {
 
@@ -1921,12 +1601,6 @@ var listActionPlanFn = function (data) {
     $("#action_new_actionplan").val("");
 
     //Map Data ...
-	/*
-	alert(notNullFn(data['header']['target_value']));
-	alert(parseFloat(data['header']['target_value']).toFixed(2));
-	alert(addCommas(parseFloat(notNullFn(data['header']['target_value'])).toFixed(2)));
-	*/
-
 
     $("#actionPlanOrganization").html(data['header']['org_name']);
     $("#actionPlanAppraisalItem").html(data['header']['item_name']);
@@ -1940,11 +1614,6 @@ var listActionPlanFn = function (data) {
     $("#actionplan_emp_name").val(data['header']['emp_name']);
     $("#actionplan_emp_id").val(data['header']['emp_id']);
     $("#item_result_id").val(data['header']['item_result_id']);
-
-
-
-
-
 
     var htmlTR = "";
     $.each(data['actions'], function (index, indexEntry) {
@@ -1970,8 +1639,6 @@ plan_value
 update_by
 update_dttm
 		 */
-
-
 
         htmlTR += "";
         htmlTR += "<tr>";
@@ -2034,59 +1701,12 @@ update_dttm
         htmlTR += "<div class='actionplan_label' style='text-align:right;'>" + addCommas(parseFloat(notNullFn(indexEntry['completed_percent'])).toFixed(2)) + "</div>";//Completed
         htmlTR += "<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='completed_percent-" + indexEntry['action_plan_id'] + "' class='actionplan_input' name='completed_percent-" + indexEntry['action_plan_id'] + "' value='" + indexEntry['completed_percent'] + "'>";//Completed
 
-        htmlTR += "</td>";/*
-			htmlTR+="<td>";
-			htmlTR+="<div class='actionplan_label' style='text-align:right;'>"+addCommas(parseFloat(notNullFn(indexEntry['plan_value'])).toFixed(2))+"</div>";//PV
-			htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='plan_value-"+indexEntry['action_plan_id']+"' name='plan_value-"+indexEntry['action_plan_id']+"' class='actionplan_input' value='"+indexEntry['plan_value']+"'>";//PV
-
-			htmlTR+="</td>";
-			htmlTR+="<td>";
-			htmlTR+="<div class='actionplan_label' style='text-align:right;'>"+addCommas(parseFloat(notNullFn(indexEntry['actual_cost'])).toFixed(2))+"</div>";//AC
-			htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='actual_cost-"+indexEntry['action_plan_id']+"' name='actual_cost-"+indexEntry['action_plan_id']+"' class='actionplan_input' value='"+indexEntry['actual_cost']+"'>";//AC
-
-			htmlTR+="</td>";
-			htmlTR+="<td>";
-			htmlTR+="<div class='actionplan_label' style='text-align:right;'>"+addCommas(parseFloat(notNullFn(indexEntry['earned_value'])).toFixed(2))+"</div>";//EV
-			htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='earned_value-"+indexEntry['action_plan_id']+"' name='earned_value-"+indexEntry['action_plan_id']+"' class='actionplan_input' value='"+indexEntry['earned_value']+"'>";//EV
-			htmlTR+="</td>";*/
+        htmlTR += "</td>";
         htmlTR += "</tr>";
     });
 
-
-
-
-
-
-
-
     $("#listDataActionPlan").html(htmlTR);
     $(".actionplan_input").hide();
-
-
-
-    //	 $( ".datepicker" ).datepicker({
-    //	        showOn: "button",
-    //	        buttonImage: "../../see-kpi-portlet/img/calendar.gif",
-    //	        buttonImageOnly: true,
-    //	        buttonText: "Select date"
-    //	      });
-    //2017-08-22
-    //	 	 $(".datepicker").datepicker();
-    //	 	 $(".datepicker").datepicker( "option", "dateFormat", "yy-mm-dd" );
-
-
-
-	/*
-	 data['header']['target_value']
-	 data['header']['forecast_value']
-	 data['header']['actual_value']
-	 data['header']['actual_vs_forecast']
-	 data['header']['actual_vs_target']
-
-	 */
-    //parseFloat(notNullFn(data['header']['target_value'])).toFixed(2);
-
-
 
     //0,0,100,80,80
     //%Actual vs Forecast
@@ -2100,25 +1720,11 @@ update_dttm
     actual_vs_forecast = (actual_value / forecast_value) * 100;
     actual_vs_target = (actual_value / target_value) * 100;
 
-    //alert("actual_vs_forecast="+actual_vs_forecast);
-    //alert("actual_vs_target="+actual_vs_target);
-    //% Actual vs Target
-	/*
-	target,performance,green,yellow,red
-	$("#sparkline").sparkline([10,12,12,9,7 ], {
-    type: 'bullet',
-    rangeColors: ['green','yellow','red ']});
-    */
-    //target,over_target,center,performance2,performance1
-    //target,allArea,green,yellow,red
-    // console.log(data['header']['result_threshold_color']);
     var rangeColorsThreshold = [];
     var ragneValue1 = [100, parseInt(parseFloat(notNullFn(data['header']['actual_vs_forecast'])).toFixed(2))];
     var ragneValue2 = [100, parseInt(parseFloat(notNullFn(data['header']['actual_vs_target'])).toFixed(2))];
     var rageGreenColor = "";
     $.each(data['header']['result_threshold_color'], function (index, indexEntry) {
-
-
         ragneValue1.push(parseInt(indexEntry['end_threshold']));
         ragneValue2.push(parseInt(indexEntry['end_threshold']));
         rangeColorsThreshold.push("#" + indexEntry['color_code']);
@@ -2126,7 +1732,6 @@ update_dttm
             rageGreenColor = "#" + indexEntry['color_code'];
         }
     });
-
 
     // console.log(ragneValue1);
     $("#actualvsForecastBar").sparkline(ragneValue1, {
@@ -2148,53 +1753,11 @@ update_dttm
         rangeColors: rangeColorsThreshold
     });
 
-
-	/*
-		$("#actualvsForecastBar").sparkline([0,0,100,parseFloat(notNullFn(actual_vs_forecast)).toFixed(2),parseFloat(notNullFn(actual_vs_forecast)).toFixed(2)], {
-				type: 'bullet',
-				width:'80',
-				targetColor: '#7f94ff',
-				performanceColor: '#7f94ff',
-				rangeColors: ['#d3dafe','#7f94ff','#7f94ff ']});
-
-
-		$("#actualvsTargetBar").sparkline([0,0,100,parseFloat(notNullFn(actual_vs_target)).toFixed(2),parseFloat(notNullFn(actual_vs_target)).toFixed(2)], {
-				type: 'bullet',
-				width:'80',
-				targetColor: '#7f94ff',
-				performanceColor: '#7f94ff',
-				rangeColors: ['#d3dafe','#7f94ff','#7f94ff ']});
-
-	 */
     $(".jqstooltip").hide();
-
-
-
-
-
 }
 
 var insertActionPlanInlineFn = function () {
-
-
     var htmlTR = ""
-	/*
-	htmlTableInline+="<tr >";
-	htmlTableInline+="<td><input id='new_seq-"+globalCount+"'  class=\"form-control input-inline-table input-seq new-condition\" type=\"text\" name=\"\"";
-	htmlTableInline+="</td>";
-	htmlTableInline+="<td>";
-	htmlTableInline+="<select id='new_operator-"+globalCount+"' class=\"form-control input-inline-table input-contact-selecttype new-condition\" ><option>or</option> <option selected>and</option></select>";
-	htmlTableInline+="</td>";
-		htmlTableInline+="<td>";
-		htmlTableInline+="<p>"+rule_name+"<input type='hidden' id='new_rule_id-"+globalCount+"' value="+rule_id+"></p>";
-		htmlTableInline+="</td>";
-	htmlTableInline+="<td>";
-	htmlTableInline+="<input id='new_complete-"+globalCount+"' type=\"checkbox\" class='new_complete_flag'>";
-	htmlTableInline+="</td>";
-	htmlTableInline+="<td ><button class='btn btn-danger btn-xs  deleteNewAction Plan new-condition' type='button' id='"+globalCount+"'>Delete</button></td>";
-	//htmlTableInline+="<td ><i class=\"fa fa-gear font-management font-management2  new-condition\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\"<button class='btn btn-danger btn-xs deleteAction Plan deleteNewAction Plan new-condition' type='button' id='"+globalCount+"'>Delete</button>\"></i></td>";
-	htmlTableInline+="</tr>";
-	*/
 
     htmlTR += "<tr>";
     htmlTR += "<td>";
@@ -2234,18 +1797,8 @@ var insertActionPlanInlineFn = function () {
     htmlTR += "</td>";
     htmlTR += "<td>";
     htmlTR += "<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='new_completed_percent-" + globalCount + "' name='new_completed_percent-" + globalCount + "' value=''>";//Completed
-    htmlTR += "</td>";/*
-				htmlTR+="<td>";
-				htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='new_plan_value-"+globalCount+"' name='new_plan_value-"+globalCount+"' value=''>";//PV
-				htmlTR+="</td>";
-				htmlTR+="<td>";
-				htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='new_actual_cost-"+globalCount+"' name='new_actual_cost-"+globalCount+"' value=''>";//AC
-				htmlTR+="</td>";
-				htmlTR+="<td>";
-				htmlTR+="<input style=\"height:20px;margin-right:3px; width:100px;\" type='text' id='new_earned_value-"+globalCount+"' name='new_earned_value-"+globalCount+"' value=''>";//EV
-				htmlTR+="</td>";*/
+    htmlTR += "</td>";
     htmlTR += "</tr>";
-
 
     $("#listDataActionPlan").append(htmlTR);
     $(".datepicker").datepicker();
@@ -2270,7 +1823,6 @@ var insertActionPlanInlineFn = function () {
                 },
                 //async:false,
                 error: function (xhr, textStatus, errorThrown) {
-                    // console.log('Error: ' + xhr.responseText);
                 },
                 success: function (data) {
                     response($.map(data, function (item) {
@@ -2288,8 +1840,6 @@ var insertActionPlanInlineFn = function () {
         }
     });
     //Autocomplete END.
-
-    //$('[data-toggle="popover"]').popover();
     globalCount++;
 }
 
@@ -2303,13 +1853,11 @@ var getActionPlanFn = function (id) {
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            //// console.log(data);
             listActionPlanFn(data);
         }
     });
 
 }
-
 
 /* phase function start*/
 var deletePhaseFn = function (id) {
@@ -2336,13 +1884,9 @@ var deletePhaseFn = function (id) {
     });
 }
 
-
-
 var findOnePhaseFn = function (id) {
 
     //get structure
-
-
     //get data for structure
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/phase/" + id,
@@ -2351,16 +1895,7 @@ var findOnePhaseFn = function (id) {
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-
-/*
-				"{
-
-			    ""phase_id"": 4,
-			    ""phase_name"": ""Ceta"",
-			    ""is_active"": 1
-
-			}"
-*/				$("#phaseName").val(data['phase_name']);
+            $("#phaseName").val(data['phase_name']);
             if (data['is_active'] == 1) {
                 $("#phaseIsActive").prop('checked', true);
             } else {
@@ -2369,9 +1904,6 @@ var findOnePhaseFn = function (id) {
 
             $("#phase_action").val("edit");
             $("#pahse_id_edit").val(id);
-
-
-
         }
     });
 
@@ -2404,9 +1936,6 @@ var listPhaseFn = function (data) {
         htmlTR += "</td>";
         htmlTR += "</tr>";
     });
-
-
-
     $("#listDataPhase").html(htmlTR);
 
     /*bindding popover start*/
@@ -2423,7 +1952,6 @@ var listPhaseFn = function (data) {
                 "backdrop": setModalPopup[0],
                 "keyboard": setModalPopup[1]
             }).css({ "margin-top": "0px" });
-            //$(this).parent().parent().parent().children().click();
             $(document).off("click", "#btnConfirmOK");
             $(document).on("click", "#btnConfirmOK", function () {
                 //alert(id);
@@ -2462,7 +1990,6 @@ var getPhaseFn = function (id) {
         data: { "item_result_id": id },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            //// console.log(data);
             listPhaseFn(data);
         }
     });
@@ -2471,7 +1998,6 @@ var getPhaseFn = function (id) {
 /* phase function end*/
 /* attach function start*/
 var getAttachFileFn = function (id) {
-
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/upload_file/" + id,
         type: "get",
@@ -2483,13 +2009,10 @@ var getAttachFileFn = function (id) {
             listAttachFileFn(data);
         }
     });
-
 }
 
 var listAttachFileFn = function (data) {
     var host = "http://" + window.location.hostname;
-
-    //// console.log(data);
     var html = "";
 
     $.each(data, function (index, indexEntry) {
@@ -2529,8 +2052,6 @@ var deleteAttachFileFn = function (id) {
 /* attach function end*/
 /* phase function end*/
 
-
-
 /* reason function start*/
 var deleteReasonFn = function (id) {
 
@@ -2549,9 +2070,7 @@ var deleteReasonFn = function (id) {
 
             } else if (data['status'] == "400") {
 
-                //$("#informConfirm").html("<font color='red'>"+data['data']+"</font>");
                 callFlashSlide("<font color=''>" + data['data'] + "</font>", "error");
-
             }
         }
     });
@@ -2566,14 +2085,9 @@ var findOneReasonFn = function (id) {
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-
-
             $("#reason_name").val(data['reason_name']);
             $("#reason_action").val("edit");
             $("#reason_id_edit").val(id);
-
-
-
         }
     });
 
@@ -2583,7 +2097,6 @@ var listReasonFn = function (data) {
     var htmlTR = "";
 
     //Exsample Data
-
     $.each(data, function (index, indexEntry) {
         htmlTR += "<tr>";
         htmlTR += "<td>" + indexEntry['rank'] + "</td>";
@@ -2609,37 +2122,33 @@ var listReasonFn = function (data) {
                 "backdrop": setModalPopup[0],
                 "keyboard": setModalPopup[1]
             }).css({ "margin-top": "0px" });
-            //$(this).parent().parent().parent().children().click();
             $(document).off("click", "#btnConfirmOK");
             $(document).on("click", "#btnConfirmOK", function () {
-                //alert(id);
                 deleteReasonFn(id);
 
             });
 
         });
+
         //findOne Start
         $(".edit_reason").on("click", function () {
 
             $(window).scrollTop(0);
             var edit = this.id.split("-");
             var id = edit[1];
-            //alert(id+"-----"+form_url);
             findOneReasonFn(id);
             $(".modal-body").scrollTop(0);
         });
     });
     /*bindding popover end*/
-
-
-
 }
+
 var clearFormReasonFn = function () {
     $("#reason_name").val("");
     $("#reason_id_edit").val("");
     $("#reason_action").val("add");
-
 }
+
 var getReasonFn = function (id) {
 
     $.ajax({
@@ -2651,7 +2160,6 @@ var getReasonFn = function (id) {
         //data:{"item_result_id":id},
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            //// console.log(data);
             listReasonFn(data);
         }
     });
@@ -2662,81 +2170,33 @@ var getReasonFn = function (id) {
 
 var listDataFn = function (data) {
     htmlHTML = "";
-
-    //	$.each(data,function(index,indexEntry){
-    //		/*
-    //	emp_result_id
-    //	emp_code
-    //	emp_name
-    //	appraisal_level_name
-    //	appraisal_type_name
-    //	position_name
-    //	assign
-    //	to_action
-    //		*/
-    //
-    //		htmlHTML+="<tr>";
-    //
-    //		htmlHTML+="	<td class=''><a href=\"#\" class='emp_code' id=\"id-"+indexEntry['emp_result_id']+"\" >"+indexEntry['emp_code']+"</a></td>";
-    //		htmlHTML+=" <td>"+indexEntry['emp_name']+"</td>";
-    //		htmlHTML+=" <td>"+indexEntry['appraisal_level_name']+"</td>";
-    //		htmlHTML+=" <td>"+indexEntry['appraisal_type_name']+"</td>";
-    //		htmlHTML+="	<td>"+indexEntry['position_name']+"</td>";
-    //		htmlHTML+="	<td>"+indexEntry['assign']+"</td>";
-    //		htmlHTML+="	<td>"+indexEntry['to_action']+"</td>";
-    //
-    //		htmlHTML+="</tr>";
-    //
-    //	});
-
-
-
-
-    htmlHTML = "";
     $.each(data['group'], function (index, indexEntry) {
-        //// console.log(index);
-        //	// console.log(indexEntry['items']);
-        //	// console.log(indexEntry['appraisal_period_desc']);
 
         htmlHTML += "<div class=\"row-fluid\">";
         htmlHTML += "<div class=\"span12\">";
         htmlHTML += "<div class=\"ibox-title2\">";
         htmlHTML += "<div class=\"titlePanel2\">" + indexEntry['appraisal_period_desc'] + " </div> ";
-
         htmlHTML += "</div>";
-
         htmlHTML += "<div class=\"ibox-content\">";
-
-
         htmlHTML += "<div class=\"table-responsive\" style='overflow:auto;'>";
         htmlHTML += "<table id=\"tablethreshould\" class=\"table table-striped\" style=\"max-width: none\">";
-
         htmlHTML += " <thead>";
         htmlHTML += " <tr>";
 
         if ($("#embed_appraisalType").val() == "2") {
-
             htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-emp-code").val() + "</b></th>";
             htmlHTML += " <th style=\"widthauto;\"><b>" + $(".lt-emp-name").val() + "</b></th>";
             htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-level").val() + "</b> </th>";
             htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-organization").val() + "</b></th>";
             htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-position").val() + "</b> </th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-action").val() + "</b></th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-group").val() + "</b></th>";
-            //htmlHTML+=" <th style=\"width:auto; text-align:center;\"><b>Manage</b></th>";
+            htmlHTML += " <th style=\"width:30%;\"><b>" + $(".lt-action").val() + "</b></th>";
 
         } else if ($("#embed_appraisalType").val() == "1") {
-
             htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-org-code").val() + "</b></th>";
             htmlHTML += " <th style=\"widthauto;\"><b>" + $(".lt-org-name").val() + "</b></th>";
             htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-level").val() + "</b> </th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-action").val() + "</b></th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-group").val() + "</b></th>";
-            //htmlHTML+=" <th style=\"width:auto; text-align:center;\"><b>Manage</b></th>";
-
+            htmlHTML += " <th style=\"width:30%;\"><b>" + $(".lt-action").val() + "</b></th>";
         }
-
-
 
         //				emp_code
         //				emp_name
@@ -2750,62 +2210,40 @@ var listDataFn = function (data) {
         htmlHTML += " </thead>";
         htmlHTML += " <tbody>";
         $.each(indexEntry['items'], function (index2, itemEntry) {
-
-
             if ($("#embed_appraisalType").val() == "2") {
-
-
                 htmlHTML += "<tr>";
-
                 htmlHTML += "	<td class=''><a href=\"#\" class='emp_code' id=\"id-" + itemEntry['emp_result_id'] + "\" >" + itemEntry['emp_code'] + "</a>";
                 htmlHTML += "<input type='hidden' name='emp_appraisal_type_id-" + itemEntry['emp_result_id'] + "' id='emp_appraisal_type_id-" + itemEntry['emp_result_id'] + "' class='emp_appraisal_type_id' value='" + itemEntry['appraisal_type_id'] + "' >";
                 htmlHTML += "<input type='hidden' name='emp_period_id-" + itemEntry['emp_result_id'] + "' id='emp_period_id-" + itemEntry['emp_result_id'] + "' class='emp_period_id' value='" + itemEntry['period_id'] + "' >";
                 htmlHTML += "<input type='hidden' name='emp_emp_code-" + itemEntry['emp_result_id'] + "' id='emp_emp_code-" + itemEntry['emp_result_id'] + "' class='emp_emp_code' value='" + itemEntry['emp_code'] + "' >";
                 htmlHTML += "<input type='hidden' name='emp_appraisal_item_id-" + itemEntry['emp_result_id'] + "' id='emp_appraisal_item_id-" + itemEntry['emp_result_id'] + "' class='emp_appraisal_item_id' value='" + itemEntry['appraisal_item_id'] + "' >";
-                htmlHTML += "<input type='hidden' name='group_id-" + itemEntry['emp_result_id'] + "' id='group_id-" + itemEntry['emp_result_id'] + "'  value='" + itemEntry['group_id'] + "' >";   // by DARIS
+                htmlHTML += "<input type='hidden' name='group_id-" + itemEntry['emp_result_id'] + "' id='group_id-" + itemEntry['emp_result_id'] + "'  value='" + itemEntry['group_id'] + "' >";
                 htmlHTML + "</td>";
                 htmlHTML += " <td>" + itemEntry['emp_name'] + "</td>";
                 htmlHTML += " <td>" + itemEntry['appraisal_level_name'] + "</td>";
                 htmlHTML += " <td>" + itemEntry['org_name'] + "</td>";
-                htmlHTML += "	<td>" + itemEntry['position_name'] + "</td>";
-
-                htmlHTML += "	<td>" + itemEntry['to_action'] + "</td>";
-                htmlHTML += "	<td>" + itemEntry['group_name'] + "</td>";
-                //						htmlHTML+="	<td style=\"text-align:center\">";
-                //						htmlHTML+=" <i data-trigger=\"focus\" tabindex=\""+index2+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear phase' id=phase-"+itemEntry['org_code']+" data-target=#addModalRule data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id=action_plan-"+itemEntry['org_code']+" class='btn btn-danger btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
-                //						htmlHTML+="	</td>";
-
+                htmlHTML += " <td>" + itemEntry['position_name'] + "</td>";
+                htmlHTML += " <td>" + itemEntry['to_action'] + "</td>";
                 htmlHTML += "</tr>";
 
             } else if ($("#embed_appraisalType").val() == "1") {
-
                 htmlHTML += "<tr>";
-
                 htmlHTML += "	<td class=''><a href=\"#\" class='emp_code' id=\"id-" + itemEntry['emp_result_id'] + "\" >" + itemEntry['org_code'] + "</a>";
                 htmlHTML += "<input type='hidden' name='emp_appraisal_type_id-" + itemEntry['emp_result_id'] + "' id='emp_appraisal_type_id-" + itemEntry['emp_result_id'] + "' class='emp_appraisal_type_id' value='" + itemEntry['appraisal_type_id'] + "' >";
                 htmlHTML += "<input type='hidden' name='emp_period_id-" + itemEntry['emp_result_id'] + "' id='emp_period_id-" + itemEntry['emp_result_id'] + "' class='emp_period_id' value='" + itemEntry['period_id'] + "' >";
                 htmlHTML += "<input type='hidden' name='emp_emp_code-" + itemEntry['emp_result_id'] + "' id='emp_emp_code-" + itemEntry['emp_result_id'] + "' class='emp_emp_code' value='" + itemEntry['emp_code'] + "' >";
                 htmlHTML += "<input type='hidden' name='emp_appraisal_item_id-" + itemEntry['emp_result_id'] + "' id='emp_appraisal_item_id-" + itemEntry['emp_result_id'] + "' class='emp_appraisal_item_id' value='" + itemEntry['appraisal_item_id'] + "' >";
-                htmlHTML += "<input type='hidden' name='group_id-" + itemEntry['emp_result_id'] + "' id='group_id-" + itemEntry['emp_result_id'] + "'  value='" + itemEntry['group_id'] + "' >";   // by DARIS
+                htmlHTML += "<input type='hidden' name='group_id-" + itemEntry['emp_result_id'] + "' id='group_id-" + itemEntry['emp_result_id'] + "'  value='" + itemEntry['group_id'] + "' >";
                 htmlHTML + "</td>";
                 htmlHTML += " <td>" + itemEntry['org_name'] + "</td>";
                 htmlHTML += " <td>" + itemEntry['appraisal_level_name'] + "</td>";
-
-                htmlHTML += "	<td>" + itemEntry['to_action'] + "</td>";
-                htmlHTML += "	<td>" + itemEntry['group_name'] + "</td>";
-                //						htmlHTML+="	<td style=\"text-align:center\">";
-                //						htmlHTML+=" <i data-trigger=\"focus\" tabindex=\""+index2+"\" data-content=\"&lt;button class='btn btn-warning btn-small btn-gear phase' id=phase-"+itemEntry['org_code']+" data-target=#addModalRule data-toggle='modal'&gt;Phase&lt;/button&gt;&nbsp;&lt;button id=action_plan-"+itemEntry['org_code']+" class='btn btn-danger btn-small btn-gear action_plan'&gt;Action Plan&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
-                //						htmlHTML+="	</td>";
-
+                htmlHTML += " <td>" + itemEntry['to_action'] + "</td>";
                 htmlHTML += "</tr>";
-
             }
-
-
         });
         htmlHTML += " </tbody>";
         htmlHTML += "  </table>";
-        htmlHTML += "<input type='hidden' id='group_id'  value='' >";   // by DARIS
+        htmlHTML += "<input type='hidden' id='group_id'  value='' >";
         htmlHTML += " </div>";
         htmlHTML += "</div>";
         htmlHTML += "</div>";
@@ -2814,44 +2252,6 @@ var listDataFn = function (data) {
     });
 
     $("#listAppraisal").html(htmlHTML);
-
-    /*bindding popover start*/
-	/*
-	// Not Use
-	$(".popover-edit-del").popover();
-	$("#listAppraisal").off("click",".popover-edit-del");
-	$("#listAppraisal").on("click",".popover-edit-del",function(){
-
-		//action_plan Start
-		$(".action_plan").on("click",function() {
-
-			$("#informConfirm").empty();
-			var id=this.id.split("-");
-			id=id[1];
-			$("#actionPlanModal").modal();
-
-			getActionPlanFn("3");
-			$("#action_actionplan").val("add");
-
-
-
-		});
-		//phase Start
-
-		$(".phase").on("click",function(event) {
-
-			//alert("phase3");
-			clearFormPhaseFn();
-			$("#informConfirm").empty();
-			var id=this.id.split("-");
-			id=id[1];
-			$("#phaseModal").modal();
-			getPhaseFn();
-		});
-		//$(".phase").off("click");
-	});
-	*/
-    /*bindding popover end*/
 }
 
 var getDataFn = function (page, rpp) {
@@ -2874,14 +2274,12 @@ var getDataFn = function (page, rpp) {
     var Organization = $("#embed_Org").val();
     var org_id = Organization.split('-');
     org_id = org_id[0];
-    //var Section= $("#embed_Section").val();
     var Position = $("#embed_Position").val();
     var EmpName = ($("#embed_EmpName").val());
     var EmpID = EmpName.split('-');
     EmpID = EmpID[0];
 
     var appraisal_type_id = ($("#embed_appraisalType").val());
-
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/show/index",
         type: "get",
@@ -2901,9 +2299,6 @@ var getDataFn = function (page, rpp) {
             "appraisal_type_id": appraisal_type_id
         },
         success: function (data) {
-
-            //// console.log(data);
-
             listDataFn(data);
             setThemeColorFn(tokenID.theme_color);
             globalData = data;
@@ -2936,8 +2331,6 @@ var searchAdvanceFn = function () {
 	*/
 
     var Position = $("#Position_id").val();
-    //Position=Position[0];
-
     var AppraisalLevel_ = ($("#appraisalType").val() == "1") ? $("#AppraisalOrgLevel").val() : $("#AppraisalEmpLevel").val();
 
     $(".embed_param_search").remove();
@@ -2967,7 +2360,6 @@ var dropDrowAsignToEditFn = function (paramStageID) {
         headers: { Authorization: "Bearer " + tokenID.token },
         data: { "stage_id": paramStageID },
         success: function (data) {
-            //var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
             var htmlOption = "";
             $.each(data, function (index, indexEntry) {
                 if (id == indexEntry['to_appraisal_level_id']) {
@@ -2980,7 +2372,7 @@ var dropDrowAsignToEditFn = function (paramStageID) {
         }
     });
 }
-//var dropDrowActionEditFn = function(stage_id,to_appraisal_level_id){
+
 var dropDrowActionEditFn = function (stage_id, employee_code, org_code) {
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/edit_action_to",
@@ -2988,10 +2380,8 @@ var dropDrowActionEditFn = function (stage_id, employee_code, org_code) {
         dataType: "json",
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
-        //data:{"stage_id":stage_id,"to_appraisal_level_id":to_appraisal_level_id},
         data: { "stage_id": stage_id, "emp_code": employee_code, "org_code": org_code, "appraisal_type_id": $("#embed_appraisalType").val() },
         success: function (data) {
-            //var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
             if (data == '') {
                 $("#btnSubmit").attr("disabled", "disabled");
             } else {
@@ -3017,17 +2407,13 @@ var appraisalTypeFn = function (nameArea, id) {
     }
 
     $.ajax({
-        //http://192.168.1.52/"+serviceName+"/public/appraisal_assignment/appraisal_type_list
         url: restfulURL + "/" + serviceName + "/public/appraisal_assignment/appraisal_type_list",
         type: "get",
         dataType: "json",
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            //var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
             var htmlOption = "";
-
-            //htmlOption+="<option  value=''>All Appraisal Type</option>";
             $.each(data, function (index, indexEntry) {
                 if (id == undefined) {
                     if (index == 0) {
@@ -3040,10 +2426,8 @@ var appraisalTypeFn = function (nameArea, id) {
                         htmlOption += "<option selected='selected' value=" + indexEntry['appraisal_type_id'] + ">" + indexEntry['appraisal_type_name'] + "</option>";
                     } else {
                         htmlOption += "<option value=" + indexEntry['appraisal_type_id'] + ">" + indexEntry['appraisal_type_name'] + "</option>";
-
                     }
                 }
-
             });
             $("#appraisalType" + nameArea).html(htmlOption);
         }
@@ -3053,26 +2437,13 @@ var validationAppraisalFn = function (data) {
 
     var errorData = "";
     var count = 0;
-
-
     errorData = stripJsonToString(data['data']);
-
     return errorData;
-
 }
 
 var saveAppraisalFn = function () {
-
-    //	"stage_id,
-    //	appraisal: [
-    //	  {
-    //	     item_result_id: '',
-    //	     score: ''
-    //	  },...
-    //	]"
-
-    updateCommentFn();   // by DARIS -->  save comment 
-    updateQualityFn();   // by DARIS -->  save quality 
+    updateCommentFn();   // -->  save comment 
+    updateQualityFn();   // -->  save quality 
 
     var competencyScore_First = "";
     var competencyScore_Second = "";
@@ -3117,23 +2488,11 @@ var saveAppraisalFn = function () {
 
             appraisal += "\"score\":\"" + competencyScore_Avg + "\"";
         }
-        //			else{
-        //
-        //			appraisal+="\"forecast_value\":\"\",";
-        //			appraisal+="\"actual_value\":\""+$("#actual-"+item_result_id).val()+"\",";
-        //			appraisal+="\"score\":\"\"";
-        //
-        //		}
-
-
         appraisal += "}";
     });
 
     appraisal += "]";
-    // console.log(appraisal);
     var appraisalObject = eval("(" + appraisal + ")");
-    //// console.log(appraisalObject);
-
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/" + $("#emp_result_id").val(),
         type: "patch",
@@ -3166,54 +2525,6 @@ var saveAppraisalFn = function () {
     });
 }
 
-
-var calculateBunusFn = function () {
-	/*
-	appraisal_type_id,
-	period_id,
-	emp_code,
-	appraisal_item_id
-	*/
-
-    //	$.ajax({
-    //		url:restfulURL+"/"+serviceName+"/public/appraisal/calculate_weight",
-    //		type:"post",
-    //		dataType:"json",
-    //		async:false,
-    //		headers:{Authorization:"Bearer "+tokenID.token},
-    //		data:{
-    //			"appraisal_type_id":"",
-    //			"period_id":"",
-    //			"emp_code":"",
-    //			"appraisal_item_id":"",
-    //
-    //		},
-    //		success:function(data){
-    //			if(data['status']==200){
-    //
-    //
-    //
-    //			}else if(data['status']==400){
-    //
-    //				callFlashSlide(validationFn(data),"error");Â Â 
-    //
-    //			}
-    //		}
-    //	});
-}
-//function getParamValue(paramName)
-//{
-//    var url = window.location.search.substring(1); //get rid of "?" in querystring
-//    var qArray = url.split('&'); //get key-value pairs
-//    for (var i = 0; i < qArray.length; i++)
-//    {
-//        var pArr = qArray[i].split('='); //split key and value
-//        if (pArr[0] == paramName)
-//            return pArr[1]; //return value
-//    }
-//}
-
-
 var generateGanttChartFn = function (dataSource) {
 
     var revgannttChart = new FusionCharts({
@@ -3229,11 +2540,6 @@ var generateGanttChartFn = function (dataSource) {
     return false;
 };
 var diffDateFn = function (date1, date2) {
-    // Here are the two dates to compare
-	/*
-	var date1 = '2011-12-24';
-	var date2 = '2012-02-01';
-	*/
     // First we split the values to arrays date1[0] is the year, [1] the month and [2] the day
     date1 = date1.split('-');
     date2 = date2.split('-');
@@ -3271,9 +2577,6 @@ var getDataGanttChartFn = function (item_result_id, ganttPaneDuration, ganttPane
     } else {
         ganttPaneDurationUnit = ganttPaneDurationUnit;
     }
-
-
-
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/dashboard/gantt",
         type: "get",
@@ -3282,7 +2585,6 @@ var getDataGanttChartFn = function (item_result_id, ganttPaneDuration, ganttPane
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            //// console.log(data);
             var tasksLength = 0;
             var startDate = "";
             var endDate = "";
@@ -3291,17 +2593,11 @@ var getDataGanttChartFn = function (item_result_id, ganttPaneDuration, ganttPane
 
                 startDate = data['tasks']['task'][0]['start'];
                 endDate = data['tasks']['task'][(tasksLength - 1)]['end'];
-
-                // console.log("ganttPaneDuration="+ganttPaneDuration);
                 if (ganttPaneDuration == undefined || ganttPaneDuration == "") {
                     ganttPaneDurationVarible = diffDateFn(startDate, endDate);
-                    // console.log(diffDateFn(startDate,endDate));
                 } else {
                     ganttPaneDurationVarible = ganttPaneDuration;
                 }
-                //// console.log(diffDateFn(startDate,endDate));
-                //alert(ganttPaneDurationVarible);
-                //$("#selectGanntChartViewDaily").val(ganttPaneDurationVarible);
                 $("#selectGanntChartViewDaily").val(365);
             } else {
                 $("#selectGanntChartViewDaily").val(1);
@@ -3324,14 +2620,10 @@ var getDataGanttChartFn = function (item_result_id, ganttPaneDuration, ganttPane
                 "chart": {
                     "exportenabled": "1",
                     "exportatclient": "1",
-                    //"caption": "Action Plan",
-                    //"subcaption": "Planned vs Actual",
                     "dateformat": "dd/mm/yyyy",
                     "outputdateformat": "ddds mns yy",
                     "ganttwidthpercent": "60",
                     "ganttPaneDuration": "365",
-                    // "ganttPaneDuration": ganttPaneDurationVarible,
-                    // "ganttPaneDurationUnit": "d",
                     "ganttPaneDurationUnit": ganttPaneDurationUnit,
                     "plottooltext": "$processName{br} $label starting date $start{br}$label ending date $end",
                     "legendBorderAlpha": "0",
@@ -3364,15 +2656,7 @@ var getDataGanttChartFn = function (item_result_id, ganttPaneDuration, ganttPane
                         }
                     ]
                 }
-				/*
-				"categories":data['categories'],
-				"processes":data['processes'],
-				"datatable":data['datatable'],
-				"tasks":data['tasks']
-				*/
-
             }
-            //// console.log(objectGantt);
             generateGanttChartFn(objectGantt);
 
             /* test here start*/
@@ -3380,36 +2664,6 @@ var getDataGanttChartFn = function (item_result_id, ganttPaneDuration, ganttPane
                 "backdrop": setModalPopup[0],
                 "keyboard": setModalPopup[1]
             }).css({ "margin-top": "0px" });
-            /* test here end.*/
-            //			var dataGantt="";
-
-            //
-            //				dataGantt+="{";
-            //				dataGantt+="\"chart\": {";
-            //				dataGantt+="\"exportenabled\": \"1\",";
-            //				dataGantt+="\"exportatclient\": \"1\",";
-            //				dataGantt+="\"caption\": \"Construction management of a new store in Denver\",";
-            //				dataGantt+="\"subcaption\": \"Planned vs Actual\",";
-            //				dataGantt+="\"dateformat\": \"dd/mm/yyyy\",";
-            //				dataGantt+="\"outputdateformat\": \"ddds mns yy\",";
-            //				dataGantt+="\"ganttwidthpercent\": \"60\",";
-            //				dataGantt+="\"ganttPaneDuration\": \"40\",";
-            //				dataGantt+="\"ganttPaneDurationUnit\": \"d\",";
-            //				dataGantt+="\"plottooltext\": \"$processName{br} $label starting date $start{br}$label ending date $end\",";
-            //				dataGantt+="\"legendBorderAlpha\": \"0\",";
-            //				dataGantt+="\"legendShadow\": \"0\",";
-            //				dataGantt+="\"usePlotGradientColor\": \"0\",";
-            //				dataGantt+="\"showCanvasBorder\": \"0\",";
-            //				dataGantt+="\"flatScrollBars\": \"1\",";
-            //				dataGantt+="\"gridbordercolor\": \"#333333\",";
-            //				dataGantt+="\"gridborderalpha\": \"20\",";
-            //				dataGantt+="\"slackFillColor\": \"#e44a00\",";
-            //				dataGantt+="\"taskBarFillMi\": \"light+0\"";
-            //				dataGantt+="}";
-            //				//dataGantt+=data;
-            //			dataGantt+="}";
-
-
         }
     });
 };
@@ -3428,10 +2682,6 @@ var listViewDailyOrMonthlyFn = function () {
 }
 
 $(document).ready(function () {
-
-    //	var username = getParamValue('username');
-    //	var password = getParamValue('password');
-
     username = $('#user_portlet').val();
     password = $('#pass_portlet').val();
     var plid = $('#plid_portlet').val();
@@ -3468,9 +2718,6 @@ $(document).ready(function () {
                 }
             }, 3000);
             //End Action plan by email link here..
-
-            //Test Fusion Chart Start
-            //getDataGanttChartFn();
 
             $("#assignTo").removeAttr("disabled");
             $("#actionToAssign").removeAttr("disabled");
@@ -3552,10 +2799,8 @@ $(document).ready(function () {
                                     label: item.position_name,
                                     value: item.position_name,
                                     position_id: item.position_id
-
                                 };
                             }));
-
                         },
                         beforeSend: function () {
                             $("body").mLoading('hide');
@@ -3582,10 +2827,6 @@ $(document).ready(function () {
                 }
             });
             var empNameAutoCompelteChangeToPositionName = function (name) {
-
-                //				var empNameCodeToPosition= $("#empName").val().split("-");
-                //				empNameCodeToPosition=empNameCodeToPosition[1];
-
                 $.ajax({
                     url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/auto_position_list",
                     type: "post",
@@ -3620,10 +2861,8 @@ $(document).ready(function () {
                         //async:false,
                         headers: { Authorization: "Bearer " + tokenID.token },
                         error: function (xhr, textStatus, errorThrown) {
-                            // console.log('Error: ' + xhr.responseText);
                         },
                         success: function (data) {
-                            // console.log(data)
                             response($.map(data, function (item) {
                                 return {
                                     label: item.emp_name + "(" + item.emp_code + ")",
@@ -3660,10 +2899,7 @@ $(document).ready(function () {
                 }
             });
 
-
-
             //Auto Complete End
-
 
             // Search
             $("#btnSearchAdvance").click(function () {
@@ -3683,19 +2919,10 @@ $(document).ready(function () {
                 findOneFn(id);
                 $("#emp_result_id").val(id);
 
-                //sessionStorage.getItem("tokenID");
-
                 sessionStorage.setItem('appraisal_type_id', $('#emp_appraisal_type_id-' + id).val());
                 sessionStorage.setItem('period_id', $('#emp_period_id-' + id).val());
                 sessionStorage.setItem('emp_code', $('#emp_emp_code-' + id).val());
                 sessionStorage.setItem('appraisal_item_id', $('#emp_appraisal_item_id-' + id).val());
-
-
-                //alert($('#emp_appraisal_item_id-'+id).val());
-                //			// console.log(sessionStorage.getItem("appraisal_type_id"));
-                //			// console.log(sessionStorage.getItem("period_id"));
-                //			// console.log(sessionStorage.getItem("emp_code"));
-                //			// console.log(sessionStorage.getItem("appraisal_item_id"));
                 $(window).scrollTop(0);
                 $(".modal-body").scrollTop(0);
 
@@ -3704,17 +2931,10 @@ $(document).ready(function () {
 
             //submit
             $("#btnSubmit").click(function () {
-
                 saveAppraisalFn();
-
-
             });
 
-
-
-
             //Action Plan Action Area...
-
             $("#btnAddActionPlan").click(function () {
 
                 if ($("#action_actionplan").val() == "add") {
@@ -3728,8 +2948,6 @@ $(document).ready(function () {
                 }
             });
 
-
-
             $("#btnEditActionPlan").click(function () {
 
                 if ($("#action_new_actionplan").val() == "add") {
@@ -3741,9 +2959,6 @@ $(document).ready(function () {
                 $(".actionplan_input").show();
 
                 $("#action_actionplan").val("edit");
-
-
-
                 $(".datepicker").datepicker();
                 $(".datepicker").each(function () {
 
@@ -3762,10 +2977,6 @@ $(document).ready(function () {
                 $(".datepicker").focus(function () {
                     $("#ui-datepicker-div").css({ "z-index": "999999" });
                 });
-
-
-
-
                 //Autocomplete START.
                 $(".responsible").autocomplete({
                     source: function (request, response) {
@@ -3779,7 +2990,6 @@ $(document).ready(function () {
                             },
                             //async:false,
                             error: function (xhr, textStatus, errorThrown) {
-                                // console.log('Error: ' + xhr.responseText);
                             },
                             success: function (data) {
                                 response($.map(data, function (item) {
@@ -3792,27 +3002,17 @@ $(document).ready(function () {
                             beforeSend: function () {
                                 $("body").mLoading('hide');
                             }
-
                         });
                     }
                 });
                 //Autocomplete END.
-
             });
-
-
             $(".app_url_hidden").show();
 
 
             //ปุ่ม add Action Plan
             $("#btnSaveActionPlan").click(function () {
-
-
                 if ($("#action_actionplan").val() == "edit") {
-
-
-
-
                     var action_plan_id = "";
                     var phase_id = "";
                     var action_plan_name = "";
@@ -3820,25 +3020,17 @@ $(document).ready(function () {
                     var plan_end_date = "";
                     var actual_start_date = "";
                     var actual_end_date = "";
-
                     var plan_value = "";
                     var actual_cost = "";
                     var earned_value = "";
                     var completed_percent = "";
                     var emp_id = "";
                     var new_responsible = "";
-
                     var actions = [];
-
-
-
                     $.each($(".action_plan_id"), function (index, indexEntry) {
 
                         var id = this.id.split("-");
                         var i = id[1];
-
-
-
                         action_plan_id = i;
                         phase_id = $("#phase_list-" + i).val();
                         action_plan_name = $("#action_plan_name-" + i).val();
@@ -3846,10 +3038,6 @@ $(document).ready(function () {
                         plan_end_date = $("#plan_end_date-" + i).val();
                         actual_start_date = $("#actual_start_date-" + i).val();
                         actual_end_date = $("#actual_end_date-" + i).val();
-                        /*
-                        plan_value=$("#plan_value-"+i).val();
-                        actual_cost=$("#actual_cost-"+i).val();
-                        earned_value=$("#earned_value-"+i).val();*/
                         completed_percent = $("#completed_percent-" + i).val();
                         if ($("#responsible-" + i).val() == "") {
                             emp_id = "";
@@ -3857,12 +3045,6 @@ $(document).ready(function () {
                             emp_id = $("#responsible-" + i).val().split("-");
                             emp_id = emp_id[0];
                         }
-                        //					  emp_id=$("#actionplan_emp_id").val();
-                        //					  responsible=$("#new_responsible").val();
-
-
-
-
                         actions.push({
                             action_plan_id: "" + action_plan_id + "",
                             phase_id: "" + phase_id + "",
@@ -3871,19 +3053,11 @@ $(document).ready(function () {
                             plan_end_date: "" + plan_end_date + "",
                             actual_start_date: "" + actual_start_date + "",
                             actual_end_date: "" + actual_end_date + "",
-                            //plan_value: ""+plan_value+"",
-                            //actual_cost: ""+actual_cost+"",
-                            //earned_value: ""+earned_value+"",
                             completed_percent: "" + completed_percent + "",
-                            // responsible: ""+responsible+"",
                             emp_id: emp_id
 
                         });
                     });
-                    //// console.log("actions");
-                    //// console.log(actions);
-
-
                     $.ajax({
                         url: restfulURL + "/" + serviceName + "/public/appraisal/action_plan/" + $("#item_result_id").val(),
                         type: "PATCH",
@@ -3897,14 +3071,10 @@ $(document).ready(function () {
                                 getActionPlanFn($("#item_result_id").val());
                                 $("#action_actionplan").val("add");
                                 if (data['data']['error'].length == 0) {
-
                                     callFlashSlideInModal($(".lt-update-successfully").val(), "#information3");
-
                                 } else {
                                     callFlashSlideInModal(listErrorActionPlanFn(data['data']['error']), "#information3", "error");
-                                    //callFlashSlideInModal(validationFn(data),"#information3","error");
                                 }
-
                             }
                         }
                     });
@@ -3913,31 +3083,12 @@ $(document).ready(function () {
                 }
 
                 if ($("#action_actionplan").val() == "add") {
-
-					/*
-					actions: [
-						 {
-									'phase_id' => 'required|integer',
-									'action_plan_name' => 'required|max:255',
-									'plan_start_date' => 'date|date_format:Y-m-d',
-									'plan_end_date' => 'date|date_format:Y-m-d',
-									'actual_start_date' => 'date|date_format:Y-m-d',
-									'actual_end_date' => 'date|date_format:Y-m-d',
-									'plan_value' => 'numeric',
-									'actual_cost' => 'numeric',
-									'earned_value' => 'numeric',
-									'completed_percent' => 'numeric',
-									'emp_id' => 'integer'
-						 },....
-					]
-					*/
                     var phase_id = "";
                     var action_plan_name = "";
                     var plan_start_date = "";
                     var plan_end_date = "";
                     var actual_start_date = "";
                     var actual_end_date = "";
-
                     var plan_value = "";
                     var actual_cost = "";
                     var earned_value = "";
@@ -3946,33 +3097,16 @@ $(document).ready(function () {
                     var new_responsible = "";
 
                     var actions = [];
-
-                    //				  $.each($(".new_action_plan_id"),function(index,indexEntry){
-                    //					 // console.log(this.id);
-                    //					// // console.log($(this).attr("id"));
-                    //					 // console.log($(this));
-                    //					 var id=this.id.split("-");
-                    //					 id=id[1];
-                    //
-                    //				  });
-
                     $.each($(".new_action_plan_id"), function (index, indexEntry) {
 
                         var id = this.id.split("-");
                         var i = id[1];
-
-
-
                         phase_id = $("#new_phase_list-" + i).val();
                         action_plan_name = $("#new_action_plan_name-" + i).val();
                         plan_start_date = $("#new_plan_start_date-" + i).val();
                         plan_end_date = $("#new_plan_end_date-" + i).val();
                         actual_start_date = $("#new_actual_start_date-" + i).val();
                         actual_end_date = $("#new_actual_end_date-" + i).val();
-						/*
-						plan_value=$("#new_plan_value-"+i).val();
-						actual_cost=$("#new_actual_cost-"+i).val();
-						earned_value=$("#new_earned_value-"+i).val();*/
                         completed_percent = $("#new_completed_percent-" + i).val();
                         if ($("#new_responsible-" + i).val() == "") {
                             emp_id = "";
@@ -3980,12 +3114,6 @@ $(document).ready(function () {
                             emp_id = $("#new_responsible-" + i).val().split("-");
                             emp_id = emp_id[0];
                         }
-                        //						  emp_id=$("#actionplan_emp_id").val();
-                        //						  responsible=$("#new_responsible").val();
-
-
-
-
                         actions.push({
 
                             phase_id: "" + phase_id + "",
@@ -3994,18 +3122,11 @@ $(document).ready(function () {
                             plan_end_date: "" + plan_end_date + "",
                             actual_start_date: "" + actual_start_date + "",
                             actual_end_date: "" + actual_end_date + "",
-                            //plan_value: ""+plan_value+"",
-                            // actual_cost: ""+actual_cost+"",
-                            //earned_value: ""+earned_value+"",
                             completed_percent: "" + completed_percent + "",
-                            // responsible: ""+responsible+"",
                             emp_id: emp_id
 
                         });
                     });
-                    //// console.log("actions");
-                    //// console.log(actions);
-
                     $.ajax({
                         url: restfulURL + "/" + serviceName + "/public/appraisal/action_plan/" + $("#item_result_id").val(),
                         type: "POST",
@@ -4013,7 +3134,6 @@ $(document).ready(function () {
                         data: { "actions": actions },
                         headers: { Authorization: "Bearer " + tokenID.token },
                         success: function (data, status) {
-                            // checkMaintenanceFn(data);
                             if (data['data']['error'] == undefined) {
                                 callFlashSlideInModal(data['data'], "#information2", "error");
                             } else {
@@ -4024,8 +3144,6 @@ $(document).ready(function () {
 
                                 } else {
                                     callFlashSlideInModal(listErrorActionPlanFn(data['data']['error']), "#information3", "error");
-                                    //callFlashSlideInModal(validationFn(data),"#information3","error");
-
                                 }
 
                             }
@@ -4039,43 +3157,17 @@ $(document).ready(function () {
             //end btn saved.
             //delete action plan start...
             $(document).on("click", "#btnDelActionPlan", function () {
-
-                //			 	if($("#action_actionplan").val()=="add"){
-                //
-                //			 		 $.each($("input.new_action_plan_id:checked"),function(index,indexEntry){
-                //
-                //			 			$(this).parent().parent().parent().remove();
-                //
-                //			 		 });
-                //
-                //			 		if($("input.new_action_plan_id").get().length==0){
-                //						$("#btnCancelActionPlan").click();
-                //					}
-                //			 	}
-
                 var action_plan_id = [];
                 var actions = [];
-
                 $.each($("input.new_action_plan_id:checked"), function (index, indexEntry) {
-
                     $(this).parent().parent().parent().remove();
-
                 });
 
                 $.each($(".action_plan_id:checked"), function (index2, indexEntry3) {
-
                     actions.push({
-
                         action_plan_id: "" + $(this).val() + "",
-
                     });
                 });
-
-
-
-
-                // // console.log(actions);
-
 
                 $.ajax({
                     url: restfulURL + "/" + serviceName + "/public/appraisal/action_plan/" + $("#item_result_id").val(),
@@ -4084,34 +3176,20 @@ $(document).ready(function () {
                     data: { "actions": actions },
                     headers: { Authorization: "Bearer " + tokenID.token },
                     success: function (data, status) {
-
-
-
                         if (data['data']['error'].length == 0) {
                             getActionPlanFn($("#item_result_id").val());
                             callFlashSlideInModal($(".lt-delete-successfully").val(), "#information3");
-
                         } else {
                             callFlashSlideInModal(listErrorActionPlanFn(data['data']['error']), "#information3", "error");
-                            //callFlashSlideInModal(validationFn(data),"#information3","error");
-
                         }
 
                     }
                 });
-
-
-
-
-
             });
             //delete action plan end...
 
             //Cancel action plan start...
             $("#btnCancelActionPlan").click(function () {
-
-
-
                 //getActionPlanFn(3);
                 $(".actionplan_label").show();
                 $(".actionplan_input").hide();
@@ -4121,17 +3199,8 @@ $(document).ready(function () {
                 $("#action_new_actionplan").val("");
                 getActionPlanFn($("#item_result_id").val());
             });
-            //Cancel action plan end...
-            //Action Plan Action Area...
-
-
-
-
-
         }
     }
-
-
 
     //Phase Start...
     $(document).on("click", "#btnSavePhase", function () {
@@ -4144,8 +3213,6 @@ $(document).ready(function () {
         }
 
         if ($("#phase_action").val() == "add") {
-
-
             $.ajax({
                 url: restfulURL + "/" + serviceName + "/public/phase",
                 type: "POST",
@@ -4153,24 +3220,16 @@ $(document).ready(function () {
                 data: { "phase_name": $("#phaseName").val(), "is_active": is_active, "item_result_id": $("#phase_item_result_id").val() },
                 headers: { Authorization: "Bearer " + tokenID.token },
                 success: function (data, status) {
-
                     if (data['status'] == 200) {
                         getPhaseFn($("#phase_item_result_id").val());
                         clearFormPhaseFn();
-
                     } else if (data['status'] == "400") {
-
-                        //$("#informConfirm").html("<font color='red'>"+data['data']+"</font>");
                         callFlashSlide("<font color=''>" + data['data']['phase_name'] + "</font>", "error");
-
                     }
-
-
                 }
             });
 
         } else {
-
             $.ajax({
                 url: restfulURL + "/" + serviceName + "/public/phase/" + $("#pahse_id_edit").val(),
                 type: "PATCH",
@@ -4178,18 +3237,13 @@ $(document).ready(function () {
                 data: { "phase_name": $("#phaseName").val(), "is_active": is_active, "item_result_id": $("#phase_item_result_id").val() },
                 headers: { Authorization: "Bearer " + tokenID.token },
                 success: function (data, status) {
-
                     if (data['status'] == 200) {
                         getPhaseFn($("#phase_item_result_id").val());
                         clearFormPhaseFn();
                     } else if (data['status'] == "400") {
-
-                        //$("#informConfirm").html("<font color='red'>"+data['data']+"</font>");
                         callFlashSlide("<font color=''>" + data['data']['phase_name'] + "</font>", "error");
 
                     }
-
-
                 }
             });
 
@@ -4205,12 +3259,7 @@ $(document).ready(function () {
 
     //Reason Start..
     $(document).on("click", "#btnSaveReason", function () {
-
-
-
         if ($("#reason_action").val() == "add") {
-
-
             $.ajax({
                 url: restfulURL + "/" + serviceName + "/public/appraisal/reason/" + $("#reason_item_result_id").val(),
                 type: "POST",
@@ -4218,19 +3267,12 @@ $(document).ready(function () {
                 data: { "reason_name": $("#reason_name").val() },
                 headers: { Authorization: "Bearer " + tokenID.token },
                 success: function (data, status) {
-
                     if (data['status'] == 200) {
                         getReasonFn($("#reason_item_result_id").val());
                         clearFormReasonFn();
-
                     } else if (data['status'] == "400") {
-
-                        //$("#informConfirm").html("<font color='red'>"+data['data']+"</font>");
                         callFlashSlide("<font color=''>" + data['data']['reason_name'] + "</font>", "error");
-
                     }
-
-
                 }
             });
 
@@ -4243,23 +3285,15 @@ $(document).ready(function () {
                 data: { "reason_name": $("#reason_name").val(), "reason_id": $("#reason_id_edit").val() },
                 headers: { Authorization: "Bearer " + tokenID.token },
                 success: function (data, status) {
-
                     if (data['status'] == 200) {
                         getReasonFn($("#reason_item_result_id").val());
                         clearFormReasonFn();
                     } else if (data['status'] == "400") {
-
-                        //$("#informConfirm").html("<font color='red'>"+data['data']+"</font>");
                         callFlashSlide("<font color=''>" + data['data']['phase_name'] + "</font>", "error");
-
                     }
-
-
                 }
             });
-
         }
-
     });
 
     $(document).on("click", "#btnCancelReason", function () {
@@ -4268,8 +3302,6 @@ $(document).ready(function () {
     });
     //Reason End...
 
-
-
     //binding tooltip start
     $('[data-toggle="tooltip"]').css({ "cursor": "pointer" });
     $('[data-toggle="tooltip"]').tooltip({
@@ -4277,18 +3309,14 @@ $(document).ready(function () {
     });
     //binding tooltip end
 
-
     //gantt chart print start
     $("#btnPrint").click(function () {
-
-
         var url = "../../see-kpi-portlet/print/gantt-chart.jsp?restfulURL=" + restfulURL + "&item_result_id=" + $("#gantt_item_result_id").val() + "&gantt_unit=" + $("#gantt_unit").val() + "&gantt_amount=" + $("#gantt_amount").val() + "";
         url += "&entityType=" + $("#embed_appraisalType").val();
         url += "&period=" + $(".ganntChartTitleEmpArea .ganttAppraisalPeriodDescTxt").text();
         url += "&organization=" + $(".ganntChartTitleEmpArea  .ganttOrgTxt").text();
         url += "&appraisalItem=" + $(".ganntChartTitleEmpArea  .ganttAppraisalItemTxt").text();
         url += "&employee=" + $(".ganntChartTitleEmpArea  .ganttEmpTxt").text();
-
         window.open(url, '_blank');
     });
 
@@ -4297,7 +3325,6 @@ $(document).ready(function () {
     //gantt chart  view daily or monthly start.
     listViewDailyOrMonthlyFn();
     $("#selectGanntChartType").change(function () {
-
         if ($(this).val() == "m") {
             $("#selectGanntChartViewDaily").hide();
             $("#selectGanntChartViewMonthly").show();
@@ -4321,8 +3348,6 @@ $(document).ready(function () {
     });
     //gantt chart  view daily or monthly end.
 
-
-
     //Button Click Stage History Start.
 
     $("#slideUpDownStageHistory").click(function () {
@@ -4331,8 +3356,6 @@ $(document).ready(function () {
     });
 
     //Button Click Stage History End.
-
-
 
     //####  FILE IMPORT  START ####
 
@@ -4362,9 +3385,7 @@ $(document).ready(function () {
         //// console.log(data);
         jQuery_1_1_3.each(files, function (key, value) {
             data.append(key, value);
-            //data.append("process_type",$("#embedParamSearchProcessType").val());
         });
-
 
         jQuery_1_1_3.ajax({
             url: restfulURL + "/" + serviceName + "/public/appraisal/upload_file/" + $("#attach_file_item_result_id").val(),
@@ -4385,7 +3406,6 @@ $(document).ready(function () {
                     $(".dropify-clear").click();
 
                 } else {
-
                     //callFlashSlideInModal("Can't Upload file .","#information3");
                 }
             },
@@ -4396,10 +3416,9 @@ $(document).ready(function () {
                 // STOP LOADING SPINNER
             }
         });
-
-
         return false;
     }
+
     //### FILE IMPORT END ###
     // download attach file start
     $("#btnDownloadAttachFile").click(function () {
