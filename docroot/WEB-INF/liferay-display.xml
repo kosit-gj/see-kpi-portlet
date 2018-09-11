@@ -56,6 +56,7 @@
 		<!-- //////////////////// Salary //////////////////// -->
 		<portlet id="import-salary-range"></portlet>
 		<portlet id="import-employee-salary"></portlet>
+		<portlet id="calculate-salary-structure"></portlet>
 		<!-- //////////////////////////////////////////////// -->
 		
 	</category>
