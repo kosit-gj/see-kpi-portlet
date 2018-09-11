@@ -669,3 +669,4 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 	
 <input type="hidden" name="id" id="id" value="">
 <input type="hidden" name="action" id="action" value="add">
+<%@ include file="/html/language-js-template/view.jsp" %>
