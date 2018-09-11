@@ -55,7 +55,7 @@
 <input class="lt-value-get-zero" type="hidden" value="<liferay-ui:message key="value-get-zero"/>"/>
 <input class="lt-view" type="hidden" value="<liferay-ui:message key="view"/>"/>
 <input class="lt-group" type="hidden" value="<liferay-ui:message key="group"/>"/>
-<input class="lt-no_raise_value" type="hidden" value="<liferay-ui:message key="no_raise_value"/>"/>
+<input class="lt-no-raise-value" type="hidden" value="<liferay-ui:message key="no-raise-value"/>"/>
 
 <!-- Appraisal (kpi result) -->
 <input class="lt-action-plan" type="hidden" value="<liferay-ui:message key="action-plan"/>"/>
