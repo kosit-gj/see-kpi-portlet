@@ -8,36 +8,20 @@ function SetSalaryRaise(){
 		 async: false,
 		 success: function(data) {
 			 if(data.raise_type == 3){
-				 $("#salary_raise_amount").hide();
+				 $("#form-group-salary_raise_amount label").html("Raise Step <span class='redFont'>*</span>");
+				 $("#salary_raise_amount").attr("placeholder", "Raise Step");
+				 
 				 $("#salary_raise_amount").parent().append("<p style='padding-top:5px;'><font size='2.5' color='red'> ( Use salary structure table ) </font></p>");
-				 $("#form-group-structure_id label").append("<span class='redFont'>*</span>");
+				 
 			 } else {
-				 $("#form-group-salary_raise_amount label").append("<span class='redFont'>*</span>");
-				 $("#structure_id").hide();
-				 $("#structure_id").val("0");
-				 $("#structure_id").parent().append("<p style='padding-top:5px;'><font size='2.5' color='red'> ( Only salary structure table type can be used ) </font></p>");
+				 $("#form-group-salary_raise_amount label").html("Salary Raise <span class='redFont'>*</span>");
+				 $("#salary_raise_amount").attr("placeholder", "Salary Raise");
+				 
+				 $("#form-group-structure_id").hide();
+				 $("#form-group-is_judgement").hide();
 			 }
 		 }
 	 });
-}
-
-var GetAmountType = function(){
-	var returnStr = "";
-	$.ajax({
-		 url: restfulURL+"/"+serviceName+"/public/system_config",
-		 type: "get",
-		 dataType: "json",
-		 headers: {Authorization:"Bearer "+tokenID.token},
-		 async: false,
-		 success: function(data) {
-			 if(data.raise_type == 3){
-				 returnStr = "text";
-			 } else {
-				 returnStr = "decimal";
-			 }
-		 }
-	 });
-	return returnStr;
 }
 
 
@@ -56,7 +40,7 @@ $(document).ready(function(){
  			           {"colunmsDisplayName":"Grade","width":"auto","id":"grade","colunmsType":"text"},
  			           {"colunmsDisplayName":"Begin Score","width":"auto","id":"begin_score","colunmsType":"text","colunmsDataType":"decimal"},
  			           {"colunmsDisplayName":"End Score","width":"auto","id":"end_score","colunmsType":"text","colunmsDataType":"decimal"},
- 			           {"colunmsDisplayName":"Salary Raise","width":"auto","id":"salary_raise_amount","colunmsType":"text","colunmsDataType":GetAmountType()},
+ 			           {"colunmsDisplayName":"Salary Raise","width":"auto","id":"salary_raise_amount","colunmsType":"text","colunmsDataType":"decimal"},
  			           {"colunmsDisplayName":"IsActive","width":"auto","id":"is_active","colunmsType":"checkbox"},
  			          ],
 
@@ -79,7 +63,7 @@ $(document).ready(function(){
 	     					},
 	     					{
 	         				"label":"Salary Raise","inputType":"text","placeholder":"Salary Raise",
-	         				"id":"salary_raise_amount","width":"200px","dataTypeInput":"number","default":"0.00"
+	         				"id":"salary_raise_amount","width":"200px","dataTypeInput":"number","required":true
 	         				},
 	         				{
 		    					"label": "Related Structures",
@@ -87,6 +71,10 @@ $(document).ready(function(){
 		    					"id": "structure_id",
 		    					"width": "200px",
 		    					"url": ""+restfulURL+"/"+serviceName+"/public/appraisal_grade/struc_list"
+		    				},
+		    				{
+		    					"label":"IsJudgement","inputType":"checkbox",
+		     					"id":"is_judgement","width":"200px"
 		    				},
 	     			        {
 	     					"label":"IsAtive","inputType":"checkbox","default":"checked",
