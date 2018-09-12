@@ -22,6 +22,8 @@
 		<portlet id="kpi-type"></portlet>
 		<portlet id="import-assignment"></portlet>
 		<portlet id="import-employee"></portlet>
+		<portlet id="import-employee-snapshot"></portlet>
+		<portlet id="import-customer"></portlet>
 		<portlet id="cds-result"></portlet>
 		<portlet id="appraisal-data"></portlet>
 		<portlet id="calculate-bonus-and-salary"></portlet>
@@ -47,5 +49,7 @@
 		<portlet id="report-summary-grade"></portlet>
 		<portlet id="assignment-log"></portlet>
 		<portlet id="dashboard-performance-comparison"></portlet>
+		<portlet id="questionnaire"></portlet>
 	</category>
+
 </display>
