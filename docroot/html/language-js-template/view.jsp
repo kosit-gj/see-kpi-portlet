@@ -114,4 +114,6 @@
 <input class="lt-import-cds-result-successfully" type="hidden" value="<liferay-ui:message key="import-cds-result-successfully"/>"/>
 
 
+<!-- Judgement -->
+<input class="lt-item_name" type="hidden" value="<liferay-ui:message key="item_name"/>"/>
 
