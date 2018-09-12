@@ -1230,7 +1230,7 @@ overflow-y: visible;
 				                
 				                <div id="maxValueAreaDeductScore" class="form-input-customs">
 				                
-				                		<input type="text" onchange="checkZero()" class="form-control input-sm numberOnly span12" placeholder="Max Value " id="maxValueDeductScore">
+				                		<input type="text" onchange="checkZero('maxValueDeductScore')" class="form-control input-sm numberOnly span12" placeholder="Max Value " id="maxValueDeductScore">
 				                	
 				                		
 				                </div>
@@ -1252,7 +1252,7 @@ overflow-y: visible;
 				                	Value Get Zero <span class='redFont'>*</span>
 				                </div>
 				                <div class="form-input-customs">
-				                	<input type="text" class="form-control input-sm numberOnly  span12" placeholder="Value Get Zero" id="ValueGetZero">
+				                	<input type="text" onchange="checkZero('ValueGetZero')" class="form-control input-sm numberOnly  span12" placeholder="Value Get Zero" id="ValueGetZero">
 				                </div>
 				                <br style="clear:both">
 			                </div>
@@ -1262,7 +1262,7 @@ overflow-y: visible;
 				                	No Raise Value  <span class='redFont'>*</span>
 				                </div>
 				                <div class="form-input-customs">
-				                	<input type="text" class="form-control input-sm numberOnly  span12" placeholder="Value does not raise salary" id="NoRaiseValue">
+				                	<input type="text" onchange="checkZero('NoRaiseValue')" class="form-control input-sm numberOnly  span12" placeholder="Value does not raise salary" id="NoRaiseValue">
 				                </div>
 				                <br style="clear:both">
 			                </div>

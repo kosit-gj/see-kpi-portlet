@@ -350,12 +350,21 @@ var findOneFn = function(id,form_url) {
 	});
 }
 
-var checkZero = function(){
-	if($("#maxValueDeductScore").val() == "0" && $("#maxValueDeductScore").val() !="") {
-		console.log('หากไม่ต้องให้หักคะแนนให้ใส่เป็นค่าว่าง');
-		callFlashSlide("หากไม่ต้องให้หักคะแนนให้ใส่เป็นค่าว่าง");
-	}
-}
+// check value zero ---> alert
+var checkZero = function(id){
+			if(id == 'maxValueDeductScore' && $("#maxValueDeductScore").val() == 0 && $("#maxValueDeductScore").val() !="") {
+				console.log('หากไม่ต้องให้หักคะแนนให้ใส่เป็นค่าว่าง');
+				callFlashSlide("หากไม่ต้องให้หักคะแนนให้ใส่เป็นค่าว่าง");
+			}
+			if(id == 'ValueGetZero' && $("#ValueGetZero").val() == 0 && $("#ValueGetZero").val() !="") {
+				console.log('หากไม่ต้องให้หักคะแนนเป็นศูนย์ให้ใส่เป็นค่าว่าง');
+				callFlashSlide("หากไม่ต้องให้หักคะแนนเป็นศูนย์ให้ใส่เป็นค่าว่าง");
+			}
+			if(id == 'NoRaiseValue' && $("#NoRaiseValue").val() == 0 && $("#NoRaiseValue").val() !="") {
+				console.log('หากหัวข้อประเมินนี้ไม่มีผลกับการปรับขึ้นเงินเดือน ให้ใส่เป็นค่าว่าง');
+				callFlashSlide("หากหัวข้อประเมินนี้ไม่มีผลกับการปรับขึ้นเงินเดือน ให้ใส่เป็นค่าว่าง");
+			}
+		};
 
 //SearchAdvance
 var searchAdvanceFn = function() {
