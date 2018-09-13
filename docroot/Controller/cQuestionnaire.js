@@ -1117,7 +1117,7 @@ var updateFn = function(){
 				$.each($(indexEntry2).children().children(".box-body").children('div').get(),function(index3,indexEntry3){
 					var question = {};
 					if($(indexEntry3).attr("question-id") != undefined && $(indexEntry3).attr("question-id") != null && $(indexEntry3).attr("question-id") != ""){
-						sub_section.question_id=$(indexEntry3).attr("question-id");
+						question.question_id=$(indexEntry3).attr("question-id");
 					}
 					question.answer_type_id = $(indexEntry3).find( '.dropDownAnswerTypeQuestion' ).val();
 	          		question.question_name = $(indexEntry3).find( '.inputQuestionName' ).val();
@@ -1238,7 +1238,7 @@ $(document).ready(function() {
 	$("#btnSubmit").click(function(){
 		// var form = $( "#formModalQuestionnaire" );
 		//globalDataTemp['form'] = $( "form#formModalQuestionnaire" ).validate(); 
-		$("#btnAddAnother").show();
+		
 		globalDataTemp['form'].validate();
 		if(globalDataTemp['form'].valid()){
 			if ($("#action").val() == "add"|| $("#action").val() == "") {
