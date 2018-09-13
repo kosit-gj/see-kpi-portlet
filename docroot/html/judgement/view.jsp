@@ -411,6 +411,9 @@ plid = layout.getPlid();
 
 }
 
+.aui input[type="checkbox"]{
+margin :0px;
+}
 .aui input, .aui textarea, .aui .uneditable-input {
    /* width: 47px;*/
 }
@@ -418,7 +421,7 @@ plid = layout.getPlid();
  .aui .table td {
     border-top: 1px solid #ddd;
     line-height: 16px;
-    padding: 5px;
+    padding: 8px;
     text-align: left;
     vertical-align: top;
 }
@@ -674,26 +677,19 @@ background-color:#71cccc !important;
                                     <!-- Select Start------------------------------------------------------------------------------------->
 
                                     <div class="form-group pull-left span3" style="margin-left: 5px">
-                                        <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="
-                                            year" />" class="input form-control input-sm span12" id="AppraisalYear"
-                                        name="AppraisalYear">
+                                        <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="year" />" class="input form-control input-sm span12" id="AppraisalYear" name="AppraisalYear">
                                         </select>
                                         <input type="hidden" value="" id="param_AppraisalYear">
                                     </div>
 
                                     <div class="form-group pull-left span3" style="margin-left: 5px">
-                                        <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="
-                                            period" />" class="input form-control input-sm span12" id="AppraisalPeriod"
-                                        name="AppraisalPeriod">
-                                        <option>All Appraisal Period</option>
+                                        <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="period" />" class="input form-control input-sm span12" id="AppraisalPeriod" name="AppraisalPeriod">
                                         </select>
                                         <input type="hidden" value="" id="param_AppraisalPeriod">
                                     </div>
 
                                     <div class="form-group pull-left span3" style="margin-left: 5px">
-                                        <select id="Judgement" name="Judgement" data-toggle="tooltip" title=""
-                                            data-original-title="<liferay-ui:message key=" judgement" />" class="input
-                                        form-control input-sm span12">
+                                        <select id="Judgement" name="Judgement-Status" data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="judgement-status" />" class="input form-control input-sm span12">
                                         </select>
                                         <input type="hidden" value="" id="param_Judgement">
                                     </div>
@@ -816,14 +812,14 @@ background-color:#71cccc !important;
                         <span aria-hidden="true">×</span><span class="sr-only"></span>
                     </button>
                     <h4 class="modal-title" id="modalTitleRole">
-                        <liferay-ui:message key="kpi-result" />
+                        <liferay-ui:message key="judgement" />
                     </h4>
                 </div>
                 <div class="modal-body">
 
                     <!-- -------------From Employee Start------------- -->
 
-                    <div class="row-fluid">
+                    <div class="row-fluid" id="modal-header">
                         <div class="span12">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
@@ -892,7 +888,7 @@ background-color:#71cccc !important;
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
                                     <div class='titlePanel'>
-                                        <liferay-ui:message key="kpi-result" />
+                                        &nbsp;&nbsp;
                                     </div>
                                 </div>
                                 <div class="ibox-content ibox-content-radius">
@@ -906,7 +902,7 @@ background-color:#71cccc !important;
                 </div> <!-- content end -->
                 <div class="modal-footer">
                     <div class='row-fluid'>
-                        <button class="btn btn-success" type="button" id="btnSubmit">
+                        <button class="btn btn-success" type="button" id="btn_submit">
                             <liferay-ui:message key="submit" /></button>
                         <input type='hidden' id='emp_result_id' name='emp_result_id' value=''>
                         <button data-dismiss="modal" class="btn btn-danger btnCancle" type="button">
