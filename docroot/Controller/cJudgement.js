@@ -15,6 +15,10 @@ $(document).ready(function () {
     $(".app_url_hidden").show();
 
     
+    $("#AppraisalYear").change(function () {   // FUNCTION CLICK 
+	   dropDrowPeriodListFn($("#AppraisalYear").val());
+    });
+  
     $("#btn_submit").click(function () {   // FUNCTION CLICK 
     	
     	if(!checkboxModalArr.length) {
@@ -26,6 +30,9 @@ $(document).ready(function () {
     });
     
     $("#btn_search_advance").click(function () {   // FUNCTION CLICK SEARCH
+    	$(".countPagination").val(10);
+        $("#rpp").remove();
+        
 	    getDataFn();   // get data 
 	    $(".search_result").show(); // show detail
     });
@@ -35,7 +42,6 @@ $(document).ready(function () {
     		callFlashSlide("Please choose Employees for Judgement.");
     		return false;
     	}
-    	
     	getJudgementFn();
     });
     
@@ -44,6 +50,8 @@ $(document).ready(function () {
     		callFlashSlide("Please choose Employees for Raise Salary.");
     		return false;
     	}
+    	// insertRaiseSalaryFn();
+    	alert("insertRaiseSalaryFn Function")
     });
 
 
@@ -200,6 +208,28 @@ var insertJudgementFn = function () {
     });
 }
 
+var insertRaiseSalaryFn = function () { 
+    $.ajax({
+        url: restfulURL + "/" + serviceName + "/public/judgement/assign_judgement",
+        type: "get",
+        dataType: "json",
+        data: {"emp_result_id":JSON.stringify(checkboxArr)},
+        async: false,
+        headers: { Authorization: "Bearer " + tokenID.token },
+        success: function (data) {
+         	if(data['status']==200 && data['errors'].length == 0){
+        		callFlashSlide("Raise Salary Successful.");
+            	$("#ModalAppraisal").modal('hide');
+            	getDataFn();   // get data
+        	}
+        },
+    	error: function(jqXHR, textStatus, errorThrown){
+    		console.log(textStatus+" / "+jqXHR+ " / " + errorThrown);
+			$("body").mLoading('hide'); //Loading
+		}
+    });
+}
+
 var getJudgementFn = function () { 
 	    $.ajax({
 	        url: restfulURL + "/" + serviceName + "/public/judgement/assign_judgement",
@@ -291,8 +321,8 @@ var genTemplateModalFn = function(data){
 	if(data['head'][0]!=undefined){
 		$("#txtEmpCode").text(data['head'][0]['emp_code']);
 		$("#txtEmpName").text(data['head'][0]['emp_name']);
-		$("#txtPosition").text(data['head'][0]['org_name']);
-		$("#txtOrgName").text(data['head'][0]['position']);
+		$("#txtPosition").text(data['head'][0]['position_name']);
+		$("#txtOrgName").text(data['head'][0]['org_name']);
 		$("#txtChiefEmpCode").text(data['head'][0]['chief_emp_code']);
 		$("#txtChiefEmpName").text(data['head'][0]['chief_emp_name']);
 		$("#txtPeriod").text(data['head'][0]['appraisal_period_desc']);

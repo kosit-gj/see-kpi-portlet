@@ -698,16 +698,16 @@ background-color:#71cccc !important;
                                     <!-- Button Start----------------------------------------------------------------------------------->
 
                                     <div class="form-group span12 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
-                                        <button type="button" class="btn btn-info input-sm" name="btn_search_advance"
+                                        <button type="button" class="btn btn-info input-sm" name="btn_search_advance" style="margin-top: 5px;"
                                             id="btn_search_advance">
                                             <i class="fa fa-search"></i>&nbsp;
                                             <liferay-ui:message key="search" />
                                         </button>
-                                        <button type="button" class="btn btn-warning input-sm" name="btn_judgement" id="btn_judgement">
+                                        <button type="button" class="btn btn-warning input-sm" name="btn_judgement" style="margin-top: 5px;" id="btn_judgement"> 
                                             <liferay-ui:message key="judgement" />
                                         </button>
                                         <button type="button" class="btn btn-success input-sm" name="btn_raise_salary"
-                                            id="btn_raise_salary">
+                                            id="btn_raise_salary" style="margin-top: 5px;">
                                             <liferay-ui:message key="raise-salary" />
                                         </button>
                                     </div>
