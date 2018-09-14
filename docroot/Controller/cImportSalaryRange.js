@@ -20,7 +20,7 @@ $(document).ready(function() {
 	getLevelFn();
 	 
 	$(".app_url_hidden").show();
-	
+
 	// Search Event //
 	$("#btn_search_advance").click(function(){
 		$("#param_year").val($("#year").val());
@@ -102,8 +102,8 @@ var getDetailFn = function(){
 						"<td class='test-right' id='year-"+indexEntry.appraisal_year+"__"+indexEntry.level_id+"__"+split(indexEntry.step)+"'>"+indexEntry.appraisal_year+"</td>" +
 						"<td id='level-"+indexEntry.appraisal_year+"__"+indexEntry.level_id+"__"+split(indexEntry.step)+"'>"+indexEntry.appraisal_level_name+"</td>" +
 						"<td class='test-right' id='step-"+indexEntry.appraisal_year+"__"+indexEntry.level_id+"__"+split(indexEntry.step)+"'>"+indexEntry.step+"</td>" +
-						"<td class='test-right' id='salary-"+indexEntry.appraisal_year+"__"+indexEntry.level_id+"__"+split(indexEntry.step)+"'>"+indexEntry.s_amount+"</td>" +
-						"<td class='test-right' id='minsalary-"+indexEntry.appraisal_year+"__"+indexEntry.level_id+"__"+split(indexEntry.step)+"'>"+indexEntry.minimum_wage_amount+"</td>" +
+						"<td class='test-right' id='salary-"+indexEntry.appraisal_year+"__"+indexEntry.level_id+"__"+split(indexEntry.step)+"'>"+addCommas(parseFloat(notNullFn(indexEntry.s_amount)).toFixed(2))+"</td>" +
+						"<td class='test-right' id='minsalary-"+indexEntry.appraisal_year+"__"+indexEntry.level_id+"__"+split(indexEntry.step)+"'>"+addCommas(parseFloat(notNullFn(indexEntry.minimum_wage_amount)).toFixed(2))+"</td>" +
 						"<td id='objectCenter' style='vertical-align:middle;'><i class='fa fa-cog font-gear popover-edit-del' data-html='true' data-toggle='popover' data-placement='top' data-trigger='focus' tabindex='"+index+"' " +
 								"data-content=\"" +
 									"<button class='btn btn-warning btn-xs edit' id=edit-"+indexEntry["appraisal_year"]+"__"+indexEntry["level_id"]+"__"+split(indexEntry["step"])+ " data-target=#ModalEdit data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>"+$('.lt-edit').val()+"</button>&nbsp;" +
