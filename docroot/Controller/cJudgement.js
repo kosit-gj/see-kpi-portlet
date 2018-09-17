@@ -50,8 +50,8 @@ $(document).ready(function () {
     		callFlashSlide("Please choose Employees for Raise Salary.");
     		return false;
     	}
-    	// insertRaiseSalaryFn();
-    	alert("insertRaiseSalaryFn Function")
+    	insertRaiseSalaryFn();
+//    	alert("insertRaiseSalaryFn Function")
     });
 
 
@@ -209,11 +209,20 @@ var insertJudgementFn = function () {
 }
 
 var insertRaiseSalaryFn = function () { 
+	var emp_id = [];
+		$.each(checkboxArr, function(index, indexEntry) { // push data total and judgement_status_id != 3
+			emp_id.push( indexEntry['id']);
+		});
+		
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/judgement/assign_judgement",
-        type: "get",
+        url: restfulURL + "/" + serviceName + "/public/salary_raise/judgement",
+        type: "post",
         dataType: "json",
-        data: {"emp_result_id":JSON.stringify(checkboxArr)},
+        data: {
+        	"period_id": $("#param_AppraisalPeriod").val(),
+        	"emp_id": emp_id
+        	},
+      
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
