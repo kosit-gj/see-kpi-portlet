@@ -267,9 +267,26 @@ var scriptFlatToggleFn = function (){
 	 $('.flat-toggle').off('click');
 	 $('.flat-toggle').on('click', function() {
 	        if ($(this).hasClass('on')) {
+	        	
+	        	if($(this).hasClass('isUrlReport')){ 
+	        		$(this).parent().prev().find( 'input' ).prop('disabled', true);
+	        	}
+	      
 	            $(this).removeClass('on');
 	            $(this).attr("data-value","0");
 	        } else {
+	        	
+	          	if($(this).hasClass('isUrlReport')){
+	        		$(this).parent().prev().find( 'input' ).prop('disabled', false);
+	        	}
+	          	
+	          	if($(this).hasClass('isNotApplicable')){ 
+	          		$.each($(this).parent().parent().parent().children('tr').get(),function(index,indexEntry){
+	          			$(indexEntry).find( '.isNotApplicable' ).removeClass('on');
+	          			$(indexEntry).find( '.isNotApplicable' ).attr("data-value","0");
+	          		});
+	        	}
+	          	
 	            $(this).addClass('on');
 	            $(this).attr("data-value","1");
 	        }
@@ -991,6 +1008,7 @@ var insertFn = function(options){
 	$.each($("#listSection").children('div').get(),function(index,indexEntry){
 		var group_section={};
 		group_section.section_name = $(indexEntry).find( '.inputSectionName' ).val();
+		group_section.url_report = $(indexEntry).find( '.inputUrlReport' ).val();
 		group_section.is_cust_search = ($(indexEntry).find( '.isCustomerSearch ' ).hasClass('on') == true ? "1":"0");
 		group_section.sub_section = [];
 		
@@ -1344,6 +1362,19 @@ $(document).ready(function() {
 		  html+="					<div class='isCustomerSearch flat-toggle'";
 		  html+="						id='' data-value='0'>";
 		  html+="						<span>Is Customer search</span>";
+		  html+="					</div>";
+		  html+="				</div>";
+		  html+="			</div>";
+		  
+		  html+="			<div class='form-inline'>";
+		  html+="				<div class='form-group float-label-control pull-left span6 section-name'>";
+		  html+="					<input  disabled type='text' class='form-control inputUrlReport' placeholder='URL Report' id=''";
+		  html+="						name='' data-toggle='tooltip' title='URL Report'required>";
+		  html+="				</div>";
+		  html+="				<div class='form-group float-label-control pull-left span2 section-parent '>";
+		  html+="					<div class='isUrlReport flat-toggle'";
+		  html+="						id='' data-value='0'>";
+		  html+="						<span>Is URL Report</span>";
 		  html+="					</div>";
 		  html+="				</div>";
 		  html+="				<div class='form-group pull-right m-b-n'>";
