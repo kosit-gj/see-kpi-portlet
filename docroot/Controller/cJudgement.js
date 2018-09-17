@@ -220,13 +220,12 @@ var insertRaiseSalaryFn = function () {
         dataType: "json",
         data: {
         	"period_id": $("#param_AppraisalPeriod").val(),
-        	"emp_id": emp_id
+        	"emp_result_id": emp_id
         	},
-      
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-         	if(data['status']==200 && data['errors'].length == 0){
+         	if(data['status']==200){
         		callFlashSlide("Raise Salary Successful.");
             	$("#ModalAppraisal").modal('hide');
             	getDataFn();   // get data

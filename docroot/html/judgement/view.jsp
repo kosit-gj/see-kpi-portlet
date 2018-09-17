@@ -19,9 +19,9 @@ String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getP
 layout = themeDisplay.getLayout();
 plid = layout.getPlid();
 %>
+
 <input type="hidden" id="param_link" name="param_link" value="<%=param_link%>">
 <input type="hidden" id="param_item_result_id" name="param_item_result_id" value="<%=param_item_result_id%>">
-
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
@@ -676,7 +676,7 @@ background-color:#71cccc !important;
 
                                     <!-- Select Start------------------------------------------------------------------------------------->
 
-                                    <div class="form-group pull-left span3" style="margin-left: 5px">
+                                    <div class="form-group pull-left span2" style="margin-left: 5px">
                                         <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="year" />" class="input form-control input-sm span12" id="AppraisalYear" name="AppraisalYear">
                                         </select>
                                         <input type="hidden" value="" id="param_AppraisalYear">
@@ -688,7 +688,7 @@ background-color:#71cccc !important;
                                         <input type="hidden" value="" id="param_AppraisalPeriod">
                                     </div>
 
-                                    <div class="form-group pull-left span3" style="margin-left: 5px">
+                                    <div class="form-group pull-left span2" style="margin-left: 5px">
                                         <select id="Judgement" name="Judgement-Status" data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="judgement-status" />" class="input form-control input-sm span12">
                                         </select>
                                         <input type="hidden" value="" id="param_Judgement">
@@ -697,24 +697,19 @@ background-color:#71cccc !important;
 
                                     <!-- Button Start----------------------------------------------------------------------------------->
 
-                                    <div class="form-group span12 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
-                                        <button type="button" class="btn btn-info input-sm" name="btn_search_advance" style="margin-top: 5px;"
-                                            id="btn_search_advance">
+                                    <div class="form-group span5 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
+                                        <button type="button" class="btn btn-info input-sm" name="btn_search_advance" id="btn_search_advance">
                                             <i class="fa fa-search"></i>&nbsp;
                                             <liferay-ui:message key="search" />
                                         </button>
-                                        <button type="button" class="btn btn-warning input-sm" name="btn_judgement" style="margin-top: 5px;" id="btn_judgement"> 
+                                        <button type="button" class="btn btn-warning input-sm" name="btn_judgement" id="btn_judgement"> 
                                             <liferay-ui:message key="judgement" />
                                         </button>
-                                        <button type="button" class="btn btn-success input-sm" name="btn_raise_salary"
-                                            id="btn_raise_salary" style="margin-top: 5px;">
+                                        <button type="button" class="btn btn-success input-sm" name="btn_raise_salary" id="btn_raise_salary">
                                             <liferay-ui:message key="raise-salary" />
                                         </button>
                                     </div>
-                                    <div class="form-group span3 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
-
-                                        <!-- Button End----------------------------------------------------------------------------------->
-                                    </div>
+									<!-- Button End----------------------------------------------------------------------------------->
                                 </div> <!-- ibox-content End-->
                             </div>
                         </div>
