@@ -269,7 +269,9 @@ var scriptFlatToggleFn = function (){
 	        if ($(this).hasClass('on')) {
 	        	
 	        	if($(this).hasClass('isUrlReport')){ 
-	        		$(this).parent().prev().find( 'input' ).prop('disabled', true);
+	        		$(this).parent().prev().find( 'input' ).prop('disabled', true);  
+	        		$(this).parent().prev().find( 'input' ).val("");
+	        		$(this).parent().prev().find( 'input' ).addClass('url_report_cursor');
 	        	}
 	      
 	            $(this).removeClass('on');
@@ -278,6 +280,7 @@ var scriptFlatToggleFn = function (){
 	        	
 	          	if($(this).hasClass('isUrlReport')){
 	        		$(this).parent().prev().find( 'input' ).prop('disabled', false);
+	        		$(this).parent().prev().find( 'input' ).removeClass('url_report_cursor');
 	        	}
 	          	
 	          	if($(this).hasClass('isNotApplicable')){ 
@@ -792,7 +795,7 @@ var listQuestionnaireFindOneFn = function(data) {
 		
 		  html+="<div class='row-fluid addSection' id='edit-headerSection-"+indexEmtry.section_id+"'>";
 		  html+="	<div class='box box-primary' >";
-		  html+="		<div class='box-header with-border'>";
+		  html+="		<div class='box-header with-border'>"; 
 		  html+="			<div class='form-inline'>";
 		  html+="				<div class='form-group float-label-control pull-left span6 section-name'>";
 		  html+="					<input type='text' class='form-control inputSectionName' placeholder='Section Name' id=''";
@@ -802,6 +805,17 @@ var listQuestionnaireFindOneFn = function(data) {
 		  html+="					<div class='isCustomerSearch flat-toggle "+(indexEmtry.is_cust_search == 0 ? "" :"on")+"'";
 		  html+="						id='' data-value='"+indexEmtry.is_cust_search+"'>";
 		  html+="						<span>Is Customer search</span>";
+		  html+="					</div>";
+		  html+="				</div>";
+		  html+="			<div class='form-inline'>";
+		  html+="				<div class='form-group float-label-control pull-left span6 section-name'>";
+		  html+="					<input  "+(indexEmtry.is_url_report == 0 ? "disabled" :"")+" type='text' class='form-control inputUrlReport "+(indexEmtry.is_url_report == 0 ? "url_report_cursor" :"")+"' placeholder='URL Report' id=''";
+		  html+="						name='' data-toggle='tooltip' title='URL Report'required value='"+(indexEmtry.url_report == undefined ? "" :indexEmtry.url_report)+"'>";
+		  html+="				</div>";
+		  html+="				<div class='form-group float-label-control pull-left span2 section-parent '>";
+		  html+="					<div class='isUrlReport flat-toggle "+(indexEmtry.is_url_report == 0 ? "" :"on")+"'";
+		  html+="						id='' data-value='"+indexEmtry.is_url_report+"'>";
+		  html+="						<span>Is URL Report</span>";
 		  html+="					</div>";
 		  html+="				</div>";
 		  html+="				<div class='form-group pull-right m-b-n'>";
@@ -818,6 +832,8 @@ var listQuestionnaireFindOneFn = function(data) {
 		  html+="						<i class='fa fa-trash'></i>";
 		  html+="					</button>";
 		  html+="				</div>";
+		  html+="			</div>";
+
 		  html+="			</div>";
 		  html+="		</div>";
 		  	// /.box-header   generateNumberIDFn
@@ -1009,6 +1025,7 @@ var insertFn = function(options){
 		var group_section={};
 		group_section.section_name = $(indexEntry).find( '.inputSectionName' ).val();
 		group_section.url_report = $(indexEntry).find( '.inputUrlReport' ).val();
+		group_section.is_url_report = ($(indexEntry).find( '.isUrlReport ' ).hasClass('on') == true ? "1":"0");
 		group_section.is_cust_search = ($(indexEntry).find( '.isCustomerSearch ' ).hasClass('on') == true ? "1":"0");
 		group_section.sub_section = [];
 		
@@ -1115,6 +1132,8 @@ var updateFn = function(){
 		var group_section={};
 
 		if(indexEntry.id.split("-")[0] == "edit"){group_section.section_id=indexEntry.id.split("-")[2];}
+		group_section.url_report = $(indexEntry).find( '.inputUrlReport' ).val();
+		group_section.is_url_report = ($(indexEntry).find( '.isUrlReport ' ).hasClass('on') == true ? "1":"0");
 		group_section.section_name = $(indexEntry).find( '.inputSectionName' ).val();
 		group_section.is_cust_search = ($(indexEntry).find( '.isCustomerSearch ' ).hasClass('on') == true ? "1":"0");
 		group_section.sub_section = [];
@@ -1368,7 +1387,7 @@ $(document).ready(function() {
 		  
 		  html+="			<div class='form-inline'>";
 		  html+="				<div class='form-group float-label-control pull-left span6 section-name'>";
-		  html+="					<input  disabled type='text' class='form-control inputUrlReport' placeholder='URL Report' id=''";
+		  html+="					<input  disabled type='text' class='form-control inputUrlReport url_report_cursor' placeholder='URL Report' id=''";
 		  html+="						name='' data-toggle='tooltip' title='URL Report'required>";
 		  html+="				</div>";
 		  html+="				<div class='form-group float-label-control pull-left span2 section-parent '>";

@@ -35,6 +35,10 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 
 
 <style>
+.aui .url_report_cursor{
+cursor: not-allowed !important;;
+}
+
 .aui .breadcrumbs2 {
 	background: rgba(0, 0, 0, 0)
 		linear-gradient(to bottom, #fff 0px, #f6f6f6 47%, #ededed 100%) repeat
