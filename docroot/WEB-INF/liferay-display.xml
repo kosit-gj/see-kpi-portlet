@@ -50,6 +50,8 @@
 		<portlet id="assignment-log"></portlet>
 		<portlet id="dashboard-performance-comparison"></portlet>
 		<portlet id="questionnaire"></portlet>
+		<portlet id="questionnaire-data"></portlet>
 	</category>
+
 
 </display>
