@@ -809,12 +809,12 @@ var listQuestionnaireFindOneFn = function(data) {
 		  html+="				</div>";
 		  html+="			<div class='form-inline'>";
 		  html+="				<div class='form-group float-label-control pull-left span6 section-name'>";
-		  html+="					<input  "+(indexEmtry.is_url_report == 0 ? "disabled" :"")+" type='text' class='form-control inputUrlReport "+(indexEmtry.is_url_report == 0 ? "url_report_cursor" :"")+"' placeholder='URL Report' id=''";
-		  html+="						name='' data-toggle='tooltip' title='URL Report'required value='"+(indexEmtry.url_report == undefined ? "" :indexEmtry.url_report)+"'>";
+		  html+="					<input  "+(indexEmtry.is_show_report == 0 ? "disabled" :"")+" type='text' class='form-control inputUrlReport "+(indexEmtry.is_show_report == 0 ? "url_report_cursor" :"")+"' placeholder='URL Report' id=''";
+		  html+="						name='' data-toggle='tooltip' title='URL Report'required value='"+(indexEmtry.report_url == undefined ? "" :indexEmtry.report_url)+"'>";
 		  html+="				</div>";
 		  html+="				<div class='form-group float-label-control pull-left span2 section-parent '>";
-		  html+="					<div class='isUrlReport flat-toggle "+(indexEmtry.is_url_report == 0 ? "" :"on")+"'";
-		  html+="						id='' data-value='"+indexEmtry.is_url_report+"'>";
+		  html+="					<div class='isUrlReport flat-toggle "+(indexEmtry.is_show_report == 0 ? "" :"on")+"'";
+		  html+="						id='' data-value='"+indexEmtry.is_show_report+"'>";
 		  html+="						<span>Is URL Report</span>";
 		  html+="					</div>";
 		  html+="				</div>";
@@ -1024,8 +1024,8 @@ var insertFn = function(options){
 	$.each($("#listSection").children('div').get(),function(index,indexEntry){
 		var group_section={};
 		group_section.section_name = $(indexEntry).find( '.inputSectionName' ).val();
-		group_section.url_report = $(indexEntry).find( '.inputUrlReport' ).val();
-		group_section.is_url_report = ($(indexEntry).find( '.isUrlReport ' ).hasClass('on') == true ? "1":"0");
+		group_section.report_url = $(indexEntry).find( '.inputUrlReport' ).val();
+		group_section.is_show_report = ($(indexEntry).find( '.isUrlReport ' ).hasClass('on') == true ? "1":"0");
 		group_section.is_cust_search = ($(indexEntry).find( '.isCustomerSearch ' ).hasClass('on') == true ? "1":"0");
 		group_section.sub_section = [];
 		
@@ -1132,8 +1132,8 @@ var updateFn = function(){
 		var group_section={};
 
 		if(indexEntry.id.split("-")[0] == "edit"){group_section.section_id=indexEntry.id.split("-")[2];}
-		group_section.url_report = $(indexEntry).find( '.inputUrlReport' ).val();
-		group_section.is_url_report = ($(indexEntry).find( '.isUrlReport ' ).hasClass('on') == true ? "1":"0");
+		group_section.report_url = $(indexEntry).find( '.inputUrlReport' ).val();
+		group_section.is_show_report = ($(indexEntry).find( '.isUrlReport ' ).hasClass('on') == true ? "1":"0");
 		group_section.section_name = $(indexEntry).find( '.inputSectionName' ).val();
 		group_section.is_cust_search = ($(indexEntry).find( '.isCustomerSearch ' ).hasClass('on') == true ? "1":"0");
 		group_section.sub_section = [];
