@@ -589,6 +589,9 @@
 .aui #modalQuestionaireData .table-bordered th{
 background-color: #666666 !important;color: #ffffff;
 }
+.aui #modalQuestionaireData .panalList .table-bordered th{
+background-color: #6666b3 !important;color: #ffffff;
+}/*#6666b3*/
 .aui .ui-accordion .ui-accordion-header {
 
     display: block;
@@ -633,6 +636,38 @@ background-color: #666666 !important;color: #ffffff;
 .aui #slideStageHistory{
 	display: none;
 }
+-webkit-overflow-scrolling: touch ; 
+/* overflow-scrolling:touch !important; */
+overflow:auto;
+}
+
+.aui .panalScore .closePanelScore {
+
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+    float: right;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 22px;
+    color: red;
+    opacity: .9;
+    filter: alpha(opacity=20);
+
+}
+
+
+.aui .panalScore.closePanelScore:hover {
+
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: .7;
+    filter: alpha(opacity=40);
+
+}
 </style>
 
 <div class='row-fluid '>
@@ -667,8 +702,9 @@ background-color: #666666 !important;color: #ffffff;
 				          <input id="param_datepicker_end" class="span12" type="text" placeholder="End Date">
 				        </div>
 				        <div class="span3">
-				          <label for="param_tse">ชื่อ/รหัส TSE</label>
-				          <input id="param_tse" class="span12" type="text" placeholder="Name/Code TSE">
+				          <label for="param_empsnapshot">ชื่อ/รหัส TSE</label>
+				          <input id="param_empsnapshot" class="span12" type="text" placeholder="Name/Code TSE">
+				          <input class="form-control input-sm" id="param_empsnapshot_id" name="param_empsnapshot_id" value="" type="hidden">
 				        </div>
 					</div>
 					<div class="row-fluid">
@@ -751,8 +787,10 @@ background-color: #666666 !important;color: #ffffff;
 					<input id="modal_datepicker_start" class="span12" type="text" placeholder="Start Date">
 			  </div>
 			  <div class="span3">
-				<label for="modal_tse_name">ชื่อ/รหัส TSE</label>
-					<input id="modal_tse_name" class="span12" type="text" placeholder="Name/Code TSE">
+				<label for="modal_empsnapshot_name">ชื่อ/รหัส TSE</label>
+					<input id="modal_empsnapshot_name" class="span12" type="text" placeholder="Name/Code TSE">
+					<input class=" input-sm" id="modal_empsnapshot_id" name="modal_empsnapshot_id" value="" type="hidden">
+					<input class=" input-sm" id="modal_position_code" name="modal_position_code" value="" type="hidden">
 			  </div>
 			  <div class="span3">
 				<label for="modal_agent_name">ชื่อผู้แทนจำหน่าย</label>
@@ -1229,6 +1267,13 @@ background-color: #666666 !important;color: #ffffff;
             </div>
 <!-- 						********************************************************* -->
 		   			<div id="listQuestionaireData"></div>
+		   			<form id="linkParam" method="POST" target="_blank" action="">
+						<input type="hidden" id="linkParam_questionaire_type_id" name="questionaire_type_id" value="">
+						<input type="hidden" id="linkParam_questionaire_id" name="questionaire_id" value="">
+						<input type="hidden" id="linkParam_emp_name" name="emp_name" value="">
+						<input type="hidden" id="linkParam_data_header_id" name="data_header_id" value="">
+						<input type="hidden" id="linkParam_questionaire_date" name="questionaire_date" value="">
+					</form>
 	            </div>
 				<div class="modal-footer">
 <!-- 					<button class="btn btn-success" type="button" id="btnSubmitUpdate">Save</button> -->
@@ -1267,34 +1312,23 @@ background-color: #666666 !important;color: #ffffff;
 				
 				<div class="row-fluid" style="text-align: left; margin-top: 15px;" >
 					<a href="#" id="slideUpDownStageHistory" style="">Work Flow Stage History</a>
+					<div class="table-responsive" style="overflow:auto;">
 					<div id="slideStageHistory" style="max-width: none; ">
-						<table class="table" >
-							<thead >
-								<tr style="white-space: nowrap;">
-									<th style="width: 15%">Created By</th>
-									<th style="width: 15%">Created Datetime</th>
-									<th style="width: 15%">From Stage</th>
-									<th style="width: 15%">To Stage</th>
-									<th style="width: 35%">Remark</th>
-								</tr>
-							</thead>
-							<tbody id="listDataStageHistory">
-								<tr>
-									<td>t6000668</td>
-									<td>2018-07-17 14:35:08</td>
-									<td>New</td>
-									<td>SaveDraft</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>t6000668</td>
-									<td>2018-07-17 14:49:17</td>
-									<td>SaveDraft</td>
-									<td>F.ReviewKPI</td>
-									<td></td>
-								</tr>
-							</tbody>
-						</table>
+							<table class="table" >
+								<thead >
+									<tr style="white-space: nowrap;">
+										<th style="width: 15%">Created By</th>
+										<th style="width: 15%">Created Datetime</th>
+										<th style="width: 15%">From Stage</th>
+										<th style="width: 15%">To Stage</th>
+										<th style="width: 35%">Remark</th>
+									</tr>
+								</thead>
+								<tbody id="listDataStageHistory">
+									
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 
@@ -1357,5 +1391,5 @@ background-color: #666666 !important;color: #ffffff;
 	<!-- Modal Confirm End -->
 	<!-- Modal Confirm End -->
 </div>
- 
- 
+
+
