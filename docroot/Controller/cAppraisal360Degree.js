@@ -379,21 +379,21 @@ var assignTemplateCommentFn = function () {  // CommentFn
     htmlTemplateComment += "<div class='row-fluid'>";
     htmlTemplateComment += "<div class='span6'>";
     htmlTemplateComment += "<label >" + $(".lt-assessor-strength-opinion").val() + "</label>";
-    htmlTemplateComment += "<textarea  onchange='onchangeTextareaCommentFn(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px; padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='assessor__strength_opinion' class='form-control'></textarea>";
+    htmlTemplateComment += "<textarea  onchange='onchangeTextareaCommentFn(\"emp_weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px; padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='assessor_strength_opinion' class='form-control'></textarea>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "<div class='span6'>";
     htmlTemplateComment += "<label >" + $(".lt-emp-strength-opinion").val() + "</label>";
-    htmlTemplateComment += "<textarea  onchange='onchangeTextareaCommentFn(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='emp__strength_opinion' class='form-control'></textarea>";
+    htmlTemplateComment += "<textarea  onchange='onchangeTextareaCommentFn(\"emp_weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='emp_strength_opinion' class='form-control'></textarea>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "<div class='row-fluid'>";
     htmlTemplateComment += "<div class='span6'>";
     htmlTemplateComment += "<label>" + $(".lt-assessor-weakness-opinion").val() + "</label>";
-    htmlTemplateComment += "<textarea  onchange='onchangeTextareaCommentFn(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='assessor__weakness_opinion' class='form-control'></textarea>";
+    htmlTemplateComment += "<textarea  onchange='onchangeTextareaCommentFn(\"emp_weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='assessor_weakness_opinion' class='form-control'></textarea>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "<div class='span6'>";
     htmlTemplateComment += "<label>" + $(".lt-emp-weakness-opinion").val() + "</label>";
-    htmlTemplateComment += "<textarea onchange='onchangeTextareaCommentFn(\"emp__weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='emp__weakness_opinion' class='form-control'></textarea>";
+    htmlTemplateComment += "<textarea onchange='onchangeTextareaCommentFn(\"emp_weakness_opinion\")' style='border-radius: 10px; font-size:13px; width: 95%; margin-bottom: 15px;padding-bottom: 5px;padding-right: 5px; padding-top: 5px; height: 110px;' id='emp_weakness_opinion' class='form-control'></textarea>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "</div>";
     htmlTemplateComment += "</div>";
@@ -426,16 +426,16 @@ var onchangGroupCommentFn = function () {  // CommentFn
 var onchangDetailCommentFn = function () {  // CommentFn 
     var id = $("#span-emp").val();
     // disabled text
-    $("#assessor__strength_opinion").prop("disabled", true);
-    $("#assessor__weakness_opinion").prop("disabled", true);
-    $("#emp__strength_opinion").prop("disabled", true);
-    $("#emp__weakness_opinion").prop("disabled", true);
+    $("#assessor_strength_opinion").prop("disabled", true);
+    $("#assessor_weakness_opinion").prop("disabled", true);
+    $("#emp_strength_opinion").prop("disabled", true);
+    $("#emp_weakness_opinion").prop("disabled", true);
 
     // clear value
-    $('#assessor__strength_opinion').val('');
-    $('#assessor__weakness_opinion').val('');
-    $('#emp__strength_opinion').val('');
-    $('#emp__weakness_opinion').val('');
+    $('#assessor_strength_opinion').val('');
+    $('#assessor_weakness_opinion').val('');
+    $('#emp_strength_opinion').val('');
+    $('#emp_weakness_opinion').val('');
 
     $.each(dataComment['detail'], function (index, indexEntry) {
         if (indexEntry['emp_id'] == id) {
@@ -453,28 +453,28 @@ var onchangDetailCommentFn = function () {  // CommentFn
             $("#comment_emp_result_id").val(indexEntry['emp_result_id']);
 
             // get value to text
-            $('#assessor__strength_opinion').val(indexEntry['assessor__strength_opinion']);
-            $('#assessor__weakness_opinion').val(indexEntry['assessor__weakness_opinion']);
-            $('#emp__strength_opinion').val(indexEntry['emp__strength_opinion']);
-            $('#emp__weakness_opinion').val(indexEntry['emp__weakness_opinion']);
+            $('#assessor_strength_opinion').val(indexEntry['assessor_strength_opinion']);
+            $('#assessor_weakness_opinion').val(indexEntry['assessor_weakness_opinion']);
+            $('#emp_strength_opinion').val(indexEntry['emp_strength_opinion']);
+            $('#emp_weakness_opinion').val(indexEntry['emp_weakness_opinion']);
 
             //disable text
             switch (dataComment['user']) {
                 case "admin":
-                    $("#assessor__strength_opinion").prop("disabled", true);
-                    $("#assessor__weakness_opinion").prop("disabled", true);
-                    $("#emp__strength_opinion").prop("disabled", true);
-                    $("#emp__weakness_opinion").prop("disabled", true); break;
+                    $("#assessor_strength_opinion").prop("disabled", true);
+                    $("#assessor_weakness_opinion").prop("disabled", true);
+                    $("#emp_strength_opinion").prop("disabled", true);
+                    $("#emp_weakness_opinion").prop("disabled", true); break;
                 case "my":
-                    $("#assessor__strength_opinion").prop("disabled", true);
-                    $("#assessor__weakness_opinion").prop("disabled", true);
-                    $("#emp__strength_opinion").prop("disabled", false);
-                    $("#emp__weakness_opinion").prop("disabled", false); break;
+                    $("#assessor_strength_opinion").prop("disabled", true);
+                    $("#assessor_weakness_opinion").prop("disabled", true);
+                    $("#emp_strength_opinion").prop("disabled", false);
+                    $("#emp_weakness_opinion").prop("disabled", false); break;
                 case "other":
-                    $("#assessor__strength_opinion").prop("disabled", false);
-                    $("#assessor__weakness_opinion").prop("disabled", false);
-                    $("#emp__strength_opinion").prop("disabled", true);
-                    $("#emp__weakness_opinion").prop("disabled", true); break;
+                    $("#assessor_strength_opinion").prop("disabled", false);
+                    $("#assessor_weakness_opinion").prop("disabled", false);
+                    $("#emp_strength_opinion").prop("disabled", true);
+                    $("#emp_weakness_opinion").prop("disabled", true); break;
             }
         }
     });
@@ -487,7 +487,7 @@ var onchangeTextareaCommentFn = function (id) {    // CommentFn
             return data.opinion_id != $("#comment_opinion_id").val();
         });
 
-    if ($("#emp__strength_opinion").val() == '' || $("#emp__weakness_opinion").val() == '')
+    if ($("#emp_strength_opinion").val() == '' || $("#emp_weakness_opinion").val() == '')
         $("#comment_comment").val('no');
 
     dataComment['detail'].push({
@@ -497,10 +497,10 @@ var onchangeTextareaCommentFn = function (id) {    // CommentFn
         "emp_name": $("#comment_emp_name").val(),
         "assessor_group_id": $("#comment_assessor_group_id").val(),
         "comment": $("#comment_comment").val(),
-        "assessor__strength_opinion": $("#assessor__strength_opinion").val(),
-        "assessor__weakness_opinion": $("#assessor__weakness_opinion").val(),
-        "emp__strength_opinion": $("#emp__strength_opinion").val(),
-        "emp__weakness_opinion": $("#emp__weakness_opinion").val()
+        "assessor_strength_opinion": $("#assessor_strength_opinion").val(),
+        "assessor_weakness_opinion": $("#assessor_weakness_opinion").val(),
+        "emp_strength_opinion": $("#emp_strength_opinion").val(),
+        "emp_weakness_opinion": $("#emp_weakness_opinion").val()
     });
 
     dataChangeComment = $.grep(dataChangeComment, function (data, index) {
@@ -511,10 +511,10 @@ var onchangeTextareaCommentFn = function (id) {    // CommentFn
         "emp_id": $("#comment_emp_id").val(),
         "emp_result_id": $("#comment_emp_result_id").val(),
         "assessor_group_id": $("#comment_assessor_group_id").val(),
-        "assessor__strength_opinion": $("#assessor__strength_opinion").val(),
-        "assessor__weakness_opinion": $("#assessor__weakness_opinion").val(),
-        "emp__strength_opinion": $("#emp__strength_opinion").val(),
-        "emp__weakness_opinion": $("#emp__weakness_opinion").val()
+        "assessor_strength_opinion": $("#assessor_strength_opinion").val(),
+        "assessor_weakness_opinion": $("#assessor_weakness_opinion").val(),
+        "emp_strength_opinion": $("#emp_strength_opinion").val(),
+        "emp_weakness_opinion": $("#emp_weakness_opinion").val()
     });
 
 }
