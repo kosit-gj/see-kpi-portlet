@@ -9,6 +9,14 @@ var password = "";
 var files;
 var emailLinkAppraisal = false;
 
+var isObjectOrArray = function(item){
+	if(jQuery.type(item) == "object" || jQuery.type(item) == "array"){
+		return true;
+	} else {
+		return false;
+	}
+}
+
 var dataQuality = [];
 var getQualityFn = function () {   // QualityFn 
 
@@ -130,9 +138,9 @@ var onchangDetailQualityFn = function (item_result_id, structureId) {  // Qualit
     dataQuality = $.each(dataQuality, function (index1, groupEntry1) {
         if (groupEntry1['structure_id'] == structureId) {
             $.each(groupEntry1, function (index2, indexEntry2) {
-                if (indexEntry2['group_id'] != undefined && indexEntry2['group_id'] == $("#group-" + structureId).val())
+                if (isObjectOrArray(indexEntry2) && indexEntry2['group_id'] == $("#group-" + structureId).val())
                     $.each(indexEntry2, function (index3, indexEntry3) {
-                        if (indexEntry3['emp_id'] != undefined && indexEntry3['emp_id'] == $("#emp-" + structureId).val()) {
+                        if (isObjectOrArray(indexEntry3) && indexEntry3['emp_id'] == $("#emp-" + structureId).val()) {
                             $.each(indexEntry3['items'], function (index, indexEntry) {
                                 if (indexEntry['competency_result_id'] == competency_result_id && indexEntry['item_result_id'] == item_result_id) {
                                     indexEntry['target_value'] = target_value;
@@ -179,9 +187,9 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
 
         if (groupEntry1['structure_id'] == structureId) {
             $.each(groupEntry1, function (index2, indexEntry2) {
-                if (indexEntry2['group_id'] != undefined && indexEntry2['group_id'] == $("#group-" + structureId).val())
+                if (isObjectOrArray(indexEntry2) && indexEntry2['group_id'] == $("#group-" + structureId).val())
                     $.each(indexEntry2, function (index3, indexEntry3) {
-                        if (indexEntry3['emp_id'] != undefined && indexEntry3['emp_id'] == $("#emp-" + structureId).val()) {
+                        if (isObjectOrArray(indexEntry3) && indexEntry3['emp_id'] == $("#emp-" + structureId).val()) {
                             total_weigh_score = indexEntry3['total_weigh_score'];
                             $.each(indexEntry3['items'], function (index, indexEntry) {
                                 if (!(indexEntry['formula_desc'] == null || indexEntry['formula_desc'] == undefined || indexEntry['formula_desc'] == "" || indexEntry['formula_desc'].length == 0)) {
@@ -259,7 +267,7 @@ var onchangGroupQualityFn = function (structureId) { // QualityFn
     $.each(dataQuality, function (index1, groupEntry1) {
         if (groupEntry1['structure_id'] == structureId) {
             $.each(groupEntry1, function (index2, indexEntry2) {
-                if (indexEntry2['group_id'] != undefined && indexEntry2['group_id'] == $("#group-" + structureId).val()) {
+                if (isObjectOrArray(indexEntry2) && indexEntry2['group_id'] == $("#group-" + structureId).val()) {
                     // has weight;
                     no_weight = indexEntry2['no_weight'];
                     result_type = indexEntry2['result_type'];
@@ -267,7 +275,8 @@ var onchangGroupQualityFn = function (structureId) { // QualityFn
                     total_weight = indexEntry2['total_weight'];
 
                     $.each(indexEntry2, function (index3, indexEntry3) {
-                        if (indexEntry3['emp_id'] != undefined) {
+                    	var objectType = jQuery.type(indexEntry3);
+                        if (objectType == "object" || objectType == "array") {
                             htmlEmp += "<option value='" + indexEntry3['emp_id'] + "'>" + indexEntry3['emp_name'] + "</option>";
                         }
                     });
@@ -2923,6 +2932,10 @@ $(document).ready(function () {
                 sessionStorage.setItem('period_id', $('#emp_period_id-' + id).val());
                 sessionStorage.setItem('emp_code', $('#emp_emp_code-' + id).val());
                 sessionStorage.setItem('appraisal_item_id', $('#emp_appraisal_item_id-' + id).val());
+                
+                // Set Defult Competency Select --> onchangDetailQualityFn() //
+                $( ".competencyScore" ).change();
+                
                 $(window).scrollTop(0);
                 $(".modal-body").scrollTop(0);
 

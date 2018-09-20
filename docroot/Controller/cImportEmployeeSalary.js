@@ -115,6 +115,7 @@ var clearFn = function() {
 	$("#from_org_id").val("");
 	$("#from_org_name").val("");
 	$("#from_Level_id").val("");
+	$("#from_step").val("");
 	$("#from_position_id").val("");
 	$("#from_position_name").val("");
 	$("#from_sup_emp_code").val("");
@@ -177,6 +178,7 @@ var findOneFn = function(id) {
 				$("#from_emp_code").val(data['emp_code']);
 				$("#from_emp_name").val(data['emp_name']);
 				$("#from_Level_id").val(data['level_id']);
+				$("#from_step").val(data['step']);
 				$("#from_emp_wsd").val(data['working_start_date']);
 				$("#from_emp_ped").val(data['probation_end_date']);
 				$("#from_emp_aed").val(data['acting_end_date']);
@@ -426,6 +428,7 @@ var updateFn = function () {
 			"acting_end_date":$("#from_emp_aed").val(),
 			"org_id":$("#from_org_id").val(),
 			"level_id":$("#from_Level_id").val(),
+			"step":$("#from_step").val(),
 			"position_id":$("#from_position_id").val(),
 			"chief_emp_code":$("#from_sup_emp_code").val(),
 			"email":$("#from_emp_email").val(),

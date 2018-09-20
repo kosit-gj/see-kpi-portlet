@@ -707,6 +707,12 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 								</div>
 							</div>
 							<div class="form-group p-xxs">
+								<label class="control-label"><liferay-ui:message key="step"/>:</label>
+								<div class="controls">
+									<input type="number" class="form-control input-sm span12" placeholder="<liferay-ui:message key="step"/>" id="from_step" step="0.5">
+								</div>
+							</div>
+							<div class="form-group p-xxs">
 								<label class="control-label"><liferay-ui:message key="working-start-date"/>:</label>
 								<div class="controls">
 									<input type="text" class="form-control input-sm span12" placeholder="" id="from_emp_wsd">
