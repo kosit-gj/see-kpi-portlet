@@ -1096,7 +1096,7 @@ var dropDrowIndividualOrgLevelFn = function (id) {
 
 var dropDrowAppraisalEmpLevelFn = function (id) {
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/emp_level",
+        url: restfulURL + "/" + serviceName + "/public/appraisal360/parameter/emp_level",
         type: "get",
         dataType: "json",
         async: false,
