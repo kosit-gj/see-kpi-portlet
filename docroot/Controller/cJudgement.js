@@ -324,6 +324,7 @@ var genTemplateModalFn = function(data){
 	checkboxModalArr = [];
 	dataTempModal = data;
 	HTML = "";
+	var TOTAL_WEIGH = "";
 	
 		// get text to modal
 	if(data['head'][0]!=undefined){
@@ -334,7 +335,10 @@ var genTemplateModalFn = function(data){
 		$("#txtChiefEmpCode").text(data['head'][0]['chief_emp_code']);
 		$("#txtChiefEmpName").text(data['head'][0]['chief_emp_name']);
 		$("#txtPeriod").text(data['head'][0]['appraisal_period_desc']);
-		$("#txtGrandTotalWeigh").text(data['head'][0]['grand_total']);
+		
+		TOTAL_WEIGH = data['head'][0]['grand_total'].split("(");
+		TOTAL_WEIGH = TOTAL_WEIGH[0]+"<br>("+TOTAL_WEIGH[1]; 
+		$("#txtGrandTotalWeigh").html(TOTAL_WEIGH);
 		$("#modal-header").show();
 	}
 	else{

@@ -865,7 +865,7 @@ background-color:#71cccc !important;
                                                 <label class="span12 p-t-xxsg text-center ">
                                                     <liferay-ui:message key="grand-total" /></label>
                                                 <label class="span12 p-t-xxsg text-center txtGrandTotalWeigh" id="txtGrandTotalWeigh"
-                                                    style="font-size: 300%;"></label>
+                                                    style="font-size: 128%;"></label>
                                             </div>
                                         </div>
                                     </div>
