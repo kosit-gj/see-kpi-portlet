@@ -378,6 +378,21 @@ plid = layout.getPlid();
 									</div>
 
                                  </div> 
+                                 <div  class="row-fluid">
+                                 	<div class="span5 object-right" >
+										<label class='text-label'> Show Grand Total &nbsp;:</label>
+									</div>
+									<div class="span5">
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 20px;">
+											<input type="radio" name="optionsShowGrandTotal" id="optionsShowGrandTotalOn" value="1">
+											  Yes
+										</label>
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+											<input type="radio" name="optionsShowGrandTotal" id="optionsShowGrandTotalOff" value="0" checked='checked'>
+											  No 
+										</label>
+									</div>
+                                 </div>
                                  <div class="row-fluid">
 							
 									<div class="span5 object-right" >

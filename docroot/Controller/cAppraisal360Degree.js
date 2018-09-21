@@ -157,7 +157,7 @@ var onchangDetailQualityFn = function (item_result_id, structureId) {  // Qualit
     });
 
     dataChangeQuality = $.grep(dataChangeQuality, function (data, index) {
-        console.log((data.competency_result_id != competency_result_id) || (data.item_result_id != item_result_id))
+//        console.log((data.competency_result_id != competency_result_id) || (data.item_result_id != item_result_id))
         return ((data.competency_result_id != competency_result_id) || (data.item_result_id != item_result_id));
     });
 
@@ -315,10 +315,11 @@ var getCommentFn = function () {    // CommentFn
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            console.log("get data successful !");
-            if (data['data'] == 'admin-empty') return true;
-            else if (data['data'] == 'my-empty') return true;
-            else {
+            if(data['data'] == 'admin-empty'){
+            	// Do not thing //
+            } else if(data['data'] == 'my-empty'){ 
+            	// Do not thing //
+            } else {
                 dataComment = data;
                 assignTemplateCommentFn();
             }
@@ -434,21 +435,36 @@ var onchangGroupCommentFn = function () {  // CommentFn
 
 var onchangDetailCommentFn = function () {  // CommentFn 
     var id = $("#span-emp").val();
-    // disabled text
-    $("#assessor_strength_opinion").prop("disabled", true);
-    $("#assessor_weakness_opinion").prop("disabled", true);
-    $("#emp_strength_opinion").prop("disabled", true);
-    $("#emp_weakness_opinion").prop("disabled", true);
+    // clare and disabled text box //
+    $("#assessor_strength_opinion").val('').prop("disabled", true);
+    $("#assessor_weakness_opinion").val('').prop("disabled", true);
+    $("#emp_strength_opinion").val('').prop("disabled", true);
+    $("#emp_weakness_opinion").val('').prop("disabled", true);
+    
+    // toggle text box by user //
+    switch (dataComment['user']) {
+        case "admin":
+            $("#assessor_strength_opinion").prop("disabled", true);
+            $("#assessor_weakness_opinion").prop("disabled", true);
+            $("#emp_strength_opinion").prop("disabled", true);
+            $("#emp_weakness_opinion").prop("disabled", true); break;
+        case "my":
+            $("#assessor_strength_opinion").prop("disabled", true);
+            $("#assessor_weakness_opinion").prop("disabled", true);
+            $("#emp_strength_opinion").prop("disabled", false);
+            $("#emp_weakness_opinion").prop("disabled", false); break;
+        case "other":
+            $("#assessor_strength_opinion").prop("disabled", false);
+            $("#assessor_weakness_opinion").prop("disabled", false);
+            $("#emp_strength_opinion").prop("disabled", true);
+            $("#emp_weakness_opinion").prop("disabled", true); break;
+    }
 
-    // clear value
-    $('#assessor_strength_opinion').val('');
-    $('#assessor_weakness_opinion').val('');
-    $('#emp_strength_opinion').val('');
-    $('#emp_weakness_opinion').val('');
-
+    
+    // Get comment append to text box //
     $.each(dataComment['detail'], function (index, indexEntry) {
         if (indexEntry['emp_id'] == id) {
-
+        	
             // set parameter hidden
             $("#comment_opinion_id").val(indexEntry['opinion_id']);
             if (indexEntry['assessor_group_id'] == null)
@@ -466,28 +482,10 @@ var onchangDetailCommentFn = function () {  // CommentFn
             $('#assessor_weakness_opinion').val(indexEntry['assessor_weakness_opinion']);
             $('#emp_strength_opinion').val(indexEntry['emp_strength_opinion']);
             $('#emp_weakness_opinion').val(indexEntry['emp_weakness_opinion']);
-
-            //disable text
-            switch (dataComment['user']) {
-                case "admin":
-                    $("#assessor_strength_opinion").prop("disabled", true);
-                    $("#assessor_weakness_opinion").prop("disabled", true);
-                    $("#emp_strength_opinion").prop("disabled", true);
-                    $("#emp_weakness_opinion").prop("disabled", true); break;
-                case "my":
-                    $("#assessor_strength_opinion").prop("disabled", true);
-                    $("#assessor_weakness_opinion").prop("disabled", true);
-                    $("#emp_strength_opinion").prop("disabled", false);
-                    $("#emp_weakness_opinion").prop("disabled", false); break;
-                case "other":
-                    $("#assessor_strength_opinion").prop("disabled", false);
-                    $("#assessor_weakness_opinion").prop("disabled", false);
-                    $("#emp_strength_opinion").prop("disabled", true);
-                    $("#emp_weakness_opinion").prop("disabled", true); break;
-            }
         }
     });
 }
+
 
 var dataChangeComment = [];
 var onchangeTextareaCommentFn = function (id) {    // CommentFn 
@@ -496,15 +494,16 @@ var onchangeTextareaCommentFn = function (id) {    // CommentFn
             return data.opinion_id != $("#comment_opinion_id").val();
         });
 
-    if ($("#emp_strength_opinion").val() == '' || $("#emp_weakness_opinion").val() == '')
-        $("#comment_comment").val('no');
+    if ($("#emp_strength_opinion").val() == '' || $("#emp_weakness_opinion").val() == ''){
+    	$("#comment_comment").val('no');
+    }
 
     dataComment['detail'].push({
         "opinion_id": $("#comment_opinion_id").val(),
-        "emp_id": $("#comment_emp_id").val(),
-        "emp_result_id": $("#comment_emp_result_id").val(),
+        "emp_id": ($("#comment_emp_id").val().length == 0) ? cMain_emp_id : $("#comment_emp_id").val(),
+        "emp_result_id": ($("#comment_emp_result_id").val().length == 0) ? $("#emp_result_id").val() : $("#comment_emp_result_id").val(),
         "emp_name": $("#comment_emp_name").val(),
-        "assessor_group_id": $("#comment_assessor_group_id").val(),
+        "assessor_group_id": ($("#comment_assessor_group_id").val().length == 0) ? $("#group_id").val() : $("#comment_assessor_group_id").val(),
         "comment": $("#comment_comment").val(),
         "assessor_strength_opinion": $("#assessor_strength_opinion").val(),
         "assessor_weakness_opinion": $("#assessor_weakness_opinion").val(),
@@ -517,9 +516,9 @@ var onchangeTextareaCommentFn = function (id) {    // CommentFn
     });
     dataChangeComment.push({
         "opinion_id": $("#comment_opinion_id").val(),
-        "emp_id": $("#comment_emp_id").val(),
-        "emp_result_id": $("#comment_emp_result_id").val(),
-        "assessor_group_id": $("#comment_assessor_group_id").val(),
+        "emp_id": ($("#comment_emp_id").val().length == 0) ? cMain_emp_id : $("#comment_emp_id").val(),
+        "emp_result_id": ($("#comment_emp_result_id").val().length == 0) ? $("#emp_result_id").val() : $("#comment_emp_result_id").val(),
+        "assessor_group_id": ($("#comment_assessor_group_id").val().length == 0) ? $("#group_id").val() : $("#comment_assessor_group_id").val(),
         "assessor_strength_opinion": $("#assessor_strength_opinion").val(),
         "assessor_weakness_opinion": $("#assessor_weakness_opinion").val(),
         "emp_strength_opinion": $("#emp_strength_opinion").val(),
@@ -1499,6 +1498,7 @@ var listAppraisalDetailFn = function (data) {
         htmlStage += "</tr>";
 
     });
+
     getCommentFn();  // CommentFn 
     $("#listDataStageHistory").html(htmlStage);
     $("#slideUpDownStageHistory").show();
