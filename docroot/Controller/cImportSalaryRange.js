@@ -40,11 +40,11 @@ var getYearFn = function() {
 		headers: {Authorization: "Bearer "+tokenID.token },
 		success: function(result) {
 			if(result.status == 200){
-				var htmlYear = "";
+				var htmlYear = "<option value=''>All Year</option>";
 				$.each(result.data, function(index, indexEntry) {
 					htmlYear += "<option value='"+indexEntry.appraisal_year+"'>"+indexEntry.appraisal_year+"</option>";
 				});
-				$("#year").append(htmlYear);
+				$("#year").html(htmlYear);
 				$("body").mLoading('hide');
 			}
 		},
@@ -65,11 +65,11 @@ var getLevelFn = function() {
 		headers: { Authorization: "Bearer "+tokenID.token },
 		success: function(result) {
 			if(result.status == 200){
-				var htmlLevel = "";
+				var htmlLevel = "<option value=''>All Level</option>";
 				$.each(result.data, function(index, indexEntry) { 
 					htmlLevel += "<option value='"+indexEntry.level_id+"'>"+indexEntry.appraisal_level_name+"</option>";
 				});
-				$("#level").append(htmlLevel);
+				$("#level").html(htmlLevel);
 				$("body").mLoading('hide');
 			}
 		},
@@ -156,6 +156,8 @@ var getDetailFn = function(){
 								    	 if(data['status']==200){			  	 									   
 									    	 clearFn();
 									    	 $("#confrimModal").modal('hide');
+									    	 getYearFn();
+									    	 getLevelFn();
 									    	 getDetailFn();
 									     }else if (data['status'] == "400"){
 									    	 callFlashSlide(""+data['data']+"");
@@ -241,6 +243,8 @@ function uploadFiles(event){
 				callFlashSlide("Import Salary Range Successfully");
 				$("body").mLoading('hide');
 				$('#ModalImport').modal('hide');
+				getYearFn();
+				getLevelFn();
 				getDetailFn();
 			}else{
 				validateFileFn(data['errors']);
@@ -353,6 +357,8 @@ function uploadFiles(event){
 					clearFn();
 					$('#ModalEdit').modal('hide');
 					callFlashSlide("Update Successfully.");
+					getYearFn();
+					getLevelFn();
 					getDetailFn();
 				}else if (data['status'] == "400") {
 					

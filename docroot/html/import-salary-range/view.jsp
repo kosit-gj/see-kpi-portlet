@@ -376,7 +376,6 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 							<select name="year" id="year"
 								class="input form-control input-sm span12" data-toggle="tooltip"
 								style="cursor: pointer;" data-original-title="<liferay-ui:message key="year"/>">
-								<option value="">All Year</option>
 							</select> <input type='hidden' value="" id="param_year">
 						</div>
 
@@ -384,7 +383,6 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 							<select name="level" id="level"
 								class="input form-control input-sm span12" data-toggle="tooltip"
 								style="cursor: pointer;" data-original-title="<liferay-ui:message key="level"/>">
-								<option value="">All Level</option>
 							</select> <input type='hidden' value="" id="param_level">
 						</div>
 
