@@ -63,9 +63,14 @@
 	margin-bottom: 0px:
 }
 
-.popover {
-	width: 150px;
+.aui .popover {
+	width: 80px;
 }
+
+.aui .popover-content {
+    padding: 5px;
+}
+
 
 .aui .pagination {
 	margin: 5px 0;
@@ -589,7 +594,7 @@
 .aui #modalQuestionaireData .table-bordered th{
 background-color: #666666 !important;color: #ffffff;
 }
-.aui #modalQuestionaireData .panalList .table-bordered th{
+.aui #modalQuestionaireData .panalRetailList .table-bordered th{
 background-color: #6666b3 !important;color: #ffffff;
 }/*#6666b3*/
 .aui .ui-accordion .ui-accordion-header {
@@ -602,9 +607,11 @@ background-color: #6666b3 !important;color: #ffffff;
     font-size: 100%;
 
 }
-.aui .accordion-modal h3 {
+.aui .accordion-modal h3,
+.aui #listData h3 {
 	font-weight: normal;
-    line-height: 25px;
+    line-height: 25px !important;
+    font-weight: bold;
 
 }
 .aui  .ui-state-active {
@@ -641,7 +648,17 @@ background-color: #6666b3 !important;color: #ffffff;
 overflow:auto;
 }
 
-.aui .panalScore .closePanelScore {
+
+
+.aui .closePanelScore:hover {
+
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: .7;
+
+}
+.aui .closePanelScore {
 
     padding: 0;
     cursor: pointer;
@@ -654,19 +671,22 @@ overflow:auto;
     line-height: 22px;
     color: red;
     opacity: .9;
-    filter: alpha(opacity=20);
 
 }
+.aui .list-data-table .table-bordered th{
+	background-color: #666666 !important;
+	color: #ffffff;
+	vertical-align: top;
+	text-align: center;
+}
 
+.aui .list-data-table .table-bordered td{
+	vertical-align: top;
+	text-align: center;
+}
 
-.aui .panalScore.closePanelScore:hover {
-
-    color: red;
-    text-decoration: none;
-    cursor: pointer;
-    opacity: .7;
-    filter: alpha(opacity=40);
-
+.aui .list-data-table .table-bordered td .btn-gear{
+	width: 100%;
 }
 </style>
 
@@ -690,21 +710,21 @@ overflow:auto;
 				<div class="ibox-content breadcrumbs2 advance-search" style="border-color: rgb(83, 120, 253);">
 					<div class="row-fluid">
 						<div class="span3">
-				          <label for="param_questionaire_id">แบบสอบถาม</label>
-				          <select id="param_questionaire_id" class="span12" name="param_questionaire_id"></select>
+				          <label for="search_questionaire_id">แบบสอบถาม</label>
+				          <select id="search_questionaire_id" class="span12" name="search_questionaire_id"></select>
 				        </div>
 						<div class="span3">
-				          <label for="param_datepicker_start">วันที่เริ่มต้น</label>
-				          <input id="param_datepicker_start" class="span12" type="text" placeholder="Start Date">
+				          <label for="search_datepicker_start">วันที่เริ่มต้น</label>
+				          <input id="search_datepicker_start" class="span12" type="text" placeholder="Start Date">
 				        </div>
 				        <div class="span3">
-				          <label for="param_datepicker_end">วันที่สิ้นสุด</label>
-				          <input id="param_datepicker_end" class="span12" type="text" placeholder="End Date">
+				          <label for="search_datepicker_end">วันที่สิ้นสุด</label>
+				          <input id="search_datepicker_end" class="span12" type="text" placeholder="End Date">
 				        </div>
 				        <div class="span3">
-				          <label for="param_empsnapshot">ชื่อ/รหัส TSE</label>
-				          <input id="param_empsnapshot" class="span12" type="text" placeholder="Name/Code TSE">
-				          <input class="form-control input-sm" id="param_empsnapshot_id" name="param_empsnapshot_id" value="" type="hidden">
+				          <label for="search_empsnapshot">ชื่อ/รหัส TSE</label>
+				          <input id="search_empsnapshot" class="span12" type="text" placeholder="Name/Code TSE">
+				          <input class="form-control input-sm" id="search_empsnapshot_id" name="search_empsnapshot_id" value="" type="hidden">
 				        </div>
 					</div>
 					<div class="row-fluid">
@@ -721,59 +741,27 @@ overflow:auto;
 		</div>
 	</div>
 	
-	<div class="row-fluid search_result" style="display: none;">
+	<div class="row-fluid" style="display: none;" id="QuestionnaireData_list_content">
 	    <div class="span12">
 	        <div class="ibox-title">
 	            <div class='titlePanel'>ข้อมูลการประเมินผลการทำงานของพนักงานขาย (TSE)</div>
 	        </div>
 	        <div class="ibox-content">
-	            <div class="row-fluid">
-	                <div class="span6 pagianation_area">
-	                    <div class="pagination_top pagination"></div>
-	                </div>
-	                <div class="span6 object-right paging-text">
-	                    <div class='pagingDropdown'>
-	                        <select id='countPaginationTop' class="form-control input-sm countPagination">
-	                            <option>10</option>
-	                            <option>20</option>
-	                            <option>50</option>
-	                            <option>100</option>
-	                        </select>
-	                    </div>
-	                    <div class='pagingText'>Results per page</div>
-	                </div>
-	            </div>
-	            <div id="generateQuestionaireData"></div>
-	            <div class="row-fluid">
-	                <div class="span6 pagianation_area">
-	                    <p class="pagination_bottom pagination"></p>
-	                </div>
-	
-	                <div class="span6 object-right paging-text">
-	                    <div class='pagingDropdown'>
-	                        <select id='countPaginationBottom' class="form-control input-sm countPagination">
-	                            <option>10</option>
-	                            <option>20</option>
-	                            <option>50</option>
-	                            <option>100</option>
-	                        </select>
-	                    </div>
-	                    <div class='pagingText'>Results per page</div>
-	                </div>
-	            </div>
+	            <div id="listData"></div>
 	        </div>
 	    </div>
 	</div>
 
 <input type="hidden" name="id" id="id" value="">
 <input type="hidden" name="action" id="action" value="add">
+<input type="hidden" name="action_modal" id="action_modal" value="">
 	<!-- Modal KPI Start Edit -->
 	  <div aria-hidden="true" role="dialog" tabindex="-1" id="modalQuestionaireData" class="modal inmodal large" style="display: none;">
 	    <div class="modal-dialog">
 	    <div class="modal-content bounceInRight">
 	            <div class="modal-header">
-	                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span></button>
-	                <h4 class="modal-title" id="modalTitleRole">Monitor ETL</h4>
+	                <button class="close btnCancle" type="button"><span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span></button>
+	                <h4 class="modal-title" id="modalTitleRole"> </h4>
 	            </div>
 	            <div class="modal-body">
 <!-- 	            ----- -->
@@ -806,471 +794,12 @@ overflow:auto;
 <!-- 	               ********************************************************* -->
 <div id="accordionListQuestionaireData" class="accordion-modal">
 </div>
-<div id="accordion" class="accordion-modal">
-          <h3>FF Preparation Process</h3>
-          <div>
-            <!-- Panel mapping data start-->
-            <div class="panel panel-info " id="panelMain" style="padding-bottom: 15px;">
-              <div class="panel-heading">1. ความพร้อมการเข้าเยี่ยม</div>
-              <div class="panel-body">
-                <br>
-                <p style="margin-bottom: 0px; ">1.1 จำนวนและรายการสินค้าบนรถ / ความพร้อมรถ</p>
-                <div class="row-fluid">
-                  <div class="span2">
-                    <!-- <label>คะแนนเฉลี่ย</label> -->
-                    <label class="radio inline" style="padding-bottom: 5px; margin-bottom: 10px;">
-                      <input style="margin-top: 2px;" type="radio" name="optionsRadios1" id="optionsRadios1" value="option1" checked> Yes
-                    </label>
-                    <label class="radio inline" style="padding-bottom: 5px; margin-bottom: 10px;">
-                      <input style="margin-top: 2px;" type="radio" name="optionsRadios1" id="optionsRadios2" value="option2"> No
-                    </label>
-                  </div>
-                  <div class="span10">
-                    <!-- <label>ความคิดเห็น</label> -->
-                    <textarea class="form-control" rows="2" id="comment" style="width:98%; margin-bottom: 0px;min-height:95px; resize: vertical;"></textarea>
-                  </div>
-                </div>
-                <hr style="margin-top: 15px; margin-bottom: 15px;">
-                <p style="margin-bottom: 0px; ">1.2 การฝากเงินตามจำนวน / วันที่กำหนด</p>
-                <div class="row-fluid">
-                  <div class="span2">
-                    <!-- <label>คะแนนเฉลี่ย</label> -->
-                    <label class="radio inline" style="padding-bottom: 5px; margin-bottom: 10px;">
-                      <input style="margin-top: 2px;" type="radio" name="optionsRadios2" id="optionsRadios1" value="option1" checked> Yes
-                    </label>
-                    <label class="radio inline" style="padding-bottom: 5px; margin-bottom: 10px;">
-                      <input style="margin-top: 2px;" type="radio" name="optionsRadios2" id="optionsRadios2" value="option2"> No
-                    </label>
-                  </div>
-                  <div class="span10">
-                    <!-- <label>ความคิดเห็น</label> -->
-                    <textarea class="form-control" rows="2" id="comment" style="width:98%; margin-bottom: 0px; min-height:95px; resize: vertical;"></textarea>
-                  </div>
-                </div>
-                <hr style="margin-top: 15px; margin-bottom: 15px;">
-                <p style="margin-bottom: 0px; ">1.3 อุปกรณ์ ช่วยขาย / ส่งเสริมการขาย / เอกสารการทำงาน </p>
-                <div class="row-fluid">
-                  <div class="span2">
-                    <!-- <label>คะแนนเฉลี่ย</label> -->
-                    <label class="radio inline" style="padding-bottom: 5px; margin-bottom: 10px;">
-                      <input style="margin-top: 2px;" type="radio" name="optionsRadios3" id="optionsRadios1" value="option1" checked> Yes
-                    </label>
-                    <label class="radio inline" style="padding-bottom: 5px; margin-bottom: 10px;">
-                      <input style="margin-top: 2px;" type="radio" name="optionsRadios3" id="optionsRadios2" value="option2"> No
-                    </label>
-                  </div>
-                  <div class="span10">
-                    <!-- <label>ความคิดเห็น</label> -->
-                    <textarea class="form-control" rows="2" id="comment" style="width:98%; margin-bottom: 0px;"></textarea>
-                  </div>
-                </div>
-                <hr style="margin-top: 15px; margin-bottom: 15px;">
-              </div>
-            </div>
-            <!-- Panel mapping data start-->
-
-            <div class="panel panel-info " id="panelMain" style="padding-bottom: 15px;">
-              <div class="panel-heading">2. การวางแผนในการทำงาน</div>
-              <div class="panel-body">
-                <!-- panel-body start-->
-                <br>
-                <p style="margin-bottom: 0px; ">2.1 วัตถุประสงค์ของการเข้าเยี่ยม VS Target ของ CC</p>
-                <div class="row-fluid">
-                  <div class="span2">
-                    <!-- <label>คะแนนเฉลี่ย</label> -->
-                    <label class="radio inline" style="padding-bottom: 5px; margin-bottom: 10px;">
-                      <input style="margin-top: 2px;" type="radio" name="optionsRadios4" id="optionsRadios1" value="option1" checked> Yes
-                    </label>
-                    <label class="radio inline" style="padding-bottom: 5px; margin-bottom: 10px;">
-                      <input style="margin-top: 2px;" type="radio" name="optionsRadios4" id="optionsRadios2" value="option2"> No
-                    </label>
-                  </div>
-                  <div class="span10">
-                    <!-- <label>ความคิดเห็น</label> -->
-                    <textarea class="form-control" rows="2" id="comment" style="width:98%; margin-bottom: 0px;"></textarea>
-                  </div>
-                </div>
-                <hr style="margin-top: 15px; margin-bottom: 15px;">
-                <!-- <hr> -->
-                <p style="margin-bottom: 0px; ">2.2 สอบถามความเข้าใจของ TP ของรอบการขาย</p>
-                <div class="row-fluid">
-                  <div class="span2">
-                    <!-- <label>คะแนนเฉลี่ย</label> -->
-                    <label class="radio inline" style="padding-bottom: 5px; margin-bottom: 10px;">
-                      <input style="margin-top: 2px;" type="radio" name="optionsRadios5" id="optionsRadios1" value="option1" checked> Yes
-                    </label>
-                    <label class="radio inline" style="padding-bottom: 5px; margin-bottom: 10px;">
-                      <input style="margin-top: 2px;" type="radio" name="optionsRadios5" id="optionsRadios2" value="option2"> No
-                    </label>
-                  </div>
-                  <div class="span10">
-                    <!-- <label>ความคิดเห็น</label> -->
-                    <textarea class="form-control" rows="2" id="comment" style="width:98%; margin-bottom: 0px;"></textarea>
-                  </div>
-                </div>
-                <hr style="margin-top: 15px; margin-bottom: 15px;">
-                <!-- <hr> -->
-                <p style="margin-bottom: 0px; ">2.3 แผนการเดินทาง </p>
-                <div class="row-fluid">
-                  <div class="span2">
-                    <!-- <label>คะแนนเฉลี่ย</label> -->
-                    <label class="radio inline" style="padding-bottom: 5px; margin-bottom: 10px;">
-                      <input style="margin-top: 2px;" type="radio" name="optionsRadios6" id="optionsRadios1" value="option1" checked> Yes
-                    </label>
-                    <label class="radio inline" style="padding-bottom: 5px; margin-bottom: 10px;">
-                      <input style="margin-top: 2px;" type="radio" name="optionsRadios6" id="optionsRadios2" value="option2"> No
-                    </label>
-                  </div>
-                  <div class="span10">
-                    <!-- <label>ความคิดเห็น</label> -->
-                    <textarea class="form-control" rows="2" id="comment" style="width:98%; margin-bottom: 0px;"></textarea>
-                  </div>
-                </div>
-              </div>
-              <!-- panel-body End-->
-            </div>
-          </div>
-          
-          <h3>FF In-Call Execution</h3>
-          <div>
-            <div class="row-fluid">
-              <div class="span6">
-                <button class="btn btn-success" id="add-store">Add</button>
-                <button class="btn btn-info" onclick="listStore();">Evaluated Retailer List</button>
-              </div>
-            </div>
-            <br>
-
-            <div class="panel panel-info " id="panalList" style="padding-bottom: 15px; display: none;;">
-              <div class="panel-heading" id="panel-head-list" style="vertical-align: top; ">หัวข้อ</div>
-              <div class="panel-body">
-                <table class="table table-bordered table-hover customers">
-                  <thead>
-                    <th style="width:50%; vertical-align: top; text-align: center">ชื่อร้าน</th>
-                    <th style="width:10%; vertical-align: top; text-align:center;">คะแนนรวม</th>
-                    <th style="width:40%"></th>
-                  </thead>
-                  <tbody id="tmodal">
-                </table>
-                <!-- panel-body start-->
-              </div>
-              <!-- panel-body End-->
-            </div>
-
-
-            <!-- Panel mapping data start-->
-            <div class="panel panel-info " id="panal-score" style="padding-bottom: 15px; ">
-              <!-- <div class="panel-heading" id="head-store"></div> -->
-              <div class="panel-heading"> ประเมินผลการทำงานของร้านค้า
-                <button type="button" class="close" data-dismiss="panel" aria-hidden="true" onclick="clearPanel();">×</button>
-                <!--<button type="button" class="close" data-target="#copyright-wrap" data-dismiss="alert"> <span aria-hidden="true">&times;</span><span class="sr-only"></span></button>-->
-              </div>
-              <div class="panel-body">
-                <div class="row-fluid">
-                  <div class="span6">
-                    <label for="storeName-modal">ชื่อร้านค้า</label>
-                    <input class='span12' type="text" style="margin-bottom: 0px;" id="storeName-modal" data-toggle="tooltip" title="Search">
-                  </div>
-                </div>
-                <br>
-                <!-- panel-body start-->
-                <table class="table table-striped table-bordered customers">
-                  <thead>
-                    <tr>
-                      <th class="col1" style="vertical-align: top;">3. เริ่มทำงานจริง</th>
-                      <th class="col2" style="vertical-align: top; text-align: center;">คะแนน</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="col1">3.1 เริ่มต้นคุยกับร้านค้าเป็นอย่างไร</td>
-                      <td class="col2">
-                        <div align="center">
-                          <select class="span2 sel">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                          </select>
-                          <div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>3.2 อัพเดทเรื่องข้อมูลร้านค้า </td>
-                      <td>
-                        <div align="center">
-                          <select class="span2 sel">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                          </select>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="col1">3.3 สร้างความสัมพันธ์กับร้านค้าในขณะเข้าเยี่ยม</td>
-                      <td class="col2">
-                        <div align="center">
-                          <select class="span2 sel">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                          </select>
-                        </div>
-                      </td>
-                    </tr>
-                    <!-- <tr>
-                      <td class=" col1">รวม</td>
-                      <td class="span2 col2">4</td>
-                    </tr> -->
-                  </tbody>
-                </table>
-
-                <table class="table table-striped table-bordered customers">
-                  <thead>
-                    <tr>
-                      <th class="col1" style="vertical-align: top;">4. การสำรวจเพื่อมองหาโอกาส</th>
-                      <th class="col2" style="vertical-align: top; text-align: center;">คะแนน</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="col1">4.1 เช็ค Stock สินค้าในขณะเข้าเยี่ยม</td>
-                      <td class="col2">
-                        <div align="center">
-                          <select class="span2 sel">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                          </select>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="col1">4.2 สินค้าขาดหรือไม่</td>
-                      <td class="col2">
-                        <div align="center">
-                          <select class="span2 sel">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                          </select>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="col1">4.3 การหมุนเวียนสินค้าในร้านค้า</td>
-                      <td class="col2">
-                        <div align="center">
-                          <select class="span2 sel">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                          </select>
-                        </div>
-                      </td>
-                    </tr>
-                    <!-- <tr>
-                      <td class="col1">รวม</td>
-                      <td class="col2">4</td>
-                    </tr> -->
-                  </tbody>
-                </table>
-
-                <table class="table table-striped table-bordered customers">
-                  <thead>
-                    <tr>
-                      <th class="col1" style="vertical-align: top;">5. LOGD </th>
-                      <th class="col2" style="vertical-align: top; text-align: center;">คะแนน</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="col1">5.1 พบของเสียในร้านค้า</td>
-                      <td class="col2">
-                        <div align="center">
-                          <select class="span2 sel">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                          </select>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="col1">5.2 พบของใกล้หมดอายุ (ต่ำกว่า 3 เดือน) </td>
-                      <td class="col2">
-                        <div align="center">
-                          <select class="span2 sel">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                          </select>
-                        </div>
-                      </td>
-                    </tr>
-                    <!-- <tr>
-                      <td class="col1">รวม</td>
-                      <td class="col2">4</td>
-                    </tr> -->
-                  </tbody>
-                </table>
-                <table class="table table-striped table-bordered customers">
-                  <thead>
-                    <tr>
-                      <th class="col1" style="vertical-align: top;">6. ลงมือปฏิบัติตามกิจกรรมต่างๆที่ตกลงกันไว้</th>
-                      <th class="col2" style="vertical-align: top; text-align: center;">คะแนน</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="col1">6.1 Stock สินค้าหลักมีเพียงพอหรือไม่ (OOS)</td>
-                      <td class="col2">
-                        <div align="center">
-                          <select class="span2 sel">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                          </select>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="col1">6.2 การบันทึกข้อมูลในร้านค้า (ใช้อุปกรณ์ Ipad) </td>
-                      <td class="col2">
-                        <div align="center">
-                          <select class="span2 sel">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                          </select>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="col1">6.3 นำเสนอการขายสินค้าและบริหารสินค้าได้อย่างเหมาะสม (ตาม CC Focus)</td>
-                      <td class="col2">
-                        <div align="center">
-                          <select class="span2 sel">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                          </select>
-                        </div>
-                      </td>
-                    </tr>
-                    <!-- <tr>
-                      <td class="col1">รวม</td>
-                      <td class="col2">4</td>
-                    </tr> -->
-                  </tbody>
-                </table>
-                <table class="table table-striped table-bordered customers">
-                  <thead>
-                    <tr>
-                      <th class="col1" style="vertical-align: top;">7.ใช้รายการส่งสริมการขายมีประสิทธิภาพหรือไม่</th>
-                      <th class="col2" style="vertical-align: top; text-align: center;">คะแนน</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="col1">7.1 ใช้ได้อย่างเหมาะสม โดยคำนึงถึงทักษะการขายก่อนการเจรจาต่อรอง</td>
-                      <td class="col2">
-                        <div align="center">
-                          <select class="span2 sel">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                          </select>
-                        </div>
-                      </td>
-                    </tr>
-                    <!-- <tr>
-                      <td class="col1">รวม</td>
-                      <td class="col2">4</td>
-                    </tr> -->
-                  </tbody>
-                </table>
-                <table class="table table-striped table-bordered customers">
-                  <thead>
-                    <tr>
-                      <th class="col1" style="vertical-align: top;">8.การสร้างการรับรู้สินค้าของบริษัท ( X serise , Flagship , Change over )่</th>
-                      <th class="col2" style="vertical-align: top; text-align: center;">คะแนน</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="col1">8.1 PPOSM ความสะอาดทั้งภายนอกและด้านใน</td>
-                      <td class="col2">
-                        <div align="center">
-                          <select class="span2 sel">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                          </select>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="col1">8.2 Price Awareness มีการสร้างการรับรู้เรื่องราคา</td>
-                      <td class="col2">
-                        <div align="center">
-                          <select class="span2 sel">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                          </select>
-                        </div>
-                      </td>
-                    </tr>
-                    <!-- <tr>
-                      <td class="col1">รวม</td>
-                      <td class="col2">4</td>
-                    </tr> -->
-                  </tbody>
-                </table>
-                <table class="table table-striped table-bordered customers">
-                  <thead>
-                    <tr>
-                      <th class="col1" style="vertical-align: top;">9.ทบทวนผลงานที่ได้ปฏิบัติในร้านค้าวันนี้ & กล่าวลาและแจ้งบริการครั้งต่อไป</th>
-                      <th class="col2" style="vertical-align: top; text-align: center;">คะแนน</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="col1">9.1 แจ้งร้านค้าถึงสิ่งที่ทำ และร้านค้าได้รับประโยชน์ในการเข้าเยี่ยมครั้งนี้</td>
-                      <td class="col2">
-                        <div align="center">
-                          <select class="span2 sel">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                          </select>
-                        </div>
-                      </td>
-                    </tr>
-                    <!-- <tr>
-                      <td class="col1">รวม</td>
-                      <td class="col2">4</td>
-                    </tr> -->
-                  </tbody>
-                </table>
-                </div>
-                <!-- panel-body End-->
-                </div>
-
-              </div>
-              <h3>Work Review Result</h3>
-              <div>
-				<div class="input-group" align="center">
-					<input type="text" id="datepicker-modal-report" class="form-control" placeholder="Date" style="margin-top: 10px; width: 250px;">
-					<span class="input-group-btn" style="width:0;">
-						<button class="btn btn-default" type="button" onclick="previewIframeFn()">View</button>
-					</span>
-				</div>
-				<div id="iframeRender"></div>
-                <div class="panel panel-info " id="panelMain" style="padding-bottom: 15px; display: show;">
-                  <div class="panel-heading" style="text-align:center; display: flex; justify-content: space-between;">ข้อคิดเห็น </div>
-                  <div class="panel-body">
-                    <label>Feedback (ให้ข้อเสนอแนะ)</label>
-                    <textarea class="form-control" rows="5" id="comment" style="width:98%; margin-bottom: 15px;"></textarea>
-                    <label>Development Plan (แผนพัฒนา)</label>
-                    <textarea class="form-control" rows="5" id="comment" style="width:98%; margin-bottom: 15px;"></textarea>
-                  </div>
-                  <!-- panel-body End-->
-                </div>
-              </div>
-            </div>
 <!-- 						********************************************************* -->
 		   			<div id="listQuestionaireData"></div>
 		   			<form id="linkParam" method="POST" target="_blank" action="">
 						<input type="hidden" id="linkParam_questionaire_type_id" name="questionaire_type_id" value="">
 						<input type="hidden" id="linkParam_questionaire_id" name="questionaire_id" value="">
-						<input type="hidden" id="linkParam_emp_name" name="emp_name" value="">
+						<input type="hidden" id="linkParam_emp_snapshot_id" name="emp_snapshot_id" value="">
 						<input type="hidden" id="linkParam_data_header_id" name="data_header_id" value="">
 						<input type="hidden" id="linkParam_questionaire_date" name="questionaire_date" value="">
 					</form>
@@ -1304,8 +833,8 @@ overflow:auto;
 
 					<div id="" class="span4 offset0">
 						<div style="margin-top: 24px;">
-							<button class="btn btn-success" type="button" id="btnSubmitUpdate">Save</button>
-							<button data-dismiss="modal" class="btn btn-danger btnCancle" type="button" >Cancel</button>
+							<button class="btn btn-success" type="button" id="btnSubmit">Save</button>
+							<button  class="btn btn-danger btnCancle" type="button" >Cancel</button>
 						</div>
 					</div>
 				</div>
@@ -1353,7 +882,7 @@ overflow:auto;
 			<div class="modal-content  bounceInRight">
 				<div class="modal-header">
 					<button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
-						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only">Close</span>
+						<span aria-hidden="true"><i class='fa fa-times'></i></span>
 					</button>
 					<h5 class="modal-title">Confirm Dialog</h5>
 				</div>
@@ -1366,7 +895,7 @@ overflow:auto;
 					<div class="form-kpi-mangement">
 						<div class="form-kpi-label" align="center">
 
-							<label>Confirm to Delete Data?</label>
+							<label id="inform_label_confirm">Confirm to Delete Data?</label>
 							<div id="inform_on_confirm" class='information'></div>
 						</div>
 					</div>
@@ -1379,17 +908,11 @@ overflow:auto;
 						<button class="btn btn-success" id="btnConfirmOK" type="button">
 							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
 						</button>
-						&nbsp;&nbsp;
-						<button data-dismiss="modal" class="btn btn-danger" type="button">
-							<i class="fa fa-times-circle"></i>&nbsp;Cancel
-						</button>
+						<button data-dismiss="modal" class="btn btn-danger" type="button"> <i class="fa fa-times-circle"></i>&nbsp;Cancel </button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Modal Confirm End -->
-	<!-- Modal Confirm End -->
 </div>
-
-
