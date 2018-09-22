@@ -807,6 +807,7 @@ var listQuestionnaireFindOneFn = function(data) {
 		  html+="						<span>Is Customer search</span>";
 		  html+="					</div>";
 		  html+="				</div>";
+		  html+="			</div>";
 		  html+="			<div class='form-inline'>";
 		  html+="				<div class='form-group float-label-control pull-left span6 section-name'>";
 		  html+="					<input  "+(indexEmtry.is_show_report == 0 ? "disabled" :"")+" type='text' class='form-control inputUrlReport "+(indexEmtry.is_show_report == 0 ? "url_report_cursor" :"")+"' placeholder='URL Report' id=''";
@@ -819,7 +820,7 @@ var listQuestionnaireFindOneFn = function(data) {
 		  html+="					</div>";
 		  html+="				</div>";
 		  html+="				<div class='form-group pull-right m-b-n'>";
-		  html+="					<button type='button' class='btn btn-success input-sm btnAddSubSection' ";
+		  html+="					<button type='button' class='btn btn-success input-sm btnAddSubSection' question-type='subSection-question'";
 		  html+="						name='' id='' style='margin-left: 5px;margin-bottom: 5px;'>";
 		  html+="						<i class='fa fa-plus-square'></i>&nbsp;Add Sub Section";
 		  html+="					</button>";
@@ -834,7 +835,6 @@ var listQuestionnaireFindOneFn = function(data) {
 		  html+="				</div>";
 		  html+="			</div>";
 
-		  html+="			</div>";
 		  html+="		</div>";
 		  	// /.box-header   generateNumberIDFn
 		  html+="		<div class='box-body sortUnderSectionList ' id='edit-bodySectionListQuestion-"+indexEmtry.section_id+"'>";
@@ -1397,7 +1397,7 @@ $(document).ready(function() {
 		  html+="					</div>";
 		  html+="				</div>";
 		  html+="				<div class='form-group pull-right m-b-n'>";
-		  html+="					<button type='button' class='btn btn-success input-sm btnAddSubSection' ";
+		  html+="					<button type='button' class='btn btn-success input-sm btnAddSubSection' question-type='subSection-question'";
 		  html+="						name='' id='' style='margin-left: 5px;margin-bottom: 5px;'>";
 		  html+="						<i class='fa fa-plus-square'></i>&nbsp;Add Sub Section";
 		  html+="					</button>";
