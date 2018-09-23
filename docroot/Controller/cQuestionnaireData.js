@@ -1,4 +1,4 @@
-const currentUrlReport = document.URL.split(":")[0]+"://"+window.location.host+"/web/guest/wwwr-transaction-report";
+const currentUrlReport = document.URL.split(":")[0]+"://"+window.location.host+"/web/guest/wwwr-summary-form";
 var globalData="";
 var globalDataTemp=[];
 var globalSevice=[];
@@ -175,11 +175,12 @@ var scriptBtnListStoreFn = function (){
 					html+="	<td style='text-align: right;' >"+indexEntry.score+"</td>";
 					html+="	<td><div align='center'>";
 					//html+="			&nbsp;";
-					html+="			<button style='width: 65px; margin-bottom: 3px;' " +is_disabled;
+
+					html+="			<button style='width: 65px; margin-bottom: 3px;' "+($("#action_modal").val()=="0" ? "disabled" : "")+" " +is_disabled;
 					html+="				class='btn btn-small btn-warning' data_header_id='"+indexEntry.data_header_id+"' customer_id='"+indexEntry.customer_id+"' section_id='"+indexEntry.section_id+"' ";
 					html+="				onclick='btnEditStoreFn(this);'>Edit</button>";
 					html+="			<span></span>";
-					html+="			<button style='width: 65px; margin-bottom: 3px;'";
+					html+="			<button style='width: 65px; margin-bottom: 3px;' "+($("#action_modal").val()=="0" ? "disabled" : "")+" ";
 					html+="				class='btn btn-small btn-danger' "+is_disabled;
 					html+="				onclick='btnDelStoreFn(this);' data_header_id='"+indexEntry.data_header_id+"' customer_id='"+indexEntry.customer_id+"' section_id='"+indexEntry.section_id+"'>Delete</button>";
 					html+="		</div></td>";
@@ -690,6 +691,7 @@ var generateQuestionaireForm = function(data) {
 		$("#modal_empsnapshot_name , #modal_datepicker_start  ").prop('disabled', true);
 		
 	}
+	
 	if(data.role.view_comment_flag == 0){
 		$("#modal_from_stage , #modal_to_stage , #modal_remark ,#btnSubmit").prop('disabled', true);
 	}; 
@@ -797,6 +799,9 @@ var generateQuestionaireForm = function(data) {
 	});
 	
 	$("#accordionListQuestionaireData").html(html);
+	if($("#action_modal").val()=="0"){
+		$("#accordionListQuestionaireData").find('input , select, textarea , .closePanelScore').prop('disabled', true);
+	};
 	scriptAutocompleteStoreNameFn();
 	scriptCheckboxCheckIsNarcoticsAnonymousFn();
 	$("#accordion").empty();

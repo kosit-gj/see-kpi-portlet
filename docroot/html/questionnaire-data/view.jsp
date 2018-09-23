@@ -754,7 +754,7 @@ overflow:auto;
 
 <input type="hidden" name="id" id="id" value="">
 <input type="hidden" name="action" id="action" value="add">
-<input type="hidden" name="action_modal" id="action_modal" value="">
+<input type="hidden" name="action_modal" id="action_modal" value="" view_comment_flag="">
 	<!-- Modal KPI Start Edit -->
 	  <div aria-hidden="true" role="dialog" tabindex="-1" id="modalQuestionaireData" class="modal inmodal large" style="display: none;">
 	    <div class="modal-dialog">
