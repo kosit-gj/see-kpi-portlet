@@ -1249,7 +1249,7 @@ overflow-y: visible;
 			                
 			                <div class='form-file-mangement is_value_get_zero_form'>
 				                <div class="form-label-customs">
-				                	Value Get Zero <span class='redFont'>*</span>
+				                	Value Get Zero &nbsp
 				                </div>
 				                <div class="form-input-customs">
 				                	<input type="text" onchange="checkZero('ValueGetZero')" class="form-control input-sm numberOnly  span12" placeholder="Value Get Zero" id="ValueGetZero">
@@ -1259,7 +1259,7 @@ overflow-y: visible;
 			                
 			                 <div class='form-file-mangement is_no_raise_value_form'> 
 				                <div class="form-label-customs">
-				                	No Raise Value  <span class='redFont'>*</span>
+				                	No Raise Value &nbsp
 				                </div>
 				                <div class="form-input-customs">
 				                	<input type="text" onchange="checkZero('NoRaiseValue')" class="form-control input-sm numberOnly  span12" placeholder="Value does not raise salary" id="NoRaiseValue">
