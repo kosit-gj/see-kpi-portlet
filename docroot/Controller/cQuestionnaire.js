@@ -23,91 +23,14 @@ globalDataTemp['NumberID']=0;
 globalDataTemp['FindOne'];
 
 globalDataTemp['form']= $( "#formModalQuestionnaire" );
-globalDataTemp["data"] = {
-		  "head": {
-		    "questionaire_id": 32,
-		    "questionaire_type_id": 1,
-		    "questionaire_name": "KOE WW Form",
-		    "pass_score": "70.0",
-		    "is_active": 1,
-		    "created_by": "admin",
-		    "created_dttm": "2018-09-07 17:36:20",
-		    "updated_by": "admin",
-		    "updated_dttm": "2018-09-07 17:36:20"
-		  },
-		  "questionaire_section": [
-		    {
-		      "section_id": 33,
-		      "section_name": "FF Preparation Process",
-		      "is_cust_search": 0,
-		      "sub_section": [
-		        {
-		          "question_id": 76,
-		          "answer_type_id": 1,
-		          "is_show_comment": 0,
-		          "parent_question_id": null,
-		          "question_name": "1.ความพร้อมการเข้าเยี่ยม",
-		          "pass_score": "0.0",
-		          "answer": [],
-		          "question": [
-		            {
-		              "question_id": 77,
-		              "answer_type_id": 1,
-		              "parent_question_id": 76,
-		              "question_name": "1.1 จำนวนและรายการสินค้าบนรถ/ความพร้อมรถ",
-		              "answer": [
-		                {
-		                  "answer_id": 39,
-		                  "row_name": "Yes",
-		                  "answer_name": "Yes",
-		                  "score": "1.0",
-		                  "is_not_applicable": 0
-		                },
-		                {
-		                  "answer_id": 40,
-		                  "row_name": "No",
-		                  "answer_name": "No",
-		                  "score": "0.0",
-		                  "is_not_applicable": 0
-		                }
-		              ]
-		            }
-		          ]
-		        },
-		        {
-		          "question_id": 78,
-		          "answer_type_id": 7,
-		          "is_show_comment": 0,
-		          "parent_question_id": null,
-		          "question_name": "2.ความพร้อมการเข้าเยี่ยมเชิงลึก",
-		          "pass_score": "0.0",
-		          "answer": [
-		            {
-		              "answer_id": 41,
-		              "row_name": "ข้อเสนอแนะ",
-		              "answer_name": "ข้อเสนอแนะ",
-		              "score": "0.0",
-		              "is_not_applicable": 1
-		            },
-		            {
-		              "answer_id": 42,
-		              "row_name": "ข้อร้องเรียน",
-		              "answer_name": "ข้อร้องเรียน",
-		              "score": "0.0",
-		              "is_not_applicable": 0
-		            }
-		          ],
-		          "question": []
-		        }
-		      ]
-		    }
-		  ]
-		};
+
 var generateDropDownList = function(url,type,request,initValue){
  	var html="";
- 	var firstItem=true;
+ 	var firstItem=false;
  	if(initValue!=undefined){
- 		html+="<option value=''>"+initValue+"</option>";
+ 		html+="<option selected value=''>"+initValue+"</option>";
+	}else{
+	 	var firstItem=true;
 	}
 
  	$.ajax ({
@@ -306,6 +229,7 @@ var scriptBtnDelHeaderBoxQuestionFn = function (){
 	        	var deleteTypeNumber;
 	        	if( deleteType == "btnDelSection"){deleteTypeNumber=0;}
 	        	else if (deleteType == "btnDelSubSection" || deleteType == "btnDelQuestion"){deleteTypeNumber=1;}
+	        	$(".btnModalClose").click();
 	        	$("#confrimModal").modal({
 					"backdrop" : setModalPopup[0],
 					"keyboard" : setModalPopup[1]
@@ -346,6 +270,7 @@ var scriptBtnDelAnswerRowFn = function (){
 	        
 	        if($(this).attr("delete-id") != undefined && $(this).attr("delete-id") != null && $(this).attr("delete-id") != ""){
 	        	var el = $(this);
+	        	$(".btnModalClose").click();
 	        	$("#confrimModal").modal({
 					"backdrop" : setModalPopup[0],
 					"keyboard" : setModalPopup[1]
@@ -738,7 +663,7 @@ var listQuestionnaireFn = function(data) {
 		$(".del").on("click",function(){
 			var id = this.id;
 			$(this).parent().parent().parent().children().click();
-			 
+			$(".btnModalClose").click();
 			$("#confrimModal").modal({
 				"backdrop" : setModalPopup[0],
 				"keyboard" : setModalPopup[1]
