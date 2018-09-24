@@ -4,6 +4,7 @@
 <display>
 	<category name="SEE KPI">
 		<portlet id="appraisal"></portlet>
+		<portlet id="appraisal-form"></portlet>
 		<portlet id="appraisal-report"></portlet>
 		<portlet id="appraisal-item"></portlet>
 		<portlet id="database-connection"></portlet>
