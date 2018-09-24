@@ -1,4 +1,4 @@
-<?xml version="1.0"?> 
+<?xml version="1.0"?>
   
 <portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0">
 	
@@ -1716,6 +1716,38 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+
+	<portlet>
+		<portlet-name>Report Lenso</portlet-name>
+		<display-name>Report Lenso</display-name>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/report lenso/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Report KPI with comment</title>
+			<short-title>Report KPI with comment</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 	
 	
 	<portlet>
@@ -1752,6 +1784,254 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	
+	<portlet>
+		<portlet-name>assignment-log</portlet-name>
+		<display-name>Assignment Log</display-name>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/assignment-log/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Assignment Logging</title>
+			<short-title>Assignment Logging</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	
+
+
+	<!-- //////////////////// 360 Degree //////////////////// -->
+	<portlet>
+		<portlet-name>appraisal-level-360degree</portlet-name>
+		<display-name>Appraisal Level 360 Degree</display-name>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/appraisal-level/view.360degree.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Appraisal Level 360 Degree</title>
+			<short-title>Appraisal Level 360 Degree</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	
+	
+	<portlet>
+		<portlet-name>appraisal-360degree</portlet-name>
+		<display-name>Appraisal 360 Degree</display-name>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/appraisal/view.360degree.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content/Language</resource-bundle>
+		<portlet-info>
+			<title>Appraisal 360 Degree</title>
+			<short-title>Appraisal 360 Degree</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<!-- //////////////////////////////////////////////////////////// -->
+	
+	
+	
+	
+	
+	<!-- //////////////////// Salary //////////////////////////////// -->
+	<portlet>
+		<portlet-name>import-salary-range</portlet-name>
+		<display-name>Import Salary Range</display-name>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/import-salary-range/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content/Language</resource-bundle>
+		<portlet-info>
+			<title>Import Salary Range</title>
+			<short-title>Import Salary Range</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	
+	<portlet>
+		<portlet-name>import-employee-salary</portlet-name>
+		<display-name>Import Employee (Salary Range)</display-name>
+		<portlet-class>
+			com.liferay.util.bridges.mvc.MVCPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/html/import-employee/view.salary.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Import Employee (Salary Range)</title>
+			<short-title>Import Employee (Salary Range)</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	
+	<portlet>
+		<portlet-name>calculate-salary-structure</portlet-name>
+		<display-name>Calculate Salary Structure</display-name>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/calculate-salary-structure/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Calculate Salary Structure</title>
+			<short-title>Calculate Salary Structure</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	
+	<portlet>
+		<portlet-name>judgement</portlet-name>
+		<display-name>Judgement</display-name>
+		<portlet-class>
+			com.liferay.util.bridges.mvc.MVCPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/judgement/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Judgement</title>
+			<short-title>Judgement</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	
+	<!-- //////////////////////////////////////////////////////////// -->
+	
+	
+	
+	
+	
 	<portlet>
 		<portlet-name>dashboard-performance-comparison</portlet-name>
 		<display-name>Dashboard Performance Comparison</display-name>
@@ -1787,5 +2067,6 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
 </portlet-app>
   

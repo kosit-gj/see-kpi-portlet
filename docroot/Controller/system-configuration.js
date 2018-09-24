@@ -59,6 +59,7 @@ var getDataFn = function(page,rpp){
 			
 			if(data["raise_type"] == 1){$("#raiseFixAmount").prop("checked", true);}
 			else if(data["raise_type"] == 2){$("#raisePercentage").prop("checked", true);}
+			else if(data["raise_type"] == 3){$("#raiseSalaryStructureTable").prop("checked", true);}
 			 
 			if(data["result_type"] == 0){$("#resultWeightPercentage").prop("checked", true);}
 			else if(data["result_type"] == 1){$("#resultPercentage").prop("checked", true);}
@@ -73,6 +74,12 @@ var getDataFn = function(page,rpp){
 			
 			if(data["item_result_log"] == 1){$("#optionsEnableAssignmentLoggingOn").prop("checked", true);}
 			else if(data["item_result_log"] == 0){$("#optionsEnableAssignmentLoggingOff").prop("checked", true);}
+			
+			if(data["show_grand_total_flag"] == 1) {
+				$("#optionsShowGrandTotalOn").prop("checked", true);
+			} else {
+				$("#optionsShowGrandTotalOff").prop("checked", true);
+			}
 			
 			$("#listThemeColor").html(htmlTheamColor);
 			jscolor.installByClassName("jscolor");
@@ -250,8 +257,10 @@ var updateFn = function() {
 	var threshold=0;
 	var emailReminder=0;
 	var item_result_log=0;
+	var show_grand_total_flag=0;
 	if($("#raiseFixAmount:checked").is(":checked")){raiseType=1;}
 	else if($("#raisePercentage:checked").is(":checked")){raiseType=2;}
+	else if($("#raiseSalaryStructureTable:checked").is(":checked")){raiseType=3;}
 	 
 	if($("#resultWeightPercentage:checked").is(":checked")){resultType=0;}
 	else if($("#resultPercentage:checked").is(":checked")){resultType=1;}
@@ -265,7 +274,13 @@ var updateFn = function() {
 	
 	
 	if($("#optionsEnableAssignmentLoggingOn:checked").is(":checked")){item_result_log=1;} 
-	else if($("#optionsEnableAssignmentLoggingOff:checked").is(":checked")){item_result_log=0;} 
+	else if($("#optionsEnableAssignmentLoggingOff:checked").is(":checked")){item_result_log=0;}
+	
+	if($("#optionsShowGrandTotalOn:checked").is(":checked")) {
+		show_grand_total_flag = 1;
+	} else if($("#optionsShowGrandTotalOff:checked").is(":checked")) {
+		show_grand_total_flag = 0;
+	}
 	
 	
 	$.ajax({
@@ -288,8 +303,8 @@ var updateFn = function() {
 			"threshold"							:  threshold,
 			"email_reminder_flag"				:  emailReminder,
 			"item_result_log"					:  item_result_log, 
-			"theme_color"			            :  $("#themeColor").val()
-			
+			"theme_color"			            :  $("#themeColor").val(),
+			"show_grand_total_flag"				: show_grand_total_flag
 		},	
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success : function(data,status) {

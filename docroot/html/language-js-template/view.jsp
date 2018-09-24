@@ -54,6 +54,8 @@
 <input class="lt-unit" type="hidden" value="<liferay-ui:message key="unit"/>"/>
 <input class="lt-value-get-zero" type="hidden" value="<liferay-ui:message key="value-get-zero"/>"/>
 <input class="lt-view" type="hidden" value="<liferay-ui:message key="view"/>"/>
+<input class="lt-group" type="hidden" value="<liferay-ui:message key="group"/>"/>
+<input class="lt-no-raise-value" type="hidden" value="<liferay-ui:message key="no-raise-value"/>"/>
 
 <!-- Appraisal (kpi result) -->
 <input class="lt-action-plan" type="hidden" value="<liferay-ui:message key="action-plan"/>"/>
@@ -79,8 +81,19 @@
 <input class="lt-total" type="hidden" value="<liferay-ui:message key="total"/>"/>
 <input class="lt-total-score" type="hidden" value="<liferay-ui:message key="total-score"/>"/>
 <input class="lt-upload-successfully" type="hidden" value="<liferay-ui:message key="upload-successfully"/>"/>
-<input class="lt-weight-score" type="hidden" value="<liferay-ui:message key="weight-score"/>"/>
-
+<input class="lt-weight-score" type="hidden" value="<liferay-ui:message key="weight-score"/>"/>  
+<input class="lt-all-messages" type="hidden" value="<liferay-ui:message key="all-messages"/>"/>  
+<input class="lt-unanswered-messages" type="hidden" value="<liferay-ui:message key="unanswered-messages"/>"/>  
+<input class="lt-answered-messages" type="hidden" value="<liferay-ui:message key="answered-messages"/>"/> 
+<input class="lt-assessor-strength-opinion" type="hidden" value="<liferay-ui:message key="assessor-strength-opinion"/>"/> 
+<input class="lt-assessor-weakness-opinion" type="hidden" value="<liferay-ui:message key="assessor-weakness-opinion"/>"/> 
+<input class="lt-emp-strength-opinion" type="hidden" value="<liferay-ui:message key="emp-strength-opinion"/>"/> 
+<input class="lt-emp-weakness-opinion" type="hidden" value="<liferay-ui:message key="emp-weakness-opinion"/>"/> 
+<input class="lt-employee" type="hidden" value="<liferay-ui:message key="employee"/>"/>
+<input class="lt-value-not-raise" type="hidden" value="<liferay-ui:message key="value-not-raise"/>"/>
+<input class="lt-over-value-not-raise" type="hidden" value="<liferay-ui:message key="over-value-not-raise"/>"/>
+<input class="lt-reward-score-Unit" type="hidden" value="<liferay-ui:message key="reward-score-Unit"/>"/>
+<input class="lt-comment" type="hidden" value="<liferay-ui:message key="comment"/>"/> 
 
 <!-- Performance Trend -->
 <input class="lt-employee-name-is-require" type="hidden" value="<liferay-ui:message key="employee-name-is-require"/>"/>
@@ -101,4 +114,6 @@
 <input class="lt-import-cds-result-successfully" type="hidden" value="<liferay-ui:message key="import-cds-result-successfully"/>"/>
 
 
+<!-- Judgement -->
+<input class="lt-item_name" type="hidden" value="<liferay-ui:message key="item_name"/>"/>
 

@@ -1,13 +1,5 @@
 //Ready to call Function.
 $(document).ready(function() {
-	var username = $('#user_portlet').val();
-	var password = $('#pass_portlet').val();
-	var plid = $('#plid_portlet').val();
-	
-	if(username!="" && username!=null & username!=[] && username!=undefined ) {
-		
-		if(connectionServiceFn(username,password,plid)==true) {
-			
 			emailLinkAssignment = true;
 			var url_emp_result_id;
 			var url_level_id_org;
@@ -41,9 +33,14 @@ $(document).ready(function() {
 					data:{"emp_result_id":url_emp_result_id},
 					headers:{Authorization:"Bearer "+tokenID.token},
 					success:function(data){
-						url_level_id_org = data[0]['level_id'];
-						url_level_id_emp = data[0]['level_id_emp'];
-						url_org_id = data[0]['org_id'];
+						if(data[0]) {
+							url_level_id_org = data[0]['level_id'];
+							url_level_id_emp = data[0]['level_id_emp'];
+							url_org_id = data[0]['org_id'];
+						} else {
+							callFlashSlide("Data is empty.");
+							return false;
+						}
 					}
 				});
 			}
@@ -70,11 +67,8 @@ $(document).ready(function() {
 			embedParam+="<input type='hidden' class='embed_param_search' id='appraisalLevelEmp' name='appraisalLevelEmp' value='"+url_level_id_emp+"'>";
 			$("#embedParamSearch").append(embedParam);
 			
-			emp_result_id = url_emp_result_id;
-			org_id_to_assign = url_org_id;
+			emp_result_id = url_emp_result_id; // emp_result_id in assignmentslidescore.js
+			org_id_to_assign = url_org_id; // org_id_to_assign in assignmentslidescore.js
 			
 			findOneFn(emp_result_id,"");
-
-		}
-	}
 });

@@ -105,7 +105,7 @@ var listDataFn = function(data) {
 	var btnDeduct = "";
 	$.each(data,function(index,indexEntry){
 		if(indexEntry['form_url']=='deduct') {
-			btnDeduct = "btnDeduct isValueGetZero-"+indexEntry['is_value_get_zero']+"";
+			btnDeduct = "btnDeduct isValueGetZero-"+indexEntry['is_value_get_zero']+" is_no_raise_value-"+indexEntry['is_no_raise_value']+"";
 		} else {
 			btnDeduct = "";
 		}
@@ -341,13 +341,31 @@ var findOneFn = function(id,form_url) {
 			}else if(form_url=="deduct"){
 				
 				initailDeductScoreFormFn('edit',data['structure_id'],data['structure_name'],data);
+			
+			}else if(form_url=="reward"){
 				
-			}
-			
-			
+				initailRewardScoreFormFn('edit',data['structure_id'],data['structure_name'],data);
+			}	
 		}
 	});
 }
+
+// check value zero ---> alert
+var checkZero = function(id){
+			if(id == 'maxValueDeductScore' && $("#maxValueDeductScore").val() == 0 && $("#maxValueDeductScore").val() !="") {
+				console.log('หากไม่ต้องให้หักคะแนนให้ใส่เป็นค่าว่าง');
+				callFlashSlide("หากไม่ต้องให้หักคะแนนให้ใส่เป็นค่าว่าง");
+			}
+			if(id == 'ValueGetZero' && $("#ValueGetZero").val() == 0 && $("#ValueGetZero").val() !="") {
+				console.log('หากไม่ต้องให้หักคะแนนเป็นศูนย์ให้ใส่เป็นค่าว่าง');
+				callFlashSlide("หากไม่ต้องให้หักคะแนนเป็นศูนย์ให้ใส่เป็นค่าว่าง");
+			}
+			if(id == 'NoRaiseValue' && $("#NoRaiseValue").val() == 0 && $("#NoRaiseValue").val() !="") {
+				console.log('หากหัวข้อประเมินนี้ไม่มีผลกับการปรับขึ้นเงินเดือน ให้ใส่เป็นค่าว่าง');
+				callFlashSlide("หากหัวข้อประเมินนี้ไม่มีผลกับการปรับขึ้นเงินเดือน ให้ใส่เป็นค่าว่าง");
+			}
+		};
+
 //SearchAdvance
 var searchAdvanceFn = function() {
 	/*
@@ -1062,7 +1080,6 @@ $(document).ready(function(){
 
 	//Autocomplete Organization Search Start
 
-<<<<<<< HEAD
 //	$("#Organization").autocomplete({
 //        source: function (request, response) {
 //        	$.ajax({
@@ -1090,35 +1107,6 @@ $(document).ready(function(){
 //				});
 //        }
 //    });
-=======
-	$("#Organization").autocomplete({
-        source: function (request, response) {
-        	$.ajax({
-				 url:restfulURL+"/"+serviceName+"/public/org/auto_org_name",
-				 type:"post",
-				 dataType:"json",
-				 headers:{Authorization:"Bearer "+tokenID.token},
-				 data:{"org_name":request.term},
-				 //async:false,
-                 error: function (xhr, textStatus, errorThrown) {
-                        console.log('Error: ' + xhr.responseText);
-                    },
-				 success:function(data){
-						response($.map(data, function (item) {
-                            return {
-                                label: item.org_id+"-"+item.org_name,
-                                value: item.org_id+"-"+item.org_name
-                            };
-                        }));
-				},
-				beforeSend:function(){
-					$("body").mLoading('hide');	
-				}
-				
-				});
-        }
-    });
->>>>>>> refs/remotes/origin/tfg/develop
 	//Autocomplete Organization Search End
 	
 	
@@ -1191,13 +1179,20 @@ $(document).ready(function(){
 	});
 	
 	$(document).on("click",".btnDeduct",function(){
-		var btnDeduct = $(this).attr('class').split(' ')[5];
-		var isValueGetZero = btnDeduct.split("-")[1];
-
+		
+		var isValueGetZero = $(this).attr('class').split(' ')[5].split("-")[1];
+		var is_no_raise_value = $(this).attr('class').split(' ')[6].split("-")[1];
+		
 		if(isValueGetZero==1) {
 			$(".is_value_get_zero_form").show();
 		} else {
 			$(".is_value_get_zero_form").hide();
+		}
+		
+		if(is_no_raise_value==1) {
+			$(".is_no_raise_value_form").show();
+		} else {
+			$(".is_no_raise_value_form").hide();
 		}
 	});
 	

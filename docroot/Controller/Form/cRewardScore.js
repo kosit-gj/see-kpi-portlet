@@ -1,23 +1,23 @@
 
 //Cleaning
-var clearDeductScoreFormFn = function(){
-	$("#actionDeductScore").val("add");
-	$("#informationDeductScore").hide();
-	$("#appraisalItemNameDeductScore").val("");
+var clearRewardScoreFormFn = function(){
+	$("#actionRewardScore").val("add");
+	$("#informationRewardScore").hide();
+	$("#appraisalItemNameRewardScore").val("");
 	//$("#appraisalLevelDeductScore").val("");
-	$("#appraisalLevelDeductScore option:first").attr('selected','selected');	
-	$("#maxValueDeductScore").val("");
+	$("#appraisalLevelRewardScore option:first").attr('selected','selected');	
+	$("#maxValueRewardScore").val("");
 	//$("#isShowVarianceDeductScore").prop("checked",false);
-	$("#isActiveDeductScore").prop("checked",true);
-	$("#DeductScoreUnitDeductScore").val("");
-	$("#ValueGetZero").val("");
-	$("#NoRaiseValue").val("");
+	$("#isActiveRewardScore").prop("checked",true);
+	$("#RewardScoreUnitRewardScore").val("");
+//	$("#ValueGetZero").val("");
 	
 	//$("#structure_id_deduct").val("");
 	
 }
 //List Data
-var listDataDeductScoreFn = function(data) {
+var listDataRewardScoreFn = function(data) {
+	console.log(data,'listDataRewardScoreFn not show!');
 	var rows="";
 	$.each(data,function(index,indexEntry){
 		rows+="<tr>";
@@ -38,20 +38,19 @@ var listDataDeductScoreFn = function(data) {
 	$("#listDeductScore").html(rows);
 };
 //Update
-var updateDeductScoreFn  = function(){
+var updateRewardScoreFn  = function(){
 	
 
-	 var item_name=$("#appraisalItemNameDeductScore").val();
-	 var item_id=$("#appraisalItemIdDeductScore").val();
-	 var appraisal_level=$("#appraisalLevelDeductScore").val();
-	 var structure_id=$("#structure_id_deduct").val();
-	 var max_value=$("#maxValueDeductScore").val();
-	 var no_raise_value=$("#NoRaiseValue").val();
-	 var unit_deduct_score=$("#DeductScoreUnitDeductScore").val();
-	 var value_get_zero=$("#ValueGetZero").val();
+	 var item_name=$("#appraisalItemNameRewardScore").val();
+	 var item_id=$("#appraisalItemIdRewardScore").val();
+	 var appraisal_level=$("#appraisalLevelRewardScore").val();
+	 var structure_id=$("#structure_id_reward").val();
+	 var max_value=$("#maxValueRewardScore").val();
+	 var unit_reward_score=$("#RewardScoreUnitRewardScore").val();
+//	 var value_get_zero=$("#ValueGetZero").val();
 	 //var department_id=$("#departmentDeductScore").val();
-	 var organization=($('[name="organizationDeductScore[]"]').val());
-	 var position=($('[name="positionDeductScore[]"]').val());
+	 var organization=($('[name="organizationRewardScore[]"]').val());
+	 var position=($('[name="positionRewardScore[]"]').val());
 
 	 var is_variance="";
 //	 if($('#isShowVarianceDeductScore').prop('checked')==true){
@@ -60,7 +59,7 @@ var updateDeductScoreFn  = function(){
 //		 is_variance=0;
 //	 }
 	 var is_active="";
-	 if($('#isActiveDeductScore').prop('checked')==true){
+	 if($('#isActiveRewardScore').prop('checked')==true){
 		 is_active=1;
 	 }else{
 		 is_active=0;
@@ -77,31 +76,30 @@ var updateDeductScoreFn  = function(){
 		 "appraisal_level":appraisal_level,
 		 "structure_id":structure_id,
 		 "max_value":max_value,
-		 "unit_deduct_score":unit_deduct_score,
-		 "value_get_zero":value_get_zero,
+		 "unit_reward_score":unit_reward_score,
+//		 "value_get_zero":value_get_zero,
 //		 "is_show_variance ":is_variance,
 		 "is_active":is_active,
 		// "department_code":department_id,
 		 "org":organization,
 		 "position":position,
-		 "form_id":"3",
-		 "no_raise_value":no_raise_value,
+		 "form_id":"4"
 		},
 	    success:function(data,status){
 		     if(data['status']=="200"){
-				 $('#modal-deduct').modal('hide');
+				 $('#modal-reward').modal('hide');
 			     callFlashSlide("Update Successfully.");
 				 getDataFn($("#pageNumber").val(),$("#rpp").val());
 		      	//clearFn();
 		     }else if(data['status']==400) {
-				callFlashSlideInModal(validationFn(data),"#informationDeductScore","error");
+				callFlashSlideInModal(validationFn(data),"#informationRewardScore","error");
 			 }
 		   }
 	   });
 	
 };
 //Insert
-var insertDeductScoreFn = function(param) {
+var insertRewardScoreFn = function(param) {
 	
 	/*
 	item_name,
@@ -111,16 +109,15 @@ var insertDeductScoreFn = function(param) {
 	unit_deduct_score,
 	is_active
 	*/	
-	 var item_name=$("#appraisalItemNameDeductScore").val();
-	 var appraisal_level=$("#appraisalLevelDeductScore").val();
-	 var structure_id=$("#structure_id_deduct").val();
-	 var max_value=$("#maxValueDeductScore").val();
-	 var no_raise_value=$("#NoRaiseValue").val();
-	 var unit_deduct_score=$("#DeductScoreUnitDeductScore").val();
-	 var value_get_zero=$("#ValueGetZero").val();
+	 var item_name=$("#appraisalItemNameRewardScore").val();
+	 var appraisal_level=$("#appraisalLevelRewardScore").val();
+	 var structure_id=$("#structure_id_reward").val();
+	 var max_value=$("#maxValueRewardScore").val();
+	 var unit_reward_score=$("#RewardScoreUnitRewardScore").val();
+//	 var value_get_zero=$("#ValueGetZero").val();
 	 //var department_id=$("#departmentDeductScore").val();
-	 var organization=($('[name="organizationDeductScore[]"]').val());
-	 var position=($('[name="positionDeductScore[]"]').val());
+	 var organization=($('[name="organizationRewardScore[]"]').val());
+	 var position=($('[name="positionRewardScore[]"]').val());
 	 var is_variance="";
 //	 if($('#isShowVarianceDeductScore').prop('checked')==true){
 //		 is_variance=1;
@@ -128,7 +125,7 @@ var insertDeductScoreFn = function(param) {
 //		 is_variance=0;
 //	 }
 	 var is_active="";
-	 if($('#isActiveDeductScore').prop('checked')==true){
+	 if($('#isActiveRewardScore').prop('checked')==true){
 		 is_active=1;
 	 }else{
 		 is_active=0;
@@ -145,15 +142,14 @@ var insertDeductScoreFn = function(param) {
 			 "appraisal_level":appraisal_level,
 			 "structure_id":structure_id,
 			 "max_value":max_value,
-			 "unit_deduct_score":unit_deduct_score,
-			 "value_get_zero":value_get_zero,
+			 "unit_reward_score":unit_reward_score,
+//			 "value_get_zero":value_get_zero,
 //			 "is_show_variance":is_variance,
 			 "is_active":is_active,
 			 //"department_code":department_id,
 			 "org":organization,
 			 "position":position,
-			 "form_id":"3",
-			 "no_raise_value":no_raise_value,
+			 "form_id":"4"
 		},
 		success:function(data){
 			//console.log(data);
@@ -162,16 +158,16 @@ var insertDeductScoreFn = function(param) {
 				if(param !="saveAndAnother"){
 					   callFlashSlide("Insert Successfully.");
 				       getDataFn($("#pageNumber").val(),$("#rpp").val());
-				       clearDeductScoreFormFn();
-				 	   $('#modal-deduct').modal('hide');
+				       clearRewardScoreFormFn();
+				 	   $('#modal-reward').modal('hide');
 					}else{
 						getDataFn($("#pageNumber").val(),$("#rpp").val());
-						clearDeductScoreFormFn();
-						callFlashSlideInModal("Insert Data is Successfully.","#informationDeductScore");
+						clearRewardScoreFormFn();
+						callFlashSlideInModal("Insert Data is Successfully.","#informationRewardScore");
 					}
 			}else if(data['status']==400){
 			//	console.log(validationFn(data));
-				callFlashSlideInModal(validationFn(data),"#informationDeductScore","error");
+				callFlashSlideInModal(validationFn(data),"#informationRewardScore","error");
 			}
 		}
 	});
@@ -179,7 +175,7 @@ var insertDeductScoreFn = function(param) {
 }
 
 
-var initailDeductScoreFormFn = function(action,structureId,structureName,data){
+var initailRewardScoreFormFn = function(action,structureId,structureName,data){
 	
 	/*
 	item_name,
@@ -190,17 +186,16 @@ var initailDeductScoreFormFn = function(action,structureId,structureName,data){
 	is_active
 	*/	
 	if(action=='edit'){
-		clearDeductScoreFormFn();
-		appraisalLevelListFn("DeductScore",data['appraisal_level'],defaultAll=false,multiSelect=true);	
+		clearRewardScoreFormFn();
+		appraisalLevelListFn("RewardScore",data['appraisal_level'],defaultAll=false,multiSelect=true);	
 		//dropDrowDepartmentFn("DeductScore",data['department_code'],defaultAll=false);
-		dropDrowOrgFn("DeductScore",data['org'],defaultAll=false);
-		dropDrowPositionFn("DeductScore",data['position'],defaultAll=false);
+		dropDrowOrgFn("RewardScore",data['org'],defaultAll=false);
+		dropDrowPositionFn("RewardScore",data['position'],defaultAll=false);
 		
-		$("#appraisalItemNameDeductScore").val(data['item_name']);
-		$("#maxValueDeductScore").val(data['max_value']);
-		$("#DeductScoreUnitDeductScore").val(data['unit_deduct_score']);
-		$("#ValueGetZero").val(data['value_get_zero']);
-		$("#NoRaiseValue").val(data['no_raise_value']);
+		$("#appraisalItemNameRewardScore").val(data['item_name']);
+		$("#maxValueRewardScore").val(data['max_value']);
+		$("#RewardScoreUnitRewardScore").val(data['unit_reward_score']);
+//		$("#ValueGetZero").val(data['value_get_zero']);
 		
 //		if(data['is_show_variance']==1){
 //			$("#isShowVarianceDeductScore").prop("checked",true);
@@ -208,32 +203,27 @@ var initailDeductScoreFormFn = function(action,structureId,structureName,data){
 //			$("#isShowVarianceDeductScore").prop("checked",false);
 //		}
 		if(data['is_active']==1){
-			$("#isActiveDeductScore").prop("checked",true);
+			$("#isActiveRewardScore").prop("checked",true);
 		}else{
-			$("#isActiveDeductScore").prop("checked",false);
+			$("#isActiveRewardScore").prop("checked",false);
 		}
 		
-		if(data['is_value_get_zero']==1){
-			$(".is_value_get_zero_form").show();
-		}else{
-			$(".is_value_get_zero_form").hide();
-		}
+//		if(data['is_value_get_zero']==1){
+//			$(".is_value_get_zero_form").show();
+//		}else{
+//			$(".is_value_get_zero_form").hide();
+//		}
 		
-		if(data['is_no_raise_value'] == 1)  
-			$(".is_no_raise_value_form").show();
-		else
-			$(".is_no_raise_value_form").hide();
-			
-		$("#appraisalItemIdDeductScore").val(data['item_id']);
-		$("#actionDeductScore").val("edit");
-		$("#btnAddAnotherDeductScore").hide();
+		$("#appraisalItemIdRewardScore").val(data['item_id']);
+		$("#actionRewardScore").val("edit");
+		$("#btnAddAnotherRewardScore").hide();
 		
 		
 		
 	
 		//set header
-		$("#structure_id_deduct").val(structureId);
-		$("#modalDeductScoreDescription").html("Edit "+structureName);
+		$("#structure_id_reward").val(structureId);
+		$("#modalRewardScoreDescription").html("Edit "+structureName);
 
 		
 		
@@ -248,17 +238,17 @@ var initailDeductScoreFormFn = function(action,structureId,structureName,data){
 		unit_deduct_score,
 		is_active
 		*/	
-		clearDeductScoreFormFn();
-		appraisalLevelListFn("DeductScore",$("#embed_appraisal_level").val(),defaultAll=false,multiSelect=true);	
+		clearRewardScoreFormFn();
+		appraisalLevelListFn("RewardScore",$("#embed_appraisal_level").val(),defaultAll=false,multiSelect=true);	
 		//dropDrowDepartmentFn("DeductScore",$("#embed_department_id").val(),defaultAll=false);
-		dropDrowOrgFn("DeductScore",$("#embed_org_id").val(),defaultAll=false);
-		dropDrowPositionFn("DeductScore",$("#embed_position_id").val(),defaultAll=false);
+		dropDrowOrgFn("RewardScore",$("#embed_org_id").val(),defaultAll=false);
+		dropDrowPositionFn("RewardScore",$("#embed_position_id").val(),defaultAll=false);
 		
-		$("#btnAddAnotherDeductScore").show();
+		$("#btnAddAnotherRewardScore").show();
 		
 		//set header
-		$("#structure_id_deduct").val(structureId);
-		$("#modalDeductScoreDescription").html("Add "+structureName);
+		$("#structure_id_reward").val(structureId);
+		$("#modalRewardScoreDescription").html("Add "+structureName);
 		
 	}
 }
@@ -266,11 +256,11 @@ $(document).ready(function(){
 //click modal deduct start.
 
 	//$("button[data-target='#modal-deduct']").click(function(){
-	$(document).on("click","button[data-target='#modal-deduct']",function(){
+	$(document).on("click","button[data-target='#modal-reward']",function(){
 		
 		var structureId=$(this).prev().prev().get();
 		var structureName=$(this).prev().prev().prev().get();
-		initailDeductScoreFormFn('add',$(structureId).val(),$(structureName).val());
+		initailRewardScoreFormFn('add',$(structureId).val(),$(structureName).val());
 		
 
 		  
@@ -279,25 +269,25 @@ $(document).ready(function(){
 	
 	//check text filed is number real only
 	//IsNumeric
-	$("#DeductScoreUnitDeductScore").keyup(function(){
+	$("#RewardScoreUnitRewardScore").keyup(function(){
 		console.log(IsNumeric(this.value,this));
 	});
 	
 	//Submit DeductScore Start
-	$(document).on("click","#btnSubmitDeductScore",function(){
+	$(document).on("click","#btnSubmitRewardScore",function(){
 	//$("#btnSubmitDeductScore").click(function(){
 		
-		if($("#actionDeductScore").val()=="add"){
-			insertDeductScoreFn("saveOnly");
+		if($("#actionRewardScore").val()=="add"){
+			insertRewardScoreFn("saveOnly");
 		}else{
-			updateDeductScoreFn();
+			updateRewardScoreFn();
 		}
 		
 	});
-	$(document).on("click","#btnAddAnotherDeductScore",function(){
+	$(document).on("click","#btnAddAnotherRewardScore",function(){
 	//$("#btnAddAnotherDeductScore").click(function(){
 		
-		insertDeductScoreFn("saveAndAnother");
+		insertRewardScoreFn("saveAndAnother");
 		
 	});
 	//Submit DeductScore end
