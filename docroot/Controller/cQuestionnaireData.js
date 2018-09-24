@@ -368,6 +368,7 @@ var scriptBtnClearAddStoreFn  = function (){
 			elements.find('autocompleteStoreID').val("");
 			elements.find('textarea').val("");
 			$("#confrimModal").modal('hide');
+			scriptAutocompleteStoreNameFn();
 		});
 	});
 };
