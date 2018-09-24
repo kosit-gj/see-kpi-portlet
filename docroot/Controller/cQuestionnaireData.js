@@ -51,6 +51,22 @@ var clearFn = function() {
 
 	
 }
+
+var getURLParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+}
+
 var getRoleAuthorizeFn = function (){
 	$.ajax({
 		url: globalSevice['restfulPathRoleAuthorize'],
@@ -530,9 +546,9 @@ var listData = function(data) {
 				html+="<table class='table table-striped table-bordered'>";
 				html+="  <thead>";
 				html+="    <tr>";
-				html+="      <th>รหัส TSE</th>";
-				html+="      <th>ชื่อ-สกุล TSE</th>";
-				html+="      <th></th>";
+				html+="      <th width=\"20%\">รหัส TSE</th>";
+				html+="      <th width=\"70%\">ชื่อ-สกุล TSE</th>";
+				html+="      <th width=\"10%\"></th>";
 				html+="    </tr>";
 				html+="  </thead>";
 				html+="  <tbody>";
@@ -1564,7 +1580,9 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_id,emp_snapshot
 					 dataType:"json",
 					 headers:{Authorization:"Bearer "+tokenID.token},
 					 data:{
-						 "emp_name":request.term
+						 "emp_name" : request.term,
+						 "start_date" : $("#search_datepicker_start").val(),
+						 "end_date" :  $("#search_datepicker_end").val()
 						 },
 					 //async:false,
 	                 error: function (xhr, textStatus, errorThrown) {
@@ -1681,7 +1699,17 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_id,emp_snapshot
 	        	
 	         }
 	    });
-		 
+		
+		var URLParameter_header_id = getURLParameter('data_header_id');
+		var URLParameter_action = getURLParameter('action');
+		var URLParameter_action_modal = getURLParameter('action_modal');
+		
+		if(URLParameter_header_id!=undefined && URLParameter_action!=undefined && URLParameter_action_modal!=undefined) {
+			$("#id").val(URLParameter_header_id);
+			$("#action").val(URLParameter_action);
+			$("#action_modal").val(URLParameter_action_modal);// 1 แก้ไขได้  0 แก้ไขไม่ได้
+			getDataTemplateFn(URLParameter_header_id);
+		}
 	 }
  });
  

@@ -524,7 +524,7 @@ $(document).ready(function() {
                             return {
                                 label: item.emp_name,
                                 value: item.emp_name,
-                                mp_snapshot_id :item.mp_snapshot_id
+                                mp_snapshot_id :item.emp_snapshot_id
                             };
                         }));
 					
