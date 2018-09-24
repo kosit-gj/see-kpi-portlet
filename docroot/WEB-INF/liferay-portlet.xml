@@ -1935,7 +1935,7 @@
 		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/Controller/CAppraisalForm.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/Controller/cAppraisalForm.js</footer-portlet-javascript>
 		<css-class-wrapper>appraisal-form-portlet</css-class-wrapper>
 	</portlet>
 
