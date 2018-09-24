@@ -842,8 +842,8 @@ overflow:auto;
 				<div class="row-fluid" style="text-align: left; margin-top: 15px;" >
 					<a href="#" id="slideUpDownStageHistory" style="">Work Flow Stage History</a>
 					<div class="table-responsive" style="overflow:auto;">
-					<div id="slideStageHistory" style="max-width: none; ">
-							<table class="table" >
+					<div id="slideStageHistory" >
+							<table class="table" style="max-width: none; ">
 								<thead >
 									<tr style="white-space: nowrap;">
 										<th style="width: 15%">Created By</th>
