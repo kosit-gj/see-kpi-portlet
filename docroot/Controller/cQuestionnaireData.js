@@ -1301,6 +1301,7 @@ var updateFn = function(){
 			if (data['status'] == "200") {
 				callFlashSlide("Update Successfully.");
 				$('#modalQuestionaireData').modal('hide');
+				getDataFn();
 				clearFn();
 			}else if (data['status'] == "400") {
 				console.log(data);
@@ -1462,6 +1463,7 @@ var insertFn = function(){
 			if (data['status'] == "200") {
 				callFlashSlide("Insert Successfully.");
 				$('#modalQuestionaireData').modal('hide');
+				getDataFn();
 				clearFn();
 			}else if (data['status'] == "400") {
 				console.log(data);
