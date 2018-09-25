@@ -192,9 +192,9 @@ var scriptBtnListStoreFn = function (){
 					html+="	<td><div align='center'>";
 					//html+="			&nbsp;";
 
-					html+="			<button style='width: 65px; margin-bottom: 3px;' "+($("#action_modal").val()=="0" ? "disabled" : "")+" " +is_disabled;
+					html+="			<button style='width: 65px; margin-bottom: 3px;' ";
 					html+="				class='btn btn-small btn-warning' data_header_id='"+indexEntry.data_header_id+"' customer_id='"+indexEntry.customer_id+"' section_id='"+indexEntry.section_id+"' ";
-					html+="				onclick='btnEditStoreFn(this);'>Edit</button>";
+					html+="				onclick='btnEditStoreFn(this);'>"+($("#action_modal").val()=="0" ? "View" : "Edit")+"</button>";
 					html+="			<span></span>";
 					html+="			<button style='width: 65px; margin-bottom: 3px;' "+($("#action_modal").val()=="0" ? "disabled" : "")+" ";
 					html+="				class='btn btn-small btn-danger' "+is_disabled;
@@ -304,6 +304,8 @@ var btnEditStoreFn = function (element){
 			$(element).parent().parent().parent().parent().parent().parent().parent().hide();
 			$(element).parent().parent().parent().parent().parent().parent().parent().next().html(html);
 			$(element).parent().parent().parent().parent().parent().parent().parent().next().show();
+			if($("#action_modal").val()=="0"){$("#accordionListQuestionaireData").find('input , select, textarea , .closePanelScore').prop('disabled', true);}
+			
 			scriptBtnClearAddStoreFn(); 
 		}
 	});
@@ -359,13 +361,15 @@ var scriptBtnClearAddStoreFn  = function (){
 		$(document).off("click","#btnConfirmOK");
 		$(document).on("click","#btnConfirmOK",function(){
 			elements.hide(); 
-			
+			if($("#action_modal").val()=="0"){$("#accordionListQuestionaireData").find('input , select, textarea , .closePanelScore').prop('disabled', true);}
+			else{elements.find('.autocompleteStoreName').prop('disabled', false);}
 			elements.find('.autocompleteStoreName').prop('disabled', false);
+			elements.find('select option').prop('selected', false);
 			elements.find('select option:eq(0)').prop('selected', true);
-			elements.find('input[type="radio"]').attr('checked', false);
-			elements.find('input[type="checkbox"]').attr('checked', false);
-			elements.find('autocompleteStoreName').val("");
-			elements.find('autocompleteStoreID').val("");
+			elements.find('input[type="radio"][value="0.0"]').prop('checked', false);
+			elements.find('input[type="checkbox"]').prop('checked', false);
+			elements.find('.autocompleteStoreName').val("");
+			elements.find('.autocompleteStoreID').val("");
 			elements.find('textarea').val("");
 			$("#confrimModal").modal('hide');
 			scriptAutocompleteStoreNameFn();
