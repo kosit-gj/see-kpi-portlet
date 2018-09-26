@@ -6,17 +6,19 @@
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
 	 	
 		 if(connectionServiceFn(username,password,plid)==true){
-    	//alert(createTableFn());
+
 	    	var options={
 	    			"colunms":[
-	    			           {"colunmsDisplayName":"Seq",           "width":"5% ","id":"seq_no","colunmsType":"text"},
-	    			           {"colunmsDisplayName":"Structure Name","width":"20%","id":"structure_name","colunmsType":"text"},
-	    			           {"colunmsDisplayName":"#Target Score", "width":"12%","id":"nof_target_score","colunmsType":"text","colunmsDataType":"int"},
-	    			           {"colunmsDisplayName":"Form Type",     "width":"13%","id":"form_name","colunmsType":"text"},
-	    			           {"colunmsDisplayName":"Unlimited Reward","width":"15%","id":"is_unlimited_reward","colunmsType":"checkbox"},
-	    			           {"colunmsDisplayName":"Unlimited Deduction","width":"15%","id":"is_unlimited_deduction","colunmsType":"checkbox"},
-	    			           {"colunmsDisplayName":"Value Get Zero","width":"15%","id":"is_value_get_zero","colunmsType":"checkbox"},
-	    			           {"colunmsDisplayName":"IsActive",      "width":"10%","id":"is_active","colunmsType":"checkbox"},
+	    			           {"colunmsDisplayName": "Seq", "width":"auto", "id":"seq_no", "colunmsType":"text"},
+	    			           {"colunmsDisplayName":"Structure Name", "width":"auto", "id":"structure_name", "colunmsType":"text"},
+	    			           {"colunmsDisplayName":"#Target Score", "width":"auto", "id":"nof_target_score", "colunmsType":"text", "colunmsDataType":"int"},
+	    			           {"colunmsDisplayName":"Type", "width":"auto", "id":"form_name", "colunmsType":"text"},
+	    			           {"colunmsDisplayName":"Level", "width":"auto", "id":"level_name", "colunmsType":"text"},
+	    			           {"colunmsDisplayName":"Unlimited Reward", "width":"10%", "id":"is_unlimited_reward", "colunmsType":"checkbox"},
+	    			           {"colunmsDisplayName":"Unlimited Deduction", "width":"10%", "id":"is_unlimited_deduction", "colunmsType":"checkbox"},
+	    			           {"colunmsDisplayName":"Value Get Zero", "width":"10%", "id":"is_value_get_zero", "colunmsType":"checkbox"},
+	    			           {"colunmsDisplayName":"IsDerive", "width":"5%", "id":"is_derive", "colunmsType":"checkbox"},
+	    			           {"colunmsDisplayName":"IsActive", "width":"5%","id":"is_active","colunmsType":"checkbox"},
 	
 	    			          ],
 	    			"form":[   {
@@ -34,7 +36,15 @@
 	    					   {
 		    					"label":"Form Type","inputType":"dropdown","default":"All",
 		    					"id":"form_id","width":"250px","url":""+restfulURL+"/"+serviceName+"/public/appraisal_structure/form_list"
-		    					},                             
+		    					},
+		    					{
+		            				"label":"Level","inputType":"dropdown","default":"All",
+		            				"id":"level_id","width":"250px", "url":""+restfulURL+"/"+serviceName+"/public/appraisal_structure/level_list"
+		            			},
+		    					{
+		            				"label":"IsDerive","inputType":"checkbox","default":"checked",
+		            				"id":"is_derive","width":"250px"
+		            			},
 	        					{
 	            				"label":"IsActive","inputType":"checkbox","default":"checked",
 	            				"id":"is_active","width":"250px"
@@ -71,29 +81,67 @@
 	    	}
 	 
 	    	createDataTableFn(options);
+	    	$("#table-appraisalStructure thead th").css("vertical-align", "middle");
+	    	$("#level_id").prepend("<option value=''></option>");
+	    	$("#level_id option:eq(1)").attr('selected','selected');
 	    	
-	    	var curFromId = $("#form_id").val();
-	    	
+	    	    	
 	    	$("#form_id").change(function() {
-	    		if($("#form_id").val()==3) { //if Deduct Score					
+	    		if(this.value==1){
+	    			// Disabled Deduct and Reward //
+					$(".is_unlimited_deduction_header, .is_value_get_zero_header, .is_unlimited_reward_header, .is_no_raise_value_header").hide();
+					$(".checkbox-is_unlimited_deduction, .checkbox-is_value_get_zero, .checkbox-is_unlimited_reward, .checkbox-is_no_raise_value").prop('checked',false);
+					
+					// Enabled Derive and Level (form type 1 only) //
+					$('#level_id').val($("#level_id option:eq(1)").val());
+					$('.checkbox-is_derive').prop('checked', true);
+					$('#form-group-level_id').show();
+					$('#form-group-is_derive').show();
+					
+				} else if(this.value==2){
+					// Disabled Deduct and Reward //
+					$(".is_unlimited_deduction_header, .is_value_get_zero_header, .is_unlimited_reward_header, .is_no_raise_value_header").hide();
+					$(".checkbox-is_unlimited_deduction, .checkbox-is_value_get_zero, .checkbox-is_unlimited_reward, .checkbox-is_no_raise_value").prop('checked',false);
+					
+					// Disabled Derive and Level //
+					$('#level_id').val('');
+					$('.checkbox-is_derive').prop('checked', false);
+					$("#form-group-level_id").hide();
+					$("#form-group-is_derive").hide();
+					
+				} else if(this.value==3) { //if Deduct Score
+					// Disabled Reward //
 					$(".is_unlimited_reward_header").hide();
 					$(".checkbox-is_unlimited_reward").prop('checked',false);
+					
+					// Enabled Deduct //
 					$(".is_unlimited_deduction_header, .is_value_get_zero_header, .is_no_raise_value_header").show();
 					$(".checkbox-is_unlimited_deduction, .checkbox-is_value_get_zero").prop('checked',true);
 					$(".checkbox-is_no_raise_value").prop('checked', false);
 					
-				} else if($("#form_id").val()==4) { //if Reward Score					
+					// Disabled Derive and Level //
+					$('#level_id').val('');
+					$('.checkbox-is_derive').prop('checked', false);
+					$("#form-group-level_id").hide();
+					$("#form-group-is_derive").hide();
+					
+				} else if(this.value==4) { //if Reward Score
+					// Disabled Deduct //
 					$(".is_unlimited_deduction_header, .is_value_get_zero_header, .is_no_raise_value_header").hide();
 					$(".checkbox-is_unlimited_deduction, .checkbox-is_value_get_zero, .checkbox-is_no_raise_value").prop('checked',false);
+					
+					// Enabled Reward //
 					$(".is_unlimited_reward_header").show();
 					$(".checkbox-is_unlimited_reward").prop('checked',true);
-						
-				} else {					
-					$(".is_unlimited_deduction_header, .is_value_get_zero_header, .is_unlimited_reward_header, .is_no_raise_value_header").hide();
-					$(".checkbox-is_unlimited_deduction, .checkbox-is_value_get_zero, .checkbox-is_unlimited_reward, .checkbox-is_no_raise_value").prop('checked',false);
-						
-				}
+					
+					// Disable Derive and Level //
+					$('#level_id').val('');
+					$('.checkbox-is_derive').prop('checked', false);
+					$("#form-group-level_id").hide();
+					$("#form-group-is_derive").hide();
+				} 
 	    	});
+	    	$("#form_id").change();
 	 	}
 	 }
 });
