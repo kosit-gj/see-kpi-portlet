@@ -688,6 +688,51 @@ overflow:auto;
 .aui .list-data-table .table-bordered td .btn-gear{
 	width: 100%;
 }
+.aui #modalQuestionaireData .modal-body {
+    max-height: calc(100vh - 206px);
+    overflow-y: auto;
+}
+/*
+.modal-dialog.full-screen {
+    position:fixed;
+    //width:auto;  // uncomment to make the width based on the left/right attributes.
+    margin:auto;                        
+    left:0px;
+    right:0px;
+    top:0px;
+    bottom:0px;
+}
+
+.aui .modal-dialog.full-screen .modal-content {
+      position:absolute;
+      left:10px;
+      right:10px;
+      top:10px;
+      bottom:10px;
+}
+
+.aui .modal-dialog.full-screen .modal-content .modal-header {
+        height:55px;  // adjust as needed.
+}
+
+.aui .modal-dialog.full-screen .modal-content .modal-body {
+        overflow-y: auto;
+	      position: absolute;
+	      top: 0;
+	      bottom: 0;
+        left:0;
+        right:0;
+	      margin-top: 55px; // .modal-header height
+	      margin-bottom: 80px;  // .modal-footer height
+}
+
+.aui .modal-dialog.full-screen .modal-content .modal-footer {
+        height:80px;  // adjust as needed.
+        position:absolute;
+        bottom:0;
+        left:0;
+        right:0;
+}*/
 </style>
 
 <div class='row-fluid '>

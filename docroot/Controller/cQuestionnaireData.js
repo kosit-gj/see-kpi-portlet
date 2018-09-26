@@ -314,6 +314,7 @@ var btnDelStoreFn = function (element){
 
 	var data_header_id = $(element).attr("data_header_id");
 	var customer_id = $(element).attr("customer_id");
+	var section_id =  $(element).attr("section_id");
 	$("#inform_label_confirm").text("Confirm to Delete Data?");
 	$("#confrimModal").modal({
 		"backdrop" : setModalPopup[0],
@@ -322,13 +323,14 @@ var btnDelStoreFn = function (element){
 	$(document).off("click","#btnConfirmOK");
 	$(document).on("click","#btnConfirmOK",function(){
 		$.ajax({
-			url:globalSevice['restfulPathEvaluatedRetailerList']+"/"+id,
+			url:globalSevice['restfulPathEvaluatedRetailerList'],
 			type:"delete",
 			dataType:"json",
 			async:true,
 			data:{
 				"data_header_id":data_header_id,
-				"customer_id":customer_id
+				"customer_id":customer_id,
+				"section_id" : section_id
 			},
 			headers:{Authorization:"Bearer "+tokenID.token},
 			success:function(data){
@@ -364,6 +366,7 @@ var scriptBtnClearAddStoreFn  = function (){
 			if($("#action_modal").val()=="0"){$("#accordionListQuestionaireData").find('input , select, textarea , .closePanelScore').prop('disabled', true);}
 			else{elements.find('.autocompleteStoreName').prop('disabled', false);}
 			elements.find('.autocompleteStoreName').prop('disabled', false);
+			elements.find('input ,textarea ,select option').attr("data_detail_id", "");
 			elements.find('select option').prop('selected', false);
 			elements.find('select option:eq(0)').prop('selected', true);
 			elements.find('input[type="radio"][value="0.0"]').prop('checked', false);
@@ -1516,9 +1519,37 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_id,emp_snapshot
 		 
 		$(".advance-search input").val("");
 		$("#search_questionaire_id").html(generateDropDownList(globalSevice['restfulPathDropDownQuestionnaireList'],"GET",{}));
-		$("#search_datepicker_start,#search_datepicker_end,#modal_datepicker_start").datepicker({
+		$("#modal_datepicker_start").datepicker({
 			dateFormat: "dd/mm/yy"
 		});
+		 $("#search_datepicker_start").datepicker({
+			 	dateFormat: "dd/mm/yy",
+	            minDate: 0,
+	            onSelect: function () {
+	                var dt2 = $('#search_datepicker_end');
+	                var startDate = $(this).datepicker('getDate');
+	                var minDate = $(this).datepicker('getDate');
+	                var dt2Date = dt2.datepicker('getDate');
+	                //difference in days. 86400 seconds in day, 1000 ms in second
+	                var dateDiff = (dt2Date - minDate)/(86400 * 1000);
+	                
+	                startDate.setDate(startDate.getDate() + 30);
+	                if (dt2Date == null || dateDiff < 0) {
+	                		dt2.datepicker('setDate', minDate);
+	                }
+	                else if (dateDiff > 30){
+	                		dt2.datepicker('setDate', startDate);
+	                }
+	                //sets dt2 maxDate to the last day of 30 days window
+	                dt2.datepicker('option', 'maxDate', startDate);
+	                dt2.datepicker('option', 'minDate', minDate);
+	            }
+	        });
+	        $('#search_datepicker_end').datepicker({
+	        	dateFormat: "dd/mm/yy",
+	        	minDate: 0
+	        });
+	    
 		toDayFn("search_datepicker_start");
 		
 		toDayFn("search_datepicker_end");
