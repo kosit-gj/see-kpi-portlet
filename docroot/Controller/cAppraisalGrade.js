@@ -35,7 +35,7 @@ $(document).ready(function(){
 		 if(connectionServiceFn(username,password,plid)==true){
 	    	var options={
 	    			"colunms":[
-	    				 
+	    				{"colunmsDisplayName":"Appraisal Form","width":"auto","id":"appraisal_form_name","colunmsType":"text"},
  			           {"colunmsDisplayName":"Appraisal Level","width":"auto","id":"appraisal_level_name","colunmsType":"text"},
  			           {"colunmsDisplayName":"Grade","width":"auto","id":"grade","colunmsType":"text"},
  			           {"colunmsDisplayName":"Begin Score","width":"auto","id":"begin_score","colunmsType":"text","colunmsDataType":"decimal"},
@@ -45,7 +45,11 @@ $(document).ready(function(){
  			          ],
 
  			          "form":[{
-	     					"label":"Appraisal Level","inputType":"dropdown",
+ 	     					"label":"Appraisal Form","inputType":"dropdown","required":true,
+ 	     					"id":"appraisal_form_id","width":"200px","url":""+restfulURL+"/"+serviceName+"/public/appraisal_grade/form_list"
+ 	     					},
+ 	     					{
+	     					"label":"Appraisal Level","inputType":"dropdown","required":true,
 	     					"id":"appraisal_level_id","width":"200px","url":""+restfulURL+"/"+serviceName+"/public/appraisal_grade/al_list"
 	     					},
 	     			        {
@@ -83,12 +87,20 @@ $(document).ready(function(){
 	     					
 	     			     ],
 	     			     
-	     			    "advanceSearch":[{
-	     			    	"label":"Level","label_tooltip":"Level","inputType":"dropdown",
-	     					"id":"appraisal_level_id","width":"100%",
-	     					"url":""+restfulURL+"/"+serviceName+"/public/appraisal_grade/al_list",
-	     					"initValue":"All"
-	    			     	}],
+	     			    "advanceSearch":[
+	     			    	{
+		     			    	"label":"Level","label_tooltip":"Form","inputType":"dropdown",
+		     					"id":"appraisal_form_id","width":"100%",
+		     					"url":""+restfulURL+"/"+serviceName+"/public/appraisal_grade/form_list",
+		     					"initValue":"All"
+	    			     	},
+	     			    	{
+		     			    	"label":"Level","label_tooltip":"Level","inputType":"dropdown",
+		     					"id":"appraisal_level_id","width":"100%",
+		     					"url":""+restfulURL+"/"+serviceName+"/public/appraisal_grade/al_list",
+		     					"initValue":"All"
+	    			     	}
+	     			    ],
 	     			     
 	    			 "formDetail":{"formSize":"modal-dialog","formName":"Appraisal Grade","id":"databaseConnection","pk_id":"grade_id"},       
 	    			 "serviceName":[restfulURL+"/"+serviceName+"/public/appraisal_grade"],
