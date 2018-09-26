@@ -35,8 +35,10 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 
 
 <style>
-.aui .url_report_cursor{
-cursor: not-allowed !important;;
+.aui .url_report_cursor,.aui .cursorNotAllowed,
+.aui #ModalQuestionnaire .cursorNotAllowed tr:hover > td,
+.aui #ModalQuestionnaire .cursorNotAllowed tr:hover > th {
+cursor: not-allowed !important;
 }
 
 .aui .breadcrumbs2 {
@@ -559,7 +561,14 @@ cursor: not-allowed !important;;
 							<select data-toggle="tooltip" title="Questionnaire Type"
 								class="input span12 m-b-n " id="form_questionnaire_type"
 								name="form_questionnaire_type"><option selected
-									value="">NoAll Questionnaire Type</option></select>
+									value="">No Questionnaire Type</option></select>
+						</div>
+						<div class="form-group pull-left span3"
+							style="margin-left: 0px; position: relative;">
+							<select data-toggle="tooltip" title="Level"
+								class="input span12 m-b-n " id="form_level"
+								name="form_level"><option selected
+									value="">No Level </option></select>
 						</div>
 					</div>
 				</div>

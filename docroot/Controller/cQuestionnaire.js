@@ -138,7 +138,8 @@ var clearFn = function() {
 	$("#action").val("add");
 	$(".btnModalClose").click();
 	globalDataTemp['form'].validate().resetForm();
-
+	$("#form_questionnaire_type ,#form_level ,.numberOnly").prop('disabled', false); 
+	$("#form_questionnaire_type ,#form_level ,.numberOnly").removeClass('cursorNotAllowed');
 	
 }
 //--------  Clear End
@@ -824,7 +825,12 @@ var listQuestionnaireFindOneFn = function(data) {
 	});
 	
 	$("#listSection").html(html);
-	
+	if(data.head.is_use == 1){
+		$("#form_questionnaire_type ,#form_level , .btnAddSection ,.btnAddSubSection,.btnAddQuestion, .btnDelSection ,.addAnswerRow , .btnDelSubSection , .btnDelQuestion ,.btnDelAnswerRow ,.dropDownAnswerTypeSubSection ,.dropDownAnswerTypeQuestion ,.btnDelAnswerRow,.numberOnly").prop('disabled', true); 
+		$("#form_questionnaire_type ,#form_level , .btnAddSection ,.btnAddSubSection,.btnAddQuestion, .btnDelSection ,.addAnswerRow , .btnDelSubSection , .btnDelQuestion ,.btnDelAnswerRow ,.dropDownAnswerTypeSubSection ,.dropDownAnswerTypeQuestion ,.btnDelAnswerRow,.numberOnly").addClass('cursorNotAllowed');
+		$("#listSection .flat-toggle").parent().find("*").addClass('cursorNotAllowed');
+	}
+	else{
 	scriptBtnAddSubSectionFn();
 	scriptBtnAddQuestionFn();
 	scriptAddAnswerRowFn();
@@ -841,6 +847,7 @@ var listQuestionnaireFindOneFn = function(data) {
 	scriptSortAnswerRowFn();
 	
 	scriptFlatToggleFn();
+	}
 	scriptToolTipFn();
 };
 var listQuestionnaireFindOneByQuestionFn = function(data,question_type,body_stamp_parent,parent_id) {
