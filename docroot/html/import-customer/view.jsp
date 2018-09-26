@@ -543,9 +543,10 @@ plid = layout.getPlid();
 						<thead>
 							<tr>
 								<th style='width: 10%;white-space: nowrap;'>Customer Code</th>
-								<th style='width: 60%;white-space: nowrap;'>Customer Name</th>
+								<th style='width: 50%;white-space: nowrap;'>Customer Name</th>
 								<th style='width: 10%;white-space: nowrap;'>Customer type</th>
 								<th style='width: 10%;white-space: nowrap;'>Industry Class</th>
+								<th style='width: 10%;text-align: center;'>Is Active</th>
 								<th style='width: 10%; text-align: center;'>Manage</th>
 							</tr>
 						</thead>
@@ -648,11 +649,21 @@ plid = layout.getPlid();
 									<input type="text" class="form-control input-sm span12" placeholder="" id="from_position_code_3" disabled="disabled">
 								</div>
 							</div>
-							
-							
-	                	
-	                	
-	                	</div>
+						<div class="form-group p-xxs">
+							<label class="control-label">Is Active:</label>
+							<div class="controls">
+								<label for="" class="checkbox" style="cursor: default">
+									<input id="from_checkboxIs_active"
+									name="from_checkboxIs_active" type="checkbox" value=""
+									style="margin-top: 4px;" disabled="disabled">
+								</label>
+							</div>
+						</div>
+
+
+
+
+					</div>
                 	</div>
 					<!-- form End -->
 					<!-- content end -->
@@ -694,7 +705,7 @@ plid = layout.getPlid();
 					<form id="fileImportCustomer">
 						<h4>FILE IMPORT</h4>
 						<div class="fileUpload ">
-							<input type="file" id="file" class="dropify" accept=".xls, .xlsx" /><span></span>
+							<input type="file" id="file" class="dropify" accept=".csv" /><span></span>
 						</div>
 					</form>
 					</div>

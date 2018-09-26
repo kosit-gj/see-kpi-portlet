@@ -189,8 +189,8 @@ var findOneFn = function(id) {
 				$("#from_position_code_1").val("");
 				$("#from_position_code_1").show();
 			}
-
 			$("#from_industry_class").val(data['industry_class']);
+			$("#from_checkboxIs_active").prop('checked', (data['is_active'] == 1 ? true:false));;
 
 		}
 	});
@@ -212,7 +212,7 @@ var listCustomerFn = function(data) {
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["customer_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["customer_type"]+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ notNullTextFn(indexEntry["industry_class"])+ "</td>";
-//		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["appraisal_level_name"]+ "</td>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\"> <div align='center'><input type='checkbox' "+ (indexEntry["is_active"]=="1" ? "checked" : "")+ " disabled></div> </td>";
 		htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><button id="+indexEntry["customer_id"]+" data-target=#ModalViewCustomer data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"' class='btn btn-primary btn-xs view'><i class='fa fa-eye' aria-hidden='true'></i></button></td>";
 
 		htmlTable += "</tr>";
@@ -329,7 +329,7 @@ $(document).ready(function() {
 	//Autocomplete Search End
 	
 	$("#exportToExcel").click(function(){
-		$("form#formExportToExcel").attr("action",$("#url_portlet").val()+"/file/import_customer.xlsx");
+		$("form#formExportToExcel").attr("action",$("#url_portlet").val()+"/file/import_customer.csv");
 	});
 	
 	
