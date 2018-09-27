@@ -190,7 +190,7 @@ var ImportLiferayUser = function(data) {
 					"jobTitle": null,
 					"groupIds": null,
 					"organizationIds": null,
-					"roleIds": null,
+					"roleIds": value.role_id,
 					"userGroupIds": null,
 					"sendEmail": false,
 					"p_auth": $("#pAuth").val()
