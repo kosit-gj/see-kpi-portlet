@@ -2,11 +2,12 @@ var gSetCriteriaCurLevel, gSetWeightCurStruc;
 
 //-------- Update Criteria Start
 var options=[];
-var insertCriteriaFn = function (levelId) {
+var insertCriteriaFn = function (levelId, modalCloseType) {
 	var structure =[];
 	var weight = [];
 	var criteria = [];
 	var checkbox = "";
+	var curFormId = $("#ac_appraisal_form").val();
 	//from_data_structure
 	$('.from_data_structure').each(function(index, indexEntry) {
 		if($(indexEntry).is(":checked")){
@@ -27,21 +28,24 @@ var insertCriteriaFn = function (levelId) {
 			dataType : "json",
 			headers:{Authorization:"Bearer "+tokenID.token},
 			async:false,
-			data:{"criteria":criteria},
+			data:{"criteria":criteria, "appraisal_form_id":curFormId},
 			success : function(data) {
-				if(data['status']==200){
-					callFlashSlide("Add Appraisal Criteria Successfully.");
+				if(data['status']==200){					
 					
-					getDataFn('','',options);
-					
-					$('#addModalCriteria').modal('hide');
-					
+					if(modalCloseType == "freeze"){
+						GetAppraisalFormByLevel(levelId, curFormId);
+						$("body").mLoading('hide');
+						callFlashSlideInModal("Add Appraisal Criteria Successfully.","#information2","info");
+						
+					} else {
+						$('#addModalCriteria').modal('hide');
+						callFlashSlide("Add Appraisal Criteria Successfully.");
+						getDataFn('','',options);
+					}
+										
 				}else if (data['status'] == "400") {
-					
 					var validate = "<font color='red'>* </font>" + data['data'] + "";
-					//alert(validate);
 					callFlashSlideInModal(validate,"#information2","error");
-					
 				} 
 			}
 		});
@@ -52,7 +56,7 @@ var insertCriteriaFn = function (levelId) {
 
 
 //--------  List Criteria  Start
-var listAppraisalCriteria = function(id) {
+var listAppraisalCriteria = function(id, formId) {
 	htmlTable="";
 	weight_percent="";
 	no_weight = "";
@@ -61,7 +65,9 @@ var listAppraisalCriteria = function(id) {
 		url:restfulURL+"/"+serviceName+"/public/appraisal_level_360/"+id+"/criteria",
 		type : "get",
 		dataType : "json",
+		data : {"form_id":formId},
 		headers:{Authorization:"Bearer "+tokenID.token},
+		async: false,
 		success : function(data) {
 			if(data["no_weight"] == 1){
 				no_weight="disabled";
@@ -103,8 +109,6 @@ var listAppraisalCriteria = function(id) {
 				htmlTable+="		<input style='margin-bottom: 0px;' class=\"span12 from_data_weight numberOnly\" "+no_weight+" type='text'  id=\""+indexEntry["structure_id"]+"\" value=\""+weight_percent+"\" />";
 				htmlTable+="	</td>";
 				htmlTable+="</tr>";
-					
-				 
 			});
 			$("#formListAppraisalCriteria").html(htmlTable);
 			var getSelectionStart = function (o) {
@@ -168,7 +172,7 @@ var insertSetweightFn = function (level_id, structure_id) {
 			dataType : "json",
 			headers:{Authorization:"Bearer "+tokenID.token},
 			async:false,
-			data:{"set_weight":setweight},
+			data:{"set_weight":setweight, "appraisal_form_id":$("#ac_appraisal_form").val()},
 			success : function(data) {
 				if(data['status']==200){
 					callFlashSlide("Add Appraisal Criteria SetWeight Successfully.");
@@ -268,6 +272,50 @@ var SetWeightFn = function(level_id, structure_id, structure_name) {
 	});
 }
 //--------  List Criteria Set Weight End
+
+
+// Get appraisal form level id // 
+var GetAppraisalFormByLevel = function(level_id, formId){
+	// Get Appraisal Form //
+	var htmlForm="";
+	var fromIdResponse = 0;
+	$.ajax({
+		url:restfulURL+"/"+serviceName+"/public/competency_criteria/form_list",
+		type : "get",
+		dataType : "json",
+		headers:{Authorization:"Bearer "+tokenID.token},
+		data:{"level_id":level_id},
+		async: false,
+		success : function(data) {
+			fromIdResponse = data[0].appraisal_form_id;
+			$.each(data,function(index,indexEntry) {
+				var usedIcon = (indexEntry.used_flag == "1")?"&#10004 ":"&emsp; ";				
+				if(indexEntry.appraisal_form_id == formId){
+					htmlForm += "<option value='"+indexEntry.appraisal_form_id+"' selected>"+usedIcon+indexEntry.appraisal_form_name+" </option>";
+				} else {
+					htmlForm += "<option value='"+indexEntry.appraisal_form_id+"'>"+usedIcon+indexEntry.appraisal_form_name+" </option>";
+				}
+			});
+			$("select#ac_appraisal_form").html(htmlForm);
+		}
+	});
+	
+	return fromIdResponse;
+}
+
+// Appraisal form change //
+function AppraisalFormChange(formId){
+	
+	// Get Appraisal Form List //
+	GetAppraisalFormByLevel(gSetCriteriaCurLevel, formId); //(level_id, form_id)
+	
+	listAppraisalCriteria(gSetCriteriaCurLevel, formId);
+	$("#addModalCriteria").modal({
+		"backdrop" : setModalPopup[0],
+		"keyboard" : setModalPopup[1]
+	});
+	
+}
 
 
 $(document).ready(
@@ -482,18 +530,29 @@ $(document).on('click', '.addModalCriteria', function() {
 	
 	gSetCriteriaCurLevel = this.id.split("-")[1];
 	
-	//$("#crierai_id").val(gSetCriteriaCurLevel);
-	listAppraisalCriteria(gSetCriteriaCurLevel);
+	// Get Appraisal Form List //
+	// GetAppraisalFormByLevel(level_id, form_id) Return from_id //
+	var formId = GetAppraisalFormByLevel(gSetCriteriaCurLevel, null);
+	
+	console.log("From Result: "+formId);
+	
+	listAppraisalCriteria(gSetCriteriaCurLevel, formId);
 	$("#addModalCriteria").modal({
 		"backdrop" : setModalPopup[0],
 		"keyboard" : setModalPopup[1]
 	});
 
-	$("#btnCriteriaSubmit").off("click");
-	$("#btnCriteriaSubmit").on("click", function() {
+	$(".btnCriteriaSubmit").off("click");
+	$(".btnCriteriaSubmit").on("click", function() {
 		$("#information2").hide();
-		insertCriteriaFn(gSetCriteriaCurLevel);
-	});
+		insertCriteriaFn(gSetCriteriaCurLevel, this.value);
+	});	
+	
+	$("#btnCriteriaClose").off("click");
+	$("#btnCriteriaClose").on("click", function() {
+		getDataFn('','',options);
+		$('#addModalCriteria').css({'z-index' : '1045'});
+	});	
 });
 
 
