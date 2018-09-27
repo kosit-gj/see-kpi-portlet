@@ -534,8 +534,6 @@ $(document).on('click', '.addModalCriteria', function() {
 	// GetAppraisalFormByLevel(level_id, form_id) Return from_id //
 	var formId = GetAppraisalFormByLevel(gSetCriteriaCurLevel, null);
 	
-	console.log("From Result: "+formId);
-	
 	listAppraisalCriteria(gSetCriteriaCurLevel, formId);
 	$("#addModalCriteria").modal({
 		"backdrop" : setModalPopup[0],
@@ -550,7 +548,7 @@ $(document).on('click', '.addModalCriteria', function() {
 	
 	$("#btnCriteriaClose").off("click");
 	$("#btnCriteriaClose").on("click", function() {
-		getDataFn('','',options);
+		// getDataFn('','',options);
 		$('#addModalCriteria').css({'z-index' : '1045'});
 	});	
 });
