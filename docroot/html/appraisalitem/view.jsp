@@ -1,29 +1,21 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
 <%@ page import="javax.portlet.*"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
+
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
+<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 
 <%
-/*
-PortletSession portletSession1 = renderRequest.getPortletSession();
-portletSession1.setAttribute("password", "authenticated", PortletSession.APPLICATION_SCOPE);
-String pwd = (String) portletSession1.getAttribute("password", PortletSession.APPLICATION_SCOPE);
-out.print(pwd);
-String password=PortalUtil.getUser(request).getPassword();
-*/
-
 String username = themeDisplay.getUser().getScreenName();
 String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWORD);
 layout = themeDisplay.getLayout();
 plid = layout.getPlid();
-
-//out.print(username);
-//out.print("password2="+password);
 %>
+
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
@@ -794,263 +786,104 @@ overflow-y: visible;
 	width: auto !important;
 }
 </style>
+
+
 <body class=" gray-bg ">
-<!--  #####################Content data here ######################-->
 <div class="app_url_hidden">
-<div class="container1">
-<div class='row-fluid'>
-	<div id="slide_status" class='span12'>
-		<div id="btnCloseSlide">×</div>
-		<div id="slide_status_area"></div>
-	</div>
-</div>
-<!-- 
-<h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Appraisal Item</span> </h2>
- -->   
-
-
-				<div class="row-fluid"><!-- start--row-fluid -->
-
-                    <div class="span12">
-                        <div class="ibox float-e-margins">
-                            <div class="ibox-title">
-                               
-                                  <div class='titlePanelSearch'>Advance Search</div> 
-         					</div>
-         					
-         						<div class="ibox-content breadcrumbs2">
-							<div class="row-fluid p-t-xxs">
-									
-									<div id="appraisalLevelArea" class="form-group pull-left span4" style="margin-left: 5px">
-											<select data-toggle="tooltip" title="LevelEmp"
-											class="input form-control input-sm" id="appraisalLevel"
-											name="appraisalLevel">
-
-											<option value="0"></option>
-
-										</select>
-									</div>
-									
-									<div id="appraisalLevelOrgArea" class="form-group pull-left span4" style="margin-left: 5px">
-											<select data-toggle="tooltip" title="LevelOrg"
-											class="input form-control input-sm" id="appraisalLevelOrg"
-											name="appraisalLevelOrg">
-
-											<option value="0"></option>
-
-										</select>
-									</div>
-									
-									<div id="OrganizationArea" class="form-group pull-left span4" style="margin-left: 5px">
-										<select data-toggle="tooltip" title=""
-											data-original-title="Organization" multiple="multiple"
-											class="input form-control input-sm span12" id="Organization"
-											name="Organization">
-											<option value=''>All Organization</option>
-										</select>
-									</div>
-								</div>
-								<div class="row-fluid p-t-xxs">
-									<div id="structureArea" class="form-group pull-left span4"
-										style="margin-left: 5px">
-										<select data-toggle="tooltip" title="Structure"
-											class="input form-control input-sm" id="structure"
-											name="structure">
-
-											<option value="0"></option>
-
-										</select>
-									</div>
-									
-									 
-									 <div id="kpiTypeArea" class="form-group pull-left span4"
-										style="margin-left: 5px">
-										<select data-toggle="tooltip" title="KPI Type"
-											class="input form-control input-sm" id="kpiType"
-											name="kpiType">
-
-											<option value="0"></option>
-
-										</select>
-									</div>
-									<div id="perspectiveArea" class="form-group pull-left span4"
-										style="margin-left: 5px">
-										<select data-toggle="tooltip" title="Perspective"
-											class="input form-control input-sm" id="perspective"
-											name="perspective">
-
-											<option value="0"></option>
-
-										</select>
-									</div>
-								</div>
-								<div class="row-fluid p-t-xxs">
-									<div id="appraisalItemNameArea"
-										class="form-group pull-left span4" style="margin-left: 5px">
-										<input data-toggle="tooltip" title="KPI"
-											placeholder="KPI" type='text'
-											name='appraisalItemName'
-											class='input form-control input-sm span12'
-											id='appraisalItemName'>
-									</div>
-									
-									 <!-- 
-									<div id="DepartmentArea" class="form-group pull-left span3"
-										style="margin-left: 5px">
-										<select data-toggle="tooltip" title="Department"
-											class="input form-control input-sm" id="department"
-											name="department">
-										</select>
-									</div>
-									 -->
-									 
-									  
-									 
-									
-									 
-									
-								
-								
-									<div class="form-group pull-right m-b-none ">
-										<button type="button" class="btn btn-info input-sm"
-											name="btnSearchAdvance" id="btnSearchAdvance">
-											<i class="fa fa-search"></i>&nbsp;Search
-										</button>
-										<!-- 
-										<button id="btnCoppy" name="btnCoppy"
-											class="btn btn-warning  input-sm" type="button">
-											<i class="fa fa-copy"></i>&nbsp;Copy
-										</button>
-										 -->
-									</div>
-								
+	<div class="container1">
+		<div class='row-fluid'>
+			<div id="slide_status" class='span12'>
+				<div id="btnCloseSlide">×</div>
+				<div id="slide_status_area"></div>
+			</div>
+		</div>
+		
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<div class='titlePanelSearch'>Advance Search</div>
+					</div>
+					<div class="ibox-content breadcrumbs2">
+						<div class="row-fluid p-t-xxs">
+							
+							<!-- Parameter : Employee Level -->
+							<div id="appraisalLevelArea" class="form-group pull-left span4" style="margin-left: 5px">
+								<select data-toggle="tooltip" title="Employee Level" class="input form-control input-sm" id="appraisalLevel" name="appraisalLevel">
+									<option value="0"></option>
+								</select>
 							</div>
-							<!--
-							<div class="row-fluid">
-										
-										
-												
-				                                    <div class="span4 m-b-xs">
-					                                    <div class="form-group"><label class="span5 control-label-search">Level</label>
-			
-						                                    <div class="span7" id="appraisalLevelArea">
-						                                    
-							                                    <select data-toggle="tooltip" title="Level" class="input form-control input-sm"  id="appraisalLevel" name="appraisalLevel">
-							                                    	
-							                                    	<option value="0"></option>
-																	
-																	
-																</select>
-																
-						                                    </div>
-						                                </div>
-													</div>
-													<div class="span4 m-b-xs">
-					                                    <div class="form-group"><label class="span5 control-label-search">Perspective</label>
-			
-						                                    <div class="span7" id="perspectiveArea">
-						                                    
-							                                    <select data-toggle="tooltip" title="Perspective" class="input form-control input-sm"  id="perspective" name="perspective">
-							                                    	
-							                                    	<option value="0"></option>
-																	
-																</select>
-																
-						                                    </div>
-						                                </div>
-													</div>
-													<div class="span4 m-b-xs">
-					                                    <div class="form-group"><label class="span5 control-label-search">Structure </label>
-			
-						                                    <div class="span7" id='structureArea'>
-						                                    
-							                                    <select data-toggle="tooltip" title="Structure" class="input form-control input-sm"  id="structure" name="structure">
-							                                    	
-							                                    	<option value="0"></option>
-																	
-																</select>
-																
-						                                    </div>
-						                                </div>
-													</div>
-													
-													
-										</div>
-										<div class="row-fluid">
-										
-													<div class="span4 m-b-xs">
-					                                    <div class="form-group"><label class="span5 control-label-search">Department</label>
-			
-						                                    <div class="span7" id='DepartmentArea'>
-						                                    
-							                                    <select data-toggle="tooltip" title="Flag 2" class="input form-control input-sm"  id="department" name="department">
-							                                    	
-							                                   
-																	
-																	
-																</select>
-																
-						                                    </div>
-						                                </div>
-													</div>
-													
-													<div class="span4 m-b-xs">
-					                                    <div class="form-group"><label class="span5 control-label-search">Appraisal Item </label>
-			
-						                                    <div class="span7" id='appraisalItemNameArea'>
-						                                    
-																<input data-toggle="tooltip" title="Appraisal Item " placeholder="Appraisal Item " type='text' name='appraisalItemName' class='input form-control input-sm span12' id='appraisalItemName'>
-																
-						                                    </div>
-						                                </div>
-													</div>
-													
-													<div class="span4" style='text-align:right;'>
-					                                    
-					                                    
-					                                     <div class="form-group"><label class="span5 control-label-search">&nbsp;</label>
-			
-						                                    <div class="span7" id='appraisalItemNameArea'>
-						                                    
-																<button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance"><i class="fa fa-search"></i>&nbsp;Search</button>
-																<button id="btnCoppy" name="btnCoppy" class="btn btn-warning  input-sm" type="button"><i class="fa fa-plus-square"></i>&nbsp;Copy</button>
-						                                    </div>
-						                                </div>
-						                                
-					                                  
-													</div>
-													
-										</div>
-													
-													
-										
-										
-										<!-- 
-										<div class='span1' align="right">
-										
-												
-												
-			                                     	<div class="input-group" >
-				                                     	<div id="btnSearchArea">
-			                                         		<button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance"><i class="fa fa-search"></i>&nbsp;Search</button>
-			                                         	</div>
-		                                         	</div>
-		                                     	
-                                     	
-										</div>
-										 -->
-										
+							
+							<!-- Parameter : Organization Level -->
+							<div id="appraisalLevelOrgArea" class="form-group pull-left span4" style="margin-left: 5px">
+								<select data-toggle="tooltip" title="Organization Level" class="input form-control input-sm" id="appraisalLevelOrg" name="appraisalLevelOrg">
+									<option value="0"></option>
+								</select>
+							</div>
+							
+							<!-- Parameter : Organization -->
+							<div id="OrganizationArea" class="form-group pull-left span4" style="margin-left: 5px">
+								<select data-toggle="tooltip" title="" data-original-title="Organization" multiple="multiple" class="input form-control input-sm span12" id="Organization" name="Organization">
+									<option value=''>All Organization</option>
+								</select>
+							</div>
+						</div>
+						
+						<div class="row-fluid p-t-xxs">
+							
+							<!-- Parameter : Structure -->
+							<div id="structureArea" class="form-group pull-left span4" style="margin-left: 5px">
+								<select data-toggle="tooltip" title="Structure" class="input form-control input-sm" id="structure" name="structure">
+									<option value="0"></option>
+								</select>
+							</div>
+							
+							<!-- Parameter : KPI Type -->
+							<div id="kpiTypeArea" class="form-group pull-left span4" style="margin-left: 5px">
+								<select data-toggle="tooltip" title="KPI Type" class="input form-control input-sm" id="kpiType" name="kpiType">
+									<option value="0"></option>
+								</select>
+							</div>
+							
+							<!-- Parameter : Perspective -->
+							<div id="perspectiveArea" class="form-group pull-left span4" style="margin-left: 5px">
+								<select data-toggle="tooltip" title="Perspective" class="input form-control input-sm" id="perspective" name="perspective">
+									<option value="0"></option>
+								</select>
+							</div>
+						</div>
 
-	                                    
-                                    
-                                     	 
-                             		</div>
-				         		</div><!-- content end -->
-				         		</div>
-				         		
-         				</div>
+						<div class="row-fluid p-t-xxs">
+							
+							<!-- Parameter : KPI Name -->
+							<div id="appraisalItemNameArea" class="form-group pull-left span4" style="margin-left: 5px">
+								<input data-toggle="tooltip" title="KPI" placeholder="KPI" type='text' name='appraisalItemName' class='input form-control input-sm span12' id='appraisalItemName'>
+							</div>
+							
+							<!-- Parameter : Assign Status -->
+							<div id="assignStatusArea" class="form-group pull-left span4" style="margin-left: 5px">
+								<select data-toggle="tooltip" title="Assign Status" class="input form-control input-sm" id="assignStatus" name="assignStatus">
+									<option value="all"> All Status </option>
+									<option value="assigned"> Assigned </option>
+									<option value="not-assign"> Not Assign </option>
+								</select>
+							</div>
+							
+							<!-- Button : Search -->
+							<div class="form-group pull-right m-b-none ">
+								<button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance">
+									<i class="fa fa-search"></i>&nbsp;Search
+								</button>
+							</div>
+							
+						</div>
+					</div>
+				</div><!-- content end -->
+			</div>
+		</div>
+	</div><!-- end--row-fluid -->
 	
-         			</div><!-- end--row-fluid -->
+	
          			<div class="row-fluid result_area">
 				         		<div class="span12">
 					         	<div class="ibox-title">

@@ -2,9 +2,9 @@
 /*#########################  Main Function Data #######################*/
 //Global variable
 var globalData=[];
-//Get Data
+
+// Get Appraisal Item from user search //
 var getDataFn = function(page,rpp) {
-	
 	
 	var appraisal_level_id = $("#embed_appraisal_level_id").val();
 	var appraisal_level_id_org = $("#embed_appraisal_level_id_org").val();
@@ -13,9 +13,8 @@ var getDataFn = function(page,rpp) {
 	var item_id= $("#embed_item_id").val();
 	var organization_id= $("#embed_organization").val();
 	var kpi_type_id= $("#embed_kpi_type_id").val();
+	var assign_status= $("#embed_assign_status").val();
 	
-	
-
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/appraisal_item",
 		type:"get",
@@ -31,21 +30,16 @@ var getDataFn = function(page,rpp) {
 			"structure_id":structure_id,
 			"perspective_id":perspective_id,
 			"item_id":item_id,
-			"org_id":organization_id
-			
-			
+			"org_id":organization_id,
+			"assign_status":assign_status
 		},
 		success:function(data){
-			
-			
 			listDataFn(data['group']);
 			setThemeColorFn(tokenID.theme_color);
 			globalData=data;
-			//paginationSetUpFn(globalData['current_page'],globalData['last_page'],globalData['last_page']);
 			$(".result_area").show();
 		}
 	})
-	
 };
 
 
@@ -70,10 +64,6 @@ var getDataFn = function(page,rpp) {
 //		
 //		return IsNumber;
 //}
-//Embed Parameter 
-var embedParam = function(id){
-	
-}
 
 
 var displayTypeFn  = function(dataValue,dataType){
@@ -366,27 +356,18 @@ var checkZero = function(id){
 			}
 		};
 
-//SearchAdvance
+
 var searchAdvanceFn = function() {
-	/*
-	appraisal_level_id,
-	structure_id,
-	perspective_id,
-	item_id
-	*/
 	
 	$(".embed_param_search").remove();
 	
 	var apraisalItemId=$("#appraisalItemName").val().split("-");
 	apraisalItemId=apraisalItemId[0];
 	
-//	var Organization=$("#Organization").val().split("-");
-//	Organization=Organization[0];
 	var Organization=$("#Organization").val();
 	
 	var structure = $("#structure").val().split("-");
 	structure=structure[0];
-	
 	
 	var embedParam="";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id' name='embed_appraisal_level_id' value='"+$("#appraisalLevel").val()+"'>";
@@ -396,11 +377,14 @@ var searchAdvanceFn = function() {
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_structure_id' name='embed_structure_id' value='"+structure+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_item_id' name='embed_item_id' value='"+apraisalItemId+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_organization' name='embed_organization' value='"+Organization+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_assign_status' name='embed_assign_status' value='"+$("#assignStatus").val()+"'>";
 	
 	$("#embedParamSearch").append(embedParam);
 	
 	getDataFn();
 };
+
+
 /*#########################  Main Function Data #######################*/
 /*#########################  Custom Function Data #######################*/
 var appraisalLevelListFn2 = function(){
@@ -1111,13 +1095,11 @@ $(document).ready(function(){
 	
 	
 	
-	//Search Start
-	$("#btnSearchAdvance").click(function(){
-		
+	// Search //
+	$("#btnSearchAdvance").click(function(){		
 		searchAdvanceFn();
 	});
-	//$("#btnSearchAdvance").click();
-	//Search End
+
 	
 
 	
