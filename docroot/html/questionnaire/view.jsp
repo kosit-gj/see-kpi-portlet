@@ -386,7 +386,11 @@ cursor: not-allowed !important;
 									class="input span12 m-b-n" id="search_quest_type" name="search_quest_type"><option
 										selected value="">All Questionnaire Type</option></select>
 							</div>
-	
+							<div  class="form-group pull-left span3" style="margin-left: 5px">
+								<select data-toggle="tooltip" title="level"
+									class="input span12 m-b-n" id="search_level_id" name="search_level_id"><option
+										selected value="">All Level</option></select>
+							</div>
 	
 							<div class="form-group pull-left span4" style="margin-left: 5px">
 								<input data-toggle="tooltip" title="Questionnaire Name"
@@ -443,39 +447,14 @@ cursor: not-allowed !important;
 								<th style='width: 5%; white-space: nowrap;'>No.</th>
 								<th style='width: 15%; white-space: nowrap;'>Questionnaire Type</th>
 								<th style='width: auto; white-space: nowrap;'>Questionnaire Name</th>
+								<th style='width: 15%; white-space: nowrap;'>Level Name</th>
 								<th style='width: 10%; white-space: nowrap;text-align: right;'>Pass Score</th>
+								<th style='width: 10%; text-align: center;' class='objectCenter'>Is Active</th>
 								<th style='width: 10%; text-align: center;' class='objectCenter'>Manage</th>
 							</tr>
 						</thead>
 						<tbody id="listQuestionnaire">
-							<tr class="rowSearch">
-								<td class="columnSearch" style="vertical-align: middle;">1</td>
-								<td class="columnSearch" style="vertical-align: middle;">Work
-									With</td>
-								<td class="columnSearch" style="vertical-align: middle;">TSE
-									Work With</td>
-								<td class="columnSearch" style="vertical-align: middle;">15</td>
-								<td id="objectCenter" style="vertical-align: middle;"><i
-									class="fa fa-cog font-gear popover-edit-del" data-html="true"
-									data-toggle="popover" data-placement="top" data-trigger="focus"
-									tabindex="0"
-									data-content="<button class='btn btn-warning btn-xs edit' id=1 data-target=#ModalCommonData data-toggle='modal' data-backdrop='static' data-keyboard='false'>Edit</button>&nbsp;<button id=1 class='btn btn-danger btn-xs del'>Delete</button>"
-									data-original-title="" title=""></i></td>
-							</tr>
-							<tr class="rowSearch">
-								<td class="columnSearch" style="vertical-align: middle;">2</td>
-								<td class="columnSearch" style="vertical-align: middle;">Work
-									With</td>
-								<td class="columnSearch" style="vertical-align: middle;">Van
-									Work With</td>
-								<td class="columnSearch" style="vertical-align: middle;">14</td>
-								<td id="objectCenter" style="vertical-align: middle;"><i
-									class="fa fa-cog font-gear popover-edit-del" data-html="true"
-									data-toggle="popover" data-placement="top" data-trigger="focus"
-									tabindex="0"
-									data-content="<button class='btn btn-warning btn-xs edit' id=2 data-target=#ModalCommonData data-toggle='modal' data-backdrop='static' data-keyboard='false'>Edit</button>&nbsp;<button id=2 class='btn btn-danger btn-xs del'>Delete</button>"
-									data-original-title="" title=""></i></td>
-							</tr>
+
 						</tbody>
 					</table>
 				</div>
@@ -566,8 +545,8 @@ cursor: not-allowed !important;
 						<div class="form-group pull-left span3"
 							style="margin-left: 0px; position: relative;">
 							<select data-toggle="tooltip" title="Level"
-								class="input span12 m-b-n " id="form_level"
-								name="form_level"><option selected
+								class="input span12 m-b-n " id="form_level_id"
+								name="form_level_id"><option selected
 									value="">No Level </option></select>
 						</div>
 					</div>
@@ -877,3 +856,45 @@ cursor: not-allowed !important;
 
 
  -->
+ 	<!-- Modal Confirm Start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModalActiveJobGroup"
+		class="modal inmodal in" style="width:400px;left:calc;display: none;z-index:1300; margin-top: 5%;" >
+		<div class="modal-dialog">
+			<div class="modal-content  bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button" style="padding-top:3px">
+						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span>
+					</button>
+					<h4 class="modal-title">Confirm Dialog</h4>
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+	
+					<!-- form start -->
+					<div class="form-kpi-mangement">
+						<div class="form-kpi-label" align="center">
+
+							<label>Would you like to set this job group</label>
+							<label>as the active questionnaire group?</label>
+							<div id="inform_on_confirm2" class='information'></div>
+						</div>
+					</div>
+
+					<!-- form start -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+					<div align="center">
+						<button class="btn btn-success" id="btnConfirmJobGroupOK" type="button">
+							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
+						</button>
+						&nbsp;&nbsp;
+						<button data-dismiss="modal" class="btn btn-danger" type="button">
+							<i class="fa fa-times-circle"></i>&nbsp;Cancel
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal Confirm End -->
