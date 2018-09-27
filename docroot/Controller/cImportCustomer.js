@@ -381,6 +381,13 @@ $(document).ready(function() {
 			processData: false, // Don't process the files
 			contentType: false, // Set content type to false as jQuery will tell the server its a query string request
 			headers:{Authorization:"Bearer "+tokenID.token},
+			xhr: function() {
+		        var xhr = $.ajaxSettings.xhr();
+		        xhr.upload.onprogress = function(e) {
+		            console.log(Math.floor(e.loaded / e.total *100) + '%');
+		        };
+		        return xhr;
+		    },
 			success: function(data, textStatus, jqXHR)
 			{
 				
