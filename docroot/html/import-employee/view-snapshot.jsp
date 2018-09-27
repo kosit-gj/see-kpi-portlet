@@ -470,7 +470,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 	
 							<div id="drop_down_level" class="form-group pull-left span2"
 								style="margin-left: 5px">
-								<select data-toggle="tooltip" title="Lveel"
+								<select data-toggle="tooltip" title="Level"
 									class="input span12 m-b-n" id="search_level" name="search_level">
 									<option selected value="">All Level</option>
 								</select>
