@@ -186,7 +186,7 @@
 		accordionHtml += "				</div>";
 		accordionHtml += "				<div class='span8' style='overflow: auto'>";
 		//accordionHtml += "					<div class='graphLTopHeader' style='margin-bottom: 3px;'>KPI: "+data['item_name']+"</div>";
-		accordionHtml += "					<div id='chartOrgBar-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"' style='min-width:500px;'></div>";
+		accordionHtml += "					<div id='chartOrgBar-"+(type == "org" ? data['org_id'] : data['emp_id'] )+"' style='width:100%;'></div>";
 		accordionHtml += "				</div>";
 		accordionHtml += "			</div>";
 		//#End Body Accordion
@@ -485,7 +485,7 @@
 	                "legendItemFontSize" : "10",
 	                "legendItemFontColor" : "#666666",
 	                "useRoundEdges":"1",
-	                "chartRightMargin":"30",
+	                "chartRightMargin":"40",
 	                
 	                //"caption": "Harry's SuperMart",
 	                //"subCaption": "Sales analysis of last year",
@@ -636,14 +636,15 @@
 	                "anchorRadius": "4",
 					"anchorBorderThickness": "2",
 					"anchorBgColor": "#FCFDFC",
-					"chartRightMargin":(data['is_show_variance'] == "1" ? "-35" :"0"),
+					//"chartRightMargin":(data['is_show_variance'] == "1" ? "-35" :"0"),
+					"chartRightMargin":"0",
 					//"anchorBorderColor": "#127fcb",
 					//"anchorSides": "6",
 					"scrollheight": "4",
 					//"numVisiblePlot": "6",
 					"flatScrollBars": "1",
 					"scrollPadding":"10",
-					
+					"trendValueFontSize": "0.1",
 	            },
 	            "categories": data['bar_chart']['categories'],
 	            "dataset": data['bar_chart']['dataset'],
