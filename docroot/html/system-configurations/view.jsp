@@ -250,6 +250,20 @@ plid = layout.getPlid();
 									</div>
 
                                  </div> 
+                                 
+                                 <div class="row-fluid">
+							
+									<div class="span5 object-right" >
+									<label class='text-label'>  Entity Type Resorting &nbsp;:</label>
+									
+									</div>
+									<div class="span3" id="entityTypeSystem">
+										<select id="entityType" class="input form-control input-sm span12" data-toggle="tooltip" title="Entity Type" name="entityType">
+										<option value="1">Ascending</option>
+										<option value="2">Descending</option>
+										</select>
+									</div>
+                                 </div> 
                                  <div class="row-fluid">
 							
 									<div class="span5 object-right" >
