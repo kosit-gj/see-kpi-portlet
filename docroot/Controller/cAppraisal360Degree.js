@@ -1,10 +1,9 @@
-var globalData = ""; 
 var galbalDataTemp = [];
 var phaseArray = [];
 var globalCount = 0;
 var username = "";
 var password = "";
-
+var gEmpInfo = [];
 //Variable to store your files
 var files;
 var emailLinkAppraisal = false;
@@ -40,7 +39,12 @@ var getQualityFn = function () {   // QualityFn
             $.each(dataQuality, function (index, groupEntry) {
                 $("#appraisal_template_area").append(assignTemplateQualityFn(index, groupEntry));
                 onchangGroupQualityFn(groupEntry['structure_id']);
-                if ($("#group_id").val() != 5) $(".classAdmin").hide(); // hidden parameter
+                
+                if ( jQuery.inArray($("#group_id").val(), ["1", "5"]) != -1 ){
+                	$(".classAdmin").show(); // Show parameter
+                } else {
+                	$(".classAdmin").hide(); // Hidden parameter
+                }
             });
         }
     });
@@ -61,6 +65,8 @@ var updateQualityFn = function () {   // QualityFn
 }
 
 var assignTemplateQualityFn = function (structureName, data) {  // QualityFn
+	console.log("assignTemplateQualityFn()...");
+	console.log(data);
     var item_result_id_array = [];
     var htmlTemplateQuality = "";
     var info_item = "";
@@ -157,7 +163,6 @@ var onchangDetailQualityFn = function (item_result_id, structureId) {  // Qualit
     });
 
     dataChangeQuality = $.grep(dataChangeQuality, function (data, index) {
-//        console.log((data.competency_result_id != competency_result_id) || (data.item_result_id != item_result_id))
         return ((data.competency_result_id != competency_result_id) || (data.item_result_id != item_result_id));
     });
 
@@ -181,6 +186,9 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
 
     $.each(dataQuality, function (index1, groupEntry1) {
         dataHint = groupEntry1['hint'];
+        
+        // Set Hint Detail //
+        hintHtml = "";
         $.each(groupEntry1['hint'], function (indexHint, indexEntryHint) {
             hintHtml += "<div style='text-align: left;\'>" + indexEntryHint['hint'] + "</div>";
         });
@@ -233,6 +241,10 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
     htmlTable += "</tr>";
 
     $("#table-" + structureId).html(htmlTable);
+    
+    if(($("select#emp-"+structureId).val()) != cMain_emp_id){
+    	$("#table-"+structureId+" .competencyScore").attr("disabled", "disabled")
+    }
 
     if ($("#group-" + structureId).val() != 0) $(".th-all").hide();  // hide total_weigh_score
 
@@ -277,7 +289,12 @@ var onchangGroupQualityFn = function (structureId) { // QualityFn
                     $.each(indexEntry2, function (index3, indexEntry3) {
                     	var objectType = jQuery.type(indexEntry3);
                         if (objectType == "object" || objectType == "array") {
-                            htmlEmp += "<option value='" + indexEntry3['emp_id'] + "'>" + indexEntry3['emp_name'] + "</option>";
+                        	if(indexEntry3['emp_id'] == cMain_emp_id){
+                        		htmlEmp += "<option value='" + indexEntry3['emp_id'] + "'> &#10148 " + cMain_emp_name + "</option>";
+                        	} else {
+                        		htmlEmp += "<option value='" + indexEntry3['emp_id'] + "'>" + indexEntry3['emp_name'] + "</option>";
+                        	}
+                            
                         }
                     });
                 }
@@ -312,6 +329,7 @@ var getCommentFn = function () {    // CommentFn
         url: restfulURL + "/" + serviceName + "/public/appraisal/comment/" + $("#emp_result_id").val(),
         type: "get",
         dataType: "json",
+        data: {"group_id" : $("#group_id").val()},
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
@@ -377,7 +395,11 @@ var assignTemplateCommentFn = function () {  // CommentFn
     htmlTemplateComment += "<select class='span12' data-original-title='" + $(".lt-employee").val() + "' title=''  data-toggle='tooltip' class='span12' id='span-emp' onchange='onchangDetailCommentFn()'>";
 
     $.each(dataComment['detail'], function (index, indexEntry) { // gen select 
-        htmlTemplateComment += "<option value='" + indexEntry['emp_id'] + "'>" + indexEntry['emp_name'] + "</option>";
+    	if(indexEntry['emp_id'] == cMain_emp_id){
+    		htmlTemplateComment += "<option value='" + indexEntry['emp_id'] + "'> &#10148" + cMain_emp_name + "</option>";
+    	} else {
+    		htmlTemplateComment += "<option value='" + indexEntry['emp_id'] + "'>" + indexEntry['emp_name'] + "</option>";
+    	}
     });
 
     htmlTemplateComment += "</select>"
@@ -416,6 +438,13 @@ var assignTemplateCommentFn = function () {  // CommentFn
     $('[data-toggle="tooltip"]').tooltip({
         html: true
     });
+    
+    // group id = 1(chief emp) - enabled assessor_strength_opinion, assessor_weakness_opinion // 
+    if(($("#group_id").val()) == 1 && $("#span-emp").val() == cMain_emp_id){
+    	$("#assessor_strength_opinion").prop("disabled", false);
+    	$("#assessor_weakness_opinion").prop("disabled", false);
+    }
+    
     onchangDetailCommentFn();
 }
 
@@ -425,7 +454,11 @@ var onchangGroupCommentFn = function () {  // CommentFn
 
     $.each(dataComment['detail'], function (index, indexEntry) { // gen select 
         if (commentTXT == indexEntry['comment'] || commentTXT == 'all') {
-            htmlSelect += "<option value='" + indexEntry['emp_id'] + "'>" + indexEntry['emp_name'] + "</option>";
+        	if(indexEntry['emp_id'] == cMain_emp_id){
+        		htmlSelect += "<option value='" + indexEntry['emp_id'] + "'> &#10148" + cMain_emp_name + "</option>";
+        	} else {
+        		htmlSelect += "<option value='" + indexEntry['emp_id'] + "'>" + indexEntry['emp_name'] + "</option>";
+        	}
         }
     });
     $("#span-emp").html(htmlSelect);
@@ -444,8 +477,13 @@ var onchangDetailCommentFn = function () {  // CommentFn
     // toggle text box by user //
     switch (dataComment['user']) {
         case "admin":
-            $("#assessor_strength_opinion").prop("disabled", true);
-            $("#assessor_weakness_opinion").prop("disabled", true);
+        	if(($("#group_id").val()) == 1 && id == cMain_emp_id){
+            	$("#assessor_strength_opinion").prop("disabled", false);
+                $("#assessor_weakness_opinion").prop("disabled", false);
+            } else {
+            	$("#assessor_strength_opinion").prop("disabled", true);
+                $("#assessor_weakness_opinion").prop("disabled", true);
+            }            
             $("#emp_strength_opinion").prop("disabled", true);
             $("#emp_weakness_opinion").prop("disabled", true); break;
         case "my":
@@ -551,8 +589,9 @@ var listErrorActionPlanFn = function (data) {
     }
     return errorData;
 }
-
 //List Error Function End
+
+
 var dropdownDeductScoreFn = function (score, nof_target_score, hint) {
     htmlTemplateQuality = "";
 
@@ -575,6 +614,7 @@ var dropdownDeductScoreFn = function (score, nof_target_score, hint) {
     }
     return htmlTemplateQuality;
 }
+
 
 var assignTemplateQualityFn_Backup = function (structureName, data) {
     var item_result_id_array = [];
@@ -679,6 +719,7 @@ var assignTemplateQualityFn_Backup = function (structureName, data) {
     return htmlTemplateQuality;
 };
 
+
 var assignTemplateRewardFn = function (structureName, data) {
 
     var htmlTemplateDeduct = "";
@@ -776,6 +817,7 @@ var assignTemplateRewardFn = function (structureName, data) {
     return htmlTemplateDeduct;
 };
 
+
 var assignTemplateDeductFn = function (structureName, data) {
 
     var htmlTemplateDeduct = "";
@@ -866,6 +908,7 @@ var assignTemplateDeductFn = function (structureName, data) {
     htmlTemplateDeduct += "</div>";
     return htmlTemplateDeduct;
 };
+
 
 var assignTemplateQuantityFn = function (structureName, data) {
     var item_result_id_array = [];
@@ -989,7 +1032,8 @@ var assignTemplateQuantityFn = function (structureName, data) {
     return htmlTemplateQuantity;
 }
 
-//function global start
+
+// Advanced Search Parameter //
 var dropDrowYearListFn = function (nameArea, id) {
     if (nameArea == undefined) {
         nameArea = "";
@@ -1016,6 +1060,7 @@ var dropDrowYearListFn = function (nameArea, id) {
     dropDrowPeriodListFn($("#AppraisalYear").val());
 }
 
+
 var dropDrowPeriodListFn = function (year, id) {
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/period_list",
@@ -1038,6 +1083,7 @@ var dropDrowPeriodListFn = function (year, id) {
     });
 }
 
+
 var dropDrowAppraisalOrgLevelFn = function (id) {
 
     $.ajax({
@@ -1048,7 +1094,6 @@ var dropDrowAppraisalOrgLevelFn = function (id) {
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
             var htmlOption = "";
-            htmlOption += "<option value=''>All Level</option>";
             $.each(data, function (index, indexEntry) {
 
                 if (id == indexEntry['level_id']) {
@@ -1068,8 +1113,8 @@ var dropDrowAppraisalOrgLevelFn = function (id) {
     }
 }
 
-var dropDrowIndividualOrgLevelFn = function (id) {
 
+var dropDrowIndividualOrgLevelFn = function (id) {
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/org_level_individual",
         type: "get",
@@ -1079,7 +1124,6 @@ var dropDrowIndividualOrgLevelFn = function (id) {
         data: { "level_id": $("#AppraisalEmpLevel").val() },
         success: function (data) {
             var htmlOption = "";
-            htmlOption += "<option value=''>All Level</option>";
             $.each(data, function (index, indexEntry) {
 
                 if (id == indexEntry['level_id']) {
@@ -1094,6 +1138,7 @@ var dropDrowIndividualOrgLevelFn = function (id) {
     dropDrowIndividualOrgFn();
 }
 
+
 var dropDrowAppraisalEmpLevelFn = function (id) {
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal360/parameter/emp_level",
@@ -1103,7 +1148,6 @@ var dropDrowAppraisalEmpLevelFn = function (id) {
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
             var htmlOption = "";
-            htmlOption += "<option value=''>All Level</option>";
             $.each(data, function (index, indexEntry) {
 
                 if (id == indexEntry['level_id']) {
@@ -1117,6 +1161,7 @@ var dropDrowAppraisalEmpLevelFn = function (id) {
     });
 }
 
+
 var dropDrowDepartmentFn = function (id) {
 
     $.ajax({
@@ -1127,7 +1172,6 @@ var dropDrowDepartmentFn = function (id) {
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
             var htmlOption = "";
-            htmlOption += "<option value=''>All Department</option>";
             $.each(data, function (index, indexEntry) {
                 if (id == indexEntry['department_code']) {
                     htmlOption += "<option selected='selected' value=" + indexEntry['department_code'] + ">" + indexEntry['department_name'] + "</option>";
@@ -1140,6 +1184,7 @@ var dropDrowDepartmentFn = function (id) {
     });
 }
 
+
 var dropDrowOrgFn = function (appraisalLevelId) {
 
     $.ajax({
@@ -1151,7 +1196,6 @@ var dropDrowOrgFn = function (appraisalLevelId) {
         data: { "level_id": appraisalLevelId },
         success: function (data) {
             var htmlOption = "";
-            htmlOption += "<option value=''>All Organization</option>";
             $.each(data, function (index, indexEntry) {
                 if (id == indexEntry['org_id']) {
                     htmlOption += "<option selected='selected' value=" + indexEntry['org_id'] + ">" + indexEntry['org_name'] + "</option>";
@@ -1163,6 +1207,7 @@ var dropDrowOrgFn = function (appraisalLevelId) {
         }
     });
 }
+
 
 var dropDrowIndividualOrgFn = function (appraisalLevelId) {
     $.ajax({
@@ -1174,7 +1219,6 @@ var dropDrowIndividualOrgFn = function (appraisalLevelId) {
         data: { "emp_level": $("#AppraisalEmpLevel").val(), "org_level": $("#AppraisalOrgLevel").val() },
         success: function (data) {
             var htmlOption = "";
-            htmlOption += "<option value=''>All Organization</option>";
             $.each(data, function (index, indexEntry) {
                 if (id == indexEntry['org_id']) {
                     htmlOption += "<option selected='selected' value=" + indexEntry['org_id'] + ">" + indexEntry['org_name'] + "</option>";
@@ -1187,29 +1231,6 @@ var dropDrowIndividualOrgFn = function (appraisalLevelId) {
     });
 }
 
-var dropDrowSectionFn = function (department_code, id) {
-
-    $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/appraisal/sec_list",
-        type: "get",
-        dataType: "json",
-        async: false,
-        headers: { Authorization: "Bearer " + tokenID.token },
-        data: { "department_code": department_code },
-        success: function (data) {
-            var htmlOption = "";
-            htmlOption += "<option value=''>All Section</option>";
-            $.each(data, function (index, indexEntry) {
-                if (id == indexEntry['section_code']) {
-                    htmlOption += "<option selected='selected' value=" + indexEntry['section_code'] + ">" + indexEntry['section_name'] + "</option>";
-                } else {
-                    htmlOption += "<option value=" + indexEntry['section_code'] + ">" + indexEntry['section_name'] + "</option>";
-                }
-            });
-            $("#Section").html(htmlOption);
-        }
-    });
-}
 
 var splitData = function (data) {
     if (data.trim() != "") {
@@ -1550,38 +1571,6 @@ var findOneFn = function (id) {
     });
 }
 
-var dropdownListPhaseFn_bk = function (nameArea, id) {
-    if (nameArea == undefined) {
-        nameArea = "";
-    }
-	/*
-	 	"phase_id": 1,
-        "phase_name": "Alpha"
-	*/
-    $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/appraisal/phase_list",
-        type: "get",
-        dataType: "json",
-        async: false,
-        headers: { Authorization: "Bearer " + tokenID.token },
-        success: function (data) {
-
-            var htmlOption = "";
-            htmlOption += "<select id='phase_list' name='phase_list' class='input-small' style=\"height:22px; margin-right:3px;\">";
-            $.each(data, function (index, indexEntry) {
-                if (id == indexEntry['phase_id']) {
-                    htmlOption += "<option selected value='" + indexEntry['phase_id'] + "'>" + indexEntry['phase_name'] + "</option>";
-                } else {
-                    htmlOption += "<option  value='" + indexEntry['phase_id'] + "'>" + indexEntry['phase_name'] + "</option>";
-                }
-            });
-            htmlOption += "</select>";
-            return htmlOption;
-
-        }
-    });
-
-}
 
 var dropdownListPhaseFn = function () {
     phaseArray = [];
@@ -2198,13 +2187,13 @@ var listDataFn = function (data) {
             htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-level").val() + "</b> </th>";
             htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-organization").val() + "</b></th>";
             htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-position").val() + "</b> </th>";
-            htmlHTML += " <th style=\"width:30%;\"><b>" + $(".lt-action").val() + "</b></th>";
+            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-action").val() + "</b></th>";
 
         } else if ($("#embed_appraisalType").val() == "1") {
             htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-org-code").val() + "</b></th>";
             htmlHTML += " <th style=\"widthauto;\"><b>" + $(".lt-org-name").val() + "</b></th>";
             htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-level").val() + "</b> </th>";
-            htmlHTML += " <th style=\"width:30%;\"><b>" + $(".lt-action").val() + "</b></th>";
+            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-action").val() + "</b></th>";
         }
 
         //				emp_code
@@ -2690,13 +2679,14 @@ var listViewDailyOrMonthlyFn = function () {
     $("#selectGanntChartViewDaily").html(html);
 }
 
+
 $(document).ready(function () {
     username = $('#user_portlet').val();
     password = $('#pass_portlet').val();
     var plid = $('#plid_portlet').val();
 
     if (username != "" && username != null & username != [] && username != undefined) {
-        if (connectionServiceFn(username, password, plid) == true) {
+        if (connectionServiceFn(username, password, plid) == true) {        	
 
             var dataClearParam = [
                 { 'id': '#Position', 'val': "" },

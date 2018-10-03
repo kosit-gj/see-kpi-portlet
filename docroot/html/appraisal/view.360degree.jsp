@@ -12,28 +12,17 @@
 <portlet:defineObjects />
 
 <%
-/*
-PortletSession portletSession1 = renderRequest.getPortletSession();
-portletSession1.setAttribute("password", "authenticated", PortletSession.APPLICATION_SCOPE);
-String pwd = (String) portletSession1.getAttribute("password", PortletSession.APPLICATION_SCOPE);
-out.print(pwd);
-String password=PortalUtil.getUser(request).getPassword();
-*/
-
 String username = themeDisplay.getUser().getScreenName();
 String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWORD);
-//out.print(username);
 
 String param_link = PortalUtil.getOriginalServletRequest(request).getParameter("param_link");
 String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getParameter("param_item_result_id");
 layout = themeDisplay.getLayout();
 plid = layout.getPlid();
-//out.print(param);
-//out.print("password2="+password);
 %>
+
 <input type="hidden" id="param_link" name="param_link" value="<%=param_link%>">
 <input type="hidden" id="param_item_result_id" name="param_item_result_id" value="<%=param_item_result_id%>">
-
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
