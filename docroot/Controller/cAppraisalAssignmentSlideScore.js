@@ -1609,7 +1609,7 @@ var appraisalTypeFn = function(nameArea,id){
 			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
-				if(id==indexEntry['appraisal_type_id']){
+				if(id==indexEntry['appraisal_type_id'] && 0){
 					htmlOption+="<option selected='selected' value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
 				}else{
 					htmlOption+="<option value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
@@ -1729,7 +1729,7 @@ var dropDrowOrgFn = function(appraisalLevelId) {
 			var htmlOption="";
 			htmlOption+="<option value=''>All Organization</option>";
 			$.each(data,function(index,indexEntry){
-				if(id==indexEntry['org_id']){
+				if(id==indexEntry['org_id'] && 0){
 					htmlOption+="<option selected='selected' value="+indexEntry['org_id']+">"+indexEntry['org_name']+"</option>";
 				}else{
 					htmlOption+="<option value="+indexEntry['org_id']+">"+indexEntry['org_name']+"</option>";
