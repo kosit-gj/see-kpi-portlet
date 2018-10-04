@@ -32,7 +32,7 @@ globalDataTemp['tempTemplateStore']=[];
 var clearFn = function() {
 	
 	$("#modalTitleRole ").html("Questionnaire");
-	$("#accordionListQuestionaireData , #genBtnStage").empty();
+	$("#accordionListQuestionaireData , #listDataStageHistory , #genBtnStage ").empty();
 	$("	form#linkParam :input, " +
 		"#modal_empsnapshot_name , " +
 		"#modal_empsnapshot_id , " +
@@ -192,7 +192,7 @@ var scriptBtnListStoreFn = function (){
 					html+="      </tr></thead>";
 					html+="      <tbody class='listDataStore'>";
 				$.each(data,function(index,indexEntry){
-					console.log(indexEntry);
+					
 					html+="<tr >";
 					html+="	<td >"+indexEntry.customer_name+"</td>";
 					html+="	<td style='text-align: right;' >"+indexEntry.score+"</td>";
@@ -226,7 +226,7 @@ var scriptBtnListStoreFn = function (){
 };
 var btnEditStoreFn = function (element){
 	//console.log(element);
-	console.log($(element).parent().parent().parent().parent().parent().parent().parent().next());
+	//console.log($(element).parent().parent().parent().parent().parent().parent().parent().next());
 	var data_header_id = $(element).attr("data_header_id");
 	var customer_id = $(element).attr("customer_id");
 	$.ajax({
@@ -240,7 +240,6 @@ var btnEditStoreFn = function (element){
 			"customer_id":customer_id
 		},
 		success:function(data){
-			console.log(data);
 			var html = "";
 			html+="  <div class='panel-heading'> ประเมินผลการทำงานของร้านค้า";
 			html+="    <button class='closePanelScore' type='button' ><span aria-hidden='true'><i class='fa fa-times'></i></span></button>";
@@ -275,7 +274,6 @@ var btnEditStoreFn = function (element){
 						}else if(indexEntry3.answer_type_id == 5 || indexEntry3.answer_type_id == 6 ){
 							html+=generateAnswerFormDropdownFn(indexEntry3,"Sub Section");
 						}else{
-							console.log("Before Comment");
 							html+=generateAnswerFormCommentFn(indexEntry3,"Sub Section");
 						}
 						
@@ -296,7 +294,6 @@ var btnEditStoreFn = function (element){
 						}else if(indexEntry2.answer_type_id == 5 || indexEntry2.answer_type_id == 6 ){
 							html+=generateAnswerFormDropdownFn(indexEntry2,"Question");
 						}else{
-							console.log("Before Comment");
 							html+=generateAnswerFormCommentFn(indexEntry2,"Question");
 						}
 		
@@ -370,9 +367,23 @@ var scriptBtnClearAddStoreFn  = function (){
 		$(document).off("click","#btnConfirmOK");
 		$(document).on("click","#btnConfirmOK",function(){
 			elements.hide(); 
+			$("#confrimModal").modal('hide');
 			if($("#action_modal").val()=="0"){$("#accordionListQuestionaireData").find('input , select, textarea , .closePanelScore').prop('disabled', true);}
-			else{elements.find('.autocompleteStoreName').prop('disabled', false);}
-			elements.find('.autocompleteStoreName').prop('disabled', false);
+			else{
+				var html ="";
+				
+				html+="    <div class='row-fluid'>";
+				html+="      <div class='span6'>";
+				html+="        <label for='storeName-modal'>ชื่อร้านค้า</label>";
+				html+="        <input class='span12 autocompleteStoreName' type='text' style='margin-bottom: 0px;' id='storeName-modal' data-toggle='tooltip' title='' data-original-title='Search' section_id='"+section_id+"'>";
+				html+="        <input class='autocompleteStoreID ' type='hidden' value=''>";
+				html+="      </div>";
+				html+="    </div>";
+				html+="    <br>";
+				html+= generateQuestionaireFormBySubSectionFn(globalDataTemp['tempTemplateStore']["section_"+section_id]);
+				elements.find(".panel-body").html(html);
+			}
+			/*elements.find('.autocompleteStoreName').prop('disabled', false);
 			elements.find('input ,textarea ,select option').attr("data_detail_id", "");
 			elements.find('select option').prop('selected', false);
 			elements.find('select option:eq(0)').prop('selected', true);
@@ -380,8 +391,8 @@ var scriptBtnClearAddStoreFn  = function (){
 			elements.find('input[type="checkbox"]').prop('checked', false);
 			elements.find('.autocompleteStoreName').val("");
 			elements.find('.autocompleteStoreID').val("");
-			elements.find('textarea').val("");
-			$("#confrimModal").modal('hide');
+			elements.find('textarea').val("");*/
+			
 			scriptAutocompleteStoreNameFn();
 		});
 	});
@@ -392,7 +403,8 @@ var scriptViewReportFn  = function (){
 		event.stopPropagation();
 		event.preventDefault();
 		$("form#linkParam #linkParam_questionaire_type_id" ).val($(this).attr("questionaire_type_id"));
-		$("form#linkParam #linkParam_questionaire_id" ).val($("#search_questionaire_type_id option:selected" ).val());
+		//$("form#linkParam #linkParam_questionaire_id" ).val($("#search_questionaire_type_id option:selected" ).val());
+		$("form#linkParam #linkParam_assessor_id" ).val($(this).attr("assessor_id"));
 		$("form#linkParam #linkParam_data_header_id" ).val($("#id" ).val());
 		$("form#linkParam #linkParam_questionaire_date" ).val($("#modal_datepicker_start" ).val());
 		
@@ -439,7 +451,7 @@ var scriptAutocompleteStoreNameFn  = function (){
 			var el = event.target;
 			var label = "label-"+$(el).attr("section_id");
 			var storeId = "id-"+$(el).attr("section_id");
-			console.log($(el));
+			
 			$(el).val(ui.item.value);
 			$(el).next().val(ui.item.data_id);
             globalDataTemp['tempAutocompleteStore'][label]=ui.item.value;
@@ -460,6 +472,51 @@ var scriptAutocompleteStoreNameFn  = function (){
          }
     });
 }
+var scriptCheckBtnRequireRemarkFn =function (){
+	$("#modal_remark").off("keyup");
+	$("#modal_remark").keyup(function(){
+		 var status_require_answer = false;
+		 var status_require_remark = false;
+		 //check require answer
+		 $.each($("#accordionListQuestionaireData").find("[answer_type_id=7] textarea").get(),function(index,indexEntry){
+			if($(indexEntry).val()==""){
+				status_require_answer = true;
+				return false;
+			}
+		 });
+		 //check require remark
+		 if($("#modal_remark").val()==""){
+			 status_require_remark=true;
+		 }
+		// true = disabled , false = not disabled
+		 $(".btnStageSubmit[is_require_answer=0][view_comment_flag=1]").prop('disabled', status_require_remark);
+		 $(".btnStageSubmit[is_require_answer=1][view_comment_flag=1]").prop('disabled', (status_require_answer || status_require_remark));
+
+	});
+};
+var scriptCheckBtnRequireAnswerFn = function (){
+	//ต้องกรอกข้อมูลภายใต้ที่ answer_type_id=7 ทั้งหมดก่อนถึงจะกดปุ่มได้
+	$("#accordionListQuestionaireData").find("[answer_type_id=7] textarea").off("keyup");
+	$("#accordionListQuestionaireData").find("[answer_type_id=7] textarea").keyup(function(){
+		  var status_require_answer = false;
+		  var status_require_remark = false;
+		  //check require answer
+		  $.each($("#accordionListQuestionaireData").find("[answer_type_id=7] textarea").get(),function(index,indexEntry){
+			if($(indexEntry).val()==""){
+				status_require_answer = true;
+				return false;
+			}
+		  });
+		  //check require remark
+		  if($("#modal_remark").val()==""){
+			  status_require_remark=true;
+		  }
+		  // true = disabled , false = not disabled
+		  $(".btnStageSubmit[is_require_answer=1][view_comment_flag=0]").prop('disabled', status_require_answer);
+		  $(".btnStageSubmit[is_require_answer=1][view_comment_flag=1]").prop('disabled', (status_require_answer || status_require_remark));
+		 
+	});
+};
 var scriptCheckboxCheckIsNarcoticsAnonymousFn  = function (){
 	$("#accordionListQuestionaireData .checkboxAnswer").off("click");
 	$("#accordionListQuestionaireData .checkboxAnswer").on("click",function(){
@@ -487,7 +544,7 @@ var findOneFn = function(data_header_id) {
 		},
 		success:function(data){
 			$("#modalTitleRole").html(data.head.questionaire_name);
-			generateQuestionaireForm(data);
+			generateQuestionaireFormFn(data);
 			generateStageFn(data.stage,data.current_stage,data.to_stage);
 			
 			
@@ -515,7 +572,7 @@ var getTemplateQuestionnaireFn = function() {
 		success:function(data){
 			$("#id").val(data.head.questionaire_id);
 			$("#modalTitleRole").html(data.head.questionaire_name);
-			generateQuestionaireForm(data);
+			generateQuestionaireFormFn(data);
 			generateStageFn(data.stage,data.current_stage,data.to_stage);
 
 		}
@@ -565,7 +622,7 @@ var delFn = function(id) {
 	});
 };
 var listData = function(data) {
-	console.log(data);
+	//console.log(data);
 	if (data == ""){
 		$("#listData").html("<div style='margin-top: 40px;margin-bottom: 40px;font-weight: bold;color: #e04747;' align='center'>No Data to Display.</div>");
 		return false;
@@ -600,7 +657,7 @@ var listData = function(data) {
 						view_flag	1 
 					 */
 					html+="		  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"left\"  data-content=\"";
-					html+="			<button class='btn btn-info btn-small btn-gear view' id='view-"+indexEntry2.data_header_id+"' questionaire_date='"+indexEntry2.questionaire_date+"' questionaire_id='"+indexEntry2.questionaire_id+"' emp_snapshot_id='"+indexEntry2.emp_snapshot_id+"' emp_name='"+indexEntry2.emp_name+"' questionaire_type_id='"+indexEntry2.questionaire_type_id+"'>Report</button>" ;
+					html+="			<button class='btn btn-info btn-small btn-gear view' id='view-"+indexEntry2.data_header_id+"' questionaire_date='"+indexEntry2.questionaire_date+"' questionaire_id='"+indexEntry2.questionaire_id+"' assessor_id='"+indexEntry2.assessor_id+"' emp_snapshot_id='"+indexEntry2.emp_snapshot_id+"' emp_name='"+indexEntry2.emp_name+"' questionaire_type_id='"+indexEntry2.questionaire_type_id+"'>Report</button>" ;
 					
 					if((indexEntry2.edit_flag==1 && indexEntry2.view_flag==0)){
 						html+="			<button class='btn btn-warning btn-small btn-gear edit' id='edit-"+indexEntry2.data_header_id+"' edit='1'>Edit</button>" ;
@@ -627,17 +684,41 @@ var listData = function(data) {
 			var view=this.id.split("-");
 			var id=view[1];
 			$("form#linkParam #linkParam_questionaire_type_id" ).val($(this).attr("questionaire_type_id"));
-			$("form#linkParam #linkParam_questionaire_id" ).val($(this).attr("questionaire_id"));
+			//$("form#linkParam #linkParam_questionaire_id" ).val($(this).attr("questionaire_id"));
+			$("form#linkParam #linkParam_assessor_id" ).val($(this).attr("assessor_id"));
 			$("form#linkParam #linkParam_emp_snapshot_id" ).val($(this).attr("emp_snapshot_id"));
 			$("form#linkParam #linkParam_data_header_id" ).val(id);
 			$("form#linkParam #linkParam_questionaire_date" ).val($(this).attr("questionaire_date"));
-			$("form#linkParam").attr("action", currentUrlReport);
-			$("form#linkParam").submit();
+			
+
+			var parameter = {};
+			var template_name ="";
+			var output_type ="pdf";
+			template_name="report-summary-from";
+			parameter = {
+						questionaire_type_id: $(this).attr("questionaire_type_id"),
+						data_header_id: id,
+						questionaire_date: $(this).attr("questionaire_date"),
+						emp_snapshot_id:$(this).attr("emp_snapshot_id"),
+						assessor_id: $(this).attr("assessor_id")
+					  };
+			
+			var data = JSON.stringify(parameter);
+			var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name="+template_name+"&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
+			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+				    window.open(url_report_jasper,"_blank");
+				} else {
+					//$('#iFrame_report').attr('src',url_report_jasper);
+					window.open(url_report_jasper,"_blank");
+				}
+//			$("form#linkParam").attr("action", currentUrlReport);
+//			$("form#linkParam").submit();
 		});
 		$(".edit").on("click",function() {
 			var edit=this.id.split("-");
 			var id=edit[1];
 			var action_edit= $(this).attr("edit");  // 1 แก้ไขได้  0 แก้ไขไม่ได้
+			clearFn();
 			$("#id").val(id);
 			$("#action").val("edit");
 			$("#action_modal").val(action_edit);
@@ -729,8 +810,8 @@ var listData = function(data) {
 		  });
 	}
 };
-var generateQuestionaireForm = function(data) {
-	console.log(data);
+var generateQuestionaireFormFn = function(data) {
+	//console.log(data);
 	if($("#action").val() == "edit"){
 		$("#modal_datepicker_start").val(data.head.questionaire_date);
 		$("#modal_empsnapshot_name").val(data.head.emp_name+" ("+data.head.position_code+")" );
@@ -752,7 +833,7 @@ var generateQuestionaireForm = function(data) {
 		
 		html+="<h3 >"+indexEntry.section_name;
 		if(indexEntry.is_show_report == 1){
-			html+="<span class='viewReport' url='"+indexEntry.report_url+"' questionaire_type_id='"+data['head'].questionaire_type_id+"'><img src='"+$("#url_portlet").val()+"/img/report.svg' data-toggle='tooltip' data-original-title='View Report' style='width: 30px;float: right;margin-top: -2px;'></span>";
+			html+="<span class='viewReport' url='"+indexEntry.report_url+"' assessor_id='"+data['head'].assessor_id+"' questionaire_type_id='"+data['head'].questionaire_type_id+"'><img src='"+$("#url_portlet").val()+"/img/report.svg' data-toggle='tooltip' data-original-title='View Report' style='width: 30px;float: right;margin-top: -2px;'></span>";
 		}
 		html+="</h3>";
 		html+="<div is_cust_search='"+indexEntry.is_cust_search+"' section_id='"+indexEntry.section_id+"'>";
@@ -780,67 +861,8 @@ var generateQuestionaireForm = function(data) {
 			html+="    </div>";
 			html+="    <br>";
 		}
-
-		$.each(indexEntry.sub_section,function(index2,indexEntry2) {
-			if(indexEntry2.question != "" && indexEntry2.answer == ""){
-				//console.log("Sub Section"); 
-				//indexEntry2.answer_type_id กับ indexEntry2.is_show_comment ไม่ใช้				
-				html+="<table class='table table-striped table-bordered ' id='tableParentQuestion-"+indexEntry2.question_id+"' question_id='"+indexEntry2.question_id+"'>";
-				html+="  <thead>";
-				html+="    <tr>";
-				html+="      <th class='' colspan='2' style='vertical-align: top;'>"+indexEntry2.question_name+"</th>";
-				//html+="      <th class='' style='vertical-align: top; text-align: center;'>คะแนน</th>";
-				html+="    </tr>";
-				html+="  </thead>";
-				html+="  <tbody>";
-				$.each(indexEntry2.question,function(index3,indexEntry3) {
-					
-					if(indexEntry3.answer_type_id == 1 || indexEntry3.answer_type_id == 2 ){
-						html+=generateAnswerFormRadioFn(indexEntry3,"Sub Section");
-					}else if(indexEntry3.answer_type_id == 3 || indexEntry3.answer_type_id == 4 ){
-						html+=generateAnswerFormCheckboxesFn(indexEntry3,"Sub Section");
-					}else if(indexEntry3.answer_type_id == 5 || indexEntry3.answer_type_id == 6 ){
-						html+=generateAnswerFormDropdownFn(indexEntry3,"Sub Section");
-					}else{
-						console.log("Before Comment");
-						html+=generateAnswerFormCommentFn(indexEntry3,"Sub Section");
-					}
-					
-					
-				});
-				
-				html+="  </tbody>";
-				html+="</table>";
-				
-				
-				
-				}else if(indexEntry2.question == "" && indexEntry2.answer != ""){
-					
-					if(indexEntry2.answer_type_id == 1 || indexEntry2.answer_type_id == 2 ){
-						html+=generateAnswerFormRadioFn(indexEntry2,"Question");
-					}else if(indexEntry2.answer_type_id == 3 || indexEntry2.answer_type_id == 4 ){
-						html+=generateAnswerFormCheckboxesFn(indexEntry2,"Question");
-					}else if(indexEntry2.answer_type_id == 5 || indexEntry2.answer_type_id == 6 ){
-						html+=generateAnswerFormDropdownFn(indexEntry2,"Question");
-					}else{
-						console.log("Before Comment");
-						html+=generateAnswerFormCommentFn(indexEntry2,"Question");
-					}
-						
-						
-					
-					
-					
-				}
-				
-				if((index2+1) != indexEntry.sub_section.length){
-					html+="  <hr style='margin-top: 15px; margin-bottom: 15px;'>";
-					
-				}
+			html+= generateQuestionaireFormBySubSectionFn(indexEntry.sub_section);
 			
-			//console.log("---------End sub_section----------");
-		});
-		
 		if( indexEntry.is_cust_search == 1){
 			html+="    </div>";
 			html+="</div>";
@@ -852,6 +874,7 @@ var generateQuestionaireForm = function(data) {
 	$("#accordionListQuestionaireData").html(html);
 	if($("#action_modal").val()=="0"){
 		$("#accordionListQuestionaireData").find('input , select, textarea , .closePanelScore').prop('disabled', true);
+		$("#accordionListQuestionaireData").find('input , select, textarea , .closePanelScore').addClass('cursorNotAllowed');
 	};
 	scriptAutocompleteStoreNameFn();
 	scriptCheckboxCheckIsNarcoticsAnonymousFn();
@@ -932,13 +955,78 @@ var generateQuestionaireForm = function(data) {
 	scriptBtnAddStoreFn();
 	scriptViewReportFn();
 	if($("#action_modal").val() == 0){
-		console.log("--------------------- View Only -----------------------");
+		//console.log("--------------------- View Only -----------------------");
 	}
 	$('[data-toggle="tooltip"]').css({"cursor":"pointer"});
 	 $('[data-toggle="tooltip"]').tooltip({
 		 html:true,container: '#modalQuestionaireData'
 	 });
-}
+};
+var generateQuestionaireFormBySubSectionFn = function(data){
+	var html = "";
+	
+	$.each(data,function(index2,indexEntry2) {
+		if(indexEntry2.question != "" && indexEntry2.answer == ""){
+			//console.log("Sub Section"); 
+			//indexEntry2.answer_type_id กับ indexEntry2.is_show_comment ไม่ใช้				
+			html+="<table class='table table-striped table-bordered ' id='tableParentQuestion-"+indexEntry2.question_id+"' question_id='"+indexEntry2.question_id+"'>";
+			html+="  <thead>";
+			html+="    <tr>";
+			html+="      <th class='' colspan='2' style='vertical-align: top;'>"+indexEntry2.question_name+"</th>";
+			//html+="      <th class='' style='vertical-align: top; text-align: center;'>คะแนน</th>";
+			html+="    </tr>";
+			html+="  </thead>";
+			html+="  <tbody>";
+			$.each(indexEntry2.question,function(index3,indexEntry3) {
+				
+				if(indexEntry3.answer_type_id == 1 || indexEntry3.answer_type_id == 2 ){
+					html+=generateAnswerFormRadioFn(indexEntry3,"Sub Section");
+				}else if(indexEntry3.answer_type_id == 3 || indexEntry3.answer_type_id == 4 ){
+					html+=generateAnswerFormCheckboxesFn(indexEntry3,"Sub Section");
+				}else if(indexEntry3.answer_type_id == 5 || indexEntry3.answer_type_id == 6 ){
+					html+=generateAnswerFormDropdownFn(indexEntry3,"Sub Section");
+				}else{
+					html+=generateAnswerFormCommentFn(indexEntry3,"Sub Section");
+				}
+				
+				
+			});
+			
+			html+="  </tbody>";
+			html+="</table>";
+			
+			
+			
+			}else if(indexEntry2.question == "" && indexEntry2.answer != ""){
+				
+				if(indexEntry2.answer_type_id == 1 || indexEntry2.answer_type_id == 2 ){
+					html+=generateAnswerFormRadioFn(indexEntry2,"Question");
+				}else if(indexEntry2.answer_type_id == 3 || indexEntry2.answer_type_id == 4 ){
+					html+=generateAnswerFormCheckboxesFn(indexEntry2,"Question");
+				}else if(indexEntry2.answer_type_id == 5 || indexEntry2.answer_type_id == 6 ){
+					html+=generateAnswerFormDropdownFn(indexEntry2,"Question");
+				}else{
+					html+=generateAnswerFormCommentFn(indexEntry2,"Question");
+				}
+					
+					
+				
+				
+				
+			}
+			
+			if((index2+1) != data.length){
+				html+="  <hr style='margin-top: 15px; margin-bottom: 15px;'>";
+				
+			}
+		
+		//console.log("---------End sub_section----------");
+	});
+	
+	return html;
+	
+};
+
 var generateStageFn = function(stage,current_stage,to_stage) {
 	var dropdownCurrentStageHTML="";
 	var dropdownToStageHTML="";
@@ -955,7 +1043,8 @@ var generateStageFn = function(stage,current_stage,to_stage) {
 		TableStageHTML+="</tr>";
 
 	});
-	
+	$("#listDataStageHistory").html(TableStageHTML);
+	//$("#slideUpDownStageHistory").show();
 	
 	
 	$.each(to_stage,function(index,indexEntry){
@@ -965,59 +1054,34 @@ var generateStageFn = function(stage,current_stage,to_stage) {
 				" view_comment_flag='"+indexEntry.view_comment_flag+"' " +
 				" to_stage='"+indexEntry.stage_id+"' >"+indexEntry.stage_name+"</button>";
 	});
-	
+	$("#genBtnStage").html(htmlBtnStage); 
 	//data.role.view_comment_flag
 	if(to_stage == ""){
 		$(".modalRemark").hide();
 	}else{
 		$(".modalRemark").show();
-		$("#modal_remark").off("keyup");
-		$("#modal_remark").keyup(function(){
-			 var status_require_answer = false;
-			 var status_require_remark = false;
-			 //check require answer
-			 $.each($("#accordionListQuestionaireData").find("[answer_type_id=7] textarea").get(),function(index,indexEntry){
-				if($(indexEntry).val()==""){
-					status_require_answer = true;
-					return false;
-				}
-			 });
-			 //check require remark
-			 if($("#modal_remark").val()!=""){
-				 status_require_remark=true;
-			 }
-			// true = disabled , false = not disabled
-			 $(".btnStageSubmit[is_require_answer=0][view_comment_flag=1]").prop('disabled', status_require_remark);
-			 $(".btnStageSubmit[is_require_answer=1][view_comment_flag=1]").prop('disabled', (status_require_answer || status_require_remark));
-
-		});
+		scriptCheckBtnRequireRemarkFn();
 	} 
-	$("#genBtnStage").html(htmlBtnStage); 
-	$("#listDataStageHistory").html(TableStageHTML);
-	//$("#slideUpDownStageHistory").show();
+	scriptCheckBtnRequireAnswerFn();
 	
-	//ต้องกรอกข้อมูลภายใต้ที่ answer_type_id=7 ทั้งหมดก่อนถึงจะกดปุ่มได้
-	$("#accordionListQuestionaireData").find("[answer_type_id=7] textarea").off("keyup");
-	$("#accordionListQuestionaireData").find("[answer_type_id=7] textarea").keyup(function(){
-		  var status_require_answer = false;
-		  var status_require_remark = false;
-		  //check require answer
-		  $.each($("#accordionListQuestionaireData").find("[answer_type_id=7] textarea").get(),function(index,indexEntry){
-			if($(indexEntry).val()==""){
-				status_require_answer = true;
-				return false;
-			}
-		  });
-		  //check require remark
-		  if($("#modal_remark").val()!=""){
-			  status_require_remark=true;
-		  }
-		  // true = disabled , false = not disabled
-		  $(".btnStageSubmit[is_require_answer=1][view_comment_flag=0]").prop('disabled', status_require_answer);
-		  $(".btnStageSubmit[is_require_answer=1][view_comment_flag=1]").prop('disabled', (status_require_answer || status_require_remark));
-		 
+	// Frist Check  Btn require_answer and Btn require_remark
+	var check_require_answer = false;
+	var check_require_remark = false;
+	
+	$.each($("#accordionListQuestionaireData").find("[answer_type_id=7] textarea").get(),function(index,indexEntry){
+		if($(indexEntry).val()==""){
+			check_require_answer = true;
+			return false;
+		}
 	});
+	if($("#modal_remark").val()==""){
+		check_require_remark=true;
+	}
 	
+	$(".btnStageSubmit[is_require_answer=1][view_comment_flag=0]").prop('disabled', check_require_answer);		
+	$(".btnStageSubmit[is_require_answer=0][view_comment_flag=1]").prop('disabled', check_require_remark);
+	$(".btnStageSubmit[is_require_answer=1][view_comment_flag=1]").prop('disabled', (check_require_answer || check_require_remark));	  
+	 
 	
 	
 	$(".btnStageSubmit").off("click");
@@ -1250,9 +1314,9 @@ var generateAnswerFormCommentFn = function(data,question_type) {
 var updateFn = function(element){
 	
 	var data_header_id = $("#id").val();
-	var questionaire_id = $("#search_questionaire_type_id").val();
+	//var questionaire_id = $("#search_questionaire_type_id").val();
 	var emp_snapshot_id = $("#modal_empsnapshot_id").val();
-	var questionaire_date = $("#modal_datepicker_start").val();
+	//var questionaire_date = $("#modal_datepicker_start").val();
 	var total_score = 0;
 	var score = [];
 	var detail = [];
@@ -1382,8 +1446,8 @@ var updateFn = function(element){
 		data : {
 				
 			"data_header_id" : data_header_id,
-			"questionaire_id": questionaire_id,
-			"questionaire_date": questionaire_date,
+			//"questionaire_id": questionaire_id,
+			//"questionaire_date": questionaire_date,
 			"emp_snapshot_id": emp_snapshot_id,
 			"total_score": total_score,
 			"detail": detail,
@@ -1397,7 +1461,7 @@ var updateFn = function(element){
 				getDataFn();
 				clearFn();
 			}else if (data['status'] == "400") {
-				console.log(data);
+				//console.log(data);
 				callFlashSlide("Failed to insert data.");
 			}  
 				   
@@ -1605,7 +1669,7 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 		$(".advance-search input").val("");
 		$("#search_questionaire_type_id ,#modal_questionaire_type_id").html(generateDropDownList(globalSevice['restfulPathDropDownQuestionnaireList'],"GET",{}));
 		$("#modal_questionaire_type_id").change(function() {
-			  console.log( "Handler for .change() called." );
+			  
 			  if($("#modal_empsnapshot_id").val() == ""){
 				  $("#modalTitleRole").text("Questionnaire");
 		        	$("#accordionListQuestionaireData").empty();
@@ -1867,17 +1931,90 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 	         }
 	    });
 		
-		var URLParameter_header_id = getURLParameter('data_header_id');
-		var URLParameter_action = getURLParameter('action');
-		var URLParameter_action_modal = getURLParameter('action_modal');
 		
-		if(URLParameter_header_id!=undefined && URLParameter_action!=undefined && URLParameter_action_modal!=undefined) {
-			$("#id").val(URLParameter_header_id);
-			$("#action").val(URLParameter_action);
-			$("#action_modal").val(URLParameter_action_modal);// 1 แก้ไขได้  0 แก้ไขไม่ได้
-			findOneFn(URLParameter_header_id);
-		}
+		
+		
 	 }
  });
  
- 
+ $(".closePanelScore").off("click");
+	$(".closePanelScore").on("click" ,function(){
+		
+		var elements = $(this).parent().parent();
+		var section_id=elements.attr("section_id");
+		$("#inform_label_confirm").text("Please confirm the cancellation by evaluated retailer?");
+		$("#confrimModal").modal({
+			"backdrop" : setModalPopup[0],
+			"keyboard" : setModalPopup[1]
+		});
+		$(document).off("click","#btnConfirmOK");
+		$(document).on("click","#btnConfirmOK",function(){
+			elements.hide(); 
+			if($("#action_modal").val()=="0"){$("#accordionListQuestionaireData").find('input , select, textarea , .closePanelScore').prop('disabled', true);}
+			else{
+			var html="";
+			//console.log(globalDataTemp['tempTemplateStore']["section_"+section_id]);
+			$.each(globalDataTemp['tempTemplateStore']["section_"+section_id],function(index2,indexEntry2) {
+			if(indexEntry2.question != "" && indexEntry2.answer == ""){
+				//console.log("Sub Section"); 
+				//indexEntry2.answer_type_id กับ indexEntry2.is_show_comment ไม่ใช้				
+				html+="<table class='table table-striped table-bordered ' id='tableParentQuestion-"+indexEntry2.question_id+"' question_id='"+indexEntry2.question_id+"'>";
+				html+="  <thead>";
+				html+="    <tr>";
+				html+="      <th class='' colspan='2' style='vertical-align: top;'>"+indexEntry2.question_name+"</th>";
+				//html+="      <th class='' style='vertical-align: top; text-align: center;'>คะแนน</th>";
+				html+="    </tr>";
+				html+="  </thead>";
+				html+="  <tbody>";
+				$.each(indexEntry2.question,function(index3,indexEntry3) {
+					
+					if(indexEntry3.answer_type_id == 1 || indexEntry3.answer_type_id == 2 ){
+						html+=generateAnswerFormRadioFn(indexEntry3,"Sub Section");
+					}else if(indexEntry3.answer_type_id == 3 || indexEntry3.answer_type_id == 4 ){
+						html+=generateAnswerFormCheckboxesFn(indexEntry3,"Sub Section");
+					}else if(indexEntry3.answer_type_id == 5 || indexEntry3.answer_type_id == 6 ){
+						html+=generateAnswerFormDropdownFn(indexEntry3,"Sub Section");
+					}else{
+						html+=generateAnswerFormCommentFn(indexEntry3,"Sub Section");
+					}
+					
+					
+				});
+				
+				html+="  </tbody>";
+				html+="</table>";
+				
+				
+				
+				}else if(indexEntry2.question == "" && indexEntry2.answer != ""){
+					
+					if(indexEntry2.answer_type_id == 1 || indexEntry2.answer_type_id == 2 ){
+						html+=generateAnswerFormRadioFn(indexEntry2,"Question");
+					}else if(indexEntry2.answer_type_id == 3 || indexEntry2.answer_type_id == 4 ){
+						html+=generateAnswerFormCheckboxesFn(indexEntry2,"Question");
+					}else if(indexEntry2.answer_type_id == 5 || indexEntry2.answer_type_id == 6 ){
+						html+=generateAnswerFormDropdownFn(indexEntry2,"Question");
+					}else{
+						html+=generateAnswerFormCommentFn(indexEntry2,"Question");
+					}
+						
+						
+					
+					
+					
+				}
+				
+				if((index2+1) != indexEntry.sub_section.length){
+					html+="  <hr style='margin-top: 15px; margin-bottom: 15px;'>";
+					
+				}
+			
+			//console.log("---------End sub_section----------");
+			});
+			elements.html(html);
+			
+			$("#confrimModal").modal('hide');
+			scriptAutocompleteStoreNameFn();
+			}
+		});
+	});

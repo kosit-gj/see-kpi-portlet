@@ -693,6 +693,10 @@ overflow:auto;
     overflow-y: auto;
 }
 
+.aui #modalQuestionaireData .cursorNotAllowed {
+cursor: not-allowed !important;
+}
+
 </style>
 
 <div class='row-fluid '>
@@ -833,10 +837,12 @@ overflow:auto;
 		   			<div id="listQuestionaireData"></div>
 		   			<form id="linkParam" method="POST" target="_blank" action="">
 						<input type="hidden" id="linkParam_questionaire_type_id" name="questionaire_type_id" value="">
-						<input type="hidden" id="linkParam_questionaire_id" name="questionaire_id" value="">
-						<input type="hidden" id="linkParam_emp_snapshot_id" name="emp_snapshot_id" value="">
 						<input type="hidden" id="linkParam_data_header_id" name="data_header_id" value="">
+<!-- 						<input type="hidden" id="linkParam_questionaire_id" name="questionaire_id" value=""> -->
+						<input type="hidden" id="linkParam_assessor_id" name="assessor_id" value="">
+						<input type="hidden" id="linkParam_emp_snapshot_id" name="emp_snapshot_id" value="">
 						<input type="hidden" id="linkParam_questionaire_date" name="questionaire_date" value="">
+
 					</form>
 	            </div>
 				<div class="modal-footer">
