@@ -10,6 +10,7 @@ globalSevice['restfulPathAutocompleteEmployeeName2']= globalSevice['restfulPathQ
 globalSevice['restfulPathAutocompleteStoreName']= globalSevice['restfulPathQuestionnaireData']+ "/auto_store";
 
 globalSevice['restfulPathAssignTemplate']= globalSevice['restfulPathQuestionnaireData']+ "/assign_template";
+globalSevice['restfulPathGenerateTemplate']= globalSevice['restfulPathQuestionnaireData']+ "/generate_template";
 globalSevice['restfulPathEvaluatedRetailerListEdit']= globalSevice['restfulPathQuestionnaireData']+ "/evaluated_retailer_list_edit";
 globalSevice['restfulPathEvaluatedRetailerList']= globalSevice['restfulPathQuestionnaireData']+ "/evaluated_retailer_list";
 
@@ -25,10 +26,13 @@ globalDataTemp['tempModalEmpNameAgenLabel']="";
 globalDataTemp['tempModalEmpNameAssignLabel']="";
 globalDataTemp['tempAutocompleteStore']={};
 
+globalDataTemp['tempTemplateStore']=[];
+
+
 var clearFn = function() {
 	
-	$("#modalTitleRole ").html("");
-	$("#accordionListQuestionaireData").empty();
+	$("#modalTitleRole ").html("Questionnaire");
+	$("#accordionListQuestionaireData , #genBtnStage").empty();
 	$("	form#linkParam :input, " +
 		"#modal_empsnapshot_name , " +
 		"#modal_empsnapshot_id , " +
@@ -36,12 +40,14 @@ var clearFn = function() {
 		"#modal_agent_name , " +
 		"#modal_assign_name ," +
 		"#modal_remark").val("");
-	$(		"#modal_empsnapshot_name , " +
+	$(		"#modal_empsnapshot_name , " + 
+			"#modal_questionaire_type_id ," +
 			"#modal_datepicker_start , " +
 			"#modal_from_stage , " +
 			"#modal_to_stage , " +
 			"#modal_remark , " +
 			"#btnSubmit").prop('disabled', false);
+	$("#modal_questionaire_type_id").val($("#modal_questionaire_type_id option:first").val());
 	//$("#form_questionnaire_type").val($("#form_questionnaire_type option:first").val());
 	$("#inform_label_confirm").text("Confirm to Delete Data?");
 	$("#id").val("");
@@ -122,7 +128,8 @@ var generateDropDownList = function(url,type,request,initValue){
 	  if (day < 10) day = "0" + day;
 
 	  var today = day + "/" + month + "/" + year;
-	  document.getElementById(id).value = today;
+	  //document.getElementById(id).value = today;
+	  $(id).val(today);
 	  // document.getElementById("datepicker-end").value = today;
 
 };
@@ -354,7 +361,7 @@ var scriptBtnClearAddStoreFn  = function (){
 	$(".closePanelScore").on("click" ,function(){
 		
 		var elements = $(this).parent().parent();
-
+		var section_id=elements.attr("section_id");
 		$("#inform_label_confirm").text("Please confirm the cancellation by evaluated retailer?");
 		$("#confrimModal").modal({
 			"backdrop" : setModalPopup[0],
@@ -385,7 +392,7 @@ var scriptViewReportFn  = function (){
 		event.stopPropagation();
 		event.preventDefault();
 		$("form#linkParam #linkParam_questionaire_type_id" ).val($(this).attr("questionaire_type_id"));
-		$("form#linkParam #linkParam_questionaire_id" ).val($("#search_questionaire_id option:selected" ).val());
+		$("form#linkParam #linkParam_questionaire_id" ).val($("#search_questionaire_type_id option:selected" ).val());
 		$("form#linkParam #linkParam_data_header_id" ).val($("#id" ).val());
 		$("form#linkParam #linkParam_questionaire_date" ).val($("#modal_datepicker_start" ).val());
 		
@@ -415,8 +422,8 @@ var scriptAutocompleteStoreNameFn  = function (){
 					  
 						response($.map(data, function (item) {
                             return {
-                            	label: item.customer_name,
-                                value: item.customer_name,
+                            	label: item.customer_name+" ("+item.customer_code+")",
+                                value: item.customer_name+" ("+item.customer_code+")",
                                 data_id :item.customer_id
                             };
                         }));
@@ -466,10 +473,9 @@ var scriptCheckboxCheckIsNarcoticsAnonymousFn  = function (){
 	
 };
 
-var getDataTemplateFn = function(data_header_id) {
-	var questionaire_id = $("#search_questionaire_id").val();
-	$("#modalTitleRole").html($("#search_questionaire_id :selected").text());
-	toDayFn('modal_datepicker_start');
+var findOneFn = function(data_header_id) {
+	
+	toDayFn('#modal_datepicker_start');
 	$.ajax({
 		url: globalSevice['restfulPathAssignTemplate'],
 		type:"get",
@@ -477,12 +483,10 @@ var getDataTemplateFn = function(data_header_id) {
 		async:true,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{
-			"questionaire_id": questionaire_id,
 			"data_header_id": data_header_id
 		},
 		success:function(data){
-			var dropdownCurrentStageHTML="";
-			var dropdownToStageHTML="";
+			$("#modalTitleRole").html(data.head.questionaire_name);
 			generateQuestionaireForm(data);
 			generateStageFn(data.stage,data.current_stage,data.to_stage);
 			
@@ -494,12 +498,34 @@ var getDataTemplateFn = function(data_header_id) {
 			});
 		}
 	});
-}
+};
+var getTemplateQuestionnaireFn = function() {
+	var emp_snapshot_id = $("#modal_empsnapshot_id").val();
+	var questionaire_type_id = $("#modal_questionaire_type_id").val();
+	$.ajax({
+		url: globalSevice['restfulPathGenerateTemplate'],
+		type:"get",
+		dataType:"json",
+		async:true,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		data:{
+			"emp_snapshot_id": emp_snapshot_id,
+			"questionaire_type_id": questionaire_type_id
+		},
+		success:function(data){
+			$("#id").val(data.head.questionaire_id);
+			$("#modalTitleRole").html(data.head.questionaire_name);
+			generateQuestionaireForm(data);
+			generateStageFn(data.stage,data.current_stage,data.to_stage);
+
+		}
+	});
+};
 
 var getDataFn = function(){
 	var start_date = $("#param_start_date").val();
 	var end_date= $("#param_end_date").val();
-	var questionaire_id= $("#param_questionaire_id").val();
+	var questionaire_type_id= $("#param_questionaire_type_id").val();
 	var emp_snapshot_id = $("#param_emp_snapshot_id").val();
 	
 	$.ajax({
@@ -511,7 +537,7 @@ var getDataFn = function(){
 		data:{
 			"start_date":start_date,
 			"end_date":end_date,
-			"questionaire_id":questionaire_id,
+			"questionaire_type_id":questionaire_type_id,
 			"emp_snapshot_id":emp_snapshot_id
 		},
 		success:function(data){
@@ -547,21 +573,23 @@ var listData = function(data) {
 	var html = "";
 	$.each(data,function(index,indexEntry) {
 
-		html+="<h3>"+indexEntry.questionaire_date;
+		html+="<h3>"+indexEntry.stage_name;
 		html+="</h3>";
 		html+="<div class=\"list-data-table\">";
 		
 				html+="<table class='table table-striped table-bordered'>";
 				html+="  <thead>";
 				html+="    <tr>";
-				html+="      <th width=\"20%\">รหัส TSE</th>";
-				html+="      <th width=\"70%\">ชื่อ-สกุล TSE</th>";
+				html+="      <th width=\"15%\">วันที่</th>";
+				html+="      <th width=\"15%\">รหัส TSE</th>";
+				html+="      <th width=\"60%\">ชื่อ-สกุล TSE</th>";
 				html+="      <th width=\"10%\"></th>";
 				html+="    </tr>";
 				html+="  </thead>";
 				html+="  <tbody>";
 				$.each(indexEntry['data'],function(index2,indexEntry2) {
 					html+="    <tr>";
+					html+="      <td>"+indexEntry2.questionaire_date+"</td>";
 					html+="      <td>"+indexEntry2.position_code+"</td>";
 					html+="      <td>"+indexEntry2.emp_name+"</td>";
 					html+="      <td>";
@@ -572,7 +600,7 @@ var listData = function(data) {
 						view_flag	1 
 					 */
 					html+="		  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"left\"  data-content=\"";
-					html+="			<button class='btn btn-info btn-small btn-gear view' id='view-"+indexEntry2.data_header_id+"' questionaire_date='"+indexEntry.questionaire_date+"' questionaire_id='"+indexEntry2.questionaire_id+"' emp_snapshot_id='"+indexEntry2.emp_snapshot_id+"' emp_name='"+indexEntry2.emp_name+"' questionaire_type_id='"+indexEntry2.questionaire_type_id+"'>Report</button>" ;
+					html+="			<button class='btn btn-info btn-small btn-gear view' id='view-"+indexEntry2.data_header_id+"' questionaire_date='"+indexEntry2.questionaire_date+"' questionaire_id='"+indexEntry2.questionaire_id+"' emp_snapshot_id='"+indexEntry2.emp_snapshot_id+"' emp_name='"+indexEntry2.emp_name+"' questionaire_type_id='"+indexEntry2.questionaire_type_id+"'>Report</button>" ;
 					
 					if((indexEntry2.edit_flag==1 && indexEntry2.view_flag==0)){
 						html+="			<button class='btn btn-warning btn-small btn-gear edit' id='edit-"+indexEntry2.data_header_id+"' edit='1'>Edit</button>" ;
@@ -614,7 +642,7 @@ var listData = function(data) {
 			$("#action").val("edit");
 			$("#action_modal").val(action_edit);
 			$(this).parent().parent().parent().children().click();
-			getDataTemplateFn(id);
+			findOneFn(id);
 		});
 		
 		$(".del").on("click",function() {
@@ -711,14 +739,12 @@ var generateQuestionaireForm = function(data) {
 		$("#modal_empsnapshot_id").val(data.head.emp_snapshot_id);
 		$("#modal_position_code").val(data.head.position_code);
 		$("#linkParam_emp_snapshot_id").val(data.head.emp_snapshot_id);
-		
-		$("#modal_empsnapshot_name , #modal_datepicker_start  ").prop('disabled', true);
+		$("#modal_questionaire_type_id").val(data.head.questionaire_type_id);
+		$("#modal_empsnapshot_name , #modal_datepicker_start ,#modal_questionaire_type_id ").prop('disabled', true);
 		
 	}
 	
-	if(data.role.view_comment_flag == 0){
-		$("#modal_from_stage , #modal_to_stage , #modal_remark ,#btnSubmit").prop('disabled', true);
-	}; 
+	
 	
 	var html = "";
 	//section_id: 4, section_name: "FF Preparation Process", is_cust_search: 0, sub_section
@@ -731,6 +757,7 @@ var generateQuestionaireForm = function(data) {
 		html+="</h3>";
 		html+="<div is_cust_search='"+indexEntry.is_cust_search+"' section_id='"+indexEntry.section_id+"'>";
 		if( indexEntry.is_cust_search == 1){
+			globalDataTemp['tempTemplateStore']["section_"+indexEntry.section_id]=indexEntry.sub_section;
 			html+="<div class='row-fluid' style='margin-bottom: 10px;'>";
 			html+="  <div class='span6'>";
 			html+="    <button class='btn btn-success btnAddStore' id='btnAddStore-"+indexEntry.section_id+"' section_id='"+indexEntry.section_id+"'>Add</button>";
@@ -915,6 +942,7 @@ var generateQuestionaireForm = function(data) {
 var generateStageFn = function(stage,current_stage,to_stage) {
 	var dropdownCurrentStageHTML="";
 	var dropdownToStageHTML="";
+	var htmlBtnStage="";
 	var TableStageHTML="";
 	$.each(stage,function(index,indexEntry){
 	
@@ -928,18 +956,75 @@ var generateStageFn = function(stage,current_stage,to_stage) {
 
 	});
 	
-	$.each(current_stage,function(index,indexEntry){	
-		 dropdownCurrentStageHTML+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1] == undefined  ?  Object.keys(indexEntry)[0]:Object.keys(indexEntry)[1]]+"</option>";	
-	});
-
+	
 	
 	$.each(to_stage,function(index,indexEntry){
-		dropdownToStageHTML+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1] == undefined  ?  Object.keys(indexEntry)[0]:Object.keys(indexEntry)[1]]+"</option>";		
+		htmlBtnStage+="<button class='btn btn-success btnStageSubmit' type='button' style='margin-left: 5px;margin-top: 5px;' " +
+				" is_require_answer='"+indexEntry.is_require_answer+"' " +(indexEntry.is_require_answer == "1" || indexEntry.view_comment_flag == "1" ? "disabled": "")+
+				" current_stage_id='"+current_stage.stage_id+"' " +
+				" view_comment_flag='"+indexEntry.view_comment_flag+"' " +
+				" to_stage='"+indexEntry.stage_id+"' >"+indexEntry.stage_name+"</button>";
 	});
-	$("#modal_from_stage").html(dropdownCurrentStageHTML);  
-	$("#modal_to_stage").html(dropdownToStageHTML); 
+	
+	//data.role.view_comment_flag
+	if(to_stage == ""){
+		$(".modalRemark").hide();
+	}else{
+		$(".modalRemark").show();
+		$("#modal_remark").off("keyup");
+		$("#modal_remark").keyup(function(){
+			 var status_require_answer = false;
+			 var status_require_remark = false;
+			 //check require answer
+			 $.each($("#accordionListQuestionaireData").find("[answer_type_id=7] textarea").get(),function(index,indexEntry){
+				if($(indexEntry).val()==""){
+					status_require_answer = true;
+					return false;
+				}
+			 });
+			 //check require remark
+			 if($("#modal_remark").val()!=""){
+				 status_require_remark=true;
+			 }
+			// true = disabled , false = not disabled
+			 $(".btnStageSubmit[is_require_answer=0][view_comment_flag=1]").prop('disabled', status_require_remark);
+			 $(".btnStageSubmit[is_require_answer=1][view_comment_flag=1]").prop('disabled', (status_require_answer || status_require_remark));
+
+		});
+	} 
+	$("#genBtnStage").html(htmlBtnStage); 
 	$("#listDataStageHistory").html(TableStageHTML);
 	//$("#slideUpDownStageHistory").show();
+	
+	//ต้องกรอกข้อมูลภายใต้ที่ answer_type_id=7 ทั้งหมดก่อนถึงจะกดปุ่มได้
+	$("#accordionListQuestionaireData").find("[answer_type_id=7] textarea").off("keyup");
+	$("#accordionListQuestionaireData").find("[answer_type_id=7] textarea").keyup(function(){
+		  var status_require_answer = false;
+		  var status_require_remark = false;
+		  //check require answer
+		  $.each($("#accordionListQuestionaireData").find("[answer_type_id=7] textarea").get(),function(index,indexEntry){
+			if($(indexEntry).val()==""){
+				status_require_answer = true;
+				return false;
+			}
+		  });
+		  //check require remark
+		  if($("#modal_remark").val()!=""){
+			  status_require_remark=true;
+		  }
+		  // true = disabled , false = not disabled
+		  $(".btnStageSubmit[is_require_answer=1][view_comment_flag=0]").prop('disabled', status_require_answer);
+		  $(".btnStageSubmit[is_require_answer=1][view_comment_flag=1]").prop('disabled', (status_require_answer || status_require_remark));
+		 
+	});
+	
+	
+	
+	$(".btnStageSubmit").off("click");
+	$(".btnStageSubmit").click(function() {
+		if ($("#action").val() == "add"|| $("#action").val() == "") {	insertFn(this);		}
+		else{	updateFn(this);		}
+	});
 };
 var generateAnswerFormRadioFn = function(data,question_type ) {
 	//console.log(" ----  Form Radio -----");
@@ -1162,18 +1247,18 @@ var generateAnswerFormCommentFn = function(data,question_type) {
 	
 };
 
-var updateFn = function(){
+var updateFn = function(element){
 	
 	var data_header_id = $("#id").val();
-	var questionaire_id = $("#search_questionaire_id").val();
+	var questionaire_id = $("#search_questionaire_type_id").val();
 	var emp_snapshot_id = $("#modal_empsnapshot_id").val();
 	var questionaire_date = $("#modal_datepicker_start").val();
 	var total_score = 0;
 	var score = [];
 	var detail = [];
 	var stage = {};
-	stage.from_stage_id =  $("#modal_from_stage").val();
-	stage.to_stage_id =  $("#modal_to_stage").val();
+	stage.from_stage_id =  $(element).attr("current_stage_id");
+	stage.to_stage_id =  $(element).attr("to_stage");
 	stage.remark =  $("#modal_remark").val();
 
 
@@ -1331,17 +1416,17 @@ var updateFn = function(){
 	  
 };
 
-var insertFn = function(){
+var insertFn = function(element){
 
-	var questionaire_id = $("#search_questionaire_id").val();
+	var questionaire_id = $("#id").val();
 	var emp_snapshot_id = $("#modal_empsnapshot_id").val();
 	var questionaire_date = $("#modal_datepicker_start").val();
 	var total_score = 0;
 	var score = [];
 	var detail = [];
 	var stage = {};
-	stage.from_stage_id =  $("#modal_from_stage").val();
-	stage.to_stage_id =  $("#modal_to_stage").val();
+	stage.from_stage_id =  $(element).attr("current_stage_id");
+	stage.to_stage_id =  $(element).attr("to_stage");
 	stage.remark =  $("#modal_remark").val();
 
 
@@ -1471,7 +1556,7 @@ var insertFn = function(){
 			if (data['status'] == "200") {
 				callFlashSlide("Insert Successfully.");
 				$('#modalQuestionaireData').modal('hide');
-				getDataFn();
+				//getDataFn();
 				clearFn();
 			}else if (data['status'] == "400") {
 				console.log(data);
@@ -1494,12 +1579,12 @@ var insertFn = function(){
 	  
 	  
 };
-var searchAdvanceFn = function (start_date,end_date,questionaire_id,emp_snapshot_id) {
+var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_snapshot_id) {
 	//embed parameter start
 	var htmlParam="";
 	htmlParam+="<input type='hidden' class='param_Embed' id='param_start_date' name='param_start_date' value='"+start_date+"'>";
 	htmlParam+="<input type='hidden' class='param_Embed' id='param_end_date' name='param_end_date' value='"+end_date+"'>";
-	htmlParam+="<input type='hidden' class='param_Embed' id='param_questionaire_id' name='param_questionaire_id' value='"+questionaire_id+"'>";
+	htmlParam+="<input type='hidden' class='param_Embed' id='param_questionaire_type_id' name='param_questionaire_type_id' value='"+questionaire_type_id+"'>";
 	htmlParam+="<input type='hidden' class='param_Embed' id='param_emp_snapshot_id' name='param_emp_snapshot_id' value='"+emp_snapshot_id+"'>";
 	$(".param_Embed").remove();
 	$("body").append(htmlParam);
@@ -1518,13 +1603,42 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_id,emp_snapshot
 		}
 		 
 		$(".advance-search input").val("");
-		$("#search_questionaire_id").html(generateDropDownList(globalSevice['restfulPathDropDownQuestionnaireList'],"GET",{}));
+		$("#search_questionaire_type_id ,#modal_questionaire_type_id").html(generateDropDownList(globalSevice['restfulPathDropDownQuestionnaireList'],"GET",{}));
+		$("#modal_questionaire_type_id").change(function() {
+			  console.log( "Handler for .change() called." );
+			  if($("#modal_empsnapshot_id").val() == ""){
+				  $("#modalTitleRole").text("Questionnaire");
+		        	$("#accordionListQuestionaireData").empty();
+		        	$("#modal_empsnapshot_name").val("");
+		        	$("#modal_empsnapshot_id").val("");
+					$("#modal_position_code").val("");
+					$("#modal_agent_name").val("");
+		            $("#modal_assign_name").val("");
+		            $("#linkParam_emp_snapshot_id").val("");
+			  }else{
+				  getTemplateQuestionnaireFn();
+			  }
+		});
 		$("#modal_datepicker_start").datepicker({
-			dateFormat: "dd/mm/yy"
+			dateFormat: "dd/mm/yy",
+            minDate: new Date(2018, 1 - 1, 1),
+	        onSelect: function () {
+	        	//alert("asdasdasd");
+	        	$("#modalTitleRole").text("Questionnaire");
+	        	$("#accordionListQuestionaireData").empty();
+	        	$("#modal_empsnapshot_name").val("");
+	        	$("#modal_empsnapshot_id").val("");
+				$("#modal_position_code").val("");
+				$("#modal_agent_name").val("");
+	            $("#modal_assign_name").val("");
+	            $("#linkParam_emp_snapshot_id").val("");
+
+	            
+	        }
 		});
 		 $("#search_datepicker_start").datepicker({
 			 	dateFormat: "dd/mm/yy",
-	            minDate: 0,
+	            minDate: new Date(2018, 1 - 1, 1),
 	            onSelect: function () {
 	                var dt2 = $('#search_datepicker_end');
 	                var startDate = $(this).datepicker('getDate');
@@ -1533,15 +1647,15 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_id,emp_snapshot
 	                //difference in days. 86400 seconds in day, 1000 ms in second
 	                var dateDiff = (dt2Date - minDate)/(86400 * 1000);
 	                
-	                startDate.setDate(startDate.getDate() + 30);
+	                //startDate.setDate(startDate.getDate() + 30);
 	                if (dt2Date == null || dateDiff < 0) {
 	                		dt2.datepicker('setDate', minDate);
 	                }
 	                else if (dateDiff > 30){
-	                		dt2.datepicker('setDate', startDate);
+	                		dt2.datepicker('setDate', null);
 	                }
 	                //sets dt2 maxDate to the last day of 30 days window
-	                dt2.datepicker('option', 'maxDate', startDate);
+	                dt2.datepicker('option', 'maxDate', null);
 	                dt2.datepicker('option', 'minDate', minDate);
 	            }
 	        });
@@ -1550,9 +1664,13 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_id,emp_snapshot
 	        	minDate: 0
 	        });
 	    
-		toDayFn("search_datepicker_start");
 		
-		toDayFn("search_datepicker_end");
+		toDayFn("#search_datepicker_start , #search_datepicker_end , #modal_datepicker_start");
+		
+		$("#search_datepicker_start ,#search_datepicker_end , #modal_datepicker_start").keypress(function(event) {
+		    return ( ( event.keyCode || event.which ) === 9 ? true : false );
+		});
+		
 		getRoleAuthorizeFn();
 		$(".app_url_hidden").show();
 		$("#btn-search").click(function(){
@@ -1560,7 +1678,7 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_id,emp_snapshot
 			searchAdvanceFn(
 					$("#search_datepicker_start").val(),
 					$("#search_datepicker_end").val(),
-					$("#search_questionaire_id").val(),
+					$("#search_questionaire_type_id").val(),
 					$("#search_empsnapshot_id").val()
 					);
 				
@@ -1580,10 +1698,14 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_id,emp_snapshot
 		
 		$("#btn-add").click(function() {
 			clearFn();
-			getDataTemplateFn();
+			//findOneFn();
+			$("#modalQuestionaireData").modal({
+				"backdrop" : setModalPopup[0],
+				"keyboard" : setModalPopup[1]
+			});
 		});
 		$("#modalQuestionaireData .btnCancle").click(function() {
-			$("#inform_label_confirm").text("You want to leave this \""+$("#modalTitleRole ").text()+"\" ?");
+			$("#inform_label_confirm").html("You want to leave this <br>\""+$("#modalTitleRole ").text()+"\" ?");
 			$("#confrimModal").modal({
 				"backdrop" : setModalPopup[0],
 				"keyboard" : setModalPopup[1]
@@ -1598,14 +1720,15 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_id,emp_snapshot
 			
 			
 		});
-		
+		//btnStageSubmit
+		/*
 		$("#btnSubmit").click(function() {
 			if ($("#action").val() == "add"|| $("#action").val() == "") {
 				insertFn();
 			}else{
 				updateFn();
 			}
-		});
+		});*/
 		/*
 		 globalDataTemp['tempSearchEmpNameLabel']="";
 		globalDataTemp['tempSearchEmpNameId']="";
@@ -1620,7 +1743,8 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_id,emp_snapshot
 					 data:{
 						 "emp_name" : request.term,
 						 "start_date" : $("#search_datepicker_start").val(),
-						 "end_date" :  $("#search_datepicker_end").val()
+						 "end_date" :  $("#search_datepicker_end").val(),
+						 "questionaire_type_id" : $("#search_questionaire_type_id").val(),
 						 },
 					 //async:false,
 	                 error: function (xhr, textStatus, errorThrown) {
@@ -1671,7 +1795,7 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_id,emp_snapshot
 					 data:{
 						 "emp_name":request.term,
 						 "date" : $("#modal_datepicker_start").val(),
-						 "questionaire_id" : ($("#action").val() == "add" ? $("#search_questionaire_id").val() : "")
+						 "questionaire_type_id" : ($("#action").val() == "add" ? $("#search_questionaire_type_id").val() : "")
 						 },
 					 //async:false,
 	                 error: function (xhr, textStatus, errorThrown) {
@@ -1712,15 +1836,17 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_id,emp_snapshot
 	            globalDataTemp['tempModalEmpNameAgenLabel']=ui.item.distributor_name;
 	            globalDataTemp['tempModalEmpNameAssignLabel']=ui.item.chief_emp_name;
 	            //globalDataTemp['tempModalEmpName']=ui.item.emp_name;
-	            
+	            getTemplateQuestionnaireFn();
 	            return false;
 	        },change: function(e, ui) {  
+	        	
 				if ($("#modal_empsnapshot_name").val() == globalDataTemp['tempModalEmpNameLabel']) {
+					/*
 					$("#modal_empsnapshot_id").val(globalDataTemp['tempModalEmpNameId']);
 					$("#modal_position_code").val(globalDataTemp['tempModalPositionCode']);
 		            $("#modal_agent_name").val(globalDataTemp['tempModalEmpNameAgenLabel']);
 		            $("#modal_assign_name").val(globalDataTemp['tempModalEmpNameAssignLabel']);
-		            $("#linkParam_emp_snapshot_id").val(globalDataTemp['tempModalEmpNameId']);
+		            $("#linkParam_emp_snapshot_id").val(globalDataTemp['tempModalEmpNameId']);*/
 				} else if (ui.item != null) {
 					$("#modal_empsnapshot_id").val(ui.item.data_id);
 					$("#modal_position_code").val(ui.item.position_code);
@@ -1728,12 +1854,15 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_id,emp_snapshot
 		            $("#modal_assign_name").val(ui.item.chief_emp_name);
 		            $("#linkParam_emp_snapshot_id").val(ui.item.data_id);
 				} else {
-					$("#modal_empsnapshot_id").val("");
+					$("#modalTitleRole").text("Questionnaire");
+		        	$("#accordionListQuestionaireData").empty();
+		        	$("#modal_empsnapshot_id").val("");
 					$("#modal_position_code").val("");
 					$("#modal_agent_name").val("");
 		            $("#modal_assign_name").val("");
 		            $("#linkParam_emp_snapshot_id").val("");
 				}
+	        	
 	        	
 	         }
 	    });
@@ -1746,7 +1875,7 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_id,emp_snapshot
 			$("#id").val(URLParameter_header_id);
 			$("#action").val(URLParameter_action);
 			$("#action_modal").val(URLParameter_action_modal);// 1 แก้ไขได้  0 แก้ไขไม่ได้
-			getDataTemplateFn(URLParameter_header_id);
+			findOneFn(URLParameter_header_id);
 		}
 	 }
  });

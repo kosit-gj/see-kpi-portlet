@@ -692,47 +692,7 @@ overflow:auto;
     max-height: calc(100vh - 206px);
     overflow-y: auto;
 }
-/*
-.modal-dialog.full-screen {
-    position:fixed;
-    //width:auto;  // uncomment to make the width based on the left/right attributes.
-    margin:auto;                        
-    left:0px;
-    right:0px;
-    top:0px;
-    bottom:0px;
-}
 
-.aui .modal-dialog.full-screen .modal-content {
-      position:absolute;
-      left:10px;
-      right:10px;
-      top:10px;
-      bottom:10px;
-}
-
-.aui .modal-dialog.full-screen .modal-content .modal-header {
-        height:55px;  // adjust as needed.
-}
-
-.aui .modal-dialog.full-screen .modal-content .modal-body {
-        overflow-y: auto;
-	      position: absolute;
-	      top: 0;
-	      bottom: 0;
-        left:0;
-        right:0;
-	      margin-top: 55px; // .modal-header height
-	      margin-bottom: 80px;  // .modal-footer height
-}
-
-.aui .modal-dialog.full-screen .modal-content .modal-footer {
-        height:80px;  // adjust as needed.
-        position:absolute;
-        bottom:0;
-        left:0;
-        right:0;
-}*/
 </style>
 
 <div class='row-fluid '>
@@ -755,8 +715,8 @@ overflow:auto;
 				<div class="ibox-content breadcrumbs2 advance-search" style="border-color: rgb(83, 120, 253);">
 					<div class="row-fluid">
 						<div class="span3">
-				          <label for="search_questionaire_id">แบบสอบถาม</label>
-				          <select id="search_questionaire_id" class="span12" name="search_questionaire_id"></select>
+				          <label for="search_questionaire_type_id">แบบสอบถาม</label>
+				          <select id="search_questionaire_type_id" class="span12" name="search_questionaire_type_id"></select>
 				        </div>
 						<div class="span3">
 				          <label for="search_datepicker_start">วันที่เริ่มต้น</label>
@@ -826,64 +786,28 @@ overflow:auto;
 					<input class=" input-sm" id="modal_position_code" name="modal_position_code" value="" type="hidden">
 			  </div>
 			  <div class="span3">
+				<label for="modal_agent_name">แบบสอบถาม</label> 
+					<select id="modal_questionaire_type_id" class="span12"
+							name="modal_questionaire_type_id">
+					</select>
+			  </div>
+			  <div class="span3">
 				<label for="modal_agent_name">ชื่อผู้แทนจำหน่าย</label>
 					<input id="modal_agent_name" class="span12" type="text" placeholder="" disabled>
 			  </div>
-			  <div class="span3">
-				<label for="modal_assign_name">ชื่อผู้ทำประเมิน</label>
+			  
+            </div>
+            <div class="row-fluid">
+            	<div class="span3">
+					<label for="modal_assign_name">ชื่อผู้ทำประเมิน</label>
 					<input id="modal_assign_name" class="span12" type="text" placeholder="" disabled>
-			  </div>
+			  	</div>
             </div>
           </div>
         </div>
 <!-- 	               ********************************************************* -->
 <div id="accordionListQuestionaireData" class="accordion-modal">
 </div>
-<!-- 						********************************************************* -->
-		   			<div id="listQuestionaireData"></div>
-		   			<form id="linkParam" method="POST" target="_blank" action="">
-						<input type="hidden" id="linkParam_questionaire_type_id" name="questionaire_type_id" value="">
-						<input type="hidden" id="linkParam_questionaire_id" name="questionaire_id" value="">
-						<input type="hidden" id="linkParam_emp_snapshot_id" name="emp_snapshot_id" value="">
-						<input type="hidden" id="linkParam_data_header_id" name="data_header_id" value="">
-						<input type="hidden" id="linkParam_questionaire_date" name="questionaire_date" value="">
-					</form>
-	            </div>
-				<div class="modal-footer">
-<!-- 					<button class="btn btn-success" type="button" id="btnSubmitUpdate">Save</button> -->
-<!-- 					<button data-dismiss="modal" class="btn btn-danger btnCancle" -->
-<!-- 						type="button">Cancel</button> -->
-					<div class="alert alert-warning information" id="information2"
-						style="display: none;"></div>
-
-
-
-
-
-
- <div class="row-fluid">
-					<div style="text-align: left;" class="span2">
-						<label for="modal_from_stage" id="">From Stage</label> 
-						<select class="span12 " id="modal_from_stage"><option value="volvo">stage1</option></select>
-					</div>
-					<div style="text-align: left;" class="span2">
-						<label for="modal_to_stage" >To stage</label> 
-						<select class="span12 " id="modal_to_stage"><option value="volvo">stage2</option></select>
-					</div>
-					<div  style="text-align: left;" class="span4">
-						<label for="modal_remark" >Remark:</label> 
-						<input type="text" class="span12 " id="modal_remark">
-					</div>
-
-
-					<div id="" class="span4 offset0">
-						<div style="margin-top: 24px;">
-							<button class="btn btn-success" type="button" id="btnSubmit">Save</button>
-							<button  class="btn btn-danger btnCancle" type="button" >Cancel</button>
-						</div>
-					</div>
-				</div>
-				
 				<div class="row-fluid" style="text-align: left; margin-top: 15px;" >
 					<a href="#" id="slideUpDownStageHistory" style="">Work Flow Stage History</a>
 					<div class="table-responsive" style="overflow:auto;">
@@ -905,14 +829,49 @@ overflow:auto;
 						</div>
 					</div>
 				</div>
+<!-- 						********************************************************* -->
+		   			<div id="listQuestionaireData"></div>
+		   			<form id="linkParam" method="POST" target="_blank" action="">
+						<input type="hidden" id="linkParam_questionaire_type_id" name="questionaire_type_id" value="">
+						<input type="hidden" id="linkParam_questionaire_id" name="questionaire_id" value="">
+						<input type="hidden" id="linkParam_emp_snapshot_id" name="emp_snapshot_id" value="">
+						<input type="hidden" id="linkParam_data_header_id" name="data_header_id" value="">
+						<input type="hidden" id="linkParam_questionaire_date" name="questionaire_date" value="">
+					</form>
+	            </div>
+				<div class="modal-footer">
+<!-- 					<button class="btn btn-success" type="button" id="btnSubmitUpdate">Save</button> -->
+<!-- 					<button data-dismiss="modal" class="btn btn-danger btnCancle" -->
+<!-- 						type="button">Cancel</button> -->
+					<div class="alert alert-warning information" id="information2"
+						style="display: none;"></div>
+
+
+					<div class="row-fluid">
+						<div  style="text-align: left; " class="span12 modalRemark">
+<!-- 						<label for="modal_remark" >Remark:</label>  -->
+						<textarea row="3" class="span12 " id="modal_remark" placeholder="Remark" style="resize: vertical;max-height: 56px;min-height: 56px;"></textarea>
+						
+						</div>
+					</div>
+
+
+					<div class="row-fluid">
+						<div>
+							<div style="display: inline;" id="genBtnStage">
+								<button class="btn btn-success" type="button" style="margin-left: 5px;margin-top: 5px;" id="btnSubmit">Save</button>
+								<button class="btn btn-success" type="button" style="margin-left: 5px;margin-top: 5px;" id="btnCompleted">Completed</button>
+								
+							</div>
+							<div style="float: right;">
+								<button class="btn btn-danger btnCancle" type="button" style="margin-left: 5px;margin-top: 5px;">Cancel</button>
+							</div>
+						</div>
+					</div>
 
 
 
-
-
-
-
-			</div>
+				</div>
 	        </div>
 	    </div>
 	    
