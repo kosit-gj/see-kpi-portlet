@@ -139,8 +139,8 @@ var clearFn = function() {
 	$("#action").val("add");
 	$(".btnModalClose").click();
 	globalDataTemp['form'].validate().resetForm();
-	$("#form_questionnaire_type  ,.numberOnly").prop('disabled', false); 
-	$("#form_questionnaire_type  ,.numberOnly").removeClass('cursorNotAllowed');
+	$("#form_questionnaire_type ,.btnAddSection  ,.numberOnly").prop('disabled', false); 
+	$("#form_questionnaire_type ,.btnAddSection  ,.numberOnly").removeClass('cursorNotAllowed');
 	
 }
 //--------  Clear End
@@ -1265,6 +1265,7 @@ $(document).ready(function() {
 	
 	
 	$("#btnAddQuestionnaire").click(function(){
+		
 		$("#btnAddAnother").show();
 	});
 	$("#btnSubmit").click(function(){

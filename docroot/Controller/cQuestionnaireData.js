@@ -402,14 +402,46 @@ var scriptViewReportFn  = function (){
 	$(".viewReport").on("click" ,function(event){
 		event.stopPropagation();
 		event.preventDefault();
+//		$("form#linkParam #linkParam_questionaire_type_id" ).val($(this).attr("questionaire_type_id"));
+//		//$("form#linkParam #linkParam_questionaire_id" ).val($("#search_questionaire_type_id option:selected" ).val());
+//		$("form#linkParam #linkParam_assessor_id" ).val($(this).attr("assessor_id"));
+//		$("form#linkParam #linkParam_data_header_id" ).val($("#id" ).val());
+//		$("form#linkParam #linkParam_questionaire_date" ).val($("#modal_datepicker_start" ).val());
+//		
+//		$("form#linkParam").attr("action", $(this).attr("url"));
+//		$("form#linkParam").submit();
+
+
 		$("form#linkParam #linkParam_questionaire_type_id" ).val($(this).attr("questionaire_type_id"));
-		//$("form#linkParam #linkParam_questionaire_id" ).val($("#search_questionaire_type_id option:selected" ).val());
+		//$("form#linkParam #linkParam_questionaire_id" ).val($(this).attr("questionaire_id"));
 		$("form#linkParam #linkParam_assessor_id" ).val($(this).attr("assessor_id"));
+		$("form#linkParam #linkParam_emp_snapshot_id" ).val($("#modal_empsnapshot_id").val());
 		$("form#linkParam #linkParam_data_header_id" ).val($("#id" ).val());
-		$("form#linkParam #linkParam_questionaire_date" ).val($("#modal_datepicker_start" ).val());
+		$("form#linkParam #linkParam_questionaire_date" ).val($("#modal_datepicker_start").val());
 		
-		$("form#linkParam").attr("action", $(this).attr("url"));
-		$("form#linkParam").submit();
+
+		var parameter = {};
+		
+		var output_type ="pdf";
+		
+		parameter = {
+					questionaire_type_id: $(this).attr("questionaire_type_id"),
+					data_header_id: $("#id" ).val(),
+					questionaire_date: $(this).attr("questionaire_date"),
+					emp_snapshot_id:$(this).attr("emp_snapshot_id"),
+					assessor_id: $(this).attr("assessor_id"),
+					param_section : $(this).attr("section_id")
+				  };
+		
+		var data = JSON.stringify(parameter);
+		var url_report_jasper = $(this).attr("url")+"&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			    window.open(url_report_jasper,"_blank");
+			} else {
+				//$('#iFrame_report').attr('src',url_report_jasper);
+				window.open(url_report_jasper,"_blank");
+			}
+		
 	});
 };
 
@@ -634,10 +666,10 @@ var listData = function(data) {
 		html+="</h3>";
 		html+="<div class=\"list-data-table\">";
 		
-				html+="<table class='table table-striped table-bordered'>";
+				html+="<table class='table table-striped table-bordered' style='max-width: none; '>";
 				html+="  <thead>";
 				html+="    <tr>";
-				html+="      <th width=\"15%\">วันที่</th>";
+				html+="      <th width=\"15%\" >วันที่</th>";
 				html+="      <th width=\"15%\">รหัส TSE</th>";
 				html+="      <th width=\"60%\">ชื่อ-สกุล TSE</th>";
 				html+="      <th width=\"10%\"></th>";
@@ -646,7 +678,7 @@ var listData = function(data) {
 				html+="  <tbody>";
 				$.each(indexEntry['data'],function(index2,indexEntry2) {
 					html+="    <tr>";
-					html+="      <td>"+indexEntry2.questionaire_date+"</td>";
+					html+="      <td style='white-space: nowrap;'>"+indexEntry2.questionaire_date+"</td>";
 					html+="      <td>"+indexEntry2.position_code+"</td>";
 					html+="      <td>"+indexEntry2.emp_name+"</td>";
 					html+="      <td>";
@@ -700,7 +732,8 @@ var listData = function(data) {
 						data_header_id: id,
 						questionaire_date: $(this).attr("questionaire_date"),
 						emp_snapshot_id:$(this).attr("emp_snapshot_id"),
-						assessor_id: $(this).attr("assessor_id")
+						assessor_id: $(this).attr("assessor_id"),
+						param_section:""
 					  };
 			
 			var data = JSON.stringify(parameter);
@@ -833,7 +866,7 @@ var generateQuestionaireFormFn = function(data) {
 		
 		html+="<h3 >"+indexEntry.section_name;
 		if(indexEntry.is_show_report == 1){
-			html+="<span class='viewReport' url='"+indexEntry.report_url+"' assessor_id='"+data['head'].assessor_id+"' questionaire_type_id='"+data['head'].questionaire_type_id+"'><img src='"+$("#url_portlet").val()+"/img/report.svg' data-toggle='tooltip' data-original-title='View Report' style='width: 30px;float: right;margin-top: -2px;'></span>";
+			html+="<span class='viewReport' url='"+indexEntry.report_url+"' section_id='"+indexEntry.section_id+"' assessor_id='"+data['head'].assessor_id+"' questionaire_type_id='"+data['head'].questionaire_type_id+"'><img src='"+$("#url_portlet").val()+"/img/report.svg' data-toggle='tooltip' data-original-title='View Report' style='width: 30px;float: right;margin-top: -2px;'></span>";
 		}
 		html+="</h3>";
 		html+="<div is_cust_search='"+indexEntry.is_cust_search+"' section_id='"+indexEntry.section_id+"'>";
@@ -1784,19 +1817,7 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 			
 			
 		});
-		//btnStageSubmit
-		/*
-		$("#btnSubmit").click(function() {
-			if ($("#action").val() == "add"|| $("#action").val() == "") {
-				insertFn();
-			}else{
-				updateFn();
-			}
-		});*/
-		/*
-		 globalDataTemp['tempSearchEmpNameLabel']="";
-		globalDataTemp['tempSearchEmpNameId']="";
-		 */
+
 		$("#search_empsnapshot").autocomplete({
 	        source: function (request, response) {
 	        	$.ajax({
@@ -1931,90 +1952,18 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 	         }
 	    });
 		
-		
+		var URLParameter_header_id = getURLParameter('data_header_id');
+		  var URLParameter_action = getURLParameter('action');
+		  var URLParameter_action_modal = getURLParameter('action_modal');
+		  
+		  if(URLParameter_header_id!=undefined && URLParameter_action!=undefined && URLParameter_action_modal!=undefined) {
+		   $("#id").val(URLParameter_header_id);
+		   $("#action").val(URLParameter_action);
+		   $("#action_modal").val(URLParameter_action_modal);// 1 แก้ไขได้  0 แก้ไขไม่ได้
+		   findOneFn(URLParameter_header_id);
+		  }
 		
 		
 	 }
  });
  
- $(".closePanelScore").off("click");
-	$(".closePanelScore").on("click" ,function(){
-		
-		var elements = $(this).parent().parent();
-		var section_id=elements.attr("section_id");
-		$("#inform_label_confirm").text("Please confirm the cancellation by evaluated retailer?");
-		$("#confrimModal").modal({
-			"backdrop" : setModalPopup[0],
-			"keyboard" : setModalPopup[1]
-		});
-		$(document).off("click","#btnConfirmOK");
-		$(document).on("click","#btnConfirmOK",function(){
-			elements.hide(); 
-			if($("#action_modal").val()=="0"){$("#accordionListQuestionaireData").find('input , select, textarea , .closePanelScore').prop('disabled', true);}
-			else{
-			var html="";
-			//console.log(globalDataTemp['tempTemplateStore']["section_"+section_id]);
-			$.each(globalDataTemp['tempTemplateStore']["section_"+section_id],function(index2,indexEntry2) {
-			if(indexEntry2.question != "" && indexEntry2.answer == ""){
-				//console.log("Sub Section"); 
-				//indexEntry2.answer_type_id กับ indexEntry2.is_show_comment ไม่ใช้				
-				html+="<table class='table table-striped table-bordered ' id='tableParentQuestion-"+indexEntry2.question_id+"' question_id='"+indexEntry2.question_id+"'>";
-				html+="  <thead>";
-				html+="    <tr>";
-				html+="      <th class='' colspan='2' style='vertical-align: top;'>"+indexEntry2.question_name+"</th>";
-				//html+="      <th class='' style='vertical-align: top; text-align: center;'>คะแนน</th>";
-				html+="    </tr>";
-				html+="  </thead>";
-				html+="  <tbody>";
-				$.each(indexEntry2.question,function(index3,indexEntry3) {
-					
-					if(indexEntry3.answer_type_id == 1 || indexEntry3.answer_type_id == 2 ){
-						html+=generateAnswerFormRadioFn(indexEntry3,"Sub Section");
-					}else if(indexEntry3.answer_type_id == 3 || indexEntry3.answer_type_id == 4 ){
-						html+=generateAnswerFormCheckboxesFn(indexEntry3,"Sub Section");
-					}else if(indexEntry3.answer_type_id == 5 || indexEntry3.answer_type_id == 6 ){
-						html+=generateAnswerFormDropdownFn(indexEntry3,"Sub Section");
-					}else{
-						html+=generateAnswerFormCommentFn(indexEntry3,"Sub Section");
-					}
-					
-					
-				});
-				
-				html+="  </tbody>";
-				html+="</table>";
-				
-				
-				
-				}else if(indexEntry2.question == "" && indexEntry2.answer != ""){
-					
-					if(indexEntry2.answer_type_id == 1 || indexEntry2.answer_type_id == 2 ){
-						html+=generateAnswerFormRadioFn(indexEntry2,"Question");
-					}else if(indexEntry2.answer_type_id == 3 || indexEntry2.answer_type_id == 4 ){
-						html+=generateAnswerFormCheckboxesFn(indexEntry2,"Question");
-					}else if(indexEntry2.answer_type_id == 5 || indexEntry2.answer_type_id == 6 ){
-						html+=generateAnswerFormDropdownFn(indexEntry2,"Question");
-					}else{
-						html+=generateAnswerFormCommentFn(indexEntry2,"Question");
-					}
-						
-						
-					
-					
-					
-				}
-				
-				if((index2+1) != indexEntry.sub_section.length){
-					html+="  <hr style='margin-top: 15px; margin-bottom: 15px;'>";
-					
-				}
-			
-			//console.log("---------End sub_section----------");
-			});
-			elements.html(html);
-			
-			$("#confrimModal").modal('hide');
-			scriptAutocompleteStoreNameFn();
-			}
-		});
-	});
