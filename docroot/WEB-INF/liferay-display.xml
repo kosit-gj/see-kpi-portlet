@@ -51,6 +51,7 @@
 		<portlet id="dashboard-performance-comparison"></portlet>
 		<portlet id="questionnaire"></portlet>
 		<portlet id="questionnaire-data"></portlet>
+		<portlet id="questionnaire-type"></portlet>
 	</category>
 
 
