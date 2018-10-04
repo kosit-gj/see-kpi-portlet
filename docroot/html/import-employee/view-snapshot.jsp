@@ -758,7 +758,15 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 									<input type="text" class="form-control input-sm span12" placeholder="" id="from_region" disabled="disabled">
 								</div>
 							</div>
-							
+							<div class="form-group p-xxs">
+								<label class="control-label">Is Active:</label>
+								<div class="controls">
+									<label for="" class="checkbox" style="cursor:default">
+                  					<input id="from_checkboxIs_active" name="from_checkboxIs_active" type="checkbox"
+										value="" style="margin-top: 4px;">
+                					</label>
+								</div>
+							</div>
 	                	
 	                	
 	                	</div>
