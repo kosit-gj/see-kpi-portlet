@@ -310,6 +310,8 @@ var findOneFn = function(id) {
 			$("#from_distributor_code").val(data['distributor_code']);
 			$("#from_distributor_name").val(data['distributor_name']);
 			$("#from_region").val(data['region']);
+			$("#from_checkboxIs_active").prop("checked",(data["is_active"]=="1" ? true : false));
+			
 		}
 	});
 };
