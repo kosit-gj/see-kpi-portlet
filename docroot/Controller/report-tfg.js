@@ -181,6 +181,7 @@ var dropDrowAppraisalEmpLevelFn = function(id){
 		}
 	});
 	//dropDrowIndividualOrgLevelFn();
+	dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
 }
 
 var dropDrowIndividualOrgLevelFn = function(id){
@@ -385,9 +386,10 @@ $(document).ready(function() {
         $("#EmpName").prop("disabled", false);
         $("#AppraisalEmpLevel").prop("disabled", false);
         dropDrowAppraisalEmpLevelFn();
+        refreshMultiOrganization();
       }
     });
-    $("#appraisalType").change();
+ 
 
     $("#AppraisalEmpLevel").change(function() {
       clearParamSearch(dataClearParam); // in cMain.js
@@ -568,10 +570,10 @@ $(document).ready(function() {
 	});
     
     $(".app_url_hidden").show();
-    dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
+    
 		
   }
   
   $("#organization").multiselect({minWidth:'100%;'}).multiselectfilter();
-  refreshMultiOrganization();
+  $("#appraisalType").change();
 });
