@@ -39,7 +39,7 @@ var getQualityFn = function () {   // QualityFn
             $.each(dataQuality, function (index, groupEntry) {
                 $("#appraisal_template_area").append(assignTemplateQualityFn(index, groupEntry));
                 onchangGroupQualityFn(groupEntry['structure_id']);
-                
+                                
                 if ( jQuery.inArray($("#group_id").val(), ["1", "5"]) != -1 ){
                 	$(".classAdmin").show(); // Show parameter
                 } else {
@@ -65,8 +65,6 @@ var updateQualityFn = function () {   // QualityFn
 }
 
 var assignTemplateQualityFn = function (structureName, data) {  // QualityFn
-	console.log("assignTemplateQualityFn()...");
-	console.log(data);
     var item_result_id_array = [];
     var htmlTemplateQuality = "";
     var info_item = "";
@@ -93,8 +91,13 @@ var assignTemplateQualityFn = function (structureName, data) {  // QualityFn
     htmlTemplateQuality += "<div class='span3'>"
     htmlTemplateQuality += "<select data-original-title='" + $(".lt-group").val() + "' title=''  data-toggle='tooltip' class='span12' id='group-" + data['structure_id'] + "' onchange='onchangGroupQualityFn(" + data['structure_id'] + ")'>";
     $.each(data, function (index, indexEntry) {
-        if (indexEntry['group_id'] != undefined)
-            htmlTemplateQuality += "<option value='" + indexEntry['group_id'] + "'>" + indexEntry['group_name'] + "</option>";
+        if (indexEntry['group_id'] != undefined){
+        	if($("#group_id").val() == indexEntry['group_id']){
+        		htmlTemplateQuality += "<option value='" + indexEntry['group_id'] + "' selected>" + indexEntry['group_name'] + "</option>";
+        	} else {
+        		htmlTemplateQuality += "<option value='" + indexEntry['group_id'] + "'>" + indexEntry['group_name'] + "</option>";
+        	}
+        }
     });
     htmlTemplateQuality += "</select >";
     htmlTemplateQuality += "</div>"
@@ -290,11 +293,15 @@ var onchangGroupQualityFn = function (structureId) { // QualityFn
                     	var objectType = jQuery.type(indexEntry3);
                         if (objectType == "object" || objectType == "array") {
                         	if(indexEntry3['emp_id'] == cMain_emp_id){
-                        		htmlEmp += "<option value='" + indexEntry3['emp_id'] + "'> &#10148 " + cMain_emp_name + "</option>";
+                        		// group id = 1(chief), default this user //
+                                if($("#group_id").val() == 1){
+                                	htmlEmp += "<option value='" + indexEntry3['emp_id'] + "' selected> &#10148 " + cMain_emp_name + "</option>";
+                                } else {
+                                	htmlEmp += "<option value='" + indexEntry3['emp_id'] + "'> &#10148 " + cMain_emp_name + "</option>";
+                                }
                         	} else {
                         		htmlEmp += "<option value='" + indexEntry3['emp_id'] + "'>" + indexEntry3['emp_name'] + "</option>";
                         	}
-                            
                         }
                     });
                 }
@@ -1116,7 +1123,7 @@ var dropDrowAppraisalOrgLevelFn = function (id) {
 
 var dropDrowIndividualOrgLevelFn = function (id) {
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/org_level_individual",
+        url: restfulURL + "/" + serviceName + "/public/appraisal360/parameter/org_level_individual",
         type: "get",
         dataType: "json",
         async: false,
@@ -1126,7 +1133,8 @@ var dropDrowIndividualOrgLevelFn = function (id) {
             var htmlOption = "";
             $.each(data, function (index, indexEntry) {
 
-                if (id == indexEntry['level_id']) {
+                //if (id == indexEntry['level_id']) {
+            	if (indexEntry['default_flag'] == 1) {
                     htmlOption += "<option selected='selected' value=" + indexEntry['level_id'] + ">" + indexEntry['appraisal_level_name'] + "</option>";
                 } else {
                     htmlOption += "<option value=" + indexEntry['level_id'] + ">" + indexEntry['appraisal_level_name'] + "</option>";
@@ -1211,16 +1219,17 @@ var dropDrowOrgFn = function (appraisalLevelId) {
 
 var dropDrowIndividualOrgFn = function (appraisalLevelId) {
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/org_individual",
+        url: restfulURL + "/" + serviceName + "/public/appraisal360/parameter/org_individual",
         type: "get",
         dataType: "json",
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
-        data: { "emp_level": $("#AppraisalEmpLevel").val(), "org_level": $("#AppraisalOrgLevel").val() },
+        data: { "org_level": $("#AppraisalOrgLevel").val() },
         success: function (data) {
             var htmlOption = "";
             $.each(data, function (index, indexEntry) {
-                if (id == indexEntry['org_id']) {
+                //if (id == indexEntry['org_id']) {
+            	if (indexEntry['default_flag'] == 1) {
                     htmlOption += "<option selected='selected' value=" + indexEntry['org_id'] + ">" + indexEntry['org_name'] + "</option>";
                 } else {
                     htmlOption += "<option value=" + indexEntry['org_id'] + ">" + indexEntry['org_name'] + "</option>";
