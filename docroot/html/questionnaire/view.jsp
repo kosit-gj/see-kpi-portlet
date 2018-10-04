@@ -386,13 +386,14 @@ cursor: not-allowed !important;
 									class="input span12 m-b-n" id="search_quest_type" name="search_quest_type"><option
 										selected value="">All Questionnaire Type</option></select>
 							</div>
+<!-- 						
 							<div  class="form-group pull-left span3" style="margin-left: 5px">
 								<select data-toggle="tooltip" title="level"
 									class="input span12 m-b-n" id="search_level_id" name="search_level_id"><option
 										selected value="">All Level</option></select>
 							</div>
-	
-							<div class="form-group pull-left span4" style="margin-left: 5px">
+-->
+							<div class="form-group pull-left span6" style="margin-left: 5px">
 								<input data-toggle="tooltip" title="Questionnaire Name"
 									class="span12 m-b-n ui-autocomplete-input"
 									style="margin-bottom: 10px;" id="search_quest_name"
@@ -447,7 +448,6 @@ cursor: not-allowed !important;
 								<th style='width: 5%; white-space: nowrap;'>No.</th>
 								<th style='width: 15%; white-space: nowrap;'>Questionnaire Type</th>
 								<th style='width: auto; white-space: nowrap;'>Questionnaire Name</th>
-								<th style='width: 15%; white-space: nowrap;'>Level Name</th>
 								<th style='width: 10%; white-space: nowrap;text-align: right;'>Pass Score</th>
 								<th style='width: 10%; text-align: center;' class='objectCenter'>Is Active</th>
 								<th style='width: 10%; text-align: center;' class='objectCenter'>Manage</th>
@@ -542,6 +542,7 @@ cursor: not-allowed !important;
 								name="form_questionnaire_type"><option selected
 									value="">No Questionnaire Type</option></select>
 						</div>
+<!-- 					
 						<div class="form-group pull-left span3"
 							style="margin-left: 0px; position: relative;">
 							<select data-toggle="tooltip" title="Level"
@@ -549,6 +550,7 @@ cursor: not-allowed !important;
 								name="form_level_id"><option selected
 									value="">No Level </option></select>
 						</div>
+ -->
 					</div>
 				</div>
 				<div class="row-fluid p-t-lg">
@@ -569,8 +571,8 @@ cursor: not-allowed !important;
 								title="Pass Score">
 						</div>
 						<div class="form-group float-label-control pull-left span2"
-							style="width: auto; margin-right: 60px;">
-							<div class="flat-toggle on" id="form_questionnaire_is_active"
+							style="width: auto; margin-right: 60px; ">
+							<div class="flat-toggle " id="form_questionnaire_is_active"
 								data-value="1">
 								<span>Is Active</span>
 

@@ -124,7 +124,7 @@ var clearFn = function() {
 	
 	
 	$("#form_questionnaire_type").val($("#form_questionnaire_type option:first").val());
-	$("#form_level_id").val($("#form_level_id option:first").val());
+	
 	
 	$("#form_questionnaire_name").val("");
 	$("#form_questionnaire_pass_score").val("");
@@ -139,8 +139,8 @@ var clearFn = function() {
 	$("#action").val("add");
 	$(".btnModalClose").click();
 	globalDataTemp['form'].validate().resetForm();
-	$("#form_questionnaire_type ,#form_level_id ,.numberOnly").prop('disabled', false); 
-	$("#form_questionnaire_type ,#form_level_id ,.numberOnly").removeClass('cursorNotAllowed');
+	$("#form_questionnaire_type  ,.numberOnly").prop('disabled', false); 
+	$("#form_questionnaire_type  ,.numberOnly").removeClass('cursorNotAllowed');
 	
 }
 //--------  Clear End
@@ -198,7 +198,7 @@ var scriptFlatToggleFn = function (){
 	        		$(this).parent().prev().find( 'input' ).val("");
 	        		$(this).parent().prev().find( 'input' ).addClass('url_report_cursor');
 	        	}
-	        	
+	        	/*
 	          	if($(this).hasClass('isBeforeWork')) {
 	        		$(this).closest('.closet-section').find('.isWorkInShop').addClass('on');
 	        	}
@@ -206,7 +206,7 @@ var scriptFlatToggleFn = function (){
 	          	if($(this).hasClass('isWorkInShop')) {
 	        		$(this).closest('.closet-section').find('.isBeforeWork').addClass('on');
 	        	}
-	        	
+	        	*/
 	        	$(this).removeClass('on');
 	            $(this).attr("data-value","0");
 	        } else {
@@ -569,7 +569,7 @@ var getDataFn = function(page,rpp){
 
 	var questType= $("#param_quest_type").val();
 	var questId= $("#param_quest_id").val();
-	var levelId =$("#param_level_id").val();
+	
 	$.ajax({
 		url : globalSevice['restfulPathQuestionnaire'],
 		type : "get",
@@ -577,7 +577,6 @@ var getDataFn = function(page,rpp){
 		data:{
 
 			"questionaire_type_id":questType,
-			"level_id":levelId,
 			"questionaire_id":questId
 
 		},
@@ -595,11 +594,10 @@ var getDataFn = function(page,rpp){
 //--------  GetData End
 
 // -------- Search Start
-var searchAdvanceFn = function (quest_type,level_id,quest_id) {
+var searchAdvanceFn = function (quest_type,quest_id) {
 	//embed parameter start
 	var htmlParam="";
 	htmlParam+="<input type='hidden' class='param_Embed' id='param_quest_type' name='param_quest_type' value='"+quest_type+"'>";
-	htmlParam+="<input type='hidden' class='param_Embed' id='param_level_id' name='param_level_id' value='"+level_id+"'>";
 	htmlParam+="<input type='hidden' class='param_Embed' id='param_quest_id' name='param_quest_id' value='"+quest_id+"'>";
 	$(".param_Embed").remove();
 	$("body").append(htmlParam);
@@ -640,7 +638,6 @@ var listQuestionnaireFn = function(data) {
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ countNo + "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["questionaire_type"]+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["questionaire_name"]+ "</td>";
-		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["appraisal_level_name"]+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;text-align: right;\">"+ notNullFn(indexEntry["pass_score"])+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\"> <div align='center'><input type='checkbox' "+ (indexEntry["is_active"]=="1" ? "checked" : "")+ " disabled></div> </td>";
 		
@@ -864,8 +861,8 @@ var listQuestionnaireFindOneFn = function(data) {
 	
 	$("#listSection").html(html);
 	if(data.head.is_use == 1){
-		$("#form_questionnaire_type ,#form_level_id , .btnAddSection ,.btnAddSubSection,.btnAddQuestion, .btnDelSection ,.addAnswerRow , .btnDelSubSection , .btnDelQuestion ,.btnDelAnswerRow ,.dropDownAnswerTypeSubSection ,.dropDownAnswerTypeQuestion ,.btnDelAnswerRow,.numberOnly").prop('disabled', true); 
-		$("#form_questionnaire_type ,#form_level_id , .btnAddSection ,.btnAddSubSection,.btnAddQuestion, .btnDelSection ,.addAnswerRow , .btnDelSubSection , .btnDelQuestion ,.btnDelAnswerRow ,.dropDownAnswerTypeSubSection ,.dropDownAnswerTypeQuestion ,.btnDelAnswerRow,.numberOnly").addClass('cursorNotAllowed');
+		$("#form_questionnaire_type  , .btnAddSection ,.btnAddSubSection,.btnAddQuestion, .btnDelSection ,.addAnswerRow , .btnDelSubSection , .btnDelQuestion ,.btnDelAnswerRow ,.dropDownAnswerTypeSubSection ,.dropDownAnswerTypeQuestion ,.btnDelAnswerRow,.numberOnly").prop('disabled', true); 
+		$("#form_questionnaire_type  , .btnAddSection ,.btnAddSubSection,.btnAddQuestion, .btnDelSection ,.addAnswerRow , .btnDelSubSection , .btnDelQuestion ,.btnDelAnswerRow ,.dropDownAnswerTypeSubSection ,.dropDownAnswerTypeQuestion ,.btnDelAnswerRow,.numberOnly").addClass('cursorNotAllowed');
 		$("#listSection .flat-toggle").parent().find("*").addClass('cursorNotAllowed');
 	}
 	else{
@@ -1007,7 +1004,7 @@ var insertFn = function(options){
 	
 	var questionaire_type_id=$("#form_questionnaire_type").val();
 	var questionaire_name=$("#form_questionnaire_name").val();
-	var level_id=$("#form_level_id").val();
+	
 	var pass_score=$("#form_questionnaire_pass_score").val();
 	var is_active=$("#form_questionnaire_is_active").attr("data-value");
 	var questionaire_section = [];
@@ -1074,7 +1071,7 @@ var insertFn = function(options){
 		data : {
 			 "questionaire_name": questionaire_name,
 			 "questionaire_type_id": questionaire_type_id,
-			 "level_id" : level_id,
+			 //"level_id" : level_id,
 			 "pass_score": pass_score,
 			 "is_active": is_active,
 			 "questionaire_section": questionaire_section
@@ -1118,7 +1115,7 @@ var updateFn = function(){
 	var questionaire_type_id=$("#form_questionnaire_type").val();
 	var questionaire_id = $("#id").val();
 	var questionaire_name=$("#form_questionnaire_name").val();
-	var level_id=$("#form_level_id").val();
+	//var level_id=$("#form_level_id").val();
 	var pass_score=$("#form_questionnaire_pass_score").val();
 	var is_active=$("#form_questionnaire_is_active").attr("data-value");
 	var questionaire_section = [];
@@ -1195,7 +1192,7 @@ $.ajax({
 			 "questionaire_name": questionaire_name,
 			 "questionaire_type_id": questionaire_type_id,
 			 "pass_score": pass_score,
-			 "level_id" : level_id,
+			 //"level_id" : level_id,
 			 "is_active": is_active,
 			 "questionaire_section": questionaire_section
 		},
@@ -1258,7 +1255,6 @@ $(document).ready(function() {
 	
 		searchAdvanceFn(
 				$("#search_quest_type").val(),
-				$("#search_level_id").val(),
 				$("#search_quest_id").val()
 				);
 			
@@ -1278,10 +1274,11 @@ $(document).ready(function() {
 		globalDataTemp['form'].validate();
 		if(globalDataTemp['form'].valid()){
 			if ($("#action").val() == "add"|| $("#action").val() == "") {
-				confrimModalActiveJobGroupFn("add");
-
+				//confrimModalActiveJobGroupFn("add");
+				insertFn();
 			}else{
-				confrimModalActiveJobGroupFn("update");
+				//confrimModalActiveJobGroupFn("update");
+				updateFn();
 			}
 		}else{
 			callFlashSlideInModal("<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Please enter all required fields.","#information2","error");
@@ -1293,7 +1290,8 @@ $(document).ready(function() {
 	$("#btnAddAnother").click(function(){
 		globalDataTemp['form'].validate();
 		if(globalDataTemp['form'].valid()){
-			confrimModalActiveJobGroupFn("saveAndAnother");
+			//confrimModalActiveJobGroupFn("saveAndAnother");
+			insertFn("saveAndAnother");
 		}else{
 			callFlashSlideInModal("<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> Please enter all required fields.","#information2","error");
 		}
