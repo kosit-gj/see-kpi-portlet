@@ -1,6 +1,114 @@
 var dataTemp = [];
 var dataTempModal = [];
 
+var gPeriodInfo;
+var gDropdownYear = $("#AppraisalYear");
+var gDropdownPeriod = $("#AppraisalPeriod");
+
+var getPeriodInfoFn = function(){
+	$.ajax({
+		url:restfulURL+"/"+serviceName+"/public/salary_raise/parameter/period",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			gPeriodInfo = data;
+		}
+	});
+}
+
+
+var dropDrowYearListFn = function () {   
+    /*
+	var htmlOption = "";
+    $.ajax({
+        url: restfulURL + "/" + serviceName + "/public/appraisal/year_list_assignment",
+        type: "get",
+        dataType: "json",
+        async: false,
+        headers: { Authorization: "Bearer " + tokenID.token },
+        success: function (data) {
+            $.each(data, function (index, indexEntry) {
+                    htmlOption += "<option value=" + indexEntry['appraisal_year'] + ">" + indexEntry['appraisal_year'] + "</option>";
+            });
+            $("#AppraisalYear").html(htmlOption);
+            dropDrowPeriodListFn($("#AppraisalYear").val());
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        	console.log(textStatus+" / "+jqXHR+ " / " + errorThrown);
+			$("body").mLoading('hide'); //Loading
+		}
+    });
+    */
+	var gUniqueYear = $.unique(gPeriodInfo.map(function(d){return d.appraisal_year;}));
+	
+	var optionStr="";
+	$.each(gUniqueYear,function(index,indexEntry){
+		optionStr+="<option value="+indexEntry+">"+indexEntry+"</option>";
+	});
+	gDropdownYear.html(optionStr);
+}
+
+
+var dropDrowPeriodListFn = function (selectedyear) { 
+	/*
+	var htmlOption = "";	
+    $.ajax({
+        url: restfulURL + "/" + serviceName + "/public/appraisal/period_list",
+        type: "get",
+        dataType: "json",
+        async: false,
+        headers: { Authorization: "Bearer " + tokenID.token },
+        data: { "appraisal_year": year },
+        success: function (data) {
+            $.each(data, function (index, indexEntry) {
+                    htmlOption += "<option  value=" + indexEntry['period_id'] + ">" + indexEntry['appraisal_period_desc'] + "</option>";
+            });
+            $("#AppraisalPeriod").html(htmlOption); 
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        	console.log(textStatus+" / "+jqXHR+ " / " + errorThrown);
+			$("body").mLoading('hide'); //Loading
+		}
+    });
+    */
+	var periodArr = jQuery.grep(gPeriodInfo, function (period, i) {
+        return period.appraisal_year == selectedyear;
+    });
+	
+    var periodOption = "";
+    $.each(periodArr, function(index,indexEntry){
+    	periodOption+="<option value="+indexEntry.period_id+">"+indexEntry.appraisal_period_desc+"</option>";
+	});
+    gDropdownPeriod.html(periodOption);
+}
+
+
+var dropDrowJudgementListFn = function () { 
+	var htmlOption = "";
+	
+    $.ajax({
+        url: restfulURL + "/" + serviceName + "/public/judgement/list_status",
+        type: "get",
+        dataType: "json",
+        async: false,
+        headers: { Authorization: "Bearer " + tokenID.token },
+        success: function (data) {
+        		htmlOption = "<option selected='selected' value=''>All Judgement</option>";
+            $.each(data, function (index, indexEntry) {
+            	htmlOption += "<option value=" + indexEntry['judgement_status_id'] + ">" + indexEntry['judgement_status'] + "</option>";     
+            });
+            $("#Judgement").html(htmlOption); 
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        	console.log(textStatus+" / "+jqXHR+ " / " + errorThrown);
+			$("body").mLoading('hide'); //Loading
+		}
+    });
+}
+
+
 $(document).ready(function () {
     var username = $('#user_portlet').val();
     var password = $('#pass_portlet').val();
@@ -62,84 +170,20 @@ $(document).ready(function () {
     });
 
     // RUN FUNCTION BEGIN
+    getPeriodInfoFn();
     dropDrowYearListFn();  			// list year and period.
+    dropDrowPeriodListFn(gDropdownYear.val());
     dropDrowJudgementListFn();	    // list judgement.
+    
+    gDropdownYear.change(function () {
+	    dropDrowPeriodFn(this.value);
+	});
     
     
 });
 
-//------------- LIST PARAMETER START ---------------------->
 
-var dropDrowYearListFn = function () {   
-    var htmlOption = "";
 
-    $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/appraisal/year_list_assignment",
-        type: "get",
-        dataType: "json",
-        async: false,
-        headers: { Authorization: "Bearer " + tokenID.token },
-        success: function (data) {
-            $.each(data, function (index, indexEntry) {
-                    htmlOption += "<option value=" + indexEntry['appraisal_year'] + ">" + indexEntry['appraisal_year'] + "</option>";
-            });
-            $("#AppraisalYear").html(htmlOption);
-            dropDrowPeriodListFn($("#AppraisalYear").val());
-        },
-        error: function(jqXHR, textStatus, errorThrown){
-        	console.log(textStatus+" / "+jqXHR+ " / " + errorThrown);
-			$("body").mLoading('hide'); //Loading
-		}
-    });
-}
-
-var dropDrowPeriodListFn = function (year) { 
-	var htmlOption = "";
-	
-    $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/appraisal/period_list",
-        type: "get",
-        dataType: "json",
-        async: false,
-        headers: { Authorization: "Bearer " + tokenID.token },
-        data: { "appraisal_year": year },
-        success: function (data) {
-            $.each(data, function (index, indexEntry) {
-                    htmlOption += "<option  value=" + indexEntry['period_id'] + ">" + indexEntry['appraisal_period_desc'] + "</option>";
-            });
-            $("#AppraisalPeriod").html(htmlOption); 
-        },
-        error: function(jqXHR, textStatus, errorThrown){
-        	console.log(textStatus+" / "+jqXHR+ " / " + errorThrown);
-			$("body").mLoading('hide'); //Loading
-		}
-    });
-}
-
-var dropDrowJudgementListFn = function () { 
-	var htmlOption = "";
-	
-    $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/judgement/list_status",
-        type: "get",
-        dataType: "json",
-        async: false,
-        headers: { Authorization: "Bearer " + tokenID.token },
-        success: function (data) {
-        		htmlOption = "<option selected='selected' value=''>All Judgement</option>";
-            $.each(data, function (index, indexEntry) {
-            	htmlOption += "<option value=" + indexEntry['judgement_status_id'] + ">" + indexEntry['judgement_status'] + "</option>";     
-            });
-            $("#Judgement").html(htmlOption); 
-        },
-        error: function(jqXHR, textStatus, errorThrown){
-        	console.log(textStatus+" / "+jqXHR+ " / " + errorThrown);
-			$("body").mLoading('hide'); //Loading
-		}
-    });
-}
-
-//------------- LIST PARAMETER END ---------------------->
 
 var getDataFn = function (page, rpp) { 
 	
@@ -243,7 +287,10 @@ var getJudgementFn = function () {
 	        url: restfulURL + "/" + serviceName + "/public/judgement/assign_judgement",
 	        type: "get",
 	        dataType: "json",
-	        data: {"emp_result_id":JSON.stringify(checkboxArr)},
+	        data: {
+	        	"emp_result_id" : JSON.stringify(checkboxArr),
+	        	"appraisal_period" : gDropdownPeriod.val()
+	        },
 	        async: false,
 	        headers: { Authorization: "Bearer " + tokenID.token },
 	        success: function (data) {
