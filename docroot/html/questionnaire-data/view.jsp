@@ -322,18 +322,28 @@
 		position: relative;
 	}
 }
-
+@media ( min-width : 766px) and (max-width: 768px) {
+		#confrimModal {
+		left: 20% !important;
+		right: 20% !important;
+		}
+		.modal.large {
+		    width: 90%;
+ 		    margin-left:-45%; 
+		    top:0px;
+		}
+	}
 /* Landscape phone to portrait tablet */
 @media ( max-width : 767px) {
 	.modal.large {
 
-	    width: '';
+	    width: 90%;
 	    top:0px;
 	}
 	
-	.aui #confrimModal {
-		left: 20%;
-		right: 20%;
+	#confrimModal {
+		left: 20% !important;
+		right: 20% !important;
 	}
 	.aui .ResultsPerPageTop {
 		position: absolute;
@@ -401,9 +411,10 @@
 	.aui #from_emp_type {
 		width: 100%;
 	}
-	.aui #confrimModal {
-		left: 5%;
-		right: 5%;
+	.aui 	#confrimModal {
+		left: 1% !important;
+		right: 1% !important;
+	
 	}
 	.aui .ResultsPerPageBottom {
 		position: static;
@@ -696,6 +707,8 @@ overflow:auto;
 .aui #modalQuestionaireData .cursorNotAllowed {
 cursor: not-allowed !important;
 }
+
+
 
 </style>
 

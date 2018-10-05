@@ -228,9 +228,11 @@ cursor: not-allowed !important;
 
 /* Landscape phones and down */
 @media ( max-width : 480px) {
-	.aui #confrimModalCdsResult {
+	.aui #confrimModalCdsResult,
+	.aui  #confrimModal {
 		left: 1%;
 	}
+
 	.aui .section-parent{margin-top: 15px ;}
 	.aui .answer-type{margin-top: 15px ;}
 }

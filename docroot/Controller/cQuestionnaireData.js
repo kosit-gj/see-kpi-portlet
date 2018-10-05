@@ -184,7 +184,8 @@ var scriptBtnListStoreFn = function (){
 
 					html+="  <div class='panel-heading' style='vertical-align: top; '>ผลการทำงาน ณ วันที่ "+date+"</div>";
 					html+="  <div class='panel-body'>";
-					html+="    <table class='table table-bordered table-hover customers'>";
+					html+="	<div class='row-fluid' style='overflow: auto;'>";
+					html+="    <table style='max-width: none;' class='table table-bordered table-hover customers'>";
 					html+="      <thead>";
 					html+="        <tr><th style='width:50%; vertical-align: top; text-align: center;min-width: 96px;'>ชื่อร้าน</th>";
 					html+="        <th style='width:10%; vertical-align: top; text-align:center;'>คะแนนรวม</th>";
@@ -214,6 +215,7 @@ var scriptBtnListStoreFn = function (){
 				element.show();
 					html+="		 </tbody>";
 					html+="		</table>";
+					html+="  </div>";
 					html+="  </div>";
 					element.html(html);
 			}
@@ -248,7 +250,7 @@ var btnEditStoreFn = function (element){
 			html+="    <div class='row-fluid'>";
 			html+="      <div class='span6'>";
 			html+="        <label for='storeName-modal'>ชื่อร้านค้า</label>";
-			html+="        <input disabled class='span12 autocompleteStoreName' type='text' style='margin-bottom: 0px;' id='storeName-modal' data-toggle='tooltip' title='' data-original-title='Search' section_id='"+customer_id+"' value='"+data.customer.customer_name+"'>";
+			html+="        <input disabled class='span12 autocompleteStoreName' type='text' style='margin-bottom: 0px;' id='storeName-modal'   section_id='"+customer_id+"' value='"+data.customer.customer_name+"'>";
 			html+="        <input class='autocompleteStoreID ' type='hidden' value='"+data.customer.customer_id+"'>";
 			html+="      </div>";
 			html+="    </div>";
@@ -375,7 +377,7 @@ var scriptBtnClearAddStoreFn  = function (){
 				html+="    <div class='row-fluid'>";
 				html+="      <div class='span6'>";
 				html+="        <label for='storeName-modal'>ชื่อร้านค้า</label>";
-				html+="        <input class='span12 autocompleteStoreName' type='text' style='margin-bottom: 0px;' id='storeName-modal' data-toggle='tooltip' title='' data-original-title='Search' section_id='"+section_id+"'>";
+				html+="        <input class='span12 autocompleteStoreName' type='text' style='margin-bottom: 0px;' id='storeName-modal' section_id='"+section_id+"'>";
 				html+="        <input class='autocompleteStoreID ' type='hidden' value=''>";
 				html+="      </div>";
 				html+="    </div>";
@@ -422,17 +424,20 @@ var scriptViewReportFn  = function (){
 
 		var parameter = {};
 		
-		var output_type ="pdf";
+		var output_type ="xlsx";
 		
 		parameter = {
-					questionaire_type_id: $(this).attr("questionaire_type_id"),
-					data_header_id: $("#id" ).val(),
-					questionaire_date: $(this).attr("questionaire_date"),
-					emp_snapshot_id:$(this).attr("emp_snapshot_id"),
-					assessor_id: $(this).attr("assessor_id"),
-					param_section : $(this).attr("section_id")
+					param_questionaire_type: $(this).attr("questionaire_type_id"),
+					param_data_header_id: $("#id" ).val(),
+					param_questionaire_date: $(this).attr("questionaire_date"),
+					param_employee:$(this).attr("emp_snapshot_id"),
+					param_assessor: $(this).attr("assessor_id"),
+					param_section : $(this).attr("section_id"),
+					param_parent_question_id:"",
+					param_date_start :"",
+					param_date_end:""
 				  };
-		
+
 		var data = JSON.stringify(parameter);
 		var url_report_jasper = $(this).attr("url")+"&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
 		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -561,7 +566,41 @@ var scriptCheckboxCheckIsNarcoticsAnonymousFn  = function (){
 	});
 	
 };
+var setModalContentBodyHeightFn = function(){
+	
+		var windowHeight = $(window ).outerHeight();
+	var modalHeight = $("#modalQuestionaireData").outerHeight();
+	var modalHeaderHeight = $("#modalQuestionaireData .modal-content .modal-header").outerHeight();
+	var modalBodyHeight = $("#modalQuestionaireData .modal-content .modal-body").outerHeight();
+	var modalFooterHeight = $("#modalQuestionaireData .modal-content .modal-footer").outerHeight();
+	//$('#modalQuestionaireData .modal-body').css('cssText', "max-height: "+((modalBodyHeight)+(windowHeight-modalHeight)-40)+"px !important;overflow-y:auto !important;");
 
+	$('#modalQuestionaireData .modal-body').css('cssText', "max-height: "+((modalBodyHeight)+(windowHeight-modalHeight)-40)+"px !important;overflow-y:auto !important;");
+	$(window).off('resize');
+	$(window).on('resize',function(){
+		  console.log($(window ).outerHeight());		
+	       setTimeout(function(){ 
+	    		var windowHeight = $(window ).outerHeight();
+	    		var modalHeight = $("#modalQuestionaireData").outerHeight();
+	    		var modalHeaderHeight = $("#modalQuestionaireData .modal-content .modal-header").outerHeight();
+	    		var modalBodyHeight = $("#modalQuestionaireData .modal-content .modal-body").outerHeight();
+	    		var modalFooterHeight = $("#modalQuestionaireData .modal-content .modal-footer").outerHeight();
+	    		//$('#modalQuestionaireData .modal-body').css('cssText', "max-height: "+((modalBodyHeight)+(windowHeight-modalHeight)-40)+"px !important;overflow-y:auto !important;");
+
+	    		$('#modalQuestionaireData .modal-body').css('cssText', "max-height: "+((modalBodyHeight)+(windowHeight-modalHeight)-40)+"px !important;overflow-y:auto !important;");
+	    		/*
+ .modal-scrollable {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: visible;
+} 
+ * */
+	       }, 5);
+	  });
+};
 var findOneFn = function(data_header_id) {
 	
 	toDayFn('#modal_datepicker_start');
@@ -585,6 +624,7 @@ var findOneFn = function(data_header_id) {
 				"backdrop" : setModalPopup[0],
 				"keyboard" : setModalPopup[1]
 			});
+			setModalContentBodyHeightFn();
 		}
 	});
 };
@@ -725,17 +765,20 @@ var listData = function(data) {
 
 			var parameter = {};
 			var template_name ="";
-			var output_type ="pdf";
+			var output_type ="xlsx";
 			template_name="report-summary-from";
 			parameter = {
-						questionaire_type_id: $(this).attr("questionaire_type_id"),
-						data_header_id: id,
-						questionaire_date: $(this).attr("questionaire_date"),
-						emp_snapshot_id:$(this).attr("emp_snapshot_id"),
-						assessor_id: $(this).attr("assessor_id"),
-						param_section:""
+						param_questionaire_type: $(this).attr("questionaire_type_id"),
+						param_data_header_id: id,
+						param_questionaire_date: $(this).attr("questionaire_date"),
+						param_employee:$(this).attr("emp_snapshot_id"),
+						param_assessor: $(this).attr("assessor_id"),
+						param_section:"",
+						param_parent_question_id:"",
+						param_date_start:"",
+						param_date_end:"",
 					  };
-			
+
 			var data = JSON.stringify(parameter);
 			var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name="+template_name+"&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
 			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -879,7 +922,7 @@ var generateQuestionaireFormFn = function(data) {
 			html+="  </div>";
 			html+="</div>";
 			
-			html+="<div class='panel panel-info panalRetailList' id='panalRetailList-"+indexEntry.section_id+"' section_id='"+indexEntry.section_id+"' style='padding-bottom: 15px;display: none;'></div>";
+			html+="<div class='panel panel-info panalRetailList' id='panalRetailList-"+indexEntry.section_id+"' section_id='"+indexEntry.section_id+"' style='padding-bottom: 15px;padding-left: 0;padding-right: 0;display: none;'></div>";
 			html+="<div class='panel panel-info panalScore' id='panalScore-"+indexEntry.section_id+"' style='padding-bottom: 15px; display: none;' section_id='"+indexEntry.section_id+"'> ";
 			html+="  <div class='panel-heading'> ประเมินผลการทำงานของร้านค้า";
 			html+="    <button class='closePanelScore' type='button' ><span aria-hidden='true'><i class='fa fa-times'></i></span></button>";
@@ -979,17 +1022,21 @@ var generateQuestionaireFormFn = function(data) {
 		    }
 		  });
 	}
-	$("#slideUpDownStageHistory").off("click");
-	$("#slideUpDownStageHistory").on("click",function(){
-        $("#slideStageHistory").slideToggle("slow");
-    });
+	
+	if($("#action").val() == "add" || $("#action").val() == ""){
+		$("#slideUpDownStageHistory").hide();
+	}else{
+		$("#slideUpDownStageHistory").show();
+		$("#slideUpDownStageHistory").off("click");
+		$("#slideUpDownStageHistory").on("click",function(){
+	        $("#slideStageHistory").slideToggle("slow");
+	    });
+	}
 	scriptBtnClearAddStoreFn();  
 	scriptBtnListStoreFn();  
 	scriptBtnAddStoreFn();
 	scriptViewReportFn();
-	if($("#action_modal").val() == 0){
-		//console.log("--------------------- View Only -----------------------");
-	}
+	
 	$('[data-toggle="tooltip"]').css({"cursor":"pointer"});
 	 $('[data-toggle="tooltip"]').tooltip({
 		 html:true,container: '#modalQuestionaireData'
@@ -1002,7 +1049,7 @@ var generateQuestionaireFormBySubSectionFn = function(data){
 		if(indexEntry2.question != "" && indexEntry2.answer == ""){
 			//console.log("Sub Section"); 
 			//indexEntry2.answer_type_id กับ indexEntry2.is_show_comment ไม่ใช้				
-			html+="<table class='table table-striped table-bordered ' id='tableParentQuestion-"+indexEntry2.question_id+"' question_id='"+indexEntry2.question_id+"'>";
+			html+="<table style='max-width: none;' class='table table-striped table-bordered ' id='tableParentQuestion-"+indexEntry2.question_id+"' question_id='"+indexEntry2.question_id+"'>";
 			html+="  <thead>";
 			html+="    <tr>";
 			html+="      <th class='' colspan='2' style='vertical-align: top;'>"+indexEntry2.question_name+"</th>";
@@ -1377,8 +1424,10 @@ var updateFn = function(element){
 				else{
 					
 					$.each($(indexEntry2).find("input:checked").get(),function(index3,indexEntry3){
-						score.push(parseFloat($(indexEntry3).val()));
 						
+						if($(indexEntry).attr("is_cust_search")==0){
+							score.push(parseFloat($(indexEntry3).val()));
+						}
 						detail.push({
 							section_id			: detail_group.section_id,
 							customer_id			: detail_group.customer_id,
@@ -1400,7 +1449,10 @@ var updateFn = function(element){
 				else{
 					$.each($(indexEntry2).find("input:checked").get(),function(index3,indexEntry3){
 						
-						score.push(parseFloat($(indexEntry3).val()));
+						
+						if($(indexEntry).attr("is_cust_search")==0){
+							score.push(parseFloat($(indexEntry3).val()));
+						}
 						//console.log("Bf total_score :"+parseFloat(total_score +$(indexEntry3).val()).toFixed(1));
 						detail.push({
 							section_id			: detail_group.section_id,
@@ -1424,8 +1476,9 @@ var updateFn = function(element){
 
 				if($(indexEntry).attr("is_cust_search")==1 && detail_group.customer_id == ""){}
 				else{
-					
-					score.push(parseFloat($(indexEntry2).find("option:selected").val()));
+					if($(indexEntry).attr("is_cust_search")==0){
+						score.push(parseFloat($(indexEntry2).find("option:selected").val()));
+					}
 					detail.push({
 							section_id			: detail_group.section_id,
 							customer_id			: detail_group.customer_id,
@@ -1445,7 +1498,7 @@ var updateFn = function(element){
 				if($(indexEntry).attr("is_cust_search")==1 && detail_group.customer_id == ""){}
 				else{
 					$.each($(indexEntry2).find("textarea").get(),function(index3,indexEntry3){
-						score.push(parseFloat($(indexEntry3).attr("score")));
+						//score.push(parseFloat($(indexEntry3).attr("score")));
 						detail.push({
 							section_id			: detail_group.section_id,
 							customer_id			: detail_group.customer_id,
@@ -1470,7 +1523,8 @@ var updateFn = function(element){
 
 	$.each(score ,function(){total_score +=parseFloat(this) || 0; });
 
-
+	console.log(detail);
+	console.log("total score" + total_score);
 	$.ajax({
 		
 		url:globalSevice['restfulPathQuestionnaireData'],
@@ -1545,8 +1599,10 @@ var insertFn = function(element){
 				else{
 					
 					$.each($(indexEntry2).find("input:checked").get(),function(index3,indexEntry3){
-						score.push(parseFloat($(indexEntry3).val()));
-						
+						//score.push(parseFloat($(indexEntry3).val()));
+						if($(indexEntry).attr("is_cust_search")==0){
+							score.push(parseFloat($(indexEntry3).val()));
+						}
 						detail.push({
 							section_id			: detail_group.section_id,
 							customer_id			: detail_group.customer_id,
@@ -1567,7 +1623,10 @@ var insertFn = function(element){
 				else{
 					$.each($(indexEntry2).find("input:checked").get(),function(index3,indexEntry3){
 						
-						score.push(parseFloat($(indexEntry3).val()));
+						//score.push(parseFloat($(indexEntry3).val()));
+						if($(indexEntry).attr("is_cust_search")==0){
+							score.push(parseFloat($(indexEntry3).val()));
+						}
 						//console.log("Bf total_score :"+parseFloat(total_score +$(indexEntry3).val()).toFixed(1));
 						detail.push({
 							section_id			: detail_group.section_id,
@@ -1591,7 +1650,10 @@ var insertFn = function(element){
 				if($(indexEntry).attr("is_cust_search")==1 && detail_group.customer_id == ""){}
 				else{
 					
-					score.push(parseFloat($(indexEntry2).find("option:selected").val()));
+					//score.push(parseFloat($(indexEntry2).find("option:selected").val()));
+					if($(indexEntry).attr("is_cust_search")==0){
+						score.push(parseFloat($(indexEntry2).find("option:selected").val()));
+					}
 					detail.push({
 							section_id			: detail_group.section_id,
 							customer_id			: detail_group.customer_id,
@@ -1610,7 +1672,7 @@ var insertFn = function(element){
 				if($(indexEntry).attr("is_cust_search")==1 && detail_group.customer_id == ""){}
 				else{
 					$.each($(indexEntry2).find("textarea").get(),function(index3,indexEntry3){
-						score.push(parseFloat($(indexEntry3).attr("score")));
+						//score.push(parseFloat($(indexEntry3).attr("score")));
 						detail.push({
 							section_id			: detail_group.section_id,
 							customer_id			: detail_group.customer_id,
@@ -1634,7 +1696,8 @@ var insertFn = function(element){
 
 	$.each(score ,function(){total_score +=parseFloat(this) || 0; });
 
-
+	console.log(detail);
+	console.log("total score" + total_score);
 	$.ajax({
 		
 		url:globalSevice['restfulPathQuestionnaireData'],
@@ -1796,10 +1859,12 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 		$("#btn-add").click(function() {
 			clearFn();
 			//findOneFn();
+			$("#slideUpDownStageHistory").hide();
 			$("#modalQuestionaireData").modal({
 				"backdrop" : setModalPopup[0],
 				"keyboard" : setModalPopup[1]
 			});
+			setModalContentBodyHeightFn();
 		});
 		$("#modalQuestionaireData .btnCancle").click(function() {
 			$("#inform_label_confirm").html("You want to leave this <br>\""+$("#modalTitleRole ").text()+"\" ?");
@@ -1963,7 +2028,8 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 		   findOneFn(URLParameter_header_id);
 		  }
 		
-		
+		  
 	 }
  });
+ 
  
