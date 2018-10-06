@@ -518,7 +518,7 @@ var dropDownListOrganization = function() {
 	//console.log("test")
 	var service_url_Check;
 	if($("#app_type").val()==1) {
-		service_url_Check = "org";
+		service_url_Check = "org/parent_org_code";
 	}
 	else {
 		service_url_Check = "org/list_org_for_emp";
@@ -908,7 +908,9 @@ $(document).ready(function() {
 		clearParamSearch(dataClearParam);// in cMain.js
 	});
 	
-	setParamSearch(dataSetParam);// in cMain.js
+	if ($("#app_type").val() == 2) {
+		setParamSearch(dataSetParam);// in cMain.js
+	}
 	
 
 	

@@ -1,5 +1,5 @@
 var restfulURL="";
-var serviceName="see_api";
+var serviceName="see_api_lenso";
 
 var serviceName_IMPkpi="impexpservices_api/public";
 //var restfulURL_IMPkpi="https://tfg-winner.tfg.co.th:8443";
@@ -8,12 +8,12 @@ var restfulURL_IMPkpi="http://localhost";
 
 //restfulURL="http://192.168.1.254";
 
-/*#######Localhost#######*/
+/*#######localhost#######*/
 //restfulURL="https://tfg-winner.tfg.co.th:8443";
 restfulURL="http://localhost";
 
 
-/*#######Localhost#######*/
+/*#######localhost#######*/
 //var lifeRayApiUrl = "https://tfg-winner.tfg.co.th";
 var lifeRayApiUrl = "http://localhost:8080";
 

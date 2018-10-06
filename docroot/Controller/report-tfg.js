@@ -181,7 +181,7 @@ var dropDrowAppraisalEmpLevelFn = function(id){
 		}
 	});
 	//dropDrowIndividualOrgLevelFn();
-	dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
+
 }
 
 var dropDrowIndividualOrgLevelFn = function(id){
@@ -412,7 +412,11 @@ $(document).ready(function() {
       clearParamSearch(dataClearParam); // in cMain.js
     });
 
+    if ($("#appraisalType").val() == "2"){
     setParamSearch(dataSetParam); // in cMain.js
+	dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
+    }
+
 
     //Auto complete Start
 

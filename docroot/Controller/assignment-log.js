@@ -388,8 +388,9 @@ $(document).ready(function() {
     $("#organization").change(function() {
       clearParamSearch(dataClearParam); // in cMain.js
     });
-
+    if ($("#appraisalType").val() == 2) {
     setParamSearch(dataSetParam); // in cMain.js
+    }
 
     //Auto complete Start
 

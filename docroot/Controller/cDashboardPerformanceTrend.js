@@ -1563,8 +1563,10 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 			 */
 			$("#year").change(); // Change for create #period
 			$("#app_type").change(); // Change for create #apprasiaEmpLevel or #apprasiaOrgLevel -> #organization
-			setParamSearch(dataSetParam);// in cMain.js
 			
+			if($("#app_type").val() == "2"){
+			setParamSearch(dataSetParam);// in cMain.js
+			}
 		}
 		
 		$(".app_url_hidden").show();

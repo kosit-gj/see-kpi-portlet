@@ -2774,7 +2774,7 @@ var listViewDailyOrMonthlyFn = function(){
 	$("#selectGanntChartViewDaily").html(html);
 }
 
-$(document).ready(function() {
+$(document).ready(function() {//daris
 
 //	var username = getParamValue('username');
 //	var password = getParamValue('password');
@@ -2832,6 +2832,7 @@ $(document).ready(function() {
 			
 			appraisalTypeFn();
 			$("#appraisalType").change(function() {
+//				clearParamSearch(dataClearParam);
 			  if ($("#appraisalType").val() == 1) {
 			    $("#Position").val("").prop("disabled", true);
 			    $("#EmpName").val("").prop("disabled", true);
@@ -2865,8 +2866,11 @@ $(document).ready(function() {
 				clearParamSearch(dataClearParam);// in cMain.js
 			});
 			
-			setParamSearch(dataSetParam);// in cMain.js
-			dropDrowIndividualOrgLevelFn();
+			if ($("#appraisalType").val() == 2) {
+				setParamSearch(dataSetParam);// in cMain.js
+				dropDrowIndividualOrgLevelFn();
+			}
+			
 
 			//Auto complete Start
 			

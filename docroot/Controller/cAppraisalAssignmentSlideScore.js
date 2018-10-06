@@ -1711,7 +1711,7 @@ var dropDrowOrgFn = function(appraisalLevelId) {
 	
 	var service_url_Check;
 	if($("#appraisalType").val()==1) {
-		service_url_Check = "org";
+		service_url_Check = "org/parent_org_code";
 	}
 	else {
 		service_url_Check = "org/list_org_for_emp";
