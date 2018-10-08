@@ -411,7 +411,7 @@ var assignTemplateCommentFn = function () {  // CommentFn
 
     $.each(dataComment['detail'], function (index, indexEntry) { // gen select 
     	if(indexEntry['emp_id'] == cMain_emp_id){
-    		htmlTemplateComment += "<option value='" + indexEntry['emp_id'] + "' selected> &#10148" + cMain_emp_name + "</option>";
+    		htmlTemplateComment += "<option value='" + indexEntry['emp_id'] + "' selected> &#10148 " + cMain_emp_name + "</option>";
     	} else {
     		htmlTemplateComment += "<option value='" + indexEntry['emp_id'] + "'>" + indexEntry['emp_name'] + "</option>";
     	}
@@ -470,7 +470,7 @@ var onchangGroupCommentFn = function () {  // CommentFn
     $.each(dataComment['detail'], function (index, indexEntry) { // gen select 
         if (commentTXT == indexEntry['comment'] || commentTXT == 'all') {
         	if(indexEntry['emp_id'] == cMain_emp_id){
-        		htmlSelect += "<option value='" + indexEntry['emp_id'] + "' selected> &#10148" + cMain_emp_name + "</option>";
+        		htmlSelect += "<option value='" + indexEntry['emp_id'] + "' selected> &#10148 " + cMain_emp_name + "</option>";
         	} else {
         		htmlSelect += "<option value='" + indexEntry['emp_id'] + "'>" + indexEntry['emp_name'] + "</option>";
         	}
