@@ -2,7 +2,7 @@
 <!DOCTYPE display PUBLIC "-//Liferay//DTD Display 6.2.0//EN" "http://www.liferay.com/dtd/liferay-display_6_2_0.dtd">
 
 <display>
-	<category name="SEE KPI FMO">
+	<category name="SEE KPI DHAS">
 		<portlet id="appraisal"></portlet>
 		<portlet id="appraisal-form"></portlet>
 		<portlet id="appraisal-report"></portlet>
@@ -49,17 +49,16 @@
 		<portlet id="assignment-log"></portlet>
 		<portlet id="dashboard-performance-comparison"></portlet>
 
-		<!-- //////////////////// 360 Degree //////////////////// -->
+		<!-- //////////////////// 360 Degree //////////////// -->
 		<portlet id="appraisal-level-360degree"></portlet>
 		<portlet id="appraisal-360degree"></portlet>
-		<!-- //////////////////////////////////////////////////// -->
+		<!-- //////////////////////////////////////////////// -->
 
 		<!-- //////////////////// Salary //////////////////// -->
 		<portlet id="import-salary-range"></portlet>
 		<portlet id="import-employee-salary"></portlet>
 		<portlet id="calculate-salary-structure"></portlet>
-		<!-- //////////////////////////////////////////////// -->
-
 		<portlet id="judgement"></portlet>
+		<!-- //////////////////////////////////////////////// -->
 	</category>
 </display>
