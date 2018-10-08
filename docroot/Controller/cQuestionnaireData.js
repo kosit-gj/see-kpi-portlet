@@ -307,9 +307,9 @@ var btnEditStoreFn = function (element){
 			});
 			
 			html+="  </div>";
-			$(element).parent().parent().parent().parent().parent().parent().parent().hide();
-			$(element).parent().parent().parent().parent().parent().parent().parent().next().html(html);
-			$(element).parent().parent().parent().parent().parent().parent().parent().next().show();
+			$(element).parent().parent().parent().parent().parent().parent().parent().parent().hide();
+			$(element).parent().parent().parent().parent().parent().parent().parent().parent().next().html(html);
+			$(element).parent().parent().parent().parent().parent().parent().parent().parent().next().show();
 			if($("#action_modal").val()=="0"){$("#accordionListQuestionaireData").find('input , select, textarea , .closePanelScore').prop('disabled', true);}
 			
 			scriptBtnClearAddStoreFn(); 
@@ -614,17 +614,22 @@ var findOneFn = function(data_header_id) {
 			"data_header_id": data_header_id
 		},
 		success:function(data){
-			$("#modalTitleRole").html(data.head.questionaire_name);
-			generateQuestionaireFormFn(data);
-			generateStageFn(data.stage,data.current_stage,data.to_stage);
+			if(data.status == "200"){
+				$("#modalTitleRole").html(data.head.questionaire_name);
+				generateQuestionaireFormFn(data);
+				generateStageFn(data.stage,data.current_stage,data.to_stage);
+				
+				
+				
+				$("#modalQuestionaireData").modal({
+					"backdrop" : setModalPopup[0],
+					"keyboard" : setModalPopup[1]
+				});
+				setModalContentBodyHeightFn();
+			}else{
+				callFlashSlide(data.data,"error");
+			}
 			
-			
-			
-			$("#modalQuestionaireData").modal({
-				"backdrop" : setModalPopup[0],
-				"keyboard" : setModalPopup[1]
-			});
-			setModalContentBodyHeightFn();
 		}
 	});
 };
@@ -931,7 +936,7 @@ var generateQuestionaireFormFn = function(data) {
 			html+="    <div class='row-fluid'>";
 			html+="      <div class='span6'>";
 			html+="        <label for='storeName-modal'>ชื่อร้านค้า</label>";
-			html+="        <input class='span12 autocompleteStoreName' type='text' style='margin-bottom: 0px;' id='storeName-modal' data-toggle='tooltip' title='' data-original-title='Search' section_id='"+indexEntry.section_id+"'>";
+			html+="        <input class='span12 autocompleteStoreName' type='text' style='margin-bottom: 0px;' id='storeName-modal' data-toggle='' title='' section_id='"+indexEntry.section_id+"'>";
 			html+="        <input class='autocompleteStoreID ' type='hidden' value=''>";
 			html+="      </div>";
 			html+="    </div>";
@@ -1251,7 +1256,7 @@ var generateAnswerFormCheckboxesFn = function(data,question_type) {
 
 	});
 	html+="        </div>";
-	html+="        <div class='span9' style='display:"+(data.answer_type_id == 1 ? "none" : "block")+"'> ";
+	html+="        <div class='span9' style='display:"+(data.answer_type_id == 3 ? "none" : "block")+"'> ";
 	html+="          <textarea class='form-control' rows='2' id='comment-"+data.question_id+"' style='width:98%; margin-bottom: 0px;min-height:60px; resize: vertical;'>"+(data.answer[0].desc_answer != undefined ? data.answer[0].desc_answer : "")+"</textarea>";
 	html+="        </div>";
 	html+="      </td>";
@@ -1279,7 +1284,7 @@ var generateAnswerFormCheckboxesFn = function(data,question_type) {
 
 		});
 		html+="        </div>";
-		html+="        <div class='span9' style='display:"+(data.answer_type_id == 1 ? "none" : "block")+"'> ";
+		html+="        <div class='span9' style='display:"+(data.answer_type_id == 3 ? "none" : "block")+"'> ";
 		html+="          <textarea class='form-control' rows='2' id='comment-"+data.question_id+"' style='width:98%; margin-bottom: 0px;min-height:60px; resize: vertical;'>"+(data.answer[0].desc_answer != undefined ? data.answer[0].desc_answer : "")+"</textarea>";
 		html+="        </div>";
 		html+="      </td>";
@@ -1398,7 +1403,9 @@ var updateFn = function(element){
 	var emp_snapshot_id = $("#modal_empsnapshot_id").val();
 	//var questionaire_date = $("#modal_datepicker_start").val();
 	var total_score = 0;
+	var total_full_score = 0;
 	var score = [];
+	var full_score = [];
 	var detail = [];
 	var stage = {};
 	stage.from_stage_id =  $(element).attr("current_stage_id");
@@ -1425,8 +1432,9 @@ var updateFn = function(element){
 					
 					$.each($(indexEntry2).find("input:checked").get(),function(index3,indexEntry3){
 						
-						if($(indexEntry).attr("is_cust_search")==0){
+						if($(indexEntry).attr("is_cust_search")==0 && $(indexEntry3).attr("is_not_applicable")==0){
 							score.push(parseFloat($(indexEntry3).val()));
+							full_score.push(parseFloat($(indexEntry3).attr("full_score")));
 						}
 						detail.push({
 							section_id			: detail_group.section_id,
@@ -1450,8 +1458,9 @@ var updateFn = function(element){
 					$.each($(indexEntry2).find("input:checked").get(),function(index3,indexEntry3){
 						
 						
-						if($(indexEntry).attr("is_cust_search")==0){
+						if($(indexEntry).attr("is_cust_search")==0 && $(indexEntry3).attr("is_not_applicable") == 0 ){
 							score.push(parseFloat($(indexEntry3).val()));
+							full_score.push(parseFloat($(indexEntry3).attr("full_score")));
 						}
 						//console.log("Bf total_score :"+parseFloat(total_score +$(indexEntry3).val()).toFixed(1));
 						detail.push({
@@ -1476,8 +1485,9 @@ var updateFn = function(element){
 
 				if($(indexEntry).attr("is_cust_search")==1 && detail_group.customer_id == ""){}
 				else{
-					if($(indexEntry).attr("is_cust_search")==0){
+					if($(indexEntry).attr("is_cust_search")==0 && $(indexEntry2).find("option:selected").attr("is_not_applicable")==0){
 						score.push(parseFloat($(indexEntry2).find("option:selected").val()));
+						full_score.push(parseFloat($(indexEntry2).find("option:selected").attr("full_score")));
 					}
 					detail.push({
 							section_id			: detail_group.section_id,
@@ -1522,8 +1532,10 @@ var updateFn = function(element){
 
 
 	$.each(score ,function(){total_score +=parseFloat(this) || 0; });
-
+	$.each(full_score ,function(){total_full_score +=parseFloat(this) || 0; });
+	
 	console.log(detail);
+	console.log("total full score" + total_full_score);
 	console.log("total score" + total_score);
 	$.ajax({
 		
@@ -1537,6 +1549,7 @@ var updateFn = function(element){
 			//"questionaire_date": questionaire_date,
 			"emp_snapshot_id": emp_snapshot_id,
 			"total_score": total_score,
+			"full_score" : total_full_score,
 			"detail": detail,
 			"stage" :  stage
 		},
@@ -1573,7 +1586,9 @@ var insertFn = function(element){
 	var emp_snapshot_id = $("#modal_empsnapshot_id").val();
 	var questionaire_date = $("#modal_datepicker_start").val();
 	var total_score = 0;
+	var total_full_score = 0;
 	var score = [];
+	var full_score = [];
 	var detail = [];
 	var stage = {};
 	stage.from_stage_id =  $(element).attr("current_stage_id");
@@ -1600,8 +1615,9 @@ var insertFn = function(element){
 					
 					$.each($(indexEntry2).find("input:checked").get(),function(index3,indexEntry3){
 						//score.push(parseFloat($(indexEntry3).val()));
-						if($(indexEntry).attr("is_cust_search")==0){
+						if($(indexEntry).attr("is_cust_search")==0 && $(indexEntry3).attr("is_not_applicable")==0){
 							score.push(parseFloat($(indexEntry3).val()));
+							full_score.push(parseFloat($(indexEntry3).attr("full_score")));
 						}
 						detail.push({
 							section_id			: detail_group.section_id,
@@ -1624,8 +1640,9 @@ var insertFn = function(element){
 					$.each($(indexEntry2).find("input:checked").get(),function(index3,indexEntry3){
 						
 						//score.push(parseFloat($(indexEntry3).val()));
-						if($(indexEntry).attr("is_cust_search")==0){
+						if($(indexEntry).attr("is_cust_search")==0 && $(indexEntry3).attr("is_not_applicable") == 0){
 							score.push(parseFloat($(indexEntry3).val()));
+							full_score.push(parseFloat($(indexEntry3).attr("full_score")));
 						}
 						//console.log("Bf total_score :"+parseFloat(total_score +$(indexEntry3).val()).toFixed(1));
 						detail.push({
@@ -1651,8 +1668,9 @@ var insertFn = function(element){
 				else{
 					
 					//score.push(parseFloat($(indexEntry2).find("option:selected").val()));
-					if($(indexEntry).attr("is_cust_search")==0){
+					if($(indexEntry).attr("is_cust_search")==0 && $(indexEntry2).find("option:selected").attr("is_not_applicable") == 0){
 						score.push(parseFloat($(indexEntry2).find("option:selected").val()));
+						full_score.push(parseFloat($(indexEntry2).find("option:selected").attr("full_score")));
 					}
 					detail.push({
 							section_id			: detail_group.section_id,
@@ -1695,8 +1713,10 @@ var insertFn = function(element){
 
 
 	$.each(score ,function(){total_score +=parseFloat(this) || 0; });
-
+	$.each(full_score ,function(){total_full_score +=parseFloat(this) || 0; });
+	
 	console.log(detail);
+	console.log("total full score" + total_full_score);
 	console.log("total score" + total_score);
 	$.ajax({
 		
@@ -1708,6 +1728,7 @@ var insertFn = function(element){
 			"questionaire_date": questionaire_date,
 			"emp_snapshot_id": emp_snapshot_id,
 			"total_score": total_score,
+			"full_score" : total_full_score,
 			"detail": detail,
 			"stage" :  stage
 		},
