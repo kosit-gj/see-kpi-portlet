@@ -432,8 +432,8 @@ var scriptViewReportFn  = function (){
 					param_questionaire_date: $(this).attr("questionaire_date"),
 					param_employee:$(this).attr("emp_snapshot_id"),
 					param_assessor: $(this).attr("assessor_id"),
-					param_section : $(this).attr("section_id"),
-					param_parent_question_id:"",
+					//param_section : $(this).attr("section_id"),
+					//param_parent_question_id:"",
 					param_date_start :"",
 					param_date_end:""
 				  };
@@ -778,8 +778,8 @@ var listData = function(data) {
 						param_questionaire_date: $(this).attr("questionaire_date"),
 						param_employee:$(this).attr("emp_snapshot_id"),
 						param_assessor: $(this).attr("assessor_id"),
-						param_section:"",
-						param_parent_question_id:"",
+						//param_section:"",
+						//param_parent_question_id:"",
 						param_date_start:"",
 						param_date_end:"",
 					  };
