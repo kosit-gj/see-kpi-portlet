@@ -324,6 +324,7 @@ var getDataFn = function (page, rpp) {
     var embed_organization = $("#embed_organization").val().split("-");
     embed_organization = embed_organization[0];
     var status = $("#embed_status").val();
+    var appraisal_form = $("#embed_appraisal_form").val();
 
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal_assignment",
@@ -343,8 +344,8 @@ var getDataFn = function (page, rpp) {
             "frequency_id": embed_period_frequency,
             "org_id": embed_organization,
             "emp_code": emp_id,
-            "status": status
-
+            "status": status,
+            "appraisal_form": appraisal_form
         },
         success: function (data) {
             listDataFn(data);
@@ -1057,6 +1058,7 @@ var searchAdvanceFn = function () {
     embedParam += "<input type='hidden' class='embed_param_search' id='embed_year_list' name='embed_year_list' value='" + $("#YearList").val() + "'>";
     embedParam += "<input type='hidden' class='embed_param_search' id='embed_organization' name='embed_organization' value='" + $("#organization").val() + "'>";
     embedParam += "<input type='hidden' class='embed_param_search' id='embed_status' name='embed_status' value='" + $("#appraisalStatus").val() + "'>";
+    embedParam += "<input type='hidden' class='embed_param_search' id='embed_appraisal_form' name='embed_appraisal_form' value='" + $("#appraisalForm").val() + "'>";
 
     $("#embedParamSearch").append(embedParam);
     getDataFn();
@@ -2123,6 +2125,24 @@ var getTemplateFn = function (emp_result_id) {
     });
 };
 
+var AppraisalFormList = function () {
+    $.ajax({
+        url: restfulURL + "/" + serviceName + "/public/appraisal_form",
+        type: "get",
+        dataType: "json",
+        async: false,
+        headers: { Authorization: "Bearer " + tokenID.token },
+        success: function (data) {
+            var htmlOption = "";
+            $.each(data, function (index, indexEntry) {
+
+                htmlOption += "<option value=" + indexEntry['appraisal_form'] + ">" + indexEntry['appraisal_form_name'] + "</option>";
+            });
+            $("#appraisalForm").html(htmlOption);
+        }
+    });
+}
+
 //Ready to call Function.
 $(document).ready(function () {
     var username = $('#user_portlet').val();
@@ -2197,6 +2217,8 @@ $(document).ready(function () {
             periodFrequencyFn();
             yearListFn();
             setParamSearch(dataSetParam);// in cMain.js
+            AppraisalFormList();
+            
 
             $("#periodFrequency").change(function () {
                 dropDrowPeriodFn($(this).val(), $("#assignFrequency").val());
