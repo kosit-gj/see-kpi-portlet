@@ -143,7 +143,7 @@ plid = layout.getPlid();
 					style="padding-top: 3px">
 					<span aria-hidden="true"><i class='fa fa-times'></i></span>
 				</button>
-				<h5 class="modal-title">Calculate Salary Confirm ?</h5>
+				<h5 class="modal-title">Please Confirm</h5>
 			</div>
 			<div class="modal-body">
 				<!-- content start -->
@@ -154,7 +154,7 @@ plid = layout.getPlid();
 				<div class="form-kpi-mangement">
 					<div class="form-kpi-label" align="center">
 
-						<label>Confirm to Delete Data?</label>
+						<label>Calculate Salary Confirm ?</label>
 						<div id="inform_on_confirm" class='information'></div>
 					</div>
 				</div>

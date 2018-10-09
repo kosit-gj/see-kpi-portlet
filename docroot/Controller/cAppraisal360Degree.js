@@ -221,9 +221,17 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
                                 htmlTable += "<td class=''>" + indexEntry['item_name'] + "  " + info_item + "</td>";
                                 htmlTable += "<td class='' style='text-align: right;padding-right: 10px;'><div id='target_value-" + indexEntry['item_result_id'] + "' data-toggle=\"tooltip\" data-placement=\"right\" title=\"" + hintHtml + "\">" + addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2)) + "</div></td>";
                                 htmlTable += "<td class='' style='text-align: center;'>";
-                                htmlTable += "<select style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' onchange='onchangDetailQualityFn(" + indexEntry['item_result_id'] + "," + structureId + ")' id='score-" + indexEntry['item_result_id'] + "' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
-                                htmlTable += dropdownDeductScoreFn(notNullFn(indexEntry['score']), indexEntry['nof_target_score'], dataHint);
-                                htmlTable += "<select>";
+                                
+                                if($("select#emp-"+structureId).val() == "0"){
+                                	htmlTable += "<select style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' onchange='onchangDetailQualityFn(" + indexEntry['item_result_id'] + "," + structureId + ")' id='score-" + indexEntry['item_result_id'] + "' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
+                                    htmlTable += "<option> "+indexEntry['score']+" </option>"
+                                    htmlTable += "<select>";
+                                } else {
+                                	htmlTable += "<select style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' onchange='onchangDetailQualityFn(" + indexEntry['item_result_id'] + "," + structureId + ")' id='score-" + indexEntry['item_result_id'] + "' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
+                                    htmlTable += dropdownDeductScoreFn(notNullFn(indexEntry['score']), indexEntry['nof_target_score'], dataHint);
+                                    htmlTable += "<select>";
+                                }                         
+                                
                                 htmlTable += "</td>";
                                 htmlTable += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['weight_percent'])).toFixed(2)) + "</td>";
                                 htmlTable += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2)) + "</td>";
@@ -403,7 +411,7 @@ var assignTemplateCommentFn = function () {  // CommentFn
 
     $.each(dataComment['detail'], function (index, indexEntry) { // gen select 
     	if(indexEntry['emp_id'] == cMain_emp_id){
-    		htmlTemplateComment += "<option value='" + indexEntry['emp_id'] + "'> &#10148" + cMain_emp_name + "</option>";
+    		htmlTemplateComment += "<option value='" + indexEntry['emp_id'] + "' selected> &#10148 " + cMain_emp_name + "</option>";
     	} else {
     		htmlTemplateComment += "<option value='" + indexEntry['emp_id'] + "'>" + indexEntry['emp_name'] + "</option>";
     	}
@@ -462,7 +470,7 @@ var onchangGroupCommentFn = function () {  // CommentFn
     $.each(dataComment['detail'], function (index, indexEntry) { // gen select 
         if (commentTXT == indexEntry['comment'] || commentTXT == 'all') {
         	if(indexEntry['emp_id'] == cMain_emp_id){
-        		htmlSelect += "<option value='" + indexEntry['emp_id'] + "'> &#10148" + cMain_emp_name + "</option>";
+        		htmlSelect += "<option value='" + indexEntry['emp_id'] + "' selected> &#10148 " + cMain_emp_name + "</option>";
         	} else {
         		htmlSelect += "<option value='" + indexEntry['emp_id'] + "'>" + indexEntry['emp_name'] + "</option>";
         	}
