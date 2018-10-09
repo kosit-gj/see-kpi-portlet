@@ -794,6 +794,13 @@ background-color:#71cccc !important;
                       <input class="form-control input-sm" id="Position_id"
 											name="Position_id" value="" type="hidden">
                   </div>
+                  
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="form_type"/>"
+                      class="input form-control input-sm span12" id="form_type" name="form_type">
+                      <option>All Form</option>
+                    </select>
+                  </div>
 
                   <!-- Cancel by SeeKPI(TFG) Defect No.263
                   <div class="form-group pull-left span3" style="margin-left: 5px">
@@ -967,6 +974,8 @@ background-color:#71cccc !important;
 												<div class="row-fluid">
 													<label class="span3 textInfo"><liferay-ui:message key="period"/>:</label>
 													<label class="span3  textData txtPeriod"  id="txtPeriod"></label>
+													<label class="span3 textInfo"><liferay-ui:message key="form_type"/>:</label>
+													<label class="span3  textData txtFormType"  id="txtFormType"></label>
 												</div>
 										</div>
 										<div class="span2 grandTototalWeightArea" id='grandTototalWeightArea'>
@@ -1006,6 +1015,8 @@ background-color:#71cccc !important;
 												<div class="row-fluid">
 													<label class="span3 textInfo"><liferay-ui:message key="period"/>:</label>
 													<label class="span3  textData txtPeriod"  id="txtPeriod"></label>
+													<label class="span3 textInfo"><liferay-ui:message key="form_type"/>:</label>
+													<label class="span3  textData txtFormType"  id="txtFormType"></label>
 												</div>
 										</div>
 
@@ -1033,6 +1044,10 @@ background-color:#71cccc !important;
 														<label class="span3 textInfo"><liferay-ui:message key="period"/>:</label>
 														<label class="span3  textData txtPeriodOrg"  id="txtPeriodOrg"></label>
 													</div>
+													<div class="row-fluid">
+														<label class="span3 textInfo"><liferay-ui:message key="form_type"/>:</label>
+														<label class="span3  textData txtFormTypeOrg"  id="txtFormTypeOrg"></label>
+													</div>
 
 											</div>
 											<div class="span2 grandTototalWeightArea" id='grandTototalWeightArea'>
@@ -1059,6 +1074,10 @@ background-color:#71cccc !important;
 														<label class="span3 textInfo textData txtParentOrganizationOrg" id="txtParentOrganizationOrg"></label>
 														<label class="span3 textInfo"><liferay-ui:message key="period"/>:</label>
 														<label class="span3 textInfo textData txtPeriodOrg"  id="txtPeriodOrg"></label>
+													</div>
+													<div class="row-fluid">
+														<label class="span3 textInfo"><liferay-ui:message key="form_type"/>:</label>
+														<label class="span3  textData txtFormTypeOrg"  id="txtFormTypeOrg"></label>
 													</div>
 
 											</div>

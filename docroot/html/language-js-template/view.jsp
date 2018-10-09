@@ -27,6 +27,7 @@
 <input class="lt-target" type="hidden" value="<liferay-ui:message key="target"/>"/>
 <input class="lt-uom" type="hidden" value="<liferay-ui:message key="uom"/>"/>
 <input class="lt-year" type="hidden" value="<liferay-ui:message key="year"/>"/>
+<input class="lt-form-type" type="hidden" value="<liferay-ui:message key="form_type"/>"/> 
 
 <!-- Assignment -->
 <input class="lt-action" type="hidden" value="<liferay-ui:message key="action"/>"/>
@@ -93,7 +94,8 @@
 <input class="lt-value-not-raise" type="hidden" value="<liferay-ui:message key="value-not-raise"/>"/>
 <input class="lt-over-value-not-raise" type="hidden" value="<liferay-ui:message key="over-value-not-raise"/>"/>
 <input class="lt-reward-score-Unit" type="hidden" value="<liferay-ui:message key="reward-score-Unit"/>"/>
-<input class="lt-comment" type="hidden" value="<liferay-ui:message key="comment"/>"/> 
+<input class="lt-comment" type="hidden" value="<liferay-ui:message key="comment"/>"/>
+<input class="lt-percent-contribute" type="hidden" value="<liferay-ui:message key="percent-contribute"/>"/>
 
 <!-- Performance Trend -->
 <input class="lt-employee-name-is-require" type="hidden" value="<liferay-ui:message key="employee-name-is-require"/>"/>
