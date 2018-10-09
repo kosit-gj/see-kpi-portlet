@@ -52,6 +52,9 @@
 		<portlet id="questionnaire"></portlet>
 		<portlet id="questionnaire-data"></portlet>
 		<portlet id="questionnaire-type"></portlet>
+		<portlet id="wwwr-position-report"></portlet>
+		<portlet id="wwwr-transaction-report"></portlet>
+		<portlet id="asm-by-tse-report"></portlet>
 	</category>
 
 
