@@ -24,6 +24,35 @@ globalDataTemp['FindOne'];
 
 globalDataTemp['form']= $( "#formModalQuestionnaire" );
 
+var validateQuestionnaireFn = function(data){
+	var validateFile="";
+
+	$.each(data,function(index,indexEntry){
+		if(indexEntry[Object.keys(indexEntry)[0]]!= undefined || indexEntry[Object.keys(indexEntry)[0]]==null){
+		
+			if(indexEntry[Object.keys(indexEntry)[0]]== null){//The employee code field is null
+				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+Object.keys(indexEntry)[0]+" : null <br>";//<i class='fa fa-level-down'></i>
+			}else{
+				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+Object.keys(indexEntry)[0]+": "+indexEntry[Object.keys(indexEntry)[0]]+" <br>";
+			}
+			if(indexEntry['errors']!=null || indexEntry['errors']!=undefined || indexEntry['errors']!=""){
+				//validateFile+="<font color='red'>&emsp;*</font> "+indexEntry['errors']+"<br>";
+				for (var key in indexEntry['errors']) {
+	 			    if (indexEntry['errors'].hasOwnProperty(key)) {
+	 			    	validateFile+="<font color='red'>&emsp;*</font> "+indexEntry['errors'][key]+"<br>";
+	 			    }
+	 			}
+			}
+		}
+		 
+//	     $.each(indexEntry['errors'],function(index2,indexEntry2){
+//	    	 console.log("test4");
+//	    	 //validateFile+="<font color='red'>&emsp;*</font> "+indexEntry2+"<br>";
+//	     });
+	 
+	});
+	callFlashSlideInModal(validateFile,"#information2","error");
+}
 var generateDropDownList = function(url,type,request,initValue){
  	var html="";
  	var firstItem=false;
@@ -1093,15 +1122,8 @@ var insertFn = function(options){
 			}else if (data['status'] == "400") {
 				//alert("Error ?");
 				console.log(data);
-				var html ="";
-				$.each(data.errors.data.validate,function(index,indexEmtry){
-					if(index == 0){
-						html+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font>"+indexEmtry;
-					}else{
-						html+="<br><font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font>"+indexEmtry;
-					}
-				});
-				callFlashSlideInModal(html,"#information2","error");
+				validateQuestionnaireFn(data['errors']);
+				//callFlashSlideInModal(html,"#information2","error");
 				//validationFn(data);
 			}  
 				   
@@ -1207,7 +1229,8 @@ $.ajax({
 			}else if (data['status'] == "400") {
 				//alert("Error ?");
 				console.log(data);
-				var html ="";
+				validateQuestionnaireFn(data['errors']);
+				/*var html ="";
 				$.each(data.errors.data.validate,function(index,indexEmtry){
 					if(index == 0){
 						html+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font>"+indexEmtry;
@@ -1215,7 +1238,7 @@ $.ajax({
 						html+="<br><font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font>"+indexEmtry;
 					}
 				});
-				callFlashSlideInModal(html,"#information2","error");
+				callFlashSlideInModal(html,"#information2","error");*/
 				//validationFn(data);
 			}  
 				   
@@ -1265,7 +1288,7 @@ $(document).ready(function() {
 	
 	
 	$("#btnAddQuestionnaire").click(function(){
-		
+		clearFn();
 		$("#btnAddAnother").show();
 	});
 	$("#btnSubmit").click(function(){
