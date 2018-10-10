@@ -1,5 +1,6 @@
 var dataTemp = [];
 var dataTempModal = [];
+var checkedItemArr = [];
 
 var gPeriodInfo;
 var gDropdownYear = $("#AppraisalYear");
@@ -20,27 +21,6 @@ var getPeriodInfoFn = function(){
 
 
 var dropDrowYearListFn = function () {   
-    /*
-	var htmlOption = "";
-    $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/appraisal/year_list_assignment",
-        type: "get",
-        dataType: "json",
-        async: false,
-        headers: { Authorization: "Bearer " + tokenID.token },
-        success: function (data) {
-            $.each(data, function (index, indexEntry) {
-                    htmlOption += "<option value=" + indexEntry['appraisal_year'] + ">" + indexEntry['appraisal_year'] + "</option>";
-            });
-            $("#AppraisalYear").html(htmlOption);
-            dropDrowPeriodListFn($("#AppraisalYear").val());
-        },
-        error: function(jqXHR, textStatus, errorThrown){
-        	console.log(textStatus+" / "+jqXHR+ " / " + errorThrown);
-			$("body").mLoading('hide'); //Loading
-		}
-    });
-    */
 	var gUniqueYear = $.unique(gPeriodInfo.map(function(d){return d.appraisal_year;}));
 	
 	var optionStr="";
@@ -51,28 +31,7 @@ var dropDrowYearListFn = function () {
 }
 
 
-var dropDrowPeriodListFn = function (selectedyear) { 
-	/*
-	var htmlOption = "";	
-    $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/appraisal/period_list",
-        type: "get",
-        dataType: "json",
-        async: false,
-        headers: { Authorization: "Bearer " + tokenID.token },
-        data: { "appraisal_year": year },
-        success: function (data) {
-            $.each(data, function (index, indexEntry) {
-                    htmlOption += "<option  value=" + indexEntry['period_id'] + ">" + indexEntry['appraisal_period_desc'] + "</option>";
-            });
-            $("#AppraisalPeriod").html(htmlOption); 
-        },
-        error: function(jqXHR, textStatus, errorThrown){
-        	console.log(textStatus+" / "+jqXHR+ " / " + errorThrown);
-			$("body").mLoading('hide'); //Loading
-		}
-    });
-    */
+var dropDrowPeriodListFn = function (selectedyear) {
 	var periodArr = jQuery.grep(gPeriodInfo, function (period, i) {
         return period.appraisal_year == selectedyear;
     });
@@ -129,7 +88,7 @@ $(document).ready(function () {
   
     $("#btn_submit").click(function () {   // FUNCTION CLICK 
     	
-    	if(!checkboxModalArr.length) {
+    	if(!checkedItemArr.length) {
     		callFlashSlide("Please choose Item for Judgement.");
     		return false;
     	}
@@ -234,7 +193,7 @@ var insertJudgementFn = function () {
         async: false,
         data: {
         	"emp_result_id": checkboxArr,
-        	"items": checkboxModalArr
+        	"items": checkedItemArr
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
@@ -368,7 +327,7 @@ var genTableListDataFn = function(data){
 }
 
 var genTemplateModalFn = function(data){
-	checkboxModalArr = [];
+	checkedItemArr = [];
 	dataTempModal = data;
 	HTML = "";
 	var TOTAL_WEIGH = "";
@@ -395,27 +354,29 @@ var genTemplateModalFn = function(data){
 		HTML += "<table id=\"tablethreshould\" class=\"table table-striped\" style=\"max-width: none\">";
 			HTML += "<thead>";
 	     	HTML += "<tr>";
-		     	HTML += " <th style=\"width:10%;\"><input type='checkbox' value='' id='check-box-all-modal' class='checkbox-modal' onchange='checkboxEvenModalFn(\"check-box-all-modal\")'></th>";
+		     	HTML += " <th style=\"width:10%;\"><input type='checkbox' value='' id='check-box-all-modal' class='checkbox-modal' onchange='checkedItemEvenFn(\"check-box-all-modal\")'></th>";
 		     	HTML += " <th style=\"width:auto;\"><b>" + $(".lt-item_name").val() + "</b></th>";
 		     HTML += "</tr>";
 		     HTML += "</thead>";
 		 HTML += "<tbody>";
+		 
+		 // Generate Item List //
 		 $.each(data['detail'], function (index, itemEntry) {
 			 
-			 if(itemEntry['is_pass']!=0){   // if is_pass is 1 --> push data checkboxModalArr 
-				 checkboxModalArr.push({
-						"judgement_item_id" : itemEntry['judgement_item_id'],
-						"is_pass" : itemEntry['is_pass']
-					});
-			 }
-						 
-				HTML += "<tr>";
-					HTML += "<td><input "+checkedFn(itemEntry['is_pass'])+" id='" + itemEntry['judgement_item_id'] + "' class='checkbox-modal'  onchange='checkboxEvenModalFn(\"" + itemEntry['judgement_item_id'] + "\")'  type='checkbox' value=''></td>";
-					HTML += "<td>" + itemEntry['judgement_item_name'] + "</td>";
-				HTML += "</tr>";
+			 // Add Item into checkedItemArr //
+			 checkedItemArr.push({
+				 "judgement_item_id" : itemEntry['judgement_item_id'],
+				 "is_pass" : itemEntry['is_pass']
 			 });
-		HTML += "</tbody>";
-		HTML += "</table>";
+			 
+			 HTML += "<tr>";
+			 HTML += "<td><input "+checkedFn(itemEntry['is_pass'])+" id='" + itemEntry['judgement_item_id'] + "' class='checkbox-modal'  onchange='checkedItemEvenFn(" + itemEntry['judgement_item_id'] + ")'  type='checkbox' value=''></td>";
+			 HTML += "<td>" + itemEntry['judgement_item_name'] + "</td>";
+			 HTML += "</tr>";
+		 });
+		 
+		 HTML += "</tbody>";
+		 HTML += "</table>";
 		
 		$("#modal-table-judgerment").html(HTML);
 		
@@ -454,40 +415,35 @@ var checkboxEvenFn = function(emp_result_id){
 			return data.id != emp_result_id;
 		});
 	}
-	console.log('check box-->'+JSON.stringify(checkboxArr));
 }
 
-var checkboxModalArr = [];  //set value global
-var checkboxEvenModalFn = function(judgement_item_id){
+
+var checkedItemEvenFn = function(judgement_item_id){
+	
+	var itemObjIndex = checkedItemArr.findIndex((obj => obj.judgement_item_id == judgement_item_id));
+	
 	if(judgement_item_id == 'check-box-all-modal'){ // check all
-		checkboxModalArr = [];
 		if ($("#"+judgement_item_id).prop("checked")) {
 			$(".checkbox-modal").prop("checked", true);
-			$.each(dataTempModal['detail'], function(index, indexEntry) {
-				checkboxModalArr.push({
-					"judgement_item_id" : indexEntry['judgement_item_id'],
-					"is_pass" : 1
-				});
-			});
+			// set all values in array of object //
+			checkedItemArr.map(obj=>obj.is_pass = 1);
 		} else {
 			$(".checkbox-modal").prop("checked", false);
+			// set all values in array of object //
+			checkedItemArr.map(obj=>obj.is_pass = 0);
 		}
 	}
 	else if ($("#"+judgement_item_id).prop("checked")) { // check one
-		checkboxModalArr.push({
-			"judgement_item_id" : judgement_item_id,
-			"is_pass" : 1
-		});
+		// set isPass = 1 on this item //
+		checkedItemArr[itemObjIndex].is_pass = 1;
 	} 
-	else{ 
+	else{ // unchecked
 		$("#check-box-all-modal").prop("checked", false);
-		checkboxModalArr = $.grep(checkboxModalArr, function(data, index) {
-			return data.judgement_item_id != judgement_item_id;
-		});
-	} 
-	
-	console.log('check box-->'+JSON.stringify(checkboxModalArr));
+		// set isPass = 0 on this item//
+		checkedItemArr[itemObjIndex].is_pass = 0;
+	}
 }
+
 
 var checkedFn = function(status){
 	if(status == 1) return "checked";

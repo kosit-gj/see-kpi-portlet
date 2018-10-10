@@ -243,21 +243,21 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
         }
     });
 
-    htmlTable += "<tr class='classAdmin th-all'>";
-    htmlTable += "<td class=''></td>";
-    htmlTable += "<td class=''></td>";
-    htmlTable += "<td class='' ></td>";
-    htmlTable += "<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>" + $(".lt-total").val() + "</b></td>";
-    htmlTable += "<td class='' style='text-align: right;padding-right: 10px;font-weight: bold;font-size:16px'><b>" + addCommas(parseFloat(notNullFn(total_weigh_score)).toFixed(2)) + "</b></td>";
-    htmlTable += "</tr>";
+    if (($("#group-" + structureId).val()) == 0){
+	    htmlTable += "<tr class='classAdmin th-all'>";
+	    htmlTable += "<td class=''></td>";
+	    htmlTable += "<td class=''></td>";
+	    htmlTable += "<td class='' ></td>";
+	    htmlTable += "<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>" + $(".lt-total").val() + "</b></td>";
+	    htmlTable += "<td class='' style='text-align: right;padding-right: 10px;font-weight: bold;font-size:16px'><b>" + addCommas(parseFloat(notNullFn(total_weigh_score)).toFixed(2)) + "</b></td>";
+	    htmlTable += "</tr>";
+    }
 
     $("#table-" + structureId).html(htmlTable);
     
     if(($("select#emp-"+structureId).val()) != cMain_emp_id){
     	$("#table-"+structureId+" .competencyScore").attr("disabled", "disabled")
-    }
-
-    if ($("#group-" + structureId).val() != 0) $(".th-all").hide();  // hide total_weigh_score
+    } 
 
     $('[data-toggle="tooltip"]').css({ "cursor": "pointer" });
     $('[data-toggle="tooltip"]').tooltip({
