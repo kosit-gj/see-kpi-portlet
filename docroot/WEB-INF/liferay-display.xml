@@ -59,6 +59,7 @@
 		<portlet id="import-employee-salary"></portlet>
 		<portlet id="calculate-salary-structure"></portlet>
 		<portlet id="judgement"></portlet>
+		<portlet id="salary-report"></portlet>
 		<!-- //////////////////////////////////////////////// -->
 	</category>
 </display>

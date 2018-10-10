@@ -789,7 +789,8 @@ plid = layout.getPlid();
 
 
 </style>
-<body class="gray-bg ">
+
+<body class="gray-bg">
 
 <!--  #####################Content data here ######################-->
 <div class='row-fluid'>
