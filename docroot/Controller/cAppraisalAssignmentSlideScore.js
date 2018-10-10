@@ -425,6 +425,7 @@ var listDataFn = function (data) {
         if ($("#embed_appraisal_type_id").val() == 2) {
 
             htmlHTML += " <th style=\"width:8%\">" + $(".lt-status").val() + "</th>";
+            htmlHTML += " <th style=\"width:8%\">" + $(".lt-form-type").val() + "</th>";
             htmlHTML += " <th style=\"width:10%\">" + $(".lt-emp-code").val() + "</th>";
             htmlHTML += " <th style=\"width:10%\">" + $(".lt-emp-name").val() + "</th>";
             htmlHTML += " <th style=\"width:15%\">" + $(".lt-organization").val() + "</th>";
@@ -433,6 +434,7 @@ var listDataFn = function (data) {
         } else if ($("#embed_appraisal_type_id").val() == 1) {
 
             htmlHTML += " <th style=\"width:8%\">" + $(".lt-status").val() + "</th>";
+            htmlHTML += " <th style=\"width:8%\">" + $(".lt-form-type").val() + "</th>";
             htmlHTML += " <th style=\"width:10%\">" + $(".lt-org-code").val() + "</th>";
             htmlHTML += " <th style=\"width:15%\">" + $(".lt-organization").val() + "</th>";
         }
@@ -465,6 +467,7 @@ var listDataFn = function (data) {
 
             if ($("#embed_appraisal_type_id").val() == 2) {
                 htmlHTML += "  <td id='status-" + itemEntry['emp_id'] + "'>" + itemEntry['status'] + "";
+                htmlHTML += "  <td>" + itemEntry['appraisal_form_name'] + "";
                 htmlHTML += "  <input type='hidden' id='emp_result_id-" + itemEntry['emp_id'] + "' name='emp_result_id-" + itemEntry['emp_id'] + "' value='" + itemEntry['emp_result_id'] + "'>";
                 htmlHTML += "  <input type='hidden' id='is_coporate_kpi-" + itemEntry['emp_id'] + "' name='is_coporate_kpi-" + itemEntry['emp_id'] + "' value='" + itemEntry['is_coporate_kpi'] + "'>";
                 htmlHTML += "  </td>";
@@ -477,6 +480,7 @@ var listDataFn = function (data) {
             } else {
 
                 htmlHTML += "  <td id='status-" + itemEntry['emp_id'] + "'>" + itemEntry['status'] + "";
+                htmlHTML += "  <td>" + itemEntry['appraisal_form_name'] + "";
                 htmlHTML += "  <input type='hidden' id='emp_result_id-" + itemEntry['emp_id'] + "' name='emp_result_id-" + itemEntry['emp_id'] + "' value='" + itemEntry['emp_result_id'] + "'>";
                 htmlHTML += "  <input type='hidden' id='is_coporate_kpi-" + itemEntry['emp_id'] + "' name='is_coporate_kpi-" + itemEntry['emp_id'] + "' value='" + itemEntry['is_coporate_kpi'] + "'>";
                 htmlHTML += "  </td>";
@@ -2136,7 +2140,7 @@ var AppraisalFormList = function () {
             var htmlOption = "";
             $.each(data, function (index, indexEntry) {
 
-                htmlOption += "<option value=" + indexEntry['appraisal_form'] + ">" + indexEntry['appraisal_form_name'] + "</option>";
+                htmlOption += "<option value=" + indexEntry['appraisal_form_id'] + ">" + indexEntry['appraisal_form_name'] + "</option>";
             });
             $("#appraisalForm").html(htmlOption);
         }
