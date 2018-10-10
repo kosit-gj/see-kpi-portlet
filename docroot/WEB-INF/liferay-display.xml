@@ -60,5 +60,6 @@
 		<!-- //////////////////////////////////////////////// -->
 
 		<portlet id="judgement"></portlet>
+		<portlet id="salary-report"></portlet>
 	</category>
 </display>

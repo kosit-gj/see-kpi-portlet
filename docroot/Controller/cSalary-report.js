@@ -51,7 +51,7 @@ var getDataFn = function() {
 	}
 	
 	  var data = JSON.stringify(parameter);
-	  var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name=report-benefit-summary&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
+	  var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name=salary-report&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
 	 console.log(url_report_jasper);
 		 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 		 window.open(url_report_jasper,"_blank");
