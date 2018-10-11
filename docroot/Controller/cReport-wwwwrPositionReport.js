@@ -23,12 +23,41 @@ $(document).ready(function() {
 	    toDayFn("#date-end");
 	    
     $( function() {
-        $( "#date-start" ).datepicker({dateFormat: "dd/mm/yy"});
+        $( "#date-start" ).datepicker({
+        	dateFormat: "dd/mm/yy",
+            minDate: new Date(2018, 1 - 1, 1),
+            onSelect: function () {
+                var dt2 = $('#date-end');
+                var startDate = $(this).datepicker('getDate');
+                var minDate = $(this).datepicker('getDate');
+                var dt2Date = dt2.datepicker('getDate');
+                //difference in days. 86400 seconds in day, 1000 ms in second
+                var dateDiff = (dt2Date - minDate)/(86400 * 1000);
+                
+                //startDate.setDate(startDate.getDate() + 30);
+                if (dt2Date == null || dateDiff < 0) {
+                		dt2.datepicker('setDate', minDate);
+                }
+                else if (dateDiff > 30){
+                		dt2.datepicker('setDate', null);
+                }
+                //sets dt2 maxDate to the last day of 30 days window
+                dt2.datepicker('option', 'maxDate', null);
+                dt2.datepicker('option', 'minDate', minDate);
+            }
+        });
       } );
     
     $( function() {
-        $( "#date-end" ).datepicker({ dateFormat: "dd/mm/yy"});
+        $( "#date-end" ).datepicker({ 
+        	dateFormat: "dd/mm/yy",
+        	minDate: 0
+        });
       } );
+    
+    $("#date-start ,#date-end").keypress(function(event) {
+	    return ( ( event.keyCode || event.which ) === 9 ? true : false );
+	});
     
     var dataClearParam = [{
         'id': '#Position',
@@ -217,8 +246,8 @@ var getDataFn = function() {
 	
 	var parameter = {};
 	var template_name ="";
-	var date_start = $("#date-start").val();
-	var date_end = $("#date-end").val();
+	var date_start = formatDate($("#date-start").val());
+	var date_end = formatDate($("#date-end").val());
 	var questionaire_type_id = $("#QuestionnaireType").val();
 	var assessor_id = $("#assessor-code-or-name-id").val();
 	var emp_snapshot_id = $("#tse-code-or-tse-name-id").val();
@@ -259,6 +288,12 @@ var getDataFn = function() {
 		}
 	 $("body").mLoading('hide'); //Loading
 };
+
+var formatDate = function(date){
+	var date_ = date.split("/");
+	var date =  date_[2]+"-"+date_[1]+"-"+date_[0]
+	return date ;
+}
 
 var toDayFn = function(id) {
 	  var date = new Date();

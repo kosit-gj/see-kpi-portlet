@@ -22,13 +22,42 @@ $(document).ready(function() {
 	 toDayFn("#date-start");
 	 toDayFn("#date-end");
 	 
-    $( function() {
-        $( "#date-start" ).datepicker({dateFormat: "dd/mm/yy"});
-      } );
-    
-    $( function() {
-        $( "#date-end" ).datepicker({ dateFormat: "dd/mm/yy"});
-      } );
+	 $( function() {
+	        $( "#date-start" ).datepicker({
+	        	dateFormat: "dd/mm/yy",
+	            minDate: new Date(2018, 1 - 1, 1),
+	            onSelect: function () {
+	                var dt2 = $('#date-end');
+	                var startDate = $(this).datepicker('getDate');
+	                var minDate = $(this).datepicker('getDate');
+	                var dt2Date = dt2.datepicker('getDate');
+	                //difference in days. 86400 seconds in day, 1000 ms in second
+	                var dateDiff = (dt2Date - minDate)/(86400 * 1000);
+	                
+	                //startDate.setDate(startDate.getDate() + 30);
+	                if (dt2Date == null || dateDiff < 0) {
+	                		dt2.datepicker('setDate', minDate);
+	                }
+	                else if (dateDiff > 30){
+	                		dt2.datepicker('setDate', null);
+	                }
+	                //sets dt2 maxDate to the last day of 30 days window
+	                dt2.datepicker('option', 'maxDate', null);
+	                dt2.datepicker('option', 'minDate', minDate);
+	            }
+	        });
+	      } );
+	    
+	    $( function() {
+	        $( "#date-end" ).datepicker({ 
+	        	dateFormat: "dd/mm/yy",
+	        	minDate: 0
+	        });
+	      } );
+	    
+	    $("#date-start ,#date-end").keypress(function(event) {
+		    return ( ( event.keyCode || event.which ) === 9 ? true : false );
+		});
     
     var dataClearParam = [{
         'id': '#Position',
