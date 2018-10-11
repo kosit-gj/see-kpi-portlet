@@ -18,6 +18,7 @@ var getDataFn = function() {
 	var EmpName_id= $("#EmpName_id").val();
 	var Position_id= $("#Position_id").val();
 	var output_type = $("#output_type").val();
+	var AppraisalYear = $("#AppraisalYear").val();
 	var parameter = {};
 	var template_name ="";
 	
@@ -34,7 +35,8 @@ var getDataFn = function() {
 //				param_period: AppraisalPeriod,
 //				level_id: "",
 				level_org_id: AppraisalOrgLevel,
-				appraisal_type_id: appraisalType
+				appraisal_type_id: appraisalType,
+				appraisal_year : AppraisalYear
 			  };
 	}
 	if(appraisalType == 2){
@@ -46,7 +48,8 @@ var getDataFn = function() {
 				emp_id: EmpName_id,
 				level_id: AppraisalEmpLevel,
 				level_org_id: AppraisalOrgLevel,
-				appraisal_type_id: appraisalType
+				appraisal_type_id: appraisalType,
+				appraisal_year : AppraisalYear
 			  };
 	}
 	
@@ -58,7 +61,7 @@ var getDataFn = function() {
 	
 	  var data = JSON.stringify(parameter);
 	  var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name="+template_name+"&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data+"&subreport_bundle=1";
-		
+	  console.log(url_report_jasper);
 	 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 		 window.open(url_report_jasper,"_blank");
 		} else {
