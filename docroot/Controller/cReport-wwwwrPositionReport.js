@@ -24,10 +24,10 @@ $(document).ready(function() {
 	    
     $( function() {
         $( "#date-start" ).datepicker({
-        	dateFormat: "dd/mm/yy",
+		 	dateFormat: "dd/mm/yy",
             minDate: new Date(2018, 1 - 1, 1),
             onSelect: function () {
-                var dt2 = $('#date-end');
+                var dt2 = $('#search_datepicker_end');
                 var startDate = $(this).datepicker('getDate');
                 var minDate = $(this).datepicker('getDate');
                 var dt2Date = dt2.datepicker('getDate');
@@ -38,9 +38,9 @@ $(document).ready(function() {
                 if (dt2Date == null || dateDiff < 0) {
                 		dt2.datepicker('setDate', minDate);
                 }
-                else if (dateDiff > 30){
+                /*else if (dateDiff > 30){
                 		dt2.datepicker('setDate', null);
-                }
+                }*/
                 //sets dt2 maxDate to the last day of 30 days window
                 dt2.datepicker('option', 'maxDate', null);
                 dt2.datepicker('option', 'minDate', minDate);
@@ -252,12 +252,7 @@ var getDataFn = function() {
 	var assessor_id = $("#assessor-code-or-name-id").val();
 	var emp_snapshot_id = $("#tse-code-or-tse-name-id").val();
 	
-	if(questionaire_type_id == 1){
-		template_name="report-ww-position";
-	}
-	else if(questionaire_type_id == 2){
-		template_name="report-wr-position";
-	}
+	template_name="report-position";
 	
 	parameter = {
 			param_questionaire_type: questionaire_type_id,
@@ -267,9 +262,9 @@ var getDataFn = function() {
 			param_date_end : date_end
 		  };
 	
-	if (date_start == '' && date_end == ''){
+	if (date_start == '' || date_end == '' || emp_snapshot_id ==''){
 		 $("body").mLoading('hide'); //Loading
-		callFlashSlide(Liferay.Language.get("date-is-require"));
+		callFlashSlide(Liferay.Language.get("TSE Code or TSE Name is require!"));
 		return false;
 	}
 

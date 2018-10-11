@@ -685,12 +685,12 @@ background-color:#71cccc !important;
                   </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <input data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="tse-code-or-tse-name "/>" class="form-control input-sm searchAdvanceText span12" placeholder="<liferay-ui:message key="tse-code-or-tse-name"/>" type="text" id="tse-code-or-tse-name" name="tse-code-or-tse-name" />
+                    <input data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="tse-code-or-tse-name"/>" class="form-control input-sm searchAdvanceText span12" placeholder="<liferay-ui:message key="tse-code-or-tse-name"/>" type="text" id="tse-code-or-tse-name" name="tse-code-or-tse-name" />
                     <input class="form-control input-sm" id="tse-code-or-tse-name-id" name="tse-code-or-tse-name-id" value="" type="hidden">
                   </div>
                   
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <input data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="assessor-code-or-name "/>" class="form-control input-sm searchAdvanceText span12" placeholder="<liferay-ui:message key="assessor-code-or-name"/>" type="text" id="assessor-code-or-name" name="assessor-code-or-name" />
+                    <input data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="assessor-code-or-name"/>" class="form-control input-sm searchAdvanceText span12" placeholder="<liferay-ui:message key="assessor-code-or-name"/>" type="text" id="assessor-code-or-name" name="assessor-code-or-name" />
                     <input class="form-control input-sm" id="assessor-code-or-name-id" name="assessor-code-or-name-id" value="" type="hidden">
                   </div>
                   
