@@ -14,10 +14,12 @@ var insertAuthorizedQuestionaireFn = function () {
 
 	$('#listAuthQuestionnaireType').children('div').get()
 	$.each($('#listAuthQuestionnaireType').children('div').get(),function(index, indexEntry) {
-		data.push({
+		if($(indexEntry).find("input:checked").attr("questionaire_id") != undefined){
+			data.push({
 			"job_function_id": ""+$(indexEntry).attr("job_function_id")+"",
 			"questionaire_id": ""+$(indexEntry).find("input:checked").attr("questionaire_id")+""
 		   });
+		};
 	});
 	
 

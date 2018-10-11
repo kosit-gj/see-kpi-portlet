@@ -1180,11 +1180,11 @@ var createDataTableFn = function(options){
 
 					  translation: {
 					    'Z': {
-					       pattern: /-/,
-					      optional: true
+					       pattern: /[0-9*]/,
+					      //optional: true
 					    }
 					  }
-					})
+					});
 
 			});
 //			$.getScript($("#url_portlet").val()+"/js/jquery.inputmask.bundle.js", function(){

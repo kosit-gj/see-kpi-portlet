@@ -163,10 +163,10 @@ var scriptBtnListStoreFn = function (){
 		var element = $(this).parent().parent().next();
 		var section_id = element.attr("section_id");
 		var position_code = $("#modal_position_code").val();
-		var data_header_id = $("#id").val();
+		var data_header_id = ($("#action").val() == "add" ? "" : $("#id").val());
 		var date = $("#modal_datepicker_start").val();
 		var html ="";
-		var is_disabled = ($("#action_modal").val() == 1 ? "" : "disabled")
+		var is_disabled = ($("#action_modal").val() == 1 ? "" : "disabled");
 		
 		$.ajax({
 			url: globalSevice['restfulPathEvaluatedRetailerList'],
@@ -231,6 +231,7 @@ var btnEditStoreFn = function (element){
 	//console.log($(element).parent().parent().parent().parent().parent().parent().parent().next());
 	var data_header_id = $(element).attr("data_header_id");
 	var customer_id = $(element).attr("customer_id");
+	var section_id = $(element).attr("section_id");
 	$.ajax({
 		url:globalSevice['restfulPathEvaluatedRetailerListEdit'],
 		type:"get",
@@ -239,7 +240,8 @@ var btnEditStoreFn = function (element){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{
 			"data_header_id":data_header_id,
-			"customer_id":customer_id
+			"customer_id":customer_id,
+			"section_id":section_id
 		},
 		success:function(data){
 			var html = "";
@@ -439,7 +441,7 @@ var scriptViewReportFn  = function (){
 				  };
 
 		var data = JSON.stringify(parameter);
-		var url_report_jasper = $(this).attr("url")+"&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
+		var url_report_jasper = $(this).attr("url")+"&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data+"&subreport_bundle=1";
 		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 			    window.open(url_report_jasper,"_blank");
 			} else {
@@ -636,6 +638,7 @@ var findOneFn = function(data_header_id) {
 var getTemplateQuestionnaireFn = function() {
 	var emp_snapshot_id = $("#modal_empsnapshot_id").val();
 	var questionaire_type_id = $("#modal_questionaire_type_id").val();
+	var date = $("#modal_datepicker_start").val();
 	$.ajax({
 		url: globalSevice['restfulPathGenerateTemplate'],
 		type:"get",
@@ -644,14 +647,29 @@ var getTemplateQuestionnaireFn = function() {
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{
 			"emp_snapshot_id": emp_snapshot_id,
-			"questionaire_type_id": questionaire_type_id
+			"questionaire_type_id": questionaire_type_id,
+			"date" : date
 		},
 		success:function(data){
-			$("#id").val(data.head.questionaire_id);
-			$("#modalTitleRole").html(data.head.questionaire_name);
-			generateQuestionaireFormFn(data);
-			generateStageFn(data.stage,data.current_stage,data.to_stage);
-
+			if(data.status == "200"){
+				$("#id").val(data.head.questionaire_id);
+				$("#modalTitleRole").html(data.head.questionaire_name);
+				generateQuestionaireFormFn(data);
+				generateStageFn(data.stage,data.current_stage,data.to_stage);
+			}else{
+				
+				$("#accordionListQuestionaireData , #listDataStageHistory , #genBtnStage ").empty();
+	        	$("#modal_empsnapshot_id").val("");
+				$("#modal_position_code").val("");
+				$("#modal_agent_name").val("");
+	            $("#modal_assign_name").val("");
+	            $("#modal_empsnapshot_name").val("");
+	            $("#linkParam_emp_snapshot_id").val("");
+	            $("#modal_questionaire_type_id").val("");
+	            $("#id").val("");
+	            
+	            callFlashSlide(data.data,"error");
+			}
 		}
 	});
 };
@@ -785,7 +803,7 @@ var listData = function(data) {
 					  };
 
 			var data = JSON.stringify(parameter);
-			var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name="+template_name+"&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
+			var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name="+template_name+"&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data+"&subreport_bundle=1";
 			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 				    window.open(url_report_jasper,"_blank");
 				} else {
@@ -906,7 +924,13 @@ var generateQuestionaireFormFn = function(data) {
 		
 	}
 	
-	
+	/*
+	 param_questionaire_type: $(this).attr("questionaire_type_id"),
+					param_data_header_id: $("#id" ).val(),
+					param_questionaire_date: $(this).attr("questionaire_date"),
+					param_employee:$(this).attr("emp_snapshot_id"),
+					param_assessor: $(this).attr("assessor_id"), 
+	 */
 	
 	var html = "";
 	//section_id: 4, section_name: "FF Preparation Process", is_cust_search: 0, sub_section
@@ -914,7 +938,7 @@ var generateQuestionaireFormFn = function(data) {
 		
 		html+="<h3 >"+indexEntry.section_name;
 		if(indexEntry.is_show_report == 1){
-			html+="<span class='viewReport' url='"+indexEntry.report_url+"' section_id='"+indexEntry.section_id+"' assessor_id='"+data['head'].assessor_id+"' questionaire_type_id='"+data['head'].questionaire_type_id+"'><img src='"+$("#url_portlet").val()+"/img/report.svg' data-toggle='tooltip' data-original-title='View Report' style='width: 30px;float: right;margin-top: -2px;'></span>";
+			html+="<span class='viewReport' url='"+indexEntry.report_url+"' emp_snapshot_id='"+data['head'].emp_snapshot_id+"' questionaire_date='"+data['head'].questionaire_date+"' section_id='"+indexEntry.section_id+"' assessor_id='"+data['head'].assessor_id+"' questionaire_type_id='"+data['head'].questionaire_type_id+"'><img src='"+$("#url_portlet").val()+"/img/report.svg' data-toggle='tooltip' data-original-title='View Report' style='width: 30px;float: right;margin-top: -2px;'></span>";
 		}
 		html+="</h3>";
 		html+="<div is_cust_search='"+indexEntry.is_cust_search+"' section_id='"+indexEntry.section_id+"'>";
@@ -1784,21 +1808,25 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 		}
 		 
 		$(".advance-search input").val("");
-		$("#search_questionaire_type_id ,#modal_questionaire_type_id").html(generateDropDownList(globalSevice['restfulPathDropDownQuestionnaireList'],"GET",{}));
+		$("#search_questionaire_type_id").html(generateDropDownList(globalSevice['restfulPathDropDownQuestionnaireList'],"GET",{}));
+		$("#modal_questionaire_type_id").html(generateDropDownList(globalSevice['restfulPathDropDownQuestionnaireList'],"GET",{}," "));
 		$("#modal_questionaire_type_id").change(function() {
 			  
-			  if($("#modal_empsnapshot_id").val() == ""){
+			  if($("#modal_questionaire_type_id").val() == ""){
 				  $("#modalTitleRole").text("Questionnaire");
-		        	$("#accordionListQuestionaireData").empty();
-		        	$("#modal_empsnapshot_name").val("");
+				  $("#accordionListQuestionaireData , #listDataStageHistory , #genBtnStage ").empty();
 		        	$("#modal_empsnapshot_id").val("");
 					$("#modal_position_code").val("");
 					$("#modal_agent_name").val("");
 		            $("#modal_assign_name").val("");
+		            $("#modal_empsnapshot_name").val("");
 		            $("#linkParam_emp_snapshot_id").val("");
+		            $("#modal_questionaire_type_id").val("");
+		            $("#id").val("");
 			  }else{
 				  getTemplateQuestionnaireFn();
 			  }
+			  //getTemplateQuestionnaireFn();
 		});
 		$("#modal_datepicker_start").datepicker({
 			dateFormat: "dd/mm/yy",
@@ -1812,8 +1840,9 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 				$("#modal_position_code").val("");
 				$("#modal_agent_name").val("");
 	            $("#modal_assign_name").val("");
+	            $("#modal_questionaire_type_id").val("");
 	            $("#linkParam_emp_snapshot_id").val("");
-
+	            
 	            
 	        }
 		});
@@ -1832,9 +1861,9 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 	                if (dt2Date == null || dateDiff < 0) {
 	                		dt2.datepicker('setDate', minDate);
 	                }
-	                else if (dateDiff > 30){
+	                /*else if (dateDiff > 30){
 	                		dt2.datepicker('setDate', null);
-	                }
+	                }*/
 	                //sets dt2 maxDate to the last day of 30 days window
 	                dt2.datepicker('option', 'maxDate', null);
 	                dt2.datepicker('option', 'minDate', minDate);
@@ -1965,8 +1994,8 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 					 headers:{Authorization:"Bearer "+tokenID.token},
 					 data:{
 						 "emp_name":request.term,
-						 "date" : $("#modal_datepicker_start").val(),
-						 "questionaire_type_id" : ($("#action").val() == "add" ? $("#search_questionaire_type_id").val() : "")
+						 //"date" : $("#modal_datepicker_start").val(),
+						 "questionaire_type_id" : ($("#action").val() == "add" ? $("#modal_questionaire_type_id").val() : "")
 						 },
 					 //async:false,
 	                 error: function (xhr, textStatus, errorThrown) {
@@ -2006,8 +2035,9 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 	            globalDataTemp['tempModalPositionCode']=ui.item.position_code;
 	            globalDataTemp['tempModalEmpNameAgenLabel']=ui.item.distributor_name;
 	            globalDataTemp['tempModalEmpNameAssignLabel']=ui.item.chief_emp_name;
+	            $("#modal_questionaire_type_id").val("");
 	            //globalDataTemp['tempModalEmpName']=ui.item.emp_name;
-	            getTemplateQuestionnaireFn();
+	            //getTemplateQuestionnaireFn();
 	            return false;
 	        },change: function(e, ui) {  
 	        	
@@ -2024,6 +2054,7 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 					$("#modal_agent_name").val(ui.item.distributor_name);
 		            $("#modal_assign_name").val(ui.item.chief_emp_name);
 		            $("#linkParam_emp_snapshot_id").val(ui.item.data_id);
+		            $("#modal_questionaire_type_id").val("");
 				} else {
 					$("#modalTitleRole").text("Questionnaire");
 		        	$("#accordionListQuestionaireData").empty();
@@ -2032,6 +2063,7 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 					$("#modal_agent_name").val("");
 		            $("#modal_assign_name").val("");
 		            $("#linkParam_emp_snapshot_id").val("");
+		            $("#modal_questionaire_type_id").val("");
 				}
 	        	
 	        	
