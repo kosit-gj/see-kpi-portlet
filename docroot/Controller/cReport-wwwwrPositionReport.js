@@ -250,8 +250,8 @@ var getDataFn = function() {
 //	}
 	
 	var data = JSON.stringify(parameter);
-	var url_report_jasper = restfulURL+"/"+serviceName+"/public/questionaire_report?template_name="+template_name+"&token="+tokenID.token+"&template_format=xlsx&used_connection=1&inline=1&data="+data;
-	
+	var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name="+template_name+"&token="+tokenID.token+"&template_format=xlsx&used_connection=1&inline=1&data="+data+"&subreport_bundle=1";	
+	console.log(url_report_jasper);
 	 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 		 window.open(url_report_jasper,"_blank");
 		} else {
