@@ -27,7 +27,7 @@ $(document).ready(function() {
 		 	dateFormat: "dd/mm/yy",
             minDate: new Date(2018, 1 - 1, 1),
             onSelect: function () {
-                var dt2 = $('#search_datepicker_end');
+                var dt2 = $('#date-end');
                 var startDate = $(this).datepicker('getDate');
                 var minDate = $(this).datepicker('getDate');
                 var dt2Date = dt2.datepicker('getDate');
