@@ -77,9 +77,7 @@ plid = layout.getPlid();
 
 }
 .aui .modal {
-
-    top: -62%;
-
+	top: -45%;
 }
 </style>
 
