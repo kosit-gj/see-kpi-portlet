@@ -479,7 +479,7 @@ var scriptBtnAddSubSectionFn = function (){
 			  html+="							<td style='min-width: 20px;width: 20px;' class='imgAnswerType'>";
 			  html+=  							imgAnswerTypeFn(answerTypeValue);
 			  html+="							</td>";
-			  html+="							<td colspan='4' >Click Add Orther</td>";
+			  html+="							<td colspan='4' >Click Add Another</td>";
 			  html+="						</tr>";
 			  html+="					</tfoot>";
 			  html+="				</table>";
@@ -980,7 +980,7 @@ var listQuestionnaireFindOneByQuestionFn = function(data,question_type,body_stam
 			  html+="							<td style='width: 20px;' class='imgAnswerType'>";
 			  html+=  							imgAnswerTypeFn(indexEmtry.answer_type_id);
 			  html+="							</td>";
-			  html+="							<td colspan='4' >Click Add Orther</td>";
+			  html+="							<td colspan='4' >Click Add Another</td>";
 			  html+="						</tr>";
 			  html+="					</tfoot>";
 			  html+="				</table>";

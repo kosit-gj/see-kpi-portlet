@@ -734,7 +734,7 @@ var listData = function(data) {
 				html+="    <tr>";
 				html+="      <th width=\"15%\" >วันที่</th>";
 				html+="      <th width=\"15%\">รหัส TSE</th>";
-				html+="      <th width=\"60%\">ชื่อ-สกุล TSE</th>";
+				html+="      <th width=\"60%\" >ชื่อ-สกุล TSE</th>";
 				html+="      <th width=\"10%\"></th>";
 				html+="    </tr>";
 				html+="  </thead>";
@@ -743,7 +743,7 @@ var listData = function(data) {
 					html+="    <tr>";
 					html+="      <td style='white-space: nowrap;'>"+indexEntry2.questionaire_date+"</td>";
 					html+="      <td>"+indexEntry2.position_code+"</td>";
-					html+="      <td>"+indexEntry2.emp_name+"</td>";
+					html+="      <td style='text-align: left;'>"+indexEntry2.emp_name+"</td>";
 					html+="      <td>";
 					/*
 					    
