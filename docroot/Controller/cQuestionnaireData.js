@@ -1331,7 +1331,7 @@ var generateAnswerFormDropdownFn = function(data,question_type) {
 		html+="      <td class='col1'><p>"+data.question_name+"</p>";
 		html+="        <textarea class='form-control' rows='1' id='comment-"+data.question_id+"' style='width:94.5%; margin-bottom: 0px; resize: vertical;display:"+(data.answer_type_id == 5 ? "none;" : "block;")+"'>"+(data.answer[0].desc_answer != undefined ? data.answer[0].desc_answer : "")+"</textarea>";
 		html+="      </td>";
-		html+="      <td class='col2'>";
+		html+="      <td class='col2' style='min-width: 60px;'>";
 		html+="        <div align='center'>";
 		html+="         <select class='span2 sel'>";
 		$.each(data.answer,function(index,indexEntry) {
@@ -1356,7 +1356,7 @@ var generateAnswerFormDropdownFn = function(data,question_type) {
 		html+="      <td class='col1'><p>คะแนน</p>";
 		html+="        <textarea class='form-control' rows='1' id='comment-"+data.question_id+"' style='width:94.5%; margin-bottom: 0px; resize: vertical;display:"+(data.answer_type_id == 5 ? "none;" : "block;")+"'>"+(data.answer[0].desc_answer != undefined ? data.answer[0].desc_answer : "")+"</textarea>";
 		html+="      </td>";
-		html+="      <td class='col2'>";
+		html+="      <td class='col2' style='min-width: 60px;'>";
 		html+="        <div align='center'>";
 		html+="         <select class='span2 sel'>";
 		$.each(data.answer,function(index,indexEntry) {
