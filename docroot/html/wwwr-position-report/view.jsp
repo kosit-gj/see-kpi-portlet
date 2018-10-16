@@ -689,9 +689,15 @@ background-color:#71cccc !important;
                     <input class="form-control input-sm" id="tse-code-or-tse-name-id" name="tse-code-or-tse-name-id" value="" type="hidden">
                   </div>
                   
-                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                 <%--  <div class="form-group pull-left span3" style="margin-left: 5px">
                     <input data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="assessor-code-or-name"/>" class="form-control input-sm searchAdvanceText span12" placeholder="<liferay-ui:message key="assessor-code-or-name"/>" type="text" id="assessor-code-or-name" name="assessor-code-or-name" />
                     <input class="form-control input-sm" id="assessor-code-or-name-id" name="assessor-code-or-name-id" value="" type="hidden">
+                  </div> --%>
+                  
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="assessor-code-or-name"/>" class="input form-control input-sm span12" id="assessor-code-or-name" name="assessor-code-or-name">
+                    <option value="" selected="selected">All Assessor</option>
+                    </select>
                   </div>
                   
                   <div class="form-group span3 m-b-none pull-right" style="margin-left: 5px; text-align:right;">

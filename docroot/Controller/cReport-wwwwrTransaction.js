@@ -44,6 +44,7 @@ $(document).ready(function() {
 	                //sets dt2 maxDate to the last day of 30 days window
 	                dt2.datepicker('option', 'maxDate', null);
 	                dt2.datepicker('option', 'minDate', minDate);
+	                clearParamFn();
 	            }
 	        });
 	      } );
@@ -51,7 +52,10 @@ $(document).ready(function() {
 	    $( function() {
 	        $( "#date-end" ).datepicker({ 
 	        	dateFormat: "dd/mm/yy",
-	        	minDate: 0
+	        	minDate: 0,
+	     	   onSelect: function () {
+	              	clearParamFn();
+	           }
 	        });
 	      } );
 	    
@@ -59,6 +63,11 @@ $(document).ready(function() {
 		    return ( ( event.keyCode || event.which ) === 9 ? true : false );
 		});
     
+	    assessorParam($("#tse-code-or-tse-name-id").val());
+	    $("#QuestionnaireType").change(function() {
+	    	clearParamFn();
+		});
+	    
     var dataClearParam = [{
         'id': '#Position',
         'val': ""
@@ -108,6 +117,13 @@ $(document).ready(function() {
   }
 });
 
+var clearParamFn = function(){
+	$("#tse-code-or-tse-name").val('');
+	$("#tse-code-or-tse-name-id").val('');
+	$("#assessor-code-or-name").val('');
+	galbalDataTemp=[]; 
+	assessorParam($("#tse-code-or-tse-name-id").val());
+}
 
 $("#btnExport").click(function(){
 	getDataFn();
@@ -173,6 +189,7 @@ $("#tse-code-or-tse-name").autocomplete({
       galbalDataTemp['tse_emp_name'] = ui.item.label;
       galbalDataTemp['tse_emp_snapshot_id'] = ui.item.emp_snapshot_id;
 //      empNameAutoCompelteChangeToPositionName(ui.item.value);
+      assessorParam($("#tse-code-or-tse-name-id").val());
       return false;
     },
     change: function(e, ui) {
@@ -186,59 +203,37 @@ $("#tse-code-or-tse-name").autocomplete({
     }
   });
 
-$("#assessor-code-or-name").autocomplete({
-
-    source: function(request, response) {
-      $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/questionaire_report/auto_assessor_report",
-        type: "GET",
-        dataType: "json",
-        data: {
-          "emp_name": request.term
-        },
-        //async:false,
-        headers: {
-          Authorization: "Bearer " + tokenID.token
-        },
-        error: function(xhr, textStatus, errorThrown) {
-          console.log('Error: ' + xhr.responseText);
-        },
-        success: function(data) {
-          console.log(data)
-          response($.map(data, function(item) {
-            return {
-              label: item.emp_name,
-              value: item.emp_name,
-              emp_snapshot_id: item.emp_snapshot_id,
-            };
-          }));
-
-        },
-        beforeSend: function() {
-          $("body").mLoading('hide');
-        }
-
-      });
-    },
-    select: function(event, ui) {
-      $("#assessor-code-or-name").val(ui.item.label);
-      $("#assessor-code-or-name-id").val(ui.item.emp_snapshot_id);
-      galbalDataTemp['assessor_emp_name'] = ui.item.label;
-      galbalDataTemp['assessor_emp_snapshot_id'] = ui.item.emp_snapshot_id;
-//      empNameAutoCompelteChangeToPositionName(ui.item.value);
-      return false;
-    },
-    change: function(e, ui) {
-      if ($("#assessor-code-or-name").val() == galbalDataTemp['assessor_emp_name']) {
-        $("#assessor-code-or-name-id").val(galbalDataTemp['assessor_emp_snapshot_id']);
-      } else if (ui.item != null) {
-        $("#assessor-code-or-name-id").val(ui.item.emp_snapshot_id);
-      } else {
-        $("#assessor-code-or-name-id").val("");
-
-      }
-    }
-  });
+var assessorParam = function(emp_snapshot_id){
+	$.ajax({
+		url:restfulURL+"/"+serviceName+"/public/questionaire_report/list_assessor_report",
+		type:"get",
+		dataType:"json",
+		async:false,
+		data:{
+			"start_date": $("#date-start").val(),
+			"end_date": $("#date-end").val(),
+			"emp_snapshot_id" :emp_snapshot_id,
+		},
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			var htmlOption="";
+			htmlOption+="<option selected='selected' value=''>All Assessor</option>";
+			if(data['status'] == '200'&&data['data'].length!=0){
+				
+				$.each(data['data'],function(index,indexEntry){
+					htmlOption+="<option value="+indexEntry['emp_snapshot_id']+">"+indexEntry['emp_name']+"</option>";
+				});
+			}
+			else if(data['status'] == '404'){
+				callFlashSlide(Liferay.Language.get(data['data']));
+			}
+			else{
+				callFlashSlide(Liferay.Language.get("ไม่พบข้อมูล"));
+			}
+			$("#assessor-code-or-name").html(htmlOption);
+		}
+	});
+}
 
 var getDataFn = function() {
 	$("body").mLoading('show'); //Loading
@@ -251,13 +246,6 @@ var getDataFn = function() {
 	var assessor_id = $("#assessor-code-or-name-id").val();
 	var emp_snapshot_id = $("#tse-code-or-tse-name-id").val();
 	
-	if(questionaire_type_id == 1){
-		template_name="report-ww-position";
-	}
-	else if(questionaire_type_id == 2){
-		template_name="report-wr-position";
-	}
-	
 	parameter = {
 			param_questionaire_type: questionaire_type_id,
 			param_employee : emp_snapshot_id,
@@ -266,17 +254,11 @@ var getDataFn = function() {
 			param_date_end : date_end
 		  };
 	
-	if (date_start == '' || date_end == '' || emp_snapshot_id ==''){
+	if (date_start == '' || date_end == ''){
 		 $("body").mLoading('hide'); //Loading
-		callFlashSlide(Liferay.Language.get("TSE Code or TSE Name is require!"));
+		callFlashSlide(Liferay.Language.get("Date Start or Date End"));
 		return false;
 	}
-
-//	var currentLocale = $("#user_locale").val();
-//	if(typeof currentLocale !== 'undefined'){
-//		template_name = template_name+"_"+currentLocale;
-//	}
-	
 		
 	var data = JSON.stringify(parameter);
 	var url_report_jasper = restfulURL+"/"+serviceName+"/public/questionaire_report/export_transaction?start_date="+date_start+"&end_date="+date_end+"&questionaire_type_id="+questionaire_type_id+"&assessor_id="+assessor_id+"&emp_snapshot_id="+emp_snapshot_id+"&token="+tokenID.token;
