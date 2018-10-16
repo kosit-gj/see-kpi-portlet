@@ -1147,7 +1147,9 @@ var generateStageFn = function(stage,current_stage,to_stage) {
 		TableStageHTML+="	<td>"+indexEntry['created_by']+"</td>";
 		TableStageHTML+="	<td>"+indexEntry['created_dttm']+"</td>";
 		TableStageHTML+="	<td>"+indexEntry['from_action']+"</td>";
+		TableStageHTML+="	<td>"+indexEntry['chief_emp_name']+"</td>";
 		TableStageHTML+="	<td>"+indexEntry['to_action']+"</td>";
+		TableStageHTML+="	<td>"+indexEntry['emp_name']+"</td>";
 		TableStageHTML+="	<td>"+notNullTextFn(indexEntry['remark'])+"</td>";
 		TableStageHTML+="</tr>";
 

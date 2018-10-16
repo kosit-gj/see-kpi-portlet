@@ -832,11 +832,13 @@ cursor: not-allowed !important;
 							<table class="table" style="max-width: none; ">
 								<thead >
 									<tr style="white-space: nowrap;">
-										<th style="width: 15%">Created By</th>
+										<th style="width: 10%">Created By</th>
 										<th style="width: 15%">Created Datetime</th>
-										<th style="width: 15%">From Stage</th>
-										<th style="width: 15%">To Stage</th>
-										<th style="width: 35%">Remark</th>
+										<th style="width: 12.5%">From Stage</th>
+										<th style="width: 15%">Assessor Name</th>
+										<th style="width: 12.5%">To Stage</th>
+										<th style="width: 15%">TSE Name</th>
+										<th style="width: 20%">Remark</th>
 									</tr>
 								</thead>
 								<tbody id="listDataStageHistory">
