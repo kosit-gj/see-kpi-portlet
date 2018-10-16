@@ -1273,6 +1273,10 @@ $(document).ready(function() {
 	
 	getDropDownAnswerTypeFn(globalSevice['restfulPathDropDownAnswerType'],"GET",{});
 	
+	$('[data-toggle="tooltip"]').css({"cursor":"pointer"});
+	$('[data-toggle="tooltip"]').tooltip({
+		 html:true
+	});
 	$(".app_url_hidden").show();
 	$("#btn_search_advance").click(function(){
 	
