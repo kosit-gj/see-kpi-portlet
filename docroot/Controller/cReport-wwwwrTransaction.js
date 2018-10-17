@@ -199,6 +199,7 @@ $("#tse-code-or-tse-name").autocomplete({
         $("#tse-code-or-tse-name-id").val(ui.item.emp_snapshot_id);
       } else {
         $("#tse-code-or-tse-name-id").val("");
+        assessorParam($("#tse-code-or-tse-name-id").val());
       }
     }
   });
