@@ -139,7 +139,7 @@ var questionnaireTypeParam = function(){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option selected='selected' value=''>All Questionaire Type</option>";
+			htmlOption+="<option selected='selected' value=''>All Questionnaire Type</option>";
 			$.each(data,function(index,indexEntry){
 				if(index==0){
 					htmlOption+="<option value="+indexEntry['questionaire_type_id']+">"+indexEntry['questionaire_type']+"</option>";
