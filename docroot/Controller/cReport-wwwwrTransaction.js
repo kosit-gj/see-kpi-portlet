@@ -208,7 +208,7 @@ var assessorParam = function(emp_snapshot_id){
 		url:restfulURL+"/"+serviceName+"/public/questionaire_report/list_assessor_report",
 		type:"get",
 		dataType:"json",
-		async:false,
+		async:true,
 		data:{
 			"start_date": $("#date-start").val(),
 			"end_date": $("#date-end").val(),
@@ -224,12 +224,12 @@ var assessorParam = function(emp_snapshot_id){
 					htmlOption+="<option value="+indexEntry['emp_snapshot_id']+">"+indexEntry['emp_name']+"</option>";
 				});
 			}
-			else if(data['status'] == '404'){
-				callFlashSlide(Liferay.Language.get(data['data']));
-			}
-			else{
-				callFlashSlide(Liferay.Language.get("ไม่พบข้อมูล"));
-			}
+//			else if(data['status'] == '404'){
+//				callFlashSlide(Liferay.Language.get(data['data']));
+//			}
+//			else{
+//				callFlashSlide(Liferay.Language.get("ไม่พบข้อมูล"));
+//			}
 			$("#assessor-code-or-name").html(htmlOption);
 		}
 	});
