@@ -265,6 +265,9 @@ var findOneFn = function (id, actionType) {
             //console.log(data['head'].length);
 
             if (data['head'].length > 0) {
+            	// set form title //
+                $("span#form-title").html(data['head'][0]['appraisal_form_name']);
+            	
                 if (emailLinkAssignment == true) {
                     url_period_id = data['head'][0]['period_id'];
                     $("#period_id_edit").val(url_period_id);
@@ -630,7 +633,7 @@ var listDataFn = function (data) {
             var id = this.id.split("-");
             id = id[1];
 
-            var emp_result_id = $(this).parent().parent().parent().parent().children().eq(1).children().val();
+            var emp_result_id = $(this).parent().parent().parent().parent().children().eq(2).children().val();
 
             $("#confrimModal").modal({
                 "backdrop": setModalPopup[0],
@@ -645,7 +648,6 @@ var listDataFn = function (data) {
         });
         //findOne Start
         $(".edit").on("click", function () {
-
             var edit = this.id.split("-");
             var id = edit[1];
             org_id_to_assign = edit[2];
@@ -660,8 +662,8 @@ var listDataFn = function (data) {
                 $(this).parent().parent().parent().children().click();
             } else {
                 //var emp_result_id = $("#emp_result_id-"+id).val();
-                var emp_result_id = $(this).parent().parent().parent().parent().children().eq(1).children().val();
-                var period_id = $(this).parent().parent().parent().parent().children().eq(2).children().val();
+                var emp_result_id = $(this).parent().parent().parent().parent().children().eq(2).children().val();
+                var period_id = $(this).parent().parent().parent().parent().children().eq(3).children().val();
                 $("#period_id_edit").val(period_id);
                 findOneFn(emp_result_id, "");
                 $(this).parent().parent().parent().children().click();
@@ -836,7 +838,8 @@ var actionUpdateAssignmentFn = function () {
                 "appraisal_type_id": $("#embed_appraisal_type_id").val(),
                 "period_id": $("#period_id_edit").val(),
                 "action_to": $("#actionAssign").val(),
-                "remark": $("#remark_footer").val()
+                "remark": $("#remark_footer").val(),
+                "appraisal_form_id": $("#embed_appraisal_form").val()
             },
             "appraisal_items": appraisal_itemsObj
         },
@@ -1010,6 +1013,7 @@ var actionAssignmentFn = function (param) {
                 "period_id": $("#embed_period_id").val(),
                 "action_to": $("#actionAssign").val(),
                 "remark": $("#remark_footer").val(),
+                "appraisal_form_id": $("#embed_appraisal_form").val()
             },
             "employees": employeesObj,
             "appraisal_items": appraisal_itemsObj
@@ -2425,6 +2429,9 @@ $(document).ready(function () {
 
             //btn assignment start
             $("#btnAssignment").click(function () {
+            	// set form title //
+            	$("span#form-title").html($("#appraisalForm option[value='"+$("#embed_appraisal_form").val()+"']").text());
+            	
                 empldoyees_code = [];
                 empldoyees_id = [];
                 default_stage_id = [];
