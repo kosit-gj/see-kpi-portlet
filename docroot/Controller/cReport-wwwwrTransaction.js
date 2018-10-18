@@ -244,7 +244,7 @@ var getDataFn = function() {
 	var date_start = $("#date-start").val();
 	var date_end = $("#date-end").val();
 	var questionaire_type_id = $("#QuestionnaireType").val();
-	var assessor_id = $("#assessor-code-or-name-id").val();
+	var assessor_id = $("#assessor-code-or-name").val();
 	var emp_snapshot_id = $("#tse-code-or-tse-name-id").val();
 	
 	parameter = {
@@ -262,7 +262,9 @@ var getDataFn = function() {
 	}
 		
 	var data = JSON.stringify(parameter);
+
 	var url_report_jasper = restfulURL+"/"+serviceName+"/public/questionaire_report/export_transaction?start_date="+date_start+"&end_date="+date_end+"&questionaire_type_id="+questionaire_type_id+"&assessor_id="+assessor_id+"&emp_snapshot_id="+emp_snapshot_id+"&token="+tokenID.token;
+	console.log(url_report_jasper);
 	 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 		 window.open(url_report_jasper,"_blank");
 		} else {

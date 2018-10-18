@@ -716,7 +716,7 @@ background-color:#71cccc !important;
       <!-- end--row-fluid -->
     </div>
   </div>
-  <iframe id="iFrame_report" frameborder="0" style="width :100%;height: 500px;">
+  <iframe id="iFrame_report" frameborder="0" style="width :100%;height: 500px; display:none;">
   			<p><liferay-ui:message key="your-browser-does-not-support-iframes"/></p>
   </iframe>
 </body>

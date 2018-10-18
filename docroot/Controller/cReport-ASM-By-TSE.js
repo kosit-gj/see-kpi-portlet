@@ -228,6 +228,7 @@ $("#tse-code-or-tse-name").autocomplete({
       return false;
     },
     change: function(e, ui) {
+    	console.log("test");
       if ($("#tse-code-or-tse-name").val() == galbalDataTemp['tse_emp_name']) {
         $("#tse-code-or-tse-name-id").val(galbalDataTemp['tse_emp_snapshot_id']);
       } else if (ui.item != null) {
@@ -248,7 +249,7 @@ var getDataFn = function() {
 	var date_start = $("#date-start").val();
 	var date_end = $("#date-end").val();
 	var questionaire_type_id = $("#QuestionnaireType").val();
-	var assessor_id = $("#assessor-code-or-name-id").val();
+	var assessor_id = $("#assessor-code-or-name").val();
 	var emp_snapshot_id = $("#tse-code-or-tse-name-id").val();
 	var data_header_id="";
 	var questionaire_date="";
@@ -275,7 +276,7 @@ var getDataFn = function() {
 	
 	var data = JSON.stringify(parameter);
 	var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name="+template_name+"&token="+tokenID.token+"&template_format=xlsx&used_connection=1&inline=1&data="+data;
-//	console.log(url_report_jasper);
+	console.log(url_report_jasper);
 //	return false;
 	 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 		 window.open(url_report_jasper,"_blank");

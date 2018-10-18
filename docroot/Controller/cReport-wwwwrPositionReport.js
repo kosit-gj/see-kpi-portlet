@@ -249,7 +249,7 @@ var getDataFn = function() {
 	var date_start = $("#date-start").val();
 	var date_end = $("#date-end").val();
 	var questionaire_type_id = $("#QuestionnaireType").val();
-	var assessor_id = $("#assessor-code-or-name-id").val();
+	var assessor_id = $("#assessor-code-or-name").val();
 	var emp_snapshot_id = $("#tse-code-or-tse-name-id").val();
 	
 	template_name="report-position";
