@@ -31,7 +31,7 @@ globalDataTemp['tempTemplateStore']=[];
 
 var clearFn = function() {
 	
-	$("#modalTitleRole ").html("Questionnaire");
+	$("#modalTitleRole ").html("แบบฟอร์ม");
 	$("#accordionListQuestionaireData , #listDataStageHistory , #genBtnStage ").empty();
 	$("	form#linkParam :input, " +
 		"#modal_empsnapshot_name , " +
@@ -363,7 +363,7 @@ var scriptBtnClearAddStoreFn  = function (){
 		
 		var elements = $(this).parent().parent();
 		var section_id=elements.attr("section_id");
-		$("#inform_label_confirm").text("Please confirm the cancellation by evaluated retailer?");
+		$("#inform_label_confirm").text("คุณต้องการยกเลิกการประเมินในร้านค้า ?");
 		$("#confrimModal").modal({
 			"backdrop" : setModalPopup[0],
 			"keyboard" : setModalPopup[1]
@@ -733,8 +733,8 @@ var listData = function(data) {
 				html+="  <thead>";
 				html+="    <tr>";
 				html+="      <th width=\"15%\" >วันที่</th>";
-				html+="      <th width=\"15%\">รหัส TSE</th>";
-				html+="      <th width=\"60%\" >ชื่อ-สกุล TSE</th>";
+				html+="      <th width=\"15%\">เขตพนักงาน</th>";
+				html+="      <th width=\"60%\" >ชื่อพนักงาน</th>";
 				html+="      <th width=\"10%\"></th>";
 				html+="    </tr>";
 				html+="  </thead>";
@@ -946,8 +946,8 @@ var generateQuestionaireFormFn = function(data) {
 			globalDataTemp['tempTemplateStore']["section_"+indexEntry.section_id]=indexEntry.sub_section;
 			html+="<div class='row-fluid' style='margin-bottom: 10px;'>";
 			html+="  <div class='span6'>";
-			html+="    <button class='btn btn-success btnAddStore' id='btnAddStore-"+indexEntry.section_id+"' section_id='"+indexEntry.section_id+"'>Add</button>";
-			html+="    <button class='btn btn-info btnListStore' id='btnListStore-"+indexEntry.section_id+"' section_id='"+indexEntry.section_id+"'>Evaluated Retailer List</button>";
+			html+="    <button class='btn btn-success btnAddStore' id='btnAddStore-"+indexEntry.section_id+"' section_id='"+indexEntry.section_id+"'>เพิ่มร้าน</button>";
+			html+="    <button class='btn btn-info btnListStore' id='btnListStore-"+indexEntry.section_id+"' section_id='"+indexEntry.section_id+"'>ร้านที่ประเมินแล้ว</button>";
 			html+="  </div>";
 			html+="</div>";
 			
@@ -1145,12 +1145,12 @@ var generateStageFn = function(stage,current_stage,to_stage) {
 	
 		TableStageHTML+="<tr >";
 		TableStageHTML+="	<td>"+indexEntry['created_by']+"</td>";
+		TableStageHTML+="	<td>"+notNullTextFn(indexEntry['remark'])+"</td>";
 		TableStageHTML+="	<td>"+indexEntry['created_dttm']+"</td>";
 		TableStageHTML+="	<td>"+indexEntry['from_action']+"</td>";
 		TableStageHTML+="	<td>"+indexEntry['chief_emp_name']+"</td>";
 		TableStageHTML+="	<td>"+indexEntry['to_action']+"</td>";
 		TableStageHTML+="	<td>"+indexEntry['emp_name']+"</td>";
-		TableStageHTML+="	<td>"+notNullTextFn(indexEntry['remark'])+"</td>";
 		TableStageHTML+="</tr>";
 
 	});
@@ -1815,7 +1815,7 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 		$("#modal_questionaire_type_id").change(function() {
 			  
 			  if($("#modal_questionaire_type_id").val() == ""){
-				  $("#modalTitleRole").text("Questionnaire");
+				  $("#modalTitleRole").text("แบบฟอร์ม");
 				  $("#accordionListQuestionaireData , #listDataStageHistory , #genBtnStage ").empty();
 		        	$("#modal_empsnapshot_id").val("");
 					$("#modal_position_code").val("");
@@ -1835,7 +1835,7 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
             minDate: new Date(2018, 1 - 1, 1),
 	        onSelect: function () {
 	        	//alert("asdasdasd");
-	        	$("#modalTitleRole").text("Questionnaire");
+	        	$("#modalTitleRole").text("แบบฟอร์ม");
 	        	$("#accordionListQuestionaireData").empty();
 	        	$("#modal_empsnapshot_name").val("");
 	        	$("#modal_empsnapshot_id").val("");
@@ -1919,7 +1919,7 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 			setModalContentBodyHeightFn();
 		});
 		$("#modalQuestionaireData .btnCancle").click(function() {
-			$("#inform_label_confirm").html("You want to leave this <br>\""+$("#modalTitleRole ").text()+"\" ?");
+			$("#inform_label_confirm").html("คุณต้องการออกจาก  <br>\""+$("#modalTitleRole ").text()+"\" ?");
 			$("#confrimModal").modal({
 				"backdrop" : setModalPopup[0],
 				"keyboard" : setModalPopup[1]
@@ -2058,7 +2058,7 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 		            $("#linkParam_emp_snapshot_id").val(ui.item.data_id);
 		            $("#modal_questionaire_type_id").val("");
 				} else {
-					$("#modalTitleRole").text("Questionnaire");
+					$("#modalTitleRole").text("แบบฟอร์ม");
 		        	$("#accordionListQuestionaireData").empty();
 		        	$("#modal_empsnapshot_id").val("");
 					$("#modal_position_code").val("");

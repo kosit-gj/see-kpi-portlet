@@ -696,7 +696,7 @@ background-color:#71cccc !important;
                   
                    <div class="form-group pull-left span3" style="margin-left: 5px">
                     <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="assessor"/>" class="input form-control input-sm span12" id="assessor-code-or-name" name="assessor-code-or-name">
-                    <option value="" selected="selected">All Assessor</option>
+                    <option value="" selected="selected">ผู้ประเมินทั้งหมด</option>
                     </select>
                   </div>
                   

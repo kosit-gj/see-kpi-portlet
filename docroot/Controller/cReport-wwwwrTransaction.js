@@ -218,7 +218,7 @@ var assessorParam = function(emp_snapshot_id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option selected='selected' value=''>All Assessor</option>";
+			htmlOption+="<option selected='selected' value=''>ผู้ประเมินทั้งหมด</option>";
 			if(data['status'] == '200'&&data['data'].length!=0){
 				
 				$.each(data['data'],function(index,indexEntry){

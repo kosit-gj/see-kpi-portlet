@@ -727,12 +727,12 @@ cursor: not-allowed !important;
 		<div class="span12">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title" style="background-color: rgb(83, 120, 253); border-color: rgb(83, 120, 253); min-height: 0px;">
-					<h5>Advanced Search</h5>
+					<h5>ค้นหา</h5>
 				</div>
 				<div class="ibox-content breadcrumbs2 advance-search" style="border-color: rgb(83, 120, 253);">
 					<div class="row-fluid">
 						<div class="span3">
-				          <label for="search_questionaire_type_id">แบบสอบถาม</label>
+				          <label for="search_questionaire_type_id">เลือกประเภทแบบฟอร์ม</label>
 				          <select id="search_questionaire_type_id" class="span12" name="search_questionaire_type_id"></select>
 				        </div>
 						<div class="span3">
@@ -744,7 +744,7 @@ cursor: not-allowed !important;
 				          <input id="search_datepicker_end" class="span12" type="text" placeholder="End Date">
 				        </div>
 				        <div class="span3">
-				          <label for="search_empsnapshot">ชื่อ/รหัส TSE</label>
+				          <label for="search_empsnapshot">ชื่อ/รหัสเขตพนักงาน</label>
 				          <input id="search_empsnapshot" class="span12" type="text" placeholder="Name/Code TSE">
 				          <input class="form-control input-sm" id="search_empsnapshot_id" name="search_empsnapshot_id" value="" type="hidden">
 				        </div>
@@ -753,7 +753,7 @@ cursor: not-allowed !important;
 						<div class="span12">
 							<div style="float: right;">
 					    		<button id="btn-search" class="btn btn-info"><i class="icon-search icon-white"></i>&nbsp;&nbsp;Search</button>
-					    		<button id="btn-add" data-backdrop="static" data-keyboard="false" class="btn btn-success"><i class="icon-plus-sign icon-white"></i>&nbsp;&nbsp;Add</button>
+					    		<button id="btn-add" data-backdrop="static" data-keyboard="false" class="btn btn-success"><i class="icon-plus-sign icon-white"></i>&nbsp;&nbsp;Add Form</button>
 				        	</div>
 				        	<div style="clear: both; margin-bottom: 8px;"></div>
 				        </div>
@@ -797,7 +797,7 @@ cursor: not-allowed !important;
 					<input id="modal_datepicker_start" class="span12" type="text" placeholder="Start Date">
 			  </div>
 			  <div class="span3">
-				<label for="modal_empsnapshot_name">ชื่อ/รหัส TSE</label>
+				<label for="modal_empsnapshot_name">ชื่อ/รหัสเขตพนักงาน</label>
 					<input id="modal_empsnapshot_name" class="span12" type="text" placeholder="Name/Code TSE">
 					<input class=" input-sm" id="modal_empsnapshot_id" name="modal_empsnapshot_id" value="" type="hidden">
 					<input class=" input-sm" id="modal_position_code" name="modal_position_code" value="" type="hidden">
@@ -832,13 +832,13 @@ cursor: not-allowed !important;
 							<table class="table" style="max-width: none; ">
 								<thead >
 									<tr style="white-space: nowrap;">
-										<th style="width: 10%">Created By</th>
+										<th style="width: 10%">ร้านค้า</th>
+										<th style="width: 20%">Remark</th>
 										<th style="width: 15%">Created Datetime</th>
 										<th style="width: 12.5%">From Stage</th>
 										<th style="width: 15%">Assessor Name</th>
 										<th style="width: 12.5%">To Stage</th>
 										<th style="width: 15%">TSE Name</th>
-										<th style="width: 20%">Remark</th>
 									</tr>
 								</thead>
 								<tbody id="listDataStageHistory">
