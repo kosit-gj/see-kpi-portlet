@@ -933,7 +933,48 @@ cursor: not-allowed !important;
 						<button class="btn btn-success" id="btnConfirmOK" type="button">
 							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
 						</button>
-						<button data-dismiss="modal" class="btn btn-danger" type="button"> <i class="fa fa-times-circle"></i>&nbsp;Cancel </button>
+						<button data-dismiss="modal" class="btn btn-danger" type="button"> <i class="fa fa-times-circle"></i>&nbsp;No </button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal Confirm End -->
+	
+	<!-- Modal Confirm Start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModalNextAssign"
+		class="modal inmodal in" style="width:400px;left:calc;display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content  bounceInRight">
+				<div class="modal-header">
+<!-- 					<button data-dismiss="modal" class="close" type="button" style="padding-top:5px"> -->
+<!-- 						<span aria-hidden="true"><i class='fa fa-times'></i></span> -->
+<!-- 					</button> -->
+					<h5 class="modal-title">Confirm Dialog</h5>
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
+                <hr>
+                 -->
+					<!-- form start -->
+					<div class="form-kpi-mangement">
+						<div class="form-kpi-label" align="center">
+
+							<label id="">คุณต้องการประเมินต่อหรือไม่?</label>
+							<div id="" class='information'></div>
+						</div>
+					</div>
+
+					<!-- form start -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+					<div align="center">
+						<button class="btn btn-success" id="btnConfirmOK" type="button">
+							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
+						</button>
+						<button data-dismiss="modal" class="btn btn-danger" id="btnConfirmNo" type="button"> <i class="fa fa-times-circle"></i>&nbsp;No </button>
 					</div>
 				</div>
 			</div>

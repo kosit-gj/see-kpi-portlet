@@ -28,6 +28,193 @@ globalDataTemp['tempAutocompleteStore']={};
 
 globalDataTemp['tempTemplateStore']=[];
 
+var generateNextFormFn = function(data,type) {
+	$("#confrimModalNextAssign").modal({
+		"backdrop" : setModalPopup[0],
+		"keyboard" : setModalPopup[1]
+	});
+	
+	$("#confrimModalNextAssign").off("click","#btnConfirmOK");
+	$("#confrimModalNextAssign").on("click","#btnConfirmOK",function(){
+		$("#confrimModalNextAssign").modal('hide');
+		clearFn();
+		$("#id").val(data.next_form.data_header_id);
+		$("#action").val("edit");
+		$("#action_modal").val(data.next_form.edit_flag);
+		
+		console.log($("#id").val());
+		console.log($("#action").val());
+		console.log($("#action_modal").val());
+		
+		$("#modalTitleRole").html(data.next_form.data.head.questionaire_name);
+		generateQuestionaireFormFn(data.next_form.data);
+		generateStageFn(data.next_form.data.stage,data.next_form.data.current_stage,data.next_form.data.to_stage);
+//		$("html, body").animate({ scrollTop: 0 }, "slow");
+	});
+	
+	$("#confrimModalNextAssign").off("click","#btnConfirmNo");
+	$("#confrimModalNextAssign").on("click","#btnConfirmNo",function(){
+		$("#confrimModalNextAssign").modal('hide');
+		$('#modalQuestionaireData').modal('hide');
+		if(type=='update') {
+			getDataFn();
+		}
+		clearFn();
+	});
+}
+
+var setAccordionAndDefaultFn = function(type,data) {
+	if(type=='add') {
+		if(typeof $("#accordionListQuestionaireData").data("ui-accordion") != "undefined"){
+			$("#accordionListQuestionaireData").accordion("destroy").accordion({
+			    heightStyle: "content",
+			    collapsible: true,
+			    beforeActivate: function (event, ui) {
+			      // The accordion believes a panel is being opened
+			      if (ui.newHeader[0]) {
+			        var currHeader = ui.newHeader;
+			        var currContent = currHeader.next('.ui-accordion-content');
+			        // The accordion believes a panel is being closed
+			      } else {
+			        var currHeader = ui.oldHeader;
+			        var currContent = currHeader.next('.ui-accordion-content');
+			      }
+			      // Since we've changed the default behavior, this detects the actual status
+			      var isPanelSelected = currHeader.attr('aria-selected') == 'true';
+	
+			      // Toggle the panel's header
+			      currHeader.toggleClass('ui-corner-all', isPanelSelected).toggleClass('accordion-header-active ui-state-active ui-corner-top', !isPanelSelected).attr('aria-selected', ((!isPanelSelected).toString()));
+	
+			      // Toggle the panel's icon
+			      currHeader.children('.ui-icon').toggleClass('ui-icon-triangle-1-e', isPanelSelected).toggleClass('ui-icon-triangle-1-s', !isPanelSelected);
+	
+			      // Toggle the panel's content
+			      currContent.toggleClass('accordion-content-active', !isPanelSelected)
+			      if (isPanelSelected) {
+			        currContent.slideUp();
+			      } else {
+			        currContent.slideDown();
+			      }
+			      return false; // Cancels the default action
+			    }
+			  });
+			
+			  
+		}else{
+			$("#accordionListQuestionaireData").accordion({
+			    heightStyle: "content",
+			    collapsible: true,
+			    beforeActivate: function (event, ui) {
+			      // The accordion believes a panel is being opened
+			      if (ui.newHeader[0]) {
+			        var currHeader = ui.newHeader;
+			        var currContent = currHeader.next('.ui-accordion-content');
+			        // The accordion believes a panel is being closed
+			      } else {
+			        var currHeader = ui.oldHeader;
+			        var currContent = currHeader.next('.ui-accordion-content');
+			      }
+			      // Since we've changed the default behavior, this detects the actual status
+			      var isPanelSelected = currHeader.attr('aria-selected') == 'true';
+	
+			      // Toggle the panel's header
+			      currHeader.toggleClass('ui-corner-all', isPanelSelected).toggleClass('accordion-header-active ui-state-active ui-corner-top', !isPanelSelected).attr('aria-selected', ((!isPanelSelected).toString()));
+	
+			      // Toggle the panel's icon
+			      currHeader.children('.ui-icon').toggleClass('ui-icon-triangle-1-e', isPanelSelected).toggleClass('ui-icon-triangle-1-s', !isPanelSelected);
+	
+			      // Toggle the panel's content
+			      currContent.toggleClass('accordion-content-active', !isPanelSelected)
+			      if (isPanelSelected) {
+			        currContent.slideUp();
+			      } else {
+			        currContent.slideDown();
+			      }
+			      return false; // Cancels the default action
+			    }
+			  });
+		}
+	} else {
+		if(typeof $("#accordionListQuestionaireData").data("ui-accordion") != "undefined"){
+			$("#accordionListQuestionaireData").accordion("destroy").accordion({
+			    heightStyle: "content",
+			    collapsible: true,
+			    active: false,
+			    beforeActivate: function (event, ui) {
+			      // The accordion believes a panel is being opened
+			      if (ui.newHeader[0]) {
+			        var currHeader = ui.newHeader;
+			        var currContent = currHeader.next('.ui-accordion-content');
+			        // The accordion believes a panel is being closed
+			      } else {
+			        var currHeader = ui.oldHeader;
+			        var currContent = currHeader.next('.ui-accordion-content');
+			      }
+			      // Since we've changed the default behavior, this detects the actual status
+			      var isPanelSelected = currHeader.attr('aria-selected') == 'true';
+	
+			      // Toggle the panel's header
+			      currHeader.toggleClass('ui-corner-all', isPanelSelected).toggleClass('accordion-header-active ui-state-active ui-corner-top', !isPanelSelected).attr('aria-selected', ((!isPanelSelected).toString()));
+	
+			      // Toggle the panel's icon
+			      currHeader.children('.ui-icon').toggleClass('ui-icon-triangle-1-e', isPanelSelected).toggleClass('ui-icon-triangle-1-s', !isPanelSelected);
+	
+			      // Toggle the panel's content
+			      currContent.toggleClass('accordion-content-active', !isPanelSelected)
+			      if (isPanelSelected) {
+			        currContent.slideUp();
+			      } else {
+			        currContent.slideDown();
+			      }
+			      return false; // Cancels the default action
+			    }
+			  });
+			
+			  
+		}else{
+			$("#accordionListQuestionaireData").accordion({
+			    heightStyle: "content",
+			    collapsible: true,
+			    active: false,
+			    beforeActivate: function (event, ui) {
+			      // The accordion believes a panel is being opened
+			      if (ui.newHeader[0]) {
+			        var currHeader = ui.newHeader;
+			        var currContent = currHeader.next('.ui-accordion-content');
+			        // The accordion believes a panel is being closed
+			      } else {
+			        var currHeader = ui.oldHeader;
+			        var currContent = currHeader.next('.ui-accordion-content');
+			      }
+			      // Since we've changed the default behavior, this detects the actual status
+			      var isPanelSelected = currHeader.attr('aria-selected') == 'true';
+	
+			      // Toggle the panel's header
+			      currHeader.toggleClass('ui-corner-all', isPanelSelected).toggleClass('accordion-header-active ui-state-active ui-corner-top', !isPanelSelected).attr('aria-selected', ((!isPanelSelected).toString()));
+	
+			      // Toggle the panel's icon
+			      currHeader.children('.ui-icon').toggleClass('ui-icon-triangle-1-e', isPanelSelected).toggleClass('ui-icon-triangle-1-s', !isPanelSelected);
+	
+			      // Toggle the panel's content
+			      currContent.toggleClass('accordion-content-active', !isPanelSelected)
+			      if (isPanelSelected) {
+			        currContent.slideUp();
+			      } else {
+			        currContent.slideDown();
+			      }
+			      return false; // Cancels the default action
+			    }
+			  });
+		}
+		
+		$.each(data,function(index,indexEntry) {
+			if(indexEntry.is_cust_search==1) {
+				$("#ui-accordion-accordionListQuestionaireData-header-"+index).click();
+			}
+		});
+		
+	}
+}
 
 var clearFn = function() {
 	
@@ -53,7 +240,7 @@ var clearFn = function() {
 	$("#id").val("");
 	$("#action").val("add");
 	$("#action_modal").val("");
-	$(".btnModalClose").click();
+//	$(".btnModalClose").click();
 
 	
 }
@@ -607,14 +794,11 @@ var findOneFn = function(data_header_id) {
 	
 	toDayFn('#modal_datepicker_start');
 	$.ajax({
-		url: globalSevice['restfulPathAssignTemplate'],
+		url: globalSevice['restfulPathAssignTemplate']+"/"+data_header_id,
 		type:"get",
 		dataType:"json",
 		async:true,
 		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{
-			"data_header_id": data_header_id
-		},
 		success:function(data){
 			if(data.status == "200"){
 				$("#modalTitleRole").html(data.head.questionaire_name);
@@ -984,77 +1168,12 @@ var generateQuestionaireFormFn = function(data) {
 	scriptAutocompleteStoreNameFn();
 	scriptCheckboxCheckIsNarcoticsAnonymousFn();
 	$("#accordion").empty();
-	if(typeof $("#accordionListQuestionaireData").data("ui-accordion") != "undefined"){
-		$("#accordionListQuestionaireData").accordion("destroy").accordion({
-		    heightStyle: "content",
-		    collapsible: true,
-		    beforeActivate: function (event, ui) {
-		      // The accordion believes a panel is being opened
-		      if (ui.newHeader[0]) {
-		        var currHeader = ui.newHeader;
-		        var currContent = currHeader.next('.ui-accordion-content');
-		        // The accordion believes a panel is being closed
-		      } else {
-		        var currHeader = ui.oldHeader;
-		        var currContent = currHeader.next('.ui-accordion-content');
-		      }
-		      // Since we've changed the default behavior, this detects the actual status
-		      var isPanelSelected = currHeader.attr('aria-selected') == 'true';
-
-		      // Toggle the panel's header
-		      currHeader.toggleClass('ui-corner-all', isPanelSelected).toggleClass('accordion-header-active ui-state-active ui-corner-top', !isPanelSelected).attr('aria-selected', ((!isPanelSelected).toString()));
-
-		      // Toggle the panel's icon
-		      currHeader.children('.ui-icon').toggleClass('ui-icon-triangle-1-e', isPanelSelected).toggleClass('ui-icon-triangle-1-s', !isPanelSelected);
-
-		      // Toggle the panel's content
-		      currContent.toggleClass('accordion-content-active', !isPanelSelected)
-		      if (isPanelSelected) {
-		        currContent.slideUp();
-		      } else {
-		        currContent.slideDown();
-		      }
-		      return false; // Cancels the default action
-		    }
-		  });
-	}else{
-		$("#accordionListQuestionaireData").accordion({
-		    heightStyle: "content",
-		    collapsible: true,
-		    beforeActivate: function (event, ui) {
-		      // The accordion believes a panel is being opened
-		      if (ui.newHeader[0]) {
-		        var currHeader = ui.newHeader;
-		        var currContent = currHeader.next('.ui-accordion-content');
-		        // The accordion believes a panel is being closed
-		      } else {
-		        var currHeader = ui.oldHeader;
-		        var currContent = currHeader.next('.ui-accordion-content');
-		      }
-		      // Since we've changed the default behavior, this detects the actual status
-		      var isPanelSelected = currHeader.attr('aria-selected') == 'true';
-
-		      // Toggle the panel's header
-		      currHeader.toggleClass('ui-corner-all', isPanelSelected).toggleClass('accordion-header-active ui-state-active ui-corner-top', !isPanelSelected).attr('aria-selected', ((!isPanelSelected).toString()));
-
-		      // Toggle the panel's icon
-		      currHeader.children('.ui-icon').toggleClass('ui-icon-triangle-1-e', isPanelSelected).toggleClass('ui-icon-triangle-1-s', !isPanelSelected);
-
-		      // Toggle the panel's content
-		      currContent.toggleClass('accordion-content-active', !isPanelSelected)
-		      if (isPanelSelected) {
-		        currContent.slideUp();
-		      } else {
-		        currContent.slideDown();
-		      }
-		      return false; // Cancels the default action
-		    }
-		  });
-	}
 	
 	if($("#action").val() == "add" || $("#action").val() == ""){
+		setAccordionAndDefaultFn('add');
 		$("#slideUpDownStageHistory").hide();
 	}else{
+		setAccordionAndDefaultFn('edit', data['data']);
 		$("#slideUpDownStageHistory").show();
 		$("#slideUpDownStageHistory").off("click");
 		$("#slideUpDownStageHistory").on("click",function(){
@@ -1583,9 +1702,7 @@ var updateFn = function(element){
 		success : function(data) {
 			if (data['status'] == "200") {
 				callFlashSlide("Update Successfully.");
-				$('#modalQuestionaireData').modal('hide');
-				getDataFn();
-				clearFn();
+				generateNextFormFn(data,'update');
 			}else if (data['status'] == "400") {
 				//console.log(data);
 				callFlashSlide("Failed to insert data.");
@@ -1762,9 +1879,10 @@ var insertFn = function(element){
 		success : function(data) {
 			if (data['status'] == "200") {
 				callFlashSlide("Insert Successfully.");
-				$('#modalQuestionaireData').modal('hide');
+				generateNextFormFn(data,'insert');
+//				$('#modalQuestionaireData').modal('hide');
 				//getDataFn();
-				clearFn();
+//				clearFn();
 			}else if (data['status'] == "400") {
 				console.log(data);
 				callFlashSlide("Failed to insert data.");
@@ -1916,6 +2034,8 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 				"backdrop" : setModalPopup[0],
 				"keyboard" : setModalPopup[1]
 			});
+			toDayFn('#modal_datepicker_start');
+			$("#modal_datepicker_start").prop('disabled', true);
 			setModalContentBodyHeightFn();
 		});
 		$("#modalQuestionaireData .btnCancle").click(function() {

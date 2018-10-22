@@ -442,7 +442,7 @@ plid = layout.getPlid();
 					<div class="col-lg-12" style="padding-left: 0px;padding-right: 0px;">
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<h5>ค้นหา</h5>
+								<h5>Advance Search</h5>
 							</div>
 
 							<div class="ibox-content breadcrumbs2">
