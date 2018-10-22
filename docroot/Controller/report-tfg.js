@@ -17,6 +17,7 @@ var getDataFn = function() {
 	var organization = $("#organization").val()==null ? '' : $("#organization").val().toString();
 	var EmpName_id= $("#EmpName_id").val();
 	var Position_id= $("#Position_id").val();
+	var FormName= $("#FormName").val();
 	var output_type = $("#output_type").val();
 	var parameter = {};
 	var template_name ="";
@@ -34,7 +35,8 @@ var getDataFn = function() {
 //				param_period: AppraisalPeriod,
 //				level_id: "",
 				level_org_id: AppraisalOrgLevel,
-				appraisal_type_id: appraisalType
+				appraisal_type_id: appraisalType,
+				appraisal_Form_id : FormName
 			  };
 	}
 	if(appraisalType == 2){
@@ -46,7 +48,8 @@ var getDataFn = function() {
 				emp_id: EmpName_id,
 				level_id: AppraisalEmpLevel,
 				level_org_id: AppraisalOrgLevel,
-				appraisal_type_id: appraisalType
+				appraisal_type_id: appraisalType,
+				appraisal_form_id : FormName
 			  };
 	}
 	
@@ -301,6 +304,31 @@ var refreshMultiOrganization = function() {
 	$('input[name=multiselect_organization]').css({'margin-bottom':'5px'});
 }
 
+var dropDrowAppraisalFormNameFn = function(id){
+
+	$.ajax({
+		url:restfulURL+"/"+serviceName+"/public/appraisal_form",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+//		data:{"appraisal_form_id": $("#FormName").val()},
+		success:function(data){
+			var htmlOption="";
+			htmlOption+="<option value=''>All Form</option>";
+			$.each(data,function(index,indexEntry){
+
+				if(id==indexEntry['appraisal_form_id']){
+					htmlOption+="<option selected='selected' value="+indexEntry['appraisal_form_id']+">"+indexEntry['appraisal_form_name']+"</option>";
+				}else{
+					htmlOption+="<option value="+indexEntry['appraisal_form_id']+">"+indexEntry['appraisal_form_name']+"</option>";
+				}
+			});
+			$("#FormName").html(htmlOption);
+		}
+	});
+	
+}
 
 
 $(document).ready(function() {
@@ -371,7 +399,13 @@ $(document).ready(function() {
 //      dropDrowPeriodListFn($(this).val());
     	console.log("Year");
     });
-		
+    
+    dropDrowAppraisalFormNameFn();
+    $("#FormName").change(function() {
+    	clearParamSearch(dataClearParam); // in cMain.js
+    	
+    });
+    
     appraisalTypeFn();
     $("#appraisalType").change(function() {
       if ($("#appraisalType").val() == 1) {

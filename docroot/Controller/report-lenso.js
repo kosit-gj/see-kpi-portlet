@@ -16,6 +16,7 @@ var getDataFn = function() {
 	var AppraisalOrgLevel= $("#AppraisalOrgLevel").val();
 	var organization = $("#organization").val();
 	var EmpName_id= $("#EmpName_id").val();
+	var FormName= $("#FormName").val();
 	var Position_id= $("#Position_id").val();
 	var output_type = $("#output_type").val();
 	var parameter = {};
@@ -26,7 +27,8 @@ var getDataFn = function() {
 		parameter = {
 				param_org: organization,
 				param_period: AppraisalPeriod,
-				param_level_org: AppraisalOrgLevel
+				param_level_org: AppraisalOrgLevel,
+				appraisal_form_id : FormName
 			  };
 	}
 	
@@ -286,6 +288,31 @@ var dropDrowOrgFn = function(appraisalLevelId,id){
 		}
 	});
 }
+var dropDrowAppraisalFormNameFn = function(id){
+
+	$.ajax({
+		url:restfulURL+"/"+serviceName+"/public/appraisal_form",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+//		data:{"appraisal_form_id": $("#FormName").val()},
+		success:function(data){
+			var htmlOption="";
+			htmlOption+="<option value=''>All Form</option>";
+			$.each(data,function(index,indexEntry){
+
+				if(id==indexEntry['appraisal_form_id']){
+					htmlOption+="<option selected='selected' value="+indexEntry['appraisal_form_id']+">"+indexEntry['appraisal_form_name']+"</option>";
+				}else{
+					htmlOption+="<option value="+indexEntry['appraisal_form_id']+">"+indexEntry['appraisal_form_name']+"</option>";
+				}
+			});
+			$("#FormName").html(htmlOption);
+		}
+	});
+	
+}
 
 
 
@@ -355,6 +382,12 @@ $(document).ready(function() {
     dropDrowYearListFn();
     $("#AppraisalYear").change(function() {
       dropDrowPeriodListFn($(this).val());
+    });
+    
+    dropDrowAppraisalFormNameFn();
+    $("#FormName").change(function() {
+    	clearParamSearch(dataClearParam); // in cMain.js
+    	
     });
 		
     appraisalTypeFn();

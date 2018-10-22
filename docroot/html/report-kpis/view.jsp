@@ -712,6 +712,13 @@ background-color:#71cccc !important;
                     <input data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="position"/>" class="form-control input-sm searchAdvanceText span12" placeholder="<liferay-ui:message key="position"/>" type="text" id="Position" name="Position" />
                     <input class="form-control input-sm" id="Position_id" name="Position_id" value="" type="hidden">
                   </div>
+                  
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select id="FormName" name="FormName" data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="From-Name"/>" class="input form-control input-sm span12">
+                      <option>All Form</option>
+                    </select>
+                  </div>
+                  
                   <div class="form-group pull-left span3" style="margin-left: 5px">
 					<select name="output_type" id="output_type" class="input form-control input-sm span12""title="" data-toggle="tooltip" style="cursor: pointer;"data-original-title="<liferay-ui:message key="output-type"/>">
 							<option value="pdf">PDF</option>
