@@ -971,7 +971,7 @@ cursor: not-allowed !important;
 				</div>
 				<div class="modal-footer">
 					<div align="center">
-						<button class="btn btn-success" id="btnConfirmOK" type="button">
+						<button class="btn btn-success" id="btnConfirmYes" type="button">
 							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
 						</button>
 						<button data-dismiss="modal" class="btn btn-danger" id="btnConfirmNo" type="button"> <i class="fa fa-times-circle"></i>&nbsp;No </button>

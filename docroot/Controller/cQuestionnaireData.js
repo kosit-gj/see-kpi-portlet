@@ -28,34 +28,36 @@ globalDataTemp['tempAutocompleteStore']={};
 
 globalDataTemp['tempTemplateStore']=[];
 
+globalDataTemp['tempAutocompleteStoreName'] = "";
+
 var generateNextFormFn = function(data,type) {
 	$("#confrimModalNextAssign").modal({
 		"backdrop" : setModalPopup[0],
 		"keyboard" : setModalPopup[1]
 	});
 	
-	$("#confrimModalNextAssign").off("click","#btnConfirmOK");
-	$("#confrimModalNextAssign").on("click","#btnConfirmOK",function(){
+	$("#confrimModalNextAssign").off("click","#btnConfirmYes");
+	$("#confrimModalNextAssign").on("click","#btnConfirmYes",function(){
 		$("#confrimModalNextAssign").modal('hide');
 		clearFn();
 		$("#id").val(data.next_form.data_header_id);
 		$("#action").val("edit");
 		$("#action_modal").val(data.next_form.edit_flag);
-		
-		console.log($("#id").val());
-		console.log($("#action").val());
-		console.log($("#action_modal").val());
-		
 		$("#modalTitleRole").html(data.next_form.data.head.questionaire_name);
 		generateQuestionaireFormFn(data.next_form.data);
 		generateStageFn(data.next_form.data.stage,data.next_form.data.current_stage,data.next_form.data.to_stage);
-//		$("html, body").animate({ scrollTop: 0 }, "slow");
+		if(type=='update') {
+			getDataFn();
+		}
+		callFlashSlide("Save.");
+		$('.modal-body').animate({ scrollTop: 0 }, "slow");
 	});
 	
 	$("#confrimModalNextAssign").off("click","#btnConfirmNo");
 	$("#confrimModalNextAssign").on("click","#btnConfirmNo",function(){
 		$("#confrimModalNextAssign").modal('hide');
 		$('#modalQuestionaireData').modal('hide');
+		callFlashSlide("Update Successfully.");
 		if(type=='update') {
 			getDataFn();
 		}
@@ -241,6 +243,7 @@ var clearFn = function() {
 	$("#action").val("add");
 	$("#action_modal").val("");
 //	$(".btnModalClose").click();
+	$("#slideStageHistory").hide();
 
 	
 }
@@ -662,7 +665,8 @@ var scriptAutocompleteStoreNameFn  = function (){
                             return {
                             	label: item.customer_name+" ("+item.customer_code+")",
                                 value: item.customer_name+" ("+item.customer_code+")",
-                                data_id :item.customer_id
+                                data_id :item.customer_id,
+                                cus_name: item.customer_name
                             };
                         }));
 					
@@ -682,6 +686,7 @@ var scriptAutocompleteStoreNameFn  = function (){
 			$(el).next().val(ui.item.data_id);
             globalDataTemp['tempAutocompleteStore'][label]=ui.item.value;
             globalDataTemp['tempAutocompleteStore'][storeId]=ui.item.data_id;
+            globalDataTemp['tempAutocompleteStoreName'] = ui.item.cus_name;
             return false;
         },change: function(e, ui) {  
         	var el = e.target;
@@ -693,6 +698,7 @@ var scriptAutocompleteStoreNameFn  = function (){
 				$(el).next().val(ui.item.data_id);
 			} else {
 				$(el).next().val("");
+				globalDataTemp['tempAutocompleteStoreName'] = "";
 			}
         	
          }
@@ -1263,7 +1269,7 @@ var generateStageFn = function(stage,current_stage,to_stage) {
 	$.each(stage,function(index,indexEntry){
 	
 		TableStageHTML+="<tr >";
-		TableStageHTML+="	<td>"+indexEntry['created_by']+"</td>";
+		TableStageHTML+="	<td>"+indexEntry['customer_name']+"</td>";
 		TableStageHTML+="	<td>"+notNullTextFn(indexEntry['remark'])+"</td>";
 		TableStageHTML+="	<td>"+indexEntry['created_dttm']+"</td>";
 		TableStageHTML+="	<td>"+indexEntry['from_action']+"</td>";
@@ -1542,7 +1548,6 @@ var generateAnswerFormCommentFn = function(data,question_type) {
 };
 
 var updateFn = function(element){
-	
 	var data_header_id = $("#id").val();
 	//var questionaire_id = $("#search_questionaire_type_id").val();
 	var emp_snapshot_id = $("#modal_empsnapshot_id").val();
@@ -1556,6 +1561,7 @@ var updateFn = function(element){
 	stage.from_stage_id =  $(element).attr("current_stage_id");
 	stage.to_stage_id =  $(element).attr("to_stage");
 	stage.remark =  $("#modal_remark").val();
+	stage.customer_name = globalDataTemp['tempAutocompleteStoreName'];
 
 
 	$.each($("#accordionListQuestionaireData").children('div').get(),function(index,indexEntry){
@@ -1701,7 +1707,7 @@ var updateFn = function(element){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success : function(data) {
 			if (data['status'] == "200") {
-				callFlashSlide("Update Successfully.");
+//				callFlashSlide("Update Successfully.");
 				generateNextFormFn(data,'update');
 			}else if (data['status'] == "400") {
 				//console.log(data);
@@ -1737,6 +1743,7 @@ var insertFn = function(element){
 	stage.from_stage_id =  $(element).attr("current_stage_id");
 	stage.to_stage_id =  $(element).attr("to_stage");
 	stage.remark =  $("#modal_remark").val();
+	stage.customer_name = globalDataTemp['tempAutocompleteStoreName'];
 
 
 	$.each($("#accordionListQuestionaireData").children('div').get(),function(index,indexEntry){
@@ -1878,7 +1885,7 @@ var insertFn = function(element){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success : function(data) {
 			if (data['status'] == "200") {
-				callFlashSlide("Insert Successfully.");
+//				callFlashSlide("Insert Successfully.");
 				generateNextFormFn(data,'insert');
 //				$('#modalQuestionaireData').modal('hide');
 				//getDataFn();

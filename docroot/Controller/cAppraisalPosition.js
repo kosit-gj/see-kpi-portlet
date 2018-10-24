@@ -88,6 +88,8 @@ $(document).ready(function(){
         });
        
     	//Autocomplete From Position End
+    	
+    	$("#position_code").prop("disabled", true);
 	 }
     });
  
