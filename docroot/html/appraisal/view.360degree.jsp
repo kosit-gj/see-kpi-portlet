@@ -29,6 +29,7 @@ plid = layout.getPlid();
 <input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
 
 <style>
+
  /* Large desktop Start#####################################*/
  @media (min-width: 1200px) {
 
@@ -706,395 +707,385 @@ background-color:#71cccc !important;
 
 <body class=" gray-bg ">
 
-  <div class='row-fluid'>
-    <div id="slide_status" class='span12'>
-      <div id="btnCloseSlide">×</div>
-      <div id="slide_status_area"></div>
-    </div>
-  </div>
+	<div class='row-fluid'>
+		<div id="slide_status" class='span12'>
+			<div id="btnCloseSlide">×</div>
+			<div id="slide_status_area"></div>
+		</div>
+	</div>
 
 
 	<div class="app_url_hidden">
 		<div class="container1">
 			<div id="includePage" class="ng-view ng-scope">
-			<!--
-				<h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Appraisal</span> </h2>
- 			-->
 				<div class="row-fluid">
+				
 					<!-- start--row-fluid -->
-
 					<div class="span12">
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<div class='titlePanel'><liferay-ui:message key="advanced-search"/></div>
+								<div class='titlePanel'>
+									<liferay-ui:message key="advanced-search" />
+								</div>
 							</div>
 
 							<div class="ibox-content breadcrumbs2">
+								<div class="row-fluid" id='advanceSearchAppraisal'>
+								
+									<div class="form-group pull-left span3"
+										style="margin-left: 5px">
+										<select data-toggle="tooltip" title=""
+											data-original-title="<liferay-ui:message key="year"/>"
+											class="input form-control input-sm span12" id="AppraisalYear"
+											name="AppraisalYear">
+										</select>
+									</div>
 
-                <div class="row-fluid" id='advanceSearchAppraisal'>
+									<div class="form-group pull-left span3"
+										style="margin-left: 5px">
+										<select data-toggle="tooltip" title=""
+											data-original-title="<liferay-ui:message key="period"/>"
+											class="input form-control input-sm span12"
+											id="AppraisalPeriod" name="AppraisalPeriod">
+											<option>All Appraisal Period</option>
+										</select>
+									</div>
 
-                  <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="year"/>" class="input form-control input-sm span12"
-                      id="AppraisalYear" name="AppraisalYear">
-                    </select>
-                  </div>
+									<div class="form-group pull-left span3"
+										style="margin-left: 5px">
+										<select id="appraisalType" name="appraisalType"
+											data-toggle="tooltip" title=""
+											data-original-title="<liferay-ui:message key="entity-type"/>"
+											class="input form-control input-sm span12">
+										</select>
+									</div>
 
-                  <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="period"/>" class="input form-control input-sm span12"
-                      id="AppraisalPeriod" name="AppraisalPeriod">
-                      <option>All Appraisal Period</option>
-                    </select>
-                  </div>
+									<div class="form-group pull-left span3"
+										style="margin-left: 5px">
+										<select id="AppraisalEmpLevel" name="AppraisalEmpLevel"
+											data-toggle="tooltip" title=""
+											data-original-title="<liferay-ui:message key="employee-level"/>"
+											class="input form-control input-sm span12">
+											<option>All Level</option>
+										</select>
+									</div>
 
-                  <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select id="appraisalType" name="appraisalType" data-toggle="tooltip"
-                      title="" data-original-title="<liferay-ui:message key="entity-type"/>" class="input form-control input-sm span12">
-                    </select>
-                  </div>
+									<div class="form-group pull-left span3"
+										style="margin-left: 5px">
+										<select id="AppraisalOrgLevel" name="AppraisalOrgLevel"
+											data-toggle="tooltip" title=""
+											data-original-title="<liferay-ui:message key="organization-level"/>"
+											class="input form-control input-sm span12">
+											<option>All Level</option>
+										</select>
+									</div>
 
-                  <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select id="AppraisalEmpLevel" name="AppraisalEmpLevel" data-toggle="tooltip"
-                      title="" data-original-title="<liferay-ui:message key="employee-level"/>" class="input form-control input-sm span12">
-                      <option>All Level</option>
-                    </select>
-                  </div>
-                  
-                  <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip"
-                      title="" data-original-title="<liferay-ui:message key="organization-level"/>" class="input form-control input-sm span12">
-                      <option>All Level</option>
-                    </select>
-                  </div>
+									<div class="form-group pull-left span3"
+										style="margin-left: 5px">
+										<select data-toggle="tooltip" title=""
+											data-original-title="<liferay-ui:message key="organization"/>"
+											class="input form-control input-sm span12" id="organization"
+											name="organization">
+											<option>All Organization</option>
+										</select>
+									</div>
 
-                  <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="organization"/>"
-                      class="input form-control input-sm span12" id="organization" name="organization">
-                      <option>All Organization</option>
-                    </select>
-                  </div>
-                  
-                  <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <input data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="employee-name"/>"
-                      class="form-control input-sm searchAdvanceText span12" placeholder="<liferay-ui:message key="employee-name"/>"
-                      type="text" id="EmpName" name="EmpName" />
-                      <input class="form-control input-sm"
-											id="EmpName_id" name="EmpName_id" value="" type="hidden">
-                  </div>
+									<div class="form-group pull-left span3"
+										style="margin-left: 5px">
+										<input data-toggle="tooltip" title=""
+											data-original-title="<liferay-ui:message key="employee-name"/>"
+											class="form-control input-sm searchAdvanceText span12"
+											placeholder="<liferay-ui:message key="employee-name"/>"
+											type="text" id="EmpName" name="EmpName" /> <input
+											class="form-control input-sm" id="EmpName_id"
+											name="EmpName_id" value="" type="hidden">
+									</div>
 
-                  <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <input data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="position"/>" class="form-control input-sm searchAdvanceText span12"
-                      placeholder="<liferay-ui:message key="position"/>" type="text" id="Position" name="Position" />
-                      <input class="form-control input-sm" id="Position_id"
+									<div class="form-group pull-left span3"
+										style="margin-left: 5px">
+										<input data-toggle="tooltip" title=""
+											data-original-title="<liferay-ui:message key="position"/>"
+											class="form-control input-sm searchAdvanceText span12"
+											placeholder="<liferay-ui:message key="position"/>"
+											type="text" id="Position" name="Position" /> <input
+											class="form-control input-sm" id="Position_id"
 											name="Position_id" value="" type="hidden">
-                  </div>
+									</div>
 
-                  <!-- Cancel by SeeKPI(TFG) Defect No.263
-                  <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select id="AppraisalLevel" name="AppraisalLevel" data-toggle="tooltip" title="" data-original-title="Level" class="input form-control input-sm span12" >
-                      <option>All Level</option>
-                      <option>ระดับบริหาร</option>
-                      <option>ระดับการจัดการ</option>
-                      <option>ระดับบังคับบัญชา</option>
-                      <option>ระดับเจ้าหน้าที่</option>
-                      <option>HR</option>
-                    </select>
-                  </div> -->
+									<div class="form-group pull-left span3"
+										style="margin-left: 5px">
+										<select data-toggle="tooltip" title=""
+											data-original-title="<liferay-ui:message key="form_type"/>"
+											class="input form-control input-sm span12" id="form_type"
+											name="form_type">
+											<option>All Form</option>
+										</select>
+									</div>
 
-
-
-                  <div class="form-group span3 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
-                    <button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance">
-                      <i class="fa fa-search"></i>&nbsp;<liferay-ui:message key="search"/>
-                    </button>
-                    &nbsp;
-                  </div>
-
-                </div>
-
-
+									<div class="form-group span3 m-b-none pull-right"
+										style="margin-left: 5px; text-align: right;">
+										<button type="button" class="btn btn-info input-sm"
+											name="btnSearchAdvance" id="btnSearchAdvance">
+											<i class="fa fa-search"></i>&nbsp;
+											<liferay-ui:message key="search" />
+										</button>
+										&nbsp;
+									</div>
 
 								</div>
-
 							</div>
-							<!-- content end -->
-						</div>
-
-					</div>
-
-				</div>
-				<!-- end--row-fluid -->
-
-				<div class="row-fluid search_result" >
-					<div class="span12">
-						<div class="ibox-title">
-							<div class='titlePanel'><liferay-ui:message key="kpi-result-list"/></div>
-						</div>
-
-
-						<div class="ibox-content">
-
-							<!-- start table -->
-							<!-- pagination start -->
-                                    	<div class="row-fluid">
-	                                    	<div class="span6 pagianation_area" >
-												<div class="pagination_top pagination"></div>
-	                                    	</div>
-
-		                                    <div class="span6 object-right paging-text">
-
-		                                    	<div class='pagingDropdown'>
-		                                 			<select  id='countPaginationTop'  class="form-control input-sm countPagination">
-					                                     <option>10</option>
-					                                     <option>20</option>
-					                                     <option>50</option>
-					                                     <option>100</option>
-					                                 </select>
-
-		                                 		</div>
-												<div class='pagingText'><liferay-ui:message key="results-per-page"/></div>
-
-		                                    </div>
-
-                                    	</div>
-                                    	 <!-- pagination end -->
-
-
-
-
-
-
-							<div id="listAppraisal"></div>
-
-							<!-- pagination start -->
-							<div class="row-fluid">
-	                                    	<div class="span6 pagianation_area">
-
-												  <p class="pagination_bottom pagination"></p>
-
-	                                    	</div>
-
-		                                    <div class="span6 object-right paging-text">
-		                                    	<div class='pagingDropdown'>
-		                                 			<select  id='countPaginationBottom'  class="form-control input-sm countPagination">
-					                                     <option>10</option>
-					                                     <option>20</option>
-					                                     <option>50</option>
-					                                     <option>100</option>
-					                                 </select>
-			                                 	</div>
-												<div class='pagingText'><liferay-ui:message key="results-per-page"/></div>
-		                                    </div>
-
-                                    	</div>
-							<!-- pagination end -->
-							<!-- end table -->
 						</div>
 						<!-- content end -->
 					</div>
 				</div>
-
-
 			</div>
+			<!-- end--row-fluid -->
+			
+
+			<div class="row-fluid search_result">
+				<div class="span12">
+					<div class="ibox-title">
+						<div class='titlePanel'>
+							<liferay-ui:message key="kpi-result-list" />
+						</div>
+					</div>
+
+
+					<div class="ibox-content">
+
+						<!-- start table -->
+						<!-- pagination start -->
+						<div class="row-fluid">
+							<div class="span6 pagianation_area">
+								<div class="pagination_top pagination"></div>
+							</div>
+
+							<div class="span6 object-right paging-text">
+
+								<div class='pagingDropdown'>
+									<select id='countPaginationTop'
+										class="form-control input-sm countPagination">
+										<option>10</option>
+										<option>20</option>
+										<option>50</option>
+										<option>100</option>
+									</select>
+
+								</div>
+								<div class='pagingText'>
+									<liferay-ui:message key="results-per-page" />
+								</div>
+
+							</div>
+
+						</div>
+						<!-- pagination end -->
+
+
+
+
+
+
+						<div id="listAppraisal"></div>
+
+						<!-- pagination start -->
+						<div class="row-fluid">
+							<div class="span6 pagianation_area">
+
+								<p class="pagination_bottom pagination"></p>
+
+							</div>
+
+							<div class="span6 object-right paging-text">
+								<div class='pagingDropdown'>
+									<select id='countPaginationBottom'
+										class="form-control input-sm countPagination">
+										<option>10</option>
+										<option>20</option>
+										<option>50</option>
+										<option>100</option>
+									</select>
+								</div>
+								<div class='pagingText'>
+									<liferay-ui:message key="results-per-page" />
+								</div>
+							</div>
+
+						</div>
+						<!-- pagination end -->
+						<!-- end table -->
+					</div>
+					<!-- content end -->
+				</div>
+			</div>
+
+
+		</div>
 	</div>
 
-	<!-- Modal Start Appraisal -->
 
+	<!-- Modal Start Appraisal -->
 	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalAppraisal"
 		class="modal inmodal large" style="display: none;">
-		<div class="modal-dialog " >
+		<div class="modal-dialog ">
 			<div class="modal-content animated bounceInRight">
+			
 				<div class="modal-header">
 					<button data-dismiss="modal" class="close" type="button">
 						<span aria-hidden="true">×</span><span class="sr-only"></span>
 					</button>
-					<!-- <i class="fa fa-laptop modal-icon"></i> -->
-					<h4 class="modal-title" id="modalTitleRole"><liferay-ui:message key="kpi-result"/></h4>
-					<!--
-                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
-                 -->
+					<h4 class="modal-title" id="modalTitleRole">
+						<liferay-ui:message key="kpi-result" />
+					</h4>
 				</div>
+				
 				<div class="modal-body">
-					<!-- content start -->
-					<!--
-					<h2>
-						<i class="fa fa fa-pencil-square-o icon-title"></i> <span
-							id="modalDescription">Appraisal</span>
-					</h2>
-					<hr>
-					 -->
-
 					<!-- -------------From Employee Start------------- -->
 					<div class="row-fluid">
-					<div class="span12">
-						<div class="ibox float-e-margins">
-							<div class="ibox-title">
-								<div class='titlePanel' id='titlePanelInformation'><liferay-ui:message key="employee-information"/></div>
-							</div>
-							<!-- ibox-content-radius -->
-							<div class="ibox-content ">
-								<div class="container-fluid"  id='empInformation'>
-									<div class='hasWeightGrandTotalArea'>
-										<div class="span10 ">
-
-												<div class="row-fluid">
-
-													<label class="span3 textInfo"><liferay-ui:message key="employee-code"/>:</label>
-													<label class="span3  textData txtEmpCode" id="txtEmpCode"></label>
-													<label class="span3 textInfo"><liferay-ui:message key="employee-name"/>:</label>
-													<label class="span3  textData txtEmpName" id="txtEmpName"></label>
-												</div>
-												<div class="row-fluid">
-													<label class="span3 textInfo"><liferay-ui:message key="position"/>:</label>
-													<label class="span3  textData txtPosition" id="txtPosition"></label>
-													<label class="span3 textInfo"><liferay-ui:message key="organization"/>:</label>
-													<label class="span3  textData txtOrgName" id="txtOrgName"></label>
-												</div>
-												<div class="row-fluid">
-
-													<label class="span3 textInfo"><liferay-ui:message key="chief-employee-code"/>:</label>
-													<label class="span3  textData txtChiefEmpCode" id="txtChiefEmpCode"></label>
-													<label class="span3 textInfo"><liferay-ui:message key="chief-employee-name"/>:</label>
-													<label class="span3  textData txtChiefEmpName" id="txtChiefEmpName"></label>
-												</div>
-
-												<div class="row-fluid">
-													<label class="span3 textInfo"><liferay-ui:message key="period"/>:</label>
-													<label class="span3  textData txtPeriod"  id="txtPeriod"></label>
-												</div>
-										</div>
-										<div class="span2 grandTototalWeightArea" id='grandTototalWeightArea'>
-												<label class="span12 p-t-xxsg text-center "><liferay-ui:message key="grand-total"/></label>
-												<label class="span12 p-t-xxsg text-center txtGrandTotalWeigh" id="txtGrandTotalWeigh" style="font-size: 300%;"></label>
-
-										</div>
-
-
+						<div class="span12">
+							<div class="ibox float-e-margins">
+								<div class="ibox-title">
+									<div class='titlePanel' id='titlePanelInformation'>
+										<liferay-ui:message key="employee-information" />
 									</div>
-
-									<div class='noWeightGrandTotalArea'>
-									<!--  -->
-									<div class="span12">
-
-												<div class="row-fluid">
-
-													<label class="span3 textInfo"><liferay-ui:message key="employee-code"/>:</label>
-													<label class="span3  textData txtEmpCode" id="txtEmpCode"></label>
-													<label class="span3 textInfo"><liferay-ui:message key="employee-name"/>:</label>
-													<label class="span3  textData txtEmpName" id="txtEmpName"></label>
-												</div>
-												<div class="row-fluid">
-													<label class="span3 textInfo"><liferay-ui:message key="position"/>:</label>
-													<label class="span3  textData txtPosition" id="txtPosition"></label>
-													<label class="span3 textInfo"><liferay-ui:message key="organization"/>:</label>
-													<label class="span3  textData txtOrgName" id="txtOrgName"></label>
-												</div>
-												<div class="row-fluid">
-
-													<label class="span3 textInfo"><liferay-ui:message key="chief-employee-code"/>:</label>
-													<label class="span3  textData txtChiefEmpCode" id="txtChiefEmpCode"></label>
-													<label class="span3 textInfo"><liferay-ui:message key="chief-employee-name"/>:</label>
-													<label class="span3  textData txtChiefEmpName" id="txtChiefEmpName"></label>
-												</div>
-
-												<div class="row-fluid">
-													<label class="span3 textInfo"><liferay-ui:message key="period"/>:</label>
-													<label class="span3  textData txtPeriod"  id="txtPeriod"></label>
-												</div>
-										</div>
-
-									<!--  -->
-									</div>
-
 								</div>
-
-								<div class="container-fluid"  id='orgInformation'>
-
-									<div class='hasWeightGrandTotalArea'>
-
+								<!-- ibox-content-radius -->
+								<div class="ibox-content ">
+									<div class="container-fluid" id='empInformation'>
+										<div class='hasWeightGrandTotalArea'>
 											<div class="span10 ">
-
-													<div class="row-fluid">
-
-														<label class="span3 textInfo"><liferay-ui:message key="organization-code"/>:</label>
-														<label class="span3  textData txtOrgCodeOrg" id="txtOrgCodeOrg"></label>
-														<label class="span3 textInfo"><liferay-ui:message key="organization-name"/>:</label>
-														<label class="span3  textData txtOrgNameOrg" id="txtOrgNameOrg"></label>
-													</div>
-													<div class="row-fluid">
-														<label class="span3 textInfo"><liferay-ui:message key="parent-organization"/>:</label>
-														<label class="span3  textData txtParentOrganizationOrg" id="txtParentOrganizationOrg"></label>
-														<label class="span3 textInfo"><liferay-ui:message key="period"/>:</label>
-														<label class="span3  textData txtPeriodOrg"  id="txtPeriodOrg"></label>
-													</div>
-
+												<div class="row-fluid">
+													<label class="span3 textInfo"><liferay-ui:message key="employee-code" />:</label>
+													<label class="span3 textData txtEmpCode" id="txtEmpCode"></label>
+													<label class="span3 textInfo"><liferay-ui:message key="employee-name" />:</label>
+													<label class="span3 textData txtEmpName" id="txtEmpName"></label>
+												</div>
+												<div class="row-fluid">
+													<label class="span3 textInfo"><liferay-ui:message key="position" />:</label> 
+													<label class="span3 textData txtPosition" id="txtPosition"></label>
+													<label class="span3 textInfo"><liferay-ui:message key="organization" />:</label> 
+													<label class="span3 textData txtOrgName" id="txtOrgName"></label>
+												</div>
+												<div class="row-fluid">
+													<label class="span3 textInfo"><liferay-ui:message key="chief-employee-code" />:</label> 
+													<label class="span3 textData txtChiefEmpCode" id="txtChiefEmpCode"></label> 
+													<label class="span3 textInfo"><liferay-ui:message key="chief-employee-name" />:</label> 
+													<label class="span3 textData txtChiefEmpName" id="txtChiefEmpName"></label>
+												</div>
+												<div class="row-fluid">
+													<label class="span3 textInfo"><liferay-ui:message key="period" />:</label> 
+													<label class="span3 textData txtPeriod" id="txtPeriod"></label>
+													<label class="span3 textInfo"><liferay-ui:message key="form_type"/>:</label>
+													<label class="span3 textData txtFormType"  id="txtFormType"></label>
+												</div>
 											</div>
 											<div class="span2 grandTototalWeightArea" id='grandTototalWeightArea'>
-													<label class="span12 p-t-xxsg text-center "><liferay-ui:message key="grand-total"/></label>
-													<label class="span12 p-t-xxsg text-center txtGrandTotalWeighOrg" id="txtGrandTotalWeighOrg" style="font-size: 300%;"></label>
-
+												<label class="span12 p-t-xxsg text-center "><liferay-ui:message key="grand-total" /></label> 
+												<label class="span12 p-t-xxsg text-center txtGrandTotalWeigh" id="txtGrandTotalWeigh" style="font-size: 300%;"></label>
 											</div>
+										</div>
 
+										<div class='noWeightGrandTotalArea'>
+											<div class="span12">
+												<div class="row-fluid">
+													<label class="span3 textInfo"><liferay-ui:message key="employee-code" />:</label> 
+													<label class="span3 textData txtEmpCode" id="txtEmpCode"></label>
+													<label class="span3 textInfo"><liferay-ui:message key="employee-name" />:</label> 
+													<label class="span3 textData txtEmpName" id="txtEmpName"></label>
+												</div>
+												<div class="row-fluid">
+													<label class="span3 textInfo"><liferay-ui:message key="position" />:</label> 
+													<label class="span3 textData txtPosition" id="txtPosition"></label>
+													<label class="span3 textInfo"><liferay-ui:message key="organization" />:</label> 
+													<label class="span3 textData txtOrgName" id="txtOrgName"></label>
+												</div>
+												<div class="row-fluid">
+													<label class="span3 textInfo"><liferay-ui:message key="chief-employee-code" />:</label> 
+													<label class="span3 textData txtChiefEmpCode" id="txtChiefEmpCode"></label>
+													<label class="span3 textInfo"><liferay-ui:message key="chief-employee-name" />:</label> 
+													<label class="span3 textData txtChiefEmpName" id="txtChiefEmpName"></label>
+												</div>
+												<div class="row-fluid">
+													<label class="span3 textInfo"><liferay-ui:message key="period" />:</label> 
+													<label class="span3 textData txtPeriod"id="txtPeriod"></label>
+													<label class="span3 textInfo"><liferay-ui:message key="form_type"/>:</label>
+													<label class="span3 textData txtFormType" id="txtFormType"></label>
+												</div>
+											</div>
+										</div>
 									</div>
 
-									<div class='noWeightGrandTotalArea'>
+									<div class="container-fluid" id='orgInformation'>
+										<div class='hasWeightGrandTotalArea'>
+											<div class="span10 ">
+												<div class="row-fluid">
+													<label class="span3 textInfo"><liferay-ui:message key="organization-code" />:</label> 
+													<label class="span3 textData txtOrgCodeOrg" id="txtOrgCodeOrg"></label>
+													<label class="span3 textInfo"><liferay-ui:message key="organization-name" />:</label> 
+													<label class="span3 textData txtOrgNameOrg" id="txtOrgNameOrg"></label>
+												</div>
+												<div class="row-fluid">
+													<label class="span3 textInfo"><liferay-ui:message key="parent-organization" />:</label> 
+													<label class="span3 textData txtParentOrganizationOrg" id="txtParentOrganizationOrg"></label> 
+													<label class="span3 textInfo"><liferay-ui:message key="period" />:</label> 
+													<label class="span3 textData txtPeriodOrg" id="txtPeriodOrg"></label>
+												</div>
+												<div class="row-fluid">
+													<label class="span3 textInfo"><liferay-ui:message key="form_type"/>:</label>
+													<label class="span3  textData txtFormTypeOrg"  id="txtFormTypeOrg"></label>
+												</div>
+											</div>
+											<div class="span2 grandTototalWeightArea" id='grandTototalWeightArea'>
+												<label class="span12 p-t-xxsg text-center "><liferay-ui:message key="grand-total" /></label> 
+												<label class="span12 p-t-xxsg text-center txtGrandTotalWeighOrg" id="txtGrandTotalWeighOrg" style="font-size: 300%;"></label>
+											</div>
+										</div>
 
+										<div class='noWeightGrandTotalArea'>
 											<div class="span12 ">
-
-													<div class="row-fluid">
-
-														<label class="span3 textInfo"><liferay-ui:message key="organization-code"/>:</label>
-														<label class="span3 textInfo textData txtOrgCodeOrg" id="txtOrgCodeOrg"></label>
-														<label class="span3 textInfo"><liferay-ui:message key="organization-name"/>:</label>
-														<label class="span3 textInfo textData txtOrgNameOrg" id="txtOrgNameOrg"></label>
-													</div>
-													<div class="row-fluid">
-														<label class="span3 textInfo"><liferay-ui:message key="parent-organization"/>:</label>
-														<label class="span3 textInfo textData txtParentOrganizationOrg" id="txtParentOrganizationOrg"></label>
-														<label class="span3 textInfo"><liferay-ui:message key="period"/>:</label>
-														<label class="span3 textInfo textData txtPeriodOrg"  id="txtPeriodOrg"></label>
-													</div>
-
+												<div class="row-fluid">
+													<label class="span3 textInfo"><liferay-ui:message key="organization-code" />:</label> 
+													<label class="span3 textInfo textData txtOrgCodeOrg"id="txtOrgCodeOrg"></label> 
+													<label class="span3 textInfo"><liferay-ui:message key="organization-name" />:</label> 
+													<label class="span3 textInfo textData txtOrgNameOrg" id="txtOrgNameOrg"></label>
+												</div>
+												<div class="row-fluid">
+													<label class="span3 textInfo"><liferay-ui:message key="parent-organization" />:</label> 
+													<label class="span3 textInfo textData txtParentOrganizationOrg" id="txtParentOrganizationOrg"></label> 
+													<label class="span3 textInfo"><liferay-ui:message key="period" />:</label> 
+													<label class="span3 textInfo textData txtPeriodOrg" id="txtPeriodOrg"></label>
+												</div>
+												<div class="row-fluid">
+													<label class="span3 textInfo"><liferay-ui:message key="form_type"/>:</label>
+													<label class="span3  textData txtFormTypeOrg"  id="txtFormTypeOrg"></label>
+												</div>
 											</div>
-
+										</div>
 									</div>
-
-
 								</div>
-
-
 							</div>
 						</div>
-
 					</div>
-
-				</div>
-				<!-- -------------From Employee Start------------- -->
-
-
-
+					<!-- -------------From Employee Start------------- -->
 
 
 
 					<!-- -------------From Appraisal Start------------- -->
 					<div class="row-fluid">
-					<div class="span12">
-						<div class="ibox float-e-margins">
-							<div class="ibox-title">
-								<div class='titlePanel'><liferay-ui:message key="kpi-result"/></div>
-							</div>
-
-							<div class="ibox-content ibox-content-radius">
-
-									<div id='appraisal_template_area'></div>
-
-
+						<div class="span12">
+							<div class="ibox float-e-margins">
+								<div class="ibox-title">
+									<div class='titlePanel'>
+										<liferay-ui:message key="kpi-result" />
+									</div>
 								</div>
+								<div class="ibox-content ibox-content-radius">
+									<div id='appraisal_template_area'></div>
+								</div>
+							</div>
 						</div>
-
 					</div>
-
-				</div>
-				<!-- -------------From Appraisal Start------------- -->
+					<!-- -------------From Appraisal Start------------- -->
 
 
 					<!-- content end -->
@@ -1115,75 +1106,90 @@ background-color:#71cccc !important;
 							 </div>
 						 </div>
 						  -->
-						 <div class="span3 ">
-							 <div class="form-group p-xxs">
-								 <label class="span4 p-t-xxs"><b><liferay-ui:message key="action"/>:</b></label>
-								 <div class="span8">
-									<select data-toggle="tooltip" title="" class="input form-control input-sm" id="actionToAssign" name="actionToAssign">
+						<div class="span3 ">
+							<div class="form-group p-xxs">
+								<label class="span4 p-t-xxs"><b><liferay-ui:message
+											key="action" />:</b></label>
+								<div class="span8">
+									<select data-toggle="tooltip" title=""
+										class="input form-control input-sm" id="actionToAssign"
+										name="actionToAssign">
 
 									</select>
-								 </div>
-							 </div>
-						 </div>
-						 <div class="span5 ">
-	            			<div class="form-group ">
-								 <label class="span3 p-t-xxs"><b><liferay-ui:message key="remark"/>:</b></label>
-								 <div class="span9">
-									 <input type='text' name='remark_footer' id='remark_footer' class='span12' value=''>
-								 </div>
-							 </div>
-	            		</div>
+								</div>
+							</div>
+						</div>
+						<div class="span5 ">
+							<div class="form-group ">
+								<label class="span3 p-t-xxs"><b><liferay-ui:message
+											key="remark" />:</b></label>
+								<div class="span9">
+									<input type='text' name='remark_footer' id='remark_footer'
+										class='span12' value=''>
+								</div>
+							</div>
+						</div>
 
 
-						  <div class="span4 offset0">
+						<div class="span4 offset0">
 
-							  	<button class="btn btn-success" type="button" id="btnSubmit"><liferay-ui:message key="submit"/></button>
-								<input type='hidden' id='emp_result_id' name='emp_result_id' value=''>
-								<button data-dismiss="modal" class="btn btn-danger btnCancle" type="button"><liferay-ui:message key="cancel"/></button>
+							<button class="btn btn-success" type="button" id="btnSubmit">
+								<liferay-ui:message key="submit" />
+							</button>
+							<input type='hidden' id='emp_result_id' name='emp_result_id'
+								value=''>
+							<button data-dismiss="modal" class="btn btn-danger btnCancle"
+								type="button">
+								<liferay-ui:message key="cancel" />
+							</button>
 
-						  </div>
+						</div>
 
 					</div>
 
-					<div class="row-fluid" style='text-align:left;'>
-            		<a href="#" id='slideUpDownStageHistory' style='display:none;'><liferay-ui:message key="work-flow-stage-history"/></a>
-            		<div id='slideStageHistory' style='display:none;'>
-            			<table class='table'>
-            				<thead>
-            					<tr style="white-space: nowrap;">
-            						<th  style='width:15%'><liferay-ui:message key="created-by"/></th>
-            						<th  style='width:15%'><liferay-ui:message key="created-datetime"/></th>
-            						<th  style='width:15%'><liferay-ui:message key="from-stage"/></th>
-            						<th  style='width:15%'><liferay-ui:message key="to-stage"/></th>
-            						<th  style='width:35%'><liferay-ui:message key="remark"/></th>
-            					</tr>
-            				</thead>
-            				<tbody id='listDataStageHistory'>
-            					<tr >
-            						<td>emp_code1</td>
-            						<td>2017-08-16 10:20:22</td>
-            						<td>HR</td>
-            						<td>Manager</td>
-            						<td>่Reject เนื่องจากไม่เหมาะสม</td>
-            					</tr>
-            					<tr >
-            						<td>emp_code1</td>
-            						<td>2017-08-16 10:20:22</td>
-            						<td>HR</td>
-            						<td>Manager</td>
-            						<td>่Reject เนื่องจากไม่เหมาะสม</td>
-            					</tr>
-            					<tr >
-            						<td>emp_code1</td>
-            						<td>2017-08-16 10:20:22</td>
-            						<td>HR</td>
-            						<td>Manager</td>
-            						<td>่Reject เนื่องจากไม่เหมาะสม</td>
-            					</tr>
-            				</tbody>
-            			</table>
-            		</div>
-            	</div>
+					<div class="row-fluid" style='text-align: left;'>
+						<a href="#" id='slideUpDownStageHistory' style='display: none;'><liferay-ui:message
+								key="work-flow-stage-history" /></a>
+						<div id='slideStageHistory' style='display: none;'>
+							<table class='table'>
+								<thead>
+									<tr style="white-space: nowrap;">
+										<th style='width: 15%'><liferay-ui:message
+												key="created-by" /></th>
+										<th style='width: 15%'><liferay-ui:message
+												key="created-datetime" /></th>
+										<th style='width: 15%'><liferay-ui:message
+												key="from-stage" /></th>
+										<th style='width: 15%'><liferay-ui:message key="to-stage" /></th>
+										<th style='width: 35%'><liferay-ui:message key="remark" /></th>
+									</tr>
+								</thead>
+								<tbody id='listDataStageHistory'>
+									<tr>
+										<td>emp_code1</td>
+										<td>2017-08-16 10:20:22</td>
+										<td>HR</td>
+										<td>Manager</td>
+										<td>่Reject เนื่องจากไม่เหมาะสม</td>
+									</tr>
+									<tr>
+										<td>emp_code1</td>
+										<td>2017-08-16 10:20:22</td>
+										<td>HR</td>
+										<td>Manager</td>
+										<td>่Reject เนื่องจากไม่เหมาะสม</td>
+									</tr>
+									<tr>
+										<td>emp_code1</td>
+										<td>2017-08-16 10:20:22</td>
+										<td>HR</td>
+										<td>Manager</td>
+										<td>่Reject เนื่องจากไม่เหมาะสม</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
 
 					<div class="alert alert-warning" id="information"
 						style="display: none;"></div>
@@ -1198,65 +1204,82 @@ background-color:#71cccc !important;
 
 
 
-<!-- Modal Phase Start -->
-<div aria-hidden="true" role="dialog" tabindex="-1" id="phaseModal" class="modal inmodal " style="display: none; margin-top: 0px;">
-    <div class="modal-dialog">
-    <div class="modal-content animated bounceInRight">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
-                <h5 class="modal-title"><liferay-ui:message key="phase"/></h5>
-            </div>
-            <div class="modal-body">
+	<!-- Modal Phase Start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="phaseModal"
+		class="modal inmodal " style="display: none; margin-top: 0px;">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only"></span>
+					</button>
+					<h5 class="modal-title">
+						<liferay-ui:message key="phase" />
+					</h5>
+				</div>
+				<div class="modal-body">
 
-<div style='margin-bottom:5px;'>
-<table style='width:100%'>
-	<tr>
-		<td style='width:100px; '><b><liferay-ui:message key="phase-name"/></b></td>
-		<td><input  type='text' name='phaseName' id='phaseName' placeholder='<liferay-ui:message key="phase-name"/>' class='input form-control input-sm-small span4' value=''></td>
-	</tr>
-	<tr>
-		<td ><b><liferay-ui:message key="is-active"/></b></td>
-		<td style='text-align:left;'><input type='checkbox' name='phaseIsActive' id='phaseIsActive' class='input form-control input-sm-small' value='0'></td>
-	</tr>
-</table>
-	<div align="right">
-	     <button class="btn btn-success" id="btnSavePhase" type="button">&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;<liferay-ui:message key="save"/>&nbsp;&nbsp;</button>&nbsp;&nbsp;
-	     <button class="btn btn-danger" id='btnCancelPhase' type="button"><i class="fa fa-times-circle"></i>&nbsp;<liferay-ui:message key="cancel"/></button>
-	</div>
-</div>
-<table class='table'>
-	<thead>
-		<tr style="white-space: nowrap;">
-			<th style='width:10%;'>
-			<b><liferay-ui:message key="no-dot"/></b>
-			</th>
-			<th style='width:30%;'>
-			<b><liferay-ui:message key="phase-name"/></b>
-			</th>
-			<th style='width:10%; text-align:center;'>
-			<b><liferay-ui:message key="is-active"/></b>
-			</th>
-			<th style='text-align:center; width:15%;'>
-			<b><liferay-ui:message key="manage"/></b>
-			</th>
-		</tr>
-	</thead>
-	<tbody id='listDataPhase'>
+					<div style='margin-bottom: 5px;'>
+						<table style='width: 100%'>
+							<tr>
+								<td style='width: 100px;'><b><liferay-ui:message
+											key="phase-name" /></b></td>
+								<td><input type='text' name='phaseName' id='phaseName'
+									placeholder='<liferay-ui:message key="phase-name"/>'
+									class='input form-control input-sm-small span4' value=''></td>
+							</tr>
+							<tr>
+								<td><b><liferay-ui:message key="is-active" /></b></td>
+								<td style='text-align: left;'><input type='checkbox'
+									name='phaseIsActive' id='phaseIsActive'
+									class='input form-control input-sm-small' value='0'></td>
+							</tr>
+						</table>
+						<div align="right">
+							<button class="btn btn-success" id="btnSavePhase" type="button">
+								&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;
+								<liferay-ui:message key="save" />
+								&nbsp;&nbsp;
+							</button>
+							&nbsp;&nbsp;
+							<button class="btn btn-danger" id='btnCancelPhase' type="button">
+								<i class="fa fa-times-circle"></i>&nbsp;
+								<liferay-ui:message key="cancel" />
+							</button>
+						</div>
+					</div>
+					<table class='table'>
+						<thead>
+							<tr style="white-space: nowrap;">
+								<th style='width: 10%;'><b><liferay-ui:message
+											key="no-dot" /></b></th>
+								<th style='width: 30%;'><b><liferay-ui:message
+											key="phase-name" /></b></th>
+								<th style='width: 10%; text-align: center;'><b><liferay-ui:message
+											key="is-active" /></b></th>
+								<th style='text-align: center; width: 15%;'><b><liferay-ui:message
+											key="manage" /></b></th>
+							</tr>
+						</thead>
+						<tbody id='listDataPhase'>
 
-	</tbody>
+						</tbody>
 
 
-	<input type="hidden" name="pahse_id_edit" id="pahse_id_edit" value="">
-	<input type="hidden" name="phase_action" id="phase_action" value="add">
-	<input type="hidden" name="phase_item_result_id" id="phase_item_result_id" value="">
+						<input type="hidden" name="pahse_id_edit" id="pahse_id_edit"
+							value="">
+						<input type="hidden" name="phase_action" id="phase_action"
+							value="add">
+						<input type="hidden" name="phase_item_result_id"
+							id="phase_item_result_id" value="">
 
 
-</table>
+					</table>
 
 
 
 
-<!--
+					<!--
 Phase
 Phase Name
 Is Active
@@ -1264,384 +1287,445 @@ Is Active
 
 
 
-                <!-- form start -->
-                <!-- content end -->
-            </div>
-
-        </div>
-    </div>
-
-
-
-</div>
-
-
-<!-- Modal Reason Start -->
-<div aria-hidden="true" role="dialog" tabindex="-1" id="reasonModal" class="modal inmodal " style="display: none; margin-top: 0px;">
-    <div class="modal-dialog">
-    <div class="modal-content animated bounceInRight">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
-                <h5 class="modal-title"><liferay-ui:message key="reason"/></h5>
-            </div>
-            <div class="modal-body">
-
-<div style='margin-bottom:5px;'>
-<table style='width:100%'>
-	<tr>
-		<td style='width:100px; '><b><liferay-ui:message key="reason"/></b></td>
-		<td><input  style='margin-bottom:5px;'  type='text' name='reason_name' id='reason_name' placeholder='<liferay-ui:message key="reason"/>' class='input form-control input-sm-small span5' value=''></td>
-	</tr>
-
-</table>
-	<div align="right">
-	     <button class="btn btn-success" id="btnSaveReason" type="button">&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;<liferay-ui:message key="save"/>&nbsp;&nbsp;</button>&nbsp;&nbsp;
-	     <button class="btn btn-danger" id='btnCancelReason' type="button"><i class="fa fa-times-circle"></i>&nbsp;<liferay-ui:message key="cancel"/></button>
-	</div>
-</div>
-			<table class='table'>
-				<thead>
-					<tr>
-						<th style='width:10%;'>
-						<b><liferay-ui:message key="no-dot"/></b>
-						</th>
-						<th style='width:30%;'>
-						<b><liferay-ui:message key="reason"/></b>
-						</th>
-						<th style='text-align:center; width:15%;'>
-						<b><liferay-ui:message key="manage"/></b>
-						</th>
-					</tr>
-				</thead>
-				<tbody id='listDataReason'>
-
-				</tbody>
-
-
-				<input type="hidden" name="reason_id_edit" id="reason_id_edit" value="">
-				<input type="hidden" name="reason_action" id="reason_action" value="add">
-				<input type="hidden" name="reason_item_result_id" id="reason_item_result_id" value="">
-
-
-			</table>
-
-                <!-- form start -->
-                <!-- content end -->
-            </div>
-
-        </div>
-    </div>
-</div>
-<!-- Modal Reason End -->
-
-<!-- Modal attach file Start -->
-<div aria-hidden="true" role="dialog" tabindex="-1" id="attachFileModal" class="modal inmodal " style="display: none; margin-top: 0px;">
-    <div class="modal-dialog">
-    <div class="modal-content animated bounceInRight">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
-                <h5 class="modal-title"><liferay-ui:message key="attach-files"/></h5>
-            </div>
-            <div class="modal-body">
-
-			<div style='margin-bottom:5px;'>
-			<form id="attachFileForm">
-			<table style='width:100%'>
-				<tr>
-
-					<td>
-
-						<input  style='width:100%;height:100%;'  type='file' name='attach_files_attachment' id='attach_files_attachment' class="dropify" accept=".xls, .xlsx, .pdf,doc,docx,jpeg"  multiple>
-						<span style='text-align:right;'>
-
-						</span>
-					</td>
-				</tr>
-
-			</table>
-			<!--
-			<input align="right" type='submit' class="btn btn-primary" type="button" id="btnSaveAttach" value='Upload'>
-			-->
-			</form>
-			</div>
-			<input type="hidden" name="attach_file_item_result_id" id="attach_file_item_result_id" value="">
-                <!-- content end -->
-            </div>
-            <div class="modal-footer">
-					<button class="btn btn-success" type="submit" id="btnSaveAttach" form="attachFileForm"><liferay-ui:message key="upload"/></button>
-					<button data-dismiss="modal" class="btn btn-danger btnCancle"
-						type="button"><liferay-ui:message key="cancel"/></button>
-						<div class="alert alert-warning information" id="information"
-						style="display: none;  position:relative;"></div>
+					<!-- form start -->
+					<!-- content end -->
 				</div>
 
-        </div>
-    </div>
-</div>
-<!-- Modal attach file End -->
-
-
-<!-- Modal Download Attach File Start -->
-<div aria-hidden="true" role="dialog" tabindex="-1" id="downloadAttachFileModal" class="modal inmodal " style="display: none; margin-top: 0px;">
-    <div class="modal-dialog">
-    <div class="modal-content animated bounceInRight">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
-                <h5 class="modal-title"><liferay-ui:message key="download-files"/></h5>
-            </div>
-            <div class="modal-body">
-            <!-- content start -->
-			<table class='table'>
-				<thead>
-					<tr>
-						<th style='width:5%;'>
-						<b><liferay-ui:message key="no-dot"/></b>
-						</th>
-						<th style='width:50%;'>
-						<b><liferay-ui:message key="attach-files"/></b>
-						</th>
-						<th style='text-align:center; width:10%;'>
-						<b><liferay-ui:message key="manage"/></b>
-						</th>
-					</tr>
-				</thead>
-				<tbody id='listDataAttachFile'>
-
-				</tbody>
-			</table>
-            <!-- content end -->
-            </div>
-
-        </div>
-    </div>
-</div>
-<!-- Modal Download attach file End -->
-
-
-<!-- modal action plan start -->
-<div aria-hidden="true" role="dialog" tabindex="-1" id="actionPlanModal" class="modal inmodal large" style="display: none; margin-top: 0px;">
-    <div class="modal-dialog">
-    <div class="modal-content animated bounceInRight large">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
-                <h5 class="modal-title"><liferay-ui:message key="action-plan"/></h5>
-            </div>
-
-
-
-
-
-
-
-            <!-- smart cricle area -->
-
-		<div class="container" id='smartArea' style='margin-top:10px; width:1050px;'>
-
-			    <ul class="ca-menu">
-			                    <li style='background:#ED1C24;'>
-			                        <a href="#">
-			                           <!--  <span class="ca-icon">A</span> #aed6f1 -->
-			                            <div class="ca-content" >
-			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>S</h2>
-			                                <h3 class="ca-sub" style='font-size: 17px; color:#ffffff;'><liferay-ui:message key="specific"/></h3>
-			                            </div>
-			                        </a>
-			                    </li>
-			                    <li style='background:#DBAE0F;'>
-			                        <a href="#">
-			                          <!--  <span class="ca-icon">I</span> #85c1e9-->
-			                            <div class="ca-content">
-			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>M</h2>
-			                                <h3 class="ca-sub" style='font-size: 17px; color:#ffffff;'><liferay-ui:message key="measurable"/></h3>
-			                            </div>
-			                        </a>
-			                    </li>
-			                    <li style='background:#EF59A0;'>
-			                        <a href="#">
-			                           <!-- <span class="ca-icon">C</span> #3498db-->
-			                            <div class="ca-content">
-			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>A</h2>
-			                                <h3 class="ca-sub" style='font-size: 17px; color:#ffffff;'><liferay-ui:message key="attainable"/></h3>
-			                            </div>
-			                        </a>
-			                    </li>
-			                    <li style='background:#009245;'>
-			                        <a href="#">
-			                           <!-- <span class="ca-icon">S</span> #1f74ad-->
-			                            <div class="ca-content">
-			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>R</h2>
-			                                <h3 class="ca-sub"  style='font-size: 17px; color:#ffffff;'><liferay-ui:message key="relevant"/></h3>
-			                            </div>
-			                        </a>
-			                    </li>
-			                     <li style='background:#F7931E;'>
-			                        <a href="#">
-			                           <!-- <span class="ca-icon">T</span> #144d73-->
-			                            <div class="ca-content">
-			                                <h2 class="ca-main" style='font-size: 80px; color:#ffffff;'>T</h2>
-			                                <h3 class="ca-sub" style='font-size: 17px; color:#ffffff;'><liferay-ui:message key="time-bound"/></h3>
-			                            </div>
-			                        </a>
-			                    </li>
-			    </ul>
 			</div>
-            <!-- smart cricle area -->
+		</div>
 
-            <div class="modal-body">
-                <!-- content start -->
 
-				<div class="row-fluid">
-				<!-- start--row-fluid -->
-				   <div class="span12">
-				           <div class="ibox float-e-margins">
-				           <!--
+
+	</div>
+
+
+	<!-- Modal Reason Start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="reasonModal"
+		class="modal inmodal " style="display: none; margin-top: 0px;">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only"></span>
+					</button>
+					<h5 class="modal-title">
+						<liferay-ui:message key="reason" />
+					</h5>
+				</div>
+				<div class="modal-body">
+
+					<div style='margin-bottom: 5px;'>
+						<table style='width: 100%'>
+							<tr>
+								<td style='width: 100px;'><b><liferay-ui:message
+											key="reason" /></b></td>
+								<td><input style='margin-bottom: 5px;' type='text'
+									name='reason_name' id='reason_name'
+									placeholder='<liferay-ui:message key="reason"/>'
+									class='input form-control input-sm-small span5' value=''></td>
+							</tr>
+
+						</table>
+						<div align="right">
+							<button class="btn btn-success" id="btnSaveReason" type="button">
+								&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;
+								<liferay-ui:message key="save" />
+								&nbsp;&nbsp;
+							</button>
+							&nbsp;&nbsp;
+							<button class="btn btn-danger" id='btnCancelReason' type="button">
+								<i class="fa fa-times-circle"></i>&nbsp;
+								<liferay-ui:message key="cancel" />
+							</button>
+						</div>
+					</div>
+					<table class='table'>
+						<thead>
+							<tr>
+								<th style='width: 10%;'><b><liferay-ui:message
+											key="no-dot" /></b></th>
+								<th style='width: 30%;'><b><liferay-ui:message
+											key="reason" /></b></th>
+								<th style='text-align: center; width: 15%;'><b><liferay-ui:message
+											key="manage" /></b></th>
+							</tr>
+						</thead>
+						<tbody id='listDataReason'>
+
+						</tbody>
+
+
+						<input type="hidden" name="reason_id_edit" id="reason_id_edit"
+							value="">
+						<input type="hidden" name="reason_action" id="reason_action"
+							value="add">
+						<input type="hidden" name="reason_item_result_id"
+							id="reason_item_result_id" value="">
+
+
+					</table>
+
+					<!-- form start -->
+					<!-- content end -->
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- Modal Reason End -->
+
+	<!-- Modal attach file Start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1"
+		id="attachFileModal" class="modal inmodal "
+		style="display: none; margin-top: 0px;">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only"></span>
+					</button>
+					<h5 class="modal-title">
+						<liferay-ui:message key="attach-files" />
+					</h5>
+				</div>
+				<div class="modal-body">
+
+					<div style='margin-bottom: 5px;'>
+						<form id="attachFileForm">
+							<table style='width: 100%'>
+								<tr>
+
+									<td><input style='width: 100%; height: 100%;' type='file'
+										name='attach_files_attachment' id='attach_files_attachment'
+										class="dropify" accept=".xls, .xlsx, .pdf,doc,docx,jpeg"
+										multiple> <span style='text-align: right;'> </span></td>
+								</tr>
+
+							</table>
+							<!--
+			<input align="right" type='submit' class="btn btn-primary" type="button" id="btnSaveAttach" value='Upload'>
+			-->
+						</form>
+					</div>
+					<input type="hidden" name="attach_file_item_result_id"
+						id="attach_file_item_result_id" value="">
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-success" type="submit" id="btnSaveAttach"
+						form="attachFileForm">
+						<liferay-ui:message key="upload" />
+					</button>
+					<button data-dismiss="modal" class="btn btn-danger btnCancle"
+						type="button">
+						<liferay-ui:message key="cancel" />
+					</button>
+					<div class="alert alert-warning information" id="information"
+						style="display: none; position: relative;"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- Modal attach file End -->
+
+
+	<!-- Modal Download Attach File Start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1"
+		id="downloadAttachFileModal" class="modal inmodal "
+		style="display: none; margin-top: 0px;">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only"></span>
+					</button>
+					<h5 class="modal-title">
+						<liferay-ui:message key="download-files" />
+					</h5>
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<table class='table'>
+						<thead>
+							<tr>
+								<th style='width: 5%;'><b><liferay-ui:message
+											key="no-dot" /></b></th>
+								<th style='width: 50%;'><b><liferay-ui:message
+											key="attach-files" /></b></th>
+								<th style='text-align: center; width: 10%;'><b><liferay-ui:message
+											key="manage" /></b></th>
+							</tr>
+						</thead>
+						<tbody id='listDataAttachFile'>
+
+						</tbody>
+					</table>
+					<!-- content end -->
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- Modal Download attach file End -->
+
+
+	<!-- modal action plan start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1"
+		id="actionPlanModal" class="modal inmodal large"
+		style="display: none; margin-top: 0px;">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight large">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only"></span>
+					</button>
+					<h5 class="modal-title">
+						<liferay-ui:message key="action-plan" />
+					</h5>
+				</div>
+
+
+
+
+
+
+
+				<!-- smart cricle area -->
+
+				<div class="container" id='smartArea'
+					style='margin-top: 10px; width: 1050px;'>
+
+					<ul class="ca-menu">
+						<li style='background: #ED1C24;'><a href="#"> <!--  <span class="ca-icon">A</span> #aed6f1 -->
+								<div class="ca-content">
+									<h2 class="ca-main" style='font-size: 80px; color: #ffffff;'>S</h2>
+									<h3 class="ca-sub" style='font-size: 17px; color: #ffffff;'>
+										<liferay-ui:message key="specific" />
+									</h3>
+								</div>
+						</a></li>
+						<li style='background: #DBAE0F;'><a href="#"> <!--  <span class="ca-icon">I</span> #85c1e9-->
+								<div class="ca-content">
+									<h2 class="ca-main" style='font-size: 80px; color: #ffffff;'>M</h2>
+									<h3 class="ca-sub" style='font-size: 17px; color: #ffffff;'>
+										<liferay-ui:message key="measurable" />
+									</h3>
+								</div>
+						</a></li>
+						<li style='background: #EF59A0;'><a href="#"> <!-- <span class="ca-icon">C</span> #3498db-->
+								<div class="ca-content">
+									<h2 class="ca-main" style='font-size: 80px; color: #ffffff;'>A</h2>
+									<h3 class="ca-sub" style='font-size: 17px; color: #ffffff;'>
+										<liferay-ui:message key="attainable" />
+									</h3>
+								</div>
+						</a></li>
+						<li style='background: #009245;'><a href="#"> <!-- <span class="ca-icon">S</span> #1f74ad-->
+								<div class="ca-content">
+									<h2 class="ca-main" style='font-size: 80px; color: #ffffff;'>R</h2>
+									<h3 class="ca-sub" style='font-size: 17px; color: #ffffff;'>
+										<liferay-ui:message key="relevant" />
+									</h3>
+								</div>
+						</a></li>
+						<li style='background: #F7931E;'><a href="#"> <!-- <span class="ca-icon">T</span> #144d73-->
+								<div class="ca-content">
+									<h2 class="ca-main" style='font-size: 80px; color: #ffffff;'>T</h2>
+									<h3 class="ca-sub" style='font-size: 17px; color: #ffffff;'>
+										<liferay-ui:message key="time-bound" />
+									</h3>
+								</div>
+						</a></li>
+					</ul>
+				</div>
+				<!-- smart cricle area -->
+
+				<div class="modal-body">
+					<!-- content start -->
+
+					<div class="row-fluid">
+						<!-- start--row-fluid -->
+						<div class="span12">
+							<div class="ibox float-e-margins">
+								<!--
 				                <div class="ibox-title" style="background-color: rgb(83, 120, 253); border-color: rgb(83, 120, 253); min-height:0px;">
 				                    <div class="titlePanelSearch">Action Plan</div>
 				    			</div>
 				    		-->
-				    			<div class="ibox-content breadcrumbs2" style="border-color: rgb(83, 120, 253);">
+								<div class="ibox-content breadcrumbs2"
+									style="border-color: rgb(83, 120, 253);">
 
-				    				<div class="row-fluid ">
+									<div class="row-fluid ">
 
-											<div class='boxActionPlainArea alert alert-success'>
-												<div class='span6'>
-													<div class='boxActionL'>
-														<!--
+										<div class='boxActionPlainArea alert alert-success'>
+											<div class='span6'>
+												<div class='boxActionL'>
+													<!--
 														<div class='actionPlanList'>
 														Phase <span id='actionPlanPhase'></span>
 														</div>
 														 -->
-														<div class='actionPlanList'>
-															<div style='padding-top:10px; padding-left: 10px;'>
-																<liferay-ui:message key="organization"/>: <span id='actionPlanOrganization'></span>
-															</div>
+													<div class='actionPlanList'>
+														<div style='padding-top: 10px; padding-left: 10px;'>
+															<liferay-ui:message key="organization" />
+															: <span id='actionPlanOrganization'></span>
 														</div>
-														<div class='actionPlanList'>
-															<div style='padding-top:10px; padding-left: 10px;'>
-																<liferay-ui:message key="kpi"/>: <span id='actionPlanAppraisalItem'></span>
-															</div>
+													</div>
+													<div class='actionPlanList'>
+														<div style='padding-top: 10px; padding-left: 10px;'>
+															<liferay-ui:message key="kpi" />
+															: <span id='actionPlanAppraisalItem'></span>
 														</div>
+													</div>
 
+
+												</div>
+											</div>
+											<div class='span6'>
+												<div class='boxActionR'>
+
+													<div class='boxActualPercentageArea'>
+
+														<div class='boxActualvsForecast boxForecastVsActual'>
+															<div class='fontBold desktopArea'>
+																<liferay-ui:message key="percent-actual-vs-forecast" />
+															</div>
+															<div class='fontBold moblieArea'>
+																<liferay-ui:message key="percent-actual-vs-target" />
+															</div>
+															<div>
+																<span id='actionPlanActualVSforecast'></span>% <span
+																	id='actualvsForecastBar'></span>
+															</div>
+														</div>
+														<div class='boxActualvsTarget boxForecastVsActual'>
+															<div class='fontBold desktopArea'>
+																<liferay-ui:message key="percent-actual-vs-target" />
+															</div>
+															<div class='fontBold moblieArea'>
+																<liferay-ui:message key="percent-actual-vs-target" />
+															</div>
+															<div>
+																<span id='actionPlanActualVSTarget'></span>% <span
+																	id='actualvsTargetBar'></span>
+															</div>
+
+														</div>
 
 													</div>
-												</div>
-												<div class='span6'>
-													<div class='boxActionR'>
-
-														<div class='boxActualPercentageArea'>
-
-															<div class='boxActualvsForecast boxForecastVsActual'>
-																<div  class='fontBold desktopArea'>
-																	<liferay-ui:message key="percent-actual-vs-forecast"/>
-																</div>
-																<div class='fontBold moblieArea' >
-																	<liferay-ui:message key="percent-actual-vs-target"/>
-																</div>
-																<div >
-																	<span id='actionPlanActualVSforecast'></span>% <span id='actualvsForecastBar'></span>
-																</div>
+													<div class='boxForecastArea'>
+														<div class='boxForecastResult boxForecastVsActual'>
+															<div class='fontBold fontCenter'>
+																<liferay-ui:message key="forecast" />
 															</div>
-															<div class='boxActualvsTarget boxForecastVsActual'>
-																<div class='fontBold desktopArea'>
-																	<liferay-ui:message key="percent-actual-vs-target"/>
-																</div>
-																<div class='fontBold moblieArea' >
-																	<liferay-ui:message key="percent-actual-vs-target"/>
-																</div>
-																<div>
-																<span id='actionPlanActualVSTarget'></span>% <span id='actualvsTargetBar'></span>
-																</div>
-
-															</div>
-
-														</div>
-														<div class='boxForecastArea'>
-															<div class='boxForecastResult boxForecastVsActual'>
-																<div class='fontBold fontCenter'>
-																	<liferay-ui:message key="forecast"/>
-																</div>
-																<div class='fontCenter'>
-																 <span id='actionPlanForecastResult'></span>
-																 </div>
-															</div>
-															<div class='boxActual boxForecastVsActual'>
-																<div class='fontBold fontCenter'>
-																	<liferay-ui:message key="target"/>
-																</div>
-																<div class='fontCenter'>
-																 <span id='actionPlanTarget'></span>
-																 </div>
+															<div class='fontCenter'>
+																<span id='actionPlanForecastResult'></span>
 															</div>
 														</div>
-														<div class='boxTargetArea' style='font-size:20px;'>
-															<div class='boxTargetData'>
-															<div class='fontBold fontCenter'><liferay-ui:message key="actual"/></div>
-															<div class='fontCenter fontBold' style='font-size:15px;margin-top:5px; color:green;'> <span id='actionPlanActual'></span></div>
+														<div class='boxActual boxForecastVsActual'>
+															<div class='fontBold fontCenter'>
+																<liferay-ui:message key="target" />
+															</div>
+															<div class='fontCenter'>
+																<span id='actionPlanTarget'></span>
 															</div>
 														</div>
 													</div>
-												</div>
-
-
-												<br style='clear:both'>
-											</div>
-									</div>
-
-
-
-									<div class='row-fluid' style='margin-top:5px;margin-bottom:5px;'>
-										<div class=' alert alert-block'>
-											<div class='span6'>
-												<button type="button" class="btn btn-success input-sm" name="btn-" id="btnAddActionPlan">
-													<liferay-ui:message key="add"/>
-												</button>
-												<button type="button" class="btn btn-warning  input-sm" name="btn-" id="btnEditActionPlan">
-													<liferay-ui:message key="edit"/>
-												</button>
-												<button type="button" class="btn btn-danger input-sm" name="btn-" id="btnDelActionPlan">
-													<liferay-ui:message key="delete"/>
-												</button>
-												<input type="hidden" id="action_actionplan" value="add" name="action_actionplan">
-            									<input type="hidden" id="action_new_actionplan" value="" name="action_new_actionplan">
-            									<input type="hidden" id="actionplan_emp_id" value="" name="actionplan_emp_id">
-            									<input type="hidden" id="actionplan_emp_name" value="" name="actionplan_emp_name">
-            									<input type="hidden" id="item_result_id" value="3" name="item_result_id">
-
-											</div>
-											<div class='span6'>
-												<div class='saveAndCancelArea' >
-													<button type="button" class="btn btn-primary input-sm" name="btn-" id="btnDownloadAttachFile">
-														<liferay-ui:message key="download"/>
-													</button>
-													<button type="button" class="btn btn-primary input-sm" name="btn-" id="btnSaveActionPlan">
-														<liferay-ui:message key="save"/>
-													</button>
-													<button type="button" class="btn btn-danger input-sm" name="btn-" id="btnCancelActionPlan">
-														<liferay-ui:message key="cancel"/>
-													</button>
-
+													<div class='boxTargetArea' style='font-size: 20px;'>
+														<div class='boxTargetData'>
+															<div class='fontBold fontCenter'>
+																<liferay-ui:message key="actual" />
+															</div>
+															<div class='fontCenter fontBold'
+																style='font-size: 15px; margin-top: 5px; color: green;'>
+																<span id='actionPlanActual'></span>
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
-											<br style='clear:both'>
+
+
+											<br style='clear: both'>
 										</div>
 									</div>
-									<div style="overflow: auto; width:100%;">
-									<!-- Select,Task,Plan Start,Plan Start,Plan End,Actual Start,Actual End,Responsible,%Completed,PV,AC,EV -->
+
+
+
+									<div class='row-fluid'
+										style='margin-top: 5px; margin-bottom: 5px;'>
+										<div class=' alert alert-block'>
+											<div class='span6'>
+												<button type="button" class="btn btn-success input-sm"
+													name="btn-" id="btnAddActionPlan">
+													<liferay-ui:message key="add" />
+												</button>
+												<button type="button" class="btn btn-warning  input-sm"
+													name="btn-" id="btnEditActionPlan">
+													<liferay-ui:message key="edit" />
+												</button>
+												<button type="button" class="btn btn-danger input-sm"
+													name="btn-" id="btnDelActionPlan">
+													<liferay-ui:message key="delete" />
+												</button>
+												<input type="hidden" id="action_actionplan" value="add"
+													name="action_actionplan"> <input type="hidden"
+													id="action_new_actionplan" value=""
+													name="action_new_actionplan"> <input type="hidden"
+													id="actionplan_emp_id" value="" name="actionplan_emp_id">
+												<input type="hidden" id="actionplan_emp_name" value=""
+													name="actionplan_emp_name"> <input type="hidden"
+													id="item_result_id" value="3" name="item_result_id">
+
+											</div>
+											<div class='span6'>
+												<div class='saveAndCancelArea'>
+													<button type="button" class="btn btn-primary input-sm"
+														name="btn-" id="btnDownloadAttachFile">
+														<liferay-ui:message key="download" />
+													</button>
+													<button type="button" class="btn btn-primary input-sm"
+														name="btn-" id="btnSaveActionPlan">
+														<liferay-ui:message key="save" />
+													</button>
+													<button type="button" class="btn btn-danger input-sm"
+														name="btn-" id="btnCancelActionPlan">
+														<liferay-ui:message key="cancel" />
+													</button>
+
+												</div>
+											</div>
+											<br style='clear: both'>
+										</div>
+									</div>
+									<div style="overflow: auto; width: 100%;">
+										<!-- Select,Task,Plan Start,Plan Start,Plan End,Actual Start,Actual End,Responsible,%Completed,PV,AC,EV -->
 										<table class='table'>
 											<thead>
 												<tr style='white-space: nowrap;'>
-													<th style='width:5%'><center><b><liferay-ui:message key="select"/></b></center></th>
-													<th style='width:10%'><b><liferay-ui:message key="task"/></b></th>
-													<th style='width:8%'><b><liferay-ui:message key="plan-start"/></b></th>
-													<th style='width:8%'><b><liferay-ui:message key="plan-end"/></b></th>
-													<th style='width:9%'><b><liferay-ui:message key="actual-start"/></b></th>
-													<th style='width:8%'><b><liferay-ui:message key="actual-end"/></b></th>
-													<th style='width:5%'><b><liferay-ui:message key="phase"/></b></th>
-													<th style='width:10%'><b><liferay-ui:message key="responsible"/></b></th>
-													<th style='width:10%'><b><liferay-ui:message key="percent-completed"/></b></th>
-<!-- 													<th style='width:7%;text-align:right;'><b>PV</b></th> -->
-<!-- 													<th style='width:7%;text-align:right;'><b>AC</b></th> -->
-<!-- 													<th style='width:7%;text-align:right;'><b>EV</b></th> -->
+													<th style='width: 5%'><center>
+															<b><liferay-ui:message key="select" /></b>
+														</center></th>
+													<th style='width: 10%'><b><liferay-ui:message
+																key="task" /></b></th>
+													<th style='width: 8%'><b><liferay-ui:message
+																key="plan-start" /></b></th>
+													<th style='width: 8%'><b><liferay-ui:message
+																key="plan-end" /></b></th>
+													<th style='width: 9%'><b><liferay-ui:message
+																key="actual-start" /></b></th>
+													<th style='width: 8%'><b><liferay-ui:message
+																key="actual-end" /></b></th>
+													<th style='width: 5%'><b><liferay-ui:message
+																key="phase" /></b></th>
+													<th style='width: 10%'><b><liferay-ui:message
+																key="responsible" /></b></th>
+													<th style='width: 10%'><b><liferay-ui:message
+																key="percent-completed" /></b></th>
+													<!-- 													<th style='width:7%;text-align:right;'><b>PV</b></th> -->
+													<!-- 													<th style='width:7%;text-align:right;'><b>AC</b></th> -->
+													<!-- 													<th style='width:7%;text-align:right;'><b>EV</b></th> -->
 
 												</tr>
 											</thead>
@@ -1699,44 +1783,51 @@ Is Active
 									</div>
 
 
-				</div><!-- content end -->
-					    </div>
+								</div>
+								<!-- content end -->
+							</div>
+
+						</div>
 
 					</div>
-
-				</div>
-				<!-- end--row-fluid -->
-				<div class="alert alert-warning information" id="information3"
+					<!-- end--row-fluid -->
+					<div class="alert alert-warning information" id="information3"
 						style="display: none;"></div>
-                <!-- content end -->
-            </div>
+					<!-- content end -->
+				</div>
 
-        </div>
-    </div>
-
-
-
-</div>
-<!-- modal action plan end -->
+			</div>
+		</div>
 
 
+
+	</div>
+	<!-- modal action plan end -->
 
 
 
 
 
-<!-- modal gantt chart start -->
-<div aria-hidden="true" role="dialog" tabindex="-1" id="ganttChartModal" class="modal inmodal large" style="display: none; margin-top: 0px;">
-    <div class="modal-dialog">
-    <div class="modal-content animated bounceInRight large">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
-                <h5 class="modal-title"><liferay-ui:message key="gantt-chart"/></h5>
-            </div>
 
-            <div class="modal-body">
-                <!-- content start -->
-                 <!--
+
+	<!-- modal gantt chart start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1"
+		id="ganttChartModal" class="modal inmodal large"
+		style="display: none; margin-top: 0px;">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight large">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only"></span>
+					</button>
+					<h5 class="modal-title">
+						<liferay-ui:message key="gantt-chart" />
+					</h5>
+				</div>
+
+				<div class="modal-body">
+					<!-- content start -->
+					<!--
                 <div class='container' >
 	                <div class='row-fluid ' >
 	                	<div class='span4 ' style='font-weight:bold;'>
@@ -1751,9 +1842,10 @@ Is Active
 	                </div>
                 </div>
                 -->
-                <div class="ibox float-e-margins">
-							<div class="ibox-title" style="background-color: rgb(255, 224, 18); border-color: rgb(255, 224, 18); text-align:right;">
-								<!--
+					<div class="ibox float-e-margins">
+						<div class="ibox-title"
+							style="background-color: rgb(255, 224, 18); border-color: rgb(255, 224, 18); text-align: right;">
+							<!--
 								Zoom
 			                	<select id='ganntChartZoom' style='width:65px;'>
 			                		<option value='90'>100%</option>
@@ -1764,83 +1856,103 @@ Is Active
 			                		<option value='10'>0%</option>
 			                	</select>
 			                	 -->
-			                	 <div style='display:none;'>
-				                	<select id='selectGanntChartType' style='width:75px;' >
-				                		<option value='d'>Daily</option>
-				                		<option value='m'>Monthly</option>
-				                	</select>
-			                	 </div>
-			                	 <div style='display:none;'>
-			                	<liferay-ui:message key="please-select-range-of-day"/>
-			                	<select  id='selectGanntChartViewDaily' style='width:100px;'>
+							<div style='display: none;'>
+								<select id='selectGanntChartType' style='width: 75px;'>
+									<option value='d'>Daily</option>
+									<option value='m'>Monthly</option>
+								</select>
+							</div>
+							<div style='display: none;'>
+								<liferay-ui:message key="please-select-range-of-day" />
+								<select id='selectGanntChartViewDaily' style='width: 100px;'>
 
-			                	</select>
-			                	</div>
-			                	<select id='selectGanntChartViewMonthly' style='width:85px; display:none;'>
-			                		<option value='1'>1 Month</option>
-			                		<option value='2'>2 Months</option>
-			                		<option value='3'>3 Months</option>
-			                		<option value='4'>4 Months</option>
-			                		<option value='5'>5 Months</option>
-			                		<option value='6'>6 Months</option>
-			                		<option value='7'>7 Months</option>
-			                		<option value='8'>8 Months</option>
-			                		<option value='9'>9 Months</option>
-			                		<option value='10'>10 Months</option>
-			                		<option value='11'>11 Months</option>
-			                		<option value='12'>12 Months</option>
-			                	</select>
+								</select>
+							</div>
+							<select id='selectGanntChartViewMonthly'
+								style='width: 85px; display: none;'>
+								<option value='1'>1 Month</option>
+								<option value='2'>2 Months</option>
+								<option value='3'>3 Months</option>
+								<option value='4'>4 Months</option>
+								<option value='5'>5 Months</option>
+								<option value='6'>6 Months</option>
+								<option value='7'>7 Months</option>
+								<option value='8'>8 Months</option>
+								<option value='9'>9 Months</option>
+								<option value='10'>10 Months</option>
+								<option value='11'>11 Months</option>
+								<option value='12'>12 Months</option>
+							</select>
 
-			                	<button  style='display:none;' class='btn btn-primary' id='btnGanttSubmit'><i class=""></i><liferay-ui:message key="submit"/></button>
-			                	<button class='btn btn-primary' id='btnPrint'><i class="icon-print"></i><liferay-ui:message key="print"/></button>
+							<button style='display: none;' class='btn btn-primary'
+								id='btnGanttSubmit'>
+								<i class=""></i>
+								<liferay-ui:message key="submit" />
+							</button>
+							<button class='btn btn-primary' id='btnPrint'>
+								<i class="icon-print"></i>
+								<liferay-ui:message key="print" />
+							</button>
+
+						</div>
+						<!-- ibox-content-radius -->
+						<div class="ibox-content "
+							style="border-color: rgb(255, 224, 18);">
+
+
+
+
+							<div class='row-fluid  ganntChartTititle ganntChartTitleOrg'>
+								<div class='span4 ' style='font-weight: bold; padding: 10px;'>
+									<liferay-ui:message key="period" />
+									: <span class='ganttAppraisalPeriodDescTxt'></span>
+								</div>
+								<div class='span4 ' style='font-weight: bold; padding: 10px;'>
+									<liferay-ui:message key="organization" />
+									: <span class='ganttOrgTxt'></span>
+								</div>
+								<div class='span4 ' style='font-weight: bold; padding: 10px;'>
+									<liferay-ui:message key="kpi" />
+									: <span class='ganttAppraisalItemTxt'></span>
+								</div>
+							</div>
+							<div class='ganntChartTititle ganntChartTitleEmpArea'>
+								<div class='row-fluid   ganntChartTitleEmp'>
+									<div class='span6 '
+										style='font-weight: bold; padding: 10px; padding-bottom: 0px'>
+										<liferay-ui:message key="period" />
+										: <span class='ganttAppraisalPeriodDescTxt'></span>
+									</div>
+									<div class='span6 '
+										style='font-weight: bold; padding: 10px; padding-bottom: 0px'>
+										<liferay-ui:message key="organization" />
+										: <span class='ganttOrgTxt'></span>
+									</div>
+								</div>
+								<div class='row-fluid  ganntChartTitleEmp'>
+									<div class='span6 '
+										style='font-weight: bold; padding: 10px; padding-top: 5px'>
+										<liferay-ui:message key="employee" />
+										: <span class='ganttEmpTxt'></span>
+									</div>
+									<div class='span6 '
+										style='font-weight: bold; padding: 10px; padding-top: 5px'>
+										<liferay-ui:message key="kpi" />
+										: <span class='ganttAppraisalItemTxt'></span>
+									</div>
+								</div>
 
 							</div>
-							<!-- ibox-content-radius -->
-							<div class="ibox-content " style="border-color: rgb(255, 224, 18);">
 
-
-
-
-									 <div class='row-fluid  ganntChartTititle ganntChartTitleOrg'  >
-					                	<div class='span4 ' style='font-weight:bold;padding:10px;'>
-					                		<liferay-ui:message key="period"/>: <span class='ganttAppraisalPeriodDescTxt'></span>
-					                	</div>
-					                	<div class='span4 ' style='font-weight:bold;padding:10px;'>
-					                		<liferay-ui:message key="organization"/>: <span class='ganttOrgTxt'></span>
-					                	</div>
-					                	<div class='span4 ' style='font-weight:bold;padding:10px;'>
-					                		<liferay-ui:message key="kpi"/>: <span class='ganttAppraisalItemTxt'></span>
-					                	</div>
-					                </div>
-					                <div class='ganntChartTititle ganntChartTitleEmpArea'>
-						                <div class='row-fluid   ganntChartTitleEmp'  >
-						                	<div class='span6 ' style='font-weight:bold;padding:10px;padding-bottom:0px'>
-						                		<liferay-ui:message key="period"/>: <span  class='ganttAppraisalPeriodDescTxt'></span>
-						                	</div>
-						                	<div class='span6 ' style='font-weight:bold;padding:10px;padding-bottom:0px'>
-						                		<liferay-ui:message key="organization"/>: <span class='ganttOrgTxt'></span>
-						                	</div>
-						                </div>
-						                <div class='row-fluid  ganntChartTitleEmp'>
-						                	<div class='span6 ' style='font-weight:bold;padding:10px; padding-top:5px'>
-						                		<liferay-ui:message key="employee"/>: <span class='ganttEmpTxt'></span>
-						                	</div>
-						                	<div class='span6 ' style='font-weight:bold;padding:10px; padding-top:5px'>
-						                		<liferay-ui:message key="kpi"/>: <span class='ganttAppraisalItemTxt'></span>
-						                	</div>
-						                </div>
-
-					                </div>
-
-									  <div style='text-align:center;'>
-					                 	<div id='ganttChart' ></div>
-									  </div>
-
+							<div style='text-align: center;'>
+								<div id='ganttChart'></div>
 							</div>
-				</div>
+
+						</div>
+					</div>
 
 
-				<!--
+					<!--
 				<div style='text-align:right;'>
 						Zoom
 	                	<select id='ganntChartZoom' style='width:65px;'>
@@ -1853,98 +1965,117 @@ Is Active
 	                	</select>
 	             </div>
 	              -->
-	             <input type="hidden" name="gantt_item_result_id" id="gantt_item_result_id" value="">
-	             <input type="hidden" name="gantt_unit" id="gantt_unit" value="">
-	             <input type="hidden" name="gantt_amount" id="gantt_amount" value="">
-                <!-- content end -->
-            </div>
+					<input type="hidden" name="gantt_item_result_id"
+						id="gantt_item_result_id" value=""> <input type="hidden"
+						name="gantt_unit" id="gantt_unit" value=""> <input
+						type="hidden" name="gantt_amount" id="gantt_amount" value="">
+					<!-- content end -->
+				</div>
 
-        </div>
-    </div>
-
-
-
-</div>
-<!-- modal gantt chart end -->
+			</div>
+		</div>
 
 
 
-<!-- Modal Confirm Start -->
-<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal" class="modal inmodal " style="display: none;">
-    <div class="modal-dialog ">
-    <div class="modal-content animated bounceInRight">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"></span></button>
-                <h5 class="modal-title"><liferay-ui:message key="confirm-dialog"/></h5>
-            </div>
-            <div class="modal-body">
-                <!-- content start -->
-                <!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
+	</div>
+	<!-- modal gantt chart end -->
+
+
+
+	<!-- Modal Confirm Start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal"
+		class="modal inmodal " style="display: none;">
+		<div class="modal-dialog ">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">×</span><span class="sr-only"></span>
+					</button>
+					<h5 class="modal-title">
+						<liferay-ui:message key="confirm-dialog" />
+					</h5>
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
                 <hr>
                  -->
-                <!-- form start -->
-                <div class="form-kpi-mangement">
-	                <div class="form-kpi-label" align="center">
-	                 		<label><liferay-ui:message key="confirm-to-delete-data"/> ? </label>
-	                </div>
-                </div>
+					<!-- form start -->
+					<div class="form-kpi-mangement">
+						<div class="form-kpi-label" align="center">
+							<label><liferay-ui:message key="confirm-to-delete-data" />
+								? </label>
+						</div>
+					</div>
 
-                <!-- form start -->
-                <!-- content end -->
-            </div>
-            <div class="modal-footer">
-            	<div align="center">
-	                <button class="btn btn-success" id="btnConfirmOK" type="button">&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;<liferay-ui:message key="yes"/>&nbsp;&nbsp;</button>&nbsp;&nbsp;
-	                <button data-dismiss="modal" class="btn btn-danger" type="button"><i class="fa fa-times-circle"></i>&nbsp;<liferay-ui:message key="cancel"/></button>
-            	</div>
-            </div>
-        </div>
-    </div>
+					<!-- form start -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+					<div align="center">
+						<button class="btn btn-success" id="btnConfirmOK" type="button">
+							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;
+							<liferay-ui:message key="yes" />
+							&nbsp;&nbsp;
+						</button>
+						&nbsp;&nbsp;
+						<button data-dismiss="modal" class="btn btn-danger" type="button">
+							<i class="fa fa-times-circle"></i>&nbsp;
+							<liferay-ui:message key="cancel" />
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
 
-</div>
-<!-- Modal Confirm End -->
-<!-- Modal Confirm Start -->
-<div aria-hidden="true" role="dialog" tabindex="-1" id="infoItemModal" class="modal inmodal " style="display: none;">
-    <div class="modal-dialog ">
-    <div class="modal-content animated bounceInRight">
-            <div class="modal-header">
-                <button style="padding-top:5px" type="button" class="close" data-dismiss="modal"><span aria-hidden="true"><i class="fa fa-times"></i></span><span class="sr-only"></span></button>
-                <h4 class="modal-title"><liferay-ui:message key="description"/></h4>
-            </div>
-            <div class="modal-body">
-                <!-- content start -->
-                <!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
+	</div>
+	<!-- Modal Confirm End -->
+	<!-- Modal Confirm Start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="infoItemModal"
+		class="modal inmodal " style="display: none;">
+		<div class="modal-dialog ">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button style="padding-top: 5px" type="button" class="close"
+						data-dismiss="modal">
+						<span aria-hidden="true"><i class="fa fa-times"></i></span><span
+							class="sr-only"></span>
+					</button>
+					<h4 class="modal-title">
+						<liferay-ui:message key="description" />
+					</h4>
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
                 <hr>
                  -->
-                <!-- form start -->
-                <div class="alert alert-info" id="htmlInfoItemName">
-			     
-			    </div>
-                <div class="form-kpi-mangement">
-	                <div id="htmlInfoItem">
-	                </div>
-                </div>
+					<!-- form start -->
+					<div class="alert alert-info" id="htmlInfoItemName"></div>
+					<div class="form-kpi-mangement">
+						<div id="htmlInfoItem"></div>
+					</div>
 
-                <!-- form start -->
-                <!-- content end -->
-            </div>
-            
-        </div>
-    </div>
+					<!-- form start -->
+					<!-- content end -->
+				</div>
+
+			</div>
+		</div>
 
 
 
-</div>
-<!-- Modal Confirm End -->
+	</div>
+	<!-- Modal Confirm End -->
 
-<div id="embedParamSearch"></div>
+	<div id="embedParamSearch"></div>
 
 
 
 	<!-- Language Template for js -->
-	<%@ include file="/html/language-js-template/view.jsp" %>
+	<%@ include file="/html/language-js-template/view.jsp"%>
 
 </body>
 
