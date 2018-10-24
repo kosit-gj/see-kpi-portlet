@@ -129,7 +129,7 @@ plid = layout.getPlid();
 								style="display: none;"></span>
 						</button>
 						<!-- <i class="fa fa-laptop modal-icon"></i> -->
-						<h4 class="modal-title" id="">360% Degree Weighting</h4>
+						<h4 class="modal-title" id="">360 Degree Weighting</h4>
 						<!-- 
 		                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
 		                 -->
