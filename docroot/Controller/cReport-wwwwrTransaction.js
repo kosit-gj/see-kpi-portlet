@@ -109,7 +109,6 @@ $(document).ready(function() {
     ];
     
     $("#tse-code-or-tse-name").autocomplete();
-    $("#assessor-code-or-name").autocomplete();
     questionnaireTypeParam();
     
     $(".app_url_hidden").show();
@@ -206,7 +205,7 @@ $("#tse-code-or-tse-name").autocomplete({
 
 var assessorParam = function(emp_snapshot_id){
 	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/questionaire_report/list_assessor_report",
+		url:restfulURL+"/"+serviceName+"/public/questionaire_report/list_assessor_report2",
 		type:"get",
 		dataType:"json",
 		async:true,
@@ -214,6 +213,7 @@ var assessorParam = function(emp_snapshot_id){
 			"start_date": $("#date-start").val(),
 			"end_date": $("#date-end").val(),
 			"emp_snapshot_id" :emp_snapshot_id,
+			"questionaire_type_id":$("#QuestionnaireType").val(),
 		},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
