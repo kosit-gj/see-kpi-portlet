@@ -959,7 +959,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
 
     htmlTemplateQuantity += "<th style=\"width:10%\" class=''><b>" + $(".lt-perspective").val() + "</b> </th>";
     htmlTemplateQuantity += "<th style=\"width:20%\" class=''><b>" + $(".lt-kpi-name").val() + "</b></th>";
-    htmlTemplateQuantity += "<th style='width:5%;text-align: right;' class=''><b>" + $(".lt-kpi-name").val() + "</b></th>";
+    htmlTemplateQuantity += "<th style='width:5%;text-align: right;' class=''><b>" + $(".lt-target").val() + "</b></th>";
     htmlTemplateQuantity += "<th style='width:5%;text-align: right;' class=''><b>" + $(".lt-uom").val() + "</b></th>";
     htmlTemplateQuantity += "<th style='width:5%;text-align: right;' class=''><b>" + $(".lt-forecast").val() + "</b></th>";
     htmlTemplateQuantity += "<th style='width:5%;text-align: right;' class=''><b>" + $(".lt-actual").val() + "</b></th>";

@@ -476,7 +476,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 								<!-- data-target="#ModalLevel"  -->
 								<button id="btn_assign_level" type="submit" data-toggle="modal"
 									class="btn btn-primary btn-sm " style="margin-left: 5px;">
-									<i class="fa fa-pencil-square-o"></i>&nbsp;<liferay-ui:message key="assign"/>&nbsp;<liferay-ui:message key="level"/>
+									<i class="fa fa-pencil-square-o"></i>&nbsp;<liferay-ui:message key="assign-level"/>
 								</button>
 							</div>
 							<div class="form-group pull-right m-b-none ">
