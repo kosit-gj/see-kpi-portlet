@@ -55,6 +55,7 @@
 		<portlet id="wwwr-position-report"></portlet>
 		<portlet id="wwwr-transaction-report"></portlet>
 		<portlet id="asm-by-tse-report"></portlet>
+		<portlet id="vsm-employee"></portlet>
 	</category>
 
 

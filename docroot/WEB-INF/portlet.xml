@@ -2116,5 +2116,38 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>vsm-employee</portlet-name>
+		<display-name>Vsm Employee</display-name>
+		<portlet-class>
+			com.liferay.util.bridges.mvc.MVCPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/vsm-employee/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Vsm Employee</title>
+			<short-title>Vsm Employee</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>
   
