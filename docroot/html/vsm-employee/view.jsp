@@ -488,15 +488,15 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 <!-- 									name="search_customer_id" value="" type="hidden"> -->
 <!-- 							</div> -->
 	
-							<div class="form-group pull-left span2" style="margin-left: 5px">
-								<input data-toggle="tooltip" title="Start Date"
-									class="span12 m-b-n ui-autocomplete-input"
-									style="margin-bottom: 10px;" id="search_start_date"
-									data-placement="top" name="search_start_date" type="text"
-									placeholder="Start Date"> <input
-									class="form-control input-sm" id="search_start_date_id"
-									name="search_start_date_id" value="" type="hidden">
-							</div>
+<!-- 							<div class="form-group pull-left span2" style="margin-left: 5px"> -->
+<!-- 								<input data-toggle="tooltip" title="Start Date" -->
+<!-- 									class="span12 m-b-n ui-autocomplete-input" -->
+<!-- 									style="margin-bottom: 10px;" id="search_start_date" -->
+<!-- 									data-placement="top" name="search_start_date" type="text" -->
+<!-- 									placeholder="Start Date"> <input -->
+<!-- 									class="form-control input-sm" id="search_start_date_id" -->
+<!-- 									name="search_start_date_id" value="" type="hidden"> -->
+<!-- 							</div> -->
 	
 							<div class="form-group pull-left span3" style="margin-left: 5px">
 								<input data-toggle="tooltip" title="Employee Name"
@@ -687,14 +687,14 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 					<div class="row-fluid">
 	                	<div class="span12 form-horizontal p-t-xxs">
 							<div class="form-group p-xxs">
-								<label class="control-label">Name VSM:</label>
+								<label class="control-label">Name (VSM):</label>
 								<div class="controls">
 									<input type="hidden" id="from_emp_id">
 									<input type="text" class="form-control input-sm span12" placeholder="" id="from_emp_name">
 								</div>
 							</div>
 							<div class="form-group p-xxs">
-								<label class="control-label">Last Name AVSM:</label>
+								<label class="control-label">Last Name (AVSM):</label>
 								<div class="controls">
 									<input type="text" class="form-control input-sm span12" placeholder="" id="from_emp_last_name">
 								</div>

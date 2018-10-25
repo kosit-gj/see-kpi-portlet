@@ -239,7 +239,7 @@ var getDataFn = function(page,rpp){
 //	var orgId= $("#param_org_id").val();
 //	var levelId= $("#param_level_id").val();
 //	var positionId= $("#param_position_id").val();
-	var startDate= $("#param_start_date").val();
+//	var startDate= $("#param_start_date").val();
 	var empId= $("#param_emp_id").val();
 	$.ajax({
 		url : galbalDataTemp['restfulPathEmployeeSnapshot'],
@@ -250,7 +250,7 @@ var getDataFn = function(page,rpp){
 //			"org_id":orgId,
 //			"level_id":levelId,
 //			"position_id":positionId,
-			"start_date":startDate,
+//			"start_date":startDate,
 			"emp_snapshot_id":empId
 		},
 		headers:{Authorization:"Bearer "+tokenID.token},
@@ -269,13 +269,13 @@ var getDataFn = function(page,rpp){
 //--------  GetData End
 
 // -------- Search Start
-var searchAdvanceFn = function (/*org,level,position,*/startDate,emp) {
+var searchAdvanceFn = function (/*org,level,position,startDate,*/emp) {
 	//embed parameter start
 	var htmlParam="";
 //	htmlParam+="<input type='hidden' class='param_Embed' id='param_org_id' name='param_org_id' value='"+org+"'>";
 //	htmlParam+="<input type='hidden' class='param_Embed' id='param_level_id' name='param_level_id' value='"+level+"'>";
 //	htmlParam+="<input type='hidden' class='param_Embed' id='param_position_id' name='param_position_id' value='"+position+"'>";
-	htmlParam+="<input type='hidden' class='param_Embed' id='param_start_date' name='param_start_date' value='"+startDate+"'>";
+//	htmlParam+="<input type='hidden' class='param_Embed' id='param_start_date' name='param_start_date' value='"+startDate+"'>";
 	htmlParam+="<input type='hidden' class='param_Embed' id='param_emp_id' name='param_emp_id' value='"+emp+"'>";
 	$(".param_Embed").remove();
 	$("body").append(htmlParam);
@@ -404,7 +404,7 @@ $(document).ready(function() {
 //				$("#search_org").val(),
 //				$("#search_level").val(),
 //				$("#search_position_id").val(),
-				$("#search_start_date_id").val(),
+//				$("#search_start_date_id").val(),
 				$("#search_emp_id").val()
 				);
 		$("#EmpSnap_list_content").show();
@@ -524,10 +524,10 @@ $(document).ready(function() {
 				 dataType:"json",
 				 headers:{Authorization:"Bearer "+tokenID.token},
 				 data:{
-					 "org_id":$("#search_org").val(),
-					 "level_id":$("#search_level").val(),
-					 "position_id":$("#search_position_id").val(),
-					 "start_date":$("#search_start_date_id").val(),
+//					 "org_id":$("#search_org").val(),
+//					 "level_id":$("#search_level").val(),
+//					 "position_id":$("#search_position_id").val(),
+//					 "start_date":$("#search_start_date_id").val(),
 					 "emp_name":request.term
 					 },
 				 //async:false,
