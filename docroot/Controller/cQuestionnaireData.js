@@ -244,7 +244,7 @@ var clearFn = function() {
 	$("#action_modal").val("");
 //	$(".btnModalClose").click();
 	$("#slideStageHistory").hide();
-
+	globalDataTemp['tempAutocompleteStoreName'] = "";
 	
 }
 
@@ -560,6 +560,7 @@ var scriptBtnClearAddStoreFn  = function (){
 		});
 		$(document).off("click","#btnConfirmOK");
 		$(document).on("click","#btnConfirmOK",function(){
+			globalDataTemp['tempAutocompleteStoreName'] = "";
 			elements.hide(); 
 			$("#confrimModal").modal('hide');
 			if($("#action_modal").val()=="0"){$("#accordionListQuestionaireData").find('input , select, textarea , .closePanelScore').prop('disabled', true);}
