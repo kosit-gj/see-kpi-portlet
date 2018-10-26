@@ -2141,7 +2141,7 @@ var AppraisalFormList = function () {
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            var htmlOption = "<option value=''> All Form </option>";
+            var htmlOption = "";
             $.each(data, function (index, indexEntry) {
                 htmlOption += "<option value=" + indexEntry['appraisal_form_id'] + ">" + indexEntry['appraisal_form_name'] + "</option>";
             });

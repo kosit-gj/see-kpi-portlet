@@ -35,7 +35,7 @@ var getDataFn = function() {
 				param_org: organization,
 				param_period: AppraisalPeriod,
 				param_level_org: AppraisalOrgLevel,
-				appraisal_form_id : FormName
+				param_form : FormName
 			  };
 	}
 	if(appraisalType == 2){
@@ -49,7 +49,7 @@ var getDataFn = function() {
 				param_emp: EmpName_id,
 				param_level_emp: AppraisalEmpLevel,
 				param_level_org: AppraisalOrgLevel,
-				appraisal_form_id : FormName
+				param_form : FormName
 			  };
 	}
 	
