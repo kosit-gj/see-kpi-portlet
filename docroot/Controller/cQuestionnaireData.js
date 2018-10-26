@@ -1709,7 +1709,14 @@ var updateFn = function(element){
 		success : function(data) {
 			if (data['status'] == "200") {
 //				callFlashSlide("Update Successfully.");
-				generateNextFormFn(data,'update');
+				if(Number(data['stage_id']) > 2) {
+					$('#modalQuestionaireData').modal('hide');
+					callFlashSlide("Update Successfully.");
+					getDataFn();
+					clearFn();
+				} else {
+					generateNextFormFn(data,'update');
+				}
 			}else if (data['status'] == "400") {
 				//console.log(data);
 				callFlashSlide("Failed to insert data.");
@@ -1887,10 +1894,17 @@ var insertFn = function(element){
 		success : function(data) {
 			if (data['status'] == "200") {
 //				callFlashSlide("Insert Successfully.");
-				generateNextFormFn(data,'insert');
+//				generateNextFormFn(data,'insert');
 //				$('#modalQuestionaireData').modal('hide');
 				//getDataFn();
 //				clearFn();
+				if(Number(data['stage_id']) > 2) {
+					$('#modalQuestionaireData').modal('hide');
+					callFlashSlide("Insert Successfully.");
+					clearFn();
+				} else {
+					generateNextFormFn(data,'insert');
+				}
 			}else if (data['status'] == "400") {
 				console.log(data);
 				callFlashSlide("Failed to insert data.");

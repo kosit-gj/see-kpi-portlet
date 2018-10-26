@@ -541,7 +541,7 @@ cursor: not-allowed !important;
 							style="margin-left: 0px; position: relative;">
 							<select data-toggle="tooltip" title="Questionnaire Type"
 								class="input span12 m-b-n " id="form_questionnaire_type"
-								name="form_questionnaire_type"><option selected
+								name="form_questionnaire_type" data-container=".modal-header"><option selected
 									value="">No Questionnaire Type</option></select>
 						</div>
 <!-- 					
