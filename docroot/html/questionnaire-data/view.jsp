@@ -920,7 +920,7 @@ cursor: not-allowed !important;
 					<div class="form-kpi-mangement">
 						<div class="form-kpi-label" align="center">
 
-							<label id="inform_label_confirm">Confirm to Delete Data?</label>
+							<label id="inform_label_confirm">คุณต้องการลบการประเมินร้านค้า?</label>
 							<div id="inform_on_confirm" class='information'></div>
 						</div>
 					</div>

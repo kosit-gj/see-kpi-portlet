@@ -711,7 +711,7 @@ var scriptCheckBtnRequireRemarkFn =function (){
 		 var status_require_answer = false;
 		 var status_require_remark = false;
 		 //check require answer
-		 $.each($("#accordionListQuestionaireData").find("[answer_type_id=7] textarea").get(),function(index,indexEntry){
+		 $.each($("#accordionListQuestionaireData").children("div[is_cust_search=0]").find("[answer_type_id=7] textarea").get(),function(index,indexEntry){
 			if($(indexEntry).val()==""){
 				status_require_answer = true;
 				return false;
@@ -734,7 +734,7 @@ var scriptCheckBtnRequireAnswerFn = function (){
 		  var status_require_answer = false;
 		  var status_require_remark = false;
 		  //check require answer
-		  $.each($("#accordionListQuestionaireData").find("[answer_type_id=7] textarea").get(),function(index,indexEntry){
+		  $.each($("#accordionListQuestionaireData").children("div[is_cust_search=0]").find("[answer_type_id=7] textarea").get(),function(index,indexEntry){
 			if($(indexEntry).val()==""){
 				status_require_answer = true;
 				return false;
