@@ -29,7 +29,7 @@ var getDataFn = function() {
 	}
 	  
 	if(appraisalType == 1){
-		template_name="report-org-performance";
+		template_name="report-performance-from-organization";
 		parameter = {
 				org_id: organization,
 //				param_period: AppraisalPeriod,
@@ -40,7 +40,7 @@ var getDataFn = function() {
 			  };
 	}
 	if(appraisalType == 2){
-		template_name="report-ind-performance";
+		template_name="report-performance-from-individual";
 		parameter = {
 				org_id: organization,
 //				param_period: AppraisalPeriod,
