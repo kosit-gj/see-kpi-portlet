@@ -29,7 +29,7 @@ var getDataFn = function() {
 	}
 	
 	if(appraisalType == 1){
-		template_name="report-org-kpi";
+		template_name="kpi-summary-from-organization";
 		parameter = {
 				param_org: organization,
 				param_period: AppraisalPeriod,
@@ -37,7 +37,7 @@ var getDataFn = function() {
 			  };
 	}
 	if(appraisalType == 2){
-		template_name="report-ind-kpi";
+		template_name="kpi-summary-from-individual";
 		parameter = {
 				param_org: organization,
 				param_period: AppraisalPeriod,
