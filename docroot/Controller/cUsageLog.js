@@ -314,7 +314,10 @@ if(connectionServiceFn(username,password,plid)==true){
 		{'id':'#position', 'val': ""},
 		{'id':'#position_id', 'val': ""},
 		{'id':'#empName', 'val': ""},
-		{'id':'#empName_id', 'val': ""}
+		{'id':'#empName_id', 'val': ""},
+		{'id':'#empName_id', 'val': ""},
+		{'id':'#usage_start_date', 'val': ""},
+		{'id':'#usage_end_date', 'val': ""},
 	];
 	
 	//SEARCH PARAM 
