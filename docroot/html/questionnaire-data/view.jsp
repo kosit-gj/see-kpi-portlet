@@ -455,6 +455,18 @@
 		width: 25%;
 		position: relative;
 	}
+	.aui .modalRemark {
+		width: 320px !important;
+	}
+	.aui .modal_remark {
+		min-height: 0px !important;
+	}
+ 	.aui .footer-remark {
+ 		padding: 10px 12px 12px; 
+ 	} 
+	#modalQuestionaireData select, #modalQuestionaireData textarea, #modalQuestionaireData input[type="text"], #modalQuestionaireData .uneditable-input {
+		margin-bottom: 0px !important;
+	}
 }
 
    #modalQuestionaireData .panel {
@@ -708,6 +720,10 @@ overflow:auto;
 cursor: not-allowed !important;
 }
 
+.aui .fix-width-button {
+	width: 90px;
+}
+
 
 
 </style>
@@ -715,7 +731,7 @@ cursor: not-allowed !important;
 <div class='row-fluid '>
 	<div class='col-xs-12'>
 		<div id="slide_status" class="span12" style="z-index: 9000;">
-			<div id="btnCloseSlide"><i class='fa fa-times'></i></div>
+<!-- 			<div id="btnCloseSlide"><i class='fa fa-times'></i></div> -->
 			<div id="slide_status_area"></div>
 		</div>
 	</div>
@@ -737,15 +753,15 @@ cursor: not-allowed !important;
 				        </div>
 						<div class="span3">
 				          <label for="search_datepicker_start">วันที่เริ่มต้น</label>
-				          <input id="search_datepicker_start" class="span12" type="text" placeholder="Start Date">
+				          <input id="search_datepicker_start" class="span12" type="text" placeholder="">
 				        </div>
 				        <div class="span3">
 				          <label for="search_datepicker_end">วันที่สิ้นสุด</label>
-				          <input id="search_datepicker_end" class="span12" type="text" placeholder="End Date">
+				          <input id="search_datepicker_end" class="span12" type="text" placeholder="">
 				        </div>
 				        <div class="span3">
 				          <label for="search_empsnapshot">ชื่อ/รหัสเขตพนักงาน</label>
-				          <input id="search_empsnapshot" class="span12" type="text" placeholder="Name/Code TSE">
+				          <input id="search_empsnapshot" class="span12" type="text" placeholder="">
 				          <input class="form-control input-sm" id="search_empsnapshot_id" name="search_empsnapshot_id" value="" type="hidden">
 				        </div>
 					</div>
@@ -798,7 +814,7 @@ cursor: not-allowed !important;
 			  </div>
 			  <div class="span3">
 				<label for="modal_empsnapshot_name">ชื่อ/รหัสเขตพนักงาน</label>
-					<input id="modal_empsnapshot_name" class="span12" type="text" placeholder="Name/Code TSE">
+					<input id="modal_empsnapshot_name" class="span12" type="text" placeholder="">
 					<input class=" input-sm" id="modal_empsnapshot_id" name="modal_empsnapshot_id" value="" type="hidden">
 					<input class=" input-sm" id="modal_position_code" name="modal_position_code" value="" type="hidden">
 			  </div>
@@ -860,7 +876,7 @@ cursor: not-allowed !important;
 
 					</form>
 	            </div>
-				<div class="modal-footer">
+				<div class="modal-footer footer-remark">
 <!-- 					<button class="btn btn-success" type="button" id="btnSubmitUpdate">Save</button> -->
 <!-- 					<button data-dismiss="modal" class="btn btn-danger btnCancle" -->
 <!-- 						type="button">Cancel</button> -->
@@ -871,7 +887,7 @@ cursor: not-allowed !important;
 					<div class="row-fluid">
 						<div  style="text-align: left; " class="span12 modalRemark">
 <!-- 						<label for="modal_remark" >Remark:</label>  -->
-						<textarea row="3" class="span12 " id="modal_remark" placeholder="Remark" style="resize: vertical;max-height: 56px;min-height: 56px;"></textarea>
+						<textarea row="3" class="span12 modal_remark" id="modal_remark" placeholder="Remark" style="resize: vertical;max-height: 56px;min-height: 56px;"></textarea>
 						
 						</div>
 					</div>
@@ -930,10 +946,10 @@ cursor: not-allowed !important;
 				</div>
 				<div class="modal-footer">
 					<div align="center">
-						<button class="btn btn-success" id="btnConfirmOK" type="button">
+						<button class="btn btn-success fix-width-button" id="btnConfirmOK" type="button">
 							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
 						</button>
-						<button data-dismiss="modal" class="btn btn-danger" type="button"> <i class="fa fa-times-circle"></i>&nbsp;No </button>
+						<button data-dismiss="modal" class="btn btn-danger fix-width-button" type="button"> <i class="fa fa-times-circle"></i>&nbsp;No </button>
 					</div>
 				</div>
 			</div>
@@ -971,10 +987,10 @@ cursor: not-allowed !important;
 				</div>
 				<div class="modal-footer">
 					<div align="center">
-						<button class="btn btn-success" id="btnConfirmYes" type="button">
+						<button class="btn btn-success fix-width-button" id="btnConfirmYes" type="button">
 							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
 						</button>
-						<button data-dismiss="modal" class="btn btn-danger" id="btnConfirmNo" type="button"> <i class="fa fa-times-circle"></i>&nbsp;No </button>
+						<button data-dismiss="modal" class="btn btn-danger fix-width-button" id="btnConfirmNo" type="button"> <i class="fa fa-times-circle"></i>&nbsp;No </button>
 					</div>
 				</div>
 			</div>

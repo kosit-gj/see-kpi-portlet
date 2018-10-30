@@ -537,7 +537,7 @@ var btnDelStoreFn = function (element){
 					callFlashSlide("Delete Successfully");
 					$("#confrimModal").modal('hide');
 				}else if(data['status']=="400"){
-					callFlashSlide(validationFn(data),"error");
+					callFlashSlide(validationFn(data));
 				}
 			}
 		});
@@ -774,7 +774,7 @@ var setModalContentBodyHeightFn = function(){
 	$('#modalQuestionaireData .modal-body').css('cssText', "max-height: "+((modalBodyHeight)+(windowHeight-modalHeight)-40)+"px !important;overflow-y:auto !important;");
 	$(window).off('resize');
 	$(window).on('resize',function(){
-		  console.log($(window ).outerHeight());		
+//		  console.log($(window ).outerHeight());		
 	       setTimeout(function(){ 
 	    		var windowHeight = $(window ).outerHeight();
 	    		var modalHeight = $("#modalQuestionaireData").outerHeight();
@@ -820,7 +820,7 @@ var findOneFn = function(data_header_id) {
 				});
 				setModalContentBodyHeightFn();
 			}else{
-				callFlashSlide(data.data,"error");
+				callFlashSlide(data.data);
 			}
 			
 		}
@@ -859,7 +859,7 @@ var getTemplateQuestionnaireFn = function() {
 	            $("#modal_questionaire_type_id").val("");
 	            $("#id").val("");
 	            
-	            callFlashSlide(data.data,"error");
+	            callFlashSlide(data.data);
 			}
 		}
 	});
@@ -902,7 +902,7 @@ var delFn = function(id) {
 				callFlashSlide("Delete Successfully");
 				$("#confrimModal").modal('hide');
 			}else if(data['status']=="400"){
-				callFlashSlide(validationFn(data),"error");
+				callFlashSlide(validationFn(data));
 			}
 		}
 	});
@@ -1329,7 +1329,7 @@ var generateStageFn = function(stage,current_stage,to_stage) {
 };
 var generateAnswerFormRadioFn = function(data,question_type ) {
 	//console.log(" ----  Form Radio -----");
-	//console.log(data);
+//	console.log(data,question_type);
 
 	var html="";
 	if(question_type == "Sub Section"){
@@ -1686,9 +1686,9 @@ var updateFn = function(element){
 	$.each(score ,function(){total_score +=parseFloat(this) || 0; });
 	$.each(full_score ,function(){total_full_score +=parseFloat(this) || 0; });
 	
-	console.log(detail);
-	console.log("total full score" + total_full_score);
-	console.log("total score" + total_score);
+//	console.log(detail);
+//	console.log("total full score" + total_full_score);
+//	console.log("total score" + total_score);
 	$.ajax({
 		
 		url:globalSevice['restfulPathQuestionnaireData'],
@@ -1873,9 +1873,8 @@ var insertFn = function(element){
 	$.each(score ,function(){total_score +=parseFloat(this) || 0; });
 	$.each(full_score ,function(){total_full_score +=parseFloat(this) || 0; });
 	
-	console.log(detail);
-	console.log("total full score" + total_full_score);
-	console.log("total score" + total_score);
+	//console.log("total full score" + total_full_score);
+	//console.log("total score" + total_score);
 	$.ajax({
 		
 		url:globalSevice['restfulPathQuestionnaireData'],
@@ -1906,7 +1905,7 @@ var insertFn = function(element){
 					generateNextFormFn(data,'insert');
 				}
 			}else if (data['status'] == "400") {
-				console.log(data);
+				//console.log(data);
 				callFlashSlide("Failed to insert data.");
 			}  
 				   

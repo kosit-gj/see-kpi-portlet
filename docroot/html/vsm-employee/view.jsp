@@ -364,7 +364,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 		.aui .ResultsPerPageTop {
 			position: absolute;
 			left: -20px;
-			top: 78px;
+			top: 50px;
 		}
 		.aui .ResultsPerPageBottom {
 			position: static;
@@ -575,7 +575,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 										<tr>
 											<th style='width: 5%;white-space: nowrap;'>Start Date</th>
 											<th style='width: 10%;white-space: nowrap;'>Emp Code</th>
-											<th style='width: 20%;white-space: nowrap;'>Emp Name</th>
+											<th style='width: 20%;white-space: nowrap;'>VSM AVSM</th>
 											<th style='width: 15%;white-space: nowrap;'>Org Name</th>
 											<th style='width: 10%;white-space: nowrap;'>Position Name</th>
 											<th style='width: 10%;white-space: nowrap;'>Chief Emp</th>
@@ -687,14 +687,16 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 					<div class="row-fluid">
 	                	<div class="span12 form-horizontal p-t-xxs">
 							<div class="form-group p-xxs">
-								<label class="control-label">Name (VSM):</label>
+<!-- 								<label class="control-label">Name (VSM):</label> -->
+								<label class="control-label">VSM:</label>
 								<div class="controls">
 									<input type="hidden" id="from_emp_id">
 									<input type="text" class="form-control input-sm span12" placeholder="" id="from_emp_name">
 								</div>
 							</div>
 							<div class="form-group p-xxs">
-								<label class="control-label">Last Name (AVSM):</label>
+<!-- 								<label class="control-label">Last Name (AVSM):</label> -->
+								<label class="control-label">AVSM:</label>
 								<div class="controls">
 									<input type="text" class="form-control input-sm span12" placeholder="" id="from_emp_last_name">
 								</div>
