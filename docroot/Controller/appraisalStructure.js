@@ -1,4 +1,107 @@
- $(document).ready(function(){
+var GenerateOptionIntoFormType = function(selectedId){
+	$.ajax({
+        url: restfulURL+"/"+serviceName+"/public/appraisal_structure/form_list",
+        type: "get",
+        dataType: "json",
+        data: {},
+        async: false,
+        headers: { Authorization: "Bearer " + tokenID.token },
+        success: function (data) { console.log(data);
+        	var htmlOption = "";
+            $.each(data, function (index, indexEntry) {
+            	if(selectedId == indexEntry.form_id){
+            		htmlOption += "<option value=" + indexEntry.form_id + " selected='selected'>" + indexEntry.form_name + "</option>";
+            	} else {
+            		htmlOption += "<option value=" + indexEntry.form_id + " >" + indexEntry.form_name + "</option>";
+            	}
+            });
+            console.log(htmlOption);
+            $("#form_id").html(htmlOption);
+        }
+	});
+} 
+
+
+var GenerateOptionIntoIsDeriveLevel = function(selectedId){
+	$.ajax({
+        url: restfulURL+"/"+serviceName+"/public/appraisal_structure/level_list",
+        type: "get",
+        dataType: "json",
+        data: {},
+        async: false,
+        headers: { Authorization: "Bearer " + tokenID.token },
+        success: function (data) {
+        	var levelId = $("#level_id");
+        	levelId.empty();
+            $.each(data, function (index, indexEntry) {
+            	if(selectedId == indexEntry.level_id){
+            		levelId.append(new Option(indexEntry.appraisal_level_name, indexEntry.level_id, selected, selected));
+            	} else {
+            		levelId.append(new Option(indexEntry.appraisal_level_name, indexEntry.level_id));
+            	}
+            });
+        }
+	});
+}
+
+
+var ToggledFlagOnSaveStructureModal = function(formIdValue){
+	if(formIdValue == 1){
+		// Disabled Deduct and Reward //
+		$("#is_unlimited_deduction_header, #is_value_get_zero_header, #is_unlimited_reward_header, #is_no_raise_value_header").hide();
+		$("#is_unlimited_deduction, #is_value_get_zero, #is_unlimited_reward, #is_no_raise_value").prop('checked',false);
+		
+		// Enabled Derive and Level (form type 1 only) //
+		$('#level_id').val($("#level_id option:eq(0)").val());
+		$('#is_derive').prop('checked', true);
+		$('#form-group-level_id').show();
+		$('#form-group-is_derive').show();
+		
+	} else if(formIdValue == 2){
+		// Disabled Deduct and Reward //
+		$("#is_unlimited_deduction_header, #is_value_get_zero_header, #is_unlimited_reward_header, #is_no_raise_value_header").hide();
+		$("#is_unlimited_deduction, #is_value_get_zero, #is_unlimited_reward, #is_no_raise_value").prop('checked',false);
+		
+		// Disabled Derive and Level //
+		$('#level_id').val('');
+		$('#is_derive').prop('checked', false);
+		$("#form-group-level_id").hide();
+		$("#form-group-is_derive").hide();
+		
+	} else if(formIdValue == 3) { //if Deduct Score
+		// Disabled Reward //
+		$("#is_unlimited_reward_header").hide();
+		$("#is_unlimited_reward").prop('checked',false);
+		
+		// Enabled Deduct //
+		$("#is_unlimited_deduction_header, #is_value_get_zero_header, #is_no_raise_value_header").show();
+		$("#is_unlimited_deduction, #is_value_get_zero").prop('checked',true);
+		$("#is_no_raise_value").prop('checked', false);
+		
+		// Disabled Derive and Level //
+		$('#level_id').val('');
+		$('#is_derive').prop('checked', false);
+		$("#form-group-level_id").hide();
+		$("#form-group-is_derive").hide();
+		
+	} else if(formIdValue == 4) { //if Reward Score
+		// Disabled Deduct //
+		$("#is_unlimited_deduction_header, #is_value_get_zero_header, #is_no_raise_value_header").hide();
+		$("#is_unlimited_deduction, #is_value_get_zero, #is_no_raise_value").prop('checked',false);
+		
+		// Enabled Reward //
+		$("#is_unlimited_reward_header").show();
+		$("#is_unlimited_reward").prop('checked',true);
+		
+		// Disable Derive and Level //
+		$('#level_id').val('');
+		$('#is_derive').prop('checked', false);
+		$("#form-group-level_id").hide();
+		$("#form-group-is_derive").hide();
+	}
+}
+
+$(document).ready(function(){
     	
 	 var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
@@ -79,69 +182,47 @@
 	    			 "expressSearch":false,
 	    			 "advanceSearchSet":false,
 	    	}
-	 
+	    	
 	    	createDataTableFn(options);
 	    	$("#table-appraisalStructure thead th").css("vertical-align", "middle");
-	    	$("#level_id").prepend("<option value=''></option>");
-	    	$("#level_id option:eq(1)").attr('selected','selected');
+	    	$("#modal-appraisalStructure").empty();
 	    	
-	    	    	
-	    	$("#form_id").change(function() {
-	    		if(this.value==1){
-	    			// Disabled Deduct and Reward //
-					$(".is_unlimited_deduction_header, .is_value_get_zero_header, .is_unlimited_reward_header, .is_no_raise_value_header").hide();
-					$(".checkbox-is_unlimited_deduction, .checkbox-is_value_get_zero, .checkbox-is_unlimited_reward, .checkbox-is_no_raise_value").prop('checked',false);
-					
-					// Enabled Derive and Level (form type 1 only) //
-					$('#level_id').val($("#level_id option:eq(1)").val());
-					$('.checkbox-is_derive').prop('checked', true);
-					$('#form-group-level_id').show();
-					$('#form-group-is_derive').show();
-					
-				} else if(this.value==2){
-					// Disabled Deduct and Reward //
-					$(".is_unlimited_deduction_header, .is_value_get_zero_header, .is_unlimited_reward_header, .is_no_raise_value_header").hide();
-					$(".checkbox-is_unlimited_deduction, .checkbox-is_value_get_zero, .checkbox-is_unlimited_reward, .checkbox-is_no_raise_value").prop('checked',false);
-					
-					// Disabled Derive and Level //
-					$('#level_id').val('');
-					$('.checkbox-is_derive').prop('checked', false);
-					$("#form-group-level_id").hide();
-					$("#form-group-is_derive").hide();
-					
-				} else if(this.value==3) { //if Deduct Score
-					// Disabled Reward //
-					$(".is_unlimited_reward_header").hide();
-					$(".checkbox-is_unlimited_reward").prop('checked',false);
-					
-					// Enabled Deduct //
-					$(".is_unlimited_deduction_header, .is_value_get_zero_header, .is_no_raise_value_header").show();
-					$(".checkbox-is_unlimited_deduction, .checkbox-is_value_get_zero").prop('checked',true);
-					$(".checkbox-is_no_raise_value").prop('checked', false);
-					
-					// Disabled Derive and Level //
-					$('#level_id').val('');
-					$('.checkbox-is_derive').prop('checked', false);
-					$("#form-group-level_id").hide();
-					$("#form-group-is_derive").hide();
-					
-				} else if(this.value==4) { //if Reward Score
-					// Disabled Deduct //
-					$(".is_unlimited_deduction_header, .is_value_get_zero_header, .is_no_raise_value_header").hide();
-					$(".checkbox-is_unlimited_deduction, .checkbox-is_value_get_zero, .checkbox-is_no_raise_value").prop('checked',false);
-					
-					// Enabled Reward //
-					$(".is_unlimited_reward_header").show();
-					$(".checkbox-is_unlimited_reward").prop('checked',true);
-					
-					// Disable Derive and Level //
-					$('#level_id').val('');
-					$('.checkbox-is_derive').prop('checked', false);
-					$("#form-group-level_id").hide();
-					$("#form-group-is_derive").hide();
-				} 
-	    	});
-	    	$("#form_id").change();
+	    	
+	    	// using new modal
+	    	$("#btnAdd").attr("data-target", "#saveStructureModal");
+	    	
+	    	// $("#btnAdd").off("click");
+	    	$("#btnAdd").unbind( "click" );
+	        $("#btnAdd").on("click", function () {
+	        	
+	        	// generate option into select tag
+	        	GenerateOptionIntoFormType(0);
+	        	GenerateOptionIntoIsDeriveLevel(0);
+	        	
+	        	$("#form_id").change(function() {
+	        		ToggledFlagOnSaveStructureModal(this.value);
+		    	});
+		    	$("#form_id").change();
+		    	
+		    	// is_derive change
+		    	$('#is_derive').change(function() {
+		    		if(this.checked) {
+		    			$('#level_id').val($("#level_id option:eq(0)").val());
+		    			$('#form-group-level_id').show();
+		    		} else {
+		    			$('#level_id').val("0");
+		    			$('#form-group-level_id').hide();
+		    		}
+		    		$('#textbox1').val(this.checked);
+		    	});
+		    	
+		    	
+		    	// submit 
+		    	
+		    	
+		    	
+	        })
+
 	 	}
 	 }
 });
