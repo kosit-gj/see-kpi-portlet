@@ -766,6 +766,12 @@ background-color:#71cccc !important;
                     <input class="form-control input-sm" id="Position_id" name="Position_id" value="" type="hidden">
                   </div>
                   
+                  <div class="form-group pull-left span3" style="margin-left: 5px;">
+				  	<select data-toggle="tooltip" title="Form Type" class="input form-control input-sm span12" id="appraisalForm" name="appraisalForm">
+					</select>
+					<input class="form-control input-sm" id="appraisalForm_id" name="appraisalForm_id" value="" type="hidden">
+				  </div>
+                  
                   <div class="form-group span3 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
                     <button type="button" class="btn btn-info input-sm" name="btnSearch" id="btnSearch">
                       <i class="icon-search"></i>&nbsp;Search

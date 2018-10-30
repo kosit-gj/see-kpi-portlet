@@ -740,6 +740,7 @@ var generateSubTableKPIFn = function(item,data){
 		var app_lv= $("#param_app_lv").val();
 		var org= $("#param_org_id").val();
 		var kpi= $("#param_kpi_id").val();
+		var form_id= $("#param_form_id").val();
 
 		$.ajax({
 			url : restfulURL+"/"+serviceName+"/public/dashboard/performance_trend",
@@ -753,7 +754,8 @@ var generateSubTableKPIFn = function(item,data){
 				"position_id":position,
 				"level_id":app_lv,
 				"org_id":org,
-				"item_id":kpi		
+				"item_id":kpi,
+				"appraisal_form_id":form_id
 			},
 			headers:{Authorization:"Bearer "+tokenID.token},
 			async:false,// w8 data 
@@ -995,7 +997,7 @@ var setScrollFn = function () {
 	
 }
  
- var searchAdvanceFn = function (year,period,app_lv,org,kpi,app_type,emp,position) {
+ var searchAdvanceFn = function (year,period,app_lv,org,kpi,app_type,emp,position,form_id) {
 	//embed parameter start
 		
 		var htmlParam="";
@@ -1007,6 +1009,7 @@ var setScrollFn = function () {
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' 	name='param_app_lv' 	value='"+app_lv+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' 	name='param_org_id' 	value='"+notNullTextFn(org)+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_kpi_id' 	name='param_kpi_id' 	value='"+notNullTextFn(kpi)+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_form_id' 		name='param_form_id' 	value='"+form_id+"'>";
 		$(".paramEmbed").remove();
 		$("body").append(htmlParam);
 		//embed parameter end
@@ -1406,7 +1409,8 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 					$("#kpi").val(),
 					$("#app_type").val(),
 					$("#emp_name_id").val(),
-					$("#position_id").val()
+					$("#position_id").val(),
+					$("#appraisalForm").val()
 					);
 			$("#accordion").show();
 			$("#accordion").children().children().next().eq(0).collapse('show');;
@@ -1565,6 +1569,8 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 			setParamSearch(dataSetParam);// in cMain.js
 			
 		}
+	 	
+	 	$("#appraisalForm").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_form","GET"));
 		
 		$(".app_url_hidden").show();
 		

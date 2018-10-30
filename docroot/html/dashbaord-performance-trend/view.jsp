@@ -791,6 +791,10 @@ overflow:auto;
 
 							</select>
 						</div>
+						<div class="form-group pull-left span3" style="margin-left: 5px; margin-bottom: 3px;">
+							<select data-toggle="tooltip" title="<liferay-ui:message key="form_type"/>" class="input form-control input-sm" id="appraisalForm" name="appraisalForm">
+							</select>
+						</div>
 
 
 						<div style="margin-bottom: 5px;"

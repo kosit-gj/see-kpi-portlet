@@ -336,7 +336,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 
 				<div class="row-fluid " id='usageLogAdvanceSearchArea'>
 
-					<div id="appraisalTypeArea" class="form-group span2"
+					<div id="appraisalTypeArea" class="form-group span3"
 						style="margin-left: 5px; margin-bottom: 3px;">
 
 						<select name="year" id="year"
@@ -349,7 +349,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 
 						</select>
 					</div>
-					<div id='xxxArea' class="form-group span2"
+					<div id='xxxArea' class="form-group span3"
 						style="margin-left: 5px; margin-bottom: 3px;">
 						<select name="period" id="period"
 							class="input form-control input-sm span12" title=""
@@ -362,7 +362,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 					</div>
 
 
-					<div id='xxxArea' class="form-group span2"
+					<div id='xxxArea' class="form-group span3"
 						style="margin-left: 5px; margin-bottom: 3px;">
 						<select name="region" id="region"
 							class="input form-control input-sm span12" title=""
@@ -378,7 +378,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 
 
 
-					<div id='appraisalLevelArea' class="form-group span2"
+					<div id='appraisalLevelArea' class="form-group span3"
 						style="margin-left: 5px; margin-bottom: 3px;">
 						<select name="district" id="district"
 							class="input form-control input-sm span12" title=""
@@ -390,7 +390,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 
 						</select>
 					</div>
-					<div class="form-group span2"
+					<div class="form-group span3"
 						style="margin-left: 5px; margin-bottom: 3px;">
 						<select name="kpi" id="kpi"
 							class="input form-control input-sm span12" title=""
@@ -400,6 +400,10 @@ This is the <b>Usage Log</b> portlet in View mode.2
 							<option value="">KPI1</option>
 							<option value="">KPI2</option>
 
+						</select>
+					</div>
+					<div class="form-group span3" style="margin-left: 5px; margin-bottom: 3px;">
+						<select data-toggle="tooltip" title="<liferay-ui:message key="form_type"/>" class="input form-control input-sm span12" id="appraisalForm" name="appraisalForm">
 						</select>
 					</div>
 

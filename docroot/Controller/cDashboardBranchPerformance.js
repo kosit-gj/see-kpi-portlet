@@ -148,6 +148,7 @@ var pinSymbol = function (color) {
 		var period= $("#embed_period").val();
 		var district_code= $("#embed_district").val();
 		var kpi= $("#embed_kpi").val();
+		var form_id = $("#embed_form_id").val();
 		//region_code=41&period_id=17&district_code=77031
 		$.ajax({
 			url:restfulURL+"/"+serviceName+"/public/dashboard/branch_performance",
@@ -157,7 +158,8 @@ var pinSymbol = function (color) {
 				"region_code"				:		region_code,
 				"period_id"					:		period,
 				"district_code"				:		district_code,
-				"item_id"					:		kpi
+				"item_id"					:		kpi,
+				"appraisal_form_id"         :       form_id
 			},
 			async:false,
 			headers:{Authorization:"Bearer "+tokenID.token},
@@ -232,6 +234,7 @@ var getColorJvectorMap = function(){
 	var period= $("#embed_period").val();
 	var district_code= $("#embed_district").val();
 	var kpi= $("#embed_kpi").val();
+	var form_id = $("#embed_form_id").val();
 	//region_code=41&period_id=17&district_code=77031
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/dashboard/branch_performance",
@@ -241,7 +244,8 @@ var getColorJvectorMap = function(){
 			"region_code"				:		region_code,
 			"period_id"					:		period,
 			"district_code"				:		district_code,
-			"item_id"					:		kpi
+			"item_id"					:		kpi,
+			"appraisal_form_id"         :       form_id
 			
 		},
 		async:false,
@@ -607,6 +611,7 @@ var showPerformanceDetailFn=function(district,province){
 	var dataDetails="";
 	var period= $("#embed_period").val();
 	var kpi= $("#embed_kpi").val();
+	var form_id = $("#embed_form_id").val();
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/dashboard/branch_details",
 		type:"get",
@@ -614,7 +619,8 @@ var showPerformanceDetailFn=function(district,province){
 		data : {
 			"province_code"		:  	district,
 				"period_id"		:	period,
-				"item_id"		:	kpi
+				"item_id"		:	kpi,
+				"appraisal_form_id"		:	form_id
 				
 			
 		},
@@ -720,6 +726,7 @@ var searchAdvanceFn = function() {
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_region' name='embed_region' value='"+$("#region").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_district' name='embed_district' value='"+$("#district").val()+"'>";
 	embedParam+="<input type='hidden' class='embed_param_search' id='embed_kpi' name='embed_kpi' value='"+$("#kpi").val()+"'>";
+	embedParam+="<input type='hidden' class='embed_param_search' id='embed_form_id' name='embed_form_id' value='"+$("#appraisalForm").val()+"'>";
 
 	$("#embedParamSearch").html(embedParam);
 	
@@ -758,6 +765,7 @@ $("document").ready(function(){
 			$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
 			$("#region").change(function(){$("#district").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/district_list","get",{"org_code":$("#region").val()},"All District"));$("#district").change();});
 			$("#district").change(function(){$("#kpi").html((generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/kpi_map_list","POST",{"region_code":$("#region").val(),"district_code":$("#district").val()},"All KPI")));});
+			$("#appraisalForm").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_form","GET"));
 			$(".app_url_hidden").show();
 			//$( "#detailPerfomanceArea" ).accordion();
 			 

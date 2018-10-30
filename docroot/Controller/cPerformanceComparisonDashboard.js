@@ -1,5 +1,30 @@
 var galbalDataTemp=[]; 
 
+var generateDropDownList = function(url,type,request,initValue){
+ 	var html="";
+ 	
+ 	if(initValue!=undefined){
+ 		html+="<option value=''>"+initValue+"</option>";
+	}
+
+ 	$.ajax ({
+ 		url:url,
+ 		type:type ,
+ 		dataType:"json" ,
+ 		data:request,
+ 		headers:{Authorization:"Bearer "+tokenID.token},
+ 		async:false,
+ 		success:function(data){
+ 			 			
+ 			$.each(data,function(index,indexEntry){
+ 				html+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1] == undefined  ?  Object.keys(indexEntry)[0]:Object.keys(indexEntry)[1]]+"</option>";	
+ 			});	
+
+ 		}
+ 	});	
+ 	return html;
+ };
+
 $('.barChart').barChart({
 
 	  // horizontal or vertical
@@ -28,7 +53,8 @@ var getChartLine = function(){
 				"level_id": $("#AppraisalEmpLevel_id").val(),
 				"appraisal_year": $("#appraisal_year").val(),
 				"emp_id": $("#EmpName_id").val(),
-				"position_id":$("#Position_id").val()
+				"position_id":$("#Position_id").val(),
+				"appraisal_form_id":$("#appraisalForm_id").val()
 			}
 	}
 	else{
@@ -37,6 +63,7 @@ var getChartLine = function(){
 				"org_id": $("#organization_id").val(),
 				"level_id": $("#AppraisalOrgLevel_id").val(),
 				"appraisal_year": $("#appraisal_year").val(),
+				"appraisal_form_id":$("#appraisalForm_id").val()
 			}
 	}
 	$.ajax({
@@ -267,7 +294,8 @@ var generateChartbar2D = function(id){  //chart bar by Daris
 				"level_id": $("#AppraisalEmpLevel_id").val(),
 				"appraisal_year": appraisal_year,
 				"emp_id": $("#EmpName_id").val(),
-				"position_id":$("#Position_id").val()
+				"position_id":$("#Position_id").val(),
+				"appraisal_form_id":$("#appraisalForm_id").val()
 			}
 		param_id = $("#EmpName_id").val();
 	}
@@ -276,6 +304,7 @@ var generateChartbar2D = function(id){  //chart bar by Daris
 				"org_id": $("#organization_id").val(),
 				"level_id": $("#AppraisalOrgLevel_id").val(),
 				"appraisal_year": appraisal_year,
+				"appraisal_form_id":$("#appraisalForm_id").val()
 			}
 	param_id = $("#organization_id").val();
 	}
@@ -711,6 +740,7 @@ $(document).ready(function() {
     ];
 
     dropDrowYearListFn();
+    $("#appraisalForm").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_form","GET"));
     $("#AppraisalYear").change(function() {
 //      dropDrowPeriodListFn($(this).val()); #close
     });
@@ -828,7 +858,8 @@ $(document).ready(function() {
     	&& $("#AppraisalOrgLevel").val() !=""
     	&& $("#organization").val() != ""
     	&& $("#EmpName_id").val() != ""
-    	&& $("#AppraisalYear").val() != "")
+    	&& $("#AppraisalYear").val() != ""
+    	&& $("#appraisalForm").val() != "")
     	|| $("#appraisalType").val() == "1"
     	){
     	
@@ -838,6 +869,7 @@ $(document).ready(function() {
     	$("#AppraisalOrgLevel_id").val($("#AppraisalOrgLevel").val());
     	$("#organization_id").val($("#organization").val());
     	$("#appraisal_year").val($("#AppraisalYear").val());
+    	$("#appraisalForm_id").val($("#appraisalForm").val());
     	getDataFn();
     	
     }

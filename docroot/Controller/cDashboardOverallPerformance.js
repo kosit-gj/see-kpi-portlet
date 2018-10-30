@@ -295,6 +295,7 @@
 		var app_lv= $("#param_app_lv").val();
 		var app_lv_org= $("#param_app_lv_org").val();
 		var org= $("#param_org_id").val();
+		var form_id= $("#param_form_id").val();
 
 		$.ajax({
 			url : restfulURL+"/"+serviceName+"/public/dashboard/kpi_overall_pie",
@@ -308,7 +309,8 @@
 				"position_id"			:		position,
 				"level_id"				:		app_lv,
 				"org_level_id"			:		app_lv_org,
-				"org_id"				:		org	
+				"org_id"				:		org,
+				"appraisal_form_id"		:		form_id
 			},
 			headers:{Authorization:"Bearer "+tokenID.token},
 			async:false,// w8 data 
@@ -332,6 +334,7 @@ var getDataAllKPIFn = function(page,rpp){
 	var app_lv= $("#param_app_lv").val();
 	var org= $("#param_org_id").val();
 	var perspective= $("#param_perspective").val();
+	var form_id = $("#param_form_id").val();
 	$.ajax({
 		url : restfulURL+"/"+serviceName+"/public/dashboard/perspective_details",
 		type : "get",
@@ -344,7 +347,8 @@ var getDataAllKPIFn = function(page,rpp){
 			"position_id"			:		position,
 			"level_id"				:		app_lv,
 			"org_id"				:		org,
-			"perspective_id" 		:		perspective 
+			"perspective_id" 		:		perspective,
+			"appraisal_form_id"		:		form_id
 		},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,// w8 data 
@@ -449,6 +453,7 @@ var getDataBubbleFn = function(page,rpp){
 	var org= $("#param_org_id").val();
 	var perspective= $("#param_perspective").val();
 	var app_lv_org= $("#param_app_lv_org").val();
+	var form_id = $("#param_form_id").val();
 	
 	$.ajax({
 		url : restfulURL+"/"+serviceName+"/public/dashboard/kpi_overall_bubble",
@@ -463,7 +468,8 @@ var getDataBubbleFn = function(page,rpp){
 			"level_id"				:		app_lv,
 			"org_level_id"			:		app_lv_org,
 			"org_id"				:		org,
-			"perspective_id" 		:		perspective 
+			"perspective_id" 		:		perspective,
+			"appraisal_form_id"		:		form_id
 		},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,// w8 data 
@@ -481,7 +487,7 @@ var getDataBubbleFn = function(page,rpp){
 };
 
  
- var searchAdvanceFn = function (year,period,app_lv,org,app_type,emp,emp_name,position) {
+ var searchAdvanceFn = function (year,period,app_lv,org,app_type,emp,emp_name,position,form_id) {
 	//embed parameter start
 	 var AppraisalLevel_ = ($("#app_type").val() == "1") ? $("#AppraisalOrgLevel").val() : $("#AppraisalEmpLevel").val() ;
 	 var AppraisalLevelOrg_ = $("#AppraisalOrgLevel").val();
@@ -496,6 +502,7 @@ var getDataBubbleFn = function(page,rpp){
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' 		name='param_app_lv' 	value='"+AppraisalLevel_+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv_org' 	name='param_app_lv_org' value='"+AppraisalLevelOrg_+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' 		name='param_org_id' 	value='"+org+"'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_form_id' 		name='param_form_id' 	value='"+form_id+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_perspective' 	name='param_perspective'value=''>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_item' 		name='param_item' 		value=''>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='sending_status' 	name='sending_status' 	value='true'>";
@@ -552,6 +559,7 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 		$("#year").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/year_list_assignment","GET"));
 		$("#period").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));
 		$("#app_type").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list","GET"));
+		$("#appraisalForm").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_form","GET"));
 		// $("#apprasiaLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/al_list","GET"));
 		// $("#kpi").html((generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val()})));
 		
@@ -676,7 +684,8 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 					$("#app_type").val(),
 					$("#emp_name_id").val(),
 					$("#emp_name").val(),
-					$("#position_id").val()
+					$("#position_id").val(),
+					$("#appraisalForm").val()
 					);
 			$("#listSubordinate").show();
 			return false;
