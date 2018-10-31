@@ -251,7 +251,7 @@
 }
 
 @media ( min-width : 768px) and (max-width: 979px) {
-		.modal.large {
+		.modal .large {
 		    width: 90%;
 		    margin-left:-45%;
 		    top:0px;
@@ -331,6 +331,8 @@
 		    width: 90%;
  		    margin-left:-45%; 
 		    top:0px;
+		    left: 5%;
+			right: 5%;
 		}
 	}
 /* Landscape phone to portrait tablet */
