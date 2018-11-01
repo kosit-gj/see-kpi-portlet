@@ -462,13 +462,13 @@ var btnEditStoreFn = function (element){
 					$.each(indexEntry2.question,function(index3,indexEntry3) {
 						
 						if(indexEntry3.answer_type_id == 1 || indexEntry3.answer_type_id == 2 ){
-							html+=generateAnswerFormRadioFn(indexEntry3,"Sub Section");
+							html+=generateAnswerFormRadioFn(indexEntry3,"Sub Section", indexEntry2.pass_score);
 						}else if(indexEntry3.answer_type_id == 3 || indexEntry3.answer_type_id == 4 ){
-							html+=generateAnswerFormCheckboxesFn(indexEntry3,"Sub Section");
+							html+=generateAnswerFormCheckboxesFn(indexEntry3,"Sub Section", indexEntry2.pass_score);
 						}else if(indexEntry3.answer_type_id == 5 || indexEntry3.answer_type_id == 6 ){
-							html+=generateAnswerFormDropdownFn(indexEntry3,"Sub Section");
+							html+=generateAnswerFormDropdownFn(indexEntry3,"Sub Section", indexEntry2.pass_score);
 						}else{
-							html+=generateAnswerFormCommentFn(indexEntry3,"Sub Section");
+							html+=generateAnswerFormCommentFn(indexEntry3,"Sub Section", indexEntry2.pass_score);
 						}
 						
 						
@@ -482,13 +482,13 @@ var btnEditStoreFn = function (element){
 					}else if(indexEntry2.question == "" && indexEntry2.answer != ""){
 						
 						if(indexEntry2.answer_type_id == 1 || indexEntry2.answer_type_id == 2 ){
-							html+=generateAnswerFormRadioFn(indexEntry2,"Question");
+							html+=generateAnswerFormRadioFn(indexEntry2,"Question", indexEntry2.pass_score);
 						}else if(indexEntry2.answer_type_id == 3 || indexEntry2.answer_type_id == 4 ){
-							html+=generateAnswerFormCheckboxesFn(indexEntry2,"Question");
+							html+=generateAnswerFormCheckboxesFn(indexEntry2,"Question", indexEntry2.pass_score);
 						}else if(indexEntry2.answer_type_id == 5 || indexEntry2.answer_type_id == 6 ){
-							html+=generateAnswerFormDropdownFn(indexEntry2,"Question");
+							html+=generateAnswerFormDropdownFn(indexEntry2,"Question", indexEntry2.pass_score);
 						}else{
-							html+=generateAnswerFormCommentFn(indexEntry2,"Question");
+							html+=generateAnswerFormCommentFn(indexEntry2,"Question", indexEntry2.pass_score);
 						}
 		
 					}
@@ -1215,13 +1215,13 @@ var generateQuestionaireFormBySubSectionFn = function(data){
 			$.each(indexEntry2.question,function(index3,indexEntry3) {
 				
 				if(indexEntry3.answer_type_id == 1 || indexEntry3.answer_type_id == 2 ){
-					html+=generateAnswerFormRadioFn(indexEntry3,"Sub Section");
+					html+=generateAnswerFormRadioFn(indexEntry3,"Sub Section", indexEntry2.pass_score);
 				}else if(indexEntry3.answer_type_id == 3 || indexEntry3.answer_type_id == 4 ){
-					html+=generateAnswerFormCheckboxesFn(indexEntry3,"Sub Section");
+					html+=generateAnswerFormCheckboxesFn(indexEntry3,"Sub Section", indexEntry2.pass_score);
 				}else if(indexEntry3.answer_type_id == 5 || indexEntry3.answer_type_id == 6 ){
-					html+=generateAnswerFormDropdownFn(indexEntry3,"Sub Section");
+					html+=generateAnswerFormDropdownFn(indexEntry3,"Sub Section", indexEntry2.pass_score);
 				}else{
-					html+=generateAnswerFormCommentFn(indexEntry3,"Sub Section");
+					html+=generateAnswerFormCommentFn(indexEntry3,"Sub Section", indexEntry2.pass_score);
 				}
 				
 				
@@ -1235,13 +1235,13 @@ var generateQuestionaireFormBySubSectionFn = function(data){
 			}else if(indexEntry2.question == "" && indexEntry2.answer != ""){
 				
 				if(indexEntry2.answer_type_id == 1 || indexEntry2.answer_type_id == 2 ){
-					html+=generateAnswerFormRadioFn(indexEntry2,"Question");
+					html+=generateAnswerFormRadioFn(indexEntry2,"Question", indexEntry2.pass_score);
 				}else if(indexEntry2.answer_type_id == 3 || indexEntry2.answer_type_id == 4 ){
-					html+=generateAnswerFormCheckboxesFn(indexEntry2,"Question");
+					html+=generateAnswerFormCheckboxesFn(indexEntry2,"Question", indexEntry2.pass_score);
 				}else if(indexEntry2.answer_type_id == 5 || indexEntry2.answer_type_id == 6 ){
-					html+=generateAnswerFormDropdownFn(indexEntry2,"Question");
+					html+=generateAnswerFormDropdownFn(indexEntry2,"Question", indexEntry2.pass_score);
 				}else{
-					html+=generateAnswerFormCommentFn(indexEntry2,"Question");
+					html+=generateAnswerFormCommentFn(indexEntry2,"Question", indexEntry2.pass_score);
 				}
 					
 					
@@ -1327,7 +1327,7 @@ var generateStageFn = function(stage,current_stage,to_stage) {
 		else{	updateFn(this);		}
 	});
 };
-var generateAnswerFormRadioFn = function(data,question_type ) {
+var generateAnswerFormRadioFn = function(data,question_type,pass_score) {
 	//console.log(" ----  Form Radio -----");
 //	console.log(data,question_type);
 
@@ -1347,6 +1347,7 @@ var generateAnswerFormRadioFn = function(data,question_type ) {
 							"answer_id='"+indexEntry.answer_id+"' " +
 							"value='"+indexEntry.score+"' " +
 							"full_score='"+indexEntry.full_score+"' " +
+							"pass_score='"+pass_score+"' " +
 							"is_not_applicable='"+indexEntry.is_not_applicable+"' > "+indexEntry.answer_name+"";
 		html+="        </label>";
 
@@ -1376,7 +1377,7 @@ var generateAnswerFormRadioFn = function(data,question_type ) {
 		html+="        <div class='"+(data.answer_type_id == 1 ? "span12" : "span3")+"'>";
 		$.each(data.answer,function(index,indexEntry) {
 			html+="        <label class='radio inline' style='padding-bottom: 5px; margin-bottom: 10px;margin-left: 10px;'>";
-			html+="          <input "+(indexEntry.is_check == 1 ? "checked":"")+" style='margin-top: 2px;' class='radioAnswer' type='radio' name='optionsRadios-"+data.question_id+"' id='optionsRadios-"+indexEntry.answer_id+"' data_detail_id='"+(indexEntry.data_detail_id != undefined ? indexEntry.data_detail_id : "")+"' answer_id='"+indexEntry.answer_id+"' full_score='"+indexEntry.full_score+"' value='"+indexEntry.score+"' is_not_applicable='"+indexEntry.is_not_applicable+"'> "+indexEntry.answer_name+"";
+			html+="          <input "+(indexEntry.is_check == 1 ? "checked":"")+" style='margin-top: 2px;' class='radioAnswer' type='radio' name='optionsRadios-"+data.question_id+"' id='optionsRadios-"+indexEntry.answer_id+"' data_detail_id='"+(indexEntry.data_detail_id != undefined ? indexEntry.data_detail_id : "")+"' answer_id='"+indexEntry.answer_id+"' full_score='"+indexEntry.full_score+"' value='"+indexEntry.score+"' is_not_applicable='"+indexEntry.is_not_applicable+"' pass_score='"+pass_score+"'> "+indexEntry.answer_name+"";
 			html+="        </label>";
 			
 		});
@@ -1392,7 +1393,7 @@ var generateAnswerFormRadioFn = function(data,question_type ) {
 	//console.log("Return : "+html);
 	return html;
 };
-var generateAnswerFormCheckboxesFn = function(data,question_type) {
+var generateAnswerFormCheckboxesFn = function(data,question_type,pass_score) {
 	//console.log(" ----  Form Checkboxes -----");
 	var html="";
 	if(question_type == "Sub Section"){
@@ -1403,7 +1404,7 @@ var generateAnswerFormCheckboxesFn = function(data,question_type) {
 	$.each(data.answer,function(index,indexEntry) {
 
 		html+="        <label class='radio inline' style='padding-bottom: 5px; margin-bottom: 10px;margin-left: 10px;padding-left: 0px;'>";
-		html+="          <input "+(indexEntry.is_check == 1 ? "checked":"")+" style='margin-top: 2px;margin-top: -2px;' class='checkboxAnswer' type='checkbox' name='optionsCheckbox-"+data.question_id+"' id='optionsCheckbox-"+indexEntry.answer_id+"' data_detail_id='"+(indexEntry.data_detail_id != undefined ? indexEntry.data_detail_id : "")+"' answer_id='"+indexEntry.answer_id+"' full_score='"+indexEntry.full_score+"' value='"+indexEntry.score+"' is_not_applicable='"+indexEntry.is_not_applicable+"'> "+indexEntry.answer_name+"";
+		html+="          <input "+(indexEntry.is_check == 1 ? "checked":"")+" style='margin-top: 2px;margin-top: -2px;' class='checkboxAnswer' type='checkbox' name='optionsCheckbox-"+data.question_id+"' id='optionsCheckbox-"+indexEntry.answer_id+"' data_detail_id='"+(indexEntry.data_detail_id != undefined ? indexEntry.data_detail_id : "")+"' answer_id='"+indexEntry.answer_id+"' full_score='"+indexEntry.full_score+"' value='"+indexEntry.score+"' is_not_applicable='"+indexEntry.is_not_applicable+"' pass_score='"+pass_score+"'> "+indexEntry.answer_name+"";
 		html+="        </label>";
 
 	});
@@ -1431,7 +1432,7 @@ var generateAnswerFormCheckboxesFn = function(data,question_type) {
 		html+="        <div class='"+(data.answer_type_id == 3 ? "span12" : "span3")+"'>";
 		$.each(data.answer,function(index,indexEntry) {
 			html+="        <label class='radio inline' style='padding-bottom: 5px; margin-bottom: 10px;margin-left: 10px;padding-left: 0px;'>";
-			html+="          <input "+(indexEntry.is_check == 1 ? "checked":"")+" style='margin-top: 2px;margin-top: -2px;' class='checkboxAnswer' type='checkbox' name='optionsCheckbox-"+data.question_id+"' name='optionsCheckbox-"+data.question_id+"' id='optionsRadios-"+indexEntry.answer_id+"' data_detail_id='"+(indexEntry.data_detail_id != undefined ? indexEntry.data_detail_id : "")+"' answer_id='"+indexEntry.answer_id+"' full_score='"+indexEntry.full_score+"' value='"+indexEntry.score+"' is_not_applicable='"+indexEntry.is_not_applicable+"'> "+indexEntry.answer_name+"";
+			html+="          <input "+(indexEntry.is_check == 1 ? "checked":"")+" style='margin-top: 2px;margin-top: -2px;' class='checkboxAnswer' type='checkbox' name='optionsCheckbox-"+data.question_id+"' name='optionsCheckbox-"+data.question_id+"' id='optionsRadios-"+indexEntry.answer_id+"' data_detail_id='"+(indexEntry.data_detail_id != undefined ? indexEntry.data_detail_id : "")+"' answer_id='"+indexEntry.answer_id+"' full_score='"+indexEntry.full_score+"' value='"+indexEntry.score+"' is_not_applicable='"+indexEntry.is_not_applicable+"' pass_score='"+pass_score+"'> "+indexEntry.answer_name+"";
 			html+="        </label>";
 
 		});
@@ -1446,7 +1447,7 @@ var generateAnswerFormCheckboxesFn = function(data,question_type) {
 	}
 	return html;
 };
-var generateAnswerFormDropdownFn = function(data,question_type) {
+var generateAnswerFormDropdownFn = function(data,question_type,pass_score) {
 	//console.log(" ----  Form Dropdown -----");
 	//console.log(data);
 	
@@ -1464,7 +1465,7 @@ var generateAnswerFormDropdownFn = function(data,question_type) {
 		html+="         <select class='span2 sel'>";
 		$.each(data.answer,function(index,indexEntry) {
 			//answer_id: 149 ,answer_name: "Yes" ,is_not_applicable: 0, row_name: "Yes" ,score: "1.0"
-			html+="            <option "+(indexEntry.is_check == 1 ? "selected":"")+" value='"+indexEntry.score+"' data_detail_id='"+(indexEntry.data_detail_id != undefined ? indexEntry.data_detail_id : "")+"' answer_id='"+indexEntry.answer_id+"' is_not_applicable='"+indexEntry.is_not_applicable+"' full_score='"+indexEntry.full_score+"'>"+indexEntry.answer_name+"</option>";
+			html+="            <option "+(indexEntry.is_check == 1 ? "selected":"")+" value='"+indexEntry.score+"' data_detail_id='"+(indexEntry.data_detail_id != undefined ? indexEntry.data_detail_id : "")+"' answer_id='"+indexEntry.answer_id+"' is_not_applicable='"+indexEntry.is_not_applicable+"' full_score='"+indexEntry.full_score+"' pass_score='"+pass_score+"'>"+indexEntry.answer_name+"</option>";
 	
 		});
 		html+="          </select>";
@@ -1489,7 +1490,7 @@ var generateAnswerFormDropdownFn = function(data,question_type) {
 		html+="         <select class='span2 sel'>";
 		$.each(data.answer,function(index,indexEntry) {
 			//answer_id: 149 ,answer_name: "Yes" ,is_not_applicable: 0, row_name: "Yes" ,score: "1.0"
-			html+="            <option "+(indexEntry.is_check == 1 ? "selected":"")+" value='"+indexEntry.score+"' data_detail_id='"+(indexEntry.data_detail_id != undefined ? indexEntry.data_detail_id : "")+"' answer_id='"+indexEntry.answer_id+"' is_not_applicable='"+indexEntry.is_not_applicable+"' full_score='"+indexEntry.full_score+"'>"+indexEntry.answer_name+"</option>";
+			html+="            <option "+(indexEntry.is_check == 1 ? "selected":"")+" value='"+indexEntry.score+"' data_detail_id='"+(indexEntry.data_detail_id != undefined ? indexEntry.data_detail_id : "")+"' answer_id='"+indexEntry.answer_id+"' is_not_applicable='"+indexEntry.is_not_applicable+"' full_score='"+indexEntry.full_score+"' pass_score='"+pass_score+"'>"+indexEntry.answer_name+"</option>";
 
 		});
 		html+="          </select>";
@@ -1501,7 +1502,7 @@ var generateAnswerFormDropdownFn = function(data,question_type) {
 	}
 	return html;
 };
-var generateAnswerFormCommentFn = function(data,question_type) {
+var generateAnswerFormCommentFn = function(data,question_type,pass_score) {
 	//console.log(" ----  Comment Data -----");
 	//console.log(data);
 	var html="";
@@ -1511,7 +1512,7 @@ var generateAnswerFormCommentFn = function(data,question_type) {
 		$.each(data.answer,function(index,indexEntry) {
 			//answer_id: 149 ,answer_name: "Yes" ,is_not_applicable: 0, row_name: "Yes" ,score: "1.0"
 			html+="      <p>"+indexEntry.answer_name+"</p>";
-			html+="       	<textarea class='form-control' rows='5' id='comment-"+data.question_id+"' style='width:96%; margin-bottom: 0px; resize: vertical;' data_detail_id='"+(indexEntry.data_detail_id != undefined ? indexEntry.data_detail_id : "")+"' answer_id='"+indexEntry.answer_id+"' is_not_applicable='"+indexEntry.is_not_applicable+"' score='"+indexEntry.score+"' full_score='"+indexEntry.full_score+"'>"+indexEntry.desc_answer+"</textarea>";
+			html+="       	<textarea class='form-control' rows='5' id='comment-"+data.question_id+"' style='width:96%; margin-bottom: 0px; resize: vertical;' data_detail_id='"+(indexEntry.data_detail_id != undefined ? indexEntry.data_detail_id : "")+"' answer_id='"+indexEntry.answer_id+"' is_not_applicable='"+indexEntry.is_not_applicable+"' score='"+indexEntry.score+"' full_score='"+indexEntry.full_score+"' pass_score='"+pass_score+"'>"+indexEntry.desc_answer+"</textarea>";
 			if((index+1) != data.answer.length){
 				html+="  <hr style='margin-top: 15px; margin-bottom: 15px;'>";
 			}
@@ -1533,7 +1534,7 @@ var generateAnswerFormCommentFn = function(data,question_type) {
 		$.each(data.answer,function(index,indexEntry) {
 			//console.log(index);
 			html+="      <p>"+indexEntry.answer_name+"</p>";
-			html+="       	<textarea class='form-control' rows='5' id='comment-"+data.question_id+"' style='width:96%; margin-bottom: 10px; resize: vertical;' data_detail_id='"+(indexEntry.data_detail_id != undefined ? indexEntry.data_detail_id : "")+"' answer_id='"+indexEntry.answer_id+"' is_not_applicable='"+indexEntry.is_not_applicable+"' score='"+indexEntry.score+"' full_score='"+indexEntry.full_score+"'>"+indexEntry.desc_answer+"</textarea>";
+			html+="       	<textarea class='form-control' rows='5' id='comment-"+data.question_id+"' style='width:96%; margin-bottom: 10px; resize: vertical;' data_detail_id='"+(indexEntry.data_detail_id != undefined ? indexEntry.data_detail_id : "")+"' answer_id='"+indexEntry.answer_id+"' is_not_applicable='"+indexEntry.is_not_applicable+"' score='"+indexEntry.score+"' full_score='"+indexEntry.full_score+"' pass_score='"+pass_score+"'>"+indexEntry.desc_answer+"</textarea>";
 	
 			
 		});
@@ -1566,7 +1567,6 @@ var updateFn = function(element){
 
 
 	$.each($("#accordionListQuestionaireData").children('div').get(),function(index,indexEntry){
-		
 		$.each($(indexEntry).find('tbody tr').get(),function(index2,indexEntry2){
 			var detail_group ={};
 			detail_group.section_id= $(indexEntry).attr("section_id");
@@ -1585,8 +1585,10 @@ var updateFn = function(element){
 					$.each($(indexEntry2).find("input:checked").get(),function(index3,indexEntry3){
 						
 						if($(indexEntry).attr("is_cust_search")==0 && $(indexEntry3).attr("is_not_applicable")==0){
-							score.push(parseFloat($(indexEntry3).val()));
-							full_score.push(parseFloat($(indexEntry3).attr("full_score")));
+							if(parseFloat($(indexEntry3).attr("pass_score")) > 0) {
+								score.push(parseFloat($(indexEntry3).val()));
+								full_score.push(parseFloat($(indexEntry3).attr("full_score")));
+							}
 						}
 						detail.push({
 							section_id			: detail_group.section_id,
@@ -1611,8 +1613,10 @@ var updateFn = function(element){
 						
 						
 						if($(indexEntry).attr("is_cust_search")==0 && $(indexEntry3).attr("is_not_applicable") == 0 ){
-							score.push(parseFloat($(indexEntry3).val()));
-							full_score.push(parseFloat($(indexEntry3).attr("full_score")));
+							if(parseFloat($(indexEntry3).attr("pass_score")) > 0) {
+								score.push(parseFloat($(indexEntry3).val()));
+								full_score.push(parseFloat($(indexEntry3).attr("full_score")));
+							}
 						}
 						//console.log("Bf total_score :"+parseFloat(total_score +$(indexEntry3).val()).toFixed(1));
 						detail.push({
@@ -1638,8 +1642,10 @@ var updateFn = function(element){
 				if($(indexEntry).attr("is_cust_search")==1 && detail_group.customer_id == ""){}
 				else{
 					if($(indexEntry).attr("is_cust_search")==0 && $(indexEntry2).find("option:selected").attr("is_not_applicable")==0){
-						score.push(parseFloat($(indexEntry2).find("option:selected").val()));
-						full_score.push(parseFloat($(indexEntry2).find("option:selected").attr("full_score")));
+						if(parseFloat($(indexEntry3).attr("pass_score")) > 0) {
+							score.push(parseFloat($(indexEntry2).find("option:selected").val()));
+							full_score.push(parseFloat($(indexEntry2).find("option:selected").attr("full_score")));
+						}
 					}
 					detail.push({
 							section_id			: detail_group.section_id,
@@ -1753,9 +1759,7 @@ var insertFn = function(element){
 	stage.remark =  $("#modal_remark").val();
 	stage.customer_name = globalDataTemp['tempAutocompleteStoreName'];
 
-
 	$.each($("#accordionListQuestionaireData").children('div').get(),function(index,indexEntry){
-		
 		$.each($(indexEntry).find('tbody tr').get(),function(index2,indexEntry2){
 			var detail_group ={};
 			detail_group.section_id= $(indexEntry).attr("section_id");
@@ -1774,8 +1778,10 @@ var insertFn = function(element){
 					$.each($(indexEntry2).find("input:checked").get(),function(index3,indexEntry3){
 						//score.push(parseFloat($(indexEntry3).val()));
 						if($(indexEntry).attr("is_cust_search")==0 && $(indexEntry3).attr("is_not_applicable")==0){
-							score.push(parseFloat($(indexEntry3).val()));
-							full_score.push(parseFloat($(indexEntry3).attr("full_score")));
+							if(parseFloat($(indexEntry3).attr("pass_score")) > 0) {
+								score.push(parseFloat($(indexEntry3).val()));
+								full_score.push(parseFloat($(indexEntry3).attr("full_score")));
+							}
 						}
 						detail.push({
 							section_id			: detail_group.section_id,
@@ -1799,8 +1805,10 @@ var insertFn = function(element){
 						
 						//score.push(parseFloat($(indexEntry3).val()));
 						if($(indexEntry).attr("is_cust_search")==0 && $(indexEntry3).attr("is_not_applicable") == 0){
-							score.push(parseFloat($(indexEntry3).val()));
-							full_score.push(parseFloat($(indexEntry3).attr("full_score")));
+							if(parseFloat($(indexEntry3).attr("pass_score")) > 0) {
+								score.push(parseFloat($(indexEntry3).val()));
+								full_score.push(parseFloat($(indexEntry3).attr("full_score")));
+							}
 						}
 						//console.log("Bf total_score :"+parseFloat(total_score +$(indexEntry3).val()).toFixed(1));
 						detail.push({
@@ -1827,8 +1835,10 @@ var insertFn = function(element){
 					
 					//score.push(parseFloat($(indexEntry2).find("option:selected").val()));
 					if($(indexEntry).attr("is_cust_search")==0 && $(indexEntry2).find("option:selected").attr("is_not_applicable") == 0){
-						score.push(parseFloat($(indexEntry2).find("option:selected").val()));
-						full_score.push(parseFloat($(indexEntry2).find("option:selected").attr("full_score")));
+						if(parseFloat($(indexEntry3).attr("pass_score")) > 0) {
+							score.push(parseFloat($(indexEntry2).find("option:selected").val()));
+							full_score.push(parseFloat($(indexEntry2).find("option:selected").attr("full_score")));
+						}
 					}
 					detail.push({
 							section_id			: detail_group.section_id,
