@@ -115,11 +115,13 @@ plid = layout.getPlid();
 			</div>
 			
 			<div class="modal-footer">
-				<button class="btn btn-success" type="button" id="btnSetweightSubmit">Save</button>
+				<button class="btn btn-primary" type="button" id="btnSetweightSubmit">Save</button>
+				<button class="btn btn-primary" type="button" id="btnSetweightSubmitAnother">Save & Add Another</button>
 				<button data-dismiss="modal" class="btn btn-danger btnCancle setWeightCloseModal" type="button">Cancel</button>
 			</div>
 			
-			<div class="alert alert-warning information" id="information3" style="display: none;">
+		
+			<div class="alert alert-warning information" id="information" style="display: none;">
 				<!-- System Message -->
 			</div>
 			
