@@ -2496,7 +2496,9 @@ var validationAppraisalFn = function (data) {
     return errorData;
 }
 
-var saveAppraisalFn = function () {
+
+var saveAppraisalIndividualFn = function () 
+{
     updateCommentFn();   // -->  save comment 
     updateQualityFn();   // -->  save quality 
 
@@ -2579,6 +2581,90 @@ var saveAppraisalFn = function () {
         }
     });
 }
+
+
+var saveAppraisalOrganizationFn = function()
+{
+	var competencyScore_First = "";
+	var competencyScore_Second = "";
+	var sum_ScoreCompetency = 0;
+	var competencyScore_Avg = "";
+	
+	var appraisal="";
+	appraisal+="[";
+	$.each($(".itemScore").get(),function(index,indexEntry){
+		var typeScore="";
+		var item_result_id=$(indexEntry).attr("id");
+		item_result_id=item_result_id.split("-");
+		typeScore=item_result_id[0];
+		item_result_id=item_result_id[1];
+
+		if(index==0){
+			appraisal+="{";
+		}else{
+			appraisal+=",{";
+		}
+		appraisal+="\"item_result_id\":\""+item_result_id+"\",";
+		if(typeScore=="forecast"){
+			appraisal+="\"forecast_value\":\""+removeComma($(indexEntry).val())+"\",";
+			appraisal+="\"actual_value\":\"\"";
+			//appraisal+="\"actual_value\":\""+$("#actual-"+item_result_id).val()+"\",";
+
+		}else if(typeScore=="competencyScore"){
+			appraisal+="\"forecast_value\":\"\",";
+			appraisal+="\"actual_value\":\"\",";
+			appraisal+="\"first_score\":\""+$(indexEntry).val()+"\"";
+			
+			competencyScore_First = parseInt($(indexEntry).val());
+			
+		}else if(typeScore=="competencyScore_Second"){
+			appraisal+="\"forecast_value\":\"\",";
+			appraisal+="\"actual_value\":\"\",";
+			appraisal+="\"second_score\":\""+$(indexEntry).val()+"\",";
+	
+			competencyScore_Second = parseInt($(indexEntry).val());
+			sum_ScoreCompetency = competencyScore_First + competencyScore_Second;
+			competencyScore_Avg = sum_ScoreCompetency / 2;
+			
+			appraisal+="\"score\":\""+competencyScore_Avg+"\"";
+		}
+		appraisal+="}";
+	});
+	
+	appraisal+="]";
+	console.log(appraisal);
+	var appraisalObject=eval("("+appraisal+")");
+
+	$.ajax({
+		url:restfulURL+"/"+serviceName+"/public/appraisal/"+$("#emp_result_id").val(),
+		type:"patch",
+		dataType:"json",
+		async:false,
+		data:{
+			"stage_id":$("#actionToAssign").val(),
+			"remark":$("#remark_footer").val(),
+			"appraisal":appraisalObject
+			},
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			if(data['status']==200){
+				
+				$("#ModalAppraisal").modal('hide');
+				callFlashSlide($(".lt-saved").val());
+				
+				if(emailLinkAppraisal==true) {
+					var url_redirect = $(location).attr('href').split("/").splice(0, 5).join("/");
+					window.location.replace(url_redirect+"/kpi-result");
+					return false;
+				}
+
+			}else if(data['status']==400){
+				callFlashSlideInModal(validationAppraisalFn(data),"#information","error");
+			}
+		}
+	});
+}
+
 
 var generateGanttChartFn = function (dataSource) {
 
@@ -2991,7 +3077,13 @@ $(document).ready(function () {
 
             //submit
             $("#btnSubmit").click(function () {
-                saveAppraisalFn();
+            	if($("#embed_appraisalType").val() == "1") {
+            		// Is Organization.
+            		saveAppraisalOrganizationFn();
+            	} else {
+            		// Is Individual.
+            		saveAppraisalIndividualFn();
+            	}
             });
 
             //Action Plan Action Area...
