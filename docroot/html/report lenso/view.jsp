@@ -8,24 +8,14 @@
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 <%
-/*
-PortletSession portletSession1 = renderRequest.getPortletSession();
-portletSession1.setAttribute("password", "authenticated", PortletSession.APPLICATION_SCOPE);
-String pwd = (String) portletSession1.getAttribute("password", PortletSession.APPLICATION_SCOPE);
-out.print(pwd);
-String password=PortalUtil.getUser(request).getPassword();
-*/
 
 String username = themeDisplay.getUser().getScreenName();
 String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWORD);
-//out.print(username);
 
 String param_link = PortalUtil.getOriginalServletRequest(request).getParameter("param_link");
 String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getParameter("param_item_result_id");
 layout = themeDisplay.getLayout();
 plid = layout.getPlid();
-//out.print(param);
-//out.print("password2="+password);
 %>
 
 <style>
@@ -79,8 +69,6 @@ plid = layout.getPlid();
 	.aui #advanceSearchAppraisal.row-fluid .span3 {
     	width: 32.5%;
 	}
-
-
   }
  /*  desktop End############################################*/
 
@@ -115,9 +103,6 @@ plid = layout.getPlid();
 	#actionPlanModal{
 		margin-top:0px;
 	}
-
-
-
 	.moblieArea{
 		display:block;
 		font-size:0.8em;
@@ -293,8 +278,6 @@ plid = layout.getPlid();
 		width:100%;
 	}
 	/*btn area end*/
-
-
   }
   /* Landscape phones and down End##########################*/
 
@@ -348,22 +331,6 @@ plid = layout.getPlid();
 
 }
 
-/*
-.aui .modal {
-    background-clip: padding-box;
-    background-color: white;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 6px;
-    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-    left: 23%;
-    margin-left: -280px;
-    outline: 0 none;
-    position: fixed;
-    top: 0%;
-    width: 90%;
-    z-index: 1050;
-}
-*/
 .aui input, .aui textarea, .aui .uneditable-input {
    /* width: 47px;*/
 }
@@ -423,13 +390,6 @@ plid = layout.getPlid();
 .aui .table td{
 	font-size: 13px;
 }
-/*
-.modal.large {
-    width: 90%;
-    margin-left:-45%;
-    top:0px;
-}
-*/
 .aui #assignTo{
 	width:100%;
 }
@@ -675,19 +635,18 @@ background-color:#71cccc !important;
                       <option>All Appraisal Period</option>
                     </select>
                   </div>
-				<div style="display:none" class="display">
-				<div class="form-group pull-left span3" style="margin-left: 5px">
+
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
                     <select id="appraisalType" name="appraisalType" data-toggle="tooltip" title="" data-original-title="Entity Type " class="input form-control input-sm span12">
                     </select>
                   </div>
-				</div>
-				<div style="display:none" class="display">
+
                   <div class="form-group pull-left span3" style="margin-left: 5px">
                     <select id="AppraisalEmpLevel" name="AppraisalEmpLevel" data-toggle="tooltip" title="" data-original-title="Employee Level" class="input form-control input-sm span12">
                       <option>All Level</option>
                     </select>
                   </div>
-				</div>
+
                   <div class="form-group pull-left span3" style="margin-left: 5px">
                     <select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip" title="" data-original-title="Organization Level" class="input form-control input-sm span12">
                       <option>All Level</option>
@@ -695,22 +654,18 @@ background-color:#71cccc !important;
                   </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select data-toggle="tooltip" title="" data-original-title="organization" class="input form-control input-sm span12" id="organization" name="organization">
-                      <option>All Organization</option>
+                    <select data-toggle="tooltip" title="" multiple="multiple" data-original-title="organization" class="input form-control input-sm span12" id="organization" name="organization">
                     </select>
                   </div>
-					<div style="display:none" class="display">
-					 <div class="form-group pull-left span3" style="margin-left: 5px">
-					                    <input data-toggle="tooltip" title="" data-original-title="Employee Name" class="form-control input-sm searchAdvanceText span12" placeholder="Employee Name" type="text" id="EmpName" name="EmpName" />
-					                    <input class="form-control input-sm" id="EmpName_id" name="EmpName_id" value="" type="hidden">
-					  </div>
-					</div>
-                 
-				<div style="display:none" class="display">
+
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <input data-toggle="tooltip" title="" data-original-title="Employee Name" class="form-control input-sm searchAdvanceText span12" placeholder="Employee Name" type="text" id="EmpName" name="EmpName" />
+                    <input class="form-control input-sm" id="EmpName_id" name="EmpName_id" value="" type="hidden">
+                  </div>
+
                   <div class="form-group pull-left span3" style="margin-left: 5px">
                     <input data-toggle="tooltip" title="" data-original-title="Position" class="form-control input-sm searchAdvanceText span12" placeholder="Position" type="text" id="Position" name="Position" />
                     <input class="form-control input-sm" id="Position_id" name="Position_id" value="" type="hidden">
-                  </div>
                   </div>
                   <div class="form-group pull-left span3" style="margin-left: 5px">
 					<select name="output_type" id="output_type" class="input form-control input-sm span12""title="" data-toggle="tooltip" style="cursor: pointer;"data-original-title="Output Type">

@@ -177,12 +177,12 @@ var listDashBoardFn = function(data){
 		$("#year").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/year_list_assignment","GET"));
 		$("#appraisalType").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list","GET"));
 		$("#period").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));
-		$("#app_type").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list","GET"));
-		$("#apprasiaLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_emp","GET","","All Emp level"));
-		$("#apprasiaLevelOrg").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_org","GET",{"level_id":$("#apprasiaLevel").val()},"All Org Level"));
-		$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/org_list","get",{"appraisal_level":$("#apprasiaLevelOrg").val()}));
-		$("#status").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/status_list","GET",{},"All Status","Unassign"));
-		$("#organization").multiselect({minWidth:'100%;'}).multiselectfilter();
+//		$("#app_type").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list","GET"));
+//		$("#apprasiaLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_emp","GET","","All Emp level"));
+//		$("#apprasiaLevelOrg").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_org","GET",{"level_id":$("#apprasiaLevel").val()},"All Org Level"));
+//		$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/org_list","get",{"appraisal_level":$("#apprasiaLevelOrg").val()}));
+//		$("#status").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/status_list","GET",{"appraisal_type_id":$("#appraisalType").val()},"All Status","Unassign"));
+//		$("#organization").multiselect({minWidth:'100%;'}).multiselectfilter();
 		
 		//#Change Param Function
 		$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
@@ -195,14 +195,16 @@ var listDashBoardFn = function(data){
 			        $("#apprasiaLevel").val("").prop("disabled", true);
 			        $("#apprasiaLevelOrg").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_org","get",{"level_id":$("#apprasiaLevel").val()},"All Org Level"));
 			        $("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/org_list","get",{"appraisal_level":$("#apprasiaLevelOrg").val()})); 
-			        $("#organization").multiselect('refresh').multiselectfilter();
+			        $("#status").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/status_list","GET",{"appraisal_type_id":$("#appraisalType").val()},"All Status","Unassign"));
 			      } else {
 			    	  $("#apprasiaLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_emp","GET","","All Emp level"));
 			    	  $("#apprasiaLevelOrg").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_org","get",{"level_id":$("#apprasiaLevel").val()},"All Org Level"));
 			    	  $("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/org_list","get",{"appraisal_level":$("#apprasiaLevelOrg").val()})); 
-			    	  $("#organization").multiselect('refresh').multiselectfilter();
 			    	  $("#apprasiaLevel").prop("disabled", false);
+			    	  $("#status").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/status_list","GET",{"appraisal_type_id":$("#appraisalType").val()},"All Status","Unassign"));
 			      }
+			      $("#organization").multiselect({minWidth:'100%;'}).multiselectfilter();
+			      $("#organization").multiselect('refresh').multiselectfilter();
 			    });
 		   $("#appraisalType").change();
 		$(".app_url_hidden").show();

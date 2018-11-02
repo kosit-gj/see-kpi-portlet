@@ -390,11 +390,9 @@
 					<div class="row-fluid">						
 						<div class="form-group span9 m-b-none pull-right"
 							style="margin-left: 5px; text-align: right;">
-							<button type="button" id="btnSearchAdvance"
-								name="btnSearchAdvance" class="btn btn-info input-sm"
-								type="button">
-								<i class="fa fa-search"></i>&nbsp;Search
-							</button>
+						<button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance">
+                      		<i class="icon-download-alt"></i>&nbsp;Export
+                    	</button> &nbsp;
 						</div>
 					</div>
 				</div>
