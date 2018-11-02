@@ -553,7 +553,6 @@
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
 
 		<footer-portlet-javascript>/Controller/appraisalStructure.js</footer-portlet-javascript>
 		<!-- include file end -->
