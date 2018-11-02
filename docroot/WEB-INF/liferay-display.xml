@@ -61,5 +61,11 @@
 		<portlet id="judgement"></portlet>
 		<portlet id="salary-report"></portlet>
 		<!-- //////////////////////////////////////////////// -->
+		
+		<!-- //////////////// Bonus ///////////////////////// -->
+		<portlet id="emp-result-judgement"></portlet>
+		<portlet id="bonus-appraisal"></portlet>
+		<portlet id="bonus-adjustment"></portlet>
+		<!-- //////////////////////////////////////////////// -->
 	</category>
 </display>
