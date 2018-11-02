@@ -48,11 +48,16 @@ display:none;
     padding-right: 15px;
 }
 
+.modal-backdrop, .modal-backdrop.fade.in {
+    background-color: #000 !important;
+    }
 
 #btnAdd{
 margin-bottom:5px
 }
-
+.aui select {
+    line-height: 0px;
+}
 .pagingText{
  	/*display:none;*/
  	}
@@ -163,13 +168,15 @@ form {
 
 
 
-.modal{top:3%;}
+.aui .modal.fade.in{top:3%;}
 #confrimModal{width: 400px;}
 
 .aui .modal-footer{
 	border-radius: 0;
 }
-
+.structure_list_content{
+	display: none;
+}
 
 /* Large desktop */
 
@@ -251,7 +258,18 @@ form {
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
 <input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
 
-<div class="row-fluid" style="display: block;">
+<div class='row-fluid'>
+
+					<div class='col-xs-12'>
+						<div id="slide_status" class="span12" style="z-index: 9000;">
+						
+							<div id="btnCloseSlide"><i class='fa fa-times'></i></div>
+							<div id="slide_status_area"></div>
+						</div>
+					</div>
+
+				</div>
+<div class="row-fluid structure_list_content" >
 	<div class="span12">
 	
 		<div class="ibox-title">
@@ -261,7 +279,7 @@ form {
 		<div class="ibox-content"> 
 			<div class="row-fluid ">
 				<div class="spen9">
-					<button type="button" class="btn btn-success" id="btnAdd" data-backdrop="static" data-keyboard="false"><i class="fa fa-plus-square"></i>&nbsp;Add&nbsp;<span id="btnAddData">Appraisal Structure</span></button>
+					<button type="button" class="btn btn-success" id="btnAdd" data-target="#saveStructureModal" data-toggle="modal" data-backdrop="static" data-keyboard="false" ><i class="fa fa-plus-square"></i>&nbsp;Add&nbsp;<span id="btnAddData">Appraisal Structure</span></button>
 				</div>
 			</div>
 
@@ -271,13 +289,13 @@ form {
 					<thead>
 						<tr>
 							<th style="width: auto; vertical-align: middle;"><b>Seq</b></th>
-							<th style="width: auto; vertical-align: middle;"><b>Structure Name</b></th>
-							<th style="width: auto; text-align: right; vertical-align: middle;"><b>#Target Score</b></th>
+							<th style="width: auto; vertical-align: middle; white-space: nowrap;"><b>Structure Name</b></th>
+							<th style="width: auto; text-align: right; vertical-align: middle; white-space: nowrap;"><b>#Target Score</b></th>
 							<th style="width: auto; vertical-align: middle;"><b>Type</b></th>
 							<th style="width: auto; vertical-align: middle;"><b>Level</b></th>
 							<th style="width: 10%; text-align: center; vertical-align: middle;"><b>Unlimited Reward</b></th>
 							<th style="width: 10%; text-align: center; vertical-align: middle;"><b>Unlimited Deduction</b></th>
-							<th style="width: 10%; text-align: center; vertical-align: middle;"><b>Value Get Zero</b></th>
+							<th style="width: 10%; text-align: center; vertical-align: middle;white-space: nowrap;"><b>Value Get Zero</b></th>
 							<th style="width: 5%; text-align: center; vertical-align: middle;"><b>IsDerive</b></th>
 							<th style="width: 5%; text-align: center; vertical-align: middle;"><b>IsActive</b></th>
 							<th style="text-align: center; vertical-align: middle;"><b>Manage</b></th>
@@ -291,7 +309,8 @@ form {
 		</div>
 	</div>
 </div>
-
+<input type="hidden" name="id" id="id" value="">
+<input type="hidden" name="action" id="action" value="add">
 
 <!-- Modal Add/Edit -->
 <!-- <div role="dialog" id="saveStructureModal" class="modal inmodal" style="display: none;"> -->
@@ -345,12 +364,6 @@ form {
 								<select class="span12 m-b-n" id="level_id" name="level_id" style="width: 250px"> </select>
 							</div>
 						</div>
-						<div class="form-group p-xxs" id="form-group-is_active">
-							<label class="control-label"> IsActive </label>
-							<div class="controls">
-								<input checked="" class="checkbox" placeholder="Is Active" id="is_active" name="is_active" type="checkbox">
-							</div>
-						</div>
 						<div id="is_unlimited_reward_header" class="form-group p-xxs" style="display: none;">
 							<label class="control-label"> Unlimited Reward </label>
 							<div class="controls">
@@ -375,6 +388,13 @@ form {
 								<input class="checkbox" placeholder="" id="is_no_raise_value" name="is_no_raise_value" type="checkbox">
 							</div>
 						</div>
+						<div class="form-group p-xxs" id="form-group-is_active">
+							<label class="control-label"> IsActive </label>
+							<div class="controls">
+								<input checked="" class="checkbox" placeholder="Is Active" id="is_active" name="is_active" type="checkbox">
+							</div>
+						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -393,3 +413,49 @@ form {
 		</div>
 	</div>
 </div>
+<!-- Modal Confirm Start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal"
+		class="modal inmodal in" style="width:400px;left:calc;display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content  bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button" style="padding-top:3px">
+						<span aria-hidden="true"><i class='fa fa-times'></i></span>
+					</button>
+					<h5 class="modal-title">Confirm Dialog</h5>
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
+                <hr>
+                 -->
+					<!-- form start -->
+					<div class="form-kpi-mangement">
+						<div class="form-kpi-label" align="center">
+
+							<label>Confirm to Delete Data?</label>
+							<div id="inform_on_confirm" class='information'></div>
+						</div>
+					</div>
+
+					<!-- form start -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+					<div align="center">
+						<button class="btn btn-success" id="btnConfirmOK" type="button">
+							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
+						</button>
+						&nbsp;&nbsp;
+						<button data-dismiss="modal" class="btn btn-danger" type="button">
+							<i class="fa fa-times-circle"></i>&nbsp;Cancel
+						</button>
+					</div>
+					<div class="alert alert-warning information" id="information2"
+						style="display: none;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal Confirm End -->
+	

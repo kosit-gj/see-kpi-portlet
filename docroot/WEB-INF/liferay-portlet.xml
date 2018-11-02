@@ -2085,12 +2085,7 @@
 		<footer-portlet-javascript>/Controller/cCalculateSalaryStructure.js</footer-portlet-javascript>
 		<css-class-wrapper>calculate-salary-structure-portlet</css-class-wrapper>
 	</portlet>
-	<!-- //////////////////////////////////////////////////////////// -->
-	
-	
-	
-	
-	
+
 	<portlet>
 		<portlet-name>judgement</portlet-name>
 		<icon>/icon.png</icon>
@@ -2118,7 +2113,8 @@
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cJudgement.js</footer-portlet-javascript>   
 		<css-class-wrapper>judgement-portlet</css-class-wrapper>       
-	</portlet>            
+	</portlet>
+
 	<portlet>
 		<portlet-name>salary-report</portlet-name>
 		<icon>/icon.png</icon>
@@ -2132,21 +2128,17 @@
 		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
 		<header-portlet-css>/js/css3-hover-effects/style.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
-
 		<header-portlet-css>/css/tywMain.css</header-portlet-css>
 		<header-portlet-css>/css/report-tfg.css</header-portlet-css>
 		<header-portlet-css>/css/dropify.css</header-portlet-css>
-
 		<header-portlet-css>/css/jquery.multiselect.css</header-portlet-css>
 		<header-portlet-css>/css/jquery.multiselect.filter.css</header-portlet-css>
-
 		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
 		<!-- <footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript> -->
 		<footer-portlet-javascript>/js/JQueryUI1.11.4/jquery-ui.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/dropify.js</footer-portlet-javascript>
-
 		<footer-portlet-javascript>/js/plugins/slimscroll/jquery.slimscroll.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.sparkline.min.js</footer-portlet-javascript>
@@ -2160,6 +2152,86 @@
 		<!-- include file end -->
 		<css-class-wrapper>salary-report-portlet</css-class-wrapper>
 	</portlet>
+	<!-- //////////////////////////////////////////////////////////// -->
+	
+	
+	
+	<!-- //////////////////// Bonus //////////////////////////////// -->
+	<portlet>
+		<portlet-name>emp-result-judgement</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
+		<header-portlet-css>/font-awesome/css/font-awesome.css</header-portlet-css>
+		<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
+		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
+		<header-portlet-css>/css/tywMain.css</header-portlet-css>
+		<header-portlet-css>/css/appraisal.css</header-portlet-css>
+		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>  
+		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/Controller/cEmpResultJudgement.js</footer-portlet-javascript>   
+		<css-class-wrapper>emp-result-judgement-portlet</css-class-wrapper>
+	</portlet>
+	
+	<portlet>
+		<portlet-name>bonus-appraisal</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
+		<header-portlet-css>/font-awesome/css/font-awesome.css</header-portlet-css>
+		<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
+		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
+		<header-portlet-css>/css/tywMain.css</header-portlet-css>
+		<header-portlet-css>/css/appraisal.css</header-portlet-css>
+		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>  
+		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/Controller/cBonusAppraisal.js</footer-portlet-javascript>   
+		<css-class-wrapper>bonus-appraisal-portlet</css-class-wrapper>
+	</portlet>
+	
+	<portlet>
+		<portlet-name>bonus-adjustment</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
+		<header-portlet-css>/font-awesome/css/font-awesome.css</header-portlet-css>
+		<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
+		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
+		<header-portlet-css>/css/tywMain.css</header-portlet-css>
+		<header-portlet-css>/css/appraisal.css</header-portlet-css>
+		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>  
+		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/Controller/cBonusAdjustment.js</footer-portlet-javascript>   
+		<css-class-wrapper>bonus-adjustment-portlet</css-class-wrapper>
+	</portlet>
+	<!-- //////////////////////////////////////////////////////////// -->
+	
+	
+	
 	<role-mapper>         
 		<role-name>administrator</role-name>      
 		<role-link>Administrator</role-link>  
