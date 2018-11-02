@@ -387,7 +387,7 @@ var embedParam = function (id) {
 
 //List Data
 var listDataFn = function (data) {
-
+	
     htmlHTML = "";
     $.each(data['group'], function (index, indexEntry) {
 
@@ -427,19 +427,21 @@ var listDataFn = function (data) {
 
         if ($("#embed_appraisal_type_id").val() == 2) {
 
-            htmlHTML += " <th style=\"width:8%\">" + $(".lt-status").val() + "</th>";
-            htmlHTML += " <th style=\"width:8%\">" + $(".lt-form-type").val() + "</th>";
-            htmlHTML += " <th style=\"width:10%\">" + $(".lt-emp-code").val() + "</th>";
-            htmlHTML += " <th style=\"width:10%\">" + $(".lt-emp-name").val() + "</th>";
-            htmlHTML += " <th style=\"width:15%\">" + $(".lt-organization").val() + "</th>";
-            htmlHTML += " <th style=\"width:15%\">" + $(".lt-position").val() + "</th>";
+            htmlHTML += " <th>" + $(".lt-status").val() + "</th>";
+            htmlHTML += " <th>" + $(".lt-form-type").val() + "</th>";
+            htmlHTML += " <th>" + $(".lt-emp-code").val() + "</th>";
+            htmlHTML += " <th>" + $(".lt-emp-name").val() + "</th>";
+            htmlHTML += " <th>" + $(".lt-organization").val() + "</th>";
+            htmlHTML += " <th>" + $(".lt-position").val() + "</th>";
+           
 
         } else if ($("#embed_appraisal_type_id").val() == 1) {
 
-            htmlHTML += " <th style=\"width:8%\">" + $(".lt-status").val() + "</th>";
-            htmlHTML += " <th style=\"width:8%\">" + $(".lt-form-type").val() + "</th>";
-            htmlHTML += " <th style=\"width:10%\">" + $(".lt-org-code").val() + "</th>";
-            htmlHTML += " <th style=\"width:15%\">" + $(".lt-organization").val() + "</th>";
+            htmlHTML += " <th>" + $(".lt-status").val() + "</th>";
+            htmlHTML += " <th>" + $(".lt-form-type").val() + "</th>";
+            htmlHTML += " <th>" + $(".lt-org-code").val() + "</th>";
+            htmlHTML += " <th>" + $(".lt-organization").val() + "</th>";
+            
         }
         if (index != 'p0') {
             htmlHTML += " <th style=\"width:7%; text-align:center;\">" + $(".lt-manage").val() + "</th>";
@@ -449,22 +451,41 @@ var listDataFn = function (data) {
         htmlHTML += " </tr>";
         htmlHTML += " </thead>";
         htmlHTML += " <tbody>";
+       
         $.each(indexEntry['items'], function (index2, itemEntry) {
+        	var checked_assigned = itemEntry['assigned']==0 ? "disabled" : "";
+        	// var checked_assigned = "checked";
+        	
             htmlHTML += "<tr>";
             if (index != 'p0') {
                 if ($("#embed_appraisal_type_id").val() == 2) {
-                    htmlHTML += "	<td class='object-center' style='text-align:center;'><input style=\"margin-bottom: 5px;\" class='action_emp' id='id-" + itemEntry['emp_id'] + "' type='checkbox' value=" + itemEntry['emp_id'] + "-" + itemEntry['emp_code'] + "-" + itemEntry['org_id'] + "-" + itemEntry['period_id'] + "-" + itemEntry['default_stage_id'] + " data-id='" + itemEntry['emp_result_id'] + "-" + itemEntry['stage_id'] + "'></td>";
-                } else if ($("#embed_appraisal_type_id").val() == 1) {
-                    htmlHTML += "	<td class='object-center' style='text-align:center;'><input style=\"margin-bottom: 5px;\" class='action_emp' id='id-" + itemEntry['org_id'] + "' type='checkbox' value=" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "--" + itemEntry['default_stage_id'] + "-/" + itemEntry['org_code'] + " data-id='" + itemEntry['emp_result_id'] + "-" + itemEntry['stage_id'] + "'></td>";
-                    //alert(itemEntry['org_id']);
+                	if(itemEntry['assigned']==0){
+	                	htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign'style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
+	                	}else{ 
+	                	htmlHTML += "	<td class='object-center' style='text-align:center;'><input style=\"margin-bottom: 5px;\" class='action_emp' id='id-" + itemEntry['emp_id'] + "' type='checkbox' value=" + itemEntry['emp_id'] + "-" + itemEntry['emp_code'] + "-" + itemEntry['org_id'] + "-" + itemEntry['period_id'] + "-" + itemEntry['default_stage_id'] + " data-id='" + itemEntry['emp_result_id'] + "-" + itemEntry['stage_id'] + "'></td>";
+	                	}
+	                } else if ($("#embed_appraisal_type_id").val() == 1) {
+	                	if(itemEntry['assigned']==0){
+		                htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign'style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
+		                }else{		
+		                htmlHTML += "	<td class='object-center' style='text-align:center;'><input style=\"margin-bottom: 5px;\" class='action_emp' id='id-" + itemEntry['org_id'] + "' type='checkbox' value=" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "--" + itemEntry['default_stage_id'] + "-/" + itemEntry['org_code'] + " data-id='" + itemEntry['emp_result_id'] + "-" + itemEntry['stage_id'] + "'></td>";
+		                }
+	                	//alert(itemEntry['org_id']);
                 }
             } else {
 
                 if ($("#embed_appraisal_type_id").val() == 2) {
-                    htmlHTML += "	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-" + itemEntry['emp_id'] + "' type='checkbox' value=" + itemEntry['emp_id'] + "-" + itemEntry['emp_code'] + "-" + itemEntry['org_id'] + "-" + itemEntry['period_id'] + "-" + itemEntry['default_stage_id'] + "-" + "></td>";
+	                	if(itemEntry['assigned']==0){
+	                	htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign'style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
+	                	}else{          
+	                    htmlHTML += "	<td class='object-center' style='text-align:center;'><input "+checked_assigned+" class='asign_emp' id='id-" + itemEntry['emp_id'] + "' type='checkbox' value=" + itemEntry['emp_id'] + "-" + itemEntry['emp_code'] + "-" + itemEntry['org_id'] + "-" + itemEntry['period_id'] + "-" + itemEntry['default_stage_id'] + "-" + "></td>";
+	                	}
                 } else if ($("#embed_appraisal_type_id").val() == 1) {
-                    htmlHTML += "	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-" + itemEntry['org_id'] + "' type='checkbox' value=" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "--" + itemEntry['default_stage_id'] + "-/" + itemEntry['org_code'] + "></td>";
-                    //alert(itemEntry['org_id']);
+                		if(itemEntry['assigned']==0){
+                        htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign'style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
+                        }else{ 
+                        htmlHTML += "	<td class='object-center' style='text-align:center;'><input "+checked_assigned+" class='asign_emp' id='id-" + itemEntry['org_id'] + "' type='checkbox' value=" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "--" + itemEntry['default_stage_id'] + "-/" + itemEntry['org_code'] + "></td>";
+                        } //alert(itemEntry['org_id']);
                 }
             }
 
@@ -480,6 +501,7 @@ var listDataFn = function (data) {
                 htmlHTML += "  <td>" + itemEntry['emp_name'] + "</td>";
                 htmlHTML += "  <td>" + itemEntry['org_name'] + "</td>";
                 htmlHTML += "	<td>" + itemEntry['position_name'] + "</td>";
+           
             } else {
 
                 htmlHTML += "  <td id='status-" + itemEntry['emp_id'] + "'>" + itemEntry['status'] + "";
@@ -491,6 +513,7 @@ var listDataFn = function (data) {
                 htmlHTML += "  <input type='hidden' id='period_id-" + itemEntry['emp_id'] + "' name='period_id-" + itemEntry['emp_id'] + "' value='" + itemEntry['period_id'] + "'>";
                 htmlHTML += " </td>";
                 htmlHTML += "  <td>" + itemEntry['org_name'] + "</td>";
+                
             }
             htmlHTML += "  <td style=\"text-align:center\">";
 
@@ -498,24 +521,24 @@ var listDataFn = function (data) {
                 //itemEntry['status']
                 if (is_hr == 1 && itemEntry['status'] == 'Accepted') {
                     //htmlHTML+="  <i title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;View&lt;/button&gt;   &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
-                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-view").val() + "\"></i>";
+                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-view").val() + "\"></i>";
                 } else if (is_hr == 1 && itemEntry['status'] == 'Draft') {
                     //htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit\"></i>";
-                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-edit").val() + "&lt;/button&gt;&nbsp;&lt;button id='del-" + itemEntry['emp_id'] + "' class='btn btn-danger btn-small btn-gear del'&gt;" + $(".lt-delete").val() + "&lt;/button&gt;\"></i>";
+                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-edit").val() + "&lt;/button&gt;&nbsp;&lt;button id='del-" + itemEntry['emp_id'] + "' class='btn btn-danger btn-small btn-gear del'&gt;" + $(".lt-delete").val() + "&lt;/button&gt;\"></i>";
                 } else if (is_hr == 1 && itemEntry['status'] != 'Accepted') {
-                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-edit").val() + "\"></i>";
+                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-edit").val() + "\"></i>";
                     //htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
                 } else if (is_self_assign == 1 && itemEntry['status'] == 'Accepted') {
                     //htmlHTML+="  <i title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;View&lt;/button&gt;   &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
-                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-view").val() + "\"></i>";
+                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-view").val() + "\"></i>";
                 } else if (is_self_assign == 1 && itemEntry['status'] == 'Draft') {
                     //htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit\"></i>";
-                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-edit").val() + "&lt;/button&gt;&nbsp;&lt;button id='del-" + itemEntry['emp_id'] + "' class='btn btn-danger btn-small btn-gear del'&gt;" + $(".lt-delete").val() + "&lt;/button&gt;\"></i>";
+                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-edit").val() + "&lt;/button&gt;&nbsp;&lt;button id='del-" + itemEntry['emp_id'] + "' class='btn btn-danger btn-small btn-gear del'&gt;" + $(".lt-delete").val() + "&lt;/button&gt;\"></i>";
                 } else if (is_self_assign == 1 && itemEntry['status'] != 'Accepted') {
-                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-edit").val() + "\"></i>";
+                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-edit").val() + "\"></i>";
                     //htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
                 } else if (is_hr == 0 || is_self_assign == 0) {
-                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-view").val() + "\"></i>";
+                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-view").val() + "\"></i>";
                 }
 
             }
@@ -542,7 +565,10 @@ var listDataFn = function (data) {
     });
 
     $("#listDatas").html(htmlHTML);
-
+    $('[data-toggle="tooltip"]').css({ "cursor": "pointer" });
+    $('[data-toggle="tooltip"]').tooltip({
+        html: true
+    });
 
     $("#unassignSelectAll").click
 
@@ -651,6 +677,8 @@ var listDataFn = function (data) {
             var edit = this.id.split("-");
             var id = edit[1];
             org_id_to_assign = edit[2];
+            organization_code = edit[3];
+            empldoyees_code = edit[4];
 
             sessionStorage.setItem('is_coporate_kpi', $("#is_coporate_kpi-" + id).val());
 
@@ -677,6 +705,8 @@ var listDataFn = function (data) {
         $(".view").on("click", function () {
             var view = this.id.split("-");
             org_id_to_assign = view[2];
+            organization_code = edit[3];
+            empldoyees_code = edit[4];
             var emp_result_id = $(this).parent().parent().parent().parent().children().eq(1).children().val();
             var period_id = $(this).parent().parent().parent().parent().children().eq(2).children().val();
             $("#period_id_edit").val(period_id);
@@ -2107,9 +2137,13 @@ var getTemplateFn = function (emp_result_id) {
 
     if ($("#appraisalType").val() == 1) {
         check_appraisalLevel = $("#appraisalLevel").val();
+        var emp_code = null;
+        var org_code = organization_code[0];
     }
     else if ($("#appraisalType").val() == 2) {
         check_appraisalLevel = $("#appraisalLevelEmp").val();
+        var emp_code = empldoyees_code[0];
+        var org_code = null;
     }
 
     $.ajax({
@@ -2120,7 +2154,12 @@ var getTemplateFn = function (emp_result_id) {
         data: {
             'appraisal_level_id': check_appraisalLevel,
             'emp_result_id': emp_result_id,
-            'org_id': org_id_to_assign
+            'org_id': org_id_to_assign,
+            'org_code': org_code,
+            'emp_code': emp_code,
+            'appraisal_type_id': $("#appraisalType").val(),
+            'appraisal_form': $("#appraisalForm").val(),
+            'period_id':$("#period_id").val()
 
         },
         headers: { Authorization: "Bearer " + tokenID.token },
