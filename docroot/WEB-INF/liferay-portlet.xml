@@ -1,6 +1,6 @@
 <?xml version="1.0"?> 
 <!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.2.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_2_0.dtd">
-
+ 
 <liferay-portlet-app>
 	<portlet> 
 		<portlet-name>see-kpi</portlet-name>
@@ -2202,6 +2202,7 @@
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/plugins/jquery_mask/jquery.mask.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cBonusAppraisal.js</footer-portlet-javascript>   
