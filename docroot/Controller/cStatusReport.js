@@ -58,20 +58,35 @@
 		var app_lv_org= $("#param_app_lv_org").val();
 		var status= $("#param_status").val();
 		var output_type = $("#param_output").val();
+		var parameter = {};
 		
 		if(org=='null') {
 			callFlashSlide(Liferay.Language.get("organization-is-require"));
 			return false;
 		}
+		var name_report = "";
 		
-		var parameter = {
-				param_year: year,
-				param_period: period,
-				param_emp_level: app_lv,
-				param_org_level: app_lv_org,
-				param_org_id: org,
-				param_status: status
+		if(app_type == 2){
+			parameter = {
+					param_year: year,
+					param_period: period,
+					param_emp_level: app_lv,
+					param_org_level: app_lv_org,
+					param_org_id: org,
+					param_status: status,
+			}
+			name_report = "report-data-entry-status-individual";
+		}else if(app_type == 1){
+			parameter = {
+					param_year: year,
+					param_period: period,
+					param_org_level: app_lv_org,
+					param_org_id: org,
+					param_status: status,
+			}
+			name_report = "report-data-entry-status-organization";
 		}
+		
 		var data = JSON.stringify(parameter);
 		
 		//-- set report lacale name --//
@@ -82,7 +97,8 @@
 		}
 		
 		//$('#iFrame_report').attr('src',url_report_jasper);
-		var url_report_jasper = restfulURL+"/"+serviceName+"/public/generate?template_name="+templateName+"&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
+		var url_report_jasper = restfulURL+"/"+serviceName+"/public/generate?template_name="+name_report+"&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
+		console.log(url_report_jasper);
 
 		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 			window.open(url_report_jasper,"_blank");
@@ -92,13 +108,13 @@
 };
 
  
- var searchAdvanceFn = function (year,period,app_lv,org,app_lv_org,status,output) {
+var searchAdvanceFn = function (year,period,appraisalType,app_lv,org,app_lv_org,status,output) {
 	//embed parameter start
 		
 		var htmlParam="";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_year' 	name='param_year' 		value='"+year+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_period' 	name='param_period' 	value='"+period+"'>";
-		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_type' name='param_app_type' 	value='1'>";
+		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_type' name='param_app_type' 	value='"+appraisalType+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv' 	name='param_app_lv' 	value='"+app_lv+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_org_id' 	name='param_org_id' 	value='"+org+"'>";
 		htmlParam+="<input type='hidden' class='paramEmbed' id='param_app_lv_org' 	name='param_app_lv_org' 	value='"+app_lv_org+"'>";
@@ -155,6 +171,7 @@ var listDashBoardFn = function(data){
 			searchAdvanceFn(
 					$("#year").val(),
 					$("#period").val(),
+					$("#appraisalType").val(),
 					$("#apprasiaLevel").val(),
 					$("#organization").val(),
 					$("#apprasiaLevelOrg").val(),
@@ -167,13 +184,14 @@ var listDashBoardFn = function(data){
 		
 		//Generate DropDown List
 		$("#year").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/year_list_assignment","GET"));
+		$("#appraisalType").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list","GET"));
 		$("#period").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));
-		$("#app_type").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list","GET"));
-		$("#apprasiaLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_emp","GET","","All Emp level"));
-		$("#apprasiaLevelOrg").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_org","GET",{"level_id":$("#apprasiaLevel").val()},"All Org Level"));
-		$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/org_list","get",{"appraisal_level":$("#apprasiaLevelOrg").val()}));
-		$("#status").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/status_list","GET",{},"All Status","Unassign"));
-		$("#organization").multiselect({minWidth:'100%;'}).multiselectfilter();
+//		$("#app_type").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list","GET"));
+//		$("#apprasiaLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_emp","GET","","All Emp level"));
+//		$("#apprasiaLevelOrg").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_org","GET",{"level_id":$("#apprasiaLevel").val()},"All Org Level"));
+//		$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/org_list","get",{"appraisal_level":$("#apprasiaLevelOrg").val()}));
+//		$("#status").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/status_list","GET",{},"All Status","Unassign"));
+//		$("#organization").multiselect({minWidth:'100%;'}).multiselectfilter();
 		
 		//#Change Param Function
 		$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
@@ -181,6 +199,25 @@ var listDashBoardFn = function(data){
 		$("#apprasiaLevelOrg").change(function(){$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/org_list","get",{"appraisal_level":$("#apprasiaLevelOrg").val()})); /*$("#organization").change();*/ $("#organization").multiselect('refresh').multiselectfilter(); });
 		//$("#organization").change(function(){console.log("organization change");$("#kpi").html((generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":1})));});
 		
+		
+		 $("#appraisalType").change(function() {
+		      if ($("#appraisalType").val() == 1) {
+		        $("#apprasiaLevel").val("").prop("disabled", true);
+		        $("#apprasiaLevelOrg").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_org","get",{"level_id":$("#apprasiaLevel").val()},"All Org Level"));
+		        $("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/org_list","get",{"appraisal_level":$("#apprasiaLevelOrg").val()})); 
+		        $("#status").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/status_list","GET",{"appraisal_type_id":$("#appraisalType").val()},"All Status","Unassign"));
+		      } else {
+		    	  $("#apprasiaLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_emp","GET","","All Emp level"));
+		    	  $("#apprasiaLevelOrg").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/al_list_org","get",{"level_id":$("#apprasiaLevel").val()},"All Org Level"));
+		    	  $("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/org_list","get",{"appraisal_level":$("#apprasiaLevelOrg").val()})); 
+		    	  $("#apprasiaLevel").prop("disabled", false);
+		    	  $("#status").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/report/status_list","GET",{"appraisal_type_id":$("#appraisalType").val()},"All Status","Unassign"));
+		      }
+		      $("#organization").multiselect({minWidth:'100%;'}).multiselectfilter();
+		      $("#organization").multiselect('refresh').multiselectfilter();
+		    });
+	   $("#appraisalType").change();
+	   
 		$(".app_url_hidden").show();
 
 		

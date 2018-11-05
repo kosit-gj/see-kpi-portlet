@@ -22,7 +22,7 @@ var getDataFn = function() {
 	var template_name ="";
 	  
 	if(appraisalType == 1){
-		template_name="report-assignment-logging-org";
+		template_name="report-assignment-logging-organization";
 		parameter = {
 				param_org: organization,
 				param_period: AppraisalPeriod,
@@ -30,7 +30,7 @@ var getDataFn = function() {
 			  };
 	}
 	if(appraisalType == 2){
-		template_name="report-assignment-logging-ind";
+		template_name="report-assignment-logging-individual";
 		parameter = {
 				param_org: organization,
 				param_period: AppraisalPeriod,
@@ -168,6 +168,7 @@ var dropDrowAppraisalEmpLevelFn = function(id){
 		}
 	});
 	//dropDrowIndividualOrgLevelFn();
+	dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
 }
 
 var dropDrowIndividualOrgLevelFn = function(id){
@@ -388,7 +389,9 @@ $(document).ready(function() {
       clearParamSearch(dataClearParam); // in cMain.js
     });
 
-    setParamSearch(dataSetParam); // in cMain.js
+    if ($("#appraisalType").val() == 2) {
+        setParamSearch(dataSetParam); // in cMain.js
+        }
 
     //Auto complete Start
 
@@ -546,7 +549,7 @@ $(document).ready(function() {
 	});
     
     $(".app_url_hidden").show();
-    dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
+//    dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
 		
   }
 });

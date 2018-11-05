@@ -1541,7 +1541,7 @@
 	
 	<portlet>
 		<portlet-name>status-report</portlet-name>
-		<display-name>Status Report</display-name>
+		<display-name>Data Entry Status</display-name>
 		<portlet-class>
 			com.liferay.util.bridges.mvc.MVCPortlet
 		</portlet-class>
@@ -1556,8 +1556,8 @@
 		</supports>
 		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
-			<title>Status Report</title>
-			<short-title>Status Report</short-title>
+			<title>Data Entry Status</title>
+			<short-title>Data Entry Status</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

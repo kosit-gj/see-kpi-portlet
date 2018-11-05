@@ -44,7 +44,7 @@ var getDataFn = function(page,rpp){
 		success : function(data) {
 
 			galbalDataSystemcon=data;
-	
+
 			//setThemeColorFn(data["theme_color"]);
 			var htmlTheamColor = "<button class=\"btn jscolor {valueElement:null,value:'"+data["theme_color"]+"',valueElement:'themeColor',onFineChange:'setThemeColorFn(this)'} \" style='width:70px; height:26px;'></button>";
 			$("#current_appraisal_year").val(data["current_appraisal_year"]);
@@ -74,6 +74,13 @@ var getDataFn = function(page,rpp){
 			
 			if(data["item_result_log"] == 1){$("#optionsEnableAssignmentLoggingOn").prop("checked", true);}
 			else if(data["item_result_log"] == 0){$("#optionsEnableAssignmentLoggingOff").prop("checked", true);}
+			
+			if(data["entity_type_resorting"] != 0){
+				$("#entityType").val(data["entity_type_resorting"])
+			}
+			else{
+				$("#entityType").val(1)
+			}
 			
 			if(data["show_grand_total_flag"] == 1) {
 				$("#optionsShowGrandTotalOn").prop("checked", true);
@@ -178,6 +185,8 @@ var clearFn = function() {
 	$("#workingSystem").val(galbalDataSystemcon["nof_date_bonus"]);
 	$("#salaryRaiseFrequency").val(galbalDataSystemcon["salary_raise_frequency_id"]);
 	$("#current_appraisal_year").val(galbalDataSystemcon["current_appraisal_year"]);
+	
+	$("#entityType").val(galbalDataSystemcon["entity_type_resorting"]);
 	
 	if(galbalDataSystemcon["raise_type"] == 1){$("#raiseFixAmount").prop("checked", true);}
 	else if(galbalDataSystemcon["raise_type"] == 2){$("#raisePercentage").prop("checked", true);}
@@ -298,6 +307,7 @@ var updateFn = function() {
 			"nof_date_bonus"                    :  $("#workingSystem").val(),
 			"salary_raise_frequency_id"         :  $("#salaryRaiseFrequency").val(),
 			"current_appraisal_year"            :  $("#current_appraisal_year").val(),
+			"entity_type_resorting"             :  $("#entityType").val(),
 			"raise_type"			            :  raiseType,
 			"result_type"			            :  resultType,
 			"threshold"							:  threshold,

@@ -301,8 +301,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 										<select data-toggle="tooltip" title="<liferay-ui:message key="employee-level"/>"
 											class="input form-control input-sm span12" id="appraisalLevel"
 											name="appraisalLevel">
-								
-								
+												<option value=""></option>
 										</select>
 									</div>
 									

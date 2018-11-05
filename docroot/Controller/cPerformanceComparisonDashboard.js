@@ -750,7 +750,10 @@ $(document).ready(function() {
       clearParamSearch(dataClearParam); // in cMain.js
     });
 
-    setParamSearch(dataSetParam); // in cMain.js
+    if ($("#appraisalType").val() == 2){
+  	  setParamSearch(dataSetParam); // in cMain.js
+  	  dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
+  }
 
     //Auto complete Start
     
@@ -848,7 +851,6 @@ $(document).ready(function() {
 	});
     
     $(".app_url_hidden").show();
-    dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
 		
   }
 });

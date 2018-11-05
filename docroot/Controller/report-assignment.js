@@ -12,7 +12,6 @@ var getDataFn = function() {
 	 $("body").mLoading('show'); //Loading
 	var AppraisalYear= $("#AppraisalYear").val();
 	var AppraisalPeriod= $("#AppraisalPeriod").val();
-	var appraisalType= $("#appraisalType").val();
 	var AppraisalEmpLevel= $("#AppraisalEmpLevel").val();
 	var AppraisalOrgLevel= $("#AppraisalOrgLevel").val();
 	var organization = $("#organization").val()==null ? '' : $("#organization").val().toString();
@@ -28,27 +27,15 @@ var getDataFn = function() {
 		return false;
 	}
 	
-	if(appraisalType == 1){
-		//template_name="report_kpis_org";
-		parameter = {
-				param_org: organization,
-				param_period: AppraisalPeriod,
-				param_level_org: AppraisalOrgLevel
-			  };
-	}
-	if(appraisalType == 2){
-		//template_name="report_kpis_ind";
-		
-		parameter = {
-				param_year: AppraisalYear,
-				param_org_id: organization,
-				param_period: AppraisalPeriod,
-				param_position: Position_id,
-				param_emp: EmpName_id,
-				param_level_emp: AppraisalEmpLevel,
-				param_level_org: AppraisalOrgLevel
-			  };
-	}
+	parameter = {
+			param_year: AppraisalYear,
+			param_org_id: organization,
+			param_period: AppraisalPeriod,
+			param_position: Position_id,
+			param_emp: EmpName_id,
+			param_level_emp: AppraisalEmpLevel,
+			param_level_org: AppraisalOrgLevel
+		  };
 	
 	//-- set report lacale name --//
 	var currentLocale = $("#user_locale").val();
@@ -59,16 +46,15 @@ var getDataFn = function() {
 	
 	  var data = JSON.stringify(parameter);
 	  var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name="+template_name+"&token="+tokenID.token+"&template_format=xlsx&used_connection=1&inline=1&data="+data;
-			window.open(url_report_jasper,"_blank");
-			$("body").mLoading('hide'); //Loading
-		return false;
-//	 	var url_report_jasper = "http://localhost/see_api/public/generate?template_name=report_kpis_org&template_format=pdf&used_connection=1&inline=1&data={%22param_period%22:%221%22,%22param_org%22:%22895%22}";
+//		window.open(url_report_jasper,"_blank");
 		
-//	 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-//		 window.open(url_report_jasper,"_blank");
-//		} else {
-//			$('#iFrame_report').attr('src',url_report_jasper);
-//		}
+		 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			 window.open(url_report_jasper,"_blank");
+			} else {
+				$('#iFrame_report').attr('src',url_report_jasper);
+			}
+			$("body").mLoading('hide'); //Loading
+	  return false;
 	 
 };
 
@@ -128,44 +114,6 @@ var dropDrowPeriodListFn = function(year, id) { //period
   });
 }
 
-var appraisalTypeFn = function(nameArea,id){
-
-	if(nameArea==undefined){
-		nameArea="";
-	}
-	var htmlOption="";
-	htmlOption+="<option value='2'>Ind</option>";
-	$("#appraisalType"+nameArea).html(htmlOption);
-//	$.ajax({
-//		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list",
-//		type:"get",
-//		dataType:"json",
-//		async:false,
-//		headers:{Authorization:"Bearer "+tokenID.token},
-//		success:function(data){
-//			var htmlOption="";
-//			$.each(data,function(index,indexEntry){
-//				if(id==undefined){
-//						if(index==0){
-//							htmlOption+="<option selected='selected' value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
-//						}else{
-//							htmlOption+="<option value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
-//						}
-//				}else{
-//					if(id==indexEntry['appraisal_type_id']){
-//							htmlOption+="<option selected='selected' value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
-//						}else{
-//							htmlOption+="<option value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
-//
-//					}
-//				}
-//
-//			});
-//			
-//		}
-//	});
-	$("#appraisalType").hide();
-}
 
 var dropDrowAppraisalEmpLevelFn = function(id){
 
@@ -187,6 +135,7 @@ var dropDrowAppraisalEmpLevelFn = function(id){
 				}
 			});
 			$("#AppraisalEmpLevel").html(htmlOption);
+			dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
 		}
 	});
 	//dropDrowIndividualOrgLevelFn();
@@ -271,11 +220,8 @@ var dropDrowAppraisalOrgLevelFn = function(id){
 		}
 	});
 	
-	if($("#appraisalType").val() == "1"){
-		dropDrowOrgFn($("#AppraisalOrgLevel").val());
-	} else {
-		dropDrowIndividualOrgFn($("#AppraisalOrgLevel").val());
-	}
+	dropDrowIndividualOrgFn($("#AppraisalOrgLevel").val());
+
 }
 
 
@@ -328,11 +274,6 @@ $(document).ready(function() {
       html: true
     });
 
-    // dropDrowYearListFn();
-    // appraisalTypeFn();
-    // dropDrowAppraisalEmpLevelFn();
-    // dropDrowAppraisalOrgLevelFn();
-
 
     var dataClearParam = [{
         'id': '#Position',
@@ -374,27 +315,20 @@ $(document).ready(function() {
       }
     ];
 
+    // run list
     dropDrowYearListFn();
+    dropDrowAppraisalEmpLevelFn();
+    dropDrowAppraisalOrgLevelFn();
+    
+    
     $("#AppraisalYear").change(function() {
       dropDrowPeriodListFn($(this).val());
     });
 		
     appraisalTypeFn();
     $("#appraisalType").change(function() {
-      if ($("#appraisalType").val() == 1) {
-        $("#Position").val("").prop("disabled", true);
-        $("#EmpName").val("").prop("disabled", true);
-        $("#AppraisalEmpLevel").prop("disabled", true);
-        dropDrowAppraisalOrgLevelFn();
-        refreshMultiOrganization();
-      } else {
-        $("#Position").prop("disabled", false);
-        $("#EmpName").prop("disabled", false);
-        $("#AppraisalEmpLevel").prop("disabled", false);
-        dropDrowAppraisalEmpLevelFn();
-      }
+    	dropDrowPeriodListFn($(this).val());
     });
-    $("#appraisalType").change();
 
     $("#AppraisalEmpLevel").change(function() {
       clearParamSearch(dataClearParam); // in cMain.js
@@ -405,11 +339,7 @@ $(document).ready(function() {
     $("#AppraisalOrgLevel").change(function() {
       clearParamSearch(dataClearParam); // in cMain.js
 
-      if ($("#appraisalType").val() == "1") {
-        dropDrowOrgFn($(this).val());
-      } else {
-        dropDrowIndividualOrgFn($(this).val());
-      }
+      dropDrowIndividualOrgFn($(this).val());
       refreshMultiOrganization();
     });
 
@@ -575,7 +505,6 @@ $(document).ready(function() {
 	});
     
     $(".app_url_hidden").show();
-    dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
 		
   }
   

@@ -29,7 +29,7 @@ var getDataFn = function() {
 	}
 	
 	if(appraisalType == 1){
-		template_name="report-org-kpi";
+		template_name="report-kpi-summary-organization";
 		parameter = {
 				param_org: organization,
 				param_period: AppraisalPeriod,
@@ -37,7 +37,7 @@ var getDataFn = function() {
 			  };
 	}
 	if(appraisalType == 2){
-		template_name="report-ind-kpi";
+		template_name="report-kpi-summary-individual";
 		parameter = {
 				param_org: organization,
 				param_period: AppraisalPeriod,
@@ -56,7 +56,7 @@ var getDataFn = function() {
 	
 	var data = JSON.stringify(parameter);
 	var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name="+template_name+"&token="+tokenID.token+"&template_format="+output_type+"&used_connection=1&inline=1&data="+data;
-	
+	console.log(url_report_jasper);
 	 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 		 window.open(url_report_jasper,"_blank");
 		} else {
@@ -66,10 +66,7 @@ var getDataFn = function() {
 };
 
 
-var dropDrowYearListFn = function(nameArea,id){
-	if(nameArea==undefined){
-		nameArea="";
-	}
+var dropDrowYearListFn = function(){
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/appraisal/year_list_assignment",
 		type:"get",
@@ -77,56 +74,39 @@ var dropDrowYearListFn = function(nameArea,id){
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
-			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
-				if(index==0){
-					htmlOption+="<option selected='selected' value="+indexEntry['appraisal_year']+">"+indexEntry['appraisal_year']+"</option>";
-				}else{
 					htmlOption+="<option value="+indexEntry['appraisal_year']+">"+indexEntry['appraisal_year']+"</option>";
-				}
 			});
-			$("#AppraisalYear"+nameArea).html(htmlOption);
+			$("#AppraisalYear").html(htmlOption);
 		}
 	});
 	
 	dropDrowPeriodListFn($("#AppraisalYear").val());
 }
-
-
-
-var dropDrowPeriodListFn = function(year, id) { //period
-  $.ajax({
-    url: restfulURL + "/" + serviceName + "/public/appraisal/period_list",
-    type: "get",
-    dataType: "json",
-    async: false,
-    headers: {
-      Authorization: "Bearer " + tokenID.token
-    },
-    data: {
-      "appraisal_year": year
-    },
-    success: function(data) {
-      var htmlOption = "";
-      $.each(data, function(index, indexEntry) {
-        if (id == indexEntry['period_id']) {
-          htmlOption += "<option selected='selected' value=" + indexEntry['period_id'] + ">" + indexEntry['appraisal_period_desc'] + "</option>";
-        } else {
-          htmlOption += "<option value=" + indexEntry['period_id'] + ">" + indexEntry['appraisal_period_desc'] + "</option>";
-        }
-      });
-      $("#AppraisalPeriod").html(htmlOption);
-    }
-  });
+var dropDrowPeriodListFn = function(year) { //period
+	  $.ajax({
+	    url: restfulURL + "/" + serviceName + "/public/appraisal/period_list",
+	    type: "get",
+	    dataType: "json",
+	    async: false,
+	    headers: {
+	      Authorization: "Bearer " + tokenID.token
+	    },
+	    data: {
+	      "appraisal_year": year
+	    },
+	    success: function(data) {
+	      var htmlOption = "";
+	      $.each(data, function(index, indexEntry) {
+	          htmlOption += "<option value=" + indexEntry['period_id'] + ">" + indexEntry['appraisal_period_desc'] + "</option>";
+	      });
+	      $("#AppraisalPeriod").html(htmlOption);
+	    }
+	  });
 }
 
-var appraisalTypeFn = function(nameArea,id){
-
-	if(nameArea==undefined){
-		nameArea="";
-	}
-
+var appraisalTypeFn = function(){
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list",
 		type:"get",
@@ -136,23 +116,9 @@ var appraisalTypeFn = function(nameArea,id){
 		success:function(data){
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
-				if(id==undefined){
-						if(index==0){
-							htmlOption+="<option selected='selected' value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
-						}else{
-							htmlOption+="<option value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
-						}
-				}else{
-					if(id==indexEntry['appraisal_type_id']){
-							htmlOption+="<option selected='selected' value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
-						}else{
-							htmlOption+="<option value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
-
-					}
-				}
-
+				htmlOption+="<option value="+indexEntry['appraisal_type_id']+">"+indexEntry['appraisal_type_name']+"</option>";
 			});
-			$("#appraisalType"+nameArea).html(htmlOption);
+			$("#appraisalType").html(htmlOption);
 		}
 	});
 }
@@ -180,6 +146,7 @@ var dropDrowAppraisalEmpLevelFn = function(id){
 		}
 	});
 	//dropDrowIndividualOrgLevelFn();
+
 }
 
 var dropDrowIndividualOrgLevelFn = function(id){
@@ -215,12 +182,10 @@ var dropDrowIndividualOrgFn = function(appraisalLevelId,id){
 	
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_individual",
-		//url:restfulURL+"/"+serviceName+"/public/"+service_url_Check+"",
 		type:"get",
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
-		//data:{"level_id":$("#AppraisalOrgLevel").val(),"emp_code":session_emp_code,"level_id_emp":$("#AppraisalEmpLevel").val()},
 		data:{"emp_level":$("#AppraisalEmpLevel").val(), "org_level":$("#AppraisalOrgLevel").val()},
 		success:function(data){
 			var htmlOption="";
@@ -319,10 +284,6 @@ $(document).ready(function() {
       html: true
     });
 
-    // dropDrowYearListFn();
-    // appraisalTypeFn();
-    // dropDrowAppraisalEmpLevelFn();
-    // dropDrowAppraisalOrgLevelFn();
 
 
     var dataClearParam = [{
@@ -366,48 +327,51 @@ $(document).ready(function() {
     ];
     
     dropDrowYearListFn();
-    $("#AppraisalYear").change(function() {
+    appraisalTypeFn();
+    
+    $("#AppraisalYear").change(function() { // if year change --> period change
       dropDrowPeriodListFn($(this).val());
     });
 		
-    appraisalTypeFn();
-    $("#appraisalType").change(function() {
+    $("#AppraisalEmpLevel").change(function() { // individual
+        clearParamSearch(dataClearParam); // in cMain.js
+        dropDrowIndividualOrgLevelFn($(this).val());
+        refreshMultiOrganization();
+      });
+    
+    $("#AppraisalOrgLevel").change(function() { // Individual and Organization   if AppraisalOrgLevel change --> dropDrowOrgFn or dropDrowIndividualOrgFn change
+        clearParamSearch(dataClearParam); // in cMain.js
+        if ($("#appraisalType").val() == "1") {
+          dropDrowOrgFn($(this).val());
+        } else {
+          dropDrowIndividualOrgFn($(this).val());
+        }
+        refreshMultiOrganization();
+      });
+    
+    $("#organization").change(function() {
+        clearParamSearch(dataClearParam); // in cMain.js
+      });
+    
+    $("#appraisalType").change(function() { // if appraisalType change 
       if ($("#appraisalType").val() == 1) {
+    	 setParamSearch(dataSetParam); // in cMain.js
         $("#Position").val("").prop("disabled", true);
         $("#EmpName").val("").prop("disabled", true);
         $("#AppraisalEmpLevel").prop("disabled", true);
         dropDrowAppraisalOrgLevelFn();
         refreshMultiOrganization();
       } else {
+    	 setParamSearch(dataSetParam); // in cMain.js
         $("#Position").prop("disabled", false);
         $("#EmpName").prop("disabled", false);
         $("#AppraisalEmpLevel").prop("disabled", false);
         dropDrowAppraisalEmpLevelFn();
+        refreshMultiOrganization();
       }
     });
-    $("#appraisalType").change();
 
-    $("#AppraisalEmpLevel").change(function() {
-      clearParamSearch(dataClearParam); // in cMain.js
-      dropDrowIndividualOrgLevelFn($(this).val());
-      refreshMultiOrganization();
-    });
-
-    $("#AppraisalOrgLevel").change(function() {
-      clearParamSearch(dataClearParam); // in cMain.js
-      if ($("#appraisalType").val() == "1") {
-        dropDrowOrgFn($(this).val());
-      } else {
-        dropDrowIndividualOrgFn($(this).val());
-      }
-      refreshMultiOrganization();
-    });
-
-    $("#organization").change(function() {
-      clearParamSearch(dataClearParam); // in cMain.js
-    });
-
-    setParamSearch(dataSetParam); // in cMain.js
+   
     //Auto complete Start
 
 
@@ -564,10 +528,10 @@ $(document).ready(function() {
 	});
     
     $(".app_url_hidden").show();
-    dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
+
 		
   }
   
   $("#organization").multiselect({minWidth:'100%;'}).multiselectfilter();
-  refreshMultiOrganization();
+  $("#appraisalType").change();
 });

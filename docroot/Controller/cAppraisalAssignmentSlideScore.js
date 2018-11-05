@@ -1235,7 +1235,7 @@ var appraisalTypeFn = function (nameArea, id) {
         success: function (data) {
             var htmlOption = "";
             $.each(data, function (index, indexEntry) {
-                if (id == indexEntry['appraisal_type_id']) {
+            	if(id==indexEntry['appraisal_type_id'] && 0){
                     htmlOption += "<option selected='selected' value=" + indexEntry['appraisal_type_id'] + ">" + indexEntry['appraisal_type_name'] + "</option>";
                 } else {
                     htmlOption += "<option value=" + indexEntry['appraisal_type_id'] + ">" + indexEntry['appraisal_type_name'] + "</option>";
@@ -1292,7 +1292,7 @@ var dropDrowDepartmentFn = function (id) {
 var dropDrowOrgFn = function (appraisalLevelId) {
     var service_url_Check;
     if ($("#appraisalType").val() == 1) {
-        service_url_Check = "org";
+    	service_url_Check = "org/parent_org_code";
     }
     else {
         service_url_Check = "org/list_org_for_emp";
@@ -1309,7 +1309,7 @@ var dropDrowOrgFn = function (appraisalLevelId) {
             var htmlOption = "";
             htmlOption += "<option value=''>All Organization</option>";
             $.each(data, function (index, indexEntry) {
-                if (id == indexEntry['org_id']) {
+            	if(id==indexEntry['org_id'] && 0){
                     htmlOption += "<option selected='selected' value=" + indexEntry['org_id'] + ">" + indexEntry['org_name'] + "</option>";
                 } else {
                     htmlOption += "<option value=" + indexEntry['org_id'] + ">" + indexEntry['org_name'] + "</option>";
@@ -1529,7 +1529,7 @@ var assignTemplateQualityFn = function (structureName, data) {
     htmlTemplateQuality += "</tr>";
     htmlTemplateQuality += "</thead>";
     htmlTemplateQuality += "<tbody id=\"listthreshould\">";
-
+    var weight_percent ="";
     $.each(data['items'], function (index, indexEntry) {
         htmlTemplateQuality += "<tr>";
         htmlTemplateQuality += "<td style=\"width:3%;text-align:center;\" class='object-center'  ><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-" + indexEntry['structure_id'] + "' type='checkbox' value='" + indexEntry['item_id'] + "'></td>";
@@ -1539,11 +1539,13 @@ var assignTemplateQualityFn = function (structureName, data) {
         htmlTemplateQuality += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_result_id' class='id-" + indexEntry['structure_id'] + "-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
 
         htmlTemplateQuality += "</tr>";
+        weight_percent = indexEntry['weight_percent']
     });
     htmlTemplateQuality += "</tbody>";
     htmlTemplateQuality += "</table>";
 
     //htmlTemplateQuality+="<div class='formName hidden'>form2</div>";
+    htmlTemplateQuality+="<input type='hidden' id='weight_percent-"+data['structure_id']+"' class='' value="+weight_percent+">";
     htmlTemplateQuality += "<input type='hidden' id='structure_id-" + data['structure_id'] + "' class='structure_id' value=" + data['structure_id'] + ">";
     htmlTemplateQuality += "<input type='hidden' id='total_weight-" + data['structure_id'] + "' class='total_weight' value=" + data['total_weight'] + ">";
     htmlTemplateQuality += "<input type='hidden' id='form-" + data['structure_id'] + "' class='' value=\"form2\">";
@@ -1669,8 +1671,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
 
     item_id_array = [];
     var htmlTemplateQuantity = "";
-
-
+    var weight_percent ="";
 
     if (data['threshold'] == 1) {
         htmlTemplateQuantity += "<div class=\"row-fluid\">";
@@ -1721,11 +1722,13 @@ var assignTemplateQuantityFn = function (structureName, data) {
             htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText5 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4'></td>";
             htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText6 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5'></td>";
             htmlTemplateQuantity += "<td style=\"width:5%;text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-weight' class='id-" + indexEntry['structure_id'] + "-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly addComma'  type='text'></td>";
+            weight_percent = indexEntry['weight_percent'];
             htmlTemplateQuantity += "</tr>";
 
         });
         htmlTemplateQuantity += "</tbody>";
         htmlTemplateQuantity += "</table>";
+        htmlTemplateQuantity += "<input type='hidden' id='weight_percent-"+data['structure_id']+"' class='' value="+weight_percent+">"; // ไม่แน่ใจ
         htmlTemplateQuantity += "<input type='hidden' id='structure_id-" + data['structure_id'] + "' class='structure_id' value=" + data['structure_id'] + ">";
         htmlTemplateQuantity += "<input type='hidden' id='no_weight-" + data['structure_id'] + "' class='no_weight' value=" + data['no_weight'] + ">";
         htmlTemplateQuantity += "<input type='hidden' id='total_weight-" + data['structure_id'] + "' class='total_weight' value=" + data['total_weight'] + ">";
@@ -1773,10 +1776,11 @@ var assignTemplateQuantityFn = function (structureName, data) {
             htmlTemplateQuantity += "<td style=\"width:5%;text-align:right;padding-right: 10px;\"><input class='input-sm-small numberOnly addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' disabled value='" + notNullFn(indexEntry['actual_value']) + "'></td>";
             htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-weight' class='id-" + indexEntry['structure_id'] + "-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly addComma'  type='text'></td>";
             htmlTemplateQuantity += "</tr>";
-
+            weight_percent = indexEntry['weight_percent']
         });
         htmlTemplateQuantity += "</tbody>";
         htmlTemplateQuantity += "</table>";
+        htmlTemplateQuantity += "<input type='hidden' id='weight_percent-"+data['structure_id']+"' class='' value="+weight_percent+">";  // ไม่แน่ใจ
         htmlTemplateQuantity += "<input type='hidden' id='structure_id-" + data['structure_id'] + "' class='structure_id' value=" + data['structure_id'] + ">";
         htmlTemplateQuantity += "<input type='hidden' id='no_weight-" + data['structure_id'] + "' class='no_weight' value=" + data['no_weight'] + ">";
         htmlTemplateQuantity += "<input type='hidden' id='total_weight-" + data['structure_id'] + "' class='total_weight' value=" + data['total_weight'] + ">";
@@ -2080,7 +2084,8 @@ var createTemplateAssignmentFn = function (data) {
         $(".grandTotalWeight").hide();
 
         $("input.total_weigth_quantity").attr('disabled', 'disabled');
-        $("input.total_weigth_quantity").val(1);
+        $("input.total_weigth_quality ").attr('disabled','disabled');
+//		$("input.total_weigth_quantity").val(1); //daris
 
 
     } else {
@@ -2530,10 +2535,33 @@ $(document).ready(function () {
                 }
             });
             //btn action assign end
-            //embed emp_id
-            //check choose appraisal item start
+            
+            var eventCheckbox = function (id){ // daris //no_weight event
+    			var id = id.split("-"); 
+    			var appraisal_id=id[1];
+    			var structure_id=id[2];
+    			var numCheck = 0;
+    			$.each($(".appraisalItem-checkbox-"+structure_id).get(),function(index,indexEnry){
+    				var id_checkbox = this.id.split("-");
+    				var id_weight = "#id-"+ id_checkbox[1]+ "-" + id_checkbox[2]+"-weight";
+    				
+    				if($(this).prop("checked") == true){
+    					 $(id_weight).addClass('check-box-'+structure_id);
+    					 numCheck++;
+    				}
+    				else{
+    					 $(id_weight).removeClass('check-box-'+structure_id);
+    					 $(id_weight).val("");
+    				}
+    			});
+    			$(".check-box-"+structure_id).val(addCommas(parseFloat($("#weight_percent-"+structure_id).val()/numCheck).toFixed(2)));
+    		}
+            
 
             $(document).on("click", ".appraisalItem-checkbox", function () {
+            	if($(".no_weight").val()==1){
+    				eventCheckbox(this.id);  //no_weight event
+    			}
 
                 if ($(this).prop("checked") == true) {
                     embedParamCheckboxAppraisalItem(this.id);
