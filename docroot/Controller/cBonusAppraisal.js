@@ -2,14 +2,24 @@
 //Global variable
 var globalSevice=[];
 var globalDataTemp=[];
+globalDataTemp['MonthlyBonusRate'];
+
 var globalData;
 
-
 const pageNumberDefault=1;
-// restfulPath Service see_api/public/bonus/advance_search/year
-globalSevice['restfulPathBonusAppraisal']=restfulURL + "/" + serviceName + "/public/bonus";
-globalSevice['restfulPathDropDownYear']= globalSevice['restfulPathBonusAppraisal'] +"/advance_search/year";
-globalSevice['restfulPathDropDownBonusPeriod']= globalSevice['restfulPathBonusAppraisal']+ "/list_bonus_period";
+
+globalSevice['restfulPathGlobal']=restfulURL + "/" + serviceName + "/public/bonus";
+
+//Parameter Sevice
+globalSevice['restfulPathDropDownYear']= globalSevice['restfulPathGlobal'] +"/advance_search/year";
+globalSevice['restfulPathDropDownBonusPeriod']= globalSevice['restfulPathGlobal']+ "/advance_search/period";
+
+//Bonus Appraisal Sevice
+globalSevice['restfulPathBonusAppraisal']=globalSevice['restfulPathGlobal'] + "/bonus_appraisal";
+globalSevice['restfulPathBonusAppraisalCalculate']=globalSevice['restfulPathBonusAppraisal']+"/calculate";
+
+//Monthly Bonus Rate Sevice
+globalSevice['restfulPathMonthlyBonusRate']=restfulURL + "/" + serviceName + "/public/system_config";
 
 
 
@@ -97,85 +107,25 @@ var clearFn = function() {
 	$("#form_questionnaire_type ,.btnAddSection  ,.numberOnly").removeClass('cursorNotAllowed');
 	
 }
-var scriptBtnSaveAndCancelFn = function(){
-	$("#btn_save_bonus_appraisal , #btn_cancel_bonus_appraisal").off("click");
-	$("#btn_save_bonus_appraisal ").on("click",function(){
-		$("#from_monthly_bonus_rate").val("");
-		$("#inform_on_confirm").html("");
-		$("#confrimModal").modal({
-			"backdrop" : setModalPopup[0],
-			"keyboard" : setModalPopup[1]
-		});
-		$(document).off("click","#btnConfirmOK");
-		$(document).on("click","#btnConfirmOK",function(){
-			
-			$.ajax({
-				 url:globalSevice['restfulPathBonusAppraisal']+"/"+id,
-				 type : "post",
-				 dataType:"json",
-				 async:false,
-				 headers:{Authorization:"Bearer "+tokenID.token},
-			     success:function(data){
-			    	 
-			    	 if(data['status']==200){
-			    		 
-			    		 // Delete user on Liferay //
-				    	 if(data["liferay_user_id"] != null){
-				    		 $.ajax({
-				 				url: lifeRayApiUrl+"/api/jsonws/user/delete-user",
-				 				type : "POST",
-				 				dataType:"JSON",
-				 				async:false,
-				 				cache: false,
-				 				data:{
-				 					"userId" : data["liferay_user_id"],
-				 					"p_auth": $("#pAuth").val()
-				 				},
-				 				beforeSend:function(){
-				 					$("body").mLoading('hide');	
-				 				},
-				 				success:function(dataImp){
-				 					var dataException = dataImp.exception;
-				 					if(dataException != null){
-				 						callFlashSlide(dataException+"");
-				 					} else {
-				 						callFlashSlide("Delete Successfully.");
-				 					}
-				 				},
-				 				error: function (jqXHR, textStatus, errorThrown) {
-				 	                  if (jqXHR.status == 500) {
-				 	                	 callFlashSlide('Internal error: ' + jqXHR.responseText);
-				 	                  } else {
-				 	                	 callFlashSlide('Unexpected error.');
-				 	                  }
-				 	              }
-				 			});					    		 
-				    	 } else {
-				    		 callFlashSlide("Delete Successfully, But not found user in liferay server.");
-				    	 }
-				    	 
-				    	 getDataFn($("#pageNumber").val(),$("#rpp").val());
-				    	 clearFn();
-				    	 $("#confrimModal").modal('hide');
-				    	 
-				     }else if (data['status'] == "400"){
-				    	 callFlashSlide(""+data['data']+"");
-				    	 //backToTopFn();
-				     }
-				     	
-				 }
-			});
-			
-		});
-		
-	});
-	$("#btn_cancel_bonus_appraisal").on("click",function(){
-		$("body").mLoading('show');
-		listBonusAppraisal(globalData.data);
-		setTimeout(function(){ 
-			$("body").mLoading('hide');
-		}, 200);
-	});
+var getPathMonthlyBonusRateFn = function(){
+	
+	var monthly_bonus_rate=0;
+	
+ 	$.ajax ({
+ 		url:globalSevice['restfulPathMonthlyBonusRate'],
+ 		type:"get" ,
+ 		dataType:"json" ,
+ 		//data:request,
+ 		headers:{Authorization:"Bearer "+tokenID.token},
+ 		async:false,
+ 		success:function(data){
+ 			 			
+ 			monthly_bonus_rate=data.monthly_bonus_rate;
+
+ 		}
+ 	});	
+ 	return monthly_bonus_rate;
+ 	
 };
 //--------  GetData Start
 var getDataFn = function(page,rpp){
@@ -185,15 +135,12 @@ var getDataFn = function(page,rpp){
 	var bonus_period_id= $("#param_bonus_period_id").val();
 	
 	$.ajax({
-		url : "",
+		url : globalSevice['restfulPathBonusAppraisal'],
 		type : "get",
 		dataType : "json",
-		data:{
-
-			"year":year,
-			"bonus_period_id":bonus_period_id
-
-		},
+		data:{"page":page,"rpp":rpp,
+			"appraisal_year":year,
+			"period_id":bonus_period_id},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success : function(data) {
@@ -211,65 +158,208 @@ var listBonusAppraisal = function(data){
 	//console.log(data);
 	$.each(data,function(index,indexEntry) {
 
-		html += "<tr class='rowSearch'>";
-		html += "<td class='columnSearch' >"+ indexEntry.name + "</td>";
-		html += "<td class='columnSearch' >"+ indexEntry.name + "</td>";
-		html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(indexEntry.number.toString()) + "</td>";
-		html += "<td class='columnSearch' style='text-align: right;'>" ;
-		if(indexEntry.edit_flag){
+		html += scriptGenerateHtmlListBonusAppraisalFn(indexEntry,"");
+		console.log(indexEntry);
+		$.each(indexEntry.departments,function(index2,indexEntry2) {
+			console.log(indexEntry2);
 			
-			html += "	<div class='float-label-control ' >";
-			html += "	<input type='text' class='form-control inputAdjustBonusRateByUnit numberOnly'";
-			html += "		data-toggle='tooltip' data-original-title='ปรับผลประเมิน'";
-			html += "		placeholder='ปรับผลประเมิน'";
-			html += "		id='inputAdjustBonusRateByUnit-1'";
-			html += "		name='inputAdjustBonusRateByUnit-1' ";
-			html += "		value='0.00' >";
-			html += "	</div>";
+			html += scriptGenerateHtmlListBonusAppraisalFn(indexEntry2,"&emsp;");
 			
-		}else{
-			html += addCommas(indexEntry.number.toString()) ;
-		}
-		html += "</td>";
-		html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(indexEntry.number.toString()) + "</td>";
-		html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(indexEntry.number.toString()) + "</td>";
-		html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(indexEntry.number.toString()) + "</td>";
-		html += "<td class='columnSearch' >"+ indexEntry.name + "</td>";
-		html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(indexEntry.number.toString()) + "</td>";
-		html += "<td class='columnSearch' style='text-align: right;'>" ;
-		if(indexEntry.edit_flag){
-			
-			html += "	<div class='float-label-control ' >";
-			html += "	<input type='text' class='form-control inputAdjustBonusRateByExecutive numberOnly'";
-			html += "		data-toggle='tooltip' data-original-title='ปรับผลประเมิน'";
-			html += "		placeholder='ปรับผลประเมิน'";
-			html += "		id='inputAdjustBonusRateByExecutive-1'";
-			html += "		name='inputAdjustBonusRateByExecutive-1' ";
-			html += "		value='0.00' >";
-			html += "	</div>";
-			
-		}else{
-			html += addCommas(indexEntry.number.toString()) ;
-		}
-		html += "</td>";
-
-		html += "</tr>";
+		});
 		
-
 	});
 
 	$("#listBonusAppraisal").html(html);
 	scriptBtnSaveAndCancelFn();
-	$('.numberOnly').mask('Z99.00', {
+	scriptDataToggleFn();
+	var option ={
+			vMin : '0',
+			vMax : '1000',
+			lZero: 'deny',
+			wEmpty: 'zero',
+			//aSign : ' %',
+			//pSign : 's'
+		};
+	scriptInputAutoNumeric(".numberOnly",option);
 
-		  translation: {
-		    'Z': {
-		       pattern: /[0-9*]/,
-		      //optional: true
-		    }
-		  }
+
+
+
+};
+
+var scriptGenerateHtmlListBonusAppraisalFn = function(indexEntry,sub_departments){
+	var html ="";
+
+
+	html += "<tr class='rowSearch' " +
+			"org_result_judgement_id='"+indexEntry.org_result_judgement_id+"' " +
+			"emp_result_judgement_id='"+indexEntry.emp_result_judgement_id+"' " +
+			"edit_flag='"+indexEntry.edit_flag+"' >";
+	html += "<td class='columnSearch' >"+ sub_departments +indexEntry.appraisal_level_name + "</td>";
+	html += "<td class='columnSearch' >"+ indexEntry.org_name + "</td>";
+	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.avg_result_score.toString())) + "</td>";
+	html += "<td class='columnSearch' style='text-align: right;'>" ;
+	if(indexEntry.edit_flag){
+		
+		html += "	<div class='float-label-control ' >";
+		html += "	<input type='text' class='form-control inputAdjustResultScore numberOnly'";
+		html += "		data-toggle='tooltip' data-original-title='ปรับผลประเมิน'";
+		html += "		placeholder='ปรับผลประเมิน'";
+		//html += "		id='inputAdjustResultScore'";
+		//html += "		name='inputAdjustResultScore' ";
+		html += "		value='"+indexEntry.adjust_result_score+"' >";
+		html += "	</div>";
+		
+	}else{
+		html += addCommas(notNullTextFn(indexEntry.adjust_result_score).toString()) ;
+	}
+	html += "</td>";
+	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.total_salary).toString()) + "</td>";
+	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.bonus_point).toString()) + "</td>";
+	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.bonus_percent).toString()) + "</td>";
+	html += "<td class='columnSearch' >"+ indexEntry.emp_name + "</td>";
+	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.emp_result_score).toString()) + "</td>";
+	html += "<td class='columnSearch' style='text-align: right;'>" ;
+	if(indexEntry.edit_flag){
+		
+		html += "	<div class='float-label-control ' >";
+		html += "	<input type='text' class='form-control inputEmpAdjustResultScore numberOnly'";
+		html += "		data-toggle='tooltip' data-original-title='ปรับผลประเมิน'";
+		html += "		placeholder='ปรับผลประเมิน'";
+		//html += "		id='inputEmpAdjustResultScore'";
+		//html += "		name='inputEmpAdjustResultScore' ";
+		html += "		value='"+indexEntry.emp_adjust_result_score+"' >";
+		html += "	</div>";
+		
+	}else{
+		html += addCommas(notNullTextFn(indexEntry.emp_adjust_result_score).toString()) ;
+	}
+	html += "	</td>";
+	html += "</tr>";
+	
+
+
+	
+	
+	return html;
+
+};
+var scriptBtnSaveAndCancelFn = function(){
+	
+	$("#btn_save_bonus_appraisal , #btn_cancel_bonus_appraisal").off("click");
+	$("#btn_save_bonus_appraisal ").on("click",function(){
+		
+		$("#from_monthly_bonus_rate").val(getPathMonthlyBonusRateFn());
+		$("#inform_on_confirm").html("");
+		
+		$("#confrimModal").modal({
+			"backdrop" : setModalPopup[0],
+			"keyboard" : setModalPopup[1]
 		});
-
+		
+		scriptBtnConfirmYesFn();
+		scriptBtnConfirmNoFn();
+		
+		
+	});
+	$("#btn_cancel_bonus_appraisal").on("click",function(){
+		$("body").mLoading('show');
+		listBonusAppraisal(globalData.data);
+		setTimeout(function(){ 
+			$("body").mLoading('hide');
+		}, 150);
+	});
+};
+var scriptBtnConfirmYesFn = function(){
+	$(document).off("click","#btnConfirmOK");
+	$(document).on("click","#btnConfirmOK",function(){
+		
+		var monthly_bonus_rate = $("#from_monthly_bonus_rate").val();
+		var data_bonus = [];
+		$.each($("#listBonusAppraisal").find("tr[edit_flag='1']").get(),function(index,indexEntry){
+			data_bonus.push({
+				 "org_result_judgement_id"	: $(this).attr("org_result_judgement_id"),
+			     "adjust_result_score"		: $(this).find('.inputAdjustResultScore').autoNumeric('get'),
+			     "emp_result_judgement_id"	: $(this).attr("emp_result_judgement_id"),
+			     "emp_adjust_result_score"	: $(this).find('.inputEmpAdjustResultScore ').autoNumeric('get')
+			});
+	  
+		 });
+		
+		$.ajax({
+			 url: globalSevice['restfulPathBonusAppraisalCalculate'],
+			 type : "post",
+			 dataType:"json",
+			 async:false,
+			 data:{
+				 monthly_bonus_rate : 	$("#from_monthly_bonus_rate").val(),
+				 data 				: 	data_bonus
+			 },
+			 headers:{Authorization:"Bearer "+tokenID.token},
+		     success:function(data){
+			     	if(data.status = "200"){
+			     		
+			     		getDataFn($("#pageNumber").val(),$("#rpp").val());
+			     		callFlashSlide("Save and Recalculate Bonus Successfully.");
+					    $("#confrimModal").modal('hide');
+					    
+			     	}else if(data.status = "400"){
+			     		callFlashSlideInModal(data['data'],"#inform_on_confirm","error");
+			     	}
+			 }
+		});
+		
+	});
+};
+var scriptBtnConfirmNoFn = function(){
+	$(document).off("click","#btnConfirmNO");
+	$(document).on("click","#btnConfirmNO",function(){
+		
+		
+		var data_bonus = [];
+		$.each($("#listBonusAppraisal").find("tr[edit_flag='1']").get(),function(index,indexEntry){
+			data_bonus.push({
+				 "org_result_judgement_id"	: $(this).attr("org_result_judgement_id"),
+			     "adjust_result_score"		: $(this).find('.inputAdjustResultScore').autoNumeric('get'),
+			     "emp_result_judgement_id"	: $(this).attr("emp_result_judgement_id"),
+			     "emp_adjust_result_score"	: $(this).find('.inputEmpAdjustResultScore ').autoNumeric('get')
+			});
+	  
+		 });
+		
+		$.ajax({
+			 url: globalSevice['restfulPathBonusAppraisal'],
+			 type : "post",
+			 dataType:"json",
+			 async:false,
+			 data:{
+				 data 				: 	data_bonus
+			 },
+			 headers:{Authorization:"Bearer "+tokenID.token},
+		     success:function(data){
+			     	if(data.status = "200"){
+			     		
+			     		getDataFn($("#pageNumber").val(),$("#rpp").val());
+			     		callFlashSlide("Save Successfully.");
+					    $("#confrimModal").modal('hide');
+					    
+			     	}else if(data.status = "400"){
+			     		callFlashSlideInModal(data['data'],"#inform_on_confirm","error");
+			     	}
+			 }
+		});
+		
+	});
+};
+var scriptDataToggleFn = function(){
+	$('[data-toggle="tooltip"]').css({"cursor":"pointer"});
+	$('[data-toggle="tooltip"]').tooltip({
+		 html:true
+	});
+};
+var scriptInputAutoNumeric = function(id,option){
+	$(id).autoNumeric('init');
+	$(id).autoNumeric('update', option);
 };
 // -------- Search Start
 var searchAdvanceFn = function (year,bonus_period_id) {
@@ -306,39 +396,34 @@ $(document).ready(function() {
 	$(".sr-only").hide();
 
 	$("#search_year").html(generateDropDownList(globalSevice['restfulPathDropDownYear'],"GET",{}));
-	$("#search_bonus_period_id").html(generateDropDownList(globalSevice['restfulPathDropDownYear'],"GET",{}));
-	//$("#form_questionnaire_type").html(generateDropDownList(globalSevice['restfulPathDropDownQuestionnaireType'],"GET",{}));
+	$("#search_bonus_period_id").html(generateDropDownList(globalSevice['restfulPathDropDownBonusPeriod'],"GET",{appraisal_year:$("#search_year").val()}));
+	scriptDataToggleFn();
 	
-	//getDropDownAnswerTypeFn(globalSevice['restfulPathDropDownAnswerType'],"GET",{});
 	
-	$('[data-toggle="tooltip"]').css({"cursor":"pointer"});
-	$('[data-toggle="tooltip"]').tooltip({
-		 html:true
-	});
+	
 	
 	$(".app_url_hidden").show();
-	$("#bonus_appraisal_list_content").show();
 	$("#btn_search_advance").click(function(){
 	
-//		searchAdvanceFn(
-//				$("#search_year").val(),
-//				$("#search_bonus_period_id").val()
-//				);
+		searchAdvanceFn(
+				$("#search_year").val(),
+				$("#search_bonus_period_id").val()
+				);
 			
 		$("#bonus_appraisal_list_content").show();
 		
 		return false;
 	});
-	
-	$('#from_monthly_bonus_rate').mask('Z9.00', {
 
-		  translation: {
-		    'Z': {
-		       pattern: /[0-9*]/,
-		      //optional: true
-		    }
-		  }
-		});
+	var option ={
+			vMin : '0',
+			vMax : '99.99',
+			lZero: 'deny',
+			aPad: false,
+			wEmpty: 'zero'
+		};
+	scriptInputAutoNumeric("#from_monthly_bonus_rate",option);
+
 	
 	
 	  

@@ -280,7 +280,8 @@
     .aui #tableBonusAppraisal .float-label-control.label-bottom label { -moz-animation: float-labels-bottom 300ms none ease-out; -webkit-animation: float-labels-bottom 300ms none ease-out; -o-animation: float-labels-bottom 300ms none ease-out; -ms-animation: float-labels-bottom 300ms none ease-out; -khtml-animation: float-labels-bottom 300ms none ease-out; animation: float-labels-bottom 300ms none ease-out; }
     .aui #tableBonusAppraisal .float-label-control.label-bottom input:not(.empty) + label,
     .aui #tableBonusAppraisal .float-label-control.label-bottom textarea:not(.empty) + label { top: 3em; }
-
+	
+	.aui #tableBonusAppraisal .float-label-control input{font-size: 12px;text-align: right;}
 
 @keyframes float-labels {
     0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
@@ -442,7 +443,7 @@
 				<!-- start table -->
 				<div class="row-fluid list-data-table" style="overflow: auto;">
 					<table class="table table-striped table-bordered" id="tableBonusAppraisal"
-						style="max-width: none; min-width: 800;">
+						style="max-width: none; min-width: 800;margin-bottom: 0px;">
 						<thead>
 							<tr>
 								<th rowspan="2" style="width: 10%; min-width: 100px;">ระดับ</th>
@@ -462,123 +463,7 @@
 							</tr>
 						</thead>
 						<tbody id="listBonusAppraisal">
-							<tr>
-								<td>BU</td>
-								<td>BU A</td>
-								<td>80</td>
-								<td>80</td>
-								<td><div class="float-label-control" >
-										<input type="text" class="form-control "
-											data-toggle="tooltip" data-original-title="เงินเดือนสุทธิ"
-											placeholder="เงินเดือนสุทธิ"
-											id="inputNetSalary-1"
-											name="inputNetSalary-1" >
-									</div></td>
-								<td>40,000,000</td>
-								<td>23.39</td>
-								<td>นาย BU MGR A</td>
-								<td>80</td>
-								<td><div class="float-label-control input-answer-name" id="yui_patched_v3_11_0_1_1541387268769_1165" style="
-    margin-bottom: 0px;
-    
-">			<input type="text" class="form-control inputAnswerName" data-toggle="tooltip" data-original-title="เงินเดือนสุทธิ" placeholder="เงินเดือนสุทธิ" id="inputAnswerName-850208-802317" name="inputAnswerName-850208-802317" required="" style="cursor: pointer;text-align: right;">		</div></td>
-							</tr>
-							<tr>
-								<td>&nbsp;&nbsp;Department</td>
-								<td>Dep A1</td>
-								<td>75</td>
-								<td>75</td>
-								<td><div class="float-label-control input-answer-name" id="yui_patched_v3_11_0_1_1541387268769_1165" style=" margin-bottom: 0px; "> <input type="text" class="form-control inputAnswerName" data-toggle="tooltip" data-original-title="เงินเดือนสุทธิ" placeholder="เงินเดือนสุทธิ" id="inputAnswerName-850208-802317" name="inputAnswerName-850208-802317" required="" style="cursor: pointer;text-align: right;"> </div></td>
-								<td>11,250,000</td>
-								<td>28.13</td>
-								<td>นาย Dep MGR A1</td>
-								<td>75</td>
-								<td><div class="float-label-control input-answer-name" id="yui_patched_v3_11_0_1_1541387268769_1165" style=" margin-bottom: 0px; "> <input type="text" class="form-control inputAnswerName" data-toggle="tooltip" data-original-title="เงินเดือนสุทธิ" placeholder="เงินเดือนสุทธิ" id="inputAnswerName-850208-802317" name="inputAnswerName-850208-802317" required="" style="cursor: pointer;text-align: right;"> </div></td>
-							</tr>
-							<tr>
-								<td>&nbsp;&nbsp;Department</td>
-								<td>Dep A2</td>
-								<td>85</td>
-								<td>85</td>
-								<td><div class="float-label-control input-answer-name" id="yui_patched_v3_11_0_1_1541387268769_1165" style=" margin-bottom: 0px; "> <input type="text" class="form-control inputAnswerName" data-toggle="tooltip" data-original-title="เงินเดือนสุทธิ" placeholder="เงินเดือนสุทธิ" id="inputAnswerName-850208-802317" name="inputAnswerName-850208-802317" required="" style="cursor: pointer;text-align: right;"> </div></td>
-								<td>12,750,000</td>
-								<td>31.88</td>
-								<td>นาย Dep MGR A2</td>
-								<td>75</td>
-								<td><div class="float-label-control input-answer-name" id="yui_patched_v3_11_0_1_1541387268769_1165" style=" margin-bottom: 0px; "> <input type="text" class="form-control inputAnswerName" data-toggle="tooltip" data-original-title="เงินเดือนสุทธิ" placeholder="เงินเดือนสุทธิ" id="inputAnswerName-850208-802317" name="inputAnswerName-850208-802317" required="" style="cursor: pointer;text-align: right;"> </div></td>
-							</tr>
-							<tr>
-								<td>BU</td>
-								<td>BU B</td>
-								<td>85</td>
-								<td>85</td>
-								<td><div class="float-label-control input-answer-name" id="yui_patched_v3_11_0_1_1541387268769_1165" style=" margin-bottom: 0px; "> <input type="text" class="form-control inputAnswerName" data-toggle="tooltip" data-original-title="เงินเดือนสุทธิ" placeholder="เงินเดือนสุทธิ" id="inputAnswerName-850208-802317" name="inputAnswerName-850208-802317" required="" style="cursor: pointer;text-align: right;"> </div></td>
-								<td>68,000,000</td>
-								<td>39.77</td>
-								<td>นาย BU MGR B</td>
-								<td>85</td>
-								<td><div class="float-label-control input-answer-name" id="yui_patched_v3_11_0_1_1541387268769_1165" style=" margin-bottom: 0px; "> <input type="text" class="form-control inputAnswerName" data-toggle="tooltip" data-original-title="เงินเดือนสุทธิ" placeholder="เงินเดือนสุทธิ" id="inputAnswerName-850208-802317" name="inputAnswerName-850208-802317" required="" style="cursor: pointer;text-align: right;"> </div></td>
-							</tr>
-							<tr>
-								<td>Department</td>
-								<td>Dep B1</td>
-								<td>80</td>
-								<td>80</td>
-								<td><div class="float-label-control input-answer-name" id="yui_patched_v3_11_0_1_1541387268769_1165" style=" margin-bottom: 0px; "> <input type="text" class="form-control inputAnswerName" data-toggle="tooltip" data-original-title="เงินเดือนสุทธิ" placeholder="เงินเดือนสุทธิ" id="inputAnswerName-850208-802317" name="inputAnswerName-850208-802317" required="" style="cursor: pointer;text-align: right;"> </div></td>
-								<td>24,000,000</td>
-								<td>35.29</td>
-								<td>นาย Dep MGR B1</td>
-								<td>80</td>
-								<td><div class="float-label-control input-answer-name" id="yui_patched_v3_11_0_1_1541387268769_1165" style=" margin-bottom: 0px; "> <input type="text" class="form-control inputAnswerName" data-toggle="tooltip" data-original-title="เงินเดือนสุทธิ" placeholder="เงินเดือนสุทธิ" id="inputAnswerName-850208-802317" name="inputAnswerName-850208-802317" required="" style="cursor: pointer;text-align: right;"> </div></td>
-							</tr>
-							<tr>
-								<td>Department</td>
-								<td>Dep B2</td>
-								<td>90</td>
-								<td>90</td>
-								<td><div class="float-label-control input-answer-name" id="yui_patched_v3_11_0_1_1541387268769_1165" style=" margin-bottom: 0px; "> <input type="text" class="form-control inputAnswerName" data-toggle="tooltip" data-original-title="เงินเดือนสุทธิ" placeholder="เงินเดือนสุทธิ" id="inputAnswerName-850208-802317" name="inputAnswerName-850208-802317" required="" style="cursor: pointer;text-align: right;"> </div></td>
-								<td>27,000,000</td>
-								<td>39.71</td>
-								<td>นาย Dep MGR B2</td>
-								<td>80</td>
-								<td><div class="float-label-control input-answer-name" id="yui_patched_v3_11_0_1_1541387268769_1165" style=" margin-bottom: 0px; "> <input type="text" class="form-control inputAnswerName" data-toggle="tooltip" data-original-title="เงินเดือนสุทธิ" placeholder="เงินเดือนสุทธิ" id="inputAnswerName-850208-802317" name="inputAnswerName-850208-802317" required="" style="cursor: pointer;text-align: right;"> </div></td>
-							</tr>
-							<tr>
-								<td>BU</td>
-								<td>BU C</td>
-								<td>90</td>
-								<td>90</td>
-								<td><div class="float-label-control input-answer-name" id="yui_patched_v3_11_0_1_1541387268769_1165" style=" margin-bottom: 0px; "> <input type="text" class="form-control inputAnswerName" data-toggle="tooltip" data-original-title="เงินเดือนสุทธิ" placeholder="เงินเดือนสุทธิ" id="inputAnswerName-850208-802317" name="inputAnswerName-850208-802317" required="" style="cursor: pointer;text-align: right;"> </div></td>
-								<td>63,000,000</td>
-								<td>36.84</td>
-								<td>นาย BU MGR C</td>
-								<td>90</td>
-								<td><div class="float-label-control input-answer-name" id="yui_patched_v3_11_0_1_1541387268769_1165" style=" margin-bottom: 0px; "> <input type="text" class="form-control inputAnswerName" data-toggle="tooltip" data-original-title="เงินเดือนสุทธิ" placeholder="เงินเดือนสุทธิ" id="inputAnswerName-850208-802317" name="inputAnswerName-850208-802317" required="" style="cursor: pointer;text-align: right;"> </div></td>
-							</tr>
-							<tr>
-								<td>Department</td>
-								<td>Dep C1</td>
-								<td>95</td>
-								<td>95</td>
-								<td><div class="float-label-control input-answer-name" id="yui_patched_v3_11_0_1_1541387268769_1165" style=" margin-bottom: 0px; "> <input type="text" class="form-control inputAnswerName" data-toggle="tooltip" data-original-title="เงินเดือนสุทธิ" placeholder="เงินเดือนสุทธิ" id="inputAnswerName-850208-802317" name="inputAnswerName-850208-802317" required="" style="cursor: pointer;text-align: right;"> </div></td>
-								<td>23,750,000</td>
-								<td>37.70</td>
-								<td>นาย Dep MGR C1</td>
-								<td>85</td>
-								<td><div class="float-label-control input-answer-name" id="yui_patched_v3_11_0_1_1541387268769_1165" style=" margin-bottom: 0px; "> <input type="text" class="form-control inputAnswerName" data-toggle="tooltip" data-original-title="เงินเดือนสุทธิ" placeholder="เงินเดือนสุทธิ" id="inputAnswerName-850208-802317" name="inputAnswerName-850208-802317" required="" style="cursor: pointer;text-align: right;"> </div></td>
-							</tr>
-							<tr>
-								<td>Department</td>
-								<td>Dep C2</td>
-								<td>85</td>
-								<td>85</td>
-								<td><input id="" class="input-xs"></td>
-								<td>21,250,000</td>
-								<td>33.73</td>
-								<td>นาย Dep MGR C2</td>
-								<td>85</td>
-								<td><input id="" class="input-xs"></td>
-							</tr>
+							
 						</tbody>
 					</table>
 				</div>
