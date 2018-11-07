@@ -11,6 +11,7 @@ var org_id_to_assign;
 var item_id_array = [];
 var emp_result_id_action = [];
 var stage_id_action = [];
+var chief_id_array = [];
 var emailLinkAssignment = false;
 
 var clearFn = function () {
@@ -453,38 +454,27 @@ var listDataFn = function (data) {
         htmlHTML += " <tbody>";
        
         $.each(indexEntry['items'], function (index2, itemEntry) {
-        	var checked_assigned = itemEntry['assigned']==0 ? "disabled" : "";
-        	// var checked_assigned = "checked";
         	
             htmlHTML += "<tr>";
             if (index != 'p0') {
                 if ($("#embed_appraisal_type_id").val() == 2) {
-                	if(itemEntry['assigned']==0){
-	                	htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign'style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
-	                	}else{ 
-	                	htmlHTML += "	<td class='object-center' style='text-align:center;'><input style=\"margin-bottom: 5px;\" class='action_emp' id='id-" + itemEntry['emp_id'] + "' type='checkbox' value=" + itemEntry['emp_id'] + "-" + itemEntry['emp_code'] + "-" + itemEntry['org_id'] + "-" + itemEntry['period_id'] + "-" + itemEntry['default_stage_id'] + " data-id='" + itemEntry['emp_result_id'] + "-" + itemEntry['stage_id'] + "'></td>";
-	                	}
-	                } else if ($("#embed_appraisal_type_id").val() == 1) {
-	                	if(itemEntry['assigned']==0){
-		                htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign'style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
-		                }else{		
-		                htmlHTML += "	<td class='object-center' style='text-align:center;'><input style=\"margin-bottom: 5px;\" class='action_emp' id='id-" + itemEntry['org_id'] + "' type='checkbox' value=" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "--" + itemEntry['default_stage_id'] + "-/" + itemEntry['org_code'] + " data-id='" + itemEntry['emp_result_id'] + "-" + itemEntry['stage_id'] + "'></td>";
-		                }
-	                	//alert(itemEntry['org_id']);
-                }
+                	htmlHTML += "	<td class='object-center' style='text-align:center;'><input style=\"margin-bottom: 5px;\" class='action_emp' id='id-" + itemEntry['emp_id'] + "' type='checkbox' value=" + itemEntry['emp_id'] + "-" + itemEntry['emp_code'] + "-" + itemEntry['org_id'] + "-" + itemEntry['period_id'] + "-" + itemEntry['default_stage_id'] + " data-id='" + itemEntry['emp_result_id'] + "-" + itemEntry['stage_id'] + "'></td>";
+	            } else if ($("#embed_appraisal_type_id").val() == 1) {
+	            	htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign'style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
+	            }
             } else {
 
                 if ($("#embed_appraisal_type_id").val() == 2) {
 	                	if(itemEntry['assigned']==0){
 	                	htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign'style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
 	                	}else{          
-	                    htmlHTML += "	<td class='object-center' style='text-align:center;'><input "+checked_assigned+" class='asign_emp' id='id-" + itemEntry['emp_id'] + "' type='checkbox' value=" + itemEntry['emp_id'] + "-" + itemEntry['emp_code'] + "-" + itemEntry['org_id'] + "-" + itemEntry['period_id'] + "-" + itemEntry['default_stage_id'] + "-" + "></td>";
+	                    htmlHTML += "	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-" + itemEntry['emp_id'] + "' type='checkbox' value='" + itemEntry['emp_id'] + "-" + itemEntry['emp_code'] + "-" + itemEntry['org_id'] + "-" + itemEntry['period_id'] + "-" + itemEntry['default_stage_id'] + "-" + "' data-chief-emp='"+itemEntry['chief_id_array']+"'></td>";
 	                	}
                 } else if ($("#embed_appraisal_type_id").val() == 1) {
                 		if(itemEntry['assigned']==0){
                         htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign'style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
                         }else{ 
-                        htmlHTML += "	<td class='object-center' style='text-align:center;'><input "+checked_assigned+" class='asign_emp' id='id-" + itemEntry['org_id'] + "' type='checkbox' value=" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "--" + itemEntry['default_stage_id'] + "-/" + itemEntry['org_code'] + "></td>";
+                        htmlHTML += "	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-" + itemEntry['org_id'] + "' type='checkbox' value='" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "--" + itemEntry['default_stage_id'] + "-/" + itemEntry['org_code'] + "' data-chief-emp='"+itemEntry['chief_id_array']+"'></td>";
                         } //alert(itemEntry['org_id']);
                 }
             }
@@ -519,26 +509,33 @@ var listDataFn = function (data) {
 
             if (index != 'p0') {
                 //itemEntry['status']
+            	if(itemEntry['chief_id_array']!=undefined) {
+            		itemEntry['chief_id_array']
+            		var data_chief_emp = "data-chief-emp='"+itemEntry['chief_id_array']+"' ";
+            	} else {
+            		var data_chief_emp = "data-chief-emp='' ";
+            	}
+            	
                 if (is_hr == 1 && itemEntry['status'] == 'Accepted') {
                     //htmlHTML+="  <i title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;View&lt;/button&gt;   &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
-                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-view").val() + "\"></i>";
+                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" &lt;button "+data_chief_emp+" class='btn btn-info btn-small btn-gear view' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-view").val() + "\"></i>";
                 } else if (is_hr == 1 && itemEntry['status'] == 'Draft') {
                     //htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit\"></i>";
-                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-edit").val() + "&lt;/button&gt;&nbsp;&lt;button id='del-" + itemEntry['emp_id'] + "' class='btn btn-danger btn-small btn-gear del'&gt;" + $(".lt-delete").val() + "&lt;/button&gt;\"></i>";
+                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button "+data_chief_emp+" class='btn btn-warning btn-small btn-gear edit' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-edit").val() + "&lt;/button&gt;&nbsp;&lt;button id='del-" + itemEntry['emp_id'] + "' class='btn btn-danger btn-small btn-gear del'&gt;" + $(".lt-delete").val() + "&lt;/button&gt;\"></i>";
                 } else if (is_hr == 1 && itemEntry['status'] != 'Accepted') {
-                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-edit").val() + "\"></i>";
+                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button "+data_chief_emp+" class='btn btn-warning btn-small btn-gear edit' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-edit").val() + "\"></i>";
                     //htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
                 } else if (is_self_assign == 1 && itemEntry['status'] == 'Accepted') {
                     //htmlHTML+="  <i title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;View&lt;/button&gt;   &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
-                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-view").val() + "\"></i>";
+                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" &lt;button "+data_chief_emp+" class='btn btn-info btn-small btn-gear view' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-view").val() + "\"></i>";
                 } else if (is_self_assign == 1 && itemEntry['status'] == 'Draft') {
                     //htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit\"></i>";
-                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-edit").val() + "&lt;/button&gt;&nbsp;&lt;button id='del-" + itemEntry['emp_id'] + "' class='btn btn-danger btn-small btn-gear del'&gt;" + $(".lt-delete").val() + "&lt;/button&gt;\"></i>";
+                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button "+data_chief_emp+" class='btn btn-warning btn-small btn-gear edit' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-edit").val() + "&lt;/button&gt;&nbsp;&lt;button id='del-" + itemEntry['emp_id'] + "' class='btn btn-danger btn-small btn-gear del'&gt;" + $(".lt-delete").val() + "&lt;/button&gt;\"></i>";
                 } else if (is_self_assign == 1 && itemEntry['status'] != 'Accepted') {
-                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-edit").val() + "\"></i>";
+                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button "+data_chief_emp+" class='btn btn-warning btn-small btn-gear edit' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-edit").val() + "\"></i>";
                     //htmlHTML+="  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"-"+itemEntry['org_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
                 } else if (is_hr == 0 || is_self_assign == 0) {
-                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-view").val() + "\"></i>";
+                    htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button "+data_chief_emp+" class='btn btn-info btn-small btn-gear view' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-view").val() + "\"></i>";
                 }
 
             }
@@ -679,6 +676,8 @@ var listDataFn = function (data) {
             org_id_to_assign = edit[2];
             organization_code = edit[3];
             empldoyees_code = edit[4];
+            chief_id_array = [];
+            chief_id_array.push($(this).attr('data-chief-emp'));
 
             sessionStorage.setItem('is_coporate_kpi', $("#is_coporate_kpi-" + id).val());
 
@@ -707,6 +706,8 @@ var listDataFn = function (data) {
             org_id_to_assign = view[2];
             organization_code = edit[3];
             empldoyees_code = edit[4];
+            chief_id_array = [];
+            chief_id_array.push($(this).attr('data-chief-emp'));
             var emp_result_id = $(this).parent().parent().parent().parent().children().eq(1).children().val();
             var period_id = $(this).parent().parent().parent().parent().children().eq(2).children().val();
             $("#period_id_edit").val(period_id);
@@ -1718,7 +1719,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
         htmlTemplateQuantity += "  <div class=\"ibox-title2\">";
 
         htmlTemplateQuantity += "      <div class='titlePanel'>" + structureName + "</div>";
-        htmlTemplateQuantity += "      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-" + data['structure_id'] + "'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-" + data['structure_id'] + "'></span>" + $(".lt-total-weight").val() + "<span id='weigth_total_quantity_percentage_target-" + data['structure_id'] + "'>" + data['total_weight'] + "%</span></div>";
+        htmlTemplateQuantity += "      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-" + data['structure_id'] + "'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-" + data['structure_id'] + "'></span>" + $(".lt-total-weight").val() + "<span id='weigth_total_quantity_percentage_target-" + data['structure_id'] + "'> " + data['total_weight'] + "%</span></div>";
         htmlTemplateQuantity += "  </div>";
         htmlTemplateQuantity += "	<div class=\"ibox-content\">";
         htmlTemplateQuantity += " <div class=\"table-responsive scrollbar-inner\">";
@@ -1743,24 +1744,43 @@ var assignTemplateQuantityFn = function (structureName, data) {
         $.each(data['items'], function (index, indexEntry) {
             item_id_array.push(indexEntry['item_id']);
             htmlTemplateQuantity += "<tr>";
-
-            htmlTemplateQuantity += "<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-" + indexEntry['structure_id'] + "' type='checkbox' value='" + indexEntry['item_id'] + "'></td>";
-            htmlTemplateQuantity += "<td style=\"width:20%\" class='id-" + indexEntry['structure_id'] + "-item_name' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name' style='padding-top:7px;'>" + indexEntry['item_name'] + "</td>";
-
-            htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' class='id-" + indexEntry['structure_id'] + "-target input form-control input-sm-small numberOnly addComma' type='text'>";
-            htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-kpi_type_id' class='id-" + indexEntry['structure_id'] + "-kpi_type_id input form-control input-sm-small numberOnly' type='hidden' value=" + indexEntry['kpi_type_id'] + ">";
-            htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-nof_target_score' class='id-" + indexEntry['structure_id'] + "-nof_target_score input form-control input-sm-small numberOnly' type='hidden' value=" + indexEntry['nof_target_score'] + ">";
-            htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_result_id' class='id-" + indexEntry['structure_id'] + "-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
-            htmlTemplateQuantity += "</td>";
-            htmlTemplateQuantity += "<td style=\"width:5%\">" + indexEntry['uom_name'] + "</td>";
-            htmlTemplateQuantity += "<td style=\"width:5%;text-align:right;padding-right: 10px;\"><input  class='input-sm-small scoreText0 numberOnly addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' disabled value='" + notNullFn(indexEntry['actual_value']) + "'></td>";
-            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText1 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0'></td>";
-            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText2 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1'></td>";
-            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText3 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2'></td>";
-            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText4 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3'></td>";
-            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText5 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4'></td>";
-            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText6 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5'></td>";
-            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-weight' class='id-" + indexEntry['structure_id'] + "-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly addComma'  type='text'></td>";
+            if(indexEntry['form_chief']==0) { // form no chief
+	            htmlTemplateQuantity += "<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-" + indexEntry['structure_id'] + "' type='checkbox' value='" + indexEntry['item_id'] + "'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:20%\" class='id-" + indexEntry['structure_id'] + "-item_name' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name' style='padding-top:7px;'>" + indexEntry['item_name'] + "</td>";
+	
+	            htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' class='id-" + indexEntry['structure_id'] + "-target input form-control input-sm-small numberOnly addComma' type='text'>";
+	            htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-kpi_type_id' class='id-" + indexEntry['structure_id'] + "-kpi_type_id input form-control input-sm-small numberOnly' type='hidden' value=" + indexEntry['kpi_type_id'] + ">";
+	            htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-nof_target_score' class='id-" + indexEntry['structure_id'] + "-nof_target_score input form-control input-sm-small numberOnly' type='hidden' value=" + indexEntry['nof_target_score'] + ">";
+	            htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_result_id' class='id-" + indexEntry['structure_id'] + "-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
+	            htmlTemplateQuantity += "</td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%\">" + indexEntry['uom_name'] + "</td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:right;padding-right: 10px;\"><input  class='input-sm-small scoreText0 numberOnly addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' disabled value='" + notNullFn(indexEntry['actual_value']) + "'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText1 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText2 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText3 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText4 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText5 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText6 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-weight' class='id-" + indexEntry['structure_id'] + "-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly addComma'  type='text'></td>";
+            } else { // form yes chief
+            	htmlTemplateQuantity += "<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-" + indexEntry['structure_id'] + " weight_quantity_chief weight_quantity_checked' type='checkbox' value='" + indexEntry['item_id'] + "'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:20%\" class='id-" + indexEntry['structure_id'] + "-item_name' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name' style='padding-top:7px;'>" + indexEntry['item_name'] + "</td>";
+	
+	            htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' class='id-" + indexEntry['structure_id'] + "-target input form-control input-sm-small numberOnly addComma weight_quantity_chief' type='text' value='"+addCommas(indexEntry['target_value'])+"'>";
+	            htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-kpi_type_id' class='id-" + indexEntry['structure_id'] + "-kpi_type_id input form-control input-sm-small numberOnly' type='hidden' value=" + indexEntry['kpi_type_id'] + ">";
+	            htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-nof_target_score' class='id-" + indexEntry['structure_id'] + "-nof_target_score input form-control input-sm-small numberOnly' type='hidden' value=" + indexEntry['nof_target_score'] + ">";
+	            htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_result_id' class='id-" + indexEntry['structure_id'] + "-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
+	            htmlTemplateQuantity += "</td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%\">" + indexEntry['uom_name'] + "</td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:right;padding-right: 10px;\"><input disabled class='input-sm-small scoreText0 numberOnly addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' disabled value='" + notNullFn(indexEntry['actual_value']) + "'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText1 addComma weight_quantity_chief' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0' value='"+addCommas(indexEntry['score0'])+"'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText2 addComma weight_quantity_chief' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1' value='"+addCommas(indexEntry['score1'])+"'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText3 addComma weight_quantity_chief' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2' value='"+addCommas(indexEntry['score2'])+"'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText4 addComma weight_quantity_chief' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3' value='"+addCommas(indexEntry['score3'])+"'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText5 addComma weight_quantity_chief' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4' value='"+addCommas(indexEntry['score4'])+"'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText6 addComma weight_quantity_chief' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5' value='"+addCommas(indexEntry['score5'])+"'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center;\"><input disabled id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-weight' class='id-" + indexEntry['structure_id'] + "-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly addComma weight_quantity_chief'  type='text' value='"+addCommas(indexEntry['weight_percent_chief'])+"'></td>";
+            }
             htmlTemplateQuantity += "</tr>";
 
         });
@@ -1783,7 +1803,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
         htmlTemplateQuantity += "  <div class=\"ibox-title2\">";
 
         htmlTemplateQuantity += "      <div class='titlePanel'>" + structureName + "</div>";
-        htmlTemplateQuantity += "      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-" + data['structure_id'] + "'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-" + data['structure_id'] + "'></span>" + $(".lt-total-weight").val() + "<span id='weigth_total_quantity_percentage_target-" + data['structure_id'] + "'>" + data['total_weight'] + "%</span></div>";
+        htmlTemplateQuantity += "      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-" + data['structure_id'] + "'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-" + data['structure_id'] + "'></span>" + $(".lt-total-weight").val() + "<span id='weigth_total_quantity_percentage_target-" + data['structure_id'] + "'> " + data['total_weight'] + "%</span></div>";
         htmlTemplateQuantity += "  </div>";
         htmlTemplateQuantity += "	<div class=\"ibox-content\">";
         htmlTemplateQuantity += " <div class=\"table-responsive scrollbar-inner\"  style='overflow:auto;'>";
@@ -1806,12 +1826,32 @@ var assignTemplateQuantityFn = function (structureName, data) {
             htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-kpi_type_id' class='id-" + indexEntry['structure_id'] + "-kpi_type_id input form-control input-sm-small numberOnly' type='hidden' value=" + indexEntry['kpi_type_id'] + ">";
             htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-nof_target_score' class='id-" + indexEntry['structure_id'] + "-nof_target_score input form-control input-sm-small numberOnly' type='hidden' value=" + indexEntry['nof_target_score'] + ">";
             htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_result_id' class='id-" + indexEntry['structure_id'] + "-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
-            htmlTemplateQuantity += "<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-" + indexEntry['structure_id'] + "' type='checkbox' value='" + indexEntry['item_id'] + "'></td>";
-            htmlTemplateQuantity += "<td style=\"width:30%\" class='id-" + indexEntry['structure_id'] + "-item_name' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name' style='padding-top:7px;'>" + indexEntry['item_name'] + "</td>";
-            htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\"><input class='input-sm-small numberOnly addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target'></td>";
-            htmlTemplateQuantity += "<td style=\"width:5%\">" + indexEntry['uom_name'] + "</td>";
-            htmlTemplateQuantity += "<td style=\"width:5%;text-align:right;padding-right: 10px;\"><input class='input-sm-small numberOnly addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' disabled value='" + notNullFn(indexEntry['actual_value']) + "'></td>";
-            htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-weight' class='id-" + indexEntry['structure_id'] + "-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly addComma'  type='text'></td>";
+            if(indexEntry['form_chief']==0) { // no form chief
+            	htmlTemplateQuantity += "<td style=\"width:3%; text-align:center;\" class='object-center'>";
+                htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-" + indexEntry['structure_id'] + "' type='checkbox' value='" + indexEntry['item_id'] + "'>";
+                htmlTemplateQuantity += "</td>";
+                htmlTemplateQuantity += "<td style=\"width:30%\" class='id-" + indexEntry['structure_id'] + "-item_name' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name' style='padding-top:7px;'>" + indexEntry['item_name'] + "</td>";
+                htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\">";
+                htmlTemplateQuantity += "<input class='input-sm-small numberOnly addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target'></td>";
+                htmlTemplateQuantity += "<td style=\"width:5%\">" + indexEntry['uom_name'] + "</td>";
+                htmlTemplateQuantity += "<td style=\"width:5%;text-align:right;padding-right: 10px;\">";
+                htmlTemplateQuantity += "<input class='input-sm-small numberOnly addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' disabled value='" + notNullFn(indexEntry['actual_value']) + "'></td>";
+                htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\">";
+                htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-weight' class='id-" + indexEntry['structure_id'] + "-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly addComma'  type='text'></td>";
+            } else { // yes form chief
+            	htmlTemplateQuantity += "<td style=\"width:3%; text-align:center;\" class='object-center'>";
+                htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-" + indexEntry['structure_id'] + " weight_quantity_chief weight_quantity_checked' type='checkbox' value='" + indexEntry['item_id'] + "'>";
+                htmlTemplateQuantity += "</td>";
+                htmlTemplateQuantity += "<td style=\"width:30%\" class='id-" + indexEntry['structure_id'] + "-item_name' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name' style='padding-top:7px;'>" + indexEntry['item_name'] + "</td>";
+                htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\">";
+                htmlTemplateQuantity += "<input class='input-sm-small numberOnly addComma weight_quantity_chief' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' value="+addCommas(indexEntry['target_value'])+"></td>";
+                htmlTemplateQuantity += "<td style=\"width:5%\">" + indexEntry['uom_name'] + "</td>";
+                htmlTemplateQuantity += "<td style=\"width:5%;text-align:right;padding-right: 10px;\">";
+                htmlTemplateQuantity += "<input class='input-sm-small numberOnly addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' disabled value='" + addCommas(notNullFn(indexEntry['actual_value'])) + "'></td>";
+                htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\">";
+                htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-weight' class='id-" + indexEntry['structure_id'] + "-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly addComma weight_quantity_chief'  type='text'></td>";
+            }
+
             htmlTemplateQuantity += "</tr>";
 
         });
@@ -2105,15 +2145,6 @@ var createTemplateAssignmentFn = function (data) {
         $(this).val(Comma($(this).val()));
     })
 
-    $(".appraisalItem-checkbox").click(function () {
-        //alert("hello");
-        if ($(this).hasClass('notCal')) {
-
-        } else {
-        }
-
-    })
-
     //sum grand total end
     if ($(".no_weight").val() == 1) {
         $(".totalWeight").hide();
@@ -2124,8 +2155,16 @@ var createTemplateAssignmentFn = function (data) {
 
 
     } else {
-        $("input.total_weigth_quantity").removeAttr('disabled');
-        $("input.total_weigth_quantity").val('');
+    	if($("input.total_weigth_quantity").closest('.weight_quantity_chief')) {
+    		$.each($("input.weight_quantity_chief").closest('.weight_quantity_checked'), function (index, indexEntry) {
+    			$("#"+indexEntry.id).click();
+    		});
+    		$("input.weight_quantity_chief").closest('.weight_quantity_checked').attr("checked", 'checked');
+    		$("input.weight_quantity_chief").attr('disabled', 'disabled');
+    	} else {
+    		 $("input.total_weigth_quantity").removeAttr('disabled');
+             $("input.total_weigth_quantity").val('');
+    	}
         $(".totalWeight").show();
         $(".grandTotalWeight").show();
     }
@@ -2137,14 +2176,11 @@ var getTemplateFn = function (emp_result_id) {
 
     if ($("#appraisalType").val() == 1) {
         check_appraisalLevel = $("#appraisalLevel").val();
-        var emp_code = null;
-        var org_code = organization_code[0];
-    }
-    else if ($("#appraisalType").val() == 2) {
+    } else if ($("#appraisalType").val() == 2) {
         check_appraisalLevel = $("#appraisalLevelEmp").val();
-        var emp_code = empldoyees_code[0];
-        var org_code = null;
     }
+    
+    console.log(chief_id_array);
 
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal_assignment/template",
@@ -2155,11 +2191,12 @@ var getTemplateFn = function (emp_result_id) {
             'appraisal_level_id': check_appraisalLevel,
             'emp_result_id': emp_result_id,
             'org_id': org_id_to_assign,
-            'org_code': org_code,
-            'emp_code': emp_code,
-            'appraisal_type_id': $("#appraisalType").val(),
-            'appraisal_form': $("#appraisalForm").val(),
-            'period_id':$("#period_id").val()
+//            'org_code': org_code,
+//            'emp_code': emp_code,
+//            'appraisal_type_id': $("#appraisalType").val(),
+//            'appraisal_form': $("#appraisalForm").val(),
+//            'period_id':$("#period_id").val(),
+            'chief_id_array': chief_id_array
 
         },
         headers: { Authorization: "Bearer " + tokenID.token },
@@ -2475,6 +2512,7 @@ $(document).ready(function () {
                 empldoyees_id = [];
                 default_stage_id = [];
                 organization_code = [];
+                chief_id_array = [];
                 $("#remark_footer").val("");
                 $(".information").hide();
                 $("#btnAddAnother").show();
@@ -2484,14 +2522,17 @@ $(document).ready(function () {
                     if ($(indexEntry).is(":checked")) {
                         var emp_id = $(indexEntry).val().split("-");
                         var org_id = $(indexEntry).val().split("-/");
+                        var data_chief_id = $(indexEntry).attr("data-chief-emp");
                         empldoyees_id.push(emp_id[0]);
                         empldoyees_code.push(emp_id[1]);
                         org_id_to_assign = emp_id[2];
                         position_id.push(emp_id[3]);
                         default_stage_id.push(emp_id[4]);
                         organization_code.push(org_id[1]);
+                        chief_id_array.push(data_chief_id);
                     }
                 });
+
                 if (empldoyees_id.length == 0) {
                     callFlashSlide($(".lt-please-choose-employees-or-organization-for-assignment").val());
                     return false;
