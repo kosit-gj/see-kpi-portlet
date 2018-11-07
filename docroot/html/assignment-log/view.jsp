@@ -5,6 +5,7 @@
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
+
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 <%
@@ -19,6 +20,7 @@ String password=PortalUtil.getUser(request).getPassword();
 String username = themeDisplay.getUser().getScreenName();
 String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWORD);
 //out.print(username);
+String currentLocale = themeDisplay.getLanguageId();
 
 String param_link = PortalUtil.getOriginalServletRequest(request).getParameter("param_link");
 String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getParameter("param_item_result_id");
@@ -635,6 +637,7 @@ background-color:#71cccc !important;
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
 <input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
+<input type="hidden" id="user_locale" name="user_locale" value="<%=currentLocale%>">
 
 
 <body class=" gray-bg ">
