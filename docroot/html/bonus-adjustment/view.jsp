@@ -428,23 +428,6 @@ plid = layout.getPlid();
     border-radius: 0;
 
 }
-
-/*
-.aui .modal {
-    background-clip: padding-box;
-    background-color: white;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 6px;
-    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-    left: 23%;
-    margin-left: -280px;
-    outline: 0 none;
-    position: fixed;
-    top: 0%;
-    width: 90%;
-    z-index: 1050;
-}
-*/
 .aui input, .aui textarea, .aui .uneditable-input {
    /* width: 47px;*/
 }
@@ -708,6 +691,92 @@ margin-bottom:1px;
 .aui .infoItem:hover{
 background-color:#71cccc !important;
 }
+
+#tableBonusAdjustment thead tr th {
+ white-space: nowrap;
+ text-align: center;
+ vertical-align: middle;
+ font-size: 14 px;
+}
+
+
+.aui .list-data-table .table-bordered th{
+ background-color: #666666 !important;
+ color: #ffffff;
+ vertical-align: top;
+ 
+/*  text-align: center; */
+}
+.aui .list-data-table .table-bordered td{
+ vertical-align: top;
+/*  text-align: center; */
+ font-size: 12px;
+/*  background-color: #fcfcfc; */
+ border-top: 1px solid #ddd;
+ line-height: 16px;
+ padding: 5px;
+
+#tableBonusAdjustment tbody tr td .input-xs{ 
+  line-height: 10px; height: 5px; font-size: 10px; width: 100px; text-align: right; 
+ } 
+
+.aui #tableBonusAdjustment .float-label-control { position: relative; margin-bottom: 0 px;font-size: smaller; }
+   /* .aui #tableBonusAdjustment .float-label-control ::-webkit-input-placeholder { color: transparent; }
+    .aui #tableBonusAdjustment .float-label-control :-moz-placeholder { color: transparent; }
+    .aui #tableBonusAdjustment .float-label-control ::-moz-placeholder { color: transparent; }
+    .aui #tableBonusAdjustment .float-label-control :-ms-input-placeholder { color: transparent; }*/
+    .aui #tableBonusAdjustment .float-label-control input:-webkit-autofill,
+    .aui #tableBonusAdjustment .float-label-control textarea:-webkit-autofill { background-color: transparent !important; -webkit-box-shadow: 0 0 0 1000px white inset !important; -moz-box-shadow: 0 0 0 1000px white inset !important; box-shadow: 0 0 0 1000px white inset !important; }
+    .aui #tableBonusAdjustment .float-label-control input, .aui #tableBonusAdjustment .float-label-control textarea, .aui #tableBonusAdjustment .float-label-control label { font-size: 1.3em; box-shadow: none; -webkit-box-shadow: none; }
+        .aui #tableBonusAdjustment .float-label-control input:focus,
+        .aui #tableBonusAdjustment .float-label-control textarea:focus { box-shadow: none; -webkit-box-shadow: none ; border-bottom-width: 3px !important;; padding-bottom: 0 !important;; border-color:#673ab7 !important; }
+        .aui #tableBonusAdjustment .float-label-control textarea:focus { padding-bottom: 4px; }
+    .aui #tableBonusAdjustment .float-label-control input, .aui #tableBonusAdjustment .float-label-control textarea { display: block; width: 100%; padding: 0.1em 0em 1px 0em; border: none; border-radius: 0px; border-bottom: 1px solid #aaa !important; outline: none; margin: 0px; background: none; }
+    .aui #tableBonusAdjustment .float-label-control textarea { padding: 0.1em 0em 5px 0em; }
+    .aui #tableBonusAdjustment .float-label-control label { position: absolute; font-weight: normal; /*top: -1.0em;*/top: 1.9em;  left: 0.08em; color: #aaaaaa !important; z-index: -1; font-size: 0.85em; -moz-animation: float-labels 300ms none ease-out; -webkit-animation: float-labels 300ms none ease-out; -o-animation: float-labels 300ms none ease-out; -ms-animation: float-labels 300ms none ease-out; -khtml-animation: float-labels 300ms none ease-out; animation: float-labels 300ms none ease-out; /* There is a bug sometimes pausing the animation. This avoids that.*/ animation-play-state: running !important; -webkit-animation-play-state: running !important; }
+    .aui #tableBonusAdjustment .float-label-control input.empty + label,
+    .aui #tableBonusAdjustment .float-label-control textarea.empty + label { top: 0.1em; font-size: 1.5em; animation: none; -webkit-animation: none; }
+    .aui #tableBonusAdjustment .float-label-control input:not(.empty) + label,
+    .aui #tableBonusAdjustment .float-label-control textarea:not(.empty) + label { z-index: 1; }
+    .aui #tableBonusAdjustment .float-label-control input:not(.empty):focus + label,
+    .aui #tableBonusAdjustment .float-label-control textarea:not(.empty):focus + label { color: #aaaaaa !important; }
+    .aui #tableBonusAdjustment .float-label-control.label-bottom label { -moz-animation: float-labels-bottom 300ms none ease-out; -webkit-animation: float-labels-bottom 300ms none ease-out; -o-animation: float-labels-bottom 300ms none ease-out; -ms-animation: float-labels-bottom 300ms none ease-out; -khtml-animation: float-labels-bottom 300ms none ease-out; animation: float-labels-bottom 300ms none ease-out; }
+    .aui #tableBonusAdjustment .float-label-control.label-bottom input:not(.empty) + label,
+    .aui #tableBonusAdjustment .float-label-control.label-bottom textarea:not(.empty) + label { top: 3em; }
+
+
+@keyframes float-labels {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: -1em; opacity: 1; }
+}
+
+@-webkit-keyframes float-labels {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: -1em; opacity: 1; }
+}
+
+@keyframes float-labels-bottom {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: 3em; opacity: 1; }
+}
+
+@-webkit-keyframes float-labels-bottom {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: 3em; opacity: 1; }
+}
+}
 </style>
 
 
@@ -724,9 +793,6 @@ background-color:#71cccc !important;
 	<!-- <div class="app_url_hidden"> -->
 		<div class="container">
 			<div id="" class="ng-view ng-scope">
-			<!--
-				<h2><i class="fa fa fa-pencil-square-o icon-title"></i> <span id="modalDescription"> Appraisal</span> </h2>
- 			-->
 				<div class="row-fluid">
 					<!-- start--row-fluid -->
 
@@ -753,6 +819,13 @@ background-color:#71cccc !important;
                       <option>ประเมินผลประจำปี 2018</option>
                     </select>
                   </div>
+                  
+                   <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="form"/>" class="input form-control input-sm span12"
+                      id="AppraisalForm" name="AppraisalForm">
+                      <option>All Form</option>
+                    </select>
+                  </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
                     <select id="AppraisalEmpLevel" name="AppraisalEmpLevel" data-toggle="tooltip"
@@ -771,7 +844,7 @@ background-color:#71cccc !important;
                   <div class="form-group pull-left span3" style="margin-left: 5px">
                     <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="organization"/>"
                       class="input form-control input-sm span12" id="organization" name="organization">
-                      <option>All Organization</option>
+                      <!-- <option>All Organization</option> -->
                     </select>
                   </div>
                   
@@ -783,13 +856,17 @@ background-color:#71cccc !important;
 											id="EmpName_id" name="EmpName_id" value="" type="hidden">
                   </div>
 
-                  <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <input data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="position"/>" class="form-control input-sm searchAdvanceText span12"
-                      placeholder="<liferay-ui:message key="position"/>" type="text" id="Position" name="Position" />
-                      <input class="form-control input-sm" id="Position_id"
-											name="Position_id" value="" type="hidden">
+                  <div class="form-group pull-left span3" style="margin-left: 5px; margin-top: 5px;">
+                  <select data-toggle="tooltip" title="<liferay-ui:message key="Position"/>" multiple="multiple" data-original-title="<liferay-ui:message key="Position"/>" class="input form-control input-sm span12" id="Position" name="Position">
+                 </select>            
                   </div>
-
+					
+				  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="status"/>" class="input form-control input-sm span12"
+                      id="status" name="status">
+                      <!-- <option>All Status</option> -->
+                    </select>
+                  </div>
 
                   <div class="form-group span3 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
                     <button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance">
@@ -814,29 +891,55 @@ background-color:#71cccc !important;
 				<div> <!-- class="row-fluid search_result" > -->
 					<div class="span12">
 						<div class="ibox-title">
-							<div class='titlePanel'><liferay-ui:message key="Adjustment-list"/></div>
-						</div>
+							<div class='titlePanel'><liferay-ui:message key="Bonus-Adjustment-list"/></div>
+						</div>						
 						<div class="ibox-content">
+						<!-- pagination start -->
+                                    	<div class="row-fluid" style="padding-bottom:1%;">
+	                                    	<div class="span6 pagianation_area" >
+												<div class="pagination_top pagination"></div>
+	                                    	</div>
+
+		                                    <div class="span6 object-right paging-text">
+
+		                                    	<div class='pagingDropdown'>
+		                                 			<select  id='countPaginationTop'  class="form-control input-sm countPagination">
+					                                     <option>10</option>
+					                                     <option>20</option>
+					                                     <option>50</option>
+					                                     <option>100</option>
+					                                 </select>
+
+		                                 		</div>
+												<div class='pagingText'><liferay-ui:message key="results-per-page"/></div>
+
+		                                    </div>
+
+                                    	</div>
+                                    	 <!-- pagination end -->																	
 							<div class="form-group m-b-none pull-right" style="margin-left: 5px; text-align:right;">
 		                    <button type="button" class="btn btn-info input-sm" name="btnAdjust" id="btnAdjust">
 		                      <liferay-ui:message key="Adjust"/>
 		                    </button>
 		                    &nbsp;
-		                 	</div>
-		                 	<div class="form-group  m-b-none pull-right" style="margin-left: 5px; text-align:right;"><input class="span6 form-control input-sm"id=" " name=" " value="" ></div>
+		                 	</div>		              
 		                 	<div class="form-group m-b-none pull-right" style="margin-left: 5px; text-align:right;">
-							<p>%ปรับผลประเมิน: </p>
+							<p>%ปรับผลประเมิน: <input class="span3 form-control input-sm"id="adjust_percent" name="adjust_percent" value="" > </p>
+							
 							</div>
 							<!-- start table -->
-							<table class="table table-bordered">
+							
+							<div class="row-fluid list-data-table" style="overflow: auto;">							
+							<table class="table table-striped table-bordered" id="tableBonusAdjustment">
 							<thead>
 						    <tr>
+						      <th rowspan="2" style="width:5%; text-align:center;" class="object-center"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></th>
 						      <th rowspan="2">รหัส</th>
-						      <th rowspan="2">ชื่อ</th>
-						      <th rowspan="2">ระดับ</th>
+						      <th rowspan="2" style="width: 15%;">ชื่อ</th>
+						      <th rowspan="2" style="width: 15%;">ระดับ</th>
 						      <th rowspan="2">หน่วยงาน</th>
 						      <th rowspan="2">ตำแหน่่ง</th>	
-						      <th>ผลการประเมินหัวหน้า</th>
+						      <th style="width: 15%;" >ผลการประเมินหัวหน้า</th>
 						      <th colspan="2">ปรับผลประเมิน</th>					 
 						    </tr>				
 						     <tr>						   
@@ -845,18 +948,33 @@ background-color:#71cccc !important;
 						      <th >Boarde</th>
 						    </tr>
 							</thead>
-							 <tbody>
+							
+							 <!-- <tbody>
 							    <tr>
+							      <td style="width:5%; text-align:center;" class="object-center"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></td>
 							      <td>E11</td>
 							      <td>นาย A11</td>
 							      <td>PG4</td>
 							      <td>คลังสินค้า</td>
 							      <td>Officer</td>
 							      <td>95</td>
-							      <td>100</td>
-							      <td>95</td>
+							      <td><div class="float-label-control" >
+						          <input type="text" class="form-control "
+						           data-toggle="tooltip" data-original-title="%"
+						           placeholder="เปอร์เซนต์"
+						           id="inputNetSalary-1"
+						           name="inputNetSalary-1" >
+						         </div></td>
+							      <td><div class="float-label-control" >
+						          <input type="text" class="form-control "
+						           data-toggle="tooltip" data-original-title="%"
+						           placeholder="เปอร์เซนต์"
+						           id="inputNetSalary-1"
+						           name="inputNetSalary-1" >
+						         </div></td>
 							    </tr>
 							    <tr>
+							      <td style="width:5%; text-align:center;" class="object-center"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></td>
 							      <td>E12</td>
 							      <td>นาย A12</td>
 							      <td>PG4</td>
@@ -867,6 +985,7 @@ background-color:#71cccc !important;
 							      <td>80</td>
 							    </tr>
 							    <tr>
+							      <td style="width:5%; text-align:center;" class="object-center"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></td>
 							      <td>E13</td>
 							      <td>นาย A13</td>
 							      <td>PG4</td>
@@ -877,6 +996,7 @@ background-color:#71cccc !important;
 							      <td>80</td>
 							    </tr>
 							    <tr>
+							      <td style="width:5%; text-align:center;" class="object-center"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></td>
 							      <td>E14</td>
 							      <td>นาย A14</td>
 							      <td>PG4</td>
@@ -887,6 +1007,7 @@ background-color:#71cccc !important;
 							      <td>85</td>
 							    </tr>
 							    <tr>
+							      <td style="width:5%; text-align:center;" class="object-center"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></td>
 							      <td>E15</td>
 							      <td>นาย A15</td>
 							      <td>PG4</td>
@@ -897,6 +1018,7 @@ background-color:#71cccc !important;
 							      <td>75</td>
 							    </tr>
 							    <tr>
+							      <td style="width:5%; text-align:center;" class="object-center"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></td>
 							      <td>E16</td>
 							      <td>นาย A16</td>
 							      <td>PG4</td>
@@ -906,8 +1028,9 @@ background-color:#71cccc !important;
 							      <td>100</td>
 							      <td>90</td>
 							    </tr>
-							 </tbody>
+							 </tbody> -->
 							</table>
+							</div>
 							<div class='row-fluid'>
 							
 						 <div class="span3 ">
@@ -920,23 +1043,77 @@ background-color:#71cccc !important;
 								 </div>
 							 </div>
 						 </div>
-						 <div class="span5 ">
-	            			<div class="form-group ">
-								 <label class="span3 p-t-xxs"><b><liferay-ui:message key="remark"/>:</b></label>
-								 <div class="span9">
-									 <input type='text' name='remark_footer' id='remark_footer' class='span12' value=''>
-								 </div>
-							 </div>
-	            		</div>
 
 
-						  <div class="span4 offset0" style='text-align:right;'>
+						  <div class="span9 offset0" style='text-align:right;'>
 
 							  	<button class="btn btn-success" type="button" id="btnSubmit"><liferay-ui:message key="submit"/></button>
 								<input type='hidden' id='emp_result_id' name='emp_result_id' value=''>
 								<button data-dismiss="modal" class="btn btn-danger btnCancle" type="button"><liferay-ui:message key="cancel"/></button>
 
 						  </div>
+						  <div class="row-fluid" style='text-align:left; padding: 3%;'>
+            		<a href="#" id='slideUpDownStageHistory'  ><liferay-ui:message key="work-flow-stage-history"/></a>
+            		<div id='slideStageHistory' style='display:none;'>
+            			<table class='table'>
+            				<thead>
+            					<tr style="white-space: nowrap;">
+            						<th  style='width:15%'><liferay-ui:message key="created-by"/></th>
+            						<th  style='width:15%'><liferay-ui:message key="created-datetime"/></th>
+            						<th  style='width:15%'><liferay-ui:message key="from-stage"/></th>
+            						<th  style='width:15%'><liferay-ui:message key="to-stage"/></th>
+            						<th  style='width:35%'><liferay-ui:message key="remark"/></th>
+            					</tr>
+            				</thead>
+            				<tbody id='listDataStageHistory'>
+            					<tr >
+            						<td>emp_code1</td>
+            						<td>2017-08-16 10:20:22</td>
+            						<td>HR</td>
+            						<td>Manager</td>
+            						<td>่Reject เนื่องจากไม่เหมาะสม</td>
+            					</tr>
+            					<tr >
+            						<td>emp_code1</td>
+            						<td>2017-08-16 10:20:22</td>
+            						<td>HR</td>
+            						<td>Manager</td>
+            						<td>่Reject เนื่องจากไม่เหมาะสม</td>
+            					</tr>
+            					<tr >
+            						<td>emp_code1</td>
+            						<td>2017-08-16 10:20:22</td>
+            						<td>HR</td>
+            						<td>Manager</td>
+            						<td>่Reject เนื่องจากไม่เหมาะสม</td>
+            					</tr>
+            				</tbody>
+            			</table>
+            		</div>
+            	</div>
+            	
+            	<!-- pagination start -->
+							<div class="row-fluid">
+	                                    	<div class="span6 pagianation_area">
+
+												  <p class="pagination_bottom pagination"></p>
+
+	                                    	</div>
+
+		                                    <div class="span6 object-right paging-text">
+		                                    	<div class='pagingDropdown'>
+		                                 			<select  id='countPaginationBottom'  class="form-control input-sm countPagination">
+					                                     <option>10</option>
+					                                     <option>20</option>
+					                                     <option>50</option>
+					                                     <option>100</option>
+					                                 </select>
+			                                 	</div>
+												<div class='pagingText'><liferay-ui:message key="results-per-page"/></div>
+		                                    </div>
+
+                                    	</div>
+							<!-- pagination end -->
 
 					</div>
 
