@@ -1225,7 +1225,7 @@ overflow-y: visible;
 			                <div class='form-file-mangement'>
 				                <div class="form-label-customs">
 				                
-				                	Max Value <span class='redFont'>*</span>
+				                	Max Value <span class=''>&nbsp;</span>
 				                </div>
 				                
 				                <div id="maxValueAreaDeductScore" class="form-input-customs">
@@ -1239,7 +1239,7 @@ overflow-y: visible;
 			                
 			                <div class='form-file-mangement'>
 				                <div class="form-label-customs">
-				                	Deduct Score/Unit <span class='redFont'>*</span>
+				                	Deduct Score/Unit <span class=''>&nbsp;</span>
 				                </div>
 				                <div class="form-input-customs">
 				                	<input type="text" class="form-control input-sm numberOnly  span12" placeholder="Deduct Score/Unit" id="DeductScoreUnitDeductScore">

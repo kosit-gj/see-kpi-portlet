@@ -40,7 +40,7 @@ var listDataDeductScoreFn = function(data) {
 //Update
 var updateDeductScoreFn  = function(){
 	
-
+	
 	 var item_name=$("#appraisalItemNameDeductScore").val();
 	 var item_id=$("#appraisalItemIdDeductScore").val();
 	 var appraisal_level=$("#appraisalLevelDeductScore").val();
@@ -65,7 +65,6 @@ var updateDeductScoreFn  = function(){
 	 }else{
 		 is_active=0;
 	 }
-	 
 	 
 	 $.ajax({
 	    url:restfulURL+"/"+serviceName+"/public/appraisal_item/"+item_id,
@@ -114,7 +113,7 @@ var insertDeductScoreFn = function(param) {
 	 var item_name=$("#appraisalItemNameDeductScore").val();
 	 var appraisal_level=$("#appraisalLevelDeductScore").val();
 	 var structure_id=$("#structure_id_deduct").val();
-	 var max_value=$("#maxValueDeductScore").val();
+	 var max_value= $("#maxValueDeductScore").val();
 	 var no_raise_value=$("#NoRaiseValue").val();
 	 var unit_deduct_score=$("#DeductScoreUnitDeductScore").val();
 	 var value_get_zero=$("#ValueGetZero").val();

@@ -164,11 +164,11 @@ var listDataFn = function(data) {
 		//mainContentHTML+="                			<td>"+itemsEntry[columnsEntry['column_name']]+"</td>";
 		
 		if(columnsEntry['data_type']=="number"){
-			mainContentHTML+="                			<td style=\"text-align:right\">"+itemsEntry[columnsEntry['column_name']]+"</td>";
+			mainContentHTML+="                			<td style=\"text-align:right\">"+setValueNullFn(itemsEntry[columnsEntry['column_name']])+"</td>"; 
 		}else if(columnsEntry['data_type']=="checkbox"){
-			mainContentHTML+="                			<td style=\"text-align:center\">"+displayTypeFn(itemsEntry[columnsEntry['column_name']],columnsEntry['data_type'])+"</td>";
+			mainContentHTML+="                			<td style=\"text-align:center\">"+displayTypeFn(setValueNullFn(itemsEntry[columnsEntry['column_name']]),columnsEntry['data_type'])+"</td>";
 		}else{
-			mainContentHTML+="                			<td>"+displayTypeFn(itemsEntry[columnsEntry['column_name']],columnsEntry['data_type'])+"</td>";
+			mainContentHTML+="                			<td>"+displayTypeFn(setValueNullFn(itemsEntry[columnsEntry['column_name']]),columnsEntry['data_type'])+"</td>";
 		}
 		});
 		mainContentHTML+="         					<td style=\"text-align:center\">";
@@ -228,6 +228,12 @@ var listDataFn = function(data) {
 	
 };
 
+var setValueNullFn = function(value){
+	if(value == null || value == ''){
+		return "";
+	}
+	return value;
+}
 
 
 //Delete
