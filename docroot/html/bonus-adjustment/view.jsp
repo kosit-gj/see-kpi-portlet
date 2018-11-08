@@ -861,12 +861,12 @@ background-color:#71cccc !important;
                  </select>            
                   </div>
 					
-				 <%--  <div class="form-group pull-left span3" style="margin-left: 5px">
+				  <div class="form-group pull-left span3" style="margin-left: 5px">
                     <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="status"/>" class="input form-control input-sm span12"
                       id="status" name="status">
                       <!-- <option>All Status</option> -->
                     </select>
-                  </div> --%>
+                  </div>
 
                   <div class="form-group span3 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
                     <button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance">

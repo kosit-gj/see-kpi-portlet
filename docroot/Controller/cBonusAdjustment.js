@@ -161,7 +161,7 @@ var dropDrowPositionFn = function(id){
 					htmlOption+="<option value="+indexEntry['position_id']+">"+indexEntry['position_name']+"</option>";				
 			});
 			$("#Position").html(htmlOption);
-			//appraisalStatusFn($("#Position").val());
+			appraisalStatusFn($("#Position").val());
 		}
 	});
 }
@@ -171,7 +171,7 @@ var refreshMultiPosition = function() {
 	$(".ui-icon-check,.ui-icon-closethick,.ui-icon-circle-close").css({'margin-top':'3px'});
 	$('input[name=multiselect_Position]').css({'margin-bottom':'5px'});
 }
-/*var appraisalStatusFn = function (nameArea, id) {
+var appraisalStatusFn = function (nameArea, id) {
     if (nameArea == undefined) {
         nameArea = "";
     }
@@ -194,6 +194,8 @@ var refreshMultiPosition = function() {
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
+        	var htmlOption="";
+			htmlOption+="<option value=''>All Status</option>";
             $.each(data, function (index, indexEntry) {
                 if (id == indexEntry['status']) {
                     htmlOption += "<option selected='selected' value='" + indexEntry['stage_id'] + "'>" + indexEntry['status'] + "</option>";
@@ -205,7 +207,7 @@ var refreshMultiPosition = function() {
             $("#status" + nameArea).html(htmlOption);
         }
     });
-}*/
+}
 
 /*$("#slideUpDownStageHistory").click(function(){
 		$("#slideStageHistory").slideToggle();
@@ -242,7 +244,7 @@ var searchAdvanceFn = function () {
     embedParam += "<input type='hidden' class='embed_param_search' id='embed_emp_id' name='embed_emp_id' value='" + empNameCode + $("#organization").val() + $("#AppraisalEmpLevel").val() +"'>";
     embedParam += "<input type='hidden' class='embed_param_search' id='embed_year_list' name='embed_year_list' value='" + $("#AppraisalYear").val() + "'>";
     embedParam += "<input type='hidden' class='embed_param_search' id='embed_organization' name='embed_organization' value='" + $("#organization").val() + $("#AppraisalEmpLevel").val() + $("#AppraisalOrgLevel").val() + "'>";
-    //embedParam += "<input type='hidden' class='embed_param_search' id='embed_status' name='embed_status' value='" + $("#status").val() + "'>";
+    embedParam += "<input type='hidden' class='embed_param_search' id='embed_status' name='embed_status' value='" + $("#status").val() + "'>";
     embedParam += "<input type='hidden' class='embed_param_search' id='embed_appraisal_form' name='embed_appraisal_form' value='" + $("#appraisalForm").val() + "'>";
 
     $("#embedParamSearch").append(embedParam);
@@ -255,14 +257,12 @@ var getDataFn = function (page, rpp) {
     var appraisal_level_id_org = $("#embed_appraisal_level_id_org").val();
     var appraisal_level_id_emp = $("#embed_appraisal_level_id_emp").val();
     var period_id = $("#embed_period_id").val();
-    var position_id = $("#embed_position_id").val().split("-");
-    embed_position_id = embed_position_id[0];
-    var emp_id = $("#embed_emp_id").val();
-    var embed_year_list = $("#embed_year_list").val();
-    var embed_organization = $("#embed_organization").val();/*.split("-");
-    embed_organization = embed_organization[0];*/
-    //var status = $("#embed_status").val();
-    var appraisal_form = $("#embed_appraisal_form").val();
+    var position_id = $("#embed_position_id").val();/*.split("-");
+    embed_position_id = embed_position_id[0];*/
+    var emp_id = $("#embed_emp_id").val();    
+    var embed_organization = $("#embed_organization").val();
+    var status = $("#embed_status").val();
+    
 
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/bonus/adjustment",
@@ -273,17 +273,13 @@ var getDataFn = function (page, rpp) {
         data: {
             "page": page,
             "rpp": rpp,
-            "appraisal_level_id": appraisal_level_id_emp,
-            "appraisal_level_id_org": appraisal_level_id_org,
-            "appraisal_type_id": appraisal_type_id,
+            "emp_level": appraisal_level_id_emp,
+            "org_level": appraisal_level_id_org,
             "period_id": period_id,
-            "position_id": position_id,
-            "appraisal_year": embed_year_list,
-            "frequency_id": embed_period_frequency,
+            "position_id": position_id,        
             "org_id": embed_organization,
-            "emp_code": emp_id,
-            "status": status,
-            "appraisal_form": appraisal_form
+            "emp_id": emp_id,
+            "stage_id": status,
         },
         success: function (data) {
             listDataFn(data);
@@ -293,7 +289,7 @@ var getDataFn = function (page, rpp) {
         }
     })
 };
-/*
+
 var listDataFn = function(data){
 	console.log(data);
 	htmlHTML="";
@@ -319,7 +315,7 @@ var listDataFn = function(data){
 
 	});
 	$("#listDatas").html(htmlHTML);
-};*/
+};
 
 
 $(document).ready(function() {
@@ -419,6 +415,7 @@ $(document).ready(function() {
 	
 	 //Search Start
     $("#btnSearchAdvance").click(function () {
+    	console.log(searchAdvanceFn);
         searchAdvanceFn();
         $(".countPagination").val(10);
         $("#rpp").remove();
