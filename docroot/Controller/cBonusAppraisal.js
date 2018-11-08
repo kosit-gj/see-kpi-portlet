@@ -16,7 +16,7 @@ globalSevice['restfulPathDropDownBonusPeriod']= globalSevice['restfulPathGlobal'
 
 //Bonus Appraisal Sevice
 globalSevice['restfulPathBonusAppraisal']=globalSevice['restfulPathGlobal'] + "/bonus_appraisal";
-globalSevice['restfulPathBonusAppraisalCalculate']=globalSevice['restfulPathBonusAppraisal']+"/calculate";
+//globalSevice['restfulPathBonusAppraisalCalculate']=globalSevice['restfulPathBonusAppraisal']+"/calculate";
 
 //Monthly Bonus Rate Sevice
 globalSevice['restfulPathMonthlyBonusRate']=restfulURL + "/" + serviceName + "/public/system_config";
@@ -80,33 +80,6 @@ var validationFn = function(data){
 	callFlashSlideInModal(validate,"#information","error");
 };	
 
-	
-// --------  Clear Start 
-var clearFn = function() {
-	
-	$("#modalTitleRole").html("Add Questionnaire");
-	
-	
-	$("#form_questionnaire_type").val($("#form_questionnaire_type option:first").val());
-	
-	
-	$("#form_questionnaire_name").val("");
-	$("#form_questionnaire_pass_score").val("");
-	
-	$("#form_questionnaire_is_active").removeClass('on');
-	$("#form_questionnaire_is_active").addClass('on');
-    $("#form_questionnaire_is_active").attr("data-value","1");
-  
-    $("#listSection").empty();
-	
-
-	$("#action").val("add");
-	$(".btnModalClose").click();
-	globalDataTemp['form'].validate().resetForm();
-	$("#form_questionnaire_type ,.btnAddSection  ,.numberOnly").prop('disabled', false); 
-	$("#form_questionnaire_type ,.btnAddSection  ,.numberOnly").removeClass('cursorNotAllowed');
-	
-}
 var getPathMonthlyBonusRateFn = function(){
 	
 	var monthly_bonus_rate=0;
@@ -132,7 +105,7 @@ var getDataFn = function(page,rpp){
 	//alert("Page : "+page+" - Rpp : "+rpp);
 
 	var year= $("#param_year").val();
-	var bonus_period_id= $("#param_bonus_period_id").val();
+	var period_id= $("#param_bonus_period_id").val();
 	
 	$.ajax({
 		url : globalSevice['restfulPathBonusAppraisal'],
@@ -159,9 +132,9 @@ var listBonusAppraisal = function(data){
 	$.each(data,function(index,indexEntry) {
 
 		html += scriptGenerateHtmlListBonusAppraisalFn(indexEntry,"");
-		console.log(indexEntry);
+		//console.log(indexEntry);
 		$.each(indexEntry.departments,function(index2,indexEntry2) {
-			console.log(indexEntry2);
+			//console.log(indexEntry2);
 			
 			html += scriptGenerateHtmlListBonusAppraisalFn(indexEntry2,"&emsp;");
 			
@@ -273,8 +246,9 @@ var scriptBtnSaveAndCancelFn = function(){
 var scriptBtnConfirmYesFn = function(){
 	$(document).off("click","#btnConfirmOK");
 	$(document).on("click","#btnConfirmOK",function(){
-		
-		var monthly_bonus_rate = $("#from_monthly_bonus_rate").val();
+		var appraisal_year= $("#param_year").val();
+		var period_id= $("#param_bonus_period_id").val();
+		var monthly_bonus_rate = $("#restfulPathBonusAppraisal").val();
 		var data_bonus = [];
 		$.each($("#listBonusAppraisal").find("tr[edit_flag='1']").get(),function(index,indexEntry){
 			data_bonus.push({
@@ -292,18 +266,22 @@ var scriptBtnConfirmYesFn = function(){
 			 dataType:"json",
 			 async:false,
 			 data:{
+				 
+				 appraisal_year		:	appraisal_year,
+				 period_id			:	period_id,
 				 monthly_bonus_rate : 	$("#from_monthly_bonus_rate").val(),
-				 data 				: 	data_bonus
+				 data 				: 	data_bonus,
+				 calculate_flag		:	1
 			 },
 			 headers:{Authorization:"Bearer "+tokenID.token},
 		     success:function(data){
-			     	if(data.status = "200"){
+			     	if(data.status == 200){
 			     		
 			     		getDataFn($("#pageNumber").val(),$("#rpp").val());
 			     		callFlashSlide("Save and Recalculate Bonus Successfully.");
 					    $("#confrimModal").modal('hide');
 					    
-			     	}else if(data.status = "400"){
+			     	}else if(data.status == 400){
 			     		callFlashSlideInModal(data['data'],"#inform_on_confirm","error");
 			     	}
 			 }
@@ -315,7 +293,8 @@ var scriptBtnConfirmNoFn = function(){
 	$(document).off("click","#btnConfirmNO");
 	$(document).on("click","#btnConfirmNO",function(){
 		
-		
+		var appraisal_year= $("#param_year").val();
+		var period_id= $("#param_bonus_period_id").val();
 		var data_bonus = [];
 		$.each($("#listBonusAppraisal").find("tr[edit_flag='1']").get(),function(index,indexEntry){
 			data_bonus.push({
@@ -333,17 +312,21 @@ var scriptBtnConfirmNoFn = function(){
 			 dataType:"json",
 			 async:false,
 			 data:{
-				 data 				: 	data_bonus
+				 
+				 appraisal_year		: $("#param_year").val(),
+				 period_id 			: $("#param_bonus_period_id").val(),
+				 data 				: 	data_bonus,
+				 calculate_flag		:	0
 			 },
 			 headers:{Authorization:"Bearer "+tokenID.token},
 		     success:function(data){
-			     	if(data.status = "200"){
+			     	if(data.status == 200){
 			     		
 			     		getDataFn($("#pageNumber").val(),$("#rpp").val());
 			     		callFlashSlide("Save Successfully.");
 					    $("#confrimModal").modal('hide');
 					    
-			     	}else if(data.status = "400"){
+			     	}else if(data.status == 400){
 			     		callFlashSlideInModal(data['data'],"#inform_on_confirm","error");
 			     	}
 			 }
