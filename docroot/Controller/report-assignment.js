@@ -62,7 +62,7 @@ $(document).ready(function() {
     // run list
     dropDrowYearListFn();
     dropDrowAppraisalEmpLevelFn();
-    dropDrowAppraisalOrgLevelFn();
+//    dropDrowAppraisalOrgLevelFn();
     
     
     $("#AppraisalYear").change(function() {

@@ -63,11 +63,6 @@ var listAppraisalCriteria = function(id) {
 		dataType : "json",
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success : function(data) {
-			if(data["no_weight"] == 1){
-				no_weight="disabled";
-			}else{
-				no_weight="";
-			};
 			
 			$.each(data['data'],function(index,indexEntry) { 
 				if(index==0) {
