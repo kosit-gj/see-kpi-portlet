@@ -3,7 +3,10 @@
 <%@ page import="javax.portlet.*"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme"%>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys"%>
+
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 <%
@@ -370,30 +373,39 @@
 		<div class="col-lg-12" style="padding-left: 0px; padding-right: 0px;">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<h5>Advance Search</h5>
+					<h5><liferay-ui:message key="advanced-search"/></h5>
 				</div>
 
 				<div class="ibox-content breadcrumbs2">
 					<div class="row-fluid p-t-xxs">
 						<div class="form-inline">
 							<div class="form-group pull-left span3" style="margin-left: 5px">
-								<select data-toggle="tooltip" title="Year"
+								<select data-toggle="tooltip" title="<liferay-ui:message key="year"/>"
 									class="input span12 m-b-n" id="search_year" name="search_year"><option
-										selected value="">Year</option></select>
+										selected value=""><liferay-ui:message key="year"/></option></select>
 							</div>
 							<div class="form-group pull-left span3" style="margin-left: 5px">
-								<select data-toggle="tooltip" title="Bonus Period"
+								<select data-toggle="tooltip" title="<liferay-ui:message key="bonus-period"/>"
 									class="input span12 m-b-n" id="search_bonus_period_id"
 									name="search_bonus_period_id"><option selected
-										value="">Bonus Period</option></select>
+										value=""></option></select>
 							</div>
 
 							<div class="form-group pull-right m-b-none p-b-xxs">
-								<button type="button" class="btn btn-info input-sm"
-									name="btn_search_advance" id="btn_search_advance"
-									style="margin-left: 5px">
-									<i class="fa fa-search"></i>&nbsp;Search
-								</button>
+								<div class="form-group pull-right m-b-none ">
+									<button type="button" name="btn_search_recalculate" onclick="getDataReCalculateFn()"
+										id="btn_search_recalculate" class="btn btn-warning input-sm "
+										style="margin-left: 5px;" disabled="disabled">
+										<i class="fa fa-calculator"></i>&nbsp;<liferay-ui:message key="calculate"/>
+									</button>
+								</div>
+								<div class="form-group pull-right m-b-none ">
+									<button type="button" name="btn_search_advance"
+										id="btn_search_advance" class="btn btn-info input-sm "
+										style="margin-left: 5px;">
+										<i class="fa fa-search"></i>&nbsp;<liferay-ui:message key="search"/>
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -411,7 +423,7 @@
 	<div class="row-fluid " id="bonus_appraisal_list_content">
 		<div class="col-lg-12" style="padding-left: 0px; padding-right: 0px;">
 			<div class="ibox-title">
-				<h5>Bonus Appraisal List</h5>
+				<h5><liferay-ui:message key="bonus-appraisal-list"/></h5>
 			</div>
 
 
@@ -446,20 +458,20 @@
 						style="max-width: none; min-width: 800;margin-bottom: 0px;">
 						<thead>
 							<tr>
-								<th rowspan="2" style="width: 10%; min-width: 100px;">ระดับ</th>
-								<th rowspan="2" style="width: 15%; min-width: 150px;">ชื่อ</th>
-								<th colspan="5" style="width: 45%;">ประเมินหน่วยงาน</th>
-								<th colspan="3" style="width: 30%;">ประเมินผู้บริหารหน่วยงาน</th>
+								<th rowspan="2" style="width: 10%; min-width: 100px;"><liferay-ui:message key="level"/></th>
+								<th rowspan="2" style="width: 15%; min-width: 150px;"><liferay-ui:message key="org-name"/></th>
+								<th colspan="5" style="width: 45%;"><liferay-ui:message key="evaluate-agency"/></th>
+								<th colspan="3" style="width: 30%;"><liferay-ui:message key="evaluate-agency-manager"/></th>
 							</tr>
 							<tr>
-								<th style="width: 10%; min-width: 100px;">ผลประเมินเฉลี่ย</th>
-								<th style="width: 10%; min-width: 100px;">ปรับผลประเมิน</th>
-								<th style="width: 10%; min-width: 100px;">เงินเดือนสุทธิ</th>
-								<th style="width: 10%; min-width: 100px;">แต้มสิทธิ์</th>
+								<th style="width: 10%; min-width: 100px;"><liferay-ui:message key="avg-result-score"/></th>
+								<th style="width: 10%; min-width: 100px;"><liferay-ui:message key="adjust-result-score"/></th>
+								<th style="width: 10%; min-width: 100px;"><liferay-ui:message key="total-salary"/></th>
+								<th style="width: 10%; min-width: 100px;"><liferay-ui:message key="bonus-point"/></th>
 								<th style="width: 5%; min-width: 40px;">%</th>
-								<th style="width: 10%; min-width: 160px;">ชื่อ</th>
-								<th style="width: 10%;min-width: 100px;">ผลประเมิน</th>
-								<th style="width: 10%; min-width: 100px;">ปรับผลประเมิน</th>
+								<th style="width: 10%; min-width: 160px;"><liferay-ui:message key="emp-name"/></th>
+								<th style="width: 10%;min-width: 100px;"><liferay-ui:message key="emp-result-score"/></th>
+								<th style="width: 10%; min-width: 100px;"><liferay-ui:message key="adjust-result-score"/></th>
 							</tr>
 						</thead>
 						<tbody id="listBonusAppraisal">
@@ -497,13 +509,13 @@
 							<button type="button" class="btn btn-info input-sm"
 								name="btn_save_bonus_appraisal" id="btn_save_bonus_appraisal"
 								style="margin-left: 5px">
-								&nbsp;Save
+								&nbsp;<liferay-ui:message key="save"/>
 							</button>
 							
 							<button type="button" class="btn btn-danger input-sm"
 								name="btn_cancel_bonus_appraisal"
 								id="btn_cancel_bonus_appraisal" style="margin-left: 5px">
-								&nbsp;Cancel
+								&nbsp;<liferay-ui:message key="cancel"/>
 							</button>
 						</div>
 					</div>
@@ -533,10 +545,9 @@
 			<div class="modal-header">
 				<button data-dismiss="modal" class="close" type="button"
 					style="padding-top: 5px">
-					<span aria-hidden="true"><i class='fa fa-times'></i></span><span
-						class="sr-only">Close</span>
+					<span aria-hidden="true"><i class='fa fa-times'></i></span>
 				</button>
-				<h5 class="modal-title">Confirm Dialog</h5>
+				<h5 class="modal-title"><liferay-ui:message key="confirm-dialog"/></h5>
 			</div>
 			<div class="modal-body">
 				<!-- content start -->
@@ -568,11 +579,11 @@
 			<div class="modal-footer">
 				<div align="center">
 					<button class="btn btn-success" id="btnConfirmOK" type="button">
-						&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
+						&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;<liferay-ui:message key="yes"/>&nbsp;&nbsp;
 					</button>
 					&nbsp;&nbsp;
 					<button data-dismiss="modal" class="btn btn-danger" id="btnConfirmNO" type="button">
-						<i class="fa fa-times-circle"></i>&nbsp;&nbsp;No&nbsp;&nbsp;
+						<i class="fa fa-times-circle"></i>&nbsp;&nbsp;<liferay-ui:message key="no"/>&nbsp;&nbsp;
 					</button>
 				</div>
 			</div>

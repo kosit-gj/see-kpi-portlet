@@ -3,7 +3,6 @@
 var globalSevice=[];
 var globalDataTemp=[];
 globalDataTemp['MonthlyBonusRate'];
-
 var globalData;
 
 const pageNumberDefault=1;
@@ -109,11 +108,53 @@ var getDataFn = function(page,rpp){
 	
 	$.ajax({
 		url : globalSevice['restfulPathBonusAppraisal'],
-		type : "get",
+		type : "post",
 		dataType : "json",
 		data:{"page":page,"rpp":rpp,
 			"appraisal_year":year,
-			"period_id":bonus_period_id},
+			"period_id":period_id,
+			"action": "search"},
+		headers:{Authorization:"Bearer "+tokenID.token},
+		async:false,
+		success : function(data) {
+			listBonusAppraisal(data['data']);
+			globalData=data;
+			paginationSetUpFn(globalData['current_page'],globalData['last_page'],globalData['last_page']);
+		}
+	});
+	
+	
+};
+var getDataReCalculateFn = function(){
+	//alert("Page : "+page+" - Rpp : "+rpp);
+
+
+	var appraisal_year= $("#param_year").val();
+	var period_id= $("#param_bonus_period_id").val();
+	var data_bonus = [];
+	$.each($("#listBonusAppraisal").find("tr[edit_flag='1']").get(),function(index,indexEntry){
+		data_bonus.push({
+			 "org_result_judgement_id"	: $(this).attr("org_result_judgement_id"),
+		     "adjust_result_score"		: $(this).find('.inputAdjustResultScore').autoNumeric('get'),
+		     "emp_result_judgement_id"	: $(this).attr("emp_result_judgement_id"),
+		     "emp_adjust_result_score"	: $(this).find('.inputEmpAdjustResultScore ').autoNumeric('get')
+		});
+  
+	 });
+	console.log(data_bonus);
+	$.ajax({
+		url : globalSevice['restfulPathBonusAppraisal'],
+		type : "post",
+		dataType : "json",
+		data:{
+			"page"				:	$("#pageNumber").val(),
+			"rpp"				:	$("#rpp").val(),
+			"appraisal_year"	:	appraisal_year,
+			"period_id"			:	period_id,
+			"data" 				: 	data_bonus,
+			"calculate_flag"	:	0,
+			"action"			:	"re-calculate"
+			},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success : function(data) {
@@ -190,7 +231,7 @@ var scriptGenerateHtmlListBonusAppraisalFn = function(indexEntry,sub_departments
 	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.total_salary).toString()) + "</td>";
 	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.bonus_point).toString()) + "</td>";
 	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.bonus_percent).toString()) + "</td>";
-	html += "<td class='columnSearch' >"+ indexEntry.emp_name + "</td>";
+	html += "<td class='columnSearch' >"+ notNullTextFn(indexEntry.emp_name) + "</td>";
 	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.emp_result_score).toString()) + "</td>";
 	html += "<td class='columnSearch' style='text-align: right;'>" ;
 	if(indexEntry.edit_flag){
@@ -261,8 +302,8 @@ var scriptBtnConfirmYesFn = function(){
 		 });
 		
 		$.ajax({
-			 url: globalSevice['restfulPathBonusAppraisalCalculate'],
-			 type : "post",
+			 url: globalSevice['restfulPathBonusAppraisal'],
+			 type : "patch",
 			 dataType:"json",
 			 async:false,
 			 data:{
@@ -308,7 +349,7 @@ var scriptBtnConfirmNoFn = function(){
 		
 		$.ajax({
 			 url: globalSevice['restfulPathBonusAppraisal'],
-			 type : "post",
+			 type : "patch",
 			 dataType:"json",
 			 async:false,
 			 data:{
@@ -394,7 +435,7 @@ $(document).ready(function() {
 				);
 			
 		$("#bonus_appraisal_list_content").show();
-		
+		$("#btn_search_recalculate").prop("disabled",false)
 		return false;
 	});
 
