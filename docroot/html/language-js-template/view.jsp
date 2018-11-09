@@ -119,3 +119,5 @@
 <!-- Judgement -->
 <input class="lt-item_name" type="hidden" value="<liferay-ui:message key="item_name"/>"/>
 
+<!-- Bonus Appraisal -->
+<input class="lt-adjust-result-score" type="hidden" value="<liferay-ui:message key="adjust-result-score"/>"/>

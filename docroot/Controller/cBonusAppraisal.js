@@ -217,7 +217,7 @@ var scriptGenerateHtmlListBonusAppraisalFn = function(indexEntry,sub_departments
 		
 		html += "	<div class='float-label-control ' >";
 		html += "	<input type='text' class='form-control inputAdjustResultScore numberOnly'";
-		html += "		data-toggle='tooltip' data-original-title='ปรับผลประเมิน'";
+		html += "		data-toggle='tooltip' data-original-title='"+$(".lt-adjust-result-score").val()+"' ";
 		html += "		placeholder='ปรับผลประเมิน'";
 		//html += "		id='inputAdjustResultScore'";
 		//html += "		name='inputAdjustResultScore' ";
@@ -238,7 +238,7 @@ var scriptGenerateHtmlListBonusAppraisalFn = function(indexEntry,sub_departments
 		
 		html += "	<div class='float-label-control ' >";
 		html += "	<input type='text' class='form-control inputEmpAdjustResultScore numberOnly'";
-		html += "		data-toggle='tooltip' data-original-title='ปรับผลประเมิน'";
+		html += "		data-toggle='tooltip' data-original-title='"+$(".lt-adjust-result-score").val()+"'";
 		html += "		placeholder='ปรับผลประเมิน'";
 		//html += "		id='inputEmpAdjustResultScore'";
 		//html += "		name='inputEmpAdjustResultScore' ";
