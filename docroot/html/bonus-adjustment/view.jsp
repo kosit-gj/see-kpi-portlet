@@ -777,6 +777,12 @@ background-color:#71cccc !important;
     100% { top: 3em; opacity: 1; }
 }
 }
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
 </style>
 
 
@@ -792,7 +798,7 @@ background-color:#71cccc !important;
 
 	<!-- <div class="app_url_hidden"> -->
 		<div class="container">
-			<div id="" class="ng-view ng-scope">
+			<div id="advanceSearchAppraisalGroup" class="ng-view ng-scope" style="display: none;">
 				<div class="row-fluid">
 					<!-- start--row-fluid -->
 
@@ -817,13 +823,6 @@ background-color:#71cccc !important;
                     <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="period"/>" class="input form-control input-sm span12"
                       id="AppraisalPeriod" name="AppraisalPeriod">
                       <option>ประเมินผลประจำปี 2018</option>
-                    </select>
-                  </div>
-                  
-                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="form"/>" class="input form-control input-sm span12"
-                      id="AppraisalForm" name="AppraisalForm">
-                      <option>All Form</option>
                     </select>
                   </div>
 
@@ -852,15 +851,20 @@ background-color:#71cccc !important;
                     <input data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="employee-name"/>"
                       class="form-control input-sm searchAdvanceText span12" placeholder="<liferay-ui:message key="employee-name"/>"
                       type="text" id="EmpName" name="EmpName" />
-                      <input class="form-control input-sm"
-											id="EmpName_id" name="EmpName_id" value="" type="hidden">
+                      <input class="form-control input-sm" id="EmpName_id" name="EmpName_id" value="" type="hidden">
                   </div>
 
-                  <div class="form-group pull-left span3" style="margin-left: 5px; margin-top: 5px;">
+                  <div class="form-group pull-left span3" style="margin-left: 5px; margin-top: 2px;">
                   <select data-toggle="tooltip" title="<liferay-ui:message key="Position"/>" multiple="multiple" data-original-title="<liferay-ui:message key="Position"/>" class="input form-control input-sm span12" id="Position" name="Position">
                  </select>            
                   </div>
-					
+				 
+				 <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="form"/>" class="input form-control input-sm span12"
+                      id="AppraisalForm" name="AppraisalForm">
+                    </select>
+                  </div>
+                  
 				  <div class="form-group pull-left span3" style="margin-left: 5px">
                     <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="status"/>" class="input form-control input-sm span12"
                       id="status" name="status">
@@ -868,7 +872,7 @@ background-color:#71cccc !important;
                     </select>
                   </div>
 
-                  <div class="form-group span3 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
+                  <div class="form-group span3 m-b-none pull-right" style="margin-top: 1px; margin-left: 5px; text-align:right;">
                     <button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance">
                       <i class="fa fa-search"></i>&nbsp;<liferay-ui:message key="search"/>
                     </button>
@@ -888,14 +892,27 @@ background-color:#71cccc !important;
 				
 				<!-- end--row-fluid -->
 
-				<div> <!-- class="row-fluid search_result" > -->
+				<div id="search_result" style="display: none;"> <!-- class="row-fluid search_result" > -->
 					<div class="span12">
 						<div class="ibox-title">
 							<div class='titlePanel'><liferay-ui:message key="Bonus-Adjustment-list"/></div>
 						</div>						
 						<div class="ibox-content">
-						<!-- pagination start -->
-                                    	<div class="row-fluid" style="padding-bottom:1%;">
+							<div class="row-fluid head_adjust" style="display: none;">							
+								<div class="form-group m-b-none pull-right" style="margin-left: 5px; text-align:right;">
+			                    <button type="button" class="btn btn-info input-sm" name="btnAdjust" id="btnAdjust">
+			                      <liferay-ui:message key="Adjust"/>
+			                    </button>
+			                    &nbsp;
+			                 	</div>		              
+			                 	<div class="form-group m-b-none pull-right" style="margin-left: 5px; text-align:right;">
+								<p>% ปรับผลประเมิน: <input type="number" min="0" style="text-align: right;" class="span3 form-control input-sm" id="adjust_percent" name="adjust_percent" value="100"> </p>
+								</div>
+							</div>
+							
+							
+							<!-- pagination start -->
+                                    	<div class="row-fluid">
 	                                    	<div class="span6 pagianation_area" >
 												<div class="pagination_top pagination"></div>
 	                                    	</div>
@@ -916,183 +933,34 @@ background-color:#71cccc !important;
 		                                    </div>
 
                                     	</div>
-                                    	 <!-- pagination end -->																	
-							<div class="form-group m-b-none pull-right" style="margin-left: 5px; text-align:right;">
-		                    <button type="button" class="btn btn-info input-sm" name="btnAdjust" id="btnAdjust">
-		                      <liferay-ui:message key="Adjust"/>
-		                    </button>
-		                    &nbsp;
-		                 	</div>		              
-		                 	<div class="form-group m-b-none pull-right" style="margin-left: 5px; text-align:right;">
-							<p>%ปรับผลประเมิน: <input class="span3 form-control input-sm"id="adjust_percent" name="adjust_percent" value="" > </p>
-							
-							</div>
-							<!-- start table -->
+                            <!-- pagination end -->							
 							
 							<div class="row-fluid list-data-table" style="overflow: auto;">							
-							<table class="table table-striped table-bordered" id="tableBonusAdjustment">
+							<table class="table table-striped table-bordered" id="tableBonusAdjustment" style="margin-bottom: 7px;">
 							<thead>
 						    <tr>
-						      <th rowspan="2" style="width:5%; text-align:center;" class="object-center"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></th>
-						      <th rowspan="2">รหัส</th>
-						      <th rowspan="2" style="width: 15%;">ชื่อ</th>
-						      <th rowspan="2" style="width: 15%;">ระดับ</th>
-						      <th rowspan="2">หน่วยงาน</th>
-						      <th rowspan="2">ตำแหน่่ง</th>	
-						      <th style="width: 15%;" >ผลการประเมินหัวหน้า</th>
-						      <th colspan="2">ปรับผลประเมิน</th>					 
+						      <th rowspan="2" style="width:5%; text-align:center;"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></th>
+						      <th rowspan="2" style="width:10%; text-align:center;">รหัส</th>
+						      <th rowspan="2" style="width: 20%;">ชื่อ</th>
+						      <th rowspan="2" style="width: 10%;">ระดับ</th>
+						      <th rowspan="2" style="width:10%; text-align:center;">หน่วยงาน</th>
+						      <th rowspan="2" style="width:10%; text-align:center;">ตำแหน่่ง</th>
+						      <th rowspan="2" style="width:10%; text-align:center;">สถานะ</th>
+						      <th style="width:10%; text-align:center;">ผลการประเมินจาก</th>
+						      <th colspan="2" style="width:15%; text-align:center;">ปรับผลประเมิน</th>					 
 						    </tr>				
 						     <tr>						   
-						      <th>cco</th>
-						      <th >%</th>
-						      <th >Boarde</th>
+						      <th id="score_name1"></th>
+						      <th>%</th>
+						      <th id="score_name2"></th>
 						    </tr>
 							</thead>
-							
-							 <!-- <tbody>
-							    <tr>
-							      <td style="width:5%; text-align:center;" class="object-center"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></td>
-							      <td>E11</td>
-							      <td>นาย A11</td>
-							      <td>PG4</td>
-							      <td>คลังสินค้า</td>
-							      <td>Officer</td>
-							      <td>95</td>
-							      <td><div class="float-label-control" >
-						          <input type="text" class="form-control "
-						           data-toggle="tooltip" data-original-title="%"
-						           placeholder="เปอร์เซนต์"
-						           id="inputNetSalary-1"
-						           name="inputNetSalary-1" >
-						         </div></td>
-							      <td><div class="float-label-control" >
-						          <input type="text" class="form-control "
-						           data-toggle="tooltip" data-original-title="%"
-						           placeholder="เปอร์เซนต์"
-						           id="inputNetSalary-1"
-						           name="inputNetSalary-1" >
-						         </div></td>
-							    </tr>
-							    <tr>
-							      <td style="width:5%; text-align:center;" class="object-center"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></td>
-							      <td>E12</td>
-							      <td>นาย A12</td>
-							      <td>PG4</td>
-							      <td>คลังสินค้า</td>
-							      <td>Officer</td>
-							      <td>80</td>
-							      <td>100</td>
-							      <td>80</td>
-							    </tr>
-							    <tr>
-							      <td style="width:5%; text-align:center;" class="object-center"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></td>
-							      <td>E13</td>
-							      <td>นาย A13</td>
-							      <td>PG4</td>
-							      <td>คลังสินค้า</td>
-							      <td>Officer</td>
-							      <td>80</td>
-							      <td>100</td>
-							      <td>80</td>
-							    </tr>
-							    <tr>
-							      <td style="width:5%; text-align:center;" class="object-center"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></td>
-							      <td>E14</td>
-							      <td>นาย A14</td>
-							      <td>PG4</td>
-							      <td>คลังสินค้า</td>
-							      <td>Officer</td>
-							      <td>85</td>
-							      <td>100</td>
-							      <td>85</td>
-							    </tr>
-							    <tr>
-							      <td style="width:5%; text-align:center;" class="object-center"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></td>
-							      <td>E15</td>
-							      <td>นาย A15</td>
-							      <td>PG4</td>
-							      <td>คลังสินค้า</td>
-							      <td>Officer</td>
-							      <td>75</td>
-							      <td>100</td>
-							      <td>75</td>
-							    </tr>
-							    <tr>
-							      <td style="width:5%; text-align:center;" class="object-center"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></td>
-							      <td>E16</td>
-							      <td>นาย A16</td>
-							      <td>PG4</td>
-							      <td>คลังสินค้า</td>
-							      <td>Officer</td>
-							      <td>90</td>
-							      <td>100</td>
-							      <td>90</td>
-							    </tr>
-							 </tbody> -->
+							 <tbody id="list_empjudege">
+								
+							 </tbody>
 							</table>
 							</div>
-							<div class='row-fluid'>
-							
-						 <div class="span3 ">
-							 <div class="form-group p-xxs">
-								 <label class="span4 p-t-xxs"><b><liferay-ui:message key="action"/>:</b></label>
-								 <div class="span8">
-									<select data-toggle="tooltip" title="" class="input form-control input-sm" id="actionToAssign" name="actionToAssign">
-
-									</select>
-								 </div>
-							 </div>
-						 </div>
-
-
-						  <div class="span9 offset0" style='text-align:right;'>
-
-							  	<button class="btn btn-success" type="button" id="btnSubmit"><liferay-ui:message key="submit"/></button>
-								<input type='hidden' id='emp_result_id' name='emp_result_id' value=''>
-								<button data-dismiss="modal" class="btn btn-danger btnCancle" type="button"><liferay-ui:message key="cancel"/></button>
-
-						  </div>
-						  <div class="row-fluid" style='text-align:left; padding: 3%;'>
-            		<a href="#" id='slideUpDownStageHistory'  ><liferay-ui:message key="work-flow-stage-history"/></a>
-            		<div id='slideStageHistory' style='display:none;'>
-            			<table class='table'>
-            				<thead>
-            					<tr style="white-space: nowrap;">
-            						<th  style='width:15%'><liferay-ui:message key="created-by"/></th>
-            						<th  style='width:15%'><liferay-ui:message key="created-datetime"/></th>
-            						<th  style='width:15%'><liferay-ui:message key="from-stage"/></th>
-            						<th  style='width:15%'><liferay-ui:message key="to-stage"/></th>
-            						<th  style='width:35%'><liferay-ui:message key="remark"/></th>
-            					</tr>
-            				</thead>
-            				<tbody id='listDataStageHistory'>
-            					<tr >
-            						<td>emp_code1</td>
-            						<td>2017-08-16 10:20:22</td>
-            						<td>HR</td>
-            						<td>Manager</td>
-            						<td>่Reject เนื่องจากไม่เหมาะสม</td>
-            					</tr>
-            					<tr >
-            						<td>emp_code1</td>
-            						<td>2017-08-16 10:20:22</td>
-            						<td>HR</td>
-            						<td>Manager</td>
-            						<td>่Reject เนื่องจากไม่เหมาะสม</td>
-            					</tr>
-            					<tr >
-            						<td>emp_code1</td>
-            						<td>2017-08-16 10:20:22</td>
-            						<td>HR</td>
-            						<td>Manager</td>
-            						<td>่Reject เนื่องจากไม่เหมาะสม</td>
-            					</tr>
-            				</tbody>
-            			</table>
-            		</div>
-            	</div>
-            	
-            	<!-- pagination start -->
+							<!-- pagination start -->
 							<div class="row-fluid">
 	                                    	<div class="span6 pagianation_area">
 
@@ -1112,8 +980,33 @@ background-color:#71cccc !important;
 												<div class='pagingText'><liferay-ui:message key="results-per-page"/></div>
 		                                    </div>
 
-                                    	</div>
+                            </div>
 							<!-- pagination end -->
+							<div class='row-fluid head_adjust' style="margin-top: 10px; display: none;">
+							
+						 <div class="span3">
+							 <div class="form-group p-xxs">
+								 <label class="span3 p-t-xxs" style="text-align: center;"><b><liferay-ui:message key="action"/> :</b></label>
+								 <div class="span7">
+									<select data-toggle="tooltip" title="" class="input form-control input-sm" id="actionToAssign" name="actionToAssign">
+									</select>
+								 </div>
+							 </div>
+						 </div>
+
+
+						  <div class="span9 offset0" style='text-align:right;'>
+
+							  	<button class="btn btn-success" type="button" id="btnSubmit"><liferay-ui:message key="submit"/></button>
+								<input type='hidden' id='emp_result_id' name='emp_result_id' value=''>
+<%-- 								<button data-dismiss="modal" class="btn btn-danger btnCancle" type="button"><liferay-ui:message key="cancel"/></button> --%>
+
+						  </div>
+						  
+						  <div class="row-fluid" style='text-align:left;'></div>
+						  	<div class="alert alert-warning" id="information" style="display: none; margin-bottom: 10px;"></div>
+            	
+            				
 
 					</div>
 
@@ -1130,7 +1023,7 @@ background-color:#71cccc !important;
 			</div>
 	</div>
 	
-	
+	<div id="embedParamSearch"></div>
 	
 	</body>
 
