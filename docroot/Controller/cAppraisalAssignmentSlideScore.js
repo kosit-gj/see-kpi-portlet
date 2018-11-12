@@ -229,8 +229,8 @@ var setDataToTemplateFn = function (data, actionType) {
         //form2
 
         //form3
-        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-maxValue").val(addCommas(indexEntry['max_value']));
-        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-deductScoreUnit").val(indexEntry['deduct_score_unit']);
+        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-maxValue").val(notNullTextFn(addCommas(indexEntry['max_value'])));
+        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-deductScoreUnit").val(notNullTextFn(indexEntry['deduct_score_unit']));
         $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-valueGetZero").val(indexEntry['value_get_zero'] == null ? "" : indexEntry['value_get_zero']);
         $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-NoRaiseValue").val(indexEntry['no_raise_value'] == null ? "" : indexEntry['no_raise_value']);
         //embedParamAppraisal for get updated.
@@ -1592,8 +1592,8 @@ var assignTemplateDeductFn = function (structureName, data) {
 
         htmlTemplateDeduct += "<td style=\"width:;text-align:center;\" class='object-center' ><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-checkbox' class='appraisalItem-checkbox notCal appraisalItem-checkbox-" + indexEntry['structure_id'] + "' type='checkbox' value='" + indexEntry['item_id'] + "'></td>";
         htmlTemplateDeduct += "<td style=\"width:\" style='padding-top:7px;' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name' class='id-" + indexEntry['structure_id'] + "-item_name'>" + indexEntry['item_name'] + "</td>";
-        htmlTemplateDeduct += "<td style=\"width:;text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-maxValue' class='id-" + indexEntry['structure_id'] + "-maxValue  input form-control input-sm-small numberOnly addComma' type='text' value='" + indexEntry['max_value'] + "'></td>";
-        htmlTemplateDeduct += "<td style=\"width:; text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-deductScoreUnit' class='id-" + indexEntry['structure_id'] + "-deductScoreUnit    input form-control input-sm-small numberOnly addComma' type='text' value='" + indexEntry['unit_deduct_score'] + "'>     </td>";
+        htmlTemplateDeduct += "<td style=\"width:;text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-maxValue' class='id-" + indexEntry['structure_id'] + "-maxValue  input form-control input-sm-small numberOnly addComma' type='text' value='" + notNullTextFn(indexEntry['max_value']) + "'></td>";
+        htmlTemplateDeduct += "<td style=\"width:; text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-deductScoreUnit' class='id-" + indexEntry['structure_id'] + "-deductScoreUnit    input form-control input-sm-small numberOnly addComma' type='text' value='" + notNullTextFn(indexEntry['unit_deduct_score']) + "'>     </td>";
         if (data['is_value_get_zero'] == 1) {
             htmlTemplateDeduct += "<td style=\"width:; text-align:center; \"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-valueGetZero' class='id-" + indexEntry['structure_id'] + "-valueGetZero  input form-control input-sm-small numberOnly addComma' type='text' value='" + (indexEntry['value_get_zero'] == null ? "" : indexEntry['value_get_zero']) + "'></td>";
         }
