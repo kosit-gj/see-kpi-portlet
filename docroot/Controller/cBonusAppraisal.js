@@ -229,7 +229,7 @@ var scriptGenerateHtmlListBonusAppraisalFn = function(indexEntry,sub_departments
 	}
 	html += "</td>";
 	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.total_salary).toString()) + "</td>";
-	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.bonus_point).toString()) + "</td>";
+	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.bonus_score).toString()) + "</td>";
 	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.bonus_percent).toString()) + "</td>";
 	html += "<td class='columnSearch' >"+ notNullTextFn(indexEntry.emp_name) + "</td>";
 	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.emp_result_score).toString()) + "</td>";
