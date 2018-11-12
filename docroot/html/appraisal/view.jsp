@@ -708,6 +708,9 @@ margin-bottom:1px;
 .aui .infoItem:hover{
 background-color:#71cccc !important;
 }
+.aui .titlePanel{
+width: auto !important;
+}
 </style>
 
 

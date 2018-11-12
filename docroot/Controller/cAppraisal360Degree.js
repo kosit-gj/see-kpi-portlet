@@ -322,7 +322,7 @@ var onchangGroupQualityFn = function (structureId) { // QualityFn
         if (result_type == 1) {
             html += "" + $(".lt-total-weight").val() + " " + total_weight_percent + "%";
         } else {
-            html += "" + $(".lt-total-score").val() + " " + total_weight + "";
+            html += "" + $(".lt-total-score").val() + " " + total_weight + " ,"+ $(".lt-total-weight").val() + " " + total_weight_percent + "%";
         }
     }
     $("#totalWeight-" + structureId).html(html);
@@ -744,9 +744,10 @@ var assignTemplateRewardFn = function (structureName, data) {
     htmlTemplateDeduct += "<div class='titlePanel'>" + structureName + "</div>";
     if (data['no_weight'] == 0) { // has weight;
         if (data['result_type'] == 1) {
-            htmlTemplateDeduct += "<div class='totalWeight'>Total Weight " + data['total_weight_percent'] + "%</div>";
+            htmlTemplateDeduct += "<div class='totalWeight'>"+$(".lt-total-weight").val()+" " + data['total_weight_percent'] + "%</div>";
         } else {
-            htmlTemplateDeduct += "<div class='totalWeight'>Total Score " + data['total_weight'] + "</div>";
+            htmlTemplateDeduct += "<div class='totalWeight'>" + $(".lt-total-score").val() + " " + data['total_weight'] + " ," + $(".lt-total-weight").val() + " " + data['total_weight_percent'] + "%</div>";
+            
         }
     }
     htmlTemplateDeduct += "</div>";
@@ -845,7 +846,7 @@ var assignTemplateDeductFn = function (structureName, data) {
         if (data['result_type'] == 1) {
             htmlTemplateDeduct += "<div class='totalWeight'>" + $(".lt-total-weight").val() + " " + data['total_weight_percent'] + "%</div>";
         } else {
-            htmlTemplateDeduct += "<div class='totalWeight'>" + $(".lt-total-score").val() + " " + data['total_weight'] + "</div>";
+            htmlTemplateDeduct += "<div class='totalWeight'>" + $(".lt-total-score").val() + " " + data['total_weight'] + " ," + $(".lt-total-weight").val() + " " + data['total_weight_percent'] + "%</div>";
         }
     }
     htmlTemplateDeduct += "</div>";
@@ -945,7 +946,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
         if (data['result_type'] == 1) {
             htmlTemplateQuantity += "      <div class='totalWeight'>" + $(".lt-total-weight").val() + " " + data['total_weight_percent'] + "%</div>";
         } else {
-            htmlTemplateQuantity += "      <div class='totalWeight'>" + $(".lt-total-score").val() + " " + data['total_weight'] + "</div>";
+            htmlTemplateQuantity += "      <div class='totalWeight'>" + $(".lt-total-score").val() + " " + data['total_weight'] + " ," + $(".lt-total-weight").val() + " " + data['total_weight_percent'] + "%</div>";
         }
     }
     htmlTemplateQuantity += "  </div>";

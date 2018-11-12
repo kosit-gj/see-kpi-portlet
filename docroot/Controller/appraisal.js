@@ -142,7 +142,7 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 			if(data['result_type']==1){
 				htmlTemplateQuality+="<div class='totalWeight'>"+$(".lt-total-weight").val()+" "+data['total_weight_percent']+"%</div>";
 			}else{
-				htmlTemplateQuality+="<div class='totalWeight'>"+$(".lt-total-score").val()+" "+data['total_weight']+"</div>";
+				htmlTemplateQuality+="<div class='totalWeight'>"+$(".lt-total-score").val()+" "+data['total_weight']+" ,"+$(".lt-total-weight").val()+" "+data['total_weight_percent']+"%</div>";
 			}
 
 		}
@@ -282,7 +282,7 @@ var assignTemplateDeductFn = function(structureName,data){
 		if(data['result_type']==1){
 			htmlTemplateDeduct+="<div class='totalWeight'>"+$(".lt-total-weight").val()+" "+data['total_weight_percent']+"%</div>";
 		}else{
-			htmlTemplateDeduct+="<div class='totalWeight'>"+$(".lt-total-score").val()+" "+data['total_weight']+"</div>";
+			htmlTemplateDeduct+="<div class='totalWeight'>"+$(".lt-total-score").val()+" "+data['total_weight']+" ,"+$(".lt-total-weight").val()+" "+data['total_weight_percent']+"%</div>";
 		}
 	}
 	htmlTemplateDeduct+="</div>";
@@ -416,7 +416,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 		if(data['result_type']==1){
 			htmlTemplateQuantity+="      <div class='totalWeight'>"+$(".lt-total-weight").val()+" "+data['total_weight_percent']+"%</div>";
 		}else{
-			htmlTemplateQuantity+="      <div class='totalWeight'>"+$(".lt-total-score").val()+" "+data['total_weight']+"</div>";
+			htmlTemplateQuantity+="      <div class='totalWeight'>"+$(".lt-total-score").val()+" "+data['total_weight']+" ,"+$(".lt-total-weight").val()+" "+data['total_weight_percent']+"%</div>";
 		}
 	}
 	htmlTemplateQuantity+="  </div>";
@@ -511,7 +511,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2))+"</td>";
 
 
-						htmlTemplateQuantity+="	<td style=\"text-align:center; display: flex; justify-content: space-between;\">";
+						htmlTemplateQuantity+="	<td style=\"text-align:center; display: ; justify-content: space-between;\">";
 						htmlTemplateQuantity+=" <span>&nbsp;&nbsp;&nbsp;&nbsp;</span><i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"   &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear reason' id='reason-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;"+$(".lt-reason").val()+"&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;"+$(".lt-gantt-chart").val()+"&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear phase' id='phase-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' data-target='' data-toggle='modal'&gt;"+$(".lt-phase").val()+"&lt;/button&gt; &lt;button style='width:100%;' id='action_plan-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' class='btn btn-success btn-small btn-gear action_plan'&gt;"+$(".lt-action-plan").val()+"&lt;/button&gt; &lt;button id='attach_file-"+indexEntry['item_result_id']+"-"+indexEntry['emp_id']+"-"+indexEntry['emp_name']+"' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;"+$(".lt-attach-files").val()+"&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>"+paperclip;
 						htmlTemplateQuantity+="	</td>";
 
