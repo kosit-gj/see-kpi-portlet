@@ -1,6 +1,6 @@
 <?xml version="1.0"?> 
 <!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.2.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_2_0.dtd">
- 
+
 <liferay-portlet-app>
 	<portlet> 
 		<portlet-name>see-kpi</portlet-name>
@@ -2171,16 +2171,20 @@
 		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
 		<header-portlet-css>/css/tywMain.css</header-portlet-css>
 		<header-portlet-css>/css/appraisal.css</header-portlet-css>
+		<header-portlet-css>/css/jquery.multiselect.css</header-portlet-css>
+		<header-portlet-css>/css/jquery.multiselect.filter.css</header-portlet-css>			
 		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>  
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/JQueryUI1.11.4/jquery-ui.min.js</footer-portlet-javascript>	
 		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>	
+		<footer-portlet-javascript>/js/jquery.multiselect.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.multiselect.filter.min.js</footer-portlet-javascript>	
 		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/Controller/cEmpResultJudgement.js</footer-portlet-javascript>   
+		<footer-portlet-javascript>/Controller/cEmpResultJudgement.js</footer-portlet-javascript>      
 		<css-class-wrapper>emp-result-judgement-portlet</css-class-wrapper>
 	</portlet>
 	
