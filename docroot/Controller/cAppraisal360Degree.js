@@ -2187,6 +2187,11 @@ var getReasonFn = function (id) {
 var listDataFn = function (data) {
     htmlHTML = "";
     $.each(data['group'], function (index, indexEntry) {
+    	
+    	 // appraisal_period_desc change Language 
+        var appraisal_period_desc = indexEntry['appraisal_period_desc'].replace("Start Date", $(".lt-start-date").val());
+        	appraisal_period_desc = appraisal_period_desc.replace("End Date", $(".lt-end-date").val());
+        	indexEntry['appraisal_period_desc'] = appraisal_period_desc;
 
         htmlHTML += "<div class=\"row-fluid\">";
         htmlHTML += "<div class=\"span12\">";

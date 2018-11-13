@@ -396,6 +396,12 @@ var listDataFn = function (data) {
         htmlHTML += "<div class=\"row-fluid\">";
         htmlHTML += "<div class=\"span12\">";
         htmlHTML += "<div class=\"ibox-title2\">";
+        
+        // appraisal_period_desc change Language 
+        var appraisal_period_desc = indexEntry['appraisal_period_desc'].replace("Start Date", $(".lt-start-date").val());
+        	appraisal_period_desc = appraisal_period_desc.replace("End Date", $(".lt-end-date").val());
+        	indexEntry['appraisal_period_desc'] = appraisal_period_desc;
+        	
         if (index != 'p0') {
             htmlHTML += "<div class=\"titlePanel2\">" + indexEntry['appraisal_period_desc'] + " ";
             htmlHTML += "<button " + statusAction + " type=\"button\" class=\"btn btn-primary input-sm\" name=\"btnAction\" id=\"btnAction\"><i class=\"fa fa-sign-in\"></i>&nbsp;" + $(".lt-action").val() + "</button>";
@@ -403,7 +409,7 @@ var listDataFn = function (data) {
         } else {
             htmlHTML += "<div class=\"titlePanel2\">" + indexEntry['appraisal_period_desc'] + " </div> ";
         }
-
+        
         htmlHTML += "</div>";
         htmlHTML += "<div class=\"ibox-content\">";
         htmlHTML += "<div class=\"table-responsive\" style='overflow:auto;'>";
@@ -1035,7 +1041,7 @@ var actionAssignmentFn = function (param) {
 }
 
 //SearchAdvance
-var searchAdvanceFn = function () {
+var searchAdvanceFn = function () {//
 	/*
 	appraisal_level_id,
 	appraisal_type_id,

@@ -273,6 +273,11 @@ var genTableListDataFn = function(data){
 	}
 	else{
 		
+	// appraisal_period_desc change Language 
+	var appraisal_period_desc = data['data'][0]['appraisal_period_desc'].replace("Start Date", $(".lt-start-date").val());
+        appraisal_period_desc = appraisal_period_desc.replace("End Date", $(".lt-end-date").val());
+        data['data'][0]['appraisal_period_desc'] = appraisal_period_desc;
+        	
 	 HTML += "<div class=\"row-fluid\">";
      HTML += "<div class=\"span12\">";
 	     HTML += "<div class=\"ibox-title2\">";

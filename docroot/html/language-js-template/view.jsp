@@ -56,6 +56,8 @@
 <input class="lt-view" type="hidden" value="<liferay-ui:message key="view"/>"/>
 <input class="lt-group" type="hidden" value="<liferay-ui:message key="group"/>"/>
 <input class="lt-no-raise-value" type="hidden" value="<liferay-ui:message key="no-raise-value"/>"/>
+<input class="lt-start-date" type="hidden" value="<liferay-ui:message key="start-date"/>"/>
+<input class="lt-end-date" type="hidden" value="<liferay-ui:message key="end-date"/>"/>
 
 <!-- Appraisal (kpi result) -->
 <input class="lt-action-plan" type="hidden" value="<liferay-ui:message key="action-plan"/>"/>
