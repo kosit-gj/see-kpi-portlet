@@ -138,14 +138,14 @@ var assignTemplateQualityFn = function(structureName,data,check_disabled_first,c
 
 	//Appraisal Item Name,Target,Actual,Score,%Weight,Weight Score
 	htmlTemplateQuality+="<div class='titlePanel'>"+structureName+"</div>";
-		if(data['no_weight']==0){ // has weight;
+//		if(data['no_weight']==0){ // has weight;
 			if(data['result_type']==1){
 				htmlTemplateQuality+="<div class='totalWeight'>"+$(".lt-total-weight").val()+" "+data['total_weight_percent']+"%</div>";
 			}else{
 				htmlTemplateQuality+="<div class='totalWeight'>"+$(".lt-total-score").val()+" "+data['total_weight']+" ,"+$(".lt-total-weight").val()+" "+data['total_weight_percent']+"%</div>";
 			}
 
-		}
+//		}
 	htmlTemplateQuality+="</div>";
 	htmlTemplateQuality+="<div class=\"ibox-content\">";
 	htmlTemplateQuality+="<div class=\"table-responsive scrollbar-inner\">";
@@ -277,14 +277,14 @@ var assignTemplateDeductFn = function(structureName,data){
 	htmlTemplateDeduct+="<div class=\"span12\">";
 	htmlTemplateDeduct+="<div class=\"ibox-title2\">";
 	htmlTemplateDeduct+="<div class='titlePanel'>"+structureName+"</div>";
-	if(data['no_weight']==0){ // has weight;
+//	if(data['no_weight']==0){ // has weight;
 
 		if(data['result_type']==1){
 			htmlTemplateDeduct+="<div class='totalWeight'>"+$(".lt-total-weight").val()+" "+data['total_weight_percent']+"%</div>";
 		}else{
 			htmlTemplateDeduct+="<div class='totalWeight'>"+$(".lt-total-score").val()+" "+data['total_weight']+" ,"+$(".lt-total-weight").val()+" "+data['total_weight_percent']+"%</div>";
 		}
-	}
+//	}
 	htmlTemplateDeduct+="</div>";
 
 		htmlTemplateDeduct+="<div class=\"ibox-content\">";
@@ -412,13 +412,13 @@ var assignTemplateQuantityFn = function(structureName,data){
 	htmlTemplateQuantity+="  <div class=\"ibox-title2\">";
 
 	htmlTemplateQuantity+="      <div class='titlePanel'>"+structureName+"</div>";
-	if(data['no_weight']==0){ // has weight;
+//	if(data['no_weight']==0){ // has weight;
 		if(data['result_type']==1){
 			htmlTemplateQuantity+="      <div class='totalWeight'>"+$(".lt-total-weight").val()+" "+data['total_weight_percent']+"%</div>";
 		}else{
 			htmlTemplateQuantity+="      <div class='totalWeight'>"+$(".lt-total-score").val()+" "+data['total_weight']+" ,"+$(".lt-total-weight").val()+" "+data['total_weight_percent']+"%</div>";
 		}
-	}
+//	}
 	htmlTemplateQuantity+="  </div>";
 	htmlTemplateQuantity+="	<div class=\"ibox-content\">";
 	htmlTemplateQuantity+=" <div class=\"table-responsive scrollbar-inner\">";

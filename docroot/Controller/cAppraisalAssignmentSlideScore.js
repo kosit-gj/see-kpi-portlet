@@ -1515,7 +1515,15 @@ var assignTemplateQualityFn = function (structureName, data) {
     htmlTemplateQuality += "<div class=\"span12\">";
     htmlTemplateQuality += "<div class=\"ibox-title2\">";
     htmlTemplateQuality += "<div class='titlePanel'>" + structureName + "</div>";
-    htmlTemplateQuality += "<div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quality_moblie_percentage-" + data['structure_id'] + "'></span><span  class='checkWeigthOver' id='weigth_total_quality_percentage-" + data['structure_id'] + "'></span>" + $(".lt-total-weight").val() + "<span id='weigth_total_quality_percentage_target-" + data['structure_id'] + "'>" + data['total_weight'] + "%<span></div>";
+    
+//  Total Weight/Total Score
+	if(data['no_weight'] == 1){ 
+		htmlTemplateQuality += "<div class='totalWeight'>"+$(".lt-total-weight").val()+" "+data['total_weight']+"%</div>";
+	}
+	else{
+		htmlTemplateQuality += "<div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quality_moblie_percentage-" + data['structure_id'] + "'></span><span  class='checkWeigthOver' id='weigth_total_quality_percentage-" + data['structure_id'] + "'></span>" + $(".lt-total-weight").val() + "<span id='weigth_total_quality_percentage_target-" + data['structure_id'] + "'> " + data['total_weight'] + "%<span></div>";
+	}
+	
     htmlTemplateQuality += "</div>";
     htmlTemplateQuality += "<div class=\"ibox-content\">";
     htmlTemplateQuality += "<div class=\"table-responsive scrollbar-inner\">";
@@ -1565,7 +1573,15 @@ var assignTemplateDeductFn = function (structureName, data) {
     htmlTemplateDeduct += "<div class=\"span12\">";
     htmlTemplateDeduct += "<div class=\"ibox-title2\">";
     htmlTemplateDeduct += "<div class='titlePanel'>" + structureName + "</div>";
-    htmlTemplateDeduct += "<div class='totalWeight'><span class='sum_d' style='display:none;' id='weigth_total_deduct_percentage-" + data['structure_id'] + "'>" + data['total_weight'] + "</span>" + $(".lt-total-weight").val() + "<span class='weigth_total_deduct_percentage_target' id='weigth_total_deduct_percentage_target-" + data['structure_id'] + "'>" + data['total_weight'] + "%</span></div>";
+    
+//  Total Weight/Total Score
+	if(data['no_weight'] == 1){ 
+		htmlTemplateDeduct += "<div class='totalWeight'>"+$(".lt-total-weight").val()+" "+data['total_weight']+"%</div>";
+	}
+	else{
+		htmlTemplateDeduct += "<div class='totalWeight'><span class='sum_d' style='display:none;' id='weigth_total_deduct_percentage-" + data['structure_id'] + "'>" + data['total_weight'] + "</span>" + $(".lt-total-weight").val() + "<span class='weigth_total_deduct_percentage_target' id='weigth_total_deduct_percentage_target-" + data['structure_id'] + "'> " + data['total_weight'] + "%</span></div>";
+	}
+
     htmlTemplateDeduct += "</div>";
     htmlTemplateDeduct += "<div class=\"ibox-content\">";
     htmlTemplateDeduct += "<div class=\"table-responsive scrollbar-inner\">";
@@ -1581,7 +1597,7 @@ var assignTemplateDeductFn = function (structureName, data) {
         htmlTemplateDeduct += "<th style=\"width:; text-align:center;\"><b>" + $(".lt-value-get-zero").val() + "</b></th>";
     }
     if (data['is_no_raise_value'] == 1) {
-        htmlTemplateDeduct += "<th style=\"width:; text-align:center;\"><b>" + $(".lt-no-raise-value").val() + "</b></th>";  // daris TH
+        htmlTemplateDeduct += "<th style=\"width:; text-align:center;\"><b>" + $(".lt-no-raise-value").val() + "</b></th>";  
     }
     htmlTemplateDeduct += "</tr>";
     htmlTemplateDeduct += "</thead>";
@@ -1626,7 +1642,15 @@ var assignTemplateRewardFn = function (structureName, data) {
     htmlTemplateDeduct += "<div class=\"span12\">";
     htmlTemplateDeduct += "<div class=\"ibox-title2\">";
     htmlTemplateDeduct += "<div class='titlePanel'>" + structureName + "</div>";
-    htmlTemplateDeduct += "<div class='totalWeight'><span class='sum_d' style='display:none;' id='weigth_total_reward_percentage-" + data['structure_id'] + "'>" + data['total_weight'] + "</span>Total Weight <span class='weigth_total_reward_percentage_target' id='weigth_total_reward_percentage_target-" + data['structure_id'] + "'>" + data['total_weight'] + "%</span></div>";
+    
+//  Total Weight/Total Score
+	if(data['no_weight'] == 1){ 
+		htmlTemplateDeduct += "<div class='totalWeight'>"+$(".lt-total-weight").val()+" "+data['total_weight']+"%</div>";
+	}
+	else{
+		htmlTemplateDeduct += "<div class='totalWeight'><span class='sum_d' style='display:none;' id='weigth_total_reward_percentage-" + data['structure_id'] + "'>" + data['total_weight'] + "</span>Total Weight <span class='weigth_total_reward_percentage_target' id='weigth_total_reward_percentage_target-" + data['structure_id'] + "'> " + data['total_weight'] + "%</span></div>";
+	}
+    
     htmlTemplateDeduct += "</div>";
     htmlTemplateDeduct += "<div class=\"ibox-content\">";
     htmlTemplateDeduct += "<div class=\"table-responsive scrollbar-inner\">";
@@ -1679,7 +1703,15 @@ var assignTemplateQuantityFn = function (structureName, data) {
         htmlTemplateQuantity += "  <div class=\"ibox-title2\">";
 
         htmlTemplateQuantity += "      <div class='titlePanel'>" + structureName + "</div>";
-        htmlTemplateQuantity += "      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-" + data['structure_id'] + "'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-" + data['structure_id'] + "'></span>" + $(".lt-total-weight").val() + "<span id='weigth_total_quantity_percentage_target-" + data['structure_id'] + "'>" + data['total_weight'] + "%</span></div>";
+        
+//      Total Weight/Total Score
+    	if(data['no_weight'] == 1){ 
+    		htmlTemplateQuantity+="<div class='totalWeight'>"+$(".lt-total-weight").val()+" "+data['total_weight']+"%</div>";
+		}
+    	else{
+    		htmlTemplateQuantity += "      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-" + data['structure_id'] + "'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-" + data['structure_id'] + "'></span>" + $(".lt-total-weight").val() + "<span id='weigth_total_quantity_percentage_target-" + data['structure_id'] + "'> " + data['total_weight'] + "%</span></div>";
+    	}
+    	
         htmlTemplateQuantity += "  </div>";
         htmlTemplateQuantity += "	<div class=\"ibox-content\">";
         htmlTemplateQuantity += " <div class=\"table-responsive scrollbar-inner\">";
@@ -2011,7 +2043,7 @@ var bindingSlideScoreBarFn = function () {
     });
 
 }
-var createTemplateAssignmentFn = function (data) {
+var createTemplateAssignmentFn = function (data) { 
     $("#appraisal_template_area").empty();
     $.each(data['group'], function (index, indexEntry) {
 
@@ -2080,13 +2112,10 @@ var createTemplateAssignmentFn = function (data) {
 
     //sum grand total end
     if ($(".no_weight").val() == 1) {
-        $(".totalWeight").hide();
         $(".grandTotalWeight").hide();
 
         $("input.total_weigth_quantity").attr('disabled', 'disabled');
         $("input.total_weigth_quality ").attr('disabled','disabled');
-//		$("input.total_weigth_quantity").val(1); //daris
-
 
     } else {
         $("input.total_weigth_quantity").removeAttr('disabled');
@@ -2536,7 +2565,7 @@ $(document).ready(function () {
             });
             //btn action assign end
             
-            var eventCheckbox = function (id){ // daris //no_weight event
+            var eventCheckbox = function (id){ //no_weight event
     			var id = id.split("-"); 
     			var appraisal_id=id[1];
     			var structure_id=id[2];
