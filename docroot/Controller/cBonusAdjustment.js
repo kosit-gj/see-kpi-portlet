@@ -5,6 +5,10 @@ var galbalDataTemp=[];
 var username = "";
 var password = "";
 
+var clearFn = function() {
+	$("#information").hide();
+}
+
 var dropDrowYearListFn = function(nameArea,id){
 	if(nameArea==undefined){
 		nameArea="";
@@ -161,10 +165,15 @@ var refreshMultiPosition = function() {
 }
 var appraisalStatusFn = function () {
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/bonus/advance_search/statusJudge",
+        url: restfulURL + "/" + serviceName + "/public/bonus/advance_search/status",
         type: "get",
         dataType: "json",
         async: false,
+        data: {
+        	"flag": "bonus_adjustment_flag",
+        	"appraisal_form_id": $("#AppraisalForm").val(),
+        	"appraisal_type_id": 2
+        },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
         	var htmlOption="";
@@ -187,7 +196,7 @@ var searchAdvanceFn = function () {
     embedParam += "<input type='hidden' class='embed_param_search' id='embed_period_id' name='embed_period_id' value='" + $("#AppraisalPeriod").val()+"'>";
     embedParam += "<input type='hidden' class='embed_param_search' id='embed_position_id' name='embed_position_id' value='" + $("#Position").val() + "'>";
     embedParam += "<input type='hidden' class='embed_param_search' id='embed_emp_id' name='embed_emp_id' value='"+$("#EmpName_id").val()+"'>";
-//    embedParam += "<input type='hidden' class='embed_param_search' id='embed_year_list' name='embed_year_list' value='" + $("#AppraisalYear").val() + "'>";
+    embedParam += "<input type='hidden' class='embed_param_search' id='embed_year_list' name='embed_year_list' value='" + $("#AppraisalYear").val() + "'>";
     embedParam += "<input type='hidden' class='embed_param_search' id='embed_organization' name='embed_organization' value='"+$("#organization").val()+"'>";
     embedParam += "<input type='hidden' class='embed_param_search' id='embed_status' name='embed_status' value='" + $("#status").val() + "'>";
     embedParam += "<input type='hidden' class='embed_param_search' id='embed_appraisal_form' name='embed_appraisal_form' value='" + $("#AppraisalForm").val() + "'>";
@@ -201,7 +210,7 @@ var searchAdvanceFn = function () {
 //Get Data
 var getDataFn = function (page, rpp) {
     var position_id = [];
-    
+    var year = $("#embed_year_list").val();
     var level_id_org = $("#embed_appraisal_level_id_org").val();
     var level_id_emp = $("#embed_appraisal_level_id_emp").val();
     var period_id = $("#embed_period_id").val();
@@ -211,21 +220,8 @@ var getDataFn = function (page, rpp) {
     var form = $("#embed_appraisal_form").val();
     position_id.push($("#embed_position_id").val());
     
-    var test ={
-    		"level_id_org" : level_id_org,
-    		"level_id_emp" : level_id_emp,
-    		"period_id" : period_id,
-    		"position_id" : position_id,
-    		"emp_id" : emp_id,
-    		"org_id" : org_id,
-    		"status" : status,
-    		"form" : form
-    }
-    
-    console.log(test);
-    
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/bonus/adjustment",
+        url: restfulURL + "/" + serviceName + "/public/bonus/bonus_adjustment",
         type: "get",
         dataType: "json",
         async: true,
@@ -233,13 +229,15 @@ var getDataFn = function (page, rpp) {
         data: {
             "page": page,
             "rpp": rpp,
+            "appraisal_year": year,
+            "period_id": period_id,
             "emp_level": level_id_emp,
             "org_level": level_id_org,
-            "period_id": period_id,
-            "position_id": position_id,        
             "org_id": org_id,
             "emp_id": emp_id,
-            "stage_id": status
+            "position_id": position_id,        
+            "stage_id": status,
+            "appraisal_form": form
         },
         success: function (data) {
             listDataFn(data['data']);
@@ -253,11 +251,15 @@ var getDataFn = function (page, rpp) {
 var to_action = function () {
 	var status = $("#embed_status").val();
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/bonus/adjustment/to_action",
+        url: restfulURL + "/" + serviceName + "/public/emp/adjustment/to_action",
         type: "get",
         dataType: "json",
         async: true,
-        data: {"stage_id": status},
+        data: {
+        	"stage_id": status,
+        	"emp_code": session_emp_code,
+        	"flag": "emp_result_judgement_flag"
+        },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
         	var htmlOption="";
@@ -270,12 +272,91 @@ var to_action = function () {
 }
 
 var listDataFn = function(data){
+	
+//	var data = [
+//        {
+//            "emp_result_id": 1,
+//            "emp_code": "t111",
+//            "emp_name": "DEP Manager - A1",
+//            "appraisal_level_name": "DHAS-Department",
+//            "position_name": "ลูกน้อง",
+//            "org_name": "Department A1",
+//            "s_amount": "51000.00",
+//            "b_amount": "200000.00",
+//            "adjust_b_amount": "200000.00",
+//            "b_rate": "3",
+//            "adjust_b_rate": "3",
+//            "status": "Bonus Evaluate",
+//            "edit_flag": 1
+//        },
+//        {
+//            "emp_result_id": 3,
+//            "emp_code": "t112",
+//            "emp_name": "Employee A1-1",
+//            "appraisal_level_name": "PG 4",
+//            "position_name": "ลูกน้อง",
+//            "org_name": "\t\r\nSection A11",
+//            "s_amount": "61000.00",
+//            "b_amount": "100000.00",
+//            "adjust_b_amount": "100000.00",
+//            "b_rate": "3",
+//            "adjust_b_rate": "3",
+//            "status": "Bonus Evaluate",
+//            "edit_flag": 1
+//        },
+//        {
+//            "emp_result_id": 4,
+//            "emp_code": "t113",
+//            "emp_name": "Employee A1-2",
+//            "appraisal_level_name": "PG 4",
+//            "position_name": "ลูกน้อง",
+//            "org_name": "\t\r\nSection A11",
+//            "s_amount": "21000.00",
+//            "b_amount": "172882.00",
+//            "adjust_b_amount": "100902.00",
+//            "b_rate": "3",
+//            "adjust_b_rate": "3",
+//            "status": "Bonus Evaluate",
+//            "edit_flag": 0
+//        },
+//        {
+//            "emp_result_id": 5,
+//            "emp_code": "t114",
+//            "emp_name": "Employee A1-3",
+//            "appraisal_level_name": "PG 4",
+//            "position_name": "ลูกน้อง",
+//            "org_name": "\t\r\nSection A11",
+//            "s_amount": "30000",
+//            "b_amount": "103731.12",
+//            "adjust_b_amount": "103731.12",
+//            "b_rate": "3.00",
+//            "adjust_b_rate": "3.00",
+//            "status": "Bonus Evaluate",
+//            "edit_flag": 1
+//        },
+//        {
+//            "emp_result_id": 2,
+//            "emp_code": "t115",
+//            "emp_name": "BU Manager - A",
+//            "appraisal_level_name": "DHAS-BU",
+//            "position_name": "Business Unit Manager",
+//            "org_name": "Business Unit A",
+//            "s_amount": "200000.00",
+//            "b_amount": "0.00",
+//            "adjust_b_amount": "0.00",
+//            "b_rate": "0.00",
+//            "adjust_b_rate": "0.00",
+//            "status": "Bonus Evaluate",
+//            "edit_flag": 0
+//        }
+//    ];
+	
 	var htmlHTML="";
 	var edit_flag = "";
 	
 	if(data.length==0) {
 		htmlHTML +="<tr>";
-		htmlHTML +="<td colspan=\"10\">";
+		htmlHTML +="<td colspan=\"11\">";
 		htmlHTML +="<div style='margin-top: 40px;margin-bottom: 40px;font-weight: bold;color: #e04747;' align='center'>No Data to Display.</div>";
 		htmlHTML +="</td>";
 		htmlHTML +="</tr";
@@ -285,22 +366,16 @@ var listDataFn = function(data){
 	}
 	
 	$.each(data,function (index, indexEntry) {
-		
+		if(index==0) {indexEntry['edit_flag'] = 0;}
 		if(indexEntry['edit_flag']==0) {
 			edit_flag = "disabled";
 		} else {
 			edit_flag = "";
 		}
 		
-		if(index==0) {
-			indexEntry['edit_flag'] = 0;
-			$("#score_name1").text(indexEntry['result_score_name1']);
-			$("#score_name2").text(indexEntry['result_score_name2']);
-		}
-		
             htmlHTML += " <tr class=\"control-calculate\">";
             htmlHTML += " <td style=\"text-align: center;\">";
-            htmlHTML += " <input style=\"margin-bottom: 5px;\" type=\"checkbox\" class=\"select-check\" id=\""+indexEntry['emp_result_id']+"\" edit_flag=\""+indexEntry['edit_flag']+"\" style=\"margin-top:-3px;\">";
+            htmlHTML += " <input "+edit_flag+" style=\"margin-bottom: 5px;\" type=\"checkbox\" class=\"select-check\" id=\""+indexEntry['emp_result_id']+"\" edit_flag=\""+indexEntry['edit_flag']+"\" style=\"margin-top:-3px;\">";
             htmlHTML += " </td>";
             htmlHTML += " <td style=\"text-align: center;\">";
             htmlHTML += " "+indexEntry['emp_code']+"";
@@ -317,17 +392,20 @@ var listDataFn = function(data){
             htmlHTML += " <td style=\"text-align: center;\">";
             htmlHTML += " "+indexEntry['position_name']+"";
             htmlHTML += " </td>";
-            htmlHTML += " <td style=\"text-align: center;\">";
-            htmlHTML += " "+indexEntry['status']+"";
+            htmlHTML += " <td style=\"text-align: right;\">";
+            htmlHTML += " "+addCommas(notNullFn(indexEntry['s_amount']))+"";
             htmlHTML += " </td>";
             htmlHTML += " <td style=\"text-align: right;\">";
-            htmlHTML += " <input disabled type='number' min=\"0\" style=\"text-align: right;\" class='form-control input-sm span12' value='"+indexEntry['result_score1']+"'/>";
+            htmlHTML += " "+addCommas(notNullFn(indexEntry['b_amount']))+"";
             htmlHTML += " </td>";
             htmlHTML += " <td class=\"data-percent\">";
-            htmlHTML += " <input "+edit_flag+" type='number' min=\"0.00\" max=\"100.00\" style=\"text-align: right;\" class='form-control input-sm span12 percent' total_adjust_result_score='"+indexEntry['result_score1']+"' value='"+indexEntry['percent_adjust']+"'/>";
+            htmlHTML += " <input "+edit_flag+" type='number' min=\"0.00\" style=\"text-align: right; min-width: 40px; padding-right: 5px;\" class='form-control input-sm span12 percent' total_adjust_result_score='"+indexEntry['s_amount']+"' value='"+indexEntry['adjust_b_amount']+"'/>";
             htmlHTML += " </td>";
             htmlHTML += " <td class=\"data-score\">";
-            htmlHTML += " <input "+edit_flag+" type='number' min=\"0.00\" max=\"100.00\" style=\"text-align: right;\" class='form-control input-sm span12 score' total_adjust_result_score='"+indexEntry['result_score1']+"' value='"+indexEntry['result_score2']+"'/>";
+            htmlHTML += " <input "+edit_flag+" type='number' min=\"0.00\" style=\"text-align: right; min-width: 40px; padding-right: 5px;\" class='form-control input-sm span12 score' total_adjust_result_score='"+indexEntry['s_amount']+"' value='"+indexEntry['adjust_b_rate']+"'/>";
+            htmlHTML += " </td>";
+            htmlHTML += " <td style=\"text-align: center;\">";
+            htmlHTML += " "+indexEntry['status']+"";
             htmlHTML += " </td>";
             htmlHTML += " </tr>";
 
@@ -339,17 +417,16 @@ var listDataFn = function(data){
 	$("#statusSelectAll").prop('checked', false);
 	$('#statusSelectAll').click(function () {
         if ($('#statusSelectAll').prop('checked')) {
-            $(".select-check").prop('checked', true);
+        	$.each($(".control-calculate").get(),function(index,indexEntry) {
+        		if($(indexEntry).find('.select-check').attr('edit_flag')==1) {
+        			$(indexEntry).find('.select-check').prop('checked', true);
+        		}
+        	});
+//        	$(".select-check").prop('checked', true);
         } else {
-            $(".select-check").prop('checked', false);;
+            $(".select-check").prop('checked', false);
         }
     });
-	
-	if(edit_flag=='disabled') {
-		$("#adjust_percent,#btnAdjust").attr('disabled');
-	} else {
-		$("#adjust_percent,#btnAdjust").removeAttr('disabled');
-	}
 	
 	if($("#actionToAssign").val()==null || $("#actionToAssign").val()==undefined) {
     	$("#btnSubmit").attr("disabled");
@@ -361,49 +438,18 @@ var listDataFn = function(data){
 };
 
 var calculatePercentKeyup = function() {
-	$("#adjust_percent").keyup(function() {
-		if (Number(this.value) > 100) {
-	      this.value = 100;
-	    }
-	});
-	
 	$("#list_empjudege").find('.percent').keyup(function() {
-		if (Number(this.value) > 100) {
-			this.value = 100;
-		}
 		var percent = this.value;
 		var adjust_result_score = Number($(this).attr("total_adjust_result_score"));
-		var total = (percent/100)*adjust_result_score;
-		
-		console.log(total,'percent');
+		var total = (percent/adjust_result_score);
 		$(this).closest('.control-calculate').find('.data-score').find('.score').val(total.toFixed(2));
-		console.log((percent/100)*adjust_result_score);
 	});
 		
 	$("#list_empjudege").find('.score').keyup(function() {
 		var score = Number($(this).val());
 		var adjust_result_score = Number($(this).attr("total_adjust_result_score"));
-		var total = (score*100)/adjust_result_score;
-		
-		console.log(total,'score');
+		var total = (score*adjust_result_score);
 		$(this).closest('.control-calculate').find('.data-percent').find('.percent').val(total.toFixed(2));
-		console.log((score*100)/adjust_result_score);
-	});
-
-	$("#btnAdjust").click(function() {
-		var adjust_percent = Number($("#adjust_percent").val());
-		var element_percent = $("#tableBonusAdjustment").find("#list_empjudege").find(".data-percent").find(".percent");
-		element_percent.val(adjust_percent);
-		
-		$.each(element_percent.get(),function(index,indexEntry) {
-			var percent = Number($(indexEntry).val());
-			var adjust_result_score = Number($(indexEntry).attr("total_adjust_result_score"));
-			var total = (percent/100)*adjust_result_score;
-			
-			console.log(total,'btnAdjust');
-			$(this).closest('.control-calculate').find('.data-score').find('.score').val(total.toFixed(2));
-			console.log((percent/100)*adjust_result_score);
-		});
 	});
 }
 
@@ -436,7 +482,6 @@ var callFlashSlideBody =function(text,id,flashType){
 	    "font-weight": "bold",
 	    "margin-right": "5px",
 	    "position": "relative",
-	    "right": "20px",
 	    "text-align": "right"
  	});
  	
@@ -474,38 +519,98 @@ var validationFn = function(data) {
  	callFlashSlideBody(validate,"#information","error");
 }
 
-var insertFn = function() {
+var insertFn = function(type) {
+	var position_id = [];
+    var year = $("#embed_year_list").val();
+    var level_id_org = $("#embed_appraisal_level_id_org").val();
+    var level_id_emp = $("#embed_appraisal_level_id_emp").val();
+    var period_id = $("#embed_period_id").val();
+    var emp_id = $("#embed_emp_id").val();
+    var org_id = $("#embed_organization").val();
+    var status = $("#embed_status").val();
+    var form = $("#embed_appraisal_form").val();
+    position_id.push($("#embed_position_id").val());
 	var stage_id = $("#actionToAssign").val();
+	
 	var detail = [];
 	$.each($(".control-calculate").get(),function(index,indexEntry){
 		if($(indexEntry).find('.select-check').prop('checked') && $(indexEntry).find('.select-check').attr('edit_flag')==1) {
 			detail.push({
 				emp_result_id		: $(indexEntry).find('.select-check').attr('id'),
-				percent_adjust		: $(indexEntry).find('.data-percent').find('.percent').val(),
-				adjust_result_score	: $(indexEntry).find('.data-score').find('.score').val()
+				adjust_b_amount		: $(indexEntry).find('.data-percent').find('.percent').val(),
+				adjust_b_rate	    : $(indexEntry).find('.data-score').find('.score').val()
 			});
 		}
 	});
 	
+	console.log({
+		"appraisal_year" : year,
+    	"period_id" : period_id,
+    	"emp_level" : level_id_emp,
+    	"org_level" : level_id_org,
+    	"org_id" : org_id,
+    	"emp_id" : emp_id,
+    	"position_id" : position_id,
+    	"stage_id" :  stage_id,
+    	"confirm_flag" : type,
+    	"detail": detail
+	});
+	
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/bonus/adjustment",
-        type: "post",
+        url: restfulURL + "/" + serviceName + "/public/bonus/bonus_adjustment",
+        type: "patch",
         dataType: "json",
         async: true,
         data: {
-        	"stage_id": stage_id,
-        	"detail": detail
+        	"appraisal_year" : year,
+        	"period_id" : period_id,
+        	"emp_level" : level_id_emp,
+        	"org_level" : level_id_org,
+        	"org_id" : org_id,
+        	"emp_id" : emp_id,
+        	"position_id" : position_id,
+        	"stage_id" :  stage_id,
+        	"confirm_flag" : type,
+        	"data": detail
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
         	if(data['status']==200) {
         		getDataFn();
-        		callFlashSlide($(".lt-insert-successfully").val());
+        		callFlashSlide($(".lt-update-successfully").val());
+        		clearFn();
         	} else if(data['status']==400) {
         		validationFn(data['data']);
         	}
         }
     });
+}
+
+var exportFn = function() {
+	var position_id = [];
+    var year = $("#AppraisalYear").val();
+    var level_id_org = $("#AppraisalOrgLevel").val();
+    var level_id_emp = $("#AppraisalEmpLevel").val();
+    var period_id = $("#AppraisalPeriod").val();
+    var emp_id = $("#EmpName_id").val();
+    var org_id = $("#organization").val();
+    var stage_id = $("#status").val();
+    var form = $("#AppraisalForm").val();
+    position_id.push($("#Position").val());
+	
+	var param="";
+	param+="&appraisal_year="+year;
+	param+="&period_id="+period_id;
+	param+="&emp_level="+level_id_emp;
+	param+="&org_level="+level_id_org;
+	param+="&org_id="+org_id;
+	param+="&emp_id="+emp_id;
+	param+="&position_id="+position_id;
+	param+="&stage_id="+stage_id;
+	param+="&appraisal_form="+form;
+
+	$("form#formExportToExcel").attr("action",restfulURL+"/"+serviceName+"/public/bonus/bonus_adjustment?token="+tokenID.token+""+param);
+	$("form#formExportToExcel").submit();
 }
 
 
@@ -598,10 +703,19 @@ $(document).ready(function() {
 		        $(".countPagination").val(10);
 		        $("#rpp").remove();
 		        $("#search_result").show();
+		        clearFn();
 		    });
 		    
 		    $("#btnSubmit").click(function() {
-		    	insertFn();
+		    	insertFn(1);
+		    });
+		    
+		    $("#btnConfirm").click(function() {
+		    	insertFn(0);
+		    });
+		    
+		    $("#btnExport").click(function() {
+		    	exportFn();
 		    });
 		    
 		    //binding tooltip start

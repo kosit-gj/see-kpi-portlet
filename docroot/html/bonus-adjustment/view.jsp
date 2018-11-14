@@ -42,7 +42,10 @@ plid = layout.getPlid();
 <style>
  /* Large desktop Start#####################################*/
  @media (min-width: 1200px) {
-
+	.position-result-perpage {
+		display: flex;
+		justify-content: space-between;
+	}
 	.modal.large {
 		    width: 90%;
 		    margin-left:-45%;
@@ -94,7 +97,10 @@ plid = layout.getPlid();
 
   /*  desktop Start#########################################*/
  @media (min-width: 980px) and (max-width: 1199px) {
-
+	.position-result-perpage {
+		display: flex;
+		justify-content: space-between;
+	}
  	.modal.large {
 		    width: 90%;
 		    margin-left:-45%;
@@ -149,7 +155,10 @@ plid = layout.getPlid();
 
  /* Portrait tablet to landscape and desktop Start##########*/
  @media (min-width: 768px) and (max-width: 979px) {
-
+	.position-result-perpage {
+		display: flex;
+		justify-content: space-between;
+	}
 	.aui .modal{
 		left:1%;
 	}
@@ -211,6 +220,10 @@ plid = layout.getPlid();
 	    /*overflow: hidden;*/
 	    text-overflow: ellipsis;
 	}
+	
+	#adjust_percent {
+		width: 20%;
+	}
 
 
   }
@@ -218,7 +231,13 @@ plid = layout.getPlid();
 
  /* Landscape phone to portrait tablet Start################*/
  @media (max-width: 767px) {
-
+	 .position-result-perpage {
+		display: flex;
+		justify-content: space-between;
+	}
+	#adjust_percent {
+		width: 20%;
+	}
  	.modal.large {
 
 	    width: '';
@@ -303,7 +322,10 @@ plid = layout.getPlid();
 
  /* Landscape phones and down Start#########################*/
  @media (max-width: 480px) {
-
+	.position-result-perpage {
+		display: block;
+		justify-content: space-between;
+	}
  	.pagingText{
 		display:none;
 	}
@@ -783,10 +805,11 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none; 
   margin: 0; 
 }
+
 </style>
 
 
-<body class=" gray-bg ">
+<body class="gray-bg">
 
   <div class='row-fluid'>
     <div id="slide_status" class='span12'>
@@ -797,7 +820,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 	<!-- <div class="app_url_hidden"> -->
-		<div class="container">
+		<div class="container" style="width: 100%">
 			<div id="advanceSearchAppraisalGroup" class="ng-view ng-scope" style="display: none;">
 				<div class="row-fluid">
 					<!-- start--row-fluid -->
@@ -854,7 +877,7 @@ input[type=number]::-webkit-outer-spin-button {
                       <input class="form-control input-sm" id="EmpName_id" name="EmpName_id" value="" type="hidden">
                   </div>
 
-                  <div class="form-group pull-left span3" style="margin-left: 5px; margin-top: 2px;">
+                  <div class="form-group pull-left span3" style="margin-left: 5px; margin-top: 2px; margin-bottom: 2px;">
                   <select data-toggle="tooltip" title="<liferay-ui:message key="Position"/>" multiple="multiple" data-original-title="<liferay-ui:message key="Position"/>" class="input form-control input-sm span12" id="Position" name="Position">
                  </select>            
                   </div>
@@ -872,11 +895,16 @@ input[type=number]::-webkit-outer-spin-button {
                     </select>
                   </div>
 
-                  <div class="form-group span3 m-b-none pull-right" style="margin-top: 1px; margin-left: 5px; text-align:right;">
+                  <div class="form-group span3 m-b-none pull-right" style="margin-top: 1px; margin-left: 5px; margin-right: 3px; text-align:right;">
                     <button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance">
                       <i class="fa fa-search"></i>&nbsp;<liferay-ui:message key="search"/>
                     </button>
                     &nbsp;
+                    <form id="formExportToExcel" action="" method="post" class="pull-right" style="margin-bottom: 0px; margin-left: 5px">
+						<button type="button" class="btn btn-success input-sm" name="btnExport" id="btnExport">
+							<i class="fa fa-download"></i>&nbsp;<liferay-ui:message key="export"/>
+                    	</button>
+					</form>
                   </div>
 
                 </div>
@@ -895,120 +923,95 @@ input[type=number]::-webkit-outer-spin-button {
 				<div id="search_result" style="display: none;"> <!-- class="row-fluid search_result" > -->
 					<div class="span12">
 						<div class="ibox-title">
-							<div class='titlePanel'><liferay-ui:message key="Bonus-Adjustment-list"/></div>
+							<div class='titlePanel'><liferay-ui:message key="bonus-judgement-list"/></div>
 						</div>						
 						<div class="ibox-content">
-							<div class="row-fluid head_adjust" style="display: none;">							
-								<div class="form-group m-b-none pull-right" style="margin-left: 5px; text-align:right;">
-			                    <button type="button" class="btn btn-info input-sm" name="btnAdjust" id="btnAdjust">
-			                      <liferay-ui:message key="Adjust"/>
-			                    </button>
-			                    &nbsp;
-			                 	</div>		              
-			                 	<div class="form-group m-b-none pull-right" style="margin-left: 5px; text-align:right;">
-								<p>% ปรับผลประเมิน: <input type="number" min="0" style="text-align: right;" class="span3 form-control input-sm" id="adjust_percent" name="adjust_percent" value="100"> </p>
-								</div>
-							</div>
-							
-							
 							<!-- pagination start -->
                                     	<div class="row-fluid">
-	                                    	<div class="span6 pagianation_area" >
-												<div class="pagination_top pagination"></div>
-	                                    	</div>
-
-		                                    <div class="span6 object-right paging-text">
-
-		                                    	<div class='pagingDropdown'>
-		                                 			<select  id='countPaginationTop'  class="form-control input-sm countPagination">
-					                                     <option>10</option>
-					                                     <option>20</option>
-					                                     <option>50</option>
-					                                     <option>100</option>
-					                                 </select>
-
-		                                 		</div>
-												<div class='pagingText'><liferay-ui:message key="results-per-page"/></div>
-
-		                                    </div>
-
+	                                    	<div class="position-result-perpage">
+		                                    	<div class="pagianation_area" >
+													<div class="pagination_top pagination"></div>
+		                                    	</div>
+			                                    <div class="object-right paging-text">
+			                                    	<div class='pagingDropdown'>
+			                                 			<select  id='countPaginationTop'  class="form-control input-sm countPagination">
+						                                     <option>10</option>
+						                                     <option>20</option>
+						                                     <option>50</option>
+						                                     <option>100</option>
+						                                 </select>
+			                                 		</div>
+													<div class='pagingText'><liferay-ui:message key="results-per-page"/></div>
+			                                    </div>
+											</div>
                                     	</div>
                             <!-- pagination end -->							
 							
 							<div class="row-fluid list-data-table" style="overflow: auto;">							
-							<table class="table table-striped table-bordered" id="tableBonusAdjustment" style="margin-bottom: 7px;">
+							<table class="table table-striped table-bordered" id="tableBonusAdjustment" style="margin-bottom: 7px; max-width: none;">
 							<thead>
 						    <tr>
-						      <th rowspan="2" style="width:5%; text-align:center;"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></th>
-						      <th rowspan="2" style="width:10%; text-align:center;">รหัส</th>
-						      <th rowspan="2" style="width: 20%;">ชื่อ</th>
-						      <th rowspan="2" style="width: 10%;">ระดับ</th>
-						      <th rowspan="2" style="width:10%; text-align:center;">หน่วยงาน</th>
-						      <th rowspan="2" style="width:10%; text-align:center;">ตำแหน่่ง</th>
-						      <th rowspan="2" style="width:10%; text-align:center;">สถานะ</th>
-						      <th style="width:10%; text-align:center;">ผลการประเมินจาก</th>
-						      <th colspan="2" style="width:15%; text-align:center;">ปรับผลประเมิน</th>					 
+						      <th style="width:5%; text-align:center;"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></th>
+						      <th style="width:10%; text-align:center;"><liferay-ui:message key="emp-code"/></th>
+						      <th style="width:15%;"><liferay-ui:message key="employee-name"/></th>
+						      <th style="width:10%;"><liferay-ui:message key="employee-level"/></th>
+						      <th style="width:10%; text-align:center;"><liferay-ui:message key="organization"/></th>
+						      <th style="width:10%; text-align:center;"><liferay-ui:message key="position"/></th>
+						      <th style="width:10%; text-align:center;"><liferay-ui:message key="salary"/></th>
+						      <th style="width:5%; text-align:center;"><liferay-ui:message key="bonus-judgement"/></th>
+						      <th style="width:10%; text-align:center;"><liferay-ui:message key="bonus-judgement-rise"/></th>
+						      <th style="width:10%; text-align:center;"><liferay-ui:message key="month-number"/></th>
+						      <th style="width:5%; text-align:center;"><liferay-ui:message key="status"/></th>
 						    </tr>				
-						     <tr>						   
-						      <th id="score_name1"></th>
-						      <th>%</th>
-						      <th id="score_name2"></th>
-						    </tr>
 							</thead>
 							 <tbody id="list_empjudege">
-								
 							 </tbody>
 							</table>
 							</div>
 							<!-- pagination start -->
 							<div class="row-fluid">
-	                                    	<div class="span6 pagianation_area">
-
-												  <p class="pagination_bottom pagination"></p>
-
-	                                    	</div>
-
-		                                    <div class="span6 object-right paging-text">
-		                                    	<div class='pagingDropdown'>
-		                                 			<select  id='countPaginationBottom'  class="form-control input-sm countPagination">
-					                                     <option>10</option>
-					                                     <option>20</option>
-					                                     <option>50</option>
-					                                     <option>100</option>
-					                                 </select>
-			                                 	</div>
-												<div class='pagingText'><liferay-ui:message key="results-per-page"/></div>
-		                                    </div>
-
-                            </div>
+								<div class="position-result-perpage">
+									<div class="pagianation_area">
+										<p class="pagination_bottom pagination"></p>
+									</div>
+									<div class="object-right paging-text">
+										<div class='pagingDropdown'>
+											<select id='countPaginationBottom'
+												class="form-control input-sm countPagination">
+												<option>10</option>
+												<option>20</option>
+												<option>50</option>
+												<option>100</option>
+											</select>
+										</div>
+										<div class='pagingText'>
+											<liferay-ui:message key="results-per-page" />
+										</div>
+									</div>
+								</div>
+							</div>
 							<!-- pagination end -->
 							<div class='row-fluid head_adjust' style="margin-top: 10px; display: none;">
-							
-						 <div class="span3">
-							 <div class="form-group p-xxs">
-								 <label class="span3 p-t-xxs" style="text-align: center;"><b><liferay-ui:message key="action"/> :</b></label>
-								 <div class="span7">
-									<select data-toggle="tooltip" title="" class="input form-control input-sm" id="actionToAssign" name="actionToAssign">
-									</select>
-								 </div>
-							 </div>
-						 </div>
-
-
-						  <div class="span9 offset0" style='text-align:right;'>
-
-							  	<button class="btn btn-success" type="button" id="btnSubmit"><liferay-ui:message key="submit"/></button>
-								<input type='hidden' id='emp_result_id' name='emp_result_id' value=''>
-<%-- 								<button data-dismiss="modal" class="btn btn-danger btnCancle" type="button"><liferay-ui:message key="cancel"/></button> --%>
-
-						  </div>
-						  
-						  <div class="row-fluid" style='text-align:left;'></div>
+								<div class="position-result-perpage">
+									 <div class="">
+										 <div class="form-group p-xxs" style="display: flex;">
+											 <label class="p-t-xxs" style="text-align: center;"><b><liferay-ui:message key="action"/>&nbsp;:&nbsp;</b></label>
+											 <div>
+												<select style="width: 155px;" data-toggle="tooltip" title="" class="input form-control input-sm" id="actionToAssign" name="actionToAssign">
+												</select>
+											 </div>
+										 </div>
+									 </div>
+							  		<div class="" style='text-align:right;'>
+							  		<button class="btn btn-primary" type="button" id="btnConfirm"><liferay-ui:message key="confirm"/></button>
+								  	<button class="btn btn-success" type="button" id="btnSubmit"><liferay-ui:message key="submit"/></button>
+									<input type='hidden' id='emp_result_id' name='emp_result_id' value=''>
+<%-- 										<button data-dismiss="modal" class="btn btn-danger btnCancle" type="button"><liferay-ui:message key="cancel"/></button> --%>
+							  		</div>
+						  		</div>
+							</div>
+					 		<div class="row-fluid" style='text-align:left;'></div>
 						  	<div class="alert alert-warning" id="information" style="display: none; margin-bottom: 10px;"></div>
-            	
-            				
-
-					</div>
 
 
 
@@ -1026,7 +1029,10 @@ input[type=number]::-webkit-outer-spin-button {
 	<div id="embedParamSearch"></div>
 	
 	</body>
-
+	
+<!-- Language Template for js -->
+<%@ include file="/html/language-js-template/view.jsp" %>
+	
 <script src="/see-kpi-portlet/js/jquery3.1.1.js"></script>
 <script type="text/javascript">
  var jQuery_1_1_3 = $.noConflict(true);

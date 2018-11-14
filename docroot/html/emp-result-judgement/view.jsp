@@ -42,7 +42,10 @@ plid = layout.getPlid();
 <style>
  /* Large desktop Start#####################################*/
  @media (min-width: 1200px) {
-
+	.position-result-perpage {
+		display: flex;
+		justify-content: space-between;
+	}
 	.modal.large {
 		    width: 90%;
 		    margin-left:-45%;
@@ -94,7 +97,10 @@ plid = layout.getPlid();
 
   /*  desktop Start#########################################*/
  @media (min-width: 980px) and (max-width: 1199px) {
-
+	.position-result-perpage {
+		display: flex;
+		justify-content: space-between;
+	}
  	.modal.large {
 		    width: 90%;
 		    margin-left:-45%;
@@ -149,7 +155,10 @@ plid = layout.getPlid();
 
  /* Portrait tablet to landscape and desktop Start##########*/
  @media (min-width: 768px) and (max-width: 979px) {
-
+	.position-result-perpage {
+		display: flex;
+		justify-content: space-between;
+	}
 	.aui .modal{
 		left:1%;
 	}
@@ -222,6 +231,10 @@ plid = layout.getPlid();
 
  /* Landscape phone to portrait tablet Start################*/
  @media (max-width: 767px) {
+	 .position-result-perpage {
+		display: flex;
+		justify-content: space-between;
+	}
 	#adjust_percent {
 		width: 20%;
 	}
@@ -309,7 +322,10 @@ plid = layout.getPlid();
 
  /* Landscape phones and down Start#########################*/
  @media (max-width: 480px) {
-
+	.position-result-perpage {
+		display: block;
+		justify-content: space-between;
+	}
  	.pagingText{
 		display:none;
 	}
@@ -790,10 +806,6 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0; 
 }
 
-.position-result-perpage {
-	display: flex;
-	justify-content: space-between;
-}
 </style>
 
 

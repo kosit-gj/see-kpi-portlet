@@ -248,7 +248,8 @@ var getDataFn = function (page, rpp) {
             "position_id": position_id,        
             "org_id": org_id,
             "emp_id": emp_id,
-            "stage_id": status
+            "stage_id": status,
+            "appraisal_form_id": form
         },
         success: function (data) {
             listDataFn(data['data']);
