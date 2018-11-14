@@ -62,6 +62,11 @@ var ClearAppraisalStructureFn = function()
 	ToggledFlagOnSaveStructureModal($("#form_id").val());
 	
 	$("#saveStructureModal input[type='checkbox']").prop('checked', true);
+	
+	//Is Derive
+	$('#is_derive').prop('checked', false);
+	$('#form-group-level_id').hide();
+	
 	$("#saveStructureModal #is_no_raise_value").prop('checked', false);
 	
 	$("#btnSetweightSubmitAnother").show();
@@ -189,10 +194,8 @@ var ToggledFlagOnSaveStructureModal = function(formIdValue)
 		$("#is_unlimited_deduction, #is_value_get_zero, #is_unlimited_reward, #is_no_raise_value").prop('checked',false);
 		
 		// Enabled Derive and Level (form type 1 only) //
-		$('#level_id').val($("#level_id option:eq(0)").val());
-		$('#is_derive').prop('checked', true);
-		$('#form-group-level_id').show();
 		$('#form-group-is_derive').show();
+		$('#level_id').val($("#level_id option:eq(0)").val());
 		
 		$("#is_derive").off("click");
 		$("#is_derive").on("click",function(){

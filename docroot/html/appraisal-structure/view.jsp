@@ -355,10 +355,10 @@ form {
 						<div class="form-group p-xxs" id="form-group-is_derive">
 							<label class="control-label"> IsDerive </label>
 							<div class="controls">
-								<input checked="" class="checkbox" placeholder="Is Derive" id="is_derive" name="is_derive" type="checkbox">
+								<input class="checkbox" placeholder="Is Derive" id="is_derive" name="is_derive" type="checkbox">
 							</div>
 						</div>
-						<div class="form-group p-xxs" id="form-group-level_id">
+						<div class="form-group p-xxs" id="form-group-level_id" style="display: none">
 							<label class="control-label"> Level </label>
 							<div class="controls">
 								<select class="span12 m-b-n" id="level_id" name="level_id" style="width: 250px"> </select>
