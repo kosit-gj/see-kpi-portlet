@@ -704,11 +704,12 @@ var listDataFn = function (data) {
         $(".view").on("click", function () {
             var view = this.id.split("-");
             org_id_to_assign = view[2];
-            organization_code = edit[3];
-            empldoyees_code = edit[4];
+            organization_code = view[3];
+            empldoyees_code = view[4];
             chief_id_array = [];
             chief_id_array.push($(this).attr('data-chief-emp'));
-            var emp_result_id = $(this).parent().parent().parent().parent().children().eq(1).children().val();
+//            var emp_result_id = $(this).parent().parent().parent().parent().children().eq(1).children().val();
+            var emp_result_id = $(this).closest('tr').find('.action_emp').attr('data-id').split('-')[0];
             var period_id = $(this).parent().parent().parent().parent().children().eq(2).children().val();
             $("#period_id_edit").val(period_id);
             findOneFn(emp_result_id, "view");
@@ -2179,8 +2180,6 @@ var getTemplateFn = function (emp_result_id) {
     } else if ($("#appraisalType").val() == 2) {
         check_appraisalLevel = $("#appraisalLevelEmp").val();
     }
-    
-    console.log(chief_id_array);
 
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal_assignment/template",
@@ -2195,7 +2194,7 @@ var getTemplateFn = function (emp_result_id) {
 //            'emp_code': emp_code,
 //            'appraisal_type_id': $("#appraisalType").val(),
 //            'appraisal_form': $("#appraisalForm").val(),
-//            'period_id':$("#period_id").val(),
+            'period_id': $("#period_id").val(),
             'chief_id_array': chief_id_array
 
         },

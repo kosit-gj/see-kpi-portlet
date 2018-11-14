@@ -165,10 +165,15 @@ var refreshMultiPosition = function() {
 }
 var appraisalStatusFn = function () {
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/bonus/advance_search/statusJudge",
+        url: restfulURL + "/" + serviceName + "/public/bonus/advance_search/status",
         type: "get",
         dataType: "json",
         async: false,
+        data: {
+        	"flag": "emp_result_judgement_flag",
+        	"appraisal_form_id": $("#AppraisalForm").val(),
+        	"appraisal_type_id": 2
+        },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
         	var htmlOption="";
@@ -229,7 +234,7 @@ var getDataFn = function (page, rpp) {
     console.log(test);
     
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/bonus/adjustment",
+        url: restfulURL + "/" + serviceName + "/public/emp/adjustment",
         type: "get",
         dataType: "json",
         async: true,
@@ -257,11 +262,15 @@ var getDataFn = function (page, rpp) {
 var to_action = function () {
 	var status = $("#embed_status").val();
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/bonus/adjustment/to_action",
+        url: restfulURL + "/" + serviceName + "/public/emp/adjustment/to_action",
         type: "get",
         dataType: "json",
         async: true,
-        data: {"stage_id": status},
+        data: {
+        	"stage_id": status,
+        	"emp_code": session_emp_code,
+        	"flag": "emp_result_judgement_flag"
+        },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
         	var htmlOption="";
@@ -508,7 +517,7 @@ var insertFn = function() {
 	});
 	
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/bonus/adjustment",
+        url: restfulURL + "/" + serviceName + "/public/emp/adjustment",
         type: "post",
         dataType: "json",
         async: true,
