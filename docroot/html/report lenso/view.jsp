@@ -1,66 +1,96 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
 <%@ page import="javax.portlet.*"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
+
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
+<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
+
 <%
+/*
+PortletSession portletSession1 = renderRequest.getPortletSession();
+portletSession1.setAttribute("password", "authenticated", PortletSession.APPLICATION_SCOPE);
+String pwd = (String) portletSession1.getAttribute("password", PortletSession.APPLICATION_SCOPE);
+out.print(pwd);
+String password=PortalUtil.getUser(request).getPassword();
+*/
+
 String username = themeDisplay.getUser().getScreenName();
 String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWORD);
+String currentLocale = themeDisplay.getLanguageId();
+
 String param_link = PortalUtil.getOriginalServletRequest(request).getParameter("param_link");
 String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getParameter("param_item_result_id");
 layout = themeDisplay.getLayout();
 plid = layout.getPlid();
+//out.print(param);
+//out.print("password2="+password);
 %>
 
 <style>
  /*  desktop Start#########################################*/
  @media (min-width: 980px) and (max-width: 1199px) {
+
  	.modal.large {
 		    width: 90%;
 		    margin-left:-45%;
 		    top:0px;
 		}
+
 	.aui .modal-body{
 		/*max-height: 400px;*/
 	}
 	#smartArea{
 	display:none;
 	}
+
 	.breadcrumbs2 .row-fluid .span4{
 			width: 32.624%;
 		}
+
 	#actionPlanModal{
 		margin-top:0px;
 	}
+
 	#actionPlanModal{
 		margin-top:0px;
 	}
+
+
 	.moblieArea{
 		display:none;
 	}
 	.desktopArea{
 		display:block;
 	}
+
 	.saveAndCancelArea{
 		text-align:right;
 	}
+
 	#actualvsTargetBar{
 		display:'';
 	}
 	#actualvsForecastBar{
 		display:'';
 	}
+
 	.aui #advanceSearchAppraisal.row-fluid .span3 {
     	width: 32.5%;
 	}
+
+
   }
  /*  desktop End############################################*/
+
  /* Portrait tablet to landscape and desktop Start##########*/
  @media (min-width: 768px) and (max-width: 979px) {
+
 	.aui .modal{
 		left:1%;
 	}
@@ -78,15 +108,20 @@ plid = layout.getPlid();
 	.pagianation_area{
 		position:'';
 	}
+
 	.aui .modal-body{
 		/*max-height: 400px;*/
 	}
 	#smartArea{
 	display:none;
 	}
+
 	#actionPlanModal{
 		margin-top:0px;
 	}
+
+
+
 	.moblieArea{
 		display:block;
 		font-size:0.8em;
@@ -94,23 +129,33 @@ plid = layout.getPlid();
 	.desktopArea{
 		display:none;
 	}
+
 	.saveAndCancelArea{
 		text-align:right;
 	}
+
+
+
 	#actualvsTargetBar{
 		display:none;
 	}
 	#actualvsForecastBar{
 		display:none;
 	}
+
 	.aui #advanceSearchAppraisal.row-fluid .span3 {
 	    width: 24.2%;
 	}
+
+
   }
  /* Portrait tablet to landscape and desktop End############*/
+
  /* Landscape phone to portrait tablet Start################*/
  @media (max-width: 767px) {
+
  	.modal.large {
+
 	    width: '';
 	    top:0px;
 	}
@@ -121,21 +166,27 @@ plid = layout.getPlid();
 	.aui .p-t-xxs {
     	text-align: left;
 	}
+
+
 		.pagianation_area{
 		/*position:absolute;*/
 	}
+
 	.aui .modal-body{
 		/*max-height: 300px;*/
 	}
 	#smartArea{
 	display:none;
 	}
+
 	#actionPlanModal{
 		margin-top:0px;
 	}
+
 	#actionPlanModal{
 		margin-top:0px;
 	}
+
 	.moblieArea{
 		display:block;
 		font-size:0.7em;
@@ -146,12 +197,14 @@ plid = layout.getPlid();
 	.saveAndCancelArea{
 		text-align:left;
 	}
+
 	#actualvsTargetBar{
 		display:'';
 	}
 	#actualvsForecastBar{
 		display:'';
 	}
+
 	/*btn area start*/
 	#btnSaveActionPlan{
 		width:100%;
@@ -159,6 +212,7 @@ plid = layout.getPlid();
 	#btnCancelActionPlan{
 		width:100%;
 	}
+
 	#btnAddActionPlan{
 		width:100%;
 	}
@@ -172,10 +226,13 @@ plid = layout.getPlid();
 		width:100%;
 	}
 	/*btn area end*/
+
   }
  /* Landscape phone to portrait tablet End##################*/
+
  /* Landscape phones and down Start#########################*/
  @media (max-width: 480px) {
+
  	.pagingText{
 		display:none;
 	}
@@ -191,12 +248,15 @@ plid = layout.getPlid();
 	#smartArea{
 	display:none;
 	}
+
 	#actionPlanModal{
 		margin-top:0px;
 	}
+
 	#actionPlanModal{
 		margin-top:0px;
 	}
+
 	.moblieArea{
 		display:block;
 		font-size:0.6em;
@@ -207,12 +267,15 @@ plid = layout.getPlid();
 	.saveAndCancelArea{
 		text-align:left;
 	}
+
 	#actualvsTargetBar{
 		display:none;
 	}
 	#actualvsForecastBar{
 		display:none;
 	}
+
+
 	/*btn area start*/
 	#btnSaveActionPlan{
 		width:100%;
@@ -220,6 +283,7 @@ plid = layout.getPlid();
 	#btnCancelActionPlan{
 		width:100%;
 	}
+
 	#btnAddActionPlan{
 		width:100%;
 	}
@@ -233,8 +297,13 @@ plid = layout.getPlid();
 		width:100%;
 	}
 	/*btn area end*/
+
+
   }
   /* Landscape phones and down End##########################*/
+
+
+
 .ibox-content {
     background-color: #fff;
     border: 1px solid #ffe57f;
@@ -243,6 +312,7 @@ plid = layout.getPlid();
     padding-left: 15px;
     padding-right: 15px;
 }
+
 #countPaginationTop{
 	width:60px;
 }
@@ -277,11 +347,31 @@ plid = layout.getPlid();
     padding: 5px;
 }
 .aui .modal-footer {
+
     border-radius: 0;
+
 }
+
+/*
+.aui .modal {
+    background-clip: padding-box;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    left: 23%;
+    margin-left: -280px;
+    outline: 0 none;
+    position: fixed;
+    top: 0%;
+    width: 90%;
+    z-index: 1050;
+}
+*/
 .aui input, .aui textarea, .aui .uneditable-input {
    /* width: 47px;*/
 }
+
  .aui .table td {
     border-top: 1px solid #ddd;
     line-height: 16px;
@@ -294,15 +384,18 @@ plid = layout.getPlid();
     color: #8d8d8d;
     font-weight: 200;
     margin-bottom: 0;
+
 }
 .aui #breadcrumbs {
     margin-bottom: 0;
 }
 .breadcrumbs2{
+
 	background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #fff 0px, #f6f6f6 47%, #ededed 100%) repeat scroll 0 0;
     border-radius: 0;
     margin-bottom: 0;
   	/*padding-bottom: 0px*/
+
 }
 .aui .searchAdvanceText{
 	/*width:94%;*/
@@ -322,6 +415,7 @@ plid = layout.getPlid();
  text-align: right;
  font-weight: bold;
 }
+
 .aui .pagination ul > li:last-child > a, .aui .pagination ul > li:last-child > span{
    border-bottom-right-radius: 0;
    border-top-right-radius: 0;
@@ -333,16 +427,25 @@ plid = layout.getPlid();
 .aui .table td{
 	font-size: 13px;
 }
+/*
+.modal.large {
+    width: 90%;
+    margin-left:-45%;
+    top:0px;
+}
+*/
 .aui #assignTo{
 	width:100%;
 }
 .aui #actionToAssign{
 	width:100%;
 }
+
 .aui .row-fluid [class*="span"]{
 min-height: auto;
 margin-bottom:1px;
 }
+
 .textInfo{
 	font-wieght:bold;
 	/*text-align:right;*/
@@ -359,6 +462,7 @@ margin-bottom:1px;
 .aui .textData{
 	  font-weight: bold;
 }
+
 /* Important part */
 .modal-dialog{
     overflow-y: initial !important
@@ -371,6 +475,7 @@ margin-bottom:1px;
 	text-align: '';
 }
 /* Update by au */
+
 .aui .btn {
 	font-size: 14px;
  	padding: 4px 12px;
@@ -378,13 +483,19 @@ margin-bottom:1px;
 	margin-top: 0px;
 	display: inline;
 }
+
+
 .aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input {
     height: 30px;
     padding: 0 0 0 5px;
     font-size: 14px;
 }
+
+
 /* Modal action plan START */
+
 .boxActionPlainArea{
+
 }
 .boxActionPlainArea .boxActionL{
 	/*float:left;*/
@@ -392,12 +503,14 @@ margin-bottom:1px;
 	/*border:1px solid #cccccc;*/
 	margin-top: 3px;
 }
+
 .boxActionPlainArea .boxActionR{
 	/*float:right;*/
 	/*width:565px;*/
 	/*width:45%;*/
 	/*border:1px solid #cccccc;*/
 }
+
 .boxTargetArea{
 	width:27%;
 	float:left;
@@ -408,10 +521,12 @@ margin-bottom:1px;
   	padding:5px;
   	height: 89px;
   	background:#fff;
+
 }
 .boxForecastArea{
 	width:28.5%;
 	float:right;
+
 	/*
 	border-width: 1px 1px 1px 1px;
 	border-color: #cccccc;
@@ -419,17 +534,20 @@ margin-bottom:1px;
   	margin:1px;
   	padding:5px;
   	*/
+
 }
 .boxActualPercentageArea{
 	width:39%;
 	float:right;
 	margin-left: 0.5%;
+
 	/*
 	border-width: 1px 1px 1px 1px;
 	border-color: #cccccc;
   	border-style: solid;
   	margin:1px;
   	padding:5px;*/
+
 }
 .fontBold{
 	font-weight:bold;
@@ -447,6 +565,7 @@ margin-bottom:1px;
 	text-align:center;
 }
 .actionPlanList{
+
 	padding:5px;
 	border-width: 1px 1px 1px 1px;
 	border-color: #cccccc;
@@ -465,15 +584,20 @@ margin-bottom:1px;
 	color:#555;
 	margin-bottom: 0;
 }
+
+
 .aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input{
 	height:'';
 }
+
 .aui input[type="color"], .aui input[type="date"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="email"], .aui input[type="month"], .aui input[type="number"], .aui input[type="password"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="text"], .aui input[type="time"], .aui input[type="url"], .aui input[type="week"], .aui select, .aui textarea, .aui .uneditable-input{
 	margin-bottom: 0px;
 }
+
 .ui-autocomplete{
 	z-index: 999999;
 }
+
 .actionplan_input{
 	display:none;
 }
@@ -491,12 +615,16 @@ margin-bottom:1px;
     */
 }
 /* Modal action plan END */
+
+
 .aui .ca-menu li{
     line-height: 0px;
 }
+
 .aui .appraisal_result .popover{
 	width:120px;
 }
+
 .aui select, .aui input[type="text"] {
     font-size: 13px;
 }
@@ -509,6 +637,7 @@ background-color:#71cccc !important;
 
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
+<input type="hidden" id="user_locale" name="user_locale" value="<%=currentLocale%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
 <input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
 
@@ -534,7 +663,7 @@ background-color:#71cccc !important;
           <div class="span12">
             <div class="ibox float-e-margins">
               <div class="ibox-title">
-                <div class='titlePanel'>Advance Search</div>
+                <div class='titlePanel'><liferay-ui:message key="advanced-search"/></div>
               </div>
 
               <div class="ibox-content breadcrumbs2">
@@ -542,49 +671,49 @@ background-color:#71cccc !important;
                 <div class="row-fluid" id='advanceSearchAppraisal'>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select data-toggle="tooltip" title="" data-original-title="Year" class="input form-control input-sm span12" id="AppraisalYear" name="AppraisalYear">
+                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="year"/>" class="input form-control input-sm span12" id="AppraisalYear" name="AppraisalYear">
                     </select>
                   </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select data-toggle="tooltip" title="" data-original-title="Period" class="input form-control input-sm span12" id="AppraisalPeriod" name="AppraisalPeriod">
+                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="period"/>" class="input form-control input-sm span12" id="AppraisalPeriod" name="AppraisalPeriod">
                       <option>All Appraisal Period</option>
                     </select>
                   </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select id="appraisalType" name="appraisalType" data-toggle="tooltip" title="" data-original-title="Entity Type " class="input form-control input-sm span12">
+                    <select id="appraisalType" name="appraisalType" data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="entity-type"/>" class="input form-control input-sm span12">
                     </select>
                   </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select id="AppraisalEmpLevel" name="AppraisalEmpLevel" data-toggle="tooltip" title="" data-original-title="Employee Level" class="input form-control input-sm span12">
+                    <select id="AppraisalEmpLevel" name="AppraisalEmpLevel" data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="employee-level"/>" class="input form-control input-sm span12">
                       <option>All Level</option>
                     </select>
                   </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip" title="" data-original-title="Organization Level" class="input form-control input-sm span12">
+                    <select id="AppraisalOrgLevel" name="AppraisalOrgLevel" data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="organization-level"/>" class="input form-control input-sm span12">
                       <option>All Level</option>
                     </select>
                   </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select data-toggle="tooltip" title="" multiple="multiple" data-original-title="organization" class="input form-control input-sm span12" id="organization" name="organization">
+                    <select data-toggle="tooltip" title="<liferay-ui:message key="organization"/>" multiple="multiple" data-original-title="<liferay-ui:message key="organization"/>" class="input form-control input-sm span12" id="organization" name="organization">
                     </select>
                   </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <input data-toggle="tooltip" title="" data-original-title="Employee Name" class="form-control input-sm searchAdvanceText span12" placeholder="Employee Name" type="text" id="EmpName" name="EmpName" />
+                    <input data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="employee-name"/>" class="form-control input-sm searchAdvanceText span12" placeholder="<liferay-ui:message key="employee-name"/>" type="text" id="EmpName" name="EmpName" />
                     <input class="form-control input-sm" id="EmpName_id" name="EmpName_id" value="" type="hidden">
                   </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <input data-toggle="tooltip" title="" data-original-title="Position" class="form-control input-sm searchAdvanceText span12" placeholder="Position" type="text" id="Position" name="Position" />
+                    <input data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="position"/>" class="form-control input-sm searchAdvanceText span12" placeholder="<liferay-ui:message key="position"/>" type="text" id="Position" name="Position" />
                     <input class="form-control input-sm" id="Position_id" name="Position_id" value="" type="hidden">
                   </div>
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-					<select name="output_type" id="output_type" class="input form-control input-sm span12""title="" data-toggle="tooltip" style="cursor: pointer;"data-original-title="Output Type">
+					<select name="output_type" id="output_type" class="input form-control input-sm span12""title="" data-toggle="tooltip" style="cursor: pointer;"data-original-title="<liferay-ui:message key="output-type"/>">
 							<option value="pdf">PDF</option>
 							<option value="xlsx">Excel</option>
 					</select>
@@ -592,9 +721,10 @@ background-color:#71cccc !important;
                   
                   <div class="form-group span3 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
                     <button type="button" class="btn btn-info input-sm" name="btnexport" id="btnExport">
-                      <i class="icon-download-alt"></i>&nbsp;Export
+                      <i class="icon-download-alt"></i>&nbsp;<liferay-ui:message key="export"/>
                     </button> &nbsp;
                   </div>
+
                 </div>
               </div>
             </div>
@@ -606,10 +736,12 @@ background-color:#71cccc !important;
     </div>
   </div>
   <iframe id="iFrame_report" frameborder="0" style="width :100%;height: 500px;">
-  			<p>Your browser does not support iframes.</p>
+  			<p><liferay-ui:message key="your-browser-does-not-support-iframes"/></p>
 		</iframe>
 </body>
+
 <script src="/see-kpi-portlet/js/jquery3.1.1.js"></script>
 <script type="text/javascript">
  var jQuery_1_1_3 = $.noConflict(true);
 </script>
+<%@ include file="/html/language-js-template/view.jsp" %>

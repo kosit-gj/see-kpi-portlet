@@ -506,7 +506,7 @@ var insertRoleFn = function () {
 var dropDownListOrganization = function(param){
 	var html="";
 	if(param == 'All'){
-		html+="<option  selected value=''>All Organization</option>";
+		html+="<option  selected value=''>"+$(".lt-all-organization").val()+"</option>";
 	}else{
 		html+="<option selected value=\"\" selected></option>";
 	}

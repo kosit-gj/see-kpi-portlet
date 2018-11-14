@@ -1186,6 +1186,8 @@ var appraisalStatusFn = function (nameArea, id) {
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
             $.each(data, function (index, indexEntry) {
+            	if(indexEntry['status'] == 'Unassigned')
+            		indexEntry['status'] = $(".lt-unassigned").val();
                 if (id == indexEntry['status']) {
                     htmlOption += "<option selected='selected' value='" + indexEntry['to_action'] + "'>" + indexEntry['status'] + "</option>";
                 } else {
@@ -1313,7 +1315,7 @@ var dropDrowOrgFn = function (appraisalLevelId) {
         data: { "level_id": appraisalLevelId, "emp_code": session_emp_code, "level_id_emp": $("#appraisalLevelEmp").val() },
         success: function (data) {
             var htmlOption = "";
-            htmlOption += "<option value=''>All Organization</option>";
+            htmlOption += "<option value=''>"+$(".lt-all-organization").val()+"</option>";
             $.each(data, function (index, indexEntry) {
             	if(id==indexEntry['org_id'] && 0){
                     htmlOption += "<option selected='selected' value=" + indexEntry['org_id'] + ">" + indexEntry['org_name'] + "</option>";

@@ -217,7 +217,7 @@ var dropDrowAppraisalEmpLevelFn = function(id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option value=''>All Level</option>";
+			htmlOption+="<option value=''>"+$(".lt-all-employee-level").val()+"</option>";
 			$.each(data,function(index,indexEntry){
 
 				if(id==indexEntry['level_id']){
@@ -243,7 +243,7 @@ var dropDrowIndividualOrgLevelFn = function(id){
 		data:{"level_id": $("#AppraisalEmpLevel").val()},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option value=''>All Level</option>";
+			htmlOption+="<option value=''>"+$(".lt-all-organization-level").val()+"</option>";
 			$.each(data,function(index,indexEntry){
 
 				if(id==indexEntry['level_id']){
@@ -293,7 +293,7 @@ var dropDrowAppraisalOrgLevelFn = function(id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option value=''>All Level</option>";
+			htmlOption+="<option value=''>"+$(".lt-all-organization-level").val()+"</option>";
 			$.each(data,function(index,indexEntry){
 
 				if(id==indexEntry['level_id']){

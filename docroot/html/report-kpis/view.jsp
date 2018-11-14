@@ -744,3 +744,4 @@ background-color:#71cccc !important;
 <script type="text/javascript">
  var jQuery_1_1_3 = $.noConflict(true);
 </script>
+<%@ include file="/html/language-js-template/view.jsp" %>

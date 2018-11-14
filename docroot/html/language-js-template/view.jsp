@@ -58,6 +58,8 @@
 <input class="lt-no-raise-value" type="hidden" value="<liferay-ui:message key="no-raise-value"/>"/>
 <input class="lt-start-date" type="hidden" value="<liferay-ui:message key="start-date"/>"/>
 <input class="lt-end-date" type="hidden" value="<liferay-ui:message key="end-date"/>"/>
+<input class="lt-unassigned" type="hidden" value="<liferay-ui:message key="unassigned"/>"/>
+
 
 <!-- Appraisal (kpi result) -->
 <input class="lt-action-plan" type="hidden" value="<liferay-ui:message key="action-plan"/>"/>
@@ -118,4 +120,19 @@
 
 <!-- Judgement -->
 <input class="lt-item_name" type="hidden" value="<liferay-ui:message key="item_name"/>"/>
+
+
+<!-- import employee (salary range) -->
+<input class="lt-all-organization" type="hidden" value="<liferay-ui:message key="all-organization"/>"/>
+
+<!-- import salary range -->
+<input class="lt-all-year" type="hidden" value="<liferay-ui:message key="all-year"/>"/>
+<input class="lt-all-level" type="hidden" value="<liferay-ui:message key="all-level"/>"/>
+
+<!-- Usage Log -->
+<input class="lt-all-employee-level" type="hidden" value="<liferay-ui:message key="all-employee-level"/>"/>
+<input class="lt-all-organization-level" type="hidden" value="<liferay-ui:message key="all-organization-level"/>"/>
+
+<!-- Status Report -->
+<input class="lt-all-status" type="hidden" value="<liferay-ui:message key="all-status"/>"/>
 

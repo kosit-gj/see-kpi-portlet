@@ -454,7 +454,7 @@ This is the <b>Usage Log</b> portlet in View mode.2
 </div>
 <div id='embedParamSearch'></div>
 
-
+<%@ include file="/html/language-js-template/view.jsp" %>
 
 
 

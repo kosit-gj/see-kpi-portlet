@@ -40,7 +40,7 @@ var getYearFn = function() {
 		headers: {Authorization: "Bearer "+tokenID.token },
 		success: function(result) {
 			if(result.status == 200){
-				var htmlYear = "<option value=''>All Year</option>";
+				var htmlYear = "<option value=''>"+$(".lt-all-year").val()+"</option>";
 				$.each(result.data, function(index, indexEntry) {
 					htmlYear += "<option value='"+indexEntry.appraisal_year+"'>"+indexEntry.appraisal_year+"</option>";
 				});
@@ -65,7 +65,7 @@ var getLevelFn = function() {
 		headers: { Authorization: "Bearer "+tokenID.token },
 		success: function(result) {
 			if(result.status == 200){
-				var htmlLevel = "<option value=''>All Level</option>";
+				var htmlLevel = "<option value=''>"+$(".lt-all-level").val()+"</option>";
 				$.each(result.data, function(index, indexEntry) { 
 					htmlLevel += "<option value='"+indexEntry.level_id+"'>"+indexEntry.appraisal_level_name+"</option>";
 				});

@@ -268,7 +268,7 @@ var dropDrowAppraisalEmpLevelFn = function(id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option value=''>All Level</option>";
+			htmlOption+="<option value=''>"+$(".lt-all-employee-level").val()+"</option>";
 			$.each(data,function(index,indexEntry){
 
 				if(id==indexEntry['level_id']){
@@ -294,7 +294,7 @@ var dropDrowIndividualOrgLevelFn = function(id){
 		data:{"level_id": $("#AppraisalEmpLevel").val()},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option value=''>All Level</option>";
+			htmlOption+="<option value=''>"+$(".lt-all-organization-level").val()+"</option>";
 			$.each(data,function(index,indexEntry){
 
 				if(id==indexEntry['level_id']){
@@ -321,7 +321,7 @@ var dropDrowIndividualOrgFn = function(appraisalLevelId,id){
 		data:{"emp_level":$("#AppraisalEmpLevel").val(), "org_level":$("#AppraisalOrgLevel").val()},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option value=''>All Organization</option>";
+			htmlOption+="<option value=''>"+$(".lt-all-organization").val()+"</option>";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['org_id']){
 					htmlOption+="<option selected='selected' value="+indexEntry['org_id']+">"+indexEntry['org_name']+"</option>";
@@ -346,7 +346,7 @@ var dropDrowAppraisalOrgLevelFn = function(id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option value=''>All Level</option>";
+			htmlOption+="<option value=''>"+$(".lt-all-organization-level").val()+"</option>";
 			$.each(data,function(index,indexEntry){
 
 				if(id==indexEntry['level_id']){
@@ -379,7 +379,7 @@ var dropDrowOrgFn = function(appraisalLevelId,id){
 		data:{"level_id":appraisalLevelId},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option value=''>All Organization</option>";
+			htmlOption+="<option value=''>"+$(".lt-all-organization").val()+"</option>";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['org_id']){
 					htmlOption+="<option selected='selected' value="+indexEntry['org_id']+">"+indexEntry['org_name']+"</option>";

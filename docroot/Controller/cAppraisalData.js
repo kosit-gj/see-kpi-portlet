@@ -290,7 +290,7 @@ var dropDownListOrganization = function() {
 	
 	var html="";
 	//html+="<select data-placement='top' id=\"org_id\" class=\"input span12 m-b-n\" name=\"org_id\">";
-	html+="<option  selected value=''>All Organization</option>";
+	html+="<option  selected value=''>"+$(".lt-all-organization").val()+"</option>";
 	$.ajax ({
 		//url:restfulURL+"/"+serviceName+"/public/org",
 		url:restfulURL+"/"+serviceName+"/public/"+service_url_Check+"",
