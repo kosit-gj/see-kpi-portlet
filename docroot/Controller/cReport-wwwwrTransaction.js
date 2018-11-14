@@ -205,7 +205,7 @@ $("#tse-code-or-tse-name").autocomplete({
 
 var assessorParam = function(emp_snapshot_id){
 	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/questionaire_report/list_assessor_report2",
+		url:restfulURL+"/"+serviceName+"/public/questionaire_report/list_assessor_report",
 		type:"get",
 		dataType:"json",
 		async:true,
