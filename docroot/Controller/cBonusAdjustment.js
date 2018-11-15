@@ -398,12 +398,36 @@ var listDataFn = function(data){
             htmlHTML += " <td style=\"text-align: right;\">";
             htmlHTML += " "+addCommas(notNullFn(indexEntry['b_amount']))+"";
             htmlHTML += " </td>";
-            htmlHTML += " <td class=\"data-percent\">";
-            htmlHTML += " <input "+edit_flag+" type='number' min=\"0.00\" style=\"text-align: right; min-width: 40px; padding-right: 5px;\" class='form-control input-sm span12 percent' total_adjust_result_score='"+indexEntry['s_amount']+"' value='"+indexEntry['adjust_b_amount']+"'/>";
-            htmlHTML += " </td>";
-            htmlHTML += " <td class=\"data-score\">";
-            htmlHTML += " <input "+edit_flag+" type='number' min=\"0.00\" style=\"text-align: right; min-width: 40px; padding-right: 5px;\" class='form-control input-sm span12 score' total_adjust_result_score='"+indexEntry['s_amount']+"' value='"+indexEntry['adjust_b_rate']+"'/>";
-            htmlHTML += " </td>";
+            //htmlHTML += " <td class=\"data-percent\">";
+            //htmlHTML += " <input "+edit_flag+" type='number' min=\"0.00\" style=\"text-align: right; min-width: 40px; padding-right: 5px;\" class='form-control input-sm span12 percent' total_adjust_result_score='"+indexEntry['s_amount']+"' value='"+indexEntry['adjust_b_amount']+"'/>";
+            if(indexEntry['edit_flag']==1) {
+            	htmlHTML += " <td class=\"data-percent\">";
+            	htmlHTML += "	<div class=\"float-label-control \">";
+                htmlHTML += "		<input  type=\"text\" class=\"form-control input-xs span12 percent numberOnly\" total_adjust_result_score='"+indexEntry['s_amount']+"' value='"+indexEntry['adjust_b_amount']+"'>";
+                htmlHTML += "	</div>";
+                htmlHTML += " </td>";
+    		} else {
+    			htmlHTML += " <td style=\"text-align: right;\">";
+    			htmlHTML += " "+addCommas(notNullFn(indexEntry['adjust_b_amount']))+"";
+    			htmlHTML += " </td>";
+    		}
+            
+            //htmlHTML += " </td>";
+            //htmlHTML += " <td class=\"data-score\">";
+            //htmlHTML += " <input "+edit_flag+" type='number' min=\"0.00\" style=\"text-align: right; min-width: 40px; padding-right: 5px;\" class='form-control input-sm span12 score' total_adjust_result_score='"+indexEntry['s_amount']+"' value='"+indexEntry['adjust_b_rate']+"'/>";
+            if(indexEntry['edit_flag']==1) {
+            	htmlHTML += " <td class=\"data-score\">";
+            	htmlHTML += "	<div class=\"float-label-control \">";
+                htmlHTML += "		<input type=\"text\" class=\"form-control input-xs span12 score numberOnly\" total_adjust_result_score='"+indexEntry['s_amount']+"' value='"+indexEntry['adjust_b_rate']+"'>";
+                htmlHTML += "	</div>";
+                htmlHTML += " </td>";
+    		} else {
+    			htmlHTML += " <td style=\"text-align: right;\">";
+    			htmlHTML += " "+addCommas(notNullFn(indexEntry['adjust_b_rate']))+"";
+    			htmlHTML += " </td>";
+    		}
+            
+            //htmlHTML += " </td>";
             htmlHTML += " <td style=\"text-align: center;\">";
             htmlHTML += " "+indexEntry['status']+"";
             htmlHTML += " </td>";
@@ -412,7 +436,15 @@ var listDataFn = function(data){
 	});
 	
 	$("#list_empjudege").html(htmlHTML);
-	
+	$(".numberOnly").autoNumeric('init');
+	$(".numberOnly").autoNumeric('update', {
+		vMin : '0',
+		vMax : '9999999999',
+		lZero: 'deny',
+		wEmpty: 'zero',
+		//aSign : ' %',
+		//pSign : 's'
+	});
 	$(".head_adjust").show();
 	$("#statusSelectAll").prop('checked', false);
 	$('#statusSelectAll').click(function () {
@@ -439,17 +471,19 @@ var listDataFn = function(data){
 
 var calculatePercentKeyup = function() {
 	$("#list_empjudege").find('.percent').keyup(function() {
-		var percent = this.value;
+		var percent = $(this).autoNumeric('get');
 		var adjust_result_score = Number($(this).attr("total_adjust_result_score"));
 		var total = (percent/adjust_result_score);
-		$(this).closest('.control-calculate').find('.data-score').find('.score').val(total.toFixed(2));
+		//$(this).closest('.control-calculate').find('.data-score').find('.score').val(total.toFixed(2));
+		$(this).closest('.control-calculate').find('.data-score').find('.score').autoNumeric('set', total);
 	});
 		
 	$("#list_empjudege").find('.score').keyup(function() {
-		var score = Number($(this).val());
+		var score = $(this).autoNumeric('get');
 		var adjust_result_score = Number($(this).attr("total_adjust_result_score"));
 		var total = (score*adjust_result_score);
-		$(this).closest('.control-calculate').find('.data-percent').find('.percent').val(total.toFixed(2));
+		//$(this).closest('.control-calculate').find('.data-percent').find('.percent').val(total.toFixed(2));
+		$(this).closest('.control-calculate').find('.data-percent').find('.score').autoNumeric('set', total);
 	});
 }
 
@@ -537,8 +571,8 @@ var insertFn = function(type) {
 		if($(indexEntry).find('.select-check').prop('checked') && $(indexEntry).find('.select-check').attr('edit_flag')==1) {
 			detail.push({
 				emp_result_id		: $(indexEntry).find('.select-check').attr('id'),
-				adjust_b_amount		: $(indexEntry).find('.data-percent').find('.percent').val(),
-				adjust_b_rate	    : $(indexEntry).find('.data-score').find('.score').val()
+				adjust_b_amount		: $(indexEntry).find('.data-percent').find('.percent').autoNumeric('get'),
+				adjust_b_rate	    : $(indexEntry).find('.data-score').find('.score').autoNumeric('get')
 			});
 		}
 	});
