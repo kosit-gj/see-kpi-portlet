@@ -805,7 +805,76 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none; 
   margin: 0; 
 }
+.ui-icon.ui-icon-triangle-1-s{
+	margin-top: 2px;
+}
+.ui-multiselect.ui-widget.ui-state-default.ui-corner-all{
+	padding-bottom: 4px;padding-top: 4px;
+}
+.ui-multiselect-checkboxes.ui-helper-reset input[type=checkbox]{
+	margin-bottom: 5px;margin-right: 5px;margin-top: 0px;
+}
 
+#tableBonusAdjustment tbody tr td .input-xs{ 
+ 	line-height: 10px; height: 15px; font-size: 10px; width: 100px; text-align: right; 
+ }
+.aui #tableBonusAdjustment .float-label-control { position: relative; margin-bottom: 0 px;font-size: smaller; }
+   /* .aui #tableBonusAdjustment .float-label-control ::-webkit-input-placeholder { color: transparent; }
+    .aui #tableBonusAdjustment .float-label-control :-moz-placeholder { color: transparent; }
+    .aui #tableBonusAdjustment .float-label-control ::-moz-placeholder { color: transparent; }
+    .aui #tableBonusAdjustment .float-label-control :-ms-input-placeholder { color: transparent; }*/
+    .aui #tableBonusAdjustment .float-label-control input:-webkit-autofill,
+    .aui #tableBonusAdjustment .float-label-control textarea:-webkit-autofill { background-color: transparent !important; -webkit-box-shadow: 0 0 0 1000px white inset !important; -moz-box-shadow: 0 0 0 1000px white inset !important; box-shadow: 0 0 0 1000px white inset !important; }
+    .aui #tableBonusAdjustment .float-label-control input, .aui #tableBonusAdjustment .float-label-control textarea, .aui #tableBonusAdjustment .float-label-control label { font-size: 1.3em; box-shadow: none; -webkit-box-shadow: none; }
+        .aui #tableBonusAdjustment .float-label-control input:focus,
+        .aui #tableBonusAdjustment .float-label-control textarea:focus { box-shadow: none; -webkit-box-shadow: none ; border-bottom-width: 3px !important;; padding-bottom: 0 !important;; border-color:#673ab7 !important; }
+        .aui #tableBonusAdjustment .float-label-control textarea:focus { padding-bottom: 4px; }
+    .aui #tableBonusAdjustment .float-label-control input, .aui #tableBonusAdjustment .float-label-control textarea { display: block; width: 100%; padding: 0.1em 0em 1px 0em; border: none; border-radius: 0px; border-bottom: 1px solid #aaa !important; outline: none; margin: 0px; background: none; }
+    .aui #tableBonusAdjustment .float-label-control textarea { padding: 0.1em 0em 5px 0em; }
+    .aui #tableBonusAdjustment .float-label-control label { position: absolute; font-weight: normal; /*top: -1.0em;*/top: 1.9em;  left: 0.08em; color: #aaaaaa !important; z-index: -1; font-size: 0.85em; -moz-animation: float-labels 300ms none ease-out; -webkit-animation: float-labels 300ms none ease-out; -o-animation: float-labels 300ms none ease-out; -ms-animation: float-labels 300ms none ease-out; -khtml-animation: float-labels 300ms none ease-out; animation: float-labels 300ms none ease-out; /* There is a bug sometimes pausing the animation. This avoids that.*/ animation-play-state: running !important; -webkit-animation-play-state: running !important; }
+    .aui #tableBonusAdjustment .float-label-control input.empty + label,
+    .aui #tableBonusAdjustment .float-label-control textarea.empty + label { top: 0.1em; font-size: 1.5em; animation: none; -webkit-animation: none; }
+    .aui #tableBonusAdjustment .float-label-control input:not(.empty) + label,
+    .aui #tableBonusAdjustment .float-label-control textarea:not(.empty) + label { z-index: 1; }
+    .aui #tableBonusAdjustment .float-label-control input:not(.empty):focus + label,
+    .aui #tableBonusAdjustment .float-label-control textarea:not(.empty):focus + label { color: #aaaaaa !important; }
+    .aui #tableBonusAdjustment .float-label-control.label-bottom label { -moz-animation: float-labels-bottom 300ms none ease-out; -webkit-animation: float-labels-bottom 300ms none ease-out; -o-animation: float-labels-bottom 300ms none ease-out; -ms-animation: float-labels-bottom 300ms none ease-out; -khtml-animation: float-labels-bottom 300ms none ease-out; animation: float-labels-bottom 300ms none ease-out; }
+    .aui #tableBonusAdjustment .float-label-control.label-bottom input:not(.empty) + label,
+    .aui #tableBonusAdjustment .float-label-control.label-bottom textarea:not(.empty) + label { top: 3em; }
+	
+	.aui #tableBonusAdjustment .float-label-control input{font-size: 12px;text-align: right;}
+
+@keyframes float-labels {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: -1em; opacity: 1; }
+}
+
+@-webkit-keyframes float-labels {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: -1em; opacity: 1; }
+}
+
+@keyframes float-labels-bottom {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: 3em; opacity: 1; }
+}
+
+@-webkit-keyframes float-labels-bottom {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: 3em; opacity: 1; }
+}
 </style>
 
 
@@ -877,7 +946,7 @@ input[type=number]::-webkit-outer-spin-button {
                       <input class="form-control input-sm" id="EmpName_id" name="EmpName_id" value="" type="hidden">
                   </div>
 
-                  <div class="form-group pull-left span3" style="margin-left: 5px; margin-top: 2px; margin-bottom: 2px;">
+                  <div class="form-group pull-left span3" style="margin-left: 5px; ">
                   <select data-toggle="tooltip" title="<liferay-ui:message key="Position"/>" multiple="multiple" data-original-title="<liferay-ui:message key="Position"/>" class="input form-control input-sm span12" id="Position" name="Position">
                  </select>            
                   </div>
