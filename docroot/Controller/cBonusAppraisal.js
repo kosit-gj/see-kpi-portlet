@@ -137,7 +137,7 @@ var getDataReCalculateFn = function(){
 			 "org_result_judgement_id"	: $(this).attr("org_result_judgement_id"),
 		     "adjust_result_score"		: $(this).find('.inputAdjustResultScore').autoNumeric('get'),
 		     "emp_result_judgement_id"	: $(this).attr("emp_result_judgement_id"),
-		     "emp_adjust_result_score"	: $(this).find('.inputEmpAdjustResultScore ').autoNumeric('get')
+		     "emp_adjust_result_score"	: ($(this).attr("emp_result_judgement_id") == "" ? "" : $(this).find('.inputEmpAdjustResultScore ').autoNumeric('get'))
 		});
   
 	 });
@@ -207,13 +207,13 @@ var scriptGenerateHtmlListBonusAppraisalFn = function(indexEntry,sub_departments
 
 	html += "<tr class='rowSearch' " +
 			"org_result_judgement_id='"+indexEntry.org_result_judgement_id+"' " +
-			"emp_result_judgement_id='"+indexEntry.emp_result_judgement_id+"' " +
+			"emp_result_judgement_id='"+ notNullTextFn(indexEntry.emp_result_judgement_id)+"' " +
 			"edit_flag='"+indexEntry.edit_flag+"' >";
 	html += "<td class='columnSearch' >"+ sub_departments +indexEntry.appraisal_level_name + "</td>";
 	html += "<td class='columnSearch' >"+ indexEntry.org_name + "</td>";
 	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.avg_result_score.toString())) + "</td>";
 	html += "<td class='columnSearch' style='text-align: right;'>" ;
-	if(indexEntry.edit_flag){
+	if(indexEntry.edit_flag && indexEntry.org_result_judgement_id != null){
 		
 		html += "	<div class='float-label-control ' >";
 		html += "	<input type='text' class='form-control inputAdjustResultScore numberOnly'";
@@ -234,7 +234,7 @@ var scriptGenerateHtmlListBonusAppraisalFn = function(indexEntry,sub_departments
 	html += "<td class='columnSearch' >"+ notNullTextFn(indexEntry.emp_name) + "</td>";
 	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.emp_result_score).toString()) + "</td>";
 	html += "<td class='columnSearch' style='text-align: right;'>" ;
-	if(indexEntry.edit_flag){
+	if(indexEntry.edit_flag  && indexEntry.emp_result_judgement_id != null){
 		
 		html += "	<div class='float-label-control ' >";
 		html += "	<input type='text' class='form-control inputEmpAdjustResultScore numberOnly'";
@@ -296,7 +296,7 @@ var scriptBtnConfirmYesFn = function(){
 				 "org_result_judgement_id"	: $(this).attr("org_result_judgement_id"),
 			     "adjust_result_score"		: $(this).find('.inputAdjustResultScore').autoNumeric('get'),
 			     "emp_result_judgement_id"	: $(this).attr("emp_result_judgement_id"),
-			     "emp_adjust_result_score"	: $(this).find('.inputEmpAdjustResultScore ').autoNumeric('get')
+			     "emp_adjust_result_score"	: ($(this).attr("emp_result_judgement_id") == "" ? "" : $(this).find('.inputEmpAdjustResultScore ').autoNumeric('get'))
 			});
 	  
 		 });
@@ -342,7 +342,7 @@ var scriptBtnConfirmNoFn = function(){
 				 "org_result_judgement_id"	: $(this).attr("org_result_judgement_id"),
 			     "adjust_result_score"		: $(this).find('.inputAdjustResultScore').autoNumeric('get'),
 			     "emp_result_judgement_id"	: $(this).attr("emp_result_judgement_id"),
-			     "emp_adjust_result_score"	: $(this).find('.inputEmpAdjustResultScore ').autoNumeric('get')
+			     "emp_adjust_result_score"	: ($(this).attr("emp_result_judgement_id") == "" ? "" : $(this).find('.inputEmpAdjustResultScore ').autoNumeric('get'))
 			});
 	  
 		 });
