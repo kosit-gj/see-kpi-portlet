@@ -269,8 +269,9 @@ var to_action = function () {
         async: true,
         data: {
         	"stage_id": status,
-        	"emp_code": session_emp_code,
-        	"flag": "emp_result_judgement_flag"
+        	"flag": "emp_result_judgement_flag",
+        	"appraisal_type_id": 2,
+        	"appraisal_form_id": $("#AppraisalForm").val()
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
@@ -312,7 +313,7 @@ var listDataFn = function(data){
 		
             htmlHTML += " <tr class=\"control-calculate\">";
             htmlHTML += " <td style=\"text-align: center;\">";
-            htmlHTML += " <input "+edit_flag+" style=\"margin-bottom: 5px;\" type=\"checkbox\" class=\"select-check\" id=\""+indexEntry['emp_result_id']+"\" edit_flag=\""+indexEntry['edit_flag']+"\" style=\"margin-top:-3px;\">";
+            htmlHTML += " <input style=\"margin-bottom: 5px;\" type=\"checkbox\" class=\"select-check\" id=\""+indexEntry['emp_result_id']+"\" edit_flag=\""+indexEntry['edit_flag']+"\" style=\"margin-top:-3px;\">";
             htmlHTML += " </td>";
             htmlHTML += " <td style=\"text-align: center;\">";
             htmlHTML += " "+indexEntry['emp_code']+"";
@@ -357,12 +358,12 @@ var listDataFn = function(data){
 	$("#statusSelectAll").prop('checked', false);
 	$('#statusSelectAll').click(function () {
         if ($('#statusSelectAll').prop('checked')) {
-        	$.each($(".control-calculate").get(),function(index,indexEntry) {
-        		if($(indexEntry).find('.select-check').attr('edit_flag')==1) {
-        			$(indexEntry).find('.select-check').prop('checked', true);
-        		}
-        	});
-//        	$(".select-check").prop('checked', true);
+//        	$.each($(".control-calculate").get(),function(index,indexEntry) {
+//        		if($(indexEntry).find('.select-check').attr('edit_flag')==1) {
+//        			$(indexEntry).find('.select-check').prop('checked', true);
+//        		}
+//        	});
+        	$(".select-check").prop('checked', true);
         } else {
             $(".select-check").prop('checked', false);
         }
@@ -375,7 +376,7 @@ var listDataFn = function(data){
 	}
 	
 	if($("#actionToAssign").val()==null || $("#actionToAssign").val()==undefined) {
-    	$("#btnSubmit").attr("disabled");
+		$("#btnSubmit").attr("disabled");
     } else {
     	$("#btnSubmit").removeAttr("disabled");
     }
@@ -416,13 +417,13 @@ var calculatePercentKeyup = function() {
 	$("#btnAdjust").click(function() {
 		var adjust_percent = Number($("#adjust_percent").val());
 		$.each($(".control-calculate").get(),function(index,indexEntry) {
-    		if($(indexEntry).find('.select-check').attr('edit_flag')==1) {
+//    		if($(indexEntry).find('.select-check').attr('edit_flag')==1) {
     			$(indexEntry).find(".data-percent").find(".percent").val(adjust_percent);
     			var percent = Number(adjust_percent);
     			var adjust_result_score = Number($(indexEntry).find(".data-percent").find(".percent").attr("total_adjust_result_score"));
     			var total = (percent/100)*adjust_result_score;
     			$(indexEntry).find('.data-score').find('.score').val(total.toFixed(2));
-    		}
+//    		}
     	});
 	});
 	
@@ -513,11 +514,12 @@ var insertFn = function() {
 	var stage_id = $("#actionToAssign").val();
 	var detail = [];
 	$.each($(".control-calculate").get(),function(index,indexEntry){
-		if($(indexEntry).find('.select-check').prop('checked') && $(indexEntry).find('.select-check').attr('edit_flag')==1) {
+		if($(indexEntry).find('.select-check').prop('checked')) {
 			detail.push({
 				emp_result_id		: $(indexEntry).find('.select-check').attr('id'),
 				percent_adjust		: $(indexEntry).find('.data-percent').find('.percent').val(),
-				adjust_result_score	: $(indexEntry).find('.data-score').find('.score').val()
+				adjust_result_score	: $(indexEntry).find('.data-score').find('.score').val(),
+				edit_flag           : $(indexEntry).find('.select-check').attr('edit_flag')
 			});
 		}
 	});
@@ -535,7 +537,7 @@ var insertFn = function() {
         success: function (data) {
         	if(data['status']==200) {
         		getDataFn();
-        		callFlashSlide($(".lt-insert-successfully").val());
+        		callFlashSlide($(".lt-update-successfully").val());
         		clearFn();
         	} else if(data['status']==400) {
         		validationFn(data['data']);

@@ -1075,7 +1075,7 @@ input[type=number]::-webkit-outer-spin-button {
 										 <div class="form-group p-xxs" style="display: flex;">
 											 <label class="p-t-xxs" style="text-align: center;"><b><liferay-ui:message key="action"/>&nbsp;:&nbsp;</b></label>
 											 <div>
-												<select style="width: 155px;" data-toggle="tooltip" title="" class="input form-control input-sm" id="actionToAssign" name="actionToAssign">
+												<select style="min-width: 150px;" data-toggle="tooltip" title="" class="input form-control input-sm" id="actionToAssign" name="actionToAssign">
 												</select>
 											 </div>
 										 </div>
