@@ -2239,5 +2239,72 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	<portlet>
+		<portlet-name>report-bonus</portlet-name>
+		<display-name>Report Bonus</display-name>
+		<portlet-class>
+			com.liferay.util.bridges.mvc.MVCPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/report-bonus/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Report Bonus</title>
+			<short-title>Report Bonus</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>report-bonus-before-adjust</portlet-name>
+		<display-name>Report Bonus Before Adjust</display-name>
+		<portlet-class>
+			com.liferay.util.bridges.mvc.MVCPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/report-bonus-before-adjust/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Report Bonus Before Adjust</title>
+			<short-title>Report Bonus Before Adjust</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>
   

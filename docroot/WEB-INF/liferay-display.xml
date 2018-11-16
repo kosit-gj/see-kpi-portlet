@@ -66,6 +66,8 @@
 		<portlet id="emp-result-judgement"></portlet>
 		<portlet id="bonus-appraisal"></portlet>
 		<portlet id="bonus-adjustment"></portlet>
+		<portlet id="report-bonus"></portlet>
+		<portlet id="report-bonus-before-adjust"></portlet>
 		<!-- //////////////////////////////////////////////// -->
 	</category>
 </display>
