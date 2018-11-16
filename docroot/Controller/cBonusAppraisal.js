@@ -120,6 +120,18 @@ var getDataFn = function(page,rpp){
 			listBonusAppraisal(data['data']);
 			globalData=data;
 			paginationSetUpFn(globalData['current_page'],globalData['last_page'],globalData['last_page']);
+			
+			if(globalData['data']['edit_flag'] == 1){
+				$("#btn_search_recalculate").prop("disabled", false);
+				$("#btn_save_bonus_appraisal").prop("disabled", false);
+				$("#btn_cancel_bonus_appraisal").prop("disabled", false);
+			} else {
+				$("#btn_search_recalculate").prop("disabled", true);
+				$("#btn_save_bonus_appraisal").prop("disabled", true);
+				$("#btn_cancel_bonus_appraisal").prop("disabled", true);
+			}
+			
+			
 		}
 	});
 	
@@ -169,15 +181,15 @@ var getDataReCalculateFn = function(){
 //--------  GetData End
 var listBonusAppraisal = function(data){
 	var html ="";
-	//console.log(data);
-	$.each(data,function(index,indexEntry) {
+	console.log(data.data);
+	$.each(data.data,function(index,indexEntry) {
 
-		html += scriptGenerateHtmlListBonusAppraisalFn(indexEntry,"");
+		html += scriptGenerateHtmlListBonusAppraisalFn(indexEntry,"",data.edit_flag);
 		//console.log(indexEntry);
 		$.each(indexEntry.departments,function(index2,indexEntry2) {
 			//console.log(indexEntry2);
 			
-			html += scriptGenerateHtmlListBonusAppraisalFn(indexEntry2,"&emsp;");
+			html += scriptGenerateHtmlListBonusAppraisalFn(indexEntry2,"&emsp;",data.edit_flag);
 			
 		});
 		
@@ -195,25 +207,19 @@ var listBonusAppraisal = function(data){
 			//pSign : 's'
 		};
 	scriptInputAutoNumeric(".numberOnly",option);
-
-
-
-
 };
 
-var scriptGenerateHtmlListBonusAppraisalFn = function(indexEntry,sub_departments){
+var scriptGenerateHtmlListBonusAppraisalFn = function(indexEntry,sub_departments,editFlag){
 	var html ="";
-
-
 	html += "<tr class='rowSearch' " +
 			"org_result_judgement_id='"+indexEntry.org_result_judgement_id+"' " +
 			"emp_result_judgement_id='"+ notNullTextFn(indexEntry.emp_result_judgement_id)+"' " +
-			"edit_flag='"+indexEntry.edit_flag+"' >";
+			"edit_flag='"+editFlag+"' >";
 	html += "<td class='columnSearch' >"+ sub_departments +indexEntry.appraisal_level_name + "</td>";
 	html += "<td class='columnSearch' >"+ indexEntry.org_name + "</td>";
 	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.avg_result_score.toString())) + "</td>";
 	html += "<td class='columnSearch' style='text-align: right;'>" ;
-	if(indexEntry.edit_flag && indexEntry.org_result_judgement_id != null){
+	if(editFlag && indexEntry.org_result_judgement_id != null){
 		
 		html += "	<div class='float-label-control ' >";
 		html += "	<input type='text' class='form-control inputAdjustResultScore numberOnly'";
@@ -234,7 +240,7 @@ var scriptGenerateHtmlListBonusAppraisalFn = function(indexEntry,sub_departments
 	html += "<td class='columnSearch' >"+ notNullTextFn(indexEntry.emp_name) + "</td>";
 	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.emp_result_score).toString()) + "</td>";
 	html += "<td class='columnSearch' style='text-align: right;'>" ;
-	if(indexEntry.edit_flag  && indexEntry.emp_result_judgement_id != null){
+	if(editFlag  && indexEntry.emp_result_judgement_id != null){
 		
 		html += "	<div class='float-label-control ' >";
 		html += "	<input type='text' class='form-control inputEmpAdjustResultScore numberOnly'";
@@ -250,10 +256,6 @@ var scriptGenerateHtmlListBonusAppraisalFn = function(indexEntry,sub_departments
 	}
 	html += "	</td>";
 	html += "</tr>";
-	
-
-
-	
 	
 	return html;
 
@@ -435,7 +437,7 @@ $(document).ready(function() {
 				);
 			
 		$("#bonus_appraisal_list_content").show();
-		$("#btn_search_recalculate").prop("disabled",false)
+//		$("#btn_search_recalculate").prop("disabled",false)
 		return false;
 	});
 
