@@ -458,20 +458,20 @@
 						style="max-width: none; min-width: 800;margin-bottom: 0px;">
 						<thead>
 							<tr>
-								<th rowspan="2" style="width: 10%; min-width: 100px;"><liferay-ui:message key="level"/></th>
-								<th rowspan="2" style="width: 15%; min-width: 150px;"><liferay-ui:message key="org-name"/></th>
-								<th colspan="5" style="width: 45%;"><liferay-ui:message key="evaluate-agency"/></th>
+								<th rowspan="2" style="width: 18%; min-width: 100px;"><liferay-ui:message key="level"/></th>
+								<th rowspan="2" style="width: 18%; min-width: 150px;"><liferay-ui:message key="org-name"/></th>
+								<th colspan="5" style="width: 34%;"><liferay-ui:message key="evaluate-agency"/></th>
 								<th colspan="3" style="width: 30%;"><liferay-ui:message key="evaluate-agency-manager"/></th>
 							</tr>
 							<tr>
-								<th style="width: 10%; min-width: 100px;"><liferay-ui:message key="avg-result-score"/></th>
-								<th style="width: 10%; min-width: 100px;"><liferay-ui:message key="adjust-result-score"/></th>
-								<th style="width: 10%; min-width: 100px;"><liferay-ui:message key="total-salary"/></th>
-								<th style="width: 10%; min-width: 100px;"><liferay-ui:message key="bonus-point"/></th>
+								<th style="width: 7%; min-width: 60px;"><liferay-ui:message key="avg-result-score"/></th>
+								<th style="width: 7%; min-width: 60px;"><liferay-ui:message key="adjust-result-score"/></th>
+								<th style="width: 7%; min-width: 80px;"><liferay-ui:message key="total-salary"/></th>
+								<th style="width: 8%; min-width: 90px;"><liferay-ui:message key="bonus-point"/></th>
 								<th style="width: 5%; min-width: 40px;">%</th>
-								<th style="width: 10%; min-width: 160px;"><liferay-ui:message key="emp-name"/></th>
-								<th style="width: 10%;min-width: 100px;"><liferay-ui:message key="emp-result-score"/></th>
-								<th style="width: 10%; min-width: 100px;"><liferay-ui:message key="adjust-result-score"/></th>
+								<th style="width: 14%; min-width: 120px;"><liferay-ui:message key="emp-name"/></th>
+								<th style="width: 8%;min-width: 60px;"><liferay-ui:message key="emp-result-score"/></th>
+								<th style="width: 8%; min-width: 60px;"><liferay-ui:message key="adjust-result-score"/></th>
 							</tr>
 						</thead>
 						<tbody id="listBonusAppraisal">

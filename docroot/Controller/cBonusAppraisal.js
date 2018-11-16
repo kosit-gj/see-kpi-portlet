@@ -153,7 +153,7 @@ var getDataReCalculateFn = function(){
 		});
   
 	 });
-	console.log(data_bonus);
+	
 	$.ajax({
 		url : globalSevice['restfulPathBonusAppraisal'],
 		type : "post",
@@ -181,7 +181,7 @@ var getDataReCalculateFn = function(){
 //--------  GetData End
 var listBonusAppraisal = function(data){
 	var html ="";
-	console.log(data.data);
+	
 	$.each(data.data,function(index,indexEntry) {
 
 		html += scriptGenerateHtmlListBonusAppraisalFn(indexEntry,"",data.edit_flag);
