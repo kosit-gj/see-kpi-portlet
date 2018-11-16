@@ -333,13 +333,19 @@ var listDataFn = function(data){
             htmlHTML += " "+indexEntry['status']+"";
             htmlHTML += " </td>";
             htmlHTML += " <td style=\"text-align: right;\">";
+            htmlHTML += " <div class=\"float-label-control\">";
             htmlHTML += " <input disabled type='number' min=\"0\" style=\"text-align: right; min-width: 40px;\" class='form-control input-sm span12' value='"+indexEntry['result_score1']+"'/>";
+            htmlHTML += " </div>";
             htmlHTML += " </td>";
             htmlHTML += " <td class=\"data-percent\">";
+            htmlHTML += " <div class=\"float-label-control\">";
             htmlHTML += " <input "+edit_flag+" type='number' min=\"0.00\" max=\"100.00\" style=\"text-align: right; min-width: 40px;\" class='form-control input-sm span12 percent' total_adjust_result_score='"+indexEntry['result_score1']+"' value='"+indexEntry['percent_adjust']+"'/>";
+            htmlHTML += " </div>";
             htmlHTML += " </td>";
             htmlHTML += " <td class=\"data-score\">";
+            htmlHTML += " <div class=\"float-label-control\">";
             htmlHTML += " <input "+edit_flag+" type='number' min=\"0.00\" max=\"100.00\" style=\"text-align: right; min-width: 40px;\" class='form-control input-sm span12 score' total_adjust_result_score='"+indexEntry['result_score1']+"' value='"+indexEntry['result_score2']+"'/>";
+            htmlHTML += " </div>";
             htmlHTML += " </td>";
             htmlHTML += " </tr>";
 
