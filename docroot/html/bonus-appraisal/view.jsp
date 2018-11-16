@@ -508,13 +508,13 @@
 						<div class="form-group pull-right m-b-none p-b-xxs">
 							<button type="button" class="btn btn-info input-sm"
 								name="btn_save_bonus_appraisal" id="btn_save_bonus_appraisal"
-								style="margin-left: 5px">
+								style="margin-left: 5px" disabled="disabled">
 								&nbsp;<liferay-ui:message key="save"/>
 							</button>
 							
 							<button type="button" class="btn btn-danger input-sm"
 								name="btn_cancel_bonus_appraisal"
-								id="btn_cancel_bonus_appraisal" style="margin-left: 5px">
+								id="btn_cancel_bonus_appraisal" style="margin-left: 5px" disabled="disabled">
 								&nbsp;<liferay-ui:message key="cancel"/>
 							</button>
 						</div>

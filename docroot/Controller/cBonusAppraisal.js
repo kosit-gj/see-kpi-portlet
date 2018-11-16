@@ -99,9 +99,10 @@ var getPathMonthlyBonusRateFn = function(){
  	return monthly_bonus_rate;
  	
 };
+
+
 //--------  GetData Start
 var getDataFn = function(page,rpp){
-	//alert("Page : "+page+" - Rpp : "+rpp);
 
 	var year= $("#param_year").val();
 	var period_id= $("#param_bonus_period_id").val();
@@ -116,27 +117,32 @@ var getDataFn = function(page,rpp){
 			"action": "search"},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
-		success : function(data) {
-			listBonusAppraisal(data['data']);
-			globalData=data;
-			paginationSetUpFn(globalData['current_page'],globalData['last_page'],globalData['last_page']);
+		success : function(response) {
 			
-			if(globalData['data']['edit_flag'] == 1){
-				$("#btn_search_recalculate").prop("disabled", false);
-				$("#btn_save_bonus_appraisal").prop("disabled", false);
-				$("#btn_cancel_bonus_appraisal").prop("disabled", false);
+			globalData = response;
+			if(response.data.status == 200){ 
+				listBonusAppraisal(response['data']);
+				globalData=response;
+				paginationSetUpFn(globalData['current_page'],globalData['last_page'],globalData['last_page']);
+				
+				if(response.data.edit_flag == 1 && response.data.data.length > 0){
+					$("#btn_search_recalculate").prop("disabled", false);
+					$("#btn_save_bonus_appraisal").prop("disabled", false);
+					$("#btn_cancel_bonus_appraisal").prop("disabled", false);
+				} else {
+					$("#btn_search_recalculate").prop("disabled", true);
+					$("#btn_save_bonus_appraisal").prop("disabled", true);
+					$("#btn_cancel_bonus_appraisal").prop("disabled", true);
+					callFlashSlide(response.data.message);
+				}
 			} else {
-				$("#btn_search_recalculate").prop("disabled", true);
-				$("#btn_save_bonus_appraisal").prop("disabled", true);
-				$("#btn_cancel_bonus_appraisal").prop("disabled", true);
+				callFlashSlide(response.data.message);
 			}
-			
-			
 		}
 	});
-	
-	
 };
+
+
 var getDataReCalculateFn = function(){
 	//alert("Page : "+page+" - Rpp : "+rpp);
 
