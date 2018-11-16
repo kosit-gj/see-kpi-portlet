@@ -3,6 +3,7 @@
 //Global variable
 var globalData = [];
 var galbalDataTemp = [];
+var globalAppraisalFormId;
 var empldoyees_code = [];
 var organization_code = [];
 var empldoyees_id = [];
@@ -251,9 +252,9 @@ var setDataToTemplateFn = function (data, actionType) {
     });
 }
 
-var findOneFn = function (id, actionType) {
+var findOneFn = function (id, appraisal_form_id, actionType) {
     //get structure
-    getTemplateFn(id);
+    getTemplateFn(id, appraisal_form_id);
     //get data for structure
 
     $.ajax({
@@ -676,6 +677,7 @@ var listDataFn = function (data) {
             org_id_to_assign = edit[2];
             organization_code = edit[3];
             empldoyees_code = edit[4];
+            globalAppraisalFormId = null;
             chief_id_array = [];
             chief_id_array.push($(this).attr('data-chief-emp'));
 
@@ -692,7 +694,7 @@ var listDataFn = function (data) {
                 var emp_result_id = $(this).parent().parent().parent().parent().children().eq(2).children().val();
                 var period_id = $(this).parent().parent().parent().parent().children().eq(3).children().val();
                 $("#period_id_edit").val(period_id);
-                findOneFn(emp_result_id, "");
+                findOneFn(emp_result_id, globalAppraisalFormId, "");
                 $(this).parent().parent().parent().children().click();
                 $(window).scrollTop(0);
                 $(".modal-body").scrollTop(0);
@@ -706,13 +708,14 @@ var listDataFn = function (data) {
             org_id_to_assign = view[2];
             organization_code = view[3];
             empldoyees_code = view[4];
+            globalAppraisalFormId = null;
             chief_id_array = [];
             chief_id_array.push($(this).attr('data-chief-emp'));
 //            var emp_result_id = $(this).parent().parent().parent().parent().children().eq(1).children().val();
             var emp_result_id = $(this).closest('tr').find('.action_emp').attr('data-id').split('-')[0];
             var period_id = $(this).parent().parent().parent().parent().children().eq(2).children().val();
             $("#period_id_edit").val(period_id);
-            findOneFn(emp_result_id, "view");
+            findOneFn(emp_result_id, globalAppraisalFormId, "view");
             $(this).parent().parent().parent().children().click();
             $(window).scrollTop(0);
             $(".modal-body").scrollTop(0);
@@ -1217,7 +1220,8 @@ var appraisalStatusFn = function (nameArea, id) {
             "appraisal_year": $("#YearList").val(),
             "appraisal_type_id": $("#appraisalType").val(),
             "emp_code": ($("#empName_id").val() == "" ? "" : $("#empName_id").val()),
-            "position_id": ($("#Position_id").val() == "" ? "" : $("#Position_id").val())
+            "position_id": ($("#Position_id").val() == "" ? "" : $("#Position_id").val()),
+            "appraisal_form_id": $("#appraisalForm").val()
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
@@ -2173,14 +2177,14 @@ var createTemplateAssignmentFn = function (data) {
 };
 
 var check_appraisalLevel;
-var getTemplateFn = function (emp_result_id) {
+var getTemplateFn = function (emp_result_id, appraisal_form_id) {
 
     if ($("#appraisalType").val() == 1) {
         check_appraisalLevel = $("#appraisalLevel").val();
     } else if ($("#appraisalType").val() == 2) {
         check_appraisalLevel = $("#appraisalLevelEmp").val();
     }
-
+    
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal_assignment/template",
         type: "GET",
@@ -2195,7 +2199,8 @@ var getTemplateFn = function (emp_result_id) {
 //            'appraisal_type_id': $("#appraisalType").val(),
 //            'appraisal_form': $("#appraisalForm").val(),
             'period_id': $("#period_id").val(),
-            'chief_id_array': chief_id_array
+            'chief_id_array': chief_id_array,
+            "appraisal_form_id": appraisal_form_id
 
         },
         headers: { Authorization: "Bearer " + tokenID.token },
@@ -2355,7 +2360,7 @@ $(document).ready(function () {
                 appraisalStatusFn();
             });
 
-            $("#organization,#YearList,#periodFrequency,#assignFrequency,#period_id").change(function () {
+            $("#organization,#YearList,#periodFrequency,#assignFrequency,#period_id,#appraisalForm").change(function () {
                 appraisalStatusFn();
             });
 
@@ -2512,6 +2517,7 @@ $(document).ready(function () {
                 default_stage_id = [];
                 organization_code = [];
                 chief_id_array = [];
+                globalAppraisalFormId = $("#appraisalForm").val();
                 $("#remark_footer").val("");
                 $(".information").hide();
                 $("#btnAddAnother").show();
@@ -2549,7 +2555,7 @@ $(document).ready(function () {
                     $("#btnSubmit").removeAttr("disabled");
                     $("#btnAddAnother").removeAttr("disabled");
                     //Default end
-                    getTemplateFn();
+                    getTemplateFn("", globalAppraisalFormId);
 
                     $("#slideUpDownStageHistory").hide();
                     $("#slideStageHistory").hide();

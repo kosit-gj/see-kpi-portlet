@@ -299,7 +299,6 @@ var listDataFn = function(data){
 	}
 	
 	$.each(data,function (index, indexEntry) {
-		if(index==0) {indexEntry['edit_flag'] = 0;}
 		if(indexEntry['edit_flag']==0) {
 			edit_flag = "disabled";
 		} else {
