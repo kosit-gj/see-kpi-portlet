@@ -805,15 +805,15 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none; 
   margin: 0; 
 }
-.ui-icon.ui-icon-triangle-1-s{
-	margin-top: 2px;
-}
-.ui-multiselect.ui-widget.ui-state-default.ui-corner-all{
-	padding-bottom: 4px;padding-top: 4px;
-}
-.ui-multiselect-checkboxes.ui-helper-reset input[type=checkbox]{
-	margin-bottom: 5px;margin-right: 5px;margin-top: 0px;
-}
+/* .ui-icon.ui-icon-triangle-1-s{ */
+/* 	margin-top: 2px; */
+/* } */
+/* .ui-multiselect.ui-widget.ui-state-default.ui-corner-all{ */
+/* 	padding-bottom: 4px;padding-top: 4px; */
+/* } */
+/* .ui-multiselect-checkboxes.ui-helper-reset input[type=checkbox]{ */
+/* 	margin-bottom: 5px;margin-right: 5px;margin-top: 0px; */
+/* } */
  #tableBonusAdjustment tbody tr td .input-xs{ 
  	line-height: 10px; height: 15px; font-size: 10px; width: 100px; text-align: right; 
  }

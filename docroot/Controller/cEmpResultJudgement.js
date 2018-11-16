@@ -576,6 +576,10 @@ $(document).ready(function() {
 				dropDrowOrgFn();
 			});
 			
+			$("#AppraisalForm").change(function() {
+				appraisalStatusFn();
+			});
+			
 			$("#Position").multiselect({minWidth:'100%;'}).multiselectfilter();
 			  refreshMultiPosition();
 			
