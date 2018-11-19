@@ -2426,7 +2426,7 @@ var dropDrowActionEditFn = function (stage_id, employee_code, org_code) {
     $.ajax({
 //        url: restfulURL + "/" + serviceName + "/public/appraisal360/edit_action_to",
         url: restfulURL + "/" + serviceName + "/public/emp/adjustment/to_action",
-        type: "POST",
+        type: "GET",
         dataType: "json",
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
