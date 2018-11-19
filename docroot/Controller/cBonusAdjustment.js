@@ -124,11 +124,11 @@ var dropDrowFormTypeFn = function(id){
 		url:restfulURL+"/"+serviceName+"/public/bonus/advance_search/form",
 		type:"get",
 		dataType:"json",
-		async:true,
+		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option value=''>All Form</option>";
+//			htmlOption+="<option value=''>All Form</option>";
 			$.each(data,function(index,indexEntry){
 				htmlOption+="<option value="+indexEntry['appraisal_form_id']+">"+indexEntry['appraisal_form_name']+"</option>";
 			});
@@ -257,8 +257,9 @@ var to_action = function () {
         async: true,
         data: {
         	"stage_id": status,
-        	"emp_code": session_emp_code,
-        	"flag": "emp_result_judgement_flag"
+        	//"flag": "emp_result_judgement_flag",
+        	"appraisal_type_id": 2,
+        	"appraisal_form_id": $("#AppraisalForm").val()
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
@@ -677,6 +678,10 @@ $(document).ready(function() {
 			
 			$("#AppraisalOrgLevel").change(function() {
 				dropDrowOrgFn();
+			});
+			
+			$("#AppraisalForm").change(function() {
+				appraisalStatusFn();
 			});
 			
 			$("#Position").multiselect({minWidth:'100%;'}).multiselectfilter();
