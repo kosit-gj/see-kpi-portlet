@@ -268,6 +268,12 @@ var to_action = function () {
             	htmlOption += "<option value='" + indexEntry['stage_id'] + "'>" + indexEntry['to_action'] + "</option>";
             });
             $("#actionToAssign").html(htmlOption);
+
+            if($("#actionToAssign").val()==null) {
+            	$("#btnConfirm,#btnSubmit").prop("disabled", true);
+            } else {
+            	$("#btnConfirm,#btnSubmit").prop("disabled", false);
+            }
         }
     });
 }
@@ -376,7 +382,7 @@ var listDataFn = function(data){
 		
             htmlHTML += " <tr class=\"control-calculate\">";
             htmlHTML += " <td style=\"text-align: center;\">";
-            htmlHTML += " <input "+edit_flag+" style=\"margin-bottom: 5px;\" type=\"checkbox\" class=\"select-check\" id=\""+indexEntry['emp_result_id']+"\" edit_flag=\""+indexEntry['edit_flag']+"\" style=\"margin-top:-3px;\">";
+            htmlHTML += " <input style=\"margin-bottom: 5px;\" type=\"checkbox\" class=\"select-check\" id=\""+indexEntry['emp_result_id']+"\" edit_flag=\""+indexEntry['edit_flag']+"\" style=\"margin-top:-3px;\">";
             htmlHTML += " </td>";
             htmlHTML += " <td style=\"text-align: center;\">";
             htmlHTML += " "+indexEntry['emp_code']+"";
@@ -450,12 +456,12 @@ var listDataFn = function(data){
 	$("#statusSelectAll").prop('checked', false);
 	$('#statusSelectAll').click(function () {
         if ($('#statusSelectAll').prop('checked')) {
-        	$.each($(".control-calculate").get(),function(index,indexEntry) {
-        		if($(indexEntry).find('.select-check').attr('edit_flag')==1) {
-        			$(indexEntry).find('.select-check').prop('checked', true);
-        		}
-        	});
-//        	$(".select-check").prop('checked', true);
+//        	$.each($(".control-calculate").get(),function(index,indexEntry) {
+//        		if($(indexEntry).find('.select-check').attr('edit_flag')==1) {
+//        			$(indexEntry).find('.select-check').prop('checked', true);
+//        		}
+//        	});
+        	$(".select-check").prop('checked', true);
         } else {
             $(".select-check").prop('checked', false);
         }
@@ -569,7 +575,7 @@ var insertFn = function(type) {
 	
 	var detail = [];
 	$.each($(".control-calculate").get(),function(index,indexEntry){
-		if($(indexEntry).find('.select-check').prop('checked') && $(indexEntry).find('.select-check').attr('edit_flag')==1) {
+		if($(indexEntry).find('.select-check').prop('checked')) {
 			detail.push({
 				emp_result_id		: $(indexEntry).find('.select-check').attr('id'),
 				adjust_b_amount		: $(indexEntry).find('.data-percent').find('.percent').autoNumeric('get'),
@@ -746,11 +752,11 @@ $(document).ready(function() {
 		    });
 		    
 		    $("#btnSubmit").click(function() {
-		    	insertFn(1);
+		    	insertFn(0);
 		    });
 		    
 		    $("#btnConfirm").click(function() {
-		    	insertFn(0);
+		    	insertFn(1);
 		    });
 		    
 		    $("#btnExport").click(function() {

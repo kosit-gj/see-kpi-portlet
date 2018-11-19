@@ -280,6 +280,12 @@ var to_action = function () {
             	htmlOption += "<option value='" + indexEntry['stage_id'] + "'>" + indexEntry['to_action'] + "</option>";
             });
             $("#actionToAssign").html(htmlOption);
+            
+            if($("#actionToAssign").val()==null) {
+            	$("#btnConfirm,#btnSubmit").prop("disabled", true);
+            } else {
+            	$("#btnConfirm,#btnSubmit").prop("disabled", false);
+            }
         }
     });
 }
