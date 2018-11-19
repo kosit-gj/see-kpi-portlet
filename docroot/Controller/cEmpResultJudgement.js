@@ -350,12 +350,12 @@ var listDataFn = function(data){
             htmlHTML += " </td>";
             htmlHTML += " <td class=\"data-percent\">";
             htmlHTML += " <div class=\"float-label-control\">";
-            htmlHTML += " <input "+edit_flag+" type='text'  style=\"text-align: right; min-width: 40px;\" class='form-control input-sm span12 percent numberOnly' total_adjust_result_score='"+indexEntry['result_score1']+"' value='"+indexEntry['percent_adjust']+"'/>";
+            htmlHTML += " <input "+edit_flag+" type='text'  style=\"text-align: right; min-width: 40px;\" class='form-control input-xs span12 percent numberOnly' total_adjust_result_score='"+indexEntry['result_score1']+"' value='"+indexEntry['percent_adjust']+"'/>";
             htmlHTML += " </div>";
             htmlHTML += " </td>";
             htmlHTML += " <td class=\"data-score\">";
             htmlHTML += " <div class=\"float-label-control\">";
-            htmlHTML += " <input "+edit_flag+" type='text'  style=\"text-align: right; min-width: 40px;\" class='form-control input-sm span12 score numberOnly' total_adjust_result_score='"+indexEntry['result_score1']+"' value='"+indexEntry['result_score2']+"'/>";
+            htmlHTML += " <input "+edit_flag+" type='text'  style=\"text-align: right; min-width: 40px;\" class='form-control input-xs span12 score numberOnly' total_adjust_result_score='"+indexEntry['result_score1']+"' value='"+indexEntry['result_score2']+"'/>";
             htmlHTML += " </div>";
             htmlHTML += " </td>";
             htmlHTML += " </tr>";
