@@ -340,18 +340,19 @@ var listDataFn = function(data){
             htmlHTML += " "+indexEntry['status']+"";
             htmlHTML += " </td>";
             htmlHTML += " <td style=\"text-align: right;\">";
-            htmlHTML += " <div class=\"float-label-control\">";
-            htmlHTML += " <input disabled type='number' min=\"0\" style=\"text-align: right; min-width: 40px;\" class='form-control input-sm span12' value='"+indexEntry['result_score1']+"'/>";
-            htmlHTML += " </div>";
+            //htmlHTML += " <div class=\"float-label-control\">";
+            //htmlHTML += " <input disabled type='number' min=\"0\" style=\"text-align: right; min-width: 40px;\" class='form-control input-sm span12' value='"+indexEntry['result_score1']+"'/>";
+            htmlHTML += indexEntry['result_score1'];
+            //htmlHTML += " </div>";
             htmlHTML += " </td>";
             htmlHTML += " <td class=\"data-percent\">";
             htmlHTML += " <div class=\"float-label-control\">";
-            htmlHTML += " <input "+edit_flag+" type='number' min=\"0.00\" max=\"100.00\" style=\"text-align: right; min-width: 40px;\" class='form-control input-sm span12 percent' total_adjust_result_score='"+indexEntry['result_score1']+"' value='"+indexEntry['percent_adjust']+"'/>";
+            htmlHTML += " <input "+edit_flag+" type='text'  style=\"text-align: right; min-width: 40px;\" class='form-control input-sm span12 percent numberOnly' total_adjust_result_score='"+indexEntry['result_score1']+"' value='"+indexEntry['percent_adjust']+"'/>";
             htmlHTML += " </div>";
             htmlHTML += " </td>";
             htmlHTML += " <td class=\"data-score\">";
             htmlHTML += " <div class=\"float-label-control\">";
-            htmlHTML += " <input "+edit_flag+" type='number' min=\"0.00\" max=\"100.00\" style=\"text-align: right; min-width: 40px;\" class='form-control input-sm span12 score' total_adjust_result_score='"+indexEntry['result_score1']+"' value='"+indexEntry['result_score2']+"'/>";
+            htmlHTML += " <input "+edit_flag+" type='text'  style=\"text-align: right; min-width: 40px;\" class='form-control input-sm span12 score numberOnly' total_adjust_result_score='"+indexEntry['result_score1']+"' value='"+indexEntry['result_score2']+"'/>";
             htmlHTML += " </div>";
             htmlHTML += " </td>";
             htmlHTML += " </tr>";
@@ -359,6 +360,15 @@ var listDataFn = function(data){
 	});
 	
 	$("#list_empjudege").html(htmlHTML);
+	$(".numberOnly").autoNumeric('init');
+	$(".numberOnly").autoNumeric('update', {
+		vMin : '0',
+		vMax : '99999999',
+		lZero: 'deny',
+		wEmpty: 'zero',
+		//aSign : ' %',
+		//pSign : 's'
+	});
 	
 	$(".head_adjust").show();
 	$("#statusSelectAll").prop('checked', false);
@@ -391,44 +401,51 @@ var listDataFn = function(data){
 };
 
 var calculatePercentKeyup = function() {
-	$("#adjust_percent").keyup(function() {
+	/*$("#adjust_percent").keyup(function() {
 		if (Number(this.value) > 100) {
 	      this.value = 100;
 	    }
-	});
+	});*/
 	
 	$("#list_empjudege").find('.percent').keyup(function() {
-		if (Number(this.value) > 100) {
+		/*if (Number(this.value) > 100) {
 			this.value = 100;
-		}
-		var percent = this.value;
+		}*/
+		var percent = $(this).autoNumeric('get');
 		var adjust_result_score = Number($(this).attr("total_adjust_result_score"));
 		var total = (percent/100)*adjust_result_score;
 		
-		console.log(total,'percent');
-		$(this).closest('.control-calculate').find('.data-score').find('.score').val(total.toFixed(2));
-		console.log((percent/100)*adjust_result_score);
+		//console.log(total,'percent');
+		//$(this).closest('.control-calculate').find('.data-score').find('.score').val(total.toFixed(2));
+		$(this).closest('.control-calculate').find('.data-score').find('.score').autoNumeric('set', total);
+		//console.log((percent/100)*adjust_result_score);
+		
 	});
 		
 	$("#list_empjudege").find('.score').keyup(function() {
-		var score = Number($(this).val());
+		var score = $(this).autoNumeric('get');
 		var adjust_result_score = Number($(this).attr("total_adjust_result_score"));
 		var total = (score*100)/adjust_result_score;
 		
-		console.log(total,'score');
-		$(this).closest('.control-calculate').find('.data-percent').find('.percent').val(total.toFixed(2));
-		console.log((score*100)/adjust_result_score);
+		//console.log(total,'score');
+		//$(this).closest('.control-calculate').find('.data-percent').find('.percent').val(total.toFixed(2));
+		$(this).closest('.control-calculate').find('.data-percent').find('.percent').autoNumeric('set', total);
+		//console.log((score*100)/adjust_result_score);
+		
 	});
 
 	$("#btnAdjust").click(function() {
-		var adjust_percent = Number($("#adjust_percent").val());
+		//var adjust_percent = Number($("#adjust_percent").val());
+		var adjust_percent = $("#adjust_percent").autoNumeric('get');
 		$.each($(".control-calculate").get(),function(index,indexEntry) {
 //    		if($(indexEntry).find('.select-check').attr('edit_flag')==1) {
-    			$(indexEntry).find(".data-percent").find(".percent").val(adjust_percent);
+    			$(indexEntry).find(".data-percent").find(".percent").autoNumeric('set', adjust_percent);
     			var percent = Number(adjust_percent);
     			var adjust_result_score = Number($(indexEntry).find(".data-percent").find(".percent").attr("total_adjust_result_score"));
     			var total = (percent/100)*adjust_result_score;
-    			$(indexEntry).find('.data-score').find('.score').val(total.toFixed(2));
+    			//$(indexEntry).find('.data-score').find('.score').val(total.toFixed(2));
+    			$(indexEntry).find('.data-score').find('.score').autoNumeric('set', total);
+    			
 //    		}
     	});
 	});
@@ -523,8 +540,8 @@ var insertFn = function() {
 		if($(indexEntry).find('.select-check').prop('checked')) {
 			detail.push({
 				emp_result_id		: $(indexEntry).find('.select-check').attr('id'),
-				percent_adjust		: $(indexEntry).find('.data-percent').find('.percent').val(),
-				adjust_result_score	: $(indexEntry).find('.data-score').find('.score').val(),
+				percent_adjust		: $(indexEntry).find('.data-percent').find('.percent').autoNumeric('get'),
+				adjust_result_score	: $(indexEntry).find('.data-score').find('.score').autoNumeric('get'),
 				edit_flag           : $(indexEntry).find('.select-check').attr('edit_flag')
 			});
 		}
@@ -639,6 +656,17 @@ $(document).ready(function() {
 					}
 		         }       
 		    });
+			$("#adjust_percent").val(100);
+			$("#adjust_percent").autoNumeric('init');
+			$("#adjust_percent").autoNumeric('update', {
+				vMin : '0',
+				vMax : '99999999',
+				lZero: 'deny',
+				wEmpty: 'zero',
+				//aSign : ' %',
+				//pSign : 's'
+			});
+			
 			
 			//Search Start
 		    $("#btnSearchAdvance").click(function () {
