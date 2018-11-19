@@ -992,7 +992,7 @@ input[type=number]::-webkit-outer-spin-button {
 									<div class="position-result-perpage" style="text-align: right;">
 										<div></div>
 										<div class="form-group m-b-none pull-right" style="margin-left: 5px; display: -webkit-box;">
-											%&nbsp;<liferay-ui:message key="adjust-result-score"/>&nbsp;<input type="number" min="0" style="text-align: right; margin-top: 2px; padding-right: 3px;" class="span3 form-control input-sm" id="adjust_percent" name="adjust_percent" value="100">
+											%&nbsp;<liferay-ui:message key="adjust-result-score"/>&nbsp;<input type="text"  style="text-align: right; margin-top: 2px; padding-right: 3px;" class="span3 form-control input-sm" id="adjust_percent" name="adjust_percent" value="100">
 											<button type="button" class="btn btn-info input-sm" name="btnAdjust" id="btnAdjust"><liferay-ui:message key="Adjust"/></button>
 										</div>
 <!-- 										<div class="form-group m-b-none pull-right" style="margin-left: 5px; text-align:right;"> -->
