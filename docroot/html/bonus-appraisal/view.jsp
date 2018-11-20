@@ -323,6 +323,9 @@
 	vertical-align: middle;
 	font-size: 14 px;
 }
+.font-bold {
+    font-weight: bold;
+}
 
 
 .aui .list-data-table .table-bordered th{
@@ -458,8 +461,8 @@
 						style="max-width: none; min-width: 800;margin-bottom: 0px;">
 						<thead>
 							<tr>
-								<th rowspan="2" style="width: 18%; min-width: 100px;"><liferay-ui:message key="level"/></th>
-								<th rowspan="2" style="width: 18%; min-width: 150px;"><liferay-ui:message key="org-name"/></th>
+								<th rowspan="2" style="width: 10%; min-width: 100px;"><liferay-ui:message key="level"/></th>
+								<th rowspan="2" style="width: 26%; min-width: 150px;"><liferay-ui:message key="org-name"/></th>
 								<th colspan="5" style="width: 34%;"><liferay-ui:message key="evaluate-agency"/></th>
 								<th colspan="3" style="width: 30%;"><liferay-ui:message key="evaluate-agency-manager"/></th>
 							</tr>

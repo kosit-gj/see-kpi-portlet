@@ -120,12 +120,11 @@ var getDataFn = function(page,rpp){
 		success : function(response) {
 			
 			globalData = response;
-			if(response.data.status == 200){ 
-				listBonusAppraisal(response['data']);
-				globalData=response;
-				paginationSetUpFn(globalData['current_page'],globalData['last_page'],globalData['last_page']);
+			if(response.status == 200){ 
+				listBonusAppraisal(response);
+				paginationSetUpFn(response.datas.current_page, response.datas.last_page, response.datas.last_page);
 				
-				if(response.data.edit_flag == 1 && response.data.data.length > 0){
+				if(response.edit_flag == 1 && response.datas.data.length > 0){
 					$("#btn_search_recalculate").prop("disabled", false);
 					$("#btn_save_bonus_appraisal").prop("disabled", false);
 					$("#btn_cancel_bonus_appraisal").prop("disabled", false);
@@ -133,10 +132,10 @@ var getDataFn = function(page,rpp){
 					$("#btn_search_recalculate").prop("disabled", true);
 					$("#btn_save_bonus_appraisal").prop("disabled", true);
 					$("#btn_cancel_bonus_appraisal").prop("disabled", true);
-					callFlashSlide(response.data.message);
+					callFlashSlide(response.message);
 				}
 			} else {
-				callFlashSlide(response.data.message);
+				callFlashSlide(response.message);
 			}
 		}
 	});
@@ -175,29 +174,26 @@ var getDataReCalculateFn = function(){
 			},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
-		success : function(data) {
-			listBonusAppraisal(data['data']);
-			globalData=data;
-			paginationSetUpFn(globalData['current_page'],globalData['last_page'],globalData['last_page']);
+		success : function(response) {
+			listBonusAppraisal(response);
+			globalData=response;
+			paginationSetUpFn(response.datas.current_page, response.datas.last_page, response.datas.last_page);
 		}
 	});
 	
 	
 };
 //--------  GetData End
-var listBonusAppraisal = function(data){
+var listBonusAppraisal = function(response){
 	var html ="";
 	
-	$.each(data.data,function(index,indexEntry) {
+	$.each(response.datas.data,function(index,indexEntry) {
 
-		html += scriptGenerateHtmlListBonusAppraisalFn(indexEntry,"",data.edit_flag);
-		//console.log(indexEntry);
-		$.each(indexEntry.departments,function(index2,indexEntry2) {
-			//console.log(indexEntry2);
-			
-			html += scriptGenerateHtmlListBonusAppraisalFn(indexEntry2,"&emsp;",data.edit_flag);
-			
-		});
+		if(indexEntry.org_code == indexEntry.parent_org_group){
+			html += scriptGenerateHtmlListBonusAppraisalFn(indexEntry,"",response.edit_flag);
+		} else {
+			html += scriptGenerateHtmlListBonusAppraisalFn(indexEntry,"&emsp;",response.edit_flag);
+		}
 		
 	});
 
@@ -216,8 +212,12 @@ var listBonusAppraisal = function(data){
 };
 
 var scriptGenerateHtmlListBonusAppraisalFn = function(indexEntry,sub_departments,editFlag){
+	var fontBold = "";
+	if(sub_departments == ""){
+		fontBold = "font-bold";
+	}
 	var html ="";
-	html += "<tr class='rowSearch' " +
+	html += "<tr class='rowSearch "+fontBold+"' " +
 			"org_result_judgement_id='"+indexEntry.org_result_judgement_id+"' " +
 			"emp_result_judgement_id='"+ notNullTextFn(indexEntry.emp_result_judgement_id)+"' " +
 			"edit_flag='"+editFlag+"' >";
