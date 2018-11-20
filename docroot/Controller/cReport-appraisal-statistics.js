@@ -39,6 +39,7 @@ $(document).ready(function () {
 
 });
 
+var json_name = "";
 var getDataFn = function () {
     $("body").mLoading('show'); //Loading
     var AppraisalYear = $("#AppraisalYear").val();
@@ -47,7 +48,15 @@ var getDataFn = function () {
     var output_type = $("#output_type").val();
     var parameter = {};
     var template_name = "";
-
+    json_name = "";
+    
+    generateJsonFn(AppraisalPeriod,AppraisalYear,organization);
+    
+    if(json_name =="" ||json_name == null){
+    	console.log("no data report")
+    	return false;
+    }
+    	
     if (organization == '') {
         $("body").mLoading('hide'); //Loading
         callFlashSlide(Liferay.Language.get("organization-is-require"));
@@ -69,7 +78,7 @@ var getDataFn = function () {
 //    }
 
     var data = JSON.stringify(parameter);
-    var url_report_jasper = restfulURL + "/" + serviceName + "/public/generateAuth?template_name=" + template_name + "&token=" + tokenID.token + "&template_format=" + output_type + "&used_connection=1&inline=1&data=" + data;
+    var url_report_jasper = restfulURL + "/" + serviceName + "/public/generateAuth?template_name=" + template_name + "&token=" + tokenID.token + "&template_format=" + output_type + "&used_connection=1&inline=1&data=" + data + "&json_name=" +json_name;
     console.log(url_report_jasper);
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         window.open(url_report_jasper, "_blank");
@@ -79,6 +88,25 @@ var getDataFn = function () {
     $("body").mLoading('hide'); //Loading
 };
 
+var generateJsonFn = function (period_id,appraisal_year,org_id) {
+    $.ajax({
+        url: restfulURL + "/" + serviceName + "/public/bonus/report",
+        type: "get",
+        dataType: "json",
+        data: {
+            "period_id": period_id,
+            "appraisal_year": appraisal_year,
+            "org_id": '"'+org_id+'"'
+        },
+        async: false,
+        headers: { Authorization: "Bearer " + tokenID.token },
+        success: function (data) {
+        	if(data['status']=='200'){
+        		json_name= data['data'];
+        	}
+        }
+    });
+}
 
 var dropDrowYearListFn = function () {
     $.ajax({
