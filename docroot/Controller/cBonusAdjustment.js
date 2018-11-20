@@ -428,7 +428,7 @@ var listDataFn = function(data){
             if(indexEntry['edit_flag']==1) {
             	htmlHTML += " <td class=\"data-score\">";
             	htmlHTML += "	<div class=\"float-label-control \">";
-                htmlHTML += "		<input type=\"text\" class=\"form-control input-xs span12 score numberOnly\" total_adjust_result_score='"+indexEntry['s_amount']+"' value='"+indexEntry['adjust_b_rate']+"'>";
+                htmlHTML += "		<input disabled type=\"text\" class=\"form-control input-xs span12 score numberOnly\" total_adjust_result_score='"+indexEntry['s_amount']+"' value='"+indexEntry['adjust_b_rate']+"'>";
                 htmlHTML += "	</div>";
                 htmlHTML += " </td>";
     		} else {
