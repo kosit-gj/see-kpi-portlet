@@ -461,19 +461,19 @@ var listDataFn = function (data) {
                 if ($("#embed_appraisal_type_id").val() == 2) {
                 	htmlHTML += "	<td class='object-center' style='text-align:center;'><input style=\"margin-bottom: 5px;\" class='action_emp' id='id-" + itemEntry['emp_id'] + "' type='checkbox' value=" + itemEntry['emp_id'] + "-" + itemEntry['emp_code'] + "-" + itemEntry['org_id'] + "-" + itemEntry['period_id'] + "-" + itemEntry['default_stage_id'] + " data-id='" + itemEntry['emp_result_id'] + "-" + itemEntry['stage_id'] + "'></td>";
 	            } else if ($("#embed_appraisal_type_id").val() == 1) {
-	            	htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign'style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
+	            	htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign action_emp' data-id='"+itemEntry.emp_result_id+"' style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
 	            }
             } else {
 
                 if ($("#embed_appraisal_type_id").val() == 2) {
 	                	if(itemEntry['assigned']==0){
-	                	htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign'style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
+	                	htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign action_emp' data-id='"+itemEntry.emp_result_id+"' style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
 	                	}else{          
 	                    htmlHTML += "	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-" + itemEntry['emp_id'] + "' type='checkbox' value='" + itemEntry['emp_id'] + "-" + itemEntry['emp_code'] + "-" + itemEntry['org_id'] + "-" + itemEntry['period_id'] + "-" + itemEntry['default_stage_id'] + "-" + "' data-chief-emp='"+itemEntry['chief_id_array']+"'></td>";
 	                	}
                 } else if ($("#embed_appraisal_type_id").val() == 1) {
                 		if(itemEntry['assigned']==0){
-                        htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign'style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
+                        htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign action_emp' data-id='"+itemEntry.emp_result_id+"' style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
                         }else{ 
                         htmlHTML += "	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-" + itemEntry['org_id'] + "' type='checkbox' value='" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "--" + itemEntry['default_stage_id'] + "-/" + itemEntry['org_code'] + "' data-chief-emp='"+itemEntry['chief_id_array']+"'></td>";
                         } //alert(itemEntry['org_id']);
@@ -1854,7 +1854,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
                 htmlTemplateQuantity += "<td style=\"width:5%;text-align:right;padding-right: 10px;\">";
                 htmlTemplateQuantity += "<input class='input-sm-small numberOnly addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' disabled value='" + addCommas(notNullFn(indexEntry['actual_value'])) + "'></td>";
                 htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\">";
-                htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-weight' class='id-" + indexEntry['structure_id'] + "-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly addComma weight_quantity_chief'  type='text'></td>";
+                htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-weight' class='id-" + indexEntry['structure_id'] + "-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly addComma weight_quantity_chief' type='text' value='"+addCommas(indexEntry['weight_percent_chief'])+"'></td>";
             }
 
             htmlTemplateQuantity += "</tr>";
