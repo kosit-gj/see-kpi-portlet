@@ -1006,7 +1006,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
         htmlTemplateQuantity += "<td>" + indexEntry['uom_name'] + "</td>";
         htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore addComma\" id=\"forecast-" + indexEntry['item_result_id'] + "\" name=\"forecast-" + indexEntry['item_result_id'] + "\" value=" + addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(2)) + "></td>";
         //htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly \" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
-        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>";
+        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;' id=\"actual_value-" + indexEntry['item_result_id'] + "\">" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>"; //# 004
         if (data['threshold'] == 1) {
             htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['score']))) + "</td>";
         } else {
@@ -2527,9 +2527,8 @@ var saveAppraisalIndividualFn = function ()
         appraisal += "\"item_result_id\":\"" + item_result_id + "\",";
         if (typeScore == "forecast") {
             appraisal += "\"forecast_value\":\"" + removeComma($(indexEntry).val()) + "\",";
-            appraisal += "\"actual_value\":\"\"";
+            appraisal+="\"actual_value\":\""+($("#actual_value-"+item_result_id).val() != undefined ? $("#actual_value-"+item_result_id).text() : $("#actual_value-"+item_result_id).val() )+"\","; // #004
             //appraisal+="\"actual_value\":\""+$("#actual-"+item_result_id).val()+"\",";
-
         } else if (typeScore == "competencyScore") {
             appraisal += "\"forecast_value\":\"\",";
             appraisal += "\"actual_value\":\"\",";
