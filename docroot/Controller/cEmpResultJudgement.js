@@ -164,7 +164,7 @@ var refreshMultiPosition = function() {
 	$("#Position").multiselect('refresh').multiselectfilter();
 	$("#Position_ms").css({'width':'100%'});
 	$(".ui-icon-check,.ui-icon-closethick,.ui-icon-circle-close").css({'margin-top':'3px'});
-	$('input[name=multiselect_Position]').css({'margin-bottom':'5px'});
+	$('input[name=multiselect_Position]').css({'margin-bottom':'6px','margin-right':'3px'});
 }
 var appraisalStatusFn = function () {
     $.ajax({
@@ -608,6 +608,11 @@ $(document).ready(function() {
 				appraisalStatusFn();
 			});
 			
+			$("#organization").change(function() {
+				dropDrowPositionFn();
+				refreshMultiPosition();
+			});
+			
 			$("#Position").multiselect({minWidth:'100%;'}).multiselectfilter();
 			  refreshMultiPosition();
 			
@@ -671,12 +676,6 @@ $(document).ready(function() {
 				wEmpty: 'zero',
 				//aSign : ' %',
 				//pSign : 's'
-			});
-			
-			
-			$("#organization").change(function() {
-				dropDrowPositionFn();
-				refreshMultiPosition();
 			});
 			
 			//Search Start

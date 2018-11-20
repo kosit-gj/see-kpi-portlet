@@ -146,7 +146,10 @@ var dropDrowPositionFn = function(id){
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
-		//data:{"Position":Position},
+		data:{
+			"organization_id" : $("#organization").val(),
+			"employee_id" : $("#EmpName_id").val()
+		},
 		success:function(data){
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
@@ -690,6 +693,11 @@ $(document).ready(function() {
 				appraisalStatusFn();
 			});
 			
+			$("#organization").change(function() {
+				dropDrowPositionFn();
+				refreshMultiPosition();
+			});
+			
 			$("#Position").multiselect({minWidth:'100%;'}).multiselectfilter();
 			  refreshMultiPosition();
 			
@@ -739,6 +747,9 @@ $(document).ready(function() {
 					} else {
 						$("#EmpName_id").val("");
 					}
+					
+					dropDrowPositionFn();
+					refreshMultiPosition();
 		         }       
 		    });
 			
