@@ -53,7 +53,7 @@ var getDataFn = function () {
     generateJsonFn(AppraisalPeriod,AppraisalYear,organization);
     
     if(json_name =="" ||json_name == null){
-    	console.log("no data report")
+    	console.log("don't have json file.")
     	return false;
     }
     	
@@ -103,6 +103,9 @@ var generateJsonFn = function (period_id,appraisal_year,org_id) {
         success: function (data) {
         	if(data['status']=='200'){
         		json_name= data['data'];
+        	}
+        	else if(data['status']=='400'){
+        		console.log(data['data']);
         	}
         }
     });
