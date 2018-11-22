@@ -71,6 +71,9 @@ var getDataFn = function(page,rpp){
 			if(data["email_reminder_flag"] == 1){$("#emailReminderOn").prop("checked", true);}
 			else if(data["email_reminder_flag"] == 0){$("#emailReminderOff").prop("checked", true);}
 			
+			if(data["allow_input_actual"] == 1){$("#optionsShowActualOn").prop("checked", true);}
+			else if(data["allow_input_actual"] == 0){$("#optionsShowActualOff").prop("checked", true);}
+			
 			
 			if(data["item_result_log"] == 1){$("#optionsEnableAssignmentLoggingOn").prop("checked", true);}
 			else if(data["item_result_log"] == 0){$("#optionsEnableAssignmentLoggingOff").prop("checked", true);}
@@ -80,6 +83,15 @@ var getDataFn = function(page,rpp){
 			} else {
 				$("#optionsShowGrandTotalOff").prop("checked", true);
 			}
+			
+			if(data["entity_type_resorting"] != 0){
+				$("#entityType").val(data["entity_type_resorting"])
+			}
+			else{
+				$("#entityType").val(1)
+			}
+				
+			
 			
 			$("#listThemeColor").html(htmlTheamColor);
 			jscolor.installByClassName("jscolor");
@@ -178,6 +190,7 @@ var clearFn = function() {
 	$("#workingSystem").val(galbalDataSystemcon["nof_date_bonus"]);
 	$("#salaryRaiseFrequency").val(galbalDataSystemcon["salary_raise_frequency_id"]);
 	$("#current_appraisal_year").val(galbalDataSystemcon["current_appraisal_year"]);
+	$("#entityType").val(galbalDataSystemcon["entity_type_resorting"]);
 	
 	if(galbalDataSystemcon["raise_type"] == 1){$("#raiseFixAmount").prop("checked", true);}
 	else if(galbalDataSystemcon["raise_type"] == 2){$("#raisePercentage").prop("checked", true);}
@@ -189,6 +202,9 @@ var clearFn = function() {
 	else if(galbalDataSystemcon["threshold"] == 0){$("#thresholdOff").prop("checked", true);}
 	if(galbalDataSystemcon["email_reminder_flag"] == 1){$("#emailReminderOn").prop("checked", true);}
 	else if(galbalDataSystemcon["email_reminder_flag"] == 0){$("#emailReminderOff").prop("checked", true);}
+	
+	if(galbalDataSystemcon["allow_input_actual"] == 1){$("#optionsShowActualOn").prop("checked", true);}
+	else if(galbalDataSystemcon["allow_input_actual"] == 0){$("#optionsShowActualOff").prop("checked", true);}
 
 	var htmlTheamColor = "<button class=\"btn jscolor {valueElement:null,value:'"+galbalDataSystemcon["theme_color"]+"',valueElement:'themeColor',onFineChange:'setThemeColorFn(this)'} \" style='width:70px; height:26px;'></button>";
 	$("#listThemeColor").html(htmlTheamColor);
@@ -258,6 +274,7 @@ var updateFn = function() {
 	var emailReminder=0;
 	var item_result_log=0;
 	var show_grand_total_flag=0;
+	var allow_input_actual=0;
 	if($("#raiseFixAmount:checked").is(":checked")){raiseType=1;}
 	else if($("#raisePercentage:checked").is(":checked")){raiseType=2;}
 	else if($("#raiseSalaryStructureTable:checked").is(":checked")){raiseType=3;}
@@ -282,6 +299,12 @@ var updateFn = function() {
 		show_grand_total_flag = 0;
 	}
 	
+	if($("#optionsShowActualOn:checked").is(":checked")) {
+		allow_input_actual = 1;
+	} else if($("#optionsShowActualOff:checked").is(":checked")) {
+		allow_input_actual = 0;
+	}
+	
 	
 	$.ajax({
 		url:restfulURL+restfulPathSystemcon,
@@ -298,6 +321,8 @@ var updateFn = function() {
 			"nof_date_bonus"                    :  $("#workingSystem").val(),
 			"salary_raise_frequency_id"         :  $("#salaryRaiseFrequency").val(),
 			"current_appraisal_year"            :  $("#current_appraisal_year").val(),
+			"entity_type_resorting"             :  $("#entityType").val(),
+			"allow_input_actual"			    :  allow_input_actual,
 			"raise_type"			            :  raiseType,
 			"result_type"			            :  resultType,
 			"threshold"							:  threshold,

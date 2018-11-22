@@ -250,6 +250,20 @@ plid = layout.getPlid();
 									</div>
 
                                  </div> 
+                                   
+                                 <div class="row-fluid">
+							
+									<div class="span5 object-right" >
+									<label class='text-label'>  Entity Type Sorting &nbsp;:</label>
+									
+									</div>
+									<div class="span3" id="entityTypeSystem">
+										<select id="entityType" class="input form-control input-sm span12" data-toggle="tooltip" title="Entity Type" name="entityType">
+										<option value="1">Ascending</option>
+										<option value="2">Descending</option>
+										</select>
+									</div>
+                                 </div> 
                                  <div class="row-fluid">
 							
 									<div class="span5 object-right" >
@@ -389,6 +403,21 @@ plid = layout.getPlid();
 										</label>
 										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
 											<input type="radio" name="optionsShowGrandTotal" id="optionsShowGrandTotalOff" value="0" checked='checked'>
+											  No 
+										</label>
+									</div>
+                                 </div>
+                                      <div  class="row-fluid">
+                                 	<div class="span5 object-right" >
+										<label class='text-label'> Allow Input Actual &nbsp;:</label>
+									</div>
+									<div class="span5">
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 20px;">
+											<input type="radio" name="optionsShowActual" id="optionsShowActualOn" value="1">
+											  Yes
+										</label>
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+											<input type="radio" name="optionsShowActual" id="optionsShowActualOff" value="0" checked='checked'>
 											  No 
 										</label>
 									</div>
