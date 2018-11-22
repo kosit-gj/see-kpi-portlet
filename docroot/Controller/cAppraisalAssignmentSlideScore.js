@@ -146,7 +146,7 @@ var setDataToTemplateFn = function (data, actionType) {
     $("#listDataStageHistory").html(htmlStage);
     $("#slideUpDownStageHistory").show();
 
-    dropDrowActionEditFn(head['stage_id'], head['emp_code'], head['org_code']);
+//    dropDrowActionEditFn(head['stage_id'], head['emp_code'], head['org_code']);
 
     //set premission button management start
     if (head['status'] == 'Accepted' || actionType == 'view') {
@@ -252,16 +252,16 @@ var setDataToTemplateFn = function (data, actionType) {
     });
 }
 
-var findOneFn = function (id, appraisal_form_id, actionType) {
+var findOneFn = function (id, appraisal_form_id, actionType, stage_id) {
     //get structure
-    getTemplateFn(id, appraisal_form_id);
+    getTemplateFn(id, appraisal_form_id, stage_id);
     //get data for structure
 
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal_assignment/" + id,
         type: "get",
         dataType: "json",
-        async: false,
+        async: true,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
             //console.log(data['head'].length);
@@ -297,11 +297,6 @@ var findOneFn = function (id, appraisal_form_id, actionType) {
 
                 }
 
-                if ($("#actionAssign").val() == null) {
-                    $("#btnSubmit").attr("disabled", "disabled");
-                } else {
-                    $("#btnSubmit").removeAttr("disabled");
-                }
             } else {
                 callFlashSlide($(".lt-data-is-empty").val());
                 return false;
@@ -335,7 +330,7 @@ var getDataFn = function (page, rpp) {
         url: restfulURL + "/" + serviceName + "/public/appraisal_assignment",
         type: "get",
         dataType: "json",
-        async: false,
+        async: true,
         headers: { Authorization: "Bearer " + tokenID.token },
         data: {
             "page": page,
@@ -372,12 +367,13 @@ var deleteFn = function (id) {
             if (data['status'] == 200) {
 
                 callFlashSlide($(".lt-delete-successfully").val());
+                appraisalStatusFn();
                 getDataFn($("#pageNumber").val(), $("#rpp").val());
                 $("#confrimModal").modal('hide');
 
             } else if (data['status'] == "400") {
-
-                callFlashSlide(validationFn(data), "error");
+            	callFlashSlide(data['data'], "error");
+//                callFlashSlide(validationFn(data), "error");
 
             }
         }
@@ -461,7 +457,8 @@ var listDataFn = function (data) {
                 if ($("#embed_appraisal_type_id").val() == 2) {
                 	htmlHTML += "	<td class='object-center' style='text-align:center;'><input style=\"margin-bottom: 5px;\" class='action_emp' id='id-" + itemEntry['emp_id'] + "' type='checkbox' value=" + itemEntry['emp_id'] + "-" + itemEntry['emp_code'] + "-" + itemEntry['org_id'] + "-" + itemEntry['period_id'] + "-" + itemEntry['default_stage_id'] + " data-id='" + itemEntry['emp_result_id'] + "-" + itemEntry['stage_id'] + "'></td>";
 	            } else if ($("#embed_appraisal_type_id").val() == 1) {
-	            	htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign action_emp' data-id='"+itemEntry.emp_result_id+"' style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
+//	            	htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign action_emp' data-id='"+itemEntry.emp_result_id+"' style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
+	            	htmlHTML += "	<td class='object-center' style='text-align:center;'><input style=\"margin-bottom: 5px;\" class='action_emp' id='id-" + itemEntry['org_id'] + "' type='checkbox' value=" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "--" + itemEntry['default_stage_id'] + "-/" + itemEntry['org_code'] + " data-id='" + itemEntry['emp_result_id'] + "-" + itemEntry['stage_id'] + "'></td>";
 	            }
             } else {
 
@@ -509,14 +506,27 @@ var listDataFn = function (data) {
             htmlHTML += "  <td style=\"text-align:center\">";
 
             if (index != 'p0') {
-                //itemEntry['status']
             	if(itemEntry['chief_id_array']!=undefined) {
-            		itemEntry['chief_id_array']
             		var data_chief_emp = "data-chief-emp='"+itemEntry['chief_id_array']+"' ";
             	} else {
             		var data_chief_emp = "data-chief-emp='' ";
             	}
             	
+            	if (itemEntry['edit_flag']==1 && itemEntry['delete_flag']==1) {
+            		//edit delete
+            		htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" <button "+data_chief_emp+" class='btn btn-warning btn-small btn-gear edit' data-stage='"+itemEntry['stage_id']+"' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'>" + $(".lt-edit").val() + "</button>&nbsp;<button id='del-" + itemEntry['emp_id'] + "' class='btn btn-danger btn-small btn-gear del'>" + $(".lt-delete").val() + "</button>\"></i>";
+            	} else if(itemEntry['edit_flag']==1 && itemEntry['delete_flag']==0) {
+            		//edit
+            		htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" <button "+data_chief_emp+" class='btn btn-warning btn-small btn-gear edit' data-stage='"+itemEntry['stage_id']+"' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'>" + $(".lt-edit").val() + "\"></i>";
+            	} else if(itemEntry['edit_flag']==0 && itemEntry['delete_flag']==1) {
+            		//delete
+            		htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" <button id='del-" + itemEntry['emp_id'] + "' class='btn btn-danger btn-small btn-gear del'>" + $(".lt-delete").val() + "</button>\"></i>";
+            	} else {
+            		// view
+            		htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" <button "+data_chief_emp+" class='btn btn-info btn-small btn-gear view' data-stage='"+itemEntry['stage_id']+"' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'>" + $(".lt-view").val() + "\"></i>";
+            	}
+            	
+            	/*
                 if (is_hr == 1 && itemEntry['status'] == 'Accepted') {
                     //htmlHTML+="  <i title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button class='btn btn-info btn-small btn-gear view' id='view-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;View&lt;/button&gt;   &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+itemEntry['emp_id']+"' data-target=#addModalRule data-toggle='modal'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+itemEntry['emp_id']+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\"></i>";
                     htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" &lt;button "+data_chief_emp+" class='btn btn-info btn-small btn-gear view' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-view").val() + "\"></i>";
@@ -538,6 +548,7 @@ var listDataFn = function (data) {
                 } else if (is_hr == 0 || is_self_assign == 0) {
                     htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" &lt;button "+data_chief_emp+" class='btn btn-info btn-small btn-gear view' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'&gt;" + $(".lt-view").val() + "\"></i>";
                 }
+                */
 
             }
             htmlHTML += "  </td>";
@@ -677,9 +688,10 @@ var listDataFn = function (data) {
             org_id_to_assign = edit[2];
             organization_code = edit[3];
             empldoyees_code = edit[4];
-            globalAppraisalFormId = null;
+            globalAppraisalFormId = $("#embed_appraisal_form").val();
             chief_id_array = [];
             chief_id_array.push($(this).attr('data-chief-emp'));
+            var current_stage_id = $(this).attr('data-stage');
 
             sessionStorage.setItem('is_coporate_kpi', $("#is_coporate_kpi-" + id).val());
 
@@ -694,7 +706,7 @@ var listDataFn = function (data) {
                 var emp_result_id = $(this).parent().parent().parent().parent().children().eq(2).children().val();
                 var period_id = $(this).parent().parent().parent().parent().children().eq(3).children().val();
                 $("#period_id_edit").val(period_id);
-                findOneFn(emp_result_id, globalAppraisalFormId, "");
+                findOneFn(emp_result_id, globalAppraisalFormId, "", current_stage_id);
                 $(this).parent().parent().parent().children().click();
                 $(window).scrollTop(0);
                 $(".modal-body").scrollTop(0);
@@ -708,14 +720,15 @@ var listDataFn = function (data) {
             org_id_to_assign = view[2];
             organization_code = view[3];
             empldoyees_code = view[4];
-            globalAppraisalFormId = null;
+            globalAppraisalFormId = $("#embed_appraisal_form").val();
             chief_id_array = [];
             chief_id_array.push($(this).attr('data-chief-emp'));
+            var current_stage_id = $(this).attr('data-stage');
 //            var emp_result_id = $(this).parent().parent().parent().parent().children().eq(1).children().val();
             var emp_result_id = $(this).closest('tr').find('.action_emp').attr('data-id').split('-')[0];
             var period_id = $(this).parent().parent().parent().parent().children().eq(2).children().val();
             $("#period_id_edit").val(period_id);
-            findOneFn(emp_result_id, globalAppraisalFormId, "view");
+            findOneFn(emp_result_id, globalAppraisalFormId, "view", current_stage_id);
             $(this).parent().parent().parent().children().click();
             $(window).scrollTop(0);
             $(".modal-body").scrollTop(0);
@@ -1480,36 +1493,64 @@ var dropDrowActionFn = function (employee_code) {
     });
 }
 
-var dropDrowActionEditFn = function (paramStageID, employee_code, org_code) {
-    $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/appraisal_assignment/edit_action_to",
-        type: "POST",
-        dataType: "json",
-        async: false,
-        headers: { Authorization: "Bearer " + tokenID.token },
-        data: { "appraisal_type_id": $("#embed_appraisal_type_id").val(), "stage_id": paramStageID, "emp_code": employee_code, "org_code": org_code },
-        success: function (data) {
-            var htmlOption = "";
-            $.each(data, function (index, indexEntry) {
-                if (id == indexEntry['stage_id']) {
-                    htmlOption += "<option selected='selected' value=" + indexEntry['stage_id'] + ">" + indexEntry['to_action'] + "</option>";
-                } else {
-                    htmlOption += "<option value=" + indexEntry['stage_id'] + ">" + indexEntry['to_action'] + "</option>";
-                }
-            });
-            $("#actionAssign").html(htmlOption);
-        }
-    });
+var dropDrowActionEditFn = function (data/*paramStageID, employee_code, org_code*/) {
+     var htmlOption = "";
+ 	  $.each(data, function (index, indexEntry) {
+ 		  htmlOption += "<option value=" + indexEntry['stage_id'] + ">" + indexEntry['to_action'] + "</option>";
+ 	  });
+ 	  $("#actionAssign").html(htmlOption);
+      if ($("#actionAssign").val() == null) {
+          $("#btnSubmit").attr("disabled", "disabled");
+      } else {
+          $("#btnSubmit").removeAttr("disabled");
+      }
+//    $.ajax({
+////        url: restfulURL + "/" + serviceName + "/public/appraisal_assignment/edit_action_to",
+////        type: "POST",
+//    	url: restfulURL + "/" + serviceName + "/public/emp/adjustment/to_action",
+//    	type: "get",
+//        dataType: "json",
+//        async: true,
+//        headers: { Authorization: "Bearer " + tokenID.token },
+//        data: { 
+//        	"appraisal_type_id": $("#embed_appraisal_type_id").val(), 
+//        	"stage_id": paramStageID,
+//        	"appraisal_form_id": $("#embed_appraisal_form").val(),
+//        	"flag": "assignment_flag"
+////        	"emp_code": employee_code, 
+////        	"org_code": org_code 
+//        },
+//        success: function (data) {
+//            var htmlOption = "";
+//            $.each(data, function (index, indexEntry) {
+//                if (id == indexEntry['stage_id']) {
+//                    htmlOption += "<option selected='selected' value=" + indexEntry['stage_id'] + ">" + indexEntry['to_action'] + "</option>";
+//                } else {
+//                    htmlOption += "<option value=" + indexEntry['stage_id'] + ">" + indexEntry['to_action'] + "</option>";
+//                }
+//            });
+//            $("#actionAssign").html(htmlOption);
+//        }
+//    });
 }
 
 var dropDrowActionEditFn2 = function (paramStageID, employee_code, org_code) {
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/appraisal_assignment/edit_action_to",
-        type: "POST",
+//        url: restfulURL + "/" + serviceName + "/public/appraisal_assignment/edit_action_to",
+//        type: "POST",
+    	url: restfulURL + "/" + serviceName + "/public/emp/adjustment/to_action",
+    	type: "get",
         dataType: "json",
-        async: false,
+        async: true,
         headers: { Authorization: "Bearer " + tokenID.token },
-        data: { "appraisal_type_id": $("#embed_appraisal_type_id").val(), "stage_id": paramStageID, "emp_code": employee_code, "org_code": org_code },
+        data: { 
+        	"appraisal_type_id": $("#embed_appraisal_type_id").val(), 
+        	"stage_id": paramStageID,
+        	"appraisal_form_id": $("#embed_appraisal_form").val(),
+        	"flag": "assignment_flag"
+//        	"emp_code": employee_code, 
+//        	"org_code": org_code
+        },
         success: function (data) {
             var htmlOption = "";
             $.each(data, function (index, indexEntry) {
@@ -2173,16 +2214,22 @@ var createTemplateAssignmentFn = function (data) {
         $(".totalWeight").show();
         $(".grandTotalWeight").show();
     }
-
 };
 
 var check_appraisalLevel;
-var getTemplateFn = function (emp_result_id, appraisal_form_id) {
+var getTemplateFn = function (emp_result_id, appraisal_form_id, stage_id) {
 
     if ($("#appraisalType").val() == 1) {
         check_appraisalLevel = $("#appraisalLevel").val();
     } else if ($("#appraisalType").val() == 2) {
         check_appraisalLevel = $("#appraisalLevelEmp").val();
+    }
+    
+    var stage = {
+    	"appraisal_type_id": $("#embed_appraisal_type_id").val(), 
+    	"stage_id": stage_id,
+    	"appraisal_form_id": $("#embed_appraisal_form").val(),
+    	"flag": "assignment_flag"
     }
     
     $.ajax({
@@ -2200,14 +2247,14 @@ var getTemplateFn = function (emp_result_id, appraisal_form_id) {
 //            'appraisal_form': $("#appraisalForm").val(),
             'period_id': $("#period_id").val(),
             'chief_id_array': chief_id_array,
-            "appraisal_form_id": appraisal_form_id
-
+            "appraisal_form_id": appraisal_form_id,
+            "obj_stage": stage
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
 
             createTemplateAssignmentFn(data);
-
+            dropDrowActionEditFn(data['to_action']);
             //SET FIXED HEADER 
         }
     });
@@ -2555,11 +2602,11 @@ $(document).ready(function () {
                     $("#btnSubmit").removeAttr("disabled");
                     $("#btnAddAnother").removeAttr("disabled");
                     //Default end
-                    getTemplateFn("", globalAppraisalFormId);
+                    getTemplateFn("", globalAppraisalFormId, default_stage_id[0]);
 
                     $("#slideUpDownStageHistory").hide();
                     $("#slideStageHistory").hide();
-                    dropDrowActionEditFn(default_stage_id[0], empldoyees_code[0], organization_code[0]);
+//                    dropDrowActionEditFn(default_stage_id[0], empldoyees_code[0], organization_code[0]);
                     //check assignment if reject  remark is require.
                     $("#actionAssign").off("change");
                     $("#actionAssign").on("change", function () {
