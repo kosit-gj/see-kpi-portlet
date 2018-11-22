@@ -202,7 +202,7 @@ var listBonusAppraisal = function(response){
 	scriptDataToggleFn();
 	var option ={
 			vMin : '0',
-			vMax : '1000',
+			vMax : '100',
 			lZero: 'deny',
 			wEmpty: 'zero',
 			//aSign : ' %',
@@ -214,7 +214,7 @@ var listBonusAppraisal = function(response){
 var scriptGenerateHtmlListBonusAppraisalFn = function(indexEntry,sub_departments,editFlag){
 	var fontBold = "";
 	if(sub_departments == ""){
-		fontBold = "font-bold";
+		fontBold = "font-bold row-darker";
 	}
 	var html ="";
 	html += "<tr class='rowSearch "+fontBold+"' " +

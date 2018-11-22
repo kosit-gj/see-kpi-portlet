@@ -351,7 +351,16 @@
 .aui .inputNetSalary{text-align: right;}
 .aui #confrimModal .form-horizontal .control-label{ width: 250px;}
 .aui #confrimModal .form-horizontal .controls{ margin-left: 250px;}
-.aui #btnConfirmOK , .aui #btnConfirmNO{width: 90px;}
+.aui #btnConfirmOK , .aui #btnConfirmNO{width: 122px;}
+
+.row-darker > td{
+	background-color: #f2f2f2 !important;
+}
+
+.aui .table td {
+    background-color: #ffffff;
+}
+
 </style>
 <div id="container1">
 	<!--  nav bar -->
@@ -457,24 +466,24 @@
 							<!-- pagination end -->
 				<!-- start table -->
 				<div class="row-fluid list-data-table" style="overflow: auto;">
-					<table class="table table-striped table-bordered" id="tableBonusAppraisal"
+					<table class="table table-bordered" id="tableBonusAppraisal"
 						style="max-width: none; min-width: 800;margin-bottom: 0px;">
 						<thead>
 							<tr>
 								<th rowspan="2" style="width: 10%; min-width: 100px;"><liferay-ui:message key="level"/></th>
 								<th rowspan="2" style="width: 26%; min-width: 150px;"><liferay-ui:message key="org-name"/></th>
-								<th colspan="5" style="width: 34%;"><liferay-ui:message key="evaluate-agency"/></th>
-								<th colspan="3" style="width: 30%;"><liferay-ui:message key="evaluate-agency-manager"/></th>
+								<th colspan="5" style="width: 34%;"><liferay-ui:message key="organization-evaluation"/></th>
+								<th colspan="3" style="width: 30%;"><liferay-ui:message key="manager-evaluation"/></th>
 							</tr>
 							<tr>
-								<th style="width: 7%; min-width: 60px;"><liferay-ui:message key="avg-result-score"/></th>
-								<th style="width: 7%; min-width: 60px;"><liferay-ui:message key="adjust-result-score"/></th>
-								<th style="width: 7%; min-width: 80px;"><liferay-ui:message key="total-salary"/></th>
-								<th style="width: 8%; min-width: 90px;"><liferay-ui:message key="bonus-point"/></th>
+								<th style="width: 7%; min-width: 60px;"><liferay-ui:message key="avg-score"/></th>
+								<th style="width: 7%; min-width: 60px;"><liferay-ui:message key="adjust-score"/></th>
+								<th style="width: 7%; min-width: 80px;"><liferay-ui:message key="net-salary"/></th>
+								<th style="width: 8%; min-width: 90px;"><liferay-ui:message key="weight"/></th>
 								<th style="width: 5%; min-width: 40px;">%</th>
 								<th style="width: 14%; min-width: 120px;"><liferay-ui:message key="emp-name"/></th>
 								<th style="width: 8%;min-width: 60px;"><liferay-ui:message key="emp-result-score"/></th>
-								<th style="width: 8%; min-width: 60px;"><liferay-ui:message key="adjust-result-score"/></th>
+								<th style="width: 8%; min-width: 60px;"><liferay-ui:message key="adjust-score"/></th>
 							</tr>
 						</thead>
 						<tbody id="listBonusAppraisal">
@@ -582,11 +591,11 @@
 			<div class="modal-footer">
 				<div align="center">
 					<button class="btn btn-success" id="btnConfirmOK" type="button">
-						&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;<liferay-ui:message key="yes"/>&nbsp;&nbsp;
+						&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;<liferay-ui:message key="calculate"/>&nbsp;&nbsp;
 					</button>
 					&nbsp;&nbsp;
 					<button data-dismiss="modal" class="btn btn-danger" id="btnConfirmNO" type="button">
-						<i class="fa fa-times-circle"></i>&nbsp;&nbsp;<liferay-ui:message key="no"/>&nbsp;&nbsp;
+						<i class="fa fa-times-circle"></i>&nbsp;&nbsp;<liferay-ui:message key="cancel"/>&nbsp;&nbsp;
 					</button>
 				</div>
 			</div>
