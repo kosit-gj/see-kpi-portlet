@@ -329,10 +329,10 @@
 
 
 .aui .list-data-table .table-bordered th{
-	background-color: #666666 !important;
-	color: #ffffff;
-	vertical-align: top;
-	
+/* 	background-color: #666666 !important; */
+/* 	color: #ffffff; */
+/* 	vertical-align: top; */
+	font-weight: 700;
 /* 	text-align: center; */
 }
 .aui .list-data-table .table-bordered td{
@@ -408,7 +408,7 @@
 									<button type="button" name="btn_search_recalculate" onclick="getDataReCalculateFn()"
 										id="btn_search_recalculate" class="btn btn-warning input-sm "
 										style="margin-left: 5px;" disabled="disabled">
-										<i class="fa fa-calculator"></i>&nbsp;<liferay-ui:message key="calculate"/>
+										<i class="fa fa-calculator"></i>&nbsp;<liferay-ui:message key="pre-calculate"/>
 									</button>
 								</div>
 								<div class="form-group pull-right m-b-none ">

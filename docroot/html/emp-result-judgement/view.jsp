@@ -723,10 +723,10 @@ background-color:#71cccc !important;
 
 
 .aui .list-data-table .table-bordered th{
- background-color: #666666 !important;
- color: #ffffff;
- vertical-align: top;
- 
+/*  background-color: #666666 !important; */
+/*  color: #ffffff; */
+/*  vertical-align: top; */
+ 	font-weight: 700;
 /*  text-align: center; */
 }
 .aui .list-data-table .table-bordered td{
@@ -1033,13 +1033,16 @@ input[type=number]::-webkit-outer-spin-button {
 						      <th rowspan="2" style="width:10%; text-align:center;"><liferay-ui:message key="organization"/></th>
 						      <th rowspan="2" style="width:10%; text-align:center;"><liferay-ui:message key="position"/></th>
 						      <th rowspan="2" style="width:10%; text-align:center;"><liferay-ui:message key="status"/></th>
-						      <th style="width:8%; text-align:center;"><liferay-ui:message key="result-assess-from"/></th>
+						      
 						      <th colspan="2" style="width:17%; text-align:center;"><liferay-ui:message key="adjust-result-score"/></th>
+						      <th colspan="3" style="width:8%; text-align:center;" class="setColSpanResultAssess"><liferay-ui:message key="result-assess-from"/></th>
 						    </tr>				
 						     <tr>						   
-						      <th style="width: 10%;"id="score_name1"></th>
 						      <th style="width: 7%;">%</th>
-						      <th id="score_name2" style="width: 10%;"></th>
+						      <th id="adjust_result_score_name" style="width: 10%;"></th>
+						      <th style="width: 10%;"id="score_name1"></th>
+						      <th style="width: 10%;"id="score_name2"></th>
+						      <th style="width: 10%;"id="score_name3"></th>						      
 						    </tr>
 							</thead>
 							 <tbody id="list_empjudege">

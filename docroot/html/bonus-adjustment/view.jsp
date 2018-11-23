@@ -723,10 +723,10 @@ background-color:#71cccc !important;
 
 
 .aui .list-data-table .table-bordered th{
- background-color: #666666 !important;
- color: #ffffff;
- vertical-align: top;
- 
+/*  background-color: #666666 !important; */
+/*  color: #ffffff; */
+/*  vertical-align: top; */
+ 	font-weight: 700;
 /*  text-align: center; */
 }
 .aui .list-data-table .table-bordered td{

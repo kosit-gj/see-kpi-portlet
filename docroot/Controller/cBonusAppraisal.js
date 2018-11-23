@@ -186,7 +186,16 @@ var getDataReCalculateFn = function(){
 //--------  GetData End
 var listBonusAppraisal = function(response){
 	var html ="";
-	
+	if(response.length==0) {
+		html +="<tr>";
+		html +="<td colspan=\"10\">";
+		html +="<div style='margin-top: 40px;margin-bottom: 40px;font-weight: bold;color: #e04747;' align='center'>No Data to Display.</div>";
+		html +="</td>";
+		html +="</tr";
+		$("#listBonusAppraisal").html(htmlHTML);
+
+		return;
+	}
 	$.each(response.datas.data,function(index,indexEntry) {
 
 		if(indexEntry.org_code == indexEntry.parent_org_group){
