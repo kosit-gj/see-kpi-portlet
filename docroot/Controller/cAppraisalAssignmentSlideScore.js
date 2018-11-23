@@ -2013,7 +2013,7 @@ var calculationGrandTotalFn = function (id) {
             var dataId = this.id.split("-");;
             var apprailsal_item_id = dataId[1];
             var structure_id = dataId[2];
-            console.log(indexEntry);
+            //console.log(indexEntry);
 
 
             if ($(indexEntry).val().trim() != "" && $("#id-" + apprailsal_item_id + "-" + structure_id + "-checkbox").prop("checked") == true) {
