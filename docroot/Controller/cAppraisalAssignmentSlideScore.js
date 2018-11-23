@@ -762,6 +762,7 @@ var actionActionAssignmentFn = function () {
                 callFlashSlide("Updated Successfully.");
                 $("#ModalAction").modal('hide');
                 $("#action").val("add");
+                appraisalStatusFn();
             }
 
         }
