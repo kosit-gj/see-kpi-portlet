@@ -138,6 +138,29 @@
 		});
 		
 	}
+ 
+ 
+var dropDrowAppraisalForm = function(){
+	
+	var htmlOption="";
+	$.ajax({
+		url:restfulURL+"/"+serviceName+"/public/appraisal_form",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			var htmlOption="";
+			// htmlOption+="<option value=''>All Form</option>";
+			$.each(data,function(index,indexEntry){
+				htmlOption+="<option value="+indexEntry['appraisal_form_id']+">"+indexEntry['appraisal_form_name']+"</option>";
+			});
+			$("#appraisalForm").html(htmlOption);
+		}
+	});
+}
+ 
+ 
  var getDataFn = function(){
 
 		
@@ -151,7 +174,8 @@
 			data:{
 				"position_id"			:		position_id,
 				"level_id"				:		level_id,
-				"org_id"				:		org_id	
+				"org_id"				:		org_id,
+				"appraisal_form"		:		$("#embed_appraisal_form").val()
 			},
 			headers:{Authorization:"Bearer "+tokenID.token},
 			async:false,// w8 data 
@@ -230,6 +254,7 @@ var listAssignmentFn = function(data){
 		embedParam+="<input type='hidden' class='embed_param_search' id='embed_period_frequency' name='embed_period_frequency' value='"+$("#periodFrequency").val()+"'>";
 		embedParam+="<input type='hidden' class='embed_param_search' id='embed_assign_frequency' name='embed_assign_frequency' value='"+$("#assignFrequency").val()+"'>";
 		embedParam+="<input type='hidden' class='embed_param_search' id='embed_period_id' name='embed_period_id' value='"+$("#period_id").val()+"'>";
+		embedParam+="<input type='hidden' class='embed_param_search' id='embed_appraisal_form' name='embed_appraisal_form' value='"+$("#appraisalForm").val()+"'>";
 			
 		$("#embedParamSearch").append(embedParam);
 		
@@ -371,6 +396,8 @@ $.each(data,function(index,indexEntry){
 			}
 		});
 		$("#appraisalType").change();
+		
+		dropDrowAppraisalForm();
 		
 		setParamSearch(dataSetParam);
 		
@@ -619,6 +646,7 @@ $.each(data,function(index,indexEntry){
 				var period_id = $("#embed_period_id").val();
 				var appraisal_year = $("#embed_year_list").val();
 				var frequency_id = $("#embed_period_frequency").val();
+				var appraisal_form = $("#embed_appraisal_form").val();
 				
 				var formData = new FormData();
 				formData.append("appraisal_type_id", appraisal_type_id);
@@ -630,6 +658,7 @@ $.each(data,function(index,indexEntry){
 				formData.append("appraisal_item_id", in_item_id);
 				formData.append("appraisal_level_id", in_level_id);
 				formData.append("org_id", in_org_id);
+				formData.append("appraisal_form", appraisal_form);
 				
 				//Send form via AJAX
 				var xhr = getXHR();
