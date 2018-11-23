@@ -1994,6 +1994,7 @@
 		<footer-portlet-javascript>/js/fusioncharts/js/fusioncharts.charts.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/fusioncharts/js/fusioncharts.widgets.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/fusioncharts/js/themes/fusioncharts.theme.fint.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/plugins/autoNumeric/autoNumeric-min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cAppraisal360Degree.js</footer-portlet-javascript>
