@@ -45,9 +45,9 @@ var getDataFn = function() {
 				param_year: AppraisalYear,
 				param_org_id: organization,
 				param_period: AppraisalPeriod,
-				param_position: Position_id,
-				param_emp: EmpName_id,
-				param_level_emp: AppraisalEmpLevel,
+				//param_position: Position_id,
+				//param_emp: EmpName_id,
+				//param_level_emp: AppraisalEmpLevel,
 				param_level_org: AppraisalOrgLevel,
 				param_form : FormName
 			  };
