@@ -346,7 +346,7 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 					<div class="row-fluid">
 						<div id="appraisalFormArea" class="form-group pull-left span4" style="margin-left:5px;">
 							<select data-toggle="tooltip" title="Appraisal Form" class="input form-control input-sm" id="appraisalForm" name="appraisalForm">
-								<option value="0"></option>
+								
 							</select>
 						</div>
 						
