@@ -295,7 +295,7 @@ var scriptBtnSaveAndCancelFn = function(){
 	});
 	$("#btn_cancel_bonus_appraisal").on("click",function(){
 		$("body").mLoading('show');
-		listBonusAppraisal(globalData.data);
+		listBonusAppraisal(globalData);
 		setTimeout(function(){ 
 			$("body").mLoading('hide');
 		}, 150);
