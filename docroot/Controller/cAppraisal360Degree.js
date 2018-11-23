@@ -16,6 +16,11 @@ var isObjectOrArray = function(item){
 	}
 }
 
+var scriptInputAutoNumeric = function(id,option){
+	$(id).autoNumeric('init');
+	$(id).autoNumeric('update', option);
+};
+
 var dataQuality = [];
 var getQualityFn = function () {   // QualityFn 
 
@@ -1004,9 +1009,9 @@ var assignTemplateQuantityFn = function (structureName, data) {
         htmlTemplateQuantity += "<td id=\"item_name-" + indexEntry['item_result_id'] + "\">" + indexEntry['item_name'] + "</td>";
         htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><div title=\"" + hintHtml + "\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >" + addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2)) + "</div></td>";
         htmlTemplateQuantity += "<td>" + indexEntry['uom_name'] + "</td>";
-        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore addComma\" id=\"forecast-" + indexEntry['item_result_id'] + "\" name=\"forecast-" + indexEntry['item_result_id'] + "\" value=" + addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(2)) + "></td>";
-        //htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly \" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
-        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;' id=\"actual_value-" + indexEntry['item_result_id'] + "\">" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>"; //# 004
+        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumeric itemScore \" id=\"forecast-" + indexEntry['item_result_id'] + "\" name=\"forecast-" + indexEntry['item_result_id'] + "\" value=" + indexEntry['forecast_value'] + "></td>";
+        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumeric \" "+((indexEntry['allow_input_actual']==0)?" disabled":"")+" id=\"actual_value-" + indexEntry['item_result_id'] + "\"  value=" + indexEntry['actual_value'] + "></td>";
+//        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;' id=\"actual_value-" + indexEntry['item_result_id'] + "\">" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>"; //# 004
         if (data['threshold'] == 1) {
             htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['score']))) + "</td>";
         } else {
@@ -1021,7 +1026,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
 		}
 
 
-        htmlTemplateQuantity += "	<td style=\"text-align:center; display: flex; justify-content: space-between;\">";
+        htmlTemplateQuantity += "	<td style=\"text-align:center; display: ; justify-content: space-between;\">";
         htmlTemplateQuantity += " <span>&nbsp;&nbsp;&nbsp;&nbsp;</span><i data-trigger=\"focus\" tabindex=\"" + index + "\" data-content=\"   &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear reason' id='reason-" + indexEntry['item_result_id'] + "-" + indexEntry['emp_id'] + "-" + indexEntry['emp_name'] + "' data-target='' data-toggle='modal'&gt;" + $(".lt-reason").val() + "&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear ganttChart' id='ganttChart-" + indexEntry['item_result_id'] + "-" + indexEntry['emp_id'] + "-" + indexEntry['emp_name'] + "' data-target='' data-toggle='modal'&gt;" + $(".lt-gantt-chart").val() + "&lt;/button&gt;  &lt;button style='width:100%;' class='btn btn-success btn-small btn-gear phase' id='phase-" + indexEntry['item_result_id'] + "-" + indexEntry['emp_id'] + "-" + indexEntry['emp_name'] + "' data-target='' data-toggle='modal'&gt;" + $(".lt-phase").val() + "&lt;/button&gt; &lt;button style='width:100%;' id='action_plan-" + indexEntry['item_result_id'] + "-" + indexEntry['emp_id'] + "-" + indexEntry['emp_name'] + "' class='btn btn-success btn-small btn-gear action_plan'&gt;" + $(".lt-action-plan").val() + "&lt;/button&gt; &lt;button id='attach_file-" + indexEntry['item_result_id'] + "-" + indexEntry['emp_id'] + "-" + indexEntry['emp_name'] + "' style='width:100%;' class='btn btn-success btn-small btn-gear attach_file'&gt;" + $(".lt-attach-files").val() + "&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>" + paperclip;
         htmlTemplateQuantity += "	</td>";
 
@@ -1543,6 +1548,15 @@ var listAppraisalDetailFn = function (data) {
 
     });
 
+	var option ={
+			vMin : '0.00',
+			vMax : '9999999.99',
+			lZero: 'deny',
+//			aPad: false,
+			wEmpty: 'zero'
+		};
+	scriptInputAutoNumeric(".autoNumeric",option);
+    
     dropDrowActionEditFn(data['head'][0]['stage_id'], data['head'][0]['emp_code'], data['head'][0]['org_code']);
     $("#assignTo").change();
     $("#ModalAppraisal").modal({
@@ -2527,8 +2541,8 @@ var saveAppraisalIndividualFn = function ()
         appraisal += "\"item_result_id\":\"" + item_result_id + "\",";
         if (typeScore == "forecast") {
             appraisal += "\"forecast_value\":\"" + removeComma($(indexEntry).val()) + "\",";
-            appraisal+="\"actual_value\":\""+($("#actual_value-"+item_result_id).val() != undefined ? $("#actual_value-"+item_result_id).text() : $("#actual_value-"+item_result_id).val() )+"\","; // #004
-            //appraisal+="\"actual_value\":\""+$("#actual-"+item_result_id).val()+"\",";
+            appraisal += "\"actual_value\":\""+$("#actual_value-"+item_result_id).autoNumeric('get')+"\","; // #004
+
         } else if (typeScore == "competencyScore") {
             appraisal += "\"forecast_value\":\"\",";
             appraisal += "\"actual_value\":\"\",";
