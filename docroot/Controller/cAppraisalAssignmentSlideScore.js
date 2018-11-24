@@ -13,6 +13,8 @@ var item_id_array = [];
 var emp_result_id_action = [];
 var stage_id_action = [];
 var chief_id_array = [];
+var org_id_array = [];
+var is_derive_check = [];
 var emailLinkAssignment = false;
 
 var clearFn = function () {
@@ -466,13 +468,13 @@ var listDataFn = function (data) {
 	                	if(itemEntry['assigned']==0){
 	                	htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign action_emp' data-id='"+itemEntry.emp_result_id+"' style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
 	                	}else{          
-	                    htmlHTML += "	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-" + itemEntry['emp_id'] + "' type='checkbox' value='" + itemEntry['emp_id'] + "-" + itemEntry['emp_code'] + "-" + itemEntry['org_id'] + "-" + itemEntry['period_id'] + "-" + itemEntry['default_stage_id'] + "-" + "' data-chief-emp='"+itemEntry['chief_id_array']+"'></td>";
+	                    htmlHTML += "	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-" + itemEntry['emp_id'] + "' type='checkbox' value='" + itemEntry['emp_id'] + "-" + itemEntry['emp_code'] + "-" + itemEntry['org_id'] + "-" + itemEntry['period_id'] + "-" + itemEntry['default_stage_id'] + "-" + "' data-chief-emp='"+itemEntry['chief_id_array']+"' data-chief-org='"+itemEntry['org_id_array']+"' data-derive='"+itemEntry['is_derive_check']+"'></td>";
 	                	}
                 } else if ($("#embed_appraisal_type_id").val() == 1) {
                 		if(itemEntry['assigned']==0){
                         htmlHTML += "	<td style='text-align: center;'><i class='icon-warning-sign action_emp' data-id='"+itemEntry.emp_result_id+"' style='font-size:20px;color:#fdc805;cursor:pointer;' data-toggle=\"tooltip\" data-placement=\"top\" title=\""+itemEntry['assigned_msg']+"\"></i></td>";
                         }else{ 
-                        htmlHTML += "	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-" + itemEntry['org_id'] + "' type='checkbox' value='" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "--" + itemEntry['default_stage_id'] + "-/" + itemEntry['org_code'] + "' data-chief-emp='"+itemEntry['chief_id_array']+"'></td>";
+                        htmlHTML += "	<td class='object-center' style='text-align:center;'><input class='asign_emp' id='id-" + itemEntry['org_id'] + "' type='checkbox' value='" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_id'] + "--" + itemEntry['default_stage_id'] + "-/" + itemEntry['org_code'] + "' data-chief-emp='"+itemEntry['chief_id_array']+"' data-chief-org='"+itemEntry['org_id_array']+"' data-derive='"+itemEntry['is_derive_check']+"'></td>";
                         } //alert(itemEntry['org_id']);
                 }
             }
@@ -512,18 +514,30 @@ var listDataFn = function (data) {
             		var data_chief_emp = "data-chief-emp='' ";
             	}
             	
+            	if(itemEntry['org_id_array']!=undefined) {
+            		var data_chief_org = "data-chief-org='"+itemEntry['org_id_array']+"' ";
+            	} else {
+            		var data_chief_org = "data-chief-org='' ";
+            	}
+            	
+            	if(itemEntry['is_derive_check']!=undefined) {
+            		var data_derive = "data-derive='"+itemEntry['is_derive_check']+"' ";
+            	} else {
+            		var data_derive = "data-derive='' ";
+            	}
+            	
             	if (itemEntry['edit_flag']==1 && itemEntry['delete_flag']==1) {
             		//edit delete
-            		htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" <button "+data_chief_emp+" class='btn btn-warning btn-small btn-gear edit' data-stage='"+itemEntry['stage_id']+"' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'>" + $(".lt-edit").val() + "</button>&nbsp;<button id='del-" + itemEntry['emp_id'] + "' class='btn btn-danger btn-small btn-gear del'>" + $(".lt-delete").val() + "</button>\"></i>";
+            		htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" <button "+data_chief_emp+" "+data_chief_org+" "+data_derive+" class='btn btn-warning btn-small btn-gear edit' data-stage='"+itemEntry['stage_id']+"' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'>" + $(".lt-edit").val() + "</button>&nbsp;<button id='del-" + itemEntry['emp_id'] + "' class='btn btn-danger btn-small btn-gear del'>" + $(".lt-delete").val() + "</button>\"></i>";
             	} else if(itemEntry['edit_flag']==1 && itemEntry['delete_flag']==0) {
             		//edit
-            		htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" <button "+data_chief_emp+" class='btn btn-warning btn-small btn-gear edit' data-stage='"+itemEntry['stage_id']+"' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'>" + $(".lt-edit").val() + "\"></i>";
+            		htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" <button "+data_chief_emp+" "+data_chief_org+" "+data_derive+" class='btn btn-warning btn-small btn-gear edit' data-stage='"+itemEntry['stage_id']+"' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'>" + $(".lt-edit").val() + "\"></i>";
             	} else if(itemEntry['edit_flag']==0 && itemEntry['delete_flag']==1) {
             		//delete
             		htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" <button id='del-" + itemEntry['emp_id'] + "' class='btn btn-danger btn-small btn-gear del'>" + $(".lt-delete").val() + "</button>\"></i>";
             	} else {
             		// view
-            		htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" <button "+data_chief_emp+" class='btn btn-info btn-small btn-gear view' data-stage='"+itemEntry['stage_id']+"' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'>" + $(".lt-view").val() + "\"></i>";
+            		htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" <button "+data_chief_emp+" "+data_chief_org+" "+data_derive+" class='btn btn-info btn-small btn-gear view' data-stage='"+itemEntry['stage_id']+"' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" + itemEntry['org_code'] + "-" + itemEntry['emp_code'] + "' data-target=#addModalRule data-toggle='modal'>" + $(".lt-view").val() + "\"></i>";
             	}
             	
             	/*
@@ -691,6 +705,10 @@ var listDataFn = function (data) {
             globalAppraisalFormId = $("#embed_appraisal_form").val();
             chief_id_array = [];
             chief_id_array.push($(this).attr('data-chief-emp'));
+            org_id_array = [];
+            org_id_array.push($(this).attr('data-chief-org'));
+            is_derive_check = [];
+            is_derive_check.push($(this).attr('data-derive'));
             var current_stage_id = $(this).attr('data-stage');
 
             sessionStorage.setItem('is_coporate_kpi', $("#is_coporate_kpi-" + id).val());
@@ -723,6 +741,10 @@ var listDataFn = function (data) {
             globalAppraisalFormId = $("#embed_appraisal_form").val();
             chief_id_array = [];
             chief_id_array.push($(this).attr('data-chief-emp'));
+            org_id_array = [];
+            org_id_array.push($(this).attr('data-chief-org'));
+            is_derive_check = [];
+            is_derive_check.push($(this).attr('data-derive'));
             var current_stage_id = $(this).attr('data-stage');
 //            var emp_result_id = $(this).parent().parent().parent().parent().children().eq(1).children().val();
             var emp_result_id = $(this).closest('tr').find('.action_emp').attr('data-id').split('-')[0];
@@ -2248,6 +2270,8 @@ var getTemplateFn = function (emp_result_id, appraisal_form_id, stage_id) {
 //            'appraisal_form': $("#appraisalForm").val(),
             'period_id': $("#period_id").val(),
             'chief_id_array': chief_id_array,
+            'org_id_array': org_id_array,
+            'is_derive_check': is_derive_check,
             "appraisal_form_id": appraisal_form_id,
             "obj_stage": stage
         },
@@ -2565,7 +2589,9 @@ $(document).ready(function () {
                 default_stage_id = [];
                 organization_code = [];
                 chief_id_array = [];
+                org_id_array = [];
                 globalAppraisalFormId = $("#appraisalForm").val();
+                is_derive_check = [];
                 $("#remark_footer").val("");
                 $(".information").hide();
                 $("#btnAddAnother").show();
@@ -2576,6 +2602,8 @@ $(document).ready(function () {
                         var emp_id = $(indexEntry).val().split("-");
                         var org_id = $(indexEntry).val().split("-/");
                         var data_chief_id = $(indexEntry).attr("data-chief-emp");
+                        var data_org_id = $(indexEntry).attr("data-chief-org");
+                        var data_derive = $(indexEntry).attr("data-derive");
                         empldoyees_id.push(emp_id[0]);
                         empldoyees_code.push(emp_id[1]);
                         org_id_to_assign = emp_id[2];
@@ -2583,6 +2611,8 @@ $(document).ready(function () {
                         default_stage_id.push(emp_id[4]);
                         organization_code.push(org_id[1]);
                         chief_id_array.push(data_chief_id);
+                        org_id_array.push(data_org_id);
+                        is_derive_check.push(data_derive);
                     }
                 });
 
