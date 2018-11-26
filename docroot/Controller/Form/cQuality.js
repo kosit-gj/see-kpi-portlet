@@ -100,7 +100,6 @@ var insertQualityFn = function(param) {
 		url:restfulURL+"/"+serviceName+"/public/appraisal_item",
 		type:"post",
 		dataType:"json",
-		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{
 			 "item_name":item_name,
@@ -194,6 +193,7 @@ clearQualityFormFn();
 		//dropDrowDepartmentFn("Quality",$("#embed_department_id").val(),defaultAll=false);
 		dropDrowOrgFn("Quality",$("#embed_org_id").val(),defaultAll=false);
 		dropDrowPositionFn("Quality",$("#embed_position_id").val(),defaultAll=false);
+		$("#actionQuality").val("add");
 		$("#btnAddAnotherQuality").show();
 		
 		//set header

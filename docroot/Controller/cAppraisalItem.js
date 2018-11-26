@@ -19,7 +19,7 @@ var getDataFn = function(page,rpp) {
 		url:restfulURL+"/"+serviceName+"/public/appraisal_item",
 		type:"get",
 		dataType:"json",
-		async:false,
+		async:true,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{
 			"page":page,
