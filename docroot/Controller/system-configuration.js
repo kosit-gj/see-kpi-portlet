@@ -74,6 +74,9 @@ var getDataFn = function(page,rpp){
 			if(data["allow_input_actual"] == 1){$("#optionsShowActualOn").prop("checked", true);}
 			else if(data["allow_input_actual"] == 0){$("#optionsShowActualOff").prop("checked", true);}
 			
+			if(data["appraisal_360_flag"] == 1){$("#optionsAppraisal360flagOn").prop("checked", true);}
+			else if(data["appraisal_360_flag"] == 0){$("#optionsAppraisal360flagOff").prop("checked", true);}
+			
 			
 			if(data["item_result_log"] == 1){$("#optionsEnableAssignmentLoggingOn").prop("checked", true);}
 			else if(data["item_result_log"] == 0){$("#optionsEnableAssignmentLoggingOff").prop("checked", true);}
@@ -205,6 +208,9 @@ var clearFn = function() {
 	
 	if(galbalDataSystemcon["allow_input_actual"] == 1){$("#optionsShowActualOn").prop("checked", true);}
 	else if(galbalDataSystemcon["allow_input_actual"] == 0){$("#optionsShowActualOff").prop("checked", true);}
+	
+	if(galbalDataSystemcon["appraisal_360_flag"] == 1){$("#optionsAppraisal360flagOn").prop("checked", true);}
+	else if(galbalDataSystemcon["appraisal_360_flag"] == 0){$("#optionsAppraisal360flagOff").prop("checked", true);}
 
 	var htmlTheamColor = "<button class=\"btn jscolor {valueElement:null,value:'"+galbalDataSystemcon["theme_color"]+"',valueElement:'themeColor',onFineChange:'setThemeColorFn(this)'} \" style='width:70px; height:26px;'></button>";
 	$("#listThemeColor").html(htmlTheamColor);
@@ -275,6 +281,8 @@ var updateFn = function() {
 	var item_result_log=0;
 	var show_grand_total_flag=0;
 	var allow_input_actual=0;
+	var appraisal_360_flag=0;
+	
 	if($("#raiseFixAmount:checked").is(":checked")){raiseType=1;}
 	else if($("#raisePercentage:checked").is(":checked")){raiseType=2;}
 	else if($("#raiseSalaryStructureTable:checked").is(":checked")){raiseType=3;}
@@ -305,6 +313,12 @@ var updateFn = function() {
 		allow_input_actual = 0;
 	}
 	
+	if($("#optionsAppraisal360flagOn:checked").is(":checked")) {
+		appraisal_360_flag = 1;
+	} else if($("#optionsAppraisal360flagOff:checked").is(":checked")) {
+		appraisal_360_flag = 0;
+	}
+	
 	
 	$.ajax({
 		url:restfulURL+restfulPathSystemcon,
@@ -323,6 +337,7 @@ var updateFn = function() {
 			"current_appraisal_year"            :  $("#current_appraisal_year").val(),
 			"entity_type_resorting"             :  $("#entityType").val(),
 			"allow_input_actual"			    :  allow_input_actual,
+			"appraisal_360_flag"                :  appraisal_360_flag,
 			"raise_type"			            :  raiseType,
 			"result_type"			            :  resultType,
 			"threshold"							:  threshold,

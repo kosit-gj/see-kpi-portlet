@@ -422,6 +422,21 @@ plid = layout.getPlid();
 										</label>
 									</div>
                                  </div>
+                                   <div  class="row-fluid">
+                                 	<div class="span5 object-right" >
+										<label class='text-label'> Appraisal 360 &nbsp;:</label>
+									</div>
+									<div class="span5">
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 20px;">
+											<input type="radio" name="optionsAppraisal360flag" id="optionsAppraisal360flagOn" value="1">
+											  Yes
+										</label>
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+											<input type="radio" name="optionsAppraisal360flag" id="optionsAppraisal360flagOff" value="0" checked='checked'>
+											  No 
+										</label>
+									</div>
+                                 </div>
                                  <div class="row-fluid">
 							
 									<div class="span5 object-right" >
