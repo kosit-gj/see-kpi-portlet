@@ -7,6 +7,21 @@ var gEmpInfo = [];
 //Variable to store your files
 var files;
 var emailLinkAppraisal = false;
+var gSystempConfig = [];
+
+var getSystempConfig = function () { 
+    $.ajax({
+        url: restfulURL + "/" + serviceName + "/public/system_config",
+        type: "get",
+        dataType: "json",
+        data: {},
+        async: false,
+        headers: { Authorization: "Bearer " + tokenID.token },
+        success: function (data) {
+        	gSystempConfig = data;
+        }
+    });
+}
 
 var isObjectOrArray = function(item){
 	if(jQuery.type(item) == "object" || jQuery.type(item) == "array"){
@@ -1167,8 +1182,13 @@ var dropDrowIndividualOrgLevelFn = function (id) {
 
 
 var dropDrowAppraisalEmpLevelFn = function (id) {
+	if(gSystempConfig.appraisal_360_flag == 1){
+		var apiUrl = "/public/appraisal360/parameter/emp_level";
+	} else {
+		var apiUrl = "/public/appraisal/parameter/emp_level";
+	}
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/appraisal360/parameter/emp_level",
+        url: restfulURL + "/" + serviceName + apiUrl,
         type: "get",
         dataType: "json",
         async: false,
@@ -2882,6 +2902,7 @@ $(document).ready(function () {
             $("#btnSubmit").removeAttr("disabled");
 
             //set parameter start
+            getSystempConfig();
             dropDrowFormTypeFn();
             dropDrowYearListFn();
             $("#AppraisalYear").change(function () {
