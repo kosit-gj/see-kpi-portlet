@@ -836,6 +836,8 @@ var assignTemplateRewardFn = function (structureName, data) {
         htmlTemplateDeduct += "<td class=''></td>";
         htmlTemplateDeduct += "<td class=''></td>";
         htmlTemplateDeduct += "<td class=''></td>";
+        htmlTemplateDeduct += "<td class=''></td>";
+        htmlTemplateDeduct += "<td class=''></td>";
         htmlTemplateDeduct += "<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>Total</b></td>";
         htmlTemplateDeduct += "<td class=''  style='text-align: right;padding-right: 10px;font-weight: bold; font-size:16px'><b>" + addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2)) + "</b></td>";
         htmlTemplateDeduct += "</tr>";
