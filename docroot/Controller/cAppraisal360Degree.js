@@ -12,6 +12,7 @@ var action_update = "";
 var files;
 var emailLinkAppraisal = false;
 var gSystempConfig = [];
+var gStage = [];
 
 var calculateFn = function(){
     $.ajax({
@@ -319,7 +320,7 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
     	$("#table-"+structureId+" .competencyScore").attr("disabled", "disabled");
     }
     */
-    if('' != 1){
+    if(edit_flag == 0 || gStage.length == 0){
     	$("#table-"+structureId+" .competencyScore").attr("disabled", "disabled");
     }
 
@@ -1253,6 +1254,7 @@ var splitData = function (data) {
 }
 
 var listAppraisalDetailFn = function (data) {
+	dropDrowActionEditFn(data['head'][0]['stage_id'], data['head'][0]['emp_code'], data['head'][0]['org_code']);
 
     if (emailLinkAppraisal == true) {
         $("#embed_appraisalType").val(data['head'][0]['appraisal_type_id']);
@@ -1523,7 +1525,7 @@ var listAppraisalDetailFn = function (data) {
 		};
 	scriptInputAutoNumeric(".autoNumeric",option);
     
-    dropDrowActionEditFn(data['head'][0]['stage_id'], data['head'][0]['emp_code'], data['head'][0]['org_code']);
+//    dropDrowActionEditFn(data['head'][0]['stage_id'], data['head'][0]['emp_code'], data['head'][0]['org_code']);
     $("#assignTo").change();
     $("#ModalAppraisal").modal({
         "backdrop": setModalPopup[0],
@@ -2424,6 +2426,7 @@ var dropDrowActionEditFn = function (stage_id, employee_code, org_code) {
         	"appraisal_form_id": $("#embed_formType").val()
         },
         success: function (data) {
+        	gStage = data; 
             if (data == '') {
                 $("#btnSubmit").attr("disabled", "disabled");
             } else {
