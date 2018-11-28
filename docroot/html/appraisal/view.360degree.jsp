@@ -983,6 +983,9 @@ background-color:#71cccc !important;
 												<label class="span12 p-t-xxsg text-center "><liferay-ui:message key="grand-total" /></label> 
 												<label class="span12 p-t-xxsg text-center txtGrandTotalWeigh" id="txtGrandTotalWeigh" style="font-size: 300%;"></label>
 											</div>
+											<div class="span12">
+												<button class="btn btn-warning" style="float:right;" type="button" id="btnCalculate"><i class="icon-play"></i> Calculate</button>
+											</div>
 										</div>
 
 										<div class='noWeightGrandTotalArea'>

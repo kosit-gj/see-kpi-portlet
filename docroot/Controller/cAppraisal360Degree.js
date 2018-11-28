@@ -4,10 +4,36 @@ var globalCount = 0;
 var username = "";
 var password = "";
 var gEmpInfo = [];
+var appraisal_period_start_date = "";
+var action_update = "";
+
 //Variable to store your files
 var files;
 var emailLinkAppraisal = false;
 var gSystempConfig = [];
+
+var calculateFn = function(){
+    $.ajax({
+        url: restfulURL + "/" + serviceName + "/public/appraisal/action_plan/" + $("#item_result_id").val(),
+        type: "PATCH",
+        dataType: "json",
+        data: { "actions": actions },
+        headers: { Authorization: "Bearer " + tokenID.token },
+        async: false,
+        success: function (data, status) {
+
+            if (data['status'] == 200) {
+                getActionPlanFn($("#item_result_id").val());
+                $("#action_actionplan").val("add");
+                if (data['data']['error'].length == 0) {
+                    callFlashSlideInModal($(".lt-update-successfully").val(), "#information3");
+                } else {
+                    callFlashSlideInModal(listErrorActionPlanFn(data['data']['error']), "#information3", "error");
+                }
+            }
+        }
+    });
+}
 
 var getSystempConfig = function () { 
     $.ajax({
@@ -1480,7 +1506,8 @@ var listAppraisalDetailFn = function (data) {
         //		 if(data['head'][0]['no_weight']==0){
         $(".hasWeightGrandTotalArea").show();
         $(".noWeightGrandTotalArea").hide();
-
+        
+        appraisal_period_start_date = data['head'][0]['appraisal_period_start_date'];
         //set header start
         if ($("#embed_appraisalType").val() == 2) {
 
@@ -2596,7 +2623,8 @@ var saveAppraisalIndividualFn = function ()
         data: {
             "stage_id": $("#actionToAssign").val(),
             "remark": $("#remark_footer").val(),
-            "appraisal": appraisalObject
+            "appraisal": appraisalObject,
+            "action_update": action_update
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
@@ -3116,6 +3144,7 @@ $(document).ready(function () {
 
             //submit
             $("#btnSubmit").click(function () {
+            	action_update = 'submit';
             	if($("#embed_appraisalType").val() == "1") {
             		// Is Organization.
             		saveAppraisalOrganizationFn();
@@ -3125,6 +3154,19 @@ $(document).ready(function () {
             	}
             });
 
+            $("#btnCalculate").click(function () {
+            	alert("Calculate");
+//            	action_update = 'calculate';
+//            	calculateFn();
+//            	if($("#embed_appraisalType").val() == "1") {
+//            		// Is Organization.
+//            		saveAppraisalOrganizationFn();
+//            	} else {
+//            		// Is Individual.
+//            		saveAppraisalIndividualFn();
+//            	}
+            });
+            
             //Action Plan Action Area...
             $("#btnAddActionPlan").click(function () {
 
