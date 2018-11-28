@@ -5,6 +5,7 @@ var username = "";
 var password = "";
 var gEmpInfo = [];
 var appraisal_period_start_date = "";
+var edit_flag = "";
 var action_update = "";
 
 //Variable to store your files
@@ -966,8 +967,8 @@ var assignTemplateQuantityFn = function (structureName, data) {
         htmlTemplateQuantity += "<td id=\"item_name-" + indexEntry['item_result_id'] + "\">" + indexEntry['item_name'] + "</td>";
         htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><div title=\"" + hintHtml + "\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >" + addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2)) + "</div></td>";
         htmlTemplateQuantity += "<td>" + indexEntry['uom_name'] + "</td>";
-        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumeric itemScore \" id=\"forecast-" + indexEntry['item_result_id'] + "\" name=\"forecast-" + indexEntry['item_result_id'] + "\" value=" + indexEntry['forecast_value'] + "></td>";
-        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumeric \" "+((indexEntry['allow_input_actual']==0)?" disabled":"")+" id=\"actual_value-" + indexEntry['item_result_id'] + "\"  value=" + indexEntry['actual_value'] + "></td>";
+        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumeric itemScore edit_flag\" "+((edit_flag==0)?" disabled":"")+" id=\"forecast-" + indexEntry['item_result_id'] + "\" name=\"forecast-" + indexEntry['item_result_id'] + "\" value=" + indexEntry['forecast_value'] + "></td>";
+        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumeric edit_flag\" "+((indexEntry['allow_input_actual']==0 || edit_flag==0)?" disabled":"")+" id=\"actual_value-" + indexEntry['item_result_id'] + "\"  value=" + indexEntry['actual_value'] + "></td>";
 //        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;' id=\"actual_value-" + indexEntry['item_result_id'] + "\">" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>"; //# 004
         if (data['threshold'] == 1) {
             htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['score']))) + "</td>";
@@ -1272,7 +1273,9 @@ var listAppraisalDetailFn = function (data) {
     $("#appraisal_template_area").empty();
     var quality = 1;
     $.each(data['group'], function (index, groupEntry) {
-
+    	
+        appraisal_period_start_date = data['head'][0]['appraisal_period_start_date'];
+        edit_flag = data['head'][0]['edit_flag'];
 
         if (groupEntry['form_url'] == 'quantity') {
             $("#appraisal_template_area").append(assignTemplateQuantityFn(index, groupEntry));
@@ -1421,7 +1424,7 @@ var listAppraisalDetailFn = function (data) {
         $(".hasWeightGrandTotalArea").show();
         $(".noWeightGrandTotalArea").hide();
         
-        appraisal_period_start_date = data['head'][0]['appraisal_period_start_date'];
+        
         //set header start
         if ($("#embed_appraisalType").val() == 2) {
 
@@ -1580,8 +1583,12 @@ var findOneFn = function (id) {
                     $("" + AppraisalEmailLink + "").find('#actionToAssign,#remark_footer').removeAttr('disabled');
                 }
 
-                if ($("#actionToAssign").val() == null) {
+                if ($("#actionToAssign").val() == null) { 
                     $("#btnSubmit").attr("disabled", "disabled");
+                    $(".edit_flag").attr("disabled", "disabled"); //#004
+                }
+                else{
+                	$(".edit_flag").attr("disabled", "true"); //#004
                 }
             } else {
                 callFlashSlide($(".lt-data-is-empty").val());
