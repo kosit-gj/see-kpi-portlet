@@ -247,7 +247,8 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
                 if (isObjectOrArray(indexEntry2) && indexEntry2['group_id'] == $("#group-" + structureId).val())
                     $.each(indexEntry2, function (index3, indexEntry3) {
                         if (isObjectOrArray(indexEntry3) && indexEntry3['emp_id'] == $("#emp-" + structureId).val()) {
-                            total_weigh_score = indexEntry3['total_weigh_score'];
+                            // total_weigh_score = indexEntry3['total_weigh_score'];
+                        	total_weigh_score = 0;
                             $.each(indexEntry3['items'], function (index, indexEntry) {
                                 if (!(indexEntry['formula_desc'] == null || indexEntry['formula_desc'] == undefined || indexEntry['formula_desc'] == "" || indexEntry['formula_desc'].length == 0)) {
                                     info_item = "<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>" + $(".lt-kpi-name").val() + " : </strong>" + indexEntry['item_name'] + "' info-data='" + indexEntry['formula_desc'] + "'>i</span>";
@@ -282,6 +283,8 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
                                 htmlTable += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['weight_percent'])).toFixed(2)) + "</td>";
                                 htmlTable += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2)) + "</td>";
                                 htmlTable += "</tr>";
+                                
+                                total_weigh_score = (total_weigh_score + parseInt(indexEntry['weigh_score']));
                             });
                         }
                     });
@@ -289,6 +292,7 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
         }
     });
 
+    /* ตัว all มีปัญหาเลยไม่เอามาใช้งาน (DHAS, 2018-11-28, p.wirun)
     if (($("#group-" + structureId).val()) == 0){
 	    htmlTable += "<tr class='classAdmin th-all'>";
 	    htmlTable += "<td class=''></td>";
@@ -298,12 +302,25 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
 	    htmlTable += "<td class='' style='text-align: right;padding-right: 10px;font-weight: bold;font-size:16px'><b>" + addCommas(parseFloat(notNullFn(total_weigh_score)).toFixed(2)) + "</b></td>";
 	    htmlTable += "</tr>";
     }
+    */
+    htmlTable += "<tr class='th-all'>";
+    htmlTable += "<td class=''></td>";
+    htmlTable += "<td class=''></td>";
+    htmlTable += "<td class='' ></td>";
+    htmlTable += "<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>" + $(".lt-total").val() + "</b></td>";
+    htmlTable += "<td class='' style='text-align: right;padding-right: 10px;font-weight: bold;font-size:16px'><b>" + addCommas(parseFloat(notNullFn(total_weigh_score)).toFixed(2)) + "</b></td>";
+    htmlTable += "</tr>";
 
     $("#table-" + structureId).html(htmlTable);
     
+    /* check จาก edit_flag แทน
     if(($("select#emp-"+structureId).val()) != cMain_emp_id){
-    	$("#table-"+structureId+" .competencyScore").attr("disabled", "disabled")
-    } 
+    	$("#table-"+structureId+" .competencyScore").attr("disabled", "disabled");
+    }
+    */
+    if('' != 1){
+    	$("#table-"+structureId+" .competencyScore").attr("disabled", "disabled");
+    }
 
     $('[data-toggle="tooltip"]').css({ "cursor": "pointer" });
     $('[data-toggle="tooltip"]').tooltip({
@@ -382,6 +399,7 @@ var onchangGroupQualityFn = function (structureId) { // QualityFn
     $("#th-score-" + structureId).html(html);
     onchangTableQualityFn(structureId)
 }
+
 
 var dataComment = [];
 var getCommentFn = function () {    // CommentFn 
@@ -675,110 +693,6 @@ var dropdownDeductScoreFn = function (score, nof_target_score, hint) {
     }
     return htmlTemplateQuality;
 }
-
-
-var assignTemplateQualityFn_Backup = function (structureName, data) {
-    var item_result_id_array = [];
-    var htmlTemplateQuality = "";
-    var info_item = "";
-    var hintCount = 0;
-    var hintHtml = "";
-    $.each(data['hint'], function (index, indexEntry) {
-        hintHtml += "<div style='text-align: left;\'>" + indexEntry['hint'] + "</div>";
-        hintCount++;
-    });
-
-    htmlTemplateQuality += "";
-    htmlTemplateQuality += "<div class=\"row-fluid\">";
-    htmlTemplateQuality += "<div class=\"span12\">";
-    htmlTemplateQuality += "<div class=\"ibox-title2\">";
-
-    //Appraisal Item Name,Target,Actual,Score,%Weight,Weight Score
-    htmlTemplateQuality += "<div class='titlePanel'>" + structureName + "</div>";
-    if (data['no_weight'] == 0) { // has weight;
-        if (data['result_type'] == 1) {
-            htmlTemplateQuality += "<div class='totalWeight'>" + $(".lt-total-weight").val() + " " + data['total_weight_percent'] + "%</div>";
-        } else {
-            htmlTemplateQuality += "<div class='totalWeight'>" + $(".lt-total-score").val() + " " + data['total_weight'] + "</div>";
-        }
-    }
-
-    htmlTemplateQuality += "</div>";
-    htmlTemplateQuality += "<div class=\"ibox-content\">";
-    htmlTemplateQuality += "<div class=\"table-responsive scrollbar-inner\">";
-    htmlTemplateQuality += "<table id=\"tablethreshould\" class=\"table table-striped\" style='max-width: none;'>";
-    htmlTemplateQuality += "<thead>";
-    //has weight
-    htmlTemplateQuality += "<tr style='white-space: nowrap;'>";
-    htmlTemplateQuality += "<th style=\"width:40%\"><b>" + $(".lt-kpi-name").val() + "</b></th>";
-    htmlTemplateQuality += "<th style='width:15%;text-align: right;'><b>" + $(".lt-target").val() + "</b></th>";
-    htmlTemplateQuality += "<th style='width:10%;text-align: center;'><b>" + $(".lt-first-line-score").val() + "</b></th>";
-    htmlTemplateQuality += "<th style='width:10%;text-align: center;'><b>" + $(".lt-second-line-score").val() + "</b></th>";
-    htmlTemplateQuality += "<th style='width:15%;text-align: right;'><b>" + $(".lt-percent-weight").val() + "</b></th>  ";
-    if (data['result_type'] == 1) {
-        htmlTemplateQuality += "<th style='width:15%;text-align: right;'><b>" + $(".lt-weight-score").val() + "</b></th>  ";
-    } else {
-        htmlTemplateQuality += "<th style='width:15%;text-align: right;'><b>" + $(".lt-result-score").val() + "</b></th>  ";
-    }
-
-    htmlTemplateQuality += "</tr>";
-    htmlTemplateQuality += "</thead>";
-    htmlTemplateQuality += "<tbody id=\"\" class='appraisal_result'>";
-
-    $.each(data['items'], function (index, indexEntry) {
-
-        item_result_id_array.push(indexEntry['item_result_id']);
-        if (!(indexEntry['formula_desc'] == null || indexEntry['formula_desc'] == undefined || indexEntry['formula_desc'] == "" || indexEntry['formula_desc'].length == 0)) {
-            info_item = "<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>" + $(".lt-kpi-name").val() + " : </strong>" + indexEntry['item_name'] + "' info-data='" + indexEntry['formula_desc'] + "'>i</span>";
-        } else {
-            info_item = "";
-        }
-        //has weight
-        htmlTemplateQuality += "<tr>";
-        htmlTemplateQuality += "<td class=''>" + indexEntry['item_name'] + "  " + info_item + "</td>";
-        htmlTemplateQuality += "<td class='' style='text-align: right;padding-right: 10px;'><div data-toggle=\"tooltip\" data-placement=\"right\" title=\"" + hintHtml + "\">" + addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2)) + "</div></td>";
-
-        htmlTemplateQuality += "<td class='' style='text-align: center;'>";
-        htmlTemplateQuality += "<select " + check_disabled_first + " style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' id='competencyScore-" + indexEntry['item_result_id'] + "' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
-        htmlTemplateQuality += dropdownDeductScoreFn(notNullFn(indexEntry['first_score']), indexEntry['nof_target_score'], data['hint']);
-        htmlTemplateQuality += "<select>";
-        htmlTemplateQuality += "</td>";
-
-        htmlTemplateQuality += "<td class='' style='text-align: center;'>";
-        htmlTemplateQuality += "<select " + check_disabled_second + " style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' id='competencyScore_Second-" + indexEntry['item_result_id'] + "' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
-        htmlTemplateQuality += dropdownDeductScoreFn(notNullFn(indexEntry['second_score']), indexEntry['nof_target_score'], data['hint']);
-        htmlTemplateQuality += "<select>";
-        htmlTemplateQuality += "</td>";
-
-        htmlTemplateQuality += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['weight_percent'])).toFixed(2)) + "</td>";
-        htmlTemplateQuality += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2)) + "</td>";
-
-        htmlTemplateQuality += "</tr>";
-    });
-
-    //has weight
-
-    htmlTemplateQuality += "<tr>";
-
-    htmlTemplateQuality += "<td class=''></td>";
-    htmlTemplateQuality += "<td class=''></td>";
-    htmlTemplateQuality += "<td class='' ></td>";
-    htmlTemplateQuality += "<td class=''></td>";
-    htmlTemplateQuality += "<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>" + $(".lt-total").val() + "</b></td>";
-    htmlTemplateQuality += "<td class='' style='text-align: right;padding-right: 10px;font-weight: bold;font-size:16px'><b>" + addCommas(parseFloat(notNullFn(data['total_weigh_score'])).toFixed(2)) + "</b></td>";
-    htmlTemplateQuality += "</tr>";
-    htmlTemplateQuality += "</tbody>";
-    htmlTemplateQuality += "</table>";
-    htmlTemplateQuality += "<input type='hidden' id='structure_id-" + data['structure_id'] + "' class='structure_id' value=" + data['structure_id'] + ">";
-    htmlTemplateQuality += "<input type='hidden' id='form-" + data['structure_id'] + "' class='' value=\"form2\">";
-    htmlTemplateQuality += "<input type='hidden' id='item_result_id_array-" + data['structure_id'] + "' class='item_result_id_array' value=\"" + item_result_id_array + "\">";
-    htmlTemplateQuality += "</div>";
-    htmlTemplateQuality += "<br style=\"clear:both\">";
-    htmlTemplateQuality += "</div>";
-    htmlTemplateQuality += "</div>";
-    htmlTemplateQuality += "</div>";
-    return htmlTemplateQuality;
-};
 
 
 var assignTemplateRewardFn = function (structureName, data) {
