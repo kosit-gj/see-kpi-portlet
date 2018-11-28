@@ -340,7 +340,7 @@ var onchangGroupQualityFn = function (structureId) { // QualityFn
                     // has weight;
                     no_weight = indexEntry2['no_weight'];
                     result_type = indexEntry2['result_type'];
-                    total_weight_percent = indexEntry2['total_weight_percent'];
+                    total_weight_percent = indexEntry2['structure_weight_percent'];
                     total_weight = indexEntry2['total_weight'];
 
                     $.each(indexEntry2, function (index3, indexEntry3) {
