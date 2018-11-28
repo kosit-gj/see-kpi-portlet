@@ -28,6 +28,7 @@
 <input class="lt-uom" type="hidden" value="<liferay-ui:message key="uom"/>"/>
 <input class="lt-year" type="hidden" value="<liferay-ui:message key="year"/>"/>
 <input class="lt-form-type" type="hidden" value="<liferay-ui:message key="form_type"/>"/> 
+<input class="lt-form" type="hidden" value="<liferay-ui:message key="form"/>"/> 
 
 <!-- Assignment -->
 <input class="lt-action" type="hidden" value="<liferay-ui:message key="action"/>"/>

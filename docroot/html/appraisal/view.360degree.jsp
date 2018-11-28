@@ -815,7 +815,7 @@ background-color:#71cccc !important;
 									<div class="form-group pull-left span3"
 										style="margin-left: 5px">
 										<select data-toggle="tooltip" title=""
-											data-original-title="<liferay-ui:message key="form_type"/>"
+											data-original-title="<liferay-ui:message key="form"/>"
 											class="input form-control input-sm span12" id="form_type"
 											name="form_type">
 											<option>All Form</option>

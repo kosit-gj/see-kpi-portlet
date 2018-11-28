@@ -7,6 +7,7 @@ var gEmpInfo = [];
 var appraisal_period_start_date = "";
 var edit_flag = "";
 var action_update = "";
+var allow_input_actual ="";
 
 //Variable to store your files
 var files;
@@ -963,13 +964,14 @@ var assignTemplateQuantityFn = function (structureName, data) {
 		*/
         //has weight
         //				if(data['no_weight']==0){
+        allow_input_actual = indexEntry['allow_input_actual'];
         htmlTemplateQuantity += "<tr >";
         htmlTemplateQuantity += "<td>" + indexEntry['perspective_name'] + "</td>";
         htmlTemplateQuantity += "<td id=\"item_name-" + indexEntry['item_result_id'] + "\">" + indexEntry['item_name'] + "</td>";
         htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><div title=\"" + hintHtml + "\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >" + addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2)) + "</div></td>";
         htmlTemplateQuantity += "<td>" + indexEntry['uom_name'] + "</td>";
-        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumeric itemScore edit_flag\" "+((edit_flag==0)?" disabled":"")+" id=\"forecast-" + indexEntry['item_result_id'] + "\" name=\"forecast-" + indexEntry['item_result_id'] + "\" value=" + indexEntry['forecast_value'] + "></td>";
-        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumeric edit_flag\" "+((indexEntry['allow_input_actual']==0 || edit_flag==0)?" disabled":"")+" id=\"actual_value-" + indexEntry['item_result_id'] + "\"  value=" + indexEntry['actual_value'] + "></td>";
+        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumeric itemScore edit_flag\"  id=\"forecast-" + indexEntry['item_result_id'] + "\" name=\"forecast-" + indexEntry['item_result_id'] + "\" value=" + indexEntry['forecast_value'] + "></td>";
+        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumeric edit_flag actual_value\"  id=\"actual_value-" + indexEntry['item_result_id'] + "\"  value=" + indexEntry['actual_value'] + "></td>";
 //        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;' id=\"actual_value-" + indexEntry['item_result_id'] + "\">" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>"; //# 004
         if (data['threshold'] == 1) {
             htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['score']))) + "</td>";
@@ -1047,6 +1049,7 @@ var dropDrowYearListFn = function (nameArea, id) {
 
 
 var dropDrowPeriodListFn = function (year, id) {
+	
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/period_list",
         type: "get",
@@ -1071,6 +1074,12 @@ var dropDrowPeriodListFn = function (year, id) {
 
 var dropDrowAppraisalOrgLevelFn = function (id) {
 
+	var htmlOption="";
+	
+	if(gSystempConfig.appraisal_360_flag == 0){
+		htmlOption+="<option value=''>All Organization Level</option>";
+	}
+	
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/org_level",
         type: "get",
@@ -1078,7 +1087,6 @@ var dropDrowAppraisalOrgLevelFn = function (id) {
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            var htmlOption = "";
             $.each(data, function (index, indexEntry) {
 
                 if (id == indexEntry['level_id']) {
@@ -1100,15 +1108,23 @@ var dropDrowAppraisalOrgLevelFn = function (id) {
 
 
 var dropDrowIndividualOrgLevelFn = function (id) {
+	var htmlOption="";
+	
+	if(gSystempConfig.appraisal_360_flag == 1){
+		var apiUrl = "/public/appraisal360/parameter/org_level_individual";
+	} else {
+		var apiUrl = "/public/appraisal/parameter/org_level_individual";
+		htmlOption+="<option value=''>All Organization Level</option>";
+	}
+	
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/appraisal360/parameter/org_level_individual",
+        url: restfulURL + "/" + serviceName + apiUrl,
         type: "get",
         dataType: "json",
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         data: { "level_id": $("#AppraisalEmpLevel").val() },
         success: function (data) {
-            var htmlOption = "";
             $.each(data, function (index, indexEntry) {
 
                 //if (id == indexEntry['level_id']) {
@@ -1126,10 +1142,13 @@ var dropDrowIndividualOrgLevelFn = function (id) {
 
 
 var dropDrowAppraisalEmpLevelFn = function (id) {
+    var htmlOption = "";
+    
 	if(gSystempConfig.appraisal_360_flag == 1){
 		var apiUrl = "/public/appraisal360/parameter/emp_level";
 	} else {
 		var apiUrl = "/public/appraisal/parameter/emp_level";
+		htmlOption+="<option value=''>All Employee Level </option>";
 	}
     $.ajax({
         url: restfulURL + "/" + serviceName + apiUrl,
@@ -1138,7 +1157,6 @@ var dropDrowAppraisalEmpLevelFn = function (id) {
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            var htmlOption = "";
             $.each(data, function (index, indexEntry) {
 
                 if (id == indexEntry['level_id']) {
@@ -1154,7 +1172,12 @@ var dropDrowAppraisalEmpLevelFn = function (id) {
 
 
 var dropDrowDepartmentFn = function (id) {
-
+	var htmlOption="";
+	
+	if(gSystempConfig.appraisal_360_flag == 0){
+		htmlOption+="<option value=''>All Department</option>";
+	}
+	
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/dep_list",
         type: "get",
@@ -1162,7 +1185,6 @@ var dropDrowDepartmentFn = function (id) {
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            var htmlOption = "";
             $.each(data, function (index, indexEntry) {
                 if (id == indexEntry['department_code']) {
                     htmlOption += "<option selected='selected' value=" + indexEntry['department_code'] + ">" + indexEntry['department_name'] + "</option>";
@@ -1177,7 +1199,12 @@ var dropDrowDepartmentFn = function (id) {
 
 
 var dropDrowOrgFn = function (appraisalLevelId) {
-
+    var htmlOption = "";
+    
+	if(gSystempConfig.appraisal_360_flag == 0){
+		htmlOption+="<option value=''>All Organization</option>";
+	}
+	
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/org",
         type: "get",
@@ -1186,7 +1213,6 @@ var dropDrowOrgFn = function (appraisalLevelId) {
         headers: { Authorization: "Bearer " + tokenID.token },
         data: { "level_id": appraisalLevelId },
         success: function (data) {
-            var htmlOption = "";
             $.each(data, function (index, indexEntry) {
                 if (id == indexEntry['org_id']) {
                     htmlOption += "<option selected='selected' value=" + indexEntry['org_id'] + ">" + indexEntry['org_name'] + "</option>";
@@ -1201,17 +1227,24 @@ var dropDrowOrgFn = function (appraisalLevelId) {
 
 
 var dropDrowIndividualOrgFn = function (appraisalLevelId) {
+    var htmlOption = "";
+    
+	if(gSystempConfig.appraisal_360_flag == 1){
+		var apiUrl = "/public/appraisal360/parameter/org_individual";
+	} else {
+		var apiUrl = "/public/appraisal/parameter/org_individual";
+		htmlOption+="<option value=''>All Organization</option>";
+	}
+	
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/appraisal360/parameter/org_individual",
+        url: restfulURL + "/" + serviceName + apiUrl,
         type: "get",
         dataType: "json",
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         data: { "org_level": $("#AppraisalOrgLevel").val() },
         success: function (data) {
-            var htmlOption = "";
             $.each(data, function (index, indexEntry) {
-                //if (id == indexEntry['org_id']) {
             	if (indexEntry['default_flag'] == 1) {
                     htmlOption += "<option selected='selected' value=" + indexEntry['org_id'] + ">" + indexEntry['org_name'] + "</option>";
                 } else {
@@ -1572,6 +1605,7 @@ var findOneFn = function (id) {
                 listAppraisalDetailFn(data);
                 setThemeColorFn(tokenID.theme_color);
 
+                
                 if ((data['head'][0]['edit_flag'] == 0)) {
                     if (emailLinkAppraisal == true) {
                         var AppraisalEmailLink = '#AppraisalEmailLink';
@@ -1584,15 +1618,27 @@ var findOneFn = function (id) {
 
                     $("" + AppraisalEmailLink + "").find('#actionToAssign,#remark_footer').removeAttr('disabled');
                 }
+                
+                
+                if($("#actionToAssign").val() == null || edit_flag == 0){ //#004
+                    $(".edit_flag").attr("disabled", "disabled"); 
+                }
+                else{ //#004
+                	 $(".edit_flag").removeAttr('disabled');
+                	 
+                	if(allow_input_actual == 0){ 
+                		$(".actual_value").attr("disabled", "disabled");
+                	} 
+                	else 
+                		$(".actual_value").removeAttr('disabled');
+                }
 
+                
                 if ($("#actionToAssign").val() == null) { 
                     $("#btnSubmit").attr("disabled", "disabled");
-                    $(".edit_flag").attr("disabled", "disabled"); //#004
                 }
-                else{
-                	$(".edit_flag").attr("disabled", "true"); //#004
-                }
-            } else {
+            } 
+            else {
                 callFlashSlide($(".lt-data-is-empty").val());
                 return false;
             }
@@ -2212,7 +2258,7 @@ var listDataFn = function (data) {
         htmlHTML += " <tr>";
 
         if ($("#embed_appraisalType").val() == "2") {
-        	htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-form-type").val()+"</b></th>";
+        	htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-form").val()+"</b></th>";
             htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-emp-code").val() + "</b></th>";
             htmlHTML += " <th style=\"widthauto;\"><b>" + $(".lt-emp-name").val() + "</b></th>";
             htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-level").val() + "</b> </th>";
@@ -2221,7 +2267,7 @@ var listDataFn = function (data) {
             htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-action").val() + "</b></th>";
 
         } else if ($("#embed_appraisalType").val() == "1") {
-        	htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-form-type").val()+"</b></th>";
+        	htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-form").val()+"</b></th>";
             htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-org-code").val() + "</b></th>";
             htmlHTML += " <th style=\"widthauto;\"><b>" + $(".lt-org-name").val() + "</b></th>";
             htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-level").val() + "</b> </th>";
