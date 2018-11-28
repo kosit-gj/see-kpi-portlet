@@ -271,10 +271,10 @@ var to_action = function () {
         dataType: "json",
         async: true,
         data: {
-            "stage_id": status,
-            "flag": "emp_result_judgement_flag",
-            "appraisal_type_id": 2,
-            "appraisal_form_id": $("#embed_appraisal_form").val()
+        	"stage_id": status,
+        	//"flag": "emp_result_judgement_flag",
+        	"appraisal_type_id": 2,
+        	"appraisal_form_id": $("#AppraisalForm").val()
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
@@ -305,11 +305,6 @@ var listDataFn = function(data){
 		htmlHTML +="</tr";
 		$("#list_empjudege").html(htmlHTML);
 		$(".head_adjust").hide();
-		
-		$("#score_name2 , #score_name3 ").hide();
-		$("#score_name1 ").text("");
-		$("#score_name1 ").show();
-		$(".setColSpanResultAssess").attr('colspan',1);
 		return;
 	}
 	
@@ -321,43 +316,8 @@ var listDataFn = function(data){
 		}
 		
 		if(index==0) {
-			var setColSpan = 0 ;
-			
-			$("#adjust_result_score_name").text(indexEntry['adjust_result_score_name']);
-			
-			if(indexEntry['result_score_name1'] != null){
-				$("#score_name1").show();
-				$("#score_name1").text(indexEntry['result_score_name1']);
-				setColSpan++;
-			}else{
-				$("#score_name1").hide();
-			}
-			if(indexEntry['result_score_name2'] != null){
-				$("#score_name2").show();
-				$("#score_name2").text(indexEntry['result_score_name2']);
-				setColSpan++;
-			}else{
-				$("#score_name2").hide();
-			}
-			if(indexEntry['result_score_name3'] != null){
-				$("#score_name3").show();
-				$("#score_name3").text(indexEntry['result_score_name3']);
-				setColSpan++;
-			}else{
-				$("#score_name3").hide();
-			}
-			
-			//set attribute colspan
-			if(setColSpan != 0){
-				$(".setColSpanResultAssess").attr('colspan',setColSpan);
-			}else{
-				$("#score_name1 ").text("");
-				$("#score_name1 ").show();
-				$("#score_name2 , #score_name3 ").hide();
-				$(".setColSpanResultAssess").attr('colspan',1);
-			}
-			
-			
+			$("#score_name1").text(indexEntry['result_score_name1']);
+			$("#score_name2").text(indexEntry['result_score_name2']);
 		}
 		
             htmlHTML += " <tr class=\"control-calculate\">";
@@ -382,6 +342,12 @@ var listDataFn = function(data){
             htmlHTML += " <td style=\"text-align: center;\">";
             htmlHTML += " "+indexEntry['status']+"";
             htmlHTML += " </td>";
+            htmlHTML += " <td style=\"text-align: right;\">";
+            //htmlHTML += " <div class=\"float-label-control\">";
+            //htmlHTML += " <input disabled type='number' min=\"0\" style=\"text-align: right; min-width: 40px;\" class='form-control input-sm span12' value='"+indexEntry['result_score1']+"'/>";
+            htmlHTML += indexEntry['result_score1'];
+            //htmlHTML += " </div>";
+            htmlHTML += " </td>";
             htmlHTML += " <td class=\"data-percent\">";
             htmlHTML += " <div class=\"float-label-control\">";
             htmlHTML += " <input "+edit_flag+" type='text'  style=\"text-align: right; min-width: 40px;\" class='form-control input-xs span12 percent numberOnly' total_adjust_result_score='"+indexEntry['result_score1']+"' value='"+indexEntry['percent_adjust']+"'/>";
@@ -392,32 +358,11 @@ var listDataFn = function(data){
             htmlHTML += " <input "+edit_flag+" type='text'  style=\"text-align: right; min-width: 40px;\" class='form-control input-xs span12 score numberOnly' total_adjust_result_score='"+indexEntry['result_score1']+"' value='"+indexEntry['result_score2']+"'/>";
             htmlHTML += " </div>";
             htmlHTML += " </td>";
-            
-            
-            if(indexEntry['result_score_name1'] != null){
-            	htmlHTML += " <td style=\"text-align: right;\">";
-                htmlHTML += 	indexEntry['result_score1'];
-                htmlHTML += " </td>";
-                htmlHTML += " </tr>";
-			}
-			if(indexEntry['result_score_name2'] != null){
-				htmlHTML += " <td style=\"text-align: right;\">";
-	            htmlHTML += 	indexEntry['result_score2'];
-	            htmlHTML += " </td>";
-	            htmlHTML += " </tr>";
-			}
-			if(indexEntry['result_score_name3'] != null){
-				htmlHTML += " <td style=\"text-align: right;\">";
-	            htmlHTML += 	indexEntry['result_score3'];
-	            htmlHTML += " </td>";
-	            htmlHTML += " </tr>";
-			}
+            htmlHTML += " </tr>";
 
 	});
 	
 	$("#list_empjudege").html(htmlHTML);
-	
-	$("#adjust_percent").autoNumeric('set', 100);
 	$(".numberOnly").autoNumeric('init');
 	$(".numberOnly").autoNumeric('update', {
 		vMin : '0',
