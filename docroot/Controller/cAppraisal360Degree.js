@@ -234,6 +234,7 @@ var onchangDetailQualityFn = function (item_result_id, structureId) {  // Qualit
 
 var onchangTableQualityFn = function (structureId) {  // QualityFn
     var htmlTable = "";
+    var nof_target_score = 0;
     var total_weigh_score = "";
     var hintHtml = "";
     var dataHint = [];
@@ -254,6 +255,7 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
                         if (isObjectOrArray(indexEntry3) && indexEntry3['emp_id'] == $("#emp-" + structureId).val()) {
                             // total_weigh_score = indexEntry3['total_weigh_score'];
                         	total_weigh_score = 0;
+                        	nof_target_score = 0;
                             $.each(indexEntry3['items'], function (index, indexEntry) {
                                 if (!(indexEntry['formula_desc'] == null || indexEntry['formula_desc'] == undefined || indexEntry['formula_desc'] == "" || indexEntry['formula_desc'].length == 0)) {
                                     info_item = "<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>" + $(".lt-kpi-name").val() + " : </strong>" + indexEntry['item_name'] + "' info-data='" + indexEntry['formula_desc'] + "'>i</span>";
@@ -290,6 +292,7 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
                                 htmlTable += "</tr>";
                                 
                                 total_weigh_score = (total_weigh_score + parseInt(indexEntry['weigh_score']));
+                                nof_target_score = parseInt(indexEntry['nof_target_score']);
                             });
                         }
                     });
@@ -308,6 +311,7 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
 	    htmlTable += "</tr>";
     }
     */
+    total_weigh_score = (total_weigh_score / nof_target_score);
     htmlTable += "<tr class='th-all'>";
     htmlTable += "<td class=''></td>";
     htmlTable += "<td class=''></td>";
