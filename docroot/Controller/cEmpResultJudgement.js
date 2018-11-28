@@ -272,7 +272,7 @@ var to_action = function () {
         async: true,
         data: {
         	"stage_id": status,
-        	//"flag": "emp_result_judgement_flag",
+        	"flag": "emp_result_judgement_flag",
         	"appraisal_type_id": 2,
         	"appraisal_form_id": $("#AppraisalForm").val()
         },
