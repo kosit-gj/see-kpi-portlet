@@ -2357,10 +2357,17 @@ var getDataFn = function (page, rpp) {
     var EmpID = EmpName.split('-');
     EmpID = EmpID[0];
 
-    var appraisal_type_id = ($("#embed_appraisalType").val());
+    var appraisal_type_id = ($("#embed_appraisalType").val()); // #004
     var form_type = $("#embed_formType").val();
+    
+	if(gSystempConfig.appraisal_360_flag == 1){
+		var apiUrl = "/public/appraisal/show/index";
+	} else {
+		var apiUrl = "/public/appraisal";
+	}
+	
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/appraisal/show/index",
+        url: restfulURL + "/" + serviceName + apiUrl,
         type: "get",
         dataType: "json",
         async: false,
@@ -3035,7 +3042,8 @@ $(document).ready(function () {
                             "emp_name": request.term,
                             "emp_code": session_emp_code,
                             "org_id": $("#organization").val(),
-                            "level_id": $("#AppraisalEmpLevel").val()
+                            "level_id": $("#AppraisalEmpLevel").val(),
+                            "org_level": $("#AppraisalOrgLevel").val()
                         },
                         //async:false,
                         headers: { Authorization: "Bearer " + tokenID.token },
