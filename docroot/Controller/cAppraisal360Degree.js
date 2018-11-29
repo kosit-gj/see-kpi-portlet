@@ -984,7 +984,8 @@ var assignTemplateQuantityFn = function (structureName, data) {
         } else {
             htmlTemplateQuantity += "<td style=\"text-align: right;padding-right: 10px;background:" + hexToRgb("#" + indexEntry['color'], 0.7) + "\">" + addCommas(parseFloat(notNullFn(indexEntry['percent_achievement']))) + "</td>";
         }
-        htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['contribute_percent'])).toFixed(2))+"</td>";
+        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumericActual edit_flag contribute_percent\"  id=\"contribute_percent-" + indexEntry['item_result_id'] + "\"  value=" + indexEntry['contribute_percent'] + "></td>";
+        //htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['contribute_percent'])).toFixed(2))+"</td>";
         htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['weight_percent'])).toFixed(2)) + "</td>";
         if(data['threshold']==1){
 			htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>"+addCommas(parseFloat(notNullFn(indexEntry['weigh_score_swc'])).toFixed(2))+"</td>";
@@ -2584,7 +2585,7 @@ var saveAppraisalIndividualFn = function ()
         if (typeScore == "forecast") {
             appraisal += "\"forecast_value\":\"" + removeComma($(indexEntry).val()) + "\",";
             appraisal += "\"actual_value\":\""+$("#actual_value-"+item_result_id).autoNumeric('get')+"\","; // #004
-
+            appraisal += "\"contribute_percent\":\""+$("#contribute_percent-"+item_result_id).autoNumeric('get')+"\","; // #105
         } else if (typeScore == "competencyScore") {
             appraisal += "\"forecast_value\":\"\",";
             appraisal += "\"actual_value\":\"\",";
@@ -2670,6 +2671,7 @@ var saveAppraisalOrganizationFn = function()
 			appraisal+="\"forecast_value\":\""+removeComma($(indexEntry).val())+"\",";
 			appraisal+="\"actual_value\":\"\"";
 			//appraisal+="\"actual_value\":\""+$("#actual-"+item_result_id).val()+"\",";
+			//appraisal += "\"contribute_percent\":\""+$("#contribute_percent-"+item_result_id).autoNumeric('get')+"\","; // #105 พี่topบอกไม่มีประเมิน org
 
 		}else if(typeScore=="competencyScore"){
 			appraisal+="\"forecast_value\":\"\",";
