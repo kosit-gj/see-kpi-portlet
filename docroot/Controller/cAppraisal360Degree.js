@@ -3141,7 +3141,6 @@ $(document).ready(function () {
 
             $("#btnCalculate").click(function () {
             	action_update = 'calculate';
-            	calculateFn();
             	if($("#embed_appraisalType").val() == "1") {
             		// Is Organization.
             		saveAppraisalOrganizationFn();
@@ -3149,6 +3148,7 @@ $(document).ready(function () {
             		// Is Individual.
             		saveAppraisalIndividualFn();
             	}
+            	calculateFn();
             	$("#id-"+($("#emp_result_id").val())).click();
             });
             
