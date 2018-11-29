@@ -32,26 +32,20 @@ var calculateFn = function(){
         async: false,
         success: function (data, status) {
         	findOneFn($("#emp_result_id").val());  // update detail modal
-        	$("#slide_status").hide();
-        	$("body").mLoading('hide'); //Loading
+        	
             if (data['status'] == 200) {
-            	clearTimeout(setTimeoutSlide);
-            	callFlashSlide("Calculate Success.");
+            	clearTimeout(setTimeoutSlide); callFlashSlide("Calculate Success.");
             	console.log(data['data']);
             }
             else if(data['status'] == 400){
-            	clearTimeout(setTimeoutSlide);
-            	callFlashSlide("<font color=''>" + data['data'] + "</font>", "error");
+            	clearTimeout(setTimeoutSlide); callFlashSlide("<font color=''>" + data['data'] + "</font>", "error");
             }
-//            clearTimeout(mLoadingShow);
-            $("body").mLoading("hide");
+//            clearTimeout(mLoadingShow);  $("body").mLoading("hide");
         },
 		error: function(jqXHR, textStatus, errorThrown){
 			findOneFn($("#emp_result_id").val());  // update detail modal
-//			clearTimeout(mLoadingShow);
-			$("body").mLoading("hide");
-			clearTimeout(setTimeoutSlide);
-			callFlashSlide("<font color=''>ETL fail ,Internal Server Error [500]</font>", "error");
+//			clearTimeout(mLoadingShow); $("body").mLoading("hide");
+			clearTimeout(setTimeoutSlide); callFlashSlide("<font color=''>ETL fail ,Internal Server Error [500]</font>", "error");
 			
 		}
     });
@@ -723,7 +717,7 @@ var dropdownDeductScoreFn = function (score, nof_target_score, hint) {
 
 
 var assignTemplateRewardFn = function (structureName, data) {
-
+console.log("console_log--> "+data);
     var htmlTemplateDeduct = "";
     htmlTemplateDeduct += "<div class=\"row-fluid\">";
     htmlTemplateDeduct += "<div class=\"span12\">";
@@ -746,10 +740,14 @@ var assignTemplateRewardFn = function (structureName, data) {
         htmlTemplateDeduct += "<tr>";
         htmlTemplateDeduct += "<th style=\"width:30%\"><b>" + $(".lt-kpi-name").val() + "</b></th>";
         htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-max-value").val() + "</b></th>";
-        htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-value-not-raise").val() + "</b></th>";
+        if (data['is_no_raise_value'] == 1) { //#004
+        	htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-value-not-raise").val() + "</b></th>";
+        }
         htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-actual-value").val() + "</b></th>";
         htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-over-value").val() + "</b></th>";
-        htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-over-value-not-raise").val() + "</b></th>";
+        if (data['is_no_raise_value'] == 1) { //#004
+            htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-over-value-not-raise").val() + "</b></th>";
+        }
         htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-reward-score-Unit").val() + "</b> </th>";
 
         if (data['result_type'] == 1) {
@@ -777,10 +775,15 @@ var assignTemplateRewardFn = function (structureName, data) {
             htmlTemplateDeduct += "<tr>";
             htmlTemplateDeduct += "<td class=''> " + indexEntry['item_name'] + "</td>";
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['max_value'])).toFixed(2)) + "</td>";
-            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['no_raise_value'])).toFixed(2)) + "</td>";
+            if (data['is_no_raise_value'] == 1) { //#004
+            	htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['no_raise_value'])).toFixed(2)) + "</td>";
+            }
+            
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>";
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2)) + "</td>";
-            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_no_raise_value'])).toFixed(2)) + "</td>";
+            if (data['is_no_raise_value'] == 1) { //#004
+            	htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_no_raise_value'])).toFixed(2)) + "</td>";
+            }
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['reward_score_unit'])).toFixed(2)) + "</td>";
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2)) + "</td>";
             htmlTemplateDeduct += "</tr>";
@@ -788,10 +791,15 @@ var assignTemplateRewardFn = function (structureName, data) {
             htmlTemplateDeduct += "<tr>";
             htmlTemplateDeduct += "<td class=''> " + indexEntry['item_name'] + "</td>";
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['max_value'])).toFixed(2)) + "</td>";
-            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['no_raise_value'])).toFixed(2)) + "</td>";
+            if (data['is_no_raise_value'] == 1) { //#004
+            	 htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['no_raise_value'])).toFixed(2)) + "</td>";
+            }
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>";
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2)) + "</td>";
-            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_no_raise_value'])).toFixed(2)) + "</td>";
+            if (data['is_no_raise_value'] == 1) { //#004
+            	htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_no_raise_value'])).toFixed(2)) + "</td>";
+           }
+            
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['reward_score_unit'])).toFixed(2)) + "</td>";
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['score'])).toFixed(2)) + "</td>";
             htmlTemplateDeduct += "</tr>";
@@ -799,8 +807,10 @@ var assignTemplateRewardFn = function (structureName, data) {
     });
     if (data['no_weight'] == 0) {
         htmlTemplateDeduct += "<tr>";
-        htmlTemplateDeduct += "<td class=''></td>";
-        htmlTemplateDeduct += "<td class=''></td>";
+        if (data['is_no_raise_value'] == 1) { //#004
+        	htmlTemplateDeduct += "<td class=''></td>";
+        	htmlTemplateDeduct += "<td class=''></td>";
+        }
         htmlTemplateDeduct += "<td class=''></td>";
         htmlTemplateDeduct += "<td class=''></td>";
         htmlTemplateDeduct += "<td class=''></td>";
@@ -848,10 +858,15 @@ var assignTemplateDeductFn = function (structureName, data) {
     htmlTemplateDeduct += "<tr style='white-space: nowrap;'>";
     htmlTemplateDeduct += "<th style=\"width:30%\"><b>" + $(".lt-kpi-name").val() + "</b></th>";
     htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-max-value").val() + "</b></th>";
-    htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-value-not-raise").val() + "</b></th>";
+    if (data['is_no_raise_value'] == 1) { //#004
+        htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-value-not-raise").val() + "</b></th>";
+    }
     htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-actual-value").val() + "</b></th>";
     htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-over-value").val() + "</b></th>";
-    htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-over-value-not-raise").val() + "</b></th>";
+    if (data['is_no_raise_value'] == 1) { //#004
+    	 htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-over-value-not-raise").val() + "</b></th>";
+    }
+   
     htmlTemplateDeduct += "<th style='width:15%;text-align: right;'><b>" + $(".lt-deduct-score").val() + "/" + $(".lt-unit").val() + "</b> </th>";
 
     if (data['is_value_get_zero'] == 1) {
@@ -874,10 +889,16 @@ var assignTemplateDeductFn = function (structureName, data) {
         htmlTemplateDeduct += "<tr>";
         htmlTemplateDeduct += "<td class=''> " + indexEntry['item_name'] + "</td>";
         htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['max_value'])).toFixed(2)) + "</td>";
-        htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['no_raise_value'])).toFixed(2)) + "</td>";
+        if (data['is_no_raise_value'] == 1) { //#004
+        	 htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['no_raise_value'])).toFixed(2)) + "</td>";
+        }
+       
         htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>";
         htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2)) + "</td>";
-        htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_no_raise_value'])).toFixed(2)) + "</td>";
+        
+        if (data['is_no_raise_value'] == 1) { //#004
+        	 htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_no_raise_value'])).toFixed(2)) + "</td>";
+       }
         htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['deduct_score_unit'])).toFixed(2)) + "</td>";
         if (data['is_value_get_zero'] == 1) {
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + (indexEntry['value_get_zero'] == null ? "   " : indexEntry['value_get_zero']) + "</td>";//indexEntry['value_get_zero']==null?"":indexEntry['value_get_zero']
@@ -891,8 +912,12 @@ var assignTemplateDeductFn = function (structureName, data) {
     htmlTemplateDeduct += "<td class=''></td>";
     htmlTemplateDeduct += "<td class=''></td>";
     htmlTemplateDeduct += "<td class=''></td>";
-    htmlTemplateDeduct += "<td class=''></td>";
-    htmlTemplateDeduct += "<td class=''></td>";
+   
+    
+    if (data['is_no_raise_value'] == 1) { //#004
+    	htmlTemplateDeduct += "<td class=''></td>";
+    	htmlTemplateDeduct += "<td class=''></td>";
+    }
     if (data['is_value_get_zero'] == 1) {
         htmlTemplateDeduct += "<td class=''></td>";
     }
@@ -2654,10 +2679,6 @@ var saveAppraisalIndividualFn = function ()
                 getDataFn();
                 
                 if(action_update=="calculate"){
-//                mLoadingShow = setInterval(function() {
-//              		  $("body").mLoading();
-//              	}, 200);
-                	
                 	calculateFn(); // run etl calculate.
                 }
                 else if(action_update=="submit"){
@@ -3191,6 +3212,8 @@ $(document).ready(function () {
             });
 
             $("#btnCalculate").click(function () {
+//              mLoadingShow = setInterval(function() { $("body").mLoading(); }, 1000);
+            	
             	action_update = 'calculate';
             	if($("#embed_appraisalType").val() == "1") {
             		// Is Organization.
