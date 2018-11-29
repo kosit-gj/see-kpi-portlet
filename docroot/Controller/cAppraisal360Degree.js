@@ -977,7 +977,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
         htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><div title=\"" + hintHtml + "\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >" + addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2)) + "</div></td>";
         htmlTemplateQuantity += "<td>" + indexEntry['uom_name'] + "</td>";
         htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumeric itemScore edit_flag\"  id=\"forecast-" + indexEntry['item_result_id'] + "\" name=\"forecast-" + indexEntry['item_result_id'] + "\" value=" + indexEntry['forecast_value'] + "></td>";
-        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumeric edit_flag actual_value\"  id=\"actual_value-" + indexEntry['item_result_id'] + "\"  value=" + indexEntry['actual_value'] + "></td>";
+        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumericActual edit_flag actual_value\"  id=\"actual_value-" + indexEntry['item_result_id'] + "\"  value=" + indexEntry['actual_value'] + "></td>";
 //        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;' id=\"actual_value-" + indexEntry['item_result_id'] + "\">" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>"; //# 004
         if (data['threshold'] == 1) {
             htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['score']))) + "</td>";
@@ -1563,6 +1563,15 @@ var listAppraisalDetailFn = function (data) {
 			wEmpty: 'zero'
 		};
 	scriptInputAutoNumeric(".autoNumeric",option);
+	
+	var option2 ={
+			vMin : '0.00',
+			vMax : '100.00',
+			lZero: 'deny',
+//			aPad: false,
+			wEmpty: 'zero'
+		};
+	scriptInputAutoNumeric(".autoNumericActual",option2);
     
 //    dropDrowActionEditFn(data['head'][0]['stage_id'], data['head'][0]['emp_code'], data['head'][0]['org_code']);
     $("#assignTo").change();
@@ -2622,6 +2631,8 @@ var saveAppraisalIndividualFn = function ()
                     window.location.replace(url_redirect + "/kpi-result");
                     return false;
                 }
+                
+                getDataFn();
 
             } else if (data['status'] == 400) {
 
@@ -2707,6 +2718,8 @@ var saveAppraisalOrganizationFn = function()
 					window.location.replace(url_redirect+"/kpi-result");
 					return false;
 				}
+				
+				getDataFn();
 
 			}else if(data['status']==400){
 				callFlashSlideInModal(validationAppraisalFn(data),"#information","error");
