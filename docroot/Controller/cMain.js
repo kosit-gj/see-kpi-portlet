@@ -270,7 +270,7 @@ $(document).on("click","#btnCloseSlide",function(){
 $(document).on("click",".btnModalClose",function(){
 	flashSlideInModalSlideUp();
 });
-
+var setTimeoutSlide;
 var callFlashSlide = function(text,flashType){
 	if(flashType=="error"){
 		
@@ -280,7 +280,7 @@ var callFlashSlide = function(text,flashType){
 	}else{
 		$("#slide_status_area").html(text);
 		$("#slide_status").slideDown("slow");
-		setTimeout(function(){
+		setTimeoutSlide = setTimeout(function(){
 			$("#slide_status").slideUp();
 		},3000);
 	}

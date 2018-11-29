@@ -8,14 +8,17 @@ var appraisal_period_start_date = "";
 var edit_flag = "";
 var action_update = "";
 var allow_input_actual ="";
-
+var chief_emp_code ="";
 //Variable to store your files
 var files;
 var emailLinkAppraisal = false;
 var gSystempConfig = [];
 var gStage = [];
+var mLoadingShow ;
 
 var calculateFn = function(){
+	
+	
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal360/Calculate/Etl",
         type: "get",
@@ -28,15 +31,29 @@ var calculateFn = function(){
         headers: { Authorization: "Bearer " + tokenID.token },
         async: false,
         success: function (data, status) {
-
+        	findOneFn($("#emp_result_id").val());  // update detail modal
+        	$("#slide_status").hide();
+        	$("body").mLoading('hide'); //Loading
             if (data['status'] == 200) {
+            	clearTimeout(setTimeoutSlide);
             	callFlashSlide("Calculate Success.");
             	console.log(data['data']);
             }
             else if(data['status'] == 400){
-            	callFlashSlide(data['data']);
+            	clearTimeout(setTimeoutSlide);
+            	callFlashSlide("<font color=''>" + data['data'] + "</font>", "error");
             }
-        }
+//            clearTimeout(mLoadingShow);
+            $("body").mLoading("hide");
+        },
+		error: function(jqXHR, textStatus, errorThrown){
+			findOneFn($("#emp_result_id").val());  // update detail modal
+//			clearTimeout(mLoadingShow);
+			$("body").mLoading("hide");
+			clearTimeout(setTimeoutSlide);
+			callFlashSlide("<font color=''>ETL fail ,Internal Server Error [500]</font>", "error");
+			
+		}
     });
 }
 
@@ -229,6 +246,7 @@ var onchangDetailQualityFn = function (item_result_id, structureId) {  // Qualit
         "weigh_score": weigh_score,
         "group_id": group_id,
         "group_weight_percent": group_weight_percent,
+        "chief_emp_id": chief_emp_code,
     });
 }
 
@@ -1475,7 +1493,7 @@ var listAppraisalDetailFn = function (data) {
             //hasWeight f and f = t
 
 
-
+            chief_emp_code = data['head'][0]['chief_emp_code'];
 
             $("#titlePanelInformation").html($(".lt-employee-information").val());
 
@@ -2624,7 +2642,7 @@ var saveAppraisalIndividualFn = function ()
         success: function (data) {
             if (data['status'] == 200) {
 
-                $("#ModalAppraisal").modal('hide');
+                
                 callFlashSlide($(".lt-saved").val());
 
                 if (emailLinkAppraisal == true) {
@@ -2634,6 +2652,18 @@ var saveAppraisalIndividualFn = function ()
                 }
                 
                 getDataFn();
+                
+                if(action_update=="calculate"){
+//                mLoadingShow = setInterval(function() {
+//              		  $("body").mLoading();
+//              	}, 200);
+                	
+                	calculateFn(); // run etl calculate.
+                }
+                else if(action_update=="submit"){
+                	$("#ModalAppraisal").modal('hide');
+                }
+            
 
             } else if (data['status'] == 400) {
 
@@ -2722,7 +2752,11 @@ var saveAppraisalOrganizationFn = function()
 				}
 				
 				getDataFn();
-
+				
+				 if(action_update=="calculate"){
+	                	calculateFn();  // run calculate etl.
+	                }
+				 
 			}else if(data['status']==400){
 				callFlashSlideInModal(validationAppraisalFn(data),"#information","error");
 			}
@@ -3145,6 +3179,7 @@ $(document).ready(function () {
             //submit
             $("#btnSubmit").click(function () {
             	action_update = 'submit';
+            	$("body").mLoading('show'); //Loading
             	if($("#embed_appraisalType").val() == "1") {
             		// Is Organization.
             		saveAppraisalOrganizationFn();
@@ -3152,6 +3187,7 @@ $(document).ready(function () {
             		// Is Individual.
             		saveAppraisalIndividualFn();
             	}
+            	$("body").mLoading('hide'); //Loading
             });
 
             $("#btnCalculate").click(function () {
@@ -3163,8 +3199,7 @@ $(document).ready(function () {
             		// Is Individual.
             		saveAppraisalIndividualFn();
             	}
-            	calculateFn();
-            	$("#id-"+($("#emp_result_id").val())).click();
+            	
             });
             
             //Action Plan Action Area...
