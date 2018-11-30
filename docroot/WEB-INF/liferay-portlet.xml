@@ -1980,6 +1980,7 @@
 		<header-portlet-css>/css/tywMain.css</header-portlet-css>
 		<header-portlet-css>/css/appraisal.css</header-portlet-css>
 		<header-portlet-css>/css/dropify.css</header-portlet-css>
+		<header-portlet-css>/js/loading/loading.css</header-portlet-css>
 		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
@@ -1995,6 +1996,7 @@
 		<footer-portlet-javascript>/js/fusioncharts/js/fusioncharts.widgets.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/fusioncharts/js/themes/fusioncharts.theme.fint.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/plugins/autoNumeric/autoNumeric-min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/loading/loading.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cAppraisal360Degree.js</footer-portlet-javascript>
