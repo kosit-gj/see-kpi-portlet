@@ -723,10 +723,10 @@ background-color:#71cccc !important;
 
 
 .aui .list-data-table .table-bordered th{
- background-color: #666666 !important;
- color: #ffffff;
- vertical-align: top;
- 
+/*  background-color: #666666 !important; */
+/*  color: #ffffff; */
+/*  vertical-align: top; */
+ 	font-weight: 700;
 /*  text-align: center; */
 }
 .aui .list-data-table .table-bordered td{
@@ -871,6 +871,18 @@ input[type=number]::-webkit-outer-spin-button {
     100% { top: 3em; opacity: 1; }
 }
 
+	.testOverFlow {
+		max-width: 200px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.testOverFlow:hover {
+		max-width: 200px;
+	    text-overflow: clip;
+	    white-space: normal;
+	    word-break: break-all;
+	}
 </style>
 
 
@@ -986,7 +998,31 @@ input[type=number]::-webkit-outer-spin-button {
 							<div class='titlePanel'><liferay-ui:message key="emp-adjustment-list"/></div>
 						</div>						
 						<div class="ibox-content">
-							<div class="row-fluid head_adjust" style="display: none; margin-bottom: 12px;">
+						<!-- pagination start -->
+						<div class="row-fluid">
+							<div class="position-result-perpage">
+								<div class="pagianation_area">
+									<div class="pagination_top pagination"></div>
+								</div>
+								<div class="object-right paging-text">
+									<div class='pagingDropdown'>
+										<select id='countPaginationTop'
+											class="form-control input-sm countPagination">
+											<option>10</option>
+											<option>20</option>
+											<option>50</option>
+											<option>100</option>
+										</select>
+									</div>
+									<div class='pagingText'>
+										<liferay-ui:message key="results-per-page" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- pagination end -->
+
+						<div class="row-fluid head_adjust" style="display: none; margin-bottom: 12px;">
 								<div class="span8"></div>
 								<div class="span4">
 									<div class="position-result-perpage" style="text-align: right;">
@@ -995,55 +1031,49 @@ input[type=number]::-webkit-outer-spin-button {
 											%&nbsp;<liferay-ui:message key="adjust-result-score"/>&nbsp;<input type="text"  style="text-align: right; margin-top: 2px; padding-right: 3px;" class="span3 form-control input-sm" id="adjust_percent" name="adjust_percent" value="100">
 											<button type="button" class="btn btn-info input-sm" name="btnAdjust" id="btnAdjust"><liferay-ui:message key="Adjust"/></button>
 										</div>
-<!-- 										<div class="form-group m-b-none pull-right" style="margin-left: 5px; text-align:right;"> -->
-<%-- 					                    	<button type="button" class="btn btn-info input-sm" name="btnAdjust" id="btnAdjust"><liferay-ui:message key="Adjust"/></button> --%>
-<!-- 					                 	</div>		               -->
 									</div>
 								</div>
 							</div>
-							<!-- pagination start -->
-                                    	<div class="row-fluid">
-	                                    	<div class="position-result-perpage">
-		                                    	<div class="pagianation_area" >
-													<div class="pagination_top pagination"></div>
-		                                    	</div>
-			                                    <div class="object-right paging-text">
-			                                    	<div class='pagingDropdown'>
-			                                 			<select  id='countPaginationTop'  class="form-control input-sm countPagination">
-						                                     <option>10</option>
-						                                     <option>20</option>
-						                                     <option>50</option>
-						                                     <option>100</option>
-						                                 </select>
-			                                 		</div>
-													<div class='pagingText'><liferay-ui:message key="results-per-page"/></div>
-			                                    </div>
-											</div>
-                                    	</div>
-                            <!-- pagination end -->							
 							
 							<div class="row-fluid list-data-table" style="overflow: auto;">							
 							<table class="table table-striped table-bordered" id="tableBonusAdjustment" style="margin-bottom: 7px; max-width: none;">
 							<thead>
 						    <tr>
+						      <%-- move to second row 
 						      <th rowspan="2" style="width:5%; text-align:center;"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></th>
 						      <th rowspan="2" style="width:10%; text-align:center;"><liferay-ui:message key="emp-code"/></th>
-						      <th rowspan="2" style="width: 20%;"><liferay-ui:message key="employee-name"/></th>
-						      <th rowspan="2" style="width: 10%;"><liferay-ui:message key="employee-level"/></th>
+						      <th rowspan="2" style="width:20%;"><liferay-ui:message key="employee-name"/></th>
+						      <th rowspan="2" style="width:10%;"><liferay-ui:message key="employee-level"/></th>
 						      <th rowspan="2" style="width:10%; text-align:center;"><liferay-ui:message key="organization"/></th>
 						      <th rowspan="2" style="width:10%; text-align:center;"><liferay-ui:message key="position"/></th>
-						      <th rowspan="2" style="width:10%; text-align:center;"><liferay-ui:message key="status"/></th>
-						      <th style="width:8%; text-align:center;"><liferay-ui:message key="result-assess-from"/></th>
-						      <th colspan="2" style="width:17%; text-align:center;"><liferay-ui:message key="adjust-result-score"/></th>
+						      <th rowspan="2" style="width:10%; text-align:center;"><liferay-ui:message key="status"/></th> 
+						      --%>
+						      
+						      <th colspan="7" style="width:70%; text-align:center;"><liferay-ui:message key="employee-information"/></th>
+						      <th colspan="2" style="width:15%; text-align:center;"><liferay-ui:message key="adjust-result-score"/></th>
+						      <th colspan="3" style="width:15%; text-align:center;" class="setColSpanResultAssess"><liferay-ui:message key="result-assess-from"/></th>
 						    </tr>				
-						     <tr>						   
-						      <th style="width: 10%;"id="score_name1"></th>
-						      <th style="width: 7%;">%</th>
-						      <th id="score_name2" style="width: 10%;"></th>
+						     <tr>
+						      <th style="width:3%;text-align:center;">
+						      	<input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;">
+						      </th>
+						      <th style="width:auto;text-align:center;"><liferay-ui:message key="emp-code"/></th>
+						      <th style="width:auto;"> <liferay-ui:message key="employee-name"/></th>
+						      <th style="width:auto;"> <liferay-ui:message key="employee-level"/></th>
+						      <th style="width:22%;text-align:center;"><liferay-ui:message key="organization"/></th>
+						      <th style="width:auto;text-align:center;"><liferay-ui:message key="position"/></th>
+						      <th style="width:auto;text-align:center;"><liferay-ui:message key="status"/></th>
+						      						   
+						      <th style="width:auto;"> % </th>
+						      <th style="width:auto;" id="adjust_result_score_name"></th>
+						      <th style="width:auto;" id="score_name1"></th>
+						      <th style="width:auto;" id="score_name2"></th>
+						      <th style="width:auto;" id="score_name3"></th>
 						    </tr>
 							</thead>
-							 <tbody id="list_empjudege">
-							 </tbody>
+							<tbody id="list_empjudege">
+								<!-- Generate by cEmpResultJudgement.js->listDataFn() -->
+							</tbody>
 							</table>
 							</div>
 							<!-- pagination start -->
