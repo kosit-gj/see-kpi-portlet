@@ -32,8 +32,6 @@ var getURLParameter = function getUrlParameter(sParam) {
 }
 
 var calculateFn = function(){
-	
-	
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal360/Calculate/Etl",
         type: "get",
@@ -42,7 +40,6 @@ var calculateFn = function(){
         	"emp_result_id": $("#emp_result_id").val(),
         	"start_date": appraisal_period_start_date
         	},
-        
         headers: { Authorization: "Bearer " + tokenID.token },
         async: false,
         success: function (data, status) {
@@ -55,13 +52,10 @@ var calculateFn = function(){
             else if(data['status'] == 400){
             	clearTimeout(setTimeoutSlide); callFlashSlide("<font color=''>" + data['data'] + "</font>", "error");
             }
-//            clearTimeout(mLoadingShow);  $("body").mLoading("hide");
         },
 		error: function(jqXHR, textStatus, errorThrown){
 			findOneFn($("#emp_result_id").val());  // update detail modal
-//			clearTimeout(mLoadingShow); $("body").mLoading("hide");
 			clearTimeout(setTimeoutSlide); callFlashSlide("<font color=''>ETL fail ,Internal Server Error [500]</font>", "error");
-			
 		}
     });
 }
@@ -2692,19 +2686,18 @@ var saveAppraisalIndividualFn = function ()
                     return false;
                 }
                 
-                getDataFn();
+                
                 
                 if(action_update=="calculate"){
                 	calculateFn(); // run etl calculate.
                 }
                 else if(action_update=="submit"){
                 	$("#ModalAppraisal").modal('hide');
+                	getDataFn();
                 }
             
 
             } else if (data['status'] == 400) {
-
-
                 callFlashSlideInModal(validationAppraisalFn(data), "#information", "error");
             }
         }
@@ -2780,7 +2773,7 @@ var saveAppraisalOrganizationFn = function()
 		success:function(data){
 			if(data['status']==200){
 				
-				$("#ModalAppraisal").modal('hide');
+//				$("#ModalAppraisal").modal('hide');
 				callFlashSlide($(".lt-saved").val());
 				
 				if(emailLinkAppraisal==true) {
@@ -2789,11 +2782,14 @@ var saveAppraisalOrganizationFn = function()
 					return false;
 				}
 				
-				getDataFn();
-				
 				 if(action_update=="calculate"){
-	                	calculateFn();  // run calculate etl.
+	                	calculateFn(); // run etl calculate.
 	                }
+	                else if(action_update=="submit"){
+	                	$("#ModalAppraisal").modal('hide');
+	                	getDataFn();
+	                }
+				 
 				 
 			}else if(data['status']==400){
 				callFlashSlideInModal(validationAppraisalFn(data),"#information","error");
@@ -3229,18 +3225,21 @@ $(document).ready(function () {
             });
 
             $("#btnCalculate").click(function () {
-//              mLoadingShow = setInterval(function() { $("body").mLoading(); }, 1000);
-            	
-            	action_update = 'calculate';
-            	if($("#embed_appraisalType").val() == "1") {
-            		// Is Organization.
-            		saveAppraisalOrganizationFn();
-            	} else {
-            		// Is Individual.
-            		saveAppraisalIndividualFn();
-            	}
-            	
-            });
+                $("body").mLoading();
+                
+                setTimeout(function() {
+                 action_update = 'calculate';
+                    if($("#embed_appraisalType").val() == "1") {
+                     // Is Organization.
+                     saveAppraisalOrganizationFn();
+                    } else {
+                     // Is Individual.
+                     saveAppraisalIndividualFn();
+                    }
+                    $("body").mLoading('hide');
+                 }, 2000);
+               
+               });
             
             //Action Plan Action Area...
             $("#btnAddActionPlan").click(function () {
