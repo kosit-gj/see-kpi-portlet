@@ -1,9 +1,19 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
-<%@ page import="javax.portlet.*"%>
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+<%-- <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %> --%>
+<%-- <%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%> --%>
+<%-- <%@ page import="javax.portlet.*"%> --%>
+<%-- <%@ page contentType="text/html; charset=UTF-8" %> --%>
+<%-- <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %> --%>
+<%-- <%@ page import="com.liferay.portal.kernel.util.WebKeys" %> --%>
+
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
+<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="javax.portlet.*"%>
+<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 <%
@@ -462,3 +472,6 @@ String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWOR
 		</div>
 	</div>
 <!-- Modal End  -->
+
+<!-- Language Template for js -->
+<%@ include file="/html/language-js-template/view.jsp" %>
