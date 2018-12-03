@@ -8,7 +8,8 @@ var restfulPathEmployeeAutocomplete="/"+serviceName+"/public/import_employee/aut
 var galbalDataImportEmp=[];
 var galbalDataTemp = [];
 var pageNumberDefault=1;
-
+var gEmpInfo = []; 
+var gCurEmpSalary = "";
 //Check Validation Start
 var validationFn = function(data){
 
@@ -200,38 +201,37 @@ var findOneFn = function(id) {
 		type : "get",
 		dataType : "json",
 		headers:{Authorization:"Bearer "+tokenID.token},
-		success : function(data) {		
-			//alert(txtFrom + " Name : "+data['emp_name']);
+		success : function(data) {
 			
-				
-				$("#from_emp_code").val(data['emp_code']);
-				$("#from_emp_name").val(data['emp_name']);
-				$("#from_Level_id").val(data['level_id']);
-				$("#from_emp_wsd").val(data['working_start_date']);
-				$("#from_emp_ped").val(data['probation_end_date']);
-				$("#from_emp_aed").val(data['acting_end_date']);
-				$("#from_org_id").val(data['org_id']);
-				$("#from_position_id").val(data['position_id']);
-				$("#from_position_name").val(data['position_name']);
-				$("#from_sup_emp_code").val(data['chief_emp_code']);
-				$("#from_emp_email").val(data['email']);
-				$("#from_emp_salary").val(data['s_amount']);
-				$("#from_emp_erp_user").val(data['erp_user']);
-				$("#from_dotline_code").val(data['dotline_code']);
-				$("#from_emp_type").val(data['emp_type']);
-				
-				if(data['has_second_line']==1){
-					$('#from_checkboxHas_second_line').prop('checked', true);
-				}else{
-					$('#from_checkboxHas_second_line').prop('checked', false);
-				}		
-				//IsAction
-				if(data['is_active']==1){
-					$('#from_checkboxIs_active').prop('checked', true);
-				}else{
-					$('#from_checkboxIs_active').prop('checked', false);
-				}		
-								
+			gCurEmpSalary = atob(data['s_amount']);
+			
+			$("#from_emp_code").val(data['emp_code']);
+			$("#from_emp_name").val(data['emp_name']);
+			$("#from_Level_id").val(data['level_id']);
+			$("#from_emp_wsd").val(data['working_start_date']);
+			$("#from_emp_ped").val(data['probation_end_date']);
+			$("#from_emp_aed").val(data['acting_end_date']);
+			$("#from_org_id").val(data['org_id']);
+			$("#from_position_id").val(data['position_id']);
+			$("#from_position_name").val(data['position_name']);
+			$("#from_sup_emp_code").val(data['chief_emp_code']);
+			$("#from_emp_email").val(data['email']);
+			$("#from_emp_salary").val('**********');
+			$("#from_emp_erp_user").val(data['erp_user']);
+			$("#from_dotline_code").val(data['dotline_code']);
+			$("#from_emp_type").val(data['emp_type']);
+			
+			if(data['has_second_line']==1){
+				$('#from_checkboxHas_second_line').prop('checked', true);
+			}else{
+				$('#from_checkboxHas_second_line').prop('checked', false);
+			}		
+			//IsAction
+			if(data['is_active']==1){
+				$('#from_checkboxIs_active').prop('checked', true);
+			}else{
+				$('#from_checkboxIs_active').prop('checked', false);
+			}
 		}
 	});
 };
@@ -449,6 +449,7 @@ var updateFn = function () {
 	
 	var isActive="";
 	var hasSecondLine="";
+	var empSalary="0.00";
 	//IsAction
 	if($("#from_checkboxIs_active:checked").is(":checked")){
 		isActive="1";
@@ -460,6 +461,12 @@ var updateFn = function () {
 		hasSecondLine="1";
 	}else{
 		hasSecondLine="0";
+	}
+	
+	if($.isNumeric($("#from_emp_salary").val())){
+		empSalary = $("#from_emp_salary").val();
+	} else {
+		empSalary = gCurEmpSalary;
 	}
 	
 	$.ajax({
@@ -478,7 +485,7 @@ var updateFn = function () {
 			"position_id":$("#from_position_id").val(),
 			"chief_emp_code":$("#from_sup_emp_code").val(),
 			"email":$("#from_emp_email").val(),
-			"s_amount":$("#from_emp_salary").val(),
+			"s_amount": empSalary,
 			"erp_user":$("#from_emp_erp_user").val(),
 			"dotline_code":$("#from_dotline_code").val(),
 			"emp_type":$("#from_emp_type").val(),
