@@ -265,6 +265,72 @@ var SetWeightFn = function(level_id, structure_id, structure_name) {
 //--------  List Criteria Set Weight End
 
 
+var seqNoArray = {}; // #004
+var seq_old_value = ""; var seq_old =""; // #004
+
+var get_seq_from_table = function(){ // #004
+    seqNoArray = {"Organization": [],"Individual"  : [],"OrganizationIndividual": []}
+
+// search column organization and individual -------------------
+	var IndividualColumn = "";
+	var OrganizationColumn = "";
+	var c = 0;
+
+	  row = $("#table-appraisalLevelForm")[0].rows[0]
+	   while(cell=row.cells[c++])
+	   {
+	     if($(cell).text() == "Organization"){
+	       OrganizationColumn = c-1;
+	     }
+	     else if($(cell).text() == "Individual"){
+	       IndividualColumn = c-1
+	     }
+	   }
+// generate seq no. --------------------
+     $('#table-appraisalLevelForm tbody tr').each(function(i1, n1){
+         var row = $(n1);
+         var seq = (row.find('td:eq(0)').text() == null || row.find('td:eq(0)').text() == "") ? '0' : row.find('td:eq(0)').text();
+    	 var conditionOrganization = row.find("td:eq("+OrganizationColumn+")").find( 'input' ).is(":checked");
+    	 var conditionIndividual = row.find("td:eq("+IndividualColumn+")").find( 'input' ).is(":checked");
+    	 
+         if(conditionOrganization && conditionIndividual){
+        	 seqNoArray['OrganizationIndividual'].push(seq);
+         }
+         else if(conditionOrganization && !conditionIndividual){
+        	 seqNoArray['Organization'].push(seq);
+         }
+         else if(!conditionOrganization && conditionIndividual){
+        	 seqNoArray['Individual'].push(seq);
+         }
+     });
+}
+
+var AutoGenSeqFn = function () { // #004
+     var checkbox_is_individual = $(".checkbox-is_individual").is(":checked");
+	 var checkbox_is_org = $(".checkbox-is_org").is(":checked");
+	 var genSeq = '';
+	 get_seq_from_table();
+	 
+    if(checkbox_is_individual+","+checkbox_is_org == seq_old && $("#action").val()=="edit"){ //  set value old (case edit)
+   	 $("#seq_no").val(seq_old_value); // get value
+   	 return true;
+    }
+    
+    if( checkbox_is_individual && checkbox_is_org){
+   	 genSeq = (Math.max(...seqNoArray['OrganizationIndividual']))+1;  // set seq. (max+1) -> Organization Individual
+    }
+    else if( checkbox_is_individual && !checkbox_is_org){
+   	 genSeq = (Math.max(...seqNoArray['Individual']))+1;  // set seq. (max+1) -> Individual
+    }
+    else if( !checkbox_is_individual && checkbox_is_org){
+   	 genSeq = (Math.max(...seqNoArray['Organization']))+1;  // set seq. (max+1) -> Organization
+    }
+    
+	 $("#seq_no").val(""); // clear value seq no
+	 $("#seq_no").val(genSeq); // get value
+};
+
+
 $(document).ready(
 		function() {
 			var username = $('#user_portlet').val();
@@ -464,6 +530,43 @@ $(document).ready(
 						}
 					}
 					createDataTableFn(options);
+					
+					 $("#table-"+options['formDetail']['id']).on("click",".popover-edit-del",function(){ // #004
+						 $(".edit").on("click",function() { // save seq no old.
+							 var checkbox_is_individual = $(".checkbox-is_individual").is(":checked");
+							 var checkbox_is_org = $(".checkbox-is_org").is(":checked");
+							 seq_old = checkbox_is_individual+","+checkbox_is_org;
+							 seq_old_value = $("#seq_no").val();
+						 });
+					});
+					 $('.checkbox-is_org, .checkbox-is_individual').on('click', AutoGenSeqFn); // #004
+					 
+					 $("#seq_no").change(function() { // #004
+						
+						 var seq_value = $('#seq_no').val();
+					     var checkbox_is_individual = $(".checkbox-is_individual").is(":checked");
+						 var checkbox_is_org = $(".checkbox-is_org").is(":checked");
+						 var found = '0';
+						 get_seq_from_table();
+						 
+						 if( checkbox_is_individual && checkbox_is_org){ // check 
+							 found = seqNoArray['OrganizationIndividual'].indexOf(seq_value);
+						 }
+						 else if( checkbox_is_individual && !checkbox_is_org){
+							 found = seqNoArray['Individual'].indexOf(seq_value);
+						 }
+						 else if( !checkbox_is_individual && checkbox_is_org){
+							 found = seqNoArray['Organization'].indexOf(seq_value);
+						 }
+						 
+						 if(found != -1 && (checkbox_is_individual || checkbox_is_org)){ // alert
+							 $('#seq_no').val("");
+							 callFlashSlideInModal("The seq no has already been taken.","#information","error");
+						 }
+						 else{
+							 $("#information").hide();
+						 }
+					});
 
 				}
 			}
