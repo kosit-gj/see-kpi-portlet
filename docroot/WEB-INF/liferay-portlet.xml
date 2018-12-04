@@ -1571,6 +1571,7 @@
 		<header-portlet-css>/css/dropify.css</header-portlet-css>
 		<header-portlet-css>/css/jquery.multiselect.css</header-portlet-css>
 		<header-portlet-css>/css/jquery.multiselect.filter.css</header-portlet-css>
+		<header-portlet-css>/css/report-kpis.css</header-portlet-css>
 		<footer-portlet-javascript>/js/jquery3.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>

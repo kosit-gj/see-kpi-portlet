@@ -572,11 +572,21 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 				));
 				
 				
+//				$("#organization").html( generateDropDownList(
+//					restfulURL+"/"+serviceName+"/public/dashboard/org_list",
+//					"POST",
+//					{"appraisal_level":$("#AppraisalOrgLevel").val()}
+//				));
+				
 				$("#organization").html( generateDropDownList(
-					restfulURL+"/"+serviceName+"/public/dashboard/org_list",
-					"POST",
-					{"appraisal_level":$("#AppraisalOrgLevel").val()}
-				));
+						restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_organization",
+						"GET",
+						{
+				        	"org_level": $("#AppraisalOrgLevel").val() ,
+				        	"appraisal_year" :$("#year").val(),
+				        	"period_id" : $("#period").val()
+				        }
+					));
 				
 				
 			} else {
@@ -610,11 +620,20 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 			clearParamSearch(dataClearParam);// in cMain.js
 			
 			if($("#app_type").val() == "1"){
+//				$("#organization").html( generateDropDownList(
+//					restfulURL+"/"+serviceName+"/public/dashboard/org_list",
+//					"POST",
+//					{"appraisal_level":$("#AppraisalOrgLevel").val()}
+//				));
 				$("#organization").html( generateDropDownList(
-					restfulURL+"/"+serviceName+"/public/dashboard/org_list",
-					"POST",
-					{"appraisal_level":$("#AppraisalOrgLevel").val()}
-				));
+						restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_organization",
+						"GET",
+						{
+				        	"org_level": $("#AppraisalOrgLevel").val() ,
+				        	"appraisal_year" :$("#year").val(),
+				        	"period_id" : $("#period").val()
+				        }
+					));
 			} else {
 				$("#organization").html( generateDropDownList(
 					restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_individual",

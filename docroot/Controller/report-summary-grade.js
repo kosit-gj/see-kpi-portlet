@@ -63,7 +63,6 @@ $(document).ready(function() {
     // run list
     dropDrowYearListFn();
     dropDrowAppraisalEmpLevelFn();
-//    dropDrowAppraisalOrgLevelFn();
     
     
     $("#AppraisalYear").change(function() {
@@ -210,6 +209,9 @@ var dropDrowPeriodListFn = function(year, id) { //period
 
 var dropDrowAppraisalEmpLevelFn = function(id){
 
+	var htmlOption="";
+	htmlOption+="<option value=''>"+$(".lt-all-employee-level").val()+"</option>";
+	
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/emp_level",
 		type:"get",
@@ -217,8 +219,6 @@ var dropDrowAppraisalEmpLevelFn = function(id){
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
-			var htmlOption="";
-			htmlOption+="<option value=''>"+$(".lt-all-employee-level").val()+"</option>";
 			$.each(data,function(index,indexEntry){
 
 				if(id==indexEntry['level_id']){
@@ -227,14 +227,17 @@ var dropDrowAppraisalEmpLevelFn = function(id){
 					htmlOption+="<option value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
 				}
 			});
-			$("#AppraisalEmpLevel").html(htmlOption);
-		    dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
 		}
 	});
+	$("#AppraisalEmpLevel").html(htmlOption);
+    dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
 }
 
 var dropDrowIndividualOrgLevelFn = function(id){
 
+	var htmlOption="";
+	htmlOption+="<option value=''>"+$(".lt-all-organization-level").val()+"</option>";
+	
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_level_individual",
 		type:"get",
@@ -243,8 +246,6 @@ var dropDrowIndividualOrgLevelFn = function(id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{"level_id": $("#AppraisalEmpLevel").val()},
 		success:function(data){
-			var htmlOption="";
-			htmlOption+="<option value=''>"+$(".lt-all-organization-level").val()+"</option>";
 			$.each(data,function(index,indexEntry){
 
 				if(id==indexEntry['level_id']){
@@ -253,9 +254,9 @@ var dropDrowIndividualOrgLevelFn = function(id){
 					htmlOption+="<option value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
 				}
 			});
-			$("#AppraisalOrgLevel").html(htmlOption);
 		}
 	});
+	$("#AppraisalOrgLevel").html(htmlOption);
 	dropDrowIndividualOrgFn();
 }
 
@@ -269,57 +270,6 @@ var dropDrowIndividualOrgFn = function(appraisalLevelId,id){
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		data:{"emp_level":$("#AppraisalEmpLevel").val(), "org_level":$("#AppraisalOrgLevel").val()},
-		success:function(data){
-			var htmlOption="";
-			$.each(data,function(index,indexEntry){
-				if(id==indexEntry['org_id']){
-					htmlOption+="<option value="+indexEntry['org_id']+">"+indexEntry['org_name']+"</option>";
-				}else{
-					htmlOption+="<option value="+indexEntry['org_id']+">"+indexEntry['org_name']+"</option>";
-				}
-			});
-			$("#organization").html(htmlOption);
-		}
-	});
-}
-
-
-var dropDrowAppraisalOrgLevelFn = function(id){
-
-	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_level",
-		type:"get",
-		dataType:"json",
-		async:false,
-		headers:{Authorization:"Bearer "+tokenID.token},
-		success:function(data){
-			var htmlOption="";
-			htmlOption+="<option value=''>"+$(".lt-all-organization-level").val()+"</option>";
-			$.each(data,function(index,indexEntry){
-
-				if(id==indexEntry['level_id']){
-					htmlOption+="<option selected='selected' value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
-				}else{
-					htmlOption+="<option value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
-				}
-			});
-			$("#AppraisalOrgLevel").html(htmlOption);
-		}
-	});
-		dropDrowIndividualOrgFn($("#AppraisalOrgLevel").val());
-}
-
-
-
-var dropDrowOrgFn = function(appraisalLevelId,id){
-
-	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/org",
-		type:"get",
-		dataType:"json",
-		async:false,
-		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"level_id":appraisalLevelId},
 		success:function(data){
 			var htmlOption="";
 			$.each(data,function(index,indexEntry){
