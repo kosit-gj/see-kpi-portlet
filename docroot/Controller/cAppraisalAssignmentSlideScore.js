@@ -224,6 +224,7 @@ var setDataToTemplateFn = function (data, actionType) {
         $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3").val(addCommas(indexEntry['score3']));
         $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4").val(addCommas(indexEntry['score4']));
         $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5").val(addCommas(indexEntry['score5']));
+        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6").val(addCommas(indexEntry['score6']));
         $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-weight").val(addCommas(indexEntry['weight_percent']));
 
         //form2
@@ -755,6 +756,7 @@ var actionUpdateAssignmentFn = function () {
                 appraisal_items += "\"score3\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score3").val()) + "\",";
                 appraisal_items += "\"score4\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score4").val()) + "\",";
                 appraisal_items += "\"score5\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score5").val()) + "\",";
+                appraisal_items += "\"score6\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score6").val()) + "\",";
                 appraisal_items += "\"total_weight\":\"" + removeComma($("#total_weight-" + $(structureEntry).val()).val()) + "\",";
                 appraisal_items += "\"weight_percent\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-weight").val()) + "\",";
                 if ($(this).prop("checked") == true) {
@@ -918,6 +920,7 @@ var actionAssignmentFn = function (param) {
                 appraisal_items += "\"score3\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score3").val()) + "\",";
                 appraisal_items += "\"score4\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score4").val()) + "\",";
                 appraisal_items += "\"score5\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score5").val()) + "\",";
+                appraisal_items += "\"score6\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score6").val()) + "\",";
                 appraisal_items += "\"weight_percent\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-weight").val()) + "\",";
                 appraisal_items += "\"total_weight\":\"" + removeComma($("#total_weight-" + $(structureEntry).val()).val()) + "\",";
                 appraisal_items += "\"select_flag\":\"1\"";
@@ -1736,7 +1739,8 @@ var assignTemplateQuantityFn = function (structureName, data) {
         htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][1]['color_code'] + "' class='OrangeBoxR'>&nbsp;</div><div style='background:#" + data['threshold_color'][2]['color_code'] + "' class='YellowBoxL'>3</div> </th>";
         htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][2]['color_code'] + "' class='YellowBoxR'>&nbsp;</div><div style='background:#" + data['threshold_color'][3]['color_code'] + "' class='greenBoxL'>4</div> </th>";
         htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][3]['color_code'] + "' class='greenBoxR'>&nbsp;</div><div style='background:#" + data['threshold_color'][4]['color_code'] + "' class='veryGreenBOxL'>5</div> </th>";
-        htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][4]['color_code'] + "' class='veryGreenBOxR'>&nbsp;</div> </th>";
+        htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][4]['color_code'] + "' class='veryGreenBOxR'>&nbsp;</div><div style='background:#" + data['threshold_color'][5]['color_code'] + "' class='veryGreenBOxL'>6</div> </th>";
+        htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][5]['color_code'] + "' class='veryGreenBOxR'>&nbsp;</div> </th>";
         htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class=''><b>" + $(".lt-percent-weight").val() + "</b></th>";
         htmlTemplateQuantity += "</tr>";
         htmlTemplateQuantity += "</thead>";
@@ -1761,6 +1765,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
             htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText4 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3'></td>";
             htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText5 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4'></td>";
             htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText6 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5'></td>";
+            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText7 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6'></td>";
             htmlTemplateQuantity += "<td style=\"width:5%;text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-weight' class='id-" + indexEntry['structure_id'] + "-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly addComma'  type='text'></td>";
             weight_percent = indexEntry['weight_percent'];
             htmlTemplateQuantity += "</tr>";
