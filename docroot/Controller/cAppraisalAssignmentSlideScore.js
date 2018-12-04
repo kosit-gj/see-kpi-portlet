@@ -1644,7 +1644,7 @@ var assignTemplateQualityFn = function (structureName, data) {
         htmlTemplateQuality += "<tr>";
         htmlTemplateQuality += "<td style=\"width:3%;text-align:center;\" class='object-center'  ><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-" + indexEntry['structure_id'] + "' type='checkbox' value='" + indexEntry['item_id'] + "'></td>";
         htmlTemplateQuality += "<td style=\"width:67%\" style='padding-top:7px;' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name' class='id-" + indexEntry['structure_id'] + "-item_name'>" + indexEntry['item_name'] + "</td>";
-        htmlTemplateQuality += "<td style=\"width:15%; text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' class='id-" + indexEntry['structure_id'] + "-target input form-control input-sm-small numberOnly addComma' type='text'></td>";
+        htmlTemplateQuality += "<td style=\"width:15%; text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' class='id-" + indexEntry['structure_id'] + "-target input form-control input-sm-small numberOnlyMaxTarget addComma' type='text' data-toggle=\"tooltip\" data-placement=\"right\" title=\"" + $(".lt-max-target").val() + " "+indexEntry['nof_target_score']+"\"></td>";
         htmlTemplateQuality += "<td style=\"width:15%; text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-weight' class='id-" + indexEntry['structure_id'] + "-weight weight_sum total_weigth_quality input form-control input-sm-small numberOnly addComma' type='text'></td>";
         htmlTemplateQuality += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_result_id' class='id-" + indexEntry['structure_id'] + "-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
 
@@ -2159,12 +2159,19 @@ var bindingSlideScoreBarFn = function () {
 var createTemplateAssignmentFn = function (data) {
     $("#appraisal_template_area").empty();
     $.each(data['group'], function (index, indexEntry) {
-
         if (indexEntry['form_url'] == 'quantity') {
             assignTemplateQuantityFn(index, indexEntry);
         } else if (indexEntry['form_url'] == 'quality') {
             $("#appraisal_template_area").append(assignTemplateQualityFn(index, indexEntry));
-
+            $(".numberOnlyMaxTarget").autoNumeric('init');
+            $(".numberOnlyMaxTarget").autoNumeric('update', {
+        		vMin : '0.00',
+        		vMax : ''+indexEntry['nof_target_score']+'',
+        		lZero: 'deny',
+        		wEmpty: '',
+        		//aSign : ' %',
+        		//pSign : 's'
+        	});
         } else if (indexEntry['form_url'] == 'deduct') {
             $("#appraisal_template_area").append(assignTemplateDeductFn(index, indexEntry));
         }
@@ -2172,6 +2179,13 @@ var createTemplateAssignmentFn = function (data) {
             $("#appraisal_template_area").append(assignTemplateRewardFn(index, indexEntry));
         }
         setThemeColorFn(tokenID.theme_color);
+        
+        //binding tooltip start
+        $('[data-toggle="tooltip"]').css({ "cursor": "pointer" });
+        $('[data-toggle="tooltip"]').tooltip({
+            html: true
+        });
+        //binding tooltip end
 
         //bindingSlideScoreBarFn();
 

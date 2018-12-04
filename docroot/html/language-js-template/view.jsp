@@ -58,6 +58,7 @@
 <input class="lt-view" type="hidden" value="<liferay-ui:message key="view"/>"/>
 <input class="lt-group" type="hidden" value="<liferay-ui:message key="group"/>"/>
 <input class="lt-no-raise-value" type="hidden" value="<liferay-ui:message key="no-raise-value"/>"/>
+<input class="lt-max-target" type="hidden" value="<liferay-ui:message key="max-target"/>"/>
 
 <!-- Appraisal (kpi result) -->
 <input class="lt-action-plan" type="hidden" value="<liferay-ui:message key="action-plan"/>"/>
