@@ -81,17 +81,21 @@
 					$(".is_unlimited_deduction_header, .is_value_get_zero_header, .is_no_raise_value_header").show();
 					$(".checkbox-is_unlimited_deduction, .checkbox-is_value_get_zero").prop('checked',true);
 					$(".checkbox-is_no_raise_value").prop('checked', false);
+					$("#nof_target_score").prop("readonly", true);
+					$("#nof_target_score").val(0);
 					
 				} else if($("#form_id").val()==4) { //if Reward Score					
 					$(".is_unlimited_deduction_header, .is_value_get_zero_header, .is_no_raise_value_header").hide();
 					$(".checkbox-is_unlimited_deduction, .checkbox-is_value_get_zero, .checkbox-is_no_raise_value").prop('checked',false);
 					$(".is_unlimited_reward_header").show();
 					$(".checkbox-is_unlimited_reward").prop('checked',true);
+					$("#nof_target_score").prop("readonly", true);
+					$("#nof_target_score").val(0);
 						
 				} else {					
 					$(".is_unlimited_deduction_header, .is_value_get_zero_header, .is_unlimited_reward_header, .is_no_raise_value_header").hide();
 					$(".checkbox-is_unlimited_deduction, .checkbox-is_value_get_zero, .checkbox-is_unlimited_reward, .checkbox-is_no_raise_value").prop('checked',false);
-						
+					$("#nof_target_score").prop("readonly", false);
 				}
 	    	});
 	 	}
