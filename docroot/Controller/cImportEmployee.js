@@ -203,7 +203,7 @@ var findOneFn = function(id) {
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success : function(data) {
 			
-			gCurEmpSalary = atob(data['s_amount']);
+			gCurEmpSalary = $.base64.decode(data['s_amount']);
 			
 			$("#from_emp_code").val(data['emp_code']);
 			$("#from_emp_name").val(data['emp_name']);
@@ -464,9 +464,9 @@ var updateFn = function () {
 	}
 	
 	if($.isNumeric($("#from_emp_salary").val())){
-		empSalary = $("#from_emp_salary").val();
+		empSalary = $.base64.encode($("#from_emp_salary").val());
 	} else {
-		empSalary = gCurEmpSalary;
+		empSalary = $.base64.encode(gCurEmpSalary);
 	}
 	
 	$.ajax({
