@@ -622,6 +622,7 @@ var insertFn = function() {
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (resData) {
         	if(resData.status == 200) {
+			appraisalStatusFn();
         		getDataFn();
         		callFlashSlide($(".lt-update-successfully").val());
         		clearFn();
