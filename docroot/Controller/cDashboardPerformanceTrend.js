@@ -1365,7 +1365,7 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 
 
  $(document).ready(function(){
-	var username = $('#user_portlet').val();
+	 var username = $('#user_portlet').val();
 	 var password = $('#pass_portlet').val();
 	 var plid = $('#plid_portlet').val();
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
@@ -1431,7 +1431,9 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 			$("#apprasiaLevel").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/al_list","GET"));
 			$("#apprasiaLevel").val($("#get_level_id").val());
 			
-			$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));
+//			$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));
+			$("#organization").html( generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_organization","get",{"org_level": $("#AppraisalOrgLevel").val() ,"appraisal_year" :$("#AppraisalYear").val(),"period_id" : $("#AppraisalPeriod").val()}));
+			
 			$("#organization").val($("#get_org_id").val());
 
 			$("#kpi").html((generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));
@@ -1454,7 +1456,8 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 			$("#get_sending_status").val("false");
 			//#Change Param Function
 			$("#year").change(function(){$("#period").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/period_list","POST",{"appraisal_year":$("#year").val()}));});
-			$("#apprasiaLevel").change(function(){$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));$("#organization").change();});
+			$("#apprasiaLevel").change(function(){	$("#organization").html( generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_organization","get",{"org_level": $("#AppraisalOrgLevel").val() ,"appraisal_year" :$("#AppraisalYear").val(),"period_id" : $("#AppraisalPeriod").val()}));$("#organization").change();});
+//			$("#apprasiaLevel").change(function(){$("#organization").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/org_list","POST",{"appraisal_level":$("#apprasiaLevel").val()}));$("#organization").change();});
 			$("#organization").change(function(){console.log("organization change");$("#kpi").html((generateDropDownList(restfulURL+"/"+serviceName+"/public/dashboard/kpi_list","POST",{"appraisal_level":$("#apprasiaLevel").val(),"org_id":$("#organization").val(),"emp_id":$("#emp_name_id").val(),"appraisal_type_id":$("#app_type").val()})));});
 		}else{
 			/*
@@ -1502,12 +1505,13 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 						"GET")
 					);
 					
-					$("#organization").html( generateDropDownList(
-						restfulURL+"/"+serviceName+"/public/dashboard/org_list",
-						"POST",
-						{"appraisal_level":$("#AppraisalOrgLevel").val()}
-					));
-
+//					$("#organization").html( generateDropDownList(
+//						restfulURL+"/"+serviceName+"/public/dashboard/org_list",
+//						"POST",
+//						{"appraisal_level":$("#AppraisalOrgLevel").val()}
+//					));
+					$("#organization").html( generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_organization","get",{"org_level": $("#AppraisalOrgLevel").val() ,"appraisal_year" :$("#AppraisalYear").val(),"period_id" : $("#AppraisalPeriod").val()}));
+					
 					
 					dropDownKpi(); // Create #kpi
 					
@@ -1532,11 +1536,12 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 				
 				if($("#app_type").val() == "1"){
 					// Create #organization whit #AppraisalOrgLevel
-					$("#organization").html( generateDropDownList(
-						restfulURL+"/"+serviceName+"/public/dashboard/org_list",
-						"POST",
-						{"appraisal_level":$("#AppraisalOrgLevel").val()}
-					));
+//					$("#organization").html( generateDropDownList(
+//						restfulURL+"/"+serviceName+"/public/dashboard/org_list",
+//						"POST",
+//						{"appraisal_level":$("#AppraisalOrgLevel").val()}
+//					));
+					$("#organization").html( generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_organization","get",{"org_level": $("#AppraisalOrgLevel").val() ,"appraisal_year" :$("#AppraisalYear").val(),"period_id" : $("#AppraisalPeriod").val()}));
 					
 					dropDownKpi(); // Create #kpi
 				} else {
@@ -1562,13 +1567,67 @@ var CreateOrgLevelAndOrganizByEmpName = function(emp_id){
 			 * Change parameter event.
 			 */
 			$("#year").change(); // Change for create #period
-			$("#app_type").change(); // Change for create #apprasiaEmpLevel or #apprasiaOrgLevel -> #organization
-			
-			if($("#app_type").val() == "2"){
-				setParamSearch(dataSetParam);// in cMain.js
+			// $("#app_type").change(); // Change for create #apprasiaEmpLevel or #apprasiaOrgLevel -> #organization
+				
+
+			// run dropDown -----------------------------------
+			if($("#app_type").val() == "1"){ // type1
+				$("#AppraisalEmpLevel").val("").prop("disabled", true);
+				$("#emp_name, #emp_name_id ,#position ,#position_id").val("").prop("disabled", true);
+				
+				$("#AppraisalOrgLevel").html( generateDropDownList(
+					restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_level",
+					"GET")
+				);
+				
+//				$("#organization").html( generateDropDownList(
+//					restfulURL+"/"+serviceName+"/public/dashboard/org_list",
+//					"POST",
+//					{"appraisal_level":$("#AppraisalOrgLevel").val()}
+//				));
+				$("#organization").html( generateDropDownList(
+						restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_organization",
+						"get",
+						{
+				        	"org_level": $("#AppraisalOrgLevel").val() ,
+				        	"appraisal_year" :$("#AppraisalYear").val(),
+				        	"period_id" : $("#AppraisalPeriod").val()
+				        }
+				));
+
+			        	
+				dropDownKpi(); // Create #kpi
+				
+			} else { // type 2
+				$("#emp_name,#position").prop("disabled", false);
+				
+				$("#AppraisalEmpLevel").prop("disabled", false).html( generateDropDownList(
+					restfulURL+"/"+serviceName+"/public/appraisal/parameter/emp_level",
+					"GET"
+				));
+					
+					if (is_all_employee == 0) {
+						setParamSearch(dataSetParam);// in cMain.js
+						$("#AppraisalOrgLevel").html(generateDropDownList(
+								restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_level_individual",
+								"GET",
+								{"level_id": $("#AppraisalEmpLevel").val()}
+							));
+					}
+					else{
+						$("#AppraisalOrgLevel").html(generateDropDownList(
+								restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_level_individual",
+								"GET",
+								{"level_id": $("#AppraisalEmpLevel").val()//,"period_id": $("#period").val()
+									
+								}
+						));
+					}
+				CreateOrgWhitEmpLevelOrgLevel(); // Create #organization whit #AppraisalEmpLevel and #AppraisalOrgLevel
+				dropDownKpi(); // Create #kpi
 			}
-			
-		}
+			// run dropDown --------------------------------
+	}
 		
 		$(".app_url_hidden").show();
 		

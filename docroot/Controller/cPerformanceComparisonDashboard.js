@@ -1,5 +1,222 @@
 var galbalDataTemp=[]; 
 
+$(document).ready(function() {
+
+	  var username = $('#user_portlet').val();
+	  var password = $('#pass_portlet').val();
+	  var plid = $('#plid_portlet').val();
+	  if (username != "" && username != null & username != [] && username != undefined) {
+
+	    if (connectionServiceFn(username, password, plid) == false) {
+	      return false;
+	    }
+	    
+	    $('[data-toggle="tooltip"]').css({
+	      "cursor": "pointer"
+	    });
+	    $('[data-toggle="tooltip"]').tooltip({
+	      html: true
+	    });
+	    
+	    var dataClearParam = [{
+	        'id': '#Position',
+	        'val': ""
+	      },
+	      {
+	        'id': '#Position_id',
+	        'val': ""
+	      },
+	      {
+	        'id': '#EmpName',
+	        'val': ""
+	      },
+	      {
+	        'id': '#EmpName_id',
+	        'val': ""
+	      }
+	    ];
+
+	    var dataSetParam = [{
+	        'id': '#Position',
+	        'val': "" + cMain_position_name + ""
+	      },
+	      {
+	        'id': '#Position_id',
+	        'val': cMain_position_id
+	      },
+	      {
+	        'id': '#EmpName',
+	        'val': "" + cMain_emp_name + "(" + session_emp_code + ")"
+	      },
+	      {
+	        'id': '#EmpName_id',
+	        'val': cMain_emp_id
+	      },
+	      {
+	        'id': '#AppraisalEmpLevel',
+	        'val': "" + cMain_level_id + ""
+	      }
+	    ];
+
+	    
+	    dropDrowYearListFn();	    
+	    appraisalTypeFn();
+	    $("#appraisalType").change(function() {
+	      if ($("#appraisalType").val() == 1) {
+	        $("#Position").val("").prop("disabled", true);
+	        $("#EmpName").val("").prop("disabled", true);
+	        $("#AppraisalEmpLevel").prop("disabled", true);
+	        dropDrowOrganizationOrgLevelFn();
+	      } else {
+	        $("#Position").prop("disabled", false);
+	        $("#EmpName").prop("disabled", false);
+	        $("#AppraisalEmpLevel").prop("disabled", false);
+	        dropDrowAppraisalEmpLevelFn();
+	        dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
+	      }
+	    });
+
+	    
+	    
+	    $("#AppraisalEmpLevel").change(function() {
+	      clearParamSearch(dataClearParam); // in cMain.js
+	      dropDrowIndividualOrgLevelFn($(this).val());
+	    });
+
+	    $("#AppraisalOrgLevel").change(function() {
+	      clearParamSearch(dataClearParam); // in cMain.js
+	      if ($("#appraisalType").val() == "1") {
+	        dropDrowOrganizationOrgFn($(this).val());
+	      } else {
+	        dropDrowIndividualOrgFn($(this).val());
+	      }
+	    });
+
+	    $("#organization").change(function() {
+	      clearParamSearch(dataClearParam); // in cMain.js
+	    });
+
+
+	    //Auto complete Start
+	    $("#EmpName").autocomplete();	
+	 
+
+	    $("#btnSearch").click(function(){
+		    $("#showChart").hide();  // panel chart 
+		    $(".showTable").hide();  // panel table
+		    $(".body-chart").hide(); // body chart
+		    if(
+		    	($("#Position").val() != ""
+		    	&& $("#appraisalType").val() !=""
+		    	&& $("#AppraisalEmpLevel").val() !=""
+		    	&& $("#AppraisalOrgLevel").val() !=""
+		    	&& $("#organization").val() != ""
+		    	&& $("#EmpName_id").val() != ""
+		    	&& $("#AppraisalYear").val() != "")
+		    	|| $("#appraisalType").val() == "1"
+		    	){
+		    	
+		    	$("#Position_id").val($("#Position").val());
+		    	$("#appraisalType_id").val($("#appraisalType").val());
+		    	$("#AppraisalEmpLevel_id").val($("#AppraisalEmpLevel").val());
+		    	$("#AppraisalOrgLevel_id").val($("#AppraisalOrgLevel").val());
+		    	$("#organization_id").val($("#organization").val());
+		    	$("#appraisal_year").val($("#AppraisalYear").val());
+		    	getDataFn();
+		    	
+		    }
+		    else{
+		    	callFlashSlide("Employee Name is Require !");
+		    	return false;
+		    }	
+		});
+	    
+	      if ($("#appraisalType").val() == 1) {
+		        $("#Position").val("").prop("disabled", true);
+		        $("#EmpName").val("").prop("disabled", true);
+		        $("#AppraisalEmpLevel").prop("disabled", true);
+		        dropDrowOrganizationOrgLevelFn();
+		      } 
+	      else {
+		        $("#Position").prop("disabled", false);
+		        $("#EmpName").prop("disabled", false);
+		        $("#AppraisalEmpLevel").prop("disabled", false);
+		        dropDrowAppraisalEmpLevelFn();
+		        if (is_all_employee == 0) {
+		        	setParamSearch(dataSetParam); // in cMain.js
+		        	dropDrowPositionFn();
+		        	dropDrowIndividualOrgLevelFn(cMain_level_id);
+		        }
+		        else {
+		        	dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
+		        }
+		      }
+	      
+	    $(".app_url_hidden").show();
+			
+	  }
+	});
+
+$("#EmpName").autocomplete({
+	  
+    source: function(request, response) {
+      $.ajax({
+        url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/auto_emp_list",
+        type: "GET",
+        dataType: "json",
+        data: {
+          "emp_name": request.term,
+          "emp_code": session_emp_code,
+          "org_id": $("#organization").val(),
+          "level_id": $("#AppraisalEmpLevel").val()
+        },
+        //async:false,
+        headers: {
+          Authorization: "Bearer " + tokenID.token
+        },
+        error: function(xhr, textStatus, errorThrown) {
+          console.log('Error: ' + xhr.responseText);
+        },
+        success: function(data) {
+          console.log(data)
+          $("#Position").html('');
+          response($.map(data, function(item) {
+            return {
+              label: item.emp_name + "(" + item.emp_code + ")",
+              value: item.emp_name,
+              emp_id: item.emp_id,
+              emp_code: item.emp_code
+            };
+          }));
+
+        },
+        beforeSend: function() {
+          $("body").mLoading('hide');
+        }
+
+      });
+    },
+    select: function(event, ui) {
+      $("#EmpName").val(ui.item.label);
+      $("#EmpName_id").val(ui.item.emp_id);
+      galbalDataTemp['EmpName'] = ui.item.label;
+      galbalDataTemp['EmpName_id'] = ui.item.emp_id;
+      //empNameAutoCompelteChangeToPositionName(ui.item.value);
+      dropDrowPositionFn();
+      return false;
+    },
+    change: function(e, ui) {
+      if ($("#EmpName").val() == galbalDataTemp['EmpName']) {
+        $("#EmpName_id").val(galbalDataTemp['EmpName_id']);
+      } else if (ui.item != null) {
+        $("#EmpName_id").val(ui.item.emp_id);
+      } else {
+        $("#EmpName_id").val("");
+        $("#Position").html('');
+      }
+    }
+  });
+
 $('.barChart').barChart({
 
 	  // horizontal or vertical
@@ -58,6 +275,68 @@ var getChartLine = function(){
 		}
 	});
 }
+
+$("#EmpName").autocomplete({
+	  
+    source: function(request, response) {
+      $.ajax({
+        url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/auto_emp_list",
+        type: "GET",
+        dataType: "json",
+        data: {
+          "emp_name": request.term,
+          "emp_code": session_emp_code,
+          "org_id": $("#organization").val(),
+          "level_id": $("#AppraisalEmpLevel").val()
+        },
+        //async:false,
+        headers: {
+          Authorization: "Bearer " + tokenID.token
+        },
+        error: function(xhr, textStatus, errorThrown) {
+          console.log('Error: ' + xhr.responseText);
+        },
+        success: function(data) {
+          console.log(data)
+          $("#Position").html('');
+          response($.map(data, function(item) {
+            return {
+              label: item.emp_name + "(" + item.emp_code + ")",
+              value: item.emp_name,
+              emp_id: item.emp_id,
+              emp_code: item.emp_code
+            };
+          }));
+
+        },
+        beforeSend: function() {
+          $("body").mLoading('hide');
+        }
+
+      });
+    },
+    select: function(event, ui) {
+      $("#EmpName").val(ui.item.label);
+      $("#EmpName_id").val(ui.item.emp_id);
+      galbalDataTemp['EmpName'] = ui.item.label;
+      galbalDataTemp['EmpName_id'] = ui.item.emp_id;
+      //empNameAutoCompelteChangeToPositionName(ui.item.value);
+      dropDrowPositionFn();
+      return false;
+    },
+    change: function(e, ui) {
+      if ($("#EmpName").val() == galbalDataTemp['EmpName']) {
+        $("#EmpName_id").val(galbalDataTemp['EmpName_id']);
+      } else if (ui.item != null) {
+        $("#EmpName_id").val(ui.item.emp_id);
+      } else {
+        $("#EmpName_id").val("");
+        $("#Position").html('');
+
+      }
+
+    }
+  });
 
 var genTableChartLine = function(data){
 	var htmlTableChart = "";
@@ -346,32 +625,6 @@ var generateChartLine2D = function(data){
 	    dataSource: 
 	    {
 	        "chart": {
-	        	/*"subcaptionFontSize": "14",
-	            "subcaptionFontBold": "0",
-	            "paletteColors": "#0075c2,#1aaf5d,#ffff00,#e60000",
-	            "bgcolor": "#ffffff",
-	            "showBorder": "0",
-	            "showShadow": "0",
-	            "showCanvasBorder": "0",
-	            "usePlotGradientColor": "0",
-	            "legendBorderAlpha": "0",
-	            "legendShadow": "0",
-	            "legendPosition":"BOTTOM",
-	            "showAxisLines": "0",
-	            "showAlternateHGridColor": "0",
-	            "divlineThickness": "1",
-	            "divLineDashed": "1",
-	            "divLineDashLen": "1",
-	            "baseFontSize" :"11",
-	            "showValues": "0",
-	            "toolTipColor": "#ffffff",
-	 	        "toolTipBorderThickness": "0",
-	 	        "toolTipBgColor": "#000000",
-	 	        "toolTipBgAlpha": "80",
-	 	        "toolTipBorderRadius": "2",
-	 	        "toolTipPadding": "5",
-	 	        "yAxisMaxValue" : Max+5,
-	 	        "yAxisMinValue" : Min-5,*/
 	             "paletteColors": "#0075c2,#1aaf5d,#ffff00,#e60000",
 	             "bgAlpha": "0",
 	             "borderAlpha": "20",
@@ -497,28 +750,28 @@ var appraisalTypeFn = function(nameArea,id){
 	});
 }
 
-var dropDrowAppraisalEmpLevelFn = function(id){
+var dropDrowAppraisalEmpLevelFn = function (id) {
+	
+	 var htmlOption = "";
+    
+   $.ajax({
+       url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/emp_level",
+       type: "get",
+       dataType: "json",
+       async: false,
+       headers: { Authorization: "Bearer " + tokenID.token },
+       success: function (data) {
+           $.each(data, function (index, indexEntry) {
 
-	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/emp_level",
-		type:"get",
-		dataType:"json",
-		async:false,
-		headers:{Authorization:"Bearer "+tokenID.token},
-		success:function(data){
-			var htmlOption="";
-//			htmlOption+="<option value=''>All Level</option>";
-			$.each(data,function(index,indexEntry){
-
-				if(id==indexEntry['level_id']){
-					htmlOption+="<option selected='selected' value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
-				}else{
-					htmlOption+="<option value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
-				}
-			});
-			$("#AppraisalEmpLevel").html(htmlOption);
-		}
-	});
+               if (id == indexEntry['level_id']) {
+                   htmlOption += "<option selected='selected' value=" + indexEntry['level_id'] + ">" + indexEntry['appraisal_level_name'] + "</option>";
+               } else {
+                   htmlOption += "<option value=" + indexEntry['level_id'] + ">" + indexEntry['appraisal_level_name'] + "</option>";
+               }
+           });
+       }
+   });
+   $("#AppraisalEmpLevel").html(htmlOption);
 }
 
 var dropDrowIndividualOrgLevelFn = function(id){
@@ -532,7 +785,6 @@ var dropDrowIndividualOrgLevelFn = function(id){
 		data:{"level_id": $("#AppraisalEmpLevel").val()},
 		success:function(data){
 			var htmlOption="";
-//			htmlOption+="<option value=''>All Level</option>";
 			$.each(data,function(index,indexEntry){
 
 				if(id==indexEntry['level_id']){
@@ -582,7 +834,6 @@ var dropDrowIndividualOrgFn = function(appraisalLevelId,id){
 		data:{"emp_level":$("#AppraisalEmpLevel").val(), "org_level":$("#AppraisalOrgLevel").val()},
 		success:function(data){
 			var htmlOption="";
-//			htmlOption+="<option value=''>All Organization</option>";
 			$.each(data,function(index,indexEntry){
 				if(id==indexEntry['org_id']){
 					htmlOption+="<option selected='selected' value="+indexEntry['org_id']+">"+indexEntry['org_name']+"</option>";
@@ -597,7 +848,7 @@ var dropDrowIndividualOrgFn = function(appraisalLevelId,id){
 
 
 
-var dropDrowAppraisalOrgLevelFn = function(id){
+var dropDrowOrganizationOrgLevelFn = function(id){
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_level",
 		type:"get",
@@ -606,7 +857,6 @@ var dropDrowAppraisalOrgLevelFn = function(id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-//			htmlOption+="<option value=''>All Level</option>";
 			$.each(data,function(index,indexEntry){
 
 				if(id==indexEntry['level_id']){
@@ -619,241 +869,38 @@ var dropDrowAppraisalOrgLevelFn = function(id){
 		}
 	});
 	
-	if($("#appraisalType").val() == "1"){
-		dropDrowOrgFn($("#AppraisalOrgLevel").val());
-	} else {
-		dropDrowIndividualOrgFn($("#AppraisalOrgLevel").val());
-	}
+		dropDrowOrganizationOrgFn($("#AppraisalOrgLevel").val());
 }
 
 
 
-var dropDrowOrgFn = function(appraisalLevelId,id){
-	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/org",
-		type:"get",
-		dataType:"json",
-		async:false,
-		headers:{Authorization:"Bearer "+tokenID.token},
-		data:{"level_id":appraisalLevelId},
-		success:function(data){
-			var htmlOption="";
-//			htmlOption+="<option value=''>All Organization</option>";
-			$.each(data,function(index,indexEntry){
-				if(id==indexEntry['org_id']){
-					htmlOption+="<option selected='selected' value="+indexEntry['org_id']+">"+indexEntry['org_name']+"</option>";
-				}else{
-					htmlOption+="<option value="+indexEntry['org_id']+">"+indexEntry['org_name']+"</option>";
-				}
-			});
-			$("#organization").html(htmlOption);
-		}
-	});
-}
+var dropDrowOrganizationOrgFn = function (appraisalLevelId, id) {
 
-
-
-$(document).ready(function() {
-
-  var username = $('#user_portlet').val();
-  var password = $('#pass_portlet').val();
-  var plid = $('#plid_portlet').val();
-  if (username != "" && username != null & username != [] && username != undefined) {
-
-    if (connectionServiceFn(username, password, plid) == false) {
-      return false;
-    }
-    $('[data-toggle="tooltip"]').css({
-      "cursor": "pointer"
-    });
-    $('[data-toggle="tooltip"]').tooltip({
-      html: true
-    });
-    console.log(tokenID.token);
-    var dataClearParam = [{
-        'id': '#Position',
-        'val': ""
-      },
-      {
-        'id': '#Position_id',
-        'val': ""
-      },
-      {
-        'id': '#EmpName',
-        'val': ""
-      },
-      {
-        'id': '#EmpName_id',
-        'val': ""
-      }
-    ];
-
-    var dataSetParam = [{
-        'id': '#Position',
-        'val': "" + cMain_position_name + ""
-      },
-      {
-        'id': '#Position_id',
-        'val': cMain_position_id
-      },
-      {
-        'id': '#EmpName',
-        'val': "" + cMain_emp_name + "(" + session_emp_code + ")"
-      },
-      {
-        'id': '#EmpName_id',
-        'val': cMain_emp_id
-      },
-      {
-        'id': '#AppraisalEmpLevel',
-        'val': "" + cMain_level_id + ""
-      }
-    ];
-
-    dropDrowYearListFn();
-    $("#AppraisalYear").change(function() {
-//      dropDrowPeriodListFn($(this).val()); #close
-    });
-    
-    appraisalTypeFn();
-    $("#appraisalType").change(function() {
-      if ($("#appraisalType").val() == 1) {
-        $("#Position").val("").prop("disabled", true);
-        $("#EmpName").val("").prop("disabled", true);
-        $("#AppraisalEmpLevel").prop("disabled", true);
-        dropDrowAppraisalOrgLevelFn();
-      } else {
-        $("#Position").prop("disabled", false);
-        $("#EmpName").prop("disabled", false);
-        $("#AppraisalEmpLevel").prop("disabled", false);
-        dropDrowAppraisalEmpLevelFn();
-      }
-    });
-    $("#appraisalType").change();
-
-    $("#AppraisalEmpLevel").change(function() {
-      clearParamSearch(dataClearParam); // in cMain.js
-      dropDrowIndividualOrgLevelFn($(this).val());
-    });
-
-    $("#AppraisalOrgLevel").change(function() {
-      clearParamSearch(dataClearParam); // in cMain.js
-
-      if ($("#appraisalType").val() == "1") {
-        dropDrowOrgFn($(this).val());
-      } else {
-        dropDrowIndividualOrgFn($(this).val());
-      }
-    });
-
-    $("#organization").change(function() {
-      clearParamSearch(dataClearParam); // in cMain.js
-    });
-
-    if ($("#appraisalType").val() == 2){
-  	  setParamSearch(dataSetParam); // in cMain.js
-  	  dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
-  }
-
-    //Auto complete Start
-    
-    $("#EmpName").autocomplete({
-  
-      source: function(request, response) {
-        $.ajax({
-          url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/auto_emp_list",
-          type: "GET",
-          dataType: "json",
-          data: {
-            "emp_name": request.term,
-            "emp_code": session_emp_code,
-            "org_id": $("#organization").val(),
-            "level_id": $("#AppraisalEmpLevel").val()
-          },
-          //async:false,
-          headers: {
-            Authorization: "Bearer " + tokenID.token
-          },
-          error: function(xhr, textStatus, errorThrown) {
-            console.log('Error: ' + xhr.responseText);
-          },
-          success: function(data) {
-            console.log(data)
-            $("#Position").html('');
-            response($.map(data, function(item) {
-              return {
-                label: item.emp_name + "(" + item.emp_code + ")",
-                value: item.emp_name,
-                emp_id: item.emp_id,
-                emp_code: item.emp_code
-              };
-            }));
-
-          },
-          beforeSend: function() {
-            $("body").mLoading('hide');
-          }
-
-        });
-      },
-      select: function(event, ui) {
-        $("#EmpName").val(ui.item.label);
-        $("#EmpName_id").val(ui.item.emp_id);
-        galbalDataTemp['EmpName'] = ui.item.label;
-        galbalDataTemp['EmpName_id'] = ui.item.emp_id;
-        //empNameAutoCompelteChangeToPositionName(ui.item.value);
-        dropDrowPositionFn();
-        return false;
-      },
-      change: function(e, ui) {
-        if ($("#EmpName").val() == galbalDataTemp['EmpName']) {
-          $("#EmpName_id").val(galbalDataTemp['EmpName_id']);
-        } else if (ui.item != null) {
-          $("#EmpName_id").val(ui.item.emp_id);
-        } else {
-          $("#EmpName_id").val("");
-          $("#Position").html('');
-
+    $.ajax({
+        url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/org_organization",
+        type: "get",
+        dataType: "json",
+        async: false,
+        headers: { Authorization: "Bearer " + tokenID.token },
+        data: {
+        	"org_level": appraisalLevelId ,
+        	"appraisal_year" :$("#AppraisalYear").val(),
+        	},
+        
+        success: function (data) {
+            var htmlOption = "";
+            $.each(data, function (index, indexEntry) {
+                if (id == indexEntry['org_id']) {
+                    htmlOption += "<option value=" + indexEntry['org_id'] + ">" + indexEntry['org_name'] + "</option>";
+                } else {
+                    htmlOption += "<option value=" + indexEntry['org_id'] + ">" + indexEntry['org_name'] + "</option>";
+                }
+            });
+            $("#organization").html(htmlOption);
         }
-
-      }
     });
+}
 
-    $("#btnSearch").click(function(){
-    $("#showChart").hide();  // panel chart 
-    $(".showTable").hide();  // panel table
-    $(".body-chart").hide(); // body chart
-    if(
-    	($("#Position").val() != ""
-/*    	&& $("#Period_id").val($("#AppraisalPeriod").val()) !="" #close*/ 
-    	&& $("#appraisalType").val() !=""
-    	&& $("#AppraisalEmpLevel").val() !=""
-    	&& $("#AppraisalOrgLevel").val() !=""
-    	&& $("#organization").val() != ""
-    	&& $("#EmpName_id").val() != ""
-    	&& $("#AppraisalYear").val() != "")
-    	|| $("#appraisalType").val() == "1"
-    	){
-    	
-    	$("#Position_id").val($("#Position").val());
-    	$("#appraisalType_id").val($("#appraisalType").val());
-    	$("#AppraisalEmpLevel_id").val($("#AppraisalEmpLevel").val());
-    	$("#AppraisalOrgLevel_id").val($("#AppraisalOrgLevel").val());
-    	$("#organization_id").val($("#organization").val());
-    	$("#appraisal_year").val($("#AppraisalYear").val());
-    	getDataFn();
-    	
-    }
-    else{
-    	callFlashSlide("Employee Name is Require !");
-    	return false;
-    }	
-	});
-    
-    $(".app_url_hidden").show();
-		
-  }
-});
 
 
 

@@ -72,10 +72,10 @@ $(document).ready(function () {
             refreshMultiOrganization();
         });
 
-        $("#AppraisalOrgLevel").change(function () { // Individual and Organization   if AppraisalOrgLevel change --> dropDrowOrgFn or dropDrowIndividualOrgFn change
+        $("#AppraisalOrgLevel").change(function () { // Individual and Organization   if AppraisalOrgLevel change --> dropDrowOrganizationOrgFn or dropDrowIndividualOrgFn change
             clearParamSearch(dataClearParam); // in cMain.js
             if ($("#appraisalType").val() == "1") {
-                dropDrowOrgFn($(this).val());
+                dropDrowOrganizationOrgFn($(this).val());
             } else {
                 dropDrowIndividualOrgFn($(this).val());
             }
@@ -92,14 +92,13 @@ $(document).ready(function () {
                 $("#Position").val("").prop("disabled", true);
                 $("#EmpName").val("").prop("disabled", true);
                 $("#AppraisalEmpLevel").prop("disabled", true);
-                dropDrowAppraisalOrgLevelFn();
+                dropDrowOrganizationOrgLevelFn();
                 refreshMultiOrganization();
             } else {
                 $("#Position").prop("disabled", false);
                 $("#EmpName").prop("disabled", false);
                 $("#AppraisalEmpLevel").prop("disabled", false);
                 dropDrowAppraisalEmpLevelFn();
-                dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
                 refreshMultiOrganization();
             }
         });
@@ -245,6 +244,9 @@ var appraisalTypeFn = function () {
 
 var dropDrowAppraisalEmpLevelFn = function (id) {
 
+    var htmlOption = "";
+    htmlOption += "<option value=''>"+$(".lt-all-employee-level").val()+"</option>";
+    
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/emp_level",
         type: "get",
@@ -252,8 +254,7 @@ var dropDrowAppraisalEmpLevelFn = function (id) {
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            var htmlOption = "";
-            htmlOption += "<option value=''>"+$(".lt-all-employee-level").val()+"</option>";
+
             $.each(data, function (index, indexEntry) {
 
                 if (id == indexEntry['level_id']) {
@@ -262,13 +263,17 @@ var dropDrowAppraisalEmpLevelFn = function (id) {
                     htmlOption += "<option value=" + indexEntry['level_id'] + ">" + indexEntry['appraisal_level_name'] + "</option>";
                 }
             });
-            $("#AppraisalEmpLevel").html(htmlOption);
         }
     });
+    $("#AppraisalEmpLevel").html(htmlOption);
+    dropDrowIndividualOrgLevelFn($("#AppraisalEmpLevel").val());
 }
 
 var dropDrowIndividualOrgLevelFn = function (id) {
 
+    var htmlOption = "";
+    htmlOption += "<option value=''>"+$(".lt-all-organization-level").val()+"</option>";
+    
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/org_level_individual",
         type: "get",
@@ -277,8 +282,6 @@ var dropDrowIndividualOrgLevelFn = function (id) {
         headers: { Authorization: "Bearer " + tokenID.token },
         data: { "level_id": $("#AppraisalEmpLevel").val() },
         success: function (data) {
-            var htmlOption = "";
-            htmlOption += "<option value=''>"+$(".lt-all-organization-level").val()+"</option>";
             $.each(data, function (index, indexEntry) {
 
                 if (id == indexEntry['level_id']) {
@@ -287,9 +290,9 @@ var dropDrowIndividualOrgLevelFn = function (id) {
                     htmlOption += "<option value=" + indexEntry['level_id'] + ">" + indexEntry['appraisal_level_name'] + "</option>";
                 }
             });
-            $("#AppraisalOrgLevel").html(htmlOption);
         }
     });
+    $("#AppraisalOrgLevel").html(htmlOption);
     dropDrowIndividualOrgFn();
 }
 
@@ -318,9 +321,11 @@ var dropDrowIndividualOrgFn = function (appraisalLevelId, id) {
 }
 
 
+var dropDrowOrganizationOrgLevelFn = function (id) {
 
-var dropDrowAppraisalOrgLevelFn = function (id) {
-
+    var htmlOption = "";
+    htmlOption += "<option value=''>"+$(".lt-all-organization-level").val()+"</option>";
+    
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/org_level",
         type: "get",
@@ -328,8 +333,6 @@ var dropDrowAppraisalOrgLevelFn = function (id) {
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            var htmlOption = "";
-            htmlOption += "<option value=''>"+$(".lt-all-organization-level").val()+"</option>";
             $.each(data, function (index, indexEntry) {
 
                 if (id == indexEntry['level_id']) {
@@ -338,27 +341,28 @@ var dropDrowAppraisalOrgLevelFn = function (id) {
                     htmlOption += "<option value=" + indexEntry['level_id'] + ">" + indexEntry['appraisal_level_name'] + "</option>";
                 }
             });
-            $("#AppraisalOrgLevel").html(htmlOption);
         }
     });
-
-    if ($("#appraisalType").val() == "1") {
-        dropDrowOrgFn($("#AppraisalOrgLevel").val());
-    } else {
-        dropDrowIndividualOrgFn($("#AppraisalOrgLevel").val());
-    }
+    
+    $("#AppraisalOrgLevel").html(htmlOption);
+    dropDrowOrganizationOrgFn($("#AppraisalOrgLevel").val());
 }
 
 
-var dropDrowOrgFn = function (appraisalLevelId, id) {
+var dropDrowOrganizationOrgFn = function (appraisalLevelId, id) {
 
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/org",
+        url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/org_organization",
         type: "get",
         dataType: "json",
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
-        data: { "level_id": appraisalLevelId },
+        data: {
+        	"org_level": appraisalLevelId ,
+        	"appraisal_year" :$("#AppraisalYear").val(),
+        	"period_id" : $("#AppraisalPeriod").val()
+        	},
+        
         success: function (data) {
             var htmlOption = "";
             $.each(data, function (index, indexEntry) {
