@@ -252,6 +252,7 @@ var clearFn = function(options){
 			$(".is_unlimited_reward_header").hide();
 			$(".is_unlimited_deduction_header").hide();
 			$(".is_value_get_zero_header").hide();
+			$("#nof_target_score").prop("readonly", false);
 		}
 		
 	});
