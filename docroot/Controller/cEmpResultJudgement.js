@@ -320,8 +320,10 @@ var listDataFn = function(data){
 	$.each(data,function (index, indexEntry) {
 		if(indexEntry['edit_flag']==0) {
 			edit_flag = "disabled";
+			$("#adjust_percent, #btnAdjust").prop('disabled', true);
 		} else {
 			edit_flag = "";
+			$("#adjust_percent, #btnAdjust").prop('disabled', false);
 		}
 		
 		/* Generate table body */
