@@ -1539,7 +1539,7 @@ var listAppraisalDetailFn = function (data) {
             $(".txtChiefEmpName").html(data['head'][0]['chief_emp_name']);
             $(".txtAppraisalType").html(data['head'][0]['appraisal_type_name']);
             $(".txtPeriod").html(data['head'][0]['appraisal_period_desc']);
-            $(".txtGrandTotalWeigh").html(data['head'][0]['result_score']);
+            $(".txtGrandTotalWeigh").html(data['head'][0]['result_score']+"<span style=\"font-size: 30%; font-weight: bold;\">"+data['head'][0]['grade']+"</span>");
             $(".txtFormType").html(data['head'][0]['appraisal_form_name']);
 
         } else if ($("#embed_appraisalType").val() == 1) {
@@ -1553,7 +1553,7 @@ var listAppraisalDetailFn = function (data) {
             $(".txtOrgNameOrg").html(data['head'][0]['org_name']);
             $(".txtParentOrganizationOrg").html(data['head'][0]['parent_org_name']);
             $(".txtPeriodOrg").html(data['head'][0]['appraisal_period_desc']);
-            $(".txtGrandTotalWeighOrg").html(data['head'][0]['result_score']);
+            $(".txtGrandTotalWeighOrg").html(data['head'][0]['result_score']+"<span style=\"font-size: 30%; font-weight: bold;\">"+data['head'][0]['grade']+"</span>");
             $(".txtFormTypeOrg").html(data['head'][0]['appraisal_form_name']);
 
         }
