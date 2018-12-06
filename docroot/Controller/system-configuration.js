@@ -381,11 +381,17 @@ var updateMailFn = function() {
 			"nof_date_bonus"                    :  galbalDataSystemcon["nof_date_bonus"],
 			"salary_raise_frequency_id"         :  galbalDataSystemcon["salary_raise_frequency_id"],
 			"current_appraisal_year"            :  galbalDataSystemcon["current_appraisal_year"],
+			"entity_type_resorting"				:  galbalDataSystemcon["entity_type_resorting"],
+			"allow_input_actual"				:  galbalDataSystemcon["allow_input_actual"],
+			"appraisal_360_flag"				:  galbalDataSystemcon["appraisal_360_flag"],
 			"raise_type"			            :  galbalDataSystemcon["raise_type"],
 			"result_type"			            :  galbalDataSystemcon["result_type"],
 			"threshold"							:  galbalDataSystemcon["threshold"],
 			"email_reminder_flag"				:  galbalDataSystemcon["email_reminder_flag"],
+			"item_result_log"					:  galbalDataSystemcon["item_result_log"],
 			"theme_color"			            :  galbalDataSystemcon["theme_color"],
+			"show_grand_total_flag"				:  galbalDataSystemcon["show_grand_total_flag"],
+			
 			// Update Mail
 			"mail_driver"         				:  $("#form_mail_driver").val(),
 			"mail_host"            				:  $("#form_mail_host").val(),
