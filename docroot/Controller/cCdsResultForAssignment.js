@@ -162,14 +162,6 @@ var searchAdvanceCdsFn = function (year,month,month_name,app_lv,app_lv_emp,app_t
 	getCdsResultDataFn(pageNumberDefault,$("#rppCds").val());
 }
 
-var splitDecimal = function(num_float){ // is_date
-	if(num_float == null)
-		num_float = '0' ;
-	
-	var num_int = num_float.split(".");
-	return num_int[0];
-}
-
 var listCdsResultFn = function (data) {
 	var htmlTable = "";
 	$.each(data,function(index,indexEntry) {
