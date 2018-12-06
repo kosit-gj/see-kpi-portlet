@@ -33,7 +33,7 @@ var getQualityFn = function () {   // QualityFn
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            console.log(data);
+            // console.log(data);
             dataQuality = data;
 
             $.each(dataQuality, function (index, groupEntry) {
@@ -183,7 +183,8 @@ var onchangDetailQualityFn = function (item_result_id, structureId) {  // Qualit
 
 var onchangTableQualityFn = function (structureId) {  // QualityFn
     var htmlTable = "";
-    var total_weigh_score = "";
+    var nof_target_score = 0.00;
+    var total_weigh_score = 0.00;
     var hintHtml = "";
     var dataHint = [];
 
@@ -201,7 +202,9 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
                 if (isObjectOrArray(indexEntry2) && indexEntry2['group_id'] == $("#group-" + structureId).val())
                     $.each(indexEntry2, function (index3, indexEntry3) {
                         if (isObjectOrArray(indexEntry3) && indexEntry3['emp_id'] == $("#emp-" + structureId).val()) {
-                            total_weigh_score = indexEntry3['total_weigh_score'];
+                            // total_weigh_score = indexEntry3['total_weigh_score'];
+                        	total_weigh_score = 0.00;
+                        	nof_target_score = 0.00;
                             $.each(indexEntry3['items'], function (index, indexEntry) {
                                 if (!(indexEntry['formula_desc'] == null || indexEntry['formula_desc'] == undefined || indexEntry['formula_desc'] == "" || indexEntry['formula_desc'].length == 0)) {
                                     info_item = "<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>" + $(".lt-kpi-name").val() + " : </strong>" + indexEntry['item_name'] + "' info-data='" + indexEntry['formula_desc'] + "'>i</span>";
@@ -236,6 +239,11 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
                                 htmlTable += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['weight_percent'])).toFixed(2)) + "</td>";
                                 htmlTable += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2)) + "</td>";
                                 htmlTable += "</tr>";
+                                
+                                total_weigh_score = (total_weigh_score + parseFloat(indexEntry['weigh_score']));
+                                nof_target_score = parseFloat(indexEntry['nof_target_score']);
+                                console.log('   -> weigh_score : '+parseFloat(indexEntry['weigh_score']));
+                                console.log(' -> sum_weigh_score : '+total_weigh_score);
                             });
                         }
                     });
@@ -243,6 +251,7 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
         }
     });
 
+    /* ตัว all มีปัญหาเลยไม่เอามาใช้งาน (DHAS, 2018-11-28, p.wirun)
     if (($("#group-" + structureId).val()) == 0){
 	    htmlTable += "<tr class='classAdmin th-all'>";
 	    htmlTable += "<td class=''></td>";
@@ -252,6 +261,17 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
 	    htmlTable += "<td class='' style='text-align: right;padding-right: 10px;font-weight: bold;font-size:16px'><b>" + addCommas(parseFloat(notNullFn(total_weigh_score)).toFixed(2)) + "</b></td>";
 	    htmlTable += "</tr>";
     }
+    */
+    console.log('total_weigh_score : '+total_weigh_score);
+    console.log('nof_target_score : '+nof_target_score);
+    total_weigh_score = (total_weigh_score / nof_target_score);
+    htmlTable += "<tr class='th-all'>";
+    htmlTable += "<td class=''></td>";
+    htmlTable += "<td class=''></td>";
+    htmlTable += "<td class='' ></td>";
+    htmlTable += "<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>" + $(".lt-total").val() + "</b></td>";
+    htmlTable += "<td class='' style='text-align: right;padding-right: 10px;font-weight: bold;font-size:16px'><b>" + addCommas(parseFloat(notNullFn(total_weigh_score)).toFixed(2)) + "</b></td>";
+    htmlTable += "</tr>";
 
     $("#table-" + structureId).html(htmlTable);
     
