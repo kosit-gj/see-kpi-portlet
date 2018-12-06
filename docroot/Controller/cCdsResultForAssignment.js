@@ -162,6 +162,14 @@ var searchAdvanceCdsFn = function (year,month,month_name,app_lv,app_lv_emp,app_t
 	getCdsResultDataFn(pageNumberDefault,$("#rppCds").val());
 }
 
+var splitDecimal = function(num_float){ // is_date
+	if(num_float == null)
+		num_float = '0' ;
+	
+	var num_int = num_float.split(".");
+	return num_int[0];
+}
+
 var listCdsResultFn = function (data) {
 	var htmlTable = "";
 	$.each(data,function(index,indexEntry) {
@@ -186,8 +194,14 @@ var listCdsResultFn = function (data) {
 		htmlTable += "<td class='columnSearch'>"+ indexEntry["year"]+ "</td>";
 		htmlTable += "<td class='columnSearch'>"+ $("#param_month_name").val()+ "</td>";
 		//htmlTable += "<td class='columnSearch'>"+ indexEntry["month_name"]+ "</td>";
-		htmlTable += "<td class='columnSearch' style='text-align: right;padding-right: 10px;'> <input id='cdsValueID-"+indexEntry["cds_result_id"]+"-"+indexEntry["cds_id"]+"-"+indexEntry["org_id"]+"-"+indexEntry["emp_id"]+"-"+indexEntry["position_id"]+"-"+indexEntry["level_id"]+"-"+indexEntry["year"]+"-"+indexEntry["month"];
-		htmlTable +="'style='text-align:right;width: 130px;' class='cdsValue numberOnlyCds addCommaCds' disabled type=\"text\"  value='"+ (indexEntry["cds_value"] == "" ? "" :addCommas(parseFloat(indexEntry["cds_value"]).toFixed(2)))+ "'></td>";
+		if(indexEntry["is_date"]){ // is_date
+			htmlTable += "<td class='columnSearch' style='text-align: right;padding-right: 10px;'> <input id='cdsValueID-"+indexEntry["cds_result_id"]+"-"+indexEntry["cds_id"]+"-"+indexEntry["org_id"]+"-"+indexEntry["emp_id"]+"-"+indexEntry["position_id"]+"-"+indexEntry["level_id"]+"-"+indexEntry["year"]+"-"+indexEntry["month"];
+			htmlTable +="'style='text-align:right;width: 130px;' class='cdsValue numberOnlyCds is_date' disabled type=\"text\"  value='"+splitDecimal(indexEntry["cds_value"])+ "'></td>";
+		}else{
+			htmlTable += "<td class='columnSearch' style='text-align: right;padding-right: 10px;'> <input id='cdsValueID-"+indexEntry["cds_result_id"]+"-"+indexEntry["cds_id"]+"-"+indexEntry["org_id"]+"-"+indexEntry["emp_id"]+"-"+indexEntry["position_id"]+"-"+indexEntry["level_id"]+"-"+indexEntry["year"]+"-"+indexEntry["month"];
+			htmlTable +="'style='text-align:right;width: 130px;' class='cdsValue numberOnlyCds addCommaCds' disabled type=\"text\"  value='"+ (indexEntry["cds_value"] == "" ? "" :addCommas(parseFloat(indexEntry["cds_value"]).toFixed(2)))+ "'></td>";
+		}
+		
 		//htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;text-align: center;\"><i id='"+ indexEntry["cds_result_id"]+ "' class='fa fa-trash del' style='color: red; cursor: pointer;'></i></td>";
 		if(indexEntry["cds_result_id"] == null){
 			htmlTable += "<td class='columnSearch'></td>";
@@ -200,6 +214,11 @@ var listCdsResultFn = function (data) {
 		htmlTable += "</tr>";////parseFloat().toLocaleString()
 	});
 	$("#listCdsResult").html(htmlTable);
+	
+	  $('.is_date').datepicker({ // is_date
+	      	dateFormat: "yymmdd",
+	      	});
+	  
 	$(".popover-edit-del-cds").popover(setPopoverDisplay);
 	$("#tableCdsResult").off("click",".popover-edit-del-cds");
 	$("#tableCdsResult").on("click",".popover-edit-del-cds",function(){

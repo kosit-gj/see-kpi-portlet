@@ -232,6 +232,7 @@ var setDataToTemplateFn = function (data, actionType) {
 	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3").val(splitDecimal(indexEntry['score3']));
 	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4").val(splitDecimal(indexEntry['score4']));
 	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5").val(splitDecimal(indexEntry['score5']));
+	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6").val(splitDecimal(indexEntry['score6']));
       
         }else{
             $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0").val(addCommas(indexEntry['score0']));
@@ -240,6 +241,8 @@ var setDataToTemplateFn = function (data, actionType) {
             $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3").val(addCommas(indexEntry['score3']));
             $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4").val(addCommas(indexEntry['score4']));
             $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5").val(addCommas(indexEntry['score5']));
+            $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6").val(addCommas(indexEntry['score6']));
+            
         }
         $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-weight").val(addCommas(indexEntry['weight_percent']));
         //form2
@@ -266,6 +269,9 @@ var setDataToTemplateFn = function (data, actionType) {
     });
 }
 var splitDecimal = function(num_float){
+	if(num_float == null)
+		num_float = '0' ;
+	
 	var num_int = num_float.split(".");
 	return num_int[0];
 }
@@ -1798,6 +1804,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
                   htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText4 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3'></td>";
                   htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText5 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4'></td>";
                   htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText6 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5'></td>";
+                  htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText7 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6'></td>";
             }else{
             htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText1 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0'></td>";
             htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText2 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1'></td>";
