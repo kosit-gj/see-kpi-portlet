@@ -402,6 +402,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 	var hintCount = 0;
 	var hintHtml="";
 	var paperclip;
+	var info_item="";
 	$.each(data['hint'],function(index,indexEntry){
 		hintHtml+="<div style='text-align: left;\'>"+indexEntry['hint']+"</div>";
 		hintCount++;
@@ -481,6 +482,11 @@ var assignTemplateQuantityFn = function(structureName,data){
 
 				paperclip = (indexEntry['files_amount'] > 0) ? "<i class='fa fa-paperclip' style='font-weight: bold; font-size: 20px;'></i>" : "<span style='width: 15.72px;'></span>";
 				item_result_id_array.push(indexEntry['item_result_id']);
+				if(!(indexEntry['formula_desc'] == null || indexEntry['formula_desc'] == undefined || indexEntry['formula_desc'] == "" || indexEntry['formula_desc'].length == 0)) {
+					info_item="<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>"+$(".lt-kpi-name").val()+" : </strong>"+indexEntry['item_name']+"' info-data='"+indexEntry['formula_desc']+"'>i</span>";
+				}else{
+					info_item ="";
+				}
 				/*
 				item_result_id
 				item_name
@@ -496,7 +502,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 //				if(data['no_weight']==0){
 					htmlTemplateQuantity+="<tr >";
 						htmlTemplateQuantity+="<td>"+indexEntry['perspective_name']+"</td>";
-						htmlTemplateQuantity+="<td id=\"item_name-"+indexEntry['item_result_id']+"\">"+indexEntry['item_name']+"</td>";
+						htmlTemplateQuantity+="<td id=\"item_name-"+indexEntry['item_result_id']+"\">"+indexEntry['item_name']+" "+info_item+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 						htmlTemplateQuantity+="<td>"+indexEntry['uom_name']+"</td>";
 						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore addComma\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(2))+"></td>";

@@ -549,11 +549,12 @@ $.each(data,function(index,indexEntry){
             downloadLink.click();
             setTimeout(function() {
                 if (typeof window.navigator.msSaveBlob !== 'undefined') {
-                	window.navigator.msSaveBlob(blob, fileName)
+                	window.navigator.msSaveBlob(blob, fileName);
+                	//ถ้าเป็น browser ie จะเข้าลูปนี้
                 } else {
                 	window.URL.revokeObjectURL(downloadUrl);
                 }
-            }, 100);
+            }, 100);//หน่วงเวลาเพื่อที่จะสามารถดาวโหลดได้
 		}
 		
 		function getXHR() {
@@ -655,7 +656,11 @@ $.each(data,function(index,indexEntry){
 				                        + currentdate.getMinutes() + "" 
 				                        + currentdate.getSeconds();
 						 if (xhr.status == 200) {
-							 saveBlob(blob, "import_assignment_"+datetime+".xlsx");
+							 if(blob.type=='application/json') { //ถ้าค่าที่ return มา เป็น json แสดงว่าข้อมูลใน excel ไม่มี
+								 callFlashSlide($(".lt-data-is-empty").val());
+							 } else {
+								 saveBlob(blob, "import_assignment_"+datetime+".xlsx");
+							 }
 							$("#loadingGif").hide();
 						 } else {
 							 $("#loadingGif").hide();

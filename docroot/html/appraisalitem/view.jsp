@@ -1875,23 +1875,38 @@ overflow-y: visible;
 			                <!-- form end -->
                 	</div>
                 	<div class='row-fluid'>
-                	<div class='span12'>
-                			<div class='form-file-mangement'>
+<!--                 	<div class='span12'> -->
+<!--                 			<div class='form-file-mangement'> -->
 			                
-				                <div class="form-label-quantity" id="formulaDescriptionLabelAreaQuantity">
+<!-- 				                <div class="form-label-quantity" id="formulaDescriptionLabelAreaQuantity"> -->
 				                
-				                	Formula Description <span class='redFont'>*</span>
-				                </div>
+<!-- 				                	Formula Description <span class='redFont'>*</span> -->
+<!-- 				                </div> -->
 				                
-				                <div class="" id="formulaDescriptionAreaQuantity">
+<!-- 				                <div class="" id="formulaDescriptionAreaQuantity"> -->
 				                
-				                	<textarea class="form-control input-sm span12" id="formulaDescriptionQuantity"  placeholder="Formula Description" style=" height: 81px;"></textarea>
+<!-- 				                	<textarea class="form-control input-sm span12" id="formulaDescriptionQuantity"  placeholder="Formula Description" style=" height: 81px;"></textarea> -->
 				                	
-				                </div>
-				                <br style="clear:both">
-			                </div>
-                	</div>
-                	 <br style="clear:both">
+<!-- 				                </div> -->
+<!-- 				                <br style="clear:both"> -->
+<!-- 			                </div> -->
+<!--                 	</div> -->
+<!--                 	<br style="clear:both"> -->
+                	<div class='row-fluid'>
+	                	<div class='span12'>
+		                		<!-- panel1 start-->
+		                		<div class="ibox-title3" style="margin-right: 2px;">
+			                          <div class='titlePanel'>Description</div>
+			                      </div>
+			   					<div class="ibox-content" style='padding-left: 5px; padding-right: 5px; margin-right: 2px;'>
+			   							<!-- content  start-->	
+			   							<div id="sunEditQuantity">
+			   							</div> 
+			                            <!-- content  end-->				
+			   					</div>
+		                		<!-- panel1 end -->   
+		                </div>
+	                </div>
                 	<div class='row-fluid'>
 	                	<div class='span6 mutiSelectBox' id='organizationBox' >
 	                		

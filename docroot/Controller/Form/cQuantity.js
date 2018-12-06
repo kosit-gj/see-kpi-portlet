@@ -17,7 +17,7 @@ var clearQuantityFormFn = function(){
 	$("#formulaDescriptionQuantity").val("");
 	$("#kpiQuantity").val("");
 	$("#textarea_cds").html("");
-	
+	suneditorQuantityFn();
 	
 }
 //List Data
@@ -54,7 +54,8 @@ var updateQuantityFn  = function(){
 	 var structure_id=$("#structure_id_quantity").val();
 	 var uom_id=$("#uomQuantity").val();
 	 var baseline_value=$("#baselineValueQuantity").val();
-	 var formula_desc=$("#formulaDescriptionQuantity").val();
+//	 var formula_desc=$("#formulaDescriptionQuantity").val();
+	 var formula_desc= editorFormulaDescriptionQuantity.getContent();
 	
 	 $(".formula_cds_id_area .cds_name_inline").remove();
 	 var formula_cds_name=$("#textarea_cds").html();
@@ -145,7 +146,8 @@ var insertQuantityFn = function(param) {
 	 var structure_id=$("#structure_id_quantity").val();
 	 var uom_id=$("#uomQuantity").val();
 	 var baseline_value=$("#baselineValueQuantity").val();
-	 var formula_desc=$("#formulaDescriptionQuantity").val();
+//	 var formula_desc=$("#formulaDescriptionQuantity").val();
+	 var formula_desc= editorFormulaDescriptionQuantity.getContent();
 	// var department_id=$("#departmentQuantity").val();
 	 var organization=($('[name="organizationQuantity[]"]').val());
 	 var position=($('[name="positionQuantity[]"]').val());
@@ -320,7 +322,8 @@ structure_name
 		dropDrowremindConditionFn("Quantity",data['remind_condition_id'],defaultAll=false,defaultEmpty=false);
 		
 		$("#baselineValueQuantity").val(data['baseline_value']);
-		$("#formulaDescriptionQuantity").val(data['formula_desc']);
+//		$("#formulaDescriptionQuantity").val(data['formula_desc']);
+		editorFormulaDescriptionQuantity.setContent(data['formula_desc']);
 		$("#appraisalItemNameQuantity").val(data['item_name']);	
 		$("#textarea_cds").html(data['formula_cds_name']);
 		$("#kpiQuantity").val(data['kpi_id']);
@@ -554,7 +557,10 @@ $(document).ready(function(){
 	
 	
 	$(document).on("click","button[data-target='#modal-quantity']",function(){
-
+		$("#modal-quantity").modal({
+			"backdrop" : setModalPopup[0],
+			"keyboard" : setModalPopup[1]
+		});
 		var structureId=$(this).prev().prev().get();
 		var structureName=$(this).prev().prev().prev().get();
 		initailQuantityFormFn('add',$(structureId).val(),$(structureName).val());
@@ -637,3 +643,54 @@ $(document).ready(function(){
 		//IsNumericForCal($(this).text(),this);
 	});
 });
+
+var editorFormulaDescriptionQuantity;
+var suneditorQuantityFn = function() {
+	var htmlOption = '<textarea id="contentDescriptionQuantity" style="width: 95%" class=""></textarea>';
+	$("#sunEditQuantity").html(htmlOption);
+	editorFormulaDescriptionQuantity = SUNEDITOR.create('contentDescriptionQuantity', {
+
+	    height: 250,
+	   width: '100%',
+
+	   // new CSS font properties
+	   addFont: null,
+
+	   // width/heigh of the video
+	   videoX: 560,
+	   videoY: 315,
+
+	   // image file input
+	   imageFileInput: undefined,
+
+	   // image url input
+	   imageUrlInput: undefined,
+
+	   // image size
+	   imageSize: '350px',
+	   
+	   // image upload url
+	   imageUploadUrl: null,
+
+	   // font list
+	   fontList: null,
+	   
+	   // font size list
+	   fontSizeList: null,
+
+	   // show/hide toolbar icons
+	   buttonList: [
+	     ['undo', 'redo'],
+	     ['fontSize', 'formats'],
+	     ['bold', 'underline', 'italic', 'strike', 'removeFormat'],
+	     ['fontColor', 'hiliteColor'],
+	     ['indent', 'outdent'],
+	     ['align', 'line', 'list'],
+	     //['align', 'line', 'list', 'table'],
+	   //['link', 'image', 'video'],
+	     ['fullScreen'] //,['fullScreen', 'codeView'],
+	    // ['preview', 'print']
+	   ]
+	   
+	 });
+}
