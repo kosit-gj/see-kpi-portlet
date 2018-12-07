@@ -8,6 +8,19 @@ var gEmpInfo = [];
 var files;
 var emailLinkAppraisal = false;
 
+var getURLParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+     for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+         if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+}
+
 var isObjectOrArray = function(item){
 	if(jQuery.type(item) == "object" || jQuery.type(item) == "array"){
 		return true;
@@ -2556,7 +2569,8 @@ var saveAppraisalIndividualFn = function ()
         data: {
             "stage_id": $("#actionToAssign").val(),
             "remark": $("#remark_footer").val(),
-            "appraisal": appraisalObject
+            "appraisal": appraisalObject,
+            "template_name" : "kpi-result-360"
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
@@ -2641,7 +2655,8 @@ var saveAppraisalOrganizationFn = function()
 		data:{
 			"stage_id":$("#actionToAssign").val(),
 			"remark":$("#remark_footer").val(),
-			"appraisal":appraisalObject
+			"appraisal":appraisalObject,
+			"template_name" : "kpi-result-360"
 			},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
@@ -3582,4 +3597,56 @@ $(document).ready(function () {
         getAttachFileFn(id);
     });
     //download attahc file end
+    
+  //email link popup
+    var URLParameter_emp_result_id = getURLParameter('emp_result_id');
+    var URLParameter_group_id = getURLParameter('group_id');
+	if(URLParameter_emp_result_id!=undefined && URLParameter_group_id!=undefined) {
+		 $.ajax({
+			 url: restfulURL + "/" + serviceName + "/public/appraisal360/check_permission_popup/"+URLParameter_emp_result_id,
+		     type: "get",
+		     dataType: "json",
+		     async: false,
+		     headers: { Authorization: "Bearer " + tokenID.token },
+		     success: function (data) {
+			     if(data['status']==200) {
+			    	 var Position = $("#Position_id").val();
+			         var AppraisalLevel_ = ($("#appraisalType").val() == "1") ? $("#AppraisalOrgLevel").val() : $("#AppraisalEmpLevel").val();
+			         
+			         $(".embed_param_search").remove();
+			         var embedParam = "";
+			         embedParam += "<input type='hidden' class='embed_param_search' id='embed_AppraisalYear' name='embed_AppraisalYear' value='" + $("#AppraisalYear").val() + "'>";
+			         embedParam += "<input type='hidden' class='embed_param_search' id='embed_AppraisalPeriod' name='embed_AppraisalPeriod' value='" + $("#AppraisalPeriod").val() + "'>";
+			         embedParam += "<input type='hidden' class='embed_param_search' id='embed_AppraisalLevel' name='embed_AppraisalLevel' value='" + AppraisalLevel_ + "'>";
+			         embedParam += "<input type='hidden' class='embed_param_search' id='embed_AppraisalLevelOrg' name='embed_AppraisalLevelOrg' value='" + $("#AppraisalOrgLevel").val() + "'>";
+			         embedParam += "<input type='hidden' class='embed_param_search' id='embed_Org' name='embed_Org' value='" + $("#organization").val() + "'>";
+			         embedParam += "<input type='hidden' class='embed_param_search' id='embed_Position' name='embed_Position' value='" + Position + "'>";
+			         embedParam += "<input type='hidden' class='embed_param_search' id='embed_EmpName' name='embed_EmpName' value='" + $("#EmpName_id").val() + "'>";
+			         embedParam += "<input type='hidden' class='embed_param_search' id='embed_appraisalType' name='embed_appraisalType' value='" + $("#appraisalType").val() + "'>";
+			         embedParam+="<input type='hidden' class='embed_param_search' id='embed_formType' name='embed_formType' value='"+$("#form_type").val()+"'>";
+			         embedParam+="<input type='hidden' id='group_id-"+URLParameter_emp_result_id+"'  value='"+URLParameter_group_id+"'>";
+			         embedParam+="<input type='hidden' id='group_id'  value=''>";
+			         $("#embedParamSearch").append(embedParam);
+			 		
+			 		 $("#remark_footer").val('');
+			 		 findOneFn(URLParameter_emp_result_id);
+			 		 $("#emp_result_id").val(URLParameter_emp_result_id);
+
+			 		 sessionStorage.setItem('appraisal_type_id', $('#emp_appraisal_type_id-' + URLParameter_emp_result_id).val());
+			 		 sessionStorage.setItem('period_id', $('#emp_period_id-' + URLParameter_emp_result_id).val());
+			 		 sessionStorage.setItem('emp_code', $('#emp_emp_code-' + URLParameter_emp_result_id).val());
+			 		 sessionStorage.setItem('appraisal_item_id', $('#emp_appraisal_item_id-' + URLParameter_emp_result_id).val());
+
+			 		 // Set Defult Competency Select --> onchangDetailQualityFn() //
+			 		 $( ".competencyScore" ).change();
+
+			 		 $(window).scrollTop(0);
+			 		 $(".modal-body").scrollTop(0);
+			     } else {
+			    	 console.log('permission fail');
+			     }
+		     }
+		});
+	}
+	// end email link popup
 });
