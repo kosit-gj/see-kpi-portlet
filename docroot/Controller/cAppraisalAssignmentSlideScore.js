@@ -233,17 +233,16 @@ var setDataToTemplateFn = function (data, actionType) {
 	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4").val(splitDecimal(indexEntry['score4']));
 	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5").val(splitDecimal(indexEntry['score5']));
 	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6").val(splitDecimal(indexEntry['score6']));
-      
         }else{
-            $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0").val(addCommas(indexEntry['score0']));
-            $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1").val(addCommas(indexEntry['score1']));
-            $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2").val(addCommas(indexEntry['score2']));
-            $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3").val(addCommas(indexEntry['score3']));
-            $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4").val(addCommas(indexEntry['score4']));
-            $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5").val(addCommas(indexEntry['score5']));
-            $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6").val(addCommas(indexEntry['score6']));
-            
+            $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0").val(notNullTextFn(addCommas(indexEntry['score0'])));
+            $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1").val(notNullTextFn(addCommas(indexEntry['score1'])));
+            $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2").val(notNullTextFn(addCommas(indexEntry['score2'])));
+            $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3").val(notNullTextFn(addCommas(indexEntry['score3'])));
+            $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4").val(notNullTextFn(addCommas(indexEntry['score4'])));
+            $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5").val(notNullTextFn(addCommas(indexEntry['score5'])));
+            $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6").val(notNullTextFn(addCommas(indexEntry['score6'])));
         }
+        
         $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-weight").val(addCommas(indexEntry['weight_percent']));
         //form2
 
