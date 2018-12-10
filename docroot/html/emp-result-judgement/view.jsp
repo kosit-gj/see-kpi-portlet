@@ -1012,6 +1012,7 @@ input[type=number]::-webkit-outer-spin-button {
 											<option>20</option>
 											<option>50</option>
 											<option>100</option>
+											<option>All</option>
 										</select>
 									</div>
 									<div class='pagingText'>
@@ -1059,7 +1060,7 @@ input[type=number]::-webkit-outer-spin-button {
 						      </th>
 						      <th style="width:auto;text-align:center;"><liferay-ui:message key="emp-code"/></th>
 						      <th style="width:auto;"> <liferay-ui:message key="employee-name"/></th>
-						      <th style="width:auto;"> <liferay-ui:message key="employee-level"/></th>
+						      <th style="width:auto;"> <liferay-ui:message key="emp-level"/></th>
 						      <th style="width:22%;text-align:center;"><liferay-ui:message key="organization"/></th>
 						      <th style="width:auto;text-align:center;"><liferay-ui:message key="position"/></th>
 						      <th style="width:auto;text-align:center;"><liferay-ui:message key="status"/></th>
@@ -1090,6 +1091,7 @@ input[type=number]::-webkit-outer-spin-button {
 												<option>20</option>
 												<option>50</option>
 												<option>100</option>
+												<option>All</option>
 											</select>
 										</div>
 										<div class='pagingText'>

@@ -334,8 +334,8 @@ var listDataFn = function(data){
 		htmlHTML += "	<td>"+indexEntry.emp_code+"</td>";
 		htmlHTML += "	<td style='white-space:nowrap'>"+indexEntry.emp_name+"</td>";
 		htmlHTML += "	<td>"+indexEntry.appraisal_level_name+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap'>"+indexEntry.org_name+"</td>";
-		htmlHTML += "	<td style='width:200px;' class='testOverFlow'>"+indexEntry.position_name+"</td>";
+		htmlHTML += "	<td style='width:180px;' class='testOverFlow'>"+indexEntry.org_name+"</td>";
+		htmlHTML += "	<td style='width:180px;' class='testOverFlow'>"+indexEntry.position_name+"</td>";
 		htmlHTML += "	<td style='white-space:nowrap'>"+indexEntry.status+"</td>";
 		htmlHTML += "	<td class='data-percent'>";
 		htmlHTML += "		<div class='float-label-control'>";
@@ -742,7 +742,7 @@ $(document).ready(function() {
 			//Search Start
 		    $("#btnSearchAdvance").click(function () {
 		        searchAdvanceFn();
-		        $(".countPagination").val(10);
+		        $(".countPagination").val('All');
 		        $("#rpp").remove();
 		        $("#search_result").show();
 		        clearFn();
