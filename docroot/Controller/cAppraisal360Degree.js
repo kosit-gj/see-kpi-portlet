@@ -36,8 +36,8 @@ var getQualityFn = function () {   // QualityFn
     dataChangeQuality = [];
 
     $.ajax({
-        // url: restfulURL + "/" + serviceName + "/public/appraisal/show/emp_result/type_2",
-    	url: restfulURL + "/" + serviceName + "/public/test",
+        url: restfulURL + "/" + serviceName + "/public/appraisal/show/emp_result/type_2",
+    	// url: restfulURL + "/" + serviceName + "/public/test",
         type: "get",
         dataType: "json",
         data: {
