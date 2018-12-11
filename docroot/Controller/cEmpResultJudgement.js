@@ -7,6 +7,8 @@ var password = "";
 
 var clearFn = function() {
 	$("#information").hide();
+	$(".sort-z-score").find('i').removeClass('fa-sort fa-sort-up fa-sort-down icon-sort-color');
+	$(".sort-z-score").find('i').addClass('fa-sort');
 }
 
 var dropDrowYearListFn = function(nameArea,id){
@@ -188,7 +190,47 @@ var appraisalStatusFn = function () {
         }
     });
 }
+var getDataCalculateFn = function(){
+	//alert("Page : "+page+" - Rpp : "+rpp);
 
+
+	var stage_id = $("#actionToAssign").val();
+	var detail = [];
+	$.each($(".control-calculate").get(),function(index,indexEntry){
+		if($(indexEntry).find('.select-check').prop('checked')) {
+			detail.push({
+				emp_result_id		: $(indexEntry).find('.select-check').attr('id'),
+				percent_adjust		: $(indexEntry).find('.data-percent').find('.percent').autoNumeric('get'),
+				adjust_result_score	: $(indexEntry).find('.data-score').find('.score').autoNumeric('get'),
+				edit_flag           : $(indexEntry).find('.select-check').attr('edit_flag')
+			});
+		}
+	});
+	
+    $.ajax({
+        url: restfulURL + "/" + serviceName + "/public/emp/adjustment",
+        type: "post",
+        dataType: "json",
+        async: true,
+        data: {
+        	//"stage_id": stage_id,
+        	"detail": detail
+        },
+        headers: { Authorization: "Bearer " + tokenID.token },
+        success: function (resData) {
+        	if(resData.status == 200) {
+			appraisalStatusFn();
+        		getDataFn();
+        		callFlashSlide($(".lt-update-successfully").val());
+        		clearFn();
+        	} else if(resData.status == 400) {
+        		callFlashSlide(resData.data);
+        	}
+        }
+    });
+	
+	
+};
 //SearchAdvance
 var searchAdvanceFn = function () {
 
@@ -256,9 +298,36 @@ var getDataFn = function (page, rpp) {
             "appraisal_form_id": form
         },
         success: function (data) {
-            listDataFn(data['data']);
+//        	var numbersArr = [];
+//        	var data_length = data['result']['data'].length;
+//        	var total = 90;
+//        	var avg = 60;
+//        	var standard_deviation = 6.65;
+//        	var temp_data = data;
+//        	$.each(temp_data['result']['data'],function (index, indexEntry) {
+//        		temp_data['result']['data'][index].z_core = (indexEntry.perv_score_1 - avg)/standard_deviation;
+//        	});
+//        	console.log("temp");
+//        	console.log(temp_data['data']);
+//        	if(data_length != 0){
+//	        	$.each(data['data'],function (index, indexEntry) {
+//	        		total += Number(indexEntry.perv_score_1);
+//	        		numbersArr.push(indexEntry.perv_score_1);
+//	        	});
+//	        	avg = total/data_length;
+//	        	standard_deviation= standardDeviationFn(numbersArr);
+//	        	$.each(data['data'],function (index, indexEntry) {
+//	        		console.log("perv_score_1 : " +indexEntry.perv_score_1);
+//	        		console.log("avg : " +avg);
+//	        		console.log("standard_deviation : " +standard_deviation);
+//	        		console.log("z_core : " + (indexEntry.perv_score_1 - avg)/standard_deviation);
+//	        		indexEntry.z_core = (indexEntry.perv_score_1 - avg)/standard_deviation;
+//	        	});
+//        	}
+        	//console.log(data['data']);
+            listDataFn(data['result']['data']);
             setThemeColorFn(tokenID.theme_color);
-            globalData = data;
+            globalData = data['result'];
             paginationSetUpFn(globalData['current_page'], globalData['last_page'], globalData['last_page']);
         }
     });
@@ -293,10 +362,28 @@ var to_action = function () {
         }
     });
 }
-
+var standardDeviationFn = function (numbersArr) {
+    //--CALCULATE AVAREGE--
+    var total = 0;
+    for(var key in numbersArr) 
+       total += numbersArr[key];
+    var meanVal = total / numbersArr.length;
+    //--CALCULATE AVAREGE--
+  
+    //--CALCULATE STANDARD DEVIATION--
+    var SDprep = 0;
+    for(var key in numbersArr) 
+       SDprep += Math.pow((parseFloat(numbersArr[key]) - meanVal),2);
+    var SDresult = Math.sqrt(SDprep/numbersArr.length);
+    //--CALCULATE STANDARD DEVIATION--
+    return SDresult;
+    
+};
 var listDataFn = function(data){
 	var htmlHTML="";
 	var edit_flag = "";
+	
+	
 	
 	if(data.length==0) {
 		htmlHTML +="<tr>";
@@ -314,10 +401,12 @@ var listDataFn = function(data){
 		return;
 	}
 	
+
 	
 	var previous1Flag = 0, previous2Flag = 0, previous3Flag = 0;
 	var judgementName = '', pervScore1Name = '', pervScore2Name = '', pervScore3Name = '';
 	$.each(data,function (index, indexEntry) {
+		
 		if(indexEntry['edit_flag']==0) {
 			edit_flag = "disabled";
 			$("#adjust_percent, #btnAdjust").prop('disabled', true);
@@ -337,6 +426,7 @@ var listDataFn = function(data){
 		htmlHTML += "	<td style='width:180px;' class='testOverFlow'>"+indexEntry.org_name+"</td>";
 		htmlHTML += "	<td style='width:180px;' class='testOverFlow'>"+indexEntry.position_name+"</td>";
 		htmlHTML += "	<td style='white-space:nowrap'>"+indexEntry.status+"</td>";
+		htmlHTML += "	<td style='white-space:nowrap'>"+indexEntry.z_score+"</td>";
 		htmlHTML += "	<td class='data-percent'>";
 		htmlHTML += "		<div class='float-label-control'>";
 		htmlHTML += "			<input "+edit_flag+" type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 percent numberOnly' total_adjust_result_score='"+indexEntry.judgement_score+"' value='"+indexEntry.percent_adjust+"'/>";
@@ -632,7 +722,30 @@ var insertFn = function() {
         }
     });
 }
-
+var compareValues = function (key, order='asc') {
+	  return function(a, b) {
+	    if(!a.hasOwnProperty(key) || 
+	       !b.hasOwnProperty(key)) {
+	  	  return 0; 
+	    }
+	    
+	    const varA = (typeof a[key] === 'string') ? 
+	      a[key].toUpperCase() : a[key];
+	    const varB = (typeof b[key] === 'string') ? 
+	      b[key].toUpperCase() : b[key];
+	      
+	    let comparison = 0;
+	    if (varA > varB) {
+	      comparison = 1;
+	    } else if (varA < varB) {
+	      comparison = -1;
+	    }
+	    return (
+	      (order == 'desc') ? 
+	      (comparison * -1) : comparison
+	    );
+	  };
+	}
 
 $(document).ready(function() {
 
@@ -673,6 +786,8 @@ $(document).ready(function() {
 				dropDrowPositionFn();
 				refreshMultiPosition();
 			});
+			
+			
 			
 			$("#Position").multiselect({minWidth:'100%;'}).multiselectfilter();
 			  refreshMultiPosition();
@@ -728,6 +843,43 @@ $(document).ready(function() {
 					refreshMultiPosition();
 		         }       
 		    });
+			
+			$(".sort-z-score").off('click');
+			$(".sort-z-score").on('click',function(){
+					
+				$("body").mLoading();
+				console.log(globalData.data.sort(compareValues('z_score', 'desc')));
+				var el = $(this);
+				var sortData; 
+				setTimeout(function(){ 
+					if(el.find('i').hasClass('fa-sort')){
+						sortData = globalData.data.sort(compareValues('z_score', 'desc'));
+						listDataFn(sortData);
+						el.find('i').removeClass('fa-sort');
+						el.find('i').addClass('fa-sort-up icon-sort-color');
+					}else if(el.find('i').hasClass('fa-sort-up')){
+						$("body").mLoading();
+						sortData = globalData.data.sort(compareValues('z_score', 'asc'));
+						listDataFn(sortData);
+						
+						el.find('i').removeClass('fa-sort-up');
+						el.find('i').addClass('fa-sort-down');
+					}else if(el.find('i').hasClass('fa-sort-down')){
+						
+						sortData = globalData.data.sort(compareValues('z_score', 'desc'));
+						listDataFn(sortData);
+						
+						el.find('i').removeClass('fa-sort-down');
+						el.find('i').addClass('fa-sort-up');
+					} 
+					$("body").mLoading('hide');
+				}, 200);
+			
+			
+			});
+			
+			
+			
 			$("#adjust_percent").val(100);
 			$("#adjust_percent").autoNumeric('init');
 			$("#adjust_percent").autoNumeric('update', {
@@ -746,6 +898,8 @@ $(document).ready(function() {
 		        $("#rpp").remove();
 		        $("#search_result").show();
 		        clearFn();
+		        $("#btn_search_recalculate").prop("disabled",false)
+		        
 		    });
 		    
 		    $("#btnSubmit").click(function() {
@@ -762,3 +916,35 @@ $(document).ready(function() {
 		}
 	}
 });
+
+
+/*
+function compareValues(key, order='asc') {
+  return function(a, b) {
+    if(!a.hasOwnProperty(key) || 
+       !b.hasOwnProperty(key)) {
+  	  return 0; 
+    }
+    
+    const varA = (typeof a[key] === 'string') ? 
+      a[key].toUpperCase() : a[key];
+    const varB = (typeof b[key] === 'string') ? 
+      b[key].toUpperCase() : b[key];
+      
+    let comparison = 0;
+    if (varA > varB) {
+      comparison = 1;
+    } else if (varA < varB) {
+      comparison = -1;
+    }
+    return (
+      (order == 'desc') ? 
+      (comparison * -1) : comparison
+    );
+  };
+}
+
+console.log(
+  bands.sort(compareValues('albums', 'desc'))
+); 
+ */

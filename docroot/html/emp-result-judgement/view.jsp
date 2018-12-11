@@ -883,6 +883,83 @@ input[type=number]::-webkit-outer-spin-button {
 	    white-space: normal;
 	    word-break: break-all;
 	}
+.box {
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border-top: 4px solid #d2d6de;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 1px 10px rgba(0,0,0,0.1);
+}
+.box2 {
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border-top: 6px solid #d2d6de;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 1px 10px rgba(0,0,0,0.1);
+}
+
+.box-primary {
+    border-top-color: #3c8dbc;
+}
+.box-warning {
+    border-top-color: #f39c12;
+}
+.box-info {
+    border-top-color: #00c0ef;
+}
+.box-success {
+    border-top-color: #00a65a;
+}
+.box-danger {
+    border-top-color: #dd4b39;
+}
+.box-header.with-border {
+    border-bottom: 1px solid #f4f4f4;
+}
+.box-header {
+    color: #444;
+    display: block;
+    padding: 10px;
+    position: relative;
+}
+.box-header:before, .box-body:before, .box-footer:before, .box-header:after, .box-body:after, .box-footer:after {
+    content: " ";
+    display: table;
+}
+.box-header:after, .box-body:after, .box-footer:after {
+    clear: both;
+}
+.box-header>.fa, .box-header>.glyphicon, .box-header>.ion, .box-header .box-title {
+    display: inline-block;
+    font-size: 18px;
+    margin: 0;
+    line-height: 1;
+}
+.box-body {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding: 10px;
+}
+.tablesorter-bootstrap .tablesorter-header i.tablesorter-icon {
+    /* position: absolute; */
+    right: 2px;
+    top: 50%;
+    margin-top: -7px;
+    width: 14px;
+    height: 14px;
+    background-repeat: no-repeat;
+    line-height: 14px;
+    display: inline-block;
+}
+.icon-sort-color{
+	color: cornflowerblue;
+}
 </style>
 
 
@@ -972,12 +1049,19 @@ input[type=number]::-webkit-outer-spin-button {
                     </select>
                   </div>
 
-                  <div class="form-group span3 m-b-none pull-right" style="margin-top: 1px; margin-left: 5px; text-align:right;">
-                    <button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance">
-                      <i class="fa fa-search"></i>&nbsp;<liferay-ui:message key="search"/>
-                    </button>
-                    &nbsp;
-                  </div>
+
+                  <div class="form-group pull-right m-b-none span3" style="margin-top: 1px; margin-left: 5px; text-align:right;">
+								<div class="form-group pull-right m-b-none ">
+									<button type="button" name="btn_search_recalculate" onclick="getDataCalculateFn()" id="btn_search_calculate" class="btn btn-warning input-sm " style="margin-left: 5px;" disabled="disabled">
+										<i class="fa fa-calculator"></i>&nbsp;<liferay-ui:message key="calculate"/>
+									</button>
+								</div>
+								<div class="form-group pull-right m-b-none ">
+									<button type="button" name="btnSearchAdvance" id="btnSearchAdvance" class="btn btn-info input-sm " style="margin-left: 5px;">
+										<i class="fa fa-search"></i>&nbsp;<liferay-ui:message key="search"/>
+									</button>
+								</div>
+							</div>
 
                 </div>
 
@@ -1024,7 +1108,20 @@ input[type=number]::-webkit-outer-spin-button {
 						<!-- pagination end -->
 
 						<div class="row-fluid head_adjust" style="display: none; margin-bottom: 12px;">
-								<div class="span8"></div>
+								<div class="span8">
+									<div class="span3" style="width:auto">
+										<div class="box box-primary" style="margin-bottom: 0px;">
+											<div class="box-header with-border" style="padding-top: 5px;">Average&nbsp;:&nbsp;<span id="average-score">0</span></div>
+<!-- 											<div class="box-body" id="">100</div> -->
+										</div>
+									</div>
+									<div class="span3" style="width:auto">
+										<div class="box box-primary" style="margin-bottom: 0px;">
+											<div class="box-header with-border" style="padding-top: 5px;">S.D.&nbsp;:&nbsp;<span id="sd-score">200</span></div>
+<!-- 											<div class="box-body" id="">200</div> -->
+										</div>
+									</div>
+								</div>
 								<div class="span4">
 									<div class="position-result-perpage" style="text-align: right;">
 										<div></div>
@@ -1050,7 +1147,7 @@ input[type=number]::-webkit-outer-spin-button {
 						      <th rowspan="2" style="width:10%; text-align:center;"><liferay-ui:message key="status"/></th> 
 						      --%>
 						      
-						      <th colspan="7" style="width:70%; text-align:center;"><liferay-ui:message key="employee-information"/></th>
+						      <th colspan="8" style="width:70%; text-align:center;"><liferay-ui:message key="employee-information"/></th>
 						      <th colspan="2" style="width:15%; text-align:center;"><liferay-ui:message key="adjust-result-score"/></th>
 						      <th colspan="3" style="width:15%; text-align:center;" class="setColSpanResultAssess"><liferay-ui:message key="result-assess-from"/></th>
 						    </tr>				
@@ -1064,7 +1161,8 @@ input[type=number]::-webkit-outer-spin-button {
 						      <th style="width:22%;text-align:center;"><liferay-ui:message key="organization"/></th>
 						      <th style="width:auto;text-align:center;"><liferay-ui:message key="position"/></th>
 						      <th style="width:auto;text-align:center;"><liferay-ui:message key="status"/></th>
-						      						   
+						      <th style="width:auto;text-align:center;cursor: pointer;" class="sort-z-score">Z-Score <i class="fa fa-sort bootstrap-icon-unsorted"></i></th>
+<!-- <i class="fa fa-sort-up" style="display:none;"></i>  <i class="fa fa-sort-down" style="display:none;></i> -->
 						      <th style="width:auto;"> % </th>
 						      <th style="width:auto;" id="adjust_result_score_name"></th>
 						      <th style="width:auto;" id="score_name1"></th>
@@ -1146,4 +1244,3 @@ input[type=number]::-webkit-outer-spin-button {
 <script type="text/javascript">
  var jQuery_1_1_3 = $.noConflict(true);
 </script>
-	
