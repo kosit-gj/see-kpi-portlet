@@ -923,18 +923,15 @@ var listData = function(data) {
 				html+="<table class='table table-striped table-bordered' style='max-width: none; '>";
 				html+="  <thead>";
 				html+="    <tr>";
-				html+="      <th width=\"15%\" >วันที่</th>";
-				html+="      <th width=\"15%\">เขตพนักงาน</th>";
-				html+="      <th width=\"60%\" >ชื่อพนักงาน</th>";
-				html+="      <th width=\"10%\"></th>";
+				html+="      <th ></th>";
+				html+="      <th >วันที่</th>";
+				html+="      <th  >ชื่อพนักงาน</th>";
+				html+="      <th >เขตพนักงาน</th>";
 				html+="    </tr>";
 				html+="  </thead>";
 				html+="  <tbody>";
 				$.each(indexEntry['data'],function(index2,indexEntry2) {
 					html+="    <tr>";
-					html+="      <td style='white-space: nowrap;'>"+indexEntry2.questionaire_date+"</td>";
-					html+="      <td>"+indexEntry2.position_code+"</td>";
-					html+="      <td style='text-align: left;'>"+indexEntry2.emp_name+"</td>";
 					html+="      <td>";
 					/*
 					    
@@ -952,6 +949,27 @@ var listData = function(data) {
 					}
 					html+="			<button "+(indexEntry2.delete_flag == 1 ? "" : "disabled")+" class='btn btn-danger btn-small btn-gear del' id='del-"+indexEntry2.data_header_id+"'>Delete</button>\"></i>";
 					html+="		 </td>";
+					html+="      <td style='white-space: nowrap;'>"+indexEntry2.questionaire_date+"</td>";
+					html+="      <td style='text-align: left;'>"+indexEntry2.emp_name+"</td>";
+					html+="      <td style='text-align: left;'>"+indexEntry2.position_code+"</td>";
+					/*html+="      <td style='text-align: left;'>"+indexEntry2.emp_name+"</td>";*/
+					/*html+="      <td>";
+					
+					    
+					 	edit_flag	1    
+						delete_flag	1
+						view_flag	1 
+					 
+					html+="		  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"left\"  data-content=\"";
+					html+="			<button class='btn btn-info btn-small btn-gear view' id='view-"+indexEntry2.data_header_id+"' questionaire_date='"+indexEntry2.questionaire_date+"' questionaire_id='"+indexEntry2.questionaire_id+"' assessor_id='"+indexEntry2.assessor_id+"' emp_snapshot_id='"+indexEntry2.emp_snapshot_id+"' emp_name='"+indexEntry2.emp_name+"' questionaire_type_id='"+indexEntry2.questionaire_type_id+"'>Report</button>" ;
+					
+					if((indexEntry2.edit_flag==1 && indexEntry2.view_flag==0)){
+						html+="			<button class='btn btn-warning btn-small btn-gear edit' id='edit-"+indexEntry2.data_header_id+"' edit='1'>Edit</button>" ;
+					}else if((indexEntry2.edit_flag==0 && indexEntry2.view_flag==1)){
+						html+="			<button class='btn btn-warning btn-small btn-gear edit' id='edit-"+indexEntry2.data_header_id+"' edit='0'>View</button>" ;
+					}
+					html+="			<button "+(indexEntry2.delete_flag == 1 ? "" : "disabled")+" class='btn btn-danger btn-small btn-gear del' id='del-"+indexEntry2.data_header_id+"'>Delete</button>\"></i>";
+					html+="		 </td>";*/
 					html+="    </tr>";
 				});
 				html+="  </tbody>";
