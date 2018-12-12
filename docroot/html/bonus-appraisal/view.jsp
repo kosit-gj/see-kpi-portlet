@@ -456,6 +456,7 @@
 					                                     <option>20</option>
 					                                     <option>50</option>
 					                                     <option>100</option>
+					                                     <option>All</option>
 					                                 </select>
 		                                 		
 		                                 		</div>
@@ -507,6 +508,7 @@
 					                                     <option>20</option>
 					                                     <option>50</option>
 					                                     <option>100</option>
+					                                     <option>All</option>
 					                                 </select> 
 			                                 	</div>
 												<div class='pagingText'>Results per page</div>

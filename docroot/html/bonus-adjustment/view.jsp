@@ -1008,6 +1008,7 @@ input[type=number]::-webkit-outer-spin-button {
 						                                     <option>20</option>
 						                                     <option>50</option>
 						                                     <option>100</option>
+						                                     <option>All</option>
 						                                 </select>
 			                                 		</div>
 													<div class='pagingText'><liferay-ui:message key="results-per-page"/></div>
@@ -1051,6 +1052,7 @@ input[type=number]::-webkit-outer-spin-button {
 												<option>20</option>
 												<option>50</option>
 												<option>100</option>
+												<option>All</option>
 											</select>
 										</div>
 										<div class='pagingText'>

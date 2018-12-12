@@ -450,7 +450,12 @@ $(document).ready(function() {
 				$("#search_year").val(),
 				$("#search_bonus_period_id").val()
 				);
-			
+		
+		if($("#rpp").val()=='' || $("#rpp").val() == undefined){  // default  
+			$(".countPagination").val('All');
+			$("#rpp").remove();
+		}
+		
 		$("#bonus_appraisal_list_content").show();
 //		$("#btn_search_recalculate").prop("disabled",false)
 		return false;
