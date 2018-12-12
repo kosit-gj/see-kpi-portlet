@@ -4,7 +4,7 @@ var galbalDataTemp=[];
 //var globalCount=0;
 var username = "";
 var password = "";
-
+const pageNumberDefault=1;
 var clearFn = function() {
 	$("#information").hide();
 }
@@ -207,7 +207,7 @@ var searchAdvanceFn = function () {
     $("#embedParamSearch").append(embedParam);
     
     to_action();
-    getDataFn();
+    getDataFn(pageNumberDefault,$("#rpp").val());
 };
 
 //Get Data
@@ -756,8 +756,10 @@ $(document).ready(function() {
 			//Search Start
 		    $("#btnSearchAdvance").click(function () {
 		        searchAdvanceFn();
-		        $(".countPagination").val(10);
-		        $("#rpp").remove();
+		    	if($("#rpp").val()=='' ||$("#rpp").val() == undefined){  // default 
+					$(".countPagination").val('All');
+					$("#rpp").remove();
+				}
 		        $("#search_result").show();
 		        clearFn();
 		    });
