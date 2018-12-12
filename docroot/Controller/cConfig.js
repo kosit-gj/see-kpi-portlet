@@ -1,21 +1,21 @@
 var restfulURL="";
-var serviceName="see_api";
+var serviceName="pmtl_api";
 
 var serviceName_IMPkpi="impexpservices_api/public";
 //var restfulURL_IMPkpi="https://tfg-winner.tfg.co.th:8443";
-var restfulURL_IMPkpi="http://localhost";
+var restfulURL_IMPkpi="http://203.151.210.160";
 /*#######Office#######*/
 
 //restfulURL="http://192.168.1.254";
 
 /*#######Localhost#######*/
 //restfulURL="https://tfg-winner.tfg.co.th:8443";
-restfulURL="http://localhost";
+restfulURL="http://203.151.210.160";
 
 
 /*#######Localhost#######*/
 //var lifeRayApiUrl = "https://tfg-winner.tfg.co.th";
-var lifeRayApiUrl = "http://localhost:8080";
+var lifeRayApiUrl = "http://203.151.210.160:8080";
 
 /*#######Poroduction#######*/
 //restfulURL="http://172.16.11.109";
