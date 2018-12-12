@@ -960,6 +960,9 @@ input[type=number]::-webkit-outer-spin-button {
 .icon-sort-color{
 	color: cornflowerblue;
 }
+.sort-z-score:hover {
+    background: #f8f8f8 !important;
+}
 </style>
 
 
@@ -1110,14 +1113,14 @@ input[type=number]::-webkit-outer-spin-button {
 						<div class="row-fluid head_adjust" style="display: none; margin-bottom: 12px;">
 								<div class="span8">
 									<div class="span3" style="width:auto">
-										<div class="box box-primary" style="margin-bottom: 0px;">
-											<div class="box-header with-border" style="padding-top: 5px;">Average&nbsp;:&nbsp;<span id="average-score">0</span></div>
+										<div class="box box-warning" style="margin-bottom: 0px;">
+											<div class="box-header with-border" style="padding-top: 5px;">Average&nbsp;&nbsp;&nbsp;<span id="average-score">0</span></div>
 <!-- 											<div class="box-body" id="">100</div> -->
 										</div>
 									</div>
 									<div class="span3" style="width:auto">
-										<div class="box box-primary" style="margin-bottom: 0px;">
-											<div class="box-header with-border" style="padding-top: 5px;">S.D.&nbsp;:&nbsp;<span id="sd-score">200</span></div>
+										<div class="box box-warning" style="margin-bottom: 0px;">
+											<div class="box-header with-border" style="padding-top: 5px;">S.D.&nbsp;&nbsp;&nbsp;<span id="sd-score">200</span></div>
 <!-- 											<div class="box-body" id="">200</div> -->
 										</div>
 									</div>
