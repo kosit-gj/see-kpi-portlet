@@ -4,7 +4,7 @@ var galbalDataTemp=[];
 //var globalCount=0;
 var username = "";
 var password = "";
-
+const pageNumberDefault=1;
 var clearFn = function() {
 	$("#information").hide();
 	$(".sort-z-score").find('i').removeClass('fa-sort fa-sort-up fa-sort-down icon-sort-color');
@@ -213,8 +213,9 @@ var getDataCalculateFn = function(){
         dataType: "json",
         async: true,
         data: {
-        	//"stage_id": stage_id,
-        	"detail": detail
+        	"stage_id": stage_id,
+        	"detail": detail,
+        	"cal_flag" : 1
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (resData) {
@@ -249,7 +250,7 @@ var searchAdvanceFn = function () {
     $("#embedParamSearch").append(embedParam);
     
     to_action();
-    getDataFn();
+    getDataFn(pageNumberDefault,$("#rpp").val());
 };
 
 //Get Data
@@ -264,7 +265,8 @@ var getDataFn = function (page, rpp) {
     var status = $("#embed_status").val();
     var form = $("#embed_appraisal_form").val();
     position_id.push($("#embed_position_id").val());
-    
+    $("#average-score").html("0");
+	$("#sd-score").html("0");
     /* Test Parameter 
     var testParam ={
     		"level_id_org" : level_id_org,
@@ -325,6 +327,8 @@ var getDataFn = function (page, rpp) {
 //	        	});
 //        	}
         	//console.log(data['data']);
+        	$("#average-score").html(data['avg']);
+        	$("#sd-score").html(data['sd']);
             listDataFn(data['result']['data']);
             setThemeColorFn(tokenID.theme_color);
             globalData = data['result'];
@@ -387,7 +391,7 @@ var listDataFn = function(data){
 	
 	if(data.length==0) {
 		htmlHTML +="<tr>";
-		htmlHTML +="<td colspan=\"10\">";
+		htmlHTML +="<td colspan=\"11\">";
 		htmlHTML +="<div style='margin-top: 40px;margin-bottom: 40px;font-weight: bold;color: #e04747;' align='center'>No Data to Display.</div>";
 		htmlHTML +="</td>";
 		htmlHTML +="</tr";
@@ -426,7 +430,7 @@ var listDataFn = function(data){
 		htmlHTML += "	<td style='width:180px;' class='testOverFlow'>"+indexEntry.org_name+"</td>";
 		htmlHTML += "	<td style='width:180px;' class='testOverFlow'>"+indexEntry.position_name+"</td>";
 		htmlHTML += "	<td style='white-space:nowrap'>"+indexEntry.status+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap'>"+indexEntry.z_score+"</td>";
+		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
 		htmlHTML += "	<td class='data-percent'>";
 		htmlHTML += "		<div class='float-label-control'>";
 		htmlHTML += "			<input "+edit_flag+" type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 percent numberOnly' total_adjust_result_score='"+indexEntry.judgement_score+"' value='"+indexEntry.percent_adjust+"'/>";
@@ -707,7 +711,8 @@ var insertFn = function() {
         async: true,
         data: {
         	"stage_id": stage_id,
-        	"detail": detail
+        	"detail": detail,
+        	"cal_flag" : 0
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (resData) {
@@ -894,11 +899,13 @@ $(document).ready(function() {
 			//Search Start
 		    $("#btnSearchAdvance").click(function () {
 		        searchAdvanceFn();
-		        $(".countPagination").val('All');
-		        $("#rpp").remove();
+		    	if($("#rpp").val()=='' || $("#rpp").val() == undefined){  // default  
+					$(".countPagination").val('All');
+					$("#rpp").remove();
+				}
 		        $("#search_result").show();
 		        clearFn();
-		        $("#btn_search_recalculate").prop("disabled",false)
+		        $("#btn_search_calculate").prop("disabled",false)
 		        
 		    });
 		    
@@ -918,33 +925,3 @@ $(document).ready(function() {
 });
 
 
-/*
-function compareValues(key, order='asc') {
-  return function(a, b) {
-    if(!a.hasOwnProperty(key) || 
-       !b.hasOwnProperty(key)) {
-  	  return 0; 
-    }
-    
-    const varA = (typeof a[key] === 'string') ? 
-      a[key].toUpperCase() : a[key];
-    const varB = (typeof b[key] === 'string') ? 
-      b[key].toUpperCase() : b[key];
-      
-    let comparison = 0;
-    if (varA > varB) {
-      comparison = 1;
-    } else if (varA < varB) {
-      comparison = -1;
-    }
-    return (
-      (order == 'desc') ? 
-      (comparison * -1) : comparison
-    );
-  };
-}
-
-console.log(
-  bands.sort(compareValues('albums', 'desc'))
-); 
- */
