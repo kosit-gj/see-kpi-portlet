@@ -742,7 +742,7 @@ background-color:#71cccc !important;
   line-height: 10px; height: 5px; font-size: 10px; width: 100px; text-align: right; 
  } 
 
-.aui #tableBonusAdjustment .float-label-control { position: relative; margin-bottom: 0 px;font-size: smaller; }
+.aui #tableBonusAdjustment .float-label-control { /*position: relative;*/ margin-bottom: 0 px;font-size: smaller; }
    /* .aui #tableBonusAdjustment .float-label-control ::-webkit-input-placeholder { color: transparent; }
     .aui #tableBonusAdjustment .float-label-control :-moz-placeholder { color: transparent; }
     .aui #tableBonusAdjustment .float-label-control ::-moz-placeholder { color: transparent; }
@@ -817,7 +817,7 @@ input[type=number]::-webkit-outer-spin-button {
  #tableBonusAdjustment tbody tr td .input-xs{ 
  	line-height: 10px; height: 15px; font-size: 10px; width: 100px; text-align: right; 
  }
-.aui #tableBonusAdjustment .float-label-control { position: relative; margin-bottom: 0 px;font-size: smaller; }
+.aui #tableBonusAdjustment .float-label-control { /*position: relative;*/ margin-bottom: 0 px;font-size: smaller; }
    /* .aui #tableBonusAdjustment .float-label-control ::-webkit-input-placeholder { color: transparent; }
     .aui #tableBonusAdjustment .float-label-control :-moz-placeholder { color: transparent; }
     .aui #tableBonusAdjustment .float-label-control ::-moz-placeholder { color: transparent; }
@@ -1064,7 +1064,7 @@ input[type=number]::-webkit-outer-spin-button {
 
                   <div class="form-group pull-right m-b-none span3" style="margin-top: 1px; margin-left: 5px; text-align:right;">
 								<div class="form-group pull-right m-b-none ">
-									<button type="button" name="btn_search_recalculate" onclick="getDataCalculateFn()" id="btn_search_calculate" class="btn btn-warning input-sm " style="margin-left: 5px;" disabled="disabled">
+									<button type="button" name="btn_search_recalculate" id="btn_search_calculate" class="btn btn-warning input-sm " style="margin-left: 5px;" disabled="disabled">
 										<i class="fa fa-calculator"></i>&nbsp;<liferay-ui:message key="calculate"/>
 									</button>
 								</div>
@@ -1145,7 +1145,7 @@ input[type=number]::-webkit-outer-spin-button {
 								</div>
 							</div>
 							
-							<div class="row-fluid list-data-table" style="overflow: auto;">							
+							<div id="scroll-tableBonusAdjustment" class="row-fluid list-data-table" style="overflow: auto;">							
 							<table class="table table-striped table-bordered" id="tableBonusAdjustment" style="margin-bottom: 7px; max-width: none;">
 							<thead>
 						    <tr id="tableBonusAdjustment-head1">
@@ -1176,6 +1176,7 @@ input[type=number]::-webkit-outer-spin-button {
 						      <th style="width:auto;text-align:center;cursor: pointer;" class="sort-z-score">Z-Score <i class="fa fa-sort bootstrap-icon-unsorted"></i></th>
 						      <th style="width:auto;"> % </th>
 						      <th style="width:auto;" id="adjust_result_score_name"></th>
+						      <th style="width:auto;" id="result_assess_from_no_data" style="display:none"></th>
 						      <%-- auto generate
 						      <th style="width:auto;" id="score_name1"></th>
 						      <th style="width:auto;" id="score_name2"></th>
@@ -1224,7 +1225,7 @@ input[type=number]::-webkit-outer-spin-button {
 										 </div>
 									 </div>
 							  		<div style='text-align:right; display: flex;'>
-							  			<label class="p-t-xxs" style="text-align: center;"><b><liferay-ui:message key="judge-name"/>&nbsp;:&nbsp;</b></label>
+							  			<label style="display: none;" id="fake_adjust_box" class="p-t-xxs" style="text-align: center;"><b><liferay-ui:message key="judge-name"/>&nbsp;:&nbsp;</b></label>
 								  		<select style="display: none; min-width: 150px;" class="input form-control input-sm"
 					                      id="fake_adjust" name="fake_adjust">
 					                    </select>&nbsp;

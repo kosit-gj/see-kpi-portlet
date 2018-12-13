@@ -6,7 +6,7 @@ var username = "";
 var password = "";
 const pageNumberDefault=1;
 var genJudgeHradComplete = 0;
-var statusFakeAdjust = false;
+var statusFakeAdjust;
 var clearFn = function() {
 	$("#information").hide();
 	$(".sort-z-score").find('i').removeClass('fa-sort fa-sort-up fa-sort-down icon-sort-color');
@@ -192,6 +192,7 @@ var appraisalStatusFn = function () {
         }
     });
 }
+/*
 var getDataCalculateFn = function(){
 	//alert("Page : "+page+" - Rpp : "+rpp);
 
@@ -234,6 +235,7 @@ var getDataCalculateFn = function(){
 	
 	
 };
+*/
 //SearchAdvance
 var searchAdvanceFn = function () {
 
@@ -362,9 +364,9 @@ var to_action = function () {
             $("#actionToAssign").html(htmlOption);
             
             if($("#actionToAssign").val()==null) {
-            	$("#btnConfirm,#btnSubmit").prop("disabled", true);
+            	$("#btnConfirm,#btnSubmit,#btn_search_calculate").prop("disabled", true);
             } else {
-            	$("#btnConfirm,#btnSubmit").prop("disabled", false);
+            	$("#btnConfirm,#btnSubmit,#btn_search_calculate").prop("disabled", false);
             }
         }
     });
@@ -382,22 +384,25 @@ var fakeAdjustFn = function () {
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-        	if(data['edit_flag']==1) {
+        	console.log(data['edit_flag'],'edit_flag');
+        	if(data['edit_flag'].length==0) {
+        		$("#fake_adjust,#fake_adjust_box").hide();
+            	statusFakeAdjust = 3;
+        	} else if(data['edit_flag']==0) {
+            	$("#fake_adjust,#fake_adjust_box").hide();
+            	statusFakeAdjust = 2;
+        	} else {
         		var htmlOption="";
         		htmlOption+="<option value=''>"+$(".lt-select").val()+"</option>";
                 $.each(data['data'], function (index, indexEntry) {
                 	htmlOption += "<option value='" + indexEntry['emp_id'] + "-" + indexEntry['org_level_id'] + "'>" + indexEntry['emp_name'] + "</option>";
                 });
                 $("#fake_adjust").html(htmlOption);
-        		$("#fake_adjust").show();
+        		$("#fake_adjust,#fake_adjust_box").show();
                 statusFakeAdjust = 1;
-        	} else if(data['edit_flag']==0) {
-            	$("#fake_adjust").hide();
-            	statusFakeAdjust = 2;
-        	} else {
-        		$("#fake_adjust").hide();
-            	statusFakeAdjust = 3;
         	}
+        	
+        	console.log(statusFakeAdjust,'statusFakeAdjust');
         }
     });
 }
@@ -438,21 +443,24 @@ var listDataFn = function(data){
 		$("#score_name1 ").text("");
 		$("#score_name1 ").show();
 		$(".setColSpanResultAssess").attr('colspan',1);
+		$("#result_assess_from_no_data").show();
+		$(".head_judge_score").remove();
 		return;
 	} else {
-		if(genJudgeHradComplete == 0){
+		//if(genJudgeHradComplete == 0){
 			// set current judge org level name
 			$("#adjust_result_score_name").text(data[0].cur_judge_org_level);
-			
+			$("#result_assess_from_no_data").hide();
+			$(".head_judge_score").remove();
 			// Generate head score under Result Assess From
 			var judHtml = "";
 			$.each(data[0].judgements,function (index, jud) {
-				judHtml += "<th style='width:auto;' id='judge_score_"+jud.org_level_id+"'>"+jud.org_level_name+"</th>";
+				judHtml += "<th style='width:auto;' class='head_judge_score' id='judge_score_"+jud.org_level_id+"'>"+jud.org_level_name+"</th>";
 			});
 			$("#tableBonusAdjustment-head2").append(judHtml);
 			$(".setColSpanResultAssess").attr('colspan', data[0].judgements.length);
-			genJudgeHradComplete = 1;
-		}
+			//genJudgeHradComplete = 1;
+		//}
 	}
 	
 
@@ -532,9 +540,9 @@ var listDataFn = function(data){
 	}
 	
 	if($("#actionToAssign").val()==null || $("#actionToAssign").val()==undefined) {
-		$("#btnSubmit").attr("disabled");
+		$("#btnSubmit,#btn_search_calculate").attr("disabled");
     } else {
-    	$("#btnSubmit").removeAttr("disabled");
+    	$("#btnSubmit,#btn_search_calculate").removeAttr("disabled");
     }
 	
 	calculatePercentKeyup();
@@ -679,7 +687,12 @@ var validationFn = function(data) {
    2 = แอดมิน  is_hr = 1 ประเมินให้คนอื่นแต่  ปรับแค่ stage
    3 = ประเมินปกติ ปรับ stage และ save
 */
-var insertFn = function(fakeFlag) {
+
+/* calFlag
+0 = ไม่ได้กดมาจากปุ่ม cal 
+1 = กดมาจากปุ่ม cal 
+*/
+var insertFn = function(fakeFlag, calFlag) {
 	if(fakeFlag==1) {
 		var objectJudge = {
 			"emp_id" : $("#fake_adjust").val().split("-")[0],
@@ -710,7 +723,7 @@ var insertFn = function(fakeFlag) {
         data: {
         	"stage_id": stage_id,
         	"detail": detail,
-        	"cal_flag" : 0,
+        	"cal_flag" : calFlag,
         	"fake_flag" : fakeFlag,
         	"object_judge" : objectJudge
         },
@@ -881,7 +894,21 @@ $(document).ready(function() {
 			
 			
 			});
-			
+			$(window).scroll(function() {
+				var myElements = $("#scroll-tableBonusAdjustment")[0].querySelectorAll("thead");
+				if($(this).scrollTop() >= $("#scroll-tableBonusAdjustment").offset().top){
+					$(".lfr-hudcrumbs").hide();
+					$(".nav-collapse").hide();
+					var translate = "translate(0," + ($(this).scrollTop()-$("#scroll-tableBonusAdjustment").offset().top) + "px)";
+					for (var i = 0; i < myElements.length; i++) {
+				       myElements[i].style.transform=translate;
+				     }
+				 }else{
+					 $(".nav-collapse").show();
+					 $("#scroll-tableBonusAdjustment thead").css("transform","translate(0,0px)");
+				 }
+
+			});
 			
 			
 			$("#adjust_percent").val(100);
@@ -908,8 +935,16 @@ $(document).ready(function() {
 		        
 		    });
 		    
-		    $("#btnSubmit").click(function() {
-		    	if(statusFakeAdjust==1) {
+		    $("#btnSubmit,#btn_search_calculate").click(function() {
+		    	if($(this).attr('id')=="btnSubmit") {
+		    		var calFlag = 0;
+		    	} else if($(this).attr('id')=="btn_search_calculate") {
+		    		var calFlag = 1;
+		    	} else {
+		    		return;
+		    	}
+		    	
+		    	if(statusFakeAdjust==1) { //เป็นการประเมินแทน ปรับ stage และบันทึก
 		    		if($("#fake_adjust").val()=="") {
 		    			callFlashSlide($(".lt-validate-select-judge").val());
 		    			return;
@@ -923,14 +958,12 @@ $(document).ready(function() {
 		    			$("#confrimModal").off("click","#btnConfirmYes");
 		    			$("#confrimModal").on("click","#btnConfirmYes",function(){
 		    				$("#confrimModal").modal('hide');
-		    				insertFn(1);
+		    				insertFn(statusFakeAdjust, calFlag);
 		    				$('.modal-body').animate({ scrollTop: 0 }, "slow");
 		    			});
 		    		}
-		    	} else if(statusFakeAdjust==2) {
-		    		insertFn(2);
 		    	} else {
-		    		insertFn(3);
+			    	insertFn(statusFakeAdjust, calFlag); // 2 or 3
 		    	}
 		    });
 		    
@@ -945,4 +978,31 @@ $(document).ready(function() {
 	}
 });
 
+/*
+$("#scroll-tableBonusAdjustment thead").css("transform","translate(0,0px)");
+$(window).bind("scroll", function() {
+    var myElements = $("#scroll-tableBonusAdjustment")[0].querySelectorAll("thead");
+ if($(this).scrollTop() >= $("#scroll-tableBonusAdjustment").offset().top){
+  $(".lfr-hudcrumbs").hide();
+  $(".nav-collapse").hide();
+  var translate = "translate(0," + ($(this).scrollTop()-$("#scroll-tableBonusAdjustment").offset().top) + "px)";
+     for (var i = 0; i < myElements.length; i++) {
+       myElements[i].style.transform=translate;
+     }
+ }else{
+  $(".nav-collapse").show();
+  $("#scroll-tableBonusAdjustment thead").css("transform","translate(0,0px)");
+ }
 
+});
+
+
+$("#scroll-tableBonusAdjustment").bind("scroll", function() {
+    var translate = "translate(0," + this.scrollTop + "px)";
+    var myElements = this.querySelectorAll("thead");
+
+    for (var i = 0; i < myElements.length; i++) {
+     myElements[i].style.transform=translate;
+    }
+});
+*/
