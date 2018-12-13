@@ -252,6 +252,7 @@ var searchAdvanceFn = function () {
     $("#embedParamSearch").append(embedParam);
     
     to_action();
+    fakeAdjustFn();
     getDataFn(pageNumberDefault,$("#rpp").val());
 };
 
@@ -370,7 +371,7 @@ var to_action = function () {
 }
 
 var fakeAdjustFn = function () {
-	var status = $("#status").val();
+	var status = $("#embed_status").val();
 	$.ajax({
         url: restfulURL + "/" + serviceName + "/public/bonus/advance_search/fake_adjust",
         type: "get",
@@ -768,7 +769,6 @@ $(document).ready(function() {
 			dropDrowOrgFn();
 			dropDrowPositionFn();
 			appraisalStatusFn();
-			fakeAdjustFn();
 			
 			$("#AppraisalYear").change(function(){
 				dropDrowPeriodListFn();
@@ -791,11 +791,6 @@ $(document).ready(function() {
 				dropDrowPositionFn();
 				refreshMultiPosition();
 			});
-			
-			$("#status").change(function() {
-				fakeAdjustFn();
-			});
-			
 			
 			
 			$("#Position").multiselect({minWidth:'100%;'}).multiselectfilter();
