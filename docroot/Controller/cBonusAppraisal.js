@@ -154,7 +154,8 @@ var getDataReCalculateFn = function(){
 			 "org_result_judgement_id"	: $(this).attr("org_result_judgement_id"),
 		     "adjust_result_score"		: $(this).find('.inputAdjustResultScore').autoNumeric('get'),
 		     "emp_result_judgement_id"	: $(this).attr("emp_result_judgement_id"),
-		     "emp_adjust_result_score"	: ($(this).attr("emp_result_judgement_id") == "" ? "" : $(this).find('.inputEmpAdjustResultScore ').autoNumeric('get'))
+		     "emp_adjust_result_score"	: ($(this).attr("emp_result_judgement_id") == "" ? "" : $(this).find('.inputEmpAdjustResultScore ').autoNumeric('get')),
+		     "emp_result_score"	: ($(this).attr("emp_result_judgement_id") == "" ? "" : $(this).find('.inputEmpResultScore ').text())
 		});
   
 	 });
@@ -253,7 +254,7 @@ var scriptGenerateHtmlListBonusAppraisalFn = function(indexEntry,sub_departments
 	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.bonus_score).toString()) + "</td>";
 	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.bonus_percent).toString()) + "</td>";
 	html += "<td class='columnSearch' >"+ notNullTextFn(indexEntry.emp_name) + "</td>";
-	html += "<td class='columnSearch' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.emp_result_score).toString()) + "</td>";
+	html += "<td class='columnSearch inputEmpResultScore' style='text-align: right;'>"+ addCommas(notNullTextFn(indexEntry.emp_result_score).toString()) + "</td>";
 	html += "<td class='columnSearch' style='text-align: right;'>" ;
 	if(editFlag  && indexEntry.emp_result_judgement_id != null){
 		
@@ -313,7 +314,8 @@ var scriptBtnConfirmYesFn = function(){
 				 "org_result_judgement_id"	: $(this).attr("org_result_judgement_id"),
 			     "adjust_result_score"		: $(this).find('.inputAdjustResultScore').autoNumeric('get'),
 			     "emp_result_judgement_id"	: $(this).attr("emp_result_judgement_id"),
-			     "emp_adjust_result_score"	: ($(this).attr("emp_result_judgement_id") == "" ? "" : $(this).find('.inputEmpAdjustResultScore ').autoNumeric('get'))
+			     "emp_adjust_result_score"	: ($(this).attr("emp_result_judgement_id") == "" ? "" : $(this).find('.inputEmpAdjustResultScore ').autoNumeric('get')),
+			     "emp_result_score"	: ($(this).attr("emp_result_judgement_id") == "" ? "" : $(this).find('.inputEmpResultScore ').text())
 			});
 	  
 		 });
@@ -359,7 +361,8 @@ var scriptBtnConfirmNoFn = function(){
 				 "org_result_judgement_id"	: $(this).attr("org_result_judgement_id"),
 			     "adjust_result_score"		: $(this).find('.inputAdjustResultScore').autoNumeric('get'),
 			     "emp_result_judgement_id"	: $(this).attr("emp_result_judgement_id"),
-			     "emp_adjust_result_score"	: ($(this).attr("emp_result_judgement_id") == "" ? "" : $(this).find('.inputEmpAdjustResultScore ').autoNumeric('get'))
+			     "emp_adjust_result_score"	: ($(this).attr("emp_result_judgement_id") == "" ? "" : $(this).find('.inputEmpAdjustResultScore ').autoNumeric('get')),
+			     "emp_result_score"	: ($(this).attr("emp_result_judgement_id") == "" ? "" : $(this).find('.inputEmpResultScore ').text())
 			});
 	  
 		 });
