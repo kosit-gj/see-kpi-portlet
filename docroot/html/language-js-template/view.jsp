@@ -123,3 +123,8 @@
 
 <!-- Bonus Appraisal -->
 <input class="lt-adjust-result-score" type="hidden" value="<liferay-ui:message key="adjust-result-score"/>"/>
+
+<!-- Empjudgement -->
+<input class="lt-judge-name" type="hidden" value="<liferay-ui:message key="judge-name"/>"/>
+<input class="lt-validate-select-judge" type="hidden" value="<liferay-ui:message key="validate-select-judge"/>"/>
+<input class="lt-validate-confirm-judge" type="hidden" value="<liferay-ui:message key="validate-confirm-judge"/>"/>

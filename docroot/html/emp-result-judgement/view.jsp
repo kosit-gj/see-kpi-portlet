@@ -963,6 +963,9 @@ input[type=number]::-webkit-outer-spin-button {
 .sort-z-score:hover {
     background: #f8f8f8 !important;
 }
+.titlePanel {
+	width: 100%;
+}
 </style>
 
 
@@ -1052,11 +1055,11 @@ input[type=number]::-webkit-outer-spin-button {
                     </select>
                   </div>
 
-                  <div class="form-group pull-left span3" style="margin-left: 5px;">
-                    <select style="display: none;" data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="manage"/>" class="input form-control input-sm span12"
-                      id="fake_adjust" name="fake_adjust">
-                    </select>
-                  </div>
+<!--                   <div class="form-group pull-left span3" style="margin-left: 5px;"> -->
+<%--                     <select style="display: none;" data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="manage"/>" class="input form-control input-sm span12" --%>
+<!--                       id="fake_adjust" name="fake_adjust"> -->
+<!--                     </select> -->
+<!--                   </div> -->
 
 
                   <div class="form-group pull-right m-b-none span3" style="margin-top: 1px; margin-left: 5px; text-align:right;">
@@ -1220,7 +1223,11 @@ input[type=number]::-webkit-outer-spin-button {
 											 </div>
 										 </div>
 									 </div>
-							  		<div class="" style='text-align:right;'>
+							  		<div style='text-align:right; display: flex;'>
+							  			<label class="p-t-xxs" style="text-align: center;"><b><liferay-ui:message key="judge-name"/>&nbsp;:&nbsp;</b></label>
+								  		<select style="display: none; min-width: 150px;" class="input form-control input-sm"
+					                      id="fake_adjust" name="fake_adjust">
+					                    </select>&nbsp;
 								  	<button class="btn btn-success" type="button" id="btnSubmit"><liferay-ui:message key="submit"/></button>
 									<input type='hidden' id='emp_result_id' name='emp_result_id' value=''>
 										<%--<button data-dismiss="modal" class="btn btn-danger btnCancle" type="button"><liferay-ui:message key="cancel"/></button> --%>

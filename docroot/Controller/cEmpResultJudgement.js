@@ -675,8 +675,8 @@ var validationFn = function(data) {
 
 
 /* fakeFlag
-   1 = แอดมินประเมินให้คนอื่นได้   ปรับ stage และ save 
-   2 = แอดมินประเมินให้คนอื่นแต่  ปรับแค่ stage
+   1 = แอดมิน  is_hr = 1 ประเมินให้คนอื่นได้   ปรับ stage และ save 
+   2 = แอดมิน  is_hr = 1 ประเมินให้คนอื่นแต่  ปรับแค่ stage
    3 = ประเมินปกติ ปรับ stage และ save
 */
 var insertFn = function(fakeFlag) {
@@ -911,10 +911,10 @@ $(document).ready(function() {
 		    $("#btnSubmit").click(function() {
 		    	if(statusFakeAdjust==1) {
 		    		if($("#fake_adjust").val()=="") {
-		    			callFlashSlide("กรุณาเลือกพนักงานที่จะทำการประเมินแทน");
+		    			callFlashSlide($(".lt-validate-select-judge").val());
 		    			return;
 		    		} else {
-		    			$("#fake_adjust_name").html("คุณต้องการประเมินแทนคุณ "+$("#fake_adjust option:selected").text()+"?");
+		    			$("#fake_adjust_name").html($(".lt-validate-confirm-judge").val()+" "+$("#fake_adjust option:selected").text()+"?");
 		    			$("#confrimModal").modal({
 		    				"backdrop" : setModalPopup[0],
 		    				"keyboard" : setModalPopup[1]
