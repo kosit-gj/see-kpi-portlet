@@ -1052,6 +1052,12 @@ input[type=number]::-webkit-outer-spin-button {
                     </select>
                   </div>
 
+                  <div class="form-group pull-left span3" style="margin-left: 5px;">
+                    <select style="display: none;" data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="manage"/>" class="input form-control input-sm span12"
+                      id="fake_adjust" name="fake_adjust">
+                    </select>
+                  </div>
+
 
                   <div class="form-group pull-right m-b-none span3" style="margin-top: 1px; margin-left: 5px; text-align:right;">
 								<div class="form-group pull-right m-b-none ">
@@ -1236,6 +1242,36 @@ input[type=number]::-webkit-outer-spin-button {
 
 			</div>
 	</div>
+	
+	<!-- Modal Confirm Start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal"
+		class="modal inmodal in" style="width:400px;left:calc;display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content  bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
+						<span aria-hidden="true"><i class='fa fa-times'></i></span>
+					</button>
+					<h5 class="modal-title"><liferay-ui:message key="confirm-dialog"/></h5>
+				</div>
+				<div class="modal-body">
+					<div class="form-kpi-mangement">
+						<div class="form-kpi-label" align="center">
+							<label id="fake_adjust_name"></label>
+							<div id="" class='information'></div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div align="center">
+						<button class="btn btn-success" id="btnConfirmYes" type="button"><liferay-ui:message key="submit"/></button>
+						<button data-dismiss="modal" class="btn btn-danger btnCancle" type="button"><liferay-ui:message key="cancel"/></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal Confirm End -->
 	
 	<div id="embedParamSearch"></div>
 	

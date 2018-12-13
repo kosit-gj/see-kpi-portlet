@@ -6,6 +6,7 @@ var username = "";
 var password = "";
 const pageNumberDefault=1;
 var genJudgeHradComplete = 0;
+var statusFakeAdjust = false;
 var clearFn = function() {
 	$("#information").hide();
 	$(".sort-z-score").find('i').removeClass('fa-sort fa-sort-up fa-sort-down icon-sort-color');
@@ -367,6 +368,39 @@ var to_action = function () {
         }
     });
 }
+
+var fakeAdjustFn = function () {
+	var status = $("#status").val();
+	$.ajax({
+        url: restfulURL + "/" + serviceName + "/public/bonus/advance_search/fake_adjust",
+        type: "get",
+        dataType: "json",
+        async: true,
+        data: {
+        	"stage_id" : status
+        },
+        headers: { Authorization: "Bearer " + tokenID.token },
+        success: function (data) {
+        	if(data['edit_flag']==1) {
+        		var htmlOption="";
+        		htmlOption+="<option value=''>"+$(".lt-select").val()+"</option>";
+                $.each(data['data'], function (index, indexEntry) {
+                	htmlOption += "<option value='" + indexEntry['emp_id'] + "-" + indexEntry['org_level_id'] + "'>" + indexEntry['emp_name'] + "</option>";
+                });
+                $("#fake_adjust").html(htmlOption);
+        		$("#fake_adjust").show();
+                statusFakeAdjust = 1;
+        	} else if(data['edit_flag']==0) {
+            	$("#fake_adjust").hide();
+            	statusFakeAdjust = 2;
+        	} else {
+        		$("#fake_adjust").hide();
+            	statusFakeAdjust = 3;
+        	}
+        }
+    });
+}
+
 var standardDeviationFn = function (numbersArr) {
     //--CALCULATE AVAREGE--
     var total = 0;
@@ -638,7 +672,22 @@ var validationFn = function(data) {
  	callFlashSlideBody(validate,"#information","error");
 }
 
-var insertFn = function() {
+
+/* fakeFlag
+   1 = แอดมินประเมินให้คนอื่นได้   ปรับ stage และ save 
+   2 = แอดมินประเมินให้คนอื่นแต่  ปรับแค่ stage
+   3 = ประเมินปกติ ปรับ stage และ save
+*/
+var insertFn = function(fakeFlag) {
+	if(fakeFlag==1) {
+		var objectJudge = {
+			"emp_id" : $("#fake_adjust").val().split("-")[0],
+			"level_id" : $("#fake_adjust").val().split("-")[1]
+		}
+	} else {
+		var objectJudge = {}
+	}
+	
 	var stage_id = $("#actionToAssign").val();
 	var detail = [];
 	$.each($(".control-calculate").get(),function(index,indexEntry){
@@ -660,7 +709,9 @@ var insertFn = function() {
         data: {
         	"stage_id": stage_id,
         	"detail": detail,
-        	"cal_flag" : 0
+        	"cal_flag" : 0,
+        	"fake_flag" : fakeFlag,
+        	"object_judge" : objectJudge
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (resData) {
@@ -717,6 +768,7 @@ $(document).ready(function() {
 			dropDrowOrgFn();
 			dropDrowPositionFn();
 			appraisalStatusFn();
+			fakeAdjustFn();
 			
 			$("#AppraisalYear").change(function(){
 				dropDrowPeriodListFn();
@@ -738,6 +790,10 @@ $(document).ready(function() {
 			$("#organization").change(function() {
 				dropDrowPositionFn();
 				refreshMultiPosition();
+			});
+			
+			$("#status").change(function() {
+				fakeAdjustFn();
 			});
 			
 			
@@ -858,7 +914,29 @@ $(document).ready(function() {
 		    });
 		    
 		    $("#btnSubmit").click(function() {
-		    	insertFn();
+		    	if(statusFakeAdjust==1) {
+		    		if($("#fake_adjust").val()=="") {
+		    			callFlashSlide("กรุณาเลือกพนักงานที่จะทำการประเมินแทน");
+		    			return;
+		    		} else {
+		    			$("#fake_adjust_name").html("คุณต้องการประเมินแทนคุณ "+$("#fake_adjust option:selected").text()+"?");
+		    			$("#confrimModal").modal({
+		    				"backdrop" : setModalPopup[0],
+		    				"keyboard" : setModalPopup[1]
+		    			});
+		    			
+		    			$("#confrimModal").off("click","#btnConfirmYes");
+		    			$("#confrimModal").on("click","#btnConfirmYes",function(){
+		    				$("#confrimModal").modal('hide');
+		    				insertFn(1);
+		    				$('.modal-body').animate({ scrollTop: 0 }, "slow");
+		    			});
+		    		}
+		    	} else if(statusFakeAdjust==2) {
+		    		insertFn(2);
+		    	} else {
+		    		insertFn(3);
+		    	}
 		    });
 		    
 		    //binding tooltip start
