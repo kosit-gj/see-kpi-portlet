@@ -4,6 +4,7 @@ var restfulPathAppraisalLevel="/"+serviceName+"/public/import_employee/assign/ap
 var restfulPathDropDownOrganization="/"+serviceName+"/public/org";
 var restfulPathPositionAutocomplete="/"+serviceName+"/public/position/auto";
 var restfulPathEmployeeAutocomplete="/"+serviceName+"/public/import_employee/auto_employee_name";
+var restfulPathEmployeeExport="/"+serviceName+"/public/import_employee/export";
 //Global variable
 var galbalDataImportEmp=[];
 var galbalDataTemp = [];
@@ -962,7 +963,16 @@ $(document).ready(function() {
   //Auto Complete Employee Name end
 	
 	$("#exportToExcel").click(function(){
-		$("form#formExportToExcel").attr("action",$("#url_portlet").val()+"/file/import_employee_template.xlsx");
+	
+		var param="";
+		param+="&org_id="+$("#search_org").val();
+		param+="&position_id="+$("#search_position_id").val();
+		param+="&emp_code="+$("#search_emp_id").val();
+		
+		console.log(restfulURL+restfulPathEmployeeExport+"?token="+tokenID.token+""+param)
+
+		$("form#formExportToExcel").attr("action",restfulURL+restfulPathEmployeeExport+"?token="+tokenID.token+""+param);
+//		var url_report_jasper = restfulURL+restfulPathEmployeeExport+"?token="+tokenID.token+""+param
 	});
 	
 	//#### Call Export User Function Start ####

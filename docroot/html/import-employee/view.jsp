@@ -488,7 +488,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 								<i class="fa fa-upload"></i>&nbsp;Import</button>
 						</div>
 						<div class="form-group pull-right m-b-none ">
-							<form id="formExportToExcel" action="" method="post"
+							<form id="formExportToExcel" action="" method="POST"
 											class="pull-right " style="margin-bottom: 0px; margin-left: 5px">
 											<button id="exportToExcel" class="btn btn-warning btn-sm"
 												type="submit">
