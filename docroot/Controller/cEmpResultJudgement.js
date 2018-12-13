@@ -5,6 +5,7 @@ var galbalDataTemp=[];
 var username = "";
 var password = "";
 const pageNumberDefault=1;
+var genJudgeHradComplete = 0;
 var clearFn = function() {
 	$("#information").hide();
 	$(".sort-z-score").find('i').removeClass('fa-sort fa-sort-up fa-sort-down icon-sort-color');
@@ -403,12 +404,23 @@ var listDataFn = function(data){
 		$("#score_name1 ").show();
 		$(".setColSpanResultAssess").attr('colspan',1);
 		return;
+	} else {
+		if(genJudgeHradComplete == 0){
+			// set current judge org level name
+			$("#adjust_result_score_name").text(data[0].cur_judge_org_level);
+			
+			// Generate head score under Result Assess From
+			var judHtml = "";
+			$.each(data[0].judgements,function (index, jud) {
+				judHtml += "<th style='width:auto;' id='judge_score_"+jud.org_level_id+"'>"+jud.org_level_name+"</th>";
+			});
+			$("#tableBonusAdjustment-head2").append(judHtml);
+			$(".setColSpanResultAssess").attr('colspan', data[0].judgements.length);
+			genJudgeHradComplete = 1;
+		}
 	}
 	
 
-	
-	var previous1Flag = 0, previous2Flag = 0, previous3Flag = 0;
-	var judgementName = '', pervScore1Name = '', pervScore2Name = '', pervScore3Name = '';
 	$.each(data,function (index, indexEntry) {
 		
 		if(indexEntry['edit_flag']==0) {
@@ -433,88 +445,24 @@ var listDataFn = function(data){
 		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
 		htmlHTML += "	<td class='data-percent'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input "+edit_flag+" type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 percent numberOnly' total_adjust_result_score='"+indexEntry.judgement_score+"' value='"+indexEntry.percent_adjust+"'/>";
+		htmlHTML += "			<input "+edit_flag+" type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 percent numberOnly' total_adjust_result_score='"+indexEntry.last_judge_score+"' value='"+indexEntry.percent_adjust+"'/>";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		htmlHTML += "	<td class='data-score'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input "+edit_flag+" type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 score numberOnly' total_adjust_result_score='"+indexEntry.judgement_score+"' value='"+indexEntry.perv_score_1+"'/>";
+		htmlHTML += "			<input "+edit_flag+" type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 score numberOnly' total_adjust_result_score='"+indexEntry.last_judge_score+"' value='"+indexEntry.last_judge_score+"'/>";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
-            
-		if(indexEntry.perv_score_1_name != null){
-			htmlHTML += "	<td class='score_name1' style='text-align:right;'>"+indexEntry.perv_score_1+"</td>";
-		}else{
-			htmlHTML += "	<td class='score_name1' style='text-align:right;'> </td>";
-		}
-		if(indexEntry.perv_score_2_name != null){
-			htmlHTML += "	<td class='score_name2' style=\"text-align: right;\">"+indexEntry.perv_score_2+"</td>";
-		}else{
-			htmlHTML += "	<td class='score_name2' style=\"text-align: right;\"></td>";
-		}
-		if(indexEntry.perv_score_3_name != null){
-			htmlHTML += "	<td class='score_name3' style=\"text-align: right;\">"+indexEntry.perv_score_3+"</td>";
-		}else{
-			htmlHTML += "	<td class='score_name3' style=\"text-align: right;\"></td>";
-		}
-		htmlHTML += "</tr>";
 		
-		// check existing previous score in response data
-		judgementName = indexEntry.judgement_name;
-		if(indexEntry.perv_score_1_name != null){
-			previous1Flag = 1;
-			pervScore1Name = indexEntry.perv_score_1_name;
-		}
-		if(indexEntry.perv_score_2_name != null){
-			previous2Flag = 1;
-			pervScore2Name = indexEntry.perv_score_2_name;
-		}
-		if(indexEntry.perv_score_3_name != null){
-			previous3Flag = 1;
-			pervScore3Name = indexEntry.perv_score_3_name;
-		}
+		// Result Assess From
+		$.each(indexEntry.judgements,function (index, jud) {
+			htmlHTML += "<td style='text-align:right;'>"+((jud.adjust_result_score == 0) ? "": jud.adjust_result_score)+"</td>";
+		});
 		
-	});
-	
-	//set attribute colspan
-	if(setColSpan != 0){
-		$(".setColSpanResultAssess").attr('colspan',setColSpan);
-	}else{
-		$("#score_name1 ").text("");
-		$("#score_name1 ").show();
-		$("#score_name2, #score_name3, .score_name2, .score_name3").hide();
-		$(".setColSpanResultAssess").attr('colspan',1);
-	}
-	
+		htmlHTML += "</tr>";		
+	});	
 	$("#list_empjudege").html(htmlHTML);
-	
-	// enable/disable previous score, set adjust name
-	var setColSpan = 0 ;
-	$("#adjust_result_score_name").text(judgementName);
-				
-	if(previous1Flag == 1){
-		$("#score_name1, .score_name1").show();
-		$("#score_name1").text(pervScore1Name);
-		setColSpan++;
-	}else{
-		$("#score_name1, .score_name1").hide();
-	}
-	
-	if(previous2Flag == 1){
-		$("#score_name2, .score_name2").show();
-		$("#score_name2").text(pervScore2Name);
-		setColSpan++;
-	}else{
-		$("#score_name2, .score_name2").hide();
-	}
-	
-	if(previous3Flag == 1){
-		$("#score_name3, .score_name3").show();
-		$("#score_name3").text(pervScore3Name);
-		setColSpan++;
-	}else{
-		$("#score_name3, .score_name3").hide();
-	}
+
 	
 	$("#adjust_percent").autoNumeric('set', 100);
 	$(".numberOnly").autoNumeric('init');

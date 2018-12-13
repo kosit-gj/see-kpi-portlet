@@ -1139,7 +1139,7 @@ input[type=number]::-webkit-outer-spin-button {
 							<div class="row-fluid list-data-table" style="overflow: auto;">							
 							<table class="table table-striped table-bordered" id="tableBonusAdjustment" style="margin-bottom: 7px; max-width: none;">
 							<thead>
-						    <tr>
+						    <tr id="tableBonusAdjustment-head1">
 						      <%-- move to second row 
 						      <th rowspan="2" style="width:5%; text-align:center;"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></th>
 						      <th rowspan="2" style="width:10%; text-align:center;"><liferay-ui:message key="emp-code"/></th>
@@ -1154,7 +1154,7 @@ input[type=number]::-webkit-outer-spin-button {
 						      <th colspan="2" style="width:15%; text-align:center;"><liferay-ui:message key="adjust-result-score"/></th>
 						      <th colspan="3" style="width:15%; text-align:center;" class="setColSpanResultAssess"><liferay-ui:message key="result-assess-from"/></th>
 						    </tr>				
-						     <tr>
+						     <tr id="tableBonusAdjustment-head2">
 						      <th style="width:3%;text-align:center;">
 						      	<input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;">
 						      </th>
@@ -1165,12 +1165,13 @@ input[type=number]::-webkit-outer-spin-button {
 						      <th style="width:auto;text-align:center;"><liferay-ui:message key="position"/></th>
 						      <th style="width:auto;text-align:center;"><liferay-ui:message key="status"/></th>
 						      <th style="width:auto;text-align:center;cursor: pointer;" class="sort-z-score">Z-Score <i class="fa fa-sort bootstrap-icon-unsorted"></i></th>
-<!-- <i class="fa fa-sort-up" style="display:none;"></i>  <i class="fa fa-sort-down" style="display:none;></i> -->
 						      <th style="width:auto;"> % </th>
 						      <th style="width:auto;" id="adjust_result_score_name"></th>
+						      <%-- auto generate
 						      <th style="width:auto;" id="score_name1"></th>
 						      <th style="width:auto;" id="score_name2"></th>
 						      <th style="width:auto;" id="score_name3"></th>
+						      --%>
 						    </tr>
 							</thead>
 							<tbody id="list_empjudege">
