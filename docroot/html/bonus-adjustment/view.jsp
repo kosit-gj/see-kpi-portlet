@@ -1028,8 +1028,8 @@ input[type=number]::-webkit-outer-spin-button {
 						      <th style="width:10%; text-align:center;"><liferay-ui:message key="organization"/></th>
 						      <th style="width:10%; text-align:center;"><liferay-ui:message key="position"/></th>
 						      <th style="width:10%; text-align:center;"><liferay-ui:message key="salary"/></th>
-						      <th style="width:5%; text-align:center;"><liferay-ui:message key="bonus-judgement"/></th>
-						      <th style="width:10%; text-align:center;"><liferay-ui:message key="bonus-judgement-rise"/></th>
+						      <th style="width:5%; text-align:center;"><liferay-ui:message key="bonus-calculate"/></th>
+						      <th style="width:10%; text-align:center;"><liferay-ui:message key="bonus-judgement"/></th>
 						      <th style="width:10%; text-align:center;"><liferay-ui:message key="month-number"/></th>
 						      <th style="width:5%; text-align:center;"><liferay-ui:message key="status"/></th>
 						    </tr>				
