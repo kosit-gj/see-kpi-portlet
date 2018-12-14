@@ -216,7 +216,7 @@ var dropDrowIndividualOrgLevelFn = function(id){
 var dropDrowIndividualOrgFn = function(appraisalLevelId,id){
 	
 	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_individual",
+		url:restfulURL+"/"+serviceName+"/public/appraisal/parameter/org_individual_report",
 		//url:restfulURL+"/"+serviceName+"/public/"+service_url_Check+"",
 		type:"get",
 		dataType:"json",
