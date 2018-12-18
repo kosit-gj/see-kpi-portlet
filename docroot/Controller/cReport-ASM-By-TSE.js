@@ -110,7 +110,7 @@ $(document).ready(function() {
     
     $("#tse-code-or-tse-name").autocomplete();
     questionnaireTypeParam();
-    
+    jobfunctionParam();
     $(".app_url_hidden").show();
 		
   }
@@ -131,7 +131,7 @@ var clearParamFn = function(){
 
 var questionnaireTypeParam = function(){
 	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/questionaire_data/list_questionaire",
+		url:restfulURL+"/"+serviceName+"/public/questionaire_data/list_questionaire1",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -147,10 +147,33 @@ var questionnaireTypeParam = function(){
 				}
 			});
 			$("#QuestionnaireType").html(htmlOption);
+			console.log(data);
 		}
 	});
 }
 
+var jobfunctionParam = function(){
+	$.ajax({
+		url:restfulURL+"/"+serviceName+"/public/questionaire_report/list_job_function",
+		type:"get",
+		dataType:"json",
+		async:false,
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			var htmlOption="";
+			htmlOption+="<option selected='selected' value=''>All Job Function</option>";
+			$.each(data,function(index,indexEntry){
+				if(index==0){
+					htmlOption+="<option value="+indexEntry['job_function_id']+">"+indexEntry['job_function_name']+"</option>";
+				}else{
+					htmlOption+="<option value="+indexEntry['job_function_id']+">"+indexEntry['job_function_name']+"</option>";
+				}
+			});
+			$("#jobfunction").html(htmlOption);
+			console.log(data);
+		}
+	});
+}
 
 var assessorParam = function(emp_snapshot_id){
 	$.ajax({
@@ -251,6 +274,7 @@ var getDataFn = function() {
 	var questionaire_type_id = $("#QuestionnaireType").val();
 	var assessor_id = $("#assessor-code-or-name").val();
 	var emp_snapshot_id = $("#tse-code-or-tse-name-id").val();
+	var job_function = $("#jobfunction").val();
 	var data_header_id="";
 	var questionaire_date="";
 	
@@ -263,7 +287,8 @@ var getDataFn = function() {
 			param_date_start : date_start,
 			param_date_end : date_end,
 			param_data_header_id:data_header_id,     
-			param_questionaire_date:questionaire_date
+			param_questionaire_date:questionaire_date,
+			param_job_function:job_function
 			
 		  };
 	

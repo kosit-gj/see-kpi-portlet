@@ -683,7 +683,12 @@ background-color:#71cccc !important;
                     <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="questionnaire-type"/>" class="input form-control input-sm span12" id="QuestionnaireType" name="QuestionnaireType">
                     </select>
                   </div>
-
+ 
+                  <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="job-function"/>" class="input form-control input-sm span12" id="jobfunction" name="jobfunction">
+                    </select>
+                  </div>
+                  
                   <div class="form-group pull-left span3" style="margin-left: 5px">
                     <input data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="tse-code-or-tse-name"/>" class="form-control input-sm searchAdvanceText span12" placeholder="<liferay-ui:message key="tse-code-or-tse-name"/>" type="text" id="tse-code-or-tse-name" name="tse-code-or-tse-name" />
                     <input class="form-control input-sm" id="tse-code-or-tse-name-id" name="tse-code-or-tse-name-id" value="" type="hidden">
@@ -699,7 +704,6 @@ background-color:#71cccc !important;
                     <option value="" selected="selected">ผู้ประเมินทั้งหมด</option>
                     </select>
                   </div>
-                  
                   
                   <div class="form-group span3 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
                     <button type="button" class="btn btn-info input-sm" name="btnexport" id="btnExport">
