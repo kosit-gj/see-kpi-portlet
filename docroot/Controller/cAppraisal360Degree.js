@@ -95,6 +95,7 @@ var getQualityFn = function () {   // QualityFn
 
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal/show/emp_result/type_2",
+    	// url: restfulURL + "/" + serviceName + "/public/test",
         type: "get",
         dataType: "json",
         data: {
@@ -104,15 +105,18 @@ var getQualityFn = function () {   // QualityFn
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            console.log(data);
             dataQuality = data;
-
-            $.each(dataQuality, function (index, groupEntry) {
-                $("#appraisal_template_area").append(assignTemplateQualityFn(index, groupEntry));
-                onchangGroupQualityFn(groupEntry['structure_id']);
-                                
-                if ( jQuery.inArray($("#group_id").val(), ["1", "5"]) != -1 ){
-                	$(".classAdmin").show(); // Show parameter
+            
+            $.each(data, function (index, groupEntry) {
+            	// generate competency structure panel
+            	$("#appraisal_template_area").append(assignTemplateQualityFn(index, groupEntry));
+            	
+            	// generate assessor parameter
+            	onchangGroupQualityFn(groupEntry.structure_id);
+            	
+            	// toggle assessor parameter 
+            	if (jQuery.inArray($("#group_id").val(), ["1","4","5"]) != -1 ){
+            		$(".classAdmin").show(); // Show parameter
                 } else {
                 	$(".classAdmin").hide(); // Hidden parameter
                 }
@@ -120,6 +124,100 @@ var getQualityFn = function () {   // QualityFn
         }
     });
 }
+
+
+
+var assignTemplateQualityFn = function (structureName, structureInfo) {  // QualityFn
+    var item_result_id_array = [];
+    var htmlTemplateQuality = "";
+    var info_item = "";
+    var hintHtml = "";
+    var total_weigh_score = "";
+
+    $.each(structureInfo.hint, function (index, indexEntry) {
+        hintHtml += "<div style='text-align:left;'>" + indexEntry.hint + "</div>";
+    });
+
+    htmlTemplateQuality += "<div class='row-fluid'>";
+    htmlTemplateQuality += "<div class='span12'>";
+    htmlTemplateQuality += "<div class='ibox-title2'>";
+    htmlTemplateQuality += "<div class='titlePanel'>" + structureName + "</div>";
+    htmlTemplateQuality += "<div class='totalWeight' id='totalWeight-" + structureInfo.structure_id + "'>";
+    if (structureInfo.result_type == 1) {
+    	htmlTemplateQuality += $(".lt-total-weight").val() + " " + structureInfo.structure_weight_percent + "%";
+    } else {
+    	htmlTemplateQuality += $(".lt-total-score").val() + " " + ((structureInfo.nof_target_score*structureInfo.structure_weight_percent) / 100) + " ,"+ $(".lt-total-weight").val() + " " + structureInfo.structure_weight_percent + "%";
+    }
+    htmlTemplateQuality += "</div>";
+    htmlTemplateQuality += "</div>";
+    htmlTemplateQuality += "<div class='ibox-content'>";
+
+    // generate assessor filter (assessor group, assessor id)
+    htmlTemplateQuality += "<div class='row-fluid classAdmin' style='margin-bottom: 10px;'>";
+    htmlTemplateQuality += "<div class='span12'>";
+    htmlTemplateQuality += "<div class='span3'>";
+    
+    // --> generate assessor group dropdown list 
+    htmlTemplateQuality += "<select data-original-title='" + $(".lt-group").val() + "' title=''  data-toggle='tooltip' class='span12' id='group-" + structureInfo.structure_id + "' onchange='onchangGroupQualityFn(" + structureInfo.structure_id + ")'>";
+    if($("#group_id").val() == "5"){
+    	htmlTemplateQuality += "<option value='' selected> All Group </option>";
+    }
+    if(jQuery.inArray($("#group_id").val(), ["1","4"]) != -1){
+    	htmlTemplateQuality += "<option value=''> All Group </option>";
+    }
+    if(structureInfo.assessor_group.length != 0){
+    	$.each(structureInfo.assessor_group, function (index, indexEntry) {
+    		if($("#group_id").val() == indexEntry.assessor_group_id){
+    			htmlTemplateQuality += "<option value='" + indexEntry.assessor_group_id + "' selected>" + indexEntry.assessor_group_name + "</option>";
+    		} else {
+    			htmlTemplateQuality += "<option value='" + indexEntry.assessor_group_id + "'>" + indexEntry.assessor_group_name + "</option>";
+    		}
+    	});
+    }
+    htmlTemplateQuality += "</select>";
+    htmlTemplateQuality += "</div>";
+    htmlTemplateQuality += "<div class='span3'>";
+    
+    // --> generate assessor dropdown 
+    htmlTemplateQuality += "<select data-original-title='" + $(".lt-employee").val() + "' title=''  data-toggle='tooltip' class='span12' id='emp-" + structureInfo.structure_id + "' onchange='onchangTableQualityFn(" + structureInfo.structure_id + ")'>";
+    htmlTemplateQuality += "</select>";
+    htmlTemplateQuality += "</div>";
+    htmlTemplateQuality += "</div>";
+    htmlTemplateQuality += "</div>";
+
+    // generate competency container
+    // --> container header
+    htmlTemplateQuality += "<div class='table-responsive scrollbar-inner'>";
+    htmlTemplateQuality += "<table id='tablethreshould' class='table table-striped' style='max-width:none;'>";
+    htmlTemplateQuality += "<thead>";
+    htmlTemplateQuality += "<tr style='white-space:nowrap;'>";
+    htmlTemplateQuality += "<th style='width:40%'><b>" + $(".lt-kpi-name").val() + "</b></th>";
+    htmlTemplateQuality += "<th style='text-align:right;'><b>" + $(".lt-target").val() + "</b></th>";
+    htmlTemplateQuality += "<th style='text-align:center;'><b>" + $(".lt-score").val() + "</b></th>";
+    htmlTemplateQuality += "<th style='text-align:right;'><b>" + $(".lt-percent-weight").val() + "</b></th>";
+    htmlTemplateQuality += "<th style='text-align:right;' id='th-score-" + structureInfo.structure_id + "'>";
+    if (structureInfo.result_type == 1) {
+    	htmlTemplateQuality += "<b>" + $(".lt-weight-score").val() + "</b>";
+    } else {
+    	htmlTemplateQuality += "<b>" + $(".lt-result-score").val() + "</b>";
+    }
+    htmlTemplateQuality += "</th>";
+    htmlTemplateQuality += "</tr>";
+    htmlTemplateQuality += "</thead>";
+    
+    // --> container detail
+    htmlTemplateQuality += "<tbody id=\"table-" + structureInfo.structure_id + "\" class='appraisal_result'>";
+    htmlTemplateQuality += "</tbody>";
+    htmlTemplateQuality += "</table>";
+    htmlTemplateQuality += "</div>";
+    htmlTemplateQuality += "<br style=\"clear:both\">";
+    htmlTemplateQuality += "</div>";
+    htmlTemplateQuality += "</div>";
+    htmlTemplateQuality += "</div>";
+    
+    return htmlTemplateQuality;
+}
+
 
 var updateQualityFn = function () {   // QualityFn 
     $.ajax({
@@ -130,79 +228,10 @@ var updateQualityFn = function () {   // QualityFn
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-            console.log("Quality --> update data successful !");
+            // console.log("Quality --> update data successful !");
         }
     });
 }
-
-var assignTemplateQualityFn = function (structureName, data) {  // QualityFn
-    var item_result_id_array = [];
-    var htmlTemplateQuality = "";
-    var info_item = "";
-    var hintHtml = "";
-    var total_weigh_score = "";
-
-    $.each(data['hint'], function (index, indexEntry) {
-        hintHtml += "<div style='text-align: left;\'>" + indexEntry['hint'] + "</div>";
-    });
-
-    htmlTemplateQuality += "";
-    htmlTemplateQuality += "<div class=\"row-fluid\">";
-    htmlTemplateQuality += "<div class=\"span12\">";
-    htmlTemplateQuality += "<div class=\"ibox-title2\">";
-    htmlTemplateQuality += "<div class='titlePanel'>" + structureName + "</div>";
-    htmlTemplateQuality += "<div class='totalWeight' id='totalWeight-" + data['structure_id'] + "'></div>";
-    htmlTemplateQuality += "</div>";
-    htmlTemplateQuality += "<div class=\"ibox-content\">";
-
-    // <---- Parameter-start
-    htmlTemplateQuality += "<div class='row-fluid classAdmin' style='margin-bottom: 10px;'>"
-    htmlTemplateQuality += "<div class=\"span12\">";
-
-    htmlTemplateQuality += "<div class='span3'>"
-    htmlTemplateQuality += "<select data-original-title='" + $(".lt-group").val() + "' title=''  data-toggle='tooltip' class='span12' id='group-" + data['structure_id'] + "' onchange='onchangGroupQualityFn(" + data['structure_id'] + ")'>";
-    $.each(data, function (index, indexEntry) {
-        if (indexEntry['group_id'] != undefined){
-        	if($("#group_id").val() == indexEntry['group_id']){
-        		htmlTemplateQuality += "<option value='" + indexEntry['group_id'] + "' selected>" + indexEntry['group_name'] + "</option>";
-        	} else {
-        		htmlTemplateQuality += "<option value='" + indexEntry['group_id'] + "'>" + indexEntry['group_name'] + "</option>";
-        	}
-        }
-    });
-    htmlTemplateQuality += "</select >";
-    htmlTemplateQuality += "</div>"
-
-    htmlTemplateQuality += "<div class='span3'>"
-    htmlTemplateQuality += "<select data-original-title='" + $(".lt-employee").val() + "' title=''  data-toggle='tooltip' class='span12' id='emp-" + data['structure_id'] + "' onchange='onchangTableQualityFn(" + data['structure_id'] + ")'>";
-    htmlTemplateQuality += "</select >";
-    htmlTemplateQuality += "</div>"
-
-    htmlTemplateQuality += "</div>";
-    htmlTemplateQuality += "</div>"
-    //Parameter-end ---->
-
-    htmlTemplateQuality += "<div class=\"table-responsive scrollbar-inner\">";
-    htmlTemplateQuality += "<table id=\"tablethreshould\" class=\"table table-striped\" style='max-width: none;'>";
-    htmlTemplateQuality += "<thead>";
-    htmlTemplateQuality += "<tr style='white-space: nowrap;'>";
-    htmlTemplateQuality += "<th style=\"width:40%\"><b>" + $(".lt-kpi-name").val() + "</b></th>";
-    htmlTemplateQuality += "<th style='text-align: right;'><b>" + $(".lt-target").val() + "</b></th>";
-    htmlTemplateQuality += "<th style='text-align: center;'><b>" + $(".lt-score").val() + "</b></th>";
-    htmlTemplateQuality += "<th style='text-align: right;'><b>" + $(".lt-percent-weight").val() + "</b></th>  ";
-    htmlTemplateQuality += "<th style='text-align: right;' id='th-score-" + data['structure_id'] + "'></th>  ";
-    htmlTemplateQuality += "</tr>";
-    htmlTemplateQuality += "</thead>";
-    htmlTemplateQuality += "<tbody id=\"table-" + data['structure_id'] + "\" class='appraisal_result'>";
-    htmlTemplateQuality += "</tbody>";
-    htmlTemplateQuality += "</table>";
-    htmlTemplateQuality += "</div>";
-    htmlTemplateQuality += "<br style=\"clear:both\">";
-    htmlTemplateQuality += "</div>";
-    htmlTemplateQuality += "</div>";
-    htmlTemplateQuality += "</div>";
-    return htmlTemplateQuality;
-};
 
 var dataChangeQuality = [];
 var onchangDetailQualityFn = function (item_result_id, structureId) {  // QualityFn
@@ -253,86 +282,182 @@ var onchangDetailQualityFn = function (item_result_id, structureId) {  // Qualit
     });
 }
 
+
 var onchangTableQualityFn = function (structureId) {  // QualityFn
     var htmlTable = "";
-    var nof_target_score = 0;
-    var total_weigh_score = "";
-    var hintHtml = "";
+    var nof_target_score = 0.00;
+    var total_weigh_score = 0.00;
     var dataHint = [];
+    
+    // prepare raw struct data
+    // --> convert object to array
+    var dataQualityArr = $.map(dataQuality, function(value, index) {
+        return [value];
+    });
+    
+    // --> get structure data to use
+    dataQualityArr = $.grep(dataQualityArr, function(v) {
+        return v.structure_id == structureId;
+    })[0];
+    
+    // --> set hint detail
+    var hintHtml = "";
+    $.each(dataQualityArr.hint, function (indexHint, indexEntryHint) {
+    	hintHtml += "<div style='text-align: left;\'>" + indexEntryHint.hint + "</div>";
+    });
+    dataHint = dataQualityArr.hint;
 
-    $.each(dataQuality, function (index1, groupEntry1) {
-        dataHint = groupEntry1['hint'];
-        
-        // Set Hint Detail //
-        hintHtml = "";
-        $.each(groupEntry1['hint'], function (indexHint, indexEntryHint) {
-            hintHtml += "<div style='text-align: left;\'>" + indexEntryHint['hint'] + "</div>";
-        });
+    // --> get data filter by assessor parameter 
+    dataQualityArr = $.grep(dataQualityArr.data, function(v) {
+    	if($("#group-"+structureId).val() == ""){ 
+    		if($("#emp-"+structureId).val() == ""){
+    			return v;
+    		} else {
+    			return v.assessor_id == $("#emp-"+structureId).val();
+    		}    		
+    	} else {
+    		if($("#emp-"+structureId).val() == ""){
+    			return v.assessor_group_id == $("#group-"+structureId).val();
+    		} else {
+    			return v.assessor_group_id == $("#group-"+structureId).val() && v.assessor_id == $("#emp-"+structureId).val();
+    		}
+    	}
+    });
+    // console.log(dataQualityArr);
 
-        if (groupEntry1['structure_id'] == structureId) {
-            $.each(groupEntry1, function (index2, indexEntry2) {
-                if (isObjectOrArray(indexEntry2) && indexEntry2['group_id'] == $("#group-" + structureId).val())
-                    $.each(indexEntry2, function (index3, indexEntry3) {
-                        if (isObjectOrArray(indexEntry3) && indexEntry3['emp_id'] == $("#emp-" + structureId).val()) {
-                            // total_weigh_score = indexEntry3['total_weigh_score'];
-                        	total_weigh_score = 0;
-                        	nof_target_score = 0;
-                            $.each(indexEntry3['items'], function (index, indexEntry) {
-                                if (!(indexEntry['formula_desc'] == null || indexEntry['formula_desc'] == undefined || indexEntry['formula_desc'] == "" || indexEntry['formula_desc'].length == 0)) {
-                                    info_item = "<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>" + $(".lt-kpi-name").val() + " : </strong>" + indexEntry['item_name'] + "' info-data='" + indexEntry['formula_desc'] + "'>i</span>";
-                                } else {
-                                    info_item = "";
-                                }
+    // calculate by assessor parameter (ตอนแรกสร้างมาเพราะจพต้องคำนวณเอง ตแนนี้ไม่ต้องแล้วให้ etl คำนวณให้ แต่ยังใช้โค๊ดเดิมได้)
+    var result = [];
+    if($("#group-"+structureId).val() == ""){
+    	
+    	// --> all group
+		if($("#emp-"+structureId).val() == ""){
+			// ----> all group - all assessor (get score from appraisal_item_result.score)
+			dataQualityArr.reduce(function (res, value) {
+				value.group_weight_percent = parseFloat(value.group_weight_percent);
+				
+		        if (!res[value.item_id]) {
+		            res[value.item_id] = {
+		            		item_result_id: value.item_result_id,
+		            		item_id: value.item_id,
+		            		item_name: value.item_name,
+		            		formula_desc: value.formula_desc,
+		            		competency_result_id: value.competency_result_id,
+		            		target_value: value.target_value,
+		            		assessor_group_id: value.assessor_group_id,
+		            		group_weight_percent: value.group_weight_percent,
+		            		nof_target_score: value.nof_target_score,
+		            		score: value.item_result_score,
+		            		weight_percent: value.item_result_weight_percent,
+		            		weigh_score: value.item_result_weigh_score,
+		            		structure_result_weigh_score: value.structure_result_weigh_score,
+		            		structure_result_nof_target_score: value.structure_result_nof_target_score
+		            };
+		            result.push(res[value.item_id]);
+		        }
+		        return res;
+		    }, {});
+		} else {
+			// ----> all group - some assessor (only one display)
+			dataQualityArr.reduce(function (res, value) {
+		        if (!res[value.item_id]) {
+		            res[value.item_id] = {
+		            		item_result_id: value.item_result_id,
+		            		item_id: value.item_id,
+		            		item_name: value.item_name,
+		            		formula_desc: value.formula_desc,
+		            		competency_result_id: value.competency_result_id,
+		            		target_value: value.target_value,
+		            		assessor_group_id: value.assessor_group_id,
+		            		group_weight_percent: value.group_weight_percent,
+		            		nof_target_score: value.nof_target_score,
+		            		score: value.score,
+		            		weight_percent: value.weight_percent,
+		            		weigh_score: value.weigh_score
+		            };
+		            result.push(res[value.item_id]);
+		        }
+		        return res;
+		    }, {});
+		}    		
+	} else {
+		// ----> some group - some assessor (only one display)
+		dataQualityArr.reduce(function (res, value) {
+	        if (!res[value.item_id]) {
+	            res[value.item_id] = {
+	            		item_result_id: value.item_result_id,
+	            		item_id: value.item_id,
+	            		item_name: value.item_name,
+	            		formula_desc: value.formula_desc,
+	            		competency_result_id: value.competency_result_id,
+	            		target_value: value.target_value,
+	            		assessor_group_id: value.assessor_group_id,
+	            		group_weight_percent: value.group_weight_percent,
+	            		nof_target_score: value.nof_target_score,
+	            		score: value.score,
+	            		weight_percent: value.weight_percent,
+	            		weigh_score: value.weigh_score
+	            };
+	            result.push(res[value.item_id]);
+	        }
+	        return res;
+	    }, {});
+	}
+    
+    // console.log("###### Cal ######");
+    // console.log(result);
+    // console.log("---------------------------------------------");
+    
+    
+    total_weigh_score = 0.00;
+    nof_target_score = 0.00;
+    $.each(result, function (index, indexEntry) {
+    	if (!(indexEntry.formula_desc == "")) {
+    		info_item = "<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>" + $(".lt-kpi-name").val() + " : </strong>" + indexEntry['item_name'] + "' info-data='" + indexEntry['formula_desc'] + "'>i</span>";
+    	} else {
+    		info_item = "";
+    	}
 
-                                // set parameter
-                                htmlTable += "<input type='hidden' id='param_competency_result_id-" + indexEntry['item_result_id'] + "' value='" + indexEntry['competency_result_id'] + "'>";
-                                htmlTable += "<input type='hidden' id='param_target_value-" + indexEntry['item_result_id'] + "' value='" + indexEntry['target_value'] + "'>";
-                                htmlTable += "<input type='hidden' id='param_weight_percent-" + indexEntry['item_result_id'] + "' value='" + indexEntry['weight_percent'] + "'>";
-                                htmlTable += "<input type='hidden' id='param_weigh_score-" + indexEntry['item_result_id'] + "' value='" + indexEntry['weigh_score'] + "'>";
-                                htmlTable += "<input type='hidden' id='param_group_id-" + indexEntry['item_result_id'] + "' value='" + indexEntry['assessor_group_id'] + "'>";
-                                htmlTable += "<input type='hidden' id='param_group_weight_percent-" + indexEntry['item_result_id'] + "' value='" + indexEntry['total_weight_percent'] + "'>";
+      // set parameter
+      htmlTable += "<input type='hidden' id='param_competency_result_id-" + indexEntry.item_result_id + "' value='" + indexEntry.competency_result_id + "'>";
+      htmlTable += "<input type='hidden' id='param_target_value-" + indexEntry.item_result_id + "' value='" + indexEntry.target_value + "'>";
+      htmlTable += "<input type='hidden' id='param_weight_percent-" + indexEntry.item_result_id + "' value='" + indexEntry.weight_percent + "'>";
+      htmlTable += "<input type='hidden' id='param_weigh_score-" + indexEntry.item_result_id + "' value='" + indexEntry.weigh_score + "'>";
+      htmlTable += "<input type='hidden' id='param_group_id-" + indexEntry.item_result_id + "' value='" + indexEntry.assessor_group_id + "'>";
+      htmlTable += "<input type='hidden' id='param_group_weight_percent-" + indexEntry.item_result_id + "' value='" + indexEntry.group_weight_percent + "'>";
 
-                                htmlTable += "<tr>";
-                                htmlTable += "<td class=''>" + indexEntry['item_name'] + "  " + info_item + "</td>";
-                                htmlTable += "<td class='' style='text-align: right;padding-right: 10px;'><div id='target_value-" + indexEntry['item_result_id'] + "' data-toggle=\"tooltip\" data-placement=\"right\" title=\"" + hintHtml + "\">" + addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2)) + "</div></td>";
-                                htmlTable += "<td class='' style='text-align: center;'>";
-                                
-                                if($("select#emp-"+structureId).val() == "0"){
-                                	htmlTable += "<select style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' onchange='onchangDetailQualityFn(" + indexEntry['item_result_id'] + "," + structureId + ")' id='score-" + indexEntry['item_result_id'] + "' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
-                                    htmlTable += "<option> "+indexEntry['score']+" </option>"
-                                    htmlTable += "<select>";
-                                } else {
-                                	htmlTable += "<select style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' onchange='onchangDetailQualityFn(" + indexEntry['item_result_id'] + "," + structureId + ")' id='score-" + indexEntry['item_result_id'] + "' class='competencyScore itemScore   input form-control input-sm-small numberOnly'>";
-                                    htmlTable += dropdownDeductScoreFn(notNullFn(indexEntry['score']), indexEntry['nof_target_score'], dataHint);
-                                    htmlTable += "<select>";
-                                }                         
-                                
-                                htmlTable += "</td>";
-                                htmlTable += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['weight_percent'])).toFixed(2)) + "</td>";
-                                htmlTable += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['weigh_score'])).toFixed(2)) + "</td>";
-                                htmlTable += "</tr>";
-                                
-                                total_weigh_score = (total_weigh_score + parseInt(indexEntry['weigh_score']));
-                                nof_target_score = parseInt(indexEntry['nof_target_score']);
-                            });
-                        }
-                    });
-            });
-        }
+      htmlTable += "<tr>";
+      htmlTable += "<td class=''>" + indexEntry.item_name + "  " + info_item + "</td>";
+      htmlTable += "<td class='' style='text-align: right;padding-right: 10px;'><div id='target_value-" + indexEntry.item_result_id + "' data-toggle=\"tooltip\" data-placement=\"right\" title=\"" + hintHtml + "\">" + addCommas(parseFloat(notNullFn(indexEntry.target_value)).toFixed(2)) + "</div></td>";
+      htmlTable += "<td class='' style='text-align: center;'>";
+      
+      if($("select#emp-"+structureId).val() == ""){
+      	htmlTable += "<select style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' onchange='onchangDetailQualityFn(" + indexEntry.item_result_id + "," + structureId + ")' id='score-" + indexEntry.item_result_id + "' class='competencyScore itemScore input form-control input-sm-small numberOnly'>";
+          htmlTable += "<option> "+indexEntry.score+" </option>"
+          htmlTable += "<select>";
+      } else {
+      	htmlTable += "<select style='width:180px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:left;' onchange='onchangDetailQualityFn(" + indexEntry.item_result_id + "," + structureId + ")' id='score-" + indexEntry.item_result_id + "' class='competencyScore itemScore input form-control input-sm-small numberOnly'>";
+          htmlTable += dropdownDeductScoreFn(notNullFn(indexEntry.score), indexEntry.nof_target_score, dataHint);
+          htmlTable += "<select>";
+      }                         
+      
+      htmlTable += "</td>";
+      htmlTable += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry.weight_percent)).toFixed(2)) + "</td>";
+      htmlTable += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry.weigh_score)).toFixed(2)) + "</td>";
+      htmlTable += "</tr>";
+      
+      if($("#group-"+structureId).val() == "" && $("#emp-"+structureId).val() == "") {
+    	  total_weigh_score = indexEntry.structure_result_weigh_score;
+      } else {
+    	  total_weigh_score = (total_weigh_score + parseFloat(indexEntry.weigh_score));
+          nof_target_score = parseFloat(indexEntry.nof_target_score);  
+      }
     });
 
-    /* ตัว all มีปัญหาเลยไม่เอามาใช้งาน (DHAS, 2018-11-28, p.wirun)
-    if (($("#group-" + structureId).val()) == 0){
-	    htmlTable += "<tr class='classAdmin th-all'>";
-	    htmlTable += "<td class=''></td>";
-	    htmlTable += "<td class=''></td>";
-	    htmlTable += "<td class='' ></td>";
-	    htmlTable += "<td class='object-right' style='text-align: right;padding-right: 10px;font-weight: bold;'><b>" + $(".lt-total").val() + "</b></td>";
-	    htmlTable += "<td class='' style='text-align: right;padding-right: 10px;font-weight: bold;font-size:16px'><b>" + addCommas(parseFloat(notNullFn(total_weigh_score)).toFixed(2)) + "</b></td>";
-	    htmlTable += "</tr>";
+    if($("#group-"+structureId).val() == "" && $("#emp-"+structureId).val() == "") {
+  	  total_weigh_score = total_weigh_score;
+    } else {
+    	total_weigh_score = (total_weigh_score / nof_target_score);
     }
-    */
-    total_weigh_score = (total_weigh_score / nof_target_score);
     htmlTable += "<tr class='th-all'>";
     htmlTable += "<td class=''></td>";
     htmlTable += "<td class=''></td>";
@@ -343,14 +468,9 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
 
     $("#table-" + structureId).html(htmlTable);
     
-    /* check จาก edit_flag แทน
     if(($("select#emp-"+structureId).val()) != cMain_emp_id){
     	$("#table-"+structureId+" .competencyScore").attr("disabled", "disabled");
-    }
-    */
-    if(edit_flag == 0 || gStage.length == 0){
-    	$("#table-"+structureId+" .competencyScore").attr("disabled", "disabled");
-    }
+    } 
 
     $('[data-toggle="tooltip"]').css({ "cursor": "pointer" });
     $('[data-toggle="tooltip"]').tooltip({
@@ -373,60 +493,62 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
 
 
 var onchangGroupQualityFn = function (structureId) { // QualityFn
-    var htmlEmp = "";
-    var html = "";
-    var no_weight = "";
-    var result_type = "";
-    var total_weight_percent = "";
-    var total_weight = "";
-
-    $.each(dataQuality, function (index1, groupEntry1) {
-        if (groupEntry1['structure_id'] == structureId) {
-            $.each(groupEntry1, function (index2, indexEntry2) {
-                if (isObjectOrArray(indexEntry2) && indexEntry2['group_id'] == $("#group-" + structureId).val()) {
-                    // has weight;
-                    no_weight = indexEntry2['no_weight'];
-                    result_type = indexEntry2['result_type'];
-                    total_weight_percent = indexEntry2['structure_weight_percent'];
-                    total_weight = indexEntry2['total_weight'];
-
-                    $.each(indexEntry2, function (index3, indexEntry3) {
-                    	var objectType = jQuery.type(indexEntry3);
-                        if (objectType == "object" || objectType == "array") {
-                        	if(indexEntry3['emp_id'] == cMain_emp_id){
-                        		// group id = 1(chief), default this user //
-                                if($("#group_id").val() == 1){
-                                	htmlEmp += "<option value='" + indexEntry3['emp_id'] + "' selected> &#10148 " + cMain_emp_name + "</option>";
-                                } else {
-                                	htmlEmp += "<option value='" + indexEntry3['emp_id'] + "'> &#10148 " + cMain_emp_name + "</option>";
-                                }
-                        	} else {
-                        		htmlEmp += "<option value='" + indexEntry3['emp_id'] + "'>" + indexEntry3['emp_name'] + "</option>";
-                        	}
-                        }
-                    });
-                }
-            });
-        } // end if
+    var htmlEmp = "";    
+    
+    // convert object to array
+    var dataQualityArr = $.map(dataQuality, function(value, index) {
+        return [value];
+    });
+    
+    // get structure data to use
+    dataQualityArr = $.grep(dataQualityArr, function(v) {
+        return v.structure_id == structureId;
+    })[0];
+    
+    // get data by assessor group (dropdown)
+    dataQualityArr = $.grep(dataQualityArr.data, function(v) {
+    	if($("#group-"+structureId).val() == ""){
+    		return v;
+    	} else {
+    		return v.assessor_group_id == $("#group-"+structureId).val();
+    	}
+    });
+    
+    // generate assessor (dropdown)
+    var dupes = {};
+	if($("#group-"+structureId).val() == ""){
+		htmlEmp += "<option value='' selected> All Assessor </option>";
+	}
+    $.each(dataQualityArr, function(index, item){
+    	if ( ! dupes[item.assessor_id]) {
+    		dupes[item.assessor_id] = true;
+    		
+    		// generate assessor <option> (1 or 5 see all assessor, 2 or 3 or 4 self see only)
+    		if(jQuery.inArray($("#group_id").val(), ["1","5"]) != -1){
+    			if(item.assessor_id == cMain_emp_id){
+        			if($("#group_id").val() == "1"){
+        				htmlEmp += "<option value='" + item.assessor_id + "' selected> &#10148 " + cMain_emp_name + "</option>";
+        			} else if($("#group_id").val() == "5"){
+        				// do not create option
+        			} else {
+        				htmlEmp += "<option value='" + item.assessor_id + "'> &#10148 " + cMain_emp_name + "</option>";
+        			}
+        		} else {
+        			htmlEmp += "<option value='" + item.assessor_id + "'>" + item.emp_name + "</option>";
+        		}
+    		} else {
+    			if($("#group_id").val() == item.assessor_group_id){
+    				if(item.assessor_id == cMain_emp_id){
+            			htmlEmp += "<option value='" + item.assessor_id + "' selected> &#10148 " + cMain_emp_name + "</option>";
+            		} else {
+            			htmlEmp += "<option value='" + item.assessor_id + "'>" + item.emp_name + "</option>";
+            		}
+    			}
+    		}
+    	}
     });
     $("#emp-" + structureId).html(htmlEmp);
-
-    if (no_weight == 0) { // has weight;
-        if (result_type == 1) {
-            html += "" + $(".lt-total-weight").val() + " " + total_weight_percent + "%";
-        } else {
-            html += "" + $(".lt-total-score").val() + " " + total_weight + "";
-        }
-    }
-    $("#totalWeight-" + structureId).html(html);
-
-    html = "";
-    if (result_type == 1) {
-        html += "<b>" + $(".lt-weight-score").val() + "</b>";
-    } else {
-        html += "<b>" + $(".lt-result-score").val() + "</b>";
-    }
-    $("#th-score-" + structureId).html(html);
+    
     onchangTableQualityFn(structureId)
 }
 
@@ -1588,7 +1710,7 @@ var listAppraisalDetailFn = function (data) {
         $(".addComma").keyup(function () {
             //Comma();
             $(this).val(Comma($(this).val()));
-            //// console.log(Comma($(this).val()));
+            // console.log(Comma($(this).val()));
         })
         $(".infoItem").off("click");
         $(".infoItem").on("click", function () {
@@ -1817,7 +1939,7 @@ update_dttm
         htmlTR += "<div class='actionplan_label'>" + indexEntry['phase_name'] + "</div>";
         htmlTR += "<select id='phase_list-" + indexEntry['action_plan_id'] + "' name='phase_list-" + indexEntry['action_plan_id'] + "' class='input-small actionplan_input' style=\"height:22px; margin-right:3px;\">";
         $.each(phaseArray, function (index2, indexEntry2) {
-            //// console.log(indexEntry['phase_id']+"=="+indexEntry2['phase_id']);
+            // console.log(indexEntry['phase_id']+"=="+indexEntry2['phase_id']);
 
             if (indexEntry['phase_id'] == indexEntry2['phase_id']) {
                 htmlTR += "<option selected value='" + indexEntry2['phase_id'] + "'>" + indexEntry2['phase_name'] + "</option>";
@@ -3689,7 +3811,7 @@ $(document).ready(function () {
 
         // Create a formdata object and add the files
         var data = new FormData();
-        //// console.log(data);
+        // console.log(data);
         jQuery_1_1_3.each(files, function (key, value) {
             data.append(key, value);
         });
@@ -3718,7 +3840,7 @@ $(document).ready(function () {
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 // Handle errors here
-                //// console.log('ERRORS: ' + textStatus);
+                // console.log('ERRORS: ' + textStatus);
                 callFlashSlideInModal('ERRORS: ' + textStatus, ".information");
                 // STOP LOADING SPINNER
             }
