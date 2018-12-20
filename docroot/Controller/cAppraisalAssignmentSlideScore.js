@@ -1835,7 +1835,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
             	htmlTemplateQuantity += "<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-" + indexEntry['structure_id'] + " weight_quantity_chief weight_quantity_checked' type='checkbox' value='" + indexEntry['item_id'] + "'></td>";
 	            htmlTemplateQuantity += "<td style=\"width:20%\" class='id-" + indexEntry['structure_id'] + "-item_name' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name' style='padding-top:7px;'>" + indexEntry['item_name'] + "</td>";
 	
-	            htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' class='id-" + indexEntry['structure_id'] + "-target input form-control input-sm-small numberOnly addComma weight_quantity_chief' type='text' value='"+addCommas(indexEntry['target_value'])+"'>";
+	            htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' class='id-" + indexEntry['structure_id'] + "-target input form-control input-sm-small numberOnly addComma weight_quantity_chief chief_target' type='text' value='"+addCommas(indexEntry['target_value'])+"'>";
 	            htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-kpi_type_id' class='id-" + indexEntry['structure_id'] + "-kpi_type_id input form-control input-sm-small numberOnly' type='hidden' value=" + indexEntry['kpi_type_id'] + ">";
 	            htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-nof_target_score' class='id-" + indexEntry['structure_id'] + "-nof_target_score input form-control input-sm-small numberOnly' type='hidden' value=" + indexEntry['nof_target_score'] + ">";
 	            htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_result_id' class='id-" + indexEntry['structure_id'] + "-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
@@ -1913,7 +1913,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
                 htmlTemplateQuantity += "</td>";
                 htmlTemplateQuantity += "<td style=\"width:30%\" class='id-" + indexEntry['structure_id'] + "-item_name' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name' style='padding-top:7px;'>" + indexEntry['item_name'] + "</td>";
                 htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\">";
-                htmlTemplateQuantity += "<input class='input-sm-small numberOnly addComma weight_quantity_chief' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' value="+addCommas(indexEntry['target_value'])+"></td>";
+                htmlTemplateQuantity += "<input class='input-sm-small numberOnly addComma weight_quantity_chief chief_target' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' value="+addCommas(indexEntry['target_value'])+"></td>";
                 htmlTemplateQuantity += "<td style=\"width:5%\">" + indexEntry['uom_name'] + "</td>";
                 htmlTemplateQuantity += "<td style=\"width:5%;text-align:right;padding-right: 10px;\">";
                 htmlTemplateQuantity += "<input class='input-sm-small numberOnly addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' disabled value='" + addCommas(notNullFn(indexEntry['actual_value'])) + "'></td>";
@@ -2243,7 +2243,8 @@ var createTemplateAssignmentFn = function (data) {
     			$("#"+indexEntry.id).click();
     		});
     		$("input.weight_quantity_chief").closest('.weight_quantity_checked').attr("checked", 'checked');
-    		$("input.weight_quantity_chief").attr('disabled', 'disabled');
+    		$("input.weight_quantity_chief").closest('.chief_target').attr("disabled", 'disabled');
+//    		$("input.weight_quantity_chief").attr('disabled', 'disabled');
     	} else {
     		 $("input.total_weigth_quantity").removeAttr('disabled');
              $("input.total_weigth_quantity").val('');
