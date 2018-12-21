@@ -54,7 +54,7 @@ var getQualityFn = function () {   // QualityFn
             	$("#appraisal_template_area").append(assignTemplateQualityFn(index, groupEntry));
             	
             	// generate assessor parameter
-            	onchangGroupQualityFn(groupEntry.structure_id);
+            	onchangGroupQualityFn(groupEntry.structure_id, groupEntry.result_type);
             	
             	// toggle assessor parameter 
             	if (jQuery.inArray($("#group_id").val(), ["1","4","5"]) != -1 ){
@@ -99,7 +99,7 @@ var assignTemplateQualityFn = function (structureName, structureInfo) {  // Qual
     htmlTemplateQuality += "<div class='span3'>";
     
     // --> generate assessor group dropdown list 
-    htmlTemplateQuality += "<select data-original-title='" + $(".lt-group").val() + "' title=''  data-toggle='tooltip' class='span12' id='group-" + structureInfo.structure_id + "' onchange='onchangGroupQualityFn(" + structureInfo.structure_id + ")'>";
+    htmlTemplateQuality += "<select data-original-title='" + $(".lt-group").val() + "' title=''  data-toggle='tooltip' class='span12' id='group-" + structureInfo.structure_id + "' onchange='onchangGroupQualityFn("+structureInfo.structure_id+","+structureInfo.result_type+")'>";
     if($("#group_id").val() == "5"){
     	htmlTemplateQuality += "<option value='' selected> All Group </option>";
     }
@@ -120,7 +120,7 @@ var assignTemplateQualityFn = function (structureName, structureInfo) {  // Qual
     htmlTemplateQuality += "<div class='span3'>";
     
     // --> generate assessor dropdown 
-    htmlTemplateQuality += "<select data-original-title='" + $(".lt-employee").val() + "' title=''  data-toggle='tooltip' class='span12' id='emp-" + structureInfo.structure_id + "' onchange='onchangTableQualityFn(" + structureInfo.structure_id + ")'>";
+    htmlTemplateQuality += "<select data-original-title='" + $(".lt-employee").val() + "' title=''  data-toggle='tooltip' class='span12' id='emp-" + structureInfo.structure_id + "' onchange='onchangTableQualityFn("+structureInfo.structure_id+","+structureInfo.result_type+")'>";
     htmlTemplateQuality += "</select>";
     htmlTemplateQuality += "</div>";
     htmlTemplateQuality += "</div>";
@@ -224,7 +224,7 @@ var onchangDetailQualityFn = function (item_result_id, structureId) {  // Qualit
 }
 
 
-var onchangTableQualityFn = function (structureId) {  // QualityFn
+var onchangTableQualityFn = function (structureId, resultType) {  // QualityFn
     var htmlTable = "";
     var nof_target_score = 0.00;
     var total_weigh_score = 0.00;
@@ -397,7 +397,12 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
     if($("#group-"+structureId).val() == "" && $("#emp-"+structureId).val() == "") {
   	  total_weigh_score = total_weigh_score;
     } else {
-    	total_weigh_score = (total_weigh_score / nof_target_score);
+    	if(resultType == 1){
+    		total_weigh_score = (total_weigh_score / nof_target_score);
+    	} else {
+    		total_weigh_score = total_weigh_score;
+    	}
+    	
     }
     htmlTable += "<tr class='th-all'>";
     htmlTable += "<td class=''></td>";
@@ -433,7 +438,7 @@ var onchangTableQualityFn = function (structureId) {  // QualityFn
 }
 
 
-var onchangGroupQualityFn = function (structureId) { // QualityFn
+var onchangGroupQualityFn = function (structureId, resultType) { // QualityFn
     var htmlEmp = "";    
     
     // convert object to array
@@ -490,7 +495,7 @@ var onchangGroupQualityFn = function (structureId) { // QualityFn
     });
     $("#emp-" + structureId).html(htmlEmp);
     
-    onchangTableQualityFn(structureId)
+    onchangTableQualityFn(structureId, resultType);
 }
 
 
