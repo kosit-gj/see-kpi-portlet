@@ -919,10 +919,8 @@ plid = layout.getPlid();
 										<select data-toggle="tooltip" title="<liferay-ui:message key="assign-frequency"/>"
 											class="input form-control input-sm" id="assignFrequency"
 											name="assignFrequency">
-											<option value="2">ทีละงวด</option>
 											<option value="1">ครั้งเดียวทุกงวด</option>
-											
-								
+											<option value="2">ทีละงวด</option>
 										</select>
 									</div>
 								</div>
