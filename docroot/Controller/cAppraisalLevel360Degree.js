@@ -206,7 +206,7 @@ var SetWeightFn = function(level_id, structure_id, structure_name) {
 		url:restfulURL+"/"+serviceName+"/public/competency_criteria",
 		type : "get",
 		dataType : "json",
-		data:{"appraisal_level_id":level_id,'structure_id':structure_id},
+		data:{"appraisal_level_id":level_id,'structure_id':structure_id,"appraisal_form_id":$("#ac_appraisal_form").val()},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success : function(data) {
 			$.each(data,function(index,indexEntry) {
