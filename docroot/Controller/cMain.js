@@ -639,6 +639,24 @@ var setThemeColorFn = function(color){
 //******************** updateTheme end********//
 
 
+// For Assignment, Appraisal, Appraisal360 //
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('/');
+}
+
+//For Assignment, Appraisal, Appraisal360 //
+var removeSlash = function(data){
+	return data.replace(/\//g, "");
+}
+
 
 
 

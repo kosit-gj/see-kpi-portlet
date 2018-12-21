@@ -13,6 +13,22 @@ var emp_result_id_action = [];
 var stage_id_action = [];
 var emailLinkAssignment = false;
 
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('/');
+}
+
+var removeSlash = function(data){
+	return data.replace(/\//g, "");
+}
+
 var clearFn = function () {
     $(':input')
         .not(':button, :submit, :reset, :hidden')
@@ -226,7 +242,8 @@ var setDataToTemplateFn = function (data, actionType) {
         //$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast").val(addCommas(indexEntry['forecast_value']));
 
         if(indexEntry['is_date']==1){ // is_date
-	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0").val(splitDecimal(indexEntry['score0']));
+        	var score0Dat = formatDate(new Date(splitDecimal(indexEntry['score0']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1")));
+	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0").val(score0Dat);
 	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1").val(splitDecimal(indexEntry['score1']));
 	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2").val(splitDecimal(indexEntry['score2']));
 	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3").val(splitDecimal(indexEntry['score3']));
@@ -762,10 +779,6 @@ var actionActionAssignmentFn = function () {
 
 var setValueNull = function(data){ if(data == null || data == ""){ return null; }else{ return removeComma(data); } }
 
-var removeSlash = function(data){
-	return data.replace(/\//g, "");
-}
-
 //Update Assignment start
 var actionUpdateAssignmentFn = function () {
 
@@ -793,14 +806,14 @@ var actionUpdateAssignmentFn = function () {
                 appraisal_items += "\"form_id\":\"1\",";
                 appraisal_items += "\"item_id\":\"" + $(appraisalItemEntry).val() + "\",";
                 appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') + "\",";
-                appraisal_items += "\"target_value\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-target").val()) + "\",";
-                appraisal_items += "\"score0\":\"" + setValueNull($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score0").val()) + "\",";
-                appraisal_items += "\"score1\":\"" + setValueNull($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score1").val()) + "\",";
-                appraisal_items += "\"score2\":\"" + setValueNull($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score2").val()) + "\",";
-                appraisal_items += "\"score3\":\"" + setValueNull($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score3").val()) + "\",";
-                appraisal_items += "\"score4\":\"" + setValueNull($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score4").val()) + "\",";
-                appraisal_items += "\"score5\":\"" + setValueNull($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score5").val()) + "\",";
-                appraisal_items += "\"score6\":\"" + setValueNull($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score6").val()) + "\",";
+                appraisal_items += "\"target_value\":\"" + removeComma(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-target").val())) + "\",";
+                appraisal_items += "\"score0\":\"" + setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score0").val())) + "\",";
+                appraisal_items += "\"score1\":\"" + setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score1").val())) + "\",";
+                appraisal_items += "\"score2\":\"" + setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score2").val())) + "\",";
+                appraisal_items += "\"score3\":\"" + setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score3").val())) + "\",";
+                appraisal_items += "\"score4\":\"" + setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score4").val())) + "\",";
+                appraisal_items += "\"score5\":\"" + setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score5").val())) + "\",";
+                appraisal_items += "\"score6\":\"" + setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score6").val())) + "\",";
                 appraisal_items += "\"total_weight\":\"" + removeComma($("#total_weight-" + $(structureEntry).val()).val()) + "\",";
                 appraisal_items += "\"weight_percent\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-weight").val()) + "\",";
                 if ($(this).prop("checked") == true) {
@@ -957,15 +970,15 @@ var actionAssignmentFn = function (param) {
                 appraisal_items += "\"form_id\":\"1\",";
                 appraisal_items += "\"item_id\":\"" + $(appraisalItemEntry).val() + "\",";
                 appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text() + "\",";
-                appraisal_items += "\"target_value\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-target").val()) + "\",";
+                appraisal_items += "\"target_value\":\"" + removeComma(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-target").val())) + "\",";
                 //appraisal_items+="\"forecast_value\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-forecast").val())+"\",";
-                appraisal_items += "\"score0\":\"" + setValueNull($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score0").val()) + "\",";
-                appraisal_items += "\"score1\":\"" + setValueNull($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score1").val()) + "\",";
-                appraisal_items += "\"score2\":\"" + setValueNull($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score2").val()) + "\",";
-                appraisal_items += "\"score3\":\"" + setValueNull($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score3").val()) + "\",";
-                appraisal_items += "\"score4\":\"" + setValueNull($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score4").val()) + "\",";
-                appraisal_items += "\"score5\":\"" + setValueNull($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score5").val()) + "\",";
-                appraisal_items += "\"score6\":\"" + setValueNull($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score6").val()) + "\",";
+                appraisal_items += "\"score0\":\"" + setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score0").val())) + "\",";
+                appraisal_items += "\"score1\":\"" + setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score1").val())) + "\",";
+                appraisal_items += "\"score2\":\"" + setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score2").val())) + "\",";
+                appraisal_items += "\"score3\":\"" + setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score3").val())) + "\",";
+                appraisal_items += "\"score4\":\"" + setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score4").val())) + "\",";
+                appraisal_items += "\"score5\":\"" + setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score5").val())) + "\",";
+                appraisal_items += "\"score6\":\"" + setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score6").val())) + "\",";
                 appraisal_items += "\"weight_percent\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-weight").val()) + "\",";
                 appraisal_items += "\"total_weight\":\"" + removeComma($("#total_weight-" + $(structureEntry).val()).val()) + "\",";
                 appraisal_items += "\"select_flag\":\"1\"";
