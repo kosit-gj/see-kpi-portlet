@@ -749,6 +749,10 @@ var actionActionAssignmentFn = function () {
 
 var setValueNull = function(data){ if(data == null || data == ""){ return null; }else{ return removeComma(data); } }
 
+var removeSlash = function(data){
+	return data.replace(/\//g, "");
+}
+
 //Update Assignment start
 var actionUpdateAssignmentFn = function () {
 
@@ -769,6 +773,7 @@ var actionUpdateAssignmentFn = function () {
                 } else {
                     appraisal_items += ",{";
                 }
+
                 appraisal_items += "\"item_result_id\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_result_id").val() + "\",";
                 appraisal_items += "\"nof_target_score\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-nof_target_score").val() + "\",";
                 appraisal_items += "\"kpi_type_id\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-kpi_type_id").val() + "\",";
@@ -933,6 +938,7 @@ var actionAssignmentFn = function (param) {
                 } else {
                     appraisal_items += ",{";
                 }
+                                
                 appraisal_items += "\"nof_target_score\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-nof_target_score").val() + "\",";
                 appraisal_items += "\"kpi_type_id\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-kpi_type_id").val() + "\",";
                 appraisal_items += "\"form_id\":\"1\",";
@@ -1752,7 +1758,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
     		htmlTemplateQuantity+="<div class='totalWeight'>"+$(".lt-total-weight").val()+" "+data['total_weight']+"%</div>";
 		}
     	else{
-    		htmlTemplateQuantity += "      <div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-" + data['structure_id'] + "'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-" + data['structure_id'] + "'></span>" + $(".lt-total-weight").val() + "<span id='weigth_total_quantity_percentage_target-" + data['structure_id'] + "'> " + data['total_weight'] + "%</span></div>";
+    		htmlTemplateQuantity += "<div class='totalWeight'><span  class='displayWeightOnMobile' id='weigth_total_quantity_moblie_percentage-" + data['structure_id'] + "'></span><span class='checkWeigthOver weigth_total_quantity_percentage' id='weigth_total_quantity_percentage-" + data['structure_id'] + "'></span>" + $(".lt-total-weight").val() + "<span id='weigth_total_quantity_percentage_target-" + data['structure_id'] + "'> " + data['total_weight'] + "%</span></div>";
     	}
     	
         htmlTemplateQuantity += "  </div>";
@@ -1785,7 +1791,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
             htmlTemplateQuantity += "<td style=\"width:20%\" class='id-" + indexEntry['structure_id'] + "-item_name' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name' style='padding-top:7px;'>" + indexEntry['item_name'] + "</td>";
 
 
-            if(indexEntry['is_date']==1){ // is_date
+            if(indexEntry['is_date']==1){ // is_date (target)
             	htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' class='id-" + indexEntry['structure_id'] + "-target input form-control input-sm-small is_date' type='text'>";
             }else{
             	htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' class='id-" + indexEntry['structure_id'] + "-target input form-control input-sm-small numberOnly addComma' type='text'>";
@@ -1798,22 +1804,22 @@ var assignTemplateQuantityFn = function (structureName, data) {
             htmlTemplateQuantity += "<td style=\"width:5%\">" + indexEntry['uom_name'] + "</td>";
             htmlTemplateQuantity += "<td style=\"width:5%;text-align:right;padding-right: 10px;\"><input  class='input-sm-small scoreText0 numberOnly addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' disabled value='" + notNullFn(indexEntry['actual_value']) + "'></td>";
             
-            if(indexEntry['is_date']==1){ // is_date
-            	  htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText1 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0'></td>";
-                  htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText2 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1'></td>";
-                  htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText3 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2'></td>";
-                  htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText4 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3'></td>";
-                  htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText5 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4'></td>";
-                  htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText6 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5'></td>";
-                  htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText7 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6'></td>";
+            if(indexEntry['is_date']==1){ // is_date (Score)
+            	htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText1 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0'></td>";
+            	htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText2 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1'></td>";
+            	htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText3 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2'></td>";
+                htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText4 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3'></td>";
+                htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText5 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4'></td>";
+                htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText6 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5'></td>";
+                htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText7 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6'></td>";
             }else{
-            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText1 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0'></td>";
-            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText2 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1'></td>";
-            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText3 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2'></td>";
-            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText4 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3'></td>";
-            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText5 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4'></td>";
-            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText6 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5'></td>";
-            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText7 addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText1 addComma numberOnly' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText2 addComma numberOnly' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText3 addComma numberOnly' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText4 addComma numberOnly' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText5 addComma numberOnly' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText6 addComma numberOnly' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5'></td>";
+	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText7 addComma numberOnly' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6'></td>";
             }
             
             htmlTemplateQuantity += "<td style=\"width:5%;text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-weight' class='id-" + indexEntry['structure_id'] + "-weight weight_sum total_weigth_quantity input form-control input-sm-small numberOnly addComma'  type='text'></td>";
@@ -1835,7 +1841,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
         htmlTemplateQuantity += "</div>";
         htmlTemplateQuantity += "</div>";
 
-    } else {
+    } else { // No Theadshow
         htmlTemplateQuantity += "<div class=\"row-fluid\">";
         htmlTemplateQuantity += "	<div class=\"span12\">";
         htmlTemplateQuantity += "  <div class=\"ibox-title2\">";
@@ -1867,7 +1873,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
             htmlTemplateQuantity += "<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-" + indexEntry['structure_id'] + "' type='checkbox' value='" + indexEntry['item_id'] + "'></td>";
             htmlTemplateQuantity += "<td style=\"width:30%\" class='id-" + indexEntry['structure_id'] + "-item_name' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name' style='padding-top:7px;'>" + indexEntry['item_name'] + "</td>";
             
-            if(indexEntry['is_date']==1){ // is_date
+            if(indexEntry['is_date']==1){ // is_date (Target)
             	 htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\"><input class='input-sm-small is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target'></td>";
             }
             else{
@@ -2134,8 +2140,8 @@ var createTemplateAssignmentFn = function (data) {
         //bindingSlideScoreBarFn();
 
         $('.is_date').datepicker({ // is_date
-        	dateFormat: "yymmdd",
-        	});
+        	dateFormat: "yy/mm/dd",
+        });
         
         var getSelectionStart = function (o) {
             if (o.createTextRange) {
