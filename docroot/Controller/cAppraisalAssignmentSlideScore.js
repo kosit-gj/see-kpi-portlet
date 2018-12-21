@@ -13,22 +13,6 @@ var emp_result_id_action = [];
 var stage_id_action = [];
 var emailLinkAssignment = false;
 
-function formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('/');
-}
-
-var removeSlash = function(data){
-	return data.replace(/\//g, "");
-}
-
 var clearFn = function () {
     $(':input')
         .not(':button, :submit, :reset, :hidden')
@@ -225,13 +209,16 @@ var setDataToTemplateFn = function (data, actionType) {
     $(".cus_information_area").show();
     $(".embed_appraisal_id").remove();
     $.each(data, function (index, indexEntry) {
-
         //mapping data start
         //form1
         $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-checkbox").prop("checked", true);
         
         if(indexEntry['is_date']==1){ // is_date
-        	 $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target").val(splitDecimal(indexEntry['target_value']));
+        	// Score-target
+        	var scoreTargetDat = new Date(splitDecimal(indexEntry['target_value']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
+        	scoreTargetDat = (scoreTargetDat == 'Invalid Date') ? splitDecimal(indexEntry['target_value']) : formatDate(scoreTargetDat);
+        	
+        	$("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target").val(scoreTargetDat).css("font-size", "12px");
         }
         else{
         	 $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target").val(addCommas(indexEntry['target_value']));
@@ -242,14 +229,41 @@ var setDataToTemplateFn = function (data, actionType) {
         //$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast").val(addCommas(indexEntry['forecast_value']));
 
         if(indexEntry['is_date']==1){ // is_date
-        	var score0Dat = formatDate(new Date(splitDecimal(indexEntry['score0']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1")));
-	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0").val(score0Dat);
-	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1").val(splitDecimal(indexEntry['score1']));
-	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2").val(splitDecimal(indexEntry['score2']));
-	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3").val(splitDecimal(indexEntry['score3']));
-	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4").val(splitDecimal(indexEntry['score4']));
-	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5").val(splitDecimal(indexEntry['score5']));
-	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6").val(splitDecimal(indexEntry['score6']));
+        	// Score-0
+        	var score0Dat = new Date(splitDecimal(indexEntry['score0']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
+        	score0Dat = (score0Dat == 'Invalid Date') ? splitDecimal(indexEntry['score0']) : formatDate(score0Dat);
+        	
+        	// Score-1
+        	var score1Dat = new Date(splitDecimal(indexEntry['score1']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
+        	score1Dat = (score1Dat == 'Invalid Date') ? splitDecimal(indexEntry['score1']) : formatDate(score1Dat);
+        	
+        	// Score-2
+        	var score2Dat = new Date(splitDecimal(indexEntry['score2']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
+        	score2Dat = (score2Dat == 'Invalid Date') ? splitDecimal(indexEntry['score2']) : formatDate(score2Dat);
+        	
+        	// Score-3
+        	var score3Dat = new Date(splitDecimal(indexEntry['score3']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
+        	score3Dat = (score3Dat == 'Invalid Date') ? splitDecimal(indexEntry['score3']) : formatDate(score3Dat);
+        	
+        	// Score-4
+        	var score4Dat = new Date(splitDecimal(indexEntry['score4']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
+        	score4Dat = (score4Dat == 'Invalid Date') ? splitDecimal(indexEntry['score4']) : formatDate(score4Dat);
+        	
+        	// Score-5
+        	var score5Dat = new Date(splitDecimal(indexEntry['score5']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
+        	score5Dat = (score5Dat == 'Invalid Date') ? splitDecimal(indexEntry['score5']) : formatDate(score5Dat);
+
+        	// Score-6
+        	var score6Dat = new Date(splitDecimal(indexEntry['score6']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
+        	score6Dat = (score6Dat == 'Invalid Date') ? splitDecimal(indexEntry['score6']) : formatDate(score6Dat);
+
+	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0").val(score0Dat).css("font-size", "12px");
+	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1").val(score1Dat).css("font-size", "12px");
+	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2").val(score2Dat).css("font-size", "12px");
+	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3").val(score3Dat).css("font-size", "12px");
+	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4").val(score4Dat).css("font-size", "12px");
+	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5").val(score5Dat).css("font-size", "12px");
+	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6").val(score6Dat).css("font-size", "12px");
         }else{
             $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0").val(notNullTextFn(addCommas(indexEntry['score0'])));
             $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1").val(notNullTextFn(addCommas(indexEntry['score1'])));
