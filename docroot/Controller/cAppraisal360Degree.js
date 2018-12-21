@@ -1067,7 +1067,16 @@ var assignTemplateQuantityFn = function (structureName, data) {
         htmlTemplateQuantity += "<td>" + indexEntry['perspective_name'] + "</td>";
         htmlTemplateQuantity += "<td id=\"item_name-" + indexEntry['item_result_id'] + "\">" + indexEntry['item_name'] + " " + info_item + "</td>";
         if(indexEntry['is_date']==1){
-        	htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><div title=\"" + hintHtml + "\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >" + splitDecimal(indexEntry['target_value']) + "</div></td>";
+        	var target_value_is_date = new Date(splitDecimal(indexEntry['target_value']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
+			
+			if(target_value_is_date == "Invalid Date"){ // no date
+				target_value_is_date = splitDecimal(indexEntry['target_value']);
+			}
+			else{
+				target_value_is_date = formatDate(target_value_is_date);
+			}
+			
+        	htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><div title=\"" + hintHtml + "\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >" + target_value_is_date + "</div></td>";
         }else{
         	htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><div title=\"" + hintHtml + "\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >" + addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2)) + "</div></td>";
         }
@@ -1075,7 +1084,16 @@ var assignTemplateQuantityFn = function (structureName, data) {
         htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore addComma\" id=\"forecast-" + indexEntry['item_result_id'] + "\" name=\"forecast-" + indexEntry['item_result_id'] + "\" value=" + addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(2)) + "></td>";
         //htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly \" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
         if(indexEntry['is_date']==1){ // is_date
-        	htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'>" + splitDecimal(indexEntry['actual_value']) + "</td>";
+        	var actual_value_is_date = new Date(splitDecimal(indexEntry['actual_value']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
+			
+			if(actual_value_is_date == "Invalid Date"){ // no date
+				actual_value_is_date = splitDecimal(indexEntry['actual_value']);
+			}
+			else{
+				actual_value_is_date = formatDate(target_value_is_date);
+			}
+			
+        	htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'>" + actual_value_is_date + "</td>";
         }else{
         	htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>";
         }
