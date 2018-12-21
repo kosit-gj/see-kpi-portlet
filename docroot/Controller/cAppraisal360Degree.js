@@ -2471,17 +2471,19 @@ var dropDrowAsignToEditFn = function (paramStageID) {
 
 var dropDrowActionEditFn = function (stage_id, employee_code, org_code) {
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/appraisal360/edit_action_to",
-        type: "POST",
+//        url: restfulURL + "/" + serviceName + "/public/appraisal360/edit_action_to",
+    	url:restfulURL+"/"+serviceName+"/public/shared/stage/to_action",
+        type: "get",
         dataType: "json",
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         data: {
         	"stage_id": stage_id, 
-        	"emp_code": employee_code, 
-        	"org_code": org_code, 
-        	"appraisal_type_id": $("#embed_appraisalType").val() ,
-        	"appraisal_group_id": $("#group_id").val()
+//        	"emp_code": employee_code, 
+//        	"org_code": org_code, 
+        	"appraisal_type_id": $("#embed_appraisalType").val(),
+        	"appraisal_group_id": $("#group_id").val(),
+        	"flag": "appraisal360_flag"
         },
         success: function (data) {
             if (data == '') {
