@@ -63,38 +63,14 @@ var embedParamCheckboxAppraisalItem = function (id) {
         $("body").append("<input type='hidden' class='embed_appraisal_id-" + structure_id + " embed_appraisal_id' id='embed_appraisal_id-" + appraisal_id + "-" + structure_id + "' name='embed_appraisal_id-" + appraisal_id + "-" + structure_id + "' value='" + appraisal_id + "'>");
     }
 }
+
+
 var setDataToTemplateFn = function (data, actionType) {
     var stage = data['stage'];
     var head = data['head'][0]
     var data = data['data'];
 
-	/*
-	employee_code
-	section
-	appraisal_type
-	employee_name
-	department
-	period
-	start_working_date
-	chief_employee_code
-	position
-	chief_employee_name
-	
-	appraisal_period_desc
-	appraisal_type_name
-	chief_emp_id
-	chief_emp_name
-	department_name
-	emp_id
-	emp_name
-	position_name
-	section_name
-	stage_id
-	status
-	working_start_date
-	 */
-    /*information start*/
-
+    // Information
     galbalDataTemp['cds_result_emp_id'] = notNullTextFn(head['emp_id']);
     galbalDataTemp['cds_result_org_id'] = notNullTextFn(head['org_id']);
     galbalDataTemp['cds_result_position_id'] = notNullTextFn(head['position_id']);
@@ -113,7 +89,6 @@ var setDataToTemplateFn = function (data, actionType) {
         $("#chief_employee_name").html(head['chief_emp_name']);
         $("#start_working_date").html(head['working_start_date']);
 
-
         $("#empInformation").show();
         $("#orgInformation").hide();
     } else {
@@ -127,8 +102,8 @@ var setDataToTemplateFn = function (data, actionType) {
         $("#periodOrg").html(head['appraisal_period_desc']);
     }
 
-    //Stage History List Data..
-
+    
+    // Stage History List Data..
     var htmlStage = "";
     $.each(stage, function (index, indexEntry) {
 
@@ -144,9 +119,8 @@ var setDataToTemplateFn = function (data, actionType) {
     $("#listDataStageHistory").html(htmlStage);
     $("#slideUpDownStageHistory").show();
 
-//    dropDrowActionEditFn(head['stage_id'], head['emp_code'], head['org_code']);
 
-    //set premission button management start
+    // set premission button management
     if (head['status'] == 'Accepted' || actionType == 'view') {
         $("#ModalAssignment").find('input[type="text"]').attr('disabled', 'disabled');
         $("#ModalAssignment").find('input[type="checkbox"]').attr('disabled', 'disabled');
@@ -162,73 +136,27 @@ var setDataToTemplateFn = function (data, actionType) {
         $("#ModalAssignment").find('input[type="checkbox"]').removeAttr('disabled');
     }
 
-    //set premission button management end		
-    /*
-    actual_value
-    item_id
-    item_name
-    item_result_id
-    created_by
-    created_dttm
-    deduct_score_unit
-    emp_id
-    emp_result_id
-    max_value
-    over_value
-    period_id
-    score0: '',
-    score1: '',
-    score2: '',
-    score3: '',        
-    score4: '',          
-    score5: '', 
-    target_value
-    updated_by
-    updated_dttm
-    weigh_score
-    weight_percent
-    
-    
-    
-    nof_target_score: '',  
-    form_id: '',      
-    item_id: '',
-    item_name: '',
-    target_value: '',
-    kpi_type_id: '',
-    score0: '',
-    score1: '',
-    score2: '',
-    score3: '',        
-    score4: '',          
-    score5: '',            
-    forecast_value: '',                                                   
-    weight_percent: '',   
-    
-    */
     $(".cus_information_area").show();
     $(".embed_appraisal_id").remove();
     $.each(data, function (index, indexEntry) {
         //mapping data start
-        //form1
+    	
+        // form-1
         $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-checkbox").prop("checked", true);
+        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_result_id").val(indexEntry['item_result_id']);
+        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-weight").val(addCommas(indexEntry['weight_percent']));
         
-        if(indexEntry['is_date']==1){ // is_date
+        // form-1 -> is_date        
+        if(indexEntry['is_date']==1){
+        	
         	// Score-target
         	var scoreTargetDat = new Date(splitDecimal(indexEntry['target_value']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
         	scoreTargetDat = (scoreTargetDat == 'Invalid Date') ? splitDecimal(indexEntry['target_value']) : formatDate(scoreTargetDat);
         	
-        	$("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target").val(scoreTargetDat).css("font-size", "12px");
-        }
-        else{
-        	 $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target").val(addCommas(indexEntry['target_value']));
-        }
-
-        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_result_id").val(indexEntry['item_result_id']);
-        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue").val(addCommas(notNullFn(indexEntry['actual_value'])));
-        //$("#id-"+indexEntry['item_id']+"-"+indexEntry['structure_id']+"-forecast").val(addCommas(indexEntry['forecast_value']));
-
-        if(indexEntry['is_date']==1){ // is_date
+        	// Score-actual
+        	var scoreActualDat = new Date(splitDecimal(indexEntry['actual_value']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
+        	scoreActualDat = (scoreActualDat == 'Invalid Date') ? splitDecimal(indexEntry['actual_value']) : formatDate(scoreActualDat);
+        	
         	// Score-0
         	var score0Dat = new Date(splitDecimal(indexEntry['score0']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
         	score0Dat = (score0Dat == 'Invalid Date') ? splitDecimal(indexEntry['score0']) : formatDate(score0Dat);
@@ -256,7 +184,9 @@ var setDataToTemplateFn = function (data, actionType) {
         	// Score-6
         	var score6Dat = new Date(splitDecimal(indexEntry['score6']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
         	score6Dat = (score6Dat == 'Invalid Date') ? splitDecimal(indexEntry['score6']) : formatDate(score6Dat);
-
+        	
+        	$("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target").val(scoreTargetDat).css("font-size", "12px");
+        	$("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue").val(scoreActualDat).css("font-size", "12px");
 	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0").val(score0Dat).css("font-size", "12px");
 	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1").val(score1Dat).css("font-size", "12px");
 	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2").val(score2Dat).css("font-size", "12px");
@@ -265,6 +195,8 @@ var setDataToTemplateFn = function (data, actionType) {
 	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5").val(score5Dat).css("font-size", "12px");
 	        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6").val(score6Dat).css("font-size", "12px");
         }else{
+        	$("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target").val(addCommas(indexEntry['target_value']));
+        	$("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue").val(addCommas(notNullFn(indexEntry['actual_value'])));
             $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0").val(notNullTextFn(addCommas(indexEntry['score0'])));
             $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1").val(notNullTextFn(addCommas(indexEntry['score1'])));
             $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2").val(notNullTextFn(addCommas(indexEntry['score2'])));
@@ -273,31 +205,26 @@ var setDataToTemplateFn = function (data, actionType) {
             $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5").val(notNullTextFn(addCommas(indexEntry['score5'])));
             $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6").val(notNullTextFn(addCommas(indexEntry['score6'])));
         }
-        
-        $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-weight").val(addCommas(indexEntry['weight_percent']));
-        //form2
 
-        //form3
+        // form-3
         $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-maxValue").val(notNullTextFn(addCommas(indexEntry['max_value'])));
         $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-deductScoreUnit").val(notNullTextFn(indexEntry['deduct_score_unit']));
         $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-valueGetZero").val(indexEntry['value_get_zero'] == null ? "" : indexEntry['value_get_zero']);
         $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-NoRaiseValue").val(indexEntry['no_raise_value'] == null ? "" : indexEntry['no_raise_value']);
-        //embedParamAppraisal for get updated.
 
+        // embedParamAppraisal for get updated.
         embedParamCheckboxAppraisalItem("id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-checkbox");
-        //mapping data end
 
         calculationGrandTotalDefaultFn();
-
     });
 
     $.each(data, function (index, indexEntry) {
-
         $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-valueGetZero").val(indexEntry['value_get_zero'] == null ? "" : indexEntry['value_get_zero']);
         $("#id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-NoRaiseValue").val(indexEntry['no_raise_value'] == null ? "" : indexEntry['no_raise_value']);
-
     });
 }
+
+
 var splitDecimal = function(num_float){
 	if(num_float == null)
 		num_float = "" ;
@@ -1876,9 +1803,9 @@ var assignTemplateQuantityFn = function (structureName, data) {
 
 
             if(indexEntry['is_date']==1){ // is_date (target)
-            	htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' class='id-" + indexEntry['structure_id'] + "-target input form-control input-sm-small is_date' type='text'>";
+            	htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\"> <input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' class='id-" + indexEntry['structure_id'] + "-target input form-control input-sm-small is_date' type='text' style='font-size:12px;'>";
             }else{
-            	htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\"><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' class='id-" + indexEntry['structure_id'] + "-target input form-control input-sm-small numberOnly addComma' type='text'>";
+            	htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\"> <input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' class='id-" + indexEntry['structure_id'] + "-target input form-control input-sm-small numberOnly addComma' type='text'>";
             }
             
             htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-kpi_type_id' class='id-" + indexEntry['structure_id'] + "-kpi_type_id input form-control input-sm-small numberOnly' type='hidden' value=" + indexEntry['kpi_type_id'] + ">";
@@ -1886,17 +1813,19 @@ var assignTemplateQuantityFn = function (structureName, data) {
             htmlTemplateQuantity += "<input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_result_id' class='id-" + indexEntry['structure_id'] + "-item_result_id input form-control input-sm-small numberOnly' type='hidden' value=\"\">";
             htmlTemplateQuantity += "</td>";
             htmlTemplateQuantity += "<td style=\"width:5%\">" + indexEntry['uom_name'] + "</td>";
-            htmlTemplateQuantity += "<td style=\"width:5%;text-align:right;padding-right: 10px;\"><input  class='input-sm-small scoreText0 numberOnly addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' disabled value='" + notNullFn(indexEntry['actual_value']) + "'></td>";
             
             if(indexEntry['is_date']==1){ // is_date (Score)
-            	htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText1 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0'></td>";
-            	htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText2 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1'></td>";
-            	htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText3 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2'></td>";
-                htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText4 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3'></td>";
-                htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText5 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4'></td>";
-                htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText6 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5'></td>";
-                htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText7 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6'></td>";
+            	indexEntry.actual_value = (indexEntry.actual_value == undefined) ? "" : indexEntry.actual_value;
+            	htmlTemplateQuantity += "<td style='width:5%;text-align:right;padding-right:10px;'> <input class='input-sm-small scoreText0' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' disabled value='" + indexEntry.actual_value + "' style='font-size:12px;'> </td>";
+            	htmlTemplateQuantity += "<td style='width:5%;text-align:center;background:#fcf8e3;'> <input disabled class='input-sm-small scoreText1 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0' style='font-size:12px;'> </td>";
+            	htmlTemplateQuantity += "<td style='width:5%;text-align:center;background:#fcf8e3;'> <input disabled class='input-sm-small scoreText2 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1' style='font-size:12px;'> </td>";
+            	htmlTemplateQuantity += "<td style='width:5%;text-align:center;background:#fcf8e3;'> <input disabled class='input-sm-small scoreText3 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2' style='font-size:12px;'> </td>";
+                htmlTemplateQuantity += "<td style='width:5%;text-align:center;background:#fcf8e3;'> <input disabled class='input-sm-small scoreText4 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score3' style='font-size:12px;'> </td>";
+                htmlTemplateQuantity += "<td style='width:5%;text-align:center;background:#fcf8e3;'> <input disabled class='input-sm-small scoreText5 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score4' style='font-size:12px;'> </td>";
+                htmlTemplateQuantity += "<td style='width:5%;text-align:center;background:#fcf8e3;'> <input disabled class='input-sm-small scoreText6 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score5' style='font-size:12px;'> </td>";
+                htmlTemplateQuantity += "<td style='width:5%;text-align:center;background:#fcf8e3;'> <input disabled class='input-sm-small scoreText7 is_date' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score6' style='font-size:12px;'> </td>";
             }else{
+            	htmlTemplateQuantity += "<td style=\"width:5%;text-align:right;padding-right: 10px;\"><input  class='input-sm-small scoreText0 numberOnly addComma' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-actualValue' disabled value='" + notNullFn(indexEntry['actual_value']) + "'></td>";
 	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText1 addComma numberOnly' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score0'></td>";
 	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText2 addComma numberOnly' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score1'></td>";
 	            htmlTemplateQuantity += "<td style=\"width:5%;text-align:center; background:#fcf8e3;\"><input disabled class='input-sm-small scoreText3 addComma numberOnly' type='text' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2' name='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-score2'></td>";
