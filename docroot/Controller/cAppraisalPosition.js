@@ -13,6 +13,7 @@ $(document).ready(function(){
     			"colunms":[
     						{"colunmsDisplayName":"Position Code","width":"15%","id":"position_code","colunmsType":"text"},
     			           {"colunmsDisplayName":"Position Name","width":"60%","id":"position_name","colunmsType":"text"},
+    			           {"colunmsDisplayName":"Job Code","width":"60%","id":"job_code","colunmsType":"text"},
     			           {"colunmsDisplayName":"Is Active","width":"auto","id":"is_active","colunmsType":"checkbox"},
     			          ],
     			"form":[{
@@ -21,6 +22,10 @@ $(document).ready(function(){
 						},{
     					"label":"Position Name","inputType":"text","placeholder":"Position Name",
     					"id":"position_name","width":"350px","required":true
+    					},
+    					{
+    					"label":"Job Code","inputType":"text","placeholder":"Job Code",
+    					"id":"job_code","width":"250px","required":true
     					},
     					{
 	 	    			"label":"IsActive","inputType":"checkbox","default":"checked",
@@ -40,7 +45,7 @@ $(document).ready(function(){
     			 "expressSearch":false,
     			 "advanceSearchSet":true,
     			 "btnAddOption":false,
-    			 "btnAdvanceDownloadOption":{"url":""+$("#url_portlet").val()+"/file/appraisal_position_template.xlsx"},
+    			 "btnAdvanceDownloadOption":{"url":restfulURL+"/"+serviceName+"/public/position/export"+"?token="+tokenID.token+""+"#position_name"},
     			 "btnAdvanceImportOption":{"formName":"Import Position","accept":".xls ,.xlsx"}
     			 //"btnManageOption":{"id":"BtnID","name":"BtnName"},
     			 //"btnAdvanceSearchOption":{"id":"BtnID","name":"<i class=\"fa fa-plus-square\"></i>&nbsp;Btn"}
@@ -88,6 +93,7 @@ $(document).ready(function(){
         });
        
     	//Autocomplete From Position End
+    	
 	 }
     });
  
