@@ -306,9 +306,9 @@ var splitDecimal = function(num_float){
 	return num_int[0];
 }
 
-var findOneFn = function (id, actionType, stage_id) {
+var findOneFn = function (id, actionType, stage_id, emp_code, org_code) {
     //get structure
-	getTemplateFn(id, stage_id);
+	getTemplateFn(id, stage_id, emp_code, org_code);
     //get data for structure
 
     $.ajax({
@@ -548,16 +548,16 @@ var listDataFn = function (data) {
                 //itemEntry['status']
             	if (itemEntry['edit_flag']==1 && itemEntry['delete_flag']==1) {
              		//edit delete
-             		htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" <button class='btn btn-warning btn-small btn-gear edit' data-stage='"+itemEntry['stage_id']+"' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "' data-target=#addModalRule data-toggle='modal'>" + $(".lt-edit").val() + "</button>&nbsp;<button id='del-" + itemEntry['emp_id'] + "' class='btn btn-danger btn-small btn-gear del'>" + $(".lt-delete").val() + "</button>\"></i>";
+             		htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" <button class='btn btn-warning btn-small btn-gear edit' data-stage='"+itemEntry['stage_id']+"' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" +itemEntry['emp_code'] + "-" +itemEntry['org_code']+ "' data-target=#addModalRule data-toggle='modal'>" + $(".lt-edit").val() + "</button>&nbsp;<button id='del-" + itemEntry['emp_id'] + "' class='btn btn-danger btn-small btn-gear del'>" + $(".lt-delete").val() + "</button>\"></i>";
              	} else if(itemEntry['edit_flag']==1 && itemEntry['delete_flag']==0) {
              		//edit
-             		htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" <button class='btn btn-warning btn-small btn-gear edit' data-stage='"+itemEntry['stage_id']+"' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "' data-target=#addModalRule data-toggle='modal'>" + $(".lt-edit").val() + "\"></i>";
+             		htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" <button class='btn btn-warning btn-small btn-gear edit' data-stage='"+itemEntry['stage_id']+"' id='edit-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" +itemEntry['emp_code'] + "-" +itemEntry['org_code']+ "' data-target=#addModalRule data-toggle='modal'>" + $(".lt-edit").val() + "\"></i>";
              	} else if(itemEntry['edit_flag']==0 && itemEntry['delete_flag']==1) {
              		//delete
              		htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" <button id='del-" + itemEntry['emp_id'] + "' class='btn btn-danger btn-small btn-gear del'>" + $(".lt-delete").val() + "</button>\"></i>";
              	} else {
              		// view
-             		htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" <button class='btn btn-info btn-small btn-gear view' data-stage='"+itemEntry['stage_id']+"' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "' data-target=#addModalRule data-toggle='modal'>" + $(".lt-view").val() + "\"></i>";
+             		htmlHTML += "  <i data-trigger=\"focus\" tabindex=\"" + index2 + "\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\"  data-content=\" <button class='btn btn-info btn-small btn-gear view' data-stage='"+itemEntry['stage_id']+"' id='view-" + itemEntry['emp_id'] + "-" + itemEntry['org_id'] + "-" +itemEntry['emp_code'] + "-" +itemEntry['org_code']+ "' data-target=#addModalRule data-toggle='modal'>" + $(".lt-view").val() + "\"></i>";
              	}
             	
 //                if (is_hr == 1 && itemEntry['status'] == 'Accepted') {
@@ -716,6 +716,8 @@ var listDataFn = function (data) {
             var edit = this.id.split("-");
             var id = edit[1];
             org_id_to_assign = edit[2];
+            var emp_code = edit[3];
+            var org_code = edit[4];
             var current_stage_id = $(this).attr('data-stage');
 
             sessionStorage.setItem('is_coporate_kpi', $("#is_coporate_kpi-" + id).val());
@@ -731,7 +733,7 @@ var listDataFn = function (data) {
                 var emp_result_id = $(this).parent().parent().parent().parent().children().eq(1).children().val();
                 var period_id = $(this).parent().parent().parent().parent().children().eq(2).children().val();
                 $("#period_id_edit").val(period_id);
-                findOneFn(emp_result_id, "", current_stage_id);
+                findOneFn(emp_result_id, "", current_stage_id, emp_code, org_code);
                 $(this).parent().parent().parent().children().click();
                 $(window).scrollTop(0);
                 $(".modal-body").scrollTop(0);
@@ -743,11 +745,13 @@ var listDataFn = function (data) {
         $(".view").on("click", function () {
             var view = this.id.split("-");
             org_id_to_assign = view[2];
+            var emp_code = edit[3];
+            var org_code = edit[4];
             var current_stage_id = $(this).attr('data-stage');
             var emp_result_id = $(this).parent().parent().parent().parent().children().eq(1).children().val();
             var period_id = $(this).parent().parent().parent().parent().children().eq(2).children().val();
             $("#period_id_edit").val(period_id);
-            findOneFn(emp_result_id, "view", current_stage_id);
+            findOneFn(emp_result_id, "view", current_stage_id, emp_code, org_code);
             $(this).parent().parent().parent().children().click();
             $(window).scrollTop(0);
             $(".modal-body").scrollTop(0);
@@ -1559,20 +1563,34 @@ var dropDrowActionEditFn = function (data/*paramStageID, employee_code, org_code
 }
 
 var dropDrowActionEditFn2 = function (paramStageID, employee_code, org_code) {
+	
+	if($("#embed_appraisal_type_id").val()==1) {
+		var dataAPI = restfulURL+"/"+serviceName+"/public/appraisal_assignment/edit_action_to";
+		var dataType = "post";
+		var dataObject = {
+				"appraisal_type_id": $("#embed_appraisal_type_id").val(),
+				"stage_id": paramStageID,
+				"emp_code": employee_code,
+				"org_code": org_code
+		}
+	} else {
+		var dataAPI = restfulURL+"/"+serviceName+"/public/shared/stage/to_action";
+		var dataType = "get";
+		var dataObject = {
+				"appraisal_type_id": $("#embed_appraisal_type_id").val(), 
+	        	"stage_id": paramStageID,
+	        	"flag": "assignment_flag",
+	        	"emp_code": employee_code
+		}
+	}
+	
     $.ajax({
-//        url: restfulURL + "/" + serviceName + "/public/appraisal_assignment/edit_action_to",
-        url: restfulURL + "/" + serviceName + "/public/emp/adjustment/to_action",
-        type: "get",
+        url: dataAPI,
+        type: dataType,
         dataType: "json",
         async: true,
         headers: { Authorization: "Bearer " + tokenID.token },
-        data: {
-        	"appraisal_type_id": $("#embed_appraisal_type_id").val(), 
-        	"stage_id": paramStageID,
-        	"flag": "assignment_flag"
-//        	"emp_code": employee_code, 
-//        	"org_code": org_code 
-        },
+        data: dataObject,
         success: function (data) {
             var htmlOption = "";
             $.each(data, function (index, indexEntry) {
@@ -2274,24 +2292,29 @@ var createTemplateAssignmentFn = function (data) {
 };
 
 var check_appraisalLevel;
-var getTemplateFn = function (emp_result_id, stage_id) {
+var getTemplateFn = function (emp_result_id, stage_id, emp_code, org_code) {
 
     if ($("#appraisalType").val() == 1) {
         check_appraisalLevel = $("#appraisalLevel").val();
-    }
-    else if ($("#appraisalType").val() == 2) {
+        var stage = {
+        		"appraisal_type_id": $("#embed_appraisal_type_id").val(),
+        		"stage_id": stage_id,
+        		"emp_code": emp_code,
+        		"org_code": org_code
+        }
+    } else if ($("#appraisalType").val() == 2) {
         check_appraisalLevel = $("#appraisalLevelEmp").val();
-    }
-    
-    var stage = {
-    		"appraisal_type_id": $("#embed_appraisal_type_id").val(), 
-         	"stage_id": stage_id,
-         	"flag": "assignment_flag"
+        var stage = {
+        		"appraisal_type_id": $("#embed_appraisal_type_id").val(), 
+             	"stage_id": stage_id,
+             	"flag": "assignment_flag",
+             	"emp_code": emp_code
+        }
     }
 
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal_assignment/template",
-        type: "GET",
+        type: "get",
         dataType: "json",
         async: false,
         data: {
@@ -2626,7 +2649,7 @@ $(document).ready(function () {
                     $("#btnSubmit").removeAttr("disabled");
                     $("#btnAddAnother").removeAttr("disabled");
                     //Default end
-                    getTemplateFn("", default_stage_id[0]);
+                    getTemplateFn("", default_stage_id[0], empldoyees_code[0], organization_code[0]);
 
                     $("#slideUpDownStageHistory").hide();
                     $("#slideStageHistory").hide();

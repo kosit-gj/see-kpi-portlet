@@ -2390,21 +2390,35 @@ var dropDrowAsignToEditFn = function(paramStageID){
 }
 //var dropDrowActionEditFn = function(stage_id,to_appraisal_level_id){
 var dropDrowActionEditFn = function(stage_id,employee_code,org_code){
+	
+	if($("#embed_appraisalType").val()==1) {
+		var dataAPI = restfulURL+"/"+serviceName+"/public/appraisal/edit_action_to";
+		var dataType = "post";
+		var dataObject = {
+				"stage_id":stage_id,
+				"emp_code":employee_code,
+				"org_code":org_code,
+				"appraisal_type_id":$("#embed_appraisalType").val()
+		}
+	} else {
+		var dataAPI = restfulURL+"/"+serviceName+"/public/shared/stage/to_action";
+		var dataType = "get";
+		var dataObject = {
+				"stage_id":stage_id,
+				"emp_code":employee_code,
+				"appraisal_type_id":$("#embed_appraisalType").val(),
+				"flag": "appraisal_flag"
+		}
+	}
+	
 	$.ajax({
-//		url:restfulURL+"/"+serviceName+"/public/appraisal/edit_action_to",
-		url:restfulURL+"/"+serviceName+"/public/shared/stage/to_action",
-		type:"get",
+		url:dataAPI,
+		type:dataType,
 		dataType:"json",
 		async:false,
 		headers:{Authorization:"Bearer "+tokenID.token},
 		//data:{"stage_id":stage_id,"to_appraisal_level_id":to_appraisal_level_id},
-		data:{
-			"stage_id":stage_id,
-//			"emp_code":employee_code,
-//			"org_code":org_code,
-			"appraisal_type_id":$("#embed_appraisalType").val(),
-			"flag": "appraisal_flag"
-		},
+		data: dataObject,
 		success:function(data){
 			//var data=['à¸—à¸”à¸¥à¸­à¸‡à¸‡à¸²à¸™','à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µ','à¸£à¸±à¸�à¸©à¸²à¸�à¸²à¸£'];
 			if(data==''){
