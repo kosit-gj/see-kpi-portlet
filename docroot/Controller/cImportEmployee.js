@@ -218,6 +218,11 @@ var findOneFn = function(id) {
 			$("#from_sup_emp_code").val(data['chief_emp_code']);
 			$("#from_emp_email").val(data['email']);
 			$("#from_emp_salary").val('**********');
+			$("#from_pqpi_amount").val(data['pqpi_amount']);
+			$("#from_fix_other_amount").val(data['fix_other_amount']);
+			$("#from_pmi_amount").val(data['pmi_amount']);
+			$("#from_pi_amount").val(data['pi_amount']);
+			$("#from_var_other_amount").val(data['var_other_amount']);		
 			$("#from_emp_erp_user").val(data['erp_user']);
 			$("#from_dotline_code").val(data['dotline_code']);
 			$("#from_emp_type").val(data['emp_type']);
@@ -282,8 +287,6 @@ var listImportEmployeeFn = function(data) {
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["position_name"])+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["chief_emp_code"])+"</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["appraisal_level_name"])+"</td>";
-		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+notNullTextFn(indexEntry["dotline_code"])+"</td>"
-		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+"<div align='center'><input type=\"checkbox\" "+has_second_checkbox+">"+"</div></td>";
 		//htmlTable += "<td class='objectCenter'>"+IsActive+"</td>";
 		//<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["_id"]+ " data-target=#ModalLevel data-toggle='modal'>Ruld</button>&nbsp;
 		//&lt;button class='btn btn-primary btn-xs btn-gear add' id=1 data-target=#ModalLevel data-toggle='modal'&gt;Role&lt;/button&gt;
@@ -487,6 +490,11 @@ var updateFn = function () {
 			"chief_emp_code":$("#from_sup_emp_code").val(),
 			"email":$("#from_emp_email").val(),
 			"s_amount": empSalary,
+			"pqpi_amount": $("#from_pqpi_amount").val(),
+			"fix_other_amount": $("#from_fix_other_amount").val(),
+			"pmi_amount": $("#from_pmi_amount").val(),
+			"pi_amount": $("#from_pi_amount").val(),
+			"var_other_amount": $("#from_var_other_amount").val(),		
 			"erp_user":$("#from_emp_erp_user").val(),
 			"dotline_code":$("#from_dotline_code").val(),
 			"emp_type":$("#from_emp_type").val(),

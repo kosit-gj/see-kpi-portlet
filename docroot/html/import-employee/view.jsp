@@ -562,8 +562,6 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 											<th style='width: auto'>Position&nbsp;Name&emsp;&emsp;&emsp;</th>
 											<th style='width: auto'>Chief&nbsp;Emp&nbsp;Code&emsp;</th>
 											<th style='width: auto'>Appraisal&nbsp;Level&emsp;</th>
-											<th style='width: auto'>Dotline&nbsp;Code&emsp;</th>
-											<th style='width: auto'>Has&nbsp;Second&nbsp;Line&emsp;</th>
 <!-- 											<th style='width: auto text-align:center;'>IsActive</th> -->
 											<th style='width: auto;text-align: center;' class='objectCenter'>Manage</th>
 										</tr>
@@ -814,6 +812,37 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 									<input type="text" class="form-control input-sm span12 numberOnly" placeholder="" id="from_emp_salary">
 								</div>
 							</div>
+							<div class="form-group p-xxs">
+								<label class="control-label">PQPI Amount:</label>
+								<div class="controls">
+									<input type="text" class="form-control input-sm span12" placeholder="" id="from_pqpi_amount">
+								</div>
+							</div>
+							<div class="form-group p-xxs">
+								<label class="control-label">Fix Other Amount:</label>
+								<div class="controls">
+									<input type="text" class="form-control input-sm span12" placeholder="" id="from_fix_other_amount">
+								</div>
+							</div>
+							<div class="form-group p-xxs">
+								<label class="control-label">PMI Amount:</label>
+								<div class="controls">
+									<input type="text" class="form-control input-sm span12" placeholder="" id="from_pmi_amount">
+								</div>
+							</div>
+							<div class="form-group p-xxs">
+								<label class="control-label">PI Amount:</label>
+								<div class="controls">
+									<input type="text" class="form-control input-sm span12" placeholder="" id="from_pi_amount">
+								</div>
+							</div>
+							<div class="form-group p-xxs">
+								<label class="control-label">Var Other Amount:</label>
+								<div class="controls">
+									<input type="text" class="form-control input-sm span12" placeholder="" id="from_var_other_amount">
+								</div>
+							</div>
+							
 							<div class="form-group p-xxs">
 								<label class="control-label">ERP User:</label>
 								<div class="controls">
