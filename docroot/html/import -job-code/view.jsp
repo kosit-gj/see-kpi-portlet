@@ -7,20 +7,11 @@
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 <%
-/*
-PortletSession portletSession1 = renderRequest.getPortletSession();
-portletSession1.setAttribute("password", "authenticated", PortletSession.APPLICATION_SCOPE);
-String pwd = (String) portletSession1.getAttribute("password", PortletSession.APPLICATION_SCOPE);
-out.print(pwd);
-String password=PortalUtil.getUser(request).getPassword();
-*/
 
 String username = themeDisplay.getUser().getScreenName();
 String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWORD);
 layout = themeDisplay.getLayout();
 plid = layout.getPlid();
-//out.print(username);
-//out.print("password2="+password);
 
 long companyID = themeDisplay.getCompanyId();
 String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
@@ -29,7 +20,6 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
 <input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
-
 <input type="hidden" id="companyID" name="companyID" value="<%= companyID %>">
 <input type="hidden" id="pAuth" name="pAuth" value="<%= pAuth %>">
 
@@ -137,12 +127,6 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 	z-index: 99999 !important;
 }
 
-/* .aui .from_data_role, .aui  .selectEmpCheckbox {
-	cursor: pointer;
-	height: 17px;
-	width: 17px;
-}
- */
 .aui .checkbox label, .aui .radio label {
 	cursor: default;
 }
@@ -156,10 +140,6 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 .aui .ui-autocomplete{
 	z-index: 1300;
 }
-/* .aui #from_emp_type {
-	width: 170px;
-} */
-
 .aui #list_content {
 	display: none;
 }
@@ -432,7 +412,6 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 
 </style>
 <div id="container1">
-    <!--  nav bar -->
     <div class='row-fluid'>
         <div class='col-xs-12'>
             <div id="slide_status" class="span12" style="z-index: 9000;">
@@ -482,10 +461,9 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
                                 <option>50</option>
                                 <option>100</option>
                             </select>
-
                         </div>
+                        
                         <div class='pagingText'>Results per page</div>
-
                     </div>
                 </div>
                 <!-- pagination end -->
@@ -535,7 +513,6 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
             <!-- content end -->
         </div>
     </div>
-
 </div>
 	
 	
@@ -553,7 +530,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
                 <div class="form-kpi-mangement">
                     <div class="form-kpi-label" align="center">
 
-                        <label>Confirm to Delete Data?</label>
+                        <label id="label-del">Confirm to Delete Data?</label>
                         <div id="inform_on_confirm" class='information'></div>
                     </div>
                 </div>
@@ -603,7 +580,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
             <div class="modal-footer">
                 <button class="btn btn-success" type="submit" id="importFileMobile" form="fileImportJobCode">Import</button>
                 <button data-dismiss="modal" class="btn btn-danger btnCancle" type="button">Cancel</button>
-                <div class="alert alert-warning information" id="informationFile" style="height:120px; overflow-y: scroll; position:relative;display: none;"></div>
+                <div class="alert alert-warning information" id="informationFile" style="height:120px; overflow-y: auto; position:relative;display: none;"></div>
             </div>
         </div>
     </div>
@@ -635,29 +612,28 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
                         <div class="form-group p-xxs">
                             <label class="control-label">Knowledge Point:<span class='redFont'>*</span></label>
                             <div class="controls">
-                                <input type="text" class="form-control input-sm span12 numberOnly" placeholder="" id="from_knowledge_point">
+                                <input type="text" class="form-control input-sm span12 autoNumeric" placeholder="" id="from_knowledge_point">
                             </div>
                         </div>
                           <div class="form-group p-xxs">
                             <label class="control-label">Capability Point:<span class='redFont'>*</span></label>
                             <div class="controls">
-                                <input type="text" class="form-control input-sm span12 numberOnly" placeholder="" id="from_capability_point">
+                                <input type="text" class="form-control input-sm span12 autoNumeric" placeholder="" id="from_capability_point">
                             </div>
                         </div>
                           <div class="form-group p-xxs">
                             <label class="control-label">Total Point:<span class='redFont'>*</span></label>
                             <div class="controls">
-                                <input type="text" class="form-control input-sm span12 numberOnly" placeholder="" id="from_total_point">
+                                <input type="text" class="form-control input-sm span12 autoNumeric" placeholder="" id="from_total_point">
                             </div>
                         </div>
                           <div class="form-group p-xxs">
                             <label class="control-label">Baht Per Point:<span class='redFont'>*</span></label>
                             <div class="controls">
-                                <input type="text" class="form-control input-sm span12 numberOnly" placeholder="" id="from_baht_per_point">
+                                <input type="text" class="form-control input-sm span12 autoNumeric" placeholder="" id="from_baht_per_point">
                             </div>
                         </div>
                         <input type="text"  id="from_job_code" style="display:none">
-                   
                      </div>
                 </div>
                 <!-- form End -->
