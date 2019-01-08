@@ -2427,8 +2427,9 @@
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cSalaryAdjustment.js</footer-portlet-javascript>
 		<css-class-wrapper>salary-adjustment-portlet</css-class-wrapper>
-
-		<portlet-name>import -job-code</portlet-name>
+	</portlet>
+	<portlet>
+		<portlet-name>import-job-code</portlet-name>
 		<icon>/icon.png</icon>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
@@ -2452,7 +2453,7 @@
 		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cImportJobCode.js</footer-portlet-javascript>
-		<css-class-wrapper>import -job-code-portlet</css-class-wrapper>    
+		<css-class-wrapper>import-job-code-portlet</css-class-wrapper>    
 	</portlet>
 	<portlet>
 		<portlet-name>report-hr-summary-consider</portlet-name>

@@ -2373,7 +2373,6 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-
 		<portlet-name>salary-adjustment</portlet-name>
 		<display-name>Salary Adjustment</display-name>
 		<portlet-class>
@@ -2391,15 +2390,30 @@
 		<portlet-info>
 			<title>Salary Adjustment</title>
 			<short-title>Salary Adjustment</short-title>
-
-		<portlet-name>import -job-code</portlet-name>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+	<portlet-name>import-job-code</portlet-name>
 		<display-name>Import Job Code</display-name>
 		<portlet-class>
 			com.liferay.util.bridges.mvc.MVCPortlet
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/import -job-code/view.jsp</value>
+			<value>/html/import-job-code/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2442,7 +2456,6 @@
 		<portlet-info>
 			<title>Report Hr Summary Consider</title>
 			<short-title>Report Hr Summary Consider</short-title>
-
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

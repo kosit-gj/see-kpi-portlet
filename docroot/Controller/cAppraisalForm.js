@@ -13,8 +13,8 @@ var getAllFormFn = function()
         		htmlBody += "<tr>";
         		htmlBody += "	<td>"+indexEntry.appraisal_form_name+"</td>";
         		htmlBody += "	<td style='text-align: center;'> <input type='checkbox' disabled='disabled'  "+((indexEntry.is_bonus==1)?"checked":"")+"> </td>";
-        		htmlBody += "	<td style='text-align: center;'> <input type='checkbox' disabled='disabled'  "+((indexEntry.is_active==1)?"checked":"")+"> </td>";
         		htmlBody += "	<td style='text-align: center;'> <input type='checkbox' disabled='disabled'  "+((indexEntry.is_raise==1)?"checked":"")+"> </td>";
+        		htmlBody += "	<td style='text-align: center;'> <input type='checkbox' disabled='disabled'  "+((indexEntry.is_active==1)?"checked":"")+"> </td>";
         		htmlBody += "	<td style='text-align: center;'> <i data-trigger='focus' tabindex='"+index+"' data-content=\"" +
         				"<button class='btn btn-warning btn-small btn-gear edit' id='edit-"+indexEntry.appraisal_form_id+"'>Edit</button>&nbsp;" +
         				"<button id='del-"+indexEntry.appraisal_form_id+"' class='btn btn-danger btn-small btn-gear del'>Delete</button>\" " +
