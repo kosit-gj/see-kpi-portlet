@@ -70,5 +70,6 @@
 		<portlet id="report-bonus-before-adjust"></portlet>
 		<!-- //////////////////////////////////////////////// -->
 		<portlet id="report-appraisal-statistics"></portlet>
+		<portlet id="salary-adjustment"></portlet>
 	</category>
 </display>
