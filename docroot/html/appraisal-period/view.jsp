@@ -105,7 +105,7 @@ plid = layout.getPlid();
 							
 							<div class='form-group' style='margin-bottom: 5px;'>
 				                <div class="span5 control-label">
-				                	Bonus Period Description<span class="redFont ">*</span>
+				                	Bonus Period Description
 				                </div>
 				                
 				                 <div class="span7">
@@ -123,7 +123,7 @@ plid = layout.getPlid();
 							
 							<div class='form-group' style='margin-bottom: 5px;'>
 				                <div class="span5 control-label">
-				                	Salary Raise Description<span class="redFont ">*</span>
+				                	Salary Raise Description
 				                </div>
 				                
 				                 <div class="span7 ">

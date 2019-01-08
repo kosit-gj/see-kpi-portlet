@@ -2058,6 +2058,39 @@
 		</security-role-ref>
 	</portlet>
 	
+	<portlet>
+		<portlet-name>calculate-salary-form</portlet-name>
+		<display-name>Calculate Salary Form</display-name>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/calculate-salary-form/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content/Language</resource-bundle>
+		<portlet-info>
+			<title>Calculate Salary Form</title>
+			<short-title>Calculate Salary Form</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	
 	<!-- //////////////////////////////////////////////////////////// -->
 	
 	
@@ -2340,6 +2373,7 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
+
 		<portlet-name>salary-adjustment</portlet-name>
 		<display-name>Salary Adjustment</display-name>
 		<portlet-class>
@@ -2357,6 +2391,58 @@
 		<portlet-info>
 			<title>Salary Adjustment</title>
 			<short-title>Salary Adjustment</short-title>
+
+		<portlet-name>import -job-code</portlet-name>
+		<display-name>Import Job Code</display-name>
+		<portlet-class>
+			com.liferay.util.bridges.mvc.MVCPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/import -job-code/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Import Job Code</title>
+			<short-title>Import Job Code</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>report-hr-summary-consider</portlet-name>
+		<display-name>Report Hr Summary Consider</display-name>
+		<portlet-class>
+			com.liferay.util.bridges.mvc.MVCPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/report-hr-summary-consider/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Report Hr Summary Consider</title>
+			<short-title>Report Hr Summary Consider</short-title>
+
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

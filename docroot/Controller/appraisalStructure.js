@@ -91,16 +91,16 @@ var InsertAppraisalStructureFn = function(Status)
 	var level_id = Number($("#form_id").val() == 1 ? ($("#is_derive").is(":checked") ? $("#level_id").val() : "0") : "0");
 	var is_derive = Number($('#is_derive').prop('checked'));
 	
-	if(form_id = 1 ){
+	if(form_id == 1 ){
 		is_unlimited_deduction = 0;
 		is_value_get_zero = 0;
 		is_no_raise_value=0;
-	}else if(form_id = 2 ){
+	}else if(form_id == 2 ){
 		is_derive=0;
 		is_unlimited_deduction = 0;
 		is_value_get_zero = 0;
 		is_no_raise_value=0;
-	}else if(form_id = 3 ){
+	}else if(form_id == 3 ){
 		is_derive=0;
 	}
 

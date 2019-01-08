@@ -48,6 +48,7 @@
 		<portlet id="report-summary-grade"></portlet>
 		<portlet id="assignment-log"></portlet>
 		<portlet id="dashboard-performance-comparison"></portlet>
+		<portlet id="report-hr-summary-consider"></portlet>
 
 		<!-- //////////////////// 360 Degree //////////////// -->
 		<portlet id="appraisal-level-360degree"></portlet>
@@ -60,6 +61,7 @@
 		<portlet id="calculate-salary-structure"></portlet>
 		<portlet id="judgement"></portlet>
 		<portlet id="salary-report"></portlet>
+		<portlet id="calculate-salary-form"></portlet>
 		<!-- //////////////////////////////////////////////// -->
 
 		<!-- //////////////// Bonus ///////////////////////// -->
@@ -71,5 +73,6 @@
 		<!-- //////////////////////////////////////////////// -->
 		<portlet id="report-appraisal-statistics"></portlet>
 		<portlet id="salary-adjustment"></portlet>
+		<portlet id="import -job-code"></portlet>
 	</category>
 </display>

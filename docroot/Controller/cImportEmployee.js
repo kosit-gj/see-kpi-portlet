@@ -11,6 +11,11 @@ var galbalDataTemp = [];
 var pageNumberDefault=1;
 var gEmpInfo = []; 
 var gCurEmpSalary = "";
+var gCurPQPIAmount = "";
+var gCurFixOtherAmount = "";
+var gCurPMIAmount = "";
+var gCurPIAmount = "";
+var gCurVarOtherAmount = "";
 //Check Validation Start
 var validationFn = function(data){
 
@@ -205,6 +210,11 @@ var findOneFn = function(id) {
 		success : function(data) {
 			
 			gCurEmpSalary = $.base64.decode(data['s_amount']);
+			gCurPQPIAmount = data['pqpi_amount'];
+			gCurFixOtherAmount = data['fix_other_amount'];
+			gCurPMIAmount = data['pmi_amount'];
+			gCurPIAmount = data['pi_amount'];
+			gCurVarOtherAmount = data['var_other_amount'];
 			
 			$("#from_emp_code").val(data['emp_code']);
 			$("#from_emp_name").val(data['emp_name']);
@@ -218,11 +228,11 @@ var findOneFn = function(id) {
 			$("#from_sup_emp_code").val(data['chief_emp_code']);
 			$("#from_emp_email").val(data['email']);
 			$("#from_emp_salary").val('**********');
-			$("#from_pqpi_amount").val(data['pqpi_amount']);
-			$("#from_fix_other_amount").val(data['fix_other_amount']);
-			$("#from_pmi_amount").val(data['pmi_amount']);
-			$("#from_pi_amount").val(data['pi_amount']);
-			$("#from_var_other_amount").val(data['var_other_amount']);		
+			$("#from_pqpi_amount").val('**********');
+			$("#from_fix_other_amount").val('**********');
+			$("#from_pmi_amount").val('**********');
+			$("#from_pi_amount").val('**********');
+			$("#from_var_other_amount").val('**********');		
 			$("#from_emp_erp_user").val(data['erp_user']);
 			$("#from_dotline_code").val(data['dotline_code']);
 			$("#from_emp_type").val(data['emp_type']);
@@ -454,6 +464,11 @@ var updateFn = function () {
 	var isActive="";
 	var hasSecondLine="";
 	var empSalary="0.00";
+	var PQPIAmount="0.00";
+	var FixOtherAmount="0.00";
+	var PMIAmount="0.00";
+	var PIAmount="0.00";
+	var VarOtherAmount="0.00";
 	//IsAction
 	if($("#from_checkboxIs_active:checked").is(":checked")){
 		isActive="1";
@@ -473,6 +488,36 @@ var updateFn = function () {
 		empSalary = $.base64.encode(gCurEmpSalary);
 	}
 	
+	if($.isNumeric($("#from_pqpi_amount").val())){
+		PQPIAmount = $("#from_pqpi_amount").val();
+	} else {
+		PQPIAmount = gCurPQPIAmount;
+	}
+	
+	if($.isNumeric($("#from_fix_other_amount").val())){
+		FixOtherAmount = $("#from_fix_other_amount").val();
+	} else {
+		FixOtherAmount = gCurFixOtherAmount;
+	}
+	
+	if($.isNumeric($("#from_pmi_amount").val())){
+		PMIAmount = $("#from_pmi_amount").val();
+	} else {
+		PMIAmount = gCurPMIAmount;
+	}
+	
+	if($.isNumeric($("#from_pi_amount").val())){
+		PIAmount = $("#from_pi_amount").val();
+	} else {
+		PIAmount = gCurPIAmount;
+	}
+	
+	if($.isNumeric($("#from_var_other_amount").val())){
+		VarOtherAmount = $("#from_var_other_amount").val();
+	} else {
+		VarOtherAmount = gCurVarOtherAmount;
+	}
+	
 	$.ajax({
 		url:restfulURL+restfulPathImportEmployee+"/"+$("#id").val(),
 		type : "PATCH",
@@ -490,11 +535,11 @@ var updateFn = function () {
 			"chief_emp_code":$("#from_sup_emp_code").val(),
 			"email":$("#from_emp_email").val(),
 			"s_amount": empSalary,
-			"pqpi_amount": $("#from_pqpi_amount").val(),
-			"fix_other_amount": $("#from_fix_other_amount").val(),
-			"pmi_amount": $("#from_pmi_amount").val(),
-			"pi_amount": $("#from_pi_amount").val(),
-			"var_other_amount": $("#from_var_other_amount").val(),		
+			"pqpi_amount": PQPIAmount,
+			"fix_other_amount": FixOtherAmount,
+			"pmi_amount": PMIAmount,
+			"pi_amount": PIAmount,
+			"var_other_amount": VarOtherAmount,		
 			"erp_user":$("#from_emp_erp_user").val(),
 			"dotline_code":$("#from_dotline_code").val(),
 			"emp_type":$("#from_emp_type").val(),
