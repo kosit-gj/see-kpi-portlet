@@ -289,6 +289,7 @@ form {
 							<th style="width: auto; vertical-align: middle; white-space: nowrap;"><b>Appraisal Form Name</b></th>
 							<th style="width: 10%; text-align: center; vertical-align: middle;"><b>IsBonus</b></th>
 							<th style="width: 10%; text-align: center; vertical-align: middle;"><b>IsActive</b></th>
+							<th style="width: 10%; text-align: center; vertical-align: middle;"><b>IsSalary</b></th>
 							<th style="text-align: center; vertical-align: middle;"><b>Manage</b></th>
 						</tr>
 					</thead>
@@ -336,6 +337,12 @@ form {
 							<label class="control-label"> IsActive </label>
 							<div class="controls">
 								<input checked="" class="checkbox" placeholder="Is Active" id="is_active" name="is_active" type="checkbox">
+							</div>
+						</div>
+						<div class="form-group p-xxs" id="form-group-is_salary">
+							<label class="control-label"> IsSalary </label>
+							<div class="controls">
+								<input checked="" class="checkbox" placeholder="Is Salary" id="is_salary" name="is_salary" type="checkbox">
 							</div>
 						</div>
 						
