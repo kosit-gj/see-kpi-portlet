@@ -48,6 +48,7 @@
 		<portlet id="report-summary-grade"></portlet>
 		<portlet id="assignment-log"></portlet>
 		<portlet id="dashboard-performance-comparison"></portlet>
+		<portlet id="report-hr-summary-consider"></portlet>
 
 		<!-- //////////////////// 360 Degree //////////////// -->
 		<portlet id="appraisal-level-360degree"></portlet>

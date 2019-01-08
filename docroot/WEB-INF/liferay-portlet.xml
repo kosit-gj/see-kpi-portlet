@@ -2426,6 +2426,36 @@
 		<footer-portlet-javascript>/Controller/cImportJobCode.js</footer-portlet-javascript>
 		<css-class-wrapper>import -job-code-portlet</css-class-wrapper>    
 	</portlet>
+	<portlet>
+		<portlet-name>report-hr-summary-consider</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
+		<header-portlet-css>/font-awesome/css/font-awesome.css</header-portlet-css>
+		<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
+		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
+		<header-portlet-css>/css/tywMain.css</header-portlet-css>
+		<header-portlet-css>/css/appraisal.css</header-portlet-css>
+		<header-portlet-css>/css/jquery.multiselect.css</header-portlet-css>
+		<header-portlet-css>/css/jquery.multiselect.filter.css</header-portlet-css>			
+		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>  
+		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/JQueryUI1.11.4/jquery-ui.min.js</footer-portlet-javascript>	
+		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>	
+		<footer-portlet-javascript>/js/jquery.multiselect.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.multiselect.filter.min.js</footer-portlet-javascript>	
+		<footer-portlet-javascript>/js/plugins/autoNumeric/autoNumeric-min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/Controller/report-hr-summary-consider.js</footer-portlet-javascript>  
+		<css-class-wrapper>
+			report-hr-summary-consider-portlet
+		</css-class-wrapper>
+	</portlet>
 	<role-mapper>         
 		<role-name>administrator</role-name>      
 		<role-link>Administrator</role-link>  
