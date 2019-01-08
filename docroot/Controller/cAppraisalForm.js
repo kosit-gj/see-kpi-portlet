@@ -14,7 +14,7 @@ var getAllFormFn = function()
         		htmlBody += "	<td>"+indexEntry.appraisal_form_name+"</td>";
         		htmlBody += "	<td style='text-align: center;'> <input type='checkbox' disabled='disabled'  "+((indexEntry.is_bonus==1)?"checked":"")+"> </td>";
         		htmlBody += "	<td style='text-align: center;'> <input type='checkbox' disabled='disabled'  "+((indexEntry.is_active==1)?"checked":"")+"> </td>";
-        		htmlBody += "	<td style='text-align: center;'> <input type='checkbox' disabled='disabled'  "+((indexEntry.is_salary==1)?"checked":"")+"> </td>";
+        		htmlBody += "	<td style='text-align: center;'> <input type='checkbox' disabled='disabled'  "+((indexEntry.is_raise==1)?"checked":"")+"> </td>";
         		htmlBody += "	<td style='text-align: center;'> <i data-trigger='focus' tabindex='"+index+"' data-content=\"" +
         				"<button class='btn btn-warning btn-small btn-gear edit' id='edit-"+indexEntry.appraisal_form_id+"'>Edit</button>&nbsp;" +
         				"<button id='del-"+indexEntry.appraisal_form_id+"' class='btn btn-danger btn-small btn-gear del'>Delete</button>\" " +
@@ -99,7 +99,7 @@ var findOneFn = function(id){
         	$("#appraisal_form_name").val(data.appraisal_form_name);
         	$("#is_bonus").prop('checked', data.is_bonus);
         	$("#is_active").prop('checked', data.is_active);
-        	$("#is_salary").prop('checked', data.is_salary);
+        	$("#is_raise").prop('checked', data.is_raise);
         	
         	$("#saveFormModal").modal({
 				"backdrop" : setModalPopup[0],
@@ -115,7 +115,7 @@ var UpdateAppraisalFormFn = function()
 	var appraisal_form_name = $("#appraisal_form_name").val();
 	var is_bonus = Number($('#is_bonus').prop('checked'));
 	var is_active = Number($('#is_active').prop('checked'));
-	var is_salary = Number($('#is_salary').prop('checked'));
+	var is_raise = Number($('#is_raise').prop('checked'));
 
 	$.ajax({
         url: restfulURL+"/"+serviceName+"/public/appraisal_form/"+$("#id").val(),
@@ -125,7 +125,7 @@ var UpdateAppraisalFormFn = function()
         	"appraisal_form_name":appraisal_form_name,
         	"is_bonus":is_bonus,
         	"is_active":is_active,
-        	"is_salary":is_salary,
+        	"is_raise":is_raise,
         },
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
@@ -150,14 +150,14 @@ var ClearAppraisalFormFn = function(){
 	$("#appraisal_form_name").val("");
 	$("#saveFormModal #is_bonus").prop('checked', false);
 	$("#saveFormModal #is_active").prop('checked', true);
-	$("#saveFormModal #is_salary").prop('checked', true);
+	$("#saveFormModal #is_raise").prop('checked', true);
 }
 
 var InsertAppraisalFormFn = function(Status){
 	var appraisal_form_name = $("#appraisal_form_name").val();
 	var is_bonus = Number($('#is_bonus').prop('checked'));
 	var is_active = Number($('#is_active').prop('checked'));
-	var is_salary = Number($('#is_salary').prop('checked'));
+	var is_raise = Number($('#is_raise').prop('checked'));
 	
 	$.ajax({
         url: restfulURL+"/"+serviceName+"/public/appraisal_form",
@@ -167,7 +167,7 @@ var InsertAppraisalFormFn = function(Status){
         	"appraisal_form_name":appraisal_form_name,
         	"is_bonus":is_bonus,
         	"is_active":is_active,
-        	"is_salary":is_salary
+        	"is_raise":is_raise
         },
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },

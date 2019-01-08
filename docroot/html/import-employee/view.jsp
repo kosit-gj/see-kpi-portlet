@@ -825,7 +825,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 								</div>
 							</div>
 							<div class="form-group p-xxs">
-								<label class="control-label">PMI Amount:</label>
+								<label class="control-label">MPI Amount:</label>
 								<div class="controls">
 									<input type="text" class="form-control input-sm span12 numberOnly" placeholder="" id="from_pmi_amount">
 								</div>
