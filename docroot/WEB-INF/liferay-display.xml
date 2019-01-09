@@ -62,6 +62,7 @@
 		<portlet id="judgement"></portlet>
 		<portlet id="salary-report"></portlet>
 		<portlet id="calculate-salary-form"></portlet>
+		<portlet id="Import-pqpi"></portlet>
 		<!-- //////////////////////////////////////////////// -->
 
 		<!-- //////////////// Bonus ///////////////////////// -->
