@@ -217,7 +217,7 @@ var findOneFn = function(id) {
 			$("#from_emp_salary").val(data['s_amount']);
 			$("#from_pqpi_amount").val(data['pqpi_amount']);
 			$("#from_fix_other_amount").val(data['fix_other_amount']);
-			$("#from_pmi_amount").val(data['mpi_amount']);
+			$("#from_mpi_amount").val(data['mpi_amount']);
 			$("#from_pi_amount").val(data['pi_amount']);
 			$("#from_var_other_amount").val(data['var_other_amount']);		
 			
@@ -484,7 +484,7 @@ var updateFn = function () {
 			"s_amount": $("#from_emp_salary").val(),
 			"pqpi_amount": $("#from_pqpi_amount").val(),
 			"fix_other_amount": $("#from_fix_other_amount").val(),
-			"mpi_amount": $("#from_pmi_amount").val(),
+			"mpi_amount": $("#from_mpi_amount").val(),
 			"pi_amount": $("#from_pi_amount").val(),
 			"var_other_amount": $("#from_var_other_amount").val(),		
 			"erp_user": $("#from_emp_erp_user").val(),
