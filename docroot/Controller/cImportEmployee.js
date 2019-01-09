@@ -13,7 +13,7 @@ var gEmpInfo = [];
 var gCurEmpSalary = "";
 var gCurPQPIAmount = "";
 var gCurFixOtherAmount = "";
-var gCurPMIAmount = "";
+var gCurMPIAmount = "";
 var gCurPIAmount = "";
 var gCurVarOtherAmount = "";
 //Check Validation Start
@@ -212,7 +212,7 @@ var findOneFn = function(id) {
 			gCurEmpSalary = $.base64.decode(data['s_amount']);
 			gCurPQPIAmount = data['pqpi_amount'];
 			gCurFixOtherAmount = data['fix_other_amount'];
-			gCurPMIAmount = data['pmi_amount'];
+			gCurMPIAmount = data['mpi_amount'];
 			gCurPIAmount = data['pi_amount'];
 			gCurVarOtherAmount = data['var_other_amount'];
 			
@@ -230,7 +230,7 @@ var findOneFn = function(id) {
 			$("#from_emp_salary").val('**********');
 			$("#from_pqpi_amount").val('**********');
 			$("#from_fix_other_amount").val('**********');
-			$("#from_pmi_amount").val('**********');
+			$("#from_mpi_amount").val('**********');
 			$("#from_pi_amount").val('**********');
 			$("#from_var_other_amount").val('**********');		
 			$("#from_emp_erp_user").val(data['erp_user']);
@@ -466,7 +466,7 @@ var updateFn = function () {
 	var empSalary="0.00";
 	var PQPIAmount="0.00";
 	var FixOtherAmount="0.00";
-	var PMIAmount="0.00";
+	var MPIAmount="0.00";
 	var PIAmount="0.00";
 	var VarOtherAmount="0.00";
 	//IsAction
@@ -500,10 +500,10 @@ var updateFn = function () {
 		FixOtherAmount = gCurFixOtherAmount;
 	}
 	
-	if($.isNumeric($("#from_pmi_amount").val())){
-		PMIAmount = $("#from_pmi_amount").val();
+	if($.isNumeric($("#from_mpi_amount").val())){
+		MPIAmount = $("#from_mpi_amount").val();
 	} else {
-		PMIAmount = gCurPMIAmount;
+		MPIAmount = gCurMPIAmount;
 	}
 	
 	if($.isNumeric($("#from_pi_amount").val())){
@@ -537,7 +537,7 @@ var updateFn = function () {
 			"s_amount": empSalary,
 			"pqpi_amount": PQPIAmount,
 			"fix_other_amount": FixOtherAmount,
-			"pmi_amount": PMIAmount,
+			"mpi_amount": MPIAmount,
 			"pi_amount": PIAmount,
 			"var_other_amount": VarOtherAmount,		
 			"erp_user":$("#from_emp_erp_user").val(),
