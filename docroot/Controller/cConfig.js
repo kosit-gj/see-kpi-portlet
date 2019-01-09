@@ -1,11 +1,13 @@
-/*####### Web Service Server #######*/
-var restfulURL="http://localhost";
-var serviceName="see_api_dhas/see-kpi-service/see_api";
+var restfulURL 			= "";
+var restfulURL_IMPkpi 	= "";
+var lifeRayApiUrl 		= "";
+var serviceName			= "see_api_dhas/see-kpi-service/see_api";
+var serviceName_IMPkpi 	= "impexpservices_api/public";
+var servicePort 		= (document.location.protocol == "https:" ? ":8443" : ""); // HTTP default port :80
 
-var restfulURL_IMPkpi="http://localhost";
-var serviceName_IMPkpi="impexpservices_api/public";
-
-
-
-/*####### Liferay Server #######*/
-var lifeRayApiUrl = "http://localhost:8080";
+	/*####### Web Service Server #######*/
+	restfulURL = document.location.protocol + "//" + document.location.hostname + servicePort ;
+	restfulURL_IMPkpi = document.location.protocol + "//" + document.location.hostname + servicePort ;
+	
+	/*####### Liferay Server #######*/
+	lifeRayApiUrl= document.location.origin;
