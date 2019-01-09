@@ -13,11 +13,7 @@ globalSevice['restfulPathFormType']= restfulURL + "/" + serviceName + "/public/b
 
 
 //Export Sevice
-globalSevice['restfulPathExportPQPI']=restfulURL + "/" + serviceName + "/public/import_pqpi/export";
-//globalSevice['restfulPathBonusAppraisalCalculate']=globalSevice['restfulPathBonusAppraisal']+"/calculate";
-
-//Monthly Bonus Rate Sevice
-globalSevice['restfulPathMonthlyBonusRate']=restfulURL + "/" + serviceName + "/public/system_config";
+globalSevice['restfulPathExportSalary']=restfulURL + "/" + serviceName + "/public/import_salary/export";
 
 //Global variable
 var galbalDataImportJobCode = [];
@@ -259,13 +255,13 @@ $(document).ready(function () {
 	$("#AppraisalForm").html(generateDropDownList(globalSevice['restfulPathFormType'],"GET",{},"All Form"));
 	
 
-	toDayFn("#effectiveDate , #expiredDate");
+	toDayFn("#effectiveDate , #adjustDate");
 	
 	 $("#effectiveDate").datepicker({
 		 	dateFormat: "yy-mm-dd",
          minDate: new Date(2018, 1 - 1, 1),
          onSelect: function () {
-             var dt2 = $('#expiredDate');
+             var dt2 = $('#adjustDate');
              var startDate = $(this).datepicker('getDate');
              var minDate = $(this).datepicker('getDate');
              var dt2Date = dt2.datepicker('getDate');
@@ -279,11 +275,11 @@ $(document).ready(function () {
              dt2.datepicker('option', 'minDate', minDate);
          }
      });
-     $('#expiredDate').datepicker({
+     $('#adjustDate').datepicker({
      	dateFormat: "yy-mm-dd",
      	minDate: 0
      });
-     $("#effectiveDate ,#expiredDate").keypress(function(event) {
+     $("#effectiveDate ,#adjustDate").keypress(function(event) {
 		    return ( ( event.keyCode || event.which ) === 9 ? true : false );
 		});
      
@@ -300,9 +296,9 @@ $(document).ready(function () {
 		param+="&period_id="+$("#AppraisalPeriod").val();
 		param+="&appraisal_form_id="+$("#AppraisalForm").val();
 		param+="&effective_date="+$("#effectiveDate").val();
-		param+="&expired_date="+$("#expiredDate").val();
-		console.log(globalSevice['restfulPathExportPQPI'] + "?token=" + tokenID.token + ""+param)
-		$("form#formExportToExcel").attr("action", globalSevice['restfulPathExportPQPI'] + "?token=" + tokenID.token+""+param+"");
+		param+="&adjust_date="+$("#adjustDate").val();
+		console.log(globalSevice['restfulPathExportSalary'] + "?token=" + tokenID.token + ""+param)
+		$("form#formExportToExcel").attr("action", globalSevice['restfulPathExportSalary'] + "?token=" + tokenID.token+""+param+"");
 		$("#formExportToExcel").submit();
 	});
 	

@@ -776,7 +776,7 @@ margin-bottom:1px;
 										<input data-toggle="tooltip" title="" data-original-title="Effective Date" class="form-control input-sm effective-date span12" placeholder="Effective Date" type="text" id="effectiveDate" name="effectiveDate" style="cursor: pointer;">
 								</div>
 								<div class="form-group pull-left span2" style="margin-left: 5px">
-									<input data-toggle="tooltip" title="" data-original-title="Expired Date" class="form-control input-sm expired-date span12" placeholder="Expired Date" type="text" id="expiredDate" name="expiredDate" style="cursor: pointer;">
+									<input data-toggle="tooltip" title="" data-original-title="Adjust Date" class="form-control input-sm expired-date span12" placeholder="Adjust Date" type="text" id="adjustDate" name="adjustDate" style="cursor: pointer;">
 								</div>
 				
 				                  <div class="form-group span2 m-b-none pull-right" style="margin-top: 1px; margin-left: 5px; margin-right: 3px; text-align:right;">
