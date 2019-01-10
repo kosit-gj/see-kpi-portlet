@@ -905,7 +905,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .fix-column-top {
-/*   position: -webkit-sticky; /* for Safari */ */
+/*   position: -webkit-sticky; /* for Safari */ 
 /*   position: sticky; */
 /*   top: 0; */
 /*   z-index: 100; */
@@ -913,7 +913,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .fix-column-top-left {
-/*   position: -webkit-sticky; /* for Safari */ */
+/*   position: -webkit-sticky; /* for Safari */ 
 /*   position: sticky; */
 /*   left: 0; */
 /*   z-index: 101; */
@@ -922,10 +922,10 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .fix-column-left {
-/*   position: -webkit-sticky; /* for Safari */ */
+/*   position: -webkit-sticky; /* for Safari */ 
 /*   position: sticky; */
 /*   left: 0; */
-/* /*   z-index: 99; */ */
+/* /*   z-index: 99; */ 
 /*   border-right: 1px solid #CCC; */
 }
 
