@@ -51,6 +51,13 @@
  	});	
  	return html;
  };
+ var splitDecimal = function(num_float){
+		if(num_float == null)
+			num_float = "" ;
+		
+		var num_int = num_float.split(".");
+		return num_int[0];
+};
  var generateAutocomplete = function(id,url,type,requests){
 	 $(id).autocomplete({
 	        source: function (request, response) {
@@ -1210,9 +1217,26 @@ var listDashBoardAllKPIFn = function(data){
 	   
 	   //loop here..
 	   $.each(indexEntry['org'],function(index2,indexEntry2){
-		    target = (indexEntry2['target']==null || indexEntry2['target']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['target']));
-			forecast = (indexEntry2['forecast']==null || indexEntry2['forecast']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['forecast']));
-			actual = (indexEntry2['actual']==null || indexEntry2['actual']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['actual']));
+		   if(indexEntry['is_date']==1){
+				
+				// Score-target
+	        	var scoreTargetDat = new Date(splitDecimal(indexEntry2['target']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
+	        	target = (scoreTargetDat == 'Invalid Date') ? splitDecimal(indexEntry2['target']) : formatDate(scoreTargetDat);
+	        	
+	        	// Score-forecast
+	        	var scoreForecastDat = new Date(splitDecimal(indexEntry2['forecast']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
+	        	forecast = (scoreForecastDat == 'Invalid Date') ? splitDecimal(indexEntry2['forecast']) : formatDate(scoreForecastDat);
+	        	
+	        	// Score-actual
+	        	var scoreActualDat = new Date(splitDecimal(indexEntry2['actual']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
+	        	actual = (scoreActualDat == 'Invalid Date') ? splitDecimal(indexEntry2['actual']) : formatDate(scoreActualDat);
+		   }else{
+			   target = (indexEntry2['target']==null || indexEntry2['target']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['target']));
+			   forecast = (indexEntry2['forecast']==null || indexEntry2['forecast']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['forecast']));
+			   actual = (indexEntry2['actual']==null || indexEntry2['actual']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['actual']));
+		   }
+		   
+		 
 			percent_target = (indexEntry2['percent_target']==null || indexEntry2['percent_target']=='') ? '' : addCommas(notNullFn(indexEntry2['percent_target']));
 			percent_forecast = (indexEntry2['percent_forecast']==null || indexEntry2['percent_forecast']=='') ? '' : addCommas(notNullFn(indexEntry2['percent_forecast']));
 		if(indexEntry2!=""){ 

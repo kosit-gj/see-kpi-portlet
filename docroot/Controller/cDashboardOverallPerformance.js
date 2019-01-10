@@ -52,7 +52,13 @@
  	});	
  	return html;
  };
- 
+ var splitDecimal = function(num_float){
+		if(num_float == null)
+			num_float = "" ;
+		
+		var num_int = num_float.split(".");
+		return num_int[0];
+};
  var generateAutocomplete = function(id,url,type,requests){
 	 $(id).autocomplete({
 	        source: function (request, response) {
@@ -364,16 +370,12 @@ var getDataAllKPIFn = function(page,rpp){
 var listAllKPIFn = function(data){
 	
 	var dataTableHTML="";
-	var forecast;
-	var target;
-	var actual;
 	var percent_target;
 	var percent_forecast;
 	$.each(data,function(index2,indexEntry2){
+		
+		
 		rangeColorsThreshold = indexEntry2['rangeColor'];
-		target = (indexEntry2['target']==null || indexEntry2['target']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['target']));
-		forecast = (indexEntry2['forecast']==null || indexEntry2['forecast']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['forecast']));
-		actual = (indexEntry2['actual']==null || indexEntry2['actual']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['actual']));
 		percent_target = (indexEntry2['percent_target']==null || indexEntry2['percent_target']=='') ? '' : addCommas(notNullFn(indexEntry2['percent_target']));
 		percent_forecast = (indexEntry2['percent_forecast']==null || indexEntry2['percent_forecast']=='') ? '' : addCommas(notNullFn(indexEntry2['percent_forecast']));
 
@@ -393,9 +395,35 @@ var listAllKPIFn = function(data){
 					dataTableHTML+="</thead>";
 					dataTableHTML+="<tbody>";
 						dataTableHTML+="<tr>";
+						
+						if(indexEntry2['is_date']==1){
+							
+							// Score-target
+				        	var scoreTargetDat = new Date(splitDecimal(indexEntry2['target']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
+				        	scoreTargetDat = (scoreTargetDat == 'Invalid Date') ? splitDecimal(indexEntry2['target']) : formatDate(scoreTargetDat);
+				        	
+				        	// Score-forecast
+				        	var scoreForecastDat = new Date(splitDecimal(indexEntry2['forecast']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
+				        	scoreForecastDat = (scoreForecastDat == 'Invalid Date') ? splitDecimal(indexEntry2['forecast']) : formatDate(scoreForecastDat);
+				        	
+				        	// Score-actual
+				        	var scoreActualDat = new Date(splitDecimal(indexEntry2['actual']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
+				        	scoreActualDat = (scoreActualDat == 'Invalid Date') ? splitDecimal(indexEntry2['actual']) : formatDate(scoreActualDat);
+				        	
+				        	dataTableHTML+="<td style=' text-align: right !important;'>"+scoreTargetDat+"</td>";
+							dataTableHTML+="<td style=' text-align: right !important;'>"+scoreForecastDat+"</td>";
+							dataTableHTML+="<td style=' text-align: right !important;'>"+scoreActualDat+"</td>";
+						}else{
+							
+							var target = (indexEntry2['target']==null || indexEntry2['target']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['target']));
+							var forecast = (indexEntry2['forecast']==null || indexEntry2['forecast']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['forecast']));
+							var actual = (indexEntry2['actual']==null || indexEntry2['actual']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['actual']));
+							
 							dataTableHTML+="<td style=' text-align: right !important;'>"+target+"</td>";
 							dataTableHTML+="<td style=' text-align: right !important;'>"+forecast+"</td>";
 							dataTableHTML+="<td style=' text-align: right !important;'>"+actual+"</td>";
+						}
+							
 						dataTableHTML+="</tr>";
 						dataTableHTML+="<tr>";
 							dataTableHTML+="<td>"+Liferay.Language.get('percent-target')+"<span style='float:right'>"+percent_target+"</span></td>";
