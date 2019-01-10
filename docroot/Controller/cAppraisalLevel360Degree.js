@@ -365,6 +365,21 @@ $(document).ready(
 							"id" : "is_show_quality",
 							"colunmsType" : "checkbox"
 						}, {
+							"colunmsDisplayName" : "Is Start Cal Bonus",
+							"width" : "",
+							"id" : "is_start_cal_bonus",
+							"colunmsType" : "checkbox"
+						}, {
+							"colunmsDisplayName" : "Is Start Cal Raise",
+							"width" : "",
+							"id" : "is_start_cal_raise",
+							"colunmsType" : "checkbox"
+						}, {
+							"colunmsDisplayName" : "Is Start Cal MPI",
+							"width" : "",
+							"id" : "is_start_cal_mpi",
+							"colunmsType" : "checkbox"
+						}, {
 							"colunmsDisplayName" : "Organization",
 							"width" : "",
 							"id" : "is_org",
@@ -379,7 +394,8 @@ $(document).ready(
 							"width" : "",
 							"id" : "is_active",
 							"colunmsType" : "checkbox"
-						}, {
+						}
+						, {
 							"colunmsDisplayName" : "Parent",
 							"width" : "",
 							"id" : "parent_level_name",
@@ -440,6 +456,27 @@ $(document).ready(
 									"inputType" : "checkbox",
 									"default" : "uncheck",
 									"id" : "is_show_quality",
+									"width" : "200px"
+								},
+								{
+									"label" : "Is Start Cal Bonus",
+									"inputType" : "checkbox",
+									"default" : "uncheck",
+									"id" : "is_start_cal_bonus",
+									"width" : "200px"
+								},
+								{
+									"label" : "Is Start Cal Raise",
+									"inputType" : "checkbox",
+									"default" : "uncheck",
+									"id" : "is_start_cal_raise",
+									"width" : "200px"
+								},
+								{
+									"label" : "Is Start Cal MPI",
+									"inputType" : "checkbox",
+									"default" : "uncheck",
+									"id" : "is_start_cal_mpi",
 									"width" : "200px"
 								},
 								{
