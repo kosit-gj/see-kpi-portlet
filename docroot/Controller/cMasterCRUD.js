@@ -15,6 +15,27 @@ var addCommas =  function(nStr)
 	}
 	return x1 + x2;
 }
+
+var groupPrameter = function(dataArray){
+	var groups = {};
+
+	for (var i = 0; i < dataArray.length; i++) {
+	  var groupName = dataArray[i].name;
+	  if (!groups[groupName]) {
+	    groups[groupName] = [];
+	  }
+	  groups[groupName].push(dataArray[i].value);
+	}
+
+	var data = "";
+	for (var groupName in groups) {
+	   data += groupName+"="+groups[groupName]+"&"; 
+	}
+
+	data= data.substring(0, data.length - 1);
+	return data;
+}
+
 //set paginate start
 var paginationSetUpCRUDFn = function(pageIndex,pageTotal,options){
 	
@@ -695,8 +716,33 @@ var createInputTypeFn  = function(object,tokenID){
 			
 		}
 	}
+	else if(object['inputType']=="multiple"){
+			$.ajax({
+				url:object['url'],
+				dataType:"json",
+				type:"get",
+				async:false,
+				headers:{Authorization:"Bearer "+tokenID.token},
+				success:function(data){
+					inputType="<select "+inputTooltip+" multiple=\"multiple\" class=\"span12 m-b-n\" id=\""+object['id']+"\" name=\""+object['id']+"\" style=\"width:"+object['width']+"\">";
+					
+					golbalDataCascades[object['id']] = data
+					
+					$.each(data,function(index,indexEntry){
+						if(dataSearch==indexEntry[Object.keys(indexEntry)[0]]){
+							inputType+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1]]+"</option>";
+						}else{
+							inputType+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1]]+"</option>";
+						}
+					});
+					inputType+="</select>";
+				}
+			})
+		
+	}
 	return inputType;
 }
+
 var createExpressSearchFn = function(){
 var expressSearch="";
 expressSearch+="<div class=\"input-group\"><input type=\"text\" class=\"input-sm form-control\" id=\"searchText\" placeholder=\"Search\"> <span class=\"input-group-btn\">";
@@ -871,7 +917,7 @@ var createAvanceSearchFn = function(options){
  */
 		if(indexEntry['inputType']=='dropdown' || indexEntry['inputType']=='cascades'){
 		
-			avanceSearchHTML+="<div class='form-group pull-left span3' style='margin-left: 5px' id=\""+indexEntry['id']+"\">";
+			avanceSearchHTML="<div class='form-group pull-left span3' style='margin-left: 5px' id=\""+indexEntry['id']+"\">";
 			avanceSearchHTML+=createInputTypeFn(indexEntry,options['tokenID']);
 			avanceSearchHTML+="</div>";
 			/*avanceSearchHTML+="<div class=\"span6 form-horizontal \">";
@@ -881,11 +927,11 @@ var createAvanceSearchFn = function(options){
 					avanceSearchHTML+="</div>";
 				avanceSearchHTML+="</div>";
 			avanceSearchHTML+="</div>";*/
-			
+			$("#advanceSearchParamArea").append(avanceSearchHTML);
 		}else if(indexEntry['inputType']=='text' || indexEntry['inputType']=='autoComplete' || indexEntry['inputType']=='hidden'){
 			
 			var dataTypeInput =(indexEntry['dataTypeInput'] == 'number' ? "numberOnly" : "");
-			avanceSearchHTML+="<div class='form-group pull-left span3' style='margin-left: 5px' id='"+indexEntry['id']+"'>";
+			avanceSearchHTML="<div class='form-group pull-left span3' style='margin-left: 5px' id='"+indexEntry['id']+"'>";
 			avanceSearchHTML+=createInputTypeFn(indexEntry,options['tokenID']);
 			avanceSearchHTML+="</div>";
 			/*
@@ -896,18 +942,33 @@ var createAvanceSearchFn = function(options){
 				avanceSearchHTML+="</div>";
 				avanceSearchHTML+="</div>";
 			avanceSearchHTML+="</div>";*/
+			$("#advanceSearchParamArea").append(avanceSearchHTML);
+		}
+		else if(indexEntry['inputType']=='multiple' ){
+			avanceSearchHTML="<div class='form-group pull-left span3' style='margin-left: 5px' id=\""+indexEntry['id']+"_\">";
+			avanceSearchHTML+=createInputTypeFn(indexEntry,options['tokenID']);
+			avanceSearchHTML+="</div>";
+			$("#advanceSearchParamArea").append(avanceSearchHTML);
+			
+			$("#"+indexEntry['id']).multiselect({minWidth:'100%;'}).multiselectfilter();
+			refreshMulti(indexEntry['id']);
+			
+			$("#appraisal_level_id_ms").attr("data-toggle", "tooltip");
+			$("#appraisal_level_id_ms").attr("data-original-title",indexEntry['label_tooltip']);
+			
 			
 		}
 	});
-	
-	
-
-	return avanceSearchHTML;
-	
-
-	
-	
+//	return avanceSearchHTML;
 }
+
+var refreshMulti = function(id) {
+	$("#"+id).multiselect('refresh').multiselectfilter();
+	$("#"+id+"_ms").css({'width':'100%'});
+	$(".ui-icon-check,.ui-icon-closethick,.ui-icon-circle-close").css({'margin-top':'-5px 3px 0;'});
+	$("input[name="+id+"]").css({'margin-bottom':'5px'});
+}
+
 var createDataTableFn = function(options){
 	//save option
 	golbalDataCascades['options']=options;
@@ -989,8 +1050,8 @@ var createDataTableFn = function(options){
 		
 		
 			if(advanceSearchSet==true){
-				
-				$("#advanceSearchParamArea").html(createAvanceSearchFn(options));
+				createAvanceSearchFn(options)
+//				$("#advanceSearchParamArea").html(createAvanceSearchFn(options));
 				$("#advanceSearchArea").show();
 			
 			}else{
@@ -1289,8 +1350,7 @@ var createDataTableFn = function(options){
 			//advance search start
 	    	$("form#searchAdvanceForm").submit(function(){
 	    		
-	    		
-	    		sessionStorage.setItem("searchAdvanceForm",$(this).serialize());
+	    		sessionStorage.setItem("searchAdvanceForm",groupPrameter($(this).serializeArray())); 
 	    		dataSearch = sessionStorage.getItem("searchAdvanceForm");
 	    		$(".countPagination").val(10);
 	    		$("#rpp").remove();

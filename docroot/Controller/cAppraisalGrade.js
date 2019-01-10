@@ -95,10 +95,9 @@ $(document).ready(function(){
 		     					"initValue":"All"
 	    			     	},
 	     			    	{
-		     			    	"label":"Level","label_tooltip":"Level","inputType":"dropdown",
+		     			    	"label":"Level","label_tooltip":"Level","inputType":"multiple",
 		     					"id":"appraisal_level_id","width":"100%",
 		     					"url":""+restfulURL+"/"+serviceName+"/public/appraisal_grade/al_list",
-		     					"initValue":"All"
 	    			     	}
 	     			    ],
 	     			     

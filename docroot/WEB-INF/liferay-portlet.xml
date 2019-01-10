@@ -380,22 +380,24 @@
 		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
 
 		<header-portlet-css>/css/tywMain.css</header-portlet-css>
-
+        <header-portlet-css>/css/jquery.multiselect.css</header-portlet-css>
+        <header-portlet-css>/css/jquery.multiselect.filter.css</header-portlet-css>
 		<header-portlet-css>/css/appraisal-grade.css</header-portlet-css>
 
 
 		<footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		<!--<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript> -->
+  		<footer-portlet-javascript>/js/JQueryUI1.11.4/jquery-ui.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.multiselect.js</footer-portlet-javascript>
+ 		<footer-portlet-javascript>/js/jquery.multiselect.filter.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
-
 		<footer-portlet-javascript>/Controller/cAppraisalGrade.js</footer-portlet-javascript>
 		<!-- include file end -->
-
 
 		<css-class-wrapper>appraisal-grade-portlet</css-class-wrapper>
 	</portlet>
