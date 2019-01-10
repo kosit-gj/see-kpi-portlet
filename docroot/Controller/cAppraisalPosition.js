@@ -45,7 +45,7 @@ $(document).ready(function(){
     			 "expressSearch":false,
     			 "advanceSearchSet":true,
     			 "btnAddOption":false,
-    			 "btnAdvanceDownloadOption":{"url":restfulURL+"/"+serviceName+"/public/position/export"+"?token="+tokenID.token+""+"#position_name"},
+    			 "btnAdvanceDownloadOption":{"url":restfulURL+"/"+serviceName+"/public/position/export"+"?token="+tokenID.token+""},
     			 "btnAdvanceImportOption":{"formName":"Import Position","accept":".xls ,.xlsx"}
     			 //"btnManageOption":{"id":"BtnID","name":"BtnName"},
     			 //"btnAdvanceSearchOption":{"id":"BtnID","name":"<i class=\"fa fa-plus-square\"></i>&nbsp;Btn"}
@@ -53,10 +53,16 @@ $(document).ready(function(){
     	
     	createDataTableFn(options);
     	
+    	var input = $("<input>").attr("type", "hidden").attr("id", "form_position_name").attr("name", "position_name").val("");
+    	$('#formExportToExcel').append(input);
+    	
 		}
 	 	//Autocomplete From Position Start
     	$("form#searchAdvanceForm #position_name input").autocomplete({
             source: function (request, response) {
+            	
+            	$("input#form_position_name").val(request.term);
+            	
             	$.ajax({
     				 url:restfulURL+"/"+serviceName+"/public/position/auto",
     				 type:"POST",
@@ -93,6 +99,9 @@ $(document).ready(function(){
         });
        
     	//Autocomplete From Position End
+    	
+    	
+    	
     	
 	 }
     });
