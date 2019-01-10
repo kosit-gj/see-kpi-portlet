@@ -433,7 +433,7 @@ var assignTemplateQuantityFn = function(structureName,data){
 
 			htmlTemplateQuantity+="<th style=\"width:10%\" class=''><b>"+$(".lt-perspective").val()+"</b> </th>";
 			htmlTemplateQuantity+="<th style=\"width:20%\" class=''><b>"+$(".lt-kpi-name").val()+"</b></th>";
-			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-kpi-name").val()+"</b></th>";
+			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-target").val()+"</b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-uom").val()+"</b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-forecast").val()+"</b></th>";
 			htmlTemplateQuantity+="<th style='width:5%;text-align: right;' class=''><b>"+$(".lt-actual").val()+"</b></th>";
@@ -513,12 +513,22 @@ var assignTemplateQuantityFn = function(structureName,data){
 								target_value_is_date = formatDate(target_value_is_date);
 							}
 							
-							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" class='is_date'>"+target_value_is_date+"</div></td>";
+							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" class=''>"+target_value_is_date+"</div></td>";
 						}else{
 							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><div title=\""+hintHtml+"\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >"+addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2))+"</div></td>";
 						}
 						htmlTemplateQuantity+="<td>"+indexEntry['uom_name']+"</td>";
-						htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore addComma\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(2))+"></td>";
+						if(indexEntry['is_date']==1){
+							
+				        	// Score-forecast
+				        	var scoreForecastDat = new Date(splitDecimal(indexEntry['forecast_value']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
+				        	scoreForecastDat = (scoreForecastDat == 'Invalid Date') ? splitDecimal(indexEntry['forecast_value']) : formatDate(scoreForecastDat);
+				        	
+				        	htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small is_date itemScore \" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+scoreForecastDat+"></td>";
+						}else{
+							htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore addComma\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(2))+"></td>";
+						}
+						//htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'>asasas<input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore addComma\" id=\"forecast-"+indexEntry['item_result_id']+"\" name=\"forecast-"+indexEntry['item_result_id']+"\" value="+addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(2))+"></td>";
 						//htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly \" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
 						if(indexEntry['is_date']==1){ //is_date
 							var actual_value_is_date = new Date(splitDecimal(indexEntry['actual_value']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
@@ -1116,7 +1126,9 @@ var listAppraisalDetailFn = function(data){
 			 $(".txtGrandTotalWeighOrg").html(data['head'][0]['result_score']);
 
 		 }
-
+		 	$('.is_date').datepicker({ // is_date
+	        	dateFormat: "yy/mm/dd",
+	        });
 			var getSelectionStart = function (o) {
 				if (o.createTextRange) {
 					var r = document.selection.createRange().duplicate()
@@ -2520,7 +2532,7 @@ var saveAppraisalFn = function(){
 		}
 		appraisal+="\"item_result_id\":\""+item_result_id+"\",";
 		if(typeScore=="forecast"){
-			appraisal+="\"forecast_value\":\""+removeComma($(indexEntry).val())+"\",";
+			appraisal+="\"forecast_value\":\""+($(indexEntry).hasClass( "is_date" ) ? removeSlash($(indexEntry).val()) : removeComma($(indexEntry).val()))+"\",";
 			appraisal+="\"actual_value\":\"\"";
 			//appraisal+="\"actual_value\":\""+$("#actual-"+item_result_id).val()+"\",";
 

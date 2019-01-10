@@ -711,6 +711,7 @@ background-color:#71cccc !important;
 .aui .titlePanel{
 width: auto !important;
 }
+.modal-open .ui-datepicker{z-index: 2000!important}
 </style>
 
 
