@@ -36,6 +36,10 @@
 		    					"id":"form_id","width":"250px","url":""+restfulURL+"/"+serviceName+"/public/appraisal_structure/form_list"
 		    					},                             
 	        					{
+		            				"label":"Is Self Assign","inputType":"checkbox","default":"",
+		            				"id":"is_self_assign","width":"250px"
+		            			},                             
+	        					{
 	            				"label":"IsActive","inputType":"checkbox","default":"checked",
 	            				"id":"is_active","width":"250px"
 	            				}
