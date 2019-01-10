@@ -742,7 +742,7 @@ background-color:#71cccc !important;
   line-height: 10px; height: 5px; font-size: 10px; width: 100px; text-align: right; 
  } 
 
-.aui #tableBonusAdjustment .float-label-control { /*position: relative;*/ margin-bottom: 0 px;font-size: smaller; }
+.aui #tableBonusAdjustment .float-label-control { position: relative; margin-bottom: 0 px;font-size: smaller; }
    /* .aui #tableBonusAdjustment .float-label-control ::-webkit-input-placeholder { color: transparent; }
     .aui #tableBonusAdjustment .float-label-control :-moz-placeholder { color: transparent; }
     .aui #tableBonusAdjustment .float-label-control ::-moz-placeholder { color: transparent; }
@@ -805,19 +805,20 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none; 
   margin: 0; 
 }
-/* .ui-icon.ui-icon-triangle-1-s{ */
-/* 	margin-top: 2px; */
-/* } */
-/* .ui-multiselect.ui-widget.ui-state-default.ui-corner-all{ */
-/* 	padding-bottom: 4px;padding-top: 4px; */
-/* } */
-/* .ui-multiselect-checkboxes.ui-helper-reset input[type=checkbox]{ */
-/* 	margin-bottom: 5px;margin-right: 5px;margin-top: 0px; */
-/* } */
- #tableBonusAdjustment tbody tr td .input-xs{ 
+.ui-icon.ui-icon-triangle-1-s{
+	margin-top: 2px;
+}
+.ui-multiselect.ui-widget.ui-state-default.ui-corner-all{
+	padding-bottom: 4px;padding-top: 4px;
+}
+.ui-multiselect-checkboxes.ui-helper-reset input[type=checkbox]{
+	margin-bottom: 5px;margin-right: 5px;margin-top: 0px;
+}
+
+#tableBonusAdjustment tbody tr td .input-xs{ 
  	line-height: 10px; height: 15px; font-size: 10px; width: 100px; text-align: right; 
  }
-.aui #tableBonusAdjustment .float-label-control { /*position: relative;*/ margin-bottom: 0 px;font-size: smaller; }
+.aui #tableBonusAdjustment .float-label-control { position: relative; margin-bottom: 0 px;font-size: smaller; }
    /* .aui #tableBonusAdjustment .float-label-control ::-webkit-input-placeholder { color: transparent; }
     .aui #tableBonusAdjustment .float-label-control :-moz-placeholder { color: transparent; }
     .aui #tableBonusAdjustment .float-label-control ::-moz-placeholder { color: transparent; }
@@ -842,134 +843,6 @@ input[type=number]::-webkit-outer-spin-button {
     .aui #tableBonusAdjustment .float-label-control.label-bottom textarea:not(.empty) + label { top: 3em; }
 	
 	.aui #tableBonusAdjustment .float-label-control input{font-size: 12px;text-align: right;}
- @keyframes float-labels {
-    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
-    20% { font-size: 1.5em; opacity: 0; }
-    30% { top: 0.1em; }
-    50% { opacity: 0; font-size: 0.85em; }
-    100% { top: -1em; opacity: 1; }
-}
- @-webkit-keyframes float-labels {
-    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
-    20% { font-size: 1.5em; opacity: 0; }
-    30% { top: 0.1em; }
-    50% { opacity: 0; font-size: 0.85em; }
-    100% { top: -1em; opacity: 1; }
-}
- @keyframes float-labels-bottom {
-    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
-    20% { font-size: 1.5em; opacity: 0; }
-    30% { top: 0.1em; }
-    50% { opacity: 0; font-size: 0.85em; }
-    100% { top: 3em; opacity: 1; }
-}
- @-webkit-keyframes float-labels-bottom {
-    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
-    20% { font-size: 1.5em; opacity: 0; }
-    30% { top: 0.1em; }
-    50% { opacity: 0; font-size: 0.85em; }
-    100% { top: 3em; opacity: 1; }
-}
-
-	.testOverFlow {
-		max-width: 200px;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-	.testOverFlow:hover {
-		max-width: 200px;
-	    text-overflow: clip;
-	    white-space: normal;
-	    word-break: break-all;
-	}
-.box {
-    position: relative;
-    border-radius: 3px;
-    background: #ffffff;
-    border-top: 4px solid #d2d6de;
-    margin-bottom: 20px;
-    width: 100%;
-    box-shadow: 0 1px 10px rgba(0,0,0,0.1);
-}
-.box2 {
-    position: relative;
-    border-radius: 3px;
-    background: #ffffff;
-    border-top: 6px solid #d2d6de;
-    margin-bottom: 20px;
-    width: 100%;
-    box-shadow: 0 1px 10px rgba(0,0,0,0.1);
-}
-
-.box-primary {
-    border-top-color: #3c8dbc;
-}
-.box-warning {
-    border-top-color: #f39c12;
-}
-.box-info {
-    border-top-color: #00c0ef;
-}
-.box-success {
-    border-top-color: #00a65a;
-}
-.box-danger {
-    border-top-color: #dd4b39;
-}
-.box-header.with-border {
-    border-bottom: 1px solid #f4f4f4;
-}
-.box-header {
-    color: #444;
-    display: block;
-    padding: 10px;
-    position: relative;
-}
-.box-header:before, .box-body:before, .box-footer:before, .box-header:after, .box-body:after, .box-footer:after {
-    content: " ";
-    display: table;
-}
-.box-header:after, .box-body:after, .box-footer:after {
-    clear: both;
-}
-.box-header>.fa, .box-header>.glyphicon, .box-header>.ion, .box-header .box-title {
-    display: inline-block;
-    font-size: 18px;
-    margin: 0;
-    line-height: 1;
-}
-.box-body {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
-    padding: 10px;
-}
-.tablesorter-bootstrap .tablesorter-header i.tablesorter-icon {
-    /* position: absolute; */
-    right: 2px;
-    top: 50%;
-    margin-top: -7px;
-    width: 14px;
-    height: 14px;
-    background-repeat: no-repeat;
-    line-height: 14px;
-    display: inline-block;
-}
-.icon-sort-color{
-	color: cornflowerblue;
-}
-.sort-z-score:hover {
-    background: #f8f8f8 !important;
-}
-.titlePanel {
-	width: 100%;
-}
-
-
-
-
 
 .multiselect-filter-th {
 	display:flex;
@@ -1014,6 +887,79 @@ input[type=number]::-webkit-outer-spin-button {
 #multiselect-filter-checkboxes input[type="checkbox"] {
   vertical-align: top;
 }
+
+.pos-column {
+
+}
+
+.pos-column .lef {
+	text-align: left;
+}
+
+.pos-column .cen {
+	text-align: center;
+}
+
+.pos-column .rig {
+	text-align: right;
+}
+
+.fix-column-top {
+/*   position: -webkit-sticky; /* for Safari */ */
+/*   position: sticky; */
+/*   top: 0; */
+/*   z-index: 100; */
+   text-align: center; 
+}
+
+.fix-column-top-left {
+/*   position: -webkit-sticky; /* for Safari */ */
+/*   position: sticky; */
+/*   left: 0; */
+/*   z-index: 101; */
+   text-align: center; 
+/*   border-right: 1px solid #CCC; */
+}
+
+.fix-column-left {
+/*   position: -webkit-sticky; /* for Safari */ */
+/*   position: sticky; */
+/*   left: 0; */
+/* /*   z-index: 99; */ */
+/*   border-right: 1px solid #CCC; */
+}
+
+@keyframes float-labels {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: -1em; opacity: 1; }
+}
+
+@-webkit-keyframes float-labels {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: -1em; opacity: 1; }
+}
+
+@keyframes float-labels-bottom {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: 3em; opacity: 1; }
+}
+
+@-webkit-keyframes float-labels-bottom {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: 3em; opacity: 1; }
+}
 </style>
 
 
@@ -1042,6 +988,7 @@ input[type=number]::-webkit-outer-spin-button {
 							<div class="ibox-content breadcrumbs2">
 
                 <div class="row-fluid" id='advanceSearchAppraisal'>
+
                   <div class="form-group pull-left span3" style="margin-left: 5px">
                     <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="year"/>" class="input form-control input-sm span12"
                       id="AppraisalYear" name="AppraisalYear">
@@ -1084,7 +1031,7 @@ input[type=number]::-webkit-outer-spin-button {
                       <input class="form-control input-sm" id="EmpName_id" name="EmpName_id" value="" type="hidden">
                   </div>
 
-                  <div class="form-group pull-left span3" style="margin-left: 5px; margin-top: 2px; margin-bottom: 2px;">
+                  <div class="form-group pull-left span3" style="margin-left: 5px; ">
                   <select data-toggle="tooltip" title="<liferay-ui:message key="Position"/>" multiple="multiple" data-original-title="<liferay-ui:message key="Position"/>" class="input form-control input-sm span12" id="Position" name="Position">
                  </select>            
                   </div>
@@ -1102,20 +1049,17 @@ input[type=number]::-webkit-outer-spin-button {
                     </select>
                   </div>
 
-<!--                   <div class="form-group pull-left span3" style="margin-left: 5px;"> -->
-<%--                     <select style="display: none;" data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="manage"/>" class="input form-control input-sm span12" --%>
-<!--                       id="fake_adjust" name="fake_adjust"> -->
-<!--                     </select> -->
-<!--                   </div> -->
-
-
-                  <div class="form-group pull-right m-b-none span3" style="margin-top: 1px; margin-left: 5px; text-align:right;">
-								<div class="form-group pull-right m-b-none ">
-									<button type="button" name="btnSearchAdvance" id="btnSearchAdvance" class="btn btn-info input-sm " style="margin-left: 5px;">
-										<i class="fa fa-search"></i>&nbsp;<liferay-ui:message key="search"/>
-									</button>
-								</div>
-							</div>
+                  <div class="form-group span3 m-b-none pull-right" style="margin-top: 1px; margin-left: 5px; margin-right: 3px; text-align:right;">
+                    <button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance">
+                      <i class="fa fa-search"></i>&nbsp;<liferay-ui:message key="search"/>
+                    </button>
+                    &nbsp;
+                    <form id="formExportToExcel" action="" method="post" class="pull-right" style="margin-bottom: 0px; margin-left: 5px">
+						<button type="button" class="btn btn-success input-sm" name="btnExport" id="btnExport">
+							<i class="fa fa-download"></i>&nbsp;<liferay-ui:message key="export"/>
+                    	</button>
+					</form>
+                  </div>
 
                 </div>
 
@@ -1133,44 +1077,41 @@ input[type=number]::-webkit-outer-spin-button {
 				<div id="search_result" style="display: none;"> <!-- class="row-fluid search_result" > -->
 					<div class="span12">
 						<div class="ibox-title">
-							<div class='titlePanel'>Salary Adjustment</div>
+							<div class='titlePanel'><liferay-ui:message key="bonus-judgement-list"/></div>
 						</div>						
 						<div class="ibox-content">
-						<!-- pagination start -->
-						<div class="row-fluid">
-							<div class="position-result-perpage">
-								<div class="pagianation_area">
-									<div class="pagination_top pagination"></div>
-								</div>
-								<div class="object-right paging-text">
-									<div class='pagingDropdown'>
-										<select id='countPaginationTop'
-											class="form-control input-sm countPagination">
-											<option>10</option>
-											<option>20</option>
-											<option>50</option>
-											<option>100</option>
-											<option>All</option>
-										</select>
-									</div>
-									<div class='pagingText'>
-										<liferay-ui:message key="results-per-page" />
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- pagination end -->
+							<!-- pagination start -->
+                                    	<div class="row-fluid">
+	                                    	<div class="position-result-perpage">
+		                                    	<div class="pagianation_area" >
+													<div class="pagination_top pagination"></div>
+		                                    	</div>
+			                                    <div class="object-right paging-text">
+			                                    	<div class='pagingDropdown'>
+			                                 			<select  id='countPaginationTop'  class="form-control input-sm countPagination">
+						                                     <option>10</option>
+						                                     <option>20</option>
+						                                     <option>50</option>
+						                                     <option>100</option>
+						                                     <option>All</option>
+						                                 </select>
+			                                 		</div>
+													<div class='pagingText'><liferay-ui:message key="results-per-page"/></div>
+			                                    </div>
+											</div>
+                                    	</div>
+                            <!-- pagination end -->							
 							<div id="scroll-tableBonusAdjustment" class="row-fluid list-data-table" style="overflow: auto;">							
-							<table class="table table-striped table-bordered" id="tableBonusAdjustment" style="margin-bottom: 7px; max-width: none; min-height: 130px;">
+							<table class="table table-striped table-bordered" id="tableBonusAdjustment" style="overflow: auto; margin-bottom: 7px; max-width: none; min-height: 130px; max-height: 150px;">
 							<thead>
 						    <tr id="tableBonusAdjustment-head1">
-						      <th rowspan="3" style="width:auto; text-align:center;"><liferay-ui:message key="no-dot"/></th>
-						      <th rowspan="3" style="width:auto; text-align:center;"><liferay-ui:message key="emp-code"/></th>
-						      <th rowspan="3" style="width:auto;"><liferay-ui:message key="employee-name"/></th>
-						      <th rowspan="3" style="width:auto;"><liferay-ui:message key="position"/></th>
-						      <th rowspan="3" style="width:auto; text-align:center;">PG</th>
-						      <th rowspan="3" style="width:auto; text-align:center;">ฝ่าย</th>
-						      <th rowspan="3" style="width:auto; text-align:center;">
+						      <th rowspan="3" class="fix-column-top cen"><liferay-ui:message key="no-dot"/></th>
+						      <th rowspan="3" class="fix-column-top cen"><liferay-ui:message key="emp-code"/></th>
+						      <th rowspan="3" class="fix-column-top cen"><liferay-ui:message key="employee-name"/></th>
+						      <th rowspan="3" class="fix-column-top cen"><liferay-ui:message key="position"/></th>
+						      <th rowspan="3" class="fix-column-top cen">PG</th>
+						      <th rowspan="3" class="fix-column-top cen">ฝ่าย</th>
+						      <th rowspan="3" class="fix-column-top cen">
 						      	<div class="multiselect-filter-th">
 							      <liferay-ui:message key="group"/>
 							      <div class="multiselect-filter" onclick="showCheckboxesFilter()">
@@ -1184,59 +1125,59 @@ input[type=number]::-webkit-outer-spin-button {
 								  </div>
 							  	</div>
 						      </th>
-						      <th rowspan="3" style="width:auto; text-align:center;">Job Code</th>
-						      <th rowspan="3" style="width:auto;">Position Code</th>
-						      <th rowspan="3" style="width:auto;">คะแนนเต็มตีค่างาน<br>(ความรู้)</th>
-						      <th rowspan="3" style="width:auto;">คะแนนเต็มตีค่างาน<br>(ศักยภาพ)</th>
-						      <th rowspan="3" style="width:auto;">Total Point</th>
-						      <th rowspan="3" style="width:auto;">Baht/Point</th>
-						      <th rowspan="3" style="width:auto;">ผลการประเมินค่างาน<br>(65 คะแนน )</th>
-						      <th rowspan="3" style="width:auto;">คะแนนความรู้</th>
-						      <th rowspan="3" style="width:auto;">คะแนนศักยภาพ</th>
-						      <th rowspan="3" style="width:auto;">คะแนนผลงานปีที่ผ่านมา<br>(20 คะแนน )</th>
-						      <th rowspan="3" style="width:auto;">คะแนนความสามารถที่มีคุณค่าต่อองค์กร<br>(15 คะแนน )</th>
-						      <th rowspan="3" style="width:auto;">คะแนนประเมิน Mgr.</th>
-						      <th rowspan="3" style="width:auto;">คะแนนประเมิน BU.</th>
-						      <th rowspan="3" style="width:auto;">คะแนนประเมิน COO.</th>
-						      <th rowspan="3" style="width:auto;">เกรด</th>
-						      <th colspan="3" style="width:auto; text-align:center;">รายได้จากการคำนวนตีค่างาน</th>
-						      <th colspan="7" style="width:auto; text-align:center;">รายได้ปัจจุบัน</th>
-						      <th rowspan="3" style="width:auto;">ขาด/เกิน</th>
-						      <th rowspan="3" style="width:auto;">Cal Standard</th>
-						      <th colspan="2" style="width:auto; text-align:center;">% Cal</th>
-						      <th colspan="4" style="width:auto; text-align:center;">รายได้ที่เปลี่ยนแปลง</th>
-						      <th colspan="7" style="width:auto; text-align:center;">รายได้ใหม่</th>
+						      <th rowspan="3" class="fix-column-top cen">Job Code</th>
+						      <th rowspan="3" class="fix-column-top cen">Position Code</th>
+						      <th rowspan="3" class="fix-column-top cen">คะแนนเต็มตีค่างาน<br>(ความรู้)</th>
+						      <th rowspan="3" class="fix-column-top cen">คะแนนเต็มตีค่างาน<br>(ศักยภาพ)</th>
+						      <th rowspan="3" class="fix-column-top-left">Total Point</th>
+						      <th rowspan="3" class="fix-column-top cen">Baht/Point</th>
+						      <th rowspan="3" class="fix-column-top cen">ผลการประเมินค่างาน<br>(65 คะแนน )</th>
+						      <th rowspan="3" class="fix-column-top cen">คะแนนความรู้</th>
+						      <th rowspan="3" class="fix-column-top cen">คะแนนศักยภาพ</th>
+						      <th rowspan="3" class="fix-column-top cen">คะแนนผลงานปีที่ผ่านมา<br>(20 คะแนน )</th>
+						      <th rowspan="3" class="fix-column-top cen">คะแนนความสามารถที่มีคุณค่าต่อองค์กร<br>(15 คะแนน )</th>
+						      <th rowspan="3" class="fix-column-top cen">คะแนนประเมิน Mgr.</th>
+						      <th rowspan="3" class="fix-column-top cen">คะแนนประเมิน BU.</th>
+						      <th rowspan="3" class="fix-column-top cen">คะแนนประเมิน COO.</th>
+						      <th rowspan="3" class="fix-column-top cen">เกรด</th>
+						      <th colspan="3" class="fix-column-top cen">รายได้จากการคำนวนตีค่างาน</th>
+						      <th colspan="7" class="fix-column-top cen">รายได้ปัจจุบัน</th>
+						      <th rowspan="3" class="fix-column-top cen">ขาด/เกิน</th>
+						      <th rowspan="3" class="fix-column-top cen">Cal Standard</th>
+						      <th colspan="2" class="fix-column-top cen">% Cal</th>
+						      <th colspan="4" class="fix-column-top cen">รายได้ที่เปลี่ยนแปลง</th>
+						      <th colspan="7" class="fix-column-top cen">รายได้ใหม่</th>
 						    </tr>
 						    <tr id="tableBonusAdjustment-head2">
-						 	  <th rowspan="2" style="width:auto;">รายได้รวมที่ควรได้ 90% ไม่รวม Bonus</th>
-						      <th rowspan="2" style="width:auto;">รายได้ Fixที่ควรได้ 65%</th>
-						      <th rowspan="2" style="width:auto;">รายได้ Var ที่ควรได้25%</th>
-						      <th rowspan="2" style="width:auto;">รายได้ปัจจุบัน Total</th>
-						      <th colspan="3" style="width:auto; text-align:center;">FIX65%</th>
-						      <th colspan="3" style="width:auto; text-align:center;">VAR25%</th>
-						      <th rowspan="2" style="width:auto;">%</th>
-						      <th rowspan="2" style="width:auto;">Bath</th>
-						      <th rowspan="2" style="width:auto;">ปรับรายได้  Total</th>
-						      <th rowspan="2" style="width:auto;">ปรับเงินเงินเดือน</th>
-						      <th rowspan="2" style="width:auto;">ปรับ P-QPI</th>
-						      <th rowspan="2" style="width:auto;">% Diff</th>
-						      <th rowspan="2" style="width:auto;">รายได้ใหม่ Total</th>
- 							  <th colspan="3" style="width:auto; text-align:center;">FIX65%</th>
-						      <th colspan="3" style="width:auto; text-align:center;">VAR25%</th>
+						 	  <th rowspan="2" class="fix-column-top cen">รายได้รวมที่ควรได้ 90% ไม่รวม Bonus</th>
+						      <th rowspan="2" class="fix-column-top cen">รายได้ Fixที่ควรได้ 65%</th>
+						      <th rowspan="2" class="fix-column-top cen">รายได้ Var ที่ควรได้25%</th>
+						      <th rowspan="2" class="fix-column-top cen">รายได้ปัจจุบัน Total</th>
+						      <th colspan="3" class="fix-column-top cen">FIX65%</th>
+						      <th colspan="3" class="fix-column-top cen">VAR25%</th>
+						      <th rowspan="2" class="fix-column-top cen">%</th>
+						      <th rowspan="2" class="fix-column-top cen">Bath</th>
+						      <th rowspan="2" class="fix-column-top cen">ปรับรายได้  Total</th>
+						      <th rowspan="2" class="fix-column-top cen">ปรับเงินเงินเดือน</th>
+						      <th rowspan="2" class="fix-column-top cen">ปรับ P-QPI</th>
+						      <th rowspan="2" class="fix-column-top cen">% Diff</th>
+						      <th rowspan="2" class="fix-column-top cen">รายได้ใหม่ Total</th>
+ 							  <th colspan="3" class="fix-column-top cen">FIX65%</th>
+						      <th colspan="3" class="fix-column-top cen">VAR25%</th>
 						    </tr>			
 						     <tr id="tableBonusAdjustment-head3">
-						      <th style="width:auto;">Salary</th>
-						      <th style="width:auto;">P-QPI</th>
-						      <th style="width:auto;">อื่นๆ</th>
-						      <th style="width:auto;">MPI</th>
-						      <th style="width:auto;">PI</th>
-						      <th style="width:auto;">อื่นๆ</th>
-						      <th style="width:auto;">Salary</th>
-						      <th style="width:auto;">P-QPI</th>
-						      <th style="width:auto;">อื่นๆ</th>
-						      <th style="width:auto;">MPI</th>
-						      <th style="width:auto;">PI</th>
-						      <th style="width:auto;">อื่นๆ</th>
+						      <th class="fix-column-top cen">Salary</th>
+						      <th class="fix-column-top cen">P-QPI</th>
+						      <th class="fix-column-top cen">อื่นๆ</th>
+						      <th class="fix-column-top cen">MPI</th>
+						      <th class="fix-column-top cen">PI</th>
+						      <th class="fix-column-top cen">อื่นๆ</th>
+						      <th class="fix-column-top cen">Salary</th>
+						      <th class="fix-column-top cen">P-QPI</th>
+						      <th class="fix-column-top cen">อื่นๆ</th>
+						      <th class="fix-column-top cen">MPI</th>
+						      <th class="fix-column-top cen">PI</th>
+						      <th class="fix-column-top cen">อื่นๆ</th>
 						    </tr>
 							</thead>
 							<tbody id="list_empjudege">
@@ -1273,19 +1214,16 @@ input[type=number]::-webkit-outer-spin-button {
 										 <div class="form-group p-xxs" style="display: flex;">
 											 <label class="p-t-xxs" style="text-align: center;"><b><liferay-ui:message key="action"/>&nbsp;:&nbsp;</b></label>
 											 <div>
-												<select style="min-width: 150px;" data-toggle="tooltip" title="" class="input form-control input-sm" id="actionToAssign" name="actionToAssign">
+												<select style="width: 155px;" data-toggle="tooltip" title="" class="input form-control input-sm" id="actionToAssign" name="actionToAssign">
 												</select>
 											 </div>
 										 </div>
 									 </div>
-							  		<div style='text-align:right; display: flex;'>
-							  			<label style="display: none;" id="fake_adjust_box" class="p-t-xxs" style="text-align: center;"><b><liferay-ui:message key="judge-name"/>&nbsp;:&nbsp;</b></label>
-								  		<select style="display: none; min-width: 150px;" class="input form-control input-sm"
-					                      id="fake_adjust" name="fake_adjust">
-					                    </select>&nbsp;
+							  		<div class="" style='text-align:right;'>
+							  		<button class="btn btn-primary" type="button" id="btnConfirm"><liferay-ui:message key="confirm"/></button>
 								  	<button class="btn btn-success" type="button" id="btnSubmit"><liferay-ui:message key="submit"/></button>
 									<input type='hidden' id='emp_result_id' name='emp_result_id' value=''>
-										<%--<button data-dismiss="modal" class="btn btn-danger btnCancle" type="button"><liferay-ui:message key="cancel"/></button> --%>
+<%-- 										<button data-dismiss="modal" class="btn btn-danger btnCancle" type="button"><liferay-ui:message key="cancel"/></button> --%>
 							  		</div>
 						  		</div>
 							</div>
@@ -1305,36 +1243,6 @@ input[type=number]::-webkit-outer-spin-button {
 			</div>
 	</div>
 	
-	<!-- Modal Confirm Start -->
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal"
-		class="modal inmodal in" style="width:400px;left:calc;display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content  bounceInRight">
-				<div class="modal-header">
-					<button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
-						<span aria-hidden="true"><i class='fa fa-times'></i></span>
-					</button>
-					<h5 class="modal-title"><liferay-ui:message key="confirm-dialog"/></h5>
-				</div>
-				<div class="modal-body">
-					<div class="form-kpi-mangement">
-						<div class="form-kpi-label" align="center">
-							<label id="fake_adjust_name"></label>
-							<div id="" class='information'></div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<div align="center">
-						<button class="btn btn-success" id="btnConfirmYes" type="button"><liferay-ui:message key="submit"/></button>
-						<button data-dismiss="modal" class="btn btn-danger btnCancle" type="button"><liferay-ui:message key="cancel"/></button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal Confirm End -->
-	
 	<div id="embedParamSearch"></div>
 	
 	</body>
@@ -1346,3 +1254,4 @@ input[type=number]::-webkit-outer-spin-button {
 <script type="text/javascript">
  var jQuery_1_1_3 = $.noConflict(true);
 </script>
+	

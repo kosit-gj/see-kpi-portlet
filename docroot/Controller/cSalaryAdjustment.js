@@ -287,7 +287,8 @@ var getDataFn = function (page, rpp) {
     */
     
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/emp/adjustment",
+        url: restfulURL + "/" + serviceName + "/public/salary",
+//    	url: restfulURL + "/" + serviceName + "/public/emp/adjustment",
         type: "get",
         dataType: "json",
         async: true,
@@ -305,37 +306,11 @@ var getDataFn = function (page, rpp) {
             "appraisal_form_id": form
         },
         success: function (data) {
-//        	var numbersArr = [];
-//        	var data_length = data['result']['data'].length;
-//        	var total = 90;
-//        	var avg = 60;
-//        	var standard_deviation = 6.65;
-//        	var temp_data = data;
-//        	$.each(temp_data['result']['data'],function (index, indexEntry) {
-//        		temp_data['result']['data'][index].z_core = (indexEntry.perv_score_1 - avg)/standard_deviation;
-//        	});
-//        	console.log("temp");
-//        	console.log(temp_data['data']);
-//        	if(data_length != 0){
-//	        	$.each(data['data'],function (index, indexEntry) {
-//	        		total += Number(indexEntry.perv_score_1);
-//	        		numbersArr.push(indexEntry.perv_score_1);
-//	        	});
-//	        	avg = total/data_length;
-//	        	standard_deviation= standardDeviationFn(numbersArr);
-//	        	$.each(data['data'],function (index, indexEntry) {
-//	        		console.log("perv_score_1 : " +indexEntry.perv_score_1);
-//	        		console.log("avg : " +avg);
-//	        		console.log("standard_deviation : " +standard_deviation);
-//	        		console.log("z_core : " + (indexEntry.perv_score_1 - avg)/standard_deviation);
-//	        		indexEntry.z_core = (indexEntry.perv_score_1 - avg)/standard_deviation;
-//	        	});
-//        	}
-        	//console.log(data['data']);
-            listDataFn(data['result']['data']);
+//        	console.log(data);
+            listDataFn(data[1]['items']);
             setThemeColorFn(tokenID.theme_color);
-            globalData = data['result'];
-            paginationSetUpFn(globalData['current_page'], globalData['last_page'], globalData['last_page']);
+//            globalData = data['result'];
+//            paginationSetUpFn(globalData['current_page'], globalData['last_page'], globalData['last_page']);
         }
     });
 };
@@ -405,12 +380,13 @@ var fakeAdjustFn = function () {
 }
 
 var listDataFn = function(data){
+	console.log(data);
 	var htmlHTML="";
 	var edit_flag = "";
 	
 	if(data.length==0) {
 		htmlHTML +="<tr>";
-		htmlHTML +="<td colspan=\"47\">";
+		htmlHTML +="<td colspan=\"46\">";
 		htmlHTML +="<div style='margin-top: 40px;margin-bottom: 40px;font-weight: bold;color: #e04747;' align='center'>No Data to Display.</div>";
 		htmlHTML +="</td>";
 		htmlHTML +="</tr";
@@ -419,91 +395,75 @@ var listDataFn = function(data){
 	}
 
 	$.each(data,function (index, indexEntry) {
-		
-		if(indexEntry['edit_flag']==0) {
-			edit_flag = "disabled";
-			$("#adjust_percent, #btnAdjust").prop('disabled', true);
-		} else {
-			edit_flag = "";
-			$("#adjust_percent, #btnAdjust").prop('disabled', false);
-		}
-		
-		index = index + 1;
-		
 		/* Generate table body */
 		htmlHTML += "<tr class='control-calculate'>";
-		htmlHTML += "	<td style='text-align:center;'>"+index+"</td>";
-		htmlHTML += "	<td>"+indexEntry.emp_code+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap'>"+indexEntry.emp_name+"</td>";
-		htmlHTML += "	<td>"+indexEntry.appraisal_level_name+"</td>";
-		htmlHTML += "	<td style='width:180px;' class='testOverFlow'>"+indexEntry.org_name+"</td>";
-		htmlHTML += "	<td style='width:180px;' class='testOverFlow filter-group'>"+indexEntry.position_name+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap'>"+indexEntry.status+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td>"+indexEntry.appraisal_level_name+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
+		htmlHTML += "	<td class='pos-column cen'>"+indexEntry.RowNumber+"</td>";
+		htmlHTML += "	<td class='pos-column cen'>"+indexEntry.emp_code+"</td>";
+		htmlHTML += "	<td class='pos-column lef'>"+indexEntry.emp_name+"</td>";
+		htmlHTML += "	<td class='pos-column lef'>"+indexEntry.position_name+"</td>";
+		htmlHTML += "	<td class='pos-column cen'>"+indexEntry.PG+"</td>";
+		htmlHTML += "	<td class='pos-column lef'>"+indexEntry.org_name+"</td>";
+		htmlHTML += "	<td class=\"filter-group pos-column cen\">"+indexEntry.appraisal_form_name+"</td>";
+		htmlHTML += "	<td class='pos-column cen'>"+indexEntry.job_code+"</td>";
+		htmlHTML += "	<td class='pos-column cen'>"+indexEntry.position_code+"</td>";
+		htmlHTML += "	<td class='pos-column rig'>"+indexEntry.knowledge_point+"</td>";
+		htmlHTML += "	<td class='pos-column rig'>"+indexEntry.capability_point+"</td>";
+		htmlHTML += "	<td class=\"fix-column-left pos-column rig\">"+indexEntry.total_point+"</td>";
+		htmlHTML += "	<td class='pos-column rig'>"+indexEntry.baht_per_point+"</td>";
+		htmlHTML += "	<td class='pos-column cen'></td>";
+		htmlHTML += "	<td class='pos-column cen'></td>";
+		htmlHTML += "	<td class='pos-column cen'></td>";
+		htmlHTML += "	<td class='pos-column cen'></td>";
+		htmlHTML += "	<td class='pos-column cen'></td>";
+		htmlHTML += "	<td class='pos-column rig'>"+indexEntry.score_manager+"</td>";
+		htmlHTML += "	<td class='pos-column rig'>"+indexEntry.score_bu+"</td>";
+		htmlHTML += "	<td class='pos-column rig'>"+indexEntry.score_coo+"</td>";
+		htmlHTML += "	<td class='pos-column cen'>"+indexEntry.grade+"</td>";
+		htmlHTML += "	<td class='pos-column rig'>"+indexEntry.total_percent+"</td>";
+		htmlHTML += "	<td class='pos-column rig'>"+indexEntry.fix_percent+"</td>";
+		htmlHTML += "	<td class='pos-column rig'>"+indexEntry.var_percent+"</td>";
+		htmlHTML += "	<td class=\"data-current-total pos-column rig\" data-value=\""+indexEntry.total_now_salary+"\">"+indexEntry.total_now_salary+"</td>";
+		htmlHTML += "	<td class=\"data-current-salary pos-column rig\" data-value=\""+indexEntry.salary+"\">"+indexEntry.salary+"</td>";
+		htmlHTML += "	<td class=\"data-current-pqpi pos-column rig\" data-value=\""+indexEntry.pqpi_amount+"\">"+indexEntry.pqpi_amount+"</td>";
+		htmlHTML += "	<td class='pos-column rig'>"+indexEntry.fix_other_amount+"</td>";
+		htmlHTML += "	<td class='pos-column rig'>"+indexEntry.mpi_amount+"</td>";
+		htmlHTML += "	<td class='pos-column rig'>"+indexEntry.pi_amount+"</td>";
+		htmlHTML += "	<td class='pos-column rig'>"+indexEntry.var_other_amount+"</td>";
+		htmlHTML += "	<td class='pos-column rig'>"+indexEntry.miss_over+"</td>";
+		htmlHTML += "	<td class='pos-column rig'>"+indexEntry.cal_standard+"</td>";
 		htmlHTML += "	<td class='data-percent'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 percent numberOnly' total_adjust_result_score='"+indexEntry.last_judge_score+"' value='"+indexEntry.percent_adjust+"'/>";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 percent numberOnly' now_salary='"+indexEntry.total_now_salary+"' />";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		htmlHTML += "	<td class='data-score'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 score numberOnly' total_adjust_result_score='"+indexEntry.last_judge_score+"' value='"+indexEntry.last_judge_score+"'/>";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 score numberOnly' now_salary='"+indexEntry.total_now_salary+"' />";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		htmlHTML += "	<td style='white-space:nowrap;text-align:right;'>"+(indexEntry.z_score.toFixed(2))+"</td>";
-		/*
-		htmlHTML += "	<td class='data-percent'>";
+		
+		htmlHTML += "	<td class='data-up-total pos-column rig' data-value=\"\"></td>";
+		
+		htmlHTML += "	<td class='data-salary'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input "+edit_flag+" type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 percent numberOnly' total_adjust_result_score='"+indexEntry.last_judge_score+"' value='"+indexEntry.percent_adjust+"'/>";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 salary numberOnly '/>";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
-		htmlHTML += "	<td class='data-score'>";
+		htmlHTML += "	<td class='data-pqpi'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input "+edit_flag+" type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 score numberOnly' total_adjust_result_score='"+indexEntry.last_judge_score+"' value='"+indexEntry.last_judge_score+"'/>";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 pqpi numberOnly' />";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
-		htmlHTML += "	<td class='data-score'>";
-		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input "+edit_flag+" type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 score numberOnly' total_adjust_result_score='"+indexEntry.last_judge_score+"' value='"+indexEntry.last_judge_score+"'/>";
-		htmlHTML += "		</div>";
-		htmlHTML += "	</td>";
-		*/
+		
+		htmlHTML += "	<td class=\"data-percent-diff pos-column rig\" data-value=\"\"></td>";
+		
+		htmlHTML += "	<td class=\"data-new-total-salary pos-column rig\" data-value=\"\"></td>";
+		htmlHTML += "	<td class=\"data-new-salary pos-column rig\" data-value=\"\"></td>";
+		htmlHTML += "	<td class=\"data-new-pqpi pos-column rig\" data-value=\"\"></td>";
+		htmlHTML += "	<td class=\"data-new-fix-other pos-column rig\" data-value=\""+indexEntry.fix_other_amount+"\">"+indexEntry.fix_other_amount+"</td>";
+		htmlHTML += "	<td class=\"data-new-mpi pos-column rig\" data-value=\""+indexEntry.mpi_amount+"\">"+indexEntry.mpi_amount+"</td>";
+		htmlHTML += "	<td class=\"data-new-pi pos-column rig\" data-value=\""+indexEntry.pi_amount+"\">"+indexEntry.pi_amount+"</td>";
+		htmlHTML += "	<td class=\"data-new-var-other pos-column rig\" data-value=\""+indexEntry.var_other_amount+"\">"+indexEntry.var_other_amount+"</td>";
 		htmlHTML += "</tr>";	
 	});	
 	$("#list_empjudege").html(htmlHTML);
@@ -560,7 +520,7 @@ $(document).mouseup(function(e) {
 var filterGroup = function(data) {
 	var htmlHTMLFilter = "";
 	htmlHTMLFilter +="<label for=\"fg-all\" id=\"filter-all\">&nbsp;<input type=\"checkbox\" id=\"fg-all\"/>&nbsp;Check All&nbsp;</label>";
-	const unique = [...new Set(data.map(item => item.position_name))];
+	const unique = [...new Set(data.map(item => item.appraisal_form_name))];
 	unique.forEach(function (value, i) { //loop exmple [1,2,3]
 		htmlHTMLFilter +="<label for=\"fg-"+i+"\" class=\"select-filter\">&nbsp;<input type=\"checkbox\" id=\"fg-"+i+"\" value=\""+value+"\"/>&nbsp;"+value+"&nbsp;</label>";
 	});
@@ -603,16 +563,93 @@ var filterGroupOnClick = function(data) {
 var calculatePercentKeyup = function() {
 	$("#list_empjudege").find('.percent').keyup(function() {
 		var percent = $(this).autoNumeric('get');
-		var adjust_result_score = Number($(this).attr("total_adjust_result_score"));
-		var total = (percent/100)*adjust_result_score;
+		
+		//คำนวน % ของรายได้ปัจจุบัน Total ว่าเป็นกี่ Bath
+		var now_salary = Number($(this).attr("now_salary"));
+		var total = (percent/100)*now_salary;
 		$(this).closest('.control-calculate').find('.data-score').find('.score').autoNumeric('set', total);
 	});
 		
 	$("#list_empjudege").find('.score').keyup(function() {
 		var score = $(this).autoNumeric('get');
-		var adjust_result_score = Number($(this).attr("total_adjust_result_score"));
-		var total = (adjust_result_score == 0 ? 0 : (score*100)/adjust_result_score);
+		
+		//คำนวน Bath ของรายได้ปัจจุบัน Total ว่าเป็นกี่ %
+		var now_salary = Number($(this).attr("now_salary"));
+		var total = (now_salary == 0 ? 0 : (score*100)/now_salary);
 		$(this).closest('.control-calculate').find('.data-percent').find('.percent').autoNumeric('set', total);
+	});
+	
+	function calculateNewSalaryTotal(elementThis, salaryOrPQPI) {
+		console.log(elementThis,'Ethis')
+		console.log(salaryOrPQPI,'salaryOrPQPI')
+		var new_pqpi = Number(elementThis.closest('.control-calculate').find('.data-new-pqpi').attr('data-value'));
+		var new_fix_other = Number(elementThis.closest('.control-calculate').find('.data-new-fix-other').attr('data-value'));
+		var new_mipi = Number(elementThis.closest('.control-calculate').find('.data-new-mpi').attr('data-value'));
+		var new_pi = Number(elementThis.closest('.control-calculate').find('.data-new-pi').attr('data-value'));
+		var new_var_other = Number(elementThis.closest('.control-calculate').find('.data-new-var-other').attr('data-value'));
+		console.log(new_pqpi,'new_pqpi');
+		console.log(new_fix_other,'new_fix_other');
+		console.log(new_mipi,'new_mipi');
+		console.log(new_pi,'new_pi');
+		console.log(new_var_other,'new_var_other');
+		var total = salaryOrPQPI + new_pqpi + new_fix_other + new_mipi + new_pi + new_var_other;
+		console.log(total,'total');
+		elementThis.closest('.control-calculate').find('.data-new-total-salary').attr('data-value', total.toFixed(2));
+		elementThis.closest('.control-calculate').find('.data-new-total-salary').text(Comma(total.toFixed(2)));
+	}
+	
+	$("#list_empjudege").find('.salary').keyup(function() {
+		var salary = Number($(this).autoNumeric('get'));
+		
+		//คำนวน ปรับรายได้ Total
+		var pqpi_score = Number($(this).closest('.control-calculate').find('.data-pqpi').find('.pqpi').autoNumeric('get'));
+		var total = pqpi_score + salary;
+		$(this).closest('.control-calculate').find('.data-up-total').attr('data-value', total.toFixed(2));
+		$(this).closest('.control-calculate').find('.data-up-total').text(Comma(total.toFixed(2)));
+		
+		//คำนวน รายได้ใหม่  ตรง salary
+		var current_salary = Number($(this).closest('.control-calculate').find('.data-current-salary').attr('data-value'));
+		var new_salary = current_salary + salary;
+		$(this).closest('.control-calculate').find('.data-new-salary').attr('data-value', new_salary.toFixed(2));
+		$(this).closest('.control-calculate').find('.data-new-salary').text(Comma(new_salary.toFixed(2)));
+		
+		//คำนวน % Diff
+		var data_current_total = Number($(this).closest('.control-calculate').find('.data-current-total').attr('data-value'));
+		var val_diff = total/data_current_total;
+		console.log(val_diff,'val_diff')
+		$(this).closest('.control-calculate').find('.data-percent-diff').attr('data-value', val_diff.toFixed(2));
+		$(this).closest('.control-calculate').find('.data-percent-diff').text(Comma(val_diff.toFixed(2)));
+		
+		//คำนวน รายได้ใหม่ total
+		calculateNewSalaryTotal($(this), new_salary);
+	});
+	
+	$("#list_empjudege").find('.pqpi').keyup(function() {
+		var pqpi = Number($(this).autoNumeric('get'));
+		console.log(pqpi,'pqpi')
+		//คำนวน ปรับรายได้ Total
+		var salary_score = Number($(this).closest('.control-calculate').find('.data-salary').find('.salary').autoNumeric('get'));
+		console.log(salary_score,'salary_score pqpi')
+		var total = salary_score + pqpi;
+		console.log(total,'total_pqpi')
+		$(this).closest('.control-calculate').find('.data-up-total').attr('data-value', total.toFixed(2));
+		$(this).closest('.control-calculate').find('.data-up-total').text(Comma(total.toFixed(2)));
+		
+		//คำนวน รายได้ใหม่  ตรง  P-QPI
+		var current_pqpi = Number($(this).closest('.control-calculate').find('.data-current-pqpi').attr('data-value'));
+		var new_pqpi = current_pqpi + pqpi;
+		$(this).closest('.control-calculate').find('.data-new-pqpi').attr('data-value', new_pqpi.toFixed(2));
+		$(this).closest('.control-calculate').find('.data-new-pqpi').text(Comma(new_pqpi.toFixed(2)));
+		
+		//คำนวน % Diff
+		var data_current_total = Number($(this).closest('.control-calculate').find('.data-current-total').attr('data-value'));
+		var val_diff = total/data_current_total;
+		console.log(val_diff,'val_diff')
+		$(this).closest('.control-calculate').find('.data-percent-diff').attr('data-value', val_diff.toFixed(2));
+		$(this).closest('.control-calculate').find('.data-percent-diff').text(Comma(val_diff.toFixed(2)));
+		
+		//คำนวน รายได้ใหม่ total
+		calculateNewSalaryTotal($(this), new_pqpi);
 	});	
 }
 
@@ -862,21 +899,21 @@ $(document).ready(function() {
 		         }       
 		    });
 			
-			$(window).scroll(function() {
-				var myElements = $("#scroll-tableBonusAdjustment")[0].querySelectorAll("thead");
-				if($(this).scrollTop() >= $("#scroll-tableBonusAdjustment").offset().top){
-					$(".lfr-hudcrumbs").hide();
-					$(".nav-collapse").hide();
-					var translate = "translate(0," + ($(this).scrollTop()-$("#scroll-tableBonusAdjustment").offset().top) + "px)";
-					for (var i = 0; i < myElements.length; i++) {
-				       myElements[i].style.transform=translate;
-				     }
-				 }else{
-					 $(".nav-collapse").show();
-					 $("#scroll-tableBonusAdjustment thead").css("transform","translate(0,0px)");
-				 }
-
-			});
+//			$(window).scroll(function() {
+//				var myElements = $("#scroll-tableBonusAdjustment")[0].querySelectorAll("thead");
+//				if($(this).scrollTop() >= $("#scroll-tableBonusAdjustment").offset().top){
+//					$(".lfr-hudcrumbs").hide();
+//					$(".nav-collapse").hide();
+//					var translate = "translate(0," + ($(this).scrollTop()-$("#scroll-tableBonusAdjustment").offset().top) + "px)";
+//					for (var i = 0; i < myElements.length; i++) {
+//				       myElements[i].style.transform=translate;
+//				     }
+//				 }else{
+//					 $(".nav-collapse").show();
+//					 $("#scroll-tableBonusAdjustment thead").css("transform","translate(0,0px)");
+//				 }
+//
+//			});
 			
 			//Search Start
 		    $("#btnSearchAdvance").click(function () {
@@ -887,8 +924,6 @@ $(document).ready(function() {
 				}
 		        $("#search_result").show();
 		        clearFn();
-		        $("#btn_search_calculate").prop("disabled",false)
-		        
 		    });
 		    
 		    $("#btnSubmit,#btn_search_calculate").click(function() {
