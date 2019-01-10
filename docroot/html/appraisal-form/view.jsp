@@ -290,6 +290,7 @@ form {
 							<th style="width: 10%; text-align: center; vertical-align: middle;"><b>IsBonus</b></th>
 							<th style="width: 10%; text-align: center; vertical-align: middle;"><b>IsActive</b></th>
 							<th style="width: 10%; text-align: center; vertical-align: middle;"><b>IsRaise</b></th>
+							<th style="width: 10%; text-align: center; vertical-align: middle;"><b>IsMPI</b></th>
 							<th style="text-align: center; vertical-align: middle;"><b>Manage</b></th>
 						</tr>
 					</thead>
@@ -343,6 +344,12 @@ form {
 							<label class="control-label"> IsRaise </label>
 							<div class="controls">
 								<input checked="" class="checkbox" placeholder="Is Salary" id="is_raise" name="is_raise" type="checkbox">
+							</div>
+						</div>
+						<div class="form-group p-xxs" id="form-group-is_mpi">
+							<label class="control-label"> IsMPI </label>
+							<div class="controls">
+								<input checked="" class="checkbox" placeholder="Is MPI" id="is_mpi" name="is_mpi" type="checkbox">
 							</div>
 						</div>
 						
