@@ -681,6 +681,30 @@ var validationFn = function(data) {
  	callFlashSlideBody(validate,"#information","error");
 }
 
+var SubmitFn = function(statusFakeAdjust, calFlag, gradeCalFlag){
+	if(statusFakeAdjust==1) { //เป็นการประเมินแทน ปรับ stage และบันทึก
+		if($("#fake_adjust").val()=="") {
+			callFlashSlide($(".lt-validate-select-judge").val());
+			return;
+		} else {
+			$("#fake_adjust_name").html($(".lt-validate-confirm-judge").val()+" "+$("#fake_adjust option:selected").text()+"?");
+			$("#confrimModal").modal({
+				"backdrop" : setModalPopup[0],
+				"keyboard" : setModalPopup[1]
+			});
+			
+			$("#confrimModal").off("click","#btnConfirmYes");
+			$("#confrimModal").on("click","#btnConfirmYes",function(){
+				$("#confrimModal").modal('hide');
+				insertFn(statusFakeAdjust, calFlag, gradeCalFlag);
+				$('.modal-body').animate({ scrollTop: 0 }, "slow");
+			});
+		}
+	} else {
+    	insertFn(statusFakeAdjust, calFlag, gradeCalFlag); // 2 or 3
+	}
+}
+
 
 /* fakeFlag
    1 = แอดมิน  is_hr = 1 ประเมินให้คนอื่นได้   ปรับ stage และ save 
@@ -692,7 +716,7 @@ var validationFn = function(data) {
 0 = ไม่ได้กดมาจากปุ่ม cal 
 1 = กดมาจากปุ่ม cal 
 */
-var insertFn = function(fakeFlag, calFlag) {
+var insertFn = function(fakeFlag, calFlag, gradeCalFlag) {
 	if(fakeFlag==1) {
 		var objectJudge = {
 			"emp_id" : $("#fake_adjust").val().split("-")[0],
@@ -725,7 +749,9 @@ var insertFn = function(fakeFlag, calFlag) {
         	"detail": detail,
         	"cal_flag" : calFlag,
         	"fake_flag" : fakeFlag,
-        	"object_judge" : objectJudge
+        	"object_judge" : objectJudge,
+        	"grade_cal_flag" : gradeCalFlag,
+        	"period_id" : $("#embed_period_id").val()
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (resData) {
@@ -944,27 +970,65 @@ $(document).ready(function() {
 		    		return;
 		    	}
 		    	
-		    	if(statusFakeAdjust==1) { //เป็นการประเมินแทน ปรับ stage และบันทึก
-		    		if($("#fake_adjust").val()=="") {
-		    			callFlashSlide($(".lt-validate-select-judge").val());
-		    			return;
-		    		} else {
-		    			$("#fake_adjust_name").html($(".lt-validate-confirm-judge").val()+" "+$("#fake_adjust option:selected").text()+"?");
-		    			$("#confrimModal").modal({
-		    				"backdrop" : setModalPopup[0],
-		    				"keyboard" : setModalPopup[1]
-		    			});
-		    			
-		    			$("#confrimModal").off("click","#btnConfirmYes");
-		    			$("#confrimModal").on("click","#btnConfirmYes",function(){
-		    				$("#confrimModal").modal('hide');
-		    				insertFn(statusFakeAdjust, calFlag);
-		    				$('.modal-body').animate({ scrollTop: 0 }, "slow");
-		    			});
-		    		}
+		    	// grade calculate in next stage
+		    	var gradeCalFlag = 0;
+		    	if(calFlag == 0){
+		    		$.ajax({
+		    			url: restfulURL + "/" + serviceName + "/public/appraisal_stage/"+$('select#actionToAssign').val(),
+		    			type: "get",
+		    			dataType: "json",
+		    			async: true,
+		    			data: {},
+		    			headers: { Authorization: "Bearer " + tokenID.token },
+		    			success: function (resData) {
+		    				if(resData.grade_calculation_flag == 1){
+		    					$("#GradeCalculationConfrimModal").modal({
+		    						"backdrop" : setModalPopup[0],
+		    						"keyboard" : setModalPopup[1]
+		    					});
+
+		    					$("#GradeCalculationConfrimModal").off("click","#btnSaveAndCalculate");
+		    					$("#GradeCalculationConfrimModal").on("click","#btnSaveAndCalculate",function(){
+		    						gradeCalFlag = 1;
+		    						$("#GradeCalculationConfrimModal").modal('hide');
+		    						SubmitFn(statusFakeAdjust, calFlag, gradeCalFlag);
+		    					});
+		    					
+		    					$("#GradeCalculationConfrimModal").off("click","#btnSaveOnly");
+		    					$("#GradeCalculationConfrimModal").on("click","#btnSaveOnly",function(){
+		    						gradeCalFlag = 0;
+		    						$("#GradeCalculationConfrimModal").modal('hide');
+		    						SubmitFn(statusFakeAdjust, calFlag, gradeCalFlag);
+		    					});
+		    				}
+		    			}
+		    		});
 		    	} else {
-			    	insertFn(statusFakeAdjust, calFlag); // 2 or 3
+		    		SubmitFn(statusFakeAdjust, calFlag, gradeCalFlag);
 		    	}
+				
+// --    		Move to SubmitFn()
+//		    	if(statusFakeAdjust==1) { //เป็นการประเมินแทน ปรับ stage และบันทึก
+//		    		if($("#fake_adjust").val()=="") {
+//		    			callFlashSlide($(".lt-validate-select-judge").val());
+//		    			return;
+//		    		} else {
+//		    			$("#fake_adjust_name").html($(".lt-validate-confirm-judge").val()+" "+$("#fake_adjust option:selected").text()+"?");
+//		    			$("#confrimModal").modal({
+//		    				"backdrop" : setModalPopup[0],
+//		    				"keyboard" : setModalPopup[1]
+//		    			});
+//		    			
+//		    			$("#confrimModal").off("click","#btnConfirmYes");
+//		    			$("#confrimModal").on("click","#btnConfirmYes",function(){
+//		    				$("#confrimModal").modal('hide');
+//		    				insertFn(statusFakeAdjust, calFlag);
+//		    				$('.modal-body').animate({ scrollTop: 0 }, "slow");
+//		    			});
+//		    		}
+//		    	} else {
+//			    	insertFn(statusFakeAdjust, calFlag); // 2 or 3
+//		    	}
 		    });
 		    
 		    //binding tooltip start

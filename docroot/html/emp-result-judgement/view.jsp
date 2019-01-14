@@ -1281,6 +1281,37 @@ input[type=number]::-webkit-outer-spin-button {
 	</div>
 	<!-- Modal Confirm End -->
 	
+	
+	<!-- Grade Calculation confirm dialog -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="GradeCalculationConfrimModal"
+		class="modal inmodal in" style="width:400px;left:calc;display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content  bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
+						<span aria-hidden="true"><i class='fa fa-times'></i></span>
+					</button>
+					<h5 class="modal-title"><liferay-ui:message key="confirm-dialog"/></h5>
+				</div>
+				<div class="modal-body">
+					<div class="form-kpi-mangement">
+						<div class="form-kpi-label" align="center">
+							<label id="">กรุณาเลือกสิ่งที่ต้องการดำเนินการต่อไป</label>
+							<div id="" class='GradeCalculationInformation'></div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div align="center">
+						<button class="btn btn-success" id="btnSaveAndCalculate" type="button"><liferay-ui:message key="save-and-salary-calculate"/></button>
+						<button class="btn btn-info" id="btnSaveOnly" type="button"><liferay-ui:message key="save-only"/></button>
+						<button data-dismiss="modal" class="btn btn-danger btnCancle" type="button"><liferay-ui:message key="cancel"/></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<div id="embedParamSearch"></div>
 	
 	</body>
