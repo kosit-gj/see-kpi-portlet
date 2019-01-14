@@ -2232,7 +2232,7 @@ var createTemplateAssignmentFn = function (data) {
 };
 
 var check_appraisalLevel;
-var getTemplateFn = function (emp_result_id, stage_id, emp_code, org_code) {
+var getTemplateFn = function (emp_result_id, stage_id, emp_code, org_code , emp_code_list) {
 
     if ($("#appraisalType").val() == 1) {
         check_appraisalLevel = $("#appraisalLevel").val();
@@ -2260,6 +2260,7 @@ var getTemplateFn = function (emp_result_id, stage_id, emp_code, org_code) {
         data: {
             'appraisal_level_id': check_appraisalLevel,
             'emp_result_id': emp_result_id,
+            'emp_code_list': emp_code_list,
             'org_id': org_id_to_assign,
             "obj_stage": stage
 
@@ -2589,7 +2590,7 @@ $(document).ready(function () {
                     $("#btnSubmit").removeAttr("disabled");
                     $("#btnAddAnother").removeAttr("disabled");
                     //Default end
-                    getTemplateFn("", default_stage_id[0], empldoyees_code[0], organization_code[0]);
+                    getTemplateFn("", default_stage_id[0], empldoyees_code[0], organization_code[0] , empldoyees_code);
 
                     $("#slideUpDownStageHistory").hide();
                     $("#slideStageHistory").hide();

@@ -788,6 +788,28 @@ plid = layout.getPlid();
 .aui #ModalAssignment .numberOnly{
 	font-size: 12px;
 }
+.aui #list-info {
+	position: absolute;
+	bottom: 90px;
+	left: -69px;
+	z-index: 3000;
+	opacity: 0;
+	width: 320px;
+	padding: 8px;
+	background-color: #333333;
+	border: 1px solid rgba(255, 255, 255, 0.9);
+	-webkit-transition: opacity 0.2s ease-out, bottom 0.2s ease-out;
+	-moz-transition: opacity 0.2s ease-out, bottom 0.2s ease-out;
+	-o-transition: opacity 0.2s ease-out, bottom 0.2s ease-out;
+	transition: opacity 0.2s ease-out, bottom 0.2s ease-out;
+}
+
+.aui  #list-info p {
+	color: #ffffff;
+	font-weight: 400;
+	font-size: 0.9em;
+	text-align: left;
+}
 </style>
 <body class="gray-bg ">
 
