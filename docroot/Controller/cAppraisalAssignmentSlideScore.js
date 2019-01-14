@@ -2155,7 +2155,17 @@ var createTemplateAssignmentFn = function (data) {
         $('.is_date').datepicker({ // is_date
         	dateFormat: "yy/mm/dd",
         });
-        
+        $(".numberOnly").autoNumeric('init');
+    	$(".numberOnly").autoNumeric('update', {
+    		vMin : '-999999999.9999',
+    		vMax : '999999999.9999',
+    		lZero: 'deny',
+    		wEmpty: 'zero',
+    		mDec: 4,
+    		//aSign : ' %',
+    		//pSign : 's'
+    	});
+        /*
         var getSelectionStart = function (o) {
             if (o.createTextRange) {
                 var r = document.selection.createRange().duplicate()
@@ -2182,7 +2192,7 @@ var createTemplateAssignmentFn = function (data) {
             }
             return true;
         });
-
+*/
 
     });
     //sum grand total start
@@ -2190,10 +2200,11 @@ var createTemplateAssignmentFn = function (data) {
     $(".weight_sum").keyup(function () {
         calculationGrandTotalFn(this.id);
     })
+    /*
     $(".addComma").keyup(function () {
         //Comma();
         $(this).val(Comma($(this).val()));
-    })
+    })*/
 
     $(".appraisalItem-checkbox").click(function () {
         //alert("hello");

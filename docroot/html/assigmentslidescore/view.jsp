@@ -785,7 +785,9 @@ plid = layout.getPlid();
   cursor: default;
 }
 
-
+.aui #ModalAssignment .numberOnly{
+	font-size: 12px;
+}
 </style>
 <body class="gray-bg ">
 
