@@ -1045,9 +1045,19 @@ input[type=number]::-webkit-outer-spin-button {
 				 <div class="form-group pull-left span3" style="margin-left: 5px">
                     <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="form"/>" class="input form-control input-sm span12"
                       id="AppraisalForm" name="AppraisalForm">
+                      <option>All From</option>
                     </select>
                   </div>            
-
+				<div class="row-fluid">
+				<div class="form-group pull-left span3" style="margin-left: 5px">
+						<select name="output_type" id="output_type"
+							class="input form-control input-sm span12" title=""
+							data-toggle="tooltip" style="cursor: pointer;"
+							data-original-title="<liferay-ui:message key="output-type"/>">
+							<option value="pdf">PDF</option>
+							<option value="xlsx">Excel</option>
+						</select>
+				</div>
                   <div class="form-group pull-right m-b-none span3" style="margin-top: 1px; margin-left: 5px; text-align:right;">					
 								<div class="form-group pull-right m-b-none ">
 									<button type="button" name="btnSearchAdvance" id="btnSearchAdvance" class="btn btn-info input-sm " style="margin-left: 5px;">
@@ -1073,7 +1083,12 @@ input[type=number]::-webkit-outer-spin-button {
 
 	
 	<div id="embedParamSearch"></div>
-	
+	<iframe id="iFrame_report" frameborder="0"
+		style="width: 100%; height: 500px;">
+		<p>
+			<liferay-ui:message key="your-browser-does-not-support-iframes" />
+		</p>
+	</iframe>
 	</body>
 	
 <!-- Language Template for js -->

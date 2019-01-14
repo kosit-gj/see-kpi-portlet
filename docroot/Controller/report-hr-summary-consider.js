@@ -40,7 +40,7 @@ var dropDrowYearListFn = function(nameArea,id){
 var dropDrowPeriodListFn = function(){
 
 	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/bonus/advance_search/period",
+		url:restfulURL+"/"+serviceName+"/public/bonus/advance_search/period_hr",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -132,7 +132,7 @@ var dropDrowFormTypeFn = function(id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-//			htmlOption+="<option value=''>All Form</option>";
+			htmlOption+="<option value=''>All Form</option>";
 			$.each(data,function(index,indexEntry){
 				htmlOption+="<option value="+indexEntry['appraisal_form_id']+">"+indexEntry['appraisal_form_name']+"</option>";
 			});
@@ -203,6 +203,7 @@ var getDataFn = function () {
 	var EmpName_id= $("#EmpName_id").val();
 	var Position_id= $("#Position").val()== null ? '' : $("#Position").val().toString();
 	var AppraisalFrom=$("#AppraisalForm").val();
+	var output_type = $("#output_type").val();
 	var parameter = {};
 	var template_name ="";
 	
@@ -222,14 +223,25 @@ var getDataFn = function () {
 				param_from:AppraisalFrom
 			  };
 
-	//-- set report lacale name --//
+/*	//-- set report lacale name --//
 	var currentLocale = $("#user_locale").val();
 	var template_name = "report-hr-summary-consider";
 	if(typeof currentLocale !== 'undefined'){
 		template_name = template_name+"_"+currentLocale;
-	}
+	}*/
+
+    var data = JSON.stringify(parameter);
+    var url_report_jasper = restfulURL + "/" + serviceName + "/public/generateAuth?template_name=report-hr-summary-consider&token=" + tokenID.token + "&template_format=" + output_type + "&used_connection=1&inline=1&data=" + data;
+    console.log(url_report_jasper);
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        window.open(url_report_jasper, "_blank");
+    } else {
+        $('#iFrame_report').attr('src', url_report_jasper);
+    }
+    $("body").mLoading('hide'); //Loading
+};
 	
-	  var data = JSON.stringify(parameter);
+/*	  var data = JSON.stringify(parameter);
 	  var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name="+template_name+"&token="+tokenID.token+"&template_format=xlsx&used_connection=1&inline=1&data="+data;
 			window.open(url_report_jasper,"_blank");
 			$("body").mLoading('hide'); //Loading
@@ -242,7 +254,7 @@ var getDataFn = function () {
 //			$('#iFrame_report').attr('src',url_report_jasper);
 //		}
 	 
-};
+};*/
     
 $(document).ready(function() {
 
