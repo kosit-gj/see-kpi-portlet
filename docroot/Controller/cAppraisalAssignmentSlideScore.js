@@ -781,7 +781,7 @@ var actionUpdateAssignmentFn = function () {
                 }
                 appraisal_items += "\"item_result_id\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_result_id").val() + "\",";
                 appraisal_items += "\"item_id\":\"" + $(appraisalItemEntry).val() + "\",";
-                appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text() + "\",";
+                appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') + "\",";
                 appraisal_items += "\"form_id\":\"2\",";
                 appraisal_items += "\"target_value\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-target").val()) + "\",";
                 appraisal_items += "\"total_weight\":\"" + removeComma($("#total_weight-" + $(structureEntry).val()).val()) + "\",";
@@ -807,7 +807,7 @@ var actionUpdateAssignmentFn = function () {
                 }
                 appraisal_items += "\"item_result_id\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_result_id").val() + "\",";
                 appraisal_items += "\"item_id\":\"" + $(appraisalItemEntry).val() + "\",";
-                appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text() + "\",";
+                appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') + "\",";
                 appraisal_items += "\"form_id\":\"3\",";
                 appraisal_items += "\"max_value\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-maxValue").val() + "\",";
                 appraisal_items += "\"total_weight\":\"" + $("#total_weight-" + $(structureEntry).val()).val() + "\",";
@@ -914,7 +914,7 @@ var actionAssignmentFn = function (param) {
                 appraisal_items += "\"kpi_type_id\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-kpi_type_id").val() + "\",";
                 appraisal_items += "\"form_id\":\"1\",";
                 appraisal_items += "\"item_id\":\"" + $(appraisalItemEntry).val() + "\",";
-                appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text() + "\",";
+                appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') + "\",";
                 appraisal_items += "\"target_value\":\"" + removeComma(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-target").val())) + "\",";
                 //appraisal_items+="\"forecast_value\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-forecast").val())+"\",";
                 appraisal_items += "\"score0\":\"" + setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score0").val())) + "\",";
@@ -939,7 +939,7 @@ var actionAssignmentFn = function (param) {
                     appraisal_items += ",{";
                 }
                 appraisal_items += "\"item_id\":\"" + $(appraisalItemEntry).val() + "\",";
-                appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text() + "\",";
+                appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') + "\",";
                 appraisal_items += "\"form_id\":\"2\",";
                 appraisal_items += "\"target_value\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-target").val()) + "\",";
                 appraisal_items += "\"weight_percent\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-weight").val()) + "\",";
@@ -957,7 +957,7 @@ var actionAssignmentFn = function (param) {
                     appraisal_items += ",{";
                 }
                 appraisal_items += "\"item_id\":\"" + $(appraisalItemEntry).val() + "\",";
-                appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text() + "\",";
+                appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') + "\",";
                 appraisal_items += "\"form_id\":\"3\",";
                 appraisal_items += "\"max_value\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-maxValue").val() + "\",";
                 appraisal_items += "\"deduct_score_unit\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-deductScoreUnit").val() + "\",";
@@ -980,7 +980,7 @@ var actionAssignmentFn = function (param) {
                     appraisal_items += ",{";
                 }
                 appraisal_items += "\"item_id\":\"" + $(appraisalItemEntry).val() + "\",";
-                appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text() + "\",";
+                appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') + "\",";
                 appraisal_items += "\"form_id\":\"4\",";
                 appraisal_items += "\"max_value\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-maxValue").val() + "\",";
                 appraisal_items += "\"reward_score_unit\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-rewardScoreUnit").val() + "\",";
