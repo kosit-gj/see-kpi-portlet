@@ -318,14 +318,20 @@ var callFlashSlideInModal =function(text,id,flashType){
 }
 
 //check value not null
-var notNullFn = function(data){
+var notNullFn = function(data,dataDigit){
 	var dataNotNull="";
+	var digit = "";
+	if((dataDigit == '' || dataDigit == undefined || dataDigit == 'undefined' || dataDigit == null ||dataDigit == 'null')){
+		digit = 2;
+	}else{
+		digit = dataDigit
+	}
 	if((data == '' || data == undefined || data == 'undefined' || data == null ||data == 'null')){
 		dataNotNull="0.00";
 	}else{
 		dataNotNull=data;
 	}
-	return parseFloat(dataNotNull).toFixed(2);
+	return parseFloat(dataNotNull).toFixed(digit);
 }
 //check value not null
 var notNullTextFn = function(data){

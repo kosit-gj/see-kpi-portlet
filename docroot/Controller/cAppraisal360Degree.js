@@ -368,7 +368,7 @@ var onchangTableQualityFn = function (structureId, resultType) {  // QualityFn
 
       htmlTable += "<tr>";
       htmlTable += "<td class=''>" + indexEntry.item_name + "  " + info_item + "</td>";
-      htmlTable += "<td class='' style='text-align: right;padding-right: 10px;'><div id='target_value-" + indexEntry.item_result_id + "' data-toggle=\"tooltip\" data-placement=\"right\" title=\"" + hintHtml + "\">" + addCommas(parseFloat(notNullFn(indexEntry.target_value)).toFixed(2)) + "</div></td>";
+      htmlTable += "<td class='' style='text-align: right;padding-right: 10px;'><div id='target_value-" + indexEntry.item_result_id + "' data-toggle=\"tooltip\" data-placement=\"right\" title=\"" + hintHtml + "\">" + addCommas(parseFloat(notNullFn(indexEntry.target_value)).toFixed(4)) + "</div></td>";
       htmlTable += "<td class='' style='text-align: center;'>";
       
       if($("select#emp-"+structureId).val() == ""){
@@ -850,7 +850,7 @@ var assignTemplateRewardFn = function (structureName, data) {
             htmlTemplateDeduct += "<td class=''> " + indexEntry['item_name'] + "</td>";
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['max_value'])).toFixed(2)) + "</td>";
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['no_raise_value'])).toFixed(2)) + "</td>";
-            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>";
+            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(4)) + "</td>";
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2)) + "</td>";
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_no_raise_value'])).toFixed(2)) + "</td>";
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['reward_score_unit'])).toFixed(2)) + "</td>";
@@ -861,7 +861,7 @@ var assignTemplateRewardFn = function (structureName, data) {
             htmlTemplateDeduct += "<td class=''> " + indexEntry['item_name'] + "</td>";
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['max_value'])).toFixed(2)) + "</td>";
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['no_raise_value'])).toFixed(2)) + "</td>";
-            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>";
+            htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(4)) + "</td>";
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2)) + "</td>";
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_no_raise_value'])).toFixed(2)) + "</td>";
             htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['reward_score_unit'])).toFixed(2)) + "</td>";
@@ -945,7 +945,7 @@ var assignTemplateDeductFn = function (structureName, data) {
         htmlTemplateDeduct += "<td class=''> " + indexEntry['item_name'] + "</td>";
         htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['max_value'])).toFixed(2)) + "</td>";
         htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['no_raise_value'])).toFixed(2)) + "</td>";
-        htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>";
+        htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(4)) + "</td>";
         htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_value'])).toFixed(2)) + "</td>";
         htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['over_no_raise_value'])).toFixed(2)) + "</td>";
         htmlTemplateDeduct += "<td class='' style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['deduct_score_unit'])).toFixed(2)) + "</td>";
@@ -1045,8 +1045,8 @@ var assignTemplateQuantityFn = function (structureName, data) {
 
         paperclip = (indexEntry['files_amount'] > 0) ? "<i class='fa fa-paperclip' style='font-weight: bold; font-size: 20px;'></i>" : "<span style='width: 15.72px;'></span>";
         item_result_id_array.push(indexEntry['item_result_id']);
-        if (!(indexEntry['formula_desc'] == null || indexEntry['formula_desc'] == undefined || indexEntry['formula_desc'] == "" || indexEntry['formula_desc'].length == 0)) {
-            info_item = "<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>" + $(".lt-kpi-name").val() + " : </strong>" + indexEntry['item_name'] + "' info-data='" + indexEntry['formula_desc'] + "'>i</span>";
+        if (!(indexEntry['item_desc'] == null || indexEntry['item_desc'] == undefined || indexEntry['item_desc'] == "" || indexEntry['item_desc'].length == 0)) {
+            info_item = "<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>" + $(".lt-kpi-name").val() + " : </strong>" + indexEntry['item_name'] + "' info-data='" + indexEntry['item_desc'] + "'>i</span>";
         } else {
             info_item = "";
         }
@@ -1078,7 +1078,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
 			
         	htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><div title=\"" + hintHtml + "\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >" + target_value_is_date + "</div></td>";
         }else{
-        	htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><div title=\"" + hintHtml + "\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >" + addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2)) + "</div></td>";
+        	htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><div title=\"" + hintHtml + "\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >" + addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(4)) + "</div></td>";
         }
         htmlTemplateQuantity += "<td>" + indexEntry['uom_name'] + "</td>";
         if(indexEntry['is_date']==1){
@@ -1089,7 +1089,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
         	
         	htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore is_date\" id=\"forecast-" + indexEntry['item_result_id'] + "\" name=\"forecast-" + indexEntry['item_result_id'] + "\" value=" + scoreForecastDat + "></td>";
 		}else{
-			htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore addComma\" id=\"forecast-" + indexEntry['item_result_id'] + "\" name=\"forecast-" + indexEntry['item_result_id'] + "\" value=" + addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(2)) + "></td>";
+			htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore addComma\" id=\"forecast-" + indexEntry['item_result_id'] + "\" name=\"forecast-" + indexEntry['item_result_id'] + "\" value=" + addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(4)) + "></td>";
 		}
         //htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore addComma\" id=\"forecast-" + indexEntry['item_result_id'] + "\" name=\"forecast-" + indexEntry['item_result_id'] + "\" value=" + addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(2)) + "></td>";
         //htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly \" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
@@ -1105,7 +1105,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
 			
         	htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'>" + actual_value_is_date + "</td>";
         }else{
-        	htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>";
+        	htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(4)) + "</td>";
         }
         
         if (data['threshold'] == 1) { // is_date
@@ -1598,7 +1598,7 @@ var listAppraisalDetailFn = function (data) {
             //get the carat position
             var caratPos = getSelectionStart(this);
             var dotPos = this.value.indexOf(".");
-            if (caratPos > dotPos && dotPos > -1 && (number[1].length > 1)) {
+            if (caratPos > dotPos && dotPos > -1 && (number[1].length > 3)) {
                 return false;
             }
             return true;
@@ -1730,10 +1730,10 @@ var listActionPlanFn = function (data) {
 
     $("#actionPlanOrganization").html(data['header']['org_name']);
     $("#actionPlanAppraisalItem").html(data['header']['item_name']);
-    $("#actionPlanTarget").html(addCommas(parseFloat(notNullFn(data['header']['target_value'])).toFixed(2)));
+    $("#actionPlanTarget").html(addCommas(parseFloat(notNullFn(data['header']['target_value'])).toFixed(4)));
 
-    $("#actionPlanForecastResult").html(addCommas(parseFloat(notNullFn(data['header']['forecast_value'])).toFixed(2)));
-    $("#actionPlanActual").html(addCommas(parseFloat(notNullFn(data['header']['actual_value'])).toFixed(2)));
+    $("#actionPlanForecastResult").html(addCommas(parseFloat(notNullFn(data['header']['forecast_value'])).toFixed(4)));
+    $("#actionPlanActual").html(addCommas(parseFloat(notNullFn(data['header']['actual_value'])).toFixed(4)));
     $("#actionPlanActualVSforecast").html(addCommas(parseFloat(notNullFn(data['header']['actual_vs_forecast'])).toFixed(2)));
     $("#actionPlanActualVSTarget").html(addCommas(parseFloat(notNullFn(data['header']['actual_vs_target'])).toFixed(2)));
 
@@ -1836,9 +1836,9 @@ update_dttm
 
     //0,0,100,80,80
     //%Actual vs Forecast
-    var actual_value = parseFloat(notNullFn(data['header']['actual_value'])).toFixed(2);
-    var target_value = parseFloat(notNullFn(data['header']['target_value'])).toFixed(2);
-    var forecast_value = parseFloat(notNullFn(data['header']['forecast_value'])).toFixed(2);
+    var actual_value = parseFloat(notNullFn(data['header']['actual_value'])).toFixed(4);
+    var target_value = parseFloat(notNullFn(data['header']['target_value'])).toFixed(4);
+    var forecast_value = parseFloat(notNullFn(data['header']['forecast_value'])).toFixed(4);
 
     var actual_vs_forecast = "";
     var actual_vs_target = "";

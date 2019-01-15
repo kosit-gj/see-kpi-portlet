@@ -341,9 +341,9 @@ var listDataPerformanceDetailFn = function(data,district,type){
 		        	var scoreActualDat = new Date(splitDecimal(indexEntry2['actual']).replace( /(\d{4})(\d{2})(\d{2})/, "$2/$3/$1"));
 		        	actual = (scoreActualDat == 'Invalid Date') ? splitDecimal(indexEntry2['actual']) : formatDate(scoreActualDat);
 			   }else{
-				   target = (indexEntry2['target']==null || indexEntry2['target']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['target']));
-					forecast = (indexEntry2['forecast']==null || indexEntry2['forecast']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['forecast']));
-					actual = (indexEntry2['actual']==null || indexEntry2['actual']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['actual']));
+				   target = (indexEntry2['target']==null || indexEntry2['target']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['target'],4));
+					forecast = (indexEntry2['forecast']==null || indexEntry2['forecast']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['forecast'],4));
+					actual = (indexEntry2['actual']==null || indexEntry2['actual']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['actual'],4));
 			   }
 				
 				
