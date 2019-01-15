@@ -800,6 +800,7 @@ var actionUpdateAssignmentFn = function () {
                 appraisal_items += "\"form_id\":\"1\",";
                 appraisal_items += "\"item_id\":\"" + $(appraisalItemEntry).val() + "\",";
                 appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') + "\",";
+                appraisal_items += "\"item_desc\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name input").text()+ "\",";
                 appraisal_items += "\"target_value\":\"" + removeComma(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-target").val())) + "\",";
                 appraisal_items += "\"score0\":\"" + setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score0").val())) + "\",";
                 appraisal_items += "\"score1\":\"" + setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score1").val())) + "\",";
@@ -831,6 +832,7 @@ var actionUpdateAssignmentFn = function () {
                 appraisal_items += "\"item_result_id\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_result_id").val() + "\",";
                 appraisal_items += "\"item_id\":\"" + $(appraisalItemEntry).val() + "\",";
                 appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') + "\",";
+                appraisal_items += "\"item_desc\":\"\",";
                 appraisal_items += "\"form_id\":\"2\",";
                 appraisal_items += "\"target_value\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-target").val()) + "\",";
                 appraisal_items += "\"total_weight\":\"" + removeComma($("#total_weight-" + $(structureEntry).val()).val()) + "\",";
@@ -857,6 +859,7 @@ var actionUpdateAssignmentFn = function () {
                 appraisal_items += "\"item_result_id\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_result_id").val() + "\",";
                 appraisal_items += "\"item_id\":\"" + $(appraisalItemEntry).val() + "\",";
                 appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') + "\",";
+                appraisal_items += "\"item_desc\":\"\",";
                 appraisal_items += "\"form_id\":\"3\",";
                 appraisal_items += "\"max_value\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-maxValue").val() + "\",";
                 appraisal_items += "\"total_weight\":\"" + $("#total_weight-" + $(structureEntry).val()).val() + "\",";
@@ -964,6 +967,7 @@ var actionAssignmentFn = function (param) {
                 appraisal_items += "\"form_id\":\"1\",";
                 appraisal_items += "\"item_id\":\"" + $(appraisalItemEntry).val() + "\",";
                 appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') + "\",";
+                appraisal_items += "\"item_desc\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name input").text()+ "\",";
                 appraisal_items += "\"target_value\":\"" + removeComma(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-target").val())) + "\",";
                 //appraisal_items+="\"forecast_value\":\""+removeComma($("#id-"+$(appraisalItemEntry).val()+"-"+$(structureEntry).val()+"-forecast").val())+"\",";
                 appraisal_items += "\"score0\":\"" + setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score0").val())) + "\",";
@@ -989,6 +993,7 @@ var actionAssignmentFn = function (param) {
                 }
                 appraisal_items += "\"item_id\":\"" + $(appraisalItemEntry).val() + "\",";
                 appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') + "\",";
+                appraisal_items += "\"item_desc\":\"\",";
                 appraisal_items += "\"form_id\":\"2\",";
                 appraisal_items += "\"target_value\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-target").val()) + "\",";
                 appraisal_items += "\"weight_percent\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-weight").val()) + "\",";
@@ -1007,6 +1012,7 @@ var actionAssignmentFn = function (param) {
                 }
                 appraisal_items += "\"item_id\":\"" + $(appraisalItemEntry).val() + "\",";
                 appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') + "\",";
+                appraisal_items += "\"item_desc\":\"\",";
                 appraisal_items += "\"form_id\":\"3\",";
                 appraisal_items += "\"max_value\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-maxValue").val() + "\",";
                 appraisal_items += "\"deduct_score_unit\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-deductScoreUnit").val() + "\",";
@@ -1030,6 +1036,7 @@ var actionAssignmentFn = function (param) {
                 }
                 appraisal_items += "\"item_id\":\"" + $(appraisalItemEntry).val() + "\",";
                 appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') + "\",";
+                appraisal_items += "\"item_desc\":\"\",";
                 appraisal_items += "\"form_id\":\"4\",";
                 appraisal_items += "\"max_value\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-maxValue").val() + "\",";
                 appraisal_items += "\"reward_score_unit\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-rewardScoreUnit").val() + "\",";
@@ -1848,7 +1855,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
             htmlTemplateQuantity += "<tr>";
 
             htmlTemplateQuantity += "<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-" + indexEntry['structure_id'] + "' type='checkbox' value='" + indexEntry['item_id'] + "'></td>";
-            htmlTemplateQuantity += "<td style=\"width:20%\" class='id-" + indexEntry['structure_id'] + "-item_name' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name' style='padding-top:7px;'>" + indexEntry['item_name'] + " <span style='position: relative;' data-info='' class='icon-info-circled iconItemDesc'></span> <input type='hidden' value='" + indexEntry['item_desc'] + "'> </td>";
+            htmlTemplateQuantity += "<td style=\"width:20%\" class='id-" + indexEntry['structure_id'] + "-item_name' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name' style='padding-top:7px;'>" + indexEntry['item_name'] + " <span style='position: relative;' data-info='' class='icon-info-circled iconItemDesc'></span> <input type='hidden' value='" + notNullTextFn(indexEntry['item_desc']) + "'> </td>";
 
 
             if(indexEntry['is_date']==1){ // is_date (target)
@@ -2217,6 +2224,7 @@ var createTemplateAssignmentFn = function (data) {
     	
     	
     	
+    	
     	$(".iconItemDesc , #btnSubmitItemDescription").off("click");
     	$(".iconItemDesc ").on("click",function(){
     		$(".titleItemName").html("");
@@ -2224,12 +2232,15 @@ var createTemplateAssignmentFn = function (data) {
 				"backdrop" : setModalPopup[0],
 				"keyboard" : setModalPopup[1]
 			});
-    		
+    		var id = $(this).parent().attr("id");
     		var itemDesc = $(this).next().val();
-    		
-    		$(".titleItemName").html(""+$(".lt-kpi-name").val()+": "+$(this).parent().text());
-        	$("#item_desc_id").val($(this).parent().attr("id"));
-        	editorItemDescriptionQuality.setContent(itemDesc);
+			var titleItemName = $(".lt-kpi-name").val()+": "+$(this).parent().text();
+    		suneditorFn();
+			$(".titleItemName").html(titleItemName);
+			$("#item_desc_id").val(id);
+			setTimeout(function(){ 
+				editorItemDescriptionQuality.setContent(itemDesc);
+			}, 50);
     		
         	$("#btnSubmitItemDescription").on("click",function(){
     			$("#"+$("#item_desc_id").val()+" input").val(editorItemDescriptionQuality.getContent());
@@ -2344,7 +2355,6 @@ var getTemplateFn = function (emp_result_id, stage_id, emp_code, org_code , emp_
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-        	suneditorFn();
             createTemplateAssignmentFn(data);
             dropDrowActionEditFn(data['to_action']);
             //SET FIXED HEADER 
