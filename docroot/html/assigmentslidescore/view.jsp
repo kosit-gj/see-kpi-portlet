@@ -28,6 +28,12 @@ plid = layout.getPlid();
 .c-4-color { background: blue; }
 .c-5-color { background: purple; }
 
+.aui .sun-editor{
+ z-index: 999999999999;
+}
+.sun-editor .sun-editor-id-toolbar .editor_tool {
+    height: 18px;
+    }
  /* Large desktop Start#####################################*/
  @media (min-width: 1200px) { 
  
@@ -1932,6 +1938,45 @@ plid = layout.getPlid();
 	<!-- Modal Confirm End -->
 	
 	
+<!-- Modal Item Description Start Edit -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="modal-itemDescriptionQuality" class="modal inmodal large" style="display: none;">
+    <div class="modal-dialog  ">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                
+             	<button data-dismiss="modal" class="close" type="button" style="padding-top:5px"><span aria-hidden="true"><i class="fa fa-times"></i></span><div></div></button>
+                <h4 class="modal-title" id="modalTitleItemDescription"><span id="modalItemDescription">Item Description</span> </h4>
+ 
+            </div>
+            <div class="modal-body">
+      	
+                <div class='row-fluid'>
+	                	<div class='span12' >
+							<h4 class="titleItemName"> </h4>
+							<!-- content  start-->
+							<div id=sunEdit>
+								<!-- <textarea id="formulaItemDescription" style="width: 95%" class=""></textarea>  -->
+							</div>
+
+							<!-- content  end-->
+
+
+						</div>
+                	</div>
+                	
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+           	 	<input type="hidden" name="item_desc_id" id="item_desc_id" value="">
+   		
+   				
+   				<button class="btn btn-primary" type="button" id="btnSubmitItemDescription">Save</button>
+                <button data-dismiss="modal" class="btn btn-white btnCancleItemDescription" type="button">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>  
+<!-- Modal Item Description End Edit -->
 	
 	<!-- Language Template for js -->
 	<%@ include file="/html/language-js-template/view.jsp" %>

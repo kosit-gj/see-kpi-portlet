@@ -12,6 +12,7 @@ var item_id_array = [];
 var emp_result_id_action = [];
 var stage_id_action = [];
 var emailLinkAssignment = false;
+var editorItemDescriptionQuality;
 
 var clearFn = function () {
     $(':input')
@@ -64,7 +65,55 @@ var embedParamCheckboxAppraisalItem = function (id) {
     }
 }
 
+var suneditorFn = function() {
+	var htmlOption = '<textarea id="txtItemDescriptionQuality" style="width: 95%" class=""></textarea>';
+	$("#sunEdit").html(htmlOption);
+	editorItemDescriptionQuality = SUNEDITOR.create('txtItemDescriptionQuality', {
 
+	    height: 250,
+	   width: '100%',
+
+	   // new CSS font properties
+	   addFont: null,
+
+	   // width/heigh of the video
+	   videoX: 560,
+	   videoY: 315,
+
+	   // image file input
+	   imageFileInput: undefined,
+
+	   // image url input
+	   imageUrlInput: undefined,
+
+	   // image size
+	   imageSize: '350px',
+	   
+	   // image upload url
+	   imageUploadUrl: null,
+
+	   // font list
+	   fontList: null,
+	   
+	   // font size list
+	   fontSizeList: null,
+
+	   // show/hide toolbar icons
+	   buttonList: [
+	     ['undo', 'redo'],
+	     ['fontSize', 'formats'],
+	     ['bold', 'underline', 'italic', 'strike', 'removeFormat'],
+	     ['fontColor', 'hiliteColor'],
+	     ['indent', 'outdent'],
+	     ['align', 'line', 'list'],
+	     //['align', 'line', 'list', 'table'],
+	   //['link', 'image', 'video'],
+	     ['fullScreen'] //,['fullScreen', 'codeView'],
+	    // ['preview', 'print']
+	   ]
+	   
+	 });
+};
 var setDataToTemplateFn = function (data, actionType) {
     var stage = data['stage'];
     var head = data['head'][0]
@@ -1799,7 +1848,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
             htmlTemplateQuantity += "<tr>";
 
             htmlTemplateQuantity += "<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-" + indexEntry['structure_id'] + "' type='checkbox' value='" + indexEntry['item_id'] + "'></td>";
-            htmlTemplateQuantity += "<td style=\"width:20%\" class='id-" + indexEntry['structure_id'] + "-item_name' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name' style='padding-top:7px;'>" + indexEntry['item_name'] + "</td>";
+            htmlTemplateQuantity += "<td style=\"width:20%\" class='id-" + indexEntry['structure_id'] + "-item_name' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name' style='padding-top:7px;'>" + indexEntry['item_name'] + " <span style='position: relative;' data-info='' class='icon-info-circled iconItemDesc'></span> <input type='hidden' value='" + indexEntry['item_desc'] + "'> </td>";
 
 
             if(indexEntry['is_date']==1){ // is_date (target)
@@ -2165,6 +2214,34 @@ var createTemplateAssignmentFn = function (data) {
     		//aSign : ' %',
     		//pSign : 's'
     	});
+    	
+    	
+    	
+    	$(".iconItemDesc , #btnSubmitItemDescription").off("click");
+    	$(".iconItemDesc ").on("click",function(){
+    		$(".titleItemName").html("");
+    		$("#modal-itemDescriptionQuality").modal({
+				"backdrop" : setModalPopup[0],
+				"keyboard" : setModalPopup[1]
+			});
+    		
+    		var itemDesc = $(this).next().val();
+    		
+    		$(".titleItemName").html(""+$(".lt-kpi-name").val()+": "+$(this).parent().text());
+        	$("#item_desc_id").val($(this).parent().attr("id"));
+        	editorItemDescriptionQuality.setContent(itemDesc);
+    		
+        	$("#btnSubmitItemDescription").on("click",function(){
+    			$("#"+$("#item_desc_id").val()+" input").val(editorItemDescriptionQuality.getContent());
+    			editorItemDescriptionQuality.destroy();
+    			callFlashSlide($(".lt-insert-successfully").val());
+                $("#modal-itemDescriptionQuality").modal('hide');
+                $("#item_desc_id").val("");
+    		});
+    		
+    	
+    	});
+    	
         /*
         var getSelectionStart = function (o) {
             if (o.createTextRange) {
@@ -2267,7 +2344,7 @@ var getTemplateFn = function (emp_result_id, stage_id, emp_code, org_code , emp_
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-
+        	suneditorFn();
             createTemplateAssignmentFn(data);
             dropDrowActionEditFn(data['to_action']);
             //SET FIXED HEADER 
@@ -2727,7 +2804,11 @@ $(document).ready(function () {
             });
         }
     }
-
+    // Clear Editer
+    $("#modal-itemDescriptionQuality [data-dismiss='modal']").click(function(){
+		suneditorFn();
+	});
+    
     //check Orientation Start
     var getBrowserWidth = function () {
         if (window.innerWidth < 768) {
