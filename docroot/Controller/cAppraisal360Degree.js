@@ -1045,8 +1045,8 @@ var assignTemplateQuantityFn = function (structureName, data) {
 
         paperclip = (indexEntry['files_amount'] > 0) ? "<i class='fa fa-paperclip' style='font-weight: bold; font-size: 20px;'></i>" : "<span style='width: 15.72px;'></span>";
         item_result_id_array.push(indexEntry['item_result_id']);
-        if (!(indexEntry['formula_desc'] == null || indexEntry['formula_desc'] == undefined || indexEntry['formula_desc'] == "" || indexEntry['formula_desc'].length == 0)) {
-            info_item = "<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>" + $(".lt-kpi-name").val() + " : </strong>" + indexEntry['item_name'] + "' info-data='" + indexEntry['formula_desc'] + "'>i</span>";
+        if (!(indexEntry['item_desc'] == null || indexEntry['item_desc'] == undefined || indexEntry['item_desc'] == "" || indexEntry['item_desc'].length == 0)) {
+            info_item = "<span style='cursor: pointer;background-color: #54b3d1;' class=\"badge badge-info infoItem\" info-itemName='<strong>" + $(".lt-kpi-name").val() + " : </strong>" + indexEntry['item_name'] + "' info-data='" + indexEntry['item_desc'] + "'>i</span>";
         } else {
             info_item = "";
         }
@@ -1598,7 +1598,7 @@ var listAppraisalDetailFn = function (data) {
             //get the carat position
             var caratPos = getSelectionStart(this);
             var dotPos = this.value.indexOf(".");
-            if (caratPos > dotPos && dotPos > -1 && (number[1].length > 1)) {
+            if (caratPos > dotPos && dotPos > -1 && (number[1].length > 3)) {
                 return false;
             }
             return true;
