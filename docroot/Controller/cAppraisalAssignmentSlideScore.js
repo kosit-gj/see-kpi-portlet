@@ -781,19 +781,39 @@ var actionUpdateAssignmentFn = function () {
     var appraisal_item1 = [];
     var appraisal_item2 = [];
     var appraisal_item3 = [];
-
+    var appraisal_items_new =[];
     //loop structure
 
     $.each($(".structure_id").get(), function (index, structureEntry) {
         if ($("#form-" + $(structureEntry).val()).val() == "form1") {
             $.each($(".appraisalItem-checkbox-" + $(structureEntry).val()).get(), function (index2, appraisalItemEntry) {
-
+            	appraisal_items_new.push({
+            		
+            		item_result_id		:	$("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_result_id").val() ,
+            		nof_target_score	:	$("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-nof_target_score").val(),
+            		kpi_type_id			: 	$("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-kpi_type_id").val(),
+            		form_id				: 	1 ,
+            		item_id				: 	$(appraisalItemEntry).val(),
+            		item_name			: 	$("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, ''),
+            		item_desc			: 	$("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name input").val(),
+            		target_value		: 	removeComma(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-target").val())),
+            		score0				:	setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score0").val())),
+            		score1				:	setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score1").val())),
+            		score2				:	setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score2").val())),
+            		score3				:	setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score3").val())),
+            		score4				:	setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score4").val())),
+            		score5				:	setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score5").val())),
+            		score6				:	setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score6").val())),
+            		weight_percent		:	removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-weight").val()),
+            		total_weight		:	removeComma($("#total_weight-" + $(structureEntry).val()).val()),
+            		select_flag			:	($(this).prop("checked")? 1 : 0),
+            	});/*
                 if (countAppraisalItem == 0) {
                     appraisal_items += "{";
                 } else {
                     appraisal_items += ",{";
                 }
-
+                
                 appraisal_items += "\"item_result_id\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_result_id").val() + "\",";
                 appraisal_items += "\"nof_target_score\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-nof_target_score").val() + "\",";
                 appraisal_items += "\"kpi_type_id\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-kpi_type_id").val() + "\",";
@@ -817,13 +837,25 @@ var actionUpdateAssignmentFn = function () {
                     appraisal_items += "\"select_flag\":\"0\"";
                 }
                 appraisal_items += "}";
-                countAppraisalItem++;
+                countAppraisalItem++;*/
             });
 
 
 
         } else if ($("#form-" + $(structureEntry).val()).val() == "form2") {
             $.each($(".appraisalItem-checkbox-" + $(structureEntry).val()).get(), function (index2, appraisalItemEntry) {
+            	appraisal_items_new.push({
+            			
+            		item_result_id	:  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_result_id").val(),
+            		item_id 		:  $(appraisalItemEntry).val() ,
+            		item_name 		:  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') ,
+            		item_desc 		:  "",
+            		form_id 		:  2,
+            		target_value	:  removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-target").val()),
+            		weight_percent	:  removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-weight").val()),
+            		total_weight	:  removeComma($("#total_weight-" + $(structureEntry).val()).val()),
+            		select_flag		:  ($(this).prop("checked")? 1 : 0),
+            	});/*
                 if (countAppraisalItem == 0) {
                     appraisal_items += "{";
                 } else {
@@ -845,12 +877,24 @@ var actionUpdateAssignmentFn = function () {
                 }
 
                 appraisal_items += "}";
-                countAppraisalItem++;
+                countAppraisalItem++;*/
             });
 
         } else if ($("#form-" + $(structureEntry).val()).val() == "form3") {
             $.each($(".appraisalItem-checkbox-" + $(structureEntry).val()).get(), function (index2, appraisalItemEntry) {
-
+            	appraisal_items_new.push({
+            		item_result_id	:  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_result_id").val(),
+            		item_id 		:  $(appraisalItemEntry).val() ,
+            		item_name 		:  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') ,
+            		item_desc 		:  "",
+            		form_id 		:  3,
+            		max_value		:  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-maxValue").val(),
+            		deduct_score_unit :$("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-deductScoreUnit").val(),
+            		value_get_zero	:  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-valueGetZero").val(),
+            		no_raise_value	:  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-NoRaiseValue").val(),
+            		total_weight	:  $("#total_weight-" + $(structureEntry).val()).val() ,
+            		select_flag		:  ($(this).prop("checked")? 1 : 0),
+            	});/*
                 if (countAppraisalItem == 0) {
                     appraisal_items += "{";
                 } else {
@@ -874,12 +918,12 @@ var actionUpdateAssignmentFn = function () {
                 }
 
                 appraisal_items += "}";
-                countAppraisalItem++;
+                countAppraisalItem++;*/
             });
         }
     });
 
-    var appraisal_itemsObj = eval("([" + appraisal_items + "])");
+    //var appraisal_itemsObj = eval("([" + appraisal_items + "])");
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal_assignment/" + $("#id").val(),
         type: "PATCH",
@@ -895,7 +939,8 @@ var actionUpdateAssignmentFn = function () {
                 "action_to": $("#actionAssign").val(),
                 "remark": $("#remark_footer").val()
             },
-            "appraisal_items": appraisal_itemsObj
+            "appraisal_items": appraisal_items_new
+            //"appraisal_items": appraisal_itemsObj
         },
         success: function (data) {
 
@@ -925,6 +970,7 @@ var actionUpdateAssignmentFn = function () {
 var actionAssignmentFn = function (param) {
     var countAppraisalItem = 0;
     var appraisal_items = [];
+    var appraisal_items_new = [];
     var employees = [];
     var appraisal_item1 = [];
     var appraisal_item2 = [];
@@ -955,7 +1001,28 @@ var actionAssignmentFn = function (param) {
         if ($("#form-" + $(structureEntry).val()).val() == "form1") {
 
             $.each($(".embed_appraisal_id-" + $(structureEntry).val()).get(), function (index2, appraisalItemEntry) {
-
+            	
+            	
+            	appraisal_items_new.push({
+            		nof_target_score	:	$("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-nof_target_score").val(),
+            		kpi_type_id			: 	$("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-kpi_type_id").val(),
+            		form_id				: 	1 ,
+            		item_id				: 	$(appraisalItemEntry).val(),
+            		item_name			: 	$("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, ''),
+            		item_desc			: 	$("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name input").val(),
+            		target_value		: 	removeComma(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-target").val())),
+            		score0				:	setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score0").val())),
+            		score1				:	setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score1").val())),
+            		score2				:	setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score2").val())),
+            		score3				:	setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score3").val())),
+            		score4				:	setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score4").val())),
+            		score5				:	setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score5").val())),
+            		score6				:	setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score6").val())),
+            		weight_percent		:	removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-weight").val()),
+            		total_weight		:	removeComma($("#total_weight-" + $(structureEntry).val()).val()),
+            		select_flag			:	1,
+            	});
+            	/*
                 if (countAppraisalItem == 0) {
                     appraisal_items += "{";
                 } else {
@@ -981,11 +1048,22 @@ var actionAssignmentFn = function (param) {
                 appraisal_items += "\"total_weight\":\"" + removeComma($("#total_weight-" + $(structureEntry).val()).val()) + "\",";
                 appraisal_items += "\"select_flag\":\"1\"";
                 appraisal_items += "}";
-                countAppraisalItem++;
+                countAppraisalItem++;*/
             });
         } else if ($("#form-" + $(structureEntry).val()).val() == "form2") {
 
             $.each($(".embed_appraisal_id-" + $(structureEntry).val()).get(), function (index2, appraisalItemEntry) {
+            	
+            	appraisal_items_new.push({
+            		item_id 		:  $(appraisalItemEntry).val() ,
+            		item_name 		:  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') ,
+            		item_desc 		:  "",
+            		form_id 		:  2,
+            		target_value	:  removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-target").val()),
+            		weight_percent	:  removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-weight").val()),
+            		total_weight	:  removeComma($("#total_weight-" + $(structureEntry).val()).val()),
+            		select_flag		:  1,
+            	});/*
                 if (countAppraisalItem == 0) {
                     appraisal_items += "{";
                 } else {
@@ -1000,11 +1078,23 @@ var actionAssignmentFn = function (param) {
                 appraisal_items += "\"total_weight\":\"" + removeComma($("#total_weight-" + $(structureEntry).val()).val()) + "\",";
                 appraisal_items += "\"select_flag\":\"1\"";
                 appraisal_items += "}";
-                countAppraisalItem++;
+                countAppraisalItem++;*/
             });
 
         } else if ($("#form-" + $(structureEntry).val()).val() == "form3") {
             $.each($(".embed_appraisal_id-" + $(structureEntry).val()).get(), function (index2, appraisalItemEntry) {
+            	appraisal_items_new.push({
+            		item_id 		:  $(appraisalItemEntry).val() ,
+            		item_name 		:  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') ,
+            		item_desc 		:  "",
+            		form_id 		:  3,
+            		max_value		:  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-maxValue").val(),
+            		deductScoreUnit :  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-deductScoreUnit").val(),
+            		value_get_zero	:  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-valueGetZero").val(),
+            		no_raise_value	:  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-NoRaiseValue").val(),
+            		total_weight	:  $("#total_weight-" + $(structureEntry).val()).val() ,
+            		select_flag		:  1,
+            	});/*
                 if (countAppraisalItem == 0) {
                     appraisal_items += "{";
                 } else {
@@ -1022,13 +1112,22 @@ var actionAssignmentFn = function (param) {
                 appraisal_items += "\"select_flag\":\"1\"";
                 appraisal_items += "}";
 
-                countAppraisalItem++;
+                countAppraisalItem++;*/
             });
         } else if ($("#form-" + $(structureEntry).val()).val() == "form4") {
 
             $.each($(".embed_appraisal_id-" + $(structureEntry).val()).get(), function (index2, appraisalItemEntry) {
-
-
+            	appraisal_items_new.push({
+            		item_id 			:  $(appraisalItemEntry).val() ,
+            		item_name 			:  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, '') ,
+            		item_desc 			:  "",
+            		form_id 			:  4 ,
+            		max_value			:  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-maxValue").val(),
+            		reward_score_unit	:  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-rewardScoreUnit").val(),
+            		total_weight		:  $("#total_weight-" + $(structureEntry).val()).val() ,
+            		select_flag			:  1,
+            	});
+/*
                 if (countAppraisalItem == 0) {
                     appraisal_items += "{";
                 } else {
@@ -1044,13 +1143,13 @@ var actionAssignmentFn = function (param) {
                 appraisal_items += "\"select_flag\":\"1\"";
                 appraisal_items += "}";
 
-                countAppraisalItem++;
+                countAppraisalItem++;*/
             });
         }
     });
 
     var employeesObj = eval("(" + employees + ")");
-    var appraisal_itemsObj = eval("([" + appraisal_items + "])");
+    //var appraisal_itemsObj = eval("([" + appraisal_items + "])");
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal_assignment",
         type: "post",
@@ -1075,7 +1174,8 @@ var actionAssignmentFn = function (param) {
                 "remark": $("#remark_footer").val(),
             },
             "employees": employeesObj,
-            "appraisal_items": appraisal_itemsObj
+            "appraisal_items": appraisal_items_new
+            //"appraisal_items": appraisal_itemsObj
         },
         success: function (data) {
 
