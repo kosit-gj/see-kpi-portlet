@@ -1460,6 +1460,29 @@ var dropDrowFormTypeFn = function(){
 	});
 }
 
+var appraisalStatusFn = function () {
+    $.ajax({
+        url: restfulURL + "/" + serviceName + "/public/bonus/advance_search/status",
+        type: "get",
+        dataType: "json",
+        async: false,
+        data: {
+        	"flag": "appraisal_flag",
+        	"appraisal_form_id": $("#embed_formType").val(),
+        	"appraisal_type_id": 2
+        },
+        headers: { Authorization: "Bearer " + tokenID.token },
+        success: function (data) {
+        	var htmlOption="";
+//			htmlOption+="<option value=''>All Status</option>";
+            $.each(data, function (index, indexEntry) {
+            	htmlOption += "<option value='" + indexEntry['stage_id'] + "'>" + indexEntry['status'] + "</option>";
+            });
+            $("#status").html(htmlOption);
+        }
+    });
+}
+
 
 var splitData = function (data) {
     if (data.trim() != "") {
@@ -1665,7 +1688,8 @@ var listAppraisalDetailFn = function (data) {
             $(".txtChiefEmpName").html(data['head'][0]['chief_emp_name']);
             $(".txtAppraisalType").html(data['head'][0]['appraisal_type_name']);
             $(".txtPeriod").html(data['head'][0]['appraisal_period_desc']);
-            $(".txtGrandTotalWeigh").html(data['head'][0]['result_score']+"<span style=\"font-size: 30%; font-weight: bold;\">"+data['head'][0]['grade']+"</span>");
+            $(".txtGrandTotalWeigh").html(data['head'][0]['result_score']);
+            $(".txtGrade").html(data['head'][0]['grade']);
             $(".txtFormType").html(data['head'][0]['appraisal_form_name']);
 
         } else if ($("#embed_appraisalType").val() == 1) {
@@ -2554,6 +2578,8 @@ var getDataFn = function (page, rpp) {
 
     var appraisal_type_id = ($("#embed_appraisalType").val()); // #004
     var form_type = $("#embed_formType").val();
+    var status = $("#embed_status").val();
+
     
 	if(gSystempConfig.appraisal_360_flag == 1){
 		var apiUrl = "/public/appraisal/show/index";
@@ -2578,6 +2604,7 @@ var getDataFn = function (page, rpp) {
             "position_id": Position,
             "emp_id": EmpID,
             "appraisal_type_id": appraisal_type_id,
+            "stage_id": status,
             "appraisal_form_id": form_type
         },
         success: function (data) {
@@ -2627,7 +2654,8 @@ var searchAdvanceFn = function () {
     embedParam += "<input type='hidden' class='embed_param_search' id='embed_EmpName' name='embed_EmpName' value='" + $("#EmpName_id").val() + "'>";
     embedParam += "<input type='hidden' class='embed_param_search' id='embed_appraisalType' name='embed_appraisalType' value='" + $("#appraisalType").val() + "'>";
     embedParam+="<input type='hidden' class='embed_param_search' id='embed_formType' name='embed_formType' value='"+$("#form_type").val()+"'>";
-    
+    embedParam += "<input type='hidden' class='embed_param_search' id='embed_status' name='embed_status' value='" + $("#status").val() + "'>";
+
     $("#embedParamSearch").append(embedParam);
 
     getDataFn();
@@ -3127,6 +3155,7 @@ $(document).ready(function () {
             //set parameter start
             getSystempConfig();
             dropDrowFormTypeFn();
+            appraisalStatusFn()
             dropDrowYearListFn();
             $("#AppraisalYear").change(function () {
                 dropDrowPeriodListFn($(this).val());
