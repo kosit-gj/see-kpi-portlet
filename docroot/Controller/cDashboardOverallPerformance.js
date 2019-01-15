@@ -415,9 +415,9 @@ var listAllKPIFn = function(data){
 							dataTableHTML+="<td style=' text-align: right !important;'>"+scoreActualDat+"</td>";
 						}else{
 							
-							var target = (indexEntry2['target']==null || indexEntry2['target']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['target']));
-							var forecast = (indexEntry2['forecast']==null || indexEntry2['forecast']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['forecast']));
-							var actual = (indexEntry2['actual']==null || indexEntry2['actual']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['actual']));
+							var target = (indexEntry2['target']==null || indexEntry2['target']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['target'],4));
+							var forecast = (indexEntry2['forecast']==null || indexEntry2['forecast']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['forecast'],4));
+							var actual = (indexEntry2['actual']==null || indexEntry2['actual']=='') ? '&nbsp;' : addCommas(notNullFn(indexEntry2['actual'],4));
 							
 							dataTableHTML+="<td style=' text-align: right !important;'>"+target+"</td>";
 							dataTableHTML+="<td style=' text-align: right !important;'>"+forecast+"</td>";
