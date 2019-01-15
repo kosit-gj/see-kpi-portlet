@@ -1350,7 +1350,7 @@ var createDataTableFn = function(options){
 			//advance search start
 	    	$("form#searchAdvanceForm").submit(function(){
 	    		
-	    		sessionStorage.setItem("searchAdvanceForm",groupPrameter($(this).serializeArray())); 
+	    		sessionStorage.setItem("searchAdvanceForm",$(this).serialize()); 
 	    		dataSearch = sessionStorage.getItem("searchAdvanceForm");
 	    		$(".countPagination").val(10);
 	    		$("#rpp").remove();
