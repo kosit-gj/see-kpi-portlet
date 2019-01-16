@@ -708,7 +708,7 @@ $(document).ready(function() {
 			    //get the carat position
 			 var caratPos = getSelectionStart(this);
 			 var dotPos = this.value.indexOf(".");
-			 if( caratPos > dotPos && dotPos>-1 && (number[1].length > 1)){
+			 if( caratPos > dotPos && dotPos>-1 && (number[1].length > 3)){
 			    return false;
 			 }
 			 return true;

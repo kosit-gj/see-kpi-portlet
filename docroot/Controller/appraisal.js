@@ -2532,8 +2532,12 @@ var saveAppraisalFn = function(){
 		}
 		appraisal+="\"item_result_id\":\""+item_result_id+"\",";
 		if(typeScore=="forecast"){
+			if($(indexEntry).val()==null || $(indexEntry).val()==""){
+				appraisal+="\"forecast_value\":\"null\",";
+			}else{
 			appraisal+="\"forecast_value\":\""+($(indexEntry).hasClass( "is_date" ) ? removeSlash($(indexEntry).val()) : removeComma($(indexEntry).val()))+"\",";
-			appraisal+="\"actual_value\":\"\"";
+			}
+//			appraisal+="\"actual_value\":\"\"";
 			//appraisal+="\"actual_value\":\""+$("#actual-"+item_result_id).val()+"\",";
 
 		}else if(typeScore=="competencyScore"){

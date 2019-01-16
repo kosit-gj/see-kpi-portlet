@@ -323,6 +323,13 @@ var findOneFn = function (id, actionType, stage_id, emp_code, org_code) {
                     $("" + AssignmentEmailLink + "").find('#remark_footer').removeAttr('disabled');
 
                 }
+                if($('#user_portlet').val() == emp_code){
+            		$.each(data['self_assign'],function(index,indexEntry){
+            			if(indexEntry['is_self_assign'] == 0){
+            				$(".structure_id[value='"+indexEntry['structure_id']+"']").parent().find('input').prop('disabled', true);
+            			}
+            		});
+            	}
 
             } else {
                 callFlashSlide($(".lt-data-is-empty").val());
@@ -1939,12 +1946,12 @@ var assignTemplateQuantityFn = function (structureName, data) {
         htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class=''><b>" + $(".lt-target").val() + "</b> </th>";
         htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class=''><b>" + $(".lt-uom").val() + "</b> </th>";
         htmlTemplateQuantity += "<th style=\"width:10%;  text-align:right;padding-right: 10px;\" class='thBox'><b>" + $(".lt-actual").val() + "</b> </th>";
-        var htmlTooltipBox_1 = "<div data-toggle='tooltip' class='tooltipBox1' data-original-title='<div style=\"float:left\"><b>Bigger is better</b><br>มากกว่าช่องที่1 แต่น้อยกว่าช่องที่2<br><b>Smaller is better</b><br>น้อยกว่าช่องที่1 แต่มากกว่าช่องที่2</div>' title='' id='box-1' style='float: right;'>1</div>";
-        var htmlTooltipBox_2 = "<div data-toggle='tooltip' class='tooltipBox2' data-original-title='มากกว่าช่องที่ 2 น้อยกว่าช่องที่ 3' title='' id='box-2' style='float: right;'>2</div>";
-        var htmlTooltipBox_3 = "<div data-toggle='tooltip' class='tooltipBox3' data-original-title='มากกว่าช่องที่ 3 น้อยกว่าช่องที่ 4' title='' id='box-3' style='float: right;'>3</div>";
-        var htmlTooltipBox_4 = "<div data-toggle='tooltip' class='tooltipBox4' data-original-title='มากกว่าช่องที่ 4 น้อยกว่าช่องที่ 5' title='' id='box-4' style='float: right;'>4</div>";
-        var htmlTooltipBox_5 = "<div data-toggle='tooltip' class='tooltipBox5' data-original-title='มากกว่าช่องที่ 5 น้อยกว่าช่องที่ 6' title='' id='box-5' style='float: right;'>5</div>";
-        var htmlTooltipBox_6 = "<div data-toggle='tooltip' class='tooltipBox6' data-original-title='มากกว่าช่องที่ 6 น้อยกว่าช่องที่ 7' title='' id='box-6' style='float: right;'>6</div>";
+        var htmlTooltipBox_1 = "<div data-toggle='tooltip' class='tooltipBox1' data-original-title='<b>Bigger is better</b><br>มากกว่าช่องที่ 1  แต่น้อยกว่าช่องที่ 2<br><b>Smaller is better</b><br>น้อยกว่าช่องที่ 1  แต่มากกว่าช่องที่ 2' title='' id='box-1' style='float: right;'>1</div>";
+        var htmlTooltipBox_2 = "<div data-toggle='tooltip' class='tooltipBox2' data-original-title='<b>Bigger is better</b><br>มากกว่าช่องที่ 2 แต่น้อยกว่าช่องที่ 3<br><b>Smaller is better</b><br>น้อยกว่าช่องที่ 2  แต่มากกว่าช่องที่ 3' title='' id='box-2' style='float: right;'>2</div>";
+        var htmlTooltipBox_3 = "<div data-toggle='tooltip' class='tooltipBox3' data-original-title='<b>Bigger is better</b><br>มากกว่าช่องที่ 3 แต่น้อยกว่าช่องที่ 4<br><b>Smaller is better</b><br>น้อยกว่าช่องที่ 3 แต่มากกว่าช่องที่ 4' title='' id='box-3' style='float: right;'>3</div>";
+        var htmlTooltipBox_4 = "<div data-toggle='tooltip' class='tooltipBox4' data-original-title='<b>Bigger is better</b><br>มากกว่าช่องที่ 4 แต่น้อยกว่าช่องที่ 5<br><b>Smaller is better</b><br>น้อยกว่าช่องที่ 4 แต่มากกว่าช่องที่ 5' title='' id='box-4' style='float: right;'>4</div>";
+        var htmlTooltipBox_5 = "<div data-toggle='tooltip' class='tooltipBox5' data-original-title='<b>Bigger is better</b><br>มากกว่าช่องที่ 5 แต่น้อยกว่าช่องที่6<br><b>Smaller is better</b><br>น้อยกว่าช่องที่  5  แต่มากกว่าช่องที่ 6' title='' id='box-5' style='float: right;'>5</div>";
+        var htmlTooltipBox_6 = "<div data-toggle='tooltip' class='tooltipBox6' data-original-title='<b>Bigger is better</b><br>มากกว่าช่องที่ 6 แต่น้อยกว่าช่องที่ 7<br><b>Smaller is better</b><br>น้อยกว่าช่องที่ 6 แต่มากกว่าช่องที่ 7' title='' id='box-6' style='float: right;'>6</div>";
        
         htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][0]['color_code'] + "' class='redBOxL tooltipBox1'>"+htmlTooltipBox_1+"</div></th>";
         htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][0]['color_code'] + "' class='redBOxR tooltipBox1'>&nbsp;</div><div style='background:#" + data['threshold_color'][1]['color_code'] + "' class='OrangeBoxL tooltipBox2'>"+htmlTooltipBox_2+"</div> </th>";
@@ -2349,17 +2356,26 @@ var createTemplateAssignmentFn = function (data) {
         $('.is_date').datepicker({ // is_date
         	dateFormat: "yy/mm/dd",
         });
-        $(".numberOnly").autoNumeric('init');
-    	$(".numberOnly").autoNumeric('update', {
+        $(".numberOnly").not('.weight_sum').autoNumeric('init');
+    	$(".numberOnly").not('.weight_sum').autoNumeric('update', {
     		vMin : '-999999999.9999',
     		vMax : '999999999.9999',
-//    		lZero: 'deny',
-    		wEmpty: 'zero',
+    		lZero: 'deny',
+    		//wEmpty: 'zero',
     		mDec: 4,
     		//aSign : ' %',
     		//pSign : 's'
     	});
-    	
+    	$(".numberOnly.weight_sum").autoNumeric('init');
+    	$(".numberOnly.weight_sum").autoNumeric('update', {
+    		vMin : '0',
+    		vMax : '999999999.99',
+    		lZero: 'deny',
+    		//wEmpty: 'zero',
+    		mDec: 2,
+    		//aSign : ' %',
+    		//pSign : 's'
+    	});
     	
     	
     	
@@ -2376,10 +2392,12 @@ var createTemplateAssignmentFn = function (data) {
     		suneditorFn();
 			$(".titleItemName").html(titleItemName);
 			$("#item_desc_id").val(id);
+			$("body").mLoading();
 			setTimeout(function(){ 
 				editorItemDescriptionQuality.setContent(itemDesc);
-			}, 50);
-    		
+				$("body").mLoading('hide');
+			}, 100);
+    	
         	$("#btnSubmitItemDescription").on("click",function(){
     			$("#"+$("#item_desc_id").val()+" input").val(editorItemDescriptionQuality.getContent());
     			editorItemDescriptionQuality.destroy();
@@ -2495,6 +2513,24 @@ var getTemplateFn = function (emp_result_id, stage_id, emp_code, org_code , emp_
         success: function (data) {
             createTemplateAssignmentFn(data);
             dropDrowActionEditFn(data['to_action']);
+            
+            if(emp_code_list != undefined){
+            	if($.inArray( $('#user_portlet').val(), emp_code_list ) >= 0){
+            		$.each(data['self_assign'],function(index,indexEntry){
+            			if(indexEntry['is_self_assign'] == 0){
+            				$(".structure_id[value='"+indexEntry['structure_id']+"']").parent().find('input').prop('disabled', true);
+            			}
+            		});
+            	}
+            }else{
+            	if($('#user_portlet').val() == stage.emp_code){
+            		$.each(data['self_assign'],function(index,indexEntry){
+            			if(indexEntry['is_self_assign'] == 0){
+            				$(".structure_id[value='"+indexEntry['structure_id']+"']").parent().find('input').prop('disabled', true);
+            			}
+            		});
+            	}
+            }
             //SET FIXED HEADER 
         }
     });
