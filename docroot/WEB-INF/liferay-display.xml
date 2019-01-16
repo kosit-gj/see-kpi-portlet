@@ -76,5 +76,6 @@
 		<portlet id="report-appraisal-statistics"></portlet>
 		<portlet id="salary-adjustment"></portlet>
 		<portlet id="import-job-code"></portlet>
+		<portlet id="mpi-judgement"></portlet>
 	</category>
 </display>
