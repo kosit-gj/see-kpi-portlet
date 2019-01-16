@@ -2359,7 +2359,7 @@ var createTemplateAssignmentFn = function (data) {
 				editorItemDescriptionQuality.setContent(itemDesc);
 				$("body").mLoading('hide');
 			}, 100);
-    		
+    	
         	$("#btnSubmitItemDescription").on("click",function(){
     			$("#"+$("#item_desc_id").val()+" input").val(editorItemDescriptionQuality.getContent());
     			editorItemDescriptionQuality.destroy();
