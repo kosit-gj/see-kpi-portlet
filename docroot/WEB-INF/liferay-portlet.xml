@@ -396,7 +396,7 @@
 		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cMasterCRUD.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/Controller/cAppraisalGrade.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/Controller/cAppraisalGradeMultipleLevel.js</footer-portlet-javascript>
 		<!-- include file end -->
 
 		<css-class-wrapper>appraisal-grade-portlet</css-class-wrapper>

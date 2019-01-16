@@ -821,7 +821,12 @@ background-color:#71cccc !important;
 											<option>All Form</option>
 										</select>
 									</div>
-
+									<div class="form-group pull-left span3" style="margin-left: 5px">
+				                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="status"/>" class="input form-control input-sm span12"
+				                      id="status" name="status">
+				                      <!-- <option>All Status</option> -->
+				                    </select>
+				                  </div>
 									<div class="form-group span3 m-b-none pull-right"
 										style="margin-left: 5px; text-align: right;">
 										<button type="button" class="btn btn-info input-sm"
@@ -980,8 +985,9 @@ background-color:#71cccc !important;
 												</div>
 											</div>
 											<div class="span2 grandTototalWeightArea" id='grandTototalWeightArea'>
-												<label class="span12 p-t-xxsg text-center "><liferay-ui:message key="grand-total" /></label> 
-												<label class="span12 p-t-xxsg text-center txtGrandTotalWeigh" id="txtGrandTotalWeigh" style="font-size: 300%;"></label>
+												<label class="span12 p-t-xxsg text-center "style=" text-align: center;"><liferay-ui:message key="grand-total" /></label> 
+												<label class="span12 p-t-xxsg text-center txtGrandTotalWeigh" id="txtGrandTotalWeigh" style="font-size: 300%; text-align: center;"></label>
+												<label class="span12 p-t-xxsg text-center txtGrade" id="txtGrade" style="font-size: 400%;padding-top: 22%;color:#6161fb;text-align: center;"></label>											
 											</div>
 											<div class="span12">
 												<button class="btn btn-warning" style="float:right;" type="button" id="btnCalculate"><i class="icon-play"></i> Calculate</button>

@@ -1000,6 +1000,8 @@ $(document).ready(function() {
 		    						$("#GradeCalculationConfrimModal").modal('hide');
 		    						SubmitFn(statusFakeAdjust, calFlag, gradeCalFlag);
 		    					});
+		    				} else {
+		    					SubmitFn(statusFakeAdjust, calFlag, gradeCalFlag);
 		    				}
 		    			}
 		    		});
