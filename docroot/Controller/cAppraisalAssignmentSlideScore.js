@@ -1939,13 +1939,20 @@ var assignTemplateQuantityFn = function (structureName, data) {
         htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class=''><b>" + $(".lt-target").val() + "</b> </th>";
         htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class=''><b>" + $(".lt-uom").val() + "</b> </th>";
         htmlTemplateQuantity += "<th style=\"width:10%;  text-align:right;padding-right: 10px;\" class='thBox'><b>" + $(".lt-actual").val() + "</b> </th>";
-        htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][0]['color_code'] + "' class='redBOxL'>1</div></th>";
-        htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][0]['color_code'] + "' class='redBOxR'>&nbsp;</div><div style='background:#" + data['threshold_color'][1]['color_code'] + "' class='OrangeBoxL'>2</div> </th>";
-        htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][1]['color_code'] + "' class='OrangeBoxR'>&nbsp;</div><div style='background:#" + data['threshold_color'][2]['color_code'] + "' class='YellowBoxL'>3</div> </th>";
-        htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][2]['color_code'] + "' class='YellowBoxR'>&nbsp;</div><div style='background:#" + data['threshold_color'][3]['color_code'] + "' class='greenBoxL'>4</div> </th>";
-        htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][3]['color_code'] + "' class='greenBoxR'>&nbsp;</div><div style='background:#" + data['threshold_color'][4]['color_code'] + "' class='veryGreenBOxL'>5</div> </th>";
-        htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][4]['color_code'] + "' class='veryGreenBOxR'>&nbsp;</div><div style='background:#" + data['threshold_color'][5]['color_code'] + "' class='veryGreenBOxL'>6</div> </th>";
-        htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][5]['color_code'] + "' class='veryGreenBOxR'>&nbsp;</div> </th>";
+        var htmlTooltipBox_1 = "<div data-toggle='tooltip' class='tooltipBox1' data-original-title='<div style=\"float:left\"><b>Bigger is better</b><br>มากกว่าช่องที่1 แต่น้อยกว่าช่องที่2<br><b>Smaller is better</b><br>น้อยกว่าช่องที่1 แต่มากกว่าช่องที่2</div>' title='' id='box-1' style='float: right;'>1</div>";
+        var htmlTooltipBox_2 = "<div data-toggle='tooltip' class='tooltipBox2' data-original-title='มากกว่าช่องที่ 2 น้อยกว่าช่องที่ 3' title='' id='box-2' style='float: right;'>2</div>";
+        var htmlTooltipBox_3 = "<div data-toggle='tooltip' class='tooltipBox3' data-original-title='มากกว่าช่องที่ 3 น้อยกว่าช่องที่ 4' title='' id='box-3' style='float: right;'>3</div>";
+        var htmlTooltipBox_4 = "<div data-toggle='tooltip' class='tooltipBox4' data-original-title='มากกว่าช่องที่ 4 น้อยกว่าช่องที่ 5' title='' id='box-4' style='float: right;'>4</div>";
+        var htmlTooltipBox_5 = "<div data-toggle='tooltip' class='tooltipBox5' data-original-title='มากกว่าช่องที่ 5 น้อยกว่าช่องที่ 6' title='' id='box-5' style='float: right;'>5</div>";
+        var htmlTooltipBox_6 = "<div data-toggle='tooltip' class='tooltipBox6' data-original-title='มากกว่าช่องที่ 6 น้อยกว่าช่องที่ 7' title='' id='box-6' style='float: right;'>6</div>";
+       
+        htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][0]['color_code'] + "' class='redBOxL tooltipBox1'>"+htmlTooltipBox_1+"</div></th>";
+        htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][0]['color_code'] + "' class='redBOxR tooltipBox1'>&nbsp;</div><div style='background:#" + data['threshold_color'][1]['color_code'] + "' class='OrangeBoxL tooltipBox2'>"+htmlTooltipBox_2+"</div> </th>";
+        htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][1]['color_code'] + "' class='OrangeBoxR tooltipBox2'>&nbsp;</div><div style='background:#" + data['threshold_color'][2]['color_code'] + "' class='YellowBoxL tooltipBox3'>"+htmlTooltipBox_3+"</div> </th>";
+        htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][2]['color_code'] + "' class='YellowBoxR tooltipBox3'>&nbsp;</div><div style='background:#" + data['threshold_color'][3]['color_code'] + "' class='greenBoxL tooltipBox4'>"+htmlTooltipBox_4+"</div> </th>";
+        htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][3]['color_code'] + "' class='greenBoxR tooltipBox4'>&nbsp;</div><div style='background:#" + data['threshold_color'][4]['color_code'] + "' class='veryGreenBOxL tooltipBox5'>"+htmlTooltipBox_5+"</div> </th>";
+        htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][4]['color_code'] + "' class='veryGreenBOxR tooltipBox5'>&nbsp;</div><div style='background:#" + data['threshold_color'][5]['color_code'] + "' class='veryGreenBOxL tooltipBox6'>"+htmlTooltipBox_6+"</div> </th>";
+        htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][5]['color_code'] + "' class='veryGreenBOxR tooltipBox6'>&nbsp;</div> </th>";
         htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class=''><b>" + $(".lt-percent-weight").val() + "</b></th>";
         htmlTemplateQuantity += "</tr>";
         htmlTemplateQuantity += "</thead>";
@@ -2075,6 +2082,37 @@ var assignTemplateQuantityFn = function (structureName, data) {
     }
     $("#appraisal_template_area").append(htmlTemplateQuantity);
 
+    //binding tooltip start
+    $('[data-toggle="tooltip"]').css({ "cursor": "pointer" });
+    $('[data-toggle="tooltip"]').tooltip({
+        html: true
+    });
+    
+    $(".tooltipBox1").hover(function(){
+		$('#box-1').tooltip('show')}, function(){
+			$('#box-1').tooltip('hide')
+	});
+    $(".tooltipBox2").hover(function(){
+		$('#box-2').tooltip('show')}, function(){
+			$('#box-2').tooltip('hide')
+	});
+    $(".tooltipBox3").hover(function(){
+		$('#box-3').tooltip('show')}, function(){
+			$('#box-3').tooltip('hide')
+	});
+    $(".tooltipBox4").hover(function(){
+		$('#box-4').tooltip('show')}, function(){
+			$('#box-4').tooltip('hide')
+	});
+    $(".tooltipBox5").hover(function(){
+		$('#box-5').tooltip('show')}, function(){
+			$('#box-5').tooltip('hide')
+	});
+    $(".tooltipBox6").hover(function(){
+		$('#box-6').tooltip('show')}, function(){
+			$('#box-6').tooltip('hide')
+	});
+    
     if (data['threshold'] == 1) {
         if (data['nof_target_score'] > 0) {
 
@@ -2315,7 +2353,7 @@ var createTemplateAssignmentFn = function (data) {
     	$(".numberOnly").autoNumeric('update', {
     		vMin : '-999999999.9999',
     		vMax : '999999999.9999',
-    		lZero: 'deny',
+//    		lZero: 'deny',
     		wEmpty: 'zero',
     		mDec: 4,
     		//aSign : ' %',

@@ -201,7 +201,7 @@ var listCdsResultFn = function (data) {
 		}
 		else{
 			htmlTable += "<td class='columnSearch' style='text-align: right;padding-right: 10px;'> <input id='cdsValueID-"+indexEntry["cds_result_id"]+"-"+indexEntry["cds_id"]+"-"+indexEntry["org_id"]+"-"+indexEntry["emp_id"]+"-"+indexEntry["position_id"]+"-"+indexEntry["level_id"]+"-"+indexEntry["year"]+"-"+indexEntry["month"];
-			htmlTable +="'style='text-align:right;width: 130px;' class='cdsValue addCommaCds' disabled type=\"text\"  value='"+ (indexEntry["cds_value"] == "" ? "" :addCommas(parseFloat(indexEntry["cds_value"]).toFixed(4)))+ "'></td>";
+			htmlTable +="'style='text-align:right;width: 130px;' class='cdsValue addCommaCds numberOnlyCds' disabled type=\"text\"  value='"+ (indexEntry["cds_value"] == "" ? "" :addCommas(parseFloat(indexEntry["cds_value"]).toFixed(4)))+ "'></td>";
 		}
 		
 		//htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;text-align: center;\"><i id='"+ indexEntry["cds_result_id"]+ "' class='fa fa-trash del' style='color: red; cursor: pointer;'></i></td>";
@@ -357,9 +357,9 @@ var updateCdsResultFn = function () {
 			"level_id": notNullTextFn(tempData[6]),
 			"year": notNullTextFn(tempData[7]),
 			"month": notNullTextFn(tempData[8]),
-			"cds_value": indexEntry.value == "" ? "" :notNullFn(indexEntry.value.replace(/,/g, "")),
+			"cds_value": indexEntry.value == "" ? "" :notNullFn(indexEntry.value.replace(/,/g, ""),4),
 		});
-		
+		console.log()
 	});
 
 
@@ -698,7 +698,7 @@ $(document).ready(function() {
 		jQuery('.numberOnlyCds').keypress(function (evt) { 
 			 var charCode = (evt.which) ? evt.which : evt.keyCode;
 			 var number = this.value.split('.');
-			 if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+			 if (charCode !=45 && charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
 			    return false;
 			 }
 			    //just one dot

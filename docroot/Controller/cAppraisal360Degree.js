@@ -1089,7 +1089,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
         	
         	htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore is_date\" id=\"forecast-" + indexEntry['item_result_id'] + "\" name=\"forecast-" + indexEntry['item_result_id'] + "\" value=" + scoreForecastDat + "></td>";
 		}else{
-			htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore addComma\" id=\"forecast-" + indexEntry['item_result_id'] + "\" name=\"forecast-" + indexEntry['item_result_id'] + "\" value=" + addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(4)) + "></td>";
+			htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore addComma\" id=\"forecast-" + indexEntry['item_result_id'] + "\" name=\"forecast-" + indexEntry['item_result_id'] + "\" value=" + ((indexEntry['forecast_value']==null||indexEntry['forecast_value']=='')?"":addCommas(notNullFn(indexEntry['forecast_value'],4))) + "></td>";
 		}
         //htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly itemScore addComma\" id=\"forecast-" + indexEntry['item_result_id'] + "\" name=\"forecast-" + indexEntry['item_result_id'] + "\" value=" + addCommas(parseFloat(notNullFn(indexEntry['forecast_value'])).toFixed(2)) + "></td>";
         //htmlTemplateQuantity+="<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small numberOnly \" id=\"actual-"+indexEntry['item_result_id']+"\" name=\"actual-"+indexEntry['item_result_id']+"\" value="+indexEntry['actual_value']+"></td>";
@@ -2621,7 +2621,11 @@ var saveAppraisalIndividualFn = function ()
         }
         appraisal += "\"item_result_id\":\"" + item_result_id + "\",";
         if (typeScore == "forecast") {
+        	if($(indexEntry).val()==null || $(indexEntry).val()==""){
+				appraisal+="\"forecast_value\":\"\",";
+			}else{
             appraisal += "\"forecast_value\":\"" + ($(indexEntry).hasClass( "is_date" ) ? removeSlash($(indexEntry).val()) : removeComma($(indexEntry).val()))+ "\",";
+			}
             appraisal += "\"actual_value\":\"\"";
             //appraisal+="\"actual_value\":\""+$("#actual-"+item_result_id).val()+"\",";
 
@@ -2705,7 +2709,11 @@ var saveAppraisalOrganizationFn = function()
 		}
 		appraisal+="\"item_result_id\":\""+item_result_id+"\",";
 		if(typeScore=="forecast"){
-			appraisal+="\"forecast_value\":\""+($(indexEntry).hasClass( "is_date" ) ? removeSlash($(indexEntry).val()) : removeComma($(indexEntry).val()))+"\",";
+			if($(indexEntry).val()==null || $(indexEntry).val()==""){
+				appraisal+="\"forecast_value\":\"\",";
+			}else{
+				appraisal+="\"forecast_value\":\""+($(indexEntry).hasClass( "is_date" ) ? removeSlash($(indexEntry).val()) : removeComma($(indexEntry).val()))+"\",";
+			}
 			appraisal+="\"actual_value\":\"\"";
 			//appraisal+="\"actual_value\":\""+$("#actual-"+item_result_id).val()+"\",";
 
