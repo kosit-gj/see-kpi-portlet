@@ -2354,9 +2354,11 @@ var createTemplateAssignmentFn = function (data) {
     		suneditorFn();
 			$(".titleItemName").html(titleItemName);
 			$("#item_desc_id").val(id);
+			$("body").mLoading();
 			setTimeout(function(){ 
 				editorItemDescriptionQuality.setContent(itemDesc);
-			}, 50);
+				$("body").mLoading('hide');
+			}, 100);
     		
         	$("#btnSubmitItemDescription").on("click",function(){
     			$("#"+$("#item_desc_id").val()+" input").val(editorItemDescriptionQuality.getContent());
