@@ -323,6 +323,13 @@ var findOneFn = function (id, actionType, stage_id, emp_code, org_code) {
                     $("" + AssignmentEmailLink + "").find('#remark_footer').removeAttr('disabled');
 
                 }
+                if($('#user_portlet').val() == emp_code){
+            		$.each(data['self_assign'],function(index,indexEntry){
+            			if(indexEntry['is_self_assign'] == 0){
+            				$(".structure_id[value='"+indexEntry['structure_id']+"']").parent().find('input').prop('disabled', true);
+            			}
+            		});
+            	}
 
             } else {
                 callFlashSlide($(".lt-data-is-empty").val());
@@ -2311,17 +2318,26 @@ var createTemplateAssignmentFn = function (data) {
         $('.is_date').datepicker({ // is_date
         	dateFormat: "yy/mm/dd",
         });
-        $(".numberOnly").autoNumeric('init');
-    	$(".numberOnly").autoNumeric('update', {
+        $(".numberOnly").not('.weight_sum').autoNumeric('init');
+    	$(".numberOnly").not('.weight_sum').autoNumeric('update', {
     		vMin : '-999999999.9999',
     		vMax : '999999999.9999',
     		lZero: 'deny',
-    		wEmpty: 'zero',
+    		//wEmpty: 'zero',
     		mDec: 4,
     		//aSign : ' %',
     		//pSign : 's'
     	});
-    	
+    	$(".numberOnly.weight_sum").autoNumeric('init');
+    	$(".numberOnly.weight_sum").autoNumeric('update', {
+    		vMin : '0',
+    		vMax : '999999999.99',
+    		lZero: 'deny',
+    		//wEmpty: 'zero',
+    		mDec: 2,
+    		//aSign : ' %',
+    		//pSign : 's'
+    	});
     	
     	
     	
@@ -2457,6 +2473,24 @@ var getTemplateFn = function (emp_result_id, stage_id, emp_code, org_code , emp_
         success: function (data) {
             createTemplateAssignmentFn(data);
             dropDrowActionEditFn(data['to_action']);
+            
+            if(emp_code_list != undefined){
+            	if($.inArray( $('#user_portlet').val(), emp_code_list ) >= 0){
+            		$.each(data['self_assign'],function(index,indexEntry){
+            			if(indexEntry['is_self_assign'] == 0){
+            				$(".structure_id[value='"+indexEntry['structure_id']+"']").parent().find('input').prop('disabled', true);
+            			}
+            		});
+            	}
+            }else{
+            	if($('#user_portlet').val() == stage.emp_code){
+            		$.each(data['self_assign'],function(index,indexEntry){
+            			if(indexEntry['is_self_assign'] == 0){
+            				$(".structure_id[value='"+indexEntry['structure_id']+"']").parent().find('input').prop('disabled', true);
+            			}
+            		});
+            	}
+            }
             //SET FIXED HEADER 
         }
     });
