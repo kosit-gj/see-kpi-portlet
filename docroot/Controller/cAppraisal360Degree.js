@@ -3109,6 +3109,22 @@ var listViewDailyOrMonthlyFn = function () {
     $("#selectGanntChartViewDaily").html(html);
 }
 
+function calculateBtnFn(){
+        
+	action_update = 'calculate';
+
+	if($("#embed_appraisalType").val() == "1") {
+		// Is Organization.
+		saveAppraisalOrganizationFn();
+	} else {
+		// Is Individual.
+		saveAppraisalIndividualFn();
+	}
+	$("body").mLoading('hide');
+	
+	return true;
+}
+
 
 $(document).ready(function () {
     username = $('#user_portlet').val();
@@ -3367,6 +3383,10 @@ $(document).ready(function () {
 
             //submit
             $("#btnSubmit").click(function () {
+            	// Calculate 
+            	calculateBtnFn();
+            	
+            	// Submit
             	action_update = 'submit';
             	$("body").mLoading('show'); //Loading
             	if($("#embed_appraisalType").val() == "1") {
