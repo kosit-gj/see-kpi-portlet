@@ -1,23 +1,16 @@
 var globalSevice=[];
-var restfulPathImportJobCode = "/" + serviceName + "/public/import_job_code";
-var restfulPathExport = "/" + serviceName + "/public/import_job_code/export";
-var restfulPathDelete = "/" + serviceName + "/public/import_job_code/delete/";
-var restfulPathEdit = "/" + serviceName + "/public/import_job_code/update/";
 
 globalSevice['restfulPathGlobal']=restfulURL + "/" + serviceName + "/public/bonus";
 
 //Parameter Sevice
-globalSevice['restfulPathDropDownYear']= restfulURL + "/" + serviceName + "/public/bonus/advance_search/year_salary";
-globalSevice['restfulPathDropDownBonusPeriod']= restfulURL + "/" + serviceName + "/public/bonus/advance_search/period_salary";
-globalSevice['restfulPathFormType']= restfulURL + "/" + serviceName + "/public/bonus/advance_search/form_salary";
-
+globalSevice['restfulPathDropDownYear']= restfulURL + "/" + serviceName + "/public/bonus/advance_search/year";
+globalSevice['restfulPathDropDownPeriod']= restfulURL + "/" + serviceName + "/public/bonus/advance_search/period";
+globalSevice['restfulPathFormType']= restfulURL + "/" + serviceName + "/public/bonus/advance_search/form_mpi";
 
 //Export Sevice
-globalSevice['restfulPathExportPQPI']=restfulURL + "/" + serviceName + "/public/import_pqpi/export";
-//globalSevice['restfulPathBonusAppraisalCalculate']=globalSevice['restfulPathBonusAppraisal']+"/calculate";
+globalSevice['restfulPathExportMPI']=restfulURL + "/" + serviceName + "/public/export_mpi/export";
 
-//Monthly Bonus Rate Sevice
-globalSevice['restfulPathMonthlyBonusRate']=restfulURL + "/" + serviceName + "/public/system_config";
+
 
 //Global variable
 var galbalDataImportJobCode = [];
@@ -255,17 +248,17 @@ $(document).ready(function () {
 		}
 	}
 	$("#AppraisalYear").html(generateDropDownList(globalSevice['restfulPathDropDownYear'],"GET",{}));
-	$("#AppraisalPeriod").html(generateDropDownList(globalSevice['restfulPathDropDownBonusPeriod'],"GET",{appraisal_year:$("#AppraisalYear").val()}));
+	$("#AppraisalPeriod").html(generateDropDownList(globalSevice['restfulPathDropDownPeriod'],"GET",{appraisal_year:$("#AppraisalYear").val()}));
 	$("#AppraisalForm").html(generateDropDownList(globalSevice['restfulPathFormType'],"GET",{},"All Form"));
 	
 
-	toDayFn("#effectiveDate , #expiredDate");
+	toDayFn("#startDate , #endDate");
 	
-	 $("#effectiveDate").datepicker({
+	 $("#startDate").datepicker({
 		 	dateFormat: "yy-mm-dd",
          minDate: new Date(2018, 1 - 1, 1),
          onSelect: function () {
-             var dt2 = $('#expiredDate');
+             var dt2 = $('#endDate');
              var startDate = $(this).datepicker('getDate');
              var minDate = $(this).datepicker('getDate');
              var dt2Date = dt2.datepicker('getDate');
@@ -279,11 +272,11 @@ $(document).ready(function () {
              dt2.datepicker('option', 'minDate', minDate);
          }
      });
-     $('#expiredDate').datepicker({
+     $('#endDate').datepicker({
      	dateFormat: "yy-mm-dd",
      	minDate: 0
      });
-     $("#effectiveDate ,#expiredDate").keypress(function(event) {
+     $("#startDate ,#endDate").keypress(function(event) {
 		    return ( ( event.keyCode || event.which ) === 9 ? true : false );
 		});
      
@@ -299,10 +292,11 @@ $(document).ready(function () {
 		var param="";
 		param+="&period_id="+$("#AppraisalPeriod").val();
 		param+="&appraisal_form_id="+$("#AppraisalForm").val();
-		param+="&effective_date="+$("#effectiveDate").val();
-		param+="&expired_date="+$("#expiredDate").val();
-		console.log(globalSevice['restfulPathExportPQPI'] + "?token=" + tokenID.token + ""+param)
-		$("form#formExportToExcel").attr("action", globalSevice['restfulPathExportPQPI'] + "?token=" + tokenID.token+""+param+"");
+		param+="&formula="+$("#formula").val();
+		param+="&start_date="+$("#startDate").val();
+		param+="&end_date="+$("#endDate").val();
+		console.log(globalSevice['restfulPathExportMPI'] + "?token=" + tokenID.token + ""+param)
+		$("form#formExportToExcel").attr("action", globalSevice['restfulPathExportMPI'] + "?token=" + tokenID.token+""+param+"");
 		$("#formExportToExcel").submit();
 	});
 	
