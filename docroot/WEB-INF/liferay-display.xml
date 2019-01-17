@@ -77,5 +77,6 @@
 		<portlet id="salary-adjustment"></portlet>
 		<portlet id="import-job-code"></portlet>
 		<portlet id="mpi-judgement"></portlet>
+		<portlet id="export-mpi"></portlet>
 	</category>
 </display>
