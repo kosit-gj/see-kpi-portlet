@@ -91,7 +91,7 @@ plid = layout.getPlid();
 		width: 24.5%;
 	}
 	
-/*	.OverFlow {
+	/* .OverFlow {
 		max-width: 200px;
 		white-space: nowrap;
 		overflow: hidden;
@@ -103,6 +103,44 @@ plid = layout.getPlid();
 	    white-space: normal;
 	    word-break: break-all;
 	} */
+	
+	/* datatables css */
+ 	/* .ellipsis {
+		display: block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		transition: all 0.2s linear;
+		white-space: nowrap;
+		padding: 0.5rem 0.1rem;
+	}
+	
+	.ellipsis {
+	}
+	
+	.ellipsis:focus, .ellipsis:hover {
+		color: transparent;
+	}
+
+	.ellipsis:focus:after, .ellipsis:hover:after {
+		content: attr(data-text);
+		overflow: visible;
+		text-overflow: inherit;
+		background: #fff;
+		position: absolute;
+		left: auto;
+		top: auto;
+		width: auto;
+		max-width: 20rem;
+		padding: 0 0.5rem;
+		white-space: normal;
+		word-wrap: break-word;
+		display: block;
+		color: black;
+		margin-top: -1.25rem;
+	} 
+	*/
+	
 
 
 
@@ -1049,11 +1087,11 @@ input[type=number]::-webkit-outer-spin-button {
 						    <tr class="GridViewScrollHeader">
 						      <th style="width:5%; text-align:center;"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></th>
 						      <th style="width:10%; text-align:center;"><liferay-ui:message key="emp-code"/></th>
-						      <th style="width:15%;"><liferay-ui:message key="employee-name"/></th>
+						      <th style="width:25%;"><liferay-ui:message key="employee-name"/></th>
 						      <th style="width:10%;"><liferay-ui:message key="emp-level"/></th>
-						      <th style="width:10%; text-align:center;"><liferay-ui:message key="organization"/></th>
-						      <th style="width:10%; text-align:center;"><liferay-ui:message key="position"/></th>
-						      <th style="width:5%; text-align:center;"><liferay-ui:message key="status"/></th>
+						      <th style="width:30%; text-align:center;"><liferay-ui:message key="organization"/></th>
+						      <th style="width:30%; text-align:center;"><liferay-ui:message key="position"/></th>
+						      <th style="width:15%; text-align:center;"><liferay-ui:message key="status"/></th>
 						      <th style="width:5%; text-align:center;"><liferay-ui:message key="score"/></th>
 						      <th style="width:5%; text-align:center;"><liferay-ui:message key="Grade"/></th>
 						      <th style="width:5%; text-align:center;"><liferay-ui:message key="amount"/></th>

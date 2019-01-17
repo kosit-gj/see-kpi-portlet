@@ -249,7 +249,6 @@ var getDataFn = function (page, rpp) {
         },
         success: function (data) {
             listDataFn(data['data']);
-            tablesfreeze();
             setThemeColorFn(tokenID.theme_color);
             globalData = data;
             paginationSetUpFn(globalData['current_page'], globalData['last_page'], globalData['last_page']);     
@@ -265,7 +264,6 @@ var tablesfreeze = function(){
 	"bInfo" : false,
 	"scrollY": 350,
 	"scrollX": true,
-	"overflow-x": "hidden",
 	"paging":  false,
 	"searching": false,
 	scrollCollapse: true,
@@ -349,10 +347,10 @@ var listDataFn = function(data){
 	
 	if(data.length==0) {
 		htmlHTML +="<tr>";
-		htmlHTML +="<td colspan=\"11\">";
+		htmlHTML +="<td colspan=\"16\">";
 		htmlHTML +="<div style='margin-top: 40px;margin-bottom: 40px;font-weight: bold;color: #e04747;' align='center'>No Data to Display.</div>";
 		htmlHTML +="</td>";
-		htmlHTML +="</tr";
+		htmlHTML +="</tr>";
 		$("#list_mpi_judgement").html(htmlHTML);
 		$(".head_adjust").hide();
 		return;
@@ -366,26 +364,26 @@ var listDataFn = function(data){
 		user_level_id = indexEntry['user_level_id'];
 		
             htmlHTML += " <tr class=\"control-calculate\">";
-            htmlHTML += " <td style=\"text-align: center; \">";
+            htmlHTML += " <td style=\"text-align: center;\">";
             htmlHTML += " <input type=\"checkbox\" class=\"select-check\" id=\""+indexEntry['emp_result_id']+"\" edit_flag=\""+indexEntry['edit_flag']+"\" style=\"margin-top:-3px;\">";
             htmlHTML += " </td>";
-            htmlHTML += " <td style=\"text-align: center;\">";
-            htmlHTML += " "+indexEntry['emp_code']+"";
+            htmlHTML += " <td style=\"text-align: center;\" >";
+            htmlHTML += " <div class=\"ellipsis\" data-text=\""+indexEntry['emp_code']+"\">"+indexEntry['emp_code']+"</div>";
             htmlHTML += " </td>";
-            htmlHTML += " <td><div style=\"margin-left: 5px; text-align: left;\" class=\"OverFlow\" >";
-            htmlHTML += " "+indexEntry['emp_name']+"";
+            htmlHTML += " <td><div style=\"margin-left: 5px; text-align: left; \" >";
+            htmlHTML += " <div class=\"ellipsis\" data-text=\""+indexEntry['emp_name']+"\">"+indexEntry['emp_name']+"</div>";
             htmlHTML += " </div></td>";
-            htmlHTML += " <td style=\"width:10%; text-align: left;\" class=\"OverFlow\" >";
-            htmlHTML += " "+indexEntry['appraisal_level_name']+"";
+            htmlHTML += " <td style=\"width:10%; text-align: left;\" >";
+            htmlHTML += " <div class=\"ellipsis\" data-text=\""+indexEntry['appraisal_level_name']+"\">"+indexEntry['appraisal_level_name']+"</div>";
             htmlHTML += " </td>";
-            htmlHTML += " <td style=\"width:10%; text-align: left;\" class=\"OverFlow\" >";
-            htmlHTML += " "+indexEntry['org_name']+"";
+            htmlHTML += " <td style=\"width:30%; text-align: left;\" >";
+            htmlHTML += " <div class=\"ellipsis\" data-text=\""+indexEntry['org_name']+"\">"+indexEntry['org_name']+"</div>";
             htmlHTML += " </td>";
-            htmlHTML += " <td style=\"width:10%; text-align: left;\" class=\"OverFlow\">";
-            htmlHTML += " "+indexEntry['position_name']+"";
+            htmlHTML += " <td style=\"width:30%; text-align: left;\" >";
+            htmlHTML += " <div class=\"ellipsis\" data-text=\""+indexEntry['position_name']+"\">"+indexEntry['position_name']+"</div>";
             htmlHTML += " </td>";
-            htmlHTML += " <td style=\"width:5%; text-align: left;\" class=\"OverFlow\">";
-            htmlHTML += " "+indexEntry['status']+"";
+            htmlHTML += " <td style=\"width:15%; text-align: left;\" >";
+            htmlHTML += " <div class=\"ellipsis\" data-text=\""+indexEntry['status']+"\">"+indexEntry['status']+"</div>";
             htmlHTML += " </td>";
             htmlHTML += " <td style=\"width:5%; text-align: center;\">";
             htmlHTML += " "+indexEntry['score_manager']+"";
@@ -473,6 +471,9 @@ var listDataFn = function(data){
 	});
 	
 	$("#list_mpi_judgement").html(htmlHTML);
+	
+	tablesfreeze();
+	
 	/* $(".numberOnly").autoNumeric('init');
 	$(".numberOnly").autoNumeric('update', {
 		vMin : '0',
