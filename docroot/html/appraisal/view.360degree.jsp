@@ -989,9 +989,9 @@ background-color:#71cccc !important;
 												<label class="span12 p-t-xxsg text-center txtGrandTotalWeigh" id="txtGrandTotalWeigh" style="font-size: 300%; text-align: center;"></label>
 												<label class="span12 p-t-xxsg text-center txtGrade" id="txtGrade" style="font-size: 400%;padding-top: 22%;color:#6161fb;text-align: center;"></label>											
 											</div>
-											<div class="span12">
+									<!-- 		<div class="span12">
 												<button class="btn btn-warning" style="float:right;" type="button" id="btnCalculate"><i class="icon-play"></i> Calculate</button>
-											</div>
+											</div> -->
 										</div>
 
 										<div class='noWeightGrandTotalArea'>
@@ -1141,8 +1141,11 @@ background-color:#71cccc !important;
 
 
 						<div class="span4 offset0">
-
-							<button class="btn btn-success" type="button" id="btnSubmit">
+							<button class="btn btn-warning" style="" type="button" id="btnCalculate">
+								<i class="icon-play"></i> <liferay-ui:message key="calculate" /> 
+							</button>
+								
+							<button class="btn btn-success" style="margin-left: 0px;"  type="button" id="btnSubmit">
 								<liferay-ui:message key="submit" />
 							</button>
 							<input type='hidden' id='emp_result_id' name='emp_result_id'
