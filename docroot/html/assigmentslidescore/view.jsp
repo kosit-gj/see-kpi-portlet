@@ -22,6 +22,13 @@ plid = layout.getPlid();
 
 <style>
 
+.aui .tooltip {
+    max-width: 2000px !important;
+}
+.aui .tooltip-inner {
+
+    max-width: 2000px !important;
+    }
 .c-1-color { background: red; }
 .c-2-color { background: yellow; }
 .c-3-color { background: green; }
