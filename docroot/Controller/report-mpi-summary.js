@@ -172,26 +172,6 @@ var refreshMultiPosition = function() {
 }
 
 
-//SearchAdvance
-/*var searchAdvanceFn = function () {
-
-    $("#embedParamSearch").empty();
-    var embedParam = "";
-    embedParam += "<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id_org' name='embed_appraisal_level_id_org' value='" + $("#AppraisalOrgLevel").val()+"'>";
-    embedParam += "<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id_emp' name='embed_appraisal_level_id_emp' value='" + $("#AppraisalEmpLevel").val() + "'>";
-    embedParam += "<input type='hidden' class='embed_param_search' id='embed_period_id' name='embed_period_id' value='" + $("#AppraisalPeriod").val()+"'>";
-    embedParam += "<input type='hidden' class='embed_param_search' id='embed_position_id' name='embed_position_id' value='" + $("#Position").val() + "'>";
-    embedParam += "<input type='hidden' class='embed_param_search' id='embed_emp_id' name='embed_emp_id' value='"+$("#EmpName_id").val()+"'>";
-//    embedParam += "<input type='hidden' class='embed_param_search' id='embed_year_list' name='embed_year_list' value='" + $("#AppraisalYear").val() + "'>";
-    embedParam += "<input type='hidden' class='embed_param_search' id='embed_organization' name='embed_organization' value='"+$("#organization").val()+"'>";
-    embedParam += "<input type='hidden' class='embed_param_search' id='embed_appraisal_form' name='embed_appraisal_form' value='" + $("#AppraisalForm").val() + "'>";
-
-    $("#embedParamSearch").append(embedParam);
-    
-   
-    getDataFn();
-};*/
-
 //Get Data
 var getDataFn = function () {
 	$("body").mLoading('show'); //Loading
@@ -223,15 +203,9 @@ var getDataFn = function () {
 				param_from:AppraisalFrom
 			  };
 
-/*	//-- set report lacale name --//
-	var currentLocale = $("#user_locale").val();
-	var template_name = "report-hr-summary-consider";
-	if(typeof currentLocale !== 'undefined'){
-		template_name = template_name+"_"+currentLocale;
-	}*/
 
     var data = JSON.stringify(parameter);
-    var url_report_jasper = restfulURL + "/" + serviceName + "/public/generateAuth?template_name=report-hr-summary-consider&token=" + tokenID.token + "&template_format=" + output_type + "&used_connection=1&inline=1&data=" + data;
+    var url_report_jasper = restfulURL + "/" + serviceName + "/public/generateAuth?template_name=report-mpi-summary&token=" + tokenID.token + "&template_format=" + output_type + "&used_connection=1&inline=1&data=" + data;
     console.log(url_report_jasper);
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         window.open(url_report_jasper, "_blank");
@@ -241,20 +215,7 @@ var getDataFn = function () {
     $("body").mLoading('hide'); //Loading
 };
 	
-/*	  var data = JSON.stringify(parameter);
-	  var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name="+template_name+"&token="+tokenID.token+"&template_format=xlsx&used_connection=1&inline=1&data="+data;
-			window.open(url_report_jasper,"_blank");
-			$("body").mLoading('hide'); //Loading
-		return false;
-//	 	var url_report_jasper = "http://localhost/see_api/public/generate?template_name=report_kpis_org&template_format=pdf&used_connection=1&inline=1&data={%22param_period%22:%221%22,%22param_org%22:%22895%22}";
-		
-//	 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-//		 window.open(url_report_jasper,"_blank");
-//		} else {
-//			$('#iFrame_report').attr('src',url_report_jasper);
-//		}
-	 
-};*/
+
     
 $(document).ready(function() {
 

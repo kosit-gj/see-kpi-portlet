@@ -966,6 +966,15 @@ input[type=number]::-webkit-outer-spin-button {
 .titlePanel {
 	width: 100%;
 }
+
+.aui .ui-multiselect{
+	line-height: 22px !important;
+}
+.ui-icon-triangle-1-s {
+    background-position: -67px -10px;
+}
+
+
 </style>
 
 
