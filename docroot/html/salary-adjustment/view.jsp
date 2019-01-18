@@ -714,12 +714,14 @@ margin-bottom:1px;
 background-color:#71cccc !important;
 }
 
+/*
 #tableBonusAdjustment thead tr th {
  white-space: nowrap;
  text-align: center;
  vertical-align: middle;
  font-size: 14 px;
 }
+*/
 
 
 .aui .list-data-table .table-bordered th{
@@ -817,8 +819,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 #tableBonusAdjustment tbody tr td .input-xs{ 
  	line-height: 10px; height: 15px; font-size: 10px; width: 100px; text-align: right; 
- }
-.aui #tableBonusAdjustment .float-label-control { position: relative; margin-bottom: 0 px;font-size: smaller; }
+ }.aui #tableBonusAdjustment .float-label-control { position: relative; margin-bottom: 0 px;font-size: smaller; }
    /* .aui #tableBonusAdjustment .float-label-control ::-webkit-input-placeholder { color: transparent; }
     .aui #tableBonusAdjustment .float-label-control :-moz-placeholder { color: transparent; }
     .aui #tableBonusAdjustment .float-label-control ::-moz-placeholder { color: transparent; }
@@ -844,90 +845,45 @@ input[type=number]::-webkit-outer-spin-button {
 	
 	.aui #tableBonusAdjustment .float-label-control input{font-size: 12px;text-align: right;}
 
-.multiselect-filter-th {
-	display:flex;
-	align-items:center;
-	justify-content:center;
-	position:relative;
+
+.table-filter-container {
+    text-align: right;
 }
 
-.multiselect-filter-selectBox {
-  position: relative;
-  width: 20px;
-  cursor: pointer;
-}
-
-.multiselect-filter-selectBox select {
-  width: 100%;
-  font-weight: bold;
-}
-
-.multiselect-filter-overSelect {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
-
-#multiselect-filter-checkboxes {
-  display: none;
-  border: 1px #dadada solid;
-  text-align: left;
-}
-
-#multiselect-filter-checkboxes label {
+.ellipsis {
   display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.2s linear;
+  white-space: nowrap;
+  padding: 0.5rem 0.1rem;
 }
 
-#multiselect-filter-checkboxes label:hover {
-  background-color: #1e90ff;
+.ellipsis:focus, .ellipsis:hover {
+  color: transparent;
 }
 
-#multiselect-filter-checkboxes input[type="checkbox"] {
-  vertical-align: top;
+.ellipsis:focus:after, .ellipsis:hover:after {
+  content: attr(data-text);
+  overflow: visible;
+  text-overflow: inherit;
+  background: #fff;
+  position: absolute;
+  left: auto;
+  top: auto;
+  width: auto;
+  max-width: 20rem;
+  /*border: 1px solid #eaebec;*/
+  padding: 0 0.5rem;
+  /*box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .28);*/
+  white-space: normal;
+  word-wrap: break-word;
+  display: block;
+  color: black;
+  margin-top: -1.25rem;
 }
 
-.pos-column {
-
-}
-
-.pos-column .lef {
-	text-align: left;
-}
-
-.pos-column .cen {
-	text-align: center;
-}
-
-.pos-column .rig {
-	text-align: right;
-}
-
-.fix-column-top {
-/*   position: -webkit-sticky; /* for Safari */ 
-/*   position: sticky; */
-/*   top: 0; */
-/*   z-index: 100; */
-   text-align: center; 
-}
-
-.fix-column-top-left {
-/*   position: -webkit-sticky; /* for Safari */ 
-/*   position: sticky; */
-/*   left: 0; */
-/*   z-index: 101; */
-   text-align: center; 
-/*   border-right: 1px solid #CCC; */
-}
-
-.fix-column-left {
-/*   position: -webkit-sticky; /* for Safari */ 
-/*   position: sticky; */
-/*   left: 0; */
-/* /*   z-index: 99; */ 
-/*   border-right: 1px solid #CCC; */
-}
 
 @keyframes float-labels {
     0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
@@ -1081,6 +1037,7 @@ input[type=number]::-webkit-outer-spin-button {
 						</div>						
 						<div class="ibox-content">
 							<!-- pagination start -->
+								<!--
                                     	<div class="row-fluid">
 	                                    	<div class="position-result-perpage">
 		                                    	<div class="pagianation_area" >
@@ -1100,91 +1057,86 @@ input[type=number]::-webkit-outer-spin-button {
 			                                    </div>
 											</div>
                                     	</div>
-                            <!-- pagination end -->							
+                                -->
+                            <!-- pagination end -->
+							<div id="table-filter-group" style="display:none; margin-bottom: 7px;">Group: <select id="filter-group" style="width: 100px;"></select></div>
 							<div id="scroll-tableBonusAdjustment" class="row-fluid list-data-table" style="overflow: auto;">							
-							<table class="table table-striped table-bordered" id="tableBonusAdjustment" style="overflow: auto; margin-bottom: 7px; max-width: none; min-height: 130px; max-height: 150px;">
+							<table class="table table-striped table-bordered" id="tableBonusAdjustment" style="margin-bottom: 0px; max-width: none;">
 							<thead>
-						    <tr id="tableBonusAdjustment-head1">
-						      <th rowspan="3" class="fix-column-top cen"><liferay-ui:message key="no-dot"/></th>
-						      <th rowspan="3" class="fix-column-top cen"><liferay-ui:message key="emp-code"/></th>
-						      <th rowspan="3" class="fix-column-top cen"><liferay-ui:message key="employee-name"/></th>
-						      <th rowspan="3" class="fix-column-top cen"><liferay-ui:message key="position"/></th>
-						      <th rowspan="3" class="fix-column-top cen">PG</th>
-						      <th rowspan="3" class="fix-column-top cen">ฝ่าย</th>
-						      <th rowspan="3" class="fix-column-top cen">
-						      	<div class="multiselect-filter-th">
-							      <liferay-ui:message key="group"/>
-							      <div class="multiselect-filter" onclick="showCheckboxesFilter()">
-									    <div class="multiselect-filter-selectBox">
-									      <select style="border: 0; background-color: #f0efef;"></select>
-									      <div class="multiselect-filter-overSelect"></div>
-									    </div>
-									    <div style="overflow: hidden;">
-									    	<div id="multiselect-filter-checkboxes"></div>
-									    </div>
-								  </div>
-							  	</div>
-						      </th>
-						      <th rowspan="3" class="fix-column-top cen">Job Code</th>
-						      <th rowspan="3" class="fix-column-top cen">Position Code</th>
-						      <th rowspan="3" class="fix-column-top cen">คะแนนเต็มตีค่างาน<br>(ความรู้)</th>
-						      <th rowspan="3" class="fix-column-top cen">คะแนนเต็มตีค่างาน<br>(ศักยภาพ)</th>
-						      <th rowspan="3" class="fix-column-top-left">Total Point</th>
-						      <th rowspan="3" class="fix-column-top cen">Baht/Point</th>
-						      <th rowspan="3" class="fix-column-top cen">ผลการประเมินค่างาน<br>(65 คะแนน )</th>
-						      <th rowspan="3" class="fix-column-top cen">คะแนนความรู้</th>
-						      <th rowspan="3" class="fix-column-top cen">คะแนนศักยภาพ</th>
-						      <th rowspan="3" class="fix-column-top cen">คะแนนผลงานปีที่ผ่านมา<br>(20 คะแนน )</th>
-						      <th rowspan="3" class="fix-column-top cen">คะแนนความสามารถที่มีคุณค่าต่อองค์กร<br>(15 คะแนน )</th>
-						      <th rowspan="3" class="fix-column-top cen">คะแนนประเมิน Mgr.</th>
-						      <th rowspan="3" class="fix-column-top cen">คะแนนประเมิน BU.</th>
-						      <th rowspan="3" class="fix-column-top cen">คะแนนประเมิน COO.</th>
-						      <th rowspan="3" class="fix-column-top cen">เกรด</th>
-						      <th colspan="3" class="fix-column-top cen">รายได้จากการคำนวนตีค่างาน</th>
-						      <th colspan="7" class="fix-column-top cen">รายได้ปัจจุบัน</th>
-						      <th rowspan="3" class="fix-column-top cen">ขาด/เกิน</th>
-						      <th rowspan="3" class="fix-column-top cen">Cal Standard</th>
-						      <th colspan="2" class="fix-column-top cen">% Cal</th>
-						      <th colspan="4" class="fix-column-top cen">รายได้ที่เปลี่ยนแปลง</th>
-						      <th colspan="7" class="fix-column-top cen">รายได้ใหม่</th>
+						    <tr>
+						      <th rowspan="3" class="fix-column-top gr"><liferay-ui:message key="group"/></th>
+						      <th rowspan="3" class="fix-column-top no"><liferay-ui:message key="no-dot"/></th>
+						      <th rowspan="3" class="fix-column-top ec"><liferay-ui:message key="emp-code"/></th>
+						      <th rowspan="3" class="fix-column-top en"><liferay-ui:message key="employee-name"/></th>
+						      <th rowspan="3" class="fix-column-top po"><liferay-ui:message key="position"/></th>
+						      <th rowspan="3" class="fix-column-top pg">PG</th>
+						      <th rowspan="3" class="fix-column-top or">ฝ่าย</th>
+						      <th rowspan="3" class="fix-column-top jc">Job Code</th>
+						      <th rowspan="3" class="fix-column-top pc">Position Code</th>
+						      <th rowspan="3" class="fix-column-top kn">คะแนนเต็มตีค่างาน<br>(ความรู้)</th>
+						      <th rowspan="3" class="fix-column-top pe">คะแนนเต็มตีค่างาน<br>(ศักยภาพ)</th>
+						      <th rowspan="3" class="fix-column-top tp">Total Point</th>
+						      <th rowspan="3" class="fix-column-top bp">Baht/Point</th>
+						      <th rowspan="3" class="fix-column-top str1">ผลการประเมินค่างาน<br>(65 คะแนน )</th>
+						      <th rowspan="3" class="fix-column-top str2">คะแนนความรู้</th>
+						      <th rowspan="3" class="fix-column-top str3">คะแนนศักยภาพ</th>
+						      <th rowspan="3" class="fix-column-top str4">คะแนนผลงานปีที่ผ่านมา<br>(20 คะแนน )</th>
+						      <th rowspan="3" class="fix-column-top str5">คะแนนความสามารถที่มีคุณค่าต่อองค์กร<br>(15 คะแนน )</th>
+						      <th rowspan="3" class="fix-column-top mgr">คะแนนประเมิน Mgr.</th>
+						      <th rowspan="3" class="fix-column-top bu">คะแนนประเมิน BU.</th>
+						      <th rowspan="3" class="fix-column-top coo">คะแนนประเมิน COO.</th>
+						      <th rowspan="3" class="fix-column-top grade">เกรด</th>
+						      
+						      <th colspan="3" class="fix-column-top sal">รายได้จากการคำนวนตีค่างาน</th>
+						      <th colspan="7" class="fix-column-top cursal">รายได้ปัจจุบัน</th>
+						      
+						      <th rowspan="3" class="fix-column-top busy">ขาด/เกิน</th>
+						      <th rowspan="3" class="fix-column-top cal">Cal Standard</th>
+						      <th colspan="2" class="fix-column-top percal">% Cal</th>
+						      <th colspan="4" class="fix-column-top changesal">รายได้ที่เปลี่ยนแปลง</th>
+						      <th colspan="7" class="fix-column-top newsal">รายได้ใหม่</th>
 						    </tr>
-						    <tr id="tableBonusAdjustment-head2">
-						 	  <th rowspan="2" class="fix-column-top cen">รายได้รวมที่ควรได้ 90% ไม่รวม Bonus</th>
-						      <th rowspan="2" class="fix-column-top cen">รายได้ Fixที่ควรได้ 65%</th>
-						      <th rowspan="2" class="fix-column-top cen">รายได้ Var ที่ควรได้25%</th>
-						      <th rowspan="2" class="fix-column-top cen">รายได้ปัจจุบัน Total</th>
-						      <th colspan="3" class="fix-column-top cen">FIX65%</th>
-						      <th colspan="3" class="fix-column-top cen">VAR25%</th>
-						      <th rowspan="2" class="fix-column-top cen">%</th>
-						      <th rowspan="2" class="fix-column-top cen">Bath</th>
-						      <th rowspan="2" class="fix-column-top cen">ปรับรายได้  Total</th>
-						      <th rowspan="2" class="fix-column-top cen">ปรับเงินเงินเดือน</th>
-						      <th rowspan="2" class="fix-column-top cen">ปรับ P-QPI</th>
-						      <th rowspan="2" class="fix-column-top cen">% Diff</th>
-						      <th rowspan="2" class="fix-column-top cen">รายได้ใหม่ Total</th>
- 							  <th colspan="3" class="fix-column-top cen">FIX65%</th>
-						      <th colspan="3" class="fix-column-top cen">VAR25%</th>
+						    <tr>
+						 	  <th rowspan="2" class="fix-column-top">รายได้รวมที่ควรได้ <br>90% ไม่รวม Bonus</th>
+						      <th rowspan="2" class="fix-column-top">รายได้ Fix<br>ที่ควรได้ 65%</th>
+						      <th rowspan="2" class="fix-column-top">รายได้ Var<br>ที่ควรได้25%</th>
+						      <th rowspan="2" class="fix-column-top">รายได้ปัจจุบัน<br>Total</th>
+						      <th colspan="3" class="fix-column-top">FIX 65%</th>
+						      <th colspan="3" class="fix-column-top">VAR 25%</th>
+						      <th rowspan="2" class="fix-column-top">%</th>
+						      <th rowspan="2" class="fix-column-top">Bath</th>
+						      <th rowspan="2" class="fix-column-top">ปรับรายได้<br>Total</th>
+						      <th rowspan="2" class="fix-column-top">ปรับเงินเงินเดือน</th>
+						      <th rowspan="2" class="fix-column-top">ปรับ P-QPI</th>
+						      <th rowspan="2" class="fix-column-top">% Diff</th>
+						      <th rowspan="2" class="fix-column-top">รายได้ใหม่<br>Total</th>
+ 							  <th colspan="3" class="fix-column-top">FIX 65%</th>
+						      <th colspan="3" class="fix-column-top">VAR 25%</th>
 						    </tr>			
-						     <tr id="tableBonusAdjustment-head3">
-						      <th class="fix-column-top cen">Salary</th>
-						      <th class="fix-column-top cen">P-QPI</th>
-						      <th class="fix-column-top cen">อื่นๆ</th>
-						      <th class="fix-column-top cen">MPI</th>
-						      <th class="fix-column-top cen">PI</th>
-						      <th class="fix-column-top cen">อื่นๆ</th>
-						      <th class="fix-column-top cen">Salary</th>
-						      <th class="fix-column-top cen">P-QPI</th>
-						      <th class="fix-column-top cen">อื่นๆ</th>
-						      <th class="fix-column-top cen">MPI</th>
-						      <th class="fix-column-top cen">PI</th>
-						      <th class="fix-column-top cen">อื่นๆ</th>
+						     <tr>
+						      <th class="fix-column-top">Salary</th>
+						      <th class="fix-column-top">P-QPI</th>
+						      <th class="fix-column-top">อื่นๆ</th>
+						      <th class="fix-column-top">MPI</th>
+						      <th class="fix-column-top">PI</th>
+						      <th class="fix-column-top">อื่นๆ</th>
+						      <th class="fix-column-top">Salary</th>
+						      <th class="fix-column-top">P-QPI</th>
+						      <th class="fix-column-top">อื่นๆ</th>
+						      <th class="fix-column-top">MPI</th>
+						      <th class="fix-column-top">PI</th>
+						      <th class="fix-column-top">อื่นๆ</th>
 						    </tr>
 							</thead>
 							<tbody id="list_empjudege">
 							</tbody>
+<!-- 							<tfoot id="list_footer"> -->
+<!-- 							</tfoot> -->
 							</table>
 							</div>
+							
 							<!-- pagination start -->
+							<!--
 							<div class="row-fluid">
 								<div class="position-result-perpage">
 									<div class="pagianation_area">
@@ -1207,7 +1159,9 @@ input[type=number]::-webkit-outer-spin-button {
 									</div>
 								</div>
 							</div>
+							-->
 							<!-- pagination end -->
+							
 							<div class='row-fluid head_adjust' style="margin-top: 10px; display: none;">
 								<div class="position-result-perpage">
 									 <div class="">

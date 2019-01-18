@@ -1086,7 +1086,7 @@ input[type=number]::-webkit-outer-spin-button {
 							  <th style="text-align:center;" colspan="3"><liferay-ui:message key="SBU"/></th>
 							</tr>
 						    <tr class="GridViewScrollHeader">
-						      <th style="text-align:center;"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></th>
+						      <th style="text-align:center;"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" class="statusSelectAll" style="margin-top:-3px;"></th>
 						      <th style="text-align:center;"><liferay-ui:message key="emp-code"/></th>
 						      <th><liferay-ui:message key="employee-name"/></th>
 						      <th><liferay-ui:message key="emp-level"/></th>

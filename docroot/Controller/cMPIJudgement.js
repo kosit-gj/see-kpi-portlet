@@ -10,7 +10,7 @@ var user_id = "";
 var user_level_id = "";
 var table = "";
 const pageNumberDefault=1;
-var checkDatatableUse = true;
+var startDatatable = true;
 var clearFn = function() {
 	$("#information").hide();
 }
@@ -259,49 +259,40 @@ var getDataFn = function (page, rpp) {
 
 var tablesfreeze = function() {
 	var table = $('#tableBonusAdjustment');
-//	if(checkDatatableUse==true) {
-//		checkDatatableUse = false;
 		table.DataTable({
-		fixedHeader: true,
-		"ordering": false,
-		"bInfo" : false,
-		"scrollY": 350,
-		"scrollX": true,
-		"paging":  false,
-		"searching": false,
-		scrollCollapse: true,
-		paging: false,
-		fixedColumns: {
-			leftColumns: 3
-		},
-		"bAutoWidth": true,
-		columnDefs: [
-			{ "width": "30px", "targets": [0] },
-			{ "width": "50px", "targets": [7,8,10,11,13,14] }, 
-			{ "width": "65px", "targets": [3,9,12,15] }, 
-			{ "width": "70px", "targets": [1] },
-			{ "width": "100px", "targets": [6] },
-			{ "width": "150px", "targets": [2] },
-			{ "width": "220px", "targets": [4,5] }
-		],
-		"iDisplayLength": -1,
-		"bPaginate": true,
-		"iCookieDuration": 60,
-		"bStateSave": false,
-		"bScrollAutoCss": true,
-		"bProcessing": true,
-		"bRetrieve": true,
-		"bJQueryUI": true
-		});
+			"searching": false,
+			fixedHeader: true,
+			"ordering": false,
+			"bInfo" : false,
+			"scrollY": 350,
+		    "scrollX": true,
+			scrollCollapse: true,
+			paging: false,
+//			fixedColumns: {
+//				leftColumns: 3
+//			},
+			"iDisplayLength": -1,
+			"bPaginate": true,
+			"iCookieDuration": 60,
+			"bStateSave": false,
+			"bAutoWidth": true,
+			"bScrollAutoCss": true,
+			"bProcessing": true,
+			"bRetrieve": true,
+			"bJQueryUI": true,
+			columnDefs: [
+				{ "width": "30px", "targets": [0] },
+				{ "width": "50px", "targets": [7,8,10,11,13,14] }, 
+				{ "width": "65px", "targets": [3,9,12,15] }, 
+				{ "width": "70px", "targets": [1] },
+				{ "width": "100px", "targets": [6] },
+				{ "width": "150px", "targets": [2] },
+				{ "width": "220px", "targets": [4,5] }
+			]
+		}).fixedColumns().update();
 		
-//		setTimeout(function(){
-//			$.fn.dataTable.tables( { visible: true, api: true } )
-//			.columns.adjust()
-//			.fixedColumns().relayout();
-//		}, 300);
-//	}
-	
-//	table.DataTable().fixedColumns().update();
+//	table.DataTable().rows().invalidate().draw();
+//	table.fixedColumns().update();
 //	table.DataTable().fixedColumns().relayout();
 	
 	$(".numberOnly").autoNumeric('init');
@@ -312,14 +303,16 @@ var tablesfreeze = function() {
 		wEmpty: 'zero',
 	});
 	$(".head_adjust").show();
-	$("#statusSelectAll").prop('checked', false);
-	$('#statusSelectAll').click(function () {
-        if ($('#statusSelectAll').prop('checked')) {
-        	$(".select-check").prop('checked', true);
-        } else {
-            $(".select-check").prop('checked', false);
-        }
-    });
+	$("#statusSelectAll").prop('checked', false); //ล้างค่าการ checked ที่ปุ่ม check
+	$(".statusSelectAll").prop('checked', false); //ล้างค่าการ checked ที่ปุ่ม check ตรง freeze
+	$('.statusSelectAll').click(function () { //ถ้าคลิ้ก  check ตรง freeze
+		$('#statusSelectAll').click(); //ให้ปุ่ม  check ทำงาน
+		if ($('#statusSelectAll').prop('checked')) {
+			$(".select-check").prop('checked', true);
+	    } else {
+	    	$(".select-check").prop('checked', false);
+	    }
+	});
 	
 	if($("#actionToAssign").val()==null || $("#actionToAssign").val()==undefined) {
     	$("#btnSubmit").attr("disabled");
