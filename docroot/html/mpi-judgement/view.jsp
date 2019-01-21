@@ -91,7 +91,7 @@ plid = layout.getPlid();
 		width: 24.5%;
 	}
 	
-	/* .OverFlow {
+	.OverFlow {
 		max-width: 200px;
 		white-space: nowrap;
 		overflow: hidden;
@@ -102,7 +102,7 @@ plid = layout.getPlid();
 	    text-overflow: clip;
 	    white-space: normal;
 	    word-break: break-all;
-	} */
+	} 
 	
 	/* datatables css */
  	/* .ellipsis {
@@ -772,12 +772,13 @@ margin-bottom:1px;
 background-color:#71cccc !important;
 }
 
-#tableBonusAdjustment thead tr th {
+/* #tableBonusAdjustment thead tr th {
  white-space: nowrap;
  text-align: center;
  vertical-align: middle;
  font-size: 14 px;
-}
+ table-layout: fixed;
+} */
 
 
 .aui .list-data-table .table-bordered th{
@@ -1079,33 +1080,34 @@ input[type=number]::-webkit-outer-spin-button {
 							<table class="table table-striped table-bordered" id="tableBonusAdjustment" style="margin-bottom: 7px; max-width: none;">
 							<thead>
 							<tr class="GridViewScrollHeader">
-							  <th style="width:100%; text-align:left;" colspan="7"><liferay-ui:message key="employee-information"/></th>
-							  <th style="width:100%; text-align:center;" colspan="3"><liferay-ui:message key="Mgr."/></th>
-							  <th style="width:100%; text-align:center;" colspan="3"><liferay-ui:message key="BU"/></th>
-							  <th style="width:100%; text-align:center;" colspan="3"><liferay-ui:message key="SBU"/></th>
+							  <th style="text-align:left;" colspan="7"><liferay-ui:message key="employee-information"/></th>
+							  <th style="text-align:center;" colspan="3"><liferay-ui:message key="Mgr."/></th>
+							  <th style="text-align:center;" colspan="3"><liferay-ui:message key="BU"/></th>
+							  <th style="text-align:center;" colspan="3"><liferay-ui:message key="SBU"/></th>
 							</tr>
 						    <tr class="GridViewScrollHeader">
-						      <th style="width:5%; text-align:center;"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" style="margin-top:-3px;"></th>
-						      <th style="width:10%; text-align:center;"><liferay-ui:message key="emp-code"/></th>
-						      <th style="width:25%;"><liferay-ui:message key="employee-name"/></th>
-						      <th style="width:10%;"><liferay-ui:message key="emp-level"/></th>
-						      <th style="width:30%; text-align:center;"><liferay-ui:message key="organization"/></th>
-						      <th style="width:30%; text-align:center;"><liferay-ui:message key="position"/></th>
-						      <th style="width:15%; text-align:center;"><liferay-ui:message key="status"/></th>
-						      <th style="width:5%; text-align:center;"><liferay-ui:message key="score"/></th>
-						      <th style="width:5%; text-align:center;"><liferay-ui:message key="Grade"/></th>
-						      <th style="width:5%; text-align:center;"><liferay-ui:message key="amount"/></th>
-						      <th style="width:5%; text-align:center;"><liferay-ui:message key="score"/></th>
-						      <th style="width:5%; text-align:center;"><liferay-ui:message key="Grade"/></th>
-						      <th style="width:5%; text-align:center;"><liferay-ui:message key="amount"/></th>
-						      <th style="width:5%; text-align:center;"><liferay-ui:message key="score"/></th>
-						      <th style="width:5%; text-align:center;"><liferay-ui:message key="Grade"/></th>
-						      <th style="width:5%; text-align:center;"><liferay-ui:message key="amount"/></th>
-						      <!--  <th style="width:10%; text-align:center;"><liferay-ui:message key="salary"/></th> -->
-						      <!-- <th style="width:5%; text-align:center;"><liferay-ui:message key="bonus-calculate"/></th> -->
-						      <!-- <th style="width:10%; text-align:center;"><liferay-ui:message key="bonus-judgement"/></th> -->
-						      <!-- <th style="width:10%; text-align:center;"><liferay-ui:message key="month-number"/></th> -->
+						      <th style="text-align:center;"><input style="margin-bottom: 5px;" type="checkbox" name="statusSelectAll" id="statusSelectAll" class="statusSelectAll" style="margin-top:-3px;"></th>
+						      <th style="text-align:center;"><liferay-ui:message key="emp-code"/></th>
+						      <th><liferay-ui:message key="employee-name"/></th>
+						      <th><liferay-ui:message key="emp-level"/></th>
+						      <th style="text-align:center;"><liferay-ui:message key="organization"/></th>
+						      <th style="text-align:center;"><liferay-ui:message key="position"/></th>
+						      <th style="text-align:center;"><liferay-ui:message key="status"/></th>
+						      <th style="text-align:center;"><liferay-ui:message key="score"/></th>
+						      <th style="text-align:center;"><liferay-ui:message key="Grade"/></th>
+						      <th style="text-align:center;"><liferay-ui:message key="amount"/></th>
+						      <th style="text-align:center;"><liferay-ui:message key="score"/></th>
+						      <th style="text-align:center;"><liferay-ui:message key="Grade"/></th>
+						      <th style="text-align:center;"><liferay-ui:message key="amount"/></th>
+						      <th style="text-align:center;"><liferay-ui:message key="score"/></th>
+						      <th style="text-align:center;"><liferay-ui:message key="Grade"/></th>
+						      <th style="text-align:center;"><liferay-ui:message key="amount"/></th>
+						      <!--  <th style="text-align:center;"><liferay-ui:message key="salary"/></th> -->
+						      <!-- <th style="text-align:center;"><liferay-ui:message key="bonus-calculate"/></th> -->
+						      <!-- <th style="text-align:center;"><liferay-ui:message key="bonus-judgement"/></th> -->
+						      <!-- <th style="text-align:center;"><liferay-ui:message key="month-number"/></th> -->
 						    </tr>				
+							
 							</thead>
 							 <tbody id="list_mpi_judgement">
 							 </tbody>

@@ -10,6 +10,7 @@ var user_id = "";
 var user_level_id = "";
 var table = "";
 const pageNumberDefault=1;
+var startDatatable = true;
 var clearFn = function() {
 	$("#information").hide();
 }
@@ -256,56 +257,8 @@ var getDataFn = function (page, rpp) {
     });
 };
 
-var tablesfreeze = function(){
-	var table = $('#tableBonusAdjustment');
-	table.DataTable({
-	fixedHeader: true,
-	"ordering": false,
-	"bInfo" : false,
-	"scrollY": 350,
-	"scrollX": true,
-	"paging":  false,
-	"searching": false,
-	scrollCollapse: true,
-	paging: false,
-	fixedColumns: {
-		leftColumns: 3
-	},
-	"iDisplayLength": -1,
-	"bPaginate": true,
-	"iCookieDuration": 60,
-	"bStateSave": false,
-	"bAutoWidth": false,
-	"bScrollAutoCss": true,
-	"bProcessing": true,
-	"bRetrieve": true,
-	"bJQueryUI": true
-	});
+var tablesfreeze = function() {
 	
-	table.DataTable().fixedColumns().update();
-	
-	$(".numberOnly").autoNumeric('init');
-	$(".numberOnly").autoNumeric('update', {
-		vMin : '0',
-		vMax : '9999999999',
-		lZero: 'deny',
-		wEmpty: 'zero',
-	});
-	$(".head_adjust").show();
-	$("#statusSelectAll").prop('checked', false);
-	$('#statusSelectAll').click(function () {
-        if ($('#statusSelectAll').prop('checked')) {
-        	$(".select-check").prop('checked', true);
-        } else {
-            $(".select-check").prop('checked', false);
-        }
-    });
-	
-	if($("#actionToAssign").val()==null || $("#actionToAssign").val()==undefined) {
-    	$("#btnSubmit").attr("disabled");
-    } else {
-    	$("#btnSubmit").removeAttr("disabled");
-    }
 }
 
 
@@ -341,9 +294,13 @@ var to_action = function () {
 
 
 var listDataFn = function(data){
-	
 	var htmlHTML="";
 	var edit_flag = "";
+	
+	var table = $('#tableBonusAdjustment');
+	table.DataTable().clear();
+	table.DataTable().destroy();
+	//ก่อน generate data ต้องเคลีย freeze เก่าออก ไม่งั้นข้อมูลมันไม่เปลี่ยน
 	
 	if(data.length==0) {
 		htmlHTML +="<tr>";
@@ -363,118 +320,121 @@ var listDataFn = function(data){
 		user_id = indexEntry['user_emp_id'];
 		user_level_id = indexEntry['user_level_id'];
 		
-            htmlHTML += " <tr class=\"control-calculate\">";
-            htmlHTML += " <td style=\"text-align: center;\">";
-            htmlHTML += " <input type=\"checkbox\" class=\"select-check\" id=\""+indexEntry['emp_result_id']+"\" edit_flag=\""+indexEntry['edit_flag']+"\" style=\"margin-top:-3px;\">";
-            htmlHTML += " </td>";
-            htmlHTML += " <td style=\"text-align: center;\" >";
-            htmlHTML += " <div class=\"ellipsis\" data-text=\""+indexEntry['emp_code']+"\">"+indexEntry['emp_code']+"</div>";
-            htmlHTML += " </td>";
-            htmlHTML += " <td><div style=\"margin-left: 5px; text-align: left; \" >";
-            htmlHTML += " <div class=\"ellipsis\" data-text=\""+indexEntry['emp_name']+"\">"+indexEntry['emp_name']+"</div>";
-            htmlHTML += " </div></td>";
-            htmlHTML += " <td style=\"width:10%; text-align: left;\" >";
-            htmlHTML += " <div class=\"ellipsis\" data-text=\""+indexEntry['appraisal_level_name']+"\">"+indexEntry['appraisal_level_name']+"</div>";
-            htmlHTML += " </td>";
-            htmlHTML += " <td style=\"width:30%; text-align: left;\" >";
-            htmlHTML += " <div class=\"ellipsis\" data-text=\""+indexEntry['org_name']+"\">"+indexEntry['org_name']+"</div>";
-            htmlHTML += " </td>";
-            htmlHTML += " <td style=\"width:30%; text-align: left;\" >";
-            htmlHTML += " <div class=\"ellipsis\" data-text=\""+indexEntry['position_name']+"\">"+indexEntry['position_name']+"</div>";
-            htmlHTML += " </td>";
-            htmlHTML += " <td style=\"width:15%; text-align: left;\" >";
-            htmlHTML += " <div class=\"ellipsis\" data-text=\""+indexEntry['status']+"\">"+indexEntry['status']+"</div>";
-            htmlHTML += " </td>";
-            htmlHTML += " <td style=\"width:5%; text-align: center;\">";
-            htmlHTML += " "+indexEntry['score_manager']+"";
-            htmlHTML += " </td>";
-            htmlHTML += " <td style=\"width:5%; text-align: center;\">";
-            htmlHTML += " "+notNullTextFn(indexEntry['grade_manager'])+"";
-            htmlHTML += " </td>";
-            htmlHTML += " <td style=\"width:5%; text-align: center;\">";
-            htmlHTML += " "+addCommas(notNullFn(indexEntry['s_amount']))+"";
-            htmlHTML += " </td>";
-            
-            if(indexEntry['is_bu']==1) {
-            	htmlHTML += " <td class=\"score_bu\" style=\"width:5%;\" >";
-            	htmlHTML += "	<div class=\"float-label-control \">";
-                htmlHTML += "		<input type=\"text\" class=\"form-control input-xs span12 bu numberOnly\" value='"+indexEntry['score_bu']+"'>";
-                htmlHTML += "	</div>";
-                htmlHTML += " </td>";
-    		} else {
-    			htmlHTML += " <td style=\"width:5%; text-align: right;\">";
-    			htmlHTML += " "+addCommas(notNullFn(indexEntry['score_bu']))+"";
-    			htmlHTML += " </td>";
-    		}
-            
-            htmlHTML += " <td style=\"width:5%; text-align: center;\">";
-            htmlHTML += " "+notNullTextFn(indexEntry['grade_bu'])+"";
-            htmlHTML += " </td>";
-            htmlHTML += " <td style=\"width:5%; text-align: right;\">";
-            htmlHTML += " "+addCommas(notNullFn(indexEntry['s_amount']))+"";
-            htmlHTML += " </td>";
-            
-            if(indexEntry['is_coo']==1) {
-            	htmlHTML += " <td class=\"score_coo\" style=\"width:5%;\" >";
-            	htmlHTML += "	<div class=\"float-label-control \">";
-                htmlHTML += "		<input type=\"text\" class=\"form-control input-xs span12 coo numberOnly\" value='"+indexEntry['score_coo']+"'>";
-                htmlHTML += "	</div>";
-                htmlHTML += " </td>";
-    		} else {
-    			htmlHTML += " <td style=\"width:5%; text-align: right;\">";
-    			htmlHTML += " "+addCommas(notNullFn(indexEntry['score_coo']))+"";
-    			htmlHTML += " </td>";
-    		}
-            
-            htmlHTML += " <td style=\"width:5%; text-align: center;\">";
-            htmlHTML += " "+notNullTextFn(indexEntry['grade_coo'])+"";
-            htmlHTML += " </td>";
-            htmlHTML += " <td style=\"width:5%; text-align: right;\">";
-            htmlHTML += " "+addCommas(notNullFn(indexEntry['s_amount']))+"";
-            htmlHTML += " </td>";
-            //htmlHTML += " <td class=\"data-percent\">";
-            //htmlHTML += " <input "+edit_flag+" type='number' min=\"0.00\" style=\"text-align: right; min-width: 40px; padding-right: 5px;\" class='form-control input-sm span12 percent' total_adjust_result_score='"+indexEntry['s_amount']+"' value='"+indexEntry['adjust_b_amount']+"'/>";
-            
-            /*
-            if(indexEntry['edit_flag']==1) {
-            	htmlHTML += " <td class=\"data-percent\">";
-            	htmlHTML += "	<div class=\"float-label-control \">";
-                htmlHTML += "		<input  type=\"text\" class=\"form-control input-xs span12 percent numberOnly\" total_adjust_result_score='"+indexEntry['s_amount']+"' value='"+indexEntry['adjust_b_amount']+"'>";
-                htmlHTML += "	</div>";
-                htmlHTML += " </td>";
-    		} else {
-    			htmlHTML += " <td style=\"text-align: right;\">";
-    			htmlHTML += " "+addCommas(notNullFn(indexEntry['adjust_b_amount']))+"";
-    			htmlHTML += " </td>";
-    		} */
-            
-            //htmlHTML += " </td>";
-            //htmlHTML += " <td class=\"data-score\">";
-            //htmlHTML += " <input "+edit_flag+" type='number' min=\"0.00\" style=\"text-align: right; min-width: 40px; padding-right: 5px;\" class='form-control input-sm span12 score' total_adjust_result_score='"+indexEntry['s_amount']+"' value='"+indexEntry['adjust_b_rate']+"'/>";
-            
-            /*
-            if(indexEntry['edit_flag']==1) {
-            	htmlHTML += " <td class=\"data-score\">";
-            	htmlHTML += "	<div class=\"float-label-control \">";
-                htmlHTML += "		<input disabled type=\"text\" class=\"form-control input-xs span12 score numberOnly\" total_adjust_result_score='"+indexEntry['s_amount']+"' value='"+indexEntry['adjust_b_rate']+"'>";
-                htmlHTML += "	</div>";
-                htmlHTML += " </td>";
-    		} else {
-    			htmlHTML += " <td style=\"text-align: right;\">";
-    			htmlHTML += " "+addCommas(notNullFn(indexEntry['adjust_b_rate']))+"";
-    			htmlHTML += " </td>";
-    		}*/
-            
-            //htmlHTML += " </td>";
-            htmlHTML += " </tr>";
+			htmlHTML += " <tr class=\"control-calculate\">";
+	        htmlHTML += " <td style=\"text-align: center;\">";
+	        htmlHTML += " <input type=\"checkbox\" class=\"select-check\" id=\""+indexEntry['emp_result_id']+"\" edit_flag=\""+indexEntry['edit_flag']+"\" style=\"margin-top:-3px;\">";
+	        htmlHTML += " </td>";
+	        htmlHTML += " <td style=\"text-align: center;\" >";
+	        htmlHTML += " <div class=\"ellipsis\" data-text=\""+indexEntry['emp_code']+"\">"+indexEntry['emp_code']+"</div>";
+	        htmlHTML += " </td>";
+	        htmlHTML += " <td><div style=\"margin-left: 5px; text-align: left; \" >";
+	        htmlHTML += " <div class=\"OverFlow\" data-text=\""+indexEntry['emp_name']+"\">"+indexEntry['emp_name']+"</div>";
+	        htmlHTML += " </div></td>";
+	        htmlHTML += " <td style=\"text-align: center;\" >";
+	        htmlHTML += " <div class=\"OverFlow\" data-text=\""+indexEntry['appraisal_level_name']+"\">"+indexEntry['appraisal_level_name']+"</div>";
+	        htmlHTML += " </td>";
+	        htmlHTML += " <td style=\"text-align: left;\" >";
+	        htmlHTML += " <div class=\"OverFlow\" data-text=\""+indexEntry['org_name']+"\">"+indexEntry['org_name']+"</div>";
+	        htmlHTML += " </td>";
+	        htmlHTML += " <td style=\"text-align: left;\" >";
+	        htmlHTML += " <div class=\"OverFlow\" data-text=\""+indexEntry['position_name']+"\">"+indexEntry['position_name']+"</div>";
+	        htmlHTML += " </td>";
+	        htmlHTML += " <td style=\"text-align: center;\" >";
+	        htmlHTML += " <div class=\"OverFlow\" data-text=\""+indexEntry['status']+"\">"+indexEntry['status']+"</div>";
+	        htmlHTML += " </td>";
+	        htmlHTML += " <td style=\"text-align: center;\">";
+	        htmlHTML += " "+indexEntry['score_manager']+"";
+	        htmlHTML += " </td>";
+	        htmlHTML += " <td style=\"text-align: center;\">";
+	        htmlHTML += " "+notNullTextFn(indexEntry['grade_manager'])+"";
+	        htmlHTML += " </td>";
+	        htmlHTML += " <td style=\"text-align: center;\">";
+	        htmlHTML += " "+addCommas(notNullFn(indexEntry['s_amount']))+"";
+	        htmlHTML += " </td>";
+	        
+	        if(indexEntry['is_bu']==1) {
+	        	htmlHTML += " <td class=\"score_bu\">";
+	        	htmlHTML += "	<div class=\"float-label-control \">";
+	            htmlHTML += "		<input type=\"text\" class=\"form-control input-xs span12 bu numberOnly\" value='"+indexEntry['score_bu']+"'>";
+	            htmlHTML += "	</div>";
+	            htmlHTML += " </td>";
+			} else {
+				htmlHTML += " <td style=\"text-align: right;\">";
+				htmlHTML += " "+addCommas(notNullFn(indexEntry['score_bu']))+"";
+				htmlHTML += " </td>";
+			}
+	        
+	        htmlHTML += " <td style=\"text-align: center;\">";
+	        htmlHTML += " "+notNullTextFn(indexEntry['grade_bu'])+"";
+	        htmlHTML += " </td>";
+	        htmlHTML += " <td style=\"text-align: right;\">";
+	        htmlHTML += " "+addCommas(notNullFn(indexEntry['s_amount']))+"";
+	        htmlHTML += " </td>";
+	        
+	        if(indexEntry['is_coo']==1) {
+	        	htmlHTML += " <td class=\"score_coo\">";
+	        	htmlHTML += "	<div class=\"float-label-control \">";
+	            htmlHTML += "		<input type=\"text\" class=\"form-control input-xs span12 coo numberOnly\" value='"+indexEntry['score_coo']+"'>";
+	            htmlHTML += "	</div>";
+	            htmlHTML += " </td>";
+			} else {
+				htmlHTML += " <td style=\"text-align: right;\">";
+				htmlHTML += " "+addCommas(notNullFn(indexEntry['score_coo']))+"";
+				htmlHTML += " </td>";
+			}
+	        
+	        htmlHTML += " <td style=\"text-align: center;\">";
+	        htmlHTML += " "+notNullTextFn(indexEntry['grade_coo'])+"";
+	        htmlHTML += " </td>";
+	        htmlHTML += " <td style=\"text-align: right;\">";
+	        htmlHTML += " "+addCommas(notNullFn(indexEntry['s_amount']))+"";
+	        htmlHTML += " </td>";
+	        htmlHTML += " </tr>";
+		
 
 	});
 	
 	$("#list_mpi_judgement").html(htmlHTML);
 	
-	tablesfreeze();
+	//เซ็ต datatable freeze column, freeze header และ ความกว้างของคอลัม
+	table.DataTable({
+		"searching": false,
+		fixedHeader: true,
+		"ordering": false,
+		"bInfo" : false,
+		"scrollY": 350,
+		"scrollX": true,
+		scrollCollapse: true,
+		paging: false,
+		fixedColumns: {
+			leftColumns: 3
+		},
+		"iDisplayLength": -1,
+		"bPaginate": true,
+		"iCookieDuration": 60,
+		"bStateSave": false,
+		"bAutoWidth": true,
+		"bScrollAutoCss": true,
+		"bProcessing": true,
+		"bRetrieve": true,
+		"bJQueryUI": true,
+		columnDefs: [
+				{ "width": "30px", "targets": [0] },
+				{ "width": "50px", "targets": [7,8,10,11,13,14] }, 
+				{ "width": "65px", "targets": [3,9,12,15] }, 
+				{ "width": "70px", "targets": [1] },
+				{ "width": "100px", "targets": [6] },
+				{ "width": "150px", "targets": [2] },
+				{ "width": "220px", "targets": [4,5] }
+		]
+	});
 	
-	/* $(".numberOnly").autoNumeric('init');
+	$("table thead th").css({"border-bottom" : "0px"});
+		
+	//	table.DataTable().fixedColumns().update();
+	//	table.DataTable().fixedColumns().relayout();
+	
+	$(".numberOnly").autoNumeric('init');
 	$(".numberOnly").autoNumeric('update', {
 		vMin : '0',
 		vMax : '9999999999',
@@ -482,23 +442,22 @@ var listDataFn = function(data){
 		wEmpty: 'zero',
 	});
 	$(".head_adjust").show();
-	$("#statusSelectAll").prop('checked', false);
-	$('#statusSelectAll').click(function () {
-        if ($('#statusSelectAll').prop('checked')) {
-        	$(".select-check").prop('checked', true);
-        } else {
-            $(".select-check").prop('checked', false);
-        }
-    });
+	$("#statusSelectAll").prop('checked', false); //ล้างค่าการ checked ที่ปุ่ม check
+	$(".statusSelectAll").prop('checked', false); //ล้างค่าการ checked ที่ปุ่ม check ตรง freeze
+	$('.statusSelectAll').click(function () { //ถ้าคลิ้ก  check ตรง freeze
+		$('#statusSelectAll').click(); //ให้ปุ่ม  check ทำงาน
+		if ($('#statusSelectAll').prop('checked')) {
+			$(".select-check").prop('checked', true);
+	    } else {
+	    	$(".select-check").prop('checked', false);
+	    }
+	});
 	
 	if($("#actionToAssign").val()==null || $("#actionToAssign").val()==undefined) {
-    	$("#btnSubmit").attr("disabled");
-    } else {
-    	$("#btnSubmit").removeAttr("disabled");
-    } */
-	
-	
-//	calculatePercentKeyup();
+		$("#btnSubmit").attr("disabled");
+	} else {
+		$("#btnSubmit").removeAttr("disabled");
+	}
 };
 
 //var calculatePercentKeyup = function() {
