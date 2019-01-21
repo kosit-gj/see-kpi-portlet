@@ -12,28 +12,16 @@
 <portlet:defineObjects />
 
 <%
-/*
-PortletSession portletSession1 = renderRequest.getPortletSession();
-portletSession1.setAttribute("password", "authenticated", PortletSession.APPLICATION_SCOPE);
-String pwd = (String) portletSession1.getAttribute("password", PortletSession.APPLICATION_SCOPE);
-out.print(pwd);
-String password=PortalUtil.getUser(request).getPassword();
-*/
-
-String username = themeDisplay.getUser().getScreenName();
-String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWORD);
-//out.print(username);
-
-String param_link = PortalUtil.getOriginalServletRequest(request).getParameter("param_link");
-String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getParameter("param_item_result_id");
-layout = themeDisplay.getLayout();
-plid = layout.getPlid();
-//out.print(param);
-//out.print("password2="+password);
+	String username = themeDisplay.getUser().getScreenName();
+	String password = (String)request.getSession().getAttribute(WebKeys.USER_PASSWORD);
+	String param_link = PortalUtil.getOriginalServletRequest(request).getParameter("param_link");
+	String param_item_result_id = PortalUtil.getOriginalServletRequest(request).getParameter("param_item_result_id");
+	layout = themeDisplay.getLayout();
+	plid = layout.getPlid();
 %>
+
 <input type="hidden" id="param_link" name="param_link" value="<%=param_link%>">
 <input type="hidden" id="param_item_result_id" name="param_item_result_id" value="<%=param_item_result_id%>">
-
 <input type="hidden" id="user_portlet" name="user_portlet" value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet" value="<%=password%>">
 <input type="hidden" id="url_portlet" name="url_portlet" value="<%= renderRequest.getContextPath() %>">
@@ -966,125 +954,385 @@ input[type=number]::-webkit-outer-spin-button {
 .titlePanel {
 	width: 100%;
 }
+.titlePanel {
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding-top: 0;
+}
+.form-label-customs {
+    float: left;
+    padding-right: 5px;
+    padding-top: 1px;
+    text-align: right;
+    width: 150px;
+}
+#advanceSearchArea{
+	display:none;
+}
+.resultArea{
+display:none;
+}
+.inputFormSearch{
+	 padding-right: 0;
+}
+.ibox-content {
+    background-color: #fff;
+    border: 1px solid #ffe57f;
+    color: inherit;
+    margin-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.modal-backdrop, .modal-backdrop.fade.in {
+    background-color: #000 !important;
+    }
+
+#btnAdd{
+margin-bottom:5px
+}
+.aui select {
+    line-height: 0px;
+}
+.pagingText{
+ 	/*display:none;*/
+ 	}
+ 	#btnPaginationTop{
+ 		width:300px;
+ 		float:left;
+ 	}
+	
+	#btnPaginationBottom{
+ 		width:300px;
+ 		float:left;
+ 	}
+	
+	.pagingText{
+	padding-top: 5px;
+	}
+	.aui .pagination ul{
+	margin: 0
+	}
+	
+	.aui form {
+    margin: 0;
+}
+.aui .table td{
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+#countPaginationTop{
+	width:60px;
+}
+#countPaginationBottom{
+	width:60px;
+}
+
+.aui #breadcrumbs {
+    margin-bottom: 0px;
+}
+
+.aui .breadcrumb {
+    background-color: #f5f5f5;
+    border-radius: 2px;
+    list-style: outside none none;
+    margin: 0 0 0px;
+    padding: 0px 15px;
+}
+.aui #file{
+	width: 100%;
+	height: 100%;
+}
+.aui .portlet-content, .aui .portlet-minimized .portlet-content-container {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #eaeaea;
+    border-image: none;
+    border-style: solid;
+    border-width: 0 1px 1px;
+    padding: 10px 5px 5px;
+}
+
+.aui .portlet-content, .aui .portlet-minimized .portlet-content-container {
+  background-color: #fafafa;
+}
+
+.aui .form-group {
+    margin-bottom: 7px;
+}
+
+
+/* Css by Au Start */
+.aui .modal-header .close{
+	font-size: 1.4em !important;
+    margin-top: 4px !important;
+    padding-top: 5px !important;
+}
+.gray-bg {
+	background-color: #f3f3f4;
+}
+.ibox-title{
+	padding: 1px 10px;
+}
+.titlePanel {
+	margin: 7px 0;
+}
+.form-group {
+    margin-bottom: 10px !important;
+}
+.control-label{
+	cursor: default;
+}
+
+.aui .ibox-title .control-label{
+	text-align: right;
+}
+
+form {
+    margin: 0 0 0;
+}
+.countPagination {
+    width: 70px;
+
+}
+.aui .popover-content {
+    padding: 5px 5px 5px 5px;
+}
+
+
+
+.aui .modal.fade.in{top:3%;}
+#confrimModal{width: 400px;}
+
+.aui .modal-footer{
+	border-radius: 0;
+}
+.form_list_content{
+	display: none;
+}
+
+/* Large desktop */
+
+@media ( min-width : 1200px) {
+	#confrimModal {
+			left: 56%;
+		}
+}
+
+/* Portrait tablet to landscape and desktop */
+@media ( min-width : 980px) and (max-width: 1199px) {
+	#confrimModal {
+		left: 57%;
+	}
+	
+}
+@media ( min-width : 768px) and (max-width: 979px) {
+	#confrimModal {
+		left: 58.5%;
+	}
+	
+}
+
+/* Landscape phone to portrait tablet */
+@media ( max-width : 767px) {
+	#confrimModal {
+		left: 23.5%;
+	}
+	
+}		
+@media ( min-width : 481px) and (max-width: 615px) {
+	#confrimModal {
+			left: 16.5%;
+		}
+	.redFont{
+		float:right;
+	}
+	
+	
+}
+
+/* Landscape phones and down */
+@media ( max-width : 480px) {
+	#confrimModal {
+		left: 1%;
+	}
+	.redFont{
+		float:left;
+	}
+	.aui .ibox-title .control-label{
+		text-align: left;
+	}
+}
+@media ( min-width : 0px) and (max-width: 468px) {
+		
+		
+}
+.aui .btn {
+	font-size: 14px;
+ 	padding: 4px 12px; 
+	width: auto;
+	margin-top: 0px;
+	display: inline;
+}
+.aui select, .aui textarea, .aui input[type="text"], .aui input[type="password"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="date"], .aui input[type="month"], .aui input[type="time"], .aui input[type="week"], .aui input[type="number"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui input[type="color"], .aui .uneditable-input {
+    height: 30px;
+    padding: none;
+    font-size: 14px;
+}
+.popover {
+	width: 135px;
+}
 </style>
 
 
 <body class="gray-bg">
 
-  <div class='row-fluid'>
-    <div id="slide_status" class='span12'>
-      <div id="btnCloseSlide">×</div>
-      <div id="slide_status_area"></div>
-    </div>
-  </div>
+	<div class='row-fluid'>
+		<div id="slide_status" class='span12'>
+			<div id="btnCloseSlide">×</div>
+			<div id="slide_status_area"></div>
+		</div>
+	</div>
 
 
 	<!-- <div class="app_url_hidden"> -->
-		<div class="container" style="width: 100%">
-			<div id="advanceSearchAppraisalGroup" class="ng-view ng-scope" style="display: none;" > <!-- style="display: none;" -->
-				<div class="row-fluid">
-					<!-- start--row-fluid -->
+	<div class="container" style="width: 100%">
+		<div id="advanceSearchAppraisalGroup" class="ng-view ng-scope">
+			<div class="row-fluid">
 
-					<div class="span12">
-						<div class="ibox float-e-margins">
-							<div class="ibox-title">
-								<div class='titlePanel'><liferay-ui:message key="advanced-search"/></div>
+				<div class="span12">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<div class='titlePanel'>
+								<liferay-ui:message key="advanced-search" />
 							</div>
-
-							<div class="ibox-content breadcrumbs2">
-
-                <div class="row-fluid" id='advanceSearchAppraisal'>
-
-				 <div class="form-group pull-left span2" style="margin-left: 5px">
-                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="form"/>" class="input form-control input-sm span12"
-                      id="AppraisalForm" name="AppraisalForm">
-                      <option>All</option>
-                    </select>
-                  </div>   
-                  <div class="form-group pull-left span2" style="margin-left: 5px">
-                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="level"/>" class="input form-control input-sm span12"
-                      id="Appraisallevel" name="Appraisallevel">
-                      <option>All</option>
-                    </select>
-                  </div> 
-                 <%--  <div class="form-group pull-left span2" style="margin-left: 5px; margin-top: 2px; margin-bottom: 2px;">
-                  <select data-toggle="tooltip" title="<liferay-ui:message key="level"/>" multiple="multiple" data-original-title="<liferay-ui:message key="level"/>" class="input form-control input-sm span12" id="Appraisallevel" name="Appraisallevel">
-                 </select>            
-                  </div>  --%>           
-				<div class="row-fluid">
-
-                  <div class="form-group pull-right m-b-none span3" style="margin-top: 1px; margin-left: 5px; text-align:right;">					
-								<div class="form-group pull-right m-b-none ">
-									<button type="button" name="btnSearchAdvance" id="btnSearchAdvance" class="btn btn-info input-sm " style="margin-left: 5px;">
-										<i class="fa fa-search"></i>&nbsp;<liferay-ui:message key="search"/>
-									</button>
-								</div>
-							</div>
-
-                </div>
-
-								</div>
-
-							</div>
-							<!-- content end -->
 						</div>
 
+						<div class="ibox-content breadcrumbs2">
+
+							<div class="row-fluid" id='advanceSearchAppraisal'>
+
+								<div class="form-group pull-left span2" style="margin-left: 5px">
+									<select data-toggle="tooltip" title=""
+										data-original-title="<liferay-ui:message key="form"/>"
+										class="input form-control input-sm span12" id="AppraisalForm"
+										name="AppraisalForm">
+										<option>All</option>
+									</select>
+								</div>
+								<div class="form-group pull-left span2" style="margin-left: 5px">
+									<select data-toggle="tooltip" title=""
+										data-original-title="<liferay-ui:message key="level"/>"
+										class="input form-control input-sm span12" id="Appraisallevel"
+										name="Appraisallevel">
+										<option>All</option>
+									</select>
+								</div>
+								<div class="row-fluid">
+
+									<div class="form-group pull-right m-b-none span3"
+										style="margin-top: 1px; margin-left: 5px; text-align: right;">
+										<div class="form-group pull-right m-b-none ">
+											<button type="button" name="btnSearchAdvance"
+												id="btnSearchAdvance" class="btn btn-info input-sm "
+												style="margin-left: 5px;">
+												<i class="fa fa-search"></i>&nbsp;
+												<liferay-ui:message key="search" />
+											</button>
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+						<!-- content end -->
 					</div>
 
-				<div id="search_result" style="display: none;" > <!-- class="row-fluid search_result" > --><!-- style="display: none;" -->
+				</div>
+
+				<div id="search_result" style="display: none;">
+					<!-- class="row-fluid search_result" > -->
+					<!-- style="display: none;" -->
 					<div class="span12">
 						<div class="ibox-title">
-							<div class='titlePanel'><liferay-ui:message key="Appraisal Grade"/></div>
-						</div>	
-						<div class="form-group m-b-none pull-left" style="margin-left: 14px;     padding-top: 10px; display: -webkit-box;">											
-							<button type="button" class="btn btn-success" id="btnAddapraisalgrade" data-target="#addModal" data-toggle="modal" data-backdrop="static" data-keyboard="false" ><i class="fa fa-plus-square"></i>&nbsp;Add&nbsp;<span id="btnAddData">Appraisal Grade</span></button>
-						</div>					
+							<div class='titlePanel'>
+								<liferay-ui:message key="Appraisal Grade" />
+							</div>
+						</div>
+						<div class="form-group m-b-none pull-left"
+							style="margin-left: 14px; padding-top: 10px; display: -webkit-box;">
+							<button type="button" class="btn btn-success"
+								id="btnAddapraisalgrade" data-target="#addModal"
+								data-toggle="modal" data-backdrop="static" data-keyboard="false">
+								<i class="fa fa-plus-square"></i>&nbsp;Add&nbsp;<span
+									id="btnAddData">Appraisal Grade</span>
+							</button>
+						</div>
 						<div class="ibox-content" style="padding-top: 5%;">
-						<!-- pagination start -->
-						<div class="row-fluid">
-							<div class="position-result-perpage">
-								<div class="pagianation_area">
-									<div class="pagination_top pagination"></div>
-								</div>
-								<div class="object-right paging-text">
-									<div class='pagingDropdown'>
-										<select id='countPaginationTop'
-											class="form-control input-sm countPagination">
-											<option>10</option>
-											<option>20</option>
-											<option>50</option>
-											<option>100</option>
-											<option>All</option>
-										</select>
+							<!-- pagination start -->
+							<div class="row-fluid">
+								<div class="position-result-perpage">
+									<div class="pagianation_area">
+										<div class="pagination_top pagination"></div>
 									</div>
-									<div class='pagingText'>
-										<liferay-ui:message key="results-per-page" />
+									<div class="object-right paging-text">
+										<div class='pagingDropdown'>
+											<select id='countPaginationTop'
+												class="form-control input-sm countPagination">
+												<option>10</option>
+												<option>20</option>
+												<option>50</option>
+												<option>100</option>
+												<option>All</option>
+											</select>
+										</div>
+										<div class='pagingText'>
+											<liferay-ui:message key="results-per-page" />
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<!-- pagination end -->
+							<!-- pagination end -->
 
-					<div class="table-responsive" id="tableArea" style="overflow: auto;">
-				<table class="table table-striped" id="table-appraisalForm"
-					style="max-width: none;">
-					<thead>
-						<tr>
-							<th style="width: auto; vertical-align: middle; white-space: nowrap;"><b>Appraisal Form </b></th>
-							<th style="width: auto; text-align: center; vertical-align: middle;"><b>Appraisal Level</b></th>
-							<th style="width: auto; text-align: center; vertical-align: middle;"><b>Grade</b></th>
-							<th style="width: auto; text-align: center; vertical-align: middle;"><b>Begin Score</b></th>
-							<th style="width: auto; text-align: center; vertical-align: middle;"><b>End Score</b></th>
-							<th style="width: auto; text-align: center; vertical-align: middle;"><b>Salary Raise</b></th>
-							<th style="width: auto; text-align: center; vertical-align: middle;"><b>IsActive</b></th>
-							<th style="text-align: center; vertical-align: middle;"><b>Manage</b></th>
-						</tr>
-					</thead>
-					<tbody id="listData">
-						<!-- Generate by getAllFormFn() -->
-					</tbody>
-				</table>
-			</div>
+							<div class="table-responsive" id="tableArea"
+								style="overflow: auto;">
+								<table class="table table-striped" id="table-appraisalForm"
+									style="max-width: none;">
+									<thead>
+										<tr>
+											<th
+												style="width: auto; vertical-align: middle; white-space: nowrap;"><b>Appraisal
+													Form </b></th>
+											<th
+												style="width: auto; text-align: center; vertical-align: middle;"><b>Appraisal
+													Level</b></th>
+											<th
+												style="width: auto; text-align: center; vertical-align: middle;"><b>Grade</b></th>
+											<th
+												style="width: auto; text-align: center; vertical-align: middle;"><b>Begin
+													Score</b></th>
+											<th
+												style="width: auto; text-align: center; vertical-align: middle;"><b>End
+													Score</b></th>
+											<th
+												style="width: auto; text-align: center; vertical-align: middle;"><b>Salary
+													Raise</b></th>
+											<th
+												style="width: auto; text-align: center; vertical-align: middle;"><b>IsActive</b></th>
+											<th style="text-align: center; vertical-align: middle;"><b>Manage</b></th>
+										</tr>
+									</thead>
+									<tbody id="listData">
+										<!-- Generate by getAllFormFn() -->
+									</tbody>
+								</table>
+							</div>
 							<!-- pagination start -->
 							<div class="row-fluid">
 								<div class="position-result-perpage">
@@ -1109,110 +1357,170 @@ input[type=number]::-webkit-outer-spin-button {
 								</div>
 							</div>
 							<!-- pagination end -->
-							
-<!-- Modal Add/Edit -->
-<!-- <div role="dialog" id="saveFormModal" class="modal inmodal" style="display: none;"> -->
-<div class="modal fade" id="addModal" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content bounceInRight">
-			
-			<div class="modal-header">
-				<button data-dismiss="modal" class="close setWeightCloseModal" type="button" style="padding-top: 5px">
-					<i class="fa fa-times" aria-hidden="true"></i><span class="sr-only" style="display: none;"></span>
-				</button>
-				<h4 class="modal-title">Appraisal Grade</h4>
-			</div>
-			
-			<div class="modal-body">
-				<div class="row-fluid"> 
-					<div class="span12 form-horizontal p-t-xxs">
-						<div class="form-group p-xxs" id="form-group-appraisal_form_name">
-							<label class="control-label"> Appraisal Form <span class="redFont">*</span> </label>
-							<div class="controls">
-							<select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="Appraisal Form Name"/>" class="input form-control input-sm span6"
-		                      id="appraisal_form_name" name="appraisal_form_name">
-		                      <!-- <option>All</option> -->
-		                    </select>
-								<!-- <input style="width: 200px" class="span12 m-b-n" placeholder="Appraisal Form Name" id="appraisal_form_name" name="appraisal_form_name" value="" type="dropdown"/> -->
-							</div>
-						</div>
-						<div class="form-group p-xxs" id="form-group-appraisal_level_name">
-							<label class="control-label"> Appraisal Level <span class="redFont">*</span> </label>
-							<div class="controls">
-							<select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="Appraisal Level Name"/>" class="input form-control input-sm span6"
-		                      id="appraisal_level_name" name="appraisal_level_name">
-		                      <!-- <option>All</option> -->
-		                    </select>
-								<!-- <input style="width: 200px" class="span12 m-b-n" placeholder="Appraisal Level Name" id="appraisal_level_name" name="appraisal_level_name" value="" type="dropdown"/> -->
-							</div>
-						</div>
-						<div class="form-group p-xxs" id="form-group-grade">
-							<label class="control-label"> Appraisal Grade <span class="redFont">*</span> </label>
-							<div class="controls">
-								<input style="width: 150px" class="span12 m-b-n" placeholder="Appraisal Grade" id="grade" name="grade" value="" type="text"/>
-							</div>
-						</div>
-						<div class="form-group p-xxs" id="form-group-begin_score">
-							<label class="control-label"> Begin Score <span class="redFont">*</span> </label>
-							<div class="controls">
-								<input style="width: 200px" class="span12 m-b-n" placeholder="Begin Score" id="begin_score" name="begin_score" value="" type="text"/>
-							</div>
-						</div>
-						<div class="form-group p-xxs" id="form-group-end_score">
-							<label class="control-label"> End Score <span class="redFont">*</span> </label>
-							<div class="controls">
-								<input style="width: 200px" class="span12 m-b-n" placeholder="End Score" id="end_score" name="end_score" value="" type="text"/>
-							</div>
-						</div>
-						<div class="form-group p-xxs" id="form-group-salary_raise">
-							<label class="control-label"> Salary Raise <span class="redFont">*</span> </label>
-							<div class="controls">
-								<input style="width: 200px" class="span12 m-b-n" placeholder="Salary Raise" id="salary_raise" name="salary_raise" value="" type="text"/>
-							</div>
-						</div>
-						<div class="form-group p-xxs" id="form-group-is_active">
-							<label class="control-label"> IsActive </label>
-							<div class="controls">
-								<input checked="" class="checkbox" placeholder="Is Active" id="is_active" name="is_active" type="checkbox">
-							</div>
-						</div>
-						
-					
-						
-					</div>
-				</div>
-			</div>
-			
-			<div class="modal-footer">
-				<button class="btn btn-primary" type="button" id="btnSetweightSubmit">Save</button>
-				<button class="btn btn-primary" type="button" id="btnSetweightSubmitAnother">Save & Add Another</button>
-				<button data-dismiss="modal" class="btn btn-danger btnCancle setWeightCloseModal" type="button">Cancel</button>
-			</div>
-			
-		
-			<div class="alert alert-warning information" id="information" style="display: none;">
-				<!-- System Message -->
-			</div>
-			
-		</div>
-	</div>
-</div>
 
 
-							
+							<!-- Modal Add/Edit -->
+							<form id="appraisal-grade-form">
+							<div class="modal fade" id="add-edit-modal" role="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content bounceInRight">
+									
+										<div class="modal-header">
+											<button data-dismiss="modal" class="close setWeightCloseModal" type="button" style="padding-top: 5px">
+												<i class="fa fa-times" aria-hidden="true"></i><span class="sr-only" style="display: none;"></span>
+											</button>
+											<h4 class="modal-title">Appraisal Grade</h4>
+										</div>
+										
+										<div class="modal-body">
+											<div class="row-fluid">
+												<div class="span12 form-horizontal p-t-xxs">
+												
+													<div class="form-group p-xxs" id="form-group-appraisal_form_id">
+														<label class="control-label"> Appraisal Form <span class="redFont">*</span> </label>
+														<div class="controls">
+															<select data-toggle="tooltip" data-original-title="<liferay-ui:message key="form-id"/>" 
+																class="input form-control input-sm span6" id="appraisal_form_id" name="appraisal_form_id">
+																<!-- <option>All</option> -->
+															</select>
+														</div>
+													</div>
+													
+													<div class="form-group p-xxs" id="form-group-appraisal_level_id">
+														<label class="control-label"> Appraisal Level <span class="redFont">*</span> </label>
+														<div class="controls">
+															<select data-toggle="tooltip" data-original-title="<liferay-ui:message key="Level"/>" 
+																class="input form-control input-sm span6" id="appraisal_level_id" name="appraisal_level_id[]">
+																<!-- <option>All</option> -->
+															</select>
+														</div>
+													</div>
+													
+													<div class="form-group p-xxs" id="form-group-grade">
+														<label class="control-label"> Appraisal Grade <span class="redFont">*</span> </label>
+														<div class="controls">
+															<input style="width: 150px" class="span12 m-b-n" placeholder="Appraisal Grade" id="grade" name="grade" value="" type="text" />
+														</div>
+													</div>
+													
+													<div class="form-group p-xxs" id="form-group-begin_score">
+														<label class="control-label"> Begin Score <span class="redFont">*</span> </label>
+														<div class="controls">
+															<input style="width: 200px" class="span12 m-b-n numberOnly" placeholder="Begin Score" id="begin_score" name="begin_score" value="" type="text" />
+														</div>
+													</div>
+													
+													<div class="form-group p-xxs" id="form-group-end_score">
+														<label class="control-label"> End Score <span class="redFont">*</span> </label>
+														<div class="controls">
+															<input style="width: 200px" class="span12 m-b-n numberOnly" placeholder="End Score" id="end_score" name="end_score" value="" type="text" />
+														</div>
+													</div>
+													
+													<div class="form-group p-xxs" id="form-group-salary_raise_amount">
+														<label class="control-label"> Salary Raise <span class="redFont">*</span> </label>
+														<div class="controls">
+															<input style="width: 200px" class="span12 m-b-n numberOnly" placeholder="Salary Raise" id="salary_raise_amount" name="salary_raise_amount" value="" type="text" />
+														</div>
+													</div>
+													
+													<div class="form-group p-xxs" id="form-group-structure_id">
+														<label class="control-label"> Related Structures <span class="redFont">*</span> </label>
+														<div class="controls">
+															<select data-toggle="tooltip" data-original-title="<liferay-ui:message key='structures'/>" 
+																class="input form-control input-sm span6" id="structure_id" name="structure_id">
+																<!-- <option>All</option> -->
+															</select>
+														</div>
+													</div>
+													
+													<div class="form-group p-xxs" id="form-group-is_judgement">
+														<label class="control-label"> IsJudgement </label>
+														<div class="controls">
+															<input class="checkbox" placeholder="Is Judgement" id="is_judgement" name="is_judgement" type="checkbox">
+														</div>
+													</div>
+													
+													<div class="form-group p-xxs" id="form-group-is_active">
+														<label class="control-label"> IsActive </label>
+														<div class="controls">
+															<input checked="" class="checkbox" placeholder="Is Active" id="is_active" name="is_active" type="checkbox">
+														</div>
+													</div>
+													
+												</div>
+											</div>
+										</div>
+
+										<div class="modal-footer">
+											<button class="btn btn-primary" type="button" id="btnSubmit">Save</button>
+											<button class="btn btn-primary" type="button" id="btnSubmitAnother">Save & Add Another</button>
+											<button data-dismiss="modal" class="btn btn-danger btnCancle setCloseModal" type="button">Cancel</button>
+										</div>
+
+										<div class="alert alert-warning information" id="information" style="display: none;">
+											<!-- System Message -->
+										</div>
+										
+									</div>
+								</div>
+							</div>
+							</form>
+
+
+
 							<!-- end table -->
 						</div>
 						<!-- content end -->
 					</div>
 				</div>
-				
+
 				<!-- end--row-fluid -->
 			</div>
+		</div>
+	</div>
+	
+	
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal"
+		class="modal inmodal in" style="width:400px;left:calc;display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content  bounceInRight">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button" style="padding-top:3px">
+						<span aria-hidden="true"><i class='fa fa-times'></i></span>
+					</button>
+					<h5 class="modal-title">Confirm Dialog</h5>
+				</div>
+				<div class="modal-body">
+					<div class="form-kpi-mangement">
+						<div class="form-kpi-label" align="center">
+							<label>Confirm to Delete Data?</label>
+							<div id="inform_on_confirm" class='information'></div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div align="center">
+						<button class="btn btn-success" id="btnConfirmOK" type="button">
+							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
+						</button>
+						&nbsp;&nbsp;
+						<button data-dismiss="modal" class="btn btn-danger" type="button">
+							<i class="fa fa-times-circle"></i>&nbsp;Cancel
+						</button>
+					</div>
+					<div class="alert alert-warning information" id="information2"
+						style="display: none;"></div>
+				</div>
+			</div>
+		</div>
 	</div>
 
-	
+
 	<div id="embedParamSearch"></div>
-	</body>
+	<input type="hidden" id="action" value=""/>
+	<input type="hidden" id="id" value=""/>
+</body>
 	
 <!-- Language Template for js -->
 <%@ include file="/html/language-js-template/view.jsp" %>
