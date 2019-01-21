@@ -1,9 +1,11 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
 <%@ page import="javax.portlet.*"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
+
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
+<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 <%
@@ -18,7 +20,13 @@ plid = layout.getPlid();
 <input type="hidden" id="plid_portlet" name="plid_portlet" value="<%= plid %>">
 
 <style>
+.aui .tooltip {
+    max-width: 2000px !important;
+}
+.aui .tooltip-inner {
 
+    max-width: 2000px !important;
+    }
 .c-1-color { background: red; }
 .c-2-color { background: yellow; }
 .c-3-color { background: green; }
@@ -1302,6 +1310,46 @@ plid = layout.getPlid();
 		</div>
 	</div>
 	<!-- Modal Confirm End -->
-	      
+	     <!-- Modal Item Description Start Edit -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="modal-itemDescriptionQuality" class="modal inmodal large" style="display: none;">
+    <div class="modal-dialog  ">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                
+             	<button data-dismiss="modal" class="close" type="button" style="padding-top:5px"><span aria-hidden="true"><i class="fa fa-times"></i></span><div></div></button>
+                <h4 class="modal-title" id="modalTitleItemDescription"><span id="modalItemDescription">Item Description</span> </h4>
+ 
+            </div>
+            <div class="modal-body">
+      	
+                <div class='row-fluid'>
+	                	<div class='span12' >
+							<h4 class="titleItemName"> </h4>
+							<!-- content  start-->
+							<div id=sunEdit>
+								<!-- <textarea id="formulaItemDescription" style="width: 95%" class=""></textarea>  -->
+							</div>
+
+							<!-- content  end-->
+
+
+						</div>
+                	</div>
+                	
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+           	 	<input type="hidden" name="item_desc_id" id="item_desc_id" value="">
+   		
+   				
+   				<button class="btn btn-primary" type="button" id="btnSubmitItemDescription">Save</button>
+                <button data-dismiss="modal" class="btn btn-white btnCancleItemDescription" type="button">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>  
+<!-- Modal Item Description End Edit --> 
+<!-- Language Template for js -->
+	<%@ include file="/html/language-js-template/view.jsp" %>
 </body>
 

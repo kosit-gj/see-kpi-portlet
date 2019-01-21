@@ -1,7 +1,7 @@
 var restfulURL="";
 var restfulURL_IMPkpi="";
 var lifeRayApiUrl="";
-var serviceName="see_api_fmo";
+var serviceName="fmo_api/see-kpi-service/see_api";
 var serviceName_IMPkpi="impexpservices_api/public";
 var servicePort = (document.location.protocol == "https:" ? ":8443" : ""); // HTTP default port :80
 
