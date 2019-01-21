@@ -123,11 +123,11 @@ var getDataFn = function (page, rpp) {
                 		htmlHTML +="<td> "+indexEntry.appraisal_form_name+" </td>";
                 		htmlHTML +="<td> "+indexEntry.appraisal_level_name+" </td>";
                 		htmlHTML +="<td> "+indexEntry.grade+" </td>";
-                		htmlHTML +="<td> "+indexEntry.begin_score+" </td>";
-                		htmlHTML +="<td> "+indexEntry.end_score+" </td>";
-                		htmlHTML +="<td> "+indexEntry.salary_raise_amount+" </td>";
-                		htmlHTML +="<td> <input type='checkbox' disabled='' "+((indexEntry.is_active==1)?"checked=''":"")+"/> </td>";
-                		htmlHTML +="<td> <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"";
+                		htmlHTML +="<td style='width: auto; text-align: right; vertical-align: middle;'> "+indexEntry.begin_score+" </td>";
+                		htmlHTML +="<td style='width: auto; text-align: right; vertical-align: middle;'> "+indexEntry.end_score+" </td>";
+                		htmlHTML +="<td style='width: auto; text-align: right; vertical-align: middle;'> "+indexEntry.salary_raise_amount+" </td>";
+                		htmlHTML +="<td style='width: auto; text-align: center; vertical-align: middle;'> <input type='checkbox' disabled='' "+((indexEntry.is_active==1)?"checked=''":"")+"/> </td>";
+                		htmlHTML +="<td style='width: auto; text-align: center; vertical-align: middle;'> <i data-trigger=\"focus\" tabindex=\""+index+"\" data-content=\"";
                 		htmlHTML +=" &lt;button class='btn btn-warning btn-small btn-gear edit' id='edit-"+indexEntry.grade_id+"'&gt;Edit&lt;/button&gt;&nbsp;&lt;button id='del-"+indexEntry.grade_id+"' class='btn btn-danger btn-small btn-gear del'&gt;Delete&lt;/button&gt;\" data-placement=\"top\" data-toggle=\"popover\" data-html=\"true\" class=\"fa fa-cog font-gear popover-edit-del\" data-original-title=\"\" title=\"\"></i>";
                 		htmlHTML +="</tr>";
         			});
@@ -142,6 +142,7 @@ var getDataFn = function (page, rpp) {
         				// destroy multiple seletion 
         				if($("#action").val() == 'add'){
         					$('#appraisal_level_id').multiselect("destroy");
+        					$('#appraisal_level_id').removeAttr("multiple");
         				}
         				
             			var id = $(this).attr("id").split("-")[1];

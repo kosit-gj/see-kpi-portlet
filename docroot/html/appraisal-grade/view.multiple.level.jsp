@@ -1274,7 +1274,7 @@ form {
 									id="btnAddData">Appraisal Grade</span>
 							</button>
 						</div>
-						<div class="ibox-content" style="padding-top: 5%;">
+						<div class="ibox-content" style="padding-top: 3%;">
 							<!-- pagination start -->
 							<div class="row-fluid">
 								<div class="position-result-perpage">
@@ -1310,18 +1310,18 @@ form {
 												style="width: auto; vertical-align: middle; white-space: nowrap;"><b>Appraisal
 													Form </b></th>
 											<th
-												style="width: auto; text-align: center; vertical-align: middle;"><b>Appraisal
+												style="width: auto; text-align: left; vertical-align: middle;"><b>Appraisal
 													Level</b></th>
 											<th
-												style="width: auto; text-align: center; vertical-align: middle;"><b>Grade</b></th>
+												style="width: auto; text-align: left; vertical-align: middle;"><b>Grade</b></th>
 											<th
-												style="width: auto; text-align: center; vertical-align: middle;"><b>Begin
+												style="width: auto; text-align: right; vertical-align: middle;"><b>Begin
 													Score</b></th>
 											<th
-												style="width: auto; text-align: center; vertical-align: middle;"><b>End
+												style="width: auto; text-align: right; vertical-align: middle;"><b>End
 													Score</b></th>
 											<th
-												style="width: auto; text-align: center; vertical-align: middle;"><b>Salary
+												style="width: auto; text-align: right; vertical-align: middle;"><b>Salary
 													Raise</b></th>
 											<th
 												style="width: auto; text-align: center; vertical-align: middle;"><b>IsActive</b></th>
