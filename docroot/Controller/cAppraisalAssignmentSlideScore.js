@@ -1096,7 +1096,7 @@ var actionAssignmentFn = function (param) {
             		item_desc 		:  "",
             		form_id 		:  3,
             		max_value		:  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-maxValue").val(),
-            		deductScoreUnit :  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-deductScoreUnit").val(),
+            		deduct_score_unit :  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-deductScoreUnit").val(),
             		value_get_zero	:  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-valueGetZero").val(),
             		no_raise_value	:  $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-NoRaiseValue").val(),
             		total_weight	:  $("#total_weight-" + $(structureEntry).val()).val() ,
