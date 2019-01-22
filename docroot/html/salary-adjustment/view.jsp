@@ -1010,11 +1010,13 @@ input[type=number]::-webkit-outer-spin-button {
                       <i class="fa fa-search"></i>&nbsp;<liferay-ui:message key="search"/>
                     </button>
                     &nbsp;
+                    <!--
                     <form id="formExportToExcel" action="" method="post" class="pull-right" style="margin-bottom: 0px; margin-left: 5px">
 						<button type="button" class="btn btn-success input-sm" name="btnExport" id="btnExport">
 							<i class="fa fa-download"></i>&nbsp;<liferay-ui:message key="export"/>
                     	</button>
 					</form>
+					-->
                   </div>
 
                 </div>
@@ -1059,7 +1061,7 @@ input[type=number]::-webkit-outer-spin-button {
                                     	</div>
                                 -->
                             <!-- pagination end -->
-							<div id="table-filter-group" style="display:none; margin-bottom: 7px;">Group: <select id="filter-group" style="width: 100px;"></select></div>
+							<div class="head_adjust" id="table-filter-group" style="display: none; margin-bottom: 7px;">Group: <select id="filter-group" style="width: 100px;"></select></div>
 							<div id="scroll-tableBonusAdjustment" class="row-fluid list-data-table" style="overflow: auto;">							
 							<table class="table table-striped table-bordered" id="tableBonusAdjustment" style="margin-bottom: 0px; max-width: none;">
 							<thead>
@@ -1077,11 +1079,11 @@ input[type=number]::-webkit-outer-spin-button {
 						      <th rowspan="3" class="fix-column-top pe">คะแนนเต็มตีค่างาน<br>(ศักยภาพ)</th>
 						      <th rowspan="3" class="fix-column-top tp">Total Point</th>
 						      <th rowspan="3" class="fix-column-top bp">Baht/Point</th>
-						      <th rowspan="3" class="fix-column-top str1">ผลการประเมินค่างาน<br>(65 คะแนน )</th>
-						      <th rowspan="3" class="fix-column-top str2">คะแนนความรู้</th>
-						      <th rowspan="3" class="fix-column-top str3">คะแนนศักยภาพ</th>
-						      <th rowspan="3" class="fix-column-top str4">คะแนนผลงานปีที่ผ่านมา<br>(20 คะแนน )</th>
-						      <th rowspan="3" class="fix-column-top str5">คะแนนความสามารถที่มีคุณค่าต่อองค์กร<br>(15 คะแนน )</th>
+						      <th rowspan="3" class="fix-column-top str1"></th>
+						      <th rowspan="3" class="fix-column-top str2"></th>
+						      <th rowspan="3" class="fix-column-top str3"></th>
+						      <th rowspan="3" class="fix-column-top str4"></th>
+						      <th rowspan="3" class="fix-column-top str5"></th>
 						      <th rowspan="3" class="fix-column-top mgr">คะแนนประเมิน Mgr.</th>
 						      <th rowspan="3" class="fix-column-top bu">คะแนนประเมิน BU.</th>
 						      <th rowspan="3" class="fix-column-top coo">คะแนนประเมิน COO.</th>
@@ -1130,8 +1132,8 @@ input[type=number]::-webkit-outer-spin-button {
 							</thead>
 							<tbody id="list_empjudege">
 							</tbody>
-<!-- 							<tfoot id="list_footer"> -->
-<!-- 							</tfoot> -->
+							<tfoot id="list_footer">
+							</tfoot>
 							</table>
 							</div>
 							
@@ -1174,7 +1176,7 @@ input[type=number]::-webkit-outer-spin-button {
 										 </div>
 									 </div>
 							  		<div class="" style='text-align:right;'>
-							  		<button class="btn btn-primary" type="button" id="btnConfirm"><liferay-ui:message key="confirm"/></button>
+<%-- 							  		<button class="btn btn-primary" type="button" id="btnConfirm"><liferay-ui:message key="confirm"/></button> --%>
 								  	<button class="btn btn-success" type="button" id="btnSubmit"><liferay-ui:message key="submit"/></button>
 									<input type='hidden' id='emp_result_id' name='emp_result_id' value=''>
 <%-- 										<button data-dismiss="modal" class="btn btn-danger btnCancle" type="button"><liferay-ui:message key="cancel"/></button> --%>
