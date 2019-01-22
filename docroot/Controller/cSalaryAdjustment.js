@@ -249,7 +249,7 @@ var appraisalStatusFn = function () {
         dataType: "json",
         async: false,
         data: {
-        	"flag": "grade_calculation_flag",
+        	"flag": "salary_approval_flag",
         	"appraisal_form_id": $("#AppraisalForm").val(),
         	"appraisal_type_id": 2
         },
@@ -350,7 +350,7 @@ var to_action = function () {
         async: true,
         data: {
             "stage_id": status,
-            "flag": "grade_calculation_flag",
+            "flag": "salary_approval_flag",
             "appraisal_type_id": 2,
             "appraisal_form_id": $("#embed_appraisal_form").val()
         },
@@ -643,38 +643,62 @@ var createDatatable = function(table, data) {
 	    	{ "width": "100px", "targets": [20] }, //คะแนนประเมินCOO
 	    	{ "width": "50px", "targets": [21] }, //เกรด
 	    	{ "width": "130px", "targets": [22] }, //รายได้รวมที่ควรได้ 
-	    	{ "width": "90px", "targets": [23] }, //รายได้ Fix
-	    	{ "width": "90px", "targets": [24] }, //รายได้ Var
-	    	{ "width": "90px", "targets": [25] }, //รายได้ปัจจุบันTotal
-	    	{ "width": "90px", "targets": [26] }, //Salary
-	    	{ "width": "90px", "targets": [27] }, //P-QPI
-	    	{ "width": "90px", "targets": [28] }, //อื่นๆ
-	    	{ "width": "90px", "targets": [29] }, //MPI
-	    	{ "width": "90px", "targets": [30] }, //PI
-	    	{ "width": "90px", "targets": [31] }, //อื่นๆ
-	    	{ "width": "90px", "targets": [32] }, //ขาด/เกิน
-	    	{ "width": "90px", "targets": [33] }, //Cal Standard
-	    	{ "width": "90px", "targets": [34] }, //%
-	    	{ "width": "90px", "targets": [35] }, //Bath
-	    	{ "width": "90px", "targets": [36] }, //ปรับรายได้
-	    	{ "width": "90px", "targets": [37] }, //ปรับเงินเงินเดือน
-	    	{ "width": "90px", "targets": [38] }, //ปรับ P-QPI	
-	    	{ "width": "90px", "targets": [39] }, //% Diff
-	    	{ "width": "90px", "targets": [40] }, //รายได้ใหม่Total
-	    	{ "width": "90px", "targets": [41] }, //Salary
-	    	{ "width": "90px", "targets": [42] }, //P-QPI
-	    	{ "width": "90px", "targets": [43] }, //อื่นๆ
-	    	{ "width": "90px", "targets": [44] }, //MPI
-	    	{ "width": "90px", "targets": [45] }, //PI
-	    	{ "width": "90px", "targets": [46] } //อื่นๆ
+	    	{ "width": "100px", "targets": [23] }, //รายได้ Fix
+	    	{ "width": "100px", "targets": [24] }, //รายได้ Var
+	    	{ "width": "100px", "targets": [25] }, //รายได้ปัจจุบันTotal
+	    	{ "width": "80px", "targets": [26] }, //Salary
+	    	{ "width": "80px", "targets": [27] }, //P-QPI
+	    	{ "width": "80px", "targets": [28] }, //อื่นๆ
+	    	{ "width": "80px", "targets": [29] }, //MPI
+	    	{ "width": "80px", "targets": [30] }, //PI
+	    	{ "width": "80px", "targets": [31] }, //อื่นๆ
+	    	{ "width": "80px", "targets": [32] }, //ขาด/เกิน
+	    	{ "width": "80px", "targets": [33] }, //Cal Standard
+	    	{ "width": "80px", "targets": [34] }, //%
+	    	{ "width": "80px", "targets": [35] }, //Bath
+	    	{ "width": "80px", "targets": [36] }, //ปรับรายได้
+	    	{ "width": "80px", "targets": [37] }, //ปรับเงินเงินเดือน
+	    	{ "width": "80px", "targets": [38] }, //ปรับ P-QPI	
+	    	{ "width": "80px", "targets": [39] }, //% Diff
+	    	{ "width": "80px", "targets": [40] }, //รายได้ใหม่Total
+	    	{ "width": "80px", "targets": [41] }, //Salary
+	    	{ "width": "80px", "targets": [42] }, //P-QPI
+	    	{ "width": "80px", "targets": [43] }, //อื่นๆ
+	    	{ "width": "80px", "targets": [44] }, //MPI
+	    	{ "width": "80px", "targets": [45] }, //PI
+	    	{ "width": "80px", "targets": [46] } //อื่นๆ
 	    ]
 	});
+	
+//	.fixedColumns().relayout();
 	
 	$('#filter-group').change(function() {
         table.DataTable()
         .columns(0).search(this.value)
         .draw();
 	}); // เซ็ตการค้นหาในคอลั่มแรก
+	
+	/*
+	$(function() {
+	    // Check the initial Poistion of the Sticky Header
+	 var stickyHeaderTop = $('#tableBonusAdjustment').offset().top;
+	 $(window).scroll(function() {
+	if ($(window).scrollTop() > stickyHeaderTop) {
+	  $('.dataTables_scrollHead, .DTFC_LeftHeadWrapper').css('transform', 'translateY(0%)');
+	  $('.DTFC_LeftHeadWrapper').css({position: 'fixed',top: '0px',zIndex: '1',left: 'auto'});
+	  $('.dataTables_scrollHead').css({position: 'fixed',top: '0px', zIndex: '1' });
+	  $('.DTFC_ScrollWrapper').css({height: ''});
+	 
+	 }
+	 else {
+	  $('.DTFC_LeftHeadWrapper, .DTFC_LeftHeadWrapper').css({position: 'relative',top: '0px'});
+	  $('.dataTables_scrollHead').css({position: 'relative', top: '0px'});
+	  $('.dataTables_scrollHead').css('transform', 'translateY(0%)');
+	      }
+
+	    });
+	 });
+	 */
     
     var textOne = data==undefined || data.total_one==0.00 || data.total_one==null ? "" : "<br>("+data.total_one+" คะแนน)";
     var textTwo = data==undefined || data.total_two==0.00 || data.total_two==null ? "" : "<br>("+data.total_two+" คะแนน)";
@@ -818,6 +842,9 @@ var calculatePercentKeyup = function() {
 		//คำนวน % Diff
 		var data_current_total = Number($(this).closest('.control-calculate').find('.data-current-total').attr('data-value'));
 		var val_diff = total/data_current_total;
+		if(val_diff=="Infinity") {
+			console.log("รายได้ปัจจุบัน Total เป็น 0 ถ้า (ปรับรายได้ Total/รายได้ปัจจุบัน Total) % diff จะเป็น infinity");
+		}
 		$(this).closest('.control-calculate').find('.data-percent-diff').attr('data-value', val_diff.toFixed(2));
 		$(this).closest('.control-calculate').find('.data-percent-diff').text(Comma(val_diff.toFixed(2)));
 //		$(this).closest('.control-calculate').find('.data-percent-diff').find('.ellipsis').attr('data-text', Comma(val_diff.toFixed(2)));
