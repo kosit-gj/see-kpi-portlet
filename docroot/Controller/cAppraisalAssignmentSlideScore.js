@@ -172,18 +172,18 @@ var setDataToTemplateFn = function (data, actionType) {
 
     // set premission button management
     if (head['status'] == 'Accepted' || actionType == 'view') {
-        $("#ModalAssignment").find('input[type="text"]').attr('disabled', 'disabled');
-        $("#ModalAssignment").find('input[type="checkbox"]').attr('disabled', 'disabled');
-        $("#ModalAssignment").find('#remark_footer').removeAttr('disabled');
+        $("#ModalAssignment , #AssignmentEmailLink").find('input[type="text"]').attr('disabled', 'disabled');
+        $("#ModalAssignment , #AssignmentEmailLink").find('input[type="checkbox"]').attr('disabled', 'disabled');
+        $("#ModalAssignment , #AssignmentEmailLink").find('#remark_footer').removeAttr('disabled');
     } else {
 
         //Check TEXT Disabled Start
-        if ($("#ModalAssignment").find('input[class="disabledInputText"]')) {
+        if ($("#ModalAssignment , #AssignmentEmailLink").find('input[class="disabledInputText"]')) {
         } else {
-            $("#ModalAssignment").find('input[type="text"]').removeAttr('disabled');
+            $("#ModalAssignment , #AssignmentEmailLink").find('input[type="text"]').removeAttr('disabled');
         }
         //Check TEXT Disabled End
-        $("#ModalAssignment").find('input[type="checkbox"]').removeAttr('disabled');
+        $("#ModalAssignment , #AssignmentEmailLink").find('input[type="checkbox"]').removeAttr('disabled');
     }
 
     $(".cus_information_area").show();
@@ -324,6 +324,7 @@ var findOneFn = function (id, actionType, stage_id, emp_code, org_code) {
                     $("" + AssignmentEmailLink + "").find('#remark_footer').removeAttr('disabled');
 
                 }
+                
                 if($('#user_portlet').val() == emp_code){
             		$.each(data['self_assign'],function(index,indexEntry){
             			if(indexEntry['is_self_assign'] == 0){

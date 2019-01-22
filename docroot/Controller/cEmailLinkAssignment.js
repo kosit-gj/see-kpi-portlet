@@ -7,7 +7,7 @@ $(document).ready(function() {
 			var url_level_id_emp;
 			var url_appraisal_type_id;
 			var url_org_id;
-			
+			var url_stage_id;
 			var url_period_id;
 			
 			var getUrlParameter = function getUrlParameter(sParam) {
@@ -39,6 +39,7 @@ $(document).ready(function() {
 							url_level_id_emp = data[0]['level_id_emp'];
 							url_emp_code= data[0]['emp_code'];
 							url_org_id = data[0]['org_id'];
+							url_stage_id = data[0]['stage_id'];
 						} else {
 							callFlashSlide("Data is empty.");
 							return false;
@@ -72,5 +73,5 @@ $(document).ready(function() {
 			emp_result_id = url_emp_result_id; // emp_result_id in assignmentslidescore.js
 			org_id_to_assign = url_org_id; // org_id_to_assign in assignmentslidescore.js
 			
-			findOneFn(emp_result_id,"",null,url_emp_code);
+			findOneFn(emp_result_id,"",url_stage_id,url_emp_code);
 });

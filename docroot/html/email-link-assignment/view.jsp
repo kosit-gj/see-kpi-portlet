@@ -797,7 +797,7 @@ plid = layout.getPlid();
 			<div class="span12">
 				<div class="ibox-title">
 	            	<div class='titlePanel'>Assignment</div>
-	         	</div>
+	         	</div>//ModalAssignment
 	         	<div class="ibox-content" id="AssignmentEmailLink">
 			    	<!-- panel0 start -->
 			        <div class="row-fluid cus_information_area" >
