@@ -33,6 +33,11 @@ plid = layout.getPlid();
 .c-4-color { background: blue; }
 .c-5-color { background: purple; }
 
+.aui #appraisal_template_area .numberOnly {
+
+    font-size: 12px;
+
+}
  /* Large desktop Start#####################################*/
  @media (min-width: 1200px) { 
  
@@ -354,6 +359,8 @@ plid = layout.getPlid();
 	font-size: 24px;
     font-weight: bold;
     margin-bottom:5px;
+    text-align: right;
+    margin-top: 10px;
 }
 .aui. #grandTotalWeightP{
 	font-size: 30px;
@@ -900,7 +907,7 @@ plid = layout.getPlid();
 						 
             		</div>
             		
-            		<div class="span2 pull-right">
+            		<div class="span2 pull-right" style="text-align: right;">
             				<input type="hidden" name="id" id="id" value="">
 		   					<input type="hidden" name="period_id_edit" id="period_id_edit" value="">
 			   				<input type="hidden" name="action" id="action" value="add">
