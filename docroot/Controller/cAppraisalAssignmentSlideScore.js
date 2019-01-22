@@ -1947,12 +1947,12 @@ var assignTemplateQuantityFn = function (structureName, data) {
         htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class=''><b>" + $(".lt-uom").val() + "</b> </th>";
         htmlTemplateQuantity += "<th style=\"width:10%;  text-align:right;padding-right: 10px;\" class='thBox'><b>" + $(".lt-actual").val() + "</b> </th>";
        
-        var htmlTooltipBox_1 = "<div data-toggle=\"tooltip\" class=\"tooltipBox1\" data-original-title=\"<span style='font-size: 12px;'>Bigger is better</span>:   มากกว่าช่องที่1 แต่น้อยกว่าเท่ากับช่องที่2 <br><span style='font-size: 12px;'>Smaller is better</span>:   น้อยกว่าช่องที่1 แต่มากกว่าเท่ากับช่องที่2\" title=\"\" id=\"box-1\" style=\"float: right;\">1</div>";
-        var htmlTooltipBox_2 = "<div data-toggle=\"tooltip\" class=\"tooltipBox2\" data-original-title=\"<span style='font-size: 12px;'>Bigger is better</span>:   มากกว่าช่องที่2 แต่น้อยกว่าเท่ากับช่องที่3 <br><span style='font-size: 12px;'>Smaller is better</span>:   น้อยกว่าช่องที่2 แต่มากกว่าเท่ากับช่องที่3\" title=\"\" id=\"box-2\" style=\"float: right;\">2</div>";
-        var htmlTooltipBox_3 = "<div data-toggle=\"tooltip\" class=\"tooltipBox3\" data-original-title=\"<span style='font-size: 12px;'>Bigger is better</span>:   มากกว่าช่องที่3 แต่น้อยกว่าเท่ากับช่องที่4 <br><span style='font-size: 12px;'>Smaller is better</span>:   น้อยกว่าช่องที่3 แต่มากกว่าเท่ากับช่องที่4\" title=\"\" id=\"box-3\" style=\"float: right;\">3</div>";
-        var htmlTooltipBox_4 = "<div data-toggle=\"tooltip\" class=\"tooltipBox4\" data-original-title=\"<span style='font-size: 12px;'>Bigger is better</span>:   มากกว่าช่องที่4 แต่น้อยกว่าเท่ากับช่องที่5 <br><span style='font-size: 12px;'>Smaller is better</span>:   น้อยกว่าช่องที่4 แต่มากกว่าเท่ากับช่องที่5\" title=\"\" id=\"box-4\" style=\"float: right;\">4</div>";
-        var htmlTooltipBox_5 = "<div data-toggle=\"tooltip\" class=\"tooltipBox5\" data-original-title=\"<span style='font-size: 12px;'>Bigger is better</span>:   มากกว่าช่องที่5 แต่น้อยกว่าเท่ากับช่องที่6 <br><span style='font-size: 12px;'>Smaller is better</span>:   น้อยกว่าช่องที่5 แต่มากกว่าเท่ากับช่องที่6\" title=\"\" id=\"box-5\" style=\"float: right;\">5</div>";
-        var htmlTooltipBox_6 = "<div data-toggle=\"tooltip\" class=\"tooltipBox6\" data-original-title=\"<span style='font-size: 12px;'>Bigger is better</span>:   มากกว่าช่องที่6 แต่น้อยกว่าเท่ากับช่องที่7 <br><span style='font-size: 12px;'>Smaller is better</span>:   น้อยกว่าช่องที่6 แต่มากกว่าเท่ากับช่องที่7\" title=\"\" id=\"box-6\" style=\"float: right;\">6</div>";
+        var htmlTooltipBox_1 = "<div data-toggle=\"tooltip\" class=\"tooltipBox\" data-original-title=\"<span style='font-size: 12px;'>Bigger is better</span>:   มากกว่าช่องที่1 แต่น้อยกว่าเท่ากับช่องที่2 <br><span style='font-size: 12px;'>Smaller is better</span>:   น้อยกว่าช่องที่1 แต่มากกว่าเท่ากับช่องที่2\" title=\"\" id=\"box-1\" style=\"float: right;\">1</div>";
+        var htmlTooltipBox_2 = "<div data-toggle=\"tooltip\" class=\"tooltipBox\" data-original-title=\"<span style='font-size: 12px;'>Bigger is better</span>:   มากกว่าช่องที่2 แต่น้อยกว่าเท่ากับช่องที่3 <br><span style='font-size: 12px;'>Smaller is better</span>:   น้อยกว่าช่องที่2 แต่มากกว่าเท่ากับช่องที่3\" title=\"\" id=\"box-2\" style=\"float: right;\">2</div>";
+        var htmlTooltipBox_3 = "<div data-toggle=\"tooltip\" class=\"tooltipBox\" data-original-title=\"<span style='font-size: 12px;'>Bigger is better</span>:   มากกว่าช่องที่3 แต่น้อยกว่าเท่ากับช่องที่4 <br><span style='font-size: 12px;'>Smaller is better</span>:   น้อยกว่าช่องที่3 แต่มากกว่าเท่ากับช่องที่4\" title=\"\" id=\"box-3\" style=\"float: right;\">3</div>";
+        var htmlTooltipBox_4 = "<div data-toggle=\"tooltip\" class=\"tooltipBox\" data-original-title=\"<span style='font-size: 12px;'>Bigger is better</span>:   มากกว่าช่องที่4 แต่น้อยกว่าเท่ากับช่องที่5 <br><span style='font-size: 12px;'>Smaller is better</span>:   น้อยกว่าช่องที่4 แต่มากกว่าเท่ากับช่องที่5\" title=\"\" id=\"box-4\" style=\"float: right;\">4</div>";
+        var htmlTooltipBox_5 = "<div data-toggle=\"tooltip\" class=\"tooltipBox\" data-original-title=\"<span style='font-size: 12px;'>Bigger is better</span>:   มากกว่าช่องที่5 แต่น้อยกว่าเท่ากับช่องที่6 <br><span style='font-size: 12px;'>Smaller is better</span>:   น้อยกว่าช่องที่5 แต่มากกว่าเท่ากับช่องที่6\" title=\"\" id=\"box-5\" style=\"float: right;\">5</div>";
+        var htmlTooltipBox_6 = "<div data-toggle=\"tooltip\" class=\"tooltipBox\" data-original-title=\"<span style='font-size: 12px;'>Bigger is better</span>:   มากกว่าช่องที่6 แต่น้อยกว่าเท่ากับช่องที่7 <br><span style='font-size: 12px;'>Smaller is better</span>:   น้อยกว่าช่องที่6 แต่มากกว่าเท่ากับช่องที่7\" title=\"\" id=\"box-6\" style=\"float: right;\">6</div>";
 
 
         htmlTemplateQuantity += "<th style=\"width:5%;  text-align:center;\" class='thBox'><div style='background:#" + data['threshold_color'][0]['color_code'] + "' class='redBOxL tooltipBox1'>"+htmlTooltipBox_1+"</div></th>";
@@ -2090,37 +2090,51 @@ var assignTemplateQuantityFn = function (structureName, data) {
 
     }
     $("#appraisal_template_area").append(htmlTemplateQuantity);
-
-    //binding tooltip start
-    $('[data-toggle="tooltip"]').css({ "cursor": "pointer" });
-    $('[data-toggle="tooltip"]').tooltip({
-        html: true
-    });
     
-    $(".tooltipBox1").hover(function(){
-		$('#box-1').tooltip('show')}, function(){
-			$('#box-1').tooltip('hide')
-	});
-    $(".tooltipBox2").hover(function(){
-		$('#box-2').tooltip('show')}, function(){
-			$('#box-2').tooltip('hide')
-	});
-    $(".tooltipBox3").hover(function(){
-		$('#box-3').tooltip('show')}, function(){
-			$('#box-3').tooltip('hide')
-	});
-    $(".tooltipBox4").hover(function(){
-		$('#box-4').tooltip('show')}, function(){
-			$('#box-4').tooltip('hide')
-	});
-    $(".tooltipBox5").hover(function(){
-		$('#box-5').tooltip('show')}, function(){
-			$('#box-5').tooltip('hide')
-	});
-    $(".tooltipBox6").hover(function(){
-		$('#box-6').tooltip('show')}, function(){
-			$('#box-6').tooltip('hide')
-	});
+//    Setting Tooltip (score 1 - 6)
+    $('.tooltipBox').tooltip({trigger : 'manual',html : true ,delay: {show: 0, hide: 0}});
+    
+    	$(".tooltipBox1").hover(function(){
+    	 $('#box-1').tooltip({trigger : 'manual',html : true ,delay: {show: 0, hide: 0}});
+	     $('#box-1').tooltip('show');
+	    }, function(){
+	       $('#box-1').tooltip('destroy');
+	    });
+    	
+    	$(".tooltipBox2").hover(function(){
+       	 $('#box-2').tooltip({trigger : 'manual',html : true ,delay: {show: 0, hide: 0}});
+   	     $('#box-2').tooltip('show');
+   	    }, function(){
+   	       $('#box-2').tooltip('destroy');
+   	    });
+    	
+    	$(".tooltipBox3").hover(function(){
+       	 $('#box-3').tooltip({trigger : 'manual',html : true ,delay: {show: 0, hide: 0}});
+   	     $('#box-3').tooltip('show');
+   	    }, function(){
+   	       $('#box-3').tooltip('destroy');
+   	    });
+    	
+    	$(".tooltipBox4").hover(function(){
+       	 $('#box-4').tooltip({trigger : 'manual',html : true ,delay: {show: 0, hide: 0}});
+   	     $('#box-4').tooltip('show');
+   	    }, function(){
+   	       $('#box-4').tooltip('destroy');
+   	    });
+    	
+    	$(".tooltipBox5").hover(function(){
+       	 $('#box-5').tooltip({trigger : 'manual',html : true ,delay: {show: 0, hide: 0}});
+   	     $('#box-5').tooltip('show');
+   	    }, function(){
+   	       $('#box-5').tooltip('destroy');
+   	    });
+    	
+    	$(".tooltipBox6").hover(function(){
+       	 $('#box-6').tooltip({trigger : 'manual',html : true ,delay: {show: 0, hide: 0}});
+   	     $('#box-6').tooltip('show');
+   	    }, function(){
+   	       $('#box-6').tooltip('destroy');
+   	    });
     
     if (data['threshold'] == 1) {
         if (data['nof_target_score'] > 0) {
