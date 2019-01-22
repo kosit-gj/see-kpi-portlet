@@ -216,6 +216,9 @@ var getDataFn = function (page, rpp) {
         			
         		}
         	}
+        	//setThemeColorFn(tokenID.theme_color);
+        	globalData = respData;
+            paginationSetUpFn(globalData['current_page'], globalData['last_page'], globalData['last_page']);
 
         }
     });
@@ -379,8 +382,8 @@ $(document).ready(function() {
 			$("#btnSearchAdvance").click(function() {
 				searchAdvanceFn();
 				if ($("#rpp").val() == '' || $("#rpp").val() == undefined) { // default
-					$(".countPagination").val('All');
-					$("#rpp").remove();
+					$(".countPagination").val(10);
+					//$("#rpp").remove();
 				}
 				
 				$("#search_result").show();
@@ -430,6 +433,13 @@ $(document).ready(function() {
 				$("#btnSubmitAnother").hide();
 				$("#add-edit-modal").modal('toggle');
 			});
+			
+			
+			/*$( ".countPagination" ).change(function() {
+				$("#rpp").val(this.val);
+				//console.log(this.val);
+				getDataFn(pageNumberDefault, $("#rpp").val());
+			});*/
 		}
 	}
 

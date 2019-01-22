@@ -1274,7 +1274,7 @@ form {
 									id="btnAddData">Appraisal Grade</span>
 							</button>
 						</div>
-						<div class="ibox-content" style="padding-top: 3%;">
+						<div class="ibox-content" style="padding-top: 5%;">
 							<!-- pagination start -->
 							<div class="row-fluid">
 								<div class="position-result-perpage">
@@ -1520,6 +1520,7 @@ form {
 	<div id="embedParamSearch"></div>
 	<input type="hidden" id="action" value=""/>
 	<input type="hidden" id="id" value=""/>
+	<!-- <input type="hidden" id="rpp" value=""/> -->
 </body>
 	
 <!-- Language Template for js -->
