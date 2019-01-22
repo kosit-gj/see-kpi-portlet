@@ -75,6 +75,9 @@ var getDataFn = function(page,rpp){
 			if(data["item_result_log"] == 1){$("#optionsEnableAssignmentLoggingOn").prop("checked", true);}
 			else if(data["item_result_log"] == 0){$("#optionsEnableAssignmentLoggingOff").prop("checked", true);}
 			
+			if(data["appraisal_360_flag"] == 1){$("#optionsAppraisal360flagOn").prop("checked", true);}
+			else if(data["appraisal_360_flag"] == 0){$("#optionsAppraisal360flagOff").prop("checked", true);}
+			
 			if(data["entity_type_resorting"] != 0){
 				$("#entityType").val(data["entity_type_resorting"])
 			}
@@ -190,7 +193,6 @@ var clearFn = function() {
 	
 	if(galbalDataSystemcon["raise_type"] == 1){$("#raiseFixAmount").prop("checked", true);}
 	else if(galbalDataSystemcon["raise_type"] == 2){$("#raisePercentage").prop("checked", true);}
-	 
 	if(galbalDataSystemcon["result_type"] == 0){$("#resultWeightPercentage").prop("checked", true);}
 	else if(galbalDataSystemcon["result_type"] == 1){$("#resultPercentage").prop("checked", true);}
 	else if(galbalDataSystemcon["result_type"] == 2){$("#raiseScore").prop("checked", true);}
@@ -198,6 +200,8 @@ var clearFn = function() {
 	else if(galbalDataSystemcon["threshold"] == 0){$("#thresholdOff").prop("checked", true);}
 	if(galbalDataSystemcon["email_reminder_flag"] == 1){$("#emailReminderOn").prop("checked", true);}
 	else if(galbalDataSystemcon["email_reminder_flag"] == 0){$("#emailReminderOff").prop("checked", true);}
+	if(galbalDataSystemcon["appraisal_360_flag"] == 1){$("#optionsAppraisal360flagOn").prop("checked", true);}
+	else if(galbalDataSystemcon["appraisal_360_flag"] == 0){$("#optionsAppraisal360flagOff").prop("checked", true);}
 
 	var htmlTheamColor = "<button class=\"btn jscolor {valueElement:null,value:'"+galbalDataSystemcon["theme_color"]+"',valueElement:'themeColor',onFineChange:'setThemeColorFn(this)'} \" style='width:70px; height:26px;'></button>";
 	$("#listThemeColor").html(htmlTheamColor);
@@ -267,6 +271,7 @@ var updateFn = function() {
 	var emailReminder=0;
 	var item_result_log=0;
 	var show_grand_total_flag=0;
+	var appraisal_360_flag=0;
 	if($("#raiseFixAmount:checked").is(":checked")){raiseType=1;}
 	else if($("#raisePercentage:checked").is(":checked")){raiseType=2;}
 	else if($("#raiseSalaryStructureTable:checked").is(":checked")){raiseType=3;}
@@ -291,6 +296,11 @@ var updateFn = function() {
 		show_grand_total_flag = 0;
 	}
 	
+	if($("#optionsAppraisal360flagOn:checked").is(":checked")) {
+		appraisal_360_flag = 1;
+	} else if($("#optionsAppraisal360flagOff:checked").is(":checked")) {
+		appraisal_360_flag = 0;
+	}
 	
 	$.ajax({
 		url:restfulURL+restfulPathSystemcon,
@@ -308,6 +318,7 @@ var updateFn = function() {
 			"salary_raise_frequency_id"         :  $("#salaryRaiseFrequency").val(),
 			"current_appraisal_year"            :  $("#current_appraisal_year").val(),
 			"entity_type_resorting"             :  $("#entityType").val(),
+			"appraisal_360_flag"                :  appraisal_360_flag,
 			"raise_type"			            :  raiseType,
 			"result_type"			            :  resultType,
 			"threshold"							:  threshold,
