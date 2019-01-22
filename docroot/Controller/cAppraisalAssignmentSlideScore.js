@@ -12,6 +12,7 @@ var item_id_array = [];
 var emp_result_id_action = [];
 var stage_id_action = [];
 var emailLinkAssignment = false;
+var itemDescriptionQuality=[];
 var editorItemDescriptionQuality;
 
 var clearFn = function () {
@@ -171,18 +172,18 @@ var setDataToTemplateFn = function (data, actionType) {
 
     // set premission button management
     if (head['status'] == 'Accepted' || actionType == 'view') {
-        $("#ModalAssignment").find('input[type="text"]').attr('disabled', 'disabled');
-        $("#ModalAssignment").find('input[type="checkbox"]').attr('disabled', 'disabled');
-        $("#ModalAssignment").find('#remark_footer').removeAttr('disabled');
+        $("#ModalAssignment , #AssignmentEmailLink").find('input[type="text"]').attr('disabled', 'disabled');
+        $("#ModalAssignment , #AssignmentEmailLink").find('input[type="checkbox"]').attr('disabled', 'disabled');
+        $("#ModalAssignment , #AssignmentEmailLink").find('#remark_footer').removeAttr('disabled');
     } else {
 
         //Check TEXT Disabled Start
-        if ($("#ModalAssignment").find('input[class="disabledInputText"]')) {
+        if ($("#ModalAssignment , #AssignmentEmailLink").find('input[class="disabledInputText"]')) {
         } else {
-            $("#ModalAssignment").find('input[type="text"]').removeAttr('disabled');
+            $("#ModalAssignment , #AssignmentEmailLink").find('input[type="text"]').removeAttr('disabled');
         }
         //Check TEXT Disabled End
-        $("#ModalAssignment").find('input[type="checkbox"]').removeAttr('disabled');
+        $("#ModalAssignment , #AssignmentEmailLink").find('input[type="checkbox"]').removeAttr('disabled');
     }
 
     $(".cus_information_area").show();
@@ -323,6 +324,7 @@ var findOneFn = function (id, actionType, stage_id, emp_code, org_code) {
                     $("" + AssignmentEmailLink + "").find('#remark_footer').removeAttr('disabled');
 
                 }
+                
                 if($('#user_portlet').val() == emp_code){
             		$.each(data['self_assign'],function(index,indexEntry){
             			if(indexEntry['is_self_assign'] == 0){
@@ -802,7 +804,7 @@ var actionUpdateAssignmentFn = function () {
             		form_id				: 	1 ,
             		item_id				: 	$(appraisalItemEntry).val(),
             		item_name			: 	$("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, ''),
-            		item_desc			: 	$("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name input").val(),
+            		item_desc			: 	itemDescriptionQuality["id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name"],
             		target_value		: 	removeComma(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-target").val())),
             		score0				:	setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score0").val())),
             		score1				:	setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score1").val())),
@@ -1016,7 +1018,7 @@ var actionAssignmentFn = function (param) {
             		form_id				: 	1 ,
             		item_id				: 	$(appraisalItemEntry).val(),
             		item_name			: 	$("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text().replace(/[\n\r]/g, ''),
-            		item_desc			: 	$("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name input").val(),
+            		item_desc			: 	itemDescriptionQuality["id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name"],
             		target_value		: 	removeComma(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-target").val())),
             		score0				:	setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score0").val())),
             		score1				:	setValueNull(removeSlash($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-score1").val())),
@@ -1971,8 +1973,8 @@ var assignTemplateQuantityFn = function (structureName, data) {
             htmlTemplateQuantity += "<tr>";
 
             htmlTemplateQuantity += "<td style=\"width:3%; text-align:center;\" class='object-center'><input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-checkbox' class='appraisalItem-checkbox appraisalItem-checkbox-" + indexEntry['structure_id'] + "' type='checkbox' value='" + indexEntry['item_id'] + "'></td>";
-            htmlTemplateQuantity += "<td style=\"width:20%\" class='id-" + indexEntry['structure_id'] + "-item_name' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name' style='padding-top:7px;'>" + indexEntry['item_name'] + " <span style='position: relative;' data-info='' class='icon-info-circled iconItemDesc'></span> <input type='hidden' value='" + notNullTextFn(indexEntry['item_desc']) + "'> </td>";
-
+            htmlTemplateQuantity += "<td style=\"width:20%\" class='id-" + indexEntry['structure_id'] + "-item_name' id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name' style='padding-top:7px;'>" + indexEntry['item_name'] + " <span style='position: relative;' data-info='' class='icon-info-circled iconItemDesc'></span>  </td>";
+            itemDescriptionQuality["id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-item_name"] = notNullTextFn(indexEntry['item_desc']);
 
             if(indexEntry['is_date']==1){ // is_date (target)
             	htmlTemplateQuantity += "<td style=\"width:5%; text-align:center;\"> <input id='id-" + indexEntry['item_id'] + "-" + indexEntry['structure_id'] + "-target' class='id-" + indexEntry['structure_id'] + "-target input form-control input-sm-small is_date' type='text' style='font-size:12px;'>";
@@ -2351,6 +2353,7 @@ var bindingSlideScoreBarFn = function () {
 
 }
 var createTemplateAssignmentFn = function (data) { 
+	itemDescriptionQuality=[];
     $("#appraisal_template_area").empty();
     $.each(data['group'], function (index, indexEntry) {
 
@@ -2403,7 +2406,7 @@ var createTemplateAssignmentFn = function (data) {
 				"keyboard" : setModalPopup[1]
 			});
     		var id = $(this).parent().attr("id");
-    		var itemDesc = $(this).next().val();
+    		var itemDesc = notNullTextFn(itemDescriptionQuality[id]);
 			var titleItemName = $(".lt-kpi-name").val()+": "+$(this).parent().text();
     		suneditorFn();
 			$(".titleItemName").html(titleItemName);
@@ -2412,10 +2415,10 @@ var createTemplateAssignmentFn = function (data) {
 			setTimeout(function(){ 
 				editorItemDescriptionQuality.setContent(itemDesc);
 				$("body").mLoading('hide');
-			}, 100);
+			}, 150);
     	
         	$("#btnSubmitItemDescription").on("click",function(){
-    			$("#"+$("#item_desc_id").val()+" input").val(editorItemDescriptionQuality.getContent());
+    			itemDescriptionQuality[$("#item_desc_id").val()]=editorItemDescriptionQuality.getContent();
     			editorItemDescriptionQuality.destroy();
     			callFlashSlide($(".lt-insert-successfully").val());
                 $("#modal-itemDescriptionQuality").modal('hide');
