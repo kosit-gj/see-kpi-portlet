@@ -591,7 +591,7 @@ var createDatatable = function(table, data) {
 //		fixedHeader: true,
 		"ordering": false,
 		"bInfo" : false,
-		"scrollY": 300,
+		"scrollY": 350,
         "scrollX": true,
 	    scrollCollapse: true,
 	    paging: false,
