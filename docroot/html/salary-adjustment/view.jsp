@@ -850,7 +850,9 @@ input[type=number]::-webkit-outer-spin-button {
     text-align: right;
 }
 
+/*
 .ellipsis {
+  max-width: 200px;
   display: block;
   white-space: nowrap;
   overflow: hidden;
@@ -874,9 +876,9 @@ input[type=number]::-webkit-outer-spin-button {
   top: auto;
   width: auto;
   max-width: 20rem;
-  /*border: 1px solid #eaebec;*/
+  border: 1px solid #eaebec;
   padding: 0 0.5rem;
-  /*box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .28);*/
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .28);
   white-space: normal;
   word-wrap: break-word;
   display: block;
@@ -884,6 +886,7 @@ input[type=number]::-webkit-outer-spin-button {
   margin-top: -1.25rem;
 }
 
+*/
 
 @keyframes float-labels {
     0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
@@ -1035,7 +1038,7 @@ input[type=number]::-webkit-outer-spin-button {
 				<div id="search_result" style="display: none;"> <!-- class="row-fluid search_result" > -->
 					<div class="span12">
 						<div class="ibox-title">
-							<div class='titlePanel'><liferay-ui:message key="bonus-judgement-list"/></div>
+							<div class='titlePanel'><liferay-ui:message key="salary-adjustment-list"/></div>
 						</div>						
 						<div class="ibox-content">
 							<!-- pagination start -->
@@ -1072,13 +1075,13 @@ input[type=number]::-webkit-outer-spin-button {
 						      <th rowspan="3" class="fix-column-top en"><liferay-ui:message key="employee-name"/></th>
 						      <th rowspan="3" class="fix-column-top po"><liferay-ui:message key="position"/></th>
 						      <th rowspan="3" class="fix-column-top pg">PG</th>
-						      <th rowspan="3" class="fix-column-top or">ฝ่าย</th>
-						      <th rowspan="3" class="fix-column-top jc">Job Code</th>
-						      <th rowspan="3" class="fix-column-top pc">Position Code</th>
+						      <th rowspan="3" class="fix-column-top or"><liferay-ui:message key="organization"/></th>
+						      <th rowspan="3" class="fix-column-top jc"><liferay-ui:message key="job-code"/></th>
+						      <th rowspan="3" class="fix-column-top pc"><liferay-ui:message key="position-code"/></th>
 						      <th rowspan="3" class="fix-column-top kn">คะแนนเต็มตีค่างาน<br>(ความรู้)</th>
 						      <th rowspan="3" class="fix-column-top pe">คะแนนเต็มตีค่างาน<br>(ศักยภาพ)</th>
 						      <th rowspan="3" class="fix-column-top tp">Total Point</th>
-						      <th rowspan="3" class="fix-column-top bp">Baht/Point</th>
+						      <th rowspan="3" class="fix-column-top bp">Baht Point</th>
 						      <th rowspan="3" class="fix-column-top str1"></th>
 						      <th rowspan="3" class="fix-column-top str2"></th>
 						      <th rowspan="3" class="fix-column-top str3"></th>
@@ -1101,14 +1104,14 @@ input[type=number]::-webkit-outer-spin-button {
 						    <tr>
 						 	  <th rowspan="2" class="fix-column-top">รายได้รวมที่ควรได้ <br>90% ไม่รวม Bonus</th>
 						      <th rowspan="2" class="fix-column-top">รายได้ Fix<br>ที่ควรได้ 65%</th>
-						      <th rowspan="2" class="fix-column-top">รายได้ Var<br>ที่ควรได้25%</th>
+						      <th rowspan="2" class="fix-column-top">รายได้ Var<br>ที่ควรได้ 25%</th>
 						      <th rowspan="2" class="fix-column-top">รายได้ปัจจุบัน<br>Total</th>
 						      <th colspan="3" class="fix-column-top">FIX 65%</th>
 						      <th colspan="3" class="fix-column-top">VAR 25%</th>
 						      <th rowspan="2" class="fix-column-top">%</th>
 						      <th rowspan="2" class="fix-column-top">Bath</th>
 						      <th rowspan="2" class="fix-column-top">ปรับรายได้<br>Total</th>
-						      <th rowspan="2" class="fix-column-top">ปรับเงินเงินเดือน</th>
+						      <th rowspan="2" class="fix-column-top">ปรับเงินเดือน</th>
 						      <th rowspan="2" class="fix-column-top">ปรับ P-QPI</th>
 						      <th rowspan="2" class="fix-column-top">% Diff</th>
 						      <th rowspan="2" class="fix-column-top">รายได้ใหม่<br>Total</th>

@@ -713,6 +713,7 @@ var createDatatable = function(table, data) {
 	$("#scroll-tableBonusAdjustment").find(".dataTables_scrollHeadInner").find(".fix-column-top").closest(".str5").html("คะแนนความสามารถที่มีคุณค่าต่อองค์กร"+ textFive);
     
 	$(".fix-column-top").css({"text-align" : "center", "border-bottom" : "0px"});
+	$("table.dataTable.no-footer").css({"border-bottom" : "0px"});
 	$(".pos-column-lef").css({"text-align" : "left"});
 	$(".pos-column-cen").css({"text-align" : "center"});
 	$(".pos-column-rig").css({"text-align" : "right"});
@@ -843,6 +844,7 @@ var calculatePercentKeyup = function() {
 		var data_current_total = Number($(this).closest('.control-calculate').find('.data-current-total').attr('data-value'));
 		var val_diff = total/data_current_total;
 		if(val_diff=="Infinity") {
+			val_diff = 0;
 			console.log("รายได้ปัจจุบัน Total เป็น 0 ถ้า (ปรับรายได้ Total/รายได้ปัจจุบัน Total) % diff จะเป็น infinity");
 		}
 		$(this).closest('.control-calculate').find('.data-percent-diff').attr('data-value', val_diff.toFixed(2));
@@ -874,6 +876,7 @@ var calculatePercentKeyup = function() {
 		var data_current_total = Number($(this).closest('.control-calculate').find('.data-current-total').attr('data-value'));
 		var val_diff = total/data_current_total;
 		if(val_diff=="Infinity") {
+			val_diff = 0;
 			console.log("รายได้ปัจจุบัน Total เป็น 0 ถ้า (ปรับรายได้ Total/รายได้ปัจจุบัน Total) % diff จะเป็น infinity");
 		}
 		$(this).closest('.control-calculate').find('.data-percent-diff').attr('data-value', val_diff.toFixed(2));
@@ -887,7 +890,7 @@ var calculatePercentKeyup = function() {
 	});	
 }
 
-var insertFn = function() {
+var updateFn = function() {
 	var stage_id = $("#actionToAssign").val();
 	var detail = [];
 	$.each($(".control-calculate").get(),function(index,indexEntry) {
@@ -921,9 +924,9 @@ var insertFn = function() {
         success: function (resData) {
         	if(resData.status == 200) {
         		appraisalStatusFn();
-        		getDataFn();
         		callFlashSlide($(".lt-update-successfully").val());
         		clearFn();
+        		$("#btnSearchAdvance").click();
         	} else if(resData.status == 400) {
         		validationFn(resData.data);
         	}
@@ -1039,7 +1042,7 @@ $(document).ready(function() {
 		    });
 		    
 		    $("#btnSubmit").click(function() {
-		    	insertFn();
+		    	updateFn();
 		    });
 		    
 		    //binding tooltip start
