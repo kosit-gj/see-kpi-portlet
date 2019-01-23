@@ -249,7 +249,7 @@ var appraisalStatusFn = function () {
         dataType: "json",
         async: false,
         data: {
-        	"flag": "salary_approval_flag",
+        	"flag": "salary_adjustment_flag",
         	"appraisal_form_id": $("#AppraisalForm").val(),
         	"appraisal_type_id": 2
         },
@@ -350,7 +350,7 @@ var to_action = function () {
         async: true,
         data: {
             "stage_id": status,
-            "flag": "salary_approval_flag",
+            "flag": "salary_adjustment_flag",
             "appraisal_type_id": 2,
             "appraisal_form_id": $("#embed_appraisal_form").val()
         },
@@ -415,15 +415,15 @@ var listDataFn = function(data) {
 		index += 1
 		
 		htmlHTML += "<tr class='control-calculate'>";
-		htmlHTML += "	<td class=\"pos-column-cen gr\">"+indexEntry.appraisal_form_name+"</td>";
-		htmlHTML += "	<td class='data-main pos-column-cen no' emp_result_id='"+indexEntry.emp_result_id+"' emp_id='"+indexEntry.emp_id+"'>"+index+"</td>";
-		htmlHTML += "	<td class='pos-column-cen ec'>"+indexEntry.emp_code+"</td>";
+//		htmlHTML += "	<td class='data-main pos-column-cen no' emp_result_id='"+indexEntry.emp_result_id+"' emp_id='"+indexEntry.emp_id+"'>"+index+"</td>";
+		htmlHTML += "	<td class='data-main pos-column-cen ec' emp_result_id='"+indexEntry.emp_result_id+"' emp_id='"+indexEntry.emp_id+"'>"+indexEntry.emp_code+"</td>";
 		htmlHTML += "	<td class='pos-column-lef en'>"+indexEntry.emp_name+"</td>";
-		htmlHTML += "	<td class='pos-column-lef po'>"+indexEntry.position_name+"</td>";
 		htmlHTML += "	<td class='pos-column-cen pg'>"+indexEntry.PG+"</td>";
 		htmlHTML += "	<td class='pos-column-lef or'>"+indexEntry.org_name+"</td>";
+		htmlHTML += "	<td class=\"pos-column-cen gr\">"+indexEntry.appraisal_form_name+"</td>";
+		htmlHTML += "	<td class='pos-column-lef po'>"+indexEntry.position_name+"</td>";
 		htmlHTML += "	<td class='pos-column-cen jc'>"+job_code+"</td>";
-		htmlHTML += "	<td class='pos-column-cen pc'>"+indexEntry.position_code+"</td>";
+//		htmlHTML += "	<td class='pos-column-cen pc'>"+indexEntry.position_code+"</td>";
 		htmlHTML += "	<td class='pos-column-rig kn'>"+knowledge_point+"</td>";
 		htmlHTML += "	<td class='pos-column-rig pe'>"+capability_point+"</td>";
 		htmlHTML += "	<td class='pos-column-rig tp'>"+total_point+"</td>";
@@ -489,8 +489,6 @@ var listDataFn = function(data) {
 	//footer sum total
 	var htmlHTMLFooter = "";
 	htmlHTMLFooter += "<tr>";
-	htmlHTMLFooter += "	<td></td>";
-	htmlHTMLFooter += "	<td></td>";
 	htmlHTMLFooter += "	<td></td>";
 	htmlHTMLFooter += "	<td></td>";
 	htmlHTMLFooter += "	<td></td>";
@@ -596,7 +594,7 @@ var createDatatable = function(table, data) {
 	    scrollCollapse: true,
 	    paging: false,
 	    fixedColumns: {
-	    	leftColumns: 1
+	    	leftColumns: 4
 	    },
 	    "searching": true,
 	    dom: 'lr<"table-filter-container">tip',
@@ -620,53 +618,53 @@ var createDatatable = function(table, data) {
 	    "bRetrieve": true,
 	    "bJQueryUI": true,
 	    columnDefs: [
-	    	{ "width": "50px", "targets": [0] }, //Group
-	    	{ "width": "30x", "targets": [1] }, //No
-	    	{ "width": "90px", "targets": [2] }, //Emp Code
-	    	{ "width": "200px", "targets": [3] }, //Employee Name
-	    	{ "width": "200px", "targets": [4] }, //Position
-	    	{ "width": "30px", "targets": [5] }, //PG
-	    	{ "width": "200px", "targets": [6] }, //ฝ่าย
-	    	{ "width": "70px", "targets": [7] }, //Job Code
-	    	{ "width": "101px", "targets": [8] }, //Position Code
-	    	{ "width": "130px", "targets": [9] }, //คะแนนเต็มตีค่างาน(ความรู้)
-	    	{ "width": "130px", "targets": [10] }, //คะแนนเต็มตีค่างาน(ศักยภาพ)
-	    	{ "width": "80px", "targets": [11] }, //Total Point
-	    	{ "width": "80px", "targets": [12] }, //Baht/Point
-	    	{ "width": "145px", "targets": [13] }, //ผลการประเมินค่างาน
-	    	{ "width": "95px", "targets": [14] }, //คะแนนความรู้	
-	    	{ "width": "110px", "targets": [15] }, //คะแนนศักยภาพ
-	    	{ "width": "170px", "targets": [16] }, //คะแนนผลงานปีที่ผ่านมา
-	    	{ "width": "145px", "targets": [17] }, //คะแนนความสามารถที่มีคุณค่าต่อองค์กร
-	    	{ "width": "100px", "targets": [18] }, //คะแนนประเมินMgr 
-	    	{ "width": "100px", "targets": [19] }, //คะแนนประเมินBU 
-	    	{ "width": "100px", "targets": [20] }, //คะแนนประเมินCOO
-	    	{ "width": "50px", "targets": [21] }, //เกรด
-	    	{ "width": "130px", "targets": [22] }, //รายได้รวมที่ควรได้ 
-	    	{ "width": "100px", "targets": [23] }, //รายได้ Fix
-	    	{ "width": "100px", "targets": [24] }, //รายได้ Var
-	    	{ "width": "100px", "targets": [25] }, //รายได้ปัจจุบันTotal
-	    	{ "width": "80px", "targets": [26] }, //Salary
-	    	{ "width": "80px", "targets": [27] }, //P-QPI
-	    	{ "width": "80px", "targets": [28] }, //อื่นๆ
-	    	{ "width": "80px", "targets": [29] }, //MPI
-	    	{ "width": "80px", "targets": [30] }, //PI
-	    	{ "width": "80px", "targets": [31] }, //อื่นๆ
-	    	{ "width": "80px", "targets": [32] }, //ขาด/เกิน
-	    	{ "width": "80px", "targets": [33] }, //Cal Standard
-	    	{ "width": "80px", "targets": [34] }, //%
-	    	{ "width": "80px", "targets": [35] }, //Bath
-	    	{ "width": "80px", "targets": [36] }, //ปรับรายได้
-	    	{ "width": "80px", "targets": [37] }, //ปรับเงินเงินเดือน
-	    	{ "width": "80px", "targets": [38] }, //ปรับ P-QPI	
-	    	{ "width": "80px", "targets": [39] }, //% Diff
-	    	{ "width": "80px", "targets": [40] }, //รายได้ใหม่Total
-	    	{ "width": "80px", "targets": [41] }, //Salary
-	    	{ "width": "80px", "targets": [42] }, //P-QPI
-	    	{ "width": "80px", "targets": [43] }, //อื่นๆ
-	    	{ "width": "80px", "targets": [44] }, //MPI
-	    	{ "width": "80px", "targets": [45] }, //PI
-	    	{ "width": "80px", "targets": [46] } //อื่นๆ
+	    	{ "width": "90px", "targets": [0] }, //Emp Code
+	    	{ "width": "200px", "targets": [1] }, //Employee Name
+	    	{ "width": "30px", "targets": [2] }, //PG
+	    	{ "width": "200px", "targets": [3] }, //org
+	    	{ "width": "50px", "targets": [4] }, //Group
+//	    	{ "width": "30x", "targets": [5] }, //No
+	    	{ "width": "200px", "targets": [5] }, //Position
+	    	{ "width": "70px", "targets": [6] }, //Job Code
+//	    	{ "width": "101px", "targets": [8] }, //Position Code
+	    	{ "width": "130px", "targets": [7] }, //คะแนนเต็มตีค่างาน(ความรู้)
+	    	{ "width": "130px", "targets": [8] }, //คะแนนเต็มตีค่างาน(ศักยภาพ)
+	    	{ "width": "80px", "targets": [9] }, //Total Point
+	    	{ "width": "80px", "targets": [10] }, //Baht/Point
+	    	{ "width": "145px", "targets": [11] }, //ผลการประเมินค่างาน
+	    	{ "width": "95px", "targets": [12] }, //คะแนนความรู้	
+	    	{ "width": "110px", "targets": [13] }, //คะแนนศักยภาพ
+	    	{ "width": "170px", "targets": [14] }, //คะแนนผลงานปีที่ผ่านมา
+	    	{ "width": "145px", "targets": [15] }, //คะแนนความสามารถที่มีคุณค่าต่อองค์กร
+	    	{ "width": "100px", "targets": [16] }, //คะแนนประเมินMgr 
+	    	{ "width": "100px", "targets": [17] }, //คะแนนประเมินBU 
+	    	{ "width": "100px", "targets": [18] }, //คะแนนประเมินCOO
+	    	{ "width": "50px", "targets": [19] }, //เกรด
+	    	{ "width": "130px", "targets": [20] }, //รายได้รวมที่ควรได้ 
+	    	{ "width": "100px", "targets": [21] }, //รายได้ Fix
+	    	{ "width": "100px", "targets": [22] }, //รายได้ Var
+	    	{ "width": "100px", "targets": [23] }, //รายได้ปัจจุบันTotal
+	    	{ "width": "80px", "targets": [24] }, //Salary
+	    	{ "width": "80px", "targets": [25] }, //P-QPI
+	    	{ "width": "80px", "targets": [26] }, //อื่นๆ
+	    	{ "width": "80px", "targets": [27] }, //MPI
+	    	{ "width": "80px", "targets": [28] }, //PI
+	    	{ "width": "80px", "targets": [29] }, //อื่นๆ
+	    	{ "width": "80px", "targets": [30] }, //ขาด/เกิน
+	    	{ "width": "80px", "targets": [31] }, //Cal Standard
+	    	{ "width": "80px", "targets": [32] }, //%
+	    	{ "width": "80px", "targets": [33] }, //Bath
+	    	{ "width": "80px", "targets": [34] }, //ปรับรายได้
+	    	{ "width": "80px", "targets": [35] }, //ปรับเงินเงินเดือน
+	    	{ "width": "80px", "targets": [36] }, //ปรับ P-QPI	
+	    	{ "width": "80px", "targets": [37] }, //% Diff
+	    	{ "width": "80px", "targets": [38] }, //รายได้ใหม่Total
+	    	{ "width": "80px", "targets": [39] }, //Salary
+	    	{ "width": "80px", "targets": [40] }, //P-QPI
+	    	{ "width": "80px", "targets": [41] }, //อื่นๆ
+	    	{ "width": "80px", "targets": [42] }, //MPI
+	    	{ "width": "80px", "targets": [43] }, //PI
+	    	{ "width": "80px", "targets": [44] } //อื่นๆ
 	    ]
 	});
 	

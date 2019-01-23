@@ -1069,15 +1069,15 @@ input[type=number]::-webkit-outer-spin-button {
 							<table class="table table-striped table-bordered" id="tableBonusAdjustment" style="margin-bottom: 0px; max-width: none;">
 							<thead>
 						    <tr>
-						      <th rowspan="3" class="fix-column-top gr"><liferay-ui:message key="group"/></th>
-						      <th rowspan="3" class="fix-column-top no"><liferay-ui:message key="no-dot"/></th>
+<%-- 						      <th rowspan="3" class="fix-column-top no"><liferay-ui:message key="no-dot"/></th> --%>
 						      <th rowspan="3" class="fix-column-top ec"><liferay-ui:message key="emp-code"/></th>
 						      <th rowspan="3" class="fix-column-top en"><liferay-ui:message key="employee-name"/></th>
-						      <th rowspan="3" class="fix-column-top po"><liferay-ui:message key="position"/></th>
-						      <th rowspan="3" class="fix-column-top pg">PG</th>
+						      <th rowspan="3" class="fix-column-top pg"><liferay-ui:message key="level"/></th>
 						      <th rowspan="3" class="fix-column-top or"><liferay-ui:message key="organization"/></th>
+						      <th rowspan="3" class="fix-column-top gr"><liferay-ui:message key="group"/></th>
+						      <th rowspan="3" class="fix-column-top po"><liferay-ui:message key="position"/></th>
 						      <th rowspan="3" class="fix-column-top jc"><liferay-ui:message key="job-code"/></th>
-						      <th rowspan="3" class="fix-column-top pc"><liferay-ui:message key="position-code"/></th>
+<%-- 						      <th rowspan="3" class="fix-column-top pc"><liferay-ui:message key="position-code"/></th> --%>
 						      <th rowspan="3" class="fix-column-top kn">คะแนนเต็มตีค่างาน<br>(ความรู้)</th>
 						      <th rowspan="3" class="fix-column-top pe">คะแนนเต็มตีค่างาน<br>(ศักยภาพ)</th>
 						      <th rowspan="3" class="fix-column-top tp">Total Point</th>
