@@ -1372,7 +1372,7 @@ form {
 											<button data-dismiss="modal" class="close setWeightCloseModal" type="button" style="padding-top: 5px">
 												<i class="fa fa-times" aria-hidden="true"></i><span class="sr-only" style="display: none;"></span>
 											</button>
-											<h4 class="modal-title">Appraisal Grade</h4>
+											<h4 class="modal-title"><liferay-ui:message key="appraisal-grade" /></h4>
 										</div>
 										
 										<div class="modal-body">
@@ -1380,7 +1380,7 @@ form {
 												<div class="span12 form-horizontal p-t-xxs">
 												
 													<div class="form-group p-xxs" id="form-group-appraisal_form_id">
-														<label class="control-label"> Appraisal Form <span class="redFont">*</span> </label>
+														<label class="control-label"><liferay-ui:message key="appraisal-form" /><span class="redFont">*</span> </label>
 														<div class="controls">
 															<select data-toggle="tooltip" data-original-title="<liferay-ui:message key="form-id"/>" 
 																class="input form-control input-sm span6" id="appraisal_form_id" name="appraisal_form_id">
@@ -1390,7 +1390,7 @@ form {
 													</div>
 													
 													<div class="form-group p-xxs" id="form-group-appraisal_level_id">
-														<label class="control-label"> Appraisal Level <span class="redFont">*</span> </label>
+														<label class="control-label"><liferay-ui:message key="appraisal-level" /><span class="redFont">*</span> </label>
 														<div class="controls">
 															<select data-toggle="tooltip" data-original-title="<liferay-ui:message key="Level"/>" 
 																class="input form-control input-sm span6" id="appraisal_level_id" name="appraisal_level_id[]">
@@ -1400,35 +1400,35 @@ form {
 													</div>
 													
 													<div class="form-group p-xxs" id="form-group-grade">
-														<label class="control-label"> Appraisal Grade <span class="redFont">*</span> </label>
+														<label class="control-label"><liferay-ui:message key="appraisal-grade" /><span class="redFont">*</span> </label>
 														<div class="controls">
 															<input style="width: 150px" class="span12 m-b-n" placeholder="Appraisal Grade" id="grade" name="grade" value="" type="text" />
 														</div>
 													</div>
 													
 													<div class="form-group p-xxs" id="form-group-begin_score">
-														<label class="control-label"> Begin Score <span class="redFont">*</span> </label>
+														<label class="control-label"><liferay-ui:message key="begin-score" /><span class="redFont">*</span> </label>
 														<div class="controls">
 															<input style="width: 200px" class="span12 m-b-n numberOnly" placeholder="Begin Score" id="begin_score" name="begin_score" value="" type="text" />
 														</div>
 													</div>
 													
 													<div class="form-group p-xxs" id="form-group-end_score">
-														<label class="control-label"> End Score <span class="redFont">*</span> </label>
+														<label class="control-label"><liferay-ui:message key="end-score" /><span class="redFont">*</span> </label>
 														<div class="controls">
 															<input style="width: 200px" class="span12 m-b-n numberOnly" placeholder="End Score" id="end_score" name="end_score" value="" type="text" />
 														</div>
 													</div>
 													
 													<div class="form-group p-xxs" id="form-group-salary_raise_amount">
-														<label class="control-label"> Salary Raise <span class="redFont">*</span> </label>
+														<label class="control-label"><liferay-ui:message key="salary-raise" /><span class="redFont">*</span> </label>
 														<div class="controls">
 															<input style="width: 200px" class="span12 m-b-n numberOnly" placeholder="Salary Raise" id="salary_raise_amount" name="salary_raise_amount" value="" type="text" />
 														</div>
 													</div>
 													
 													<div class="form-group p-xxs" id="form-group-structure_id">
-														<label class="control-label"> Related Structures <span class="redFont">*</span> </label>
+														<label class="control-label"><liferay-ui:message key="related-structures" /><span class="redFont">*</span> </label>
 														<div class="controls">
 															<select data-toggle="tooltip" data-original-title="<liferay-ui:message key='structures'/>" 
 																class="input form-control input-sm span6" id="structure_id" name="structure_id">
@@ -1438,14 +1438,14 @@ form {
 													</div>
 													
 													<div class="form-group p-xxs" id="form-group-is_judgement">
-														<label class="control-label"> IsJudgement </label>
+														<label class="control-label"><liferay-ui:message key="is-judgement" /></label>
 														<div class="controls">
 															<input class="checkbox" placeholder="Is Judgement" id="is_judgement" name="is_judgement" type="checkbox">
 														</div>
 													</div>
 													
 													<div class="form-group p-xxs" id="form-group-is_active">
-														<label class="control-label"> IsActive </label>
+														<label class="control-label"><liferay-ui:message key="is-active" /></label>
 														<div class="controls">
 															<input checked="" class="checkbox" placeholder="Is Active" id="is_active" name="is_active" type="checkbox">
 														</div>
@@ -1456,9 +1456,9 @@ form {
 										</div>
 
 										<div class="modal-footer">
-											<button class="btn btn-primary" type="button" id="btnSubmit">Save</button>
-											<button class="btn btn-primary" type="button" id="btnSubmitAnother">Save & Add Another</button>
-											<button data-dismiss="modal" class="btn btn-danger btnCancle setCloseModal" type="button">Cancel</button>
+											<button class="btn btn-primary" type="button" id="btnSubmit"><liferay-ui:message key="save" /></button>
+											<button class="btn btn-primary" type="button" id="btnSubmitAnother"><liferay-ui:message key="save-and-add-another" /></button>
+											<button data-dismiss="modal" class="btn btn-danger btnCancle setCloseModal" type="button"><liferay-ui:message key="cancel" /></button>
 										</div>
 
 										<div class="alert alert-warning information" id="information" style="display: none;">
@@ -1492,12 +1492,12 @@ form {
 					<button data-dismiss="modal" class="close" type="button" style="padding-top:3px">
 						<span aria-hidden="true"><i class='fa fa-times'></i></span>
 					</button>
-					<h5 class="modal-title">Confirm Dialog</h5>
+					<h5 class="modal-title"><liferay-ui:message key="confirm-dialog" /></h5>
 				</div>
 				<div class="modal-body">
 					<div class="form-kpi-mangement">
 						<div class="form-kpi-label" align="center">
-							<label>Confirm to Delete Data?</label>
+							<label><liferay-ui:message key="confirm-to-delete-data" />?</label>
 							<div id="inform_on_confirm" class='information'></div>
 						</div>
 					</div>
@@ -1509,7 +1509,7 @@ form {
 						</button>
 						&nbsp;&nbsp;
 						<button data-dismiss="modal" class="btn btn-danger" type="button">
-							<i class="fa fa-times-circle"></i>&nbsp;Cancel
+							<i class="fa fa-times-circle"></i>&nbsp;<liferay-ui:message key="cancel" />
 						</button>
 					</div>
 					<div class="alert alert-warning information" id="information2"
