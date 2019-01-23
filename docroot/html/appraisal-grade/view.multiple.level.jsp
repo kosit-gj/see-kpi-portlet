@@ -1262,7 +1262,7 @@ form {
 					<div class="span12">
 						<div class="ibox-title">
 							<div class='titlePanel'>
-								<liferay-ui:message key="Appraisal Grade" />
+								<liferay-ui:message key="appraisal-grade" />
 							</div>
 						</div>
 						<div class="form-group m-b-none pull-left"
@@ -1270,8 +1270,8 @@ form {
 							<button type="button" class="btn btn-success"
 								id="btnAddapraisalgrade" data-target="#addModal"
 								data-toggle="modal" data-backdrop="static" data-keyboard="false">
-								<i class="fa fa-plus-square"></i>&nbsp;Add&nbsp;<span
-									id="btnAddData">Appraisal Grade</span>
+								<i class="fa fa-plus-square"></i><span
+									id="btnAddData">&nbsp;<liferay-ui:message key="add-appraisal-grade" /></span>
 							</button>
 						</div>
 						<div class="ibox-content" style="padding-top: 5%;">
@@ -1307,25 +1307,28 @@ form {
 									<thead>
 										<tr>
 											<th
-												style="width: auto; vertical-align: middle; white-space: nowrap;"><b>Appraisal
-													Form </b></th>
+												style="width: auto; vertical-align: middle; white-space: nowrap;">
+												<b><liferay-ui:message key="appraisal-form" /></b></th>
 											<th
-												style="width: auto; text-align: left; vertical-align: middle;"><b>Appraisal
-													Level</b></th>
+												style="width: auto; text-align: left; vertical-align: middle;">
+												<b><liferay-ui:message key="appraisal-level" /></b></th>
 											<th
-												style="width: auto; text-align: left; vertical-align: middle;"><b>Grade</b></th>
+												style="width: auto; text-align: left; vertical-align: middle;">
+												<b><liferay-ui:message key="grade" /></b></th>
 											<th
-												style="width: auto; text-align: right; vertical-align: middle;"><b>Begin
-													Score</b></th>
+												style="width: auto; text-align: right; vertical-align: middle;">
+												<b><liferay-ui:message key="begin-score" /></b></th>								
 											<th
-												style="width: auto; text-align: right; vertical-align: middle;"><b>End
-													Score</b></th>
+												style="width: auto; text-align: right; vertical-align: middle;">
+												<b><liferay-ui:message key="end-score" /></b></th>
 											<th
-												style="width: auto; text-align: right; vertical-align: middle;"><b>Salary
-													Raise</b></th>
+												style="width: auto; text-align: right; vertical-align: middle;">
+												<b><liferay-ui:message key="salary-raise" /></b></th>
 											<th
-												style="width: auto; text-align: center; vertical-align: middle;"><b>IsActive</b></th>
-											<th style="text-align: center; vertical-align: middle;"><b>Manage</b></th>
+												style="width: auto; text-align: center; vertical-align: middle;">
+												<b><liferay-ui:message key="is-active" /></b></th>
+											<th style="text-align: center; vertical-align: middle;">
+												<b><liferay-ui:message key="manage" /></b></th>
 										</tr>
 									</thead>
 									<tbody id="listData">
