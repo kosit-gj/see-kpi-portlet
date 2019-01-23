@@ -179,7 +179,7 @@ var appraisalStatusFn = function () {
         dataType: "json",
         async: false,
         data: {
-        	"flag": "bonus_adjustment_flag",
+        	"flag": "mpi_judgement_flag",
         	"appraisal_form_id": $("#AppraisalForm").val(),
         	"appraisal_type_id": 2
         },
