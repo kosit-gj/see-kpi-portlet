@@ -125,6 +125,25 @@ var generateNumberIDFn = function(){
 	globalDataTemp['NumberID']++;
 	return globalDataTemp['NumberID'];
 };
+var generateIsRequireAnswerFn = function(value,is_require_answer){
+	var html="";
+	var style="";
+	
+	// value = Answer Type
+	if(value == "2" || value == "4" || value == "6" || value == "7"){
+		style = "";
+	}else{
+		style = "display: none;";
+	}
+	
+	html+="				<div class='form-group pull-left span1 ' style='margin-top: 5px;'>";
+	html+="					<div class='is_require_answer flat-toggle "+(is_require_answer == "1" ? "on" : "")+"'  data-value='"+(is_require_answer == "1" ? "1" : "0")+"' style='"+style+"'> ";
+	html+="						<span >is Require Answer</span>";
+	html+="					</div>";
+	html+="				</div>";
+	
+ 	return html;
+};
 	//Check Validation
 var validationFn = function(data){
 	var validate = "";
@@ -359,6 +378,21 @@ var scriptDropDownAnswerTypeSubSectionChangeIconFn = function (){
 		var valueType = $(this).val(); 
 		$(this).parent().parent().parent().next().find( '.dropDownAnswerTypeQuestion' ).val(valueType);
 		$(this).parent().parent().parent().next().find( '.imgAnswerType' ).html(imgAnswerTypeFn(valueType));
+		
+		switch (valueType ) {
+	     case "1": case "3": case "5":
+	    	 $(this).parent().parent().parent().next().find( '.is_require_answer' ).hide();
+	    	 $(this).parent().parent().parent().next().find( '.is_require_answer' ).removeClass('on');
+	    	 $(this).parent().parent().parent().next().find( '.is_require_answer' ).attr("data-value","0");
+	        break;
+	     case "2": case "4": case "6": case "7":
+	    	 $(this).parent().parent().parent().next().find( '.is_require_answer' ).show();
+	    	 scriptFlatToggleFn();
+	         break;
+	     default:
+	    	 $(this).parent().parent().parent().next().find( '.is_require_answer' ).hide();
+		 }
+		
 	});
 }; 
 //binding drop down Answer Type by Question change all icon at row answer 
@@ -367,8 +401,26 @@ var scriptDropDownAnswerTypeQuestionChangeIconFn = function (){
 	$(".dropDownAnswerTypeQuestion").change(function() {
 		var valueType = $(this).val();
 		$(this).parent().parent().parent().next().find( '.imgAnswerType' ).html(imgAnswerTypeFn(valueType));
+		
+		switch (valueType ) {
+	     case "1": case "3": case "5":
+	    	$(this).parent().next().find( '.is_require_answer' ).hide();
+	    	$(this).parent().next().find( '.is_require_answer' ).removeClass('on');
+	    	$(this).parent().next().find( '.is_require_answer' ).attr("data-value","0");
+	        break;
+	     case "2": case "4": case "6": case "7":
+	    	 $(this).parent().next().find( '.is_require_answer' ).show();
+	    	 scriptFlatToggleFn();
+	         break;
+	     default:
+	    	 $(this).parent().next().find( '.is_require_answer' ).hide();
+		 }
+		
+		
 	});
 }; 
+
+
 //btn gennerate html Sub Section
 var scriptBtnAddSubSectionFn = function (){
 	  $('.btnAddSubSection').off('click');
@@ -444,21 +496,23 @@ var scriptBtnAddSubSectionFn = function (){
 		  	//console.log($(this).parent().parent().parent().next().append("<div class='span10'>test</div>"));
 			  
 			  var html="";
-			  html+="<div class='"+(questionType == "subSection-question" ? "sortUnderSubSectionItem span10 "+bodyStampParentID+"" : "sortUnderSectionItem span11 "+bodyStampParentID+"")+"' style='display: block;' question-type='question'>";
+			  html+="<div class='"+(questionType == "subSection-question" ? "sortUnderSubSectionItem span11 "+bodyStampParentID+"" : "sortUnderSectionItem span11 "+bodyStampParentID+"")+"' style='display: block;' question-type='question'>";
 			  html+="	<div class='box2 box-primary' >";
 			  html+="		<div class='box-header with-border'  style='padding-top: 5px;'>";
 			  html+="		<center class='imgMoveHandleQuestion'><div style='width: 13px;padding-top: 4px;'><img src='"+$("#url_portlet").val()+"/img/answer/grip-horizontal.svg' style='opacity: 0.3;'></div></center>";
 
 			  html+="			<div class='form-inline' >";
-			  html+="				<div class='form-group float-label-control pull-left "+(questionType == "subSection-question" ? " span6 " : " span7 ")+" section-name' style='margin-top: 5px;'>";
+			  html+="				<div class='form-group float-label-control pull-left "+(questionType == "subSection-question" ? " span6 " : " span6 ")+" section-name' style='margin-top: 5px;'>";
 			  html+="					<input type='text' class='form-control inputQuestionName' placeholder='Question Name' id='inputQuestionName-"+numberIdFirst+"-"+numberIdSecond+"' name='inputQuestionName-"+numberIdFirst+"-"+numberIdSecond+"' data-toggle='tooltip' data-original-title='Question Name' required>";
 			  html+="				</div>";
-			  html+="				<div class='form-group pull-left "+(questionType == "subSection-question" ? " span4 " : " span3 ")+" answer-type' style='margin-top: 5px;'>";
+			  html+="				<div class='form-group pull-left "+(questionType == "subSection-question" ? " span3 " : " span3 ")+" answer-type' style='margin-top: 5px;'>";
 			  html+="					<select data-toggle='tooltip' data-original-title='Answer Type'";
 			  html+="						class='input span12 m-b-n dropDownAnswerTypeQuestion' id=''>";
 			  html+= 						listDropDownAnswerTypeFn(answerTypeValue);
 			  html+="					</select>";
 			  html+="				</div>";
+			  						//New is_require_answer
+			  html+=				generateIsRequireAnswerFn(answerTypeValue);
 			  html+="				<div class='form-group pull-right m-b-n' >";
 			  html+="					<button type='button' class='btn btn-danger input-sm btnDelQuestion'";
 			  html+="						name='' id='' style='margin-left: 5px;margin-top: 5px;'>";
@@ -923,7 +977,7 @@ var listQuestionnaireFindOneByQuestionFn = function(data,question_type,body_stam
 	 $.each(data,function(index,indexEmtry){
 	  		var questionType = "subSection-question";
 	  			  		
-	  		  html+="<div class='"+(question_type == "subSection-question" ? "sortUnderSubSectionItem span10 "+body_stamp_parent+"" : "sortUnderSectionItem span11 "+body_stamp_parent+"")+"' style='display: block;' question-type='"+question_type+"' question-id='"+indexEmtry.question_id+"' parent-id='"+indexEmtry.parent_question_id+"'>";
+	  		  html+="<div class='"+(question_type == "subSection-question" ? "sortUnderSubSectionItem span11 "+body_stamp_parent+"" : "sortUnderSectionItem span11 "+body_stamp_parent+"")+"' style='display: block;' question-type='"+question_type+"' question-id='"+indexEmtry.question_id+"' parent-id='"+indexEmtry.parent_question_id+"'>";
 			  html+="	<div class='box2 box-primary' >";
 			  html+="		<div class='box-header with-border'  style='padding-top: 5px;'>";
 			  html+="		<center class='imgMoveHandleQuestion'><div style='width: 13px;padding-top: 4px;'><img src='"+$("#url_portlet").val()+"/img/answer/grip-horizontal.svg' style='opacity: 0.3;'></div></center>";
@@ -931,12 +985,13 @@ var listQuestionnaireFindOneByQuestionFn = function(data,question_type,body_stam
 			  html+="				<div class='form-group float-label-control pull-left span6 section-name' style='margin-top: 5px;'>";
 			  html+="					<input type='text' class='form-control inputQuestionName' placeholder='Question Name' id='inputQuestionName-"+indexEmtry.question_id+"' name='inputQuestionName-"+indexEmtry.question_id+"' data-toggle='tooltip' data-original-title='Question Name' required value='"+indexEmtry.question_name+"'>";
 			  html+="				</div>";
-			  html+="				<div class='form-group pull-left "+(question_type == "subSection-question" ? " span4 " : " span3 ")+"  answer-type' style='margin-top: 5px;'>";
+			  html+="				<div class='form-group pull-left "+(question_type == "subSection-question" ? " span3 " : " span3 ")+"  answer-type' style='margin-top: 5px;'>";
 			  html+="					<select data-toggle='tooltip' data-original-title='Answer Type'";
 			  html+="						class='input span12 m-b-n dropDownAnswerTypeQuestion' id=''>";
 			  html+= 						listDropDownAnswerTypeFn(indexEmtry.answer_type_id);
 			  html+="					</select>";
 			  html+="				</div>";
+			  html+=				generateIsRequireAnswerFn(indexEmtry.answer_type_id, indexEmtry.is_require_answer);
 			  html+="				<div class='form-group pull-right m-b-n' >";
 			  html+="					<button type='button' class='btn btn-danger input-sm btnDelQuestion'";
 			  html+="						name='btnDelQuestion-"+indexEmtry.question_id+"' id='btnDelQuestion-"+indexEmtry.question_id+"' style='margin-left: 5px;margin-top: 5px;' delete-id='"+indexEmtry.question_id+"'>";
@@ -1059,10 +1114,12 @@ var insertFn = function(options){
 				sub_section.answer_type_id = $(indexEntry2).find( '.dropDownAnswerTypeSubSection' ).val();
 	          	sub_section.question_name = $(indexEntry2).find( '.inputSubSectionName' ).val();
 	          	sub_section.pass_score = $(indexEntry2).find( '.inputSubSectionPassScore' ).val();
+	          	sub_section.is_require_answer = 0;
 	          	sub_section.question = [];
 				$.each($(indexEntry2).children().children(".box-body").children('div').get(),function(index3,indexEntry3){
 					var question = {};
 					question.answer_type_id = $(indexEntry3).find( '.dropDownAnswerTypeQuestion' ).val();
+					question.is_require_answer = ($(indexEntry3).find( '.is_require_answer' ).hasClass('on') == true ? "1":"0");
 	          		question.question_name = $(indexEntry3).find( '.inputQuestionName' ).val();
 	          		question.answer = getDataAnswerFn($(indexEntry3).children().find("tbody").children('tr').get());
 					
@@ -1075,6 +1132,7 @@ var insertFn = function(options){
 				// Question Start
 	          	sub_section.answer_type_id = $(indexEntry2).find( '.dropDownAnswerTypeQuestion' ).val();
 	          	sub_section.question_name = $(indexEntry2).find( '.inputQuestionName' ).val();
+	          	sub_section.is_require_answer = ($(indexEntry2).find( '.is_require_answer' ).hasClass('on') == true ? "1":"0");
 	          	sub_section.pass_score = "";
 	          	sub_section.answer = getDataAnswerFn($(indexEntry2).children().find("tbody").children('tr').get());
 	          	// Question End
@@ -1168,6 +1226,7 @@ var updateFn = function(){
 				sub_section.answer_type_id = $(indexEntry2).find( '.dropDownAnswerTypeSubSection' ).val();
 	          	sub_section.question_name = $(indexEntry2).find( '.inputSubSectionName' ).val();
 	          	sub_section.pass_score = $(indexEntry2).find( '.inputSubSectionPassScore' ).val();
+	          	sub_section.is_require_answer = 0;
 	          	sub_section.question = [];
 				$.each($(indexEntry2).children().children(".box-body").children('div').get(),function(index3,indexEntry3){
 					var question = {};
@@ -1176,6 +1235,7 @@ var updateFn = function(){
 					}
 					question.answer_type_id = $(indexEntry3).find( '.dropDownAnswerTypeQuestion' ).val();
 	          		question.question_name = $(indexEntry3).find( '.inputQuestionName' ).val();
+	          		question.is_require_answer =  ($(indexEntry3).find( '.is_require_answer' ).hasClass('on') == true ? "1":"0");
 	          		question.answer = getDataAnswerFn($(indexEntry3).children().find("tbody").children('tr').get());
 					
 					sub_section.question.push(question);
@@ -1190,6 +1250,7 @@ var updateFn = function(){
 				}
 				sub_section.answer_type_id = $(indexEntry2).find( '.dropDownAnswerTypeQuestion' ).val();
 	          	sub_section.question_name = $(indexEntry2).find( '.inputQuestionName' ).val();
+	          	sub_section.is_require_answer =  ($(indexEntry2).find( '.is_require_answer' ).hasClass('on') == true ? "1":"0");
 	          	sub_section.pass_score = "";
 	          	sub_section.answer = getDataAnswerFn($(indexEntry2).children().find("tbody").children('tr').get());
 	          	// Question End
