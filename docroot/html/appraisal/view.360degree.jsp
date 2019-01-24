@@ -736,7 +736,7 @@ background-color:#71cccc !important;
 										style="margin-left: 5px">
 										<select data-toggle="tooltip" title=""
 											data-original-title="<liferay-ui:message key="year"/>"
-											class="input form-control input-sm span12" id="AppraisalYear"
+											class="input form-control input-sm span12 cascade-status" id="AppraisalYear"
 											name="AppraisalYear">
 										</select>
 									</div>
@@ -745,7 +745,7 @@ background-color:#71cccc !important;
 										style="margin-left: 5px">
 										<select data-toggle="tooltip" title=""
 											data-original-title="<liferay-ui:message key="period"/>"
-											class="input form-control input-sm span12"
+											class="input form-control input-sm span12 cascade-status"
 											id="AppraisalPeriod" name="AppraisalPeriod">
 											<option>All Appraisal Period</option>
 										</select>
@@ -756,7 +756,7 @@ background-color:#71cccc !important;
 										<select id="appraisalType" name="appraisalType"
 											data-toggle="tooltip" title=""
 											data-original-title="<liferay-ui:message key="entity-type"/>"
-											class="input form-control input-sm span12">
+											class="input form-control input-sm span12 cascade-status">
 										</select>
 									</div>
 
@@ -765,7 +765,7 @@ background-color:#71cccc !important;
 										<select id="AppraisalEmpLevel" name="AppraisalEmpLevel"
 											data-toggle="tooltip" title=""
 											data-original-title="<liferay-ui:message key="employee-level"/>"
-											class="input form-control input-sm span12">
+											class="input form-control input-sm span12 cascade-status">
 											<option>All Level</option>
 										</select>
 									</div>
@@ -775,7 +775,7 @@ background-color:#71cccc !important;
 										<select id="AppraisalOrgLevel" name="AppraisalOrgLevel"
 											data-toggle="tooltip" title=""
 											data-original-title="<liferay-ui:message key="organization-level"/>"
-											class="input form-control input-sm span12">
+											class="input form-control input-sm span12 cascade-status">
 											<option>All Level</option>
 										</select>
 									</div>
@@ -784,7 +784,7 @@ background-color:#71cccc !important;
 										style="margin-left: 5px">
 										<select data-toggle="tooltip" title=""
 											data-original-title="<liferay-ui:message key="organization"/>"
-											class="input form-control input-sm span12" id="organization"
+											class="input form-control input-sm span12 cascade-status" id="organization"
 											name="organization">
 											<option>All Organization</option>
 										</select>
@@ -797,7 +797,7 @@ background-color:#71cccc !important;
 											class="form-control input-sm searchAdvanceText span12"
 											placeholder="<liferay-ui:message key="employee-name"/>"
 											type="text" id="EmpName" name="EmpName" /> <input
-											class="form-control input-sm" id="EmpName_id"
+											class="form-control input-sm cascade-status" id="EmpName_id"
 											name="EmpName_id" value="" type="hidden">
 									</div>
 
@@ -808,7 +808,7 @@ background-color:#71cccc !important;
 											class="form-control input-sm searchAdvanceText span12"
 											placeholder="<liferay-ui:message key="position"/>"
 											type="text" id="Position" name="Position" /> <input
-											class="form-control input-sm" id="Position_id"
+											class="form-control input-sm cascade-status" id="Position_id"
 											name="Position_id" value="" type="hidden">
 									</div>
 
@@ -816,7 +816,7 @@ background-color:#71cccc !important;
 										style="margin-left: 5px">
 										<select data-toggle="tooltip" title=""
 											data-original-title="<liferay-ui:message key="form"/>"
-											class="input form-control input-sm span12" id="form_type"
+											class="input form-control input-sm span12 cascade-status" id="form_type"
 											name="form_type">
 											<option>All Form</option>
 										</select>

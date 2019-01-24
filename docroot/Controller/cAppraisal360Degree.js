@@ -1468,13 +1468,20 @@ var appraisalStatusFn = function () {
         async: false,
         data: {
         	"flag": "appraisal_flag",
-        	"appraisal_form_id": $("#embed_formType").val(),
-        	"appraisal_type_id": 2
+        	"appraisal_form_id" : $("#form_type").val(),
+        	"appraisal_type_id" : $("#appraisalType").val(),
+        	"emp_level" : $("#AppraisalEmpLevel").val(),
+        	"org_level" : $("#AppraisalOrgLevel").val(),
+        	"org_id" : $("#organization").val(),
+        	"appraisal_year" : $("#AppraisalYear").val(),
+        	"period_id" : $("#AppraisalPeriod").val(),
+        	"emp_id" : $("#EmpName_id").val(),
+        	"position_id" : $("#Position_id").val()
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
         	var htmlOption="";
-//			htmlOption+="<option value=''>All Status</option>";
+			// htmlOption+="<option value=''>All Status</option>";
             $.each(data, function (index, indexEntry) {
             	htmlOption += "<option value='" + indexEntry['stage_id'] + "'>" + indexEntry['status'] + "</option>";
             });
@@ -3171,7 +3178,6 @@ $(document).ready(function () {
             //set parameter start
             getSystempConfig();
             dropDrowFormTypeFn();
-            appraisalStatusFn()
             dropDrowYearListFn();
             $("#AppraisalYear").change(function () {
                 dropDrowPeriodListFn($(this).val());
@@ -3216,12 +3222,9 @@ $(document).ready(function () {
             dropDrowIndividualOrgLevelFn();
 
             //Auto complete Start
-
-
             $("#Position").autocomplete({
                 source: function (request, response) {
                     $.ajax({
-
                         url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/auto_position_list",
                         type: "post",
                         dataType: "json",
@@ -3261,9 +3264,8 @@ $(document).ready(function () {
                     galbalDataTemp['position_name'] = ui.item.label;
                     galbalDataTemp['position_id'] = ui.item.position_id;
                     return false;
-                }, change: function (e, ui) {
-
-
+                },
+                change: function (e, ui) {
                     if ($("#Position").val() == galbalDataTemp['position_name']) {
                         $("#Position_id").val(galbalDataTemp['position_id']);
                     } else if (ui.item != null) {
@@ -3271,8 +3273,10 @@ $(document).ready(function () {
                     } else {
                         $("#Position_id").val("");
                     }
+                    appraisalStatusFn();
                 }
             });
+            
             var empNameAutoCompelteChangeToPositionName = function (name) {
                 $.ajax({
                     url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/auto_position_list",
@@ -3293,7 +3297,6 @@ $(document).ready(function () {
             }
 
             $("#EmpName").autocomplete({
-
                 source: function (request, response) {
                     $.ajax({
                         url: restfulURL + "/" + serviceName + "/public/appraisal/parameter/auto_emp_list",
@@ -3319,12 +3322,10 @@ $(document).ready(function () {
                                     emp_code: item.emp_code
                                 };
                             }));
-
                         },
                         beforeSend: function () {
                             $("body").mLoading('hide');
                         }
-
                     });
                 },
                 select: function (event, ui) {
@@ -3334,20 +3335,24 @@ $(document).ready(function () {
                     galbalDataTemp['EmpName_id'] = ui.item.emp_id;
                     empNameAutoCompelteChangeToPositionName(ui.item.value);
                     return false;
-                }, change: function (e, ui) {
+                },
+                change: function (e, ui) {
                     if ($("#EmpName").val() == galbalDataTemp['EmpName']) {
                         $("#EmpName_id").val(galbalDataTemp['EmpName_id']);
                     } else if (ui.item != null) {
                         $("#EmpName_id").val(ui.item.emp_id);
                     } else {
                         $("#EmpName_id").val("");
-
                     }
-
+                    appraisalStatusFn();
                 }
             });
-
             //Auto Complete End
+            
+            appraisalStatusFn();
+            $(".cascade-status").change(function () {
+            	appraisalStatusFn();
+            });
 
             // Search
             $("#btnSearchAdvance").click(function () {
