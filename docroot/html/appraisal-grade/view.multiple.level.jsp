@@ -1199,7 +1199,7 @@ form {
 	</div>
 
 
-	<!-- <div class="app_url_hidden"> -->
+	<div class="app_url_hidden">
 	<div class="container" style="width: 100%">
 		<div id="advanceSearchAppraisalGroup" class="ng-view ng-scope">
 			<div class="row-fluid">

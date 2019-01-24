@@ -373,7 +373,7 @@ $(document).ready(function() {
 			
 	if (username != "" && username != null & username != [] && username != undefined) {
 		if (connectionServiceFn(username, password, plid) == true) {
-			
+			$(".app_url_hidden").show();
 			// generate parameter
 			dropDrowFormTypeFn("#AppraisalForm", null, true);
 			dropDrowAppraisalEmpLevelFn("#Appraisallevel", null, true);
