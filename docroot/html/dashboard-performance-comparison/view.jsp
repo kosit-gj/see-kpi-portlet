@@ -51,6 +51,23 @@ plid = layout.getPlid();
 .aui .genTable th{
 	font-weight: bold!important;
 }
+
+.aui .genTable{
+	table-layout: fixed!important;
+	width: 1140px!important;
+}
+.OverFlow {
+	max-width: 200px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.OverFlow:hover {
+	max-width: 200px;
+	text-overflow: clip;
+	white-space: normal;
+	word-break: break-all;
+} 
 .aui .tr-color-2 td{
 background-color: #f9f9f9!important;
 }
