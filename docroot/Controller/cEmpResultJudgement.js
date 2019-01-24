@@ -196,6 +196,7 @@ var appraisalStatusFn = function () {
             $.each(data, function (index, indexEntry) {
             	htmlOption += "<option value='" + indexEntry['stage_id'] + "'>" + indexEntry['status'] + "</option>";
             });
+            htmlOption += "<option value='ARJ'>After result judgement</option>";
             $("#status").html(htmlOption);
         }
     });
