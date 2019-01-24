@@ -287,10 +287,10 @@ form {
 					<thead>
 						<tr>
 							<th style="width: auto; vertical-align: middle; white-space: nowrap;"><b>Appraisal Form Name</b></th>
-							<th style="width: 10%; text-align: center; vertical-align: middle;"><b>IsBonus</b></th>
-							<th style="width: 10%; text-align: center; vertical-align: middle;"><b>IsActive</b></th>
+							<th style="width: 10%; text-align: center; vertical-align: middle;"><b>IsBonus</b></th>			
 							<th style="width: 10%; text-align: center; vertical-align: middle;"><b>IsRaise</b></th>
 							<th style="width: 10%; text-align: center; vertical-align: middle;"><b>IsMPI</b></th>
+							<th style="width: 10%; text-align: center; vertical-align: middle;"><b>IsActive</b></th>
 							<th style="text-align: center; vertical-align: middle;"><b>Manage</b></th>
 						</tr>
 					</thead>
@@ -333,13 +333,7 @@ form {
 							<div class="controls">
 								<input checked="" class="checkbox" placeholder="Is Bonus" id="is_bonus" name="is_bonus" type="checkbox">
 							</div>
-						</div>
-						<div class="form-group p-xxs" id="form-group-is_active">
-							<label class="control-label"> IsActive </label>
-							<div class="controls">
-								<input checked="" class="checkbox" placeholder="Is Active" id="is_active" name="is_active" type="checkbox">
-							</div>
-						</div>
+						</div>	
 						<div class="form-group p-xxs" id="form-group-is_raise">
 							<label class="control-label"> IsRaise </label>
 							<div class="controls">
@@ -350,6 +344,12 @@ form {
 							<label class="control-label"> IsMPI </label>
 							<div class="controls">
 								<input checked="" class="checkbox" placeholder="Is MPI" id="is_mpi" name="is_mpi" type="checkbox">
+							</div>
+						</div>
+						<div class="form-group p-xxs" id="form-group-is_active">
+							<label class="control-label"> IsActive </label>
+							<div class="controls">
+								<input checked="" class="checkbox" placeholder="Is Active" id="is_active" name="is_active" type="checkbox">
 							</div>
 						</div>
 						
