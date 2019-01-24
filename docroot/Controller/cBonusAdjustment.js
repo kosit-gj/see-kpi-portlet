@@ -175,7 +175,15 @@ var appraisalStatusFn = function () {
         data: {
         	"flag": "bonus_adjustment_flag",
         	"appraisal_form_id": $("#AppraisalForm").val(),
-        	"appraisal_type_id": 2
+        	"appraisal_type_id": 2,
+        	
+        	"emp_level" : $("#AppraisalEmpLevel").val(),
+            "org_level" : $("#AppraisalOrgLevel").val(),
+            "org_id" : $("#organization").val(),
+            "appraisal_year" : $("#AppraisalYear").val(),
+            "period_id" : $("#AppraisalPeriod").val(),
+            "emp_id" : $("#EmpName_id").val(),
+            "position_id" : $("#Position").val()
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
@@ -678,15 +686,18 @@ $(document).ready(function() {
 			
 			$("#AppraisalYear").change(function(){
 				dropDrowPeriodListFn();
+				appraisalStatusFn();
 			});
 			
 			$("#AppraisalEmpLevel").change(function() {
 				dropDrowAppraisalOrgLevelFn();
 				dropDrowOrgFn();
+				appraisalStatusFn();
 			});
 			
 			$("#AppraisalOrgLevel").change(function() {
 				dropDrowOrgFn();
+				appraisalStatusFn();
 			});
 			
 			$("#AppraisalForm").change(function() {
@@ -696,10 +707,15 @@ $(document).ready(function() {
 			$("#organization").change(function() {
 				dropDrowPositionFn();
 				refreshMultiPosition();
+				appraisalStatusFn();
 			});
 			
 			$("#Position").multiselect({minWidth:'100%;'}).multiselectfilter();
 			  refreshMultiPosition();
+			  
+			$("#Position").change(function() {
+			  appraisalStatusFn();
+			});
 			
 			$("#EmpName").autocomplete({
 		        source: function (request, response) {
@@ -750,6 +766,7 @@ $(document).ready(function() {
 					
 					dropDrowPositionFn();
 					refreshMultiPosition();
+					appraisalStatusFn();
 		         }       
 		    });
 			
