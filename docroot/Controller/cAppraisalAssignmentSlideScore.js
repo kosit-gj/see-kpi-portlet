@@ -427,20 +427,20 @@ var listDataFn = function (data) {
 
         if ($("#embed_appraisal_type_id").val() == 2) {
 
-            htmlHTML += " <th>" + $(".lt-status").val() + "</th>";
-            htmlHTML += " <th>" + $(".lt-form-type").val() + "</th>";
-            htmlHTML += " <th>" + $(".lt-emp-code").val() + "</th>";
-            htmlHTML += " <th>" + $(".lt-emp-name").val() + "</th>";
-            htmlHTML += " <th>" + $(".lt-organization").val() + "</th>";
-            htmlHTML += " <th>" + $(".lt-position").val() + "</th>";
+            htmlHTML += " <th style=\"width:8%;\">" + $(".lt-status").val() + "</th>";
+            htmlHTML += " <th style=\"width:10%;\">" + $(".lt-form-type").val() + "</th>";
+            htmlHTML += " <th style=\"width:10%;\">" + $(".lt-emp-code").val() + "</th>";
+            htmlHTML += " <th style=\"width:15%;\">" + $(".lt-emp-name").val() + "</th>";
+            htmlHTML += " <th style=\"width:20%;\">" + $(".lt-organization").val() + "</th>";
+            htmlHTML += " <th style=\"width:25%;\">" + $(".lt-position").val() + "</th>";
            
 
         } else if ($("#embed_appraisal_type_id").val() == 1) {
 
-            htmlHTML += " <th>" + $(".lt-status").val() + "</th>";
-            htmlHTML += " <th>" + $(".lt-form-type").val() + "</th>";
-            htmlHTML += " <th>" + $(".lt-org-code").val() + "</th>";
-            htmlHTML += " <th>" + $(".lt-organization").val() + "</th>";
+            htmlHTML += " <th style=\"width:13%;\">" + $(".lt-status").val() + "</th>";
+            htmlHTML += " <th style=\"width:20%;\">" + $(".lt-form-type").val() + "</th>";
+            htmlHTML += " <th style=\"width:25%;\">" + $(".lt-org-code").val() + "</th>";
+            htmlHTML += " <th style=\"width:30%;\">" + $(".lt-organization").val() + "</th>";
             
         }
         if (index != 'p0') {
@@ -1565,7 +1565,7 @@ var dropDrowActionEditFn2 = function (paramStageID, employee_code, org_code) {
     	url: restfulURL + "/" + serviceName + "/public/emp/adjustment/to_action",
     	type: "get",
         dataType: "json",
-        async: true,
+        async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         data: { 
         	"appraisal_type_id": $("#embed_appraisal_type_id").val(), 
@@ -2590,8 +2590,12 @@ $(document).ready(function () {
             //Search Start
             $("#btnSearchAdvance").click(function () {
                 searchAdvanceFn();
-                $(".countPagination").val(10);
-                $("#rpp").remove();
+                if($("#rpp").val()=='' || $("#rpp").val() == undefined){  // default  
+					$(".countPagination").val('All');
+					$("#rpp").remove();
+				}
+                //$(".countPagination").val(10);
+                //$("#rpp").remove();
                 $(".search_result").show();
             });
 

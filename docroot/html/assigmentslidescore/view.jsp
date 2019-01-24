@@ -946,6 +946,7 @@ plid = layout.getPlid();
 					                                     <option>20</option>
 					                                     <option>50</option>
 					                                     <option>100</option>
+					                                     <option>All</option>
 					                                 </select>
 		                                 		
 		                                 		</div>
@@ -983,6 +984,7 @@ plid = layout.getPlid();
 					                                     <option>20</option>
 					                                     <option>50</option>
 					                                     <option>100</option>
+					                                     <option>All</option>
 					                                 </select> 
 			                                 	</div>
 												<div class='pagingText'><liferay-ui:message key="results-per-page"/></div>
