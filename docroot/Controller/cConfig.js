@@ -1,21 +1,32 @@
 var restfulURL="";
+var restfulURL_IMPkpi="";
+var lifeRayApiUrl="";
+var serviceName="wwwr_api/see-kpi-service/see_api";
+var serviceName_IMPkpi="impexpservices_api/public";
+var servicePort = (document.location.protocol == "https:" ? ":8443" : ""); // HTTP default port :80
+
+	restfulURL = document.location.protocol + "//" + document.location.hostname + servicePort ;
+	restfulURL_IMPkpi = document.location.protocol + "//" + document.location.hostname + servicePort ;
+	lifeRayApiUrl= document.location.origin;
+	/*
+var restfulURL="";
 var serviceName="pmtl_api";
 
 var serviceName_IMPkpi="impexpservices_api/public";
 //var restfulURL_IMPkpi="https://tfg-winner.tfg.co.th:8443";
-var restfulURL_IMPkpi="http://203.151.210.160";
+var restfulURL_IMPkpi="http://203.151.210.160";*/
 /*#######Office#######*/
 
 //restfulURL="http://192.168.1.254";
 
 /*#######Localhost#######*/
 //restfulURL="https://tfg-winner.tfg.co.th:8443";
-restfulURL="http://203.151.210.160";
-
-
-/*#######Localhost#######*/
-//var lifeRayApiUrl = "https://tfg-winner.tfg.co.th";
-var lifeRayApiUrl = "http://203.151.210.160:8080";
+//restfulURL="http://203.151.210.160";
+//
+//
+///*#######Localhost#######*/
+////var lifeRayApiUrl = "https://tfg-winner.tfg.co.th";
+//var lifeRayApiUrl = "http://203.151.210.160:8080";
 
 /*#######Poroduction#######*/
 //restfulURL="http://172.16.11.109";
