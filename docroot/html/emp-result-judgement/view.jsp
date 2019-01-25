@@ -1169,7 +1169,7 @@ input[type=number]::-webkit-outer-spin-button {
 						      </th>
 						      <th style="width:auto;text-align:center;"><liferay-ui:message key="emp-code"/></th>
 						      <th style="width:auto;"> <liferay-ui:message key="employee-name"/></th>
-						      <th style="width:auto;"> <liferay-ui:message key="emp-level"/></th>
+						      <th style="width:auto;"> <liferay-ui:message key="level"/></th>
 						      <th style="width:22%;text-align:center;"><liferay-ui:message key="organization"/></th>
 						      <th style="width:auto;text-align:center;"><liferay-ui:message key="position"/></th>
 						      <th style="width:auto;text-align:center;"><liferay-ui:message key="status"/></th>
