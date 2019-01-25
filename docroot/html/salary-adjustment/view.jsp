@@ -850,6 +850,15 @@ input[type=number]::-webkit-outer-spin-button {
     text-align: right;
 }
 
+.aui .table thead th {
+	font-size : 13px;
+}
+
+.aui .table th {
+	padding: 0px 8px 0px 8px;
+	vertical-align: middle;
+}
+
 /*
 .ellipsis {
   max-width: 200px;
@@ -1064,7 +1073,7 @@ input[type=number]::-webkit-outer-spin-button {
                                     	</div>
                                 -->
                             <!-- pagination end -->
-							<div class="head_adjust" id="table-filter-group" style="display: none; margin-bottom: 7px;">Group: <select id="filter-group" style="width: 100px;"></select></div>
+<!-- 							<div class="head_adjust" id="table-filter-group" style="display: none; margin-bottom: 7px;">Group: <select id="filter-group" style="width: 100px;"></select></div> -->
 							<div id="scroll-tableBonusAdjustment" class="row-fluid list-data-table" style="overflow: auto;">							
 							<table class="table table-striped table-bordered" id="tableBonusAdjustment" style="margin-bottom: 0px; max-width: none;">
 							<thead>
@@ -1074,7 +1083,7 @@ input[type=number]::-webkit-outer-spin-button {
 						      <th rowspan="3" class="fix-column-top en"><liferay-ui:message key="employee-name"/></th>
 						      <th rowspan="3" class="fix-column-top pg"><liferay-ui:message key="level"/></th>
 						      <th rowspan="3" class="fix-column-top or"><liferay-ui:message key="organization"/></th>
-						      <th rowspan="3" class="fix-column-top gr"><liferay-ui:message key="group"/></th>
+						      <th rowspan="3" class="fix-column-top gr"><liferay-ui:message key="form_type"/></th>
 						      <th rowspan="3" class="fix-column-top po"><liferay-ui:message key="position"/></th>
 						      <th rowspan="3" class="fix-column-top jc"><liferay-ui:message key="job-code"/></th>
 <%-- 						      <th rowspan="3" class="fix-column-top pc"><liferay-ui:message key="position-code"/></th> --%>

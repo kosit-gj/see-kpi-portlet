@@ -560,7 +560,7 @@ var listDataFn = function(data) {
 	
 	createDatatable(table, data); //สร้างรูปแบบ datatable
 	calculatePercentKeyup(); //เซ็ตค่าการกดคำนวนต่างๆ
-	filterGroup(data['items']); //generate filter group
+	//filterGroup(data['items']); //generate filter group
 	setPermission(data); //set สิทการจัดการข้อมูล
 	
 	$(".head_adjust").show();
@@ -604,8 +604,8 @@ var createDatatable = function(table, data) {
 	    fixedColumns: {
 	    	leftColumns: 4
 	    },
-	    "searching": true,
-	    dom: 'lr<"table-filter-container">tip',
+	    "searching": false,
+//	    dom: 'lr<"table-filter-container">tip',
 //	    initComplete: function(settings) {
 //	    	var api = new $.fn.dataTable.Api(settings);
 //	    	$('.table-filter-container', api.table().container()).append(
@@ -678,11 +678,13 @@ var createDatatable = function(table, data) {
 	
 //	.fixedColumns().relayout();
 	
+	/*
 	$('#filter-group').change(function() {
         table.DataTable()
         .columns(0).search(this.value)
         .draw();
 	}); // เซ็ตการค้นหาในคอลั่มแรก
+	*/
 	
 	/*
 	$(function() {
@@ -720,6 +722,8 @@ var createDatatable = function(table, data) {
     
 	$(".fix-column-top").css({"text-align" : "center", "border-bottom" : "0px"});
 	$("table.dataTable.no-footer").css({"border-bottom" : "0px"});
+	//$(".aui .table thead th").css({"font-size" : "13px"});
+	//$(".aui .table th").css({"padding" : "0px 10px 0px 10px", "vertical-align": "middle"});
 	$(".pos-column-lef").css({"text-align" : "left"});
 	$(".pos-column-cen").css({"text-align" : "center"});
 	$(".pos-column-rig").css({"text-align" : "right"});
