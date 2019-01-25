@@ -1985,6 +1985,42 @@ plid = layout.getPlid();
 </div>  
 <!-- Modal Item Description End Edit -->
 	
+<!-- Modal Error Description Start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="modal-error-description" class="modal inmodal large" style="display: none;">
+    <div class="modal-dialog  ">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+
+                <button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
+                    <span aria-hidden="true"><i class="fa fa-times"></i></span>
+                </button>
+                <h4 class="modal-title" id="modal-title-item-description">
+                    <span id="modal-item-description">Error Description</span>
+                </h4>
+
+            </div>
+            <div class="modal-body">
+
+                <div class='row-fluid'>
+                    <div class='span12'>
+                        <h4 class="title-item-name">ไม่สามารถมอบหมายหัวข้อประเมินได้  เนื่องจากมีการมอบหมายไปแล้ว</h4>
+                        <!-- content  start-->
+                        <div style="height: 200px; overflow: auto;" id=error-description></div>
+
+                        <!-- content  end-->
+                    </div>
+                </div>
+
+                <!-- content end -->
+            </div>
+            <div class="modal-footer">
+                 <button data-dismiss="modal" class="btn btn-white" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Error Description End  -->
+
 	<!-- Language Template for js -->
 	<%@ include file="/html/language-js-template/view.jsp" %>
 

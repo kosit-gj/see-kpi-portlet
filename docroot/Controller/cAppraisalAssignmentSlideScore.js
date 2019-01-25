@@ -1189,7 +1189,7 @@ var actionAssignmentFn = function (param) {
         success: function (data) {
 
             //console.log(data);
-            if (data['status'] == 200) {
+            if (data['status'] == 200 && (data['already_assigned'].length== 0)) {
                 if (param != "saveAndAnother") {
                     callFlashSlide($(".lt-insert-successfully").val());
                     getDataFn($("#pageNumber").val(), $("#rpp").val());
@@ -1203,7 +1203,11 @@ var actionAssignmentFn = function (param) {
                 }
                 appraisalStatusFn();
 
-            } else if (data['status'] == "400") {
+            }else if(data['status'] == 200 && (data['already_assigned'].length != 0)){
+            	$("#ModalAssignment").modal('hide');
+            	errorDescriptionFn(data['already_assigned']);
+            } 
+            else if (data['status'] == "400") {
                 callFlashSlideInModal(validationAssignmentFn(data), "#information", "error");
                 return false;
             }
@@ -1211,6 +1215,21 @@ var actionAssignmentFn = function (param) {
     });
 }
 
+var errorDescriptionFn = function(dataError){
+	console.log(dataError);
+	var htmlError = "";
+	   htmlError += "<hr style='margin-top: 5px;margin-bottom: 5px;'>";
+	   $.each(dataError, function (index, indexEntry) {
+		   htmlError +="<p style='color: red;'><b style='font-weight: bold;'>["+(index+1)+"]&emsp; Employee Code: </b> "+indexEntry['emp_code']+"<b style='font-weight: bold;'>&emsp; Employee Name: </b> "+indexEntry['emp_name']+"<b style='font-weight: bold;'>&emsp; Organization: </b>"+indexEntry['org_name']+" <b style='font-weight: bold;'>&emsp; Period: </b> "+indexEntry['appraisal_period_desc']+"</p>";
+		   htmlError += "<hr style='margin-top: 5px;margin-bottom: 5px;'>";
+       });
+	   $("#error-description").html(htmlError);
+
+	   $("#modal-error-description").modal({
+	      "backdrop" : setModalPopup[0],
+	      "keyboard" : setModalPopup[1]
+	    });
+}
 //SearchAdvance
 var searchAdvanceFn = function () {//
 	/*
