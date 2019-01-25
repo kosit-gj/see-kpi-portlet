@@ -318,7 +318,7 @@ var getAllStructureFn = function()
         	var htmlBody = "";
         	$.each(data,function(index,indexEntry) {
         		htmlBody += "<tr>";
-        		htmlBody += "	<td>"+(indexEntry.seq_no+1)+"</td>";
+        		htmlBody += "	<td>"+indexEntry.seq_no+"</td>";
         		htmlBody += "	<td>"+indexEntry.structure_name+"</td>";
         		htmlBody += "	<td style='text-align: right;'>"+indexEntry.nof_target_score+"</td>";
         		htmlBody += "	<td>"+indexEntry.form_name+"</td>";
