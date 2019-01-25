@@ -464,8 +464,15 @@ var listDataFn = function(data){
 			// Generate head score under Result Assess From
 			var judHtml = "";
 			$.each(data[0].judgements,function (index, jud) {
-				judHtml += "<th style='width:auto;' class='head_judge_score' id='judge_score_"+jud.org_level_id+"'>"+jud.org_level_name+"</th>";
+				if (jud.org_level_name == null)  {
+					judHtml += "";
+				} else {
+					judHtml += "<th style='width:auto;' class='head_judge_score' id='judge_score_"+jud.org_level_id+"'>"+jud.org_level_name+"</th>";
+				}
 			});
+			/* $.each(data[0].judgements,function (index, jud) {
+				judHtml += "<th style='width:auto;' class='head_judge_score' id='judge_score_"+jud.org_level_id+"'>"+jud.org_level_name+"</th>";
+			}); */
 			$("#tableBonusAdjustment-head2").append(judHtml);
 			$(".setColSpanResultAssess").attr('colspan', data[0].judgements.length);
 			//genJudgeHradComplete = 1;
@@ -508,8 +515,16 @@ var listDataFn = function(data){
 		
 		// Result Assess From
 		$.each(indexEntry.judgements,function (index, jud) {
-			htmlHTML += "<td style='text-align:right;'>"+((jud.adjust_result_score == 0) ? "": jud.adjust_result_score)+"</td>";
+			if (jud.org_level_name == null){
+				htmlHTML += "";
+			} else {
+				htmlHTML += "<td style='text-align:right;'>"+parseFloat(jud.adjust_result_score).toFixed(2)+"</td>";
+			}
 		});
+		/* $.each(indexEntry.judgements,function (index, jud) {
+			htmlHTML += "<td style='text-align:right;'>"+((jud.adjust_result_score == 0) ? "": jud.adjust_result_score)+"</td>";
+		}); */
+		
 		
 		htmlHTML += "</tr>";		
 	});	
