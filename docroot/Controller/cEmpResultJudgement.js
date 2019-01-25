@@ -495,9 +495,9 @@ var listDataFn = function(data){
 		htmlHTML += "	<td style='text-align:center;'>";
 		htmlHTML += "		<input style='margin-bottom:5px;' type='checkbox' class='select-check' id='"+indexEntry.emp_result_id+"' edit_flag='"+indexEntry.edit_flag+"' style='margin-top:-3px;'>";
 		htmlHTML += "	</td>";
-		htmlHTML += "	<td>"+indexEntry.emp_code+"</td>";
+		htmlHTML += "	<td style='text-align: center;'>"+indexEntry.emp_code+"</td>";
 		htmlHTML += "	<td style='white-space:nowrap'>"+indexEntry.emp_name+"</td>";
-		htmlHTML += "	<td>"+indexEntry.appraisal_level_name+"</td>";
+		htmlHTML += "	<td style='text-align: center;'>"+indexEntry.appraisal_level_name+"</td>";
 		htmlHTML += "	<td style='width:180px;' class='testOverFlow'>"+indexEntry.org_name+"</td>";
 		htmlHTML += "	<td style='width:180px;' class='testOverFlow'>"+indexEntry.position_name+"</td>";
 		htmlHTML += "	<td style='white-space:nowrap'>"+indexEntry.status+"</td>";
