@@ -154,8 +154,8 @@ var ClearAppraisalFormFn = function(){
 	$("#appraisal_form_name").val("");
 	$("#saveFormModal #is_bonus").prop('checked', false);
 	$("#saveFormModal #is_active").prop('checked', true);
-	$("#saveFormModal #is_raise").prop('checked', true);
-	$("#saveFormModal #is_mpi").prop('checked', true);
+	$("#saveFormModal #is_raise").prop('checked', false);
+	$("#saveFormModal #is_mpi").prop('checked', false);
 }
 
 var InsertAppraisalFormFn = function(Status){
