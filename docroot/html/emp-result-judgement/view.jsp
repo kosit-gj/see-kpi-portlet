@@ -1296,7 +1296,7 @@ input[type=number]::-webkit-outer-spin-button {
 				<div class="modal-body">
 					<div class="form-kpi-mangement">
 						<div class="form-kpi-label" align="center">
-							<label id="">กรุณาเลือกสิ่งที่ต้องการดำเนินการต่อไป</label>
+							<label id=""><liferay-ui:message key="grade-calculation-confrim-modal"/></label>
 							<div id="" class='GradeCalculationInformation'></div>
 						</div>
 					</div>
