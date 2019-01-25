@@ -288,6 +288,22 @@ var ClearAppraisalFormFn = function(action){
 
 }
 
+var validaFn = function(data){
+	var errorData="";
+	var count=0;
+	$.each(data['data'],function(index,indexEntry){
+		if(index!=undefined){
+			if(count==0){
+				errorData+=""+indexEntry+"<br>";
+			}else{
+				errorData+=""+indexEntry+"<br>";
+			}
+		} 			
+		count++;
+	});      		
+    
+	return errorData; 		
+}
 
 var InsertAppraisalGradeFn = function(Status){	
 	$.ajax({
@@ -297,7 +313,7 @@ var InsertAppraisalGradeFn = function(Status){
         data: $("#appraisal-grade-form").serialize(),
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
-        success: function (data) { 
+        success: function (data) {       	     	
         	if(data['status']==200){
         		  		
         		if(Status == 'Save'){
@@ -313,7 +329,8 @@ var InsertAppraisalGradeFn = function(Status){
         		}
         	
         	}else if(data['status']==400){
-        		callFlashSlideInModal(validationFn(data),"#information","error");
+        		console.log(validaFn(data));
+        		callFlashSlideInModal(validaFn(data),"#information","error");
 			}
         }
 	});
