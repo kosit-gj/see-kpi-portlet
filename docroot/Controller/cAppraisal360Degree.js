@@ -1485,6 +1485,7 @@ var appraisalStatusFn = function () {
             $.each(data, function (index, indexEntry) {
             	htmlOption += "<option value='" + indexEntry['stage_id'] + "'>" + indexEntry['status'] + "</option>";
             });
+            htmlOption += "<option value='AA360'>After appraisal 360</option>";
             $("#status").html(htmlOption);
         }
     });
@@ -2484,20 +2485,20 @@ var listDataFn = function (data) {
         htmlHTML += " <tr>";
 
         if ($("#embed_appraisalType").val() == "2") {
-        	htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-form").val()+"</b></th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-emp-code").val() + "</b></th>";
-            htmlHTML += " <th style=\"widthauto;\"><b>" + $(".lt-emp-name").val() + "</b></th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-level").val() + "</b> </th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-organization").val() + "</b></th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-position").val() + "</b> </th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-action").val() + "</b></th>";
+        	htmlHTML+=" <th style=\"width: 10%; text-align: center;\"><b>"+$(".lt-form").val()+"</b></th>";
+            htmlHTML += " <th style=\"width: 10%; text-align: center;\"><b>" + $(".lt-emp-code").val() + "</b></th>";
+            htmlHTML += " <th style=\"width: 18%; text-align: center;\"><b>" + $(".lt-emp-name").val() + "</b></th>";
+            htmlHTML += " <th style=\"width: 7%; text-align: center;\"><b>" + $(".lt-level").val() + "</b> </th>";
+            htmlHTML += " <th style=\"width: 25%; text-align: center;\"><b>" + $(".lt-organization").val() + "</b></th>";
+            htmlHTML += " <th style=\"width: 20%; text-align: center;\"><b>" + $(".lt-position").val() + "</b> </th>";
+            htmlHTML += " <th style=\"width: 10%; text-align: center;\"><b>" + $(".lt-action").val() + "</b></th>";
 
         } else if ($("#embed_appraisalType").val() == "1") {
-        	htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-form").val()+"</b></th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-org-code").val() + "</b></th>";
-            htmlHTML += " <th style=\"widthauto;\"><b>" + $(".lt-org-name").val() + "</b></th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-level").val() + "</b> </th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-action").val() + "</b></th>";
+        	htmlHTML+=" <th style=\"width: 15%; text-align: center;\"><b>"+$(".lt-form").val()+"</b></th>";
+            htmlHTML += " <th style=\"width: 15%; text-align: center;\"><b>" + $(".lt-org-code").val() + "</b></th>";
+            htmlHTML += " <th style=\"width: 40%; text-align: center;\"><b>" + $(".lt-org-name").val() + "</b></th>";
+            htmlHTML += " <th style=\"width: 15%; text-align: center;\"><b>" + $(".lt-level").val() + "</b> </th>";
+            htmlHTML += " <th style=\"width: 15%; text-align: center;\"><b>" + $(".lt-action").val() + "</b></th>";
         }
 
         //				emp_code
@@ -2514,8 +2515,8 @@ var listDataFn = function (data) {
         $.each(indexEntry['items'], function (index2, itemEntry) {
             if ($("#embed_appraisalType").val() == "2") {
                 htmlHTML += "<tr>";
-                htmlHTML += " <td>"+itemEntry['appraisal_form_name']+"</td>";
-                htmlHTML += "	<td class=''><a href=\"#\" class='emp_code' id=\"id-" + itemEntry['emp_result_id'] + "\" >" + itemEntry['emp_code'] + "</a>";
+                htmlHTML += " <td style=\"text-align: center;\">"+itemEntry['appraisal_form_name']+"</td>";
+                htmlHTML += "	<td style=\"text-align: center;\" class=''><a href=\"#\" class='emp_code' id=\"id-" + itemEntry['emp_result_id'] + "\" >" + itemEntry['emp_code'] + "</a>";
                 htmlHTML += "<input type='hidden' name='emp_appraisal_type_id-" + itemEntry['emp_result_id'] + "' id='emp_appraisal_type_id-" + itemEntry['emp_result_id'] + "' class='emp_appraisal_type_id' value='" + itemEntry['appraisal_type_id'] + "' >";
                 htmlHTML += "<input type='hidden' name='emp_period_id-" + itemEntry['emp_result_id'] + "' id='emp_period_id-" + itemEntry['emp_result_id'] + "' class='emp_period_id' value='" + itemEntry['period_id'] + "' >";
                 htmlHTML += "<input type='hidden' name='emp_emp_code-" + itemEntry['emp_result_id'] + "' id='emp_emp_code-" + itemEntry['emp_result_id'] + "' class='emp_emp_code' value='" + itemEntry['emp_code'] + "' >";
@@ -2523,16 +2524,16 @@ var listDataFn = function (data) {
                 htmlHTML += "<input type='hidden' name='group_id-" + itemEntry['emp_result_id'] + "' id='group_id-" + itemEntry['emp_result_id'] + "'  value='" + itemEntry['group_id'] + "' >";
                 htmlHTML + "</td>";
                 htmlHTML += " <td>" + itemEntry['emp_name'] + "</td>";
-                htmlHTML += " <td>" + itemEntry['appraisal_level_name'] + "</td>";
+                htmlHTML += " <td style=\"text-align: center;\">" + itemEntry['appraisal_level_name'] + "</td>";
                 htmlHTML += " <td>" + itemEntry['org_name'] + "</td>";
                 htmlHTML += " <td>" + itemEntry['position_name'] + "</td>";
-                htmlHTML += " <td>" + itemEntry['to_action'] + "</td>";
+                htmlHTML += " <td style=\"text-align: center;\">" + itemEntry['to_action'] + "</td>";
                 htmlHTML += "</tr>";
 
             } else if ($("#embed_appraisalType").val() == "1") {
                 htmlHTML += "<tr>";
-                htmlHTML += " <td>"+itemEntry['appraisal_form_name']+"</td>";
-                htmlHTML += "	<td class=''><a href=\"#\" class='emp_code' id=\"id-" + itemEntry['emp_result_id'] + "\" >" + itemEntry['org_code'] + "</a>";
+                htmlHTML += " <td style=\"text-align: center;\">"+itemEntry['appraisal_form_name']+"</td>";
+                htmlHTML += "	<td style=\"text-align: center;\" class=''><a href=\"#\" class='emp_code' id=\"id-" + itemEntry['emp_result_id'] + "\" >" + itemEntry['org_code'] + "</a>";
                 htmlHTML += "<input type='hidden' name='emp_appraisal_type_id-" + itemEntry['emp_result_id'] + "' id='emp_appraisal_type_id-" + itemEntry['emp_result_id'] + "' class='emp_appraisal_type_id' value='" + itemEntry['appraisal_type_id'] + "' >";
                 htmlHTML += "<input type='hidden' name='emp_period_id-" + itemEntry['emp_result_id'] + "' id='emp_period_id-" + itemEntry['emp_result_id'] + "' class='emp_period_id' value='" + itemEntry['period_id'] + "' >";
                 htmlHTML += "<input type='hidden' name='emp_emp_code-" + itemEntry['emp_result_id'] + "' id='emp_emp_code-" + itemEntry['emp_result_id'] + "' class='emp_emp_code' value='" + itemEntry['emp_code'] + "' >";
@@ -2540,8 +2541,8 @@ var listDataFn = function (data) {
                 htmlHTML += "<input type='hidden' name='group_id-" + itemEntry['emp_result_id'] + "' id='group_id-" + itemEntry['emp_result_id'] + "'  value='" + itemEntry['group_id'] + "' >";
                 htmlHTML + "</td>";
                 htmlHTML += " <td>" + itemEntry['org_name'] + "</td>";
-                htmlHTML += " <td>" + itemEntry['appraisal_level_name'] + "</td>";
-                htmlHTML += " <td>" + itemEntry['to_action'] + "</td>";
+                htmlHTML += " <td style=\"text-align: center;\">" + itemEntry['appraisal_level_name'] + "</td>";
+                htmlHTML += " <td style=\"text-align: center;\">" + itemEntry['to_action'] + "</td>";
                 htmlHTML += "</tr>";
             }
         });
@@ -3357,8 +3358,10 @@ $(document).ready(function () {
             // Search
             $("#btnSearchAdvance").click(function () {
                 searchAdvanceFn();
-                $(".countPagination").val(10);
-                $("#rpp").remove();
+                if($("#rpp").val()=='' ||$("#rpp").val() == undefined){  // default 
+					$(".countPagination").val('All');
+					$("#rpp").remove();
+				}
             });
 
             //get appraisal detail.
