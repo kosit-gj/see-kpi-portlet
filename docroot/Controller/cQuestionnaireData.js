@@ -1654,13 +1654,13 @@ var updateFn = function(element){
 				
 				
 				
-			}else if($(indexEntry2).attr("answer_type_id") == "4" || $(indexEntry2).attr("answer_type_id") == "5"){
+			}else if($(indexEntry2).attr("answer_type_id") == "5" || $(indexEntry2).attr("answer_type_id") == "6"){
 
 
 				if($(indexEntry).attr("is_cust_search")==1 && detail_group.customer_id == ""){}
 				else{
 					if($(indexEntry).attr("is_cust_search")==0 && $(indexEntry2).find("option:selected").attr("is_not_applicable")==0){
-						if(parseFloat($(indexEntry3).attr("pass_score")) > 0) {
+						if(parseFloat($(indexEntry2).find("option:selected").attr("pass_score")) > 0) {
 							score.push(parseFloat($(indexEntry2).find("option:selected").val()));
 							full_score.push(parseFloat($(indexEntry2).find("option:selected").attr("full_score")));
 						}
@@ -1845,7 +1845,7 @@ var insertFn = function(element){
 				
 				
 				
-			}else if($(indexEntry2).attr("answer_type_id") == "4" || $(indexEntry2).attr("answer_type_id") == "5"){
+			}else if($(indexEntry2).attr("answer_type_id") == "5" || $(indexEntry2).attr("answer_type_id") == "6"){
 
 
 				if($(indexEntry).attr("is_cust_search")==1 && detail_group.customer_id == ""){}
@@ -1853,7 +1853,7 @@ var insertFn = function(element){
 					
 					//score.push(parseFloat($(indexEntry2).find("option:selected").val()));
 					if($(indexEntry).attr("is_cust_search")==0 && $(indexEntry2).find("option:selected").attr("is_not_applicable") == 0){
-						if(parseFloat($(indexEntry3).attr("pass_score")) > 0) {
+						if(parseFloat($(indexEntry2).find("option:selected").attr("pass_score")) > 0) {
 							score.push(parseFloat($(indexEntry2).find("option:selected").val()));
 							full_score.push(parseFloat($(indexEntry2).find("option:selected").attr("full_score")));
 						}
@@ -1900,7 +1900,7 @@ var insertFn = function(element){
 
 	$.each(score ,function(){total_score +=parseFloat(this) || 0; });
 	$.each(full_score ,function(){total_full_score +=parseFloat(this) || 0; });
-	
+	console.log(detail);
 	//console.log("total full score" + total_full_score);
 	//console.log("total score" + total_score);
 	$.ajax({
