@@ -2439,14 +2439,14 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>report-hr-summary-consider</portlet-name>
-		<display-name>Report Hr Summary Consider</display-name>
+		<portlet-name>report-salary-adjustment</portlet-name>
+		<display-name>Report Salary Adjustment</display-name>
 		<portlet-class>
 			com.liferay.util.bridges.mvc.MVCPortlet
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/report-hr-summary-consider/view.jsp</value>
+			<value>/html/report-salary-adjustment/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2454,8 +2454,8 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>Report Hr Summary Consider</title>
-			<short-title>Report Hr Summary Consider</short-title>
+			<title>Report Salary Adjustment</title>
+			<short-title>Report Salary Adjustment</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

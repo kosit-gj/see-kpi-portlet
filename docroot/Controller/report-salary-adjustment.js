@@ -207,11 +207,16 @@ var getDataFn = function () {
 	var parameter = {};
 	var template_name ="";
 	
-	  if (Position_id == '') {
+	if(Position_id ==''){
+		$(".ui-multiselect-all").click();
+		Position_id = $("#Position").val().toString();
+	}
+	console.log(Position_id);
+	/*  if (Position_id == '') {
 	        $("body").mLoading('hide'); //Loading
 	        callFlashSlide("Position is Require !");
 	        return false;
-	    }
+	    }*/
 		parameter = {
 				param_year: AppraisalYear,
 				param_org_id: organization,
@@ -231,7 +236,7 @@ var getDataFn = function () {
 	}*/
 
     var data = JSON.stringify(parameter);
-    var url_report_jasper = restfulURL + "/" + serviceName + "/public/generateAuth?template_name=report-hr-summary-consider&token=" + tokenID.token + "&template_format=" + output_type + "&used_connection=1&inline=1&data=" + data;
+    var url_report_jasper = restfulURL + "/" + serviceName + "/public/generateAuth?template_name=report-salary-adjustment&token=" + tokenID.token + "&template_format=" + output_type + "&used_connection=1&inline=1&data=" + data;
     console.log(url_report_jasper);
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         window.open(url_report_jasper, "_blank");
@@ -272,7 +277,7 @@ $(document).ready(function() {
 			dropDrowAppraisalOrgLevelFn();
 			dropDrowOrgFn();
 			dropDrowPositionFn();
-		
+			
 			
 			$("#AppraisalYear").change(function(){
 				dropDrowPeriodListFn();
@@ -351,10 +356,14 @@ $(document).ready(function() {
 					refreshMultiPosition();
 		         }       
 		    });
-
+			
 			//Search Start
 		    $("#btnSearchAdvance").click(function () {
-		    	getDataFn();	    
+		    	getDataFn();
+		    	/*if($("#Position")  == ''){
+		    		$(".ui-multiselect-all").click();
+		    	}*/
+		    		    
 		    });
 		    	    
 		    //binding tooltip start

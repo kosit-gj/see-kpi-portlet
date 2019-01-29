@@ -2460,7 +2460,7 @@
 		<css-class-wrapper>import-job-code-portlet</css-class-wrapper>    
 	</portlet>
 	<portlet>
-		<portlet-name>report-hr-summary-consider</portlet-name>
+		<portlet-name>report-salary-adjustment</portlet-name>
 		<icon>/icon.png</icon>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
@@ -2484,9 +2484,9 @@
 		<footer-portlet-javascript>/js/plugins/autoNumeric/autoNumeric-min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/Controller/report-hr-summary-consider.js</footer-portlet-javascript>  
+		<footer-portlet-javascript>/Controller/report-salary-adjustment.js</footer-portlet-javascript>  
 		<css-class-wrapper>
-			report-hr-summary-consider-portlet
+			report-salary-adjustment-portlet
 		</css-class-wrapper>
 	</portlet>
 	<portlet>
