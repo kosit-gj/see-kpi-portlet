@@ -2472,14 +2472,14 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>Import-pqpi</portlet-name>
-		<display-name>Import PQPI</display-name>
+		<portlet-name>export-pqpi</portlet-name>
+		<display-name>Export PQPI</display-name>
 		<portlet-class>
 			com.liferay.util.bridges.mvc.MVCPortlet
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/import-pqpi/view.jsp</value>
+			<value>/html/export-pqpi/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2487,8 +2487,8 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>Import PQPI</title>
-			<short-title>Import Pqpi</short-title>
+			<title>Export PQPI</title>
+			<short-title>Export Pqpi</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>
