@@ -46,15 +46,16 @@ $(document).ready(function(){
     			 "advanceSearchSet":true,
     			 "btnAddOption":false,
     			 "btnAdvanceDownloadOption":{"url":restfulURL+"/"+serviceName+"/public/position/export"+"?token="+tokenID.token+""},
-    			 "btnAdvanceImportOption":{"formName":"Import Position","accept":".xls ,.xlsx"}
+    			 "btnAdvanceImportOption":{"formName":"Import Position","accept":".xls ,.xlsx"},
+    			 "templateName": "position"
     			 //"btnManageOption":{"id":"BtnID","name":"BtnName"},
     			 //"btnAdvanceSearchOption":{"id":"BtnID","name":"<i class=\"fa fa-plus-square\"></i>&nbsp;Btn"}
     	}
     	
     	createDataTableFn(options);
     	
-    	var input = $("<input>").attr("type", "hidden").attr("id", "form_position_name").attr("name", "position_name").val("");
-    	$('#formExportToExcel').append(input);
+//    	var input = $("<input>").attr("type", "hidden").attr("id", "form_position_name").attr("name", "position_name").val();
+//    	$('#formExportToExcel').append(input);
     	
 		}
 	 	//Autocomplete From Position Start
