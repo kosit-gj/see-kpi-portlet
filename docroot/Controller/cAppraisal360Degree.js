@@ -15,6 +15,7 @@ var emailLinkAppraisal = false;
 var gSystempConfig = [];
 var gStage = [];
 var mLoadingShow ;
+let globalCurrentStage = [];
 
 var getURLParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -2829,7 +2830,7 @@ var saveAppraisalIndividualFn = function ()
         dataType: "json",
         async: false,
         data: {
-            "stage_id": $("#actionToAssign").val(),
+            "stage_id": globalCurrentStage['stage_id'],
             "remark": $("#remark_footer").val(),
             "appraisal": appraisalObject,
             "action_update": action_update,
@@ -2855,6 +2856,7 @@ var saveAppraisalIndividualFn = function ()
                 }
                 else if(action_update=="submit"){
                 	$("#ModalAppraisal").modal('hide');
+                	appraisalStatusFn();
                 	getDataFn();
                 }
             
@@ -2919,14 +2921,13 @@ var saveAppraisalOrganizationFn = function()
 	appraisal+="]";
 	console.log(appraisal);
 	var appraisalObject=eval("("+appraisal+")");
-
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/appraisal/"+$("#emp_result_id").val(),
 		type:"patch",
 		dataType:"json",
 		async:false,
 		data:{
-			"stage_id":$("#actionToAssign").val(),
+			"stage_id":globalCurrentStage['stage_id'],
 			"remark":$("#remark_footer").val(),
 			"appraisal":appraisalObject,
 			"template_name" : "kpi-result-360"
@@ -2949,6 +2950,7 @@ var saveAppraisalOrganizationFn = function()
 	                }
 	                else if(action_update=="submit"){
 	                	$("#ModalAppraisal").modal('hide');
+	                	appraisalStatusFn();
 	                	getDataFn();
 	                }
 				 
@@ -3391,9 +3393,10 @@ $(document).ready(function () {
 
             //submit
             $("#btnSubmit").click(function () {
-            	// Calculate 
-            	calculateBtnFn();
+            	globalCurrentStage['stage_id'] = $("#actionToAssign").val();
             	
+            	// Calculate
+            	calculateBtnFn();
             	// Submit
             	action_update = 'submit';
             	$("body").mLoading('show'); //Loading
@@ -3408,6 +3411,8 @@ $(document).ready(function () {
             });
 
             $("#btnCalculate").click(function () {
+            	globalCurrentStage['stage_id'] = $("#actionToAssign").val();
+            	
                 $("body").mLoading();
                 
                 setTimeout(function() {
