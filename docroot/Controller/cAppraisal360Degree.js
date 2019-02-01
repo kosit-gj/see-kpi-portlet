@@ -2711,21 +2711,17 @@ var dropDrowActionEditFn = function (stage_id, employee_code, org_code) {
         	"appraisal_form_id": $("#embed_formType").val()
         },
         success: function (data) {
-        	gStage = data; 
-            if (data == '') {
-                $("#btnSubmit").attr("disabled", "disabled");
-            } else {
-                $("#btnSubmit").removeAttr("disabled");
-            }
             var htmlOption = "";
             $.each(data, function (index, indexEntry) {
-                if (id == indexEntry['stage_id']) {
-                    htmlOption += "<option selected='selected' value=" + indexEntry['stage_id'] + ">" + indexEntry['to_action'] + "</option>";
-                } else {
-                    htmlOption += "<option value=" + indexEntry['stage_id'] + ">" + indexEntry['to_action'] + "</option>";
-                }
+            	htmlOption += "<option value=" + indexEntry['stage_id'] + ">" + indexEntry['to_action'] + "</option>";
             });
             $("#actionToAssign").html(htmlOption);
+            
+            if ($("#actionToAssign").val() == null || $("#embed_status").val() == "AA360") {
+                $("#btnSubmit,#actionToAssign").attr("disabled", "disabled");
+            } else {
+                $("#btnSubmit,#actionToAssign").removeAttr("disabled");
+            }
         }
     });
 }
