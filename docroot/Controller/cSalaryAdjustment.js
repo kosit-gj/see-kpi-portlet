@@ -464,15 +464,15 @@ var listDataFn = function(data) {
 		htmlHTML += "	<td class='pos-column-rig cal'>"+cal_standard+"</td>";
 		htmlHTML += "	<td class='data-percent percal1'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 percent numberOnly' now_salary='"+indexEntry.total_now_salary+"' value='0.00' />";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 percent numberOnly' now_salary='"+indexEntry.cal_standard+"' value='100' />";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		htmlHTML += "	<td class='data-score percal2'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 score numberOnly' now_salary='"+indexEntry.total_now_salary+"' value='0.00' />";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 score numberOnly' now_salary='"+indexEntry.cal_standard+"' value='0.00' />";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
-		htmlHTML += "	<td class='data-up-total pos-column-rig changesal1' data-value=\"0.00\"></td>";
+		htmlHTML += "	<td class='data-up-total pos-column-rig changesal1' data-value=\""+indexEntry.cal_standard+"\">"+cal_standard+"</td>";
 		htmlHTML += "	<td class='data-salary changesal2'>";
 		htmlHTML += "		<div class='float-label-control'>";
 		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 salary numberOnly' value='0.00' />";
@@ -793,6 +793,7 @@ var calculatePercentKeyup = function() {
 		$(this).closest('.control-calculate').find('.data-score').find('.score').autoNumeric('set', total);
 		calculateSumtotalFooter();
 	});
+	$("#list_empjudege").find('.percent').keyup();
 		
 	$("#list_empjudege").find('.score').keyup(function() {
 		var score = $(this).autoNumeric('get');
