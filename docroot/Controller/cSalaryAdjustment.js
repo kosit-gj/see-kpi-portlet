@@ -583,13 +583,13 @@ var setPermission = function(data) {
 		$("#list_empjudege").find(".salary").attr("disabled", false);
 		$("#list_empjudege").find(".pqpi").attr("disabled", false);
 		$("#btnSubmit").attr("disabled", false);
+		
+		if($("#actionToAssign").val()==null || $("#actionToAssign").val()==undefined) {
+			$("#btnSubmit").attr("disabled", true);
+	    } else {
+	    	$("#btnSubmit").attr("disabled", false);
+	    }
 	}
-	
-	if($("#actionToAssign").val()==null || $("#actionToAssign").val()==undefined) {
-		$("#btnSubmit").attr("disabled", true);
-    } else {
-    	$("#btnSubmit").attr("disabled", false);
-    }
 }
 
 var createDatatable = function(table, data) {
@@ -700,7 +700,7 @@ var createDatatable = function(table, data) {
 	$("#scroll-tableBonusAdjustment").find(".dataTables_scrollHeadInner").find(".fix-column-top").closest(".str5").html("คะแนนความสามารถที่มีคุณค่าต่อองค์กร"+ textFive);
     */
 	
-	$(".fix-column-top").css({"text-align" : "center", "border-bottom" : "0px"});
+	$(".fix-column-top").css({"text-align" : "center", "border-bottom" : "0px", "vertical-align": "top"});
 	$("table.dataTable.no-footer").css({"border-bottom" : "0px"});
 	//$(".aui .table thead th").css({"font-size" : "13px"});
 	//$(".aui .table th").css({"padding" : "0px 10px 0px 10px", "vertical-align": "middle"});

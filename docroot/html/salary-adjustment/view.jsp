@@ -1145,8 +1145,8 @@ input[type=number]::-webkit-outer-spin-button {
 							</thead>
 							<tbody id="list_empjudege">
 							</tbody>
-<!-- 							<tfoot id="list_footer"> -->
-<!-- 							</tfoot> -->
+							<tfoot id="list_footer">
+							</tfoot>
 							</table>
 							</div>
 							
