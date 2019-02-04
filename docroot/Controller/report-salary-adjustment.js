@@ -292,9 +292,9 @@ $(document).ready(function() {
 				dropDrowOrgFn();
 			});
 			
-			$("#AppraisalForm").change(function() {
-				dropDrowFormTypeFn();
-			});
+//			$("#AppraisalForm").change(function() {
+//				dropDrowFormTypeFn();
+//			});
 			
 			$("#organization").change(function() {
 				dropDrowPositionFn();

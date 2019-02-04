@@ -209,7 +209,7 @@ var dropDrowFormTypeFn = function(id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-//			htmlOption+="<option value=''>All Form</option>";
+			htmlOption+="<option value=''>All Form</option>";
 			$.each(data,function(index,indexEntry){
 				htmlOption+="<option value="+indexEntry['appraisal_form_id']+">"+indexEntry['appraisal_form_name']+"</option>";
 			});
