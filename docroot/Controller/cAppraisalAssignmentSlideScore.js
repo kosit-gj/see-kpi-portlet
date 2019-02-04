@@ -649,10 +649,10 @@ var listDataFn = function (data) {
             $("#btnAddAnother").removeAttr("disabled");
             //Default end
             dropDrowActionEditFn2(stage_id_action[0], empldoyees_code[0], organization_code[0]);
-            if ($("#actionAction").val() == null) {
-                $("#btnSubmitAction").attr("disabled", "disabled");
+            if ($("#actionAction").val() == null || $("#embed_status") == "afterAssignment") {
+                $("#btnSubmitAction,#actionAction").attr("disabled", "disabled");
             } else {
-                $("#btnSubmitAction").removeAttr("disabled");
+                $("#btnSubmitAction,#actionAction").removeAttr("disabled");
             }
 
             $("#ModalAction").modal({
@@ -1237,19 +1237,16 @@ var appraisalLevelListEmpLevelToOrgFn = function () {
     });
 }
 
-var appraisalStatusFn = function (nameArea, id) {
-
-    if (nameArea == undefined) {
-        nameArea = "";
-    }
-    var htmlOption = "";
+var appraisalStatusFn = function () {
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/appraisal_assignment/status_list",
+        //url: restfulURL + "/" + serviceName + "/public/appraisal_assignment/status_list",
+        url: restfulURL + "/" + serviceName + "/public/bonus/advance_search/status",
         type: "get",
         dataType: "json",
         async: false,
         data: {
-            "emp_level": $("#appraisalLevelEmp").val(),
+            /*
+        	"emp_level": $("#appraisalLevelEmp").val(),
             "org_level": $("#appraisalLevel").val(),
             "org_id": $("#organization").val(),
             "period_id": $("#period_id").val(),
@@ -1258,19 +1255,29 @@ var appraisalStatusFn = function (nameArea, id) {
             "appraisal_type_id": $("#appraisalType").val(),
             "emp_code": ($("#empName_id").val() == "" ? "" : $("#empName_id").val()),
             "position_id": ($("#Position_id").val() == "" ? "" : $("#Position_id").val()),
-            "appraisal_form_id": $("#appraisalForm").val()
+            "appraisal_form_id": $("#appraisalForm").val(),
+            */
+            "flag": "assignment_flag",
+            "appraisal_form_id": $("#appraisalForm").val(),
+            "appraisal_type_id": $("#appraisalType").val(),
+            "emp_level": $("#appraisalLevelEmp").val(),
+            "org_level": $("#appraisalLevel").val(),
+            "org_id": $("#organization").val(),
+            "appraisal_year": $("#YearList").val(),
+            "period_id": $("#period_id").val(),
+            "emp_id": ($("#empName_id").val() == "" ? "" : $("#empName_id").val()),
+            "position_id": ($("#Position_id").val() == "" ? "" : $("#Position_id").val())
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
+        	var htmlOption = "";
+        	htmlOption += "<option value='Unassigned'>Unassigned</option>";
             $.each(data, function (index, indexEntry) {
-                if (id == indexEntry['status']) {
-                    htmlOption += "<option selected='selected' value='" + indexEntry['to_action'] + "'>" + indexEntry['status'] + "</option>";
-                } else {
-                    htmlOption += "<option value='" + indexEntry['to_action'] + "'>" + indexEntry['status'] + "</option>";
-
-                }
+            	//htmlOption += "<option value='" + indexEntry['to_action'] + "'>" + indexEntry['status'] + "</option>";
+            	htmlOption += "<option value='" + indexEntry['stage_id'] + "'>" + indexEntry['status'] + "</option>";
             });
-            $("#appraisalStatus" + nameArea).html(htmlOption);
+            htmlOption += "<option value='afterAssignment'>After Assignment</option>";
+            $("#appraisalStatus").html(htmlOption);
         }
     });
 }
@@ -1523,10 +1530,10 @@ var dropDrowActionEditFn = function (data/*paramStageID, employee_code, org_code
  		  htmlOption += "<option value=" + indexEntry['stage_id'] + ">" + indexEntry['to_action'] + "</option>";
  	  });
  	  $("#actionAssign").html(htmlOption);
-      if ($("#actionAssign").val() == null) {
-          $("#btnSubmit").attr("disabled", "disabled");
+      if ($("#actionAssign").val() == null || $("#embed_status") == "afterAssignment") {
+          $("#btnSubmit,#actionAssign").attr("disabled", "disabled");
       } else {
-          $("#btnSubmit").removeAttr("disabled");
+          $("#btnSubmit,#actionAssign").removeAttr("disabled");
       }
 //    $.ajax({
 ////        url: restfulURL + "/" + serviceName + "/public/appraisal_assignment/edit_action_to",

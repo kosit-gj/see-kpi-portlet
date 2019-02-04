@@ -1067,7 +1067,12 @@ var createDataTableFn = function(options){
 			if(options['btnAdvanceDownloadOption']!=undefined){
 				$("#btnAdvanceDownloadOption").html(createBtnAdvanceDownloadOptionFn());
 				$("#exportToExcel").click(function(){
-					$("form#formExportToExcel").attr("action",options['btnAdvanceDownloadOption']['url']);
+					// เช็ค templateName หน้า position downlond ส่ง position_name
+					if(options['templateName']!=undefined && options['templateName']=="position") {
+						$("form#formExportToExcel").attr("action",options['btnAdvanceDownloadOption']['url']+"&position_name="+$("form#searchAdvanceForm #position_name input").val());
+					} else {
+						$("form#formExportToExcel").attr("action",options['btnAdvanceDownloadOption']['url']);
+					}
 				});
 			}
 			if(options['btnAdvanceImportOption']!=undefined){

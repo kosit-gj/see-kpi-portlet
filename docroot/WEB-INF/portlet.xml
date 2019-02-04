@@ -2439,14 +2439,14 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>report-hr-summary-consider</portlet-name>
-		<display-name>Report Hr Summary Consider</display-name>
+		<portlet-name>report-salary-adjustment</portlet-name>
+		<display-name>Report Salary Adjustment</display-name>
 		<portlet-class>
 			com.liferay.util.bridges.mvc.MVCPortlet
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/report-hr-summary-consider/view.jsp</value>
+			<value>/html/report-salary-adjustment/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2454,8 +2454,8 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>Report Hr Summary Consider</title>
-			<short-title>Report Hr Summary Consider</short-title>
+			<title>Report Salary Adjustment</title>
+			<short-title>Report Salary Adjustment</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>
@@ -2472,14 +2472,14 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>Import-pqpi</portlet-name>
-		<display-name>Import PQPI</display-name>
+		<portlet-name>export-pqpi</portlet-name>
+		<display-name>Export PQPI</display-name>
 		<portlet-class>
 			com.liferay.util.bridges.mvc.MVCPortlet
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/import-pqpi/view.jsp</value>
+			<value>/html/export-pqpi/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2487,8 +2487,8 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>Import PQPI</title>
-			<short-title>Import Pqpi</short-title>
+			<title>Export PQPI</title>
+			<short-title>Export Pqpi</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>
@@ -2505,14 +2505,14 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>import-salary</portlet-name>
-		<display-name>Import Salary</display-name>
+		<portlet-name>export-salary</portlet-name>
+		<display-name>Export Salary</display-name>
 		<portlet-class>
 			com.liferay.util.bridges.mvc.MVCPortlet
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/import-salary/view.jsp</value>
+			<value>/html/export-salary/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2520,8 +2520,8 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>Import Salary</title>
-			<short-title>Import Salary</short-title>
+			<title>Export Salary</title>
+			<short-title>Export Salary</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

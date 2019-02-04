@@ -372,10 +372,10 @@ var to_action = function () {
             });
             $("#actionToAssign").html(htmlOption);
             
-            if($("#actionToAssign").val()==null) {
-            	$("#btnConfirm,#btnSubmit,#btn_search_calculate").prop("disabled", true);
+            if($("#actionToAssign").val()==null || $("embed_status").val()=="ARJ") {
+            	$("#btnConfirm,#btnSubmit,#btn_search_calculate,#actionToAssign").prop("disabled", true);
             } else {
-            	$("#btnConfirm,#btnSubmit,#btn_search_calculate").prop("disabled", false);
+            	$("#btnConfirm,#btnSubmit,#btn_search_calculate,#actionToAssign").prop("disabled", false);
             }
         }
     });

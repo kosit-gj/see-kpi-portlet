@@ -874,6 +874,7 @@ background-color:#71cccc !important;
 										<option>20</option>
 										<option>50</option>
 										<option>100</option>
+										<option>All</option>
 									</select>
 
 								</div>
@@ -909,6 +910,7 @@ background-color:#71cccc !important;
 										<option>20</option>
 										<option>50</option>
 										<option>100</option>
+										<option>All</option>
 									</select>
 								</div>
 								<div class='pagingText'>

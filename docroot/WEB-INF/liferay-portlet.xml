@@ -2460,7 +2460,7 @@
 		<css-class-wrapper>import-job-code-portlet</css-class-wrapper>    
 	</portlet>
 	<portlet>
-		<portlet-name>report-hr-summary-consider</portlet-name>
+		<portlet-name>report-salary-adjustment</portlet-name>
 		<icon>/icon.png</icon>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
@@ -2484,13 +2484,13 @@
 		<footer-portlet-javascript>/js/plugins/autoNumeric/autoNumeric-min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/Controller/report-hr-summary-consider.js</footer-portlet-javascript>  
+		<footer-portlet-javascript>/Controller/report-salary-adjustment.js</footer-portlet-javascript>  
 		<css-class-wrapper>
-			report-hr-summary-consider-portlet
+			report-salary-adjustment-portlet
 		</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>Import-pqpi</portlet-name>
+		<portlet-name>export-pqpi</portlet-name>
 		<icon>/icon.png</icon>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
 		<header-portlet-css>/css/plugins/iCheck/custom.css</header-portlet-css>
@@ -2510,11 +2510,11 @@
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/Controller/cImportPQPI.js</footer-portlet-javascript>
-		<css-class-wrapper>import-pqpi-portlet</css-class-wrapper>
+		<footer-portlet-javascript>/Controller/cExportPQPI.js</footer-portlet-javascript>
+		<css-class-wrapper>export-pqpi-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>import-salary</portlet-name>
+		<portlet-name>export-salary</portlet-name>
 		<icon>/icon.png</icon>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
 		<header-portlet-css>/css/plugins/iCheck/custom.css</header-portlet-css>
@@ -2534,8 +2534,8 @@
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/Controller/cImportSalary.js</footer-portlet-javascript>
-		<css-class-wrapper>import-salary-portlet</css-class-wrapper>
+		<footer-portlet-javascript>/Controller/cExportSalary.js</footer-portlet-javascript>
+		<css-class-wrapper>export-salary-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>mpi-judgement</portlet-name>

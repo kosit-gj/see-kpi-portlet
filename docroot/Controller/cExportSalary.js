@@ -257,28 +257,10 @@ $(document).ready(function () {
 
 	toDayFn("#effectiveDate , #adjustDate");
 	
-	 $("#effectiveDate").datepicker({
-		 	dateFormat: "yy-mm-dd",
-         minDate: new Date(2018, 1 - 1, 1),
-         onSelect: function () {
-             var dt2 = $('#adjustDate');
-             var startDate = $(this).datepicker('getDate');
-             var minDate = $(this).datepicker('getDate');
-             var dt2Date = dt2.datepicker('getDate');
-             //difference in days. 86400 seconds in day, 1000 ms in second
-             var dateDiff = (dt2Date - minDate)/(86400 * 1000);
-             
-             if (dt2Date == null || dateDiff < 0) {
-             		dt2.datepicker('setDate', minDate);
-             }
-             dt2.datepicker('option', 'maxDate', null);
-             dt2.datepicker('option', 'minDate', minDate);
-         }
+	 $("#effectiveDate , #adjustDate").datepicker({
+		 	dateFormat: "yy-mm-dd"
      });
-     $('#adjustDate').datepicker({
-     	dateFormat: "yy-mm-dd",
-     	minDate: 0
-     });
+   
      $("#effectiveDate ,#adjustDate").keypress(function(event) {
 		    return ( ( event.keyCode || event.which ) === 9 ? true : false );
 		});

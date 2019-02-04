@@ -48,7 +48,7 @@
 		<portlet id="report-summary-grade"></portlet>
 		<portlet id="assignment-log"></portlet>
 		<portlet id="dashboard-performance-comparison"></portlet>
-		<portlet id="report-hr-summary-consider"></portlet>
+		<portlet id="report-salary-adjustment"></portlet>
 
 		<!-- //////////////////// 360 Degree //////////////// -->
 		<portlet id="appraisal-level-360degree"></portlet>
@@ -62,8 +62,8 @@
 		<portlet id="judgement"></portlet>
 		<portlet id="salary-report"></portlet>
 		<portlet id="calculate-salary-form"></portlet>
-		<portlet id="Import-pqpi"></portlet>
-		<portlet id="import-salary"></portlet>
+		<portlet id="export-pqpi"></portlet>
+		<portlet id="export-salary"></portlet>
 		<!-- //////////////////////////////////////////////// -->
 
 		<!-- //////////////// Bonus ///////////////////////// -->

@@ -15,6 +15,7 @@ var emailLinkAppraisal = false;
 var gSystempConfig = [];
 var gStage = [];
 var mLoadingShow ;
+let globalCurrentStage = [];
 
 var getURLParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -1485,6 +1486,7 @@ var appraisalStatusFn = function () {
             $.each(data, function (index, indexEntry) {
             	htmlOption += "<option value='" + indexEntry['stage_id'] + "'>" + indexEntry['status'] + "</option>";
             });
+            htmlOption += "<option value='AA360'>After appraisal 360</option>";
             $("#status").html(htmlOption);
         }
     });
@@ -2484,20 +2486,20 @@ var listDataFn = function (data) {
         htmlHTML += " <tr>";
 
         if ($("#embed_appraisalType").val() == "2") {
-        	htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-form").val()+"</b></th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-emp-code").val() + "</b></th>";
-            htmlHTML += " <th style=\"widthauto;\"><b>" + $(".lt-emp-name").val() + "</b></th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-level").val() + "</b> </th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-organization").val() + "</b></th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-position").val() + "</b> </th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-action").val() + "</b></th>";
+        	htmlHTML+=" <th style=\"width: 10%; text-align: center;\"><b>"+$(".lt-form").val()+"</b></th>";
+            htmlHTML += " <th style=\"width: 10%; text-align: center;\"><b>" + $(".lt-emp-code").val() + "</b></th>";
+            htmlHTML += " <th style=\"width: 18%; text-align: center;\"><b>" + $(".lt-emp-name").val() + "</b></th>";
+            htmlHTML += " <th style=\"width: 7%; text-align: center;\"><b>" + $(".lt-level").val() + "</b> </th>";
+            htmlHTML += " <th style=\"width: 25%; text-align: center;\"><b>" + $(".lt-organization").val() + "</b></th>";
+            htmlHTML += " <th style=\"width: 20%; text-align: center;\"><b>" + $(".lt-position").val() + "</b> </th>";
+            htmlHTML += " <th style=\"width: 10%; text-align: center;\"><b>" + $(".lt-action").val() + "</b></th>";
 
         } else if ($("#embed_appraisalType").val() == "1") {
-        	htmlHTML+=" <th style=\"width:auto;\"><b>"+$(".lt-form").val()+"</b></th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-org-code").val() + "</b></th>";
-            htmlHTML += " <th style=\"widthauto;\"><b>" + $(".lt-org-name").val() + "</b></th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-level").val() + "</b> </th>";
-            htmlHTML += " <th style=\"width:auto;\"><b>" + $(".lt-action").val() + "</b></th>";
+        	htmlHTML+=" <th style=\"width: 15%; text-align: center;\"><b>"+$(".lt-form").val()+"</b></th>";
+            htmlHTML += " <th style=\"width: 15%; text-align: center;\"><b>" + $(".lt-org-code").val() + "</b></th>";
+            htmlHTML += " <th style=\"width: 40%; text-align: center;\"><b>" + $(".lt-org-name").val() + "</b></th>";
+            htmlHTML += " <th style=\"width: 15%; text-align: center;\"><b>" + $(".lt-level").val() + "</b> </th>";
+            htmlHTML += " <th style=\"width: 15%; text-align: center;\"><b>" + $(".lt-action").val() + "</b></th>";
         }
 
         //				emp_code
@@ -2514,8 +2516,8 @@ var listDataFn = function (data) {
         $.each(indexEntry['items'], function (index2, itemEntry) {
             if ($("#embed_appraisalType").val() == "2") {
                 htmlHTML += "<tr>";
-                htmlHTML += " <td>"+itemEntry['appraisal_form_name']+"</td>";
-                htmlHTML += "	<td class=''><a href=\"#\" class='emp_code' id=\"id-" + itemEntry['emp_result_id'] + "\" >" + itemEntry['emp_code'] + "</a>";
+                htmlHTML += " <td style=\"text-align: center;\">"+itemEntry['appraisal_form_name']+"</td>";
+                htmlHTML += "	<td style=\"text-align: center;\" class=''><a href=\"#\" class='emp_code' id=\"id-" + itemEntry['emp_result_id'] + "\" >" + itemEntry['emp_code'] + "</a>";
                 htmlHTML += "<input type='hidden' name='emp_appraisal_type_id-" + itemEntry['emp_result_id'] + "' id='emp_appraisal_type_id-" + itemEntry['emp_result_id'] + "' class='emp_appraisal_type_id' value='" + itemEntry['appraisal_type_id'] + "' >";
                 htmlHTML += "<input type='hidden' name='emp_period_id-" + itemEntry['emp_result_id'] + "' id='emp_period_id-" + itemEntry['emp_result_id'] + "' class='emp_period_id' value='" + itemEntry['period_id'] + "' >";
                 htmlHTML += "<input type='hidden' name='emp_emp_code-" + itemEntry['emp_result_id'] + "' id='emp_emp_code-" + itemEntry['emp_result_id'] + "' class='emp_emp_code' value='" + itemEntry['emp_code'] + "' >";
@@ -2523,16 +2525,16 @@ var listDataFn = function (data) {
                 htmlHTML += "<input type='hidden' name='group_id-" + itemEntry['emp_result_id'] + "' id='group_id-" + itemEntry['emp_result_id'] + "'  value='" + itemEntry['group_id'] + "' >";
                 htmlHTML + "</td>";
                 htmlHTML += " <td>" + itemEntry['emp_name'] + "</td>";
-                htmlHTML += " <td>" + itemEntry['appraisal_level_name'] + "</td>";
+                htmlHTML += " <td style=\"text-align: center;\">" + itemEntry['appraisal_level_name'] + "</td>";
                 htmlHTML += " <td>" + itemEntry['org_name'] + "</td>";
                 htmlHTML += " <td>" + itemEntry['position_name'] + "</td>";
-                htmlHTML += " <td>" + itemEntry['to_action'] + "</td>";
+                htmlHTML += " <td style=\"text-align: center;\">" + itemEntry['to_action'] + "</td>";
                 htmlHTML += "</tr>";
 
             } else if ($("#embed_appraisalType").val() == "1") {
                 htmlHTML += "<tr>";
-                htmlHTML += " <td>"+itemEntry['appraisal_form_name']+"</td>";
-                htmlHTML += "	<td class=''><a href=\"#\" class='emp_code' id=\"id-" + itemEntry['emp_result_id'] + "\" >" + itemEntry['org_code'] + "</a>";
+                htmlHTML += " <td style=\"text-align: center;\">"+itemEntry['appraisal_form_name']+"</td>";
+                htmlHTML += "	<td style=\"text-align: center;\" class=''><a href=\"#\" class='emp_code' id=\"id-" + itemEntry['emp_result_id'] + "\" >" + itemEntry['org_code'] + "</a>";
                 htmlHTML += "<input type='hidden' name='emp_appraisal_type_id-" + itemEntry['emp_result_id'] + "' id='emp_appraisal_type_id-" + itemEntry['emp_result_id'] + "' class='emp_appraisal_type_id' value='" + itemEntry['appraisal_type_id'] + "' >";
                 htmlHTML += "<input type='hidden' name='emp_period_id-" + itemEntry['emp_result_id'] + "' id='emp_period_id-" + itemEntry['emp_result_id'] + "' class='emp_period_id' value='" + itemEntry['period_id'] + "' >";
                 htmlHTML += "<input type='hidden' name='emp_emp_code-" + itemEntry['emp_result_id'] + "' id='emp_emp_code-" + itemEntry['emp_result_id'] + "' class='emp_emp_code' value='" + itemEntry['emp_code'] + "' >";
@@ -2540,8 +2542,8 @@ var listDataFn = function (data) {
                 htmlHTML += "<input type='hidden' name='group_id-" + itemEntry['emp_result_id'] + "' id='group_id-" + itemEntry['emp_result_id'] + "'  value='" + itemEntry['group_id'] + "' >";
                 htmlHTML + "</td>";
                 htmlHTML += " <td>" + itemEntry['org_name'] + "</td>";
-                htmlHTML += " <td>" + itemEntry['appraisal_level_name'] + "</td>";
-                htmlHTML += " <td>" + itemEntry['to_action'] + "</td>";
+                htmlHTML += " <td style=\"text-align: center;\">" + itemEntry['appraisal_level_name'] + "</td>";
+                htmlHTML += " <td style=\"text-align: center;\">" + itemEntry['to_action'] + "</td>";
                 htmlHTML += "</tr>";
             }
         });
@@ -2709,21 +2711,17 @@ var dropDrowActionEditFn = function (stage_id, employee_code, org_code) {
         	"appraisal_form_id": $("#embed_formType").val()
         },
         success: function (data) {
-        	gStage = data; 
-            if (data == '') {
-                $("#btnSubmit").attr("disabled", "disabled");
-            } else {
-                $("#btnSubmit").removeAttr("disabled");
-            }
             var htmlOption = "";
             $.each(data, function (index, indexEntry) {
-                if (id == indexEntry['stage_id']) {
-                    htmlOption += "<option selected='selected' value=" + indexEntry['stage_id'] + ">" + indexEntry['to_action'] + "</option>";
-                } else {
-                    htmlOption += "<option value=" + indexEntry['stage_id'] + ">" + indexEntry['to_action'] + "</option>";
-                }
+            	htmlOption += "<option value=" + indexEntry['stage_id'] + ">" + indexEntry['to_action'] + "</option>";
             });
             $("#actionToAssign").html(htmlOption);
+            
+            if ($("#actionToAssign").val() == null || $("#embed_status").val() == "AA360") {
+                $("#btnSubmit,#actionToAssign").attr("disabled", "disabled");
+            } else {
+                $("#btnSubmit,#actionToAssign").removeAttr("disabled");
+            }
         }
     });
 }
@@ -2828,7 +2826,7 @@ var saveAppraisalIndividualFn = function ()
         dataType: "json",
         async: false,
         data: {
-            "stage_id": $("#actionToAssign").val(),
+            "stage_id": globalCurrentStage['stage_id'],
             "remark": $("#remark_footer").val(),
             "appraisal": appraisalObject,
             "action_update": action_update,
@@ -2854,6 +2852,7 @@ var saveAppraisalIndividualFn = function ()
                 }
                 else if(action_update=="submit"){
                 	$("#ModalAppraisal").modal('hide');
+                	appraisalStatusFn();
                 	getDataFn();
                 }
             
@@ -2918,14 +2917,13 @@ var saveAppraisalOrganizationFn = function()
 	appraisal+="]";
 	console.log(appraisal);
 	var appraisalObject=eval("("+appraisal+")");
-
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/appraisal/"+$("#emp_result_id").val(),
 		type:"patch",
 		dataType:"json",
 		async:false,
 		data:{
-			"stage_id":$("#actionToAssign").val(),
+			"stage_id":globalCurrentStage['stage_id'],
 			"remark":$("#remark_footer").val(),
 			"appraisal":appraisalObject,
 			"template_name" : "kpi-result-360"
@@ -2948,6 +2946,7 @@ var saveAppraisalOrganizationFn = function()
 	                }
 	                else if(action_update=="submit"){
 	                	$("#ModalAppraisal").modal('hide');
+	                	appraisalStatusFn();
 	                	getDataFn();
 	                }
 				 
@@ -3357,8 +3356,10 @@ $(document).ready(function () {
             // Search
             $("#btnSearchAdvance").click(function () {
                 searchAdvanceFn();
-                $(".countPagination").val(10);
-                $("#rpp").remove();
+                if($("#rpp").val()=='' ||$("#rpp").val() == undefined){  // default 
+					$(".countPagination").val('All');
+					$("#rpp").remove();
+				}
             });
 
             //get appraisal detail.
@@ -3388,9 +3389,10 @@ $(document).ready(function () {
 
             //submit
             $("#btnSubmit").click(function () {
-            	// Calculate 
-            	calculateBtnFn();
+            	globalCurrentStage['stage_id'] = $("#actionToAssign").val();
             	
+            	// Calculate
+            	calculateBtnFn();
             	// Submit
             	action_update = 'submit';
             	$("body").mLoading('show'); //Loading
@@ -3405,6 +3407,8 @@ $(document).ready(function () {
             });
 
             $("#btnCalculate").click(function () {
+            	globalCurrentStage['stage_id'] = $("#actionToAssign").val();
+            	
                 $("body").mLoading();
                 
                 setTimeout(function() {

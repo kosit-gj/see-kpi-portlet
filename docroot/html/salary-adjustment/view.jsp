@@ -1091,14 +1091,15 @@ input[type=number]::-webkit-outer-spin-button {
 						      <th rowspan="3" class="fix-column-top pe">คะแนนเต็มตีค่างาน<br>(ศักยภาพ)</th>
 						      <th rowspan="3" class="fix-column-top tp">Total Point</th>
 						      <th rowspan="3" class="fix-column-top bp">Baht Point</th>
-						      <th rowspan="3" class="fix-column-top str1"></th>
-						      <th rowspan="3" class="fix-column-top str2"></th>
-						      <th rowspan="3" class="fix-column-top str3"></th>
-						      <th rowspan="3" class="fix-column-top str4"></th>
-						      <th rowspan="3" class="fix-column-top str5"></th>
+						      <th rowspan="3" class="fix-column-top str1">ผลการประเมินค่างาน</th>
+						      <th rowspan="3" class="fix-column-top str2">คะแนนความรู้</th>
+						      <th rowspan="3" class="fix-column-top str3">คะแนนศักยภาพ</th>
+						      <th rowspan="3" class="fix-column-top str4">คะแนนผลงานปีที่ผ่านมา</th>
+						      <th rowspan="3" class="fix-column-top str5">คะแนนความสามารถที่มีคุณค่าต่อองค์กร</th>
 						      <th rowspan="3" class="fix-column-top mgr">คะแนนประเมิน Mgr.</th>
 						      <th rowspan="3" class="fix-column-top bu">คะแนนประเมิน BU.</th>
 						      <th rowspan="3" class="fix-column-top coo">คะแนนประเมิน COO.</th>
+						      <th rowspan="3" class="fix-column-top boa">คะแนนประเมิน Board.</th>
 						      <th rowspan="3" class="fix-column-top grade">เกรด</th>
 						      
 						      <th colspan="3" class="fix-column-top sal">รายได้จากการคำนวนตีค่างาน</th>
