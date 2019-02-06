@@ -1449,6 +1449,7 @@ var dropDrowFormTypeFn = function(){
 		type:"get",
 		dataType:"json",
 		async:false,
+		data:{'is_active':1},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
