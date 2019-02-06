@@ -475,7 +475,7 @@ var listDataFn = function(data) {
 		htmlHTML += "	<td class='data-up-total pos-column-rig changesal1' data-value=\""+indexEntry.cal_standard+"\">"+cal_standard+"</td>";
 		htmlHTML += "	<td class='data-salary changesal2'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 salary numberOnly' value='0.00' />";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 salary numberOnly' value='"+indexEntry.cal_standard+"' />";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		htmlHTML += "	<td class='data-pqpi changesal3'>";
