@@ -624,7 +624,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
                           <div class="form-group p-xxs">
                             <label class="control-label">Total Point:<span class='redFont'>*</span></label>
                             <div class="controls">
-                                <input type="text" class="form-control input-sm span12 autoNumeric" placeholder="" id="from_total_point">
+                                <input type="text" class="form-control input-sm span12 " placeholder="" id="from_total_point" disabled>
                             </div>
                         </div>
                           <div class="form-group p-xxs">

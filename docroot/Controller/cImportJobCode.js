@@ -157,12 +157,12 @@ var listImportJobCodeFn = function (data) {
 				});
 			});
 			var option = {
-				vMin: '0',
-				vMax: '32767',
+				vMin: '0.00',
+				vMax: '99999.99',
 				lZero: 'deny',
 				//						aPad: false,
 				wEmpty: 'zero',
-				mDec: '0'
+				mDec: '2'
 			};
 			scriptInputAutoNumeric(".autoNumeric", option);
 
@@ -227,10 +227,16 @@ $(document).ready(function () {
 
 	getDataFn(pageNumberDefault, $("#rpp").val());
 	$("#list_content").show();
+	
+	// $("#from_total_point").autoNumeric('init');
+	$('input[id=from_knowledge_point], input[id=from_capability_point]').keypress(function(e) {
+		var total = (parseFloat($("#from_knowledge_point").autoNumeric('get')) + parseFloat($("#from_capability_point").autoNumeric('get'))).toFixed(2);
+		$("#from_total_point").val(total).autoNumeric('init').autoNumeric('update',{vMin:'0.00',lZero:'deny',wEmpty:'zero',mDec:'2'});
+	});
 
 
 	$("#exportToExcel").click(function () {
-		console.log(restfulURL + restfulPathExport + "?token=" + tokenID.token + "")
+		// console.log(restfulURL + restfulPathExport + "?token=" + tokenID.token + "")
 		$("form#formExportToExcel").attr("action", restfulURL + restfulPathExport + "?token=" + tokenID.token);
 	});
 
