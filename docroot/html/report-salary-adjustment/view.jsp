@@ -1042,13 +1042,22 @@ input[type=number]::-webkit-outer-spin-button {
                  </select>            
                   </div>
 				 
-				 <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="form"/>" class="input form-control input-sm span12"
+				 <div class="form-group pull-left span3" style="margin-left: 5px; margin-top: 2px;">
+                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="form"/>"
+                    multiple="multiple" data-original-title="<liferay-ui:message key="AppraisalForm"/>" 
+                    class="input form-control input-sm span12"
                       id="AppraisalForm" name="AppraisalForm">
-                      <option>All From</option>
                     </select>
-                  </div>            
-				<div class="row-fluid">
+                  </div>           
+
+				<div class="row-fluid pull-left ">
+				
+				<div class="form-group pull-left span3" style="margin-left: 5px">
+					<input data-toggle="tooltip" title="" data-original-title="Effective Date" 
+					class="form-control input-sm effective-date span12" placeholder="Effective Date" 
+					type="text" id="effectiveDate" name="effectiveDate" style="cursor: pointer;">
+				</div>
+				
 				<div class="form-group pull-left span3" style="margin-left: 5px">
 						<select name="output_type" id="output_type"
 							class="input form-control input-sm span12" title=""

@@ -23,6 +23,12 @@ globalSevice['restfulPathMonthlyBonusRate']=restfulURL + "/" + serviceName + "/p
 var galbalDataImportJobCode = [];
 var galbalDataTemp = [];
 var pageNumberDefault = 1;
+var refreshMultiAppraisalForm = function() {
+	$("#AppraisalForm").multiselect('refresh').multiselectfilter();
+	$("#AppraisalForm_ms").css({'width':'100%'});
+	$(".ui-icon-check,.ui-icon-closethick,.ui-icon-circle-close").css({'margin-top':'3px'});
+	$('input[name=multiselect_AppraisalForm]').css({'margin-bottom':'6px','margin-right':'3px'});
+}
 
 var validationFn = function (data) {
 	var validate = "";
@@ -47,7 +53,7 @@ var generateDropDownList = function(url,type,request,initValue){
  	if(initValue!=undefined){
  		html+="<option selected value=''>"+initValue+"</option>";
 	}else{
-	 	var firstItem=true;
+	 	//var firstItem=true;
 	}
 
  	$.ajax ({
@@ -256,9 +262,11 @@ $(document).ready(function () {
 	}
 	$("#AppraisalYear").html(generateDropDownList(globalSevice['restfulPathDropDownYear'],"GET",{}));
 	$("#AppraisalPeriod").html(generateDropDownList(globalSevice['restfulPathDropDownBonusPeriod'],"GET",{appraisal_year:$("#AppraisalYear").val()}));
-	$("#AppraisalForm").html(generateDropDownList(globalSevice['restfulPathFormType'],"GET",{},"All Form"));
+	$("#AppraisalForm").html(generateDropDownList(globalSevice['restfulPathFormType'],"GET",{}));
+	$("#AppraisalForm").multiselect({minWidth:'100%;'}).multiselectfilter();
+	refreshMultiAppraisalForm();
 	
-
+	//console.log(AppraisalFrom);
 	toDayFn("#effectiveDate , #expiredDate");
 	
 	 $("#effectiveDate").datepicker({
@@ -298,12 +306,17 @@ $(document).ready(function () {
 	$("#btnExport").click(function () {
 		var param="";
 		param+="&period_id="+$("#AppraisalPeriod").val();
-		param+="&appraisal_form_id="+$("#AppraisalForm").val();
+		param+="&appraisal_form_id="+$("#AppraisalForm").val()== null ? '' : $("#AppraisalForm").val();
 		param+="&effective_date="+$("#effectiveDate").val();
 		param+="&expired_date="+$("#expiredDate").val();
 		console.log(globalSevice['restfulPathExportPQPI'] + "?token=" + tokenID.token + ""+param)
 		$("form#formExportToExcel").attr("action", globalSevice['restfulPathExportPQPI'] + "?token=" + tokenID.token+""+param+"");
 		$("#formExportToExcel").submit();
+		if($("#AppraisalForm")==''){
+			$(".ui-multiselect-all").click();
+			AppraisalFrom = $("#AppraisalForm").val();
+		}
+		console.log($("#AppraisalForm"));
 	});
 	
 
