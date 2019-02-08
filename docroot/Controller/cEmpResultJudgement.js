@@ -278,14 +278,20 @@ var searchAdvanceFn = function () {
 
     $("#embedParamSearch").append(embedParam);
     
-    to_action();
-    fakeAdjustFn();
-    getDataFn(pageNumberDefault,$("#rpp").val());
+    if($("#embed_appraisal_form").val() == "null"){
+    	callFlashSlide($(".lt-please-select-at-least-one-appraisal-form").val());
+    	return false;
+    } else {
+    	to_action();
+        fakeAdjustFn();
+    	getDataFn(pageNumberDefault,$("#rpp").val());
+    }
 };
 
 //Get Data
 var getDataFn = function (page, rpp) {
     var position_id = [];
+    
     var appraisal_form = $("#embed_appraisal_form").val().split(',');
     appraisal_form = jQuery.map(appraisal_form, function( val ) {
 		return val.split('-')[0];
@@ -373,6 +379,11 @@ var getDataFn = function (page, rpp) {
 
 var to_action = function () {
 	var status = $("#embed_status").val();
+	var appraisal_form = $("#embed_appraisal_form").val().split(',');
+    appraisal_form = jQuery.map(appraisal_form, function( val ) {
+		return val.split('-')[0];
+	});
+	
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/emp/adjustment/to_action",
         type: "get",
@@ -382,7 +393,7 @@ var to_action = function () {
             "stage_id": status,
             "flag": "emp_result_judgement_flag",
             "appraisal_type_id": 2,
-            "appraisal_form_id": $("#embed_appraisal_form").val()
+            "appraisal_form_id": appraisal_form
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {

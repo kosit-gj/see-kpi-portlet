@@ -128,3 +128,4 @@
 <input class="lt-judge-name" type="hidden" value="<liferay-ui:message key="judge-name"/>"/>
 <input class="lt-validate-select-judge" type="hidden" value="<liferay-ui:message key="validate-select-judge"/>"/>
 <input class="lt-validate-confirm-judge" type="hidden" value="<liferay-ui:message key="validate-confirm-judge"/>"/>
+<input class="lt-please-select-at-least-one-appraisal-form" type="hidden" value="<liferay-ui:message key="please-select-at-least-one-appraisal-form"/>"/>
