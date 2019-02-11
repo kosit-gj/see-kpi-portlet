@@ -91,8 +91,11 @@ var refreshMultiPosition = function() {
 	$("#AppraisalForm").multiselect('refresh');
 	$("#Position").multiselect('refresh').multiselectfilter();
 	$(".ui-multiselect").css({'width':'100%'});
+	$(".ui-multiselect-menu").css({'padding-bottom':'15px'});
+	$(".ui-multiselect-checkboxes").css({'padding-bottom':'10px'});
 	$(".ui-icon-check,.ui-icon-closethick,.ui-icon-circle-close").css({'margin-top':'3px'});
-//	$('input[name=multiselect_Position]').css({'margin-bottom':'6px','margin-right':'3px'});
+	$('input[name=multiselect_Position]').css({'margin-bottom':'6px','margin-right':'3px'});
+	$('input[name=multiselect_AppraisalForm]').css({'margin-bottom':'6px','margin-right':'3px'});
 }
 
 var dropDrowYearListFn = function(nameArea,id){
@@ -1082,7 +1085,8 @@ $(document).ready(function() {
 			$("#AppraisalForm").multiselect({
 				minWidth:'100%',
 				noneSelectedText: "Select Form",
-				selectedText: "# Form"
+				selectedText: "# Form",
+				header: false
 			});
 			
 			$("#AppraisalForm").change(function() {
