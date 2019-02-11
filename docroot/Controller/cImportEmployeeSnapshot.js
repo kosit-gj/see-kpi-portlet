@@ -12,6 +12,7 @@ galbalDataTemp['restfulPathEmployeeSnapshotAutocompleteStartDate']= galbalDataTe
 galbalDataTemp['restfulPathEmployeeSnapshotAutocompleteEmpname']= galbalDataTemp['restfulPathEmployeeSnapshot']+ "/auto_emp";
 galbalDataTemp['restfulPathEmployeeSnapshotImportFile']= galbalDataTemp['restfulPathEmployeeSnapshot']+ "/import";
 galbalDataTemp['restfulPathEmployeeSnapshotExportFile']= galbalDataTemp['restfulPathEmployeeSnapshot']+ "/export";
+galbalDataTemp['restfulPathEmployeeSnapshotListJob']= galbalDataTemp['restfulPathEmployeeSnapshot']+ "/parameter/list_job";
 // Autocomplete Temp
 galbalDataTemp['tempPositonLabel']="";
 galbalDataTemp['tempPositonId']="";
@@ -69,6 +70,58 @@ var generateDropDownList = function(url,type,request,initValue){
 	 	return html;
 	 };
 
+
+	//-------- Update Start
+	var updateFn = function () {
+		
+		var emp_first_name = $("#from_first_name").val();
+		var emp_last_name = $("#from_last_name").val();
+		var email = $("#from_email").val();
+		var job_function_id = $("#from_fob_function").val();
+		var distributor_code = $("#from_distributor_code").val();
+		var distributor_name = $("#from_distributor_name").val();
+		var region = $("#from_region").val();
+		var is_active = "0";
+		
+		//IsAction
+		if($("#from_checkboxIs_active:checked").is(":checked")){
+			is_active="1";
+		}else{
+			is_active="0";
+		}
+		
+		$.ajax({
+			url:galbalDataTemp['restfulPathEmployeeSnapshot']+"/"+$("#param_emp_snapshot_id").val(),
+			type : "PATCH",
+			dataType : "json",
+			headers:{Authorization:"Bearer "+tokenID.token},
+			data : {
+				"emp_first_name":emp_first_name,
+				"emp_last_name":emp_last_name,
+				"email":email,
+				"job_function_id":job_function_id,
+				"distributor_code":distributor_code,
+				"distributor_name":distributor_name,
+				"region":region,
+				"is_active":is_active,
+			},	
+			success : function(data) {
+
+				if (data['status'] == 200) {
+					getDataFn($("#pageNumber").val(),$("#rpp").val());
+					clearFn();
+					$('#ModalEditEmployee').modal('hide');
+					callFlashSlide("Update Successfully.");
+					
+				}else if (data['status'] == 400) {
+					validationFn(data);
+				}
+			}
+		});
+		return false;
+	}
+	// -------- Update End
+	
 
 	//Check Validation
 var validationFn = function(data){
@@ -129,16 +182,18 @@ var clearFn = function() {
 	$("#from_start_date").val("");
 	$("#from_emp_id").val("");
 	$("#from_emp_code").val("");
-	$("#from_emp_name").val("");
+	$("#from_first_name").val("");
+	$("#from_last_name").val("");
 	$("#from_email").val("");
 	$("#from_org_name").val("");
 	$("#from_level_name").val("");
 	$("#from_position_code").val("");
+	$("#from_fob_function").val("");
 	$("#from_chief_emp_code").val("");
 	$("#from_distributor_code").val("");
 	$("#from_distributor_name").val("");
 	$("#from_region").val("");
-		
+	$("#param_emp_snapshot_id").val()
 	
 	
 	$(".btnModalClose").click();
@@ -301,16 +356,19 @@ var findOneFn = function(id) {
 			$("#from_start_date").val(data['start_date']);
 			$("#from_emp_id").val(data['emp_id']);
 			$("#from_emp_code").val(data['emp_code']);
-			$("#from_emp_name").val(data['emp_first_name']+" "+data['emp_last_name']);
+			$("#from_first_name").val(data['emp_first_name']);
+			$("#from_last_name").val(data['emp_last_name']);
 			$("#from_email").val(data['email']);
 			$("#from_org_name").val(data['org_name']);
 			$("#from_level_name").val(data['appraisal_level_name']);
 			$("#from_position_code").val(data['position_code']);
+			$("#from_fob_function").val(data['job_function_id']);
 			$("#from_chief_emp_code").val(data['chief_emp_code']);
 			$("#from_distributor_code").val(data['distributor_code']);
 			$("#from_distributor_name").val(data['distributor_name']);
 			$("#from_region").val(data['region']);
 			$("#from_checkboxIs_active").prop("checked",(data["is_active"]=="1" ? true : false));
+			$("#param_emp_snapshot_id").val(data['emp_snapshot_id']);
 			
 		}
 	});
@@ -330,14 +388,15 @@ var listEmployeeSnapFn = function(data) {
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["start_date"]+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["emp_code"]+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["emp_first_name"]+" "+indexEntry["emp_last_name"]+ "</td>";
-		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ notNullTextFn(indexEntry["org_name"])+ "</td>";
+		htmlTable += "<td class='columnSearch testOverFlow' style=\"vertical-align: middle;\">"+ notNullTextFn(indexEntry["org_name"])+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ notNullTextFn(indexEntry["position_code"])+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ notNullTextFn(indexEntry["chief_emp_code"])+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ notNullTextFn(indexEntry["appraisal_level_name"])+ "</td>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ notNullTextFn(indexEntry["job_function_name"])+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ notNullTextFn(indexEntry["distributor_code"])+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ notNullTextFn(indexEntry["region"])+ "</td>";
 		
-		htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><button id="+indexEntry["emp_snapshot_id"]+" data-target=#ModalViewEmployee data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"' class='btn btn-primary btn-xs view'><i class='fa fa-eye' aria-hidden='true'></i></button></td>";
+		htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><button id="+indexEntry["emp_snapshot_id"]+" data-target=#ModalEditEmployee data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"' class='btn btn-primary btn-xs edit'><i class='icon-edit' aria-hidden='true'></i></button></td>";
 
 		htmlTable += "</tr>";
 	});
@@ -349,13 +408,13 @@ var listEmployeeSnapFn = function(data) {
 	//function popover
 	//$(".popover-edit-del").popover(setPopoverDisplay);
 	
-	$("#tableEmployee").off("click",".view");
-	$("#tableEmployee").on("click",".view",function(){
-		
-			clearFn();
-			findOneFn(this.id);	
-			
+	$("#tableEmployee").off("click",".edit");
+	$("#tableEmployee").on("click",".edit",function(){
+		clearFn();
+		$("#from_fob_function").html(generateDropDownList(galbalDataTemp['restfulPathEmployeeSnapshotListJob'],"GET",{},undefined));
+		findOneFn(this.id);	
 	});
+	
 	
 	
 }
@@ -407,6 +466,9 @@ $(document).ready(function() {
 		clearFn();
 	});
 
+	$("#btnEmpSubmit").click(function() {
+		updateFn();
+	});
 
 	
 	//Autocomplete Search Start
@@ -559,7 +621,13 @@ $(document).ready(function() {
 	//Autocomplete Search End
 	
 	$("#exportToExcel").click(function(){
-		$("form#formExportToExcel").attr("action",galbalDataTemp['restfulPathEmployeeSnapshotExportFile']+"?token="+tokenID.token+"");
+		var param="";
+			param+="&org_id="+$("#search_org").val();
+			param+="&level_id="+$("#search_level").val();
+			param+="&position_id="+$("#search_position_id").val();
+			param+="&start_date="+$("#search_start_date_id").val();
+			param+="&emp_snapshot_id="+$("#search_emp_id").val();
+		$("form#formExportToExcel").attr("action",galbalDataTemp['restfulPathEmployeeSnapshotExportFile']+"?token="+tokenID.token+""+param);
 	});
 	
 	

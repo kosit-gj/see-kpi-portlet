@@ -432,7 +432,18 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 	font-size: 0.9em;
 	text-align: left;
 }
-
+.testOverFlow {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+ }
+ .testOverFlow:hover {
+  max-width: 200px;
+     text-overflow: clip;
+     white-space: normal;
+     word-break: break-all;
+ }
 
 </style>
 <div id="container1" >
@@ -576,13 +587,14 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 											<th style='width: 5%;white-space: nowrap;'>Start Date</th>
 											<th style='width: 10%;white-space: nowrap;'>Emp Code</th>
 											<th style='width: 20%;white-space: nowrap;'>Emp Name</th>
-											<th style='width: 15%;white-space: nowrap;'>Org Name</th>
+											<th style='max-width: 200px; min-width: 200px; white-space: nowrap;'>Org Name</th>
 											<th style='width: 10%;white-space: nowrap;'>Position Name</th>
 											<th style='width: 10%;white-space: nowrap;'>Chief Emp</th>
 											<th style='width: 10%;white-space: nowrap;'>Level Code</th>
+											<th style='width: 10%;white-space: nowrap;'>Job Function</th>
 											<th style='width: 10%; text-align: center;'>Distributor</th>
 											<th style='width: 10%; text-align: center;'>Region</th>
-											<th style='width: auto;text-align: center;' class='objectCenter'>Manage</th>
+											<th style='width: 10%;text-align: center;' class='objectCenter'>Manage</th>
 										</tr>
 									</thead>
 									<tbody id="listEmployee">
@@ -669,7 +681,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 	
 <!-- Modal View Edit -->
 
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalViewEmployee"
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalEditEmployee"
 		class="modal inmodal" style="display: none;">
 		<div class="modal-dialog">
 			<div class="modal-content bounceInRight">
@@ -678,12 +690,13 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only">Close</span>
 					</button>
 					<!-- <i class="fa fa-laptop modal-icon"></i> -->
-					<h4 class="modal-title" id="modalTitleRole">Employee</h4>
+					<h4 class="modal-title" id="modalTitleRole">Edit Employee</h4>
 					
 				</div>
 				<div class="modal-body">
 					<!-- content start -->
 					<!-- form start -->
+					<input type="text"  id="param_emp_snapshot_id" style="display:none;">
 					<div class="row-fluid">
 	                	<div class="span12 form-horizontal p-t-xxs">
 	                		<div class="form-group p-xxs">
@@ -705,15 +718,21 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 								</div>
 							</div>
 							<div class="form-group p-xxs">
-								<label class="control-label">Employee Name:</label>
+								<label class="control-label">First Name:</label>
 								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_emp_name" disabled="disabled">
+									<input type="text" class="form-control input-sm span12" placeholder="" id="from_first_name" >
+								</div>
+							</div>
+								<div class="form-group p-xxs">
+								<label class="control-label">LastName:</label>
+								<div class="controls">
+									<input type="text" class="form-control input-sm span12" placeholder="" id="from_last_name" >
 								</div>
 							</div>
 							<div class="form-group p-xxs">
 								<label class="control-label">Email:</label>
 								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_email" disabled="disabled">
+									<input type="text" class="form-control input-sm span12" placeholder="" id="from_email" >
 								</div>
 							</div>
 							<div class="form-group p-xxs">
@@ -735,6 +754,12 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 								</div>
 							</div>
 							<div class="form-group p-xxs">
+								<label class="control-label">Job Function:</label>
+								<div class="controls">
+									<select class="form-control input-sm span12" id="from_fob_function" name="search_level"></select>
+								</div>
+							</div>
+							<div class="form-group p-xxs">
 								<label class="control-label">Chief Emp Code:</label>
 								<div class="controls">
 									<input type="text" class="form-control input-sm span12" placeholder="" id="from_chief_emp_code" disabled="disabled">
@@ -743,19 +768,19 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 							<div class="form-group p-xxs">
 								<label class="control-label">Distributor Code:</label>
 								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_distributor_code" disabled="disabled">
+									<input type="text" class="form-control input-sm span12" placeholder="" id="from_distributor_code">
 								</div>
 							</div>
 							<div class="form-group p-xxs">
 								<label class="control-label">Distributor Name:</label>
 								<div class="controls">
-									<textarea type="text" class="form-control input-sm span12" placeholder="" id="from_distributor_name" style="min-height:95px; resize: vertical;" disabled="disabled"></textarea>
+									<textarea type="text" class="form-control input-sm span12" placeholder="" id="from_distributor_name" style="min-height:95px; resize: vertical;"></textarea>
 								</div>
 							</div>
 							<div class="form-group p-xxs">
 								<label class="control-label">Region:</label>
 								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_region" disabled="disabled">
+									<input type="text" class="form-control input-sm span12" placeholder="" id="from_region">
 								</div>
 							</div>
 							<div class="form-group p-xxs">
@@ -776,9 +801,9 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 				</div>
 
 				<div class="modal-footer">
-<!-- 				<button class="btn btn-success" type="button" id="btnEmpSubmit">Save</button> -->
+				<button class="btn btn-primary" id="btnEmpSubmit" type="button">Save</button>
 				<button data-dismiss="modal" class="btn btn-danger btnCancle" type="button">Cancel</button>
-						<div class="alert alert-warning information" id="information2"
+						<div class="alert alert-warning information" id="information"
 						style="display: none;"></div>
 				</div>
 
