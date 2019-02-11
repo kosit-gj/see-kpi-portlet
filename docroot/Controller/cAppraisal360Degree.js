@@ -3334,6 +3334,7 @@ $(document).ready(function () {
                     galbalDataTemp['EmpName'] = ui.item.label;
                     galbalDataTemp['EmpName_id'] = ui.item.emp_id;
                     empNameAutoCompelteChangeToPositionName(ui.item.value);
+                    appraisalStatusFn();
                     return false;
                 },
                 change: function (e, ui) {

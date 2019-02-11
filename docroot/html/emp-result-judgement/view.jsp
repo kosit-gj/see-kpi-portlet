@@ -1038,18 +1038,19 @@ input[type=number]::-webkit-outer-spin-button {
                   </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px; margin-top: 2px; margin-bottom: 2px;">
-                  <select data-toggle="tooltip" title="<liferay-ui:message key="Position"/>" multiple="multiple" data-original-title="<liferay-ui:message key="Position"/>" class="input form-control input-sm span12" id="Position" name="Position">
+                  <select data-toggle="tooltip" multiple="multiple" data-original-title="<liferay-ui:message key="Position"/>" class="input form-control input-sm span12" id="Position" name="Position">
                  </select>            
                   </div>
 				 
-				 <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="form"/>" class="input form-control input-sm span12"
-                      id="AppraisalForm" name="AppraisalForm">
-                    </select>
+				 <div class="form-group pull-left span3" style="margin-left: 5px; margin-top: 2px; margin-bottom: 2px;">
+				 	<div class="form-control span12">
+                    	<select data-toggle="tooltip" data-original-title="<liferay-ui:message key="form"/>" class="input form-control input-sm span12" id="AppraisalForm" name="AppraisalForm" multiple="multiple">
+                    	</select>
+                    </div>
                   </div>
                   
-				  <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="status"/>" class="input form-control input-sm span12"
+				  <div class="form-group pull-left span3" style="margin-left:5px;">
+                    <select data-toggle="tooltip" data-original-title="<liferay-ui:message key="status"/>" class="input form-control input-sm span12"
                       id="status" name="status">
                       <!-- <option>All Status</option> -->
                     </select>

@@ -125,6 +125,7 @@ var dropDrowFormTypeFn = function(id){
 		type:"get",
 		dataType:"json",
 		async:false,
+		data:{'is_bonus':1},
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";

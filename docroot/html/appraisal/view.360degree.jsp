@@ -989,7 +989,7 @@ background-color:#71cccc !important;
 											<div class="span2 grandTototalWeightArea" id='grandTototalWeightArea'>
 												<label class="span12 p-t-xxsg text-center "style=" text-align: center;"><liferay-ui:message key="grand-total" /></label> 
 												<label class="span12 p-t-xxsg text-center txtGrandTotalWeigh" id="txtGrandTotalWeigh" style="font-size: 300%; text-align: center;"></label>
-												<label class="span12 p-t-xxsg text-center txtGrade" id="txtGrade" style="font-size: 400%;padding-top: 22%;color:#6161fb;text-align: center;"></label>											
+												<label class="span12 p-t-xxsg text-center txtGrade" id="txtGrade" style="font-size: 400%;padding-top:14%;color:#6161fb;text-align: center;"></label>											
 											</div>
 									<!-- 		<div class="span12">
 												<button class="btn btn-warning" style="float:right;" type="button" id="btnCalculate"><i class="icon-play"></i> Calculate</button>

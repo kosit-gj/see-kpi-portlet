@@ -766,8 +766,10 @@ margin-bottom:1px;
 				                    </select>
 				                  </div>
 								 
-								 <div class="form-group pull-left span2" style="margin-left: 5px">
-				                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="form"/>" class="input form-control input-sm span12"
+								  <div class="form-group pull-left span2" style="margin-left: 5px;  margin-top: 2px;">
+				                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="form"/>"
+				                     multiple="multiple" data-original-title="<liferay-ui:message key="AppraisalForm"/>" 
+				                     class="input form-control input-sm span12"
 				                      id="AppraisalForm" name="AppraisalForm">
 				                    </select>
 				                  </div>

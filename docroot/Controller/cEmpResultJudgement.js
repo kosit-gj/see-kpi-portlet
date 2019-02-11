@@ -134,7 +134,7 @@ var dropDrowFormTypeFn = function(id){
 			var htmlOption="";
 //			htmlOption+="<option value=''>All Form</option>";
 			$.each(data,function(index,indexEntry){
-				htmlOption+="<option value="+indexEntry['appraisal_form_id']+">"+indexEntry['appraisal_form_name']+"</option>";
+				htmlOption+="<option value='"+indexEntry['appraisal_form_id']+"-"+indexEntry['appraisal_form_type']+"'>"+indexEntry['appraisal_form_name']+"</option>";
 			});
 			$("#AppraisalForm").html(htmlOption);
 		}
@@ -170,7 +170,23 @@ var refreshMultiPosition = function() {
 	$(".ui-icon-check,.ui-icon-closethick,.ui-icon-circle-close").css({'margin-top':'3px'});
 	$('input[name=multiselect_Position]').css({'margin-bottom':'6px','margin-right':'3px'});
 }
+var refreshMultiForm = function() {
+	$("#AppraisalForm").multiselect('refresh');
+	$("#AppraisalForm_ms").css({'width':'100%'});
+	$(".ui-icon-check,.ui-icon-closethick,.ui-icon-circle-close").css({'margin-top':'3px'});
+	$('input[name=multiselect_AppraisalForm]').css({'margin-bottom':'6px','margin-right':'3px'});
+}
 var appraisalStatusFn = function () {
+	// get form value
+	var formArr = $("#AppraisalForm").val();
+	if(formArr == null){
+		formArr = [];
+	} else {
+		formArr = jQuery.map( formArr, function( val ) {
+			return val.split('-')[0];
+		});
+	}
+	
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/bonus/advance_search/status",
         type: "get",
@@ -178,7 +194,7 @@ var appraisalStatusFn = function () {
         async: false,
         data: {
         	"flag": "emp_result_judgement_flag",
-        	"appraisal_form_id": $("#AppraisalForm").val(),
+        	"appraisal_form_id": formArr,
         	"appraisal_type_id": 2,
         	
         	 "emp_level" : $("#AppraisalEmpLevel").val(),
@@ -262,14 +278,24 @@ var searchAdvanceFn = function () {
 
     $("#embedParamSearch").append(embedParam);
     
-    to_action();
-    fakeAdjustFn();
-    getDataFn(pageNumberDefault,$("#rpp").val());
+    if($("#embed_appraisal_form").val() == "null"){
+    	callFlashSlide($(".lt-please-select-at-least-one-appraisal-form").val());
+    	return false;
+    } else {
+    	to_action();
+        fakeAdjustFn();
+    	getDataFn(pageNumberDefault,$("#rpp").val());
+    }
 };
 
 //Get Data
 var getDataFn = function (page, rpp) {
     var position_id = [];
+    
+    var appraisal_form = $("#embed_appraisal_form").val().split(',');
+    appraisal_form = jQuery.map(appraisal_form, function( val ) {
+		return val.split('-')[0];
+	});
     
     var level_id_org = $("#embed_appraisal_level_id_org").val();
     var level_id_emp = $("#embed_appraisal_level_id_emp").val();
@@ -277,7 +303,7 @@ var getDataFn = function (page, rpp) {
     var emp_id = $("#embed_emp_id").val();
     var org_id = $("#embed_organization").val();
     var status = $("#embed_status").val();
-    var form = $("#embed_appraisal_form").val();
+    // var form = $("#embed_appraisal_form").val();
     position_id.push($("#embed_position_id").val());
     $("#average-score").html("0");
 	$("#sd-score").html("0");
@@ -311,7 +337,7 @@ var getDataFn = function (page, rpp) {
             "org_id": org_id,
             "emp_id": emp_id,
             "stage_id": status,
-            "appraisal_form_id": form
+            "appraisal_form_id": appraisal_form
         },
         success: function (data) {
 //        	var numbersArr = [];
@@ -353,6 +379,11 @@ var getDataFn = function (page, rpp) {
 
 var to_action = function () {
 	var status = $("#embed_status").val();
+	var appraisal_form = $("#embed_appraisal_form").val().split(',');
+    appraisal_form = jQuery.map(appraisal_form, function( val ) {
+		return val.split('-')[0];
+	});
+	
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/emp/adjustment/to_action",
         type: "get",
@@ -362,7 +393,7 @@ var to_action = function () {
             "stage_id": status,
             "flag": "emp_result_judgement_flag",
             "appraisal_type_id": 2,
-            "appraisal_form_id": $("#embed_appraisal_form").val()
+            "appraisal_form_id": appraisal_form
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
@@ -849,7 +880,26 @@ $(document).ready(function() {
 				appraisalStatusFn();
 			});
 			
+			$("#AppraisalForm").multiselect({header:false, width:'100%'});
+			refreshMultiForm();
 			$("#AppraisalForm").change(function() {
+				// console.log(jQuery.type($(this).val()));
+				if($(this).val()==null) {
+					$("input[name='multiselect_AppraisalForm']").prop('disabled', false);
+				} else {
+					var data_type = $(this).val()[0].split('-')[1];
+					console.log(data_type);
+					$.each($("input[name='multiselect_AppraisalForm']").get(),function(index,indexEntry) {
+						if(data_type==$(indexEntry).val().split("-")[1]) {
+							$(indexEntry).prop('disabled', false);
+							// console.log(data_type, $(indexEntry).val().split("-")[1], 'false');
+						} else {
+							$(indexEntry).prop('disabled', true);
+							// console.log(data_type, $(indexEntry).val().split("-")[1], 'true');
+						}
+					});
+				}
+				
 				appraisalStatusFn();
 			});
 			

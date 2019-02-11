@@ -132,13 +132,19 @@ var dropDrowFormTypeFn = function(id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option value=''>All Form</option>";
+			//htmlOption+="<option value=''>All Form</option>";
 			$.each(data,function(index,indexEntry){
 				htmlOption+="<option value="+indexEntry['appraisal_form_id']+">"+indexEntry['appraisal_form_name']+"</option>";
 			});
 			$("#AppraisalForm").html(htmlOption);
 		}
 	});
+}
+var refreshMultiAppraisalForm = function() {
+	$("#AppraisalForm").multiselect('refresh').multiselectfilter();
+	$("#AppraisalForm_ms").css({'width':'100%'});
+	$(".ui-icon-check,.ui-icon-closethick,.ui-icon-circle-close").css({'margin-top':'3px'});
+	$('input[name=multiselect_AppraisalForm]').css({'margin-bottom':'6px','margin-right':'3px'});
 }
 
 
@@ -171,27 +177,6 @@ var refreshMultiPosition = function() {
 	$('input[name=multiselect_Position]').css({'margin-bottom':'6px','margin-right':'3px'});
 }
 
-
-//SearchAdvance
-/*var searchAdvanceFn = function () {
-
-    $("#embedParamSearch").empty();
-    var embedParam = "";
-    embedParam += "<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id_org' name='embed_appraisal_level_id_org' value='" + $("#AppraisalOrgLevel").val()+"'>";
-    embedParam += "<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id_emp' name='embed_appraisal_level_id_emp' value='" + $("#AppraisalEmpLevel").val() + "'>";
-    embedParam += "<input type='hidden' class='embed_param_search' id='embed_period_id' name='embed_period_id' value='" + $("#AppraisalPeriod").val()+"'>";
-    embedParam += "<input type='hidden' class='embed_param_search' id='embed_position_id' name='embed_position_id' value='" + $("#Position").val() + "'>";
-    embedParam += "<input type='hidden' class='embed_param_search' id='embed_emp_id' name='embed_emp_id' value='"+$("#EmpName_id").val()+"'>";
-//    embedParam += "<input type='hidden' class='embed_param_search' id='embed_year_list' name='embed_year_list' value='" + $("#AppraisalYear").val() + "'>";
-    embedParam += "<input type='hidden' class='embed_param_search' id='embed_organization' name='embed_organization' value='"+$("#organization").val()+"'>";
-    embedParam += "<input type='hidden' class='embed_param_search' id='embed_appraisal_form' name='embed_appraisal_form' value='" + $("#AppraisalForm").val() + "'>";
-
-    $("#embedParamSearch").append(embedParam);
-    
-   
-    getDataFn();
-};*/
-
 //Get Data
 var getDataFn = function () {
 	$("body").mLoading('show'); //Loading
@@ -202,7 +187,8 @@ var getDataFn = function () {
 	var organization = $("#organization").val();
 	var EmpName_id= $("#EmpName_id").val();
 	var Position_id= $("#Position").val()== null ? '' : $("#Position").val().toString();
-	var AppraisalFrom=$("#AppraisalForm").val();
+	var AppraisalFrom=$("#AppraisalForm").val()== null ? '' : $("#AppraisalForm").val().toString();
+	var EffectiveDate=$("#effectiveDate").val();	
 	var output_type = $("#output_type").val();
 	var parameter = {};
 	var template_name ="";
@@ -212,6 +198,12 @@ var getDataFn = function () {
 		Position_id = $("#Position").val().toString();
 	}
 	console.log(Position_id);
+	if(AppraisalFrom ==''){
+		$(".ui-multiselect-all").click();
+		AppraisalFrom = $("#AppraisalForm").val().toString();
+	}
+	console.log(AppraisalFrom);
+	console.log(EffectiveDate);
 	/*  if (Position_id == '') {
 	        $("body").mLoading('hide'); //Loading
 	        callFlashSlide("Position is Require !");
@@ -225,7 +217,8 @@ var getDataFn = function () {
 				param_emp: EmpName_id,
 				param_level_emp: AppraisalEmpLevel,
 				param_level_org: AppraisalOrgLevel,
-				param_from:AppraisalFrom
+				param_from:AppraisalFrom,
+				param_effectiveDate:EffectiveDate
 			  };
 
 /*	//-- set report lacale name --//
@@ -260,6 +253,21 @@ var getDataFn = function () {
 //		}
 	 
 };*/
+var toDayFn = function(id) {
+	  var date = new Date();
+	  var day = date.getDate();
+	  var month = date.getMonth() + 1;
+	  var year = date.getFullYear();
+
+	  if (month < 10) month = "0" + month;
+	  if (day < 10) day = "0" + day;
+
+	  var today = year + "-" + month + "-" + day;
+	  //document.getElementById(id).value = today;
+	  $(id).val(today);
+	  // document.getElementById("datepicker-end").value = today;
+
+};
     
 $(document).ready(function() {
 
@@ -305,6 +313,8 @@ $(document).ready(function() {
 			$("#Position").multiselect({minWidth:'100%;'}).multiselectfilter();
 			  refreshMultiPosition();
 			
+			  $("#AppraisalForm").multiselect({minWidth:'100%;'}).multiselectfilter();
+			  refreshMultiAppraisalForm();
 			$("#EmpName").autocomplete({
 		        source: function (request, response) {
 		        	$.ajax({
@@ -365,6 +375,20 @@ $(document).ready(function() {
 		    	}*/
 		    		    
 		    });
+		    
+		    toDayFn("#effectiveDate ");
+			
+			 $("#effectiveDate").datepicker({
+				 	dateFormat: "yy-mm-dd",
+		         minDate: new Date(2018, 1 - 1, 1),
+		         onSelect: function () {		            
+		             var startDate = $(this).datepicker('getDate');
+		             var minDate = $(this).datepicker('getDate');		           
+		         }
+		     });
+			 $("#effectiveDate").keypress(function(event) {
+				    return ( ( event.keyCode || event.which ) === 9 ? true : false );
+				});
 		    	    
 		    //binding tooltip start
 		    $('[data-toggle="tooltip"]').css({"cursor":"pointer"});
