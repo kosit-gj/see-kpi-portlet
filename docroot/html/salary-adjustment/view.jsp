@@ -715,7 +715,7 @@ background-color:#71cccc !important;
 }
 
 /*
-#tableBonusAdjustment thead tr th {
+.tableBonusAdjustment thead tr th {
  white-space: nowrap;
  text-align: center;
  vertical-align: middle;
@@ -740,33 +740,33 @@ background-color:#71cccc !important;
  line-height: 16px;
  padding: 5px;
 
-#tableBonusAdjustment tbody tr td .input-xs{ 
+.tableBonusAdjustment tbody tr td .input-xs{ 
   line-height: 10px; height: 5px; font-size: 10px; width: 100px; text-align: right; 
  } 
 
-.aui #tableBonusAdjustment .float-label-control { position: relative; margin-bottom: 0 px;font-size: smaller; }
-   /* .aui #tableBonusAdjustment .float-label-control ::-webkit-input-placeholder { color: transparent; }
-    .aui #tableBonusAdjustment .float-label-control :-moz-placeholder { color: transparent; }
-    .aui #tableBonusAdjustment .float-label-control ::-moz-placeholder { color: transparent; }
-    .aui #tableBonusAdjustment .float-label-control :-ms-input-placeholder { color: transparent; }*/
-    .aui #tableBonusAdjustment .float-label-control input:-webkit-autofill,
-    .aui #tableBonusAdjustment .float-label-control textarea:-webkit-autofill { background-color: transparent !important; -webkit-box-shadow: 0 0 0 1000px white inset !important; -moz-box-shadow: 0 0 0 1000px white inset !important; box-shadow: 0 0 0 1000px white inset !important; }
-    .aui #tableBonusAdjustment .float-label-control input, .aui #tableBonusAdjustment .float-label-control textarea, .aui #tableBonusAdjustment .float-label-control label { font-size: 1.3em; box-shadow: none; -webkit-box-shadow: none; }
-        .aui #tableBonusAdjustment .float-label-control input:focus,
-        .aui #tableBonusAdjustment .float-label-control textarea:focus { box-shadow: none; -webkit-box-shadow: none ; border-bottom-width: 3px !important;; padding-bottom: 0 !important;; border-color:#673ab7 !important; }
-        .aui #tableBonusAdjustment .float-label-control textarea:focus { padding-bottom: 4px; }
-    .aui #tableBonusAdjustment .float-label-control input, .aui #tableBonusAdjustment .float-label-control textarea { display: block; width: 100%; padding: 0.1em 0em 1px 0em; border: none; border-radius: 0px; border-bottom: 1px solid #aaa !important; outline: none; margin: 0px; background: none; }
-    .aui #tableBonusAdjustment .float-label-control textarea { padding: 0.1em 0em 5px 0em; }
-    .aui #tableBonusAdjustment .float-label-control label { position: absolute; font-weight: normal; /*top: -1.0em;*/top: 1.9em;  left: 0.08em; color: #aaaaaa !important; z-index: -1; font-size: 0.85em; -moz-animation: float-labels 300ms none ease-out; -webkit-animation: float-labels 300ms none ease-out; -o-animation: float-labels 300ms none ease-out; -ms-animation: float-labels 300ms none ease-out; -khtml-animation: float-labels 300ms none ease-out; animation: float-labels 300ms none ease-out; /* There is a bug sometimes pausing the animation. This avoids that.*/ animation-play-state: running !important; -webkit-animation-play-state: running !important; }
-    .aui #tableBonusAdjustment .float-label-control input.empty + label,
-    .aui #tableBonusAdjustment .float-label-control textarea.empty + label { top: 0.1em; font-size: 1.5em; animation: none; -webkit-animation: none; }
-    .aui #tableBonusAdjustment .float-label-control input:not(.empty) + label,
-    .aui #tableBonusAdjustment .float-label-control textarea:not(.empty) + label { z-index: 1; }
-    .aui #tableBonusAdjustment .float-label-control input:not(.empty):focus + label,
-    .aui #tableBonusAdjustment .float-label-control textarea:not(.empty):focus + label { color: #aaaaaa !important; }
-    .aui #tableBonusAdjustment .float-label-control.label-bottom label { -moz-animation: float-labels-bottom 300ms none ease-out; -webkit-animation: float-labels-bottom 300ms none ease-out; -o-animation: float-labels-bottom 300ms none ease-out; -ms-animation: float-labels-bottom 300ms none ease-out; -khtml-animation: float-labels-bottom 300ms none ease-out; animation: float-labels-bottom 300ms none ease-out; }
-    .aui #tableBonusAdjustment .float-label-control.label-bottom input:not(.empty) + label,
-    .aui #tableBonusAdjustment .float-label-control.label-bottom textarea:not(.empty) + label { top: 3em; }
+.aui .tableBonusAdjustment .float-label-control { position: relative; margin-bottom: 0 px;font-size: smaller; }
+   /* .aui .tableBonusAdjustment .float-label-control ::-webkit-input-placeholder { color: transparent; }
+    .aui .tableBonusAdjustment .float-label-control :-moz-placeholder { color: transparent; }
+    .aui .tableBonusAdjustment .float-label-control ::-moz-placeholder { color: transparent; }
+    .aui .tableBonusAdjustment .float-label-control :-ms-input-placeholder { color: transparent; }*/
+    .aui .tableBonusAdjustment .float-label-control input:-webkit-autofill,
+    .aui .tableBonusAdjustment .float-label-control textarea:-webkit-autofill { background-color: transparent !important; -webkit-box-shadow: 0 0 0 1000px white inset !important; -moz-box-shadow: 0 0 0 1000px white inset !important; box-shadow: 0 0 0 1000px white inset !important; }
+    .aui .tableBonusAdjustment .float-label-control input, .aui .tableBonusAdjustment .float-label-control textarea, .aui .tableBonusAdjustment .float-label-control label { font-size: 1.3em; box-shadow: none; -webkit-box-shadow: none; }
+        .aui .tableBonusAdjustment .float-label-control input:focus,
+        .aui .tableBonusAdjustment .float-label-control textarea:focus { box-shadow: none; -webkit-box-shadow: none ; border-bottom-width: 3px !important;; padding-bottom: 0 !important;; border-color:#673ab7 !important; }
+        .aui .tableBonusAdjustment .float-label-control textarea:focus { padding-bottom: 4px; }
+    .aui .tableBonusAdjustment .float-label-control input, .aui .tableBonusAdjustment .float-label-control textarea { display: block; width: 100%; padding: 0.1em 0em 1px 0em; border: none; border-radius: 0px; border-bottom: 1px solid #aaa !important; outline: none; margin: 0px; background: none; }
+    .aui .tableBonusAdjustment .float-label-control textarea { padding: 0.1em 0em 5px 0em; }
+    .aui .tableBonusAdjustment .float-label-control label { position: absolute; font-weight: normal; /*top: -1.0em;*/top: 1.9em;  left: 0.08em; color: #aaaaaa !important; z-index: -1; font-size: 0.85em; -moz-animation: float-labels 300ms none ease-out; -webkit-animation: float-labels 300ms none ease-out; -o-animation: float-labels 300ms none ease-out; -ms-animation: float-labels 300ms none ease-out; -khtml-animation: float-labels 300ms none ease-out; animation: float-labels 300ms none ease-out; /* There is a bug sometimes pausing the animation. This avoids that.*/ animation-play-state: running !important; -webkit-animation-play-state: running !important; }
+    .aui .tableBonusAdjustment .float-label-control input.empty + label,
+    .aui .tableBonusAdjustment .float-label-control textarea.empty + label { top: 0.1em; font-size: 1.5em; animation: none; -webkit-animation: none; }
+    .aui .tableBonusAdjustment .float-label-control input:not(.empty) + label,
+    .aui .tableBonusAdjustment .float-label-control textarea:not(.empty) + label { z-index: 1; }
+    .aui .tableBonusAdjustment .float-label-control input:not(.empty):focus + label,
+    .aui .tableBonusAdjustment .float-label-control textarea:not(.empty):focus + label { color: #aaaaaa !important; }
+    .aui .tableBonusAdjustment .float-label-control.label-bottom label { -moz-animation: float-labels-bottom 300ms none ease-out; -webkit-animation: float-labels-bottom 300ms none ease-out; -o-animation: float-labels-bottom 300ms none ease-out; -ms-animation: float-labels-bottom 300ms none ease-out; -khtml-animation: float-labels-bottom 300ms none ease-out; animation: float-labels-bottom 300ms none ease-out; }
+    .aui .tableBonusAdjustment .float-label-control.label-bottom input:not(.empty) + label,
+    .aui .tableBonusAdjustment .float-label-control.label-bottom textarea:not(.empty) + label { top: 3em; }
 
 
 @keyframes float-labels {
@@ -817,33 +817,33 @@ input[type=number]::-webkit-outer-spin-button {
 	margin-bottom: 5px;margin-right: 5px;margin-top: 0px;
 }
 
-#tableBonusAdjustment tbody tr td .input-xs{ 
+.tableBonusAdjustment tbody tr td .input-xs{ 
  	line-height: 10px; height: 15px; font-size: 10px; width: 100px; text-align: right; 
- }.aui #tableBonusAdjustment .float-label-control { position: relative; margin-bottom: 0 px;font-size: smaller; }
-   /* .aui #tableBonusAdjustment .float-label-control ::-webkit-input-placeholder { color: transparent; }
-    .aui #tableBonusAdjustment .float-label-control :-moz-placeholder { color: transparent; }
-    .aui #tableBonusAdjustment .float-label-control ::-moz-placeholder { color: transparent; }
-    .aui #tableBonusAdjustment .float-label-control :-ms-input-placeholder { color: transparent; }*/
-    .aui #tableBonusAdjustment .float-label-control input:-webkit-autofill,
-    .aui #tableBonusAdjustment .float-label-control textarea:-webkit-autofill { background-color: transparent !important; -webkit-box-shadow: 0 0 0 1000px white inset !important; -moz-box-shadow: 0 0 0 1000px white inset !important; box-shadow: 0 0 0 1000px white inset !important; }
-    .aui #tableBonusAdjustment .float-label-control input, .aui #tableBonusAdjustment .float-label-control textarea, .aui #tableBonusAdjustment .float-label-control label { font-size: 1.3em; box-shadow: none; -webkit-box-shadow: none; }
-        .aui #tableBonusAdjustment .float-label-control input:focus,
-        .aui #tableBonusAdjustment .float-label-control textarea:focus { box-shadow: none; -webkit-box-shadow: none ; border-bottom-width: 3px !important;; padding-bottom: 0 !important;; border-color:#673ab7 !important; }
-        .aui #tableBonusAdjustment .float-label-control textarea:focus { padding-bottom: 4px; }
-    .aui #tableBonusAdjustment .float-label-control input, .aui #tableBonusAdjustment .float-label-control textarea { display: block; width: 100%; padding: 0.1em 0em 1px 0em; border: none; border-radius: 0px; border-bottom: 1px solid #aaa !important; outline: none; margin: 0px; background: none; }
-    .aui #tableBonusAdjustment .float-label-control textarea { padding: 0.1em 0em 5px 0em; }
-    .aui #tableBonusAdjustment .float-label-control label { position: absolute; font-weight: normal; /*top: -1.0em;*/top: 1.9em;  left: 0.08em; color: #aaaaaa !important; z-index: -1; font-size: 0.85em; -moz-animation: float-labels 300ms none ease-out; -webkit-animation: float-labels 300ms none ease-out; -o-animation: float-labels 300ms none ease-out; -ms-animation: float-labels 300ms none ease-out; -khtml-animation: float-labels 300ms none ease-out; animation: float-labels 300ms none ease-out; /* There is a bug sometimes pausing the animation. This avoids that.*/ animation-play-state: running !important; -webkit-animation-play-state: running !important; }
-    .aui #tableBonusAdjustment .float-label-control input.empty + label,
-    .aui #tableBonusAdjustment .float-label-control textarea.empty + label { top: 0.1em; font-size: 1.5em; animation: none; -webkit-animation: none; }
-    .aui #tableBonusAdjustment .float-label-control input:not(.empty) + label,
-    .aui #tableBonusAdjustment .float-label-control textarea:not(.empty) + label { z-index: 1; }
-    .aui #tableBonusAdjustment .float-label-control input:not(.empty):focus + label,
-    .aui #tableBonusAdjustment .float-label-control textarea:not(.empty):focus + label { color: #aaaaaa !important; }
-    .aui #tableBonusAdjustment .float-label-control.label-bottom label { -moz-animation: float-labels-bottom 300ms none ease-out; -webkit-animation: float-labels-bottom 300ms none ease-out; -o-animation: float-labels-bottom 300ms none ease-out; -ms-animation: float-labels-bottom 300ms none ease-out; -khtml-animation: float-labels-bottom 300ms none ease-out; animation: float-labels-bottom 300ms none ease-out; }
-    .aui #tableBonusAdjustment .float-label-control.label-bottom input:not(.empty) + label,
-    .aui #tableBonusAdjustment .float-label-control.label-bottom textarea:not(.empty) + label { top: 3em; }
+ }.aui .tableBonusAdjustment .float-label-control { position: relative; margin-bottom: 0 px;font-size: smaller; }
+   /* .aui .tableBonusAdjustment .float-label-control ::-webkit-input-placeholder { color: transparent; }
+    .aui .tableBonusAdjustment .float-label-control :-moz-placeholder { color: transparent; }
+    .aui .tableBonusAdjustment .float-label-control ::-moz-placeholder { color: transparent; }
+    .aui .tableBonusAdjustment .float-label-control :-ms-input-placeholder { color: transparent; }*/
+    .aui .tableBonusAdjustment .float-label-control input:-webkit-autofill,
+    .aui .tableBonusAdjustment .float-label-control textarea:-webkit-autofill { background-color: transparent !important; -webkit-box-shadow: 0 0 0 1000px white inset !important; -moz-box-shadow: 0 0 0 1000px white inset !important; box-shadow: 0 0 0 1000px white inset !important; }
+    .aui .tableBonusAdjustment .float-label-control input, .aui .tableBonusAdjustment .float-label-control textarea, .aui .tableBonusAdjustment .float-label-control label { font-size: 1.3em; box-shadow: none; -webkit-box-shadow: none; }
+        .aui .tableBonusAdjustment .float-label-control input:focus,
+        .aui .tableBonusAdjustment .float-label-control textarea:focus { box-shadow: none; -webkit-box-shadow: none ; border-bottom-width: 3px !important;; padding-bottom: 0 !important;; border-color:#673ab7 !important; }
+        .aui .tableBonusAdjustment .float-label-control textarea:focus { padding-bottom: 4px; }
+    .aui .tableBonusAdjustment .float-label-control input, .aui .tableBonusAdjustment .float-label-control textarea { display: block; width: 100%; padding: 0.1em 0em 1px 0em; border: none; border-radius: 0px; border-bottom: 1px solid #aaa !important; outline: none; margin: 0px; background: none; }
+    .aui .tableBonusAdjustment .float-label-control textarea { padding: 0.1em 0em 5px 0em; }
+    .aui .tableBonusAdjustment .float-label-control label { position: absolute; font-weight: normal; /*top: -1.0em;*/top: 1.9em;  left: 0.08em; color: #aaaaaa !important; z-index: -1; font-size: 0.85em; -moz-animation: float-labels 300ms none ease-out; -webkit-animation: float-labels 300ms none ease-out; -o-animation: float-labels 300ms none ease-out; -ms-animation: float-labels 300ms none ease-out; -khtml-animation: float-labels 300ms none ease-out; animation: float-labels 300ms none ease-out; /* There is a bug sometimes pausing the animation. This avoids that.*/ animation-play-state: running !important; -webkit-animation-play-state: running !important; }
+    .aui .tableBonusAdjustment .float-label-control input.empty + label,
+    .aui .tableBonusAdjustment .float-label-control textarea.empty + label { top: 0.1em; font-size: 1.5em; animation: none; -webkit-animation: none; }
+    .aui .tableBonusAdjustment .float-label-control input:not(.empty) + label,
+    .aui .tableBonusAdjustment .float-label-control textarea:not(.empty) + label { z-index: 1; }
+    .aui .tableBonusAdjustment .float-label-control input:not(.empty):focus + label,
+    .aui .tableBonusAdjustment .float-label-control textarea:not(.empty):focus + label { color: #aaaaaa !important; }
+    .aui .tableBonusAdjustment .float-label-control.label-bottom label { -moz-animation: float-labels-bottom 300ms none ease-out; -webkit-animation: float-labels-bottom 300ms none ease-out; -o-animation: float-labels-bottom 300ms none ease-out; -ms-animation: float-labels-bottom 300ms none ease-out; -khtml-animation: float-labels-bottom 300ms none ease-out; animation: float-labels-bottom 300ms none ease-out; }
+    .aui .tableBonusAdjustment .float-label-control.label-bottom input:not(.empty) + label,
+    .aui .tableBonusAdjustment .float-label-control.label-bottom textarea:not(.empty) + label { top: 3em; }
 	
-	.aui #tableBonusAdjustment .float-label-control input{font-size: 12px;text-align: right;}
+	.aui .tableBonusAdjustment .float-label-control input{font-size: 12px;text-align: right;}
 
 
 .table-filter-container {
@@ -999,17 +999,18 @@ input[type=number]::-webkit-outer-spin-button {
                       <input class="form-control input-sm" id="EmpName_id" name="EmpName_id" value="" type="hidden">
                   </div>
 
-                  <div class="form-group pull-left span3" style="margin-left: 5px; ">
+                  <div class="form-group pull-left span3" style="margin-left: 5px;">
                   <select data-toggle="tooltip" title="<liferay-ui:message key="Position"/>" multiple="multiple" data-original-title="<liferay-ui:message key="Position"/>" class="input form-control input-sm span12" id="Position" name="Position">
                  </select>            
                   </div>
 				 
 				 <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="form"/>" class="input form-control input-sm span12"
+                    <select multiple="multiple" data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="form"/>" class="input form-control input-sm span12"
                       id="AppraisalForm" name="AppraisalForm">
                     </select>
                   </div>
-                  
+             </div>
+             <div class="row-fluid" id='advanceSearchAppraisal'>
 				  <div class="form-group pull-left span3" style="margin-left: 5px">
                     <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="status"/>" class="input form-control input-sm span12"
                       id="status" name="status">
@@ -1075,79 +1076,14 @@ input[type=number]::-webkit-outer-spin-button {
                             <!-- pagination end -->
 <!-- 							<div class="head_adjust" id="table-filter-group" style="display: none; margin-bottom: 7px;">Group: <select id="filter-group" style="width: 100px;"></select></div> -->
 							<div id="scroll-tableBonusAdjustment" class="row-fluid list-data-table" style="overflow: auto;">							
-							<table class="table table-striped table-bordered" id="tableBonusAdjustment" style="margin-bottom: 0px; max-width: none;">
-							<thead>
-						    <tr>
-<%-- 						      <th rowspan="3" class="fix-column-top no"><liferay-ui:message key="no-dot"/></th> --%>
-						      <th rowspan="3" class="fix-column-top ec"><liferay-ui:message key="emp-code"/></th>
-						      <th rowspan="3" class="fix-column-top en"><liferay-ui:message key="employee-name"/></th>
-						      <th rowspan="3" class="fix-column-top pg"><liferay-ui:message key="level"/></th>
-						      <th rowspan="3" class="fix-column-top or"><liferay-ui:message key="organization"/></th>
-						      <th rowspan="3" class="fix-column-top gr"><liferay-ui:message key="form_type"/></th>
-						      <th rowspan="3" class="fix-column-top po"><liferay-ui:message key="position"/></th>
-						      <th rowspan="3" class="fix-column-top jc"><liferay-ui:message key="job-code"/></th>
-<%-- 						      <th rowspan="3" class="fix-column-top pc"><liferay-ui:message key="position-code"/></th> --%>
-						      <th rowspan="3" class="fix-column-top kn">คะแนนเต็มตีค่างาน<br>(ความรู้)</th>
-						      <th rowspan="3" class="fix-column-top pe">คะแนนเต็มตีค่างาน<br>(ศักยภาพ)</th>
-						      <th rowspan="3" class="fix-column-top tp">Total Point</th>
-						      <th rowspan="3" class="fix-column-top bp">Baht Point</th>
-						      <th rowspan="3" class="fix-column-top str1">ผลการประเมินค่างาน</th>
-						      <th rowspan="3" class="fix-column-top str2">คะแนนความรู้</th>
-						      <th rowspan="3" class="fix-column-top str3">คะแนนศักยภาพ</th>
-						      <th rowspan="3" class="fix-column-top str4">คะแนนผลงานปีที่ผ่านมา</th>
-						      <th rowspan="3" class="fix-column-top str5">คะแนนความสามารถที่มีคุณค่าต่อองค์กร</th>
-						      <th rowspan="3" class="fix-column-top mgr">คะแนนประเมิน Mgr.</th>
-						      <th rowspan="3" class="fix-column-top bu">คะแนนประเมิน BU.</th>
-						      <th rowspan="3" class="fix-column-top coo">คะแนนประเมิน COO.</th>
-						      <th rowspan="3" class="fix-column-top boa">คะแนนประเมิน Board.</th>
-						      <th rowspan="3" class="fix-column-top grade">เกรด</th>
-						      
-						      <th colspan="3" class="fix-column-top sal">รายได้จากการคำนวนตีค่างาน</th>
-						      <th colspan="7" class="fix-column-top cursal">รายได้ปัจจุบัน</th>
-						      
-						      <th rowspan="3" class="fix-column-top busy">ขาด/เกิน</th>
-						      <th rowspan="3" class="fix-column-top cal">Cal Standard</th>
-						      <th colspan="2" class="fix-column-top percal">% Cal</th>
-						      <th colspan="4" class="fix-column-top changesal">รายได้ที่เปลี่ยนแปลง</th>
-						      <th colspan="7" class="fix-column-top newsal">รายได้ใหม่</th>
-						    </tr>
-						    <tr>
-						 	  <th rowspan="2" class="fix-column-top">รายได้รวมที่ควรได้ <br>90% ไม่รวม Bonus</th>
-						      <th rowspan="2" class="fix-column-top">รายได้ Fix<br>ที่ควรได้ 65%</th>
-						      <th rowspan="2" class="fix-column-top">รายได้ Var<br>ที่ควรได้ 25%</th>
-						      <th rowspan="2" class="fix-column-top">รายได้ปัจจุบัน<br>Total</th>
-						      <th colspan="3" class="fix-column-top">FIX 65%</th>
-						      <th colspan="3" class="fix-column-top">VAR 25%</th>
-						      <th rowspan="2" class="fix-column-top">%</th>
-						      <th rowspan="2" class="fix-column-top">Bath</th>
-						      <th rowspan="2" class="fix-column-top">ปรับรายได้<br>Total</th>
-						      <th rowspan="2" class="fix-column-top">ปรับเงินเดือน</th>
-						      <th rowspan="2" class="fix-column-top">ปรับ P-QPI</th>
-						      <th rowspan="2" class="fix-column-top">% Diff</th>
-						      <th rowspan="2" class="fix-column-top">รายได้ใหม่<br>Total</th>
- 							  <th colspan="3" class="fix-column-top">FIX 65%</th>
-						      <th colspan="3" class="fix-column-top">VAR 25%</th>
-						    </tr>			
-						     <tr>
-						      <th class="fix-column-top">Salary</th>
-						      <th class="fix-column-top">P-QPI</th>
-						      <th class="fix-column-top">อื่นๆ</th>
-						      <th class="fix-column-top">MPI</th>
-						      <th class="fix-column-top">PI</th>
-						      <th class="fix-column-top">อื่นๆ</th>
-						      <th class="fix-column-top">Salary</th>
-						      <th class="fix-column-top">P-QPI</th>
-						      <th class="fix-column-top">อื่นๆ</th>
-						      <th class="fix-column-top">MPI</th>
-						      <th class="fix-column-top">PI</th>
-						      <th class="fix-column-top">อื่นๆ</th>
-						    </tr>
-							</thead>
-							<tbody id="list_empjudege">
-							</tbody>
-							<tfoot id="list_footer">
-							</tfoot>
-							</table>
+<!-- 							<table class="table table-striped table-bordered" id="tableBonusAdjustment" style="margin-bottom: 0px; max-width: none;"> -->
+<!-- 							<thead id="list_header"> -->
+<!-- 							</thead> -->
+<!-- 							<tbody id="list_empjudege"> -->
+<!-- 							</tbody> -->
+<!-- 							<tfoot id="list_footer"> -->
+<!-- 							</tfoot> -->
+<!-- 							</table> -->
 							</div>
 							
 							<!-- pagination start -->

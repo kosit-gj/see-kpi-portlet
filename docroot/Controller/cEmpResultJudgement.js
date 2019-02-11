@@ -1076,32 +1076,3 @@ $(document).ready(function() {
 		}
 	}
 });
-
-/*
-$("#scroll-tableBonusAdjustment thead").css("transform","translate(0,0px)");
-$(window).bind("scroll", function() {
-    var myElements = $("#scroll-tableBonusAdjustment")[0].querySelectorAll("thead");
- if($(this).scrollTop() >= $("#scroll-tableBonusAdjustment").offset().top){
-  $(".lfr-hudcrumbs").hide();
-  $(".nav-collapse").hide();
-  var translate = "translate(0," + ($(this).scrollTop()-$("#scroll-tableBonusAdjustment").offset().top) + "px)";
-     for (var i = 0; i < myElements.length; i++) {
-       myElements[i].style.transform=translate;
-     }
- }else{
-  $(".nav-collapse").show();
-  $("#scroll-tableBonusAdjustment thead").css("transform","translate(0,0px)");
- }
-
-});
-
-
-$("#scroll-tableBonusAdjustment").bind("scroll", function() {
-    var translate = "translate(0," + this.scrollTop + "px)";
-    var myElements = this.querySelectorAll("thead");
-
-    for (var i = 0; i < myElements.length; i++) {
-     myElements[i].style.transform=translate;
-    }
-});
-*/
