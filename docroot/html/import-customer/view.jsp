@@ -500,11 +500,11 @@ plid = layout.getPlid();
 
 
 			<div class="ibox-content">
-
 			<div class="row-fluid ">
          		<div class="spen12">
-	                 <span id="btnAdvanceDownloadOption"><form id="formExportToExcel" action="" method="post" class="" style="display: inline-flex; margin-bottom: 5px; position: relative; top: -1px;">	<button id="exportToExcel" class="btn btn-warning btn-sm" type="submit">		<i class="fa fa-download"></i> Download	</button></form></span>
-	                  <span id="btnAdvanceImportOption">   <button style="margin-bottom: 5px;" type="button" class="btn btn-success input-sm" name="btn_import" id="btn_import" ><i class="fa fa-upload"></i>&nbsp;Import</button></span>
+	                 <span id="btnAdvanceDownloadOption"><form id="formDowloadToCsv" action="" method="post" class="" style="display: inline-flex; margin-bottom: 5px; position: relative; top: -1px;">	<button id="exportToExcel" class="btn btn-warning btn-sm" type="submit">		<i class="fa fa-download"></i> Download	</button></form></span>
+	                 <span id="btnAdvanceExportOption"><form id="formExportToCsv" action="" method="post" class="" style="display: inline-flex; margin-bottom: 5px; position: relative; top: -1px;">	<button id="exportToCsv" class="btn btn-danger btn-sm" type="submit">		<i class="fa fa-download"></i> Export	</button></form></span>
+	                   <span id="btnAdvanceImportOption">   <button style="margin-bottom: 5px;" type="button" class="btn btn-success input-sm" name="btn_import" id="btn_import" ><i class="fa fa-upload"></i>&nbsp;Import</button></span>
                  </div>
          	</div>
 
@@ -626,27 +626,27 @@ plid = layout.getPlid();
 							<div class="form-group p-xxs">
 								<label class="control-label">Customer Name:</label>
 								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_customer_name" disabled="disabled">
+									<input type="text" class="form-control input-sm span12" placeholder="" id="from_customer_name" >
 								</div>
 							</div>
 							<div class="form-group p-xxs">
 								<label class="control-label">Customer Type:</label>
 								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_customer_type" disabled="disabled">
+									<input type="text" class="form-control input-sm span12" placeholder="" id="from_customer_type" >
 								</div>
 							</div>
 							<div class="form-group p-xxs">
 								<label class="control-label">Industry Classification:</label>
 								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_industry_class" disabled="disabled">
+									<input type="text" class="form-control input-sm span12" placeholder="" id="from_industry_class">
 								</div>
 							</div>
 							<div class="form-group p-xxs">
 								<label class="control-label">Position Code:</label>
 								<div class="controls">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_position_code_1" disabled="disabled">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_position_code_2" disabled="disabled">
-									<input type="text" class="form-control input-sm span12" placeholder="" id="from_position_code_3" disabled="disabled">
+									<input type="text" class="form-control input-sm span12 fromPositionCode" placeholder="" id="from_position_code_1" >
+									<input type="text" class="form-control input-sm span12 fromPositionCode" placeholder="" id="from_position_code_2" >
+									<input type="text" class="form-control input-sm span12 fromPositionCode" placeholder="" id="from_position_code_3" >
 								</div>
 							</div>
 						<div class="form-group p-xxs">
@@ -655,7 +655,7 @@ plid = layout.getPlid();
 								<label for="" class="checkbox" style="cursor: default">
 									<input id="from_checkboxIs_active"
 									name="from_checkboxIs_active" type="checkbox" value=""
-									style="margin-top: 4px;" disabled="disabled">
+									style="margin-top: 4px;" >
 								</label>
 							</div>
 						</div>
@@ -670,7 +670,7 @@ plid = layout.getPlid();
 				</div>
 				
 				<div class="modal-footer">
-<!-- 					<button class="btn btn-success" type="button" id="btnEmpSubmit">Save</button> -->
+ 					<button class="btn btn-success" type="button" id="btnCustomerSubmit">Save</button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle" type="button">Cancel</button>
 						<div class="alert alert-warning information" id="information2"
 						style="display: none;"></div>

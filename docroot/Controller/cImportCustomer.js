@@ -6,13 +6,14 @@ var galbalDataCustomer=[];
 
 var tempCusId ="";
 var tempCusName ="";
+var editCustomerID="";
 var pageNumberDefault=1;
 var restfulPathCus = restfulURL + "/" + serviceName + "/public/customer";
 var restfulPathDropDownCusType = restfulPathCus + "/list_cus_type";
 var restfulPathDropDownCusIndustry = restfulPathCus + "/list_industry";
 var restfulPathCusAutocomplete = restfulPathCus + "/auto_cus";
 var restfulPathCusImportFile = restfulPathCus + "/import";
-var restfulPathCusImportFile = restfulPathCus + "/import";
+var restfulPathCusExportFile = restfulPathCus + "/export";
 
 var generateDropDownList = function(url,type,request,initValue){
  	var html="";
@@ -42,23 +43,25 @@ var generateDropDownList = function(url,type,request,initValue){
 
 
 	//Check Validation
-var validationFn = function(data){
+var validationFn = function(data,id){
 	var validate = "";
 	var count = 0;
-	$.each(data['data'], function(index, indexEntry) {
-
-		if (index != undefined) {
-			if (count == 0) {
-				validate += "<font color='red'>* </font>" + indexEntry + "";
-			} else {
-				validate += "<br><font color='red'>* </font> " + indexEntry + " ";
-			}
-		}
-
-		count++;
-	});
+	$.each(data, function(index, indexEntry) {
+        //console.log(indexEntry);
+        $.each(indexEntry, function(index2, indexEntry2) {
+            //console.log(indexEntry2);
+            if (index2 != undefined) {
+                if (count == 0) {
+                    validate += "<font color='red'>* </font>" + indexEntry2 + "";
+                } else {
+                    validate += "<br><font color='red'>* </font> " + indexEntry2 + " ";
+                }
+            }
+        count++;
+        });
+    });
 	
-	callFlashSlideInModal(validate,"#information","error");
+	callFlashSlideInModal(validate,id,"error");
 };	
 
 	
@@ -103,12 +106,6 @@ var clearFn = function() {
 	$("#from_position_code_1").val("");
 	$("#from_position_code_2").val("");
 	$("#from_position_code_3").val("");
-	$("#from_position_code_1").hide();
-	$("#from_position_code_2").hide();
-	$("#from_position_code_3").hide();
-	$("#from_position_code_1").prop('disabled', true);
-	$("#from_position_code_2").prop('disabled', true);
-	$("#from_position_code_3").prop('disabled', true);
 	$("#from_industry_class").val("");
 		
 	
@@ -182,12 +179,9 @@ var findOneFn = function(id) {
 			if(data['customer_position'] != undefined && data['customer_position'] != null && data['customer_position'] != ""){
 				$.each(data['customer_position'],function(index,indexEntry) {
 					$("#from_position_code_"+count).val(indexEntry['position_code']);
-					$("#from_position_code_"+count).show();
+					// $("#from_position_code_"+count).show();
 					count++;
 				});
-			}else{
-				$("#from_position_code_1").val("");
-				$("#from_position_code_1").show();
 			}
 			$("#from_industry_class").val(data['industry_class']);
 			$("#from_checkboxIs_active").prop('checked', (data['is_active'] == 1 ? true:false));;
@@ -213,7 +207,7 @@ var listCustomerFn = function(data) {
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["customer_type"]+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ notNullTextFn(indexEntry["industry_class"])+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\"> <div align='center'><input type='checkbox' "+ (indexEntry["is_active"]=="1" ? "checked" : "")+ " disabled></div> </td>";
-		htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><button id="+indexEntry["customer_id"]+" data-target=#ModalViewCustomer data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"' class='btn btn-primary btn-xs view'><i class='fa fa-eye' aria-hidden='true'></i></button></td>";
+		htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><button id="+indexEntry["customer_id"]+" data-target=#ModalViewCustomer data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"' class='btn btn-primary btn-xs view'><i class='fa fa-edit ' aria-hidden='true'></i></button></td>";
 
 		htmlTable += "</tr>";
 	});
@@ -229,6 +223,7 @@ var listCustomerFn = function(data) {
 	$("#tableCustomer").on("click",".view",function(){
 		
 			clearFn();
+			editCustomerID = this.id;
 			findOneFn(this.id);	
 			
 	});
@@ -237,6 +232,54 @@ var listCustomerFn = function(data) {
 }
 
 // --------  ListData  End
+
+var updateFn = function () {
+	
+	var isActive="";
+	var customerPosition=[];
+	
+
+
+	$.each($(".fromPositionCode").get(),function(index,indexEntry){
+		//console.log($(indexEntry).val());
+		if($(indexEntry).val() != ""){
+			customerPosition.push($(indexEntry).val());
+		}
+	});
+	
+	//IsAction
+	isActive=($("#from_checkboxIs_active").is(":checked") ? 1 : 0);
+	
+	
+	$.ajax({
+		url:restfulPathCus+"/"+editCustomerID,
+		type : "PATCH",
+		dataType : "json",
+		headers:{Authorization:"Bearer "+tokenID.token},
+		data : {
+			"customer_code":$("#from_customer_code").val(),
+			"customer_name":$("#from_customer_name").val(),
+			"customer_type":$("#from_customer_type").val(),
+			"industry_class":$("#from_industry_class").val(),
+			"customer_position":customerPosition,
+			"is_active":isActive
+		},	
+		success : function(data) {
+
+			if (data['status'] == "200") {
+				getDataFn($("#pageNumber").val(),$("#rpp").val());
+				clearFn();
+				$('#ModalViewCustomer').modal('hide');
+				callFlashSlide("Update Successfully.");
+				
+			}else if (data['status'] == "400") {
+				//console.log(data);
+				validationFn(data['errors'],"#information2");
+			}
+		}
+	});
+	return false;
+}
 
 
 
@@ -276,8 +319,9 @@ $(document).ready(function() {
 		clearFn();
 	});
 
-
-	
+	$("#btnCustomerSubmit").click(function() {
+		updateFn();
+	});
 	//Autocomplete Search Start
 	$("#search_customer_name").autocomplete({
         source: function (request, response) {
@@ -328,10 +372,18 @@ $(document).ready(function() {
    
 	//Autocomplete Search End
 	
-	$("#exportToExcel").click(function(){
-		$("form#formExportToExcel").attr("action",$("#url_portlet").val()+"/file/import_customer.csv");
+	$("#dowloadToCsv").click(function(){
+		$("form#formDowloadToCsv").attr("action",$("#url_portlet").val()+"/file/import_customer.csv");
 	});
-	
+	$("#exportToCsv").click(function () {
+		
+		var param="";
+		param+="&customer_type="+$("#param_customer_type").val();
+		param+="&industry_class="+$("#param_industry_class").val();
+		param+="&customer_id="+$("#param_customer_id").val();
+		$("form#formExportToCsv").attr("action", restfulPathCusExportFile + "?token=" + tokenID.token+""+param+"");
+		$("#formExportToCsv").submit();
+	});
 	
 	//FILE IMPORT MOBILE START
 	$("#btn_import").click(function () {
