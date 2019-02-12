@@ -1530,7 +1530,7 @@ var dropDrowActionEditFn = function (data/*paramStageID, employee_code, org_code
  		  htmlOption += "<option value=" + indexEntry['stage_id'] + ">" + indexEntry['to_action'] + "</option>";
  	  });
  	  $("#actionAssign").html(htmlOption);
-      if ($("#actionAssign").val() == null || $("#embed_status") == "afterAssignment") {
+      if ($("#actionAssign").val() == null || $("#embed_status").val() == "afterAssignment") {
           $("#btnSubmit,#actionAssign").attr("disabled", "disabled");
       } else {
           $("#btnSubmit,#actionAssign").removeAttr("disabled");
