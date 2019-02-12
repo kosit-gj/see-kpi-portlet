@@ -306,7 +306,7 @@ $(document).ready(function () {
 	$("#btnExport").click(function () {
 		var param="";
 		param+="&period_id="+$("#AppraisalPeriod").val();
-		param+="&appraisal_form_id="+$("#AppraisalForm").val()== null ? '' : $("#AppraisalForm").val();
+		param+="&appraisal_form_id="+(($("#AppraisalForm").val()==null) ? '' : $("#AppraisalForm").val());
 		param+="&effective_date="+$("#effectiveDate").val();
 		param+="&expired_date="+$("#expiredDate").val();
 		console.log(globalSevice['restfulPathExportPQPI'] + "?token=" + tokenID.token + ""+param)
