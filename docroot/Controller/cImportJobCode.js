@@ -232,7 +232,11 @@ $(document).ready(function () {
 	$('input[id=from_knowledge_point], input[id=from_capability_point]').keypress(function(e) {
 		var total = (parseFloat($("#from_knowledge_point").autoNumeric('get')) + parseFloat($("#from_capability_point").autoNumeric('get'))).toFixed(2);
 		$("#from_total_point").val(total).autoNumeric('init').autoNumeric('update',{vMin:'0.00',lZero:'deny',wEmpty:'zero',mDec:'2'});
+	}).on('change',function(e) {
+		var total = (parseFloat($("#from_knowledge_point").autoNumeric('get')) + parseFloat($("#from_capability_point").autoNumeric('get'))).toFixed(2);
+		$("#from_total_point").val(total).autoNumeric('init').autoNumeric('update',{vMin:'0.00',lZero:'deny',wEmpty:'zero',mDec:'2'});
 	});
+
 
 
 	$("#exportToExcel").click(function () {
