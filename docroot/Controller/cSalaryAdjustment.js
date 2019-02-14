@@ -534,7 +534,7 @@ var listDataFn = function(data) {
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_pi_amount)+"\" class=\"bold pos-column-rig ft-sum-current-pi\">"+Comma(notNullFn(data.sum_pi_amount))+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_var_other_amount)+"\" class=\"bold pos-column-rig ft-sum-current-var-other\">"+Comma(notNullFn(data.sum_var_other_amount))+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_miss_over)+"\" class=\"bold pos-column-rig ft-sum-missover\">"+Comma(notNullFn(data.sum_miss_over))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(Math.round(data.sum_cal_standard))+"\" class=\"bold pos-column-rig ft-sum-cal-standard\">"+Comma(notNullFn(Math.round(data.sum_cal_standard)))+"</td>";
+	htmlHTMLFooter3 += "		<td data-value=\""+Math.round(notNullFn(data.sum_cal_standard))+"\" class=\"bold pos-column-rig ft-sum-cal-standard\">"+Comma(Math.round(notNullFn(data.sum_cal_standard)))+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-percent\">"+notNullFn()+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-bath\">"+notNullFn()+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-change-total\">"+notNullFn()+"</td>";
@@ -581,7 +581,7 @@ var listDataFn = function(data) {
 		let pi_amount = Comma(notNullFn(indexEntry.pi_amount));
 		let var_other_amount = Comma(notNullFn(indexEntry.var_other_amount));
 		let miss_over = Comma(notNullFn(indexEntry.total_now_salary-((cal3 * 90)/100)));
-		let cal_standard = Comma(notNullFn(Math.round(indexEntry.cal_standard)));
+		let cal_standard = Comma(Math.round(notNullFn(indexEntry.cal_standard)));
 		
 		var job_code = notNullTextFn(indexEntry.job_code);
 		var grade = notNullTextFn(indexEntry.grade);
@@ -874,7 +874,7 @@ var calculatePercentKeyup = function() {
 
 		$(".ft-sum-percent").attr('data-value', sumPercent);
 		$(".ft-sum-bath").attr('data-value', sumBath);
-		$(".ft-sum-change-total").attr('data-value', sumTotalChangeSalary);
+		$(".ft-sum-change-total").attr('data-value', Math.round(sumTotalChangeSalary));
 		$(".ft-sum-change-salary").attr('data-value', sumChangeSalary);
 		$(".ft-sum-change-pqpi").attr('data-value', sumChangePQPI);
 		$(".ft-sum-change-diff").attr('data-value', sumChangeDiff);
@@ -884,7 +884,7 @@ var calculatePercentKeyup = function() {
 		
 		$(".dataTables_scrollFoot").find(".ft-sum-percent").text(Comma(sumPercent.toFixed(2)));
 		$(".dataTables_scrollFoot").find(".ft-sum-bath").text(Comma(sumBath.toFixed(2)));
-		$(".dataTables_scrollFoot").find(".ft-sum-change-total").text(Comma(sumTotalChangeSalary));
+		$(".dataTables_scrollFoot").find(".ft-sum-change-total").text(Comma(Math.round(sumTotalChangeSalary)));
 		$(".dataTables_scrollFoot").find(".ft-sum-change-salary").text(Comma(sumChangeSalary.toFixed(2)));
 		$(".dataTables_scrollFoot").find(".ft-sum-change-pqpi").text(Comma(sumChangePQPI.toFixed(2)));
 		$(".dataTables_scrollFoot").find(".ft-sum-change-diff").text(Comma(sumChangeDiff.toFixed(2)));
@@ -942,8 +942,8 @@ var calculatePercentKeyup = function() {
 		//คำนวน ปรับรายได้ Total
 		var pqpi_score = Number($(this).closest('.control-calculate').find('.data-pqpi').find('.pqpi').autoNumeric('get'));
 		var total = pqpi_score + salary;
-		$(this).closest('.control-calculate').find('.data-up-total').attr('data-value', total);
-		$(this).closest('.control-calculate').find('.data-up-total').text(Comma(total));
+		$(this).closest('.control-calculate').find('.data-up-total').attr('data-value', Math.round(total));
+		$(this).closest('.control-calculate').find('.data-up-total').text(Comma(Math.round(total)));
 		
 		//คำนวน รายได้ใหม่  ตรง salary
 		var current_salary = Number($(this).closest('.control-calculate').find('.data-current-salary').attr('data-value'));
@@ -974,8 +974,8 @@ var calculatePercentKeyup = function() {
 		//คำนวน ปรับรายได้ Total
 		var salary_score = Number($(this).closest('.control-calculate').find('.data-salary').find('.salary').autoNumeric('get'));
 		var total = salary_score + pqpi;
-		$(this).closest('.control-calculate').find('.data-up-total').attr('data-value', total);
-		$(this).closest('.control-calculate').find('.data-up-total').text(Comma(total));
+		$(this).closest('.control-calculate').find('.data-up-total').attr('data-value', Math.round(total));
+		$(this).closest('.control-calculate').find('.data-up-total').text(Comma(Math.round(total)));
 		
 		//คำนวน รายได้ใหม่  ตรง  P-QPI
 		var current_pqpi = Number($(this).closest('.control-calculate').find('.data-current-pqpi').attr('data-value'));
