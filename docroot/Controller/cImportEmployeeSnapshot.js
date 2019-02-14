@@ -202,6 +202,8 @@ var clearFn = function() {
 //--------  Clear End
 
 var ImportLiferayUser = function(data) {
+	$("#btnUserImportOK").prop('disabled', false);
+	$("#userImportProgressbar").hide();
 	$("#userImportModal").modal();
 	$(document).off("click","#btnUserImportOK");
 	$(document).on("click","#btnUserImportOK",function(){
@@ -210,7 +212,7 @@ var ImportLiferayUser = function(data) {
 		
 		$("body").mLoading('hide');	
 		$("#btnUserImportOK").prop('disabled', true);
-		$("#userImportProgressbar").toggle();
+		$("#userImportProgressbar").show();
 		
 		$.each(data.emp, function( key, value ) {
 					
@@ -286,8 +288,8 @@ var ImportLiferayUser = function(data) {
 			});
 			callFlashSlideInModal(validateFile, "#userImportInfo", "error");
 		}else{
-			$("#userImportModal").modal('hide');
-			callFlashSlide("Import User Successfully");
+//			$("#userImportModal").modal('hide');
+//			callFlashSlide("Import User Successfully");
 		}
 	});
 }
@@ -383,7 +385,12 @@ var listEmployeeSnapFn = function(data) {
 	var htmlTable = "";
 
 	$.each(data,function(index,indexEntry) {
-      
+      // is active
+		var is_active_html = "";
+		if(notNullTextFn(indexEntry["is_active"])==1){
+			is_active_html = "checked";
+		}
+		
 		htmlTable += "<tr class='rowSearch'>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["start_date"]+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ indexEntry["emp_code"]+ "</td>";
@@ -395,6 +402,7 @@ var listEmployeeSnapFn = function(data) {
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ notNullTextFn(indexEntry["job_function_name"])+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ notNullTextFn(indexEntry["distributor_code"])+ "</td>";
 		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;\">"+ notNullTextFn(indexEntry["region"])+ "</td>";
+		htmlTable += "<td class='columnSearch' style=\"vertical-align: middle;text-align:center;\"><input type='checkbox' style='margin-top: 4px;' "+is_active_html+" disabled></td>";
 		
 		htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><button id="+indexEntry["emp_snapshot_id"]+" data-target=#ModalEditEmployee data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"' class='btn btn-primary btn-xs edit'><i class='icon-edit' aria-hidden='true'></i></button></td>";
 
@@ -696,11 +704,11 @@ $(document).ready(function() {
 				}else{
 					validateFileFn(data['errors']);
 					getDataFn($(".pagination .active").attr( "data-lp" ),$("#rpp").val());
-					$("body").mLoading('hide');
+/*					$("body").mLoading('hide');
 					if(data["emp"].length > 0){
 						ImportLiferayUser(data);
 					}
-					
+*/					
 
 				}
 			},

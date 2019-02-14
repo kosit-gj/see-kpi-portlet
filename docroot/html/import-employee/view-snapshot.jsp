@@ -35,6 +35,18 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 
 
 <style>
+.progressBar {
+	display: none;
+	margin: 15px 0 0;
+	position: relative;
+	height:25px;
+	text-align:center;
+}
+.progressBarText {
+	color: blue;
+    position: absolute;
+    margin: 3px -30px 0px !important;
+}
 .aui .breadcrumbs2 {
 	background: rgba(0, 0, 0, 0)
 		linear-gradient(to bottom, #fff 0px, #f6f6f6 47%, #ededed 100%) repeat
@@ -433,13 +445,13 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 	text-align: left;
 }
 .testOverFlow {
-  max-width: 200px;
+  max-width: 135px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
  }
  .testOverFlow:hover {
-  max-width: 200px;
+  max-width: 135px;
      text-overflow: clip;
      white-space: normal;
      word-break: break-all;
@@ -587,13 +599,14 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 											<th style='width: 5%;white-space: nowrap;'>Start Date</th>
 											<th style='width: 10%;white-space: nowrap;'>Emp Code</th>
 											<th style='width: 20%;white-space: nowrap;'>Emp Name</th>
-											<th style='max-width: 200px; min-width: 200px; white-space: nowrap;'>Org Name</th>
+											<th style='max-width:135px; white-space: nowrap;'>Org Name</th>
 											<th style='width: 10%;white-space: nowrap;'>Position Name</th>
 											<th style='width: 10%;white-space: nowrap;'>Chief Emp</th>
 											<th style='width: 10%;white-space: nowrap;'>Level Code</th>
 											<th style='width: 10%;white-space: nowrap;'>Job Function</th>
 											<th style='width: 10%; text-align: center;'>Distributor</th>
 											<th style='width: 10%; text-align: center;'>Region</th>
+											<th style='width: 10%; white-space: nowrap; text-align: center;'>Is Active</th>
 											<th style='width: 10%;text-align: center;' class='objectCenter'>Manage</th>
 										</tr>
 									</thead>
