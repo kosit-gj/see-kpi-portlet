@@ -5,6 +5,23 @@ var password = "";
 const pageNumberDefault=1;
 let countDatatableGenerate = 0;
 
+function roundThen(value, precision) {
+	if (Number.isInteger(precision)) {
+		var shift = Math.pow(10, precision);
+		return Math.round(value * shift) / shift;
+	} else {
+		return Math.round(value);
+	}
+	
+	/* example
+	roundThen(123.688689)     // 123
+	roundThen(123.688689, 0)  // 123
+	roundThen(123.688689, 1)  // 123.7
+	roundThen(123.688689, 2)  // 123.69
+	roundThen(123.688689, -2) // 100
+	*/
+}
+
 var callFlashSlideBody =function(text,id,flashType){
 	if(flashType=="error") {
 		if(id!=undefined){
@@ -566,12 +583,25 @@ var listDataFn = function(data) {
 			  return el.structure_id == structureIdToCal;
 		});
 		
-		let cal1 = indexEntry.total_point * parseInt(calArrayFilter[0]['score']);
-		let cal2 = cal1 / parseInt(calArrayFilter[0]['total_score']);
-		let cal3 = cal2 * parseInt(indexEntry.baht_per_point);
-		let total_percent = Comma(notNullFn(isNaN((cal3 * 90)/100) ? 0 : (cal3 * 90)/100 ));
-		let fix_percent = Comma(notNullFn(isNaN((cal3 * 65)/100) ? 0 : (cal3 * 65)/100 ));
-		let var_percent = Comma(notNullFn(isNaN((cal3 * 25)/100) ? 0 : (cal3 * 25)/100 ));
+		var cal1 = Number(indexEntry.total_point) * Number(calArrayFilter[0]['score']);
+//		console.log(indexEntry.total_point,'indexEntry.total_point');
+//		console.log(calArrayFilter[0]['score'],'score');
+//		console.log(cal1,'cal1');
+		
+		let cal2 = cal1 / Number(calArrayFilter[0]['total_score']);
+//		console.log(calArrayFilter[0]['total_score'],'total_score');
+//		console.log(cal2,'cal2');
+		
+		let cal3 = cal2 * Number(indexEntry.baht_per_point);
+//		console.log(indexEntry.baht_per_point,'baht_per_point');
+//		console.log(cal3,'cal3');
+		
+		let total_percent = Comma(roundThen(notNullFn(isNaN((cal3 * 90)/100) ? 0 : (cal3 * 90)/100 ), -2));
+//		console.log(total_percent,'total_percent');
+		let fix_percent = Comma(roundThen(notNullFn(isNaN((cal3 * 65)/100) ? 0 : (cal3 * 65)/100 ), -2));
+//		console.log(fix_percent,'fix_percent');
+		let var_percent = Comma(roundThen(notNullFn(isNaN((cal3 * 25)/100) ? 0 : (cal3 * 25)/100 ), -2));
+//		console.log(var_percent,'var_percent');
 		
 		let total_now_salary = Comma(notNullFn(indexEntry.total_now_salary));
 		let salary = Comma(notNullFn(indexEntry.salary));
