@@ -684,6 +684,7 @@ $.each(data,function(index,indexEntry){
 				                        + currentdate.getHours() + ""  
 				                        + currentdate.getMinutes() + "" 
 				                        + currentdate.getSeconds();
+				         console.log(xhr.status);
 						 if (xhr.status == 200) {
 							 if(blob.type=='application/json') { //ถ้าค่าที่ return มา เป็น json แสดงว่าข้อมูลใน excel ไม่มี
 								 callFlashSlide($(".lt-data-is-empty").val());
@@ -691,6 +692,9 @@ $.each(data,function(index,indexEntry){
 								 saveBlob(blob, "import_assignment_"+datetime+".xlsx");
 							 }
 							$("#loadingGif").hide();
+						 } else if(xhr.status == 500) {
+							 $("#loadingGif").hide();
+							 callFlashSlide("Server Error","error");
 						 } else {
 							 $("#loadingGif").hide();
 							 callFlashSlide("Error! cannot export this file because this excel many data","error");
