@@ -565,6 +565,7 @@ var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
 	if(pageTotal==0){
 		pageTotal=1
 	}
+	$("#pageNumber").val(pageIndex); 
 	$('.pagination_top,.pagination_bottom').off("page");
 	$('.pagination_top,.pagination_bottom').bootpag({
 	    total: pageTotal,//page Total

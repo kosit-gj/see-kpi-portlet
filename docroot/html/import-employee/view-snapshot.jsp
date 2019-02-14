@@ -445,13 +445,13 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 	text-align: left;
 }
 .testOverFlow {
-  max-width: 135px;
+  max-width: 137px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
  }
  .testOverFlow:hover {
-  max-width: 135px;
+  max-width: 138px;
      text-overflow: clip;
      white-space: normal;
      word-break: break-all;
@@ -599,7 +599,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 											<th style='width: 5%;white-space: nowrap;'>Start Date</th>
 											<th style='width: 10%;white-space: nowrap;'>Emp Code</th>
 											<th style='width: 20%;white-space: nowrap;'>Emp Name</th>
-											<th style='max-width:135px; white-space: nowrap;'>Org Name</th>
+											<th style='max-width:138px; min-width:138px; white-space: nowrap;'>Org Name</th>
 											<th style='width: 10%;white-space: nowrap;'>Position Name</th>
 											<th style='width: 10%;white-space: nowrap;'>Chief Emp</th>
 											<th style='width: 10%;white-space: nowrap;'>Level Code</th>
