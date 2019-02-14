@@ -369,7 +369,7 @@ var to_action = function () {
             "stage_id": status,
             "flag": "salary_adjustment_flag",
             "appraisal_type_id": 2,
-            "appraisal_form_id": $("#embed_appraisal_form").val()
+            "appraisal_form_id": $("#AppraisalForm").val()
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
@@ -401,7 +401,7 @@ var listDataFn = function(data) {
 	// countDatatableGenerate คือการ generate datatable ไปเรื่อยๆเนื่องจากคอลั่มหัวตารางมีการเปลี่ยนจึงต้องสร้างใหม่ และลบอันเก่าออก
 	// ทำไมถึงต้องสร้างใหม่ไปเรื่อยๆ เนื่องจาก datatable ตอน clear แล้วมันจะ error หาก datatable datatable มีการ dynamic header column 
 	countDatatableGenerate += 1;
-	console.log(countDatatableGenerate);
+	//console.log(countDatatableGenerate);
 	var startTableDynamic = "";
 	startTableDynamic +="<table class=\"table table-striped table-bordered tableBonusAdjustment\" id=\"tableBonusAdjustment"+countDatatableGenerate+"\" style=\"margin-bottom: 0px; max-width: none;\">";
 	startTableDynamic +="</table>";
@@ -534,7 +534,7 @@ var listDataFn = function(data) {
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_pi_amount)+"\" class=\"bold pos-column-rig ft-sum-current-pi\">"+Comma(notNullFn(data.sum_pi_amount))+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_var_other_amount)+"\" class=\"bold pos-column-rig ft-sum-current-var-other\">"+Comma(notNullFn(data.sum_var_other_amount))+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_miss_over)+"\" class=\"bold pos-column-rig ft-sum-missover\">"+Comma(notNullFn(data.sum_miss_over))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_cal_standard)+"\" class=\"bold pos-column-rig ft-sum-cal-standard\">"+Comma(notNullFn(data.sum_cal_standard))+"</td>";
+	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(Math.round(data.sum_cal_standard))+"\" class=\"bold pos-column-rig ft-sum-cal-standard\">"+Comma(notNullFn(Math.round(data.sum_cal_standard)))+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-percent\">"+notNullFn()+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-bath\">"+notNullFn()+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-change-total\">"+notNullFn()+"</td>";
@@ -561,12 +561,17 @@ var listDataFn = function(data) {
 		let score_coo = Comma(notNullFn(indexEntry.score_coo));
 		let score_board = Comma(notNullFn(indexEntry.score_board));
 		
-		let cal1 = indexEntry.total_point * Number(indexEntry['structure_result'][0]['score']);
-		let cal2 = cal1 / Number(indexEntry['structure_result'][0]['total_score']);
-		let cal3 = cal2 * indexEntry.baht_per_point;
-		let total_percent = Comma(notNullFn((cal3 * 90)/100));
-		let fix_percent = Comma(notNullFn((cal3 * 65)/100));
-		let var_percent = Comma(notNullFn((cal3 * 25)/100));
+		let structureIdToCal = indexEntry['first_structure_id'];
+		let calArrayFilter = indexEntry['structure_result'].filter(function (el) {
+			  return el.structure_id == structureIdToCal;
+		});
+		
+		let cal1 = indexEntry.total_point * parseInt(calArrayFilter[0]['score']);
+		let cal2 = cal1 / parseInt(calArrayFilter[0]['total_score']);
+		let cal3 = cal2 * parseInt(indexEntry.baht_per_point);
+		let total_percent = Comma(notNullFn(isNaN((cal3 * 90)/100) ? 0 : (cal3 * 90)/100 ));
+		let fix_percent = Comma(notNullFn(isNaN((cal3 * 65)/100) ? 0 : (cal3 * 65)/100 ));
+		let var_percent = Comma(notNullFn(isNaN((cal3 * 25)/100) ? 0 : (cal3 * 25)/100 ));
 		
 		let total_now_salary = Comma(notNullFn(indexEntry.total_now_salary));
 		let salary = Comma(notNullFn(indexEntry.salary));
@@ -620,18 +625,18 @@ var listDataFn = function(data) {
 		htmlHTML += "	<td class='pos-column-rig'>"+cal_standard+"</td>";
 		htmlHTML += "	<td class='data-percent'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 percent numberOnly' now_salary='"+indexEntry.cal_standard+"' value='100' />";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 percent numberOnly' now_salary='"+Math.round(indexEntry.cal_standard)+"' value='100' />";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		htmlHTML += "	<td class='data-score'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 score numberOnly' now_salary='"+indexEntry.cal_standard+"' value='0.00' />";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 score numberOnly' now_salary='"+Math.round(indexEntry.cal_standard)+"' value='0.00' />";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
-		htmlHTML += "	<td class='data-up-total pos-column-rig' data-value=\""+indexEntry.cal_standard+"\">"+cal_standard+"</td>";
+		htmlHTML += "	<td class='data-up-total pos-column-rig' data-value=\""+Math.round(indexEntry.cal_standard)+"\">"+cal_standard+"</td>";
 		htmlHTML += "	<td class='data-salary changesal2'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 salary numberOnly' value='"+indexEntry.cal_standard+"' />";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 salary numberOnly' value='"+Math.round(indexEntry.cal_standard)+"' />";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		htmlHTML += "	<td class='data-pqpi'>";
@@ -926,7 +931,7 @@ var calculatePercentKeyup = function() {
 		var new_pi = Number(elementThis.closest('.control-calculate').find('.data-new-pi').attr('data-value'));
 		var new_var_other = Number(elementThis.closest('.control-calculate').find('.data-new-var-other').attr('data-value'));
 		var total = new_salary + new_pqpi + new_fix_other + new_mipi + new_pi + new_var_other;
-		console.log('total -> ',total,"data -> ", new_salary, new_pqpi, new_fix_other, new_mipi, new_pi, new_var_other);
+		//console.log('total -> ',total,"data -> ", new_salary, new_pqpi, new_fix_other, new_mipi, new_pi, new_var_other);
 		elementThis.closest('.control-calculate').find('.data-new-total-salary').attr('data-value', total.toFixed(2));
 		elementThis.closest('.control-calculate').find('.data-new-total-salary').text(Comma(total.toFixed(2)));
 	}
@@ -1018,7 +1023,7 @@ var updateFn = function() {
 		}
 	});
 	
-	console.log(detail);
+	//console.log(detail);
 	
 	if(detail.length==0) {
 		callFlashSlide("Please Select Employee");
