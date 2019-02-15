@@ -983,7 +983,7 @@ var calculatePercentKeyup = function() {
 		
 		//คำนวน % Diff
 		var data_current_total = Number($(this).closest('.control-calculate').find('.data-current-total').attr('data-value'));
-		var val_diff = total/data_current_total;
+		var val_diff = (total/data_current_total)*100;
 		
 		if(val_diff=="Infinity") {
 			val_diff = 0;
@@ -1015,7 +1015,7 @@ var calculatePercentKeyup = function() {
 		
 		//คำนวน % Diff
 		var data_current_total = Number($(this).closest('.control-calculate').find('.data-current-total').attr('data-value'));
-		var val_diff = total/data_current_total;
+		var val_diff = (total/data_current_total)*100;
 		
 		if(val_diff=="Infinity") {
 			val_diff = 0;
