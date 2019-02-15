@@ -550,7 +550,7 @@ var listDataFn = function(data) {
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_mpi_amount)+"\" class=\"bold pos-column-rig ft-sum-current-mipi\">"+Comma(notNullFn(data.sum_mpi_amount))+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_pi_amount)+"\" class=\"bold pos-column-rig ft-sum-current-pi\">"+Comma(notNullFn(data.sum_pi_amount))+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_var_other_amount)+"\" class=\"bold pos-column-rig ft-sum-current-var-other\">"+Comma(notNullFn(data.sum_var_other_amount))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_miss_over)+"\" class=\"bold pos-column-rig ft-sum-missover\">"+Comma(notNullFn(data.sum_miss_over))+"</td>";
+	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-missover\">"+notNullFn()+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+Math.round(notNullFn(data.sum_cal_standard))+"\" class=\"bold pos-column-rig ft-sum-cal-standard\">"+Comma(Math.round(notNullFn(data.sum_cal_standard)))+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-percent\">"+notNullFn()+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-bath\">"+notNullFn()+"</td>";
@@ -610,7 +610,7 @@ var listDataFn = function(data) {
 		let mpi_amount = Comma(notNullFn(indexEntry.mpi_amount));
 		let pi_amount = Comma(notNullFn(indexEntry.pi_amount));
 		let var_other_amount = Comma(notNullFn(indexEntry.var_other_amount));
-		let miss_over = Comma(notNullFn(indexEntry.total_now_salary-((cal3 * 90)/100)));
+		let miss_over = Comma(roundThen(notNullFn(indexEntry.total_now_salary-((cal3 * 90)/100)), -2));
 		let cal_standard = Comma(Math.round(notNullFn(indexEntry.cal_standard)));
 		
 		var job_code = notNullTextFn(indexEntry.job_code);
@@ -651,7 +651,7 @@ var listDataFn = function(data) {
 		htmlHTML += "	<td class='pos-column-rig'>"+mpi_amount+"</td>";
 		htmlHTML += "	<td class='pos-column-rig'>"+pi_amount+"</td>";
 		htmlHTML += "	<td class='pos-column-rig'>"+var_other_amount+"</td>";
-		htmlHTML += "	<td class='pos-column-rig'>"+miss_over+"</td>";
+		htmlHTML += "	<td class='data-miss-over pos-column-rig' data-value="+miss_over+">"+miss_over+"</td>";
 		htmlHTML += "	<td class='pos-column-rig'>"+cal_standard+"</td>";
 		htmlHTML += "	<td class='data-percent'>";
 		htmlHTML += "		<div class='float-label-control'>";
@@ -885,6 +885,7 @@ var calculatePercentKeyup = function() {
 		let sumTotalNewSalary = 0;
 		let sumNewSalary = 0;
 		let sumNewPQPI = 0;
+		let sumMissOver = 0;
 		
 		$.each($(".control-calculate").get(),function(index,indexEntry) {
 			if (typeof $(indexEntry).attr('data-dt-row') !== typeof undefined && $(indexEntry).attr('data-dt-row') !== false) {
@@ -899,6 +900,7 @@ var calculatePercentKeyup = function() {
 				sumTotalNewSalary += Number(removeComma($(indexEntry).find('.data-new-total-salary').attr('data-value')));
 				sumNewSalary += Number(removeComma($(indexEntry).find('.data-new-salary').attr('data-value')));
 				sumNewPQPI += Number(removeComma($(indexEntry).find('.data-new-pqpi').attr('data-value')));
+				sumMissOver += Number(removeComma($(indexEntry).find('.data-miss-over').attr('data-value')));
 			}
 		});
 
@@ -911,6 +913,7 @@ var calculatePercentKeyup = function() {
 		$(".ft-sum-new-total").attr('data-value', sumTotalNewSalary);
 		$(".ft-sum-new-salary").attr('data-value', sumNewSalary);
 		$(".ft-sum-new-pqpi").attr('data-value', sumNewPQPI);
+		$(".ft-sum-missover").attr('data-value', sumMissOver);
 		
 		$(".dataTables_scrollFoot").find(".ft-sum-percent").text(Comma(sumPercent.toFixed(2)));
 		$(".dataTables_scrollFoot").find(".ft-sum-bath").text(Comma(sumBath.toFixed(2)));
@@ -921,6 +924,7 @@ var calculatePercentKeyup = function() {
 		$(".dataTables_scrollFoot").find(".ft-sum-new-total").text(Comma(sumTotalNewSalary.toFixed(2)));
 		$(".dataTables_scrollFoot").find(".ft-sum-new-salary").text(Comma(sumNewSalary.toFixed(2)));
 		$(".dataTables_scrollFoot").find(".ft-sum-new-pqpi").text(Comma(sumNewPQPI.toFixed(2)));
+		$(".dataTables_scrollFoot").find(".ft-sum-missover").text(Comma(sumMissOver));
 		
 //		$("#list_empjudege").find(".ft-sum-percent").text(Comma(sumPercent.toFixed(2)));
 //		$("#list_empjudege").find(".ft-sum-bath").text(Comma(sumBath.toFixed(2)));
