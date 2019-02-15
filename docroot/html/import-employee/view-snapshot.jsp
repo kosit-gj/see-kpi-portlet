@@ -855,7 +855,7 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 							<i class="fa fa-times-circle"></i>&nbsp;Cancel
 						</button>
 					</div>
-					<div id="userImportProgressbar" class="progressBar"> <span id="progressText" class="progressBarText"></span> </div> 
+					<div id="userImportProgressbar" style="padding-left: 0px;padding-right: 0px;" class="progressBar"> <span id="progressText" class="progressBarText"></span> </div> 
 					<div class="alert alert-warning information" id="userImportInfo"
 						style="height:220px; overflow-y: scroll; position:relative; display: none;">
 					</div>
