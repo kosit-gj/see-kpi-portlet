@@ -521,6 +521,19 @@ var listDataFn = function(data) {
 	*/
 	
 	//footer sum total
+	
+	if(data.sum_new_salary==null || data.sum_new_salary=="") {
+		var sum_salary = data.sum_salary;
+	} else {
+		var sum_salary = data.sum_new_salary;
+	}
+	
+	if(data.sum_new_pqpi_amount==null || data.sum_new_pqpi_amount=="") {
+		var sum_pqpi_amount = data.sum_pqpi_amount;
+	} else {
+		var sum_pqpi_amount = data.sum_new_pqpi_amount;
+	}
+	
 	htmlHTMLFooter += "<tr>";
 	htmlHTMLFooter += "	<td></td>";
 	htmlHTMLFooter += "	<td></td>";
@@ -559,8 +572,8 @@ var listDataFn = function(data) {
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-change-pqpi\">"+notNullFn()+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-change-diff\">"+notNullFn()+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_total_now_salary)+"\" class=\"bold pos-column-rig ft-sum-new-total\">"+Comma(notNullFn(data.sum_total_now_salary))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_salary)+"\" class=\"bold pos-column-rig ft-sum-new-salary\">"+Comma(notNullFn(data.sum_salary))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_pqpi_amount)+"\" class=\"bold pos-column-rig ft-sum-new-pqpi\">"+Comma(notNullFn(data.sum_pqpi_amount))+"</td>";
+	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(sum_salary)+"\" class=\"bold pos-column-rig ft-sum-new-salary\">"+Comma(notNullFn(sum_salary))+"</td>";
+	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(sum_pqpi_amount)+"\" class=\"bold pos-column-rig ft-sum-new-pqpi\">"+Comma(notNullFn(sum_pqpi_amount))+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_fix_other_amount)+"\" class=\"bold pos-column-rig ft-sum-new-fix-other\">"+Comma(notNullFn(data.sum_fix_other_amount))+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_mpi_amount)+"\" class=\"bold pos-column-rig ft-sum-new-mpi\">"+Comma(notNullFn(data.sum_mpi_amount))+"</td>";
 	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_pi_amount)+"\" class=\"bold pos-column-rig ft-sum-new-pi\">"+Comma(notNullFn(data.sum_pi_amount))+"</td>";
@@ -606,6 +619,29 @@ var listDataFn = function(data) {
 		let total_now_salary = Comma(notNullFn(indexEntry.total_now_salary));
 		let salary = Comma(notNullFn(indexEntry.salary));
 		let pqpi_amount = Comma(notNullFn(indexEntry.pqpi_amount));
+		
+		if(indexEntry.new_salary==null || indexEntry.new_salary=="") {
+			var new_salary = salary;
+			var dataValueSalary = indexEntry.salary;
+		} else {
+			var new_salary = Comma(indexEntry.new_salary);
+			var dataValueSalary = indexEntry.new_salary;
+		}
+		
+		if(indexEntry.new_pqpi_amount==null || indexEntry.new_pqpi_amount=="") {
+			var new_pqpi_amount = pqpi_amount;
+			var dataValuePQPIAmount = indexEntry.pqpi_amount;
+		} else {
+			var new_pqpi_amount = Comma(indexEntry.new_pqpi_amount);
+			var dataValuePQPIAmount = indexEntry.new_pqpi_amount;
+		}
+		
+		if(indexEntry.adjust_raise_s_amount==null || indexEntry.adjust_raise_s_amount==0) {
+			var adjust_raise_s_amount = Math.round(indexEntry.cal_standard);
+		} else {
+			var adjust_raise_s_amount = Math.round(indexEntry.adjust_raise_s_amount);
+		}
+		
 		let fix_other_amount = Comma(notNullFn(indexEntry.fix_other_amount));
 		let mpi_amount = Comma(notNullFn(indexEntry.mpi_amount));
 		let pi_amount = Comma(notNullFn(indexEntry.pi_amount));
@@ -666,18 +702,18 @@ var listDataFn = function(data) {
 		htmlHTML += "	<td class='data-up-total pos-column-rig' data-value=\""+Math.round(indexEntry.cal_standard)+"\">"+cal_standard+"</td>";
 		htmlHTML += "	<td class='data-salary changesal2'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 salary numberOnly' value='"+Math.round(indexEntry.cal_standard)+"' />";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 salary numberOnly' value='"+adjust_raise_s_amount+"' />";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		htmlHTML += "	<td class='data-pqpi'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 pqpi numberOnly' value='0.00' />";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 pqpi numberOnly' value='"+indexEntry.adjust_raise_pqpi_amount+"' />";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		htmlHTML += "	<td class=\"data-percent-diff pos-column-rig\" data-value=\"0.00\"></td>";
 		htmlHTML += "	<td class=\"data-new-total-salary pos-column-rig\"  data-value=\""+notNullFn(indexEntry.total_now_salary)+"\">"+total_now_salary+"</td>";
-		htmlHTML += "	<td class=\"data-new-salary pos-column-rig\" data-value=\""+notNullFn(indexEntry.salary)+"\">"+salary+"</td>";
-		htmlHTML += "	<td class=\"data-new-pqpi pos-column-rig\" data-value=\""+notNullFn(indexEntry.pqpi_amount)+"\">"+pqpi_amount+"</td>";
+		htmlHTML += "	<td class=\"data-new-salary pos-column-rig\" data-value=\""+notNullFn(dataValueSalary)+"\">"+new_salary+"</td>";
+		htmlHTML += "	<td class=\"data-new-pqpi pos-column-rig\" data-value=\""+notNullFn(dataValuePQPIAmount)+"\">"+new_pqpi_amount+"</td>";
 		htmlHTML += "	<td class=\"data-new-fix-other pos-column-rig\" data-value=\""+notNullFn(indexEntry.fix_other_amount)+"\">"+fix_other_amount+"</td>";
 		htmlHTML += "	<td class=\"data-new-mpi pos-column-rig\" data-value=\""+notNullFn(indexEntry.mpi_amount)+"\">"+mpi_amount+"</td>";
 		htmlHTML += "	<td class=\"data-new-pi pos-column-rig\" data-value=\""+notNullFn(indexEntry.pi_amount)+"\">"+pi_amount+"</td>";
@@ -718,12 +754,15 @@ var setPermission = function(data) {
 		$("#list_empjudege").find(".pqpi").attr("disabled", false);
 		$("#btnSubmit").attr("disabled", false);
 		
-		if($("#actionToAssign").val()==null || $("#actionToAssign").val()==undefined) {
-			$("#btnSubmit").attr("disabled", true);
-	    } else {
-	    	$("#btnSubmit").attr("disabled", false);
-	    }
+		$("#list_empjudege").find('.percent').keyup();
+		$("#list_empjudege").find('.salary').keyup();
 	}
+	
+	if($("#actionToAssign").val()==null || $("#actionToAssign").val()==undefined) {
+		$("#btnSubmit").attr("disabled", true);
+    } else {
+    	$("#btnSubmit").attr("disabled", false);
+    }
 }
 
 var createDatatable = function(table, countStruc) {
@@ -1033,9 +1072,6 @@ var calculatePercentKeyup = function() {
 		calculateNewSalaryTotal($(this));
 		calculateSumtotalFooter();
 	});
-	
-	$("#list_empjudege").find('.percent').keyup();
-	$("#list_empjudege").find('.salary').keyup();
 }
 
 var updateFn = function() {
