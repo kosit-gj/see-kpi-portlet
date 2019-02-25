@@ -304,6 +304,9 @@ var to_action = function () {
 var listDataFn = function(data){
 	var htmlHTML="";
 	var edit_flag = "";
+	var grade_manager = "";
+	var grade_bu = "";
+	var grade_coo = "";
 	
 	var table = $('#tableBonusAdjustment');
 	table.DataTable().clear();
@@ -327,6 +330,24 @@ var listDataFn = function(data){
 		user_coo = indexEntry['is_coo'];
 		user_id = indexEntry['user_emp_id'];
 		user_level_id = indexEntry['user_level_id'];
+		
+		if (indexEntry['grade_manager'] == null){
+			grade_manager = "-";
+		}else if (indexEntry['grade_manager'] != null){
+			grade_manager = indexEntry['grade_manager'];
+		}
+		
+		if (indexEntry['grade_bu'] == null){
+			grade_bu = "-";
+		}else if (indexEntry['grade_bu'] != null){
+			grade_bu = indexEntry['grade_bu'];
+		}
+		
+		if (indexEntry['grade_coo'] == null){
+			grade_coo = "-";
+		}else if (indexEntry['grade_coo'] != null){
+			grade_coo = indexEntry['grade_coo'];
+		}
 		
 			htmlHTML += " <tr class=\"control-calculate\">";
 	        htmlHTML += " <td style=\"text-align: center;\">";
@@ -354,7 +375,7 @@ var listDataFn = function(data){
 	        htmlHTML += " "+indexEntry['score_manager']+"";
 	        htmlHTML += " </td>";
 	        htmlHTML += " <td style=\"text-align: center;\">";
-	        htmlHTML += " "+notNullTextFn(indexEntry['grade_manager'])+"";
+	        htmlHTML += " "+grade_manager+"";
 	        htmlHTML += " </td>";
 	        htmlHTML += " <td style=\"text-align: center;\">";
 	        htmlHTML += " "+addCommas(notNullFn(indexEntry['s_amount']))+"";
@@ -373,7 +394,7 @@ var listDataFn = function(data){
 			}
 	        
 	        htmlHTML += " <td style=\"text-align: center;\">";
-	        htmlHTML += " "+notNullTextFn(indexEntry['grade_bu'])+"";
+	        htmlHTML += " "+grade_bu+"";
 	        htmlHTML += " </td>";
 	        htmlHTML += " <td style=\"text-align: right;\">";
 	        htmlHTML += " "+addCommas(notNullFn(indexEntry['s_amount']))+"";
@@ -392,7 +413,7 @@ var listDataFn = function(data){
 			}
 	        
 	        htmlHTML += " <td style=\"text-align: center;\">";
-	        htmlHTML += " "+notNullTextFn(indexEntry['grade_coo'])+"";
+	        htmlHTML += " "+grade_coo+"";
 	        htmlHTML += " </td>";
 	        htmlHTML += " <td style=\"text-align: right;\">";
 	        htmlHTML += " "+addCommas(notNullFn(indexEntry['s_amount']))+"";
