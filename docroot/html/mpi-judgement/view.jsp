@@ -1006,8 +1006,9 @@ input[type=number]::-webkit-outer-spin-button {
                   </div>
 
                   <div class="form-group pull-left span3" style="margin-left: 5px; ">
-                  <select data-toggle="tooltip" title="<liferay-ui:message key="Position"/>" multiple="multiple" data-original-title="<liferay-ui:message key="Position"/>" class="input form-control input-sm span12" id="Position" name="Position">
-                 </select>            
+                  <select data-toggle="tooltip" title="<liferay-ui:message key="Position"/>" multiple="multiple" data-original-title="<liferay-ui:message key="Position"/>" 
+                  	class="input form-control input-sm span12" id="Position" name="Position">
+                  </select>            
                   </div>
 				 
 				 <div class="form-group pull-left span3" style="margin-left: 5px">

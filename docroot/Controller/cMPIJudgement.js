@@ -204,6 +204,7 @@ var appraisalStatusFn = function () {
 }
 
 //SearchAdvance
+/*
 var searchAdvanceFn = function () {
 
     $("#embedParamSearch").empty();
@@ -223,22 +224,28 @@ var searchAdvanceFn = function () {
     to_action();
     getDataFn(pageNumberDefault,$("#rpp").val());
 };
+*/
 
 //Get Data
 var getDataFn = function (page, rpp) {
-    var position_id = [];
-    var year = $("#embed_year_list").val();
-    var level_id_org = $("#embed_appraisal_level_id_org").val();
-    var level_id_emp = $("#embed_appraisal_level_id_emp").val();
-    var period_id = $("#embed_period_id").val();
-    var emp_id = $("#embed_emp_id").val();
-    var org_id = $("#embed_organization").val();
-    var status = $("#embed_status").val();
-    var form = $("#embed_appraisal_form").val();
-    position_id.push($("#embed_position_id").val());
+	to_action();
+	
+	//var page = pageNumberDefault;
+	//var rpp = $("#rpp").val();
+	
+	var position_id = $("#Position").val();
+    var year = $("#AppraisalYear").val();
+    var level_id_org = $("#AppraisalOrgLevel").val();
+    var level_id_emp = $("#AppraisalEmpLevel").val();
+    var period_id = $("#AppraisalPeriod").val();
+    var emp_id = $("#EmpName_id").val();
+    var org_id = $("#organization").val();
+    var status = $("#status").val();
+    var form = $("#AppraisalForm").val();
+    //position_id.push($("#Position").val());
     
     $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/mpi/mpi_judgement",   // bonus/bonus_adjustment
+        url: restfulURL + "/" + serviceName + "/public/mpi/mpi_judgement",
         type: "get",
         dataType: "json",
         async: true,
@@ -265,13 +272,11 @@ var getDataFn = function (page, rpp) {
     });
 };
 
-var tablesfreeze = function() {
-	
-}
-
 
 var to_action = function () {
-	var status = $("#embed_status").val();
+	var status = $("#status").val();
+	var form_id = $("#AppraisalForm").val();
+	
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/emp/adjustment/to_action",
         type: "get",
@@ -279,9 +284,9 @@ var to_action = function () {
         async: true,
         data: {
         	"stage_id": status,
-        	"flag": "bonus_adjustment_flag",
+        	"flag": "mpi_judgement_flag",
         	"appraisal_type_id": 2,
-        	"appraisal_form_id": $("#embed_appraisal_form").val()
+        	"appraisal_form_id": form_id
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
@@ -315,9 +320,24 @@ var listDataFn = function(data){
 	
 	if(data.length==0) {
 		htmlHTML +="<tr>";
-		htmlHTML +="<td colspan=\"16\">";
-		htmlHTML +="<div style='margin-top: 40px;margin-bottom: 40px;font-weight: bold;color: #e04747;' align='center'>No Data to Display.</div>";
-		htmlHTML +="</td>";
+		htmlHTML +="<td></td>";
+		htmlHTML +="<td></td>";
+		htmlHTML +="<td></td>";
+		htmlHTML +="<td></td>";
+		htmlHTML +="<td></td>";
+		htmlHTML +="<td></td>";
+		htmlHTML +="<td></td>";
+		htmlHTML +="<td></td>";
+		htmlHTML +="<td></td>";
+		htmlHTML +="<td></td>";
+		htmlHTML +="<td></td>";
+		htmlHTML +="<td></td>";
+		htmlHTML +="<td></td>";
+		htmlHTML +="<td></td>";
+		htmlHTML +="<td></td>";
+		htmlHTML +="<td></td>";
+		//htmlHTML +="<div style='margin-top: 40px;margin-bottom: 40px;font-weight: bold;color: #e04747;' align='center'>No Data to Display.</div>";
+		//htmlHTML +="</td>";
 		htmlHTML +="</tr>";
 		$("#list_mpi_judgement").html(htmlHTML);
 		$(".head_adjust").hide();
@@ -574,17 +594,17 @@ var validationFn = function(data) {
 }
 
 var insertFn = function(type) {
-	var position_id = [];
-    var year = $("#embed_year_list").val();
-    var level_id_org = $("#embed_appraisal_level_id_org").val();
-    var level_id_emp = $("#embed_appraisal_level_id_emp").val();
-    var period_id = $("#embed_period_id").val();
-    var emp_id = $("#embed_emp_id").val();
-    var org_id = $("#embed_organization").val();
-    var status = $("#embed_status").val();
-    var form = $("#embed_appraisal_form").val();
-    position_id.push($("#embed_position_id").val());
-	var stage_id = $("#actionToAssign").val();
+	
+	/* var position_id = $("#Position").val();
+    var year = $("#AppraisalYear").val();
+    var level_id_org = $("#AppraisalOrgLevel").val();
+    var level_id_emp = $("#AppraisalEmpLevel").val();
+    var period_id = $("#AppraisalPeriod").val();
+    var emp_id = $("#EmpName_id").val();
+    var org_id = $("#organization").val();
+    var status = $("#status").val();
+    var form = $("#AppraisalForm").val();
+	var stage_id = $("#actionToAssign").val(); */
 	
 	var detail = [];
 	$.each($(".control-calculate").get(),function(index,indexEntry){
@@ -613,7 +633,7 @@ var insertFn = function(type) {
 		}
 	});
 	
-	console.log({
+	/* console.log({
 		"appraisal_year" : year,
     	"period_id" : period_id,
     	"emp_level" : level_id_emp,
@@ -624,7 +644,7 @@ var insertFn = function(type) {
     	"stage_id" :  stage_id,
     	"confirm_flag" : type,
     	"detail": detail
-	});
+	}); */
 	
 	
     $.ajax({
@@ -633,14 +653,6 @@ var insertFn = function(type) {
         dataType: "json",
         async: true,
         data: {
-        	"appraisal_year" : year,
-        	"period_id" : period_id,
-        	"emp_level" : level_id_emp,
-        	"org_level" : level_id_org,
-        	"org_id" : org_id,
-        	"emp_id" : emp_id,
-        	"position_id" : position_id,
-        	"stage_id" :  stage_id,
         	"confirm_flag" : type,
         	"data": detail
         },
@@ -765,7 +777,7 @@ $(document).ready(function() {
 			
 			//Search Start
 		    $("#btnSearchAdvance").click(function () {
-		        searchAdvanceFn();
+		    	getDataFn(pageNumberDefault,$("#rpp").val());
 		    	if($("#rpp").val()=='' ||$("#rpp").val() == undefined){  // default 
 					$(".countPagination").val('All');
 					$("#rpp").remove();
