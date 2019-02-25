@@ -594,7 +594,7 @@ var validationFn = function(data) {
 }
 
 var insertFn = function(type) {
-	
+	console.log("test");
 	/* var position_id = $("#Position").val();
     var year = $("#AppraisalYear").val();
     var level_id_org = $("#AppraisalOrgLevel").val();
@@ -653,12 +653,14 @@ var insertFn = function(type) {
         dataType: "json",
         async: true,
         data: {
+        	"stage_id" : $("#actionToAssign").val(),
         	"confirm_flag" : type,
         	"data": detail
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
         	if(data['status']==200) {
+        		appraisalStatusFn();
         		getDataFn(pageNumberDefault,$("#rpp").val());
         		callFlashSlide($(".lt-update-successfully").val());
         		clearFn();
@@ -691,6 +693,10 @@ $(document).ready(function() {
 			
 			$("#AppraisalYear").change(function(){
 				dropDrowPeriodListFn();
+				appraisalStatusFn();
+			});
+			
+			$("#AppraisalPeriod").change(function() {
 				appraisalStatusFn();
 			});
 			
