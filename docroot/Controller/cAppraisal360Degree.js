@@ -2890,10 +2890,9 @@ var saveAppraisalOrganizationFn = function()
 		appraisal+="\"item_result_id\":\""+item_result_id+"\",";
 		if(typeScore=="forecast"){
 			appraisal+="\"forecast_value\":\""+removeComma($(indexEntry).val())+"\",";
-			appraisal+="\"actual_value\":\"\"";
-			//appraisal+="\"actual_value\":\""+$("#actual-"+item_result_id).val()+"\",";
+			appraisal += "\"actual_value\":\""+$("#actual_value-"+item_result_id).autoNumeric('get')+"\","; // #004
+			//appraisal+="\"actual_value\":\"\"";
 			//appraisal += "\"contribute_percent\":\""+$("#contribute_percent-"+item_result_id).autoNumeric('get')+"\","; // #105 พี่topบอกไม่มีประเมิน org
-
 		}else if(typeScore=="competencyScore"){
 			appraisal+="\"forecast_value\":\"\",";
 			appraisal+="\"actual_value\":\"\",";
@@ -2927,6 +2926,7 @@ var saveAppraisalOrganizationFn = function()
 			"stage_id":globalCurrentStage['stage_id'],
 			"remark":$("#remark_footer").val(),
 			"appraisal":appraisalObject,
+			"action_update": action_update,
 			"template_name" : "kpi-result-360"
 			},
 		headers:{Authorization:"Bearer "+tokenID.token},
