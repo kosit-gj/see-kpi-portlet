@@ -398,7 +398,7 @@ var listDataFn = function(data){
 	        htmlHTML += " "+grade_manager+"";
 	        htmlHTML += " </td>";
 	        htmlHTML += " <td style=\"text-align: center;\">";
-	        htmlHTML += " "+addCommas(notNullFn(indexEntry['s_amount']))+"";
+	        htmlHTML += " "+addCommas(notNullFn(indexEntry['amount_manager']))+"";
 	        htmlHTML += " </td>";
 	        
 	        if(indexEntry['is_bu']==1) {
@@ -417,7 +417,7 @@ var listDataFn = function(data){
 	        htmlHTML += " "+grade_bu+"";
 	        htmlHTML += " </td>";
 	        htmlHTML += " <td style=\"text-align: right;\">";
-	        htmlHTML += " "+addCommas(notNullFn(indexEntry['s_amount']))+"";
+	        htmlHTML += " "+addCommas(notNullFn(indexEntry['amount_bu']))+"";
 	        htmlHTML += " </td>";
 	        
 	        if(indexEntry['is_coo']==1) {
@@ -436,7 +436,7 @@ var listDataFn = function(data){
 	        htmlHTML += " "+grade_coo+"";
 	        htmlHTML += " </td>";
 	        htmlHTML += " <td style=\"text-align: right;\">";
-	        htmlHTML += " "+addCommas(notNullFn(indexEntry['s_amount']))+"";
+	        htmlHTML += " "+addCommas(notNullFn(indexEntry['amount_coo']))+"";
 	        htmlHTML += " </td>";
 	        htmlHTML += " </tr>";
 		
@@ -444,6 +444,7 @@ var listDataFn = function(data){
 	});
 	
 	$("#list_mpi_judgement").html(htmlHTML);
+	
 	
 	//เซ็ต datatable freeze column, freeze header และ ความกว้างของคอลัม
 	table.DataTable({
@@ -479,6 +480,17 @@ var listDataFn = function(data){
 	});
 	
 	$("table thead th").css({"border-bottom" : "0px"});
+	
+	// สามารถเลือก checkbox ได้เฉพาะคนที่เป็น bu และ coo
+	if (user_bu == '1' || user_coo == '1'){
+		$( "input[type='checkbox']" ).prop({
+			  disabled: false
+		});
+	}else {
+		$( "input[type='checkbox']" ).prop({
+			  disabled: true
+		});
+	}
 		
 	//	table.DataTable().fixedColumns().update();
 	//	table.DataTable().fixedColumns().relayout();
