@@ -170,6 +170,7 @@ var getDataFn = function (page, rpp) {
         				$("#salary_raise_amount").val(itemEdit.salary_raise_amount);
         				$("#appraisal_level_id option[value='"+itemEdit.structure_id+"']").prop('selected', true);
         				$("#is_judgement").prop('checked', ((itemEdit.is_judgement==1)?true:false));
+        				$("#raise_type option[value='"+itemEdit.raise_type+"']").prop('selected', true);
         				$("#is_active").prop('checked', ((itemEdit.is_active==1)?true:false));
         				
         				// render modal
@@ -359,6 +360,8 @@ function SetSalaryRaise(){
 				 $("#form-group-structure_id").hide();
 				 $("#form-group-is_judgement").hide();
 			 }
+			 
+			 $("#raise_type option[value='"+data.raise_type+"']").prop('selected', true);
 		 }
 	 });
 }

@@ -1444,6 +1444,17 @@ form {
 														</div>
 													</div>
 													
+													<div class="form-group p-xxs" id="form-group-is_raise_type">
+														<label class="control-label"><liferay-ui:message key="raise-type" /><span class="redFont">*</span> </label>
+														<div class="controls">
+															<select class="input form-control input-sm span6" id="raise_type" name="raise_type">
+																<option value="1">Fix Amount</option>
+																<option value="2">Percentage</option>
+																<option value="3">Salary Structure Table</option>
+															</select>
+														</div>
+													</div>
+													
 													<div class="form-group p-xxs" id="form-group-is_active">
 														<label class="control-label"><liferay-ui:message key="is-active" /></label>
 														<div class="controls">
