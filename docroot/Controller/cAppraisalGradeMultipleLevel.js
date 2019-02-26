@@ -202,7 +202,7 @@ var getDataFn = function (page, rpp) {
             					     if(data['status'] == 200){
             					    	 callFlashSlide("Delete Successfully.");
             					    	 $("#confrimModal").modal('hide');
-            					    	 getDataFn();
+            					    	 getDataFn(pageNumberDefault, $("#rpp").val());
             					     }else if (data['status'] == 400){
             					    	 callFlashSlideInModal(data['data'],"#inform_on_confirm","error");
             					    }
@@ -259,7 +259,7 @@ var UpdateAppraisalFormFn = function() {
 		success : function(data) {
 			if (data['status'] == 200) {
 				callFlashSlide("Update successed.");
-				getDataFn();
+				getDataFn(pageNumberDefault, $("#rpp").val());
 				$("#add-edit-modal").modal('toggle');
 				ClearAppraisalFormFn('ClearAll');
 			} else if (data['status'] == 400) {
@@ -321,13 +321,12 @@ var InsertAppraisalGradeFn = function(Status){
         			callFlashSlide("Insert successed.");
         			ClearAppraisalFormFn('ClearAll');
         			$("#add-edit-modal").modal('toggle');
-        			getDataFn();
         		}else if(Status == 'SaveAnother'){
         			callFlashSlideInModal("Insert success.","#information","");
         			$("#table-appraisalForm thead th").css("vertical-align", "middle");
-        			getDataFn();
         			ClearAppraisalFormFn('Clear');
         		}
+        		getDataFn(pageNumberDefault, $("#rpp").val());
         	
         	}else if(data['status']==400){
         		console.log(validaFn(data));
