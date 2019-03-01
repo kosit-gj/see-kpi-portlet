@@ -64,7 +64,7 @@ var dropDrowAppraisalOrgLevelFn = function(id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option value=''>All Level</option>";
+			htmlOption+="<option value=''>All Organization Level</option>";
 			$.each(data,function(index,indexEntry){
 				htmlOption+="<option value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
 			});
@@ -83,7 +83,7 @@ var dropDrowAppraisalEmpLevelFn = function(id){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option value=''>All Level</option>";
+			htmlOption+="<option value=''>All Employee Level</option>";
 			$.each(data,function(index,indexEntry){
 
 				if(id==indexEntry['level_id']){
@@ -711,7 +711,10 @@ $(document).ready(function() {
 				appraisalStatusFn();
 			});
 			
-			$("#Position").multiselect({minWidth:'100%;'}).multiselectfilter();
+			$("#Position").multiselect({
+				minWidth:'100%;',
+				noneSelectedText: "Select Position",
+		 		selectedText: "# Position"}).multiselectfilter();
 			  refreshMultiPosition();
 			  
 			$("#Position").change(function() {

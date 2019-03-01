@@ -333,7 +333,8 @@ $.each(data,function(index,indexEntry){
 			];
 		 
 		// $("#organization").multiselect({minWidth:'100%;'});
-		$("#organization").multiselect({minWidth:'100%;'}).multiselectfilter();
+		$("#organization").multiselect({minWidth:'100%;', noneSelectedText: "Select Organization",
+	 		 selectedText: "# Organization"}).multiselectfilter();
 		 $("#appraisalType").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/appraisal_type_list","GET"));
 		 
 		$("#appraisalType").change(function(){
@@ -364,7 +365,9 @@ $.each(data,function(index,indexEntry){
 		$("#YearList").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal/year_list_assignment","GET"));
 		$("#periodFrequency").html(generateDropDownList(restfulURL+"/"+serviceName+"/public/appraisal_assignment/frequency_list","GET"));
 		$("#appraisalLevel").multiselect({
-			 minWidth:'100%;'
+			 minWidth:'100%;',
+			 noneSelectedText: "Select Employee Level",
+		 	 selectedText: "# appraisalLevel"
 		});
 		
 		$(".app_url_hidden").show();

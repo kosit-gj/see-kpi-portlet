@@ -263,7 +263,11 @@ $(document).ready(function () {
 	$("#AppraisalYear").html(generateDropDownList(globalSevice['restfulPathDropDownYear'],"GET",{}));
 	$("#AppraisalPeriod").html(generateDropDownList(globalSevice['restfulPathDropDownBonusPeriod'],"GET",{appraisal_year:$("#AppraisalYear").val()}));
 	$("#AppraisalForm").html(generateDropDownList(globalSevice['restfulPathFormType'],"GET",{}));
-	$("#AppraisalForm").multiselect({minWidth:'100%;'}).multiselectfilter();
+	$("#AppraisalForm").multiselect({
+		minWidth:'100%;',
+		noneSelectedText: "Select Form",
+ 		selectedText: "# AppraisalForm"	
+	}).multiselectfilter();
 	refreshMultiAppraisalForm();
 	
 	//console.log(AppraisalFrom);

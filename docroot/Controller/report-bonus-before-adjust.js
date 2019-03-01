@@ -129,7 +129,7 @@ var dropDrowAppraisalOrgLevelFn = function (id) {
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
             var htmlOption = "";
-            htmlOption += "<option value=''>All Level</option>";
+            htmlOption += "<option value=''>All Organization Level</option>";
             $.each(data, function (index, indexEntry) {
 
                 if (id == indexEntry['level_id']) {
@@ -229,6 +229,10 @@ $(document).ready(function () {
         $(".app_url_hidden").show();
     }
 
-    $("#organization").multiselect({ minWidth: '100%;' }).multiselectfilter();
+    $("#organization").multiselect({ 
+    	minWidth: '100%;',
+		noneSelectedText: "Select Organization",
+ 		selectedText: "# Organization"
+    }).multiselectfilter();
     refreshMultiOrganization();
 });

@@ -33,7 +33,10 @@ $(document).ready(function () {
         $(".app_url_hidden").show();
     }
 
-    $("#organization").multiselect({ minWidth: '100%;' }).multiselectfilter();
+    $("#organization").multiselect({ 
+    	minWidth: '100%;',
+    	noneSelectedText: "Select Organization",
+		selectedText: "# Organization" }).multiselectfilter();
 
     $(".ui-multiselect-menu").find(".ui-multiselect-all").click();  // check all organization
 

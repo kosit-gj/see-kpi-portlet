@@ -397,7 +397,7 @@ var appraisalLevelListFn2 = function(){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option  value=\"\">All Level</option>";
+			htmlOption+="<option  value=\"\">All Employee Level</option>";
 			$.each(data,function(index,indexEntry){
 				htmlOption+="<option value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
 			});
@@ -443,7 +443,7 @@ var appraisalLevelListFn = function(nameArea,id,defaultAll,multiSelect){
 			if(defaultAll==false){
 				
 			}else{
-				htmlOption+="<option  value=\"\">All Level</option>";
+				htmlOption+="<option  value=\"\">All Employee Level</option>";
 			}
 			$.each(data,function(index,indexEntry){
 				
@@ -480,7 +480,7 @@ var appraisalLevelOrgListFn = function(){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-				htmlOption+="<option  value=\"\">All Level</option>";
+				htmlOption+="<option  value=\"\">All Organization Level</option>";
 			$.each(data,function(index,indexEntry){
 				htmlOption+="<option value="+indexEntry['level_id']+">"+indexEntry['appraisal_level_name']+"</option>";
 			});
@@ -985,7 +985,9 @@ $(document).ready(function(){
 	//parameter end
 	
 	 $("#Organization").multiselect({
-		 minWidth:'100%;'
+		 minWidth:'100%;',
+		 noneSelectedText: "Select Organization",
+ 		 selectedText: "# Organization"
 	 }).multiselectfilter();
 	
 	 $("#appraisalLevel").change(function() {
