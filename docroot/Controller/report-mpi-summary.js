@@ -125,7 +125,7 @@ var dropDrowOrgFn = function(){
 
 var dropDrowFormTypeFn = function(id){
 	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/bonus/advance_search/form_hr",
+		url:restfulURL+"/"+serviceName+"/public/bonus/advance_search/form_mpi",
 		type:"get",
 		dataType:"json",
 		async:false,
@@ -248,9 +248,9 @@ $(document).ready(function() {
 				dropDrowOrgFn();
 			});
 			
-			$("#AppraisalForm").change(function() {
-				dropDrowFormTypeFn();
-			});
+//			$("#AppraisalForm").change(function() {
+//				dropDrowFormTypeFn();
+//			});
 			
 			$("#organization").change(function() {
 				dropDrowPositionFn();
