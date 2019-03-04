@@ -2589,6 +2589,7 @@ var getDataFn = function (page, rpp) {
     var appraisal_type_id = ($("#embed_appraisalType").val()); // #004
     var form_type = $("#embed_formType").val();
     var status = $("#embed_status").val();
+    var only_subordinate = $("#embed_only_subordinate").val();
 
     
 	if(gSystempConfig.appraisal_360_flag == 1){
@@ -2615,7 +2616,8 @@ var getDataFn = function (page, rpp) {
             "emp_id": EmpID,
             "appraisal_type_id": appraisal_type_id,
             "stage_id": status,
-            "appraisal_form_id": form_type
+            "appraisal_form_id": form_type,
+            "only_subordinate": only_subordinate
         },
         success: function (data) {
             listDataFn(data);
@@ -2651,6 +2653,11 @@ var searchAdvanceFn = function () {
 
     var Position = $("#Position_id").val();
     var AppraisalLevel_ = ($("#appraisalType").val() == "1") ? $("#AppraisalOrgLevel").val() : $("#AppraisalEmpLevel").val();
+    if($("#only_subordinate").prop("checked")) {
+    	var subordinate = 1;
+    } else {
+    	var subordinate = 0;
+    }
 
     $(".embed_param_search").remove();
     var embedParam = "";
@@ -2665,6 +2672,7 @@ var searchAdvanceFn = function () {
     embedParam += "<input type='hidden' class='embed_param_search' id='embed_appraisalType' name='embed_appraisalType' value='" + $("#appraisalType").val() + "'>";
     embedParam+="<input type='hidden' class='embed_param_search' id='embed_formType' name='embed_formType' value='"+$("#form_type").val()+"'>";
     embedParam += "<input type='hidden' class='embed_param_search' id='embed_status' name='embed_status' value='" + $("#status").val() + "'>";
+    embedParam += "<input type='hidden' class='embed_param_search' id='embed_only_subordinate' name='embed_only_subordinate' value='" + subordinate + "'>";
 
     $("#embedParamSearch").append(embedParam);
 
@@ -3186,14 +3194,23 @@ $(document).ready(function () {
             appraisalTypeFn();
             $("#appraisalType").change(function () {
                 if ($("#appraisalType").val() == 1) {
-                    $("#Position").val("").prop("disabled", true);
-                    $("#EmpName").val("").prop("disabled", true);
-                    $("#AppraisalEmpLevel").prop("disabled", true);
+                    $("#AppraisalEmpLevel, #EmpName, #Position").val("").prop("disabled", true);
+                    $("#only_subordinate").prop("checked", false).prop("disabled", true);
+                    $("#AppraisalOrgLevel, #organization").prop("disabled", false);
                     dropDrowAppraisalOrgLevelFn();
                 } else {
-                    $("#Position").prop("disabled", false);
-                    $("#EmpName").prop("disabled", false);
-                    $("#AppraisalEmpLevel").prop("disabled", false);
+                	$("#only_subordinate").prop("disabled", false);
+                	$("#only_subordinate").off('click');
+                    $("#only_subordinate").click(function() {
+                    	if($(this).prop('checked')) {
+                    		$("#AppraisalEmpLevel, #AppraisalOrgLevel, #organization, #EmpName, #Position").val("").prop("disabled", true);
+                    	} else {
+                    		$("#AppraisalEmpLevel, #AppraisalOrgLevel, #organization, #EmpName, #Position").prop("disabled", false);
+                    	}
+                    });
+                    $("#only_subordinate").click();
+                    
+//                    $("#AppraisalEmpLevel, #AppraisalOrgLevel, #organization, #EmpName, #Position, #only_subordinate").prop("disabled", false);
                     dropDrowAppraisalEmpLevelFn();
                 }
             });
