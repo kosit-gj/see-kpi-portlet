@@ -756,10 +756,10 @@ var setPermission = function(data) {
 		$("#list_empjudege").find(".salary").attr("disabled", false);
 		$("#list_empjudege").find(".pqpi").attr("disabled", false);
 		$("#btnSubmit").attr("disabled", false);
-		
-		$("#list_empjudege").find('.percent').keyup();
-		$("#list_empjudege").find('.salary').keyup();
 	}
+	
+	$("#list_empjudege").find('.percent').keyup();
+	$("#list_empjudege").find('.salary').keyup();
 	
 	if($("#actionToAssign").val()==null || $("#actionToAssign").val()==undefined) {
 		$("#btnSubmit").attr("disabled", true);
