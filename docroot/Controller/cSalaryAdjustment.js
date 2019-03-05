@@ -391,9 +391,12 @@ var to_action = function () {
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
         	var htmlOption="";
-            $.each(data, function (index, indexEntry) {
-            	htmlOption += "<option value='" + indexEntry['stage_id'] + "'>" + indexEntry['to_action'] + "</option>";
-            });
+        	if(data.length!==0) {
+            	htmlOption += "<option value='999'>Save</option>"; //999 is not update stage
+                $.each(data, function (index, indexEntry) {
+                	htmlOption += "<option value='" + indexEntry['stage_id'] + "'>" + indexEntry['to_action'] + "</option>";
+                });
+        	}
             $("#actionToAssign").html(htmlOption);
         }
     });
