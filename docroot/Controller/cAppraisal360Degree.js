@@ -1156,7 +1156,22 @@ var assignTemplateQuantityFn = function (structureName, data) {
         htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><div title=\"" + hintHtml + "\" data-toggle=\"tooltip\" data-html=\"true\" data-placement=\"right\" >" + addCommas(parseFloat(notNullFn(indexEntry['target_value'])).toFixed(2)) + "</div></td>";
         htmlTemplateQuantity += "<td>" + indexEntry['uom_name'] + "</td>";
         htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumeric itemScore edit_flag\"  id=\"forecast-" + indexEntry['item_result_id'] + "\" name=\"forecast-" + indexEntry['item_result_id'] + "\" value=" + indexEntry['forecast_value'] + "></td>";
-        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'><input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumericActual edit_flag actual_value\"  id=\"actual_value-" + indexEntry['item_result_id'] + "\"  value=" + indexEntry['actual_value'] + "></td>";
+        
+        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'>";
+        
+        if(indexEntry['is_derive']==1) {
+        	if(edit_flag==1 && allow_input_actual==1 && indexEntry['edit_derive']==1) {
+        		var disabled_canedit = "";
+            } else {
+            	var disabled_canedit = "disabled";
+            }
+        	htmlTemplateQuantity += "<input "+disabled_canedit+" style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumericActual\"  id=\"actual_value-" + indexEntry['item_result_id'] + "\"  value=" + indexEntry['actual_value'] + ">";
+        } else {
+        	htmlTemplateQuantity += "<input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumericActual edit_flag actual_value\"  id=\"actual_value-" + indexEntry['item_result_id'] + "\"  value=" + indexEntry['actual_value'] + ">";
+        }
+        
+        htmlTemplateQuantity += "</td>";
+        
 //        htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;' id=\"actual_value-" + indexEntry['item_result_id'] + "\">" + addCommas(parseFloat(notNullFn(indexEntry['actual_value'])).toFixed(2)) + "</td>"; //# 004
         if (data['threshold'] == 1) {
             htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'>" + addCommas(parseFloat(notNullFn(indexEntry['score']))) + "</td>";
@@ -1854,11 +1869,11 @@ var findOneFn = function (id) {
                 else{ //#004
                 	 $(".edit_flag").removeAttr('disabled');
                 	 
-                	if(allow_input_actual == 0){ 
+                	if(allow_input_actual == 0){
                 		$(".actual_value").attr("disabled", "disabled");
-                	} 
-                	else 
+                	} else {
                 		$(".actual_value").removeAttr('disabled');
+                	}
                 }
 
                 
