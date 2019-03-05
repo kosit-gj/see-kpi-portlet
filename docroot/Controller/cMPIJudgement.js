@@ -348,6 +348,7 @@ var listDataFn = function(data){
 
 		user_bu = indexEntry['is_bu'];
 		user_coo = indexEntry['is_coo'];
+		user_admin = indexEntry['is_admin'];
 		user_id = indexEntry['user_emp_id'];
 		user_level_id = indexEntry['user_level_id'];
 		
@@ -482,7 +483,7 @@ var listDataFn = function(data){
 	$("table thead th").css({"border-bottom" : "0px"});
 	
 	// สามารถเลือก checkbox ได้เฉพาะคนที่เป็น bu และ coo
-	if (user_bu == '1' || user_coo == '1'){
+	if (user_bu == '1' || user_coo == '1' || user_admin == '1'){
 		$( "input[type='checkbox']" ).prop({
 			  disabled: false
 		});
@@ -606,7 +607,6 @@ var validationFn = function(data) {
 }
 
 var insertFn = function(type) {
-	console.log("test");
 	/* var position_id = $("#Position").val();
     var year = $("#AppraisalYear").val();
     var level_id_org = $("#AppraisalOrgLevel").val();
