@@ -3249,8 +3249,11 @@ $(document).ready(function () {
             $("#organization").change(function () {
                 clearParamSearch(dataClearParam);// in cMain.js
             });
-
-            setParamSearch(dataSetParam);// in cMain.js
+            
+            if(!$("#only_subordinate").prop('checked')) {
+            	setParamSearch(dataSetParam);// in cMain.js
+            }
+            
             dropDrowIndividualOrgLevelFn();
 
             //Auto complete Start
