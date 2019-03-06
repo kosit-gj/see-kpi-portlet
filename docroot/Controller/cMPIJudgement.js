@@ -174,6 +174,9 @@ var refreshMultiPosition = function() {
 	$('input[name=multiselect_Position]').css({'margin-bottom':'5px'});
 }
 var appraisalStatusFn = function () {
+	var position_id = $("#Position").val();
+	if (position_id == null){ position_id = ['null']}
+	
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/bonus/advance_search/status",
         type: "get",
@@ -190,7 +193,7 @@ var appraisalStatusFn = function () {
             "appraisal_year" : $("#AppraisalYear").val(),
             "period_id" : $("#AppraisalPeriod").val(),
             "emp_id" : $("#EmpName_id").val(),
-            "position_id" : $("#Position").val()
+            "position_id" : position_id
         },
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
@@ -235,6 +238,7 @@ var getDataFn = function (page, rpp) {
 	//var rpp = $("#rpp").val();
 	
 	var position_id = $("#Position").val();
+	if (position_id == null){ position_id = ['null']}
     var year = $("#AppraisalYear").val();
     var level_id_org = $("#AppraisalOrgLevel").val();
     var level_id_emp = $("#AppraisalEmpLevel").val();
