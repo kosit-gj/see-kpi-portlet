@@ -8,6 +8,7 @@ var score = "";
 var type_score = "";
 var user_id = "";
 var user_level_id = "";
+var user_admin = "";
 var table = "";
 const pageNumberDefault=1;
 var startDatatable = true;
@@ -628,7 +629,8 @@ var insertFn = function(type) {
 				score				: $('#'+idInput).parent().parent().find('.score_bu').find('.bu').autoNumeric('get'),
 				type_score			: "bu",
 				user_id				: user_id,
-				user_level_id		: user_level_id
+				user_level_id		: user_level_id,
+				user_admin			: user_admin
 			});
 			}
 		}
@@ -639,7 +641,18 @@ var insertFn = function(type) {
 				score	    		: $('#'+idInput).parent().parent().find('.score_coo').find('.coo').autoNumeric('get'),
 				type_score			: "coo",
 				user_id				: user_id,
-				user_level_id		: user_level_id
+				user_level_id		: user_level_id,
+				user_admin			: user_admin
+			});
+			}
+		}
+		if(user_admin == '1'){
+			if($(indexEntry).find('.select-check').prop('checked')) {
+			detail.push({
+				emp_result_id		: $(indexEntry).find('.select-check').attr('id'),
+				user_id				: user_id,
+				user_level_id		: user_level_id,
+				user_admin			: user_admin
 			});
 			}
 		}
