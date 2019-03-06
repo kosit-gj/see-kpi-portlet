@@ -1159,6 +1159,14 @@ var assignTemplateQuantityFn = function (structureName, data) {
         
         htmlTemplateQuantity += "<td style='text-align: right;padding-right: 10px;'>";
         
+        if(indexEntry['derive_item_result_id']==null || indexEntry['derive_item_result_id']==0 || indexEntry['derive_item_result_id']=='') {
+        	htmlTemplateQuantity += "<input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumericActual edit_flag actual_value\"  id=\"actual_value-" + indexEntry['item_result_id'] + "\"  value=" + indexEntry['actual_value'] + ">";
+        } else {
+        	//if item have derive_item_result_id set cannot edit this item
+        	htmlTemplateQuantity += "<input disabled style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumericActual\"  id=\"actual_value-" + indexEntry['item_result_id'] + "\"  value=" + indexEntry['actual_value'] + ">";
+        }
+        
+        /*
         if(indexEntry['is_derive']==1) {
         	if(edit_flag==1 && allow_input_actual==1 && indexEntry['edit_derive']==1) {
         		var disabled_canedit = "";
@@ -1169,6 +1177,7 @@ var assignTemplateQuantityFn = function (structureName, data) {
         } else {
         	htmlTemplateQuantity += "<input style=\"width:70px; height: 25px;padding: 0 0 0 5px; font-size:13px; text-align:right;\" type=\"text\" class=\"span10 input-sm-small  autoNumericActual edit_flag actual_value\"  id=\"actual_value-" + indexEntry['item_result_id'] + "\"  value=" + indexEntry['actual_value'] + ">";
         }
+        */
         
         htmlTemplateQuantity += "</td>";
         
