@@ -982,6 +982,7 @@ var actionAssignmentFn = function (param) {
                 appraisal_items += "\"kpi_type_id\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-kpi_type_id").val() + "\",";
                 appraisal_items += "\"form_id\":\"1\",";
                 appraisal_items += "\"item_id\":\"" + $(appraisalItemEntry).val() + "\",";
+                appraisal_items += "\"actual_value\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-actualValue").val() + "\",";
                 appraisal_items += "\"item_result_id_derive\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-checkbox").attr('item_result_id') + "\",";
                 appraisal_items += "\"item_name\":\"" + $("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-item_name").text() + "\",";
                 appraisal_items += "\"target_value\":\"" + removeComma($("#id-" + $(appraisalItemEntry).val() + "-" + $(structureEntry).val() + "-target").val()) + "\",";
