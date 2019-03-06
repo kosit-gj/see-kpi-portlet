@@ -258,7 +258,11 @@ $(document).ready(function() {
 			});
 			
 			
-			$("#Position").multiselect({minWidth:'100%;'}).multiselectfilter();
+			$("#Position").multiselect({
+				minWidth:'100%;',
+				noneSelectedText: "Select Position",
+		 		selectedText: "# Position"	
+			}).multiselectfilter();
 			  refreshMultiPosition();
 			
 			$("#EmpName").autocomplete({
