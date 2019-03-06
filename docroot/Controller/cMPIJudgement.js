@@ -175,7 +175,7 @@ var refreshMultiPosition = function() {
 }
 var appraisalStatusFn = function () {
 	var position_id = $("#Position").val();
-	if (position_id == null){ position_id = ['null']}
+	if (position_id == null){ position_id = ['null'];}
 	
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/bonus/advance_search/status",
@@ -238,7 +238,7 @@ var getDataFn = function (page, rpp) {
 	//var rpp = $("#rpp").val();
 	
 	var position_id = $("#Position").val();
-	if (position_id == null){ position_id = ['null']}
+	if (position_id == null){ position_id = ['null'];}
     var year = $("#AppraisalYear").val();
     var level_id_org = $("#AppraisalOrgLevel").val();
     var level_id_emp = $("#AppraisalEmpLevel").val();
