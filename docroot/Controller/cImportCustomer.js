@@ -372,7 +372,7 @@ $(document).ready(function() {
    
 	//Autocomplete Search End
 	
-	$("#dowloadToCsv").click(function(){
+	$("#exportToExcel").click(function(){
 		$("form#formDowloadToCsv").attr("action",$("#url_portlet").val()+"/file/import_customer.csv");
 	});
 	$("#exportToCsv").click(function () {
