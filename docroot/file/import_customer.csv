@@ -1,1 +1,1 @@
-﻿customer_code,customer_name,customer_type,tse,vsm,lex,industry_class,is_active
+﻿customer_code,customer_name,customer_type,position_code[1],position_code[2],position_code[3],industry_class,is_active
