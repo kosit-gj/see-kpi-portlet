@@ -1,10 +1,12 @@
 //-------- Update Criteria Start
 var options=[];
 var scriptCheckboxCheckIsActiveOnlyOneFn  = function (){
-	$("#listAuthQuestionnaireType .checkboxIsActive").off("click");
-	$("#listAuthQuestionnaireType .checkboxIsActive").on("click",function(){
-		$(this).parent().parent().parent().find('.checkboxIsActive').prop('checked', false);
-		$(this).prop('checked', true);
+	$("#listAuthQuestionnaireType .checkboxIsActive").off("change");
+	$("#listAuthQuestionnaireType .checkboxIsActive").on("change",function(){
+		if(this.checked){ //console.log(this.checked);
+			$(this).parent().parent().parent().find('.checkboxIsActive').prop('checked', false);
+			$(this).prop('checked', true);
+        }
 	});
 	
 };
