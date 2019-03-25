@@ -57,6 +57,7 @@
 		<portlet id="asm-by-tse-report"></portlet>
 		<portlet id="vsm-employee"></portlet>
 		<portlet id="job_function"></portlet>
+		<portlet id="Operation-Tracking-Report"></portlet>	
 	</category>
 
 
