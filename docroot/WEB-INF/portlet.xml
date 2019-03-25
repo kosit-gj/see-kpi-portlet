@@ -2025,7 +2025,7 @@
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/wwwr-position-report/view.jsp</value>
+			<value>/html/Report-PMTL/wwwr-position-report.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2058,7 +2058,7 @@
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/wwwr-transaction-report/view.jsp</value>
+			<value>/html/Report-PMTL/wwwr-transaction-report.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2091,7 +2091,7 @@
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/asm-by-tse-report/view.jsp</value>
+			<value>/html/Report-PMTL/asm-by-tse-report.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2124,7 +2124,7 @@
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/Operation-Tracking-Report/view.jsp</value>
+			<value>/html/Report-PMTL/operation-tracking-report.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2200,6 +2200,39 @@
 		<portlet-info>
 			<title>Job Function</title>
 			<short-title>Job Function</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>fsf-hc-report</portlet-name>
+		<display-name>FSF HC Report</display-name>
+		<portlet-class>
+			com.liferay.util.bridges.mvc.MVCPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/Report-PMTL/fsf-hc-report.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>FSF HC Report</title>
+			<short-title>Fsf Hc Report</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>
