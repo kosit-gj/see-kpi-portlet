@@ -63,6 +63,10 @@ $(document).ready(function() {
 	    return ( ( event.keyCode || event.which ) === 9 ? true : false );
 	});
     
+	$("#date-start ,#date-end").keydown(function(event) {		
+	    return ( ( event.keyCode || event.which ) === 9 ? true : false );
+	});
+    
     assessorParam($("#tse-code-or-tse-name-id").val());
     $("#QuestionnaireType").change(function() {
     	clearParamFn();

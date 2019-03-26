@@ -62,6 +62,10 @@ $(document).ready(function() {
 	    $("#date-start ,#date-end").keypress(function(event) {
 		    return ( ( event.keyCode || event.which ) === 9 ? true : false );
 		});
+	    
+		$("#date-start ,#date-end").keydown(function(event) {		
+		    return ( ( event.keyCode || event.which ) === 9 ? true : false );
+		});
     
 	    $("#QuestionnaireType").change(function() {
 	    	clearParamFn();
@@ -82,6 +86,14 @@ var clearParamFn = function(){
 	galbalDataTemp=[]; 
 }
 
+var refreshMultiQuestionnaireType = function() {
+	$("#QuestionnaireType").multiselect({minWidth:'100%;'}).multiselectfilter();
+	$("#QuestionnaireType_ms").css({'width':'100%','padding-top': '4px','padding-bottom': '4px'});
+	$(".ui-icon-check,.ui-icon-closethick,.ui-icon-circle-close").css({'margin-top':'3px'});
+	$(".ui-icon").css({'margin-top':'0px'});
+	$('input[name=multiselect_QuestionnaireType]').css({'margin-bottom':'5px','margin-right':'5px'});
+}
+
 var questionnaireTypeParam = function(){
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/public/questionaire_data/list_questionaire1",
@@ -91,48 +103,55 @@ var questionnaireTypeParam = function(){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success:function(data){
 			var htmlOption="";
-			htmlOption+="<option selected='selected' value=''>All Questionnaire Type</option>";
 			$.each(data,function(index,indexEntry){
-				if(index==0){
 					htmlOption+="<option value="+indexEntry['questionaire_type_id']+">"+indexEntry['questionaire_type']+"</option>";
-				}else{
-					htmlOption+="<option value="+indexEntry['questionaire_type_id']+">"+indexEntry['questionaire_type']+"</option>";
-				}
 			});
 			$("#QuestionnaireType").html(htmlOption);
-			console.log(data);
+		    refreshMultiQuestionnaireType();
 		}
 	});
 }
 
-
+var json_name = "";
 var getDataFn = function() {
 	$("body").mLoading('show'); //Loading
 	var parameter = {};
 	var template_name ="";
 	var date_start = $("#date-start").val();
 	var date_end = $("#date-end").val();
-	var questionaire_type_id = $("#QuestionnaireType").val();
+	var questionaire_type_id = $("#QuestionnaireType").val()==null ? '' : $("#QuestionnaireType").val().toString();
 	
 	template_name="FSF-HC-Report"; 
-	
-	parameter = {
-			param_questionaire_type: questionaire_type_id,
-			param_date_start : date_start,
-			param_date_end : date_end,
-		  };
 	
 	if (date_start == '' || date_end == ''){
 		 $("body").mLoading('hide'); //Loading
 		callFlashSlide(Liferay.Language.get("Date start or Date end is require!"));
 		return false;
 	}
-
+	
+	if (questionaire_type_id==''){
+		 $("body").mLoading('hide'); //Loading
+		callFlashSlide("Questionnaire type is require.");
+		return false;
+	}
+	
+    generateJsonFn(date_start,date_end,questionaire_type_id);
+    
+    if(json_name =="" ||json_name == null){
+    	console.log("don't have json file.")
+    	return false;
+    }
+    
+	parameter = {
+			param_questionaire_type: questionaire_type_id,
+			param_date_start : date_start,
+			param_date_end : date_end,
+		  };
 	
 	var data = JSON.stringify(parameter);
-	var url_report_jasper = restfulURL+"/"+serviceName+"/public/generateAuth?template_name="+template_name+"&token="+tokenID.token+"&template_format=xlsx&used_connection=1&inline=1&data="+data;
+	var url_report_jasper = restfulURL + "/" + serviceName + "/public/generateAuth?template_name=" + template_name + "&token=" + tokenID.token + "&template_format=xlsx&used_connection=1&inline=1&data=" + data + "&json_name=" +json_name;
 	console.log(url_report_jasper);
-//	return false;
+
 	 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 		 window.open(url_report_jasper,"_blank");
 		} else {
@@ -156,3 +175,26 @@ var toDayFn = function(id) {
 	  // document.getElementById("datepicker-end").value = today;
 
 };
+
+var generateJsonFn = function (date_start,date_end,questionaire_type_id) {
+    $.ajax({
+        url: restfulURL + "/" + serviceName + "/public/FSF_HC/report",
+        type: "get",
+        dataType: "json",
+        data: {
+            "date_start": date_start,
+            "date_end": date_end,
+            "questionaire_type_id": '"'+questionaire_type_id+'"'
+        },
+        async: false,
+        headers: { Authorization: "Bearer " + tokenID.token },
+        success: function (data) {
+        	if(data['status']=='200'){
+        		json_name= data['data'];
+        	}
+        	else if(data['status']=='400'){
+        		console.log(data['data']);
+        	}
+        }
+    });
+}

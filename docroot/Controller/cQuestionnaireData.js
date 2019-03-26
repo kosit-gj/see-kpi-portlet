@@ -2050,6 +2050,10 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 		    return ( ( event.keyCode || event.which ) === 9 ? true : false );
 		});
 		
+		$("#search_datepicker_start ,#search_datepicker_end , #modal_datepicker_start").keydown(function(event) {
+		    return ( ( event.keyCode || event.which ) === 9 ? true : false );
+		});
+		
 		getRoleAuthorizeFn();
 		$(".app_url_hidden").show();
 		$("#btn-search").click(function(){
