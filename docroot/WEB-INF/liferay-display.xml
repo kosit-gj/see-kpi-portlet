@@ -59,6 +59,7 @@
 		<portlet id="job_function"></portlet>
 		<portlet id="Operation-Tracking-Report"></portlet>
 		<portlet id="fsf-hc-report"></portlet>
+		<portlet id="import-head-count"></portlet>
 	</category>
 
 
