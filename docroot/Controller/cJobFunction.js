@@ -13,7 +13,7 @@ $(document).ready(function(){
     			"colunms":[
     						{"colunmsDisplayName":"Job Function Name","width":"60%","id":"job_function_name","colunmsType":"text"},
     			           {"colunmsDisplayName":"Is Evaluated","width":"auto","id":"is_evaluated","colunmsType":"checkbox"},
-    			           {"colunmsDisplayName":"Is Headcount","width":"auto","id":"is_headcount","colunmsType":"checkbox"},
+    			           {"colunmsDisplayName":"Is Show Report","width":"auto","id":"is_show_report","colunmsType":"checkbox"},
     			          ],
     			"form":[{
 						"label":"Job Function Name","inputType":"text","placeholder":"Job Function Name",
@@ -24,8 +24,8 @@ $(document).ready(function(){
 	 	    			"id":"is_evaluated","width":"200px"
 	 	    			},
     					{
-		 	    			"label":"Is Headcount","inputType":"checkbox","default":"",
-		 	    			"id":"is_headcount","width":"200px"
+		 	    			"label":"Is Show Report","inputType":"checkbox","default":"",
+		 	    			"id":"is_show_report","width":"200px"
 		 	    			}
     					
     			     ], 	
@@ -40,7 +40,7 @@ $(document).ready(function(){
     			 "tokenID":tokenID,
     			 "pagignation":false,
     			 "expressSearch":false,
-    			 "advanceSearchSet":true,
+    			 "advanceSearchSet":false,
     			 "btnAddOption":true,
     			 //"btnAdvanceDownloadOption":{"url":""+$("#url_portlet").val()+"/file/appraisal_position_template.xlsx"},
     			 //"btnAdvanceImportOption":{"formName":"Import Position","accept":".xls ,.xlsx"}
