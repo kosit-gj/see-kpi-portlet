@@ -6,13 +6,11 @@ const pageNumberDefault=1;
 let countDatatableGenerate = 0;
 var GlobalChangingSortingData;
 
+/*
 function refreshDataSortFn(index, objName, data) {
-	console.log(index, objName, data, 'index')
-	console.log(GlobalChangingSortingData['items'][0].objName, 1)
-	GlobalChangingSortingData['items'][0].objName = data;
-	console.log(GlobalChangingSortingData['items'][0].objName, 2)
-	console.log(GlobalChangingSortingData);
+	GlobalChangingSortingData['items'][index][objName] = data;
 }
+*/
 
 function roundThen(value, precision) {
 	if (Number.isInteger(precision)) {
@@ -412,7 +410,9 @@ var to_action = function () {
 }
 
 var listDataFn = function(data) {
-	GlobalChangingSortingData = data;
+	//console.log(data, '411')
+	//GlobalChangingSortingData = data;
+	//console.log(GlobalChangingSortingData, 413)
 	var htmlHTML="";
 	
 	var htmlHeader1 = "";
@@ -450,9 +450,9 @@ var listDataFn = function(data) {
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\"><input type=\"checkbox\" name=\"statusSelectAll\" id=\"statusSelectAll\" class=\"statusSelectAll\"></th>";
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">"+$(".lt-emp-name").val()+"</th>";
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">"+$(".lt-organization").val()+"</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top\">Z-Score</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring\" number-sort='5'>"+(data['is_board']==1 ? 'คะแนนประเมิน Board.' : 'คะแนนประเมิน COO.')+"</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top\">เกรด</th>";
+	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_z_score\" sort-type='asc' name-sort='z_score'>Z-Score</th>";
+	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_score\" sort-type='asc' name-sort='"+(data['is_board']==1 ? 'score_board' : 'score_coo')+"'>"+(data['is_board']==1 ? 'คะแนนประเมิน Board.' : 'คะแนนประเมิน COO.')+"</th>";
+	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_grade\" sort-type='asc' name-sort='grade'>เกรด</th>";
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">Cal Standard</th>";
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">ขาด/เกิน</th>";
 	htmlHeader1+="<th colspan=\"4\" class=\"fix-column-top\">รายได้ที่เปลี่ยนแปลง</th>";
@@ -467,11 +467,11 @@ var listDataFn = function(data) {
 //	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">คะแนนผลงานปีที่ผ่านมา ( 20 คะแนน )</th>";
 //	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">คะแนนความสามารถที่มีคุณค่าต่อองค์กร ( 15 คะแนน )</th>";
 
-	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">คะแนนประเมิน Mgr. </th>";
-	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">คะแนนประเมิน BU. </th>";
+	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_score_mgr\" sort-type='asc' name-sort='score_mgr'>คะแนนประเมิน Mgr. </th>";
+	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_score_bu\" sort-type='asc' name-sort='score_bu'>คะแนนประเมิน BU. </th>";
 	
 	if(data['is_board']==1) {
-		htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">คะแนนประเมิน COO.</th>";
+		htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_score_coo\" sort-type='asc' name-sort='score_coo2'>คะแนนประเมิน COO.</th>";
 	}
 	
 	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">คะแนนเต็มตีค่างาน (ความรู้)</th>";
@@ -484,7 +484,7 @@ var listDataFn = function(data) {
 	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">ปรับรายได้ Total</th>";
 	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">ปรับเงินเดือน</th>";
 	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">ปรับ P-QPI</th>";
-	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">% Diff</th>";
+	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top refreshSoring column_diff\" sort-type='asc' name-sort='score_diff'>% Diff</th>";
 	
 	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">%</th>";
 	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top\">Bath</th>";
@@ -492,11 +492,11 @@ var listDataFn = function(data) {
 	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">รายได้รวมที่ควรได้ 90% ไม่รวม Bonus</th>";
 	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">รายได้ Fix ที่ควรได้ 65%</th>";
 	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">รายได้ Var ที่ควรได้ 25%</th>";
-	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top\">รายได้ปัจจุบัน Total</th>";
+	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top refreshSoring column_current_total\" sort-type='asc' name-sort='current_total'>รายได้ปัจจุบัน Total</th>";
 	
 	htmlHeader3+="<th colspan=\"3\" class=\"fix-column-top\">FIX65%</th>";
 	htmlHeader3+="<th colspan=\"3\" class=\"fix-column-top\">VAR25%</th>";
-	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top\">รายได้ใหม่<br>Total</th>";
+	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top refreshSoring column_new_total\" sort-type='asc' name-sort='new_total'>รายได้ใหม่<br>Total</th>";
 	htmlHeader3+="<th colspan=\"3\" class=\"fix-column-top\">FIX 65%</th>";
 	htmlHeader3+="<th colspan=\"3\" class=\"fix-column-top\">VAR 25%</th>";
 	htmlHeader3+="</tr>";
@@ -699,7 +699,7 @@ var listDataFn = function(data) {
 			miss_over = 0;
 		}
 		
-		index += 1
+		//index += 1
 		
 		htmlHTML += "<tr class='control-calculate rowNum"+index+"' rowNum="+index+" data-current-total='"+notNullFn(indexEntry.total_now_salary)+"' total_point='"+notNullFn(indexEntry.total_point)+"' bath_point='"+notNullFn(indexEntry.baht_per_point)+"'>";
 		//start freeze
@@ -709,7 +709,7 @@ var listDataFn = function(data) {
 		htmlHTML += "	<td class='pos-column-cen'>"+indexEntry.z_score.toFixed(2)+"</td>";
 		htmlHTML += "	<td class='data-coo' array-grade='"+JSON.stringify(indexEntry['cal_grade'])+"'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 score_coo numberOnlyCoo' value='"+score_coo+"' obj-name='"+(data['is_board']==1 ? 'score_board' : 'score_coo')+"'/>";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 score_coo numberOnlyCoo' value='"+(data['is_board']==1 ? score_board : score_coo)+"' obj-name='"+(data['is_board']==1 ? 'score_board' : 'score_coo')+"'/>";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		htmlHTML += "	<td class='data-grade pos-column-cen' "+displayNonejobEvua+">"+grade+"</td>";
@@ -810,50 +810,41 @@ var setPermission = function(data) {
 }
 
 var createDatatable = function(table, countStruc, isBoard) {
-	
-	/* Create an array with the values of all the input boxes in a column, parsed as numbers */
-	$.fn.dataTable.ext.order['dom-text'] = function  ( settings, col )
-	{
-	    return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
-	        return $('input', td).val();
-	    } );
-	}
-	
 	var columnSettingFirst = [
 		//start freeze
-		{ "width": "10px", "targets": [0], "bSortable": false  }, //checkbox
-    	{ "width": "30px", "targets": [1], "bSortable": false }, //Employee Name
-    	{ "width": "30px", "targets": [2], "bSortable": false }, //org
-    	{ "width": "20px", "targets": [3] }, //z-score
-    	{ "width": "20px", "targets": [4], "orderDataType": "dom-text" }, //คะแนนประเมินCOO or board
-    	{ "width": "10px", "targets": [5] }, //Grade
-    	{ "width": "10px", "targets": [6], "bSortable": false }, //Calstandard
-    	{ "width": "10px", "targets": [7], "bSortable": false }, //ขาดเกิน
-    	{ "width": "30px", "targets": [8], "bSortable": false }, //ปรับรายได้ total
-    	{ "width": "30px", "targets": [9], "bSortable": false }, //ปรับเงินเดือน
-    	{ "width": "30px", "targets": [10], "bSortable": false }, //ปรับ pqpi
+		{ "width": "10px", "targets": [0]}, //checkbox
+    	{ "width": "30px", "targets": [1]}, //Employee Name
+    	{ "width": "30px", "targets": [2]}, //org
+    	{ "width": "20px", "targets": [3]}, //z-score
+    	{ "width": "20px", "targets": [4]}, //คะแนนประเมินCOO or board
+    	{ "width": "10px", "targets": [5]}, //Grade
+    	{ "width": "10px", "targets": [6]}, //Calstandard
+    	{ "width": "10px", "targets": [7]}, //ขาดเกิน
+    	{ "width": "30px", "targets": [8]}, //ปรับรายได้ total
+    	{ "width": "30px", "targets": [9]}, //ปรับเงินเดือน
+    	{ "width": "30px", "targets": [10]}, //ปรับ pqpi
     	{ "width": "10px", "targets": [11] }, // % diff
     	// end freeze
     	
-    	{ "width": "100px", "targets": [12], "bSortable": false }, //%
-    	{ "width": "100px", "targets": [13], "orderDataType": "dom-text" }, //Bath
-    	{ "width": "100px", "targets": [14], "bSortable": false }, //รายได้รวมที่ควรได้90% ไม่รวม Bonus
-    	{ "width": "100px", "targets": [15], "bSortable": false }, //รายได้รวมที่ควรได้65% ไม่รวม Bonus
-    	{ "width": "50px", "targets": [16], "bSortable": false }, //รายได้รวมที่ควรได้25% ไม่รวม Bonus
+    	{ "width": "100px", "targets": [12]}, //%
+    	{ "width": "100px", "targets": [13] }, //Bath
+    	{ "width": "100px", "targets": [14]}, //รายได้รวมที่ควรได้90% ไม่รวม Bonus
+    	{ "width": "100px", "targets": [15]}, //รายได้รวมที่ควรได้65% ไม่รวม Bonus
+    	{ "width": "50px", "targets": [16]}, //รายได้รวมที่ควรได้25% ไม่รวม Bonus
     	{ "width": "50px", "targets": [17] }, //รายได้ปัจจุบันTotal
-    	{ "width": "130px", "targets": [18], "bSortable": false }, //Salary
-    	{ "width": "100px", "targets": [19], "bSortable": false }, //P-QPI
-    	{ "width": "100px", "targets": [20], "bSortable": false }, //อื่นๆ
-    	{ "width": "100px", "targets": [21], "bSortable": false }, ////MPI
-    	{ "width": "80px", "targets": [22], "bSortable": false }, ///PI
-    	{ "width": "80px", "targets": [23], "bSortable": false }, //อื่นๆ
+    	{ "width": "130px", "targets": [18]}, //Salary
+    	{ "width": "100px", "targets": [19]}, //P-QPI
+    	{ "width": "100px", "targets": [20]}, //อื่นๆ
+    	{ "width": "100px", "targets": [21]}, ////MPI
+    	{ "width": "80px", "targets": [22]}, ///PI
+    	{ "width": "80px", "targets": [23]}, //อื่นๆ
     	{ "width": "80px", "targets": [24] },  //รายได้ใหม่Total
-    	{ "width": "130px", "targets": [25], "bSortable": false }, //Salary
-    	{ "width": "100px", "targets": [26], "bSortable": false }, //P-QPI
-    	{ "width": "100px", "targets": [27], "bSortable": false }, //อื่นๆ
-    	{ "width": "100px", "targets": [28], "bSortable": false }, ////MPI
-    	{ "width": "80px", "targets": [29], "bSortable": false }, ///PI
-    	{ "width": "80px", "targets": [30], "bSortable": false }, //อื่นๆ
+    	{ "width": "130px", "targets": [25] }, //Salary
+    	{ "width": "100px", "targets": [26]}, //P-QPI
+    	{ "width": "100px", "targets": [27] }, //อื่นๆ
+    	{ "width": "100px", "targets": [28]}, ////MPI
+    	{ "width": "80px", "targets": [29] }, ///PI
+    	{ "width": "80px", "targets": [30] }, //อื่นๆ
     ];
 	
 	var i;
@@ -861,8 +852,7 @@ var createDatatable = function(table, countStruc, isBoard) {
 		//i start 0
 		columnSettingFirst.push({
 			"width": "100px",
-			"targets": [31+i],
-			"bSortable": false
+			"targets": [31+i]
 		});
 	}
 	
@@ -871,19 +861,19 @@ var createDatatable = function(table, countStruc, isBoard) {
 	    	{ "width": "80px", "targets": [31+countStruc] }, //คะแนนประเมิน Mgr.
 	    	{ "width": "80px", "targets": [32+countStruc] }, //คะแนนประเมิน Bu
 	    	{ "width": "80px", "targets": [33+countStruc] }, //คะแนนประเมิน Coo
-	    	{ "width": "80px", "targets": [34+countStruc], "bSortable": false }, //คะแนนเต็มตีค่างาน (ความรู้)
-	    	{ "width": "80px", "targets": [35+countStruc], "bSortable": false }, //คะแนนเต็มตีค่างาน (ศักยภาพ)
-	    	{ "width": "80px", "targets": [36+countStruc], "bSortable": false }, //Total Point
-	    	{ "width": "80px", "targets": [37+countStruc], "bSortable": false }, //Baht/Point
+	    	{ "width": "80px", "targets": [34+countStruc]}, //คะแนนเต็มตีค่างาน (ความรู้)
+	    	{ "width": "80px", "targets": [35+countStruc] }, //คะแนนเต็มตีค่างาน (ศักยภาพ)
+	    	{ "width": "80px", "targets": [36+countStruc] }, //Total Point
+	    	{ "width": "80px", "targets": [37+countStruc] }, //Baht/Point
 	    ];
 	} else {
 		var columnSettingLast = [
 	    	{ "width": "80px", "targets": [31+countStruc] }, //คะแนนประเมิน Mgr.
 	    	{ "width": "80px", "targets": [32+countStruc] }, //คะแนนประเมิน Bu
-	    	{ "width": "80px", "targets": [33+countStruc], "bSortable": false }, //คะแนนเต็มตีค่างาน (ความรู้)
-	    	{ "width": "80px", "targets": [34+countStruc], "bSortable": false }, //คะแนนเต็มตีค่างาน (ศักยภาพ)
-	    	{ "width": "80px", "targets": [35+countStruc], "bSortable": false }, //Total Point
-	    	{ "width": "80px", "targets": [36+countStruc], "bSortable": false }, //Baht/Point
+	    	{ "width": "80px", "targets": [33+countStruc] }, //คะแนนเต็มตีค่างาน (ความรู้)
+	    	{ "width": "80px", "targets": [34+countStruc] }, //คะแนนเต็มตีค่างาน (ศักยภาพ)
+	    	{ "width": "80px", "targets": [35+countStruc] }, //Total Point
+	    	{ "width": "80px", "targets": [36+countStruc] }, //Baht/Point
 	    ];
 	}
 	
@@ -892,7 +882,7 @@ var createDatatable = function(table, countStruc, isBoard) {
 	table.DataTable({
 		fixedHeader: true,
 	    "searching": false,
-		"ordering": true,
+		"ordering": false,
 		"bInfo" : false,
 		"scrollY": 350,
         "scrollX": true,
@@ -1179,7 +1169,7 @@ var calculatePercentKeyup = function() {
 		
 		let indexArray = $(this).closest('.control-calculate').attr('rowNum');
 		let objName = $(this).attr('obj-name');
-		refreshDataSortFn(indexArray, objName, scoreCooOrBoard);
+//		refreshDataSortFn(indexArray, objName, scoreCooOrBoard);
 
 		var arrayG = $(this).closest('.data-coo').attr('array-grade');
 		var ArrayScore = JSON.parse(arrayG);
@@ -1210,6 +1200,73 @@ var calculatePercentKeyup = function() {
 		
 		$(this).closest('.data-coo').attr('data-sort', notNullFn(score_coo)); //add score_coo or score_board to attr
 	});
+	
+	/*
+	$(".refreshSoring").click(function() {
+		if($(this).attr('sort-type')=='asc') {
+			if($(this).attr('name-sort')=='score_coo' || $(this).attr('name-sort')=='score_coo2') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.score_coo > b.score_coo) ? 1 : ((b.score_coo > a.score_coo) ? -1 : 0)); 
+			} else if($(this).attr('name-sort')=='score_board') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.score_board > b.score_board) ? 1 : ((b.score_board > a.score_board) ? -1 : 0)); 
+			} else if($(this).attr('name-sort')=='z_score') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.z_score > b.z_score) ? 1 : ((b.z_score > a.z_score) ? -1 : 0)); 
+			} else if($(this).attr('name-sort')=='grade') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.grade > b.grade) ? 1 : ((b.grade > a.grade) ? -1 : 0)); 
+			} else if($(this).attr('name-sort')=='score_diff') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.percent_diff > b.percent_diff) ? 1 : ((b.percent_diff > a.percent_diff) ? -1 : 0)); 
+			} else if($(this).attr('name-sort')=='current_total') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.total_now_salary > b.total_now_salary) ? 1 : ((b.total_now_salary > a.total_now_salary) ? -1 : 0)); 
+			} else if($(this).attr('name-sort')=='new_total') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.total_now_salary > b.total_now_salary) ? 1 : ((b.total_now_salary > a.total_now_salary) ? -1 : 0)); 
+			} else if($(this).attr('name-sort')=='score_mgr') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.score_manager > b.score_manager) ? 1 : ((b.score_manager > a.score_manager) ? -1 : 0)); 
+			} else if($(this).attr('name-sort')=='score_bu') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.score_bu > b.score_bu) ? 1 : ((b.score_bu > a.score_bu) ? -1 : 0)); 
+			}
+		} else {
+			if($(this).attr('name-sort')=='score_coo' || $(this).attr('name-sort')=='score_coo2') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.score_coo < b.score_coo) ? 1 : ((b.score_coo < a.score_coo) ? -1 : 0)); 
+			} else if($(this).attr('name-sort')=='score_board') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.score_board < b.score_board) ? 1 : ((b.score_board < a.score_board) ? -1 : 0)); 
+			} else if($(this).attr('name-sort')=='z_score') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.z_score < b.z_score) ? 1 : ((b.z_score < a.z_score) ? -1 : 0)); 
+			} else if($(this).attr('name-sort')=='grade') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.grade < b.grade) ? 1 : ((b.grade < a.grade) ? -1 : 0)); 
+			} else if($(this).attr('name-sort')=='score_diff') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.percent_diff < b.percent_diff) ? 1 : ((b.percent_diff < a.percent_diff) ? -1 : 0)); 
+			} else if($(this).attr('name-sort')=='current_total') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.total_now_salary < b.total_now_salary) ? 1 : ((b.total_now_salary < a.total_now_salary) ? -1 : 0)); 
+			} else if($(this).attr('name-sort')=='new_total') {//waiting fix
+				GlobalChangingSortingData['items'].sort((a,b) => (a.total_now_salary_new < b.total_now_salary_new) ? 1 : ((b.total_now_salary_new < a.total_now_salary_new) ? -1 : 0)); 
+			} else if($(this).attr('name-sort')=='score_mgr') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.score_manager < b.score_manager) ? 1 : ((b.score_manager < a.score_manager) ? -1 : 0)); 
+			} else if($(this).attr('name-sort')=='score_bu') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.score_bu < b.score_bu) ? 1 : ((b.score_bu < a.score_bu) ? -1 : 0)); 
+			}
+		}
+		
+		listDataFn(GlobalChangingSortingData);
+		if($(this).attr('sort-type')=='asc') {
+			$('.refreshSoring.column_score').attr('sort-type', 'desc');
+			$('.refreshSoring.column_z_score').attr('sort-type', 'desc');
+			$('.refreshSoring.column_grade').attr('sort-type', 'desc');
+			$('.refreshSoring.column_diff').attr('sort-type', 'desc');
+			$('.refreshSoring.column_current_total').attr('sort-type', 'desc');
+			$('.refreshSoring.column_new_total').attr('sort-type', 'desc');
+			$('.refreshSoring.column_score_mgr').attr('sort-type', 'desc');
+			$('.refreshSoring.column_score_bu').attr('sort-type', 'desc');
+		} else {
+			$('.refreshSoring.column_score').attr('sort-type', 'asc');
+			$('.refreshSoring.column_z_score').attr('sort-type', 'asc');
+			$('.refreshSoring.column_grade').attr('sort-type', 'asc');
+			$('.refreshSoring.column_diff').attr('sort-type', 'asc');
+			$('.refreshSoring.column_current_total').attr('sort-type', 'asc');
+			$('.refreshSoring.column_new_total').attr('sort-type', 'asc');
+			$('.refreshSoring.column_score_mgr').attr('sort-type', 'asc');
+			$('.refreshSoring.column_score_bu').attr('sort-type', 'asc');
+		}
+	});
+	*/
 }
 
 var updateFn = function(cal) {
@@ -1227,7 +1284,8 @@ var updateFn = function(cal) {
 					emp_id				: $(indexEntry).find('.data-main').attr('emp_id'),
 					salary				: $(indexEntry).find('.data-salary').find('.salary').autoNumeric('get'),
 					pqpi				: $(indexEntry).find('.data-pqpi').find('.pqpi').autoNumeric('get'),
-					grade				: $(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find('.rowNum'+row_num).find('.data-grade').text().trim()
+					grade				: $(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find('.rowNum'+row_num).find('.data-grade').text().trim(),
+					score_adjust		: $(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find('.rowNum'+row_num).find('.score_coo').autoNumeric('get')
 				});
 			}
 		}
@@ -1263,10 +1321,6 @@ var updateFn = function(cal) {
         	}
         }
     });
-}
-
-var exportExcel = function() {
-	$("#tableBonusAdjustment1").tableExport();
 }
 
 $(document).ready(function() {
@@ -1383,7 +1437,7 @@ $(document).ready(function() {
 					dropDrowPositionFn();
 					refreshMultiPosition();
 					appraisalStatusFn();
-		         }       
+		         }
 		    });
 			
 			//Search Start
@@ -1403,10 +1457,6 @@ $(document).ready(function() {
 		    
 		    $("#btnCalculate").click(function() {
 		    	updateFn(1);
-		    });
-		    
-		    $("#btnExport").click(function() {
-		    	exportExcel();
 		    });
 		    
 		    //binding tooltip start

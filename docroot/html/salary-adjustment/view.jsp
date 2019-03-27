@@ -734,7 +734,7 @@ background-color:#71cccc !important;
 .aui .list-data-table .table-bordered td{
  vertical-align: top;
 /*  text-align: center; */
- font-size: 12px;
+ font-size: 10px;
 /*  background-color: #fcfcfc; */
  border-top: 1px solid #ddd;
  line-height: 16px;
@@ -843,7 +843,7 @@ input[type=number]::-webkit-outer-spin-button {
     .aui .tableBonusAdjustment .float-label-control.label-bottom input:not(.empty) + label,
     .aui .tableBonusAdjustment .float-label-control.label-bottom textarea:not(.empty) + label { top: 3em; }
 	
-	.aui .tableBonusAdjustment .float-label-control input{font-size: 12px;text-align: right;}
+	.aui .tableBonusAdjustment .float-label-control input{font-size: 10px;text-align: right;}
 
 
 .table-filter-container {
@@ -851,7 +851,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .aui .table thead th {
-	font-size : 13px;
+	font-size : 11px;
 }
 
 .aui .table th {
@@ -993,15 +993,7 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 10px;
 }
 </style>
-<!--
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
--->
+
 
 <body class="gray-bg">
 
