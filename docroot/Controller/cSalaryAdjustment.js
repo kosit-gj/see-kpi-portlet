@@ -4,6 +4,15 @@ var username = "";
 var password = "";
 const pageNumberDefault=1;
 let countDatatableGenerate = 0;
+var GlobalChangingSortingData;
+
+function refreshDataSortFn(index, objName, data) {
+	console.log(index, objName, data, 'index')
+	console.log(GlobalChangingSortingData['items'][0].objName, 1)
+	GlobalChangingSortingData['items'][0].objName = data;
+	console.log(GlobalChangingSortingData['items'][0].objName, 2)
+	console.log(GlobalChangingSortingData);
+}
 
 function roundThen(value, precision) {
 	if (Number.isInteger(precision)) {
@@ -403,6 +412,7 @@ var to_action = function () {
 }
 
 var listDataFn = function(data) {
+	GlobalChangingSortingData = data;
 	var htmlHTML="";
 	
 	var htmlHeader1 = "";
@@ -433,64 +443,78 @@ var listDataFn = function(data) {
 	tableBegin +="<tbody id=\"list_empjudege\"></tbody>";
 	tableBegin +="<tfoot id=\"list_footer\"></tfoot>";
 	table.html(tableBegin);
-		
+	
+	//25
 	htmlHeader1+="<tr>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top\"><input type=\"checkbox\" name=\"statusSelectAll\" id=\"statusSelectAll\" class=\"statusSelectAll\"></th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top\">"+$(".lt-emp-code").val()+"</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top\">"+$(".lt-emp-name").val()+"</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top\">"+$(".lt-level").val()+"</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top\">"+$(".lt-organization").val()+"</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top\">"+$(".lt-form-type").val()+"</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top\">"+$(".lt-position").val()+"</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top\">"+$(".lt-job-code").val()+"</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top\">คะแนนเต็มตีค่างาน<br>(ความรู้)</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top\">คะแนนเต็มตีค่างาน<br>(ศักยภาพ)</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top\">Total Point</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top\">Baht Point</th>";
+	//freeze
+	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\"><input type=\"checkbox\" name=\"statusSelectAll\" id=\"statusSelectAll\" class=\"statusSelectAll\"></th>";
+	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">"+$(".lt-emp-name").val()+"</th>";
+	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">"+$(".lt-organization").val()+"</th>";
+	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top\">Z-Score</th>";
+	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring\" number-sort='5'>"+(data['is_board']==1 ? 'คะแนนประเมิน Board.' : 'คะแนนประเมิน COO.')+"</th>";
+	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top\">เกรด</th>";
+	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">Cal Standard</th>";
+	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">ขาด/เกิน</th>";
+	htmlHeader1+="<th colspan=\"4\" class=\"fix-column-top\">รายได้ที่เปลี่ยนแปลง</th>";
+	//end freeze
+	
+	htmlHeader1+="<th colspan=\"2\" class=\"fix-column-top\">Calculator</th>";
+	htmlHeader1+="<th colspan=\"3\" class=\"fix-column-top\">รายได้จากการคำนวนตีค่างาน</th>";
+	htmlHeader1+="<th colspan=\"7\" class=\"fix-column-top\">รายได้ปัจจุบัน</th>";
+	htmlHeader1+="<th colspan=\"7\" class=\"fix-column-top\">รายได้ใหม่</th>";
+	
+//	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">ผลการประเมินค่างาน( 65 คะแนน )</th>";
+//	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">คะแนนผลงานปีที่ผ่านมา ( 20 คะแนน )</th>";
+//	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">คะแนนความสามารถที่มีคุณค่าต่อองค์กร ( 15 คะแนน )</th>";
 
-	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">คะแนนประเมิน Mgr.</th>";
-	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">คะแนนประเมิน BU.</th>";
-	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">คะแนนประเมิน COO.</th>";
-	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">คะแนนประเมิน Board.</th>";
-	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">เกรด</th>";
-	htmlHeader3+="<th colspan=\"3\" class=\"fix-column-top\">รายได้จากการคำนวนตีค่างาน</th>";
-	htmlHeader3+="<th colspan=\"7\" class=\"fix-column-top\">รายได้ปัจจุบัน</th>";
-	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">ขาด/เกิน</th>";
-	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">Cal Standard</th>";
-	htmlHeader3+="<th colspan=\"2\" class=\"fix-column-top\">% Cal</th>";
-	htmlHeader3+="<th colspan=\"4\" class=\"fix-column-top\">รายได้ที่เปลี่ยนแปลง</th>";
-	htmlHeader3+="<th colspan=\"7\" class=\"fix-column-top\">รายได้ใหม่</th>";
+	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">คะแนนประเมิน Mgr. </th>";
+	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">คะแนนประเมิน BU. </th>";
+	
+	if(data['is_board']==1) {
+		htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">คะแนนประเมิน COO.</th>";
+	}
+	
+	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">คะแนนเต็มตีค่างาน (ความรู้)</th>";
+	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">คะแนนเต็มตีค่างาน (ศักยภาพ)</th>";
+	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">Total Point</th>";
+	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">Baht/Point</th>";
 	htmlHeader3+="</tr>";
+	
 	htmlHeader3+="<tr>";
-	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top\">รายได้รวมที่ควรได้ <br>90% ไม่รวม Bonus</th>";
-	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top\">รายได้ Fix<br>ที่ควรได้ 65%</th>";
-	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top\">รายได้ Var<br>ที่ควรได้ 25%</th>";
-	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top\">รายได้ปัจจุบัน<br>Total</th>";
-	htmlHeader3+="<th colspan=\"3\" class=\"fix-column-top\">FIX 65%</th>";
-	htmlHeader3+="<th colspan=\"3\" class=\"fix-column-top\">VAR 25%</th>";
-	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top\">%</th>";
+	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">ปรับรายได้ Total</th>";
+	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">ปรับเงินเดือน</th>";
+	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">ปรับ P-QPI</th>";
+	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">% Diff</th>";
+	
+	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">%</th>";
 	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top\">Bath</th>";
-	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top\">ปรับรายได้<br>Total</th>";
-	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top\">ปรับเงินเดือน</th>";
-	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top\">ปรับ P-QPI</th>";
-	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top\">% Diff</th>";
+	
+	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">รายได้รวมที่ควรได้ 90% ไม่รวม Bonus</th>";
+	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">รายได้ Fix ที่ควรได้ 65%</th>";
+	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">รายได้ Var ที่ควรได้ 25%</th>";
+	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top\">รายได้ปัจจุบัน Total</th>";
+	
+	htmlHeader3+="<th colspan=\"3\" class=\"fix-column-top\">FIX65%</th>";
+	htmlHeader3+="<th colspan=\"3\" class=\"fix-column-top\">VAR25%</th>";
 	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top\">รายได้ใหม่<br>Total</th>";
 	htmlHeader3+="<th colspan=\"3\" class=\"fix-column-top\">FIX 65%</th>";
 	htmlHeader3+="<th colspan=\"3\" class=\"fix-column-top\">VAR 25%</th>";
-	htmlHeader3+="</tr>";	
+	htmlHeader3+="</tr>";
+	
 	htmlHeader3+="<tr>";
-	htmlHeader3+="<th class=\"fix-column-top\">Salary</th>";
-	htmlHeader3+="<th class=\"fix-column-top\">P-QPI</th>";
-	htmlHeader3+="<th class=\"fix-column-top\">อื่นๆ</th>";
-	htmlHeader3+="<th class=\"fix-column-top\">MPI</th>";
-	htmlHeader3+="<th class=\"fix-column-top\">PI</th>";
-	htmlHeader3+="<th class=\"fix-column-top\">อื่นๆ</th>";
-	htmlHeader3+="<th class=\"fix-column-top\">Salary</th>";
-	htmlHeader3+="<th class=\"fix-column-top\">P-QPI</th>";
-	htmlHeader3+="<th class=\"fix-column-top\">อื่นๆ</th>";
-	htmlHeader3+="<th class=\"fix-column-top\">MPI</th>";
-	htmlHeader3+="<th class=\"fix-column-top\">PI</th>";
-	htmlHeader3+="<th class=\"fix-column-top\">อื่นๆ</th>";
+	htmlHeader3+="<th class=\"fix-column-top no-sort\">Salary</th>";
+	htmlHeader3+="<th class=\"fix-column-top no-sort\">P-QPI</th>";
+	htmlHeader3+="<th class=\"fix-column-top no-sort\">อื่นๆ</th>";
+	htmlHeader3+="<th class=\"fix-column-top no-sort\">MPI</th>";
+	htmlHeader3+="<th class=\"fix-column-top no-sort\">PI</th>";
+	htmlHeader3+="<th class=\"fix-column-top no-sort\">อื่นๆ</th>";
+	
+	htmlHeader3+="<th class=\"fix-column-top no-sort\">Salary</th>";
+	htmlHeader3+="<th class=\"fix-column-top no-sort\">P-QPI</th>";
+	htmlHeader3+="<th class=\"fix-column-top no-sort\">อื่นๆ</th>";
+	htmlHeader3+="<th class=\"fix-column-top no-sort\">MPI</th>";
+	htmlHeader3+="<th class=\"fix-column-top no-sort\">PI</th>";
+	htmlHeader3+="<th class=\"fix-column-top no-sort\">อื่นๆ</th>";
 	htmlHeader3+="</tr>";
 
 	if(data==undefined) {
@@ -504,19 +528,26 @@ var listDataFn = function(data) {
 		
 		clearFooterSumFn(); //clear sum ใน footer
 		$(".head_adjust").hide();
+		$("#average-score").text("");
+		$("#sd-score").text("");
 		return;
 	}
+	
+	$("#average-score").text(data['avg'].toFixed(2));
+	$("#sd-score").text(data['sd'].toFixed(2));
 	
 	countStruc = data['items'][0]['structure_result'].length;
 	
 	$.each(data['items'][0]['structure_result'],function (index, indexEntry) {
-		htmlHeader2 +="<th rowspan='3' class='fix-column-top'>"+indexEntry.structure_name+"</th>";
+		htmlHeader2 +="<th rowspan='3' class='fix-column-top no-sort'>"+indexEntry.structure_name+"</th>";
 		htmlHTMLFooter2 +="<td></td>";
 	});
 	
 	$("#list_header").html(htmlHeader1+htmlHeader2+htmlHeader3);
+	
 	table.DataTable().clear();
 	table.DataTable().destroy();
+	
 	/* clear freeze
 		ต้องเคลียหลังจาก  table มี header columnแล้ว ถ้าเคลียก่อนมันจะ error
 		และต้องเคลียก่อน มี  data ใน  tbody
@@ -538,49 +569,52 @@ var listDataFn = function(data) {
 	}
 	
 	htmlHTMLFooter += "<tr>";
-	htmlHTMLFooter += "	<td></td>";
-	htmlHTMLFooter += "	<td></td>";
-	htmlHTMLFooter += "	<td></td>";
-	htmlHTMLFooter += "	<td></td>";
-	htmlHTMLFooter += "	<td></td>";
-	htmlHTMLFooter += "	<td></td>";
-	htmlHTMLFooter += "	<td></td>";
-	htmlHTMLFooter += "	<td></td>";
-	htmlHTMLFooter += "	<td></td>";
-	htmlHTMLFooter += "	<td></td>";
-	htmlHTMLFooter += "	<td></td>";
-	htmlHTMLFooter += "	<td></td>";
+	htmlHTMLFooter += "<td></td>";
+	htmlHTMLFooter += "<td></td>";
+	htmlHTMLFooter += "<td></td>";
+	htmlHTMLFooter += "<td></td>";
+	htmlHTMLFooter += "<td></td>";
+	htmlHTMLFooter += "<td></td>";
 	
-	htmlHTMLFooter3 += "	<td></td>";
-	htmlHTMLFooter3 += "	<td></td>";
-	htmlHTMLFooter3 += "	<td></td>";
-	htmlHTMLFooter3 += "	<td></td>";
-	htmlHTMLFooter3 += "	<td></td>";
-	htmlHTMLFooter3 += "	<td></td>";
-	htmlHTMLFooter3 += "	<td></td>";
-	htmlHTMLFooter3 += "		<td class=\"bold pos-column-rig\">Total</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_total_now_salary)+"\" class=\"bold pos-column-rig ft-sum-current-total\">"+Comma(notNullFn(data.sum_total_now_salary))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_salary)+"\" class=\"bold pos-column-rig ft-sum-current-salary\">"+Comma(notNullFn(data.sum_salary))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_pqpi_amount)+"\" class=\"bold pos-column-rig ft-sum-current-pqpi\">"+Comma(notNullFn(data.sum_pqpi_amount))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_fix_other_amount)+"\" class=\"bold pos-column-rig ft-sum-current-fix-other\">"+Comma(notNullFn(data.sum_fix_other_amount))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_mpi_amount)+"\" class=\"bold pos-column-rig ft-sum-current-mipi\">"+Comma(notNullFn(data.sum_mpi_amount))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_pi_amount)+"\" class=\"bold pos-column-rig ft-sum-current-pi\">"+Comma(notNullFn(data.sum_pi_amount))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_var_other_amount)+"\" class=\"bold pos-column-rig ft-sum-current-var-other\">"+Comma(notNullFn(data.sum_var_other_amount))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-missover\">"+notNullFn()+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+Math.round(notNullFn(data.sum_cal_standard))+"\" class=\"bold pos-column-rig ft-sum-cal-standard\">"+Comma(Math.round(notNullFn(data.sum_cal_standard)))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-percent\">"+notNullFn()+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-bath\">"+notNullFn()+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-change-total\">"+notNullFn()+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-change-salary\">"+notNullFn()+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-change-pqpi\">"+notNullFn()+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-change-diff\">"+notNullFn()+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_total_now_salary)+"\" class=\"bold pos-column-rig ft-sum-new-total\">"+Comma(notNullFn(data.sum_total_now_salary))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(sum_salary)+"\" class=\"bold pos-column-rig ft-sum-new-salary\">"+Comma(notNullFn(sum_salary))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(sum_pqpi_amount)+"\" class=\"bold pos-column-rig ft-sum-new-pqpi\">"+Comma(notNullFn(sum_pqpi_amount))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_fix_other_amount)+"\" class=\"bold pos-column-rig ft-sum-new-fix-other\">"+Comma(notNullFn(data.sum_fix_other_amount))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_mpi_amount)+"\" class=\"bold pos-column-rig ft-sum-new-mpi\">"+Comma(notNullFn(data.sum_mpi_amount))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_pi_amount)+"\" class=\"bold pos-column-rig ft-sum-new-pi\">"+Comma(notNullFn(data.sum_pi_amount))+"</td>";
-	htmlHTMLFooter3 += "		<td data-value=\""+notNullFn(data.sum_var_other_amount)+"\" class=\"bold pos-column-rig ft-sum-new-var-other\">"+Comma(notNullFn(data.sum_var_other_amount))+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+Math.round(notNullFn(data.sum_cal_standard))+"\" class=\"bold pos-column-rig ft-sum-cal-standard\">"+Comma(Math.round(notNullFn(data.sum_cal_standard)))+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-missover\">"+notNullFn()+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-change-total\">"+notNullFn()+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-change-salary\">"+notNullFn()+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-change-pqpi\">"+notNullFn()+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-change-diff\">"+notNullFn()+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-percent\">"+notNullFn()+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn()+"\" class=\"bold pos-column-rig ft-sum-bath\">"+notNullFn()+"</td>";
+	
+	htmlHTMLFooter += "<td></td>";
+	htmlHTMLFooter += "<td></td>";
+	
+	htmlHTMLFooter += "<td class=\"bold pos-column-rig\">Total</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn(data.sum_total_now_salary)+"\" class=\"bold pos-column-rig ft-sum-current-total\">"+Comma(notNullFn(data.sum_total_now_salary))+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn(data.sum_salary)+"\" class=\"bold pos-column-rig ft-sum-current-salary\">"+Comma(notNullFn(data.sum_salary))+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn(data.sum_pqpi_amount)+"\" class=\"bold pos-column-rig ft-sum-current-pqpi\">"+Comma(notNullFn(data.sum_pqpi_amount))+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn(data.sum_fix_other_amount)+"\" class=\"bold pos-column-rig ft-sum-current-fix-other\">"+Comma(notNullFn(data.sum_fix_other_amount))+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn(data.sum_mpi_amount)+"\" class=\"bold pos-column-rig ft-sum-current-mipi\">"+Comma(notNullFn(data.sum_mpi_amount))+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn(data.sum_pi_amount)+"\" class=\"bold pos-column-rig ft-sum-current-pi\">"+Comma(notNullFn(data.sum_pi_amount))+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn(data.sum_var_other_amount)+"\" class=\"bold pos-column-rig ft-sum-current-var-other\">"+Comma(notNullFn(data.sum_var_other_amount))+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn(data.sum_total_now_salary)+"\" class=\"bold pos-column-rig ft-sum-new-total\">"+Comma(notNullFn(data.sum_total_now_salary))+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn(sum_salary)+"\" class=\"bold pos-column-rig ft-sum-new-salary\">"+Comma(notNullFn(sum_salary))+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn(sum_pqpi_amount)+"\" class=\"bold pos-column-rig ft-sum-new-pqpi\">"+Comma(notNullFn(sum_pqpi_amount))+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn(data.sum_fix_other_amount)+"\" class=\"bold pos-column-rig ft-sum-new-fix-other\">"+Comma(notNullFn(data.sum_fix_other_amount))+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn(data.sum_mpi_amount)+"\" class=\"bold pos-column-rig ft-sum-new-mpi\">"+Comma(notNullFn(data.sum_mpi_amount))+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn(data.sum_pi_amount)+"\" class=\"bold pos-column-rig ft-sum-new-pi\">"+Comma(notNullFn(data.sum_pi_amount))+"</td>";
+	htmlHTMLFooter += "<td data-value=\""+notNullFn(data.sum_var_other_amount)+"\" class=\"bold pos-column-rig ft-sum-new-var-other\">"+Comma(notNullFn(data.sum_var_other_amount))+"</td>";
+	
+	htmlHTMLFooter3 += "<td></td>";
+	htmlHTMLFooter3 += "<td></td>";
+	
+	if(data['is_board']==1) {
+		htmlHTMLFooter3 += "<td></td>";
+	}
+	
+	htmlHTMLFooter3 += "<td></td>";
+	htmlHTMLFooter3 += "<td></td>";
+	htmlHTMLFooter3 += "<td></td>";
+	htmlHTMLFooter3 += "<td></td>";
 	htmlHTMLFooter3 += "</tr>";
 	$("#list_footer").html(htmlHTMLFooter+htmlHTMLFooter2+htmlHTMLFooter3);
 	
@@ -599,12 +633,12 @@ var listDataFn = function(data) {
 			  return el.structure_id == structureIdToCal;
 		});
 		
-		var cal1 = Number(indexEntry.total_point) * Number(calArrayFilter[0]['score']);
+		var cal1 = Number(indexEntry.total_point) * Number(indexEntry.score_coo);
 //		console.log(indexEntry.total_point,'indexEntry.total_point');
 //		console.log(calArrayFilter[0]['score'],'score');
 //		console.log(cal1,'cal1');
 		
-		let cal2 = cal1 / Number(calArrayFilter[0]['total_score']);
+		let cal2 = cal1 / 100;
 //		console.log(calArrayFilter[0]['total_score'],'total_score');
 //		console.log(cal2,'cal2');
 		
@@ -649,40 +683,65 @@ var listDataFn = function(data) {
 		let mpi_amount = Comma(notNullFn(indexEntry.mpi_amount));
 		let pi_amount = Comma(notNullFn(indexEntry.pi_amount));
 		let var_other_amount = Comma(notNullFn(indexEntry.var_other_amount));
-		let miss_over = Comma(roundThen(notNullFn(indexEntry.total_now_salary-((cal3 * 90)/100)), -2));
+		
+		let cal_miss_over = (Number(indexEntry.salary)+Number(indexEntry.pqpi_amount)+Number(indexEntry.fix_other_amount))-removeComma(fix_percent);
+		let miss_over = Comma(roundThen(notNullFn(cal_miss_over), -2));
+		
 		let cal_standard = Comma(Math.round(notNullFn(indexEntry.cal_standard)));
 		
 		var job_code = notNullTextFn(indexEntry.job_code);
 		var grade = notNullTextFn(indexEntry.grade);
 		
+		if(indexEntry['is_job_evaluation']==1) {
+			var displayNonejobEvua = "";
+		} else {
+			var displayNonejobEvua = "stype='display: none;'";
+			miss_over = 0;
+		}
+		
 		index += 1
 		
-		htmlHTML += "<tr class='control-calculate'>";
+		htmlHTML += "<tr class='control-calculate rowNum"+index+"' rowNum="+index+" data-current-total='"+notNullFn(indexEntry.total_now_salary)+"' total_point='"+notNullFn(indexEntry.total_point)+"' bath_point='"+notNullFn(indexEntry.baht_per_point)+"'>";
+		//start freeze
 		htmlHTML += "	<td class='data-check pos-column-cen'><input type=\"checkbox\" class=\"select-check\" emp_result_id='"+indexEntry.emp_result_id+"'></td>";
-		htmlHTML += "	<td class='data-main pos-column-cen' emp_result_id='"+indexEntry.emp_result_id+"' emp_id='"+indexEntry.emp_id+"'>"+indexEntry.emp_code+"</td>";
-		htmlHTML += "	<td class='pos-column-lef'>"+indexEntry.emp_name+"</td>";
-		htmlHTML += "	<td class='pos-column-cen'>"+indexEntry.PG+"</td>";
+		htmlHTML += "	<td class='pos-column-lef data-main' emp_result_id='"+indexEntry.emp_result_id+"' emp_id='"+indexEntry.emp_id+"'>"+indexEntry.emp_name+"</td>";
 		htmlHTML += "	<td class='pos-column-lef'>"+indexEntry.org_name+"</td>";
-		htmlHTML += "	<td class='pos-column-cen'>"+indexEntry.appraisal_form_name+"</td>";
-		htmlHTML += "	<td class='pos-column-lef'>"+indexEntry.position_name+"</td>";
-		htmlHTML += "	<td class='pos-column-cen'>"+job_code+"</td>";
-		htmlHTML += "	<td class='pos-column-rig'>"+knowledge_point+"</td>";
-		htmlHTML += "	<td class='pos-column-rig'>"+capability_point+"</td>";
-		htmlHTML += "	<td class='pos-column-rig'>"+total_point+"</td>";
-		htmlHTML += "	<td class='pos-column-rig'>"+baht_per_point+"</td>";
+		htmlHTML += "	<td class='pos-column-cen'>"+indexEntry.z_score.toFixed(2)+"</td>";
+		htmlHTML += "	<td class='data-coo' array-grade='"+JSON.stringify(indexEntry['cal_grade'])+"'>";
+		htmlHTML += "		<div class='float-label-control'>";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 score_coo numberOnlyCoo' value='"+score_coo+"' obj-name='"+(data['is_board']==1 ? 'score_board' : 'score_coo')+"'/>";
+		htmlHTML += "		</div>";
+		htmlHTML += "	</td>";
+		htmlHTML += "	<td class='data-grade pos-column-cen' "+displayNonejobEvua+">"+grade+"</td>";
+		htmlHTML += "	<td class='pos-column-rig'>"+cal_standard+"</td>";
+		htmlHTML += "	<td class='data-miss-over pos-column-rig' "+displayNonejobEvua+" data-value="+miss_over+">"+miss_over+"</td>";
+		htmlHTML += "	<td class='data-up-total pos-column-rig' "+displayNonejobEvua+" data-value=\""+Math.round(indexEntry.cal_standard)+"\">"+cal_standard+"</td>";
+		htmlHTML += "	<td class='data-salary changesal2' data-sort='"+Math.random()+"'>";
+		htmlHTML += "		<div class='float-label-control'>";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 salary numberOnly' value='' />";
+		htmlHTML += "		</div>";
+		htmlHTML += "	</td>";
+		htmlHTML += "	<td class='data-pqpi'>";
+		htmlHTML += "		<div class='float-label-control'>";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 pqpi numberOnly' value='' />";
+		htmlHTML += "		</div>";
+		htmlHTML += "	</td>";
+		htmlHTML += "	<td class=\"data-percent-diff pos-column-rig\" data-value=\"0.00\"></td>";
+		//end freeze
 		
-		$.each(indexEntry['structure_result'],function (iStruc, dataStruc) {
-			htmlHTML +="<td class='pos-column-rig'>"+Comma(notNullFn(dataStruc.score))+"</td>";
-		});
-		
-		htmlHTML += "	<td class='pos-column-rig'>"+score_manager+"</td>";
-		htmlHTML += "	<td class='pos-column-rig'>"+score_bu+"</td>";
-		htmlHTML += "	<td class='pos-column-rig'>"+score_coo+"</td>";
-		htmlHTML += "	<td class='pos-column-rig'>"+score_board+"</td>";
-		htmlHTML += "	<td class='pos-column-cen'>"+grade+"</td>";
-		htmlHTML += "	<td class='pos-column-rig'>"+total_percent+"</td>";
-		htmlHTML += "	<td class='pos-column-rig'>"+fix_percent+"</td>";
-		htmlHTML += "	<td class='pos-column-rig'>"+var_percent+"</td>";
+		htmlHTML += "	<td class='data-percent'>";
+		htmlHTML += "		<div class='float-label-control'>";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 percent numberOnly' now_salary='"+Math.round(indexEntry.total_now_salary)+"' value='100' />";
+		htmlHTML += "		</div>";
+		htmlHTML += "	</td>";
+		htmlHTML += "	<td class='data-score'>";
+		htmlHTML += "		<div class='float-label-control'>";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 score numberOnly' now_salary='"+Math.round(indexEntry.total_now_salary)+"' value='0.00' />";
+		htmlHTML += "		</div>";
+		htmlHTML += "	</td>";
+		htmlHTML += "	<td class='data-total-percent pos-column-rig' "+displayNonejobEvua+">"+total_percent+"</td>";
+		htmlHTML += "	<td class='data-fix-percent pos-column-rig' "+displayNonejobEvua+">"+fix_percent+"</td>";
+		htmlHTML += "	<td class='data-var-percent pos-column-rig' "+displayNonejobEvua+">"+var_percent+"</td>";
 		htmlHTML += "	<td class=\"data-current-total pos-column-rig\" data-value=\""+notNullFn(indexEntry.total_now_salary)+"\">"+total_now_salary+"</td>";
 		htmlHTML += "	<td class=\"data-current-salary pos-column-rig\" data-value=\""+notNullFn(indexEntry.salary)+"\">"+salary+"</td>";
 		htmlHTML += "	<td class=\"data-current-pqpi pos-column-rig\" data-value=\""+notNullFn(indexEntry.pqpi_amount)+"\">"+pqpi_amount+"</td>";
@@ -690,30 +749,6 @@ var listDataFn = function(data) {
 		htmlHTML += "	<td class='pos-column-rig'>"+mpi_amount+"</td>";
 		htmlHTML += "	<td class='pos-column-rig'>"+pi_amount+"</td>";
 		htmlHTML += "	<td class='pos-column-rig'>"+var_other_amount+"</td>";
-		htmlHTML += "	<td class='data-miss-over pos-column-rig' data-value="+miss_over+">"+miss_over+"</td>";
-		htmlHTML += "	<td class='pos-column-rig'>"+cal_standard+"</td>";
-		htmlHTML += "	<td class='data-percent'>";
-		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 percent numberOnly' now_salary='"+Math.round(indexEntry.cal_standard)+"' value='100' />";
-		htmlHTML += "		</div>";
-		htmlHTML += "	</td>";
-		htmlHTML += "	<td class='data-score'>";
-		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 score numberOnly' now_salary='"+Math.round(indexEntry.cal_standard)+"' value='0.00' />";
-		htmlHTML += "		</div>";
-		htmlHTML += "	</td>";
-		htmlHTML += "	<td class='data-up-total pos-column-rig' data-value=\""+Math.round(indexEntry.cal_standard)+"\">"+cal_standard+"</td>";
-		htmlHTML += "	<td class='data-salary changesal2'>";
-		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 salary numberOnly' value='"+adjust_raise_s_amount+"' />";
-		htmlHTML += "		</div>";
-		htmlHTML += "	</td>";
-		htmlHTML += "	<td class='data-pqpi'>";
-		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 pqpi numberOnly' value='"+indexEntry.adjust_raise_pqpi_amount+"' />";
-		htmlHTML += "		</div>";
-		htmlHTML += "	</td>";
-		htmlHTML += "	<td class=\"data-percent-diff pos-column-rig\" data-value=\"0.00\"></td>";
 		htmlHTML += "	<td class=\"data-new-total-salary pos-column-rig\"  data-value=\""+notNullFn(indexEntry.total_now_salary)+"\">"+total_now_salary+"</td>";
 		htmlHTML += "	<td class=\"data-new-salary pos-column-rig\" data-value=\""+notNullFn(dataValueSalary)+"\">"+new_salary+"</td>";
 		htmlHTML += "	<td class=\"data-new-pqpi pos-column-rig\" data-value=\""+notNullFn(dataValuePQPIAmount)+"\">"+new_pqpi_amount+"</td>";
@@ -721,21 +756,27 @@ var listDataFn = function(data) {
 		htmlHTML += "	<td class=\"data-new-mpi pos-column-rig\" data-value=\""+notNullFn(indexEntry.mpi_amount)+"\">"+mpi_amount+"</td>";
 		htmlHTML += "	<td class=\"data-new-pi pos-column-rig\" data-value=\""+notNullFn(indexEntry.pi_amount)+"\">"+pi_amount+"</td>";
 		htmlHTML += "	<td class=\"data-new-var-other pos-column-rig\" data-value=\""+notNullFn(indexEntry.var_other_amount)+"\">"+var_other_amount+"</td>";
-		htmlHTML += "</tr>";	
+		
+		$.each(indexEntry['structure_result'],function (iStruc, dataStruc) {
+			htmlHTML +="<td class='pos-column-rig'>"+Comma(notNullFn(dataStruc.score))+"</td>";
+		});
+		
+		htmlHTML += "	<td class='pos-column-rig'>"+score_manager+"</td>";
+		htmlHTML += "	<td class='pos-column-rig'>"+score_bu+"</td>";
+		
+		if(data['is_board']==1) {
+			htmlHTML += "	<td class='pos-column-rig'>"+score_coo+"</td>";
+		}
+		
+		htmlHTML += "	<td class='pos-column-rig' "+displayNonejobEvua+">"+knowledge_point+"</td>";
+		htmlHTML += "	<td class='pos-column-rig' "+displayNonejobEvua+">"+capability_point+"</td>";
+		htmlHTML += "	<td class='pos-column-rig' "+displayNonejobEvua+">"+total_point+"</td>";
+		htmlHTML += "	<td class='pos-column-rig' "+displayNonejobEvua+">"+baht_per_point+"</td>";
+		htmlHTML += "</tr>";
 	});
 	$("#list_empjudege").html(htmlHTML);
-
-	$(".numberOnly").autoNumeric('init');
-	$(".numberOnly").autoNumeric('update', {
-		vMin : '0',
-		vMax : '99999999',
-		lZero: 'deny',
-		wEmpty: 'zero',
-		//aSign : ' %',
-		//pSign : 's'
-	});
 	
-	createDatatable(table, countStruc); //สร้างรูปแบบ datatable
+	createDatatable(table, countStruc, data['is_board']); //สร้างรูปแบบ datatable
 	calculatePercentKeyup(); //เซ็ตค่าการกดคำนวนต่างๆ
 	//filterGroup(data['items']); //generate filter group
 	setPermission(data); //set สิทการจัดการข้อมูล
@@ -768,77 +809,104 @@ var setPermission = function(data) {
     }
 }
 
-var createDatatable = function(table, countStruc) {
+var createDatatable = function(table, countStruc, isBoard) {
+	
+	/* Create an array with the values of all the input boxes in a column, parsed as numbers */
+	$.fn.dataTable.ext.order['dom-text'] = function  ( settings, col )
+	{
+	    return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
+	        return $('input', td).val();
+	    } );
+	}
+	
 	var columnSettingFirst = [
-		{ "width": "20px", "targets": [0] }, //Emp Code
-    	{ "width": "90px", "targets": [1] }, //Emp Code
-    	{ "width": "200px", "targets": [2] }, //Employee Name
-    	{ "width": "30px", "targets": [3] }, //PG
-    	{ "width": "200px", "targets": [4] }, //org
-    	{ "width": "50px", "targets": [5] }, //Group
-    	{ "width": "200px", "targets": [6] }, //Position
-    	{ "width": "70px", "targets": [7] }, //Job Code
-    	{ "width": "130px", "targets": [8] }, //คะแนนเต็มตีค่างาน(ความรู้)
-    	{ "width": "130px", "targets": [9] }, //คะแนนเต็มตีค่างาน(ศักยภาพ)
-    	{ "width": "80px", "targets": [10] }, //Total Point
-    	{ "width": "80px", "targets": [11] }, //Baht/Point
-    ]
-    
+		//start freeze
+		{ "width": "10px", "targets": [0], "bSortable": false  }, //checkbox
+    	{ "width": "30px", "targets": [1], "bSortable": false }, //Employee Name
+    	{ "width": "30px", "targets": [2], "bSortable": false }, //org
+    	{ "width": "20px", "targets": [3] }, //z-score
+    	{ "width": "20px", "targets": [4], "orderDataType": "dom-text" }, //คะแนนประเมินCOO or board
+    	{ "width": "10px", "targets": [5] }, //Grade
+    	{ "width": "10px", "targets": [6], "bSortable": false }, //Calstandard
+    	{ "width": "10px", "targets": [7], "bSortable": false }, //ขาดเกิน
+    	{ "width": "30px", "targets": [8], "bSortable": false }, //ปรับรายได้ total
+    	{ "width": "30px", "targets": [9], "bSortable": false }, //ปรับเงินเดือน
+    	{ "width": "30px", "targets": [10], "bSortable": false }, //ปรับ pqpi
+    	{ "width": "10px", "targets": [11] }, // % diff
+    	// end freeze
+    	
+    	{ "width": "100px", "targets": [12], "bSortable": false }, //%
+    	{ "width": "100px", "targets": [13], "orderDataType": "dom-text" }, //Bath
+    	{ "width": "100px", "targets": [14], "bSortable": false }, //รายได้รวมที่ควรได้90% ไม่รวม Bonus
+    	{ "width": "100px", "targets": [15], "bSortable": false }, //รายได้รวมที่ควรได้65% ไม่รวม Bonus
+    	{ "width": "50px", "targets": [16], "bSortable": false }, //รายได้รวมที่ควรได้25% ไม่รวม Bonus
+    	{ "width": "50px", "targets": [17] }, //รายได้ปัจจุบันTotal
+    	{ "width": "130px", "targets": [18], "bSortable": false }, //Salary
+    	{ "width": "100px", "targets": [19], "bSortable": false }, //P-QPI
+    	{ "width": "100px", "targets": [20], "bSortable": false }, //อื่นๆ
+    	{ "width": "100px", "targets": [21], "bSortable": false }, ////MPI
+    	{ "width": "80px", "targets": [22], "bSortable": false }, ///PI
+    	{ "width": "80px", "targets": [23], "bSortable": false }, //อื่นๆ
+    	{ "width": "80px", "targets": [24] },  //รายได้ใหม่Total
+    	{ "width": "130px", "targets": [25], "bSortable": false }, //Salary
+    	{ "width": "100px", "targets": [26], "bSortable": false }, //P-QPI
+    	{ "width": "100px", "targets": [27], "bSortable": false }, //อื่นๆ
+    	{ "width": "100px", "targets": [28], "bSortable": false }, ////MPI
+    	{ "width": "80px", "targets": [29], "bSortable": false }, ///PI
+    	{ "width": "80px", "targets": [30], "bSortable": false }, //อื่นๆ
+    ];
+	
 	var i;
 	for (i = 0; i < countStruc; i++) {
+		//i start 0
 		columnSettingFirst.push({
 			"width": "100px",
-			"targets": [12+i]
+			"targets": [31+i],
+			"bSortable": false
 		});
 	}
 	
-	var columnSettingLast = [
-    	{ "width": "100px", "targets": [12+countStruc] }, //คะแนนประเมินMgr 
-    	{ "width": "100px", "targets": [13+countStruc] }, //คะแนนประเมินBU 
-    	{ "width": "100px", "targets": [14+countStruc] }, //คะแนนประเมินCOO
-    	{ "width": "100px", "targets": [15+countStruc] }, //คะแนนประเมินBoard
-    	{ "width": "50px", "targets": [16+countStruc] }, //เกรด
-    	{ "width": "130px", "targets": [17+countStruc] }, //รายได้รวมที่ควรได้ 
-    	{ "width": "100px", "targets": [18+countStruc] }, //รายได้ Fix
-    	{ "width": "100px", "targets": [19+countStruc] }, //รายได้ Var
-    	{ "width": "100px", "targets": [20+countStruc] }, //รายได้ปัจจุบันTotal
-    	{ "width": "80px", "targets": [21+countStruc] }, //Salary
-    	{ "width": "80px", "targets": [22+countStruc] }, //P-QPI
-    	{ "width": "80px", "targets": [23+countStruc] }, //อื่นๆ
-    	{ "width": "80px", "targets": [24+countStruc] }, //MPI
-    	{ "width": "80px", "targets": [25+countStruc] }, //PI
-    	{ "width": "80px", "targets": [26+countStruc] }, //อื่นๆ
-    	{ "width": "80px", "targets": [27+countStruc] }, //ขาด/เกิน
-    	{ "width": "80px", "targets": [28+countStruc] }, //Cal Standard
-    	{ "width": "80px", "targets": [29+countStruc] }, //%
-    	{ "width": "80px", "targets": [30+countStruc] }, //Bath
-    	{ "width": "80px", "targets": [31+countStruc] }, //ปรับรายได้
-    	{ "width": "80px", "targets": [32+countStruc] }, //ปรับเงินเงินเดือน
-    	{ "width": "80px", "targets": [33+countStruc] }, //ปรับ P-QPI	
-    	{ "width": "80px", "targets": [34+countStruc] }, //% Diff
-    	{ "width": "80px", "targets": [35+countStruc] }, //รายได้ใหม่Total
-    	{ "width": "80px", "targets": [36+countStruc] }, //Salary
-    	{ "width": "80px", "targets": [37+countStruc] }, //P-QPI
-    	{ "width": "80px", "targets": [38+countStruc] }, //อื่นๆ
-    	{ "width": "80px", "targets": [39+countStruc] }, //MPI
-    	{ "width": "80px", "targets": [40+countStruc] }, //PI
-    	{ "width": "80px", "targets": [41+countStruc] } //อื่นๆ
-    ]
+	if(isBoard==1) {
+		var columnSettingLast = [
+	    	{ "width": "80px", "targets": [31+countStruc] }, //คะแนนประเมิน Mgr.
+	    	{ "width": "80px", "targets": [32+countStruc] }, //คะแนนประเมิน Bu
+	    	{ "width": "80px", "targets": [33+countStruc] }, //คะแนนประเมิน Coo
+	    	{ "width": "80px", "targets": [34+countStruc], "bSortable": false }, //คะแนนเต็มตีค่างาน (ความรู้)
+	    	{ "width": "80px", "targets": [35+countStruc], "bSortable": false }, //คะแนนเต็มตีค่างาน (ศักยภาพ)
+	    	{ "width": "80px", "targets": [36+countStruc], "bSortable": false }, //Total Point
+	    	{ "width": "80px", "targets": [37+countStruc], "bSortable": false }, //Baht/Point
+	    ];
+	} else {
+		var columnSettingLast = [
+	    	{ "width": "80px", "targets": [31+countStruc] }, //คะแนนประเมิน Mgr.
+	    	{ "width": "80px", "targets": [32+countStruc] }, //คะแนนประเมิน Bu
+	    	{ "width": "80px", "targets": [33+countStruc], "bSortable": false }, //คะแนนเต็มตีค่างาน (ความรู้)
+	    	{ "width": "80px", "targets": [34+countStruc], "bSortable": false }, //คะแนนเต็มตีค่างาน (ศักยภาพ)
+	    	{ "width": "80px", "targets": [35+countStruc], "bSortable": false }, //Total Point
+	    	{ "width": "80px", "targets": [36+countStruc], "bSortable": false }, //Baht/Point
+	    ];
+	}
 	
 	var columnSetting = columnSettingFirst.concat(columnSettingLast); 
 	
 	table.DataTable({
 		fixedHeader: true,
 	    "searching": false,
-		"ordering": false,
+		"ordering": true,
 		"bInfo" : false,
 		"scrollY": 350,
         "scrollX": true,
 	    scrollCollapse: true,
 	    paging: false,
 	    fixedColumns: {
-	    	leftColumns: 5
+	    	leftColumns: 12
 	    },
+//	    drawCallback: function() {
+//	        $('#tableBonusAdjustment1 tbody tr').each(function(i, tr) {
+//	           tr.children[0].textContent = i+1;
+//	           console.log(i);
+//	        })
+//	    },
 //	    "iDisplayLength": -1,
 //	    "bPaginate": true,
 //	    "iCookieDuration": 60,
@@ -848,7 +916,7 @@ var createDatatable = function(table, countStruc) {
 //	    "bProcessing": true,
 //	    "bRetrieve": true,
 //	    "bJQueryUI": true,
-	    columnDefs : columnSetting
+	    columnDefs : columnSetting,
 	});
 	
 	/*
@@ -859,12 +927,32 @@ var createDatatable = function(table, countStruc) {
 	}); // เซ็ตการค้นหาในคอลั่มแรก
 	*/
 	
+	$(".numberOnly,.numberOnlyCoo").autoNumeric('init');
+	$(".numberOnly").autoNumeric('update', {
+		vMin : '0',
+		vMax : '99999999',
+		lZero: 'deny',
+		wEmpty: 'zero',
+		//aSign : ' %',
+		//pSign : 's'
+	});
+	
+	$(".numberOnlyCoo").autoNumeric('update', {
+		vMin : '0',
+		vMax : '999',
+		lZero: 'deny',
+		wEmpty: 'zero',
+		//aSign : ' %',
+		//pSign : 's'
+	});
+	
 	$(".fix-column-top").css({"text-align" : "center", "border-bottom" : "0px", "vertical-align": "top"});
 	$("table.dataTable.no-footer").css({"border-bottom" : "0px"});
 	$(".pos-column-lef").css({"text-align" : "left"});
 	$(".pos-column-cen").css({"text-align" : "center"});
 	$(".pos-column-rig").css({"text-align" : "right"});
 	$(".pos-column-rig").closest('.bold').css({"font-weight" : "bold"});
+	$(".no-sort").removeClass("sorting_asc");
 	
 	$("#statusSelectAll").prop('checked', false); //ล้างค่าการ checked ที่ปุ่ม check
 	$(".statusSelectAll").prop('checked', false); //ล้างค่าการ checked ที่ปุ่ม check ตรง freeze
@@ -933,12 +1021,16 @@ var calculatePercentKeyup = function() {
 			if (typeof $(indexEntry).attr('data-dt-row') !== typeof undefined && $(indexEntry).attr('data-dt-row') !== false) {
 				//เป็นคลาสของ datatables ซึ่งจะไม่เอาข้อมูลในส่วนนี้
 			} else {
+				let row_num = $(indexEntry).closest('.control-calculate').attr('rowNum');
+				
 				sumPercent += Number(removeComma($(indexEntry).find('.data-percent').find('.percent').val()));
 				sumBath += Number(removeComma($(indexEntry).find('.data-score').find('.score').val()));
 				sumTotalChangeSalary += Number(removeComma($(indexEntry).find('.data-up-total').attr('data-value')));
-				sumChangeSalary += Number(removeComma($(indexEntry).find('.data-salary').find('.salary').val()));
-				sumChangePQPI += Number(removeComma($(indexEntry).find('.data-pqpi').find('.pqpi').val()));
-				sumChangeDiff += Number(removeComma($(indexEntry).find('.data-percent-diff').attr('data-value')));
+				
+				sumChangeSalary += Number(removeComma($(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find(".rowNum"+row_num).find('.data-salary').find('.salary').val()));
+				sumChangePQPI += Number(removeComma($(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find(".rowNum"+row_num).find('.data-pqpi').find('.pqpi').val()));
+				sumChangeDiff += Number(removeComma($(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find(".rowNum"+row_num).find('.data-percent-diff').attr('data-value')));
+				
 				sumTotalNewSalary += Number(removeComma($(indexEntry).find('.data-new-total-salary').attr('data-value')));
 				sumNewSalary += Number(removeComma($(indexEntry).find('.data-new-salary').attr('data-value')));
 				sumNewPQPI += Number(removeComma($(indexEntry).find('.data-new-pqpi').attr('data-value')));
@@ -959,14 +1051,17 @@ var calculatePercentKeyup = function() {
 		
 		$(".dataTables_scrollFoot").find(".ft-sum-percent").text(Comma(sumPercent.toFixed(2)));
 		$(".dataTables_scrollFoot").find(".ft-sum-bath").text(Comma(sumBath.toFixed(2)));
-		$(".dataTables_scrollFoot").find(".ft-sum-change-total").text(Comma(Math.round(sumTotalChangeSalary)));
-		$(".dataTables_scrollFoot").find(".ft-sum-change-salary").text(Comma(sumChangeSalary.toFixed(2)));
-		$(".dataTables_scrollFoot").find(".ft-sum-change-pqpi").text(Comma(sumChangePQPI.toFixed(2)));
-		$(".dataTables_scrollFoot").find(".ft-sum-change-diff").text(Comma(sumChangeDiff.toFixed(2)));
+		
+		$(".DTFC_LeftFootWrapper").find(".ft-sum-change-total").text(Comma(Math.round(sumTotalChangeSalary)));
+		$(".DTFC_LeftFootWrapper").find(".ft-sum-change-salary").text(Comma(sumChangeSalary.toFixed(2)));
+		$(".DTFC_LeftFootWrapper").find(".ft-sum-change-pqpi").text(Comma(sumChangePQPI.toFixed(2)));
+		$(".DTFC_LeftFootWrapper").find(".ft-sum-change-diff").text(Comma(sumChangeDiff.toFixed(2)));
+		
 		$(".dataTables_scrollFoot").find(".ft-sum-new-total").text(Comma(sumTotalNewSalary.toFixed(2)));
 		$(".dataTables_scrollFoot").find(".ft-sum-new-salary").text(Comma(sumNewSalary.toFixed(2)));
 		$(".dataTables_scrollFoot").find(".ft-sum-new-pqpi").text(Comma(sumNewPQPI.toFixed(2)));
-		$(".dataTables_scrollFoot").find(".ft-sum-missover").text(Comma(sumMissOver));
+		
+		$(".DTFC_LeftFootWrapper").find(".ft-sum-missover").text(Comma(sumMissOver));
 		
 //		$("#list_empjudege").find(".ft-sum-percent").text(Comma(sumPercent.toFixed(2)));
 //		$("#list_empjudege").find(".ft-sum-bath").text(Comma(sumBath.toFixed(2)));
@@ -995,89 +1090,129 @@ var calculatePercentKeyup = function() {
 		//คำนวน Bath ของรายได้ปัจจุบัน Total ว่าเป็นกี่ %
 		var now_salary = Number($(this).attr("now_salary"));
 		var total = (now_salary == 0 ? 0 : (score*100)/now_salary);
+		console.log(score, now_salary, total, '1016');
 		$(this).closest('.control-calculate').find('.data-percent').find('.percent').autoNumeric('set', total);
 		calculateSumtotalFooter();
 	});
 	
 	function calculateNewSalaryTotal(elementThis) {
-		var new_salary = Number(elementThis.closest('.control-calculate').find('.data-new-salary').attr('data-value'));
-		var new_pqpi = Number(elementThis.closest('.control-calculate').find('.data-new-pqpi').attr('data-value'));
-		var new_fix_other = Number(elementThis.closest('.control-calculate').find('.data-new-fix-other').attr('data-value'));
-		var new_mipi = Number(elementThis.closest('.control-calculate').find('.data-new-mpi').attr('data-value'));
-		var new_pi = Number(elementThis.closest('.control-calculate').find('.data-new-pi').attr('data-value'));
-		var new_var_other = Number(elementThis.closest('.control-calculate').find('.data-new-var-other').attr('data-value'));
+		let row_num = $(elementThis).closest('.control-calculate').attr('rowNum');
+		var new_salary = Number($(".rowNum"+row_num).find('.data-new-salary').attr('data-value'));
+		var new_pqpi = Number($(".rowNum"+row_num).find('.data-new-pqpi').attr('data-value'));
+		var new_fix_other = Number($(".rowNum"+row_num).find('.data-new-fix-other').attr('data-value'));
+		var new_mipi = Number($(".rowNum"+row_num).find('.data-new-mpi').attr('data-value'));
+		var new_pi = Number($(".rowNum"+row_num).find('.data-new-pi').attr('data-value'));
+		var new_var_other = Number($(".rowNum"+row_num).find('.data-new-var-other').attr('data-value'));
 		var total = new_salary + new_pqpi + new_fix_other + new_mipi + new_pi + new_var_other;
 		//console.log('total -> ',total,"data -> ", new_salary, new_pqpi, new_fix_other, new_mipi, new_pi, new_var_other);
-		elementThis.closest('.control-calculate').find('.data-new-total-salary').attr('data-value', total.toFixed(2));
-		elementThis.closest('.control-calculate').find('.data-new-total-salary').text(Comma(total.toFixed(2)));
+		$(".rowNum"+row_num).find('.data-new-total-salary').attr('data-value', total.toFixed(2));
+		$(".rowNum"+row_num).find('.data-new-total-salary').text(Comma(total.toFixed(2)));
 	}
 	
-	$("#list_empjudege").find('.salary').keyup(function() {
+	$('.salary').keyup(function() {
 		var salary = Number($(this).autoNumeric('get'));
+		let row_num = $(this).closest('.control-calculate').attr('rowNum');
+		//$(this).closest('.dataTables_scroll').find('.dataTables_scrollBody').find(".rowNum"+row_num).find('.data-salary').find('.salary').val(salary);
 		
 		//คำนวน ปรับรายได้ Total
-		var pqpi_score = Number($(this).closest('.control-calculate').find('.data-pqpi').find('.pqpi').autoNumeric('get'));
+		var pqpi_score = Number($(this).closest(".rowNum"+row_num).find('.data-pqpi').find('.pqpi').autoNumeric('get'));
 		var total = pqpi_score + salary;
-		$(this).closest('.control-calculate').find('.data-up-total').attr('data-value', Math.round(total));
-		$(this).closest('.control-calculate').find('.data-up-total').text(Comma(Math.round(total)));
+		$(".rowNum"+row_num).find('.data-up-total').attr('data-value', Math.round(total));
+		$(".rowNum"+row_num).find('.data-up-total').text(Comma(Math.round(total)));
 		
 		//คำนวน รายได้ใหม่  ตรง salary
-		var current_salary = Number($(this).closest('.control-calculate').find('.data-current-salary').attr('data-value'));
+		var current_salary = Number($(".rowNum"+row_num).find('.data-current-salary').attr('data-value'));
 		var new_salary = current_salary + salary;
-		$(this).closest('.control-calculate').find('.data-new-salary').attr('data-value', new_salary.toFixed(2));
-		$(this).closest('.control-calculate').find('.data-new-salary').text(Comma(new_salary.toFixed(2)));
-		
+		$(".rowNum"+row_num).find('.data-new-salary').attr('data-value', new_salary.toFixed(2));
+		$(".rowNum"+row_num).find('.data-new-salary').text(Comma(new_salary.toFixed(2)));
+
 		//คำนวน % Diff
-		var data_current_total = Number($(this).closest('.control-calculate').find('.data-current-total').attr('data-value'));
+		var data_current_total = Number($(this).closest(".rowNum"+row_num).attr('data-current-total'));
 		var val_diff = (total/data_current_total)*100;
-		
 		if(val_diff=="Infinity") {
 			val_diff = 0;
 			console.log("รายได้ปัจจุบัน Total เป็น 0 ถ้า (ปรับรายได้ Total/รายได้ปัจจุบัน Total) % diff จะเป็น infinity");
 		}
 		
-		$(this).closest('.control-calculate').find('.data-percent-diff').attr('data-value', val_diff.toFixed(2));
-		$(this).closest('.control-calculate').find('.data-percent-diff').text(Comma(val_diff.toFixed(2)));
+		$(this).closest(".rowNum"+row_num).find('.data-percent-diff').attr('data-value', val_diff.toFixed(2));
+		$(this).closest(".rowNum"+row_num).find('.data-percent-diff').text(Comma(val_diff.toFixed(2)));
 		
 		//คำนวน รายได้ใหม่ total
 		calculateNewSalaryTotal($(this));
 		calculateSumtotalFooter();
 	});
 	
-	$("#list_empjudege").find('.pqpi').keyup(function() {
+	$(".pqpi").keyup(function() {
 		var pqpi = Number($(this).autoNumeric('get'));
+		let row_num = $(this).closest('.control-calculate').attr('rowNum');
 
 		//คำนวน ปรับรายได้ Total
-		var salary_score = Number($(this).closest('.control-calculate').find('.data-salary').find('.salary').autoNumeric('get'));
+		var salary_score = Number($(this).closest(".rowNum"+row_num).find('.data-salary').find('.salary').autoNumeric('get'));
 		var total = salary_score + pqpi;
-		$(this).closest('.control-calculate').find('.data-up-total').attr('data-value', Math.round(total));
-		$(this).closest('.control-calculate').find('.data-up-total').text(Comma(Math.round(total)));
+		$(this).closest(".rowNum"+row_num).find('.data-up-total').attr('data-value', Math.round(total));
+		$(this).closest(".rowNum"+row_num).find('.data-up-total').text(Comma(Math.round(total)));
 		
 		//คำนวน รายได้ใหม่  ตรง  P-QPI
-		var current_pqpi = Number($(this).closest('.control-calculate').find('.data-current-pqpi').attr('data-value'));
+		var current_pqpi = Number($(".rowNum"+row_num).find('.data-current-pqpi').attr('data-value'));
 		var new_pqpi = current_pqpi + pqpi;
-		$(this).closest('.control-calculate').find('.data-new-pqpi').attr('data-value', new_pqpi.toFixed(2));
-		$(this).closest('.control-calculate').find('.data-new-pqpi').text(Comma(new_pqpi.toFixed(2)));
+		$(".rowNum"+row_num).find('.data-new-pqpi').attr('data-value', new_pqpi.toFixed(2));
+		$(".rowNum"+row_num).find('.data-new-pqpi').text(Comma(new_pqpi.toFixed(2)));
 		
 		//คำนวน % Diff
-		var data_current_total = Number($(this).closest('.control-calculate').find('.data-current-total').attr('data-value'));
+		var data_current_total = Number($(this).closest(".rowNum"+row_num).attr('data-current-total'));
 		var val_diff = (total/data_current_total)*100;
-		
 		if(val_diff=="Infinity") {
 			val_diff = 0;
 			console.log("รายได้ปัจจุบัน Total เป็น 0 ถ้า (ปรับรายได้ Total/รายได้ปัจจุบัน Total) % diff จะเป็น infinity");
 		}
 		
-		$(this).closest('.control-calculate').find('.data-percent-diff').attr('data-value', val_diff.toFixed(2));
-		$(this).closest('.control-calculate').find('.data-percent-diff').text(Comma(val_diff.toFixed(2)));
+		$(this).closest(".rowNum"+row_num).find('.data-percent-diff').attr('data-value', val_diff.toFixed(2));
+		$(this).closest(".rowNum"+row_num).find('.data-percent-diff').text(Comma(val_diff.toFixed(2)));
 		
 		//คำนวน รายได้ใหม่ total
 		calculateNewSalaryTotal($(this));
 		calculateSumtotalFooter();
+	});
+	
+	$(".score_coo").keyup(function() {
+		var scoreCooOrBoard = Number($(this).autoNumeric('get'));
+		
+		let indexArray = $(this).closest('.control-calculate').attr('rowNum');
+		let objName = $(this).attr('obj-name');
+		refreshDataSortFn(indexArray, objName, scoreCooOrBoard);
+
+		var arrayG = $(this).closest('.data-coo').attr('array-grade');
+		var ArrayScore = JSON.parse(arrayG);
+		
+		var filterScore = ArrayScore.filter(function (el) {
+		    return scoreCooOrBoard >= el.begin_score && scoreCooOrBoard <= el.end_score;
+		});
+		
+		var grade = (filterScore.length==0 ? '' : filterScore[0]['grade']);
+		
+		$(this).closest('.control-calculate').find('.data-grade').text(grade);
+		
+		let score_coo = $(this).autoNumeric('get');
+		let total_point = $(this).closest('.control-calculate').attr('total_point');
+		let bath_point = $(this).closest('.control-calculate').attr('bath_point');
+		
+		let cal1 = Number(total_point) * Number(score_coo);
+		let cal2 = cal1 / 100;
+		let cal3 = cal2 * Number(bath_point);
+		let total_percent = Comma(roundThen(notNullFn(isNaN((cal3 * 90)/100) ? 0 : (cal3 * 90)/100 ), -2));
+		let fix_percent = Comma(roundThen(notNullFn(isNaN((cal3 * 65)/100) ? 0 : (cal3 * 65)/100 ), -2));
+		let var_percent = Comma(roundThen(notNullFn(isNaN((cal3 * 25)/100) ? 0 : (cal3 * 25)/100 ), -2));
+		
+		let row_num = $(this).closest('.control-calculate').attr('rowNum');
+		$(".rowNum"+row_num).find('.data-total-percent').text(Comma(total_percent));
+		$(".rowNum"+row_num).find('.data-fix-percent').text(Comma(fix_percent));
+		$(".rowNum"+row_num).find('.data-var-percent').text(Comma(var_percent));
+		
+		$(this).closest('.data-coo').attr('data-sort', notNullFn(score_coo)); //add score_coo or score_board to attr
 	});
 }
 
-var updateFn = function() {
+var updateFn = function(cal) {
 	var stage_id = $("#actionToAssign").val();
 	var detail = [];
 	$.each($(".control-calculate").get(),function(index,indexEntry) {
@@ -1086,17 +1221,20 @@ var updateFn = function() {
 			
 		} else {
 			if($(indexEntry).find('.data-check').find('.select-check').attr('select-check')==1) {
+				let row_num = $(indexEntry).closest('.control-calculate').attr('rowNum');
 				detail.push({
 					emp_result_id		: $(indexEntry).find('.data-main').attr('emp_result_id'),
 					emp_id				: $(indexEntry).find('.data-main').attr('emp_id'),
 					salary				: $(indexEntry).find('.data-salary').find('.salary').autoNumeric('get'),
-					pqpi				: $(indexEntry).find('.data-pqpi').find('.pqpi').autoNumeric('get')
+					pqpi				: $(indexEntry).find('.data-pqpi').find('.pqpi').autoNumeric('get'),
+					grade				: $(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find('.rowNum'+row_num).find('.data-grade').text().trim()
 				});
 			}
 		}
 	});
 	
-	//console.log(detail);
+	console.log(detail, cal);
+//	return;
 	
 	if(detail.length==0) {
 		callFlashSlide("Please Select Employee");
@@ -1110,6 +1248,7 @@ var updateFn = function() {
         async: true,
         data: {
         	"stage_id": stage_id,
+        	"calculate_flag": cal,
         	"detail": detail
         },
         headers: { Authorization: "Bearer " + tokenID.token },
@@ -1124,6 +1263,10 @@ var updateFn = function() {
         	}
         }
     });
+}
+
+var exportExcel = function() {
+	$("#tableBonusAdjustment1").tableExport();
 }
 
 $(document).ready(function() {
@@ -1255,7 +1398,15 @@ $(document).ready(function() {
 		    });
 		    
 		    $("#btnSubmit").click(function() {
-		    	updateFn();
+		    	updateFn(0);
+		    });
+		    
+		    $("#btnCalculate").click(function() {
+		    	updateFn(1);
+		    });
+		    
+		    $("#btnExport").click(function() {
+		    	exportExcel();
 		    });
 		    
 		    //binding tooltip start

@@ -928,8 +928,80 @@ input[type=number]::-webkit-outer-spin-button {
     50% { opacity: 0; font-size: 0.85em; }
     100% { top: 3em; opacity: 1; }
 }
-</style>
 
+.box {
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border-top: 4px solid #d2d6de;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 1px 10px rgba(0,0,0,0.1);
+}
+.box2 {
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border-top: 6px solid #d2d6de;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 1px 10px rgba(0,0,0,0.1);
+}
+
+.box-primary {
+    border-top-color: #3c8dbc;
+}
+.box-warning {
+    border-top-color: #f39c12;
+}
+.box-info {
+    border-top-color: #00c0ef;
+}
+.box-success {
+    border-top-color: #00a65a;
+}
+.box-danger {
+    border-top-color: #dd4b39;
+}
+.box-header.with-border {
+    border-bottom: 1px solid #f4f4f4;
+}
+.box-header {
+    color: #444;
+    display: block;
+    padding: 10px;
+    position: relative;
+}
+.box-header:before, .box-body:before, .box-footer:before, .box-header:after, .box-body:after, .box-footer:after {
+    content: " ";
+    display: table;
+}
+.box-header:after, .box-body:after, .box-footer:after {
+    clear: both;
+}
+.box-header>.fa, .box-header>.glyphicon, .box-header>.ion, .box-header .box-title {
+    display: inline-block;
+    font-size: 18px;
+    margin: 0;
+    line-height: 1;
+}
+.box-body {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding: 10px;
+}
+</style>
+<!--
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+-->
 
 <body class="gray-bg">
 
@@ -1022,14 +1094,9 @@ input[type=number]::-webkit-outer-spin-button {
                     <button type="button" class="btn btn-info input-sm" name="btnSearchAdvance" id="btnSearchAdvance">
                       <i class="fa fa-search"></i>&nbsp;<liferay-ui:message key="search"/>
                     </button>
-                    &nbsp;
-                    <!--
-                    <form id="formExportToExcel" action="" method="post" class="pull-right" style="margin-bottom: 0px; margin-left: 5px">
-						<button type="button" class="btn btn-success input-sm" name="btnExport" id="btnExport">
-							<i class="fa fa-download"></i>&nbsp;<liferay-ui:message key="export"/>
-                    	</button>
-					</form>
-					-->
+                    <button type="button" name="btnCalculate" id="btnCalculate" class="btn btn-warning input-sm" style="margin-left: 5px;">
+						<i class="fa fa-calculator"></i>&nbsp;<liferay-ui:message key="calculate"/>
+					</button>
                   </div>
 
                 </div>
@@ -1051,6 +1118,35 @@ input[type=number]::-webkit-outer-spin-button {
 							<div class='titlePanel'><liferay-ui:message key="salary-adjustment-list"/></div>
 						</div>						
 						<div class="ibox-content">
+							<div class="row-fluid" style="margin-bottom: 12px;">
+								<div class="span8">
+									<div class="span3" style="width:auto">
+										<div class="box box-warning" style="margin-bottom: 0px;">
+											<div class="box-header with-border" style="padding-top: 5px;">Average&nbsp;&nbsp;&nbsp;<span id="average-score">0</span></div>
+<!-- 											<div class="box-body" id="">100</div> -->
+										</div>
+									</div>
+									<div class="span3" style="width:auto">
+										<div class="box box-warning" style="margin-bottom: 0px;">
+											<div class="box-header with-border" style="padding-top: 5px;">S.D.&nbsp;&nbsp;&nbsp;<span id="sd-score">200</span></div>
+<!-- 											<div class="box-body" id="">200</div> -->
+										</div>
+									</div>
+								</div>
+								<div class="span4">
+									<div class="position-result-perpage" style="text-align: right;">
+										<div></div>
+										<div class="form-group m-b-none pull-right" style="margin-left: 5px;">
+											<form id="formExportToExcel" action="" method="post" class="pull-right" style="margin-bottom: 0px; margin-left: 5px">
+												<button type="button" class="btn btn-success input-sm" name="btnExport" id="btnExport">
+													<i class="fa fa-download"></i>&nbsp;<liferay-ui:message key="export"/>
+						                    	</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							
 							<!-- pagination start -->
 								<!--
                                     	<div class="row-fluid">
