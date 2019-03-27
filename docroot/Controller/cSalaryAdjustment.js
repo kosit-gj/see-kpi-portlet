@@ -1266,7 +1266,25 @@ var updateFn = function(cal) {
 }
 
 var exportExcel = function() {
-	$("#tableBonusAdjustment1").tableExport();
+	var LeftHeadWrapper = $(".DTFC_LeftHeadWrapper").html();
+	var LeftBodyWrapper = $(".DTFC_LeftBodyWrapper").html();
+	var LeftFootWrapper = $(".DTFC_LeftFootWrapper").html();
+	var List_header =  $("#list_header").html();
+
+	$(".DTFC_LeftHeadWrapper").html("");
+	$(".DTFC_LeftBodyWrapper").html("");
+	$(".DTFC_LeftFootWrapper").html("");          
+	$("#list_header").html("");
+
+	$("#scroll-tableBonusAdjustment").table2excel({
+		exclude: ".noExl",
+		filename: "Salary Adjustment.xls"
+	});
+
+	$("#list_header").html(List_header);
+	$(".DTFC_LeftHeadWrapper").html(LeftHeadWrapper);
+	$(".DTFC_LeftBodyWrapper").html(LeftBodyWrapper);
+	$(".DTFC_LeftFootWrapper").html(LeftFootWrapper);
 }
 
 $(document).ready(function() {
