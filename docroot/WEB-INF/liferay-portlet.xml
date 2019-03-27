@@ -2427,6 +2427,9 @@
 		<footer-portlet-javascript>/js/jquery.multiselect.filter.min.js</footer-portlet-javascript>	
 		<footer-portlet-javascript>/js/plugins/autoNumeric/autoNumeric-min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/tablefreeze/datatables.min.js</footer-portlet-javascript>
+<!-- 		<footer-portlet-javascript>/js/xlsx.core.min.js</footer-portlet-javascript> -->
+<!-- 		<footer-portlet-javascript>/js/FileSaver.js</footer-portlet-javascript> -->
+<!-- 		<footer-portlet-javascript>/js/tableexport.min.js</footer-portlet-javascript> -->
 		<footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/Controller/cSalaryAdjustment.js</footer-portlet-javascript>
