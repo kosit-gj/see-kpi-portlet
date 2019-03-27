@@ -6,11 +6,13 @@ const pageNumberDefault=1;
 let countDatatableGenerate = 0;
 var GlobalChangingSortingData;
 
-/*
 function refreshDataSortFn(index, objName, data) {
-	GlobalChangingSortingData['items'][index][objName] = data;
+	console.log(index, objName, data, 'index')
+	console.log(GlobalChangingSortingData['items'][0].objName, 1)
+	GlobalChangingSortingData['items'][0].objName = data;
+	console.log(GlobalChangingSortingData['items'][0].objName, 2)
+	console.log(GlobalChangingSortingData);
 }
-*/
 
 function roundThen(value, precision) {
 	if (Number.isInteger(precision)) {
@@ -1321,6 +1323,29 @@ var updateFn = function(cal) {
         	}
         }
     });
+}
+
+
+var exportExcel = function() {
+	var LeftHeadWrapper = $(".DTFC_LeftHeadWrapper").html();
+	var LeftBodyWrapper = $(".DTFC_LeftBodyWrapper").html();
+	var LeftFootWrapper = $(".DTFC_LeftFootWrapper").html();
+	var List_header =  $("#list_header").html();
+
+	$(".DTFC_LeftHeadWrapper").html("");
+	$(".DTFC_LeftBodyWrapper").html("");
+	$(".DTFC_LeftFootWrapper").html("");          
+	$("#list_header").html("");
+
+	$("#scroll-tableBonusAdjustment").table2excel({
+		exclude: ".noExl",
+		filename: "Salary Adjustment.xls"
+	});
+
+	$("#list_header").html(List_header);
+	$(".DTFC_LeftHeadWrapper").html(LeftHeadWrapper);
+	$(".DTFC_LeftBodyWrapper").html(LeftBodyWrapper);
+	$(".DTFC_LeftFootWrapper").html(LeftFootWrapper);
 }
 
 $(document).ready(function() {
