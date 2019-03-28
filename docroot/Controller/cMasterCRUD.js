@@ -91,7 +91,7 @@ var validateFileFn = function(data){
 			if(indexEntry[Object.keys(indexEntry)[0]]== null){//The employee code field is null
 				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+Object.keys(indexEntry)[0]+" : null <i class='fa fa-level-down'></i><br>";
 			}else{
-				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+Object.keys(indexEntry)[0]+": "+indexEntry+" <i class='fa fa-level-down'></i><br>";}
+				validateFile+="<font color='#FFC446'><i class='fa fa-exclamation-triangle'></i></font> "+Object.keys(indexEntry)[0]+": "+indexEntry[Object.keys(indexEntry)[0]]+" <i class='fa fa-level-down'></i><br>";}
 			}
 	     $.each(indexEntry['errors'],function(index2,indexEntry2){
 	    	 validateFile+="<font color='red'>&emsp;*</font> "+indexEntry2+"<br>";
