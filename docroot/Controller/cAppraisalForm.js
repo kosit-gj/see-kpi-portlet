@@ -14,6 +14,7 @@ var getAllFormFn = function()
         		htmlBody += "	<td>"+indexEntry.appraisal_form_name+"</td>";
         		htmlBody += "	<td style='text-align: center;'> <input type='checkbox' disabled='disabled'  "+((indexEntry.is_bonus==1)?"checked":"")+"> </td>";
         		htmlBody += "	<td style='text-align: center;'> <input type='checkbox' disabled='disabled'  "+((indexEntry.is_raise==1)?"checked":"")+"> </td>";
+        		htmlBody += "	<td style='text-align: center;'> <input type='checkbox' disabled='disabled'  "+((indexEntry.is_job_evaluation==1)?"checked":"")+"> </td>";
         		htmlBody += "	<td style='text-align: center;'> <input type='checkbox' disabled='disabled'  "+((indexEntry.is_mpi==1)?"checked":"")+"> </td>";
         		htmlBody += "	<td style='text-align: center;'> <input type='checkbox' disabled='disabled'  "+((indexEntry.is_active==1)?"checked":"")+"> </td>";
         		htmlBody += "	<td style='text-align: center;'> <i data-trigger='focus' tabindex='"+index+"' data-content=\"" +
@@ -86,7 +87,8 @@ var getAllFormFn = function()
 }
 
 
-var findOneFn = function(id){
+var findOneFn = function(id)
+{
 	$.ajax({
         url: restfulURL+"/"+serviceName+"/public/appraisal_form/"+id,
         type: "get",
@@ -95,13 +97,21 @@ var findOneFn = function(id){
         async: false,
         headers: { Authorization: "Bearer " + tokenID.token },
         success: function (data) {
-        	console.log(data);
         	$("#id").val(data.appraisal_form_id);
         	$("#appraisal_form_name").val(data.appraisal_form_name);
         	$("#is_bonus").prop('checked', data.is_bonus);
         	$("#is_active").prop('checked', data.is_active);
         	$("#is_raise").prop('checked', data.is_raise);
+        	$("#is_job_evaluation").prop('checked', data.is_job_evaluation);
         	$("#is_mpi").prop('checked', data.is_mpi);
+        	
+        	// is_job_evaluation visible
+        	if(data.is_raise == 1){
+        		$("div#form-group-is_job_evaluation").show();
+        	} else {
+        		$("div#form-group-is_job_evaluation").hide();
+        	}
+        	
         	
         	$("#saveFormModal").modal({
 				"backdrop" : setModalPopup[0],
@@ -112,13 +122,16 @@ var findOneFn = function(id){
 	});
 };
 
+
 var UpdateAppraisalFormFn = function()
 {
 	var appraisal_form_name = $("#appraisal_form_name").val();
 	var is_bonus = Number($('#is_bonus').prop('checked'));
 	var is_active = Number($('#is_active').prop('checked'));
 	var is_raise = Number($('#is_raise').prop('checked'));
+	var is_job_evaluation = Number($('#is_job_evaluation').prop('checked'));
 	var is_mpi = Number($('#is_mpi').prop('checked'));
+	
 
 	$.ajax({
         url: restfulURL+"/"+serviceName+"/public/appraisal_form/"+$("#id").val(),
@@ -129,6 +142,7 @@ var UpdateAppraisalFormFn = function()
         	"is_bonus":is_bonus,
         	"is_active":is_active,
         	"is_raise":is_raise,
+        	"is_job_evaluation":is_job_evaluation,
         	"is_mpi":is_mpi
         },
         async: false,
@@ -150,19 +164,27 @@ var UpdateAppraisalFormFn = function()
 }
 
 
-var ClearAppraisalFormFn = function(){
+var ClearAppraisalFormFn = function()
+{
 	$("#appraisal_form_name").val("");
 	$("#saveFormModal #is_bonus").prop('checked', false);
 	$("#saveFormModal #is_active").prop('checked', true);
 	$("#saveFormModal #is_raise").prop('checked', false);
 	$("#saveFormModal #is_mpi").prop('checked', false);
+	$("#saveFormModal #is_job_evaluation").prop('checked', false);
+	
+	// is_job_evaluation invisible
+	$("div#form-group-is_job_evaluation").hide();
 }
 
-var InsertAppraisalFormFn = function(Status){
+
+var InsertAppraisalFormFn = function(Status)
+{
 	var appraisal_form_name = $("#appraisal_form_name").val();
 	var is_bonus = Number($('#is_bonus').prop('checked'));
 	var is_active = Number($('#is_active').prop('checked'));
 	var is_raise = Number($('#is_raise').prop('checked'));
+	var is_job_evaluation = Number($('#is_job_evaluation').prop('checked'));
 	var is_mpi = Number($('#is_mpi').prop('checked'));
 	
 	$.ajax({
@@ -174,6 +196,7 @@ var InsertAppraisalFormFn = function(Status){
         	"is_bonus":is_bonus,
         	"is_active":is_active,
         	"is_raise":is_raise,
+        	"is_job_evaluation":is_job_evaluation,
         	"is_mpi":is_mpi
         },
         async: false,
@@ -210,7 +233,7 @@ $(document).ready(function(){
 	 var password = $('#pass_portlet').val();
 	 var plid = $('#plid_portlet').val();
 	 if(username!="" && username!=null & username!=[] && username!=undefined ){
-		 if(connectionServiceFn(username,password,plid)==true){		 
+		 if(connectionServiceFn(username,password,plid)==true){
 			 getAllFormFn();
 			 $(".form_list_content").show();
 			 
@@ -244,51 +267,18 @@ $(document).ready(function(){
 				 InsertAppraisalFormFn("SaveAnother");
 			 });
 			 
-//			 var options = {
-//					 "colunms":[
-//							{
-//								 "colunmsDisplayName": "Appraisal Form Name",
-//								 "width": "65%",
-//								 "id": "appraisal_form_name",
-//								 "colunmsType": "text"
-//							 },
-//							 {
-//								 "colunmsDisplayName": "IsActive",
-//								 "width": "20%",
-//								 "id": "is_active",
-//								 "colunmsType": "checkbox"
-//							 }
-//						],
-//						"form":[
-//							{
-//								"label": "Appraisal Form Name",
-//								"inputType": "text",
-//								"placeholder": "Appraisal Form Name",
-//								"id": "appraisal_form_name",
-//								"width": "200px",
-//								"required": true
-//							},
-//							{
-//								"label": "IsActive",
-//								"inputType": "checkbox",
-//								"default": "checked",
-//								"id": "is_active",
-//								"width":"250px"
-//							}
-//						],
-//						"formDetail":{
-//							"formSize": "modal-dialog", 
-//							"formName": "Appraisal Form", 
-//							"id": "appraisal_form_id",
-//							"pk_id": "appraisal_form_id"
-//						},
-//						"serviceName":[restfulURL+"/"+serviceName+"/public/appraisal_form"],
-//						"tokenID":tokenID,
-//						"pagignation":false,
-//						"expressSearch":false
-//			}
-//			 
-//			createDataTableFn(options);
+			// is_job_evaluation invisible
+			$("#is_raise").change(function() {
+				if (this.checked) {
+					$("div#form-group-is_job_evaluation").show();
+					$("#saveFormModal #is_job_evaluation").prop('checked', true);
+				} else {
+					$("div#form-group-is_job_evaluation").hide();
+					$("#saveFormModal #is_job_evaluation").prop('checked', false);
+				}
+			});
+			 
+			 
 		}
 	}
 	 
