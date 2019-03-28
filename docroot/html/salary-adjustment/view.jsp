@@ -1252,6 +1252,14 @@ input[type=number]::-webkit-outer-spin-button {
 	
 	<div id="embedParamSearch"></div>
 	
+		<div id="export-temp" hidden> 
+			<table class="table table-striped table-bordered" id="table-export-temp">
+			<thead id="list_header_temp"></thead>
+			<tbody id="list_boby_temp"></tbody>
+			<tfoot id="list_footer_temp"></tfoot>
+			</table>
+		</div>
+		
 	</body>
 	
 <!-- Language Template for js -->

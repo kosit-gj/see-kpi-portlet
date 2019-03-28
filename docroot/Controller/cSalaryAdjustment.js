@@ -1347,26 +1347,34 @@ var updateFn = function(cal) {
 
 
 var exportExcel = function() {
-//	var LeftHeadWrapper = $(".DTFC_LeftHeadWrapper").html();
-//	var LeftBodyWrapper = $(".DTFC_LeftBodyWrapper").html();
-//	var LeftFootWrapper = $(".DTFC_LeftFootWrapper").html();
-//	var List_header =  $("#list_header").html();
-//
-//	$(".DTFC_LeftHeadWrapper").html("");
-//	$(".DTFC_LeftBodyWrapper").html("");
-//	$(".DTFC_LeftFootWrapper").html("");          
-//	$("#list_header").html("");
-//	$("#tableBonusAdjustment1").html();
+	
+	$("#list_header_temp").empty().html($("#tableBonusAdjustment"+countDatatableGenerate+" > thead").html());
 
-	$("#tableBonusAdjustment1").table2excel({
+	// append row is checked
+	$("#list_boby_temp").empty();
+	$("#tableBonusAdjustment"+countDatatableGenerate+" > tbody > tr").each(function() {
+		var isRowSelect = $(this).children("td:eq(0)").children("input").attr("select-check");
+		if (typeof isRowSelect !== typeof undefined && isRowSelect == "1") {
+			$("#list_boby_temp").append("<tr>"+$(this).html()+"</tr>");
+		}
+	});
+	
+	var numFooter = [6,7,8,9,10,11]
+
+	$.each(numFooter,function(index,value) {
+	  $(".dataTables_scroll").find(".dataTables_scrollFootInner").find(".tableBonusAdjustment").find("#list_footer > tr > td:eq("+value+")")
+	  .html($(".DTFC_LeftFootWrapper").find(".tableBonusAdjustment").find("#list_footer > tr > td:eq("+value+")").html()
+	  );
+	});
+	
+	$("#list_footer_temp").empty().html($(".dataTables_scroll").find(".dataTables_scrollFootInner").find(".tableBonusAdjustment").find("#list_footer").html());
+
+	// export table to excel
+	$("#table-export-temp").table2excel({
 		exclude: ".noExl",
 		filename: "Salary Adjustment.xls"
 	});
-
-//	$("#list_header").html(List_header);
-//	$(".DTFC_LeftHeadWrapper").html(LeftHeadWrapper);
-//	$(".DTFC_LeftBodyWrapper").html(LeftBodyWrapper);
-//	$(".DTFC_LeftFootWrapper").html(LeftFootWrapper);
+	
 }
 
 $(document).ready(function() {
