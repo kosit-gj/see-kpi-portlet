@@ -992,6 +992,20 @@ input[type=number]::-webkit-outer-spin-button {
     border-bottom-left-radius: 3px;
     padding: 10px;
 }
+
+.hideScrollbar::-webkit-scrollbar {
+  display: none;
+  verticle-align: middle;
+}
+.hideScrollbar::-webkit-scrollbar-button {
+  display: none;
+  verticle-align: middle;
+}
+
+.dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>thead>tr>th, .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>thead>tr>td, .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>tbody>tr>th, .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>tbody>tr>td {
+	vertical-align: top;
+}
+
 </style>
 
 
