@@ -6,13 +6,13 @@ const pageNumberDefault=1;
 let countDatatableGenerate = 0;
 var GlobalChangingSortingData;
 
-function refreshDataSortFn(index, objName, data) {
-	console.log(index, objName, data, 'index')
-	console.log(GlobalChangingSortingData['items'][0].objName, 1)
-	GlobalChangingSortingData['items'][0].objName = data;
-	console.log(GlobalChangingSortingData['items'][0].objName, 2)
-	console.log(GlobalChangingSortingData);
-}
+//function refreshDataSortFn(index, objName, data) {
+//	console.log(index, objName, data, 'index')
+//	console.log(GlobalChangingSortingData['items'][0].objName, 1)
+//	GlobalChangingSortingData['items'][0].objName = data;
+//	console.log(GlobalChangingSortingData['items'][0].objName, 2)
+//	console.log(GlobalChangingSortingData);
+//}
 
 function roundThen(value, precision) {
 	if (Number.isInteger(precision)) {
@@ -1060,6 +1060,14 @@ var calculatePercentKeyup = function() {
 		
 		$(".DTFC_LeftFootWrapper").find(".ft-sum-missover").text(Comma(sumMissOver));
 		
+		//update main table
+		/*
+		$(".dataTables_scrollBody").find(".ft-sum-change-total").text(Comma(Math.round(sumTotalChangeSalary)));
+		$(".dataTables_scrollBody").find(".ft-sum-change-salary").text(Comma(sumChangeSalary.toFixed(2)));
+		$(".dataTables_scrollBody").find(".ft-sum-change-pqpi").text(Comma(sumChangePQPI.toFixed(2)));
+		$(".dataTables_scrollBody").find(".ft-sum-change-diff").text(Comma(sumChangeDiff.toFixed(2)));
+		*/
+		
 //		$("#list_empjudege").find(".ft-sum-percent").text(Comma(sumPercent.toFixed(2)));
 //		$("#list_empjudege").find(".ft-sum-bath").text(Comma(sumBath.toFixed(2)));
 //		$("#list_empjudege").find(".ft-sum-change-total").text(Comma(sumTotalChangeSalary.toFixed(2)));
@@ -1109,6 +1117,7 @@ var calculatePercentKeyup = function() {
 	$('.salary').keyup(function() {
 		var salary = Number($(this).autoNumeric('get'));
 		let row_num = $(this).closest('.control-calculate').attr('rowNum');
+		$('.dataTables_scrollBody').find(".rowNum"+row_num).find('.data-salary').find('.salary').attr('value', salary);
 		//$(this).closest('.dataTables_scroll').find('.dataTables_scrollBody').find(".rowNum"+row_num).find('.data-salary').find('.salary').val(salary);
 		
 		//คำนวน ปรับรายได้ Total
@@ -1116,6 +1125,7 @@ var calculatePercentKeyup = function() {
 		var total = pqpi_score + salary;
 		$(".rowNum"+row_num).find('.data-up-total').attr('data-value', Math.round(total));
 		$(".rowNum"+row_num).find('.data-up-total').text(Comma(Math.round(total)));
+		$('.dataTables_scrollBody').find(".rowNum"+row_num).find('.data-up-total').text(Comma(Math.round(total))); //update grade value in main table
 		
 		//คำนวน รายได้ใหม่  ตรง salary
 		var current_salary = Number($(".rowNum"+row_num).find('.data-current-salary').attr('data-value'));
@@ -1133,6 +1143,7 @@ var calculatePercentKeyup = function() {
 		
 		$(this).closest(".rowNum"+row_num).find('.data-percent-diff').attr('data-value', val_diff.toFixed(2));
 		$(this).closest(".rowNum"+row_num).find('.data-percent-diff').text(Comma(val_diff.toFixed(2)));
+		$('.dataTables_scrollBody').find(".rowNum"+row_num).find('.data-percent-diff').text(Comma(val_diff.toFixed(2)));
 		
 		//คำนวน รายได้ใหม่ total
 		calculateNewSalaryTotal($(this));
@@ -1142,12 +1153,14 @@ var calculatePercentKeyup = function() {
 	$(".pqpi").keyup(function() {
 		var pqpi = Number($(this).autoNumeric('get'));
 		let row_num = $(this).closest('.control-calculate').attr('rowNum');
+		$('.dataTables_scrollBody').find(".rowNum"+row_num).find('.data-pqpi').find('.pqpi').attr('value', pqpi);
 
 		//คำนวน ปรับรายได้ Total
 		var salary_score = Number($(this).closest(".rowNum"+row_num).find('.data-salary').find('.salary').autoNumeric('get'));
 		var total = salary_score + pqpi;
 		$(this).closest(".rowNum"+row_num).find('.data-up-total').attr('data-value', Math.round(total));
 		$(this).closest(".rowNum"+row_num).find('.data-up-total').text(Comma(Math.round(total)));
+		$('.dataTables_scrollBody').find(".rowNum"+row_num).find('.data-up-total').text(Comma(Math.round(total))); //update grade value in main table
 		
 		//คำนวน รายได้ใหม่  ตรง  P-QPI
 		var current_pqpi = Number($(".rowNum"+row_num).find('.data-current-pqpi').attr('data-value'));
@@ -1165,6 +1178,7 @@ var calculatePercentKeyup = function() {
 		
 		$(this).closest(".rowNum"+row_num).find('.data-percent-diff').attr('data-value', val_diff.toFixed(2));
 		$(this).closest(".rowNum"+row_num).find('.data-percent-diff').text(Comma(val_diff.toFixed(2)));
+		$('.dataTables_scrollBody').find(".rowNum"+row_num).find('.data-percent-diff').text(Comma(val_diff.toFixed(2)));
 		
 		//คำนวน รายได้ใหม่ total
 		calculateNewSalaryTotal($(this));
@@ -1173,9 +1187,10 @@ var calculatePercentKeyup = function() {
 	
 	$(".score_coo").keyup(function() {
 		var scoreCooOrBoard = Number($(this).autoNumeric('get'));
-		
 		let indexArray = $(this).closest('.control-calculate').attr('rowNum');
-		let objName = $(this).attr('obj-name');
+		$('.dataTables_scrollBody').find(".rowNum"+indexArray).find('.data-coo').find('.score_coo').attr('value', scoreCooOrBoard); //update score_coo value in main table
+		
+//		let objName = $(this).attr('obj-name');
 //		refreshDataSortFn(indexArray, objName, scoreCooOrBoard);
 
 		var arrayG = $(this).closest('.data-coo').attr('array-grade');
@@ -1188,6 +1203,7 @@ var calculatePercentKeyup = function() {
 		var grade = (filterScore.length==0 ? '' : filterScore[0]['grade']);
 		
 		$(this).closest('.control-calculate').find('.data-grade').text(grade);
+		$('.dataTables_scrollBody').find(".rowNum"+indexArray).find('.data-grade').text(grade); //update grade value in main table
 		
 		let score_coo = $(this).autoNumeric('get');
 		let total_point = $(this).closest('.control-calculate').attr('total_point');
@@ -1340,6 +1356,7 @@ var exportExcel = function() {
 //	$(".DTFC_LeftBodyWrapper").html("");
 //	$(".DTFC_LeftFootWrapper").html("");          
 //	$("#list_header").html("");
+//	$("#tableBonusAdjustment1").html();
 
 	$("#tableBonusAdjustment1").table2excel({
 		exclude: ".noExl",
