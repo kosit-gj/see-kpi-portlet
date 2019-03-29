@@ -967,7 +967,7 @@ var createDatatable = function(table, countStruc, isBoard) {
 	
 	$("table.dataTable.no-footer").css({"border-bottom" : "0px"});
 	
-	$(".tableBonusAdjustment>tbody>tr").css({"height" : "0"}); //clear height tr
+	//$(".tableBonusAdjustment>tbody>tr").css({"height" : "0"}); //clear height tr
 	
 	$(".pos-column-lef").css({
 		"text-align" : "left", 
@@ -988,8 +988,8 @@ var createDatatable = function(table, countStruc, isBoard) {
 	
 	$(".no-sort").removeClass("sorting_asc");
 	
-	$(".pos-column-lef").find('.ecEmpName').addClass("maxWidthEmpName ellipsis");
-	$(".pos-column-lef").find('.ecOrgName').addClass("maxWidthOrg ellipsis");
+//	$(".pos-column-lef").find('.ecEmpName').addClass("maxWidthEmpName ellipsis");
+//	$(".pos-column-lef").find('.ecOrgName').addClass("maxWidthOrg ellipsis");
 	
 //	$(".pos-column-lef").find('.eclip').addClass("ellipsis");
 	
@@ -1388,7 +1388,7 @@ var updateFn = function(cal) {
 }
 
 var exportExcel = function() {
-	
+	let selectCheck = false;
 	$("#list_header_temp").empty().html($("#tableBonusAdjustment"+countDatatableGenerate+" > thead").html());
 
 	// append row is checked
@@ -1397,8 +1397,14 @@ var exportExcel = function() {
 		var isRowSelect = $(this).children("td:eq(0)").children("input").attr("select-check");
 		if (typeof isRowSelect !== typeof undefined && isRowSelect == "1") {
 			$("#list_boby_temp").append("<tr>"+$(this).html()+"</tr>");
+			selectCheck = true;
 		}
 	});
+	
+	if(selectCheck==false) {
+		callFlashSlide("Please Select Employee");
+		return;
+	}
 	
 	var numFooter = [6,7,8,9,10,11]
 
@@ -1566,8 +1572,8 @@ $(document).ready(function() {
 		    
 		    $(window).scroll(function() {
 		    	$('.fixedHeader-floating').hide(); //ทุกครั้งที่เลื่อนสกอ จะซ่อนคลาสของ datatable ที่ freeze ไม่งั้น ui จะเพี้ยน
-		    	$(".DTFC_LeftBodyWrapper").css({"height" : $('.dataTables_scrollBody').find('tbody:visible').height()}); //set height frezze math tr
-				$(".DTFC_ScrollWrapper").css({"height" : $('.dataTables_scroll:visible').height()}); //set div freeze math height main table
+		    	//$(".DTFC_LeftBodyWrapper").css({"height" : $('.dataTables_scrollBody').find('tbody:visible').height()}); //set height frezze math tr
+				//$(".DTFC_ScrollWrapper").css({"height" : $('.dataTables_scroll:visible').height()}); //set div freeze math height main table
 		    });
 		    
 //		    $.fn.dataTable.ext.errMode = function ( settings, helpPage, message ) { 

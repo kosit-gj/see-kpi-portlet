@@ -1182,7 +1182,7 @@ input[type=number]::-webkit-outer-spin-button {
                                 -->
                             <!-- pagination end -->
 <!-- 							<div class="head_adjust" id="table-filter-group" style="display: none; margin-bottom: 7px;">Group: <select id="filter-group" style="width: 100px;"></select></div> -->
-							<div id="scroll-tableBonusAdjustment" class="row-fluid list-data-table" style="overflow: auto;">							
+							<div id="scroll-tableBonusAdjustment" class="row-fluid list-data-table">							
 <!-- 							<table class="table table-striped table-bordered" id="tableBonusAdjustment" style="margin-bottom: 0px; max-width: none;"> -->
 <!-- 							<thead id="list_header"> -->
 <!-- 							</thead> -->
