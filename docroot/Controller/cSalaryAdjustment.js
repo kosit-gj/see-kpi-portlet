@@ -686,8 +686,8 @@ var listDataFn = function(data) {
 		htmlHTML += "<tr class='control-calculate rowNum"+index+"' rowNum="+index+" data-current-total='"+notNullFn(indexEntry.total_now_salary)+"' total_point='"+notNullFn(indexEntry.total_point)+"' bath_point='"+notNullFn(indexEntry.baht_per_point)+"'>";
 		//start freeze
 		htmlHTML += "	<td class='data-check pos-column-cen'><input type=\"checkbox\" class=\"select-check\" emp_result_id='"+indexEntry.emp_result_id+"'></td>";
-		htmlHTML += "	<td class='pos-column-lef data-main' emp_result_id='"+indexEntry.emp_result_id+"' emp_id='"+indexEntry.emp_id+"'>"+indexEntry.emp_name+"</td>";
-		htmlHTML += "	<td class='pos-column-lef'>"+indexEntry.org_name+"</td>";
+		htmlHTML += "	<td class='pos-column-lef data-main' emp_result_id='"+indexEntry.emp_result_id+"' emp_id='"+indexEntry.emp_id+"'><span class='ecEmpName' data-text='"+indexEntry.emp_name+"'>"+indexEntry.emp_name+"</span></td>";
+		htmlHTML += "	<td class='pos-column-lef'><span class='ecOrgName' data-text='"+indexEntry.org_name+"'>"+indexEntry.org_name+"</span></td>";
 		htmlHTML += "	<td class='pos-column-cen'>"+indexEntry.z_score.toFixed(2)+"</td>";
 		htmlHTML += "	<td class='data-coo' array-grade='"+JSON.stringify(indexEntry['cal_grade'])+"'>";
 		htmlHTML += "		<div class='float-label-control'>";
@@ -820,7 +820,7 @@ var createDatatable = function(table, countStruc, isBoard) {
 		//start freeze
 		{ "width": "10px", "targets": [0]}, //checkbox
     	{ "width": "30px", "targets": [1]}, //Employee Name
-    	{ "width": "30px", "targets": [2]}, //org
+    	{ "width": "65px", "targets": [2]}, //org
     	{ "width": "20px", "targets": [3]}, //z-score
     	{ "width": "20px", "targets": [4]}, //คะแนนประเมินCOO or board
     	{ "width": "10px", "targets": [5]}, //Grade
@@ -895,7 +895,8 @@ var createDatatable = function(table, countStruc, isBoard) {
 	    scrollCollapse: true,
 	    paging: false,
 	    fixedColumns: {
-	    	leftColumns: 12
+	    	leftColumns: 12,
+	    	heightMatch: 'auto'
 	    },
 //	    drawCallback: function() {
 //	        $('#tableBonusAdjustment1 tbody tr').each(function(i, tr) {
@@ -942,18 +943,55 @@ var createDatatable = function(table, countStruc, isBoard) {
 		//pSign : 's'
 	});
 
-	$(".fix-column-top").css({"text-align" : "center", "border-bottom" : "0px", "vertical-align": "top"});
+	$(".fix-column-top").css({
+		"text-align" : "center", 
+		"border-bottom" : "0px", 
+		"vertical-align": "top"
+	});
 	
-	$(".maxWidth30").css({"max-width" : "30px", "overflow-y" : "auto", "text-overflow": "clip", "vertical-align": "top"});
-	$(".maxWidth10").css({"max-width" : "10px", "overflow-y" : "auto", "text-overflow": "clip", "vertical-align": "top"});
+	$(".maxWidth30").css({
+		"max-width" : "30px", 
+		"overflow-y" : "auto", 
+		"text-overflow": "clip", 
+		"vertical-align": "top"
+	});
+	
+	$(".maxWidth10").css({
+		"max-width" : "10px", 
+		"overflow-y" : "auto", 
+		"text-overflow": "clip", 
+		"vertical-align": "top"
+	});
+	
 	$(".maxWidth30,.maxWidth10").addClass("hideScrollbar");
 	
 	$("table.dataTable.no-footer").css({"border-bottom" : "0px"});
-	$(".pos-column-lef").css({"text-align" : "left", "vertical-align": "top"});
-	$(".pos-column-cen").css({"text-align" : "center", "vertical-align": "top"});
-	$(".pos-column-rig").css({"text-align" : "right", "vertical-align": "top"});
+	
+	$(".tableBonusAdjustment>tbody>tr").css({"height" : "0"}); //clear height tr
+	
+	$(".pos-column-lef").css({
+		"text-align" : "left", 
+		"vertical-align": "top"
+	});
+	
+	$(".pos-column-cen").css({
+		"text-align" : "center", 
+		"vertical-align": "top"
+	});
+	
+	$(".pos-column-rig").css({
+		"text-align" : "right", 
+		"vertical-align": "top"
+	});
+	
 	$(".pos-column-rig.bold").css({"font-weight" : "bold"});
+	
 	$(".no-sort").removeClass("sorting_asc");
+	
+	$(".pos-column-lef").find('.ecEmpName').addClass("maxWidthEmpName ellipsis");
+	$(".pos-column-lef").find('.ecOrgName').addClass("maxWidthOrg ellipsis");
+	
+//	$(".pos-column-lef").find('.eclip').addClass("ellipsis");
 	
 	$("#statusSelectAll").prop('checked', false); //ล้างค่าการ checked ที่ปุ่ม check
 	$(".statusSelectAll").prop('checked', false); //ล้างค่าการ checked ที่ปุ่ม check ตรง freeze
@@ -1349,28 +1387,34 @@ var updateFn = function(cal) {
     });
 }
 
-
 var exportExcel = function() {
-//	var LeftHeadWrapper = $(".DTFC_LeftHeadWrapper").html();
-//	var LeftBodyWrapper = $(".DTFC_LeftBodyWrapper").html();
-//	var LeftFootWrapper = $(".DTFC_LeftFootWrapper").html();
-//	var List_header =  $("#list_header").html();
-//
-//	$(".DTFC_LeftHeadWrapper").html("");
-//	$(".DTFC_LeftBodyWrapper").html("");
-//	$(".DTFC_LeftFootWrapper").html("");          
-//	$("#list_header").html("");
-//	$("#tableBonusAdjustment1").html();
+	
+	$("#list_header_temp").empty().html($("#tableBonusAdjustment"+countDatatableGenerate+" > thead").html());
+	//$("#list_footer_temp").empty().html($("#tableBonusAdjustment"+countDatatableGenerate+" > tfoot").html());
 
-	$("#tableBonusAdjustment1").table2excel({
+	// append row is checked
+	$("#list_boby_temp").empty();
+	$("#tableBonusAdjustment"+countDatatableGenerate+" > tbody > tr").each(function() {
+		var isRowSelect = $(this).children("td:eq(0)").children("input").attr("select-check");
+		if (typeof isRowSelect !== typeof undefined && isRowSelect == "1") {
+			$("#list_boby_temp").append("<tr>"+$(this).html()+"</tr>");
+		}
+	});
+	
+	$("#list_footer_temp").empty().html($(".dataTables_scroll").find(".dataTables_scrollFootInner").find(".tableBonusAdjustment").find("#list_footer").html());
+	
+	//$(".dataTables_scroll").closest(".dataTables_scroll").find(".tableBonusAdjustment").find("#list_footer").html();
+	/* 
+	$("#tableBonusAdjustment"+countDatatableGenerate+" > tfooter > tr").each(function() {
+		$("#list_boby_temp").append("<tr>"+$(this).html()+"</tr>");
+	}); */
+
+	// export table to excel
+	$("#table-export-temp").table2excel({
 		exclude: ".noExl",
 		filename: "Salary Adjustment.xls"
 	});
-
-//	$("#list_header").html(List_header);
-//	$(".DTFC_LeftHeadWrapper").html(LeftHeadWrapper);
-//	$(".DTFC_LeftBodyWrapper").html(LeftBodyWrapper);
-//	$(".DTFC_LeftFootWrapper").html(LeftFootWrapper);
+	
 }
 
 $(document).ready(function() {
@@ -1521,6 +1565,8 @@ $(document).ready(function() {
 		    
 		    $(window).scroll(function() {
 		    	$('.fixedHeader-floating').hide(); //ทุกครั้งที่เลื่อนสกอ จะซ่อนคลาสของ datatable ที่ freeze ไม่งั้น ui จะเพี้ยน
+		    	$(".DTFC_LeftBodyWrapper").css({"height" : $('.dataTables_scrollBody').find('tbody:visible').height()}); //set height frezze math tr
+				$(".DTFC_ScrollWrapper").css({"height" : $('.dataTables_scroll:visible').height()}); //set div freeze math height main table
 		    });
 		    
 //		    $.fn.dataTable.ext.errMode = function ( settings, helpPage, message ) { 

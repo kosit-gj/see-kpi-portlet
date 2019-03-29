@@ -859,44 +859,6 @@ input[type=number]::-webkit-outer-spin-button {
 	vertical-align: middle;
 }
 
-/*
-.ellipsis {
-  max-width: 200px;
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: all 0.2s linear;
-  white-space: nowrap;
-  padding: 0.5rem 0.1rem;
-}
-
-.ellipsis:focus, .ellipsis:hover {
-  color: transparent;
-}
-
-.ellipsis:focus:after, .ellipsis:hover:after {
-  content: attr(data-text);
-  overflow: visible;
-  text-overflow: inherit;
-  background: #fff;
-  position: absolute;
-  left: auto;
-  top: auto;
-  width: auto;
-  max-width: 20rem;
-  border: 1px solid #eaebec;
-  padding: 0 0.5rem;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .28);
-  white-space: normal;
-  word-wrap: break-word;
-  display: block;
-  color: black;
-  margin-top: -1.25rem;
-}
-
-*/
-
 @keyframes float-labels {
     0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
     20% { font-size: 1.5em; opacity: 0; }
@@ -1004,6 +966,49 @@ input[type=number]::-webkit-outer-spin-button {
 
 .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>thead>tr>th, .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>thead>tr>td, .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>tbody>tr>th, .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>tbody>tr>td {
 	vertical-align: top;
+}
+
+.maxWidthEmpName {
+	max-width: 30px;
+}
+
+.maxWidthOrg {
+	max-width: 65px;
+}
+
+.ellipsis {
+  /*max-width: 30px;*/
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+/*   text-overflow: ellipsis; */
+  transition: all 0.2s linear;
+  white-space: nowrap;
+/*   padding: 0.5rem 0.1rem; */
+}
+
+.ellipsis:focus, .ellipsis:hover {
+  color: transparent;
+}
+
+.ellipsis:focus:after, .ellipsis:hover:after {
+  content: attr(data-text);
+  overflow: visible;
+  text-overflow: inherit;
+  background: #fff;
+  position: absolute;
+  left: auto;
+  top: auto;
+  width: auto;
+  max-width: 20rem;
+  border: 1px solid #eaebec;
+  padding: 0 0.5rem;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .28);
+  white-space: normal;
+  word-wrap: break-word;
+  display: block;
+  color: black;
+  margin-top: -1.25rem;
 }
 
 </style>
