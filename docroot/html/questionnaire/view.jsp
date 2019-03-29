@@ -538,11 +538,20 @@ cursor: not-allowed !important;
 				<div class="row-fluid p-t-xxs">
 					<div class="form-inline">
 						<div class="form-group pull-left span3"
-							style="margin-left: 0px; position: relative;">
+							style="margin-right: 5px; position: relative;">
 							<select data-toggle="tooltip" title="Questionnaire Type"
 								class="input span12 m-b-n " id="form_questionnaire_type"
 								name="form_questionnaire_type" data-container=".modal-header"><option selected
 									value="">No Questionnaire Type</option></select>
+						</div>
+						<div class="form-group pull-left span3"
+							style="margin-left: 0px; position: relative;">
+							<select data-toggle="tooltip" title="Pass Score Type"
+								class="input span12 m-b-n " id="form_pass_score_type"
+								name="form_pass_score_type" data-container=".modal-header">
+								<option selected value="percentage">Percentage</option>
+								<option  value="score">Score</option>
+							</select>
 						</div>
 <!-- 					
 						<div class="form-group pull-left span3"

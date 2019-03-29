@@ -172,7 +172,7 @@ var clearFn = function() {
 	
 	
 	$("#form_questionnaire_type").val($("#form_questionnaire_type option:first").val());
-	
+	$("#form_pass_score_type").val($("#form_pass_score_type option:first").val());
 	
 	$("#form_questionnaire_name").val("");
 	$("#form_questionnaire_pass_score").val("");
@@ -187,8 +187,8 @@ var clearFn = function() {
 	$("#action").val("add");
 	$(".btnModalClose").click();
 	globalDataTemp['form'].validate().resetForm();
-	$("#form_questionnaire_type ,.btnAddSection  ,.numberOnly").prop('disabled', false); 
-	$("#form_questionnaire_type ,.btnAddSection  ,.numberOnly").removeClass('cursorNotAllowed');
+	$("#form_questionnaire_type ,#form_pass_score_type ,.btnAddSection  ,.numberOnly").prop('disabled', false); 
+	$("#form_questionnaire_type ,#form_pass_score_type ,.btnAddSection  ,.numberOnly").removeClass('cursorNotAllowed');
 	
 }
 //--------  Clear End
@@ -806,6 +806,7 @@ var listQuestionnaireFn = function(data) {
 var listQuestionnaireFindOneFn = function(data) {
 	var html="";
 	$("#form_questionnaire_type").val(data.head.questionaire_type_id);
+	$("#form_pass_score_type").val(data.head.pass_score_type);
 	$("#form_questionnaire_name").val(data.head.questionaire_name);
 	$("#form_questionnaire_pass_score").val(data.head.pass_score);
 	$("#form_questionnaire_is_active").val(data.head.pass_score);
@@ -946,8 +947,8 @@ var listQuestionnaireFindOneFn = function(data) {
 	
 	$("#listSection").html(html);
 	if(data.head.is_use == 1){
-		$("#form_questionnaire_type  , .btnAddSection ,.btnAddSubSection,.btnAddQuestion, .btnDelSection ,.addAnswerRow , .btnDelSubSection , .btnDelQuestion ,.btnDelAnswerRow ,.dropDownAnswerTypeSubSection ,.dropDownAnswerTypeQuestion ,.btnDelAnswerRow,.numberOnly").prop('disabled', true); 
-		$("#form_questionnaire_type  , .btnAddSection ,.btnAddSubSection,.btnAddQuestion, .btnDelSection ,.addAnswerRow , .btnDelSubSection , .btnDelQuestion ,.btnDelAnswerRow ,.dropDownAnswerTypeSubSection ,.dropDownAnswerTypeQuestion ,.btnDelAnswerRow,.numberOnly").addClass('cursorNotAllowed');
+		$("#form_questionnaire_type ,#form_pass_score_type  , .btnAddSection ,.btnAddSubSection,.btnAddQuestion, .btnDelSection ,.addAnswerRow , .btnDelSubSection , .btnDelQuestion ,.btnDelAnswerRow ,.dropDownAnswerTypeSubSection ,.dropDownAnswerTypeQuestion ,.btnDelAnswerRow,.numberOnly").prop('disabled', true); 
+		$("#form_questionnaire_type ,#form_pass_score_type , .btnAddSection ,.btnAddSubSection,.btnAddQuestion, .btnDelSection ,.addAnswerRow , .btnDelSubSection , .btnDelQuestion ,.btnDelAnswerRow ,.dropDownAnswerTypeSubSection ,.dropDownAnswerTypeQuestion ,.btnDelAnswerRow,.numberOnly").addClass('cursorNotAllowed');
 		$("#listSection .flat-toggle").parent().find("*").addClass('cursorNotAllowed');
 	}
 	else{
@@ -1089,6 +1090,7 @@ var confrimModalActiveJobGroupFn = function(activity){
 var insertFn = function(options){
 	
 	var questionaire_type_id=$("#form_questionnaire_type").val();
+	var pass_score_type=$("#form_pass_score_type").val();
 	var questionaire_name=$("#form_questionnaire_name").val();
 	
 	var pass_score=$("#form_questionnaire_pass_score").val();
@@ -1160,6 +1162,7 @@ var insertFn = function(options){
 		data : {
 			 "questionaire_name": questionaire_name,
 			 "questionaire_type_id": questionaire_type_id,
+			 "pass_score_type": pass_score_type,
 			 //"level_id" : level_id,
 			 "pass_score": pass_score,
 			 "is_active": is_active,
@@ -1195,6 +1198,7 @@ var insertFn = function(options){
 
 var updateFn = function(){
 	var questionaire_type_id=$("#form_questionnaire_type").val();
+	var pass_score_type=$("#form_pass_score_type").val();
 	var questionaire_id = $("#id").val();
 	var questionaire_name=$("#form_questionnaire_name").val();
 	//var level_id=$("#form_level_id").val();
@@ -1276,6 +1280,7 @@ $.ajax({
 			 "questionaire_id" : questionaire_id,
 			 "questionaire_name": questionaire_name,
 			 "questionaire_type_id": questionaire_type_id,
+			 "pass_score_type":pass_score_type,
 			 "pass_score": pass_score,
 			 //"level_id" : level_id,
 			 "is_active": is_active,
