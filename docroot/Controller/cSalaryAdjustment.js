@@ -453,7 +453,7 @@ var listDataFn = function(data) {
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">"+$(".lt-emp-name").val()+"</th>";
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">"+$(".lt-organization").val()+"</th>";
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_z_score\" sort-type='asc' name-sort='z_score'>Z-Score</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_score\" sort-type='asc' name-sort='"+(data['is_board']==1 || data['is_board']==undefined || data['is_board']=='undefined' ? 'score_board' : 'score_coo')+"'>"+(data['is_board']==1 ? 'คะแนนประเมิน Board.' : 'คะแนนประเมิน COO.')+"</th>";
+	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_score\" sort-type='asc' name-sort='"+(data==undefined || data['is_board']==1 ? 'score_board' : 'score_coo')+"'>"+(data==undefined ||  data['is_board']==1 ? 'คะแนนประเมิน Board.' : 'คะแนนประเมิน COO.')+"</th>";
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_grade\" sort-type='asc' name-sort='grade'>เกรด</th>";
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">Cal Standard</th>";
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">ขาด/เกิน</th>";
@@ -472,7 +472,7 @@ var listDataFn = function(data) {
 	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_score_mgr\" sort-type='asc' name-sort='score_mgr'>คะแนนประเมิน Mgr. </th>";
 	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_score_bu\" sort-type='asc' name-sort='score_bu'>คะแนนประเมิน BU. </th>";
 	
-	if(data['is_board']==1) {
+	if(data==undefined || data['is_board']==1) {
 		htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_score_coo\" sort-type='asc' name-sort='score_coo2'>คะแนนประเมิน COO.</th>";
 	}
 	
