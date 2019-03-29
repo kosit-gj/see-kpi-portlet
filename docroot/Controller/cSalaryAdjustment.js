@@ -1390,7 +1390,6 @@ var updateFn = function(cal) {
 var exportExcel = function() {
 	
 	$("#list_header_temp").empty().html($("#tableBonusAdjustment"+countDatatableGenerate+" > thead").html());
-	//$("#list_footer_temp").empty().html($("#tableBonusAdjustment"+countDatatableGenerate+" > tfoot").html());
 
 	// append row is checked
 	$("#list_boby_temp").empty();
@@ -1401,13 +1400,15 @@ var exportExcel = function() {
 		}
 	});
 	
-	$("#list_footer_temp").empty().html($(".dataTables_scroll").find(".dataTables_scrollFootInner").find(".tableBonusAdjustment").find("#list_footer").html());
+	var numFooter = [6,7,8,9,10,11]
+
+	$.each(numFooter,function(index,value) {
+	  $(".dataTables_scroll").find(".dataTables_scrollFootInner").find(".tableBonusAdjustment").find("#list_footer > tr > td:eq("+value+")")
+	  .html($(".DTFC_LeftFootWrapper").find(".tableBonusAdjustment").find("#list_footer > tr > td:eq("+value+")").html()
+	  );
+	});
 	
-	//$(".dataTables_scroll").closest(".dataTables_scroll").find(".tableBonusAdjustment").find("#list_footer").html();
-	/* 
-	$("#tableBonusAdjustment"+countDatatableGenerate+" > tfooter > tr").each(function() {
-		$("#list_boby_temp").append("<tr>"+$(this).html()+"</tr>");
-	}); */
+	$("#list_footer_temp").empty().html($(".dataTables_scroll").find(".dataTables_scrollFootInner").find(".tableBonusAdjustment").find("#list_footer").html());
 
 	// export table to excel
 	$("#table-export-temp").table2excel({
