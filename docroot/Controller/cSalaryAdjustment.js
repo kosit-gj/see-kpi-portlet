@@ -443,15 +443,11 @@ var listDataFn = function(data) {
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\"><input type=\"checkbox\" name=\"statusSelectAll\" id=\"statusSelectAll\" class=\"statusSelectAll\"></th>";
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">"+$(".lt-emp-name").val()+"</th>";
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">"+$(".lt-organization").val()+"</th>";
-<<<<<<< HEAD
+
 	htmlHeader1+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_z_score\" sort-type='asc' name-sort='z_score'>Z-Score<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
 	htmlHeader1+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_score\" sort-type='asc' board-check='"+(data==undefined || data['is_board']==1 ? '1' : '0')+"' name-sort='"+(data==undefined || data['is_board']==1 ? 'score_board' : 'score_coo')+"'>"+(data==undefined || data['is_board']==1 ? 'คะแนนประเมิน Board.' : 'คะแนนประเมิน COO.')+"<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
 	htmlHeader1+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_grade\" sort-type='asc' name-sort='grade'>เกรด<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
-=======
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_z_score\" sort-type='asc' name-sort='z_score'>Z-Score</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_score\" sort-type='asc' name-sort='"+(data==undefined || data['is_board']==1 ? 'score_board' : 'score_coo')+"'>"+(data==undefined ||  data['is_board']==1 ? 'คะแนนประเมิน Board.' : 'คะแนนประเมิน COO.')+"</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_grade\" sort-type='asc' name-sort='grade'>เกรด</th>";
->>>>>>> refs/remotes/origin/dhas/develop
+
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">Cal Standard</th>";
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">ขาด/เกิน</th>";
 	htmlHeader1+="<th colspan=\"4\" class=\"fix-column-top\">รายได้ที่เปลี่ยนแปลง</th>";
@@ -470,11 +466,7 @@ var listDataFn = function(data) {
 	htmlHeader3+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_score_bu\" sort-type='asc' name-sort='score_bu'>คะแนนประเมิน BU.<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
 	
 	if(data==undefined || data['is_board']==1) {
-<<<<<<< HEAD
 		htmlHeader3+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_score_coo\" sort-type='asc' name-sort='score_coo2'>คะแนนประเมิน COO.<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
-=======
-		htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_score_coo\" sort-type='asc' name-sort='score_coo2'>คะแนนประเมิน COO.</th>";
->>>>>>> refs/remotes/origin/dhas/develop
 	}
 	
 	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">คะแนนเต็มตีค่างาน (ความรู้)</th>";
