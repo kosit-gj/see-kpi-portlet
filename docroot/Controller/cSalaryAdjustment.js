@@ -6,14 +6,6 @@ const pageNumberDefault=1;
 let countDatatableGenerate = 0;
 var GlobalChangingSortingData;
 
-//function refreshDataSortFn(index, objName, data) {
-//	console.log(index, objName, data, 'index')
-//	console.log(GlobalChangingSortingData['items'][0].objName, 1)
-//	GlobalChangingSortingData['items'][0].objName = data;
-//	console.log(GlobalChangingSortingData['items'][0].objName, 2)
-//	console.log(GlobalChangingSortingData);
-//}
-
 function roundThen(value, precision) {
 	if (Number.isInteger(precision)) {
 		var shift = Math.pow(10, precision);
@@ -412,9 +404,8 @@ var to_action = function () {
 }
 
 var listDataFn = function(data) {
-	//console.log(data, '411')
-	//GlobalChangingSortingData = data;
-	//console.log(GlobalChangingSortingData, 413)
+	GlobalChangingSortingData = data;
+	//console.log(GlobalChangingSortingData, 408)
 	var htmlHTML="";
 	
 	var htmlHeader1 = "";
@@ -452,9 +443,9 @@ var listDataFn = function(data) {
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\"><input type=\"checkbox\" name=\"statusSelectAll\" id=\"statusSelectAll\" class=\"statusSelectAll\"></th>";
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">"+$(".lt-emp-name").val()+"</th>";
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">"+$(".lt-organization").val()+"</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_z_score\" sort-type='asc' name-sort='z_score'>Z-Score</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_score\" sort-type='asc' name-sort='"+(data['is_board']==1 || data['is_board']==undefined || data['is_board']=='undefined' ? 'score_board' : 'score_coo')+"'>"+(data['is_board']==1 ? 'คะแนนประเมิน Board.' : 'คะแนนประเมิน COO.')+"</th>";
-	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_grade\" sort-type='asc' name-sort='grade'>เกรด</th>";
+	htmlHeader1+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_z_score\" sort-type='asc' name-sort='z_score'>Z-Score<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
+	htmlHeader1+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_score\" sort-type='asc' board-check='"+(data==undefined || data['is_board']==1 ? '1' : '0')+"' name-sort='"+(data==undefined || data['is_board']==1 ? 'score_board' : 'score_coo')+"'>"+(data==undefined || data['is_board']==1 ? 'คะแนนประเมิน Board.' : 'คะแนนประเมิน COO.')+"<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
+	htmlHeader1+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_grade\" sort-type='asc' name-sort='grade'>เกรด<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">Cal Standard</th>";
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">ขาด/เกิน</th>";
 	htmlHeader1+="<th colspan=\"4\" class=\"fix-column-top\">รายได้ที่เปลี่ยนแปลง</th>";
@@ -469,11 +460,11 @@ var listDataFn = function(data) {
 //	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">คะแนนผลงานปีที่ผ่านมา ( 20 คะแนน )</th>";
 //	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top\">คะแนนความสามารถที่มีคุณค่าต่อองค์กร ( 15 คะแนน )</th>";
 
-	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_score_mgr\" sort-type='asc' name-sort='score_mgr'>คะแนนประเมิน Mgr. </th>";
-	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_score_bu\" sort-type='asc' name-sort='score_bu'>คะแนนประเมิน BU. </th>";
+	htmlHeader3+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_score_mgr\" sort-type='asc' name-sort='score_mgr'>คะแนนประเมิน Mgr.<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
+	htmlHeader3+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_score_bu\" sort-type='asc' name-sort='score_bu'>คะแนนประเมิน BU.<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
 	
-	if(data['is_board']==1) {
-		htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top refreshSoring column_score_coo\" sort-type='asc' name-sort='score_coo2'>คะแนนประเมิน COO.</th>";
+	if(data==undefined || data['is_board']==1) {
+		htmlHeader3+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_score_coo\" sort-type='asc' name-sort='score_coo2'>คะแนนประเมิน COO.<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
 	}
 	
 	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">คะแนนเต็มตีค่างาน (ความรู้)</th>";
@@ -486,7 +477,7 @@ var listDataFn = function(data) {
 	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort maxWidth30\">ปรับรายได้ Total</th>";
 	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort maxWidth30\">ปรับเงินเดือน</th>";
 	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort maxWidth30\">ปรับ P-QPI</th>";
-	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top refreshSoring column_diff maxWidth10\" sort-type='asc' name-sort='score_diff'>% Diff</th>";
+	htmlHeader3+="<th rowspan=\"2\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_diff maxWidth10\" sort-type='asc' name-sort='score_diff'>% Diff<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
 	
 	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort maxWidth30\">%</th>";
 	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top maxWidth30\">Bath</th>";
@@ -494,11 +485,11 @@ var listDataFn = function(data) {
 	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">รายได้รวมที่ควรได้ 90% ไม่รวม Bonus</th>";
 	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">รายได้ Fix ที่ควรได้ 65%</th>";
 	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top no-sort\">รายได้ Var ที่ควรได้ 25%</th>";
-	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top refreshSoring column_current_total maxWidth30\" sort-type='asc' name-sort='current_total'>รายได้ปัจจุบัน Total</th>";
+	htmlHeader3+="<th rowspan=\"2\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_current_total maxWidth30\" sort-type='asc' name-sort='current_total'>รายได้ปัจจุบัน Total<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
 	
 	htmlHeader3+="<th colspan=\"3\" class=\"fix-column-top\">FIX65%</th>";
 	htmlHeader3+="<th colspan=\"3\" class=\"fix-column-top\">VAR25%</th>";
-	htmlHeader3+="<th rowspan=\"2\" class=\"fix-column-top refreshSoring column_new_total maxWidth30\" sort-type='asc' name-sort='new_total'>รายได้ใหม่<br>Total</th>";
+	htmlHeader3+="<th rowspan=\"2\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_new_total maxWidth30\" sort-type='asc' name-sort='new_total'>รายได้ใหม่<br>Total<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
 	htmlHeader3+="<th colspan=\"3\" class=\"fix-column-top\">FIX 65%</th>";
 	htmlHeader3+="<th colspan=\"3\" class=\"fix-column-top\">VAR 25%</th>";
 	htmlHeader3+="</tr>";
@@ -673,12 +664,24 @@ var listDataFn = function(data) {
 		let mpi_amount = Comma(notNullFn(indexEntry.mpi_amount));
 		let pi_amount = Comma(notNullFn(indexEntry.pi_amount));
 		let var_other_amount = Comma(notNullFn(indexEntry.var_other_amount));
-		console.log(indexEntry.salary, '+', indexEntry.pqpi_amount, '+', indexEntry.fix_other_amount, '-', fix_percent);
+		//console.log(indexEntry.salary, '+', indexEntry.pqpi_amount, '+', indexEntry.fix_other_amount, '-', fix_percent);
 		let cal_miss_over = (Number(indexEntry.salary)+Number(indexEntry.pqpi_amount)+Number(indexEntry.fix_other_amount))-removeComma(fix_percent);
 		let miss_over = Comma(roundThen(notNullFn(cal_miss_over), -2));
-		console.log(miss_over, 'miss')
+		//console.log(miss_over, 'miss')
 		
-		let cal_standard = Comma(Math.round(notNullFn(indexEntry.cal_standard)));
+		var score_cal = (data['is_board']==1 ? score_board : score_coo);
+		let cal_standard;
+		indexEntry['cal_grade'].filter(function (el) {
+			if(score_cal >= el.begin_score && score_cal <= el.end_score) {
+				if(el.raise_type==1) {
+					cal_standard =  Comma(Math.round(notNullFn(el.salary_raise_amount)));
+				} else {
+					let salary_raise_percent = Number(el.salary_raise_percent);
+					cal_standard = Comma(Math.round(notNullFn((salary_raise_percent* Number(indexEntry.salary))/100)));
+				}
+			}
+		});
+//		let cal_standard = Comma(Math.round(notNullFn(indexEntry.cal_standard)));
 		
 		var job_code = notNullTextFn(indexEntry.job_code);
 		var grade = notNullTextFn(indexEntry.grade);
@@ -691,7 +694,7 @@ var listDataFn = function(data) {
 		htmlHTML += "	<td class='pos-column-cen'>"+indexEntry.z_score.toFixed(2)+"</td>";
 		htmlHTML += "	<td class='data-coo' array-grade='"+JSON.stringify(indexEntry['cal_grade'])+"'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 score_coo numberOnlyCoo' value='"+(data['is_board']==1 ? score_board : score_coo)+"' obj-name='"+(data['is_board']==1 ? 'score_board' : 'score_coo')+"'/>";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 score_coo numberOnlyCoo' value='"+(data['is_board']==1 ? score_board : score_coo)+"'/>";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		
@@ -701,32 +704,32 @@ var listDataFn = function(data) {
 			htmlHTML += "	<td class='data-miss-over pos-column-rig' data-value="+miss_over+">"+miss_over+"</td>";
 		} else {
 			htmlHTML += "	<td class='data-grade pos-column-cen'>"+grade+"</td>";
-			htmlHTML += "	<td class='pos-column-rig'>"+cal_standard+"</td>";
+			htmlHTML += "	<td class='data-calstandard pos-column-rig'>"+cal_standard+"</td>";
 			htmlHTML += "	<td class='pos-column-rig' data-value=''></td>";
 		}
 		
 		htmlHTML += "	<td class='data-up-total pos-column-rig maxWidth30' data-value=\""+Math.round(indexEntry.cal_standard)+"\">"+cal_standard+"</td>";
 		htmlHTML += "	<td class='data-salary changesal2 maxWidth30' data-sort='"+Math.random()+"'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 salary numberOnly' value='' />";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 salary numberOnly' value='"+(typeof indexEntry['input_salary'] === 'undefined' ? '' : indexEntry['input_salary'])+"' />";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		htmlHTML += "	<td class='data-pqpi maxWidth30'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 pqpi numberOnly' value='' />";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 pqpi numberOnly' value='"+(typeof indexEntry['input_pqpi'] === 'undefined' ? '' : indexEntry['input_pqpi'])+"' />";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
-		htmlHTML += "	<td class=\"data-percent-diff pos-column-rig maxWidth10\" data-value=\"0.00\"></td>";
+		htmlHTML += "	<td class=\"data-percent-diff pos-column-rig maxWidth10\" data-value=\""+indexEntry['percent_diff']+"\">"+(indexEntry['percent_diff']==0 ? '' : indexEntry['percent_diff'])+"</td>";
 		//end freeze
 		
 		htmlHTML += "	<td class='data-percent maxWidth30'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 percent numberOnly' now_salary='"+Math.round(indexEntry.total_now_salary)+"' value='100' />";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 percent numberOnly' now_salary='"+Math.round(indexEntry.total_now_salary)+"' value='"+(typeof indexEntry['input_percent'] === 'undefined' ? '100' : indexEntry['input_percent'])+"'/>";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		htmlHTML += "	<td class='data-score maxWidth30'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 score numberOnly' now_salary='"+Math.round(indexEntry.total_now_salary)+"' value='0.00' />";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 score numberOnly' now_salary='"+Math.round(indexEntry.total_now_salary)+"' value='"+(typeof indexEntry['input_score'] === 'undefined' ? '0.00' : indexEntry['input_score'])+"'/>";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		
@@ -747,7 +750,7 @@ var listDataFn = function(data) {
 		htmlHTML += "	<td class='pos-column-rig maxWidth30'>"+mpi_amount+"</td>";
 		htmlHTML += "	<td class='pos-column-rig maxWidth30'>"+pi_amount+"</td>";
 		htmlHTML += "	<td class='pos-column-rig maxWidth30'>"+var_other_amount+"</td>";
-		htmlHTML += "	<td class=\"data-new-total-salary pos-column-rig maxWidth30\"  data-value=\""+notNullFn(indexEntry.total_now_salary)+"\">"+total_now_salary+"</td>";
+		htmlHTML += "	<td class=\"data-new-total-salary pos-column-rig maxWidth30\"  data-value=\""+notNullFn((typeof indexEntry.input_total_new_salary === 'undefined' ? indexEntry.total_now_salary : indexEntry.input_total_new_salary))+"\">"+(typeof indexEntry.input_total_new_salary === 'undefined' ? total_now_salary : Comma(notNullFn(indexEntry.input_total_new_salary)))+"</td>";
 		htmlHTML += "	<td class=\"data-new-salary pos-column-rig maxWidth30\" data-value=\""+notNullFn(dataValueSalary)+"\">"+new_salary+"</td>";
 		htmlHTML += "	<td class=\"data-new-pqpi pos-column-rig maxWidth30\" data-value=\""+notNullFn(dataValuePQPIAmount)+"\">"+new_pqpi_amount+"</td>";
 		htmlHTML += "	<td class=\"data-new-fix-other pos-column-rig maxWidth30\" data-value=\""+notNullFn(indexEntry.fix_other_amount)+"\">"+fix_other_amount+"</td>";
@@ -1055,6 +1058,7 @@ var calculatePercentKeyup = function() {
 		let sumNewSalary = 0;
 		let sumNewPQPI = 0;
 		let sumMissOver = 0;
+		let sumCalStandard = 0;
 		
 		$.each($(".control-calculate").get(),function(index,indexEntry) {
 			if (typeof $(indexEntry).attr('data-dt-row') !== typeof undefined && $(indexEntry).attr('data-dt-row') !== false) {
@@ -1066,6 +1070,7 @@ var calculatePercentKeyup = function() {
 				sumBath += Number(removeComma($(indexEntry).find('.data-score').find('.score').val()));
 				sumTotalChangeSalary += Number(removeComma($(indexEntry).find('.data-up-total').attr('data-value')));
 				
+				sumCalStandard += Number(removeComma($(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find(".rowNum"+row_num).find('.data-calstandard').text()));
 				sumChangeSalary += Number(removeComma($(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find(".rowNum"+row_num).find('.data-salary').find('.salary').val()));
 				sumChangePQPI += Number(removeComma($(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find(".rowNum"+row_num).find('.data-pqpi').find('.pqpi').val()));
 				sumChangeDiff += Number(removeComma($(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find(".rowNum"+row_num).find('.data-percent-diff').attr('data-value')));
@@ -1077,6 +1082,7 @@ var calculatePercentKeyup = function() {
 			}
 		});
 
+		$(".ft-sum-cal-standard").attr('data-value', sumCalStandard);
 		$(".ft-sum-percent").attr('data-value', sumPercent);
 		$(".ft-sum-bath").attr('data-value', sumBath);
 		$(".ft-sum-change-total").attr('data-value', Math.round(sumTotalChangeSalary));
@@ -1091,6 +1097,7 @@ var calculatePercentKeyup = function() {
 		$(".dataTables_scrollFoot").find(".ft-sum-percent").text(Comma(sumPercent.toFixed(2)));
 		$(".dataTables_scrollFoot").find(".ft-sum-bath").text(Comma(sumBath.toFixed(2)));
 		
+		$(".DTFC_LeftFootWrapper").find(".ft-sum-cal-standard").text(Comma(Math.round(sumCalStandard)));
 		$(".DTFC_LeftFootWrapper").find(".ft-sum-change-total").text(Comma(Math.round(sumTotalChangeSalary)));
 		$(".DTFC_LeftFootWrapper").find(".ft-sum-change-salary").text(Comma(sumChangeSalary.toFixed(2)));
 		$(".DTFC_LeftFootWrapper").find(".ft-sum-change-pqpi").text(Comma(sumChangePQPI.toFixed(2)));
@@ -1123,7 +1130,7 @@ var calculatePercentKeyup = function() {
 	
 	$("#list_empjudege").find('.percent').keyup(function() {
 		var percent = $(this).autoNumeric('get');
-		
+		//console.log($(this).closest('.control-calculate').find('.data-score').find('.score').autoNumeric('get'), '1117')
 		//คำนวน % ของรายได้ปัจจุบัน Total ว่าเป็นกี่ Bath
 		var now_salary = Number($(this).attr("now_salary"));
 		var total = (percent/100)*now_salary;
@@ -1137,7 +1144,7 @@ var calculatePercentKeyup = function() {
 		//คำนวน Bath ของรายได้ปัจจุบัน Total ว่าเป็นกี่ %
 		var now_salary = Number($(this).attr("now_salary"));
 		var total = (now_salary == 0 ? 0 : (score*100)/now_salary);
-		console.log(score, now_salary, total, '1016');
+		//console.log(score, now_salary, total, '1016');
 		$(this).closest('.control-calculate').find('.data-percent').find('.percent').autoNumeric('set', total);
 		calculateSumtotalFooter();
 	});
@@ -1231,9 +1238,6 @@ var calculatePercentKeyup = function() {
 		var scoreCooOrBoard = Number($(this).autoNumeric('get'));
 		let indexArray = $(this).closest('.control-calculate').attr('rowNum');
 		$('.dataTables_scrollBody').find(".rowNum"+indexArray).find('.data-coo').find('.score_coo').attr('value', scoreCooOrBoard); //update score_coo value in main table
-		
-//		let objName = $(this).attr('obj-name');
-//		refreshDataSortFn(indexArray, objName, scoreCooOrBoard);
 
 		var arrayG = $(this).closest('.data-coo').attr('array-grade');
 		var ArrayScore = JSON.parse(arrayG);
@@ -1241,11 +1245,25 @@ var calculatePercentKeyup = function() {
 		var filterScore = ArrayScore.filter(function (el) {
 		    return scoreCooOrBoard >= el.begin_score && scoreCooOrBoard <= el.end_score;
 		});
-		
 		var grade = (filterScore.length==0 ? '' : filterScore[0]['grade']);
-		
 		$(this).closest('.control-calculate').find('.data-grade').text(grade);
 		$('.dataTables_scrollBody').find(".rowNum"+indexArray).find('.data-grade').text(grade); //update grade value in main table
+		
+		let cal_standard;
+		ArrayScore.filter(function (el) {
+			if(scoreCooOrBoard >= el.begin_score && scoreCooOrBoard <= el.end_score) {
+				if(el.raise_type==1) {
+					cal_standard =  Comma(Math.round(notNullFn(el.salary_raise_amount)));
+				} else {
+					let salary_raise_percent = Number(el.salary_raise_percent);
+					let salary = Number(document.querySelector('div.dataTables_scrollBody tr.rowNum'+indexArray+' td.data-current-salary').getAttribute('data-value'));
+					cal_standard = Comma(Math.round(notNullFn((salary_raise_percent*salary)/100)));
+				}
+			}
+		});
+		//console.log(cal_standard);
+		$(this).closest('.control-calculate').find('.data-calstandard').text(cal_standard);
+		document.querySelector('div.dataTables_scrollBody tr.rowNum'+indexArray+' td.data-calstandard').innerText = cal_standard; //update grade value in main table
 		
 		let score_coo = $(this).autoNumeric('get');
 		let total_point = $(this).closest('.control-calculate').attr('total_point');
@@ -1264,10 +1282,32 @@ var calculatePercentKeyup = function() {
 		$(".rowNum"+row_num).find('.data-var-percent').text(Comma(var_percent));
 		
 		$(this).closest('.data-coo').attr('data-sort', notNullFn(score_coo)); //add score_coo or score_board to attr
+		
+		calculateSumtotalFooter();
 	});
 	
-	/*
 	$(".refreshSoring").click(function() {
+		let refreshThis = $(this);
+		GlobalChangingSortingData['items'].map(function(item, index) {
+			item['grade'] = (typeof $('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-grade').html() === 'undefined' ? '' : $('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-grade').html().trim());
+			
+			if(refreshThis.attr('board-check')==1) {
+				item['score_board'] = parseInt($('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-coo').find('.score_coo').autoNumeric('get'));
+			} else {
+				item['score_coo'] = parseInt($('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-coo').find('.score_coo').autoNumeric('get'));
+			}
+			
+			item['input_salary'] = parseInt($('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-salary').find('.salary').autoNumeric('get'));
+			item['input_pqpi'] = parseInt($('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-pqpi').find('.pqpi').autoNumeric('get'));
+			item['percent_diff'] = (typeof $('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-percent-diff').html() === 'undefined' ? '' : $('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-percent-diff').html().trim());
+			item['input_percent'] = $('.dataTables_scroll').find('.rowNum'+index).find('.data-percent').find('.percent').autoNumeric('get');
+			item['input_score'] = parseInt($('.dataTables_scroll').find('.rowNum'+index).find('.data-score').find('.score').autoNumeric('get'));
+			item['input_total_new_salary'] = $('.dataTables_scroll').find('.rowNum'+index).find('.data-new-total-salary').attr('data-value');
+			return item;
+		});
+		
+		GlobalChangingSortingData['sum_total_now_salary'] = Number(document.querySelector("div.dataTables_scroll div.dataTables_scrollFoot td.ft-sum-new-total").getAttribute('data-value'));
+		
 		if($(this).attr('sort-type')=='asc') {
 			if($(this).attr('name-sort')=='score_coo' || $(this).attr('name-sort')=='score_coo2') {
 				GlobalChangingSortingData['items'].sort((a,b) => (a.score_coo > b.score_coo) ? 1 : ((b.score_coo > a.score_coo) ? -1 : 0)); 
@@ -1282,7 +1322,7 @@ var calculatePercentKeyup = function() {
 			} else if($(this).attr('name-sort')=='current_total') {
 				GlobalChangingSortingData['items'].sort((a,b) => (a.total_now_salary > b.total_now_salary) ? 1 : ((b.total_now_salary > a.total_now_salary) ? -1 : 0)); 
 			} else if($(this).attr('name-sort')=='new_total') {
-				GlobalChangingSortingData['items'].sort((a,b) => (a.total_now_salary > b.total_now_salary) ? 1 : ((b.total_now_salary > a.total_now_salary) ? -1 : 0)); 
+				GlobalChangingSortingData['items'].sort((a,b) => (a.input_total_new_salary > b.input_total_new_salary) ? 1 : ((b.input_total_new_salary > a.input_total_new_salary) ? -1 : 0)); 
 			} else if($(this).attr('name-sort')=='score_mgr') {
 				GlobalChangingSortingData['items'].sort((a,b) => (a.score_manager > b.score_manager) ? 1 : ((b.score_manager > a.score_manager) ? -1 : 0)); 
 			} else if($(this).attr('name-sort')=='score_bu') {
@@ -1302,7 +1342,7 @@ var calculatePercentKeyup = function() {
 			} else if($(this).attr('name-sort')=='current_total') {
 				GlobalChangingSortingData['items'].sort((a,b) => (a.total_now_salary < b.total_now_salary) ? 1 : ((b.total_now_salary < a.total_now_salary) ? -1 : 0)); 
 			} else if($(this).attr('name-sort')=='new_total') {//waiting fix
-				GlobalChangingSortingData['items'].sort((a,b) => (a.total_now_salary_new < b.total_now_salary_new) ? 1 : ((b.total_now_salary_new < a.total_now_salary_new) ? -1 : 0)); 
+				GlobalChangingSortingData['items'].sort((a,b) => (a.input_total_new_salary < b.input_total_new_salary) ? 1 : ((b.input_total_new_salary < a.input_total_new_salary) ? -1 : 0)); 
 			} else if($(this).attr('name-sort')=='score_mgr') {
 				GlobalChangingSortingData['items'].sort((a,b) => (a.score_manager < b.score_manager) ? 1 : ((b.score_manager < a.score_manager) ? -1 : 0)); 
 			} else if($(this).attr('name-sort')=='score_bu') {
@@ -1310,7 +1350,10 @@ var calculatePercentKeyup = function() {
 			}
 		}
 		
+		const positionBeforeRefresh = $(".dataTables_scrollBody").scrollLeft();
 		listDataFn(GlobalChangingSortingData);
+	    $(".dataTables_scrollBody").scrollLeft(positionBeforeRefresh);
+
 		if($(this).attr('sort-type')=='asc') {
 			$('.refreshSoring.column_score').attr('sort-type', 'desc');
 			$('.refreshSoring.column_z_score').attr('sort-type', 'desc');
@@ -1320,6 +1363,36 @@ var calculatePercentKeyup = function() {
 			$('.refreshSoring.column_new_total').attr('sort-type', 'desc');
 			$('.refreshSoring.column_score_mgr').attr('sort-type', 'desc');
 			$('.refreshSoring.column_score_bu').attr('sort-type', 'desc');
+			$('.refreshSoring.column_score_coo').attr('sort-type', 'desc');
+			
+			if($(this).attr('name-sort')=='score_coo' || $(this).attr('name-sort')=='score_board') {
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_score i').removeAttribute('class');
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_score i').setAttribute('class', 'fa fa-sort-desc')
+			} else if($(this).attr('name-sort')=='z_score') {
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_z_score i').removeAttribute('class');
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_z_score i').setAttribute('class', 'fa fa-sort-desc')
+			} else if($(this).attr('name-sort')=='grade') {
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_grade i').removeAttribute('class');
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_grade i').setAttribute('class', 'fa fa-sort-desc')
+			} else if($(this).attr('name-sort')=='score_diff') {
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_diff i').removeAttribute('class');
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_diff i').setAttribute('class', 'fa fa-sort-desc')
+			} else if($(this).attr('name-sort')=='current_total') {
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_current_total i').removeAttribute('class');
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_current_total i').setAttribute('class', 'fa fa-sort-desc')
+			} else if($(this).attr('name-sort')=='new_total') {
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_new_total i').removeAttribute('class');
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_new_total i').setAttribute('class', 'fa fa-sort-desc')
+			} else if($(this).attr('name-sort')=='score_mgr') {
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_mgr i').removeAttribute('class');
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_mgr i').setAttribute('class', 'fa fa-sort-desc')
+			} else if($(this).attr('name-sort')=='score_bu') {
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_bu i').removeAttribute('class');
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_bu i').setAttribute('class', 'fa fa-sort-desc')
+			} else if ($(this).attr('name-sort')=='score_coo2') {
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_coo i').removeAttribute('class');
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_coo i').setAttribute('class', 'fa fa-sort-desc')
+			}
 		} else {
 			$('.refreshSoring.column_score').attr('sort-type', 'asc');
 			$('.refreshSoring.column_z_score').attr('sort-type', 'asc');
@@ -1329,9 +1402,38 @@ var calculatePercentKeyup = function() {
 			$('.refreshSoring.column_new_total').attr('sort-type', 'asc');
 			$('.refreshSoring.column_score_mgr').attr('sort-type', 'asc');
 			$('.refreshSoring.column_score_bu').attr('sort-type', 'asc');
+			$('.refreshSoring.column_score_coo').attr('sort-type', 'asc');
+			
+			if($(this).attr('name-sort')=='score_coo' || $(this).attr('name-sort')=='score_board') {
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_score i').removeAttribute('class');
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_score i').setAttribute('class', 'fa fa-sort-asc');
+			} else if($(this).attr('name-sort')=='z_score') {
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_z_score i').removeAttribute('class');
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_z_score i').setAttribute('class', 'fa fa-sort-asc');
+			} else if($(this).attr('name-sort')=='grade') {
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_grade i').removeAttribute('class');
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_grade i').setAttribute('class', 'fa fa-sort-asc');
+			} else if($(this).attr('name-sort')=='score_diff') {
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_diff i').removeAttribute('class');
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_diff i').setAttribute('class', 'fa fa-sort-asc');
+			} else if($(this).attr('name-sort')=='current_total') {
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_current_total i').removeAttribute('class');
+				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_current_total i').setAttribute('class', 'fa fa-sort-asc');
+			} else if($(this).attr('name-sort')=='new_total') {
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_new_total i').removeAttribute('class');
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_new_total i').setAttribute('class', 'fa fa-sort-asc');
+			} else if($(this).attr('name-sort')=='score_mgr') {
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_mgr i').removeAttribute('class');
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_mgr i').setAttribute('class', 'fa fa-sort-asc');
+			} else if($(this).attr('name-sort')=='score_bu') {
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_bu i').removeAttribute('class');
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_bu i').setAttribute('class', 'fa fa-sort-asc');
+			} else if ($(this).attr('name-sort')=='score_coo2') {
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_coo i').removeAttribute('class');
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_coo i').setAttribute('class', 'fa fa-sort-asc')
+			}
 		}
 	});
-	*/
 }
 
 var updateFn = function(cal) {
@@ -1356,7 +1458,7 @@ var updateFn = function(cal) {
 		}
 	});
 	
-	console.log(detail, cal);
+	//console.log(detail, cal);
 	
 	if(detail.length==0) {
 		callFlashSlide("Please Select Employee");
