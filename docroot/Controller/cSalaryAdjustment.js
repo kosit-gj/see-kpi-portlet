@@ -445,7 +445,7 @@ var listDataFn = function(data) {
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">"+$(".lt-organization").val()+"</th>";
 
 	htmlHeader1+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_z_score\" sort-type='asc' name-sort='z_score'>Z-Score<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
-	htmlHeader1+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_score\" sort-type='asc' board-check='"+(data==undefined || data['is_board']==1 ? '1' : '0')+"' name-sort='"+(data==undefined || data['is_board']==1 ? 'score_board' : 'score_coo')+"'>"+(data==undefined || data['is_board']==1 ? 'คะแนนประเมิน Board.' : 'คะแนนประเมิน COO.')+"<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
+	htmlHeader1+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_score\" sort-type='asc' name-sort='score_last'>"+(data==undefined || data['is_board']==1 ? 'คะแนนประเมิน Board.' : 'คะแนนประเมิน COO.')+"<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
 	htmlHeader1+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_grade\" sort-type='asc' name-sort='grade'>เกรด<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
 
 	htmlHeader1+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">Cal Standard</th>";
@@ -464,9 +464,10 @@ var listDataFn = function(data) {
 
 	htmlHeader3+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_score_mgr\" sort-type='asc' name-sort='score_mgr'>คะแนนประเมิน Mgr.<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
 	htmlHeader3+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_score_bu\" sort-type='asc' name-sort='score_bu'>คะแนนประเมิน BU.<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
+	htmlHeader3+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_score_coo\" sort-type='asc' name-sort='score_coo'>คะแนนประเมิน COO.<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
 	
 	if(data==undefined || data['is_board']==1) {
-		htmlHeader3+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_score_coo\" sort-type='asc' name-sort='score_coo2'>คะแนนประเมิน COO.<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
+		htmlHeader3+="<th rowspan=\"3\" style='cursor: pointer;' class=\"fix-column-top refreshSoring column_score_board\" sort-type='asc' name-sort='score_board'>คะแนนประเมิน Board.<br/><i class='fa fa-sort' aria-hidden='true'></i></th>";
 	}
 	
 	htmlHeader3+="<th rowspan=\"3\" class=\"fix-column-top no-sort\">คะแนนเต็มตีค่างาน (ความรู้)</th>";
@@ -601,6 +602,7 @@ var listDataFn = function(data) {
 	
 	htmlHTMLFooter3 += "<td></td>";
 	htmlHTMLFooter3 += "<td></td>";
+	htmlHTMLFooter3 += "<td></td>";
 	
 	if(data['is_board']==1) {
 		htmlHTMLFooter3 += "<td></td>";
@@ -628,7 +630,7 @@ var listDataFn = function(data) {
 			  return el.structure_id == structureIdToCal;
 		});
 		
-		var cal1 = Number(indexEntry.total_point) * Number(indexEntry.score_coo);
+		var cal1 = Number(indexEntry.total_point) * Number(indexEntry.score_last);
 		let cal2 = cal1 / 100;
 		let cal3 = cal2 * Number(indexEntry.baht_per_point);
 		
@@ -671,7 +673,7 @@ var listDataFn = function(data) {
 		let miss_over = Comma(roundThen(notNullFn(cal_miss_over), -2));
 		//console.log(miss_over, 'miss')
 		
-		var score_cal = (data['is_board']==1 ? score_board : score_coo);
+		var score_cal = Number(indexEntry.score_last);
 		let cal_standard;
 		indexEntry['cal_grade'].filter(function (el) {
 			if(score_cal >= el.begin_score && score_cal <= el.end_score) {
@@ -696,7 +698,7 @@ var listDataFn = function(data) {
 		htmlHTML += "	<td class='pos-column-cen'>"+indexEntry.z_score.toFixed(2)+"</td>";
 		htmlHTML += "	<td class='data-coo' array-grade='"+JSON.stringify(indexEntry['cal_grade'])+"'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 score_coo numberOnlyCoo' value='"+(data['is_board']==1 ? score_board : score_coo)+"'/>";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 score_last numberOnlyCoo' value='"+indexEntry.score_last+"'/>";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		
@@ -766,9 +768,10 @@ var listDataFn = function(data) {
 		
 		htmlHTML += "	<td class='pos-column-rig'>"+score_manager+"</td>";
 		htmlHTML += "	<td class='pos-column-rig'>"+score_bu+"</td>";
+		htmlHTML += "	<td class='pos-column-rig'>"+score_coo+"</td>";
 		
 		if(data['is_board']==1) {
-			htmlHTML += "	<td class='pos-column-rig'>"+score_coo+"</td>";
+			htmlHTML += "	<td class='pos-column-rig'>"+score_board+"</td>";
 		}
 		
 		if(indexEntry['is_job_evaluation']==1) {
@@ -872,19 +875,21 @@ var createDatatable = function(table, countStruc, isBoard) {
 	    	{ "width": "40px", "targets": [31+countStruc] }, //คะแนนประเมิน Mgr.
 	    	{ "width": "40px", "targets": [32+countStruc] }, //คะแนนประเมิน Bu
 	    	{ "width": "40px", "targets": [33+countStruc] }, //คะแนนประเมิน Coo
-	    	{ "width": "40px", "targets": [34+countStruc]}, //คะแนนเต็มตีค่างาน (ความรู้)
-	    	{ "width": "40px", "targets": [35+countStruc] }, //คะแนนเต็มตีค่างาน (ศักยภาพ)
-	    	{ "width": "30px", "targets": [36+countStruc] }, //Total Point
-	    	{ "width": "30px", "targets": [37+countStruc] }, //Baht/Point
+	    	{ "width": "40px", "targets": [34+countStruc] }, //คะแนนประเมิน Board
+	    	{ "width": "40px", "targets": [35+countStruc]}, //คะแนนเต็มตีค่างาน (ความรู้)
+	    	{ "width": "40px", "targets": [36+countStruc] }, //คะแนนเต็มตีค่างาน (ศักยภาพ)
+	    	{ "width": "30px", "targets": [37+countStruc] }, //Total Point
+	    	{ "width": "30px", "targets": [38+countStruc] }, //Baht/Point
 	    ];
 	} else {
 		var columnSettingLast = [
 	    	{ "width": "40px", "targets": [31+countStruc] }, //คะแนนประเมิน Mgr.
 	    	{ "width": "40px", "targets": [32+countStruc] }, //คะแนนประเมิน Bu
-	    	{ "width": "40px", "targets": [33+countStruc] }, //คะแนนเต็มตีค่างาน (ความรู้)
-	    	{ "width": "40px", "targets": [34+countStruc] }, //คะแนนเต็มตีค่างาน (ศักยภาพ)
-	    	{ "width": "30px", "targets": [35+countStruc] }, //Total Point
-	    	{ "width": "30px", "targets": [36+countStruc] }, //Baht/Point
+	    	{ "width": "40px", "targets": [33+countStruc] }, //คะแนนประเมิน Coo
+	    	{ "width": "40px", "targets": [34+countStruc] }, //คะแนนเต็มตีค่างาน (ความรู้)
+	    	{ "width": "40px", "targets": [35+countStruc] }, //คะแนนเต็มตีค่างาน (ศักยภาพ)
+	    	{ "width": "30px", "targets": [36+countStruc] }, //Total Point
+	    	{ "width": "30px", "targets": [37+countStruc] }, //Baht/Point
 	    ];
 	}
 	
@@ -1236,10 +1241,10 @@ var calculatePercentKeyup = function() {
 		calculateSumtotalFooter();
 	});
 	
-	$(".score_coo").keyup(function() {
+	$(".score_last").keyup(function() {
 		var scoreCooOrBoard = Number($(this).autoNumeric('get'));
 		let indexArray = $(this).closest('.control-calculate').attr('rowNum');
-		$('.dataTables_scrollBody').find(".rowNum"+indexArray).find('.data-coo').find('.score_coo').attr('value', scoreCooOrBoard); //update score_coo value in main table
+		$('.dataTables_scrollBody').find(".rowNum"+indexArray).find('.data-coo').find('.score_last').attr('value', scoreCooOrBoard); //update score_last value in main table
 
 		var arrayG = $(this).closest('.data-coo').attr('array-grade');
 		var ArrayScore = JSON.parse(arrayG);
@@ -1265,13 +1270,13 @@ var calculatePercentKeyup = function() {
 		});
 		//console.log(cal_standard);
 		$(this).closest('.control-calculate').find('.data-calstandard').text(cal_standard);
-		document.querySelector('div.dataTables_scrollBody tr.rowNum'+indexArray+' td.data-calstandard').innerText = cal_standard; //update grade value in main table
+		const calStandard = document.querySelector('div.dataTables_scrollBody tr.rowNum'+indexArray+' td.data-calstandard');
+		(calStandard ? calStandard.innerText = cal_standard : ''); //update grade value in main table
 		
-		let score_coo = $(this).autoNumeric('get');
 		let total_point = $(this).closest('.control-calculate').attr('total_point');
 		let bath_point = $(this).closest('.control-calculate').attr('bath_point');
-		
-		let cal1 = Number(total_point) * Number(score_coo);
+		//console.log(scoreCooOrBoard, '1277')
+		let cal1 = Number(total_point) * Number(scoreCooOrBoard);
 		let cal2 = cal1 / 100;
 		let cal3 = cal2 * Number(bath_point);
 		let total_percent = Comma(roundThen(notNullFn(isNaN((cal3 * 90)/100) ? 0 : (cal3 * 90)/100 ), -2));
@@ -1283,7 +1288,7 @@ var calculatePercentKeyup = function() {
 		$(".rowNum"+row_num).find('.data-fix-percent').text(Comma(fix_percent));
 		$(".rowNum"+row_num).find('.data-var-percent').text(Comma(var_percent));
 		
-		$(this).closest('.data-coo').attr('data-sort', notNullFn(score_coo)); //add score_coo or score_board to attr
+		$(this).closest('.data-coo').attr('data-sort', notNullFn(scoreCooOrBoard)); //add score last to attr
 		
 		calculateSumtotalFooter();
 	});
@@ -1292,13 +1297,7 @@ var calculatePercentKeyup = function() {
 		let refreshThis = $(this);
 		GlobalChangingSortingData['items'].map(function(item, index) {
 			item['grade'] = (typeof $('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-grade').html() === 'undefined' ? '' : $('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-grade').html().trim());
-			
-			if(refreshThis.attr('board-check')==1) {
-				item['score_board'] = parseInt($('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-coo').find('.score_coo').autoNumeric('get'));
-			} else {
-				item['score_coo'] = parseInt($('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-coo').find('.score_coo').autoNumeric('get'));
-			}
-			
+			item['score_last'] = parseInt($('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-coo').find('.score_last').autoNumeric('get'));
 			item['input_salary'] = parseInt($('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-salary').find('.salary').autoNumeric('get'));
 			item['input_pqpi'] = parseInt($('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-pqpi').find('.pqpi').autoNumeric('get'));
 			item['percent_diff'] = (typeof $('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-percent-diff').html() === 'undefined' ? '' : $('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-percent-diff').html().trim());
@@ -1311,8 +1310,8 @@ var calculatePercentKeyup = function() {
 		GlobalChangingSortingData['sum_total_now_salary'] = Number(document.querySelector("div.dataTables_scroll div.dataTables_scrollFoot td.ft-sum-new-total").getAttribute('data-value'));
 		
 		if($(this).attr('sort-type')=='asc') {
-			if($(this).attr('name-sort')=='score_coo' || $(this).attr('name-sort')=='score_coo2') {
-				GlobalChangingSortingData['items'].sort((a,b) => (a.score_coo > b.score_coo) ? 1 : ((b.score_coo > a.score_coo) ? -1 : 0)); 
+			if($(this).attr('name-sort')=='score_last') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.score_last > b.score_last) ? 1 : ((b.score_last > a.score_last) ? -1 : 0)); 
 			} else if($(this).attr('name-sort')=='score_board') {
 				GlobalChangingSortingData['items'].sort((a,b) => (a.score_board > b.score_board) ? 1 : ((b.score_board > a.score_board) ? -1 : 0)); 
 			} else if($(this).attr('name-sort')=='z_score') {
@@ -1329,10 +1328,12 @@ var calculatePercentKeyup = function() {
 				GlobalChangingSortingData['items'].sort((a,b) => (a.score_manager > b.score_manager) ? 1 : ((b.score_manager > a.score_manager) ? -1 : 0)); 
 			} else if($(this).attr('name-sort')=='score_bu') {
 				GlobalChangingSortingData['items'].sort((a,b) => (a.score_bu > b.score_bu) ? 1 : ((b.score_bu > a.score_bu) ? -1 : 0)); 
+			} else if($(this).attr('name-sort')=='score_coo') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.score_coo > b.score_coo) ? 1 : ((b.score_coo > a.score_coo) ? -1 : 0)); 
 			}
 		} else {
-			if($(this).attr('name-sort')=='score_coo' || $(this).attr('name-sort')=='score_coo2') {
-				GlobalChangingSortingData['items'].sort((a,b) => (a.score_coo < b.score_coo) ? 1 : ((b.score_coo < a.score_coo) ? -1 : 0)); 
+			if($(this).attr('name-sort')=='score_last') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.score_last < b.score_last) ? 1 : ((b.score_last < a.score_last) ? -1 : 0)); 
 			} else if($(this).attr('name-sort')=='score_board') {
 				GlobalChangingSortingData['items'].sort((a,b) => (a.score_board < b.score_board) ? 1 : ((b.score_board < a.score_board) ? -1 : 0)); 
 			} else if($(this).attr('name-sort')=='z_score') {
@@ -1349,6 +1350,8 @@ var calculatePercentKeyup = function() {
 				GlobalChangingSortingData['items'].sort((a,b) => (a.score_manager < b.score_manager) ? 1 : ((b.score_manager < a.score_manager) ? -1 : 0)); 
 			} else if($(this).attr('name-sort')=='score_bu') {
 				GlobalChangingSortingData['items'].sort((a,b) => (a.score_bu < b.score_bu) ? 1 : ((b.score_bu < a.score_bu) ? -1 : 0)); 
+			} else if($(this).attr('name-sort')=='score_coo') {
+				GlobalChangingSortingData['items'].sort((a,b) => (a.score_coo < b.score_coo) ? 1 : ((b.score_coo < a.score_coo) ? -1 : 0)); 
 			}
 		}
 		
@@ -1366,10 +1369,14 @@ var calculatePercentKeyup = function() {
 			$('.refreshSoring.column_score_mgr').attr('sort-type', 'desc');
 			$('.refreshSoring.column_score_bu').attr('sort-type', 'desc');
 			$('.refreshSoring.column_score_coo').attr('sort-type', 'desc');
+			$('.refreshSoring.column_score_board').attr('sort-type', 'desc');
 			
-			if($(this).attr('name-sort')=='score_coo' || $(this).attr('name-sort')=='score_board') {
+			if($(this).attr('name-sort')=='score_last') {
 				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_score i').removeAttribute('class');
 				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_score i').setAttribute('class', 'fa fa-sort-desc')
+			} else if($(this).attr('name-sort')=='score_board') {
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_board i').removeAttribute('class');
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_board i').setAttribute('class', 'fa fa-sort-desc')
 			} else if($(this).attr('name-sort')=='z_score') {
 				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_z_score i').removeAttribute('class');
 				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_z_score i').setAttribute('class', 'fa fa-sort-desc')
@@ -1391,7 +1398,7 @@ var calculatePercentKeyup = function() {
 			} else if($(this).attr('name-sort')=='score_bu') {
 				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_bu i').removeAttribute('class');
 				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_bu i').setAttribute('class', 'fa fa-sort-desc')
-			} else if ($(this).attr('name-sort')=='score_coo2') {
+			} else if ($(this).attr('name-sort')=='score_coo') {
 				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_coo i').removeAttribute('class');
 				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_coo i').setAttribute('class', 'fa fa-sort-desc')
 			}
@@ -1405,10 +1412,14 @@ var calculatePercentKeyup = function() {
 			$('.refreshSoring.column_score_mgr').attr('sort-type', 'asc');
 			$('.refreshSoring.column_score_bu').attr('sort-type', 'asc');
 			$('.refreshSoring.column_score_coo').attr('sort-type', 'asc');
+			$('.refreshSoring.column_score_board').attr('sort-type', 'asc');
 			
-			if($(this).attr('name-sort')=='score_coo' || $(this).attr('name-sort')=='score_board') {
+			if($(this).attr('name-sort')=='score_last') {
 				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_score i').removeAttribute('class');
 				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_score i').setAttribute('class', 'fa fa-sort-asc');
+			} else if($(this).attr('name-sort')=='score_board') {
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_board i').removeAttribute('class');
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_board i').setAttribute('class', 'fa fa-sort-asc');
 			} else if($(this).attr('name-sort')=='z_score') {
 				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_z_score i').removeAttribute('class');
 				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_z_score i').setAttribute('class', 'fa fa-sort-asc');
@@ -1430,7 +1441,7 @@ var calculatePercentKeyup = function() {
 			} else if($(this).attr('name-sort')=='score_bu') {
 				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_bu i').removeAttribute('class');
 				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_bu i').setAttribute('class', 'fa fa-sort-asc');
-			} else if ($(this).attr('name-sort')=='score_coo2') {
+			} else if ($(this).attr('name-sort')=='score_coo') {
 				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_coo i').removeAttribute('class');
 				document.querySelector('div.dataTables_scroll th.refreshSoring.column_score_coo i').setAttribute('class', 'fa fa-sort-asc')
 			}
@@ -1454,7 +1465,7 @@ var updateFn = function(cal) {
 					salary				: $(indexEntry).find('.data-salary').find('.salary').autoNumeric('get'),
 					pqpi				: $(indexEntry).find('.data-pqpi').find('.pqpi').autoNumeric('get'),
 					grade				: $(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find('.rowNum'+row_num).find('.data-grade').text().trim(),
-					score_adjust		: $(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find('.rowNum'+row_num).find('.score_coo').autoNumeric('get')
+					score_adjust		: $(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find('.rowNum'+row_num).find('.score_last').autoNumeric('get')
 				});
 			}
 		}
