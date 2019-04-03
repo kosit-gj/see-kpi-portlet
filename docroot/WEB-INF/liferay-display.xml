@@ -57,5 +57,6 @@
 		<portlet id="report-assignment"></portlet>
 		<portlet id="job-log"></portlet>
 		<portlet id="report-summary-grade"></portlet>
+		<portlet id="summary-performance-appraisal"></portlet>
 	</category>
 </display>
