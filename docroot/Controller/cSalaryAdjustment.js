@@ -316,11 +316,11 @@ var searchAdvanceFn = function () {
     $("#embedParamSearch").append(embedParam);
     
     to_action();
-    getDataFn(pageNumberDefault,$("#rpp").val());
+    getDataFn();
 };
 
 //Get Data
-var getDataFn = function (page, rpp) {
+var getDataFn = function () {
     var position_id = [];
     var form_id = [];
     
@@ -356,8 +356,8 @@ var getDataFn = function (page, rpp) {
         async: true,
         headers: { Authorization: "Bearer " + tokenID.token },
         data: {
-            "page": page,
-            "rpp": rpp,
+//            "page": page,
+//            "rpp": rpp,
             "emp_level": level_id_emp,
             "org_level": level_id_org,
             "period_id": period_id,
@@ -393,7 +393,7 @@ var to_action = function () {
         success: function (data) {
         	var htmlOption="";
         	if(data.length!==0) {
-            	htmlOption += "<option value='999'>Save</option>"; //999 is not update stage
+            	//htmlOption += "<option value='999'>Save</option>"; //999 is not update stage
                 $.each(data, function (index, indexEntry) {
                 	htmlOption += "<option value='" + indexEntry['stage_id'] + "'>" + indexEntry['to_action'] + "</option>";
                 });
@@ -702,6 +702,8 @@ var listDataFn = function(data) {
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		
+		console.log(indexEntry.score_last);
+		
 		if(indexEntry['is_job_evaluation']==1) {
 			htmlHTML += "	<td class='pos-column-cen'></td>";
 			htmlHTML += "	<td class='pos-column-rig'></td>";
@@ -905,8 +907,7 @@ var createDatatable = function(table, countStruc, isBoard) {
 	    scrollCollapse: true,
 	    paging: false,
 	    fixedColumns: {
-	    	leftColumns: 12,
-	    	heightMatch: 'auto'
+	    	leftColumns: 12
 	    },
 //	    drawCallback: function() {
 //	        $('#tableBonusAdjustment1 tbody tr').each(function(i, tr) {
@@ -946,7 +947,7 @@ var createDatatable = function(table, countStruc, isBoard) {
 	
 	$(".numberOnlyCoo").autoNumeric('update', {
 		vMin : '0',
-		vMax : '999',
+		vMax : '999.99',
 		lZero: 'deny',
 		wEmpty: 'zero',
 		//aSign : ' %',
@@ -1460,10 +1461,10 @@ var updateFn = function(cal) {
 			if($(indexEntry).find('.data-check').find('.select-check').attr('select-check')==1) {
 				let row_num = $(indexEntry).closest('.control-calculate').attr('rowNum');
 				detail.push({
-					emp_result_id		: $(indexEntry).find('.data-main').attr('emp_result_id'),
-					emp_id				: $(indexEntry).find('.data-main').attr('emp_id'),
-					salary				: $(indexEntry).find('.data-salary').find('.salary').autoNumeric('get'),
-					pqpi				: $(indexEntry).find('.data-pqpi').find('.pqpi').autoNumeric('get'),
+					emp_result_id		: $(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find('.rowNum'+row_num).find('.data-main').attr('emp_result_id'),
+					emp_id				: $(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find('.rowNum'+row_num).find('.data-main').attr('emp_id'),
+					salary				: $(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find('.rowNum'+row_num).find('.data-salary').find('.salary').autoNumeric('get'),
+					pqpi				: $(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find('.rowNum'+row_num).find('.data-pqpi').find('.pqpi').autoNumeric('get'),
 					grade				: $(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find('.rowNum'+row_num).find('.data-grade').text().trim(),
 					score_adjust		: $(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find('.rowNum'+row_num).find('.score_last').autoNumeric('get')
 				});
@@ -1471,7 +1472,8 @@ var updateFn = function(cal) {
 		}
 	});
 	
-	//console.log(detail, cal);
+//	console.log(detail, cal);
+//	return;
 	
 	if(detail.length==0) {
 		callFlashSlide("Please Select Employee");
@@ -1494,7 +1496,7 @@ var updateFn = function(cal) {
         		appraisalStatusFn();
         		callFlashSlide($(".lt-update-successfully").val());
         		clearFn();
-        		$("#btnSearchAdvance").click();
+        		getDataFn();
         	} else if(resData.status == 400) {
         		validationFn(resData.data);
         	}
