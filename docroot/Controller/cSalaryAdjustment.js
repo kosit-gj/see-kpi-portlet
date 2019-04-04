@@ -730,7 +730,7 @@ var listDataFn = function(data) {
 		
 		htmlHTML += "	<td class='data-percent maxWidth30'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 percent numberOnly' now_salary='"+Math.round(indexEntry.total_now_salary)+"' value='"+(typeof indexEntry['input_percent'] === 'undefined' ? '100' : indexEntry['input_percent'])+"'/>";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 percent numberOnly' now_salary='"+Math.round(indexEntry.total_now_salary)+"' value='"+(typeof indexEntry['input_percent'] === 'undefined' ? '' : indexEntry['input_percent'])+"'/>";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		htmlHTML += "	<td class='data-score maxWidth30'>";
