@@ -702,7 +702,7 @@ var listDataFn = function(data) {
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		
-		console.log(indexEntry.score_last);
+		//console.log(indexEntry.score_last);
 		
 		if(indexEntry['is_job_evaluation']==1) {
 			htmlHTML += "	<td class='pos-column-cen'></td>";
@@ -717,12 +717,12 @@ var listDataFn = function(data) {
 		htmlHTML += "	<td class='data-up-total pos-column-rig maxWidth30' data-value=\""+Math.round(indexEntry.cal_standard)+"\">"+cal_standard+"</td>";
 		htmlHTML += "	<td class='data-salary changesal2 maxWidth30' data-sort='"+Math.random()+"'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 salary numberOnly' value='"+(typeof indexEntry['input_salary'] === 'undefined' ? '' : indexEntry['input_salary'])+"' />";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width:40px;' class='form-control input-xs span12 salary numberOnly' value='"+(typeof indexEntry['input_salary'] === 'undefined' ? (indexEntry.adjust_raise_s_amount==0 ? '' : indexEntry.adjust_raise_s_amount) : indexEntry['input_salary'])+"' />";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		htmlHTML += "	<td class='data-pqpi maxWidth30'>";
 		htmlHTML += "		<div class='float-label-control'>";
-		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 pqpi numberOnly' value='"+(typeof indexEntry['input_pqpi'] === 'undefined' ? '' : indexEntry['input_pqpi'])+"' />";
+		htmlHTML += "			<input type='text' style='text-align:right; min-width: 40px;' class='form-control input-xs span12 pqpi numberOnlyPQPI' value='"+(typeof indexEntry['input_pqpi'] === 'undefined' ? (indexEntry.adjust_raise_pqpi_amount==0 ? '' : indexEntry.adjust_raise_pqpi_amount) : indexEntry['input_pqpi'])+"' />";
 		htmlHTML += "		</div>";
 		htmlHTML += "	</td>";
 		htmlHTML += "	<td class=\"data-percent-diff pos-column-rig maxWidth10\" data-value=\""+indexEntry['percent_diff']+"\">"+(indexEntry['percent_diff']==0 ? '' : indexEntry['percent_diff'])+"</td>";
@@ -935,10 +935,19 @@ var createDatatable = function(table, countStruc, isBoard) {
 	}); // เซ็ตการค้นหาในคอลั่มแรก
 	*/
 	
-	$(".numberOnly,.numberOnlyCoo").autoNumeric('init');
+	$(".numberOnly,.numberOnlyCoo,.numberOnlyPQPI").autoNumeric('init');
 	$(".numberOnly").autoNumeric('update', {
 		vMin : '0',
-		vMax : '99999999',
+		vMax : '999999',
+		lZero: 'deny',
+		wEmpty: 'zero',
+		//aSign : ' %',
+		//pSign : 's'
+	});
+	
+	$(".numberOnlyPQPI").autoNumeric('update', {
+		vMin : '-99999',
+		vMax : '99999',
 		lZero: 'deny',
 		wEmpty: 'zero',
 		//aSign : ' %',
@@ -1388,8 +1397,8 @@ var calculatePercentKeyup = function() {
 				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_diff i').removeAttribute('class');
 				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_diff i').setAttribute('class', 'fa fa-sort-desc')
 			} else if($(this).attr('name-sort')=='current_total') {
-				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_current_total i').removeAttribute('class');
-				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_current_total i').setAttribute('class', 'fa fa-sort-desc')
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_current_total i').removeAttribute('class');
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_current_total i').setAttribute('class', 'fa fa-sort-desc')
 			} else if($(this).attr('name-sort')=='new_total') {
 				document.querySelector('div.dataTables_scroll th.refreshSoring.column_new_total i').removeAttribute('class');
 				document.querySelector('div.dataTables_scroll th.refreshSoring.column_new_total i').setAttribute('class', 'fa fa-sort-desc')
@@ -1431,8 +1440,8 @@ var calculatePercentKeyup = function() {
 				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_diff i').removeAttribute('class');
 				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_diff i').setAttribute('class', 'fa fa-sort-asc');
 			} else if($(this).attr('name-sort')=='current_total') {
-				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_current_total i').removeAttribute('class');
-				document.querySelector('div.DTFC_LeftHeadWrapper th.refreshSoring.column_current_total i').setAttribute('class', 'fa fa-sort-asc');
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_current_total i').removeAttribute('class');
+				document.querySelector('div.dataTables_scroll th.refreshSoring.column_current_total i').setAttribute('class', 'fa fa-sort-asc');
 			} else if($(this).attr('name-sort')=='new_total') {
 				document.querySelector('div.dataTables_scroll th.refreshSoring.column_new_total i').removeAttribute('class');
 				document.querySelector('div.dataTables_scroll th.refreshSoring.column_new_total i').setAttribute('class', 'fa fa-sort-asc');
