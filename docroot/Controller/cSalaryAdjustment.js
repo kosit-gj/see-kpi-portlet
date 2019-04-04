@@ -796,6 +796,7 @@ var listDataFn = function(data) {
 	calculatePercentKeyup(); //เซ็ตค่าการกดคำนวนต่างๆ
 	//filterGroup(data['items']); //generate filter group
 	setPermission(data); //set สิทการจัดการข้อมูล
+	calculateSumtotalFooter(); //sum footer
 	
 	$(".head_adjust").show();
 };
@@ -815,8 +816,8 @@ var setPermission = function(data) {
 		$("#btnSubmit").attr("disabled", false);
 	}
 	
-	$("#list_empjudege").find('.percent').keyup();
-	$("#list_empjudege").find('.salary').keyup();
+//	$("#list_empjudege").find('.percent').keyup();
+//	$("#list_empjudege").find('.salary').keyup();
 	
 	if($("#actionToAssign").val()==null || $("#actionToAssign").val()==undefined) {
 		$("#btnSubmit").attr("disabled", true);
@@ -1062,89 +1063,88 @@ var filterGroup = function(data) {
 }
 */
 
-var calculatePercentKeyup = function() {
+function calculateSumtotalFooter() {
+	let sumPercent = 0;
+	let sumBath = 0;
+	let sumTotalChangeSalary = 0;
+	let sumChangeSalary = 0;
+	let sumChangePQPI = 0;
+	let sumChangeDiff = 0;
+	let sumTotalNewSalary = 0;
+	let sumNewSalary = 0;
+	let sumNewPQPI = 0;
+	let sumMissOver = 0;
+	let sumCalStandard = 0;
 	
-	function calculateSumtotalFooter() {
-		let sumPercent = 0;
-		let sumBath = 0;
-		let sumTotalChangeSalary = 0;
-		let sumChangeSalary = 0;
-		let sumChangePQPI = 0;
-		let sumChangeDiff = 0;
-		let sumTotalNewSalary = 0;
-		let sumNewSalary = 0;
-		let sumNewPQPI = 0;
-		let sumMissOver = 0;
-		let sumCalStandard = 0;
-		
-		$.each($(".control-calculate").get(),function(index,indexEntry) {
-			if (typeof $(indexEntry).attr('data-dt-row') !== typeof undefined && $(indexEntry).attr('data-dt-row') !== false) {
-				//เป็นคลาสของ datatables ซึ่งจะไม่เอาข้อมูลในส่วนนี้
-			} else {
-				let row_num = $(indexEntry).closest('.control-calculate').attr('rowNum');
-				
-				sumPercent += Number(removeComma($(indexEntry).find('.data-percent').find('.percent').val()));
-				sumBath += Number(removeComma($(indexEntry).find('.data-score').find('.score').val()));
-				sumTotalChangeSalary += Number(removeComma($(indexEntry).find('.data-up-total').attr('data-value')));
-				
-				sumCalStandard += Number(removeComma($(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find(".rowNum"+row_num).find('.data-calstandard').text()));
-				sumChangeSalary += Number(removeComma($(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find(".rowNum"+row_num).find('.data-salary').find('.salary').val()));
-				sumChangePQPI += Number(removeComma($(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find(".rowNum"+row_num).find('.data-pqpi').find('.pqpi').val()));
-				sumChangeDiff += Number(removeComma($(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find(".rowNum"+row_num).find('.data-percent-diff').attr('data-value')));
-				
-				sumTotalNewSalary += Number(removeComma($(indexEntry).find('.data-new-total-salary').attr('data-value')));
-				sumNewSalary += Number(removeComma($(indexEntry).find('.data-new-salary').attr('data-value')));
-				sumNewPQPI += Number(removeComma($(indexEntry).find('.data-new-pqpi').attr('data-value')));
-				sumMissOver += Number(removeComma($(indexEntry).find('.data-miss-over').attr('data-value')));
-			}
-		});
+	$.each($(".control-calculate").get(),function(index,indexEntry) {
+		if (typeof $(indexEntry).attr('data-dt-row') !== typeof undefined && $(indexEntry).attr('data-dt-row') !== false) {
+			//เป็นคลาสของ datatables ซึ่งจะไม่เอาข้อมูลในส่วนนี้
+		} else {
+			let row_num = $(indexEntry).closest('.control-calculate').attr('rowNum');
+			
+			sumPercent += Number(removeComma($(indexEntry).find('.data-percent').find('.percent').val()));
+			sumBath += Number(removeComma($(indexEntry).find('.data-score').find('.score').val()));
+			sumTotalChangeSalary += Number(removeComma($(indexEntry).find('.data-up-total').attr('data-value')));
+			
+			sumCalStandard += Number(removeComma($(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find(".rowNum"+row_num).find('.data-calstandard').text()));
+			sumChangeSalary += Number(removeComma($(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find(".rowNum"+row_num).find('.data-salary').find('.salary').val()));
+			sumChangePQPI += Number(removeComma($(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find(".rowNum"+row_num).find('.data-pqpi').find('.pqpi').val()));
+			sumChangeDiff += Number(removeComma($(indexEntry).closest('.dataTables_scroll').next().find('.DTFC_LeftBodyWrapper').find(".rowNum"+row_num).find('.data-percent-diff').attr('data-value')));
+			
+			sumTotalNewSalary += Number(removeComma($(indexEntry).find('.data-new-total-salary').attr('data-value')));
+			sumNewSalary += Number(removeComma($(indexEntry).find('.data-new-salary').attr('data-value')));
+			sumNewPQPI += Number(removeComma($(indexEntry).find('.data-new-pqpi').attr('data-value')));
+			sumMissOver += Number(removeComma($(indexEntry).find('.data-miss-over').attr('data-value')));
+		}
+	});
 
-		$(".ft-sum-cal-standard").attr('data-value', sumCalStandard);
-		$(".ft-sum-percent").attr('data-value', sumPercent);
-		$(".ft-sum-bath").attr('data-value', sumBath);
-		$(".ft-sum-change-total").attr('data-value', Math.round(sumTotalChangeSalary));
-		$(".ft-sum-change-salary").attr('data-value', sumChangeSalary);
-		$(".ft-sum-change-pqpi").attr('data-value', sumChangePQPI);
-		$(".ft-sum-change-diff").attr('data-value', sumChangeDiff);
-		$(".ft-sum-new-total").attr('data-value', sumTotalNewSalary);
-		$(".ft-sum-new-salary").attr('data-value', sumNewSalary);
-		$(".ft-sum-new-pqpi").attr('data-value', sumNewPQPI);
-		$(".ft-sum-missover").attr('data-value', sumMissOver);
-		
-		$(".dataTables_scrollFoot").find(".ft-sum-percent").text(Comma(sumPercent.toFixed(2)));
-		$(".dataTables_scrollFoot").find(".ft-sum-bath").text(Comma(sumBath.toFixed(2)));
-		
-		$(".DTFC_LeftFootWrapper").find(".ft-sum-cal-standard").text(Comma(Math.round(sumCalStandard)));
-		$(".DTFC_LeftFootWrapper").find(".ft-sum-change-total").text(Comma(Math.round(sumTotalChangeSalary)));
-		$(".DTFC_LeftFootWrapper").find(".ft-sum-change-salary").text(Comma(sumChangeSalary.toFixed(2)));
-		$(".DTFC_LeftFootWrapper").find(".ft-sum-change-pqpi").text(Comma(sumChangePQPI.toFixed(2)));
-		$(".DTFC_LeftFootWrapper").find(".ft-sum-change-diff").text(Comma(sumChangeDiff.toFixed(2)));
-		
-		$(".dataTables_scrollFoot").find(".ft-sum-new-total").text(Comma(sumTotalNewSalary.toFixed(2)));
-		$(".dataTables_scrollFoot").find(".ft-sum-new-salary").text(Comma(sumNewSalary.toFixed(2)));
-		$(".dataTables_scrollFoot").find(".ft-sum-new-pqpi").text(Comma(sumNewPQPI.toFixed(2)));
-		
-		$(".DTFC_LeftFootWrapper").find(".ft-sum-missover").text(Comma(sumMissOver));
-		
-		//update main table
-		/*
-		$(".dataTables_scrollBody").find(".ft-sum-change-total").text(Comma(Math.round(sumTotalChangeSalary)));
-		$(".dataTables_scrollBody").find(".ft-sum-change-salary").text(Comma(sumChangeSalary.toFixed(2)));
-		$(".dataTables_scrollBody").find(".ft-sum-change-pqpi").text(Comma(sumChangePQPI.toFixed(2)));
-		$(".dataTables_scrollBody").find(".ft-sum-change-diff").text(Comma(sumChangeDiff.toFixed(2)));
-		*/
-		
-//		$("#list_empjudege").find(".ft-sum-percent").text(Comma(sumPercent.toFixed(2)));
-//		$("#list_empjudege").find(".ft-sum-bath").text(Comma(sumBath.toFixed(2)));
-//		$("#list_empjudege").find(".ft-sum-change-total").text(Comma(sumTotalChangeSalary.toFixed(2)));
-//		$("#list_empjudege").find(".ft-sum-change-salary").text(Comma(sumChangeSalary.toFixed(2)));
-//		$("#list_empjudege").find(".ft-sum-change-pqpi").text(Comma(sumChangePQPI.toFixed(2)));
-//		$("#list_empjudege").find(".ft-sum-change-diff").text(Comma(sumChangeDiff.toFixed(2)));
-//		$("#list_empjudege").find(".ft-sum-new-total").text(Comma(sumTotalNewSalary.toFixed(2)));
-//		$("#list_empjudege").find(".ft-sum-new-salary").text(Comma(sumNewSalary.toFixed(2)));
-//		$("#list_empjudege").find(".ft-sum-new-pqpi").text(Comma(sumNewPQPI.toFixed(2)));
-	}
+	$(".ft-sum-cal-standard").attr('data-value', sumCalStandard);
+	$(".ft-sum-percent").attr('data-value', sumPercent);
+	$(".ft-sum-bath").attr('data-value', sumBath);
+	$(".ft-sum-change-total").attr('data-value', Math.round(sumTotalChangeSalary));
+	$(".ft-sum-change-salary").attr('data-value', sumChangeSalary);
+	$(".ft-sum-change-pqpi").attr('data-value', sumChangePQPI);
+	$(".ft-sum-change-diff").attr('data-value', sumChangeDiff);
+	$(".ft-sum-new-total").attr('data-value', sumTotalNewSalary);
+	$(".ft-sum-new-salary").attr('data-value', sumNewSalary);
+	$(".ft-sum-new-pqpi").attr('data-value', sumNewPQPI);
+	$(".ft-sum-missover").attr('data-value', sumMissOver);
 	
+	$(".dataTables_scrollFoot").find(".ft-sum-percent").text(Comma(sumPercent.toFixed(2)));
+	$(".dataTables_scrollFoot").find(".ft-sum-bath").text(Comma(sumBath.toFixed(2)));
+	
+	$(".DTFC_LeftFootWrapper").find(".ft-sum-cal-standard").text(Comma(Math.round(sumCalStandard)));
+	$(".DTFC_LeftFootWrapper").find(".ft-sum-change-total").text(Comma(Math.round(sumTotalChangeSalary)));
+	$(".DTFC_LeftFootWrapper").find(".ft-sum-change-salary").text(Comma(sumChangeSalary.toFixed(2)));
+	$(".DTFC_LeftFootWrapper").find(".ft-sum-change-pqpi").text(Comma(sumChangePQPI.toFixed(2)));
+	$(".DTFC_LeftFootWrapper").find(".ft-sum-change-diff").text(Comma(sumChangeDiff.toFixed(2)));
+	
+	$(".dataTables_scrollFoot").find(".ft-sum-new-total").text(Comma(sumTotalNewSalary.toFixed(2)));
+	$(".dataTables_scrollFoot").find(".ft-sum-new-salary").text(Comma(sumNewSalary.toFixed(2)));
+	$(".dataTables_scrollFoot").find(".ft-sum-new-pqpi").text(Comma(sumNewPQPI.toFixed(2)));
+	
+	$(".DTFC_LeftFootWrapper").find(".ft-sum-missover").text(Comma(sumMissOver));
+	
+	//update main table
+	/*
+	$(".dataTables_scrollBody").find(".ft-sum-change-total").text(Comma(Math.round(sumTotalChangeSalary)));
+	$(".dataTables_scrollBody").find(".ft-sum-change-salary").text(Comma(sumChangeSalary.toFixed(2)));
+	$(".dataTables_scrollBody").find(".ft-sum-change-pqpi").text(Comma(sumChangePQPI.toFixed(2)));
+	$(".dataTables_scrollBody").find(".ft-sum-change-diff").text(Comma(sumChangeDiff.toFixed(2)));
+	*/
+	
+//	$("#list_empjudege").find(".ft-sum-percent").text(Comma(sumPercent.toFixed(2)));
+//	$("#list_empjudege").find(".ft-sum-bath").text(Comma(sumBath.toFixed(2)));
+//	$("#list_empjudege").find(".ft-sum-change-total").text(Comma(sumTotalChangeSalary.toFixed(2)));
+//	$("#list_empjudege").find(".ft-sum-change-salary").text(Comma(sumChangeSalary.toFixed(2)));
+//	$("#list_empjudege").find(".ft-sum-change-pqpi").text(Comma(sumChangePQPI.toFixed(2)));
+//	$("#list_empjudege").find(".ft-sum-change-diff").text(Comma(sumChangeDiff.toFixed(2)));
+//	$("#list_empjudege").find(".ft-sum-new-total").text(Comma(sumTotalNewSalary.toFixed(2)));
+//	$("#list_empjudege").find(".ft-sum-new-salary").text(Comma(sumNewSalary.toFixed(2)));
+//	$("#list_empjudege").find(".ft-sum-new-pqpi").text(Comma(sumNewPQPI.toFixed(2)));
+}
+
+var calculatePercentKeyup = function() {
 	$("#list_empjudege").find('.percent').keyup(function() {
 		var percent = $(this).autoNumeric('get');
 		//console.log($(this).closest('.control-calculate').find('.data-score').find('.score').autoNumeric('get'), '1117')
