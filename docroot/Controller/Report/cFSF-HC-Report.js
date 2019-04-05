@@ -38,9 +38,6 @@ $(document).ready(function() {
 	                if (dt2Date == null || dateDiff < 0) {
 	                		dt2.datepicker('setDate', minDate);
 	                }
-	                /*else if (dateDiff > 30){
-	                		dt2.datepicker('setDate', null);
-	                }*/
 	                //sets dt2 maxDate to the last day of 30 days window
 	                dt2.datepicker('option', 'maxDate', null);
 	                dt2.datepicker('option', 'minDate', minDate);
@@ -117,12 +114,13 @@ var getDataFn = function() {
 	$("body").mLoading('show'); //Loading
 	var parameter = {};
 	var template_name ="";
+	var path_jasper ="";
 	var date_start = $("#date-start").val();
 	var date_end = $("#date-end").val();
 	var questionaire_type_id = $("#QuestionnaireType").val()==null ? '' : $("#QuestionnaireType").val().toString();
 	
 	template_name="FSF-HC-Report"; 
-	
+	path_jasper="FSF-HC-Report/";
 	if (date_start == '' || date_end == ''){
 		 $("body").mLoading('hide'); //Loading
 		callFlashSlide(Liferay.Language.get("Date start or Date end is require!"));
@@ -149,7 +147,7 @@ var getDataFn = function() {
 		  };
 	
 	var data = JSON.stringify(parameter);
-	var url_report_jasper = restfulURL + "/" + serviceName + "/public/generateAuth?template_name=" + template_name + "&token=" + tokenID.token + "&template_format=xlsx&used_connection=1&inline=1&data=" + data + "&json_name=" +json_name;
+	var url_report_jasper = restfulURL + "/" + serviceName + "/public/generateAuth?template_name=" + template_name + "&path_jasper="+path_jasper+"&token=" + tokenID.token + "&template_format=xlsx&used_connection=1&inline=1&data=" + "&json_name=" +json_name;
 	console.log(url_report_jasper);
 
 	 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -170,10 +168,7 @@ var toDayFn = function(id) {
 	  if (day < 10) day = "0" + day;
 
 	  var today = day + "/" + month + "/" + year;
-	  //document.getElementById(id).value = today;
 	  $(id).val(today);
-	  // document.getElementById("datepicker-end").value = today;
-
 };
 
 var generateJsonFn = function (date_start,date_end,questionaire_type_id) {
