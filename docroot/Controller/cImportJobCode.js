@@ -138,10 +138,10 @@ var listImportJobCodeFn = function (data) {
 					type: "patch",
 					dataType: "json",
 					data: {
-						"knowledge_point": $("#from_knowledge_point").autoNumeric('get'),
-						"capability_point": $("#from_capability_point").autoNumeric('get'),
-						"total_point": $("#from_total_point").autoNumeric('get'),
-						"baht_per_point": $("#from_baht_per_point").autoNumeric('get'),
+						"knowledge_point": $("#from_knowledge_point").val().replace(',', ''),
+						"capability_point": $("#from_capability_point").val().replace(',', ''),
+						"total_point": $("#from_total_point").val().replace(',', ''),
+						"baht_per_point": $("#from_baht_per_point").val().replace(',', '')
 					},
 					headers: { Authorization: "Bearer " + tokenID.token },
 					async: false,

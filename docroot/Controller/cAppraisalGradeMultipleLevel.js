@@ -2,7 +2,7 @@ var globalData="";
 var galbalDataTemp=[]; 
 var username = "";
 var password = "";
-const pageNumberDefault=1;
+var pageNumberDefault=1;
 
 var clearFn = function() {
 	$("#information").hide();
@@ -89,7 +89,7 @@ var searchAdvanceFn = function () {
 
 
 var getDataFn = function (page, rpp) {
-	
+	pageNumberDefault = page;
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/appraisal_grade",
         type: "get",
@@ -139,6 +139,7 @@ var getDataFn = function (page, rpp) {
                 		      
         			// item edit
         			$(".edit").on("click",function() {
+        				$(window).scrollTop(50);
         				// destroy multiple seletion 
         				if($("#action").val() == 'add'){
         					$('#appraisal_level_id').multiselect("destroy");
