@@ -35,7 +35,7 @@ $(document).ready(function(){
     					"url":""+restfulURL+"/"+serviceName+"/public/job_function/list"
      				    }
      				    ],
-    			 "formDetail":{"formSize":"modal-dialog","formName":"Fob Function","id":"job_function","pk_id":"job_function_id"},       
+    			 "formDetail":{"formSize":"modal-dialog","formName":"Job Function","id":"job_function","pk_id":"job_function_id"},       
     			 "serviceName":[restfulURL+"/"+serviceName+"/public/job_function"],
     			 "tokenID":tokenID,
     			 "pagignation":false,
