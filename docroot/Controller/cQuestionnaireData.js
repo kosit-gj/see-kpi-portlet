@@ -2169,7 +2169,7 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 					 headers:{Authorization:"Bearer "+tokenID.token},
 					 data:{
 						 "emp_name":request.term,
-						 //"date" : $("#modal_datepicker_start").val(),
+						 "date" : $("#modal_datepicker_start").val(),
 						 "questionaire_type_id" : ($("#action").val() == "add" ? $("#modal_questionaire_type_id").val() : "")
 						 },
 					 //async:false,
