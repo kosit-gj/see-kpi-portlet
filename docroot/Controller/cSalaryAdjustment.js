@@ -1315,7 +1315,7 @@ var calculatePercentKeyup = function() {
 	$(".refreshSoring").click(function() {
 		GlobalChangingSortingData['items'].map(function(item, index) {
 			item['grade'] = (typeof $('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-grade').html() === 'undefined' ? '' : $('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-grade').html().trim());
-			item['score_last'] = parseInt($('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-coo').find('.score_last').autoNumeric('get'));
+			item['score_last'] = Number($('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-coo').find('.score_last').autoNumeric('get'));
 			item['adjust_raise_s_amount'] = parseInt($('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-salary').find('.salary').autoNumeric('get'));
 			item['adjust_raise_pqpi_amount'] = parseInt($('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-pqpi').find('.pqpi').autoNumeric('get'));
 			item['percent_diff'] = (typeof $('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-percent-diff').html() === 'undefined' ? '' : $('.DTFC_LeftBodyWrapper').find('.rowNum'+index).find('.data-percent-diff').html().trim());
