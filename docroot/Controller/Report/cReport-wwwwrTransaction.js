@@ -158,7 +158,7 @@ $("#tse-code-or-tse-name").autocomplete({
 
     source: function(request, response) {
       $.ajax({
-        url: restfulURL + "/" + serviceName + "/public/questionaire_report/auto_emp_report",
+        url: restfulURL + "/" + serviceName + "/public/questionaire_report/auto_emp_report2",
         type: "GET",
         dataType: "json",
         data: {
