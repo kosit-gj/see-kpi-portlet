@@ -221,6 +221,7 @@ $("#tse-code-or-tse-name").autocomplete({
         type: "GET",
         dataType: "json",
         data: {
+					"questionaire_type_id": $("#QuestionnaireType").val(),
 					"emp_name": request.term,
 					"start_date": $("#date-start").val(),
           "end_date": $("#date-end").val()
