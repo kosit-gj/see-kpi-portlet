@@ -189,6 +189,8 @@ var generateJsonFn = function (date_start,date_end,questionaire_type_id) {
         	}
         	else if(data['status']=='400'){
         		console.log(data['data']);
+        		callFlashSlide(data['data']);
+        		json_name ==""
         	}
         }
     });
