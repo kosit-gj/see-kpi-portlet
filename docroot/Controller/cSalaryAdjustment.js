@@ -707,7 +707,7 @@ var listDataFn = function(data) {
 		if(indexEntry['is_job_evaluation']==1) {
 			htmlHTML += "	<td class='pos-column-cen'></td>";
 			htmlHTML += "	<td class='pos-column-rig'></td>";
-			htmlHTML += "	<td class='data-miss-over pos-column-rig maxWidth30' data-value="+miss_over+">"+miss_over+"</td>";
+			htmlHTML += "	<td class='data-miss-over pos-column-rig maxWidth30' data-value="+miss_over+">"+(cal_miss_over > 0 ? '<font style="color: red;">'+miss_over+'</font>' : miss_over)+"</td>";
 		} else {
 			htmlHTML += "	<td class='data-grade pos-column-cen'>"+grade+"</td>";
 			htmlHTML += "	<td class='data-calstandard pos-column-rig'>"+cal_standard+"</td>";
@@ -1303,7 +1303,7 @@ var calculatePercentKeyup = function() {
 		const DatamissOver = document.querySelector('div.DTFC_LeftBodyWrapper tr.rowNum'+row_num+' td.data-miss-over');
 		const DatamissOverMain = document.querySelector('div.dataTables_scrollBody tr.rowNum'+row_num+' td.data-miss-over');
 		if(DatamissOver) {
-			DatamissOver.innerText = miss_over
+			DatamissOver.innerText = (cal_miss_over > 0 ? '<font style="color: red;">'+miss_over+'</font>' : miss_over);
 			DatamissOverMain.setAttribute("data-value", roundThen(notNullFn(cal_miss_over), -2));
 		}
 		
