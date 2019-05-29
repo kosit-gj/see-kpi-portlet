@@ -74,6 +74,9 @@ var getDataFn = function(page,rpp){
 			if(data["item_result_log"] == 1){$("#optionsEnableAssignmentLoggingOn").prop("checked", true);}
 			else if(data["item_result_log"] == 0){$("#optionsEnableAssignmentLoggingOff").prop("checked", true);}
 			
+			if(data["maintainance_period"] == 1){$("#optionsEnableMaintainancePeriodOn").prop("checked", true);}
+			else if(data["maintainance_period"] == 0){$("#optionsEnableMaintainancePeriodOff").prop("checked", true);}
+			
 			$("#listThemeColor").html(htmlTheamColor);
 			jscolor.installByClassName("jscolor");
 			
@@ -182,7 +185,9 @@ var clearFn = function() {
 	else if(galbalDataSystemcon["threshold"] == 0){$("#thresholdOff").prop("checked", true);}
 	if(galbalDataSystemcon["email_reminder_flag"] == 1){$("#emailReminderOn").prop("checked", true);}
 	else if(galbalDataSystemcon["email_reminder_flag"] == 0){$("#emailReminderOff").prop("checked", true);}
-
+	if(galbalDataSystemcon["maintainance_period"] == 1){$("#optionsEnableMaintainancePeriodOn").prop("checked", true);}
+	else if(galbalDataSystemcon["maintainance_period"] == 0){$("#optionsEnableMaintainancePeriodOff").prop("checked", true);}
+	
 	var htmlTheamColor = "<button class=\"btn jscolor {valueElement:null,value:'"+galbalDataSystemcon["theme_color"]+"',valueElement:'themeColor',onFineChange:'setThemeColorFn(this)'} \" style='width:70px; height:26px;'></button>";
 	$("#listThemeColor").html(htmlTheamColor);
 	jscolor.installByClassName("jscolor");
@@ -250,6 +255,7 @@ var updateFn = function() {
 	var threshold=0;
 	var emailReminder=0;
 	var item_result_log=0;
+	var maintainance_period=0;
 	if($("#raiseFixAmount:checked").is(":checked")){raiseType=1;}
 	else if($("#raisePercentage:checked").is(":checked")){raiseType=2;}
 	 
@@ -263,10 +269,12 @@ var updateFn = function() {
 	if($("#emailReminderOn:checked").is(":checked")){emailReminder=1;}
 	else if($("#emailReminderOff:checked").is(":checked")){emailReminder=0;}
 	
-	
 	if($("#optionsEnableAssignmentLoggingOn:checked").is(":checked")){item_result_log=1;} 
 	else if($("#optionsEnableAssignmentLoggingOff:checked").is(":checked")){item_result_log=0;} 
-	
+	// # ตั้งค่าเปิดหรือปิดระบบ WWWR
+	if($("#optionsEnableMaintainancePeriodOn:checked").is(":checked")){maintainance_period=1;} 
+	else if($("#optionsEnableMaintainancePeriodOff:checked").is(":checked")){maintainance_period=0;} 
+
 	
 	$.ajax({
 		url:restfulURL+restfulPathSystemcon,
@@ -287,6 +295,7 @@ var updateFn = function() {
 			"result_type"			            :  resultType,
 			"threshold"							:  threshold,
 			"email_reminder_flag"				:  emailReminder,
+			"maintainance_period"				:  maintainance_period,
 			"item_result_log"					:  item_result_log, 
 			"theme_color"			            :  $("#themeColor").val()
 			
@@ -330,6 +339,7 @@ var updateMailFn = function() {
 			"result_type"			            :  galbalDataSystemcon["result_type"],
 			"threshold"							:  galbalDataSystemcon["threshold"],
 			"email_reminder_flag"				:  galbalDataSystemcon["email_reminder_flag"],
+			"maintainance_period"				:  galbalDataSystemcon["maintainance_period"],
 			"theme_color"			            :  galbalDataSystemcon["theme_color"],
 			// Update Mail
 			"mail_driver"         				:  $("#form_mail_driver").val(),
@@ -341,6 +351,8 @@ var updateMailFn = function() {
 			"web_domain"			            :  $("#form_web_domain").val(),
 			
 		},	
+		
+		
 		headers:{Authorization:"Bearer "+tokenID.token},
 		success : function(data,status) {
 				if (data['status'] == "200") {

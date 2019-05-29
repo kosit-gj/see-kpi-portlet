@@ -374,6 +374,27 @@ plid = layout.getPlid();
 									</div>
 
                                  </div> 
+                                 
+                                 <div class="row-fluid">
+							
+									<div class="span5 object-right" >
+									<label class='text-label'>  Maintainance Period  &nbsp;:</label>
+									
+									</div>
+									<div class="span5">
+										
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 20px;">
+											  <input  type="radio" name="optionsEnableMaintainancePeriod" id="optionsEnableMaintainancePeriodOff" value="0">
+											  Yes
+										</label>
+										<label class="radio" style="margin-bottom: 10px; float: left; margin-right: 10px;">
+											<input type="radio" name="optionsEnableMaintainancePeriod" id="optionsEnableMaintainancePeriodOn" value="1" checked='checked'>
+											  No 
+										</label>
+										
+									</div>
+
+                                 </div> 
                                  <div class="row-fluid">
 							
 									<div class="span5 object-right" >
