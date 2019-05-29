@@ -705,6 +705,14 @@ background-color:#71cccc !important;
                     </select>
                   </div>
                   
+                   <div class="form-group pull-left span3" style="margin-left: 5px">
+                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="report-type"/>" class="input form-control input-sm span12" id="show-emp-flag" name="show-emp-flag">
+	                    <option value="true" selected="selected"><liferay-ui:message key="show-asm-and-detail"/></option>
+	                    <option value="false" ><liferay-ui:message key="show-only-asm"/></option>
+                    </select> 
+                  </div>
+                  
+                  
                   <div class="form-group span3 m-b-none pull-right" style="margin-left: 5px; text-align:right;">
                     <button type="button" class="btn btn-info input-sm" name="btnexport" id="btnExport">
                       <i class="icon-download-alt"></i>&nbsp;<liferay-ui:message key="export"/>
@@ -725,7 +733,7 @@ background-color:#71cccc !important;
   			<p><liferay-ui:message key="your-browser-does-not-support-iframes"/></p>
   </iframe>
 </body>
-
+ 
 <script src="/see-kpi-portlet/js/jquery3.1.1.js"></script>
 <script type="text/javascript">
  var jQuery_1_1_3 = $.noConflict(true);

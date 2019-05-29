@@ -1,7 +1,7 @@
 var username = "";
 var password = "";
 var galbalDataTemp=[]; 
-
+ 
 $(document).ready(function() {
 
   var username = $('#user_portlet').val();
@@ -284,7 +284,7 @@ var getDataFn = function() {
 	var job_function = $("#jobfunction").val();
 	var data_header_id="";
 	var questionaire_date="";
-	
+	var show_emp_flag =$("#show-emp-flag").val();
 	template_name="Operation-Tracking-Report"; 
 	
 	parameter = {
@@ -295,8 +295,8 @@ var getDataFn = function() {
 			param_date_end : date_end,
 			param_data_header_id:data_header_id,     
 			param_questionaire_date:questionaire_date,
-			param_job_function:job_function
-			
+			param_job_function:job_function,
+			param_show_emp_flag :show_emp_flag
 		  };
 	
 	if (date_start == '' || date_end == ''){
