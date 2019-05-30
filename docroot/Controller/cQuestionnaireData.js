@@ -1040,16 +1040,36 @@ var listData = function(data) {
 		$(".del").on("click",function() {
 			var edit=this.id.split("-");
 			var id=edit[1];
-
-			$("#confrimModal").modal({
-				"backdrop" : setModalPopup[0],
-				"keyboard" : setModalPopup[1]
-			});
-			$(this).parent().parent().parent().children().click();
-			$(document).off("click","#btnConfirmOK");
-			$(document).on("click","#btnConfirmOK",function(){
-				delFn(id);
-			});
+			var element = $(this).parent().parent().parent().children();
+			
+			$.ajax ({
+		 		url:globalSevice['restfulPathGetMaintainancePeriod'],
+		 		type:"post" ,
+		 		dataType:"json" ,
+		 		headers:{Authorization:"Bearer "+tokenID.token},
+		 		async:false,
+		 		success:function(data){
+		 			 			
+		 			// maintainance_period: 0 ปิดระบบ 1เปิดระบบ
+		 			if(data.status == 200 && data.maintainance_period == 1){
+		 				$("#confrimModal").modal({
+		 					"backdrop" : setModalPopup[0],
+		 					"keyboard" : setModalPopup[1]
+		 				});
+		 				$(element).click();
+		 				$(document).off("click","#btnConfirmOK");
+		 				$(document).on("click","#btnConfirmOK",function(){
+		 					delFn(id);
+		 				});
+		 			}
+		 			else{
+		 				$("#ModalWarning").modal({
+		 					"backdrop" : setModalPopup[0],
+		 					"keyboard" : setModalPopup[1]
+		 				});
+		 			}
+		 		}
+		 	});	
 		});
 	});
 	
