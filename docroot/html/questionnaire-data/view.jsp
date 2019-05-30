@@ -232,7 +232,7 @@
 		    top:0px;
 		}
 		
-	.aui #confrimModal {
+	.aui #confrimModal , .aui #ModalWarning {
 		left: 50%;
 	}
 }
@@ -245,7 +245,7 @@
 		    top:0px;
 		}
 		
-	.aui #confrimModal {
+	.aui #confrimModal , .aui #ModalWarning {
 		left: 50%;
 	}
 }
@@ -257,7 +257,7 @@
 		    top:0px;
 		}
 		
-	.aui #confrimModal {
+	.aui #confrimModal , .aui #ModalWarning {
 		left: 15%;
 		right: 15%;
 	}
@@ -360,7 +360,7 @@
 		.aui .height-32-px {
 			height: 42px
 		}
-		.aui #confrimModal {
+		.aui #confrimModal , .aui #ModalWarning {
 			left: 10%;
 			right: 10%;
 		}
