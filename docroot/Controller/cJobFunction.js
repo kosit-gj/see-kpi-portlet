@@ -14,6 +14,7 @@ $(document).ready(function(){
     						{"colunmsDisplayName":"Job Function Name","width":"60%","id":"job_function_name","colunmsType":"text"},
     			           {"colunmsDisplayName":"Is Evaluated","width":"auto","id":"is_evaluated","colunmsType":"checkbox"},
     			           {"colunmsDisplayName":"Is Show Report","width":"auto","id":"is_show_report","colunmsType":"checkbox"},
+    			           {"colunmsDisplayName":"Group Name","width":"auto","id":"job_function_group_name","colunmsType":"text"},
     			          ],
     			"form":[{
 						"label":"Job Function Name","inputType":"text","placeholder":"Job Function Name",
@@ -26,7 +27,11 @@ $(document).ready(function(){
     					{
 		 	    			"label":"Is Show Report","inputType":"checkbox","default":"",
 		 	    			"id":"is_show_report","width":"200px"
-		 	    			}
+		 	    			},
+		 	    		{
+		    				"label":"Group Name","inputType":"dropdown","default":"",
+		    				"id":"job_function_group_id","width":"250px","url":""+restfulURL+"/"+serviceName+"/public/job_function/group_list"
+		    			}, 
     					
     			     ], 	
     			 "advanceSearch":[{
