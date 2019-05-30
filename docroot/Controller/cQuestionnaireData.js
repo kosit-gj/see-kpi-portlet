@@ -8,6 +8,7 @@ globalSevice['restfulPathRoleAuthorize']= globalSevice['restfulPathQuestionnaire
 globalSevice['restfulPathAutocompleteEmployeeName']= globalSevice['restfulPathQuestionnaireData']+ "/auto_emp";
 globalSevice['restfulPathAutocompleteEmployeeName2']= globalSevice['restfulPathQuestionnaireData']+ "/auto_emp2";
 globalSevice['restfulPathAutocompleteStoreName']= globalSevice['restfulPathQuestionnaireData']+ "/auto_store";
+globalSevice['restfulPathGetMaintainancePeriod']= globalSevice['restfulPathQuestionnaireData']+ "/maintainance_period";
 
 globalSevice['restfulPathAssignTemplate']= globalSevice['restfulPathQuestionnaireData']+ "/assign_template";
 globalSevice['restfulPathGenerateTemplate']= globalSevice['restfulPathQuestionnaireData']+ "/generate_template";
@@ -941,13 +942,15 @@ var listData = function(data) {
 					 */
 					html+="		  <i data-trigger=\"focus\" tabindex=\""+index2+"\" title=\"\" data-original-title=\"\" class=\"fa fa-cog font-gear popover-edit-del\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"right\"  data-content=\"";
 					html+="			<button class='btn btn-info btn-small btn-gear view' id='view-"+indexEntry2.data_header_id+"' questionaire_date='"+indexEntry2.questionaire_date+"' questionaire_id='"+indexEntry2.questionaire_id+"' assessor_id='"+indexEntry2.assessor_id+"' emp_snapshot_id='"+indexEntry2.emp_snapshot_id+"' emp_name='"+indexEntry2.emp_name+"' questionaire_type_id='"+indexEntry2.questionaire_type_id+"'>Report</button>" ;
-					
-					if((indexEntry2.edit_flag==1 && indexEntry2.view_flag==0)){
+
+					if((indexEntry2.edit_flag==1 && indexEntry2.view_flag==0 && indexEntry2.maintainance_period==1)){
 						html+="			<button class='btn btn-warning btn-small btn-gear edit' id='edit-"+indexEntry2.data_header_id+"' edit='1'>Edit</button>" ;
-					}else if((indexEntry2.edit_flag==0 && indexEntry2.view_flag==1)){
+						html+="			<button "+(indexEntry2.delete_flag == 1 ? "" : "disabled")+" class='btn btn-danger btn-small btn-gear del' id='del-"+indexEntry2.data_header_id+"'>Delete</button>";
+					}else if((indexEntry2.edit_flag==0 && indexEntry2.view_flag==1 && indexEntry2.maintainance_period==1)){
 						html+="			<button class='btn btn-warning btn-small btn-gear edit' id='edit-"+indexEntry2.data_header_id+"' edit='0'>View</button>" ;
+						html+="			<button "+(indexEntry2.delete_flag == 1 ? "" : "disabled")+" class='btn btn-danger btn-small btn-gear del' id='del-"+indexEntry2.data_header_id+"'>Delete</button>";
 					}
-					html+="			<button "+(indexEntry2.delete_flag == 1 ? "" : "disabled")+" class='btn btn-danger btn-small btn-gear del' id='del-"+indexEntry2.data_header_id+"'>Delete</button>\"></i>";
+					html+="			\"></i>";
 					html+="		 </td>";
 					html+="      <td style='white-space: nowrap;'>"+indexEntry2.questionaire_date+"</td>";
 					html+="      <td style='text-align: left;'>"+indexEntry2.emp_name+"</td>";
@@ -1341,8 +1344,28 @@ var generateStageFn = function(stage,current_stage,to_stage) {
 	
 	$(".btnStageSubmit").off("click");
 	$(".btnStageSubmit").click(function() {
-		if ($("#action").val() == "add"|| $("#action").val() == "") {	insertFn(this);		}
-		else{	updateFn(this);		}
+		$.ajax ({
+	 		url:globalSevice['restfulPathGetMaintainancePeriod'],
+	 		type:"post" ,
+	 		dataType:"json" ,
+	 		headers:{Authorization:"Bearer "+tokenID.token},
+	 		async:false,
+	 		success:function(data){
+	 			 			
+	 			// maintainance_period: 0 ปิดระบบ 1เปิดระบบ
+	 			if(data.status == 200 && data.maintainance_period == 1){
+	 				if ($("#action").val() == "add"|| $("#action").val() == "") {	insertFn(this);		}
+	 				else{	updateFn(this);		}
+	 			}
+	 			else{
+	 				$("#ModalWarning").modal({
+	 					"backdrop" : setModalPopup[0],
+	 					"keyboard" : setModalPopup[1]
+	 				});
+	 			}
+	 		}
+	 	});	
+		
 	});
 };
 var generateAnswerFormRadioFn = function(data,question_type,pass_score) {
@@ -2082,14 +2105,35 @@ var searchAdvanceFn = function (start_date,end_date,questionaire_type_id,emp_sna
 		$("#btn-add").click(function() {
 			clearFn();
 			//findOneFn();
-			$("#slideUpDownStageHistory").hide();
-			$("#modalQuestionaireData").modal({
-				"backdrop" : setModalPopup[0],
-				"keyboard" : setModalPopup[1]
-			});
-			toDayFn('#modal_datepicker_start');
-			$("#modal_datepicker_start").prop('disabled', true);
-			setModalContentBodyHeightFn();
+			//questionaire_data/maintainance_period
+			$.ajax ({
+		 		url:globalSevice['restfulPathGetMaintainancePeriod'],
+		 		type:"post" ,
+		 		dataType:"json" ,
+		 		headers:{Authorization:"Bearer "+tokenID.token},
+		 		async:false,
+		 		success:function(data){
+		 			 			
+		 			// maintainance_period: 0 ปิดระบบ 1เปิดระบบ
+		 			if(data.status == 200 && data.maintainance_period == 1){
+		 				$("#slideUpDownStageHistory").hide();
+		 				$("#modalQuestionaireData").modal({
+		 					"backdrop" : setModalPopup[0],
+		 					"keyboard" : setModalPopup[1]
+		 				});
+		 				toDayFn('#modal_datepicker_start');
+		 				$("#modal_datepicker_start").prop('disabled', true);
+		 				setModalContentBodyHeightFn();
+		 			}
+		 			else{
+		 				$("#ModalWarning").modal({
+		 					"backdrop" : setModalPopup[0],
+		 					"keyboard" : setModalPopup[1]
+		 				});
+		 			}
+		 		}
+		 	});	
+			
 		});
 		$("#modalQuestionaireData .btnCancle").click(function() {
 			$("#inform_label_confirm").html("คุณต้องการออกจาก  <br>\""+$("#modalTitleRole ").text()+"\" ?");

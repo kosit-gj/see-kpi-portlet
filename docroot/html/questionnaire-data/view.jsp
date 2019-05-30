@@ -917,7 +917,34 @@ cursor: not-allowed !important;
 	</div>                      
 	<!-- Modal KPI End Edit -->
 	
- 
+ <!-- Modal Warning Start -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalWarning"
+		class="modal inmodal in" style="width:400px;left:calc;display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content  bounceInRight">
+				<div class="modal-header">
+					<h5 class="modal-title">Warning</h5>
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<div class="form-kpi-mangement">
+						<div class="form-kpi-label" align="center">
+
+							<label id="">คุณไม่สามารถเพิ่มหรือแก้ไขแบบฟอร์มในช่วงปิดปรับปรุงระบบ</label>
+							
+						</div>
+					</div>
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+					<div align="center">
+						<button data-dismiss="modal" class="btn btn-danger fix-width-button" id="" type="button"> <i class="fa fa-times-circle"></i>&nbsp;Close </button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal Warning End -->
 	<!-- Modal Confirm Start -->
 	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal"
 		class="modal inmodal in" style="width:400px;left:calc;display: none;">
@@ -999,4 +1026,7 @@ cursor: not-allowed !important;
 		</div>
 	</div>
 	<!-- Modal Confirm End -->
+	
+	
+	
 </div>
