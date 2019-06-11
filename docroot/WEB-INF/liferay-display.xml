@@ -61,6 +61,7 @@
 		<portlet id="fsf-hc-report"></portlet>
 		<portlet id="import-head-count"></portlet>
 		<portlet id="delete_and_mend_employee"></portlet>
+		<portlet id="asm-performance-report"></portlet>
 	</category>
 
 
