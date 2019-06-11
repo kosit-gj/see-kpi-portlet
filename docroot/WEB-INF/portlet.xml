@@ -2281,5 +2281,40 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>delete_and_mend_employee</portlet-name>
+		<display-name>Delete &amp; Mend Employee</display-name>
+		<portlet-class>
+			com.liferay.util.bridges.mvc.MVCPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>
+				/html/import-employee/delete_and_mend_employee.jsp
+			</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Delete &amp; Mend Employee</title>
+			<short-title>Delete And Mend Employee</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>
   
