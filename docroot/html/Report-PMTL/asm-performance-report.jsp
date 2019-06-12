@@ -132,6 +132,14 @@ plid = layout.getPlid();
 .aui #breadcrumbs {
     margin-bottom: 0;
 }
+
+.ui-icon-triangle-1-s {
+    background-position: -65px -10px !important;
+}
+#QuestionnaireType_ms {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
 </style>
 
 <input type="hidden" id="param_link" name="param_link" value="<%=param_link%>">
@@ -175,7 +183,7 @@ plid = layout.getPlid();
                   </div>
                   
                   <div class="form-group pull-left span3" style="margin-left: 5px">
-                    <select data-toggle="tooltip" title="" data-original-title="<liferay-ui:message key="questionnaire-type"/>" class="input form-control input-sm span12" id="QuestionnaireType" name="QuestionnaireType">
+                    <select data-toggle="tooltip" title="" multiple="multiple" data-original-title="<liferay-ui:message key="questionnaire-type"/>" class="input form-control input-sm span12" id="QuestionnaireType" name="QuestionnaireType">
                     </select>
                   </div>
                   

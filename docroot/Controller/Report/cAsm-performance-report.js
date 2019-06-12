@@ -28,7 +28,7 @@ $(document).ready(function () {
     $("#btnExport").click(function () {
       getDataFn();
     });
-
+    
     $(".app_url_hidden").show();
   }
 });
@@ -50,6 +50,9 @@ var questionnaireTypeParam = function () {
         }
       });
       $("#QuestionnaireType").html(htmlOption);
+      
+      $("#QuestionnaireType").multiselect().multiselectfilter();
+      refreshMultiQuestionnaireType();
     }
   });
 }
@@ -75,22 +78,34 @@ var yearParam = function () {
   });
 }
 
+var refreshMultiQuestionnaireType = function () {
+    $("#QuestionnaireType").multiselect('refresh').multiselectfilter();
+    $("#QuestionnaireType_ms").css({ 'width': '100%' });
+    $(".ui-icon-check,.ui-icon-closethick,.ui-icon-circle-close").css({ 'margin-top': '3px' });
+    $('input[name=multiselect_QuestionnaireType]').css({ 'margin-bottom': '5px' });
+    $(".ui-corner-all").find('input').css({ 'margin-right': '5px' });
+}
 
 var getDataFn = function() {
   $("body").mLoading('show'); //Loading
   
-	var parameter = {};
+  var parameter = {};
   var template_name ="";
   
   // parameter  
 	var year = $("#year").val();
-	var questionaire_type_id = $("#QuestionnaireType").val();
-	
+	var questionaire_type_id = $("#QuestionnaireType").val()== null ? '' : $("#QuestionnaireType").val().toString();
 	template_name="asm-performance-report";
+	
+	if (questionaire_type_id == ''){
+		$("body").mLoading('hide'); //Loading
+		callFlashSlide("Questionaire type is Require");
+		return false;
+	}
 	
 	parameter = {
       year: year,
-			questionaire_type_id : questionaire_type_id,
+	  questionaire_type_id : questionaire_type_id,
 	};
 	
 	var data = JSON.stringify(parameter);
