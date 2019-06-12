@@ -300,7 +300,7 @@ var appraisalStatusFn = function () {
 }
 
 var searchAdvanceFn = function () {
-
+	console.log("searchAdvanceFn " + new Date(Date.now()));
     $("#embedParamSearch").empty();
     var embedParam = "";
     embedParam += "<input type='hidden' class='embed_param_search' id='embed_appraisal_level_id_org' name='embed_appraisal_level_id_org' value='" + $("#AppraisalOrgLevel").val()+"'>";
@@ -334,30 +334,14 @@ var getDataFn = function () {
     form_id.push($("#embed_appraisal_form").val());
     $("#average-score").html("0");
 	$("#sd-score").html("0");
-    /* Test Parameter 
-    var testParam ={
-    		"level_id_org" : level_id_org,
-    		"level_id_emp" : level_id_emp,
-    		"period_id" : period_id,
-    		"position_id" : position_id,
-    		"emp_id" : emp_id,
-    		"org_id" : org_id,
-    		"status" : status,
-    		"form" : form
-    }    
-    console.log(testParam);
-    */
     
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/salary/show",
-//    	url: restfulURL + "/" + serviceName + "/public/emp/adjustment",
         type: "get",
         dataType: "json",
         async: true,
         headers: { Authorization: "Bearer " + tokenID.token },
         data: {
-//            "page": page,
-//            "rpp": rpp,
             "emp_level": level_id_emp,
             "org_level": level_id_org,
             "period_id": period_id,
@@ -367,11 +351,8 @@ var getDataFn = function () {
             "stage_id": status,
             "appraisal_form_id": form_id
         },
-        success: function (data) {
-            listDataFn(data[1]);
-//            setThemeColorFn(tokenID.theme_color);
-//            globalData = data['result'];
-//            paginationSetUpFn(globalData['current_page'], globalData['last_page'], globalData['last_page']);
+        success: function (respData) {
+        	listDataFn(respData);
         }
     });
 };
@@ -404,19 +385,11 @@ var to_action = function () {
 }
 
 var listDataFn = function(data) {
-	GlobalChangingSortingData = data;
-	//console.log(GlobalChangingSortingData, 408)
-	var htmlHTML="";
+//	GlobalChangingSortingData = data;
 	
-	var htmlHeader1 = "";
-	var htmlHeader2 = "";
-	var htmlHeader3 = "";
-	
-	var htmlHTMLFooter = "";
-	var htmlHTMLFooter2 = "";
-	var htmlHTMLFooter3 = "";
-	
-	var edit_flag = "";
+	var htmlHTML="", htmlHeader1="", htmlHeader2="", htmlHeader3="";
+	var htmlHTMLFooter="", htmlHTMLFooter2="", htmlHTMLFooter3="";
+	var edit_flag="";
 	
 	//countStruc   คือ จำนวน structure header column
 	let countStruc = 0;
@@ -542,6 +515,7 @@ var listDataFn = function(data) {
 	$("#list_header").html(htmlHeader1+htmlHeader2+htmlHeader3);
 	
 	table.DataTable().clear();
+	
 	table.DataTable().destroy();
 	
 	/* clear freeze
@@ -551,7 +525,6 @@ var listDataFn = function(data) {
 	*/
 	
 	//footer sum total
-	
 	if(data.sum_new_salary==null || data.sum_new_salary=="") {
 		var sum_salary = data.sum_salary;
 	} else {
@@ -793,12 +766,17 @@ var listDataFn = function(data) {
 	$("#list_empjudege").html(htmlHTML);
 	
 	createDatatable(table, countStruc, data['is_board']); //สร้างรูปแบบ datatable
+	
 	calculatePercentKeyup(); //เซ็ตค่าการกดคำนวนต่างๆ
+	
 	//filterGroup(data['items']); //generate filter group
+	
 	setPermission(data); //set สิทการจัดการข้อมูล
+	
 	calculateSumtotalFooter(); //sum footer
 	
 	$(".head_adjust").show();
+	
 };
 
 var setPermission = function(data) {
@@ -896,7 +874,7 @@ var createDatatable = function(table, countStruc, isBoard) {
 	    ];
 	}
 	
-	var columnSetting = columnSettingFirst.concat(columnSettingLast); 
+	var columnSetting = columnSettingFirst.concat(columnSettingLast);
 	
 	table.DataTable({
 		fixedHeader: true,

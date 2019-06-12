@@ -1,9 +1,9 @@
 var restfulURL 			= "";
 var restfulURL_IMPkpi 	= "";
 var lifeRayApiUrl 		= "";
-var serviceName			= "dhas_api";
+var serviceName			= "see_api_dhas/see-kpi-service/see_api";
 var serviceName_IMPkpi 	= "impexpservices_api/public";
-var servicePort 		= (document.location.protocol == "https:" ? ":8443" : ":81"); // HTTP default port :80
+var servicePort 		= (document.location.protocol == "https:" ? ":8443" : ":80"); // HTTP default port :80
 
 	/*####### Web Service Server #######*/
 	restfulURL = document.location.protocol + "//" + document.location.hostname + servicePort ;
