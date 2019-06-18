@@ -1364,6 +1364,7 @@ var generateStageFn = function(stage,current_stage,to_stage) {
 	
 	$(".btnStageSubmit").off("click");
 	$(".btnStageSubmit").click(function() {
+		var element = this;
 		$.ajax ({
 	 		url:globalSevice['restfulPathGetMaintainancePeriod'],
 	 		type:"post" ,
@@ -1374,8 +1375,8 @@ var generateStageFn = function(stage,current_stage,to_stage) {
 	 			 			
 	 			// maintainance_period: 0 ปิดระบบ 1เปิดระบบ
 	 			if(data.status == 200 && data.maintainance_period == 1){
-	 				if ($("#action").val() == "add"|| $("#action").val() == "") {	insertFn(this);		}
-	 				else{	updateFn(this);		}
+	 				if ($("#action").val() == "add"|| $("#action").val() == "") {	insertFn(element);		}
+	 				else{	updateFn(element);		}
 	 			}
 	 			else{
 	 				$("#ModalWarning").modal({
