@@ -694,11 +694,11 @@ String pAuth = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 						</div>
 					</div>
 						
-						<div class="row-fluid pagination-display">
+						<div class="row-fluid">
 								<div class="height-32-px"></div>
 						</div>
 						<!-- pagination start -->
-							<div class="row-fluid">
+							<div class="row-fluid pagination-display">
 								<div id="width-100-persen" class="span9 m-b-xs">
 									
 									<span class="pagination_top m-b-none pagination"></span>
