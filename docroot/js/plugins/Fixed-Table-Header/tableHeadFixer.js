@@ -17,7 +17,7 @@
                 if (settings.head) {
                     if (settings.left > 0) {
                         var tr = table.find("> thead > tr");
-
+                        
                         tr.each(function (k, row) {
                             solverLeftColspan(row, function (cell) {
                                 $(cell).css("z-index", settings['z-index'] + 1);
@@ -219,17 +219,28 @@
             function solverLeftColspan(row, action) {
                 var fixColumn = settings.left;
                 var inc = 1;
-
+                var span = 0;
+                
                 for (var i = 1; i <= fixColumn; i = i + inc) {
-                    var nth = inc > 1 ? i - 1 : i;
-
-                    var cell = $(row).find("> *:nth-child(" + nth + ")");
+                	// เนื่องจาก colspan ที่มากกว่า 1 col ทำให้การอ่านตำแหน่งผิด จึงต้องสร้าง span ขึ้นมาสะสมแล้วลบออกจากต่ำแหน่ง i อีกทีเพื่อหาต่ำแหน่ง ณ ปัจจุบัน
+                	span += inc > 1 ? (inc-1) : 0;
+                    var nth = inc > 1 ? i - span : i;
+                    //console.warn("i: "+i);
+                    //console.log("inc : "+inc);
+                    //console.log("nth : "+nth);
+                    var cell = $(row).find("> *:nth-child(" + (nth) + ")");
                     var colspan = cell.prop("colspan");
-
+                    //console.log(cell);
+                    //console.log(colspan);
+                    
+                    //span = colspan > 0 ? colspan : 0;
+                    //console.warn("span:"+span)
                     if (typeof cell.cellPos() != 'undefined' && cell.cellPos().left < fixColumn) {
+                    	//console.warn(cell);
+                    	//console.log("-------------");
                         action(cell);
                     }
-
+                    
                     inc = colspan;
                 }
             }
