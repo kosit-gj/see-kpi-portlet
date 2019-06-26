@@ -1,0 +1,9 @@
+/**
+ * ParamQuery Select
+ * 
+ * Copyright (c) 2012-2019 Paramvir Dhindsa (http://paramquery.com)
+ * Released under Evaluation license
+ * http://paramquery.com/pro/license/evaluate
+ * 
+ */
+.pq-select-button .icon-large, .pq-select-button .glyphicon{    float:right;    font-size:10px;    margin: 2px;    width: 16px;}.pq-select-button .panel{    margin-bottom: 0;}.pq-select-button{    white-space: normal;}.pq-select-item-text{    font-weight: normal;}.ui-state-disabled{    opacity:0.35;    filter: Alpha(Opacity=35);}.pq-icon.caret{    margin:8px 4px;}.pq-select-popup .label-info{}
