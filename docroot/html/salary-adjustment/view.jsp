@@ -1011,6 +1011,18 @@ input[type=number]::-webkit-outer-spin-button {
   margin-top: -1.25rem;
 }
 
+/* ######### Start Paramquery Table ######### */
+.aui .pq-grid{
+	font-size:10px !important;;
+}
+.aui .pq-title-span:hover {
+	text-decoration: underline !important;;
+    cursor: pointer !important;;
+}
+.aui a[href='http://paramquery.com/pro']{
+	display: none;
+}
+/* ######### End Paramquery Table ######### */
 </style>
 
 
@@ -1133,13 +1145,34 @@ input[type=number]::-webkit-outer-spin-button {
 								<div class="span8">
 									<div class="span3" style="width:auto">
 										<div class="box box-warning" style="margin-bottom: 0px;">
-											<div class="box-header with-border" style="padding-top: 5px;">Average&nbsp;&nbsp;&nbsp;<span id="average-score">0</span></div>
-<!-- 											<div class="box-body" id="">100</div> -->
+											<div class="box-header with-border" style="padding-top: 5px;">
+												<div style="font-weight: bold;font-size: larger;color: midnightblue;" align="center">Z-Score</div>
+												<hr style="margin-bottom: 3px;margin-top: 3px;">
+												<div style="display: inline-flex;">
+													<div >
+														Average:&nbsp;&nbsp;&nbsp;<span id="average-score">0</span>
+													</div>
+													<div class="" style="margin-left: 20px;">
+														S.D.:&nbsp;&nbsp;&nbsp;<span id="sd-score">0</span>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 									<div class="span3" style="width:auto">
 										<div class="box box-warning" style="margin-bottom: 0px;">
-											<div class="box-header with-border" style="padding-top: 5px;">S.D.&nbsp;&nbsp;&nbsp;<span id="sd-score">200</span></div>
+											<div class="box-header with-border" style="padding-top: 5px;">
+												<div style="font-weight: bold;font-size: larger;color: midnightblue;" align="center">Z-Score Corp.</div>
+												<hr style="margin-bottom: 3px;margin-top: 3px;">
+												<div style="display: inline-flex;">
+													<div >
+														Average:&nbsp;&nbsp;&nbsp;<span id="filter-average-score">0</span>
+													</div>
+													<div class="" style="margin-left: 20px;">
+														S.D.:&nbsp;&nbsp;&nbsp;<span id="filter-sd-score">0</span>
+													</div>
+												</div>											
+											</div>
 <!-- 											<div class="box-body" id="">200</div> -->
 										</div>
 									</div>
@@ -1182,7 +1215,8 @@ input[type=number]::-webkit-outer-spin-button {
                                 -->
                             <!-- pagination end -->
 <!-- 							<div class="head_adjust" id="table-filter-group" style="display: none; margin-bottom: 7px;">Group: <select id="filter-group" style="width: 100px;"></select></div> -->
-							<div id="scroll-tableBonusAdjustment" class="row-fluid list-data-table" style="overflow: auto;">							
+							<div id="sa" style=""></div>
+							<div id="scroll-tableBonusAdjustment" class="row-fluid list-data-table" style="overflow: auto;height: 500px;display:none;">							
 <!-- 							<table class="table table-striped table-bordered" id="tableBonusAdjustment" style="margin-bottom: 0px; max-width: none;"> -->
 <!-- 							<thead id="list_header"> -->
 <!-- 							</thead> -->

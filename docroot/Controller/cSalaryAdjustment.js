@@ -2,6 +2,7 @@ var globalData="";
 var galbalDataTemp=[]; 
 var username = "";
 var password = "";
+var pqGridTable;
 const pageNumberDefault=1;
 let countDatatableGenerate = 0;
 var GlobalChangingSortingData;
@@ -352,7 +353,9 @@ var getDataFn = function () {
             "appraisal_form_id": form_id
         },
         success: function (respData) {
+        	globalData=respData;
         	listDataFn(respData);
+        	
         }
     });
 };
@@ -390,14 +393,313 @@ var listDataFn = function(data) {
 	var htmlHTML="", htmlHeader1="", htmlHeader2="", htmlHeader3="";
 	var htmlHTMLFooter="", htmlHTMLFooter2="", htmlHTMLFooter3="";
 	var edit_flag="";
+	var permissionSA=[{status:false,icon:""},{status:true,icon:"<span class='ui-icon ui-icon-pencil'></span>"}];
 	
 	//countStruc   คือ จำนวน structure header column
 	let countStruc = 0;
-	
+	countStruc = data['items'][0]['structure_result'].length;
+	console.warn("countStruc " + countStruc);
 	// countDatatableGenerate คือการ generate datatable ไปเรื่อยๆเนื่องจากคอลั่มหัวตารางมีการเปลี่ยนจึงต้องสร้างใหม่ และลบอันเก่าออก
 	// ทำไมถึงต้องสร้างใหม่ไปเรื่อยๆ เนื่องจาก datatable ตอน clear แล้วมันจะ error หาก datatable datatable มีการ dynamic header column 
 	countDatatableGenerate += 1;
 	//console.log(countDatatableGenerate);
+	$("#average-score").text(data['avg'].toFixed(2));
+	$("#sd-score").text(data['sd'].toFixed(2));
+	$("#filter-average-score").text(data['avg_filter'].toFixed(2));
+	$("#filter-sd-score").text(data['sd_filter'].toFixed(2));
+	
+	try {
+			$( "#sa" ).pqGrid( "destroy" );
+	}catch(err) {
+		  //document.getElementById("demo").innerHTML = err.message;
+	}
+	var json_data = data['items'] ;
+	
+    var obj = { 
+        /*width: 'flex',*/ height: 'flex', maxHeight: 600,
+        flex: { on: true, one: true, all: true }, icon: undefined,
+        title: 'Salary Adjustment', showTitle: true,
+        freezeCols: (17+countStruc),
+        numberCell: { show: false },  
+        dataModel: { data: json_data },
+        groupModel: {
+            on: true, header: false, headerMenu: false, merge: false,
+            grandSummary: true
+        },
+		summaryTitle: { sum: "{0}" },
+		rowInit: function(ui) {
+			
+			/* ########### ในส่วน grandsummary ###########*/
+			if (ui.rowData.hasOwnProperty('pq_grandsummary') === true) {
+				// Column "รายได้ Var ที่ควรได้ 25%" ใส่ word Total
+				ui.rowData.var_percent = 'Total';
+				// Column "% Diff" หาเปอร์เซ็นต์ผลต่างของ   "ปรับรายได้ Total" / "รายได้ปัจจุบัน Total"
+				ui.rowData.percent_diff = isNaN(Number(ui.rowData.total_up_salary)/Number(ui.rowData.total_now_salary)) ? 0 : (Number(ui.rowData.total_up_salary)/Number(ui.rowData.total_now_salary));
+				//return { style: 'color:blue;font-weight:bold;font-size:larger;'};
+			}
+   
+        },
+        editorEnd: function( event, ui ) {
+			if(ui.dataIndx == "input_percent"){
+				//คำนวน % ของรายได้ปัจจุบัน Total ว่าเป็นกี่ Bath
+				$( event.target ).pqGrid( "updateRow", { rowIndx: ui.rowIndx , newRow: { 'input_score': parseFloat((ui.rowData.input_percent/100)*ui.rowData.total_now_salary).toFixed(2) }} );
+
+			}else if(ui.dataIndx == "input_score"){
+				//คำนวน Bath ของรายได้ปัจจุบัน Total ว่าเป็นกี่ %
+				$( event.target ).pqGrid( "updateRow", { rowIndx: ui.rowIndx , newRow: { 'input_percent': parseFloat(ui.rowData.input_score*100/ui.rowData.total_now_salary).toFixed(2) }} );
+			}
+		},
+    };
+    
+
+    /* ########### Start: Create Columns Header ########### */
+    obj.colModel = [
+    	{ dataIndx: "state", maxWidth: 30, minWidth: 30, align: "center", resizable: false,
+            title: "",
+            menuIcon: false,
+            type: 'checkBoxSelection', cls: 'ui-state-default', sortable: false, editor: false,
+            dataType: 'bool',
+            cb: {
+                all: false, //checkbox selection in the header affect current page only.
+                header: true //show checkbox in header. 
+            }
+        },
+    	{ title: "ID", dataIndx: "emp_result_id" , hidden: true },
+    	{ title: $(".lt-emp-code").val(), dataIndx: "emp_code" , width: 60,halign:"left", editable: false},
+	 	{ title: $(".lt-emp-name").val(), dataIndx: "emp_name" , width: 100,editable: false},
+		{ title: "Org Name", dataIndx: "org_name" , editable: false},
+		{ title: "Z-Score", dataIndx: "z_score",dataType: "float",format: '#,###.00' , editable: false} ,
+		{ title: "Z-Score Corp.", dataIndx: "z_score_filter",dataType: "float",format: '#,###.00' , editable: false} ,
+		{ title: (data==undefined || data['is_board']==1 ? "<span class='ui-icon ui-icon-pencil'></span>คะแนนประเมิน Board." : "<span class='ui-icon ui-icon-pencil'></span>คะแนนประเมิน COO."), dataIndx: "score_last",dataType: "float",format: '#,###.00' , editable: true} ,
+		{ title: "เกรด", dataIndx: "grade", editable: false} ,
+		{ title: "Cal Standard", dataIndx: "cal_standard",dataType: "float",format: '#,###.00' , editable: false , summary: { type: 'sum' }} ,
+		{ title: "ขาด/เกิน", dataIndx: "miss_over",dataType: "float",format: '#,###' , editable: false , summary: { type: 'sum' }} ,
+		{ title: "รายได้ที่เปลี่ยนแปลง",align: "center", colModel: [
+				{ title: "ปรับรายได้ Total", dataIndx: "total_up_salary",dataType: "float",format: '#,###.00' , editable: false, summary: { type: 'sum' }} ,
+				{ title: permissionSA[data.edit_flag].icon+"ปรับเงินเดือน", dataIndx: "adjust_raise_s_amount",dataType: "float",format: '#,###.00' , editable: permissionSA[data.edit_flag].status , summary: { type: 'sum' }} ,
+				{ title: permissionSA[data.edit_flag].icon+"ปรับ P-QPI", dataIndx: "adjust_raise_pqpi_amount",dataType: "float",format: '#,###.00' , editable: permissionSA[data.edit_flag].status , summary: { type: 'sum' }} ,
+				{ title: "% Diff", dataIndx: "percent_diff",dataType: "float",format: '#,###.00%' , editable: false} ,
+		]},
+		{ title: "Calculator",align: "center", colModel: [
+				{ title: permissionSA[data.edit_flag].icon+"%", dataIndx: "input_percent",dataType: "float",format: '#,###.00%' , editable: permissionSA[data.edit_flag].status , summary: { type: 'sum' }} ,
+				{ title: permissionSA[data.edit_flag].icon+"Bath", dataIndx: "input_score", dataType: "float",format: '#,###.00' , editable: permissionSA[data.edit_flag].status , summary: { type: 'sum' }} ,
+		]},
+		{ title: "รายได้จากการคำนวนตีค่างาน",align: "center", colModel: [
+			{ title: "รายได้รวมที่ควรได้ 90% ไม่รวม Bonus", dataIndx: "total_percent",dataType: "float",format: '#,###.00' , editable: false} ,
+			{ title: "รายได้ Fix ที่ควรได้ 65%", dataIndx: "fix_percent",dataType: "float",format: '#,###.00' , editable: false} ,
+			{ title: "รายได้ Var ที่ควรได้ 25%", dataIndx: "var_percent",dataType: "float",format: '#,###.00' , editable: false} ,		
+		]},
+		/* ########### END: Frozen columns ########### */
+		{ title: "รายได้ปัจจุบัน",align: "center", colModel: [
+				{ title: "รายได้ปัจจุบัน Total", dataIndx: "total_now_salary",dataType: "float",format: '#,###.00' , editable: false , summary: { type: 'sum' }} ,
+				{ title: "FIX65%",align: "center", colModel:[
+						{ title: "Salary", dataIndx: "salary",dataType: "float",format: '#,###.00' , editable: false , summary: { type: 'sum' }} ,
+						{ title: "P-QPI", dataIndx: "pqpi_amount",dataType: "float",format: '#,###.00' , editable: false , summary: { type: 'sum' }} ,
+						{ title: "อื่นๆ", dataIndx: "fix_other_amount",dataType: "float",format: '#,###.00' , editable: false , summary: { type: 'sum' }} ,
+				]},
+				{ title: "VAR25%",align: "center", colModel:[
+						{ title: "MPI", dataIndx: "mpi_amount",dataType: "float",format: '#,###.00' , editable: false , summary: { type: 'sum' }} ,
+						{ title: "PI", dataIndx: "pi_amount",dataType: "float",format: '#,###.00' , editable: false , summary: { type: 'sum' }} ,
+						{ title: "อื่นๆ", dataIndx: "var_other_amount",dataType: "float",format: '#,###.00' , editable: false , summary: { type: 'sum' }} ,
+				]},
+		]},
+		{ title: "รายได้ใหม่",align: "center", colModel: [
+				{ title: "รายได้ใหม่ Total", dataIndx: "input_total_new_salary",dataType: "float",format: '#,###.00' , editable: false} ,
+				{ title: "FIX65%",align: "center", colModel:[
+						{ title: "Salary", dataIndx: "new_salary",dataType: "float",format: '#,###.00' , editable: false} ,
+						{ title: "P-QPI", dataIndx: "new_pqpi_amount",dataType: "float",format: '#,###.00' , editable: false} ,
+						{ title: "อื่นๆ", dataIndx: "fix_other_amount",dataType: "float",format: '#,###.00' , editable: false} ,
+				]},
+				{ title: "VAR25%",align: "center", colModel:[
+						{ title: "MPI", dataIndx: "mpi_amount",dataType: "float",format: '#,###.00' , editable: false} ,
+						{ title: "PI", dataIndx: "pi_amount",dataType: "float",format: '#,###.00' , editable: false} ,
+						{ title: "อื่นๆ", dataIndx: "var_other_amount",dataType: "float",format: '#,###.00' , editable: false} ,
+				]},
+		]},
+		
+		
+		];
+    
+    $.each(data['items'][0]['structure_result'],function (index, indexEntry) {
+    	obj.colModel.push({title: indexEntry.structure_name, dataIndx: "structure_result_"+indexEntry.structure_id,dataType: "float",format: '#,###.00' , editable: false}); 
+    });
+    
+    obj.colModel.push(
+    		{ title: "คะแนนประเมิน Mgr.", dataIndx: "score_manager",dataType: "float",format: '#,###.00' , editable: false} ,
+    		{ title: "คะแนนประเมิน BU.", dataIndx: "score_bu",dataType: "float",format: '#,###.00' , editable: false} ,
+    		{ title: "คะแนนประเมิน COO.", dataIndx: "score_coo",dataType: "float",format: '#,###.00' , editable: false} ,
+    		{ title: "คะแนนประเมิน Board.", dataIndx: "score_board",dataType: "float",format: '#,###.00' , editable: false, hidden: (data==undefined || data['is_board']==1)} ,
+    		{ title: "คะแนนเต็มตีค่างาน (ความรู้)", dataIndx: "knowledge_point",dataType: "float",format: '#,###.00' , editable: false} ,
+    		{ title: "คะแนนเต็มตีค่างาน (ศักยภาพ)", dataIndx: "capability_point",dataType: "float",format: '#,###.00' , editable: false} ,
+    		{ title: "Total Point", dataIndx: "total_point",dataType: "float",format: '#,###.00' , editable: false} ,
+    		{ title: "Baht/Point", dataIndx: "baht_per_point",dataType: "float",format: '#,###.00' , editable: false}
+    ); 
+    /* ########### End: Create Columns Header ########### */
+    obj.formulas = [ 
+		["grade", function(rd) { 
+			// rd = ข้อมูลทั้งหมดของ row นั้น
+			if(rd.is_job_evaluation == 1) {return '';};
+			var ArrayScore = rd.cal_grade;
+			var filterScore = ArrayScore.filter(function (el) {
+	    		return rd.score_last >= el.begin_score && rd.score_last <= el.end_score;
+			});
+			var grade = (filterScore.length==0 ? '' : filterScore[0]['grade']);
+			return grade; 
+		}],
+		["cal_standard", function(rd) { 
+			if(rd.is_job_evaluation == 1) {return '';};
+			var ArrayScore = rd.cal_grade;
+			var cal_standard;
+			ArrayScore.filter(function (el) {
+				if(rd.score_last >= el.begin_score && rd.score_last <= el.end_score) {
+					if(el.raise_type==1) {
+						cal_standard =  (Math.round(notNullFn(el.salary_raise_amount)));
+					} else {
+						cal_standard = (Math.round(notNullFn((el.salary_raise_percent*rd.salary)/100)));
+					}
+				}
+			});
+			return cal_standard;
+		}],
+		["miss_over", function(rd) {
+			if(rd.is_job_evaluation != 1) {return '';};
+			var scoreCooOrBoard = rd.score_last;
+			var cal = ( (Number(rd.total_point) * Number(scoreCooOrBoard)) / 100 ) * Number(rd.bath_point);
+			var fix_percent = roundThen(notNullFn(isNaN((cal * 65)/100) ? 0 : (cal3 * 65)/100 ), -2);
+			var cal_miss_over = (Number(rd.salary)+Number(rd.pqpi_amount)+Number(rd.fix_other_amount))-fix_percent;
+			var miss_over = roundThen(notNullFn(cal_miss_over), -2);
+			var attr = rd.pq_cellattr = rd.pq_cellattr || {};
+            if(miss_over > 0){                       
+                attr.emp_result_id = attr.miss_over = { style: 'color: #ff0000;font-style:italic;'}                        
+            }
+			return miss_over;
+		}],
+		["total_up_salary", function(rd) {
+			//คำนวน ปรับรายได้ Total = ปรับเงินเดือน+(ปรับ P-QPI)
+			if( ($.inArray(rd.adjust_raise_pqpi_amount, [null,undefined,'']) == -1) ||  ($.inArray(rd.adjust_raise_s_amount, [null,undefined,'']) == -1)   ){
+				var adjust_raise_pqpi_amount = ($.inArray(rd.adjust_raise_pqpi_amount, [null,undefined,'']) != -1) ? 0 : Number(rd.adjust_raise_pqpi_amount);
+				var adjust_raise_s_amount = ($.inArray(rd.adjust_raise_s_amount, [null,undefined,'']) != -1) ? 0 : Number(rd.adjust_raise_s_amount);
+				var total = adjust_raise_pqpi_amount+adjust_raise_s_amount;
+				return isNaN(Math.round(total)) ? '' : Math.round(total);
+			}else{
+				return '';
+			}
+		}],
+		["percent_diff", function(rd) {
+			//% Diff = รายได้ปัจจุบัน Total/รายได้ปัจจุบัน Totall
+			if($.inArray(rd.total_up_salary, [null,undefined,'']) != -1){
+				return '';
+			}else{
+				return isNaN(Number(rd.total_up_salary)/Number(rd.total_now_salary)) ? '' : (Number(rd.total_up_salary)/Number(rd.total_now_salary));
+			}
+		}],
+		["total_percent", function(rd) {
+			if(rd.is_job_evaluation != 1) {return '';};
+			var scoreCooOrBoard = rd.score_last;
+			var cal = ( (Number(rd.total_point) * Number(scoreCooOrBoard)) / 100 ) * Number(rd.bath_point);
+			var total_percent = roundThen(notNullFn(isNaN((cal * 90)/100) ? 0 : (cal3 * 90)/100 ), -2);
+			return total_percent;
+		}],
+		["fix_percent", function(rd) {
+			if(rd.is_job_evaluation != 1) {return '';};
+			var scoreCooOrBoard = rd.score_last;
+			var cal = ( (Number(rd.total_point) * Number(scoreCooOrBoard)) / 100 ) * Number(rd.bath_point);
+			var fix_percent = roundThen(notNullFn(isNaN((cal * 65)/100) ? 0 : (cal3 * 65)/100 ), -2);
+			return fix_percent;
+		}],
+		["var_percent", function(rd) {
+			if(rd.is_job_evaluation != 1) {return '';};
+			var scoreCooOrBoard = rd.score_last;
+			var cal = ( (Number(rd.total_point) * Number(scoreCooOrBoard)) / 100 ) * Number(rd.bath_point);
+			var var_percent = roundThen(notNullFn(isNaN((cal * 25)/100) ? 0 : (cal3 * 25)/100 ), -2);
+			return var_percent;
+		}],
+		["total_now_salary", function(rd) { 
+			// FIX65%
+			var salary = Number(rd.salary);
+			var pqpi = Number(rd.pqpi_amount);
+			var fix_other =  Number(rd.fix_other_amount);
+			// FIX25%
+			var mipi = Number(rd.mpi_amount);
+			var pi = Number(rd.pi_amount);
+			var var_other = Number(rd.var_other_amount);
+			// รายได้ปัจจุบัน Total
+			var total = salary + pqpi + fix_other + mipi + pi + var_other;
+			return notNullFn(total);
+			
+		}],
+		["new_salary", function(rd) { 
+			//console.log(rd.new_salary);
+			if(rd.new_salary==null || rd.new_salary==""){
+				return rd.salary;
+			}else{
+				return parseFloat(Number(rd.adjust_raise_s_amount) + Number(rd.salary)).toFixed(2);
+			}
+			
+		}],
+		["new_pqpi_amount", function(rd) { 	
+			if(rd.new_pqpi_amount==null || rd.new_pqpi_amount==""){
+				return rd.pqpi_amount;
+			}else{
+				return parseFloat(Number(rd.adjust_raise_pqpi_amount) + Number(rd.pqpi_amount)).toFixed(2);
+			}
+		}],
+
+		["input_total_new_salary", function(rd) { 
+			if((typeof rd.input_total_new_salary === 'undefined')){
+				return notNullFn(Number(rd.total_now_salary)+Number(rd.adjust_raise_s_amount)+Number(rd.adjust_raise_pqpi_amount));
+			}else{
+				var new_salary = Number(rd.new_salary);
+				var new_pqpi = Number(rd.new_pqpi_amount);
+				var new_fix_other =  Number(rd.fix_other_amount);
+				var new_mipi = Number(rd.mpi_amount);
+				var new_pi = Number(rd.pi_amount);
+				var new_var_other = Number(rd.var_other_amount);
+				var total = new_salary + new_pqpi + new_fix_other + new_mipi + new_pi + new_var_other;
+				return notNullFn(total);
+			}
+		}],
+		["knowledge_point", function(rd) { 	
+			if(rd.is_job_evaluation != 1) {return '';};
+		}],
+		["capability_point", function(rd) { 	
+			if(rd.is_job_evaluation != 1) {return '';};
+		}],
+		["total_point", function(rd) { 	
+			if(rd.is_job_evaluation != 1) {return '';};
+		}],
+		["baht_per_point", function(rd) { 	
+			if(rd.is_job_evaluation != 1) {return '';};
+		}],
+		
+
+];
+    //หาค่า score ใน Strcture_result ออกมาแสดง
+    $.each(data['items'][0]['structure_result'],function (index, indexEntry) {
+		
+   	 obj.formulas.push(
+				["structure_result_"+indexEntry.structure_id, function(rd) {
+					var ArrayScore = rd.structure_result;
+					var filterScore = ArrayScore.filter(function (el) {
+						return indexEntry.structure_id === el.structure_id;
+					});
+					var score = (filterScore.length==0 ? '' : filterScore[0]['score']);
+					return score; 	
+				}]
+		); 
+   });
+    //console.warn(obj);
+    //pqGridTable = obj;
+    pqGridTable = $("#sa").pqGrid(obj);
+    //$("#sa").Checkbox('state')
+
+    //$( "#sa" ).pqGrid( "refresh" );
+	
+	
+/*auau	
+	
+	
+	
 	var startTableDynamic = "";
 	startTableDynamic +="<table class=\"table table-striped table-bordered tableBonusAdjustment\" id=\"tableBonusAdjustment"+countDatatableGenerate+"\" style=\"margin-bottom: 0px; max-width: none;\">";
 	startTableDynamic +="</table>";
@@ -409,6 +711,8 @@ var listDataFn = function(data) {
 	tableBegin +="<tbody id=\"list_empjudege\"></tbody>";
 	tableBegin +="<tfoot id=\"list_footer\"></tfoot>";
 	table.html(tableBegin);
+	
+	
 	
 	//25
 	htmlHeader1+="<tr>";
@@ -513,10 +817,10 @@ var listDataFn = function(data) {
 	});
 	
 	$("#list_header").html(htmlHeader1+htmlHeader2+htmlHeader3);
+auau	*/
+	//table.DataTable().clear();
 	
-	table.DataTable().clear();
-	
-	table.DataTable().destroy();
+	//table.DataTable().destroy();
 	
 	/* clear freeze
 		ต้องเคลียหลังจาก  table มี header columnแล้ว ถ้าเคลียก่อนมันจะ error
@@ -525,6 +829,7 @@ var listDataFn = function(data) {
 	*/
 	
 	//footer sum total
+    /* auu
 	if(data.sum_new_salary==null || data.sum_new_salary=="") {
 		var sum_salary = data.sum_salary;
 	} else {
@@ -765,7 +1070,7 @@ var listDataFn = function(data) {
 	});
 	$("#list_empjudege").html(htmlHTML);
 	
-	createDatatable(table, countStruc, data['is_board']); //สร้างรูปแบบ datatable
+	//createDatatable(table, countStruc, data['is_board']); //สร้างรูปแบบ datatable
 	
 	calculatePercentKeyup(); //เซ็ตค่าการกดคำนวนต่างๆ
 	
@@ -774,7 +1079,7 @@ var listDataFn = function(data) {
 	setPermission(data); //set สิทการจัดการข้อมูล
 	
 	calculateSumtotalFooter(); //sum footer
-	
+	auau*/
 	$(".head_adjust").show();
 	
 };
@@ -1448,6 +1753,7 @@ var calculatePercentKeyup = function() {
 var updateFn = function(cal) {
 	var stage_id = $("#actionToAssign").val();
 	var detail = [];
+	/*
 	$.each($(".control-calculate").get(),function(index,indexEntry) {
 		if (typeof $(indexEntry).attr('data-dt-row') !== typeof undefined && $(indexEntry).attr('data-dt-row') !== false) {
 			//เป็นคลาสของ datatables ซึ่งจะไม่เอาข้อมูลในส่วนนี้
@@ -1466,15 +1772,21 @@ var updateFn = function(cal) {
 			}
 		}
 	});
-	
+	*/
 //	console.log(detail, cal);
 //	return;
+	//$( "#sa" ).pqGrid("Checkbox", "state").getCheckedNodes().length
 	
-	if(detail.length==0) {
+	try {
+		detail = $( "#sa" ).pqGrid("Checkbox", "state").getCheckedNodes();
+		if(detail.length==0) {
+			callFlashSlide("Please Select Employee");
+			return;
+		}
+	}catch(err) {
 		callFlashSlide("Please Select Employee");
-		return;
 	}
-
+	detail = $( "#sa" ).pqGrid("Checkbox", "state").getCheckedNodes();
     $.ajax({
         url: restfulURL + "/" + serviceName + "/public/salary/update",
         type: "patch",
@@ -1500,7 +1812,7 @@ var updateFn = function(cal) {
 }
 
 var exportExcel = function() {
-	let selectCheck = false;
+	/*let selectCheck = false;
 	$("#list_header_temp").empty().html($("#tableBonusAdjustment"+countDatatableGenerate+" > thead").html());
 
 	// append row is checked
@@ -1532,7 +1844,11 @@ var exportExcel = function() {
 	$("#table-export-temp").table2excel({
 		exclude: ".noExl",
 		filename: "Salary Adjustment.xls"
-	});
+	});*/
+
+	 var  blob = $( "#sa" ).pqGrid( "exportData", {  format: 'xlsx', nopqdata: true});
+	 if(typeof blob === "string"){blob = new Blob([blob]);};
+	 saveAs(blob, "Salary Adjustment.xlsx" );
 	
 }
 
