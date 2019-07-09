@@ -393,10 +393,10 @@ var listDataFn = function(data) {
 	var htmlHTML="", htmlHeader1="", htmlHeader2="", htmlHeader3="";
 	var htmlHTMLFooter="", htmlHTMLFooter2="", htmlHTMLFooter3="";
 	var edit_flag="";
-	var permissionSA=[{status:false,icon:""},{status:true,icon:"<span class='ui-icon ui-icon-pencil'></span>"}];
-	
+	var permissionSA=[{status:false,icon:""},{status:true,icon:"*"}];//<span class='ui-icon ui-icon-pencil'></span>
+	//var data = globalData;
 	//countStruc   คือ จำนวน structure header column
-	let countStruc = 0;
+	var countStruc = 0;
 	countStruc = data['items'][0]['structure_result'].length;
 	console.warn("countStruc " + countStruc);
 	// countDatatableGenerate คือการ generate datatable ไปเรื่อยๆเนื่องจากคอลั่มหัวตารางมีการเปลี่ยนจึงต้องสร้างใหม่ และลบอันเก่าออก
@@ -465,12 +465,12 @@ var listDataFn = function(data) {
             }
         },
     	{ title: "ID", dataIndx: "emp_result_id" , hidden: true },
-    	{ title: $(".lt-emp-code").val(), dataIndx: "emp_code" , width: 60,halign:"left", editable: false},
-	 	{ title: $(".lt-emp-name").val(), dataIndx: "emp_name" , width: 100,editable: false},
-		{ title: "Org Name", dataIndx: "org_name" , editable: false},
+    	{ title: $(".lt-emp-code").val(), dataIndx: "emp_code" , width: 50,maxWidth: 60,halign:"left", editable: false , hidden: true},
+	 	{ title: $(".lt-emp-name").val(), dataIndx: "emp_name" , width: 50,maxWidth: 50,editable: false},
+		{ title: "Org Name", dataIndx: "org_name" ,maxWidth: 50, editable: false},
 		{ title: "Z-Score", dataIndx: "z_score",dataType: "float",format: '#,###.00' , editable: false} ,
 		{ title: "Z-Score Corp.", dataIndx: "z_score_filter",dataType: "float",format: '#,###.00' , editable: false} ,
-		{ title: (data==undefined || data['is_board']==1 ? "<span class='ui-icon ui-icon-pencil'></span>คะแนนประเมิน Board." : "<span class='ui-icon ui-icon-pencil'></span>คะแนนประเมิน COO."), dataIndx: "score_last",dataType: "float",format: '#,###.00' , editable: true} ,
+		{ title: (data==undefined || data['is_board']==1 ? "*คะแนนประเมิน Board." : "*คะแนนประเมิน COO."), dataIndx: "score_last",dataType: "float",format: '#,###.00' , editable: true} ,
 		{ title: "เกรด", dataIndx: "grade", editable: false} ,
 		{ title: "Cal Standard", dataIndx: "cal_standard",dataType: "float",format: '#,###.00' , editable: false , summary: { type: 'sum' }} ,
 		{ title: "ขาด/เกิน", dataIndx: "miss_over",dataType: "float",format: '#,###' , editable: false , summary: { type: 'sum' }} ,
@@ -659,17 +659,19 @@ var listDataFn = function(data) {
 				return notNullFn(total);
 			}
 		}],
-		["knowledge_point", function(rd) { 	
-			if(rd.is_job_evaluation != 1) {return '';};
+		["knowledge_point", function(rd) { 
+			return rd.is_job_evaluation == 0 ? null : rd.knowledge_point;
 		}],
 		["capability_point", function(rd) { 	
 			if(rd.is_job_evaluation != 1) {return '';};
+			return rd.is_job_evaluation == 0 ? null : rd.capability_point;
 		}],
 		["total_point", function(rd) { 	
 			if(rd.is_job_evaluation != 1) {return '';};
+			return rd.is_job_evaluation == 0 ? null : rd.total_point;
 		}],
 		["baht_per_point", function(rd) { 	
-			if(rd.is_job_evaluation != 1) {return '';};
+			return rd.is_job_evaluation == 0 ? null : rd.baht_per_point;
 		}],
 		
 
@@ -1812,43 +1814,37 @@ var updateFn = function(cal) {
 }
 
 var exportExcel = function() {
-	/*let selectCheck = false;
-	$("#list_header_temp").empty().html($("#tableBonusAdjustment"+countDatatableGenerate+" > thead").html());
-
-	// append row is checked
-	$("#list_boby_temp").empty();
-	$("#tableBonusAdjustment"+countDatatableGenerate+" > tbody > tr").each(function() {
-		var isRowSelect = $(this).children("td:eq(0)").children("input").attr("select-check");
-		if (typeof isRowSelect !== typeof undefined && isRowSelect == "1") {
-			$("#list_boby_temp").append("<tr>"+$(this).html()+"</tr>");
-			selectCheck = true;
-		}
-	});
+	$("body").mLoading();
 	
-	if(selectCheck==false) {
+	try {
+		var detail = $( "#sa" ).pqGrid("Checkbox", "state").getCheckedNodes();
+		if(detail.length==0) {
+			$("body").mLoading('hide');
+			callFlashSlide("Please Select Employee");
+			return;
+		}else{
+			// filter เฉพาะที่เลือกพนักงานเท่านั้น
+			$( "#sa" ).pqGrid("filter", {
+		        oper: 'replace',
+		        rules: [{ dataIndx: "state", condition: "contain", value: true}]
+		    });
+		}
+	}catch(err) {
 		callFlashSlide("Please Select Employee");
-		return;
 	}
 	
-	var numFooter = [6,7,8,9,10,11]
-
-	$.each(numFooter,function(index,value) {
-	  $(".dataTables_scroll").find(".dataTables_scrollFootInner").find(".tableBonusAdjustment").find("#list_footer > tr > td:eq("+value+")")
-	  .html($(".DTFC_LeftFootWrapper").find(".tableBonusAdjustment").find("#list_footer > tr > td:eq("+value+")").html()
-	  );
-	});
-	
-	$("#list_footer_temp").empty().html($(".dataTables_scroll").find(".dataTables_scrollFootInner").find(".tableBonusAdjustment").find("#list_footer").html());
-
-	// export table to excel
-	$("#table-export-temp").table2excel({
-		exclude: ".noExl",
-		filename: "Salary Adjustment.xls"
-	});*/
-
 	 var  blob = $( "#sa" ).pqGrid( "exportData", {  format: 'xlsx', nopqdata: true});
 	 if(typeof blob === "string"){blob = new Blob([blob]);};
 	 saveAs(blob, "Salary Adjustment.xlsx" );
+	 
+	 
+	 // ยกเลิก filter
+	 $( "#sa" ).pqGrid("filter", {
+	        oper: 'replace',
+	        rules: []
+	    });
+	 
+	 $("body").mLoading('hide');
 	
 }
 
