@@ -548,9 +548,9 @@ var listDataFn = function(data) {
 			ArrayScore.filter(function (el) {
 				if(rd.score_last >= el.begin_score && rd.score_last <= el.end_score) {
 					if(el.raise_type==1) {
-						cal_standard =  (Math.round(notNullFn(el.salary_raise_amount)));
+						cal_standard =  roundThen(Math.round(notNullFn(el.salary_raise_amount)),-2);
 					} else {
-						cal_standard = (Math.round(notNullFn((el.salary_raise_percent*rd.salary)/100)));
+						cal_standard = roundThen(Math.round(notNullFn((el.salary_raise_percent*rd.salary)/100)),-2);
 					}
 				}
 			});
