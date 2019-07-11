@@ -419,7 +419,7 @@ var listDataFn = function(data) {
             on: true, header: false, headerMenu: false, merge: false,
             grandSummary: true
         },
-		summaryTitle: { sum: "{0}" },
+		summaryTitle: { sum: "{0}" ,count:"{0} คน"},
 		rowInit: function(ui) {
 			
 			/* ########### ในส่วน grandsummary ###########*/
@@ -459,7 +459,7 @@ var listDataFn = function(data) {
         },
     	{ title: "ID", dataIndx: "emp_result_id" , hidden: true },
     	{ title: $(".lt-emp-code").val(), dataIndx: "emp_code" , width: 50,maxWidth: 60,halign:"left", editable: false , hidden: true},
-	 	{ title: $(".lt-emp-name").val(), dataIndx: "emp_name" , width: 50,maxWidth: 50,editable: false},
+	 	{ title: $(".lt-emp-name").val(), dataIndx: "emp_name" , width: 50,maxWidth: 50,editable: false,summary: { type: 'count' }},
 		{ title: "Org Name", dataIndx: "org_name" ,maxWidth: 50, editable: false},
 		{ title: "Z-Score", dataIndx: "z_score",dataType: "float",format: '#,###.00' , editable: false} ,
 		{ title: "Z-Score Corp.", dataIndx: "z_score_filter",dataType: "float",format: '#,###.00' , editable: false} ,
@@ -559,8 +559,8 @@ var listDataFn = function(data) {
 		["miss_over", function(rd) {
 			if(rd.is_job_evaluation != 1) {return '';};
 			var scoreCooOrBoard = rd.score_last;
-			var cal = ( (Number(rd.total_point) * Number(scoreCooOrBoard)) / 100 ) * Number(rd.bath_point);
-			var fix_percent = roundThen(notNullFn(isNaN((cal * 65)/100) ? 0 : (cal3 * 65)/100 ), -2);
+			var cal = ( (Number(rd.total_point) * Number(scoreCooOrBoard)) / 100 ) * Number(rd.baht_per_point);
+			var fix_percent = roundThen(notNullFn(isNaN((cal * 65)/100) ? 0 : (cal * 65)/100 ), -2);
 			var cal_miss_over = (Number(rd.salary)+Number(rd.pqpi_amount)+Number(rd.fix_other_amount))-fix_percent;
 			var miss_over = roundThen(notNullFn(cal_miss_over), -2);
 			var attr = rd.pq_cellattr = rd.pq_cellattr || {};
@@ -591,22 +591,22 @@ var listDataFn = function(data) {
 		["total_percent", function(rd) {
 			if(rd.is_job_evaluation != 1) {return '';};
 			var scoreCooOrBoard = rd.score_last;
-			var cal = ( (Number(rd.total_point) * Number(scoreCooOrBoard)) / 100 ) * Number(rd.bath_point);
-			var total_percent = roundThen(notNullFn(isNaN((cal * 90)/100) ? 0 : (cal3 * 90)/100 ), -2);
+			var cal = ( (Number(rd.total_point) * Number(scoreCooOrBoard)) / 100 ) * Number(rd.baht_per_point);
+			var total_percent = roundThen(notNullFn(isNaN((cal * 90)/100) ? 0 : (cal * 90)/100 ), -2);
 			return total_percent;
 		}],
 		["fix_percent", function(rd) {
 			if(rd.is_job_evaluation != 1) {return '';};
 			var scoreCooOrBoard = rd.score_last;
-			var cal = ( (Number(rd.total_point) * Number(scoreCooOrBoard)) / 100 ) * Number(rd.bath_point);
-			var fix_percent = roundThen(notNullFn(isNaN((cal * 65)/100) ? 0 : (cal3 * 65)/100 ), -2);
+			var cal = ( (Number(rd.total_point) * Number(scoreCooOrBoard)) / 100 ) * Number(rd.baht_per_point);
+			var fix_percent = roundThen(notNullFn(isNaN((cal * 65)/100) ? 0 : (cal * 65)/100 ), -2);
 			return fix_percent;
 		}],
 		["var_percent", function(rd) {
 			if(rd.is_job_evaluation != 1) {return '';};
 			var scoreCooOrBoard = rd.score_last;
-			var cal = ( (Number(rd.total_point) * Number(scoreCooOrBoard)) / 100 ) * Number(rd.bath_point);
-			var var_percent = roundThen(notNullFn(isNaN((cal * 25)/100) ? 0 : (cal3 * 25)/100 ), -2);
+			var cal = ( (Number(rd.total_point) * Number(scoreCooOrBoard)) / 100 ) * Number(rd.baht_per_point);
+			var var_percent = roundThen(notNullFn(isNaN((cal * 25)/100) ? 0 : (cal * 25)/100 ), -2);
 			return var_percent;
 		}],
 		["total_now_salary", function(rd) { 
