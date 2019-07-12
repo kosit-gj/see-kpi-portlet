@@ -1022,6 +1022,40 @@ input[type=number]::-webkit-outer-spin-button {
 .aui a[href='http://paramquery.com/pro']{
 	display: none;
 }
+.pq-grid-col.sa-col-head-calculate {
+    background: rgba(250, 208, 190, 0.6);
+}
+.pq-grid-col.sa-col-head-income-cal-work-fees {
+
+    background: rgba(127, 113, 228, 0.4);
+
+}
+.pq-grid-col.sa-col-head-current-income{
+
+    background: rgb(248, 212, 50,0.35);
+
+}
+
+.pq-grid-col.sa-col-head-new-income{
+
+    background: rgb(22, 166, 163 ,0.5);
+
+}
+.pq-grid-col.sa-col-head-structure{
+
+    background: rgb(233, 38, 143 ,0.4);
+
+}
+.pq-grid-col.sa-col-head-scoring{
+
+    background: rgb(206, 67, 83,0.6);
+
+}
+.pq-grid-col.sa-col-head-total-work-fees{
+
+    background: rgb(148, 213, 228,0.7);
+
+}
 /* ######### End Paramquery Table ######### */
 </style>
 

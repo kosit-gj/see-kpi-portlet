@@ -6,7 +6,16 @@ var pqGridTable;
 const pageNumberDefault=1;
 let countDatatableGenerate = 0;
 var GlobalChangingSortingData;
-
+// Set background color ที่ต้องทำเป็น Function เพราะว่าเพื่อกรณีต้องมีการจัดการข้อมูลเพิ่ม
+var setCallBg = {
+		calculate			:function(ui){  var attr = ui.rowData.pq_cellattr = ui.rowData.pq_cellattr || {}; attr[ui.dataIndx] = { style: 'background: #F9EAE1;'} ;	 },//return {style: 'background: rgba(250, 208, 190, 0.3);'};
+		incomeCalWorkFees	:function(ui){  var attr = ui.rowData.pq_cellattr = ui.rowData.pq_cellattr || {}; attr[ui.dataIndx] = { style: 'background: #DADCF1;'} ; },
+		currentIncome		:function(ui){	var attr = ui.rowData.pq_cellattr = ui.rowData.pq_cellattr || {}; attr[ui.dataIndx] = { style: 'background: #F7EDD4;'} ; },
+		newIncome			:function(ui){	var attr = ui.rowData.pq_cellattr = ui.rowData.pq_cellattr || {}; attr[ui.dataIndx] = { style: 'background: #C7E6E2;'} ; },
+		structure			:function(ui){	var attr = ui.rowData.pq_cellattr = ui.rowData.pq_cellattr || {}; attr[ui.dataIndx] = { style: 'background: #ECDDE5;'} ; },
+		scoring				:function(ui){	var attr = ui.rowData.pq_cellattr = ui.rowData.pq_cellattr || {}; attr[ui.dataIndx] = { style: 'background: #EBBEC2;'} ; },
+		totalWorkFees		:function(ui){	var attr = ui.rowData.pq_cellattr = ui.rowData.pq_cellattr || {}; attr[ui.dataIndx] = { style: 'background: #D8EBEF;'} ; },
+	};
 function roundThen(value, precision) {
 	if (Number.isInteger(precision)) {
 		var shift = Math.pow(10, precision);
@@ -411,7 +420,8 @@ var listDataFn = function(data) {
     var obj = { 
         /*width: 'flex',*/ height: 'flex', maxHeight: 600,
         flex: { on: true, one: true, all: true }, icon: undefined,
-        title: 'Salary Adjustment', showTitle: true,
+        title: 'Salary Adjustment', showTitle: true,stripeRows:false,
+        columnBorders: true,rowBorders: true,
         freezeCols: (17+countStruc),
         numberCell: { show: false },  
         dataModel: { data: json_data },
@@ -444,7 +454,6 @@ var listDataFn = function(data) {
 		},
     };
     
-
     /* ########### Start: Create Columns Header ########### */
     obj.colModel = [
     	{ dataIndx: "state", maxWidth: 30, minWidth: 30, align: "center", resizable: false,
@@ -465,48 +474,48 @@ var listDataFn = function(data) {
 		{ title: "Z-Score Corp.", dataIndx: "z_score_filter",dataType: "float",format: '#,###.00' , editable: false} ,
 		{ title: (data==undefined || data['is_board']==1 ? "*คะแนนประเมิน Board." : "*คะแนนประเมิน COO."), dataIndx: "score_last",dataType: "float",format: '#,###.00' , editable: true} ,
 		{ title: "เกรด", dataIndx: "grade", editable: false} ,
-		{ title: "Cal Standard", dataIndx: "cal_standard",dataType: "float",format: '#,###.00' , editable: false , summary: { type: 'sum' }} ,
+		{ title: "Cal Standards", dataIndx: "cal_standard",dataType: "float",format: '#,###.00' , editable: false , summary: { type: 'sum' }} ,
 		{ title: "ขาด/เกิน", dataIndx: "miss_over",dataType: "float",format: '#,###' , editable: false , summary: { type: 'sum' }} ,
 		{ title: "รายได้ที่เปลี่ยนแปลง",align: "center", colModel: [
-				{ title: "ปรับรายได้ Total", dataIndx: "total_up_salary",dataType: "float",format: '#,###.00' , editable: false, summary: { type: 'sum' }} ,
+				{ title: "ปรับรายได้ Total", dataIndx: "total_up_salary",dataType: "float",format: '#,###.00' , editable: false, summary: { type: 'sum' },} ,
 				{ title: permissionSA[data.edit_flag].icon+"ปรับเงินเดือน", dataIndx: "adjust_raise_s_amount",dataType: "float",format: '#,###.00' , editable: permissionSA[data.edit_flag].status , summary: { type: 'sum' }} ,
 				{ title: permissionSA[data.edit_flag].icon+"ปรับ P-QPI", dataIndx: "adjust_raise_pqpi_amount",dataType: "float",format: '#,###.00' , editable: permissionSA[data.edit_flag].status , summary: { type: 'sum' }} ,
 				{ title: "% Diff", dataIndx: "percent_diff",dataType: "float",format: '#,###.00%' , editable: false} ,
 		]},
-		{ title: "Calculator",align: "center", colModel: [
-				{ title: permissionSA[data.edit_flag].icon+"%", dataIndx: "input_percent",dataType: "float",format: '#,###.00%' , editable: permissionSA[data.edit_flag].status , summary: { type: 'sum' }} ,
-				{ title: permissionSA[data.edit_flag].icon+"Bath", dataIndx: "input_score", dataType: "float",format: '#,###.00' , editable: permissionSA[data.edit_flag].status , summary: { type: 'sum' }} ,
+		{ title: "Calculator",align: "center", clsHead:"sa-col-head-calculate", colModel: [
+				{ title: permissionSA[data.edit_flag].icon+"%", dataIndx: "input_percent",dataType: "float",format: '#,###.00%' ,clsHead:"sa-col-head-calculate", editable: permissionSA[data.edit_flag].status ,render: setCallBg.calculate, summary: { type: 'sum' }} ,
+				{ title: permissionSA[data.edit_flag].icon+"Bath", dataIndx: "input_score", dataType: "float",format: '#,###.00' ,clsHead:"sa-col-head-calculate", editable: permissionSA[data.edit_flag].status ,render: setCallBg.calculate , summary: { type: 'sum' }} ,
 		]},
-		{ title: "รายได้จากการคำนวนตีค่างาน",align: "center", colModel: [
-			{ title: "รายได้รวมที่ควรได้ 90% ไม่รวม Bonus", dataIndx: "total_percent",dataType: "float",format: '#,###.00' , editable: false} ,
-			{ title: "รายได้ Fix ที่ควรได้ 65%", dataIndx: "fix_percent",dataType: "float",format: '#,###.00' , editable: false} ,
-			{ title: "รายได้ Var ที่ควรได้ 25%", dataIndx: "var_percent",dataType: "float",format: '#,###.00' , editable: false} ,		
+		{ title: "รายได้จากการคำนวนตีค่างาน",align: "center",clsHead:"sa-col-head-income-cal-work-fees", colModel: [
+			{ title: "รายได้รวมที่ควรได้ 90% ไม่รวม Bonus", dataIndx: "total_percent",dataType: "float",format: '#,###.00' ,clsHead:"sa-col-head-income-cal-work-fees", editable: false ,render: setCallBg.incomeCalWorkFees} ,
+			{ title: "รายได้ Fix ที่ควรได้ 65%", dataIndx: "fix_percent",dataType: "float",format: '#,###.00' ,clsHead:"sa-col-head-income-cal-work-fees", editable: false ,render: setCallBg.incomeCalWorkFees} ,
+			{ title: "รายได้ Var ที่ควรได้ 25%", dataIndx: "var_percent",dataType: "float",format: '#,###.00' ,clsHead:"sa-col-head-income-cal-work-fees", editable: false ,render: setCallBg.incomeCalWorkFees} ,		
 		]},
-		/* ########### END: Frozen columns ########### */
-		{ title: "รายได้ปัจจุบัน",align: "center", colModel: [
-				{ title: "รายได้ปัจจุบัน Total", dataIndx: "total_now_salary",dataType: "float",format: '#,###.00' , editable: false , summary: { type: 'sum' }} ,
-				{ title: "FIX65%",align: "center", colModel:[
-						{ title: "Salary", dataIndx: "salary",dataType: "float",format: '#,###.00' , editable: false , summary: { type: 'sum' }} ,
-						{ title: "P-QPI", dataIndx: "pqpi_amount",dataType: "float",format: '#,###.00' , editable: false , summary: { type: 'sum' }} ,
-						{ title: "อื่นๆ", dataIndx: "fix_other_amount",dataType: "float",format: '#,###.00' , editable: false , summary: { type: 'sum' }} ,
+		/* ########### END: Frozen columns ########### */ 
+		{ title: "รายได้ปัจจุบัน",align: "center", clsHead:"sa-col-head-current-income", colModel: [
+				{ title: "รายได้ปัจจุบัน Total", dataIndx: "total_now_salary",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-current-income", editable: false ,render: setCallBg.currentIncome, summary: { type: 'sum' }} ,
+				{ title: "FIX65%",align: "center", clsHead:"sa-col-head-current-income", colModel:[
+						{ title: "Salary", dataIndx: "salary",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-current-income", editable: false ,render: setCallBg.currentIncome, summary: { type: 'sum' }} ,
+						{ title: "P-QPI", dataIndx: "pqpi_amount",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-current-income", editable: false ,render: setCallBg.currentIncome, summary: { type: 'sum' }} ,
+						{ title: "อื่นๆ", dataIndx: "fix_other_amount",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-current-income", editable: false ,render: setCallBg.currentIncome, summary: { type: 'sum' }} ,
 				]},
-				{ title: "VAR25%",align: "center", colModel:[
-						{ title: "MPI", dataIndx: "mpi_amount",dataType: "float",format: '#,###.00' , editable: false , summary: { type: 'sum' }} ,
-						{ title: "PI", dataIndx: "pi_amount",dataType: "float",format: '#,###.00' , editable: false , summary: { type: 'sum' }} ,
-						{ title: "อื่นๆ", dataIndx: "var_other_amount",dataType: "float",format: '#,###.00' , editable: false , summary: { type: 'sum' }} ,
+				{ title: "VAR25%",align: "center", clsHead:"sa-col-head-current-income", colModel:[
+						{ title: "MPI", dataIndx: "mpi_amount",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-current-income", editable: false ,render: setCallBg.currentIncome, summary: { type: 'sum' }} ,
+						{ title: "PI", dataIndx: "pi_amount",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-current-income", editable: false ,render: setCallBg.currentIncome, summary: { type: 'sum' }} ,
+						{ title: "อื่นๆ", dataIndx: "var_other_amount",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-current-income", editable: false ,render: setCallBg.currentIncome, summary: { type: 'sum' }} ,
 				]},
 		]},
-		{ title: "รายได้ใหม่",align: "center", colModel: [
-				{ title: "รายได้ใหม่ Total", dataIndx: "input_total_new_salary",dataType: "float",format: '#,###.00' , editable: false} ,
-				{ title: "FIX65%",align: "center", colModel:[
-						{ title: "Salary", dataIndx: "new_salary",dataType: "float",format: '#,###.00' , editable: false} ,
-						{ title: "P-QPI", dataIndx: "new_pqpi_amount",dataType: "float",format: '#,###.00' , editable: false} ,
-						{ title: "อื่นๆ", dataIndx: "fix_other_amount",dataType: "float",format: '#,###.00' , editable: false} ,
+		{ title: "รายได้ใหม่",align: "center", clsHead:"sa-col-head-new-income", colModel: [
+				{ title: "รายได้ใหม่ Total", dataIndx: "input_total_new_salary",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-new-income",  editable: false ,render: setCallBg.newIncome} ,
+				{ title: "FIX65%",align: "center", clsHead:"sa-col-head-new-income",  colModel:[
+						{ title: "Salary", dataIndx: "new_salary",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-new-income",  editable: false ,render: setCallBg.newIncome} ,
+						{ title: "P-QPI", dataIndx: "new_pqpi_amount",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-new-income",  editable: false ,render: setCallBg.newIncome} ,
+						{ title: "อื่นๆ", dataIndx: "fix_other_amount",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-new-income",  editable: false ,render: setCallBg.newIncome} ,
 				]},
-				{ title: "VAR25%",align: "center", colModel:[
-						{ title: "MPI", dataIndx: "mpi_amount",dataType: "float",format: '#,###.00' , editable: false} ,
-						{ title: "PI", dataIndx: "pi_amount",dataType: "float",format: '#,###.00' , editable: false} ,
-						{ title: "อื่นๆ", dataIndx: "var_other_amount",dataType: "float",format: '#,###.00' , editable: false} ,
+				{ title: "VAR25%",align: "center", clsHead:"sa-col-head-new-income", colModel:[
+						{ title: "MPI", dataIndx: "mpi_amount",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-new-income", editable: false ,render: setCallBg.newIncome} ,
+						{ title: "PI", dataIndx: "pi_amount",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-new-income", editable: false ,render: setCallBg.newIncome} ,
+						{ title: "อื่นๆ", dataIndx: "var_other_amount",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-new-income", editable: false ,render: setCallBg.newIncome} ,
 				]},
 		]},
 		
@@ -514,20 +523,21 @@ var listDataFn = function(data) {
 		];
     
     $.each(data['items'][0]['structure_result'],function (index, indexEntry) {
-    	obj.colModel.push({title: indexEntry.structure_name, dataIndx: "structure_result_"+indexEntry.structure_id,dataType: "float",format: '#,###.00' , editable: false}); 
+    	obj.colModel.push({title: indexEntry.structure_name, dataIndx: "structure_result_"+indexEntry.structure_id,dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-structure", editable: false,render: setCallBg.structure}); 
     });
-    
-    obj.colModel.push(
-    		{ title: "คะแนนประเมิน Mgr.", dataIndx: "score_manager",dataType: "float",format: '#,###.00' , editable: false} ,
-    		{ title: "คะแนนประเมิน BU.", dataIndx: "score_bu",dataType: "float",format: '#,###.00' , editable: false} ,
-    		{ title: "คะแนนประเมิน COO.", dataIndx: "score_coo",dataType: "float",format: '#,###.00' , editable: false} ,
-    		{ title: "คะแนนประเมิน Board.", dataIndx: "score_board",dataType: "float",format: '#,###.00' , editable: false, hidden: (data==undefined || data['is_board']==1)} ,
-    		{ title: "คะแนนเต็มตีค่างาน (ความรู้)", dataIndx: "knowledge_point",dataType: "float",format: '#,###.00' , editable: false} ,
-    		{ title: "คะแนนเต็มตีค่างาน (ศักยภาพ)", dataIndx: "capability_point",dataType: "float",format: '#,###.00' , editable: false} ,
-    		{ title: "Total Point", dataIndx: "total_point",dataType: "float",format: '#,###.00' , editable: false} ,
-    		{ title: "Baht/Point", dataIndx: "baht_per_point",dataType: "float",format: '#,###.00' , editable: false}
+
+    obj.colModel.push(  
+    		{ title: "คะแนนประเมิน Mgr.", dataIndx: "score_manager",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-scoring", editable: false,render: setCallBg.scoring} ,
+    		{ title: "คะแนนประเมิน BU.", dataIndx: "score_bu",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-scoring", editable: false,render: setCallBg.scoring} ,
+    		{ title: "คะแนนประเมิน COO.", dataIndx: "score_coo",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-scoring", editable: false,render: setCallBg.scoring} ,
+    		{ title: "คะแนนประเมิน Board.", dataIndx: "score_board",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-scoring", editable: false ,render: setCallBg.scoring, hidden: (data==undefined || data['is_board']==1)} ,
+    		{ title: "คะแนนเต็มตีค่างาน (ความรู้)", dataIndx: "knowledge_point",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-total-work-fees",editable: false,render: setCallBg.totalWorkFees} ,
+    		{ title: "คะแนนเต็มตีค่างาน (ศักยภาพ)", dataIndx: "capability_point",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-total-work-fees", editable: false,render: setCallBg.totalWorkFees} ,
+    		{ title: "Total Point", dataIndx: "total_point",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-total-work-fees", editable: false,render: setCallBg.totalWorkFees} ,
+    		{ title: "Baht/Point", dataIndx: "baht_per_point",dataType: "float",format: '#,###.00' , clsHead:"sa-col-head-total-work-fees", editable: false,render: setCallBg.totalWorkFees}
     ); 
     /* ########### End: Create Columns Header ########### */
+    
     
     /* ########### Start: Set Calculate Columns ########### */
     obj.formulas = [ 
