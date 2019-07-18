@@ -95,7 +95,7 @@ var generateManageText = function(value,title){
 };
 var generateManageDropDownList = function(id,value,type,title){
 	//Type List -level -job
-	console.log(id);
+//	console.log(id);
 	var html="";
 	// สำหรับไว้แสดงข้อมูลเท่านั้น
 	html+="<div class='manageItemView'>"+ value+ "</div>" ;
@@ -138,7 +138,7 @@ var generateManageDropDownList = function(id,value,type,title){
 					"is_active": ($(indexEntry).find(".manageCheckBox").is(":checked") == true ? 1 : 0)
 				});
 		});
-		console.log(emp_list);
+//		console.log(emp_list);
 		$(".form-kpi-label label").text("Confirm to Mend Data?");
 		$("#confrimModal").modal({
 			"backdrop" : setModalPopup[0],
@@ -346,13 +346,11 @@ var listEmployeeSnapFn = function(data,type) {
 
 // --------  ListData  End
 var deleteDataFn = function(){
-
+	
 	var emp_snapshot_id=[];
-	$.each($(".selectEmpCheckbox").get(),function(index,indexEntry){
+	$.each($("input.selectEmpCheckbox:checked").get(),function(index,indexEntry){
 	    emp_snapshot_id.push({
-	    		emp_snapshot_id:$(indexEntry).attr("emp_snapshot_id"),
-	    		emp_name:$(indexEntry).attr("emp_name"),
-	    		start_date:$(indexEntry).attr("start_date"),
+	    		emp_snapshot_id : $(indexEntry).val()
 	    	});
 	});
 	
@@ -452,8 +450,13 @@ $(document).ready(function() {
 	});
 	$("#btn_delete").off("click");
 	$("#btn_delete").click(function(){
-		$("#btnConfirmOK").show();
-		deleteDataFn();
+		if ($('input.selectEmpCheckbox:checked').val() == undefined){
+			callFlashSlide("Please Select Employee !!!");
+		}else {
+			$("#btnConfirmOK").show();
+			deleteDataFn();
+		}
+		
 		$("#btn_edit").prop('disabled', false);
 		$("#btn_save").prop('disabled', true);
 		$("#btn_cancel").prop('disabled', true);
