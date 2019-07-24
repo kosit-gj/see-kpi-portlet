@@ -26,6 +26,15 @@
     padding-right: 50px;
 }
 
+#modalQuestionaireData{
+  -webkit-overflow-scrolling:touch !important;
+}
+body {
+   
+    overflow-x: hidden;
+    /* overflow-y: scroll !important; */
+}
+
 .button-to-input {
     margin-left: -50px;
     height: 25px;

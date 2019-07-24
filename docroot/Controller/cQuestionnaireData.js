@@ -40,6 +40,7 @@ var generateNextFormFn = function(data,type) {
 	$("#confrimModalNextAssign").off("click","#btnConfirmYes");
 	$("#confrimModalNextAssign").on("click","#btnConfirmYes",function(){
 		$("#confrimModalNextAssign").modal('hide');
+		$("#modalQuestionaireData .modal-body").focus();
 		clearFn();
 		$("#id").val(data.next_form.data_header_id);
 		$("#action").val("edit");
