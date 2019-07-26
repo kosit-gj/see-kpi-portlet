@@ -1980,7 +1980,10 @@ var insertFn = function(element){
 			}else if (data['status'] == "400") {
 				//console.log(data);
 				callFlashSlide("Failed to insert data.");
-			}  
+			}else if (data['status'] == "404") {
+				//console.log(data);
+				callFlashSlide(data['data']);
+			} 
 				   
 				   
 			
