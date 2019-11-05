@@ -256,6 +256,29 @@ var searchAdvanceFn = function (Organization,Position,EmployeeName) {
 	
 }
 // -------- SearchFn End
+var showEmployeeFn = (event) =>{
+	//console.log("##### Begin Edit Show Employee #####");
+	$(".btnModalClose").click();
+	$(event.target).parent().parent().parent().children().click();
+	dropDownEmpType();
+	//console.log(`		##### Begin Find Employee ${event.target.id} #####`);
+	findOneFn(event.target.id);
+	//console.log(`		##### End Find Employee ${event.target.id} #####`);
+	
+	$("#from_emp_wsd").datepicker();
+    $("#from_emp_wsd").datepicker( "option", "dateFormat", "yy-mm-dd" );
+    $("#from_emp_ped").datepicker();
+    $("#from_emp_ped").datepicker( "option", "dateFormat", "yy-mm-dd" );
+    $("#from_emp_aed").datepicker();
+    $("#from_emp_aed").datepicker( "option", "dateFormat", "yy-mm-dd" );
+    $(".ui-datepicker").hide();
+	
+	$("#id").val(event.target.id);
+	$("#action").val("edit");
+	$("#btnSubmit").val("Edit");
+	
+	//console.log("##### End Edit Show Employee #####");
+}
 
 
 //--------  ListData  Start
@@ -290,7 +313,7 @@ var listImportEmployeeFn = function(data) {
 		//&lt;button class='btn btn-primary btn-xs btn-gear add' id=1 data-target=#ModalLevel data-toggle='modal'&gt;Role&lt;/button&gt;
 		htmlTable += "<td id=\"objectCenter\" style=\"vertical-align: middle;\"><i class=\"fa fa-cog font-gear popover-edit-del\" data-trigger=\"focus\" tabindex=\""+index+"\" data-html=\"true\" data-toggle=\"popover\" data-placement=\"top\" data-content=\" " +
 				//"<button class='btn btn-primary btn-xs btn-gear role' id="+ indexEntry["emp_id"]+ " data-target=#ModalLevel data-toggle='modal'>Role</button>&nbsp;" +
-				"<button class='btn btn-warning btn-xs btn-gear edit' id="+ indexEntry["emp_code"]+ " data-target=#ModalEditEmp data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>Edit</button>&nbsp;" +
+				"<button class='btn btn-warning btn-xs btn-gear edit' onclick='showEmployeeFn(event);' id="+ indexEntry["emp_code"]+ " data-target=#ModalEditEmp data-toggle='modal' data-backdrop='"+setModalPopup[0]+"' data-keyboard='"+setModalPopup[1]+"'>Edit</button>&nbsp;" +
 		        "<button id="+indexEntry["emp_code"]+" class='btn btn-danger btn-xs btn-gear del'>Delete</button>\"></i></td>";
 		htmlTable += "</tr>";
 		
@@ -305,26 +328,34 @@ var listImportEmployeeFn = function(data) {
 	
 	$("#tableEmployee").off("click",".popover-edit-del");
 	$("#tableEmployee").on("click",".popover-edit-del",function(){
-			$(".edit").on("click",function() {
-			$(".btnModalClose").click();
-			$(this).parent().parent().parent().children().click();
-			dropDownEmpType();
-			findOneFn(this.id);
-			
-			$("#from_emp_wsd").datepicker();
-		    $("#from_emp_wsd").datepicker( "option", "dateFormat", "yy-mm-dd" );
-		    $("#from_emp_ped").datepicker();
-		    $("#from_emp_ped").datepicker( "option", "dateFormat", "yy-mm-dd" );
-		    $("#from_emp_aed").datepicker();
-		    $("#from_emp_aed").datepicker( "option", "dateFormat", "yy-mm-dd" );
-		    $(".ui-datepicker").hide();
-			
-			$("#id").val(this.id);
-			$("#action").val("edit");
-			$("#btnSubmit").val("Edit");		
-			
-			
-		});
+//			เปลี่ยนไปใช้ onclick showEmployeeFn(event);
+//			$(".edit").on("click",function() {
+//			console.log("##### Begin Edit Show Employee #####");
+//			$(".btnModalClose").click();
+//			$(this).parent().parent().parent().children().click();
+//			dropDownEmpType();
+//			console.log(`		##### Begin Find Employee ${this.id} #####`);
+//			findOneFn(this.id);
+//			console.log(`		##### End Find Employee ${this.id} #####`);
+//			
+//			
+//			
+//			$("#from_emp_wsd").datepicker();
+//		    $("#from_emp_wsd").datepicker( "option", "dateFormat", "yy-mm-dd" );
+//		    $("#from_emp_ped").datepicker();
+//		    $("#from_emp_ped").datepicker( "option", "dateFormat", "yy-mm-dd" );
+//		    $("#from_emp_aed").datepicker();
+//		    $("#from_emp_aed").datepicker( "option", "dateFormat", "yy-mm-dd" );
+//		    $(".ui-datepicker").hide();
+//			
+//			$("#id").val(this.id);
+//			$("#action").val("edit");
+//			$("#btnSubmit").val("Edit");
+//			
+//			console.log("##### End Edit Show Employee #####");
+//			
+//			
+//		});
 		
 		
 		$(".del").on("click",function(){
