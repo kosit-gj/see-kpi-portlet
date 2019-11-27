@@ -443,6 +443,9 @@ $(document).ready(function() {
 	$("#search_bonus_period_id").html(generateDropDownList(globalSevice['restfulPathDropDownBonusPeriod'],"GET",{appraisal_year:$("#search_year").val()}));
 	scriptDataToggleFn();
 	
+	$("#search_year").change(function(){
+		$("#search_bonus_period_id").html(generateDropDownList(globalSevice['restfulPathDropDownBonusPeriod'],"GET",{appraisal_year:$("#search_year").val()}));
+	});
 	
 	
 	
