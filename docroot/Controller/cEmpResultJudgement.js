@@ -40,7 +40,7 @@ var dropDrowYearListFn = function(nameArea,id){
 var dropDrowPeriodListFn = function(){
 
 	$.ajax({
-		url:restfulURL+"/"+serviceName+"/public/bonus/advance_search/period",
+		url:restfulURL+"/"+serviceName+"/public/bonus/advance_search/period_all",
 		type:"get",
 		dataType:"json",
 		async:false,
