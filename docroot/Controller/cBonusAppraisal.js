@@ -160,27 +160,35 @@ var getDataReCalculateFn = function(){
   
 	 });
 	
-	$.ajax({
-		url : globalSevice['restfulPathBonusAppraisal'],
-		type : "post",
-		dataType : "json",
-		data:{
-			"page"				:	$("#pageNumber").val(),
-			"rpp"				:	$("#rpp").val(),
-			"appraisal_year"	:	appraisal_year,
-			"period_id"			:	period_id,
-			"data" 				: 	data_bonus,
-			"calculate_flag"	:	0,
-			"action"			:	"re-calculate"
-			},
-		headers:{Authorization:"Bearer "+tokenID.token},
-		async:false,
-		success : function(response) {
-			listBonusAppraisal(response);
-			globalData=response;
-			paginationSetUpFn(response.datas.current_page, response.datas.last_page, response.datas.last_page);
-		}
-	});
+	$("body").mLoading();
+	setTimeout(function(){ 
+		$.ajax({
+			url : globalSevice['restfulPathBonusAppraisal'],
+			type : "post",
+			dataType : "json",
+			data:{
+				"page"				:	$("#pageNumber").val(),
+				"rpp"				:	$("#rpp").val(),
+				"appraisal_year"	:	appraisal_year,
+				"period_id"			:	period_id,
+				"data" 				: 	data_bonus,
+				"calculate_flag"	:	0,
+				"action"			:	"re-calculate"
+				},
+			headers:{Authorization:"Bearer "+tokenID.token},
+			async:false,
+			success : function(response) {
+				listBonusAppraisal(response);
+				globalData=response;
+				paginationSetUpFn(response.datas.current_page, response.datas.last_page, response.datas.last_page);
+				callFlashSlide("Recalculate Bonus Successfully.");
+			}
+		});
+		
+		
+	}, 300);
+	
+	
 	
 	
 };
@@ -319,33 +327,35 @@ var scriptBtnConfirmYesFn = function(){
 			});
 	  
 		 });
-		
-		$.ajax({
-			 url: globalSevice['restfulPathBonusAppraisal'],
-			 type : "patch",
-			 dataType:"json",
-			 async:false,
-			 data:{
-				 
-				 appraisal_year		:	appraisal_year,
-				 period_id			:	period_id,
-				 monthly_bonus_rate : 	$("#from_monthly_bonus_rate").val(),
-				 data 				: 	data_bonus,
-				 calculate_flag		:	1
-			 },
-			 headers:{Authorization:"Bearer "+tokenID.token},
-		     success:function(data){
-			     	if(data.status == 200){
-			     		
-			     		getDataFn($("#pageNumber").val(),$("#rpp").val());
-			     		callFlashSlide("Save and Recalculate Bonus Successfully.");
-					    $("#confrimModal").modal('hide');
-					    
-			     	}else if(data.status == 400){
-			     		callFlashSlideInModal(data['data'],"#inform_on_confirm","error");
-			     	}
-			 }
-		});
+		$("body").mLoading();
+		setTimeout(function(){
+			$.ajax({
+				 url: globalSevice['restfulPathBonusAppraisal'],
+				 type : "patch",
+				 dataType:"json",
+				 async:false,
+				 data:{
+					 
+					 appraisal_year		:	appraisal_year,
+					 period_id			:	period_id,
+					 monthly_bonus_rate : 	$("#from_monthly_bonus_rate").val(),
+					 data 				: 	data_bonus,
+					 calculate_flag		:	1
+				 },
+				 headers:{Authorization:"Bearer "+tokenID.token},
+			     success:function(data){
+				     	if(data.status == 200){
+				     		
+				     		getDataFn($("#pageNumber").val(),$("#rpp").val());
+				     		callFlashSlide("Save and Recalculate Bonus Successfully.");
+						    $("#confrimModal").modal('hide');
+						    
+				     	}else if(data.status == 400){
+				     		callFlashSlideInModal(data['data'],"#inform_on_confirm","error");
+				     	}
+				 }
+			});
+		},300);
 		
 	});
 };
@@ -366,32 +376,36 @@ var scriptBtnConfirmNoFn = function(){
 			});
 	  
 		 });
+		$("body").mLoading();
+		setTimeout(function(){
+			$.ajax({
+				 url: globalSevice['restfulPathBonusAppraisal'],
+				 type : "patch",
+				 dataType:"json",
+				 async:false,
+				 data:{
+					 
+					 appraisal_year		: $("#param_year").val(),
+					 period_id 			: $("#param_bonus_period_id").val(),
+					 data 				: 	data_bonus,
+					 calculate_flag		:	0
+				 },
+				 headers:{Authorization:"Bearer "+tokenID.token},
+			     success:function(data){
+				     	if(data.status == 200){
+				     		
+				     		getDataFn($("#pageNumber").val(),$("#rpp").val());
+				     		callFlashSlide("Save Successfully.");
+						    $("#confrimModal").modal('hide');
+						    
+				     	}else if(data.status == 400){
+				     		callFlashSlideInModal(data['data'],"#inform_on_confirm","error");
+				     	}
+				 }
+			});
+			
+		},300);
 		
-		$.ajax({
-			 url: globalSevice['restfulPathBonusAppraisal'],
-			 type : "patch",
-			 dataType:"json",
-			 async:false,
-			 data:{
-				 
-				 appraisal_year		: $("#param_year").val(),
-				 period_id 			: $("#param_bonus_period_id").val(),
-				 data 				: 	data_bonus,
-				 calculate_flag		:	0
-			 },
-			 headers:{Authorization:"Bearer "+tokenID.token},
-		     success:function(data){
-			     	if(data.status == 200){
-			     		
-			     		getDataFn($("#pageNumber").val(),$("#rpp").val());
-			     		callFlashSlide("Save Successfully.");
-					    $("#confrimModal").modal('hide');
-					    
-			     	}else if(data.status == 400){
-			     		callFlashSlideInModal(data['data'],"#inform_on_confirm","error");
-			     	}
-			 }
-		});
 		
 	});
 };
@@ -413,8 +427,10 @@ var searchAdvanceFn = function (year,bonus_period_id) {
 	htmlParam+="<input type='hidden' class='param_Embed' id='param_bonus_period_id' name='param_bonus_period_id' value='"+bonus_period_id+"'>";
 	$(".param_Embed").remove();
 	$("body").append(htmlParam);
-
-	getDataFn(pageNumberDefault,$("#rpp").val());
+	
+	$("body").mLoading();
+	setTimeout(function(){ getDataFn(pageNumberDefault,$("#rpp").val()); }, 300);
+	
 	
 }
 // -------- Search End
