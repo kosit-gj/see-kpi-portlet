@@ -437,7 +437,7 @@ var listDataFn = function(data){
             if(indexEntry['edit_flag']==1) {
             	htmlHTML += " <td class=\"data-score\">";
             	htmlHTML += "	<div class=\"float-label-control \">";
-                htmlHTML += "		<input disabled type=\"text\" class=\"form-control input-xs span12 score numberOnly\" total_adjust_result_score='"+indexEntry['s_amount']+"' value='"+indexEntry['adjust_b_rate']+"'>";
+                htmlHTML += "		<input type=\"text\" class=\"form-control input-xs span12 score numberOnly\" total_adjust_result_score='"+indexEntry['s_amount']+"' value='"+indexEntry['adjust_b_rate']+"'>";
                 htmlHTML += "	</div>";
                 htmlHTML += " </td>";
     		} else {
@@ -501,8 +501,8 @@ var calculatePercentKeyup = function() {
 		var score = $(this).autoNumeric('get');
 		var adjust_result_score = Number($(this).attr("total_adjust_result_score"));
 		var total = (score*adjust_result_score);
-		//$(this).closest('.control-calculate').find('.data-percent').find('.percent').val(total.toFixed(2));
-		$(this).closest('.control-calculate').find('.data-percent').find('.score').autoNumeric('set', total);
+		$(this).closest('.control-calculate').find('.data-percent').find('.percent').val(total.toFixed(2));
+		//$(this).closest('.control-calculate').find('.data-percent').find('.score').autoNumeric('set', total);
 	});
 }
 
